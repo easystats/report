@@ -1,0 +1,27 @@
+---
+title: "Support new models"
+output: 
+  github_document:
+    toc: true
+    fig_width: 10.08
+    fig_height: 6
+  rmarkdown::html_vignette:
+    toc: true
+    fig_width: 10.08
+    fig_height: 6
+tags: [r, report]
+vignette: >
+  \usepackage[utf8]{inputenc}
+editor_options: 
+  chunk_output_type: console
+---
+
+
+# Support new models
+
+blablabla.
+
+```{r warning=FALSE, message=FALSE}
+1+1
+```
+
