@@ -1,0 +1,32 @@
+Package: report
+Type: Package
+Title: Automated reporting of statistical models in R
+Version: 0.1.0
+Authors@R: c(
+    person("Dominique", 
+        "Makowski", 
+        email = "dom.makowski@gmail.com",
+        role = c("aut", "cre", "cph"), 
+        comment = c(ORCID = "0000-0001-5375-9967"))
+	)
+Maintainer: Dominique Makowski <dom.makowski@gmail.com>
+URL: https://github.com/DominiqueMakowski/bayestestR
+BugReports: https://github.com/DominiqueMakowski/bayestestR/issues
+Description: Converts statistical models into textual reports suited for publication.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+VignetteBuilder: knitr
+Suggests:
+    spelling,
+    knitr,
+    rmarkdown,
+    testthat,
+    covr,
+	ggplot2,
+	dplyr,
+	tidyr,
+	stringr,
+	broom
+RoxygenNote: 6.1.1
+Language: en-GB
