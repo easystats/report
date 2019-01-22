@@ -7,16 +7,16 @@
     "folds" : "",
     "hash" : "0",
     "id" : "E6B47A78",
-    "lastKnownWriteTime" : 1548153940,
-    "last_content_update" : 1548153940188,
+    "lastKnownWriteTime" : 1548159021,
+    "last_content_update" : 1548159021477,
     "path" : "C:/Users/Dom/Dropbox/RECHERCHE/N/report/README.Rmd",
     "project_path" : "README.Rmd",
     "properties" : {
         "chunk_output_type" : "console",
-        "cursorPosition" : "100,41",
-        "scrollLine" : "83"
+        "cursorPosition" : "26,111",
+        "scrollLine" : "0"
     },
-    "relative_order" : 3,
+    "relative_order" : 1,
     "source_on_save" : false,
     "source_window" : "",
     "type" : "r_markdown"

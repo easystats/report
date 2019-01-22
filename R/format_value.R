@@ -10,8 +10,7 @@
 #' format_value(1.2)
 #' format_value(1.2012313)
 #' format_value(0.0045)
-#'
 #' @export
-format_value <- function(x, digits=2){
+format_value <- function(x, digits = 2) {
   return(trimws(format(round(x, digits), nsmall = digits)))
 }

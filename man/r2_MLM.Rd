@@ -34,7 +34,6 @@ This function reads in raw data and multilevel model (MLM) parameter estimates a
 }
 \examples{
 print("no examples yet")
-
 }
 \references{
 - Rights & Sterba (2018). Quantifying explained variance in multilevel models: An integrative framework for defining R-squared measures. Psychological Methods.

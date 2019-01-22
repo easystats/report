@@ -22,43 +22,16 @@ knitr::opts_chunk$set(
 ```
 
 
-[![Build Status](https://travis-ci.org/DominiqueMakowski/bayestestR.svg?branch=master)](https://travis-ci.org/DominiqueMakowski/bayestestR)
-[![codecov](https://codecov.io/gh/DominiqueMakowski/bayestestR/branch/master/graph/badge.svg)](https://codecov.io/gh/DominiqueMakowski/bayestestR)
-[![HitCount](http://hits.dwyl.io/DominiqueMakowski/bayestestR.svg)](http://hits.dwyl.io/DominiqueMakowski/bayestestR)
+[![Build Status](https://travis-ci.org/neuropsychology/report.svg?branch=master)](https://travis-ci.org/neuropsychology/report)
+[![codecov](https://codecov.io/gh/neuropsychology/report/branch/master/graph/badge.svg)](https://codecov.io/gh/neuropsychology/report)
+[![HitCount](http://hits.dwyl.io/DominiqueMakowski/bayestestR.svg)](http://hits.dwyl.io/neuropsychology/report)
 <!-- Add this to the README manually! -->
-<!-- [![Documentation](https://img.shields.io/badge/documentation-bayestestR-orange.svg?colorB=E91E63)](https://dominiquemakowski.github.io/bayestestR/) -->
+<!-- [![Documentation](https://img.shields.io/badge/documentation-report-orange.svg?colorB=E91E63)](https://neuropsychology.github.io/report/) -->
 
 
 
 
 
-
-```{r eval=FALSE, message=FALSE, warning=FALSE, echo=FALSE}
-# Create logo
-library(ggplot2)
-library(dplyr)
-library(hexSticker)
-
-
-p <- iris %>% 
-  ggplot(aes(x=Sepal.Length, y=Sepal.Width)) +
-  theme_void() + 
-  theme_transparent() +
-  annotate("text", x=0, y=1, label="text")
-p
-
-s <- hexSticker::sticker("https://s11475.pcdn.co/wp-content/uploads/2013/12/Publishorperish-01.jpg", 
-                         package="report", 
-                        p_size=12,
-                        s_x=1,
-                        s_y=.85,
-                        s_width=0.8, 
-                        # s_height=0.8,
-                        h_fill="#8BC34A", 
-                        h_color="#FF9800",
-                        filename="./man/figures/logo.svg")
-s
-```
 
 
 

@@ -17,7 +17,6 @@
 #'
 #' @examples
 #' print("no examples yet")
-#'
 #' @seealso
 #' - https://my.vanderbilt.edu/jasonrights/software/r2mlm/
 #' - https://mgb-research.netlify.com/post/visualizing-variance-in-multilevel-models-using-the-riverplot-package/
@@ -26,7 +25,7 @@
 #' - Rights & Sterba (2018). Quantifying explained variance in multilevel models: An integrative framework for defining R-squared measures. Psychological Methods.
 #' - Rights & Cole (2018) Effect Size Measures for Multilevel Models in Clinical Child and Adolescent Research: New R-Squared Methods and Recommendations, Journal of Clinical Child & Adolescent Psychology, 47:6.
 #' @export
-r2_MLM <- function(data, Tau, sigma2, within_covs=NULL, between_covs=NULL, random_covs=NULL, gamma_w=NULL, gamma_b=NULL, has_intercept=TRUE, clustermeancentered=TRUE){
+r2_MLM <- function(data, Tau, sigma2, within_covs = NULL, between_covs = NULL, random_covs = NULL, gamma_w = NULL, gamma_b = NULL, has_intercept = TRUE, clustermeancentered = TRUE) {
   return("Not implemented yet.")
   # if(has_intercept==T){
   #   if(length(gamma_b)>1) gamma <- c(1,gamma_w,gamma_b[2:length(gamma_b)])

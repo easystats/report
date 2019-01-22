@@ -12,7 +12,7 @@ os:
   
 r:
   - release
-  - devel
+  # - devel
 
 
 warnings_are_errors: true

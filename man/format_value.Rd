@@ -19,7 +19,6 @@ format_value(1.20)
 format_value(1.2)
 format_value(1.2012313)
 format_value(0.0045)
-
 }
 \author{
 \href{https://dominiquemakowski.github.io/}{Dominique Makowski}

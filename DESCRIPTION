@@ -17,6 +17,10 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr
+Imports:
+	dplyr,
+	tidyr,
+	stringr
 Suggests:
     spelling,
     knitr,
@@ -24,9 +28,6 @@ Suggests:
     testthat,
     covr,
 	ggplot2,
-	dplyr,
-	tidyr,
-	stringr,
 	broom
 RoxygenNote: 6.1.1
 Language: en-GB
