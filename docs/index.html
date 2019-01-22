@@ -98,26 +98,13 @@
 <a href="#report" class="anchor"></a>report <img src="reference/figures/logo.svg" align="right" height="139">
 </h1></div>
 
-<p><code>report</code> aims at doing this and that.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>Run the following:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"devtools"</span>)
-devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"neuropsychology/report"</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"report"</span>)</code></pre></div>
-</div>
-</div>
-<div id="goal" class="section level1">
-<h1 class="hasAnchor">
-<a href="#goal" class="anchor"></a>Goal</h1>
 <p><strong><em>“From R to Manuscript”</em></strong></p>
-<p><code>Psycho</code>’s primary goal is to fill the gap between Julia’s output and the formatted result description of your manuscript, with the automated use of <strong>best practices</strong> guidelines, ensuring standardization and quality of results reporting. It also provides useful tools and functions for psychologists, neuropsychologists and neuroscientists for their everyday data analyses.</p>
+<p><code>report</code>’s primary goal is to fill the gap between R’s output and the formatted result description of your manuscript, with the automated use of <strong>best practices</strong> guidelines, ensuring standardization and quality of results reporting.</p>
 </div>
 <div id="contribute" class="section level1">
 <h1 class="hasAnchor">
 <a href="#contribute" class="anchor"></a>Contribute</h1>
-<p><code>Psycho.jl</code> <strong>is a young package in need of affection</strong>. You can easily hop aboard the <a href="CONTRIBUTING.html">developpment</a> of this open-source software and improve psychological science by doing the following:</p>
+<p><strong><code>report</code> is a young package in need of affection</strong>. You can easily hop aboard the <a href="CONTRIBUTING.html">developpment</a> of this open-source software and improve psychological science by doing the following:</p>
 <ul>
 <li>Create or check existing <a href="https://github.com/neuropsychology/report/issues"><img src="reference/figures/issue_bug.png" height="25"></a> issues to report, replicate, understand or solve some bugs.</li>
 <li>Create or check existing <a href="https://github.com/neuropsychology/report/issues"><img src="reference/figures/issue_featureidea.png" height="25"></a> issues to suggest or discuss a new feature.</li>
@@ -126,10 +113,13 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 </ul>
 <p>Don’t be shy, try to code and submit a pull request (See the <a href="CONTRIBUTING.html">contributing guide</a>). Even if unperfect, we will help you make it great! All contributors will be very graciously rewarded someday :smirk:.</p>
 </div>
-<div id="installation-1" class="section level1">
+<div id="installation" class="section level1">
 <h1 class="hasAnchor">
-<a href="#installation-1" class="anchor"></a>Installation</h1>
-<pre><code>pkg&gt; add https://github.com/neuropsychology/Psycho.jl.git</code></pre>
+<a href="#installation" class="anchor"></a>Installation</h1>
+<p>Run the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"devtools"</span>)
+devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"neuropsychology/report"</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"report"</span>)</code></pre></div>
 </div>
 <div id="examples" class="section level1">
 <h1 class="hasAnchor">
@@ -144,9 +134,9 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 <a href="#credits" class="anchor"></a>Credits</h2>
 <p>You can cite the package as following:</p>
 <ul>
-<li>Makowski, (2019). <em>Understand and Describe Bayesian Models and Posterior Distributions using BayestestR</em>. CRAN. doi: .</li>
+<li>Makowski, (2019). <em>Automated reporting of statistical models in R</em>. CRAN. doi: .</li>
 </ul>
-<p>Please remember that parts of the code in this package was inspired / shamelessly copied from other great packages that you must check out and cite, such as <a href="https://github.com/strengejacke/sjstats">sjstats</a> or <a href="https://github.com/tszanalytics/BayesTesting.jl">BayesTesting.jl</a>. All credits go to their authors.</p>
+<p>Please remember that parts of the code in this package was inspired / shamelessly copied from other great packages that you must check out and cite, such as <a href="https://github.com/strengejacke/sjstats">sjstats</a>. All credits go to their authors.</p>
 </div>
 </div>
   </div>
@@ -178,7 +168,8 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Dominique Makowski <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0001-5375-9967" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
+<li>
+<a href="https://dominiquemakowski.github.io/">Dominique Makowski</a> <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0001-5375-9967" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
 </ul>
 </div>
 
@@ -196,7 +187,7 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 
 
       <footer><div class="copyright">
-  <p>Developed by Dominique Makowski.</p>
+  <p>Developed by <a href="https://dominiquemakowski.github.io/">Dominique Makowski</a>.</p>
 </div>
 
 <div class="pkgdown">
