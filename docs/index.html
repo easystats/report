@@ -120,14 +120,109 @@
 devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"neuropsychology/report"</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"report"</span>)</code></pre></div>
 </div>
-<div id="examples" class="section level2">
+<div id="report-all-the-things" class="section level2">
 <h2 class="hasAnchor">
-<a href="#examples" class="anchor"></a>Examples</h2>
-<div id="report-all-the-things" class="section level3">
-<h3 class="hasAnchor">
-<a href="#report-all-the-things" class="anchor"></a>Report all the things</h3>
+<a href="#report-all-the-things" class="anchor"></a>Report all the things <a href="https://neuropsychology.github.io/Psycho.jl/latest/"><img src="https://www.memecreator.org/static/images/templates/2776.jpg" height="100"></a>
+</h2>
 <!-- Add this to the README manually! -->
 <!-- <a href=https://neuropsychology.github.io/Psycho.jl/latest/><img src="https://www.memecreator.org/static/images/templates/2776.jpg" height="100"></a> -->
+<div id="general-workflow" class="section level3">
+<h3 class="hasAnchor">
+<a href="#general-workflow" class="anchor"></a>General Workflow</h3>
+<p>The <code>report</code> package works in a two steps fashion. First, creating a <code>report</code> object with the <code><a href="reference/report.html">report()</a></code> function (which takes different arguments depending on the type of object you are reporting). Then, this report can be displayed either textually, using <code><a href="reference/to_text.html">to_text()</a></code>, or as a table, using <code><a href="reference/to_table.html">to_table()</a></code>. Moreover, you can also access a more detailed (but less digest) version of the report using <code><a href="reference/to_fulltext.html">to_fulltext()</a></code> and <code><a href="reference/to_fulltable.html">to_fulltable()</a></code>.</p>
+</div>
+<div id="dataframes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#dataframes" class="anchor"></a>Dataframes</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/report.html">report</a></span>(iris)
+## The data contains 150 observations of the following variables:
+##   - Sepal.Length: Mean = 5.84 +- 0.83 [4.30, 7.90]
+##   - Sepal.Width: Mean = 3.06 +- 0.44 [2.00, 4.40]
+##   - Petal.Length: Mean = 3.76 +- 1.77 [1.00, 6.90]
+##   - Petal.Width: Mean = 1.20 +- 0.76 [0.10, 2.50]
+##   - Species: 3 levels: setosa (33.33%); versicolor (33.33%); virginica (33.33%)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/to_table.html">to_table</a></span>(<span class="kw"><a href="reference/report.html">report</a></span>(iris, <span class="dt">median =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<table class="table table">
+<thead><tr class="header">
+<th align="left">Variable</th>
+<th align="left">Level</th>
+<th align="right">n_Obs</th>
+<th align="right">perc_Obs</th>
+<th align="right">n_Missing</th>
+<th align="right">Median</th>
+<th align="right">MAD</th>
+<th align="right">Min</th>
+<th align="right">Max</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Species</td>
+<td align="left">setosa</td>
+<td align="right">50</td>
+<td align="right">33.33</td>
+<td align="right">0</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left">Species</td>
+<td align="left">versicolor</td>
+<td align="right">50</td>
+<td align="right">33.33</td>
+<td align="right">0</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="left">Species</td>
+<td align="left">virginica</td>
+<td align="right">50</td>
+<td align="right">33.33</td>
+<td align="right">0</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left">Petal.Length</td>
+<td align="left"></td>
+<td align="right">150</td>
+<td align="right"></td>
+<td align="right">0</td>
+<td align="right">4.35</td>
+<td align="right">1.8532</td>
+<td align="right">1.0</td>
+<td align="right">6.9</td>
+</tr>
+<tr class="odd">
+<td align="left">Petal.Width</td>
+<td align="left"></td>
+<td align="right">150</td>
+<td align="right"></td>
+<td align="right">0</td>
+<td align="right">1.30</td>
+<td align="right">1.0378</td>
+<td align="right">0.1</td>
+<td align="right">2.5</td>
+</tr>
+<tr class="even">
+<td align="left">Sepal.Width</td>
+<td align="left"></td>
+<td align="right">150</td>
+<td align="right"></td>
+<td align="right">0</td>
+<td align="right">3.00</td>
+<td align="right">0.4448</td>
+<td align="right">2.0</td>
+<td align="right">4.4</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div id="credits" class="section level2">
@@ -180,6 +275,7 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 <li><a href="https://travis-ci.org/neuropsychology/report"><img src="https://travis-ci.org/neuropsychology/report.svg?branch=master" alt="Build Status"></a></li>
 <li><a href="https://codecov.io/gh/neuropsychology/report"><img src="https://codecov.io/gh/neuropsychology/report/branch/master/graph/badge.svg" alt="codecov"></a></li>
 <li><a href="http://hits.dwyl.io/neuropsychology/report"><img src="http://hits.dwyl.io/DominiqueMakowski/bayestestR.svg" alt="HitCount"></a></li>
+<li><a href="https://neuropsychology.github.io/report/"><img src="https://img.shields.io/badge/documentation-report-orange.svg?colorB=E91E63" alt="Documentation"></a></li>
 </ul>
 </div>
 </div>

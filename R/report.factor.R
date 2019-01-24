@@ -53,7 +53,6 @@ report.factor <- function(x, levels_percentage = TRUE, missing_percentage = FALS
   # Selection ---------------------------------------------------------------
   table <- table_full
   if (levels_percentage == TRUE) {
-    table <- dplyr::select(table, -one_of("n_Obs"))
     text <- paste0(text_levels, " (", text_perc_Obs)
   } else {
     table <- dplyr::select(table, -one_of("perc_Obs"))

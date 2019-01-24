@@ -2,6 +2,7 @@
 
 S3method(print,report)
 S3method(report,character)
+S3method(report,data.frame)
 S3method(report,factor)
 S3method(report,numeric)
 export(as.report)

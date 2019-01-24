@@ -13,22 +13,20 @@
 #' @examples
 #' x <- c("A", "B", "C", "A", "B", "B", "D", "E", "B", "D", "A")
 #' report(x)
-#' report(x, n_characters=2, levels_percentage=FALSE, missing_percentage=TRUE)
+#' report(x, n_characters = 2, levels_percentage = FALSE, missing_percentage = TRUE)
 #' to_fulltext(report(x))
-#' to_table(report(x, n_characters="all"))
+#' to_table(report(x, n_characters = "all"))
 #' to_fulltable(report(x))
-#'
 #' @seealso report
 #' @import dplyr
 #'
 #' @export
 report.character <- function(x, n_characters = 3, levels_percentage = TRUE, missing_percentage = FALSE, ...) {
-
-  n_char <- as.data.frame(sort(table(x), decreasing=TRUE))
+  n_char <- as.data.frame(sort(table(x), decreasing = TRUE))
   names(n_char) <- c("Entry", "n_Entry")
   n_char$perc_Entry <- n_char$n_Entry / length(x)
 
-  if(n_characters == "all" | n_characters > nrow(n_char)){
+  if (n_characters == "all" | n_characters > nrow(n_char)) {
     n_characters <- nrow(n_char)
   }
 
@@ -42,9 +40,9 @@ report.character <- function(x, n_characters = 3, levels_percentage = TRUE, miss
   table_full$perc_Missing <- table_full$n_Missing / table_full$n_Obs * 100
 
 
-  if(levels_percentage == TRUE){
+  if (levels_percentage == TRUE) {
     text <- paste0(n_char$Entry, ", ", format_value(n_char$perc_Entry), "%")
-  } else{
+  } else {
     text <- paste0(n_char$Entry, ", n = ", n_char$n_Entry)
   }
 
@@ -54,17 +52,17 @@ report.character <- function(x, n_characters = 3, levels_percentage = TRUE, miss
   table <- table_full
 
 
-  if(nrow(n_char) > 1){
+  if (nrow(n_char) > 1) {
     text <- paste0(nrow(n_char), " entries: ", text)
   } else {
     text <- paste0(nrow(n_char), " entry: ", text)
   }
 
-  if(nrow(n_char)-n_characters == 1){
-    text <- paste0(text, " and ", nrow(n_char)-n_characters, " other")
+  if (nrow(n_char) - n_characters == 1) {
+    text <- paste0(text, " and ", nrow(n_char) - n_characters, " other")
   }
-  if(nrow(n_char)-n_characters > 1){
-    text <- paste0(text, " and ", nrow(n_char)-n_characters, " others")
+  if (nrow(n_char) - n_characters > 1) {
+    text <- paste0(text, " and ", nrow(n_char) - n_characters, " others")
   }
 
   text_full <- text
@@ -72,16 +70,16 @@ report.character <- function(x, n_characters = 3, levels_percentage = TRUE, miss
 
   text_n_Missing <- paste0(table_full$n_Missing[1], " missing")
   text_perc_Missing <- paste0(format_value(table_full$perc_Missing[1]), "% missing")
-  if(missing_percentage == TRUE){
+  if (missing_percentage == TRUE) {
     text_full <- paste0(text_full, "(", text_perc_Missing, ")")
     table <- dplyr::select(table, -one_of("n_Missing"))
-    if(table_full$n_Missing[1] > 0){
+    if (table_full$n_Missing[1] > 0) {
       text <- paste0(text, " (", text_perc_Missing, ")")
     }
-  } else{
+  } else {
     text_full <- paste0(text_full, " (", text_n_Missing, ")")
     table <- dplyr::select(table, -one_of("perc_Missing"))
-    if(table_full$n_Missing[1] > 0){
+    if (table_full$n_Missing[1] > 0) {
       text <- paste0(text, " (", text_n_Missing, ")")
     }
   }

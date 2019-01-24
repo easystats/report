@@ -19,12 +19,15 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   fig.path = "README-"
 )
+
+options(knitr.kable.NA = '',
+        digits = 4)
 ```
 
 
 [![Build Status](https://travis-ci.org/neuropsychology/report.svg?branch=master)](https://travis-ci.org/neuropsychology/report)
 [![codecov](https://codecov.io/gh/neuropsychology/report/branch/master/graph/badge.svg)](https://codecov.io/gh/neuropsychology/report)
-[![HitCount](http://hits.dwyl.io/DominiqueMakowski/bayestestR.svg)](http://hits.dwyl.io/neuropsychology/report)
+[![HitCount](http://hits.dwyl.io/DominiqueMakowski/bayestestR.svg)](http://hits.dwyl.io/neuropsychology/report) 
 <!-- Add this to the README manually! -->
 <!-- [![Documentation](https://img.shields.io/badge/documentation-report-orange.svg?colorB=E91E63)](https://neuropsychology.github.io/report/) -->
 
@@ -61,22 +64,33 @@ Run the following:
 install.packages("devtools")
 devtools::install_github("neuropsychology/report")
 ```
-```{r message=FALSE, warning=FALSE, eval=FALSE}
+```{r message=FALSE, warning=FALSE}
 library("report")
 ```
 
 
 
 
-## Examples
-
-### Report all the things 
+## Report all the things
 <!-- Add this to the README manually! -->
 <!-- <a href=https://neuropsychology.github.io/Psycho.jl/latest/><img src="https://www.memecreator.org/static/images/templates/2776.jpg" height="100"></a> -->
 
+### General Workflow
 
+The `report` package works in a two steps fashion. First, creating a `report` object with the `report()` function (which takes different arguments depending on the type of object you are reporting). Then, this report can be displayed either textually, using `to_text()`, or as a table, using `to_table()`. Moreover, you can also access a more detailed (but less digest) version of the report using `to_fulltext()` and `to_fulltable()`.
 
+### Dataframes
 
+```{r message=FALSE, warning=FALSE}
+report(iris)
+```
+
+```{r message=FALSE, warning=FALSE, eval=FALSE}
+to_table(report(iris, median = TRUE))
+```
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+knitr::kable(to_table(report(iris, median = TRUE)))
+```
 
 ## Credits
 

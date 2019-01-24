@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1548324440064.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "138209009",
+    "id" : "9A4B979C",
+    "lastKnownWriteTime" : 1548298900,
+    "last_content_update" : 1548298900,
+    "path" : "C:/Users/Dom/Dropbox/RECHERCHE/N/report/tests/testthat/test-report.numeric.R",
+    "project_path" : "tests/testthat/test-report.numeric.R",
+    "properties" : {
+        "cursorPosition" : "8,32",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
