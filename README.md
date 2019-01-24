@@ -2,7 +2,7 @@
 report <img src='man/figures/logo.png' align="right" height="139" />
 ====================================================================
 
-[![Build Status](https://travis-ci.org/neuropsychology/report.svg?branch=master)](https://travis-ci.org/neuropsychology/report) [![codecov](https://codecov.io/gh/neuropsychology/report/branch/master/graph/badge.svg)](https://codecov.io/gh/neuropsychology/report) [![HitCount](http://hits.dwyl.io/DominiqueMakowski/bayestestR.svg)](http://hits.dwyl.io/neuropsychology/report) <!-- Add this to the README manually! --> <!-- [![Documentation](https://img.shields.io/badge/documentation-report-orange.svg?colorB=E91E63)](https://neuropsychology.github.io/report/) -->
+[![Build Status](https://travis-ci.org/neuropsychology/report.svg?branch=master)](https://travis-ci.org/neuropsychology/report) [![codecov](https://codecov.io/gh/neuropsychology/report/branch/master/graph/badge.svg)](https://codecov.io/gh/neuropsychology/report) [![HitCount](http://hits.dwyl.io/DominiqueMakowski/bayestestR.svg)](http://hits.dwyl.io/neuropsychology/report) [![Documentation](https://img.shields.io/badge/documentation-report-orange.svg?colorB=E91E63)](https://neuropsychology.github.io/report/) 
 
 ***"From R to Manuscript"***
 
@@ -34,7 +34,7 @@ devtools::install_github("neuropsychology/report")
 library("report")
 ```
 
-Report all the things
+Report all the things <a href=https://neuropsychology.github.io/Psycho.jl/latest/><img src="https://www.memecreator.org/static/images/templates/2776.jpg" height="100"></a> -->
 ---------------------
 
 <!-- Add this to the README manually! -->
