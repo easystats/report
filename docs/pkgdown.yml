@@ -1,5 +1,7 @@
 pandoc: 1.19.2.1
 pkgdown: 1.3.0
 pkgdown_sha: ~
-articles: []
+articles:
+  report: report.html
+  Support_new_models: Support_new_models.html
 

@@ -12,7 +12,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-# report <img src='man/figures/logo.svg' align="right" height="139" />
+# report <img src='man/figures/logo.png' align="right" height="139" />
 
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
@@ -37,9 +37,9 @@ knitr::opts_chunk$set(
 
 ***"From R to Manuscript"***
 
-`report`'s primary goal is to fill the gap between R's output and the formatted result description of your manuscript, with the automated use of **best practices** guidelines, ensuring standardization and quality of results reporting.
+`report`'s primary goal is to fill the gap between R's output and the formatted result description of your manuscript, with the automated use of **best practices** guidelines, ensuring **standardization** and **quality** of results reporting.
 
-# Contribute
+## Contribute
 
 **`report` is a young package in need of affection**. You can easily hop aboard the [developpment](.github/CONTRIBUTING.md) of this open-source software and improve psychological science by doing the following:
 
@@ -52,7 +52,7 @@ Don't be shy, try to code and submit a pull request (See the [contributing guide
 
 
 
-# Installation
+## Installation
 
 
 Run the following:
@@ -68,9 +68,9 @@ library("report")
 
 
 
-# Examples
+## Examples
 
-## Report all the things 
+### Report all the things 
 <!-- Add this to the README manually! -->
 <!-- <a href=https://neuropsychology.github.io/Psycho.jl/latest/><img src="https://www.memecreator.org/static/images/templates/2776.jpg" height="100"></a> -->
 

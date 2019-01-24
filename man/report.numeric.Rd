@@ -8,7 +8,7 @@
   range = TRUE, missing_percentage = FALSE, ...)
 }
 \arguments{
-\item{x}{a dataframe.}
+\item{x}{a numeric vector.}
 
 \item{median}{show \link{mean} and \link{sd} (default) or \link{median} and \link{mad}.}
 
@@ -27,8 +27,9 @@ Create a report of a numeric vector.
 x <- rnorm(1000)
 report(x)
 report(x, median = TRUE, dispersion = TRUE, range = TRUE, missing_percentage = TRUE)
-print(report(x), full=TRUE)
-
+to_fulltext(report(x))
+to_table(report(x))
+to_fulltable(report(x))
 }
 \seealso{
 report

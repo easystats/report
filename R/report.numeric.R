@@ -2,7 +2,7 @@
 #'
 #' Create a report of a numeric vector.
 #'
-#' @param x a dataframe.
+#' @param x a numeric vector.
 #' @param median show \link{mean} and \link{sd} (default) or \link{median} and \link{mad}.
 #' @param dispersion show dispersion (\link{sd} or \link{mad}).
 #' @param range show range.
@@ -15,8 +15,9 @@
 #' x <- rnorm(1000)
 #' report(x)
 #' report(x, median = TRUE, dispersion = TRUE, range = TRUE, missing_percentage = TRUE)
-#' print(report(x), full=TRUE)
-#'
+#' to_fulltext(report(x))
+#' to_table(report(x))
+#' to_fulltable(report(x))
 #' @seealso report
 #' @import dplyr
 #' @importFrom stats mad sd
@@ -35,7 +36,7 @@ report.numeric <- function(x, median = FALSE, dispersion = TRUE, range = TRUE, m
     n_Obs = length(x),
     n_Missing = sum(is.na(x))
   )
-  table_full$perc_Missing <- table_full$n_Missing / table_full$n_Obs
+  table_full$perc_Missing <- table_full$n_Missing / table_full$n_Obs * 100
 
 
   # Text --------------------------------------------------------------------
@@ -111,6 +112,5 @@ report.numeric <- function(x, median = FALSE, dispersion = TRUE, range = TRUE, m
     table_full = table_full
   )
 
-  # class(out) <- c("report", class(out))
   return(as.report(out))
 }

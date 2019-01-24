@@ -2,7 +2,7 @@
 % Please edit documentation in R/report.R
 \name{as.report}
 \alias{as.report}
-\title{create objects of class \link{report}.}
+\title{create objects of class \link{report}}
 \usage{
 as.report(x)
 }
@@ -10,5 +10,5 @@ as.report(x)
 \item{x}{an arbitrary R object.}
 }
 \description{
-create objects of class \link{report}.
+create objects of class \link{report}
 }

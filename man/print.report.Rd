@@ -2,7 +2,7 @@
 % Please edit documentation in R/report.R
 \name{print.report}
 \alias{print.report}
-\title{Print the results.}
+\title{Report printing}
 \usage{
 \method{print}{report}(x, full = FALSE, ...)
 }
@@ -14,7 +14,7 @@
 \item{...}{Further arguments passed to or from other methods.}
 }
 \description{
-Print the results.
+Report printing
 }
 \author{
 \href{https://dominiquemakowski.github.io/}{Dominique Makowski}

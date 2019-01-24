@@ -2,7 +2,7 @@
 % Please edit documentation in R/report.R
 \name{is.report}
 \alias{is.report}
-\title{Test for objects of class \link{report}.}
+\title{Test for objects of class \link{report}}
 \usage{
 is.report(x)
 }
@@ -10,5 +10,5 @@ is.report(x)
 \item{x}{an arbitrary R object.}
 }
 \description{
-Test for objects of class \link{report}.
+Test for objects of class \link{report}
 }
