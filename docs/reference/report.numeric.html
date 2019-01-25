@@ -146,27 +146,27 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>a numeric vector.</p></td>
+      <td><p>Numeric vector.</p></td>
     </tr>
     <tr>
       <th>median</th>
-      <td><p>show <a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a> and <a href='https://www.rdocumentation.org/packages/stats/topics/sd'>sd</a> (default) or <a href='https://www.rdocumentation.org/packages/stats/topics/median'>median</a> and <a href='https://www.rdocumentation.org/packages/stats/topics/mad'>mad</a>.</p></td>
+      <td><p>Show <a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a> and <a href='https://www.rdocumentation.org/packages/stats/topics/sd'>sd</a> (default) or <a href='https://www.rdocumentation.org/packages/stats/topics/median'>median</a> and <a href='https://www.rdocumentation.org/packages/stats/topics/mad'>mad</a>.</p></td>
     </tr>
     <tr>
       <th>dispersion</th>
-      <td><p>show dispersion (<a href='https://www.rdocumentation.org/packages/stats/topics/sd'>sd</a> or <a href='https://www.rdocumentation.org/packages/stats/topics/mad'>mad</a>).</p></td>
+      <td><p>Show dispersion (<a href='https://www.rdocumentation.org/packages/stats/topics/sd'>sd</a> or <a href='https://www.rdocumentation.org/packages/stats/topics/mad'>mad</a>).</p></td>
     </tr>
     <tr>
       <th>range</th>
-      <td><p>show range.</p></td>
+      <td><p>Show range.</p></td>
     </tr>
     <tr>
       <th>missing_percentage</th>
-      <td><p>show missings by number (default) or percentage</p></td>
+      <td><p>Show missings by number (default) or percentage</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>arguments passed to or from other methods.</p></td>
+      <td><p>Arguments passed to or from other methods.</p></td>
     </tr>
     </table>
     
@@ -180,8 +180,8 @@
 <span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; Mean = 0.00 +- 1.00 [-2.94, 2.76]</div><div class='input'><span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>, <span class='kw'>median</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>dispersion</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; Median = 0.01 +- 1.00 [-2.94, 2.76]</div><div class='input'><span class='fu'><a href='to_fulltext.html'>to_fulltext</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; Mean = 0.00, SD = 1.00, Median = 0.01, MAD = 1.00, Range = [-2.94, 2.76], 0 missing.</div><div class='input'><span class='fu'><a href='to_table.html'>to_table</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt;          Mean       SD       Min      Max n_Obs n_Missing
 #&gt; 1 0.004339615 1.000001 -2.938978 2.755418  1000         0</div><div class='input'><span class='fu'><a href='to_fulltable.html'>to_fulltable</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt;          Mean       SD      Median      MAD       Min      Max n_Obs n_Missing
 #&gt; 1 0.004339615 1.000001 0.008579051 1.002888 -2.938978 2.755418  1000         0
-#&gt;   perc_Missing
-#&gt; 1            0</div></pre>
+#&gt;   percentage_Missing
+#&gt; 1                  0</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

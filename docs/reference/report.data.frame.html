@@ -139,7 +139,7 @@
 
     <pre class="usage"><span class='co'># S3 method for data.frame</span>
 <span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>, <span class='kw'>median</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>dispersion</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>range</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>levels_percentage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>n_characters</span> <span class='kw'>=</span> <span class='fl'>3</span>,
+  <span class='kw'>range</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>levels_percentage</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>n_characters</span> <span class='kw'>=</span> <span class='fl'>3</span>,
   <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -147,35 +147,35 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>a numeric vector.</p></td>
+      <td><p>Numeric vector.</p></td>
     </tr>
     <tr>
       <th>median</th>
-      <td><p>show <a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a> and <a href='https://www.rdocumentation.org/packages/stats/topics/sd'>sd</a> (default) or <a href='https://www.rdocumentation.org/packages/stats/topics/median'>median</a> and <a href='https://www.rdocumentation.org/packages/stats/topics/mad'>mad</a>.</p></td>
+      <td><p>Show <a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a> and <a href='https://www.rdocumentation.org/packages/stats/topics/sd'>sd</a> (default) or <a href='https://www.rdocumentation.org/packages/stats/topics/median'>median</a> and <a href='https://www.rdocumentation.org/packages/stats/topics/mad'>mad</a>.</p></td>
     </tr>
     <tr>
       <th>dispersion</th>
-      <td><p>show dispersion (<a href='https://www.rdocumentation.org/packages/stats/topics/sd'>sd</a> or <a href='https://www.rdocumentation.org/packages/stats/topics/mad'>mad</a>).</p></td>
+      <td><p>Show dispersion (<a href='https://www.rdocumentation.org/packages/stats/topics/sd'>sd</a> or <a href='https://www.rdocumentation.org/packages/stats/topics/mad'>mad</a>).</p></td>
     </tr>
     <tr>
       <th>range</th>
-      <td><p>show range.</p></td>
+      <td><p>Show range.</p></td>
     </tr>
     <tr>
       <th>levels_percentage</th>
-      <td><p>show characters entries and factor levels by percentage (default) or number.</p></td>
+      <td><p>Show characters entries and factor levels by number (default) or percentage.</p></td>
     </tr>
     <tr>
       <th>n_characters</th>
-      <td><p>number of different character entries to show. Can be "all".</p></td>
+      <td><p>Number of different character entries to show. Can be "all".</p></td>
     </tr>
     <tr>
       <th>missing_percentage</th>
-      <td><p>show missings by number (default) or percentage</p></td>
+      <td><p>Show missings by number (default) or percentage.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>arguments passed to or from other methods.</p></td>
+      <td><p>Arguments passed to or from other methods.</p></td>
     </tr>
     </table>
     
@@ -191,36 +191,36 @@
 #&gt;   - Sepal.Width: Mean = 3.06 +- 0.44 [2.00, 4.40]
 #&gt;   - Petal.Length: Mean = 3.76 +- 1.77 [1.00, 6.90]
 #&gt;   - Petal.Width: Mean = 1.20 +- 0.76 [0.10, 2.50]
-#&gt;   - Species: 3 levels: setosa (33.33%); versicolor (33.33%); virginica (33.33%)</div><div class='input'><span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>, <span class='kw'>median</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>dispersion</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; The data contains 150 observations of the following variables:
+#&gt;   - Species: 3 levels: setosa (n = 50); versicolor (n = 50); virginica (n = 50)</div><div class='input'><span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>, <span class='kw'>median</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>dispersion</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; The data contains 150 observations of the following variables:
 #&gt;   - Sepal.Length: Median = 5.80 +- 1.04 [4.30, 7.90]
 #&gt;   - Sepal.Width: Median = 3.00 +- 0.44 [2.00, 4.40]
 #&gt;   - Petal.Length: Median = 4.35 +- 1.85 [1.00, 6.90]
 #&gt;   - Petal.Width: Median = 1.30 +- 1.04 [0.10, 2.50]
-#&gt;   - Species: 3 levels: setosa (33.33%); versicolor (33.33%); virginica (33.33%)</div><div class='input'><span class='fu'><a href='to_fulltext.html'>to_fulltext</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; The data contains 150 observations of the following variables:
+#&gt;   - Species: 3 levels: setosa (n = 50); versicolor (n = 50); virginica (n = 50)</div><div class='input'><span class='fu'><a href='to_fulltext.html'>to_fulltext</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; The data contains 150 observations of the following variables:
 #&gt;   - Sepal.Length: Mean = 5.84, SD = 0.83, Median = 5.80, MAD = 1.04, Range = [4.30, 7.90], 0 missing.
 #&gt;   - Sepal.Width: Mean = 3.06, SD = 0.44, Median = 3.00, MAD = 0.44, Range = [2.00, 4.40], 0 missing.
 #&gt;   - Petal.Length: Mean = 3.76, SD = 1.77, Median = 4.35, MAD = 1.85, Range = [1.00, 6.90], 0 missing.
 #&gt;   - Petal.Width: Mean = 1.20, SD = 0.76, Median = 1.30, MAD = 1.04, Range = [0.10, 2.50], 0 missing.
-#&gt;   - Species: 3 levels: setosa (n = 50, 33.33%; 0 missing); versicolor (n = 50, 33.33%; 0 missing); virginica (n = 50, 33.33%; 0 missing)</div><div class='input'><span class='fu'><a href='to_table.html'>to_table</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt;       Variable      Level n_Obs perc_Obs n_Missing     Mean        SD Min Max
-#&gt; 1      Species     setosa    50 33.33333         0       NA        NA  NA  NA
-#&gt; 2      Species versicolor    50 33.33333         0       NA        NA  NA  NA
-#&gt; 3      Species  virginica    50 33.33333         0       NA        NA  NA  NA
-#&gt; 4 Petal.Length       &lt;NA&gt;   150       NA         0 3.758000 1.7652982 1.0 6.9
-#&gt; 5  Petal.Width       &lt;NA&gt;   150       NA         0 1.199333 0.7622377 0.1 2.5
-#&gt; 6  Sepal.Width       &lt;NA&gt;   150       NA         0 3.057333 0.4358663 2.0 4.4</div><div class='input'><span class='fu'><a href='to_fulltable.html'>to_fulltable</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt;       Variable      Level n_Obs perc_Obs n_Missing perc_Missing     Mean
-#&gt; 1      Species     setosa    50 33.33333         0            0       NA
-#&gt; 2      Species versicolor    50 33.33333         0            0       NA
-#&gt; 3      Species  virginica    50 33.33333         0            0       NA
-#&gt; 4 Petal.Length       &lt;NA&gt;   150       NA         0            0 3.758000
-#&gt; 5  Petal.Width       &lt;NA&gt;   150       NA         0            0 1.199333
-#&gt; 6  Sepal.Width       &lt;NA&gt;   150       NA         0            0 3.057333
-#&gt;          SD Median     MAD Min Max
-#&gt; 1        NA     NA      NA  NA  NA
-#&gt; 2        NA     NA      NA  NA  NA
-#&gt; 3        NA     NA      NA  NA  NA
-#&gt; 4 1.7652982   4.35 1.85325 1.0 6.9
-#&gt; 5 0.7622377   1.30 1.03782 0.1 2.5
-#&gt; 6 0.4358663   3.00 0.44478 2.0 4.4</div></pre>
+#&gt;   - Species: 3 levels: setosa (n = 50, 33.33%; 0 missing); versicolor (n = 50, 33.33%; 0 missing); virginica (n = 50, 33.33%; 0 missing)</div><div class='input'><span class='fu'><a href='to_table.html'>to_table</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt;       Variable      Level n_Obs n_Missing     Mean        SD Min Max
+#&gt; 1      Species     setosa    50         0       NA        NA  NA  NA
+#&gt; 2      Species versicolor    50         0       NA        NA  NA  NA
+#&gt; 3      Species  virginica    50         0       NA        NA  NA  NA
+#&gt; 4 Petal.Length       &lt;NA&gt;   150         0 3.758000 1.7652982 1.0 6.9
+#&gt; 5  Petal.Width       &lt;NA&gt;   150         0 1.199333 0.7622377 0.1 2.5
+#&gt; 6  Sepal.Width       &lt;NA&gt;   150         0 3.057333 0.4358663 2.0 4.4</div><div class='input'><span class='fu'><a href='to_fulltable.html'>to_fulltable</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt;       Variable      Level n_Obs n_Missing percentage_Missing     Mean        SD
+#&gt; 1      Species     setosa    50         0                  0       NA        NA
+#&gt; 2      Species versicolor    50         0                  0       NA        NA
+#&gt; 3      Species  virginica    50         0                  0       NA        NA
+#&gt; 4 Petal.Length       &lt;NA&gt;   150         0                  0 3.758000 1.7652982
+#&gt; 5  Petal.Width       &lt;NA&gt;   150         0                  0 1.199333 0.7622377
+#&gt; 6  Sepal.Width       &lt;NA&gt;   150         0                  0 3.057333 0.4358663
+#&gt;   Median     MAD Min Max percentage_Obs
+#&gt; 1     NA      NA  NA  NA       33.33333
+#&gt; 2     NA      NA  NA  NA       33.33333
+#&gt; 3     NA      NA  NA  NA       33.33333
+#&gt; 4   4.35 1.85325 1.0 6.9             NA
+#&gt; 5   1.30 1.03782 0.1 2.5             NA
+#&gt; 6   3.00 0.44478 2.0 4.4             NA</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -5,8 +5,8 @@
 #'  \item{\link[=report.numeric]{report.numeric}}
 #'  }
 #'
-#' @param x an R object.
-#' @param ... arguments passed to or from other methods.
+#' @param x Object.
+#' @param ... Arguments passed to or from other methods.
 #'
 #' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
 #'
@@ -19,7 +19,7 @@ report <- function(x, ...) {
 
 #' Test for objects of class \link{report}
 #'
-#' @param x an arbitrary R object.
+#' @param x An arbitrary R object.
 #'
 #' @export
 is.report <- function(x) inherits(x, "report")
@@ -29,7 +29,7 @@ is.report <- function(x) inherits(x, "report")
 
 #' create objects of class \link{report}
 #'
-#' @param x an arbitrary R object.
+#' @param x An arbitrary R object.
 #'
 #' @export
 as.report <- function(x) {
@@ -44,9 +44,9 @@ as.report <- function(x) {
 
 #' Report printing
 #'
-#' @param x An object of class \link{report}
+#' @param x Object of class \link{report}
 #' @param full Show the full report.
-#' @param ... Further arguments passed to or from other methods.
+#' @param ... Arguments passed to or from other methods.
 #'
 #' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
 #'
@@ -77,10 +77,10 @@ to_fulltext <- function(x, full = TRUE, ...) {
 
 #' Report table display
 #'
-#' @param x An object of class \link{report}
+#' @param x Object of class \link{report}
 #' @param full Show the full report.
-#' @param digits Format the digits.
-#' @param ... Further arguments passed to or from other methods.
+#' @param digits Number of digits.
+#' @param ... Arguments passed to or from other methods.
 #'
 #' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
 #'
@@ -111,4 +111,21 @@ to_fulltable <- as.data.frame.report <- function(x, full = TRUE, digits = NULL, 
   table <- to_table(x, digits = digits, full = full)
 
   return(table)
+}
+
+
+#' Report values
+#'
+#' @param x Object of class \link{report}
+#' @param ... Arguments passed to or from other methods.
+#'
+#' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
+#'
+#' @export
+to_values <- as.list.report <- function(x, ...) {
+  if (!"values" %in% names(x)) {
+    return(as.list(x$table_full))
+  } else {
+    return(x$values)
+  }
 }

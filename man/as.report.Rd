@@ -7,7 +7,7 @@
 as.report(x)
 }
 \arguments{
-\item{x}{an arbitrary R object.}
+\item{x}{An arbitrary R object.}
 }
 \description{
 create objects of class \link{report}

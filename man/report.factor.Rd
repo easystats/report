@@ -4,17 +4,17 @@
 \alias{report.factor}
 \title{Factor (Categorical Vector) Report}
 \usage{
-\method{report}{factor}(x, levels_percentage = TRUE,
+\method{report}{factor}(x, levels_percentage = FALSE,
   missing_percentage = FALSE, ...)
 }
 \arguments{
-\item{x}{a categorical vector.}
+\item{x}{Categorical vector.}
 
-\item{levels_percentage}{show factor levels by percentage (default) or number.}
+\item{levels_percentage}{Show factor levels by number (default) or percentage.}
 
-\item{missing_percentage}{show missings by number (default) or percentage}
+\item{missing_percentage}{Show missings by number (default) or percentage.}
 
-\item{...}{arguments passed to or from other methods.}
+\item{...}{Arguments passed to or from other methods.}
 }
 \description{
 Create a report of a categorical vector.
@@ -22,7 +22,7 @@ Create a report of a categorical vector.
 \examples{
 x <- factor(rep(c("A", "B", "C"), 10))
 report(x)
-report(x, levels_percentage = FALSE, missing_percentage = TRUE)
+report(x, levels_percentage = TRUE, missing_percentage = TRUE)
 to_fulltext(report(x))
 to_table(report(x))
 to_fulltable(report(x))

@@ -7,13 +7,13 @@
 to_fulltable(x, full = TRUE, digits = NULL, ...)
 }
 \arguments{
-\item{x}{An object of class \link{report}}
+\item{x}{Object of class \link{report}}
 
 \item{full}{Show the full report.}
 
-\item{digits}{Format the digits.}
+\item{digits}{Number of digits.}
 
-\item{...}{Further arguments passed to or from other methods.}
+\item{...}{Arguments passed to or from other methods.}
 }
 \description{
 Report table display

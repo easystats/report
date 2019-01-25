@@ -8,5 +8,5 @@ test_that("report.character", {
 
   r <- report(x, levels_percentage = FALSE, missing_percentage = TRUE)
   testthat::expect_equal(nrow(r$table), 1, tol = 0)
-  testthat::expect_equal(r$table$perc_Missing[1], 0, tol = 0)
+  testthat::expect_equal(r$table$percentage_Missing[1], 0, tol = 0)
 })

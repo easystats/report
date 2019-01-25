@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1548389927937.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "50CF6BD4",
+    "lastKnownWriteTime" : 1548396548,
+    "last_content_update" : 1548396548561,
+    "path" : "C:/Users/Dom/Dropbox/RECHERCHE/N/report/README.Rmd",
+    "project_path" : "README.Rmd",
+    "properties" : {
+        "chunk_output_type" : "console",
+        "cursorPosition" : "29,249",
+        "scrollLine" : "24"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

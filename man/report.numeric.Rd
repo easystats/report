@@ -8,17 +8,17 @@
   range = TRUE, missing_percentage = FALSE, ...)
 }
 \arguments{
-\item{x}{a numeric vector.}
+\item{x}{Numeric vector.}
 
-\item{median}{show \link{mean} and \link{sd} (default) or \link{median} and \link{mad}.}
+\item{median}{Show \link{mean} and \link{sd} (default) or \link{median} and \link{mad}.}
 
-\item{dispersion}{show dispersion (\link{sd} or \link{mad}).}
+\item{dispersion}{Show dispersion (\link{sd} or \link{mad}).}
 
-\item{range}{show range.}
+\item{range}{Show range.}
 
-\item{missing_percentage}{show missings by number (default) or percentage}
+\item{missing_percentage}{Show missings by number (default) or percentage}
 
-\item{...}{arguments passed to or from other methods.}
+\item{...}{Arguments passed to or from other methods.}
 }
 \description{
 Create a report of a numeric vector.

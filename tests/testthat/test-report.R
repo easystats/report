@@ -1,4 +1,4 @@
-context("report.")
+context("report")
 
 
 test_that("report", {
@@ -12,4 +12,7 @@ test_that("report", {
   testthat::expect_is(to_fulltable(r), "data.frame")
   testthat::expect_is(as.data.frame(r), "data.frame")
   testthat::expect_is(summary(r), "data.frame")
+
+  testthat::expect_is(as.list(r), "list")
+  testthat::expect_is(to_values(r), "list")
 })

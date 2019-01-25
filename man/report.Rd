@@ -7,9 +7,9 @@
 report(x, ...)
 }
 \arguments{
-\item{x}{an R object.}
+\item{x}{Object.}
 
-\item{...}{arguments passed to or from other methods.}
+\item{...}{Arguments passed to or from other methods.}
 }
 \description{
 Create textual reports. See the documentation for your object's class:

@@ -1,7 +1,7 @@
 #' Value Formatting
 #'
-#' @param x number.
-#' @param digits number of significant digits.
+#' @param x Numeric value.
+#' @param digits Number of significant digits.
 #'
 #' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
 #'

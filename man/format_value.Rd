@@ -7,9 +7,9 @@
 format_value(x, digits = 2)
 }
 \arguments{
-\item{x}{number.}
+\item{x}{Numeric value.}
 
-\item{digits}{number of significant digits.}
+\item{digits}{Number of significant digits.}
 }
 \description{
 Value Formatting

@@ -1,0 +1,8 @@
+datasets="C:/Program Files/R/R-3.5.1/library/datasets"
+dplyr="C:/Users/Dom/Documents/R/win-library/3.5/dplyr"
+grDevices="C:/Program Files/R/R-3.5.1/library/grDevices"
+graphics="C:/Program Files/R/R-3.5.1/library/graphics"
+methods="C:/Program Files/R/R-3.5.1/library/methods"
+report="C:/Users/Dom/Documents/R/win-library/3.5/report"
+stats="C:/Program Files/R/R-3.5.1/library/stats"
+utils="C:/Program Files/R/R-3.5.1/library/utils"

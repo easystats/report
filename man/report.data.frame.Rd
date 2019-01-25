@@ -5,25 +5,25 @@
 \title{Dataframe Report}
 \usage{
 \method{report}{data.frame}(x, median = FALSE, dispersion = TRUE,
-  range = TRUE, levels_percentage = TRUE, n_characters = 3,
+  range = TRUE, levels_percentage = FALSE, n_characters = 3,
   missing_percentage = FALSE, ...)
 }
 \arguments{
-\item{x}{a numeric vector.}
+\item{x}{Numeric vector.}
 
-\item{median}{show \link{mean} and \link{sd} (default) or \link{median} and \link{mad}.}
+\item{median}{Show \link{mean} and \link{sd} (default) or \link{median} and \link{mad}.}
 
-\item{dispersion}{show dispersion (\link{sd} or \link{mad}).}
+\item{dispersion}{Show dispersion (\link{sd} or \link{mad}).}
 
-\item{range}{show range.}
+\item{range}{Show range.}
 
-\item{levels_percentage}{show characters entries and factor levels by percentage (default) or number.}
+\item{levels_percentage}{Show characters entries and factor levels by number (default) or percentage.}
 
-\item{n_characters}{number of different character entries to show. Can be "all".}
+\item{n_characters}{Number of different character entries to show. Can be "all".}
 
-\item{missing_percentage}{show missings by number (default) or percentage}
+\item{missing_percentage}{Show missings by number (default) or percentage.}
 
-\item{...}{arguments passed to or from other methods.}
+\item{...}{Arguments passed to or from other methods.}
 }
 \description{
 Create a report of a dataframe.

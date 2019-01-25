@@ -1,0 +1,512 @@
+)
+out
+library(report)
+library(dplyr)
+x <- c("A", "B", "C", "A", "B", "B", "D", "E", "B", "D", "A")
+n_characters = 4
+levels_percentage = TRUE
+missing_percentage = FALSE
+n_char <- as.data.frame(sort(table(x), decreasing=TRUE))
+names(n_char) <- c("Entry", "n_Entry")
+n_char$perc_Entry <- n_char$n_Entry / length(x)
+if(n_characters == "all" | n_characters > nrow(n_char)){
+n_characters <- nrow(n_char)
+}
+# Table -------------------------------------------------------------------
+table_full <- data.frame(
+n_Entries = nrow(n_char),
+n_Obs = length(x),
+n_Missing = sum(is.na(x))
+)
+table_full$perc_Missing <- table_full$n_Missing / table_full$n_Obs * 100
+if(levels_percentage == TRUE){
+text <- paste0(n_char$Entry, ", ", format_value(n_char$perc_Entry), "%")
+} else{
+text <- paste0(n_char$Entry, ", n = ", n_char$n_Entry)
+}
+text <- text[1:n_characters]
+text
+text <- text[1:n_characters]
+table <- table_full
+text <- paste0(text, collapse = "; ")
+if(nrow(n_char) > 1){
+text <- paste0(nrow(n_char), " entries: ", text)
+} else {
+text <- paste0(nrow(n_char), " entry: ", text)
+}
+if(nrow(n_char)-n_characters == 1){
+text <- paste0(text, " and ", nrow(n_char)-n_characters, " other")
+}
+if(nrow(n_char)-n_characters > 1){
+text <- paste0(text, " and ", nrow(n_char)-n_characters, " others")
+}
+text_full <- text
+text
+n_char <- as.data.frame(sort(table(x), decreasing=TRUE))
+names(n_char) <- c("Entry", "n_Entry")
+n_char$perc_Entry <- n_char$n_Entry / length(x)
+if(n_characters == "all" | n_characters > nrow(n_char)){
+n_characters <- nrow(n_char)
+}
+# Table -------------------------------------------------------------------
+table_full <- data.frame(
+n_Entries = nrow(n_char),
+n_Obs = length(x),
+n_Missing = sum(is.na(x))
+)
+table_full$perc_Missing <- table_full$n_Missing / table_full$n_Obs * 100
+if(levels_percentage == TRUE){
+text <- paste0(n_char$Entry, ", ", format_value(n_char$perc_Entry), "%")
+} else{
+text <- paste0(n_char$Entry, ", n = ", n_char$n_Entry)
+}
+text <- text[1:n_characters]
+table <- table_full
+text <- paste0(text, collapse = "; ")
+text
+table_full$Entries <- text
+library(report)
+x <- c("A", "B", "C", "A", "B", "B", "D", "E", "B", "D", "A")
+report(x)
+library(report)
+x <- c("A", "B", "C", "A", "B", "B", "D", "E", "B", "D", "A")
+report(x)
+report(x, n_characters=2, levels_percentage=TRUE, missing_percentage=TRUE)
+report(x, n_characters=2, levels_percentage=FALSE, missing_percentage=TRUE)
+to_fulltext(report(x))
+to_table(report(x, n_characters="all"))
+library(report)
+x <- c("A", "B", "C", "A", "B", "B", "D", "E", "B", "D", "A")
+r <- report(x)
+nrow(r$table)
+testthat::expect_warning(r$table$Median)
+r <- report(x, levels_percentage=FALSE, missing_percentage=TRUE)
+testthat::expect_equal(nrow(r$table), 1, tol = 0)
+r$table
+r$table$perc_Missing
+testthat::expect_equal(r$table$perc_Missing[1], 0, tol = 0)
+logical(c(TRUE, TRUE, FALSE))
+pkgdown::build_site()
+styler::style_pkg
+styler::style_pkg()
+pkgdown::build_favicon()
+pkgdown::build_site()
+pkgdown::build_site()
+library(report)
+x <- c("A", "B", "C", "A", "B", "B", "D", "E", "B", "D", "A")
+r <- report(x)
+testthat::expect_equal(nrow(r$table), 1, tol = 0)
+testthat::expect_warning(r$table$Median)
+r$table$Median
+testthat::expect_null(r$table$Median)
+x <- iris
+table_full <- data.frame()
+table <- data.frame()
+text_full <- ""
+text <- ""
+for(col in names(x)){
+r <- report(x[col])
+text_full <- paste0(text_full, "\n  - ", r$text_full)
+text <- paste0(text, "\n  - ", r$text)
+}
+col
+x[col]
+r <- report(x[[col]])
+# Table -------------------------------------------------------------------
+table_full <- data.frame()
+table <- data.frame()
+text_full <- ""
+text <- ""
+for(col in names(x)){
+r <- report(x[[col]])
+text_full <- paste0(text_full, "\n  - ", r$text_full)
+text <- paste0(text, "\n  - ", r$text)
+}
+text_full
+text
+table <- merge(table, r$table)
+table
+table_full <- data.frame()
+table <- data.frame()
+text_full <- ""
+text <- ""
+for(col in names(x)){
+r <- report(x[[col]])
+table <- merge(table, r$table, all=TRUE)
+text_full <- paste0(text_full, "\n  - ", r$text_full)
+text <- paste0(text, "\n  - ", r$text)
+}
+table
+r$table
+col <- "Sepal.Length"
+r <- report(x[[col]])
+r$table
+table
+current_table <- r$table
+current_table$Variable <- col
+merge(table, current_table, all=TRUE)
+table_full <- data.frame()
+table <- data.frame()
+text_full <- ""
+text <- ""
+for(col in names(x)){
+r <- report(x[[col]])
+current_table <- r$table
+current_table$Variable <- col
+table <- merge(table, current_table, all=TRUE, incomparables = NA)
+text_full <- paste0(text_full, "\n  - ", r$text_full)
+text <- paste0(text, "\n  - ", r$text)
+}
+table_full <- data.frame()
+table <- data.frame()
+text_full <- ""
+text <- ""
+for(col in names(x)){
+r <- report(x[[col]])
+current_table <- r$table
+current_table$Variable <- col
+table <- merge(table, current_table, all=TRUE)
+text_full <- paste0(text_full, "\n  - ", r$text_full)
+text <- paste0(text, "\n  - ", r$text)
+}
+table
+table <- select_(table, "Variable", everything())
+library(report)
+library(dplyr)
+x <- iris
+# Table -------------------------------------------------------------------
+table_full <- data.frame()
+table <- data.frame()
+text_full <- ""
+text <- ""
+for(col in names(x)){
+r <- report(x[[col]])
+current_table <- r$table
+current_table$Variable <- col
+table <- merge(table, current_table, all=TRUE)
+text_full <- paste0(text_full, "\n  - ", r$text_full)
+text <- paste0(text, "\n  - ", r$text)
+}
+table <- select_(table, "Variable", everything())
+table
+table <- select_(table, "Variable", "everything()")
+table
+table <- select_(table, "Variable", "Dupa", "everything()")
+if("Level" %in% names(table)){
+table <- select_(table, "Variable", "Level", "everything()")
+} else{
+table <- select_(table, "Variable", "everything()")
+}
+table
+library(report)
+# Table -------------------------------------------------------------------
+table_full <- data.frame()
+table <- data.frame()
+text_full <- ""
+text <- ""
+for(col in names(x)){
+r <- report(x[[col]])
+current_table <- r$table
+current_table$Variable <- col
+table <- merge(table, current_table, all=TRUE)
+text_full <- paste0(text_full, "\n  - ", r$text_full)
+text <- paste0(text, "\n  - ", r$text)
+}
+if("Level" %in% names(table)){
+table <- select_(table, "Variable", "Level", "everything()")
+} else{
+table <- select_(table, "Variable", "everything()")
+}
+table
+library(report)
+x <- iris
+# Table -------------------------------------------------------------------
+table_full <- data.frame()
+table <- data.frame()
+text_full <- ""
+text <- ""
+for(col in names(x)){
+r <- report(x[[col]])
+current_table <- r$table
+current_table$Variable <- col
+table <- merge(table, current_table, all=TRUE)
+text_full <- paste0(text_full, "\n  - ", r$text_full)
+text <- paste0(text, "\n  - ", r$text)
+}
+if("Level" %in% names(table)){
+table <- select_(table, "Variable", "Level", "everything()")
+} else{
+table <- select_(table, "Variable", "everything()")
+}
+table
+library(report)
+table_full <- data.frame()
+table <- data.frame()
+text_full <- ""
+text <- ""
+for(col in names(x)){
+r <- report(x[[col]])
+current_table <- r$table
+current_table$Variable <- col
+table <- merge(table, current_table, all=TRUE)
+text_full <- paste0(text_full, "\n  - ", r$text_full)
+text <- paste0(text, "\n  - ", r$text)
+}
+if("Level" %in% names(table)){
+table <- select_(table, "Variable", "Level", "everything()")
+} else{
+table <- select_(table, "Variable", "everything()")
+}
+table
+table <- select_(table, "Variable", "Level", "everything()", "n_Obs", "perc_Obs")
+table
+select_(table, "Variable", "Level", "everything()", "n_Obs", "perc_Obs")
+table <- select_(table, "Variable", "Level", "n_Obs", "perc_Obs", "everything()")
+table
+text_full <- select_(text_full, "Variable", "Level", "n_Obs", "perc_Obs", "everything()")
+table_full <- select_(table_full, "Variable", "Level", "n_Obs", "perc_Obs", "everything()")
+table_full
+fulltable <- data.frame()
+table <- data.frame()
+fulltext <- ""
+text <- ""
+for(col in names(x)){
+r <- report(x[[col]])
+current_fulltable <- r$fulltable
+current_fulltable$Variable <- col
+fulltable <- merge(fulltable, current_fulltable, all=TRUE)
+current_table <- r$table
+current_table$Variable <- col
+table <- merge(table, current_table, all=TRUE)
+fulltext <- paste0(fulltext, "\n  - ", r$text_full)
+text <- paste0(text, "\n  - ", r$text)
+}
+if("Level" %in% names(table)){
+table <- select_(table, "Variable", "Level", "n_Obs", "perc_Obs", "everything()")
+fulltable <- select_(fulltable, "Variable", "Level", "n_Obs", "perc_Obs", "everything()")
+} else{
+table <- select_(table, "Variable", "n_Obs", "everything()")
+fulltable <- select_(fulltable, "Variable", "n_Obs", "everything()")
+}
+names(table)
+fulltable
+fulltable <- data.frame()
+table <- data.frame()
+fulltext <- ""
+text <- ""
+for(col in names(x)){
+r <- report(x[[col]])
+current_fulltable <- r$fulltable
+current_fulltable$Variable <- col
+fulltable <- merge(fulltable, current_fulltable, all=TRUE)
+current_table <- r$table
+current_table$Variable <- col
+table <- merge(table, current_table, all=TRUE)
+fulltext <- paste0(fulltext, "\n  - ", r$text_full)
+text <- paste0(text, "\n  - ", r$text)
+}
+r$fulltable
+# Table -------------------------------------------------------------------
+table_full <- data.frame()
+table <- data.frame()
+text_full <- ""
+text <- ""
+for(col in names(x)){
+r <- report(x[[col]])
+current_table <- r$table
+current_table$Variable <- col
+table <- merge(table, current_table, all=TRUE)
+current_table <- r$table_full
+current_table$Variable <- col
+table_full <- merge(table_full, current_table, all=TRUE)
+text_full <- paste0(text_full, "\n  - ", r$text_full)
+text <- paste0(text, "\n  - ", r$text)
+}
+if("Level" %in% names(table)){
+table <- select_(table, "Variable", "Level", "n_Obs", "perc_Obs", "everything()")
+table_full <- select_(table_full, "Variable", "Level", "n_Obs", "perc_Obs", "everything()")
+} else{
+table <- select_(table, "Variable", "n_Obs", "everything()")
+table_full <- select_(table_full, "Variable", "n_Obs", "everything()")
+}
+table_full
+text
+cat(text)
+# Table -------------------------------------------------------------------
+table_full <- data.frame()
+table <- data.frame()
+text_full <- ""
+text <- ""
+for(col in names(x)){
+r <- report(x[[col]])
+current_table <- r$table
+current_table$Variable <- col
+table <- merge(table, current_table, all=TRUE)
+current_table <- r$table_full
+current_table$Variable <- col
+table_full <- merge(table_full, current_table, all=TRUE)
+text_full <- paste0(text_full, "\n  - ", col, ": ", r$text_full)
+text <- paste0(text, "\n  - ", col, ": ", r$text)
+}
+if("Level" %in% names(table)){
+table <- select_(table, "Variable", "Level", "n_Obs", "perc_Obs", "everything()")
+table_full <- select_(table_full, "Variable", "Level", "n_Obs", "perc_Obs", "everything()")
+} else{
+table <- select_(table, "Variable", "n_Obs", "everything()")
+table_full <- select_(table_full, "Variable", "n_Obs", "everything()")
+}
+text
+cat(text)
+text <- paste0("The data contains ", nrow(x), " observations of the following variables:", text)
+text_full <- paste0("The data contains ", nrow(x), " observations of the following variables:", text_full)
+text
+cat(text)
+library(report)
+r <- report(iris)
+nrow(r$table)
+r$table$Median
+r$table
+testthat::expect_null(r$table$Median)
+library(report)
+r <- report(iris)
+testthat::expect_equal(nrow(r$table), 6, tol = 0)
+testthat::expect_null(r$table$Median)
+r <- report(levels_percentage = FALSE, missing_percentage = TRUE)
+testthat::expect_equal(nrow(r$table), 3, tol = 0)
+testthat::expect_equal(r$table$perc_Missing, c(0, 0, 0), tol = 0)
+r <- report(iris, levels_percentage = FALSE, missing_percentage = TRUE)
+r <- report(iris, levels_percentage = FALSE, missing_percentage = TRUE, median = TRUE, range = FALSE, dispersion = FALSE)
+testthat::expect_equal(nrow(r$table), 6, tol = 0)
+nrow(r$table)
+r
+r <- report(iris, levels_percentage = FALSE, missing_percentage = TRUE, median = TRUE, range = FALSE, dispersion = FALSE)
+r
+library(report)
+r <- report(seq(0, 1, length.out = 100), median = TRUE, range = FALSE, dispersion = FALSE, missing_percentage = TRUE)
+r
+r <- report(iris, levels_percentage = FALSE, missing_percentage = TRUE, median = TRUE, range = FALSE, dispersion = FALSE)
+r <- report(iris, levels_percentage = FALSE, missing_percentage = TRUE, median = TRUE, range = FALSE, dispersion = FALSE)
+x <- iris
+missing_percentage = TRUE
+levels_percentage = FALSE
+median = TRUE
+range = FALSE
+dispersion = FALSE
+# Table -------------------------------------------------------------------
+table_full <- data.frame()
+table <- data.frame()
+text_full <- ""
+text <- ""
+for(col in names(x)){
+r <- report(x[[col]], median = median, dispersion = dispersion, range = range, levels_percentage = levels_percentage, n_characters = n_characters, missing_percentage = missing_percentage)
+current_table <- r$table
+current_table$Variable <- col
+table <- merge(table, current_table, all=TRUE)
+current_table <- r$table_full
+current_table$Variable <- col
+table_full <- merge(table_full, current_table, all=TRUE)
+text_full <- paste0(text_full, "\n  - ", col, ": ", r$text_full)
+text <- paste0(text, "\n  - ", col, ": ", r$text)
+}
+table
+if("Level" %in% names(table)){
+table <- select_(table, "Variable", "Level", "n_Obs", "perc_Obs", "everything()")
+table_full <- select_(table_full, "Variable", "Level", "n_Obs", "perc_Obs", "everything()")
+} else{
+table <- select_(table, "Variable", "n_Obs", "everything()")
+table_full <- select_(table_full, "Variable", "n_Obs", "everything()")
+}
+library(dplyr)
+if("Level" %in% names(table)){
+table <- select_(table, "Variable", "Level", "n_Obs", "perc_Obs", "everything()")
+table_full <- select_(table_full, "Variable", "Level", "n_Obs", "perc_Obs", "everything()")
+} else{
+table <- select_(table, "Variable", "n_Obs", "everything()")
+table_full <- select_(table_full, "Variable", "n_Obs", "everything()")
+}
+table
+table
+if("Level" %in% names(table)){
+if("perc_Obs" %in% names(table)){
+table <- select_(table, "Variable", "Level", "n_Obs", "perc_Obs", "everything()")
+table_full <- select_(table_full, "Variable", "Level", "n_Obs", "perc_Obs", "everything()")
+} else{
+table <- select_(table, "Variable", "Level", "n_Obs", "everything()")
+table_full <- select_(table_full, "Variable", "Level", "n_Obs", "everything()")
+}
+} else{
+table <- select_(table, "Variable", "n_Obs", "everything()")
+table_full <- select_(table_full, "Variable", "n_Obs", "everything()")
+}
+library(report)
+r <- report(iris, levels_percentage = FALSE, missing_percentage = TRUE, median = TRUE, range = FALSE, dispersion = FALSE)
+testthat::expect_equal(nrow(r$table), 6, tol = 0)
+testthat::expect_equal(r$table$perc_Missing, c(0, 0, 0), tol = 0)
+r$table
+mean(r$table$n_Obs)
+testthat::expect_equal(mean(r$table$n_Obs), 100, tol = 0)
+report(iris) %>%
+to_table(median = TRUE)
+report(iris, median = TRUE) %>%
+to_table()
+to_table(report(iris, median = TRUE))
+knitr::kable(to_table(report(iris, median = TRUE)))
+pkgdown::build_site()
+pkgdown::build_site()
+pkgdown::build_site()
+x <- t.test(iris$Sepal.Width, iris$Sepal.Length)
+rename_if_possible <- function(x, replace, with){
+names(x) <- stringr::str_replace(names(x), replace, with)
+return(x)
+}
+rename_if_possible <- function(x, replace, with){
+names(x) <- stringr::str_replace(names(x), replace, with)
+return(x)
+}
+# Processing --------------------------------------------------------------
+table_full <- broom::tidy(x) %>%
+rename_if_possible("estimate", "Estimate") %>%
+rename_if_possible("p.value", "p") %>%
+rename_if_possible("conf.low", "CI_low") %>%
+rename_if_possible("conf.high", "CI_high")
+library(dplyr)
+# Processing --------------------------------------------------------------
+table_full <- broom::tidy(x) %>%
+rename_if_possible("estimate", "Estimate") %>%
+rename_if_possible("p.value", "p") %>%
+rename_if_possible("conf.low", "CI_low") %>%
+rename_if_possible("conf.high", "CI_high")
+table_full
+rename_if_possible <- function(x, pattern, replacement){
+names(x) <- stringr::str_replace(names(x), pattern, replacement)
+return(x)
+}
+rename_if_possible(iris, "Sepal.Length", "length")
+x <- t.test(iris$Sepal.Width, iris$Sepal.Length)
+broom::tidy(x)
+x$data.name
+# Processing --------------------------------------------------------------
+table_full <- broom::tidy(x) %>%
+rename_if_possible("estimate", "Estimate") %>%
+rename_if_possible("p.value", "p") %>%
+rename_if_possible("conf.low", "CI_low") %>%
+rename_if_possible("conf.high", "CI_high") %>%
+rename_if_possible("parameter", "DoF") %>%
+rename_if_possible("method", "Method") %>%
+rename_if_possible("estimate1", "Mean_1")  %>%
+rename_if_possible("estimate2", "Mean_2")
+table_full
+names(x) <- stringr::str_replace(names(x), coll(pattern), replacement)
+library(report)
+library(dplyr)
+x <- t.test(iris$Sepal.Width, iris$Sepal.Length)
+# Processing --------------------------------------------------------------
+table_full <- broom::tidy(x) %>%
+rename_if_possible("estimate", "Estimate") %>%
+rename_if_possible("p.value", "p") %>%
+rename_if_possible("conf.low", "CI_low") %>%
+rename_if_possible("conf.high", "CI_high") %>%
+rename_if_possible("parameter", "DoF") %>%
+rename_if_possible("method", "Method") %>%
+rename_if_possible("estimate1", "Mean_1")  %>%
+rename_if_possible("estimate2", "Mean_2")

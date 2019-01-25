@@ -7,11 +7,11 @@
 \method{print}{report}(x, full = FALSE, ...)
 }
 \arguments{
-\item{x}{An object of class \link{report}}
+\item{x}{Object of class \link{report}}
 
 \item{full}{Show the full report.}
 
-\item{...}{Further arguments passed to or from other methods.}
+\item{...}{Arguments passed to or from other methods.}
 }
 \description{
 Report printing

@@ -124,8 +124,6 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 <h2 class="hasAnchor">
 <a href="#report-all-the-things" class="anchor"></a>Report all the things <a href="https://neuropsychology.github.io/Psycho.jl/latest/"><img src="https://www.memecreator.org/static/images/templates/2776.jpg" height="100"></a>
 </h2>
-<!-- Add this to the README manually! -->
-<!-- <a href=https://neuropsychology.github.io/Psycho.jl/latest/><img src="https://www.memecreator.org/static/images/templates/2776.jpg" height="100"></a> -->
 <div id="general-workflow" class="section level3">
 <h3 class="hasAnchor">
 <a href="#general-workflow" class="anchor"></a>General Workflow</h3>
@@ -140,14 +138,13 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 ##   - Sepal.Width: Mean = 3.06 +- 0.44 [2.00, 4.40]
 ##   - Petal.Length: Mean = 3.76 +- 1.77 [1.00, 6.90]
 ##   - Petal.Width: Mean = 1.20 +- 0.76 [0.10, 2.50]
-##   - Species: 3 levels: setosa (33.33%); versicolor (33.33%); virginica (33.33%)</code></pre></div>
+##   - Species: 3 levels: setosa (n = 50); versicolor (n = 50); virginica (n = 50)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/to_table.html">to_table</a></span>(<span class="kw"><a href="reference/report.html">report</a></span>(iris, <span class="dt">median =</span> <span class="ot">TRUE</span>))</code></pre></div>
 <table class="table table">
 <thead><tr class="header">
 <th align="left">Variable</th>
 <th align="left">Level</th>
 <th align="right">n_Obs</th>
-<th align="right">perc_Obs</th>
 <th align="right">n_Missing</th>
 <th align="right">Median</th>
 <th align="right">MAD</th>
@@ -159,7 +156,6 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 <td align="left">Species</td>
 <td align="left">setosa</td>
 <td align="right">50</td>
-<td align="right">33.33</td>
 <td align="right">0</td>
 <td align="right"></td>
 <td align="right"></td>
@@ -170,7 +166,6 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 <td align="left">Species</td>
 <td align="left">versicolor</td>
 <td align="right">50</td>
-<td align="right">33.33</td>
 <td align="right">0</td>
 <td align="right"></td>
 <td align="right"></td>
@@ -181,7 +176,6 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 <td align="left">Species</td>
 <td align="left">virginica</td>
 <td align="right">50</td>
-<td align="right">33.33</td>
 <td align="right">0</td>
 <td align="right"></td>
 <td align="right"></td>
@@ -192,7 +186,6 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 <td align="left">Petal.Length</td>
 <td align="left"></td>
 <td align="right">150</td>
-<td align="right"></td>
 <td align="right">0</td>
 <td align="right">4.35</td>
 <td align="right">1.8532</td>
@@ -203,7 +196,6 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 <td align="left">Petal.Width</td>
 <td align="left"></td>
 <td align="right">150</td>
-<td align="right"></td>
 <td align="right">0</td>
 <td align="right">1.30</td>
 <td align="right">1.0378</td>
@@ -214,7 +206,6 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 <td align="left">Sepal.Width</td>
 <td align="left"></td>
 <td align="right">150</td>
-<td align="right"></td>
 <td align="right">0</td>
 <td align="right">3.00</td>
 <td align="right">0.4448</td>
@@ -223,6 +214,14 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 </tr>
 </tbody>
 </table>
+</div>
+<div id="correlations-and-t-tests" class="section level3">
+<h3 class="hasAnchor">
+<a href="#correlations-and-t-tests" class="anchor"></a>Correlations and t-tests</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/report.html">report</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/cor.test">cor.test</a></span>(iris<span class="op">$</span>Sepal.Length, iris<span class="op">$</span>Petal.Length))
+## The Pearson's correlation between iris$Sepal.Length and iris$Petal.Length is positive, large and significant (r(148) = 0.87, 95% CI [0.83, 0.91], p &lt; .001).</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/report.html">report</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/t.test">t.test</a></span>(iris<span class="op">$</span>Sepal.Length, iris<span class="op">$</span>Petal.Length))
+## The Welch Two Sample t-test suggests that the difference between iris$Sepal.Length and iris$Petal.Length (mean of x = 5.84, mean of y = 3.76, difference = 2.09) is significant (t(211.54) = 13.10, 95% CI [1.77, 2.40], p &lt; .001).</code></pre></div>
 </div>
 </div>
 <div id="credits" class="section level2">

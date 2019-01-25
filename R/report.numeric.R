@@ -2,12 +2,12 @@
 #'
 #' Create a report of a numeric vector.
 #'
-#' @param x a numeric vector.
-#' @param median show \link{mean} and \link{sd} (default) or \link{median} and \link{mad}.
-#' @param dispersion show dispersion (\link{sd} or \link{mad}).
-#' @param range show range.
-#' @param missing_percentage show missings by number (default) or percentage
-#' @param ... arguments passed to or from other methods.
+#' @param x Numeric vector.
+#' @param median Show \link{mean} and \link{sd} (default) or \link{median} and \link{mad}.
+#' @param dispersion Show dispersion (\link{sd} or \link{mad}).
+#' @param range Show range.
+#' @param missing_percentage Show missings by number (default) or percentage
+#' @param ... Arguments passed to or from other methods.
 #'
 #' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
 #'
@@ -36,7 +36,7 @@ report.numeric <- function(x, median = FALSE, dispersion = TRUE, range = TRUE, m
     n_Obs = length(x),
     n_Missing = sum(is.na(x))
   )
-  table_full$perc_Missing <- table_full$n_Missing / table_full$n_Obs * 100
+  table_full$percentage_Missing <- table_full$n_Missing / table_full$n_Obs * 100
 
 
   # Text --------------------------------------------------------------------
@@ -53,7 +53,7 @@ report.numeric <- function(x, median = FALSE, dispersion = TRUE, range = TRUE, m
 
   # Missings
   if (missing_percentage == TRUE) {
-    text_missing <- paste0(", ", format_value(table_full$perc_Missing[1], 1), "% missing.")
+    text_missing <- paste0(", ", format_value(table_full$percentage_Missing[1], 1), "% missing.")
   } else {
     text_missing <- paste0(", ", table_full$n_Missing[1], " missing.")
   }
@@ -89,7 +89,7 @@ report.numeric <- function(x, median = FALSE, dispersion = TRUE, range = TRUE, m
   if (missing_percentage == TRUE) {
     table <- dplyr::select(table, -one_of("n_Missing"))
   } else {
-    table <- dplyr::select(table, -one_of("perc_Missing"))
+    table <- dplyr::select(table, -one_of("percentage_Missing"))
   }
 
 
@@ -109,7 +109,8 @@ report.numeric <- function(x, median = FALSE, dispersion = TRUE, range = TRUE, m
     text = text,
     text_full = text_full,
     table = table,
-    table_full = table_full
+    table_full = table_full,
+    values = as.list(table_full)
   )
 
   return(as.report(out))

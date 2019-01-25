@@ -7,7 +7,7 @@
 is.report(x)
 }
 \arguments{
-\item{x}{an arbitrary R object.}
+\item{x}{An arbitrary R object.}
 }
 \description{
 Test for objects of class \link{report}

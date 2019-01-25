@@ -139,30 +139,30 @@
 
     <pre class="usage"><span class='co'># S3 method for character</span>
 <span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>, <span class='kw'>n_characters</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>levels_percentage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>levels_percentage</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>a character vector.</p></td>
+      <td><p>Character vector.</p></td>
     </tr>
     <tr>
       <th>n_characters</th>
-      <td><p>number of different character entries to show. Can be "all".</p></td>
+      <td><p>Number of different character entries to show. Can be "all".</p></td>
     </tr>
     <tr>
       <th>levels_percentage</th>
-      <td><p>show characters entries by percentage (default) or number.</p></td>
+      <td><p>Show characters entries by number (default) or percentage.</p></td>
     </tr>
     <tr>
       <th>missing_percentage</th>
-      <td><p>show missings by number (default) or percentage</p></td>
+      <td><p>Show missings by number (default) or percentage.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>arguments passed to or from other methods.</p></td>
+      <td><p>Arguments passed to or from other methods.</p></td>
     </tr>
     </table>
     
@@ -173,9 +173,9 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"A"</span>, <span class='st'>"B"</span>, <span class='st'>"C"</span>, <span class='st'>"A"</span>, <span class='st'>"B"</span>, <span class='st'>"B"</span>, <span class='st'>"D"</span>, <span class='st'>"E"</span>, <span class='st'>"B"</span>, <span class='st'>"D"</span>, <span class='st'>"A"</span>)
-<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; 5 entries: B, 0.36%; A, 0.27%; D, 0.18% and 2 others</div><div class='input'><span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>, <span class='kw'>n_characters</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>levels_percentage</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; 5 entries: B, n = 4; A, n = 3 and 3 others</div><div class='input'><span class='fu'><a href='to_fulltext.html'>to_fulltext</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; 5 entries: B, 0.36%; A, 0.27%; D, 0.18% and 2 others (0 missing)</div><div class='input'><span class='fu'><a href='to_table.html'>to_table</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>, <span class='kw'>n_characters</span> <span class='kw'>=</span> <span class='st'>"all"</span>))</div><div class='output co'>#&gt;   n_Entries n_Obs n_Missing                                          Entries
-#&gt; 1         5    11         0 B, 0.36%; A, 0.27%; D, 0.18%; C, 0.09%; E, 0.09%</div><div class='input'><span class='fu'><a href='to_fulltable.html'>to_fulltable</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt;   n_Entries n_Obs n_Missing perc_Missing                      Entries
-#&gt; 1         5    11         0            0 B, 0.36%; A, 0.27%; D, 0.18%</div></pre>
+<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; 5 entries: B, n = 4; A, n = 3; D, n = 2 and 2 others</div><div class='input'><span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>, <span class='kw'>n_characters</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>levels_percentage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; 5 entries: B, 0.36%; A, 0.27% and 3 others</div><div class='input'><span class='fu'><a href='to_fulltext.html'>to_fulltext</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; 5 entries: B, n = 4; A, n = 3; D, n = 2 and 2 others (0 missing)</div><div class='input'><span class='fu'><a href='to_table.html'>to_table</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>, <span class='kw'>n_characters</span> <span class='kw'>=</span> <span class='st'>"all"</span>))</div><div class='output co'>#&gt;   n_Entries n_Obs n_Missing                                          Entries
+#&gt; 1         5    11         0 B, n = 4; A, n = 3; D, n = 2; C, n = 1; E, n = 1</div><div class='input'><span class='fu'><a href='to_fulltable.html'>to_fulltable</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt;   n_Entries n_Obs n_Missing percentage_Missing                      Entries
+#&gt; 1         5    11         0                  0 B, n = 4; A, n = 3; D, n = 2</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
