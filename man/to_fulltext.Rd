@@ -4,12 +4,14 @@
 \alias{to_fulltext}
 \title{Report printing}
 \usage{
-to_fulltext(x, full = TRUE, ...)
+to_fulltext(x, full = TRUE, width = NULL, ...)
 }
 \arguments{
 \item{x}{Object of class \link{report}}
 
 \item{full}{Show the full report.}
+
+\item{width}{Positive integer giving the target column for wrapping lines in the output.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

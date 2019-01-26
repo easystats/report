@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Report printing — print.report • report</title>
+<title>Autowrap String — format_text_wrap • report</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,9 +37,9 @@
 
 
 
-<meta property="og:title" content="Report printing — print.report" />
+<meta property="og:title" content="Autowrap String — format_text_wrap" />
 
-<meta property="og:description" content="Report printing" />
+<meta property="og:description" content="Autowrap String" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -129,38 +129,29 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Report printing</h1>
-    <small class="dont-index">Source: <a href='https://github.com/neuropsychology/report/blob/master/R/report.R'><code>R/report.R</code></a></small>
-    <div class="hidden name"><code>print.report.Rd</code></div>
+    <h1>Autowrap String</h1>
+    <small class="dont-index">Source: <a href='https://github.com/neuropsychology/report/blob/master/R/format_text.R'><code>R/format_text.R</code></a></small>
+    <div class="hidden name"><code>format_text_wrap.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Report printing</p>
+    <p>Autowrap String</p>
     
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for report</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>x</span>, <span class='kw'>full</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>format_text_wrap</span>(<span class='no'>x</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>Object of class <a href='report.html'>report</a></p></td>
-    </tr>
-    <tr>
-      <th>full</th>
-      <td><p>Show the full report.</p></td>
+      <td><p>Character vector.</p></td>
     </tr>
     <tr>
       <th>width</th>
       <td><p>Positive integer giving the target column for wrapping lines in the output.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Arguments passed to or from other methods.</p></td>
     </tr>
     </table>
     

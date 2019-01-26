@@ -4,12 +4,14 @@
 \alias{print.report}
 \title{Report printing}
 \usage{
-\method{print}{report}(x, full = FALSE, ...)
+\method{print}{report}(x, full = FALSE, width = NULL, ...)
 }
 \arguments{
 \item{x}{Object of class \link{report}}
 
 \item{full}{Show the full report.}
+
+\item{width}{Positive integer giving the target column for wrapping lines in the output.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

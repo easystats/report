@@ -7,14 +7,14 @@
     "folds" : "",
     "hash" : "0",
     "id" : "A6CF5FFB",
-    "lastKnownWriteTime" : 1548490200,
-    "last_content_update" : 1548490200791,
+    "lastKnownWriteTime" : 1548491776,
+    "last_content_update" : 1548491776597,
     "path" : "C:/Users/Dom/Dropbox/RECHERCHE/N/report/vignettes/report.Rmd",
     "project_path" : "vignettes/report.Rmd",
     "properties" : {
         "chunk_output_type" : "console",
-        "cursorPosition" : "28,3",
-        "scrollLine" : "0"
+        "cursorPosition" : "133,3",
+        "scrollLine" : "103"
     },
     "relative_order" : 5,
     "source_on_save" : false,

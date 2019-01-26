@@ -54,53 +54,78 @@ The `report` package works in a two steps fashion. First, creating a `report` ob
 
 ### Dataframes
 
-```{r message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, eval=FALSE}
 report(iris)
 ```
-
+```{r message=FALSE, warning=FALSE}
+print(report(iris), width=80)
+```
 
 The reports nicely work within the *tidyverse*:
 
-```{r message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, eval=FALSE}
 library(dplyr)
 
 iris %>% 
   group_by(Species) %>% 
   report(median = TRUE)  # Display Median and MAD instead of Mean and SD
 ```
+```{r message=FALSE, warning=FALSE}
+library(dplyr)
 
-
+iris %>% 
+  group_by(Species) %>% 
+  report(median = TRUE) %>% 
+  print(width=80)
+```
 
 ### Correlations and t-tests
 
-```{r message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, eval=FALSE}
 report(cor.test(iris$Sepal.Length, iris$Petal.Length))
 ```
-
 ```{r message=FALSE, warning=FALSE}
-report(t.test(iris$Sepal.Length, iris$Petal.Length))
+print(report(cor.test(iris$Sepal.Length, iris$Petal.Length)), width=80)
 ```
 
-
+```{r message=FALSE, warning=FALSE, eval=FALSE}
+report(t.test(iris$Sepal.Length, iris$Petal.Length))
+```
+```{r message=FALSE, warning=FALSE}
+print(report(t.test(iris$Sepal.Length, iris$Petal.Length)), width=80)
+```
 ### Linear Models (LM)
 
 The difference between regular and full reports becomes obvious for more complicated models.
 
-```{r message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, eval=FALSE}
 model <- lm(Sepal.Length ~ Petal.Length + Species, data=iris)
 r <- report(model)
 
 to_text(r)
 ```
 ```{r message=FALSE, warning=FALSE}
+model <- lm(Sepal.Length ~ Petal.Length + Species, data=iris) 
+r <- report(model)
+
+to_text(r, width=80)
+```
+
+
+```{r message=FALSE, warning=FALSE, eval=FALSE}
 to_fulltext(r)
 ```
+```{r message=FALSE, warning=FALSE}
+to_fulltext(r, width=80)
+```
+
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
 to_table(r, digits=2)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 knitr::kable(to_table(r, digits=2))
 ```
+
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
 to_fulltable(r, digits=2)
 ```

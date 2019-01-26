@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1548490770396.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "CCFF2027",
+    "lastKnownWriteTime" : 1548491800,
+    "last_content_update" : 1548491800,
+    "path" : "C:/Users/Dom/Dropbox/RECHERCHE/N/report/R/report.R",
+    "project_path" : "R/report.R",
+    "properties" : {
+        "cursorPosition" : "81,39",
+        "scrollLine" : "61"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
