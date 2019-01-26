@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1548496469659.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1357014978",
+    "id" : "3C55DDE6",
+    "lastKnownWriteTime" : 1548499327,
+    "last_content_update" : 1548499327025,
+    "path" : "C:/Users/Dom/Dropbox/RECHERCHE/N/report/vignettes/cite_packages.Rmd",
+    "project_path" : "vignettes/cite_packages.Rmd",
+    "properties" : {
+        "chunk_output_type" : "console",
+        "cursorPosition" : "49,495",
+        "scrollLine" : "32"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

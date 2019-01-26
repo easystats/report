@@ -5,16 +5,17 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "0",
+    "hash" : "1494969621",
     "id" : "89260CC7",
-    "lastKnownWriteTime" : 1548494858,
-    "last_content_update" : 1548494858973,
+    "lastKnownWriteTime" : 1548499302,
+    "last_content_update" : 1548499302552,
     "path" : "C:/Users/Dom/Dropbox/RECHERCHE/N/report/README.Rmd",
     "project_path" : "README.Rmd",
     "properties" : {
         "chunk_output_type" : "console",
-        "cursorPosition" : "169,0",
-        "scrollLine" : "142"
+        "cursorPosition" : "115,459",
+        "ignored_words" : "src,png,href,https,github,com,neuropsychology,img,Makowski,doi\n",
+        "scrollLine" : "99"
     },
     "relative_order" : 3,
     "source_on_save" : false,

@@ -33,6 +33,15 @@ lm(Sepal.Length ~ Species, data=iris) %>%
     ##   - Speciesvirginica is significant (beta = 1.58, 95% CI [1.38, 1.79], p < .001) and large (Std. beta
     ## = 1.91).
 
+## Documentation
+
+The package’s full documentation can be found
+[**here**](https://neuropsychology.github.io/report/). Check-out these
+tutorials:
+
+  - [Get
+    Started](https://neuropsychology.github.io/report/articles/report.html)
+
 ## Contribute
 
 **`report` is a young package in need of affection**. You can easily hop
@@ -95,7 +104,7 @@ arguments depending on the type of object you are reporting). Then, this
 report can be displayed either textually, using `to_text()`, or as a
 table, using `to_table()`. Moreover, you can also access a more detailed
 (but less digest) version of the report using `to_fulltext()` and
-`to_fulltable()`. Finally, the `values()` makes it easy to access all
+`to_fulltable()`. Finally, the `to_values()` makes it easy to access all
 the internals of a model.
 
 ### Dataframes

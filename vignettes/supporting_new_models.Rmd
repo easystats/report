@@ -1,5 +1,5 @@
 ---
-title: "Support new models"
+title: "Supporting New Models"
 output: 
   github_document:
     toc: true

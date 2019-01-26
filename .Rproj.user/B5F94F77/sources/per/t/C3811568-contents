@@ -1,0 +1,39 @@
+---
+title: "Supporting New Models"
+output: 
+  github_document:
+    toc: true
+    fig_width: 10.08
+    fig_height: 6
+  rmarkdown::html_vignette:
+    toc: true
+    fig_width: 10.08
+    fig_height: 6
+tags: [r, report]
+vignette: >
+  \usepackage[utf8]{inputenc}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  tidy.opts=list(width.cutoff=60),
+  tidy=TRUE,
+  fig.path = "README-"
+)
+options(knitr.kable.NA = '',
+        digits = 4,
+        width=60)
+```
+
+
+## Support new models
+
+You can easily contribute in order for `report` to support new models. 
+
+1. **Add report method:** The first step is to add a new file, named `report.NewClass.R` in the [`R`](https://github.com/DominiqueMakowski/bayestestR/tree/master/R) folder. 
+2. In this file, write a new function with the same name (*i.e.*, `report.NewClass`).
+3. This function must return a `list` containing 5 elements, respectively named `text` (a string), `text_full` (a string), `table` (a dataframe), `table_full` (a dataframe) and `values` (a list).
+4. This `list`, named for instance `out`, can be returned wrapped in the `as.report()`.

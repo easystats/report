@@ -1,0 +1,89 @@
+---
+title: "How to Cite Packages"
+output: 
+  github_document:
+    toc: true
+    fig_width: 10.08
+    fig_height: 6
+  rmarkdown::html_vignette:
+    toc: true
+    fig_width: 10.08
+    fig_height: 6
+tags: [r, report]
+vignette: >
+  \usepackage[utf8]{inputenc}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  tidy.opts=list(width.cutoff=60),
+  tidy=TRUE,
+  fig.path = "README-"
+)
+options(knitr.kable.NA = '',
+        digits = 4)
+```
+
+
+**Citing the packages, modules and softwares you used for your analysis is important**, both from a **reproducibility perspective** (statistical routines are often implemented in different ways by different packages, which could explain possible discrepancies in the results. Saying *"I did this using this function from that package version 1.2.3"* is a way of protecting yourself by being transparent about what you have found doing what you have done), but also for **acknowledging** the work and time that people spent creating tools for others (sometimes at the expense of their own research).
+
+- **That's great, but how to *actually* cite them?**
+- **I used about 100 packages, should I cite them *all*?**
+
+## What should I cite?
+
+Ideally, you should indeed cite all the packages that you used. However, it's often not possible to cite them all in the manuscript body. Therefore, I would recommend the following:
+
+### **1. Cite the main/important packages in the manuscript**
+
+This should be done for the packages that were central to your specific study (*i.e.,* that got you the results that you reported) rather than data manipulation tools (*even though these are as much important*).
+
+##### Example:
+
+> Statistics were done using R 3.5.0 (R Core Team, 2018), the *rstanarm* (*v2.13.1*; Gabry & Goodrich, 2016) and the *report* (*v0.1.0*; Makowski, 2019) packages. The full reproducible code is available in **Supplementary Materials**.
+
+### **2. Present everything in Supplementary Materials**
+
+Then, in *Supplementary Materials*, you can show all the packages and functions you used. To do it quickly, explicitly and in a reproducible fashion, I cannot recommend more writing the *Supplementary Materials* with [**R Markdown**](https://rmarkdown.rstudio.com/), which can generate *docs* and *pdf* files that you can submit along with your manuscript. Moreover, if you're using R, you can include (usually at the end) every used package citation and their version using the `cite_packages()` function from the [**report**](https://github.com/neuropsychology/report) package.
+
+##### Example:
+
+```{r message=FALSE, warning=FALSE, eval=FALSE}
+library(report)
+library(dplyr)
+library(knitr)
+
+cite_packages(sessionInfo())
+```
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(report)
+library(dplyr)
+library(knitr)
+
+knitr::kable(cite_packages(sessionInfo()))
+```
+
+
+## How should I cite it?
+
+Finding the right citation information is sometimes complicated. In R, this process is made quite easy, you simply run `citation("packagename")`. For instance, `citation("dplyr")`:
+
+    To cite ‘dplyr’ in publications use:
+
+      Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2018). dplyr: A Grammar of Data Manipulation. R package version
+      0.7.6. https://CRAN.R-project.org/package=dplyr
+
+    A BibTeX entry for LaTeX users is
+
+      @Manual{,
+        title = {dplyr: A Grammar of Data Manipulation},
+        author = {Hadley Wickham and Romain François and Lionel Henry and Kirill Müller},
+        year = {2018},
+        note = {R package version 0.7.6},
+        url = {https://CRAN.R-project.org/package=dplyr},
+      }
+
+For other languages, such as Python or Julia, it might be a little trickier, but a **quick search on google (*or github*)** should provide you with all the necessary information (version, authors and date). **Finally, keep in mind that it's better to have a slightly incomplete citation than no citation at all.**

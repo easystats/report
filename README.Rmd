@@ -62,6 +62,13 @@ lm(Sepal.Length ~ Species, data=iris) %>%
 ```
 
 
+## Documentation
+
+The package's full documentation can be found [**here**](https://neuropsychology.github.io/report/). Check-out these tutorials:
+
+- [Get Started](https://neuropsychology.github.io/report/articles/report.html)
+
+
 ## Contribute
 
 **`report` is a young package in need of affection**. You can easily hop aboard the [developpment](.github/CONTRIBUTING.md) of this open-source software and improve psychological science by doing the following:
@@ -106,7 +113,7 @@ Please remember that parts of the code in this package were inspired (*or shamel
 
 ### General Workflow
 
-The `report` package works in a two steps fashion. First, creating a `report` object with the `report()` function (which takes different arguments depending on the type of object you are reporting). Then, this report can be displayed either textually, using `to_text()`, or as a table, using `to_table()`. Moreover, you can also access a more detailed (but less digest) version of the report using `to_fulltext()` and `to_fulltable()`. Finally, the `values()` makes it easy to access all the internals of a model. 
+The `report` package works in a two steps fashion. First, creating a `report` object with the `report()` function (which takes different arguments depending on the type of object you are reporting). Then, this report can be displayed either textually, using `to_text()`, or as a table, using `to_table()`. Moreover, you can also access a more detailed (but less digest) version of the report using `to_fulltext()` and `to_fulltable()`. Finally, the `to_values()` makes it easy to access all the internals of a model. 
 
 
 ### Dataframes
