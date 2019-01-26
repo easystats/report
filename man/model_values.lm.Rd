@@ -4,12 +4,17 @@
 \alias{model_values.lm}
 \title{Linear Models Parameters}
 \usage{
-\method{model_values}{lm}(model, CI = 95, ...)
+\method{model_values}{lm}(model, CI = 95, effsize = "cohen1988",
+  data = NULL, ...)
 }
 \arguments{
 \item{model}{Object of class \link{lm}.}
 
 \item{CI}{Confidence Interval (CI) level. Default to 95\%.}
+
+\item{effsize}{Compute standardized parameters and interpret them using a set of rules. Can be "cohen1988" (default), "sawilowsky2009", NULL, or a custom set of \link{rules}.}
+
+\item{data}{Dataframe used to fit the model. Can be useful to compute standardized parameters.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

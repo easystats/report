@@ -1,3 +1,22 @@
+#' Retrieve Data
+#'
+#' Attempts at retrieving data from model. See the documentation for your object's class:
+#' \itemize{
+#'  \item{\link[=model_data.lm]{lm}}
+#'  }
+#'
+#' @param model Statistical Model.
+#' @param ... Arguments passed to or from other methods.
+#'
+#' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
+#'
+#' @export
+model_data <- function(model, ...) {
+  UseMethod("model_data")
+}
+
+
+
 #' Compute Indices of Model Performance
 #'
 #' Indices of model performance. See the documentation for your object's class:
@@ -94,9 +113,3 @@ model_parameters <- function(model, ...) {
 model_values <- function(model, ...) {
   UseMethod("model_values")
 }
-
-
-
-
-
-

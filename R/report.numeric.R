@@ -24,11 +24,10 @@
 #'
 #' @export
 report.numeric <- function(x, median = FALSE, dispersion = TRUE, range = TRUE, missing_percentage = FALSE, ...) {
-
-  if(length(unique(x)) == 2){
-    if(is.null(names(x))){
+  if (length(unique(x)) == 2) {
+    if (is.null(names(x))) {
       name <- deparse(substitute(x))
-    } else{
+    } else {
       name <- names(x)
     }
     warning(paste0("Variable `", name, "` contains only two different values. Consider converting it to a factor."))
@@ -124,6 +123,3 @@ report.numeric <- function(x, median = FALSE, dispersion = TRUE, range = TRUE, m
 
   return(as.report(out))
 }
-
-
-

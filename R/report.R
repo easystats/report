@@ -97,7 +97,7 @@ to_table <- summary.report <- function(x, full = FALSE, digits = NULL, ...) {
   if (!is.null(digits)) {
     initial_order <- names(table)
     nums <- dplyr::select_if(table, is.numeric)
-    nums <- sapply(nums, format_value, digits=digits)
+    nums <- sapply(nums, format_value, digits = digits)
     fact <- dplyr::select_if(table, is.character)
     fact <- cbind(fact, dplyr::select_if(table, is.factor))
     table <- cbind(fact, nums)

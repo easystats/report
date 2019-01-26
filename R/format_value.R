@@ -19,6 +19,6 @@ format_value <- function(x, digits = 2) {
 #' @inherit format_value
 #' @export
 format_value_unless_integer <- function(x, digits = 2) {
-  x <- ifelse(x %% 1 == 0, x, format_value(x, digits=digits))
+  x <- ifelse(x %% 1 == 0, x, format_value(x, digits = digits))
   return(x)
 }

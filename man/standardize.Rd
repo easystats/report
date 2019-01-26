@@ -4,7 +4,8 @@
 \alias{standardize}
 \title{Standardization}
 \usage{
-standardize(x, robust = FALSE, select = NULL, exclude = NULL, ...)
+standardize(x, robust = FALSE, select = NULL, exclude = NULL,
+  data = NULL, ...)
 }
 \arguments{
 \item{x}{Object.}
@@ -16,6 +17,8 @@ standardized.}
 
 \item{exclude}{For a data.frame, character or list of characters of column names to be excluded
 from standardization.}
+
+\item{data}{Data used for fitting the model.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

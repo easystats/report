@@ -16,6 +16,17 @@ editor_options:
   chunk_output_type: console
 ---
 
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  tidy.opts=list(width.cutoff=60),
+  tidy=TRUE,
+  fig.path = "README-"
+)
+options(knitr.kable.NA = '',
+        digits = 4)
+```
+
 
 ## Why?
 

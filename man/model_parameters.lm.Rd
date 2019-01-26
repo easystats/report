@@ -4,10 +4,12 @@
 \alias{model_parameters.lm}
 \title{Linear Models Description}
 \usage{
-\method{model_parameters}{lm}(model, ...)
+\method{model_parameters}{lm}(model, effsize = "cohen1988", ...)
 }
 \arguments{
 \item{model}{Object of class \link{lm}.}
+
+\item{effsize}{Compute standardized parameters and interpret them using a set of rules. Can be "cohen1988" (default), "sawilowsky2009", NULL, or a custom set of \link{rules}.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

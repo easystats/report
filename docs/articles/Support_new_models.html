@@ -63,6 +63,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/interpret_indices.html">Indicese interpretation</a>
+    </li>
+    <li>
       <a href="../articles/Support_new_models.html">Support new models</a>
     </li>
   </ul>
@@ -73,7 +76,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/DominiqueMakowski/bayestestR">
+  <a href="https://github.com/neuropsychology/report">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -93,19 +96,24 @@
       <h1>Support new models</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/DominiqueMakowski/bayestestR/blob/master/vignettes/Support_new_models.Rmd"><code>vignettes/Support_new_models.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/neuropsychology/report/blob/master/vignettes/Support_new_models.Rmd"><code>vignettes/Support_new_models.Rmd</code></a></small>
       <div class="hidden name"><code>Support_new_models.Rmd</code></div>
 
     </div>
 
     
     
-<div id="support-new-models" class="section level1">
-<h1 class="hasAnchor">
-<a href="#support-new-models" class="anchor"></a>Support new models</h1>
-<p>blablabla.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">+</span><span class="dv">1</span></code></pre></div>
-<pre><code>## [1] 2</code></pre>
+<div id="support-new-models" class="section level2">
+<h2 class="hasAnchor">
+<a href="#support-new-models" class="anchor"></a>Support new models</h2>
+<p>You can easily contribute in order for <code>report</code> to support new models.</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Add report method:</strong> The first step is to add a new file, named <code>report.NewClass.R</code> in the <a href="https://github.com/DominiqueMakowski/bayestestR/tree/master/R"><code>R</code></a> folder.</li>
+<li>In this file, write a new function with the same name (<em>i.e.</em>, <code>report.NewClass</code>).</li>
+<li>This function must return a <code>list</code> containing 5 elements, respectively named <code>text</code> (a string), <code>text_full</code> (a string), <code>table</code> (a dataframe), <code>table_full</code> (a dataframe) and <code>values</code> (a list).</li>
+<li>This <code>list</code>, named for instance <code>out</code>, can be returned wrapped in the <code><a href="../reference/as.report.html">as.report()</a></code>.</li>
+</ol>
 </div>
   </div>
 

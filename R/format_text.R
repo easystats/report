@@ -11,8 +11,8 @@
 #' @importFrom utils head tail
 #'
 #' @export
-format_text_collapse <- function(x, sep=", ", last=" and ") {
-  if(length(x) == 1){
+format_text_collapse <- function(x, sep = ", ", last = " and ") {
+  if (length(x) == 1) {
     return(x)
   } else {
     s <- paste0(head(x, -1), collapse = sep)

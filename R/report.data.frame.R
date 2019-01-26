@@ -88,30 +88,32 @@ report.data.frame <- function(x, median = FALSE, dispersion = TRUE, range = TRUE
 #' @inheritParams report.data.frame
 #' @import dplyr
 #' @export
-report.grouped_df <- function(x, median = FALSE, dispersion = TRUE, range = TRUE, levels_percentage = FALSE, n_characters = 3, missing_percentage = FALSE, ...){
+report.grouped_df <- function(x, median = FALSE, dispersion = TRUE, range = TRUE, levels_percentage = FALSE, n_characters = 3, missing_percentage = FALSE, ...) {
   groups <- group_vars(x)
   ungrouped_x <- ungroup(x)
   xlist <- split(ungrouped_x, ungrouped_x[groups], sep = " - ")
 
 
-  text <- paste0("The data contains ", nrow(ungrouped_x),
-                 " observations, grouped by ",
-                 format_text_collapse(groups),
-                 ", of the following variables:")
+  text <- paste0(
+    "The data contains ", nrow(ungrouped_x),
+    " observations, grouped by ",
+    format_text_collapse(groups),
+    ", of the following variables:"
+  )
   text_full <- text
 
   table <- data.frame()
   table_full <- data.frame()
 
-  values = list()
-  for(group in names(xlist)){
+  values <- list()
+  for (group in names(xlist)) {
     data <- xlist[[group]]
     data <- dplyr::select(data, -dplyr::one_of(groups))
-    r <- report(data, median=median, dispersion=dispersion, range=range, levels_percentage=levels_percentage, n_characters=n_characters, missing_percentage = missing_percentage)
+    r <- report(data, median = median, dispersion = dispersion, range = range, levels_percentage = levels_percentage, n_characters = n_characters, missing_percentage = missing_percentage)
 
     current_text <- ""
     current_text_full <- ""
-    for(col in names(r$values)){
+    for (col in names(r$values)) {
       current_text <- paste0(current_text, "\n  - ", col, ": ", r$values[[col]]$text)
       current_text_full <- paste0(current_text_full, "\n  - ", col, ": ", r$values[[col]]$text_full)
     }

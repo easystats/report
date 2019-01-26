@@ -98,6 +98,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/interpret_indices.html">Indicese interpretation</a>
+    </li>
+    <li>
       <a href="../articles/Support_new_models.html">Support new models</a>
     </li>
   </ul>
@@ -109,7 +112,7 @@
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/DominiqueMakowski/bayestestR">
+  <a href="https://github.com/neuropsychology/report">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -127,7 +130,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Correlation Coefficient Interpretation</h1>
-    <small class="dont-index">Source: <a href='https://github.com/DominiqueMakowski/bayestestR/blob/master/R/interpret_r.R'><code>R/interpret_r.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/neuropsychology/report/blob/master/R/interpret_r.R'><code>R/interpret_r.R</code></a></small>
     <div class="hidden name"><code>interpret_r.Rd</code></div>
     </div>
 
@@ -156,15 +159,30 @@
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <ul>
+<li><p>Cohen, J. (1988). Statistical power analysis for the behavioural sciences.</p></li>
+<li><p>Evans, J. D. (1996). Straightforward statistics for the behavioral sciences. Thomson Brooks/Cole Publishing Co.</p></li>
+</ul>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Page 88 of APA's 6th Edition.</p></div>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>interpret_r</span>(<span class='kw'>r</span><span class='kw'>=</span><span class='fl'>.015</span>)</div><div class='output co'>#&gt; [1] "positive and very small"</div><div class='input'><span class='fu'>interpret_r</span>(<span class='kw'>r</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>.5</span>, -<span class='fl'>.02</span>))</div><div class='output co'>#&gt; [1] "positive and large"      "negative and very small"</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>interpret_r</span>(<span class='kw'>r</span> <span class='kw'>=</span> <span class='fl'>.015</span>)</div><div class='output co'>#&gt; [1] "positive and very small"</div><div class='input'><span class='fu'>interpret_r</span>(<span class='kw'>r</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>.5</span>, -<span class='fl'>.02</span>))</div><div class='output co'>#&gt; [1] "positive and large"      "negative and very small"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
+      
+      <li><a href="#references">References</a></li>
+
+      <li><a href="#see-also">See also</a></li>
+      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

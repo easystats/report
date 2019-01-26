@@ -4,12 +4,17 @@
 \alias{report.lm}
 \title{Linear Models Report}
 \usage{
-\method{report}{lm}(x, CI = 95, ...)
+\method{report}{lm}(x, CI = 95, effsize = "cohen1988", data = NULL,
+  ...)
 }
 \arguments{
 \item{x}{Object of class \link{lm}.}
 
 \item{CI}{Confidence Interval (CI) level. Default to 95\%.}
+
+\item{effsize}{Compute standardized parameters and interpret them using a set of rules. Can be "cohen1988" (default), "sawilowsky2009", NULL, or a custom set of \link{rules}.}
+
+\item{data}{Dataframe used to fit the model. Can be useful to compute standardized parameters.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
@@ -17,7 +22,7 @@
 Create a report of a linear model.
 }
 \examples{
-model <- lm(Sepal.Length ~ Petal.Length * Species, data=iris)
+model <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
 r <- report(model)
 to_text(r)
 to_fulltext(r)

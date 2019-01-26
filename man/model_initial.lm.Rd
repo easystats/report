@@ -15,7 +15,7 @@
 Initial parameters for linear models.
 }
 \examples{
-model <- lm(Sepal.Length ~ Petal.Length * Species, data=iris)
+model <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
 }
 \author{
 \href{https://dominiquemakowski.github.io/}{Dominique Makowski}

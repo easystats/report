@@ -97,6 +97,3 @@ report.factor <- function(x, levels_percentage = FALSE, missing_percentage = FAL
 
   return(as.report(out))
 }
-
-
-
