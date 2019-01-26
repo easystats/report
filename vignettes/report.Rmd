@@ -58,7 +58,7 @@ The `report` package works in a two steps fashion. First, creating a `report` ob
 report(iris)
 ```
 ```{r message=FALSE, warning=FALSE}
-print(report(iris), width=80)
+print(report(iris), width=100)
 ```
 
 The reports nicely work within the *tidyverse*:
@@ -68,31 +68,32 @@ library(dplyr)
 
 iris %>% 
   group_by(Species) %>% 
-  report(median = TRUE)  # Display Median and MAD instead of Mean and SD
+  report(median = TRUE, range = FALSE)  # Display only the Median and MAD
 ```
 ```{r message=FALSE, warning=FALSE}
 library(dplyr)
 
 iris %>% 
   group_by(Species) %>% 
-  report(median = TRUE) %>% 
-  print(width=80)
+  report(median = TRUE, range = FALSE) %>% 
+  print(width=100)
 ```
+
 
 ### Correlations and t-tests
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
 report(cor.test(iris$Sepal.Length, iris$Petal.Length))
 ```
-```{r message=FALSE, warning=FALSE}
-print(report(cor.test(iris$Sepal.Length, iris$Petal.Length)), width=80)
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+print(report(cor.test(iris$Sepal.Length, iris$Petal.Length)), width=100)
 ```
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
 report(t.test(iris$Sepal.Length, iris$Petal.Length))
 ```
-```{r message=FALSE, warning=FALSE}
-print(report(t.test(iris$Sepal.Length, iris$Petal.Length)), width=80)
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+print(report(t.test(iris$Sepal.Length, iris$Petal.Length)), width=100)
 ```
 ### Linear Models (LM)
 
@@ -104,19 +105,19 @@ r <- report(model)
 
 to_text(r)
 ```
-```{r message=FALSE, warning=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 model <- lm(Sepal.Length ~ Petal.Length + Species, data=iris) 
 r <- report(model)
 
-to_text(r, width=80)
+to_text(r, width=100)
 ```
 
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
 to_fulltext(r)
 ```
-```{r message=FALSE, warning=FALSE}
-to_fulltext(r, width=80)
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+to_fulltext(r, width=100)
 ```
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}

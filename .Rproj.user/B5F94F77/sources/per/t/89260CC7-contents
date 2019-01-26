@@ -40,10 +40,26 @@ options(knitr.kable.NA = '',
 
 ***"From R to Manuscript"***
 
-`report`'s primary goal is to fill the gap between R's output and the formatted result description of your manuscript, with the automated use of **best practices** guidelines (*e.g.,* [APA's style guide](https://www.apastyle.org/)), ensuring **standardization** and **quality** of results reporting.
+`report`'s primary goal is to fill the gap between R's output and the formatted result description of your manuscript, with the automated use of **best practices** guidelines (*e.g.,* [APA](https://www.apastyle.org/)'s style guide), ensuring **standardization** and **quality** of results reporting.
 
 
 **Note: this package is the heir and successor to the [psycho](https://github.com/neuropsychology/psycho.R) package.**
+
+
+```{r message=FALSE, warning=FALSE, eval=FALSE}
+# Example
+lm(Sepal.Length ~ Species, data=iris) %>% 
+  report()
+```
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(report)
+library(dplyr)
+
+# Example
+lm(Sepal.Length ~ Species, data=iris) %>% 
+  report() %>% 
+  to_text(width=100)
+```
 
 
 ## Contribute
@@ -68,9 +84,20 @@ Run the following:
 install.packages("devtools")
 devtools::install_github("neuropsychology/report")
 ```
-```{r message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, eval=FALSE}
 library("report")
 ```
+
+
+
+## Credits
+
+You can put a **Star** on this repo, and cite the package as following:
+
+- Makowski, (2019). *Automated reporting of statistical models in R*. CRAN. doi: .
+
+
+Please remember that parts of the code in this package were inspired (*or shamelessly copied*) from other great packages, such as [sjstats](https://github.com/strengejacke/sjstats). Please consider citing them!
 
 
 
@@ -88,7 +115,7 @@ The `report` package works in a two steps fashion. First, creating a `report` ob
 report(iris)
 ```
 ```{r message=FALSE, warning=FALSE}
-print(report(iris), width=80)
+print(report(iris), width=100)
 ```
 
 The reports nicely work within the *tidyverse*:
@@ -98,15 +125,15 @@ library(dplyr)
 
 iris %>% 
   group_by(Species) %>% 
-  report(median = TRUE)  # Display Median and MAD instead of Mean and SD
+  report(median = TRUE, range = FALSE)  # Display only the Median and MAD
 ```
 ```{r message=FALSE, warning=FALSE}
 library(dplyr)
 
 iris %>% 
   group_by(Species) %>% 
-  report(median = TRUE) %>% 
-  print(width=80)
+  report(median = TRUE, range = FALSE) %>% 
+  print(width=100)
 ```
 
 ### Correlations and t-tests
@@ -115,14 +142,14 @@ iris %>%
 report(cor.test(iris$Sepal.Length, iris$Petal.Length))
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-print(report(cor.test(iris$Sepal.Length, iris$Petal.Length)), width=80)
+print(report(cor.test(iris$Sepal.Length, iris$Petal.Length)), width=100)
 ```
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
 report(t.test(iris$Sepal.Length, iris$Petal.Length))
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-print(report(t.test(iris$Sepal.Length, iris$Petal.Length)), width=80)
+print(report(t.test(iris$Sepal.Length, iris$Petal.Length)), width=100)
 ```
 ### Linear Models (LM)
 
@@ -138,7 +165,7 @@ to_text(r)
 model <- lm(Sepal.Length ~ Petal.Length + Species, data=iris) 
 r <- report(model)
 
-to_text(r, width=80)
+to_text(r, width=100)
 ```
 
 
@@ -146,7 +173,7 @@ to_text(r, width=80)
 to_fulltext(r)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-to_fulltext(r, width=80)
+to_fulltext(r, width=100)
 ```
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
@@ -163,11 +190,3 @@ to_fulltable(r, digits=2)
 knitr::kable(to_fulltable(r, digits=2))
 ```
 
-## Credits
-
-You can put a **Star** on this repo, and cite the package as following:
-
-- Makowski, (2019). *Automated reporting of statistical models in R*. CRAN. doi: .
-
-
-Please remember that parts of the code in this package were inspired (*or shamelessly copied*) from other great packages, such as [sjstats](https://github.com/strengejacke/sjstats). Please consider citing them!
