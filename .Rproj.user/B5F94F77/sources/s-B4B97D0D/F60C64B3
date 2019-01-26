@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1548469550082.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "F60C64B3",
+    "lastKnownWriteTime" : 1548472054,
+    "last_content_update" : 1548472054375,
+    "path" : "C:/Users/Dom/Dropbox/RECHERCHE/N/report/R/standardize.R",
+    "project_path" : "R/standardize.R",
+    "properties" : {
+        "cursorPosition" : "74,0",
+        "scrollLine" : "70"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

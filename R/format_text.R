@@ -1,0 +1,22 @@
+#' Collapse Character Vector
+#'
+#' @param x Character vector.
+#' @param sep Separator.
+#' @param last Last separator.
+#'
+#' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
+#'
+#' @examples
+#' format_text_collapse(c("A", "B", "C"))
+#' @importFrom utils head tail
+#'
+#' @export
+format_text_collapse <- function(x, sep=", ", last=" and ") {
+  if(length(x) == 1){
+    return(x)
+  } else {
+    s <- paste0(head(x, -1), collapse = sep)
+    s <- paste0(c(s, tail(x, 1)), collapse = last)
+    return(s)
+  }
+}

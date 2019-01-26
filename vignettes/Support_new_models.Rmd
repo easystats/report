@@ -17,11 +17,11 @@ editor_options:
 ---
 
 
-# Support new models
+## Support new models
 
-blablabla.
+You can easily contribute in order for `report` to support new models. 
 
-```{r warning=FALSE, message=FALSE}
-1+1
-```
-
+1. **Add report method:** The first step is to add a new file, named `report.NewClass.R` in the [`R`](https://github.com/DominiqueMakowski/bayestestR/tree/master/R) folder. 
+2. In this file, write a new function with the same name (*i.e.*, `report.NewClass`).
+3. This function must return a `list` containing 5 elements, respectively named `text` (a string), `text_full` (a string), `table` (a dataframe), `table_full` (a dataframe) and `values` (a list).
+4. This `list`, named for instance `out`, can be returned wrapped in the `as.report()`.

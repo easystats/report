@@ -9,7 +9,12 @@
 #' @examples
 #' interpret_r(r = .015)
 #' interpret_r(r = c(.5, -.02))
-#' #
+#' @seealso Page 88 of APA's 6th Edition.
+#' @references
+#' \itemize{
+#'   \item Cohen, J. (1988). Statistical power analysis for the behavioural sciences.
+#'   \item Evans, J. D. (1996). Straightforward statistics for the behavioral sciences. Thomson Brooks/Cole Publishing Co.
+#' }
 #' @export
 interpret_r <- function(r, rules = "cohen1988", direction = TRUE) {
   if (rules == "cohen1988") {
