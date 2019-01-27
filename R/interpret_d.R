@@ -15,13 +15,15 @@
 #' }
 #' @export
 interpret_d <- function(d, rules = "cohen1988") {
-  if (rules == "cohen1988") {
-    return(interpret(d, rules(c(0.2, 0.5, 0.8), c("very small", "small", "medium", "large"))))
-  } else if (rules == "sawilowsky2009") {
-    return(interpret(d, rules(c(0.1, 0.2, 0.5, 0.8, 1.2, 2), c("tiny", "very small", "small", "medium", "large", "very large", "huge"))))
-  } else if (!is.rules(rules)) {
-    stop("The rules set must be an object of type rules.")
-  } else {
-    return(interpret(d, rules))
+  if(is.rules(rules)){
+    return(interpret(abs(d), rules))
+  } else{
+    if (rules == "cohen1988") {
+      return(interpret(abs(d), rules(c(0.2, 0.5, 0.8), c("very small", "small", "medium", "large"))))
+    } else if (rules == "sawilowsky2009") {
+      return(interpret(abs(d), rules(c(0.1, 0.2, 0.5, 0.8, 1.2, 2), c("tiny", "very small", "small", "medium", "large", "very large", "huge"))))
+    } else {
+      stop("rules must be 'cohen1988', 'sawilowsky2009' or an object of type rules.")
+    }
   }
 }

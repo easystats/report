@@ -106,22 +106,19 @@
 
     
     
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div id="installation" class="section level3">
+<h3 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h3>
 <p>Run the following:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"devtools"</span>)</a>
 <a class="sourceLine" id="cb1-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"neuropsychology/report"</span>)</a></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"report"</span>)</a></code></pre></div>
 </div>
-<div id="general-workflow" class="section level2">
-<h2 class="hasAnchor">
-<a href="#general-workflow" class="anchor"></a>General Workflow</h2>
-<p>The <code>report</code> package works in a two steps fashion. First, creating a <code>report</code> object with the <code><a href="../reference/report.html">report()</a></code> function (which takes different arguments depending on the type of object you are reporting). Then, this report can be displayed either textually, using <code><a href="../reference/to_text.html">to_text()</a></code>, or as a table, using <code><a href="../reference/to_table.html">to_table()</a></code>. Moreover, you can also access a more detailed (but less digest) version of the report using <code><a href="../reference/to_fulltext.html">to_fulltext()</a></code> and <code><a href="../reference/to_fulltable.html">to_fulltable()</a></code>. Finally, the <code><a href="../reference/to_values.html">to_values()</a></code> makes it easy to access all the internals of a model.</p>
+<div id="general-workflow" class="section level3">
+<h3 class="hasAnchor">
+<a href="#general-workflow" class="anchor"></a>General Workflow</h3>
+<p>The <code>report</code> package works in a two steps fashion. First, creating a <code>report</code> object with the <code><a href="../reference/report.html">report()</a></code> function (which takes different arguments depending on the type of object you are reporting). Then, this report can be displayed either textually, using <code><a href="../reference/to_text.html">to_text()</a></code>, or as a table, using <code><a href="../reference/to_table.html">to_table()</a></code>. Moreover, you can also access a more detailed (but less digest) version of the report using <code><a href="../reference/to_fulltext.html">to_fulltext()</a></code> and <code><a href="../reference/to_fulltable.html">to_fulltable()</a></code>. Finally, <code><a href="../reference/to_values.html">to_values()</a></code> makes it easy to access all the internals of a model.</p>
 </div>
-<div id="examples" class="section level2">
-<h2 class="hasAnchor">
-<a href="#examples" class="anchor"></a>Examples</h2>
 <div id="dataframes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#dataframes" class="anchor"></a>Dataframes</h3>
@@ -139,28 +136,22 @@
 <a class="sourceLine" id="cb5-3" title="3">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb5-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb5-5" title="5"><span class="st">  </span><span class="kw"><a href="../reference/report.html">report</a></span>(<span class="dt">median =</span> <span class="ot">TRUE</span>, <span class="dt">range =</span> <span class="ot">FALSE</span>)  <span class="co"># Display only the Median and MAD</span></a></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a>
-<a class="sourceLine" id="cb6-2" title="2"></a>
-<a class="sourceLine" id="cb6-3" title="3">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="st">  </span><span class="kw"><a href="../reference/report.html">report</a></span>(<span class="dt">median =</span> <span class="ot">TRUE</span>, <span class="dt">range =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-6" title="6"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(<span class="dt">width=</span><span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb6-7" title="7"><span class="co">## The data contains 150 observations, grouped by Species, of the following variables:</span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="co">## - setosa (n = 50):</span></a>
-<a class="sourceLine" id="cb6-9" title="9"><span class="co">##   - Sepal.Length: Median = 5.00 +- 0.30</span></a>
-<a class="sourceLine" id="cb6-10" title="10"><span class="co">##   - Sepal.Width: Median = 3.40 +- 0.37</span></a>
-<a class="sourceLine" id="cb6-11" title="11"><span class="co">##   - Petal.Length: Median = 1.50 +- 0.15</span></a>
-<a class="sourceLine" id="cb6-12" title="12"><span class="co">##   - Petal.Width: Median = 0.20 +- 0.00</span></a>
-<a class="sourceLine" id="cb6-13" title="13"><span class="co">## - versicolor (n = 50):</span></a>
-<a class="sourceLine" id="cb6-14" title="14"><span class="co">##   - Sepal.Length: Median = 5.90 +- 0.52</span></a>
-<a class="sourceLine" id="cb6-15" title="15"><span class="co">##   - Sepal.Width: Median = 2.80 +- 0.30</span></a>
-<a class="sourceLine" id="cb6-16" title="16"><span class="co">##   - Petal.Length: Median = 4.35 +- 0.52</span></a>
-<a class="sourceLine" id="cb6-17" title="17"><span class="co">##   - Petal.Width: Median = 1.30 +- 0.22</span></a>
-<a class="sourceLine" id="cb6-18" title="18"><span class="co">## - virginica (n = 50):</span></a>
-<a class="sourceLine" id="cb6-19" title="19"><span class="co">##   - Sepal.Length: Median = 6.50 +- 0.59</span></a>
-<a class="sourceLine" id="cb6-20" title="20"><span class="co">##   - Sepal.Width: Median = 3.00 +- 0.30</span></a>
-<a class="sourceLine" id="cb6-21" title="21"><span class="co">##   - Petal.Length: Median = 5.55 +- 0.67</span></a>
-<a class="sourceLine" id="cb6-22" title="22"><span class="co">##   - Petal.Width: Median = 2.00 +- 0.30</span></a></code></pre></div>
+<pre><code>## The data contains 150 observations, grouped by Species, of the following variables:
+## - setosa (n = 50):
+##   - Sepal.Length: Median = 5.00 +- 0.30
+##   - Sepal.Width: Median = 3.40 +- 0.37
+##   - Petal.Length: Median = 1.50 +- 0.15
+##   - Petal.Width: Median = 0.20 +- 0.00
+## - versicolor (n = 50):
+##   - Sepal.Length: Median = 5.90 +- 0.52
+##   - Sepal.Width: Median = 2.80 +- 0.30
+##   - Petal.Length: Median = 4.35 +- 0.52
+##   - Petal.Width: Median = 1.30 +- 0.22
+## - virginica (n = 50):
+##   - Sepal.Length: Median = 6.50 +- 0.59
+##   - Sepal.Width: Median = 3.00 +- 0.30
+##   - Petal.Length: Median = 5.55 +- 0.67
+##   - Petal.Width: Median = 2.00 +- 0.30</code></pre>
 </div>
 <div id="correlations-and-t-tests" class="section level3">
 <h3 class="hasAnchor">
@@ -187,25 +178,25 @@
 ## Within this model: 
 ##   - Petal.Length is significant (beta = 0.90, 95% CI [0.78, 1.03], p &lt; .001) and large (Std. beta =
 ## 1.93).
-##   - Speciesversicolor is significant (beta = -1.60, 95% CI [-1.98, -1.22], p &lt; .001) and very small
-## (Std. beta = -1.93).
-##   - Speciesvirginica is significant (beta = -2.12, 95% CI [-2.66, -1.58], p &lt; .001) and very small
-## (Std. beta = -2.56).</code></pre>
+##   - Speciesversicolor is significant (beta = -1.60, 95% CI [-1.98, -1.22], p &lt; .001) and large (Std.
+## beta = -1.93).
+##   - Speciesvirginica is significant (beta = -2.12, 95% CI [-2.66, -1.58], p &lt; .001) and large (Std.
+## beta = -2.56).</code></pre>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw"><a href="../reference/to_fulltext.html">to_fulltext</a></span>(r)</a></code></pre></div>
 <pre><code>##  We fitted a linear model to predict Sepal.Length with Petal.Length and Species (formula =
 ## Sepal.Length ~ Petal.Length + Species). Effect sizes were labelled following Cohen's (1988)
 ## recommendations. The model explains a significant proportion of variance (R2 = 0.84, F(4, 146) =
-## 249.40, p &lt; .001, adj. R2 = 0.83). The model's intercept is at 3.68 (t = 34.72, 95% CI [3.47,
+## 249.40, p &lt; .001, adj. R2 = 0.83). The model's intercept is at 3.68(t() = 34.72, 95% CI [3.47,
 ## 3.89], p &lt; .001).
 ## 
 ## Within this model: 
 ##   - Petal.Length is positive, significant (beta = 0.90, t(146) = 13.96, 95% CI [0.78, 1.03], p &lt;
 ## .001) and large (Std. beta = 1.93, Std. SE = 0.14, Std. 95% CI [1.66, 2.20]).
 ##   - Speciesversicolor is negative, significant (beta = -1.60, t(146) = -8.28, 95% CI [-1.98, -1.22],
-## p &lt; .001) and very small (Std. beta = -1.93, Std. SE = 0.23, Std. 95% CI [-2.40, -1.47]).
+## p &lt; .001) and large (Std. beta = -1.93, Std. SE = 0.23, Std. 95% CI [-2.40, -1.47]).
 ##   - Speciesvirginica is negative, significant (beta = -2.12, t(146) = -7.74, 95% CI [-2.66, -1.58], p
-## &lt; .001) and very small (Std. beta = -2.56, Std. SE = 0.33, Std. 95% CI [-3.21, -1.90]).</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw"><a href="../reference/to_table.html">to_table</a></span>(r, <span class="dt">digits=</span><span class="dv">2</span>)</a></code></pre></div>
+## &lt; .001) and large (Std. beta = -2.56, Std. SE = 0.33, Std. 95% CI [-3.21, -1.90]).</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw"><a href="../reference/to_table.html">to_table</a></span>(r)</a></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">Parameter</th>
@@ -245,7 +236,7 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw"><a href="../reference/to_fulltable.html">to_fulltable</a></span>(r, <span class="dt">digits=</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw"><a href="../reference/to_fulltable.html">to_fulltable</a></span>(r)</a></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">Parameter</th>
@@ -267,7 +258,7 @@
 <td align="left">3.68</td>
 <td align="left">0.11</td>
 <td align="left">34.72</td>
-<td align="left">146.00</td>
+<td align="left">146</td>
 <td align="left">3.47</td>
 <td align="left">3.89</td>
 <td align="left">0.00</td>
@@ -281,7 +272,7 @@
 <td align="left">0.90</td>
 <td align="left">0.06</td>
 <td align="left">13.96</td>
-<td align="left">146.00</td>
+<td align="left">146</td>
 <td align="left">0.78</td>
 <td align="left">1.03</td>
 <td align="left">0.00</td>
@@ -295,7 +286,7 @@
 <td align="left">-1.60</td>
 <td align="left">0.19</td>
 <td align="left">-8.28</td>
-<td align="left">146.00</td>
+<td align="left">146</td>
 <td align="left">-1.98</td>
 <td align="left">-1.22</td>
 <td align="left">0.00</td>
@@ -309,7 +300,7 @@
 <td align="left">-2.12</td>
 <td align="left">0.27</td>
 <td align="left">-7.74</td>
-<td align="left">146.00</td>
+<td align="left">146</td>
 <td align="left">-2.66</td>
 <td align="left">-1.58</td>
 <td align="left">0.00</td>
@@ -321,19 +312,9 @@
 </tbody>
 </table>
 </div>
-</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#installation">Installation</a></li>
-      <li><a href="#general-workflow">General Workflow</a></li>
-      <li><a href="#examples">Examples</a></li>
-      </ul>
-</div>
       </div>
 
 </div>

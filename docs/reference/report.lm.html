@@ -180,15 +180,15 @@
 #&gt; 
 #&gt; Within this model: 
 #&gt;   - Petal.Length is not significant (beta = 0.54, 95% CI [0.00, 1.09], p = 0.05) and large (Std. beta = 1.16).
-#&gt;   - Speciesversicolor is significant (beta = -1.81, 95% CI [-2.99, -0.62], p &lt; .01) and very small (Std. beta = -0.88).
-#&gt;   - Speciesvirginica is significant (beta = -3.15, 95% CI [-4.41, -1.90], p &lt; .001) and very small (Std. beta = -1.75).
+#&gt;   - Speciesversicolor is significant (beta = -1.81, 95% CI [-2.99, -0.62], p &lt; .01) and large (Std. beta = -0.88).
+#&gt;   - Speciesvirginica is significant (beta = -3.15, 95% CI [-4.41, -1.90], p &lt; .001) and large (Std. beta = -1.75).
 #&gt;   - Petal.Length:Speciesversicolor is not significant (beta = 0.29, 95% CI [-0.30, 0.87], p &gt; .1) and medium (Std. beta = 0.61).
-#&gt;   - Petal.Length:Speciesvirginica is not significant (beta = 0.45, 95% CI [-0.12, 1.03], p &gt; .1) and large (Std. beta = 0.97).</div><div class='input'><span class='fu'><a href='to_fulltext.html'>to_fulltext</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; We fitted a linear model to predict Sepal.Length with Petal.Length and Species (formula = Sepal.Length ~ Petal.Length * Species). Effect sizes were labelled following Cohen's (1988) recommendations. The model explains a significant proportion of variance (R2 = 0.84, F(6, 144) = 151.71, p &lt; .001, adj. R2 = 0.83). The model's intercept is at 4.21 (t = 10.34, 95% CI [3.41, 5.02], p &lt; .001). 
+#&gt;   - Petal.Length:Speciesvirginica is not significant (beta = 0.45, 95% CI [-0.12, 1.03], p &gt; .1) and large (Std. beta = 0.97).</div><div class='input'><span class='fu'><a href='to_fulltext.html'>to_fulltext</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; We fitted a linear model to predict Sepal.Length with Petal.Length and Species (formula = Sepal.Length ~ Petal.Length * Species). Effect sizes were labelled following Cohen's (1988) recommendations. The model explains a significant proportion of variance (R2 = 0.84, F(6, 144) = 151.71, p &lt; .001, adj. R2 = 0.83). The model's intercept is at 4.21(t() = 10.34, 95% CI [3.41, 5.02], p &lt; .001). 
 #&gt; 
 #&gt; Within this model: 
 #&gt;   - Petal.Length is positive, not significant (beta = 0.54, t(144) = 1.96, 95% CI [0.00, 1.09], p = 0.05) and large (Std. beta = 1.16, Std. SE = 0.59, Std. 95% CI [-0.01, 2.32]).
-#&gt;   - Speciesversicolor is negative, significant (beta = -1.81, t(144) = -3.02, 95% CI [-2.99, -0.62], p &lt; .01) and very small (Std. beta = -0.88, Std. SE = 0.77, Std. 95% CI [-2.41, 0.65]).
-#&gt;   - Speciesvirginica is negative, significant (beta = -3.15, t(144) = -4.97, 95% CI [-4.41, -1.90], p &lt; .001) and very small (Std. beta = -1.75, Std. SE = 0.79, Std. 95% CI [-3.32, -0.18]).
+#&gt;   - Speciesversicolor is negative, significant (beta = -1.81, t(144) = -3.02, 95% CI [-2.99, -0.62], p &lt; .01) and large (Std. beta = -0.88, Std. SE = 0.77, Std. 95% CI [-2.41, 0.65]).
+#&gt;   - Speciesvirginica is negative, significant (beta = -3.15, t(144) = -4.97, 95% CI [-4.41, -1.90], p &lt; .001) and large (Std. beta = -1.75, Std. SE = 0.79, Std. 95% CI [-3.32, -0.18]).
 #&gt;   - Petal.Length:Speciesversicolor is positive, not significant (beta = 0.29, t(144) = 0.97, 95% CI [-0.30, 0.87], p &gt; .1) and medium (Std. beta = 0.61, Std. SE = 0.63, Std. 95% CI [-0.63, 1.85]).
 #&gt;   - Petal.Length:Speciesvirginica is positive, not significant (beta = 0.45, t(144) = 1.56, 95% CI [-0.12, 1.03], p &gt; .1) and large (Std. beta = 0.97, Std. SE = 0.62, Std. 95% CI [-0.26, 2.19]).</div><div class='input'><span class='fu'><a href='to_table.html'>to_table</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt;                        Parameter       beta       CI_low    CI_high
 #&gt; 1                    (Intercept)  4.2131682  3.407870308  5.0184661

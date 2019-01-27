@@ -2,19 +2,25 @@
 % Please edit documentation in R/report.R
 \name{to_fulltable}
 \alias{to_fulltable}
-\title{Report table display}
+\alias{as.data.frame.report}
+\title{Full report table display}
 \usage{
 to_fulltable(x, full = TRUE, digits = NULL, ...)
+
+\method{as.data.frame}{report}(x, ...)
 }
 \arguments{
 \item{x}{Object of class \link{report}}
 
-\item{full}{Show the full report.}
+\item{full}{Show the full report (default to TRUE).}
 
 \item{digits}{Number of digits.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
 \description{
-Report table display
+Full report table display
+}
+\author{
+\href{https://dominiquemakowski.github.io/}{Dominique Makowski}
 }

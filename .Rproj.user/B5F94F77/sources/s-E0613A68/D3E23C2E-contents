@@ -1,0 +1,149 @@
+#' Create Reports
+#'
+#' Create textual reports. See the documentation for your object's class:
+#' \itemize{
+#'  \item{\link[=report.data.frame]{data.frame}}
+#'  \item{\link[=report.htest]{t-test}}
+#'  \item{\link[=report.htest]{correlation}}
+#'  }
+#'
+#' @param x Object.
+#' @param ... Arguments passed to or from other methods.
+#'
+#' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
+#'
+#' @export
+report <- function(x, ...) {
+  UseMethod("report")
+}
+
+
+
+#' Test for objects of class \link{report}
+#'
+#' @param x An arbitrary R object.
+#'
+#' @export
+is.report <- function(x) inherits(x, "report")
+
+
+
+
+#' create objects of class \link{report}
+#'
+#' @param x An arbitrary R object.
+#'
+#' @export
+as.report <- function(x) {
+  class(x) <- c("report", class(x))
+  return(x)
+}
+
+
+
+
+
+
+#' Report printing
+#'
+#' @param x Object of class \link{report}
+#' @param full Show the full report.
+#' @param width Positive integer giving the target column for wrapping lines in the output.
+#' @param ... Arguments passed to or from other methods.
+#'
+#' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
+#'
+#' @export
+print.report <- function(x, full = FALSE, width = NULL, ...) {
+  if (full == TRUE) {
+    text <- x$text_full
+  } else {
+    text <- x$text
+  }
+
+  if (!is.null(width)) {
+    text <- format_text_wrap(text, width = width)
+  }
+
+  cat(text, sep = "\n")
+  invisible(text)
+}
+
+#' @inherit print.report
+#'
+#' @export
+to_text <- print.report
+
+
+#' @inherit to_text
+#'
+#' @export
+to_fulltext <- function(x, full = TRUE, width = NULL, ...) {
+  to_text(x, full = full, width = width)
+}
+
+#' Report table display
+#'
+#' @param x Object of class \link{report}
+#' @param full Show the full report.
+#' @param digits Number of digits.
+#' @param ... Arguments passed to or from other methods.
+#'
+#' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
+#'
+#' @export
+to_table <- function(x, full = FALSE, digits = NULL, ...) {
+  if (full == TRUE) {
+    table <- x$table_full
+  } else {
+    table <- x$table
+  }
+
+  if (!is.null(digits) & ncol(dplyr::select_if(table, is.numeric)) > 0) {
+    initial_order <- names(table)
+    nums <- dplyr::select_if(table, is.numeric)
+    nums <- sapply(nums, format_value_unless_integers, digits = digits)
+    fact <- dplyr::select_if(table, is.character)
+    fact <- cbind(fact, dplyr::select_if(table, is.factor))
+    if(ncol(fact) == 0){
+      table <- nums
+    } else {
+      table <- cbind(fact, nums)
+    }
+    table <- table[initial_order]
+    if(inherits(table, "character")){
+      table <- as.data.frame(t(table))
+    }
+  }
+
+  return(table)
+}
+#' @export
+summary.report <- to_table
+
+#' @inherit to_table
+#' @export
+to_fulltable <- as.data.frame.report <- function(x, full = TRUE, digits = NULL, ...) {
+  table <- to_table(x, digits = digits, full = full)
+
+  return(table)
+}
+
+
+#' Report values
+#'
+#' @param x Object of class \link{report}
+#' @param ... Arguments passed to or from other methods.
+#'
+#' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
+#'
+#' @export
+to_values <- function(x, ...) {
+  if (!"values" %in% names(x)) {
+    return(as.list(x$table_full))
+  } else {
+    return(x$values)
+  }
+}
+#' @export
+as.list.report <- to_values

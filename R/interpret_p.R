@@ -10,11 +10,14 @@
 #' interpret_p(c(.5, .02))
 #' @export
 interpret_p <- function(p, rules = "default") {
-  if (rules == "default") {
-    return(interpret(p, rules(c(0.05), c("significant", "not significant"))))
-  } else if (!is.rules(rules)) {
-    stop("The rules set must be an object of type rules.")
-  } else {
+  if (is.rules(rules)) {
     return(interpret(p, rules))
+  } else{
+    if (rules == "default") {
+      return(interpret(p, rules(c(0.05), c("significant", "not significant"))))
+    } else {
+      stop("rules must be 'default' or an object of type rules.")
+    }
   }
+
 }

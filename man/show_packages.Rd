@@ -2,15 +2,18 @@
 % Please edit documentation in R/misc_cite_packages.R
 \name{show_packages}
 \alias{show_packages}
+\alias{cite_packages}
 \title{Cite Loaded Packages}
 \usage{
 show_packages(session)
+
+cite_packages(session)
 }
 \arguments{
 \item{session}{A \link[=sessionInfo]{sessionInfo} object.}
 }
 \description{
-Citation table of loaded packages (show_packages includes version and name, and cite_packages includes only the citation).
+Citation table of loaded packages (\link{show_packages} includes version and name, and `\link{cite_packages} includes only the citation).
 }
 \examples{
 \dontrun{

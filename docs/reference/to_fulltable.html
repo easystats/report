@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Report table display — to_fulltable • report</title>
+<title>Full report table display — to_fulltable • report</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,9 +37,9 @@
 
 
 
-<meta property="og:title" content="Report table display — to_fulltable" />
+<meta property="og:title" content="Full report table display — to_fulltable" />
 
-<meta property="og:description" content="Report table display" />
+<meta property="og:description" content="Full report table display" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -132,18 +132,21 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Report table display</h1>
+    <h1>Full report table display</h1>
     <small class="dont-index">Source: <a href='https://github.com/neuropsychology/report/blob/master/R/report.R'><code>R/report.R</code></a></small>
     <div class="hidden name"><code>to_fulltable.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Report table display</p>
+    <p>Full report table display</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>to_fulltable</span>(<span class='no'>x</span>, <span class='kw'>full</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>to_fulltable</span>(<span class='no'>x</span>, <span class='kw'>full</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>digits</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for report</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/as.data.frame'>as.data.frame</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -154,7 +157,7 @@
     </tr>
     <tr>
       <th>full</th>
-      <td><p>Show the full report.</p></td>
+      <td><p>Show the full report (default to TRUE).</p></td>
     </tr>
     <tr>
       <th>digits</th>
@@ -174,6 +177,8 @@
       <li><a href="#arguments">Arguments</a></li>
                 </ul>
 
+    <h2>Author</h2>
+    <p><a href='https://dominiquemakowski.github.io/'>Dominique Makowski</a></p>
   </div>
 </div>
 

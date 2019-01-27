@@ -39,7 +39,7 @@
 
 <meta property="og:title" content="Cite Loaded Packages — show_packages" />
 
-<meta property="og:description" content="Citation table of loaded packages (show_packages includes version and name, and cite_packages includes only the citation)." />
+<meta property="og:description" content="Citation table of loaded packages (show_packages includes version and name, and `cite_packages includes only the citation)." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -139,11 +139,13 @@
 
     <div class="ref-description">
     
-    <p>Citation table of loaded packages (show_packages includes version and name, and cite_packages includes only the citation).</p>
+    <p>Citation table of loaded packages (show_packages includes version and name, and `cite_packages includes only the citation).</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>show_packages</span>(<span class='no'>session</span>)</pre>
+    <pre class="usage"><span class='fu'>show_packages</span>(<span class='no'>session</span>)
+
+<span class='fu'>cite_packages</span>(<span class='no'>session</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -158,7 +160,7 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='fu'>show_packages</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/sessionInfo'>sessionInfo</a></span>())
-<span class='fu'><a href='cite_packages.html'>cite_packages</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/sessionInfo'>sessionInfo</a></span>())
+<span class='fu'>cite_packages</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/sessionInfo'>sessionInfo</a></span>())
 <span class='co'># }</span><div class='input'>
 </div></pre>
   </div>

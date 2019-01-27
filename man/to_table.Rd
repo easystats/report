@@ -4,10 +4,10 @@
 \alias{to_table}
 \title{Report table display}
 \usage{
-to_table(x, full = FALSE, digits = NULL, ...)
+to_table(object, full = FALSE, digits = NULL, ...)
 }
 \arguments{
-\item{x}{Object of class \link{report}}
+\item{object}{Object of class \link{report}}
 
 \item{full}{Show the full report.}
 

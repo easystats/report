@@ -1,6 +1,6 @@
 #' Cite Loaded Packages
 #'
-#' Citation table of loaded packages (show_packages includes version and name, and cite_packages includes only the citation).
+#' Citation table of loaded packages (\link{show_packages} includes version and name, and `\link{cite_packages} includes only the citation).
 #'
 #' @param session A \link[=sessionInfo]{sessionInfo} object.
 #'
@@ -49,8 +49,7 @@ show_packages <- function(session) {
   return(data)
 }
 
-
-#' @inherit show_packages
+#' @rdname show_packages
 #' @export
 cite_packages <- function(session) {
   data <- show_packages(session)
