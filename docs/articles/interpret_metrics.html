@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Supporting New Models • report</title>
+<title>Automated Interpretation of Metrics • report</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -15,7 +15,7 @@
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Supporting New Models">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Automated Interpretation of Metrics">
 <meta property="og:description" content="">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
@@ -96,27 +96,53 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Supporting New Models</h1>
+      <h1>Automated Interpretation of Metrics</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/easystats/report/blob/master/vignettes/supporting_new_models.Rmd"><code>vignettes/supporting_new_models.Rmd</code></a></small>
-      <div class="hidden name"><code>supporting_new_models.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/easystats/report/blob/master/vignettes/interpret_metrics.Rmd"><code>vignettes/interpret_metrics.Rmd</code></a></small>
+      <div class="hidden name"><code>interpret_metrics.Rmd</code></div>
 
     </div>
 
     
     
-<div id="support-new-models" class="section level2">
+<div id="why" class="section level2">
 <h2 class="hasAnchor">
-<a href="#support-new-models" class="anchor"></a>Support new models</h2>
-<p>You can easily contribute in order for <code>report</code> to support new models.</p>
-<ol style="list-style-type: decimal">
+<a href="#why" class="anchor"></a>Why?</h2>
+<p>Many metrics used in statistics (indices of fit, model performance or parameter estimates) can be very abstract. A long experience is required to intuitively “<em>feel</em>” the meaning of their values. In order to facilitate the understanding of the results they are facing, many scientists use (often implicitly) some set of <em>rules of thumb</em>. In order to validate and standardize such interpretation grid, some authors validated and published them in the form of guidelines. One of the most famous interpertation grid was proposed by <strong>Cohen (1988)</strong> for a series of widely used indices, such as the correlation <strong>r</strong> (<em>r</em> = .20, small; <em>r</em> = .40, moderate and <em>r</em> = .60, large) or the <strong>standardized difference</strong> (<em>Cohen’s d</em>).</p>
+<p>Readers should keep in mind that these thresholds are arbitrary and should be discussed on a case-by-case basis, to avoid their crystalisation, as for the infamous <strong><em>p</em> &lt; .05</strong> example.</p>
+<p><code>report</code> implements such sets of rules of thumb for a variety of indices in a flexible and explicit fashion.</p>
+</div>
+<div id="supported-indices" class="section level2">
+<h2 class="hasAnchor">
+<a href="#supported-indices" class="anchor"></a>Supported Indices</h2>
+<div id="correlation-r" class="section level3">
+<h3 class="hasAnchor">
+<a href="#correlation-r" class="anchor"></a>Correlation <em>r</em>
+</h3>
+<div id="cohen-1988" class="section level5">
+<h5 class="hasAnchor">
+<a href="#cohen-1988" class="anchor"></a><strong>Cohen (1988)</strong>
+</h5>
+<p><code><a href="../reference/interpret_r.html">interpret_r(x, rules = "cohen1988")</a></code></p>
+<ul>
 <li>
-<strong>Add report method:</strong> The first step is to add a new file, named <code>report.NewClass.R</code> in the <a href="https://github.com/DominiqueMakowski/bayestestR/tree/master/R"><code>R</code></a> folder.</li>
-<li>In this file, write a new function with the same name (<em>i.e.</em>, <code>report.NewClass</code>).</li>
-<li>This function must return a <code>list</code> containing 5 elements, respectively named <code>text</code> (a string), <code>text_full</code> (a string), <code>table</code> (a dataframe), <code>table_full</code> (a dataframe) and <code>values</code> (a list).</li>
-<li>This <code>list</code>, named for instance <code>out</code>, can be returned wrapped in the <code><a href="../reference/as.report.html">as.report()</a></code>.</li>
-</ol>
+<strong>r = 0 - 0.1</strong>: Very small</li>
+<li>
+<strong>r = 0.1 - 0.3</strong>: Small</li>
+<li>
+<strong>r = 0.3 - 0.5</strong>: Moderate</li>
+<li>
+<strong>r &gt; 0.5</strong>: Large</li>
+</ul>
+</div>
+</div>
+<div id="correlation-d" class="section level3">
+<h3 class="hasAnchor">
+<a href="#correlation-d" class="anchor"></a>Correlation <em>d</em>
+</h3>
+<p>TODO.</p>
+</div>
 </div>
   </div>
 
@@ -125,7 +151,8 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#support-new-models">Support new models</a></li>
+<li><a href="#why">Why?</a></li>
+      <li><a href="#supported-indices">Supported Indices</a></li>
       </ul>
 </div>
       </div>

@@ -3,7 +3,7 @@ pkgdown: 1.3.0
 pkgdown_sha: ~
 articles:
   cite_packages: cite_packages.html
-  interpret_indices: interpret_indices.html
+  interpret_metrics: interpret_metrics.html
   report: report.html
   supporting_new_models: supporting_new_models.html
 

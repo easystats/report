@@ -66,7 +66,7 @@
       <a href="articles/cite_packages.html">How to Cite Packages</a>
     </li>
     <li>
-      <a href="articles/interpret_indices.html">Automated Interpretation of Indices</a>
+      <a href="articles/interpret_metrics.html">Automated Interpretation of Metrics</a>
     </li>
     <li>
       <a href="articles/supporting_new_models.html">Supporting New Models</a>
@@ -79,7 +79,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/neuropsychology/report">
+  <a href="https://github.com/easystats/report">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -106,7 +106,7 @@
 
 <p><strong><em>“From R to Manuscript”</em></strong></p>
 <p><code>report</code>’s primary goal is to fill the gap between R’s output and the formatted result description of your manuscript, with the automated use of <strong>best practices</strong> guidelines (<em>e.g.,</em> <a href="https://www.apastyle.org/">APA</a>’s style guide), ensuring <strong>standardization</strong> and <strong>quality</strong> of results reporting.</p>
-<p><strong>Note: this package is the heir and successor to the <a href="https://github.com/neuropsychology/psycho.R">psycho</a> package.</strong></p>
+<p><strong>Note: this package is the heir and successor to the <a href="https://github.com/easystats/psycho.R">psycho</a> package.</strong></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Example</span></a>
 <a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Species, <span class="dt">data=</span>iris) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb1-3" title="3"><span class="st">  </span><span class="kw"><a href="reference/report.html">report</a></span>()</a></code></pre></div>
@@ -121,9 +121,12 @@
 <div id="documentation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#documentation" class="anchor"></a>Documentation</h2>
-<p>The package documentation can be found <a href="https://neuropsychology.github.io/report/"><strong>here</strong></a>. Check-out these tutorials:</p>
+<p>The package documentation can be found <a href="https://easystats.github.io/report/"><strong>here</strong></a>. Check-out these tutorials:</p>
 <ul>
-<li><a href="https://neuropsychology.github.io/report/articles/report.html">Get Started</a></li>
+<li><a href="https://easystats.github.io/report/articles/report.html">Get Started</a></li>
+<li><a href="https://easystats.github.io/report/articles/interpret_metrics.html">Automated Interpretation of Metrics</a></li>
+<li><a href="https://easystats.github.io/report/articles/cite_packages.html">How to Cite Packages</a></li>
+<li><a href="https://easystats.github.io/report/articles/supporting_new_models.html">Supporting New Models</a></li>
 </ul>
 </div>
 <div id="contribute" class="section level2">
@@ -131,10 +134,10 @@
 <a href="#contribute" class="anchor"></a>Contribute</h2>
 <p><strong><code>report</code> is a young package in need of affection</strong>. You can easily hop aboard the <a href="CONTRIBUTING.html">developpment</a> of this open-source software and improve psychological science by doing the following:</p>
 <ul>
-<li>Create or check existing <a href="https://github.com/neuropsychology/report/issues"><img src="reference/figures/issue_bug.png" height="25"></a> issues to report, replicate, understand or solve some bugs.</li>
-<li>Create or check existing <a href="https://github.com/neuropsychology/report/issues"><img src="reference/figures/issue_featureidea.png" height="25"></a> issues to suggest or discuss a new feature.</li>
-<li>Check existing <a href="https://github.com/neuropsychology/report/issues"><img src="reference/figures/issue_help.png" height="25"></a> issues to see things that we’d like to implement, but where help is needed to do it.</li>
-<li>Check existing <a href="https://github.com/neuropsychology/report/issues"><img src="reference/figures/issue_opinion.png" height="25"></a> issues to give your opinion and participate in package’s design discussions.</li>
+<li>Create or check existing <a href="https://github.com/easystats/report/issues"><img src="reference/figures/issue_bug.png" height="25"></a> issues to report, replicate, understand or solve some bugs.</li>
+<li>Create or check existing <a href="https://github.com/easystats/report/issues"><img src="reference/figures/issue_featureidea.png" height="25"></a> issues to suggest or discuss a new feature.</li>
+<li>Check existing <a href="https://github.com/easystats/report/issues"><img src="reference/figures/issue_help.png" height="25"></a> issues to see things that we’d like to implement, but where help is needed to do it.</li>
+<li>Check existing <a href="https://github.com/easystats/report/issues"><img src="reference/figures/issue_opinion.png" height="25"></a> issues to give your opinion and participate in package’s design discussions.</li>
 </ul>
 <p>Don’t be shy, try to code and submit a pull request (See the <a href="CONTRIBUTING.html">contributing guide</a>). Even if unperfect, we will help you make it great! All contributors will be very graciously rewarded someday :smirk:.</p>
 </div>
@@ -143,12 +146,12 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Run the following:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"devtools"</span>)</a>
-<a class="sourceLine" id="cb3-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"neuropsychology/report"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb3-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"easystats/report"</span>)</a></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"report"</span>)</a></code></pre></div>
 </div>
 <div id="report-all-the-things" class="section level2">
 <h2 class="hasAnchor">
-<a href="#report-all-the-things" class="anchor"></a>Report all the things <a href="https://neuropsychology.github.io/Psycho.jl/latest/"><img src="https://www.memecreator.org/static/images/templates/2776.jpg" height="100"></a>
+<a href="#report-all-the-things" class="anchor"></a>Report all the things <a href="https://easystats.github.io/Psycho.jl/latest/"><img src="https://www.memecreator.org/static/images/templates/2776.jpg" height="100"></a>
 </h2>
 <div id="general-workflow" class="section level3">
 <h3 class="hasAnchor">
@@ -159,14 +162,13 @@
 <h3 class="hasAnchor">
 <a href="#dataframes" class="anchor"></a>Dataframes</h3>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="reference/report.html">report</a></span>(iris)</a></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(<span class="kw"><a href="reference/report.html">report</a></span>(iris), <span class="dt">width=</span><span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="co">## The data contains 150 observations of the following variables:</span></a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="co">##   - Sepal.Length: Mean = 5.84 +- 0.83 [4.30, 7.90]</span></a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="co">##   - Sepal.Width: Mean = 3.06 +- 0.44 [2.00, 4.40]</span></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="co">##   - Petal.Length: Mean = 3.76 +- 1.77 [1.00, 6.90]</span></a>
-<a class="sourceLine" id="cb6-6" title="6"><span class="co">##   - Petal.Width: Mean = 1.20 +- 0.76 [0.10, 2.50]</span></a>
-<a class="sourceLine" id="cb6-7" title="7"><span class="co">##   - Species: 3 levels: setosa (n = 50); versicolor (n = 50); virginica (n = 50)</span></a></code></pre></div>
-<p>The reports nicely work within the <em>tidyverse</em>:</p>
+<pre><code>## The data contains 150 observations of the following variables:
+##   - Sepal.Length: Mean = 5.84 +- 0.83 [4.30, 7.90]
+##   - Sepal.Width: Mean = 3.06 +- 0.44 [2.00, 4.40]
+##   - Petal.Length: Mean = 3.76 +- 1.77 [1.00, 6.90]
+##   - Petal.Width: Mean = 1.20 +- 0.76 [0.10, 2.50]
+##   - Species: 3 levels: setosa (n = 50); versicolor (n = 50); virginica (n = 50)</code></pre>
+<p>The reports nicely work within the <a href="https://github.com/tidyverse"><em>tidyverse</em></a>:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a>
 <a class="sourceLine" id="cb7-2" title="2"></a>
 <a class="sourceLine" id="cb7-3" title="3">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -356,7 +358,6 @@
 <ul>
 <li>Makowski, (2019). <em>Automated reporting of statistical models in R</em>. CRAN. doi: .</li>
 </ul>
-<p>Please remember that parts of the code in this package were inspired (<em>or shamelessly copied</em>) from other great packages, such as <a href="https://github.com/strengejacke/sjstats">sjstats</a>. Please consider citing them!</p>
 </div>
 </div>
   </div>
@@ -365,9 +366,9 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/neuropsychology/report">https://​github.com/​neuropsychology/​report</a>
+<li>Browse source code at <br><a href="https://github.com/easystats/report">https://​github.com/​easystats/​report</a>
 </li>
-<li>Report a bug at <br><a href="https://github.com/neuropsychology/report/issues">https://​github.com/​neuropsychology/​report/​issues</a>
+<li>Report a bug at <br><a href="https://github.com/easystats/report/issues">https://​github.com/​easystats/​report/​issues</a>
 </li>
 </ul>
 </div>
@@ -396,10 +397,10 @@
       <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.org/neuropsychology/report"><img src="https://travis-ci.org/neuropsychology/report.svg?branch=master" alt="Build Status"></a></li>
-<li><a href="https://codecov.io/gh/neuropsychology/report"><img src="https://codecov.io/gh/neuropsychology/report/branch/master/graph/badge.svg" alt="codecov"></a></li>
-<li><a href="http://hits.dwyl.io/neuropsychology/report"><img src="http://hits.dwyl.io/DominiqueMakowski/bayestestR.svg" alt="HitCount"></a></li>
-<li><a href="https://neuropsychology.github.io/report/"><img src="https://img.shields.io/badge/documentation-report-orange.svg?colorB=E91E63" alt="Documentation"></a></li>
+<li><a href="https://travis-ci.org/easystats/report"><img src="https://travis-ci.org/easystats/report.svg?branch=master" alt="Build Status"></a></li>
+<li><a href="https://codecov.io/gh/easystats/report"><img src="https://codecov.io/gh/easystats/report/branch/master/graph/badge.svg" alt="codecov"></a></li>
+<li><a href="http://hits.dwyl.io/easystats/report"><img src="http://hits.dwyl.io/DominiqueMakowski/bayestestR.svg" alt="HitCount"></a></li>
+<li><a href="https://easystats.github.io/report/"><img src="https://img.shields.io/badge/documentation-report-orange.svg?colorB=E91E63" alt="Documentation"></a></li>
 </ul>
 </div>
 </div>
