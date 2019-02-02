@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1548488363326.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "89260CC7",
+    "lastKnownWriteTime" : 1549074328,
+    "last_content_update" : 1549074328784,
+    "path" : "C:/Users/Dom/Dropbox/RECHERCHE/N/easystats/report/README.Rmd",
+    "project_path" : "README.Rmd",
+    "properties" : {
+        "chunk_output_type" : "console",
+        "cursorPosition" : "196,82",
+        "ignored_words" : "src,png,href,https,github,com,neuropsychology,img,Makowski,doi\n",
+        "scrollLine" : "167"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

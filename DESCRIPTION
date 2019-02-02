@@ -10,8 +10,8 @@ Authors@R: c(
         comment = c(ORCID = "0000-0001-5375-9967"))
 	)
 Maintainer: Dominique Makowski <dom.makowski@gmail.com>
-URL: https://github.com/neuropsychology/report
-BugReports: https://github.com/neuropsychology/report/issues
+URL: https://github.com/easystats/report
+BugReports: https://github.com/easystats/report/issues
 Description: Converts statistical models into textual reports suited for publication.
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -24,11 +24,11 @@ Imports:
 	purrr,
 	broom
 Suggests:
-    spelling,
-    knitr,
-    rmarkdown,
-    testthat,
-    covr,
+	spelling,
+	knitr,
+	rmarkdown,
+	testthat,
+	covr,
 	ggplot2
 RoxygenNote: 6.1.1
 Language: en-GB
