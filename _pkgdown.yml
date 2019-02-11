@@ -1,3 +1,7 @@
 authors:
   Dominique Makowski:
     href: https://dominiquemakowski.github.io/
+
+template:
+  params:
+    bootswatch: cosmo

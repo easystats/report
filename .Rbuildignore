@@ -4,6 +4,7 @@
 ^\.Rproj\.user$
 ^\.travis.yml
 ^\_pkgdown.yml
+^LICENSE
 ^data/.
 ^docs/.
 ^vignettes/.

@@ -13,13 +13,11 @@ cite_packages(session)
 \item{session}{A \link[=sessionInfo]{sessionInfo} object.}
 }
 \description{
-Citation table of loaded packages (\link{show_packages} includes version and name, and `\link{cite_packages} includes only the citation).
+Citation table of loaded packages (\link{show_packages} includes version and name, and \link{cite_packages} includes only the citation).
 }
 \examples{
-\dontrun{
 show_packages(sessionInfo())
 cite_packages(sessionInfo())
-}
 
 }
 \author{

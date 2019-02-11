@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1549898583064.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "FDFAFAF7",
+    "lastKnownWriteTime" : 1549898610,
+    "last_content_update" : 1549898610595,
+    "path" : "C:/Users/Dom/Dropbox/RECHERCHE/N/easystats/report/R/misc_cite_packages.R",
+    "project_path" : "R/misc_cite_packages.R",
+    "properties" : {
+        "cursorPosition" : "22,47",
+        "scrollLine" : "3"
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
