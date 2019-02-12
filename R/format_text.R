@@ -28,9 +28,8 @@ format_text_collapse <- function(x, sep = ", ", last = " and ") {
 #' @param width Positive integer giving the target column for wrapping lines in the output.
 #'
 #' @examples
-#' x <- paste(rep("a very long string", 50), collapse=" ")
-#' format_text_wrap(x, width=50)
-#'
+#' x <- paste(rep("a very long string", 50), collapse = " ")
+#' format_text_wrap(x, width = 50)
 #' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
 #' @importFrom stringr str_split str_trim coll
 #' @export
@@ -43,8 +42,8 @@ format_text_wrap <- function(x, width = NULL) {
   }
 
   wrapped <- ""
-  for(s in text){
-    if(nchar(s) > width){
+  for (s in text) {
+    if (nchar(s) > width) {
       leading_spaces <- nchar(s) - nchar(stringr::str_trim(s))
       s <- strwrap(s, width = width)
       s <- paste0(s, collapse = "\n")

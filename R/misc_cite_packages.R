@@ -7,7 +7,6 @@
 #' @examples
 #' show_packages(sessionInfo())
 #' cite_packages(sessionInfo())
-#'
 #' @author \href{https://github.com/DominiqueMakowski}{Dominique Makowski}
 #' @import stringr dplyr
 #' @importFrom utils packageVersion
@@ -40,9 +39,11 @@ show_packages <- function(session) {
     versions <- c(versions, as.character(packageVersion(pkg_name)))
     names <- c(names, pkg_name)
   }
-  data <- data.frame("Package" = names,
-                    "Version" = versions,
-                    "References" = citations) %>%
+  data <- data.frame(
+    "Package" = names,
+    "Version" = versions,
+    "References" = citations
+  ) %>%
     arrange_("Package")
   return(data)
 }

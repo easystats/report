@@ -2,9 +2,8 @@
 #'
 #' Create textual reports. See the documentation for your object's class:
 #' \itemize{
-#'  \item{\link[=report.data.frame]{data.frame}}
-#'  \item{\link[=report.htest]{t-test}}
-#'  \item{\link[=report.htest]{correlation}}
+#'  \item{\link[=report.data.frame]{Dataframes}}
+#'  \item{\link[=report.htest]{Correlations and t-tests}}
 #'  }
 #'
 #' @param x Object.
@@ -105,13 +104,13 @@ to_table <- function(object, full = FALSE, digits = NULL, ...) {
     nums <- sapply(nums, format_value_unless_integers, digits = digits)
     fact <- dplyr::select_if(table, is.character)
     fact <- cbind(fact, dplyr::select_if(table, is.factor))
-    if(ncol(fact) == 0){
+    if (ncol(fact) == 0) {
       table <- nums
     } else {
       table <- cbind(fact, nums)
     }
     table <- table[initial_order]
-    if(inherits(table, "character")){
+    if (inherits(table, "character")) {
       table <- as.data.frame(t(table))
     }
   }
@@ -141,7 +140,7 @@ to_fulltable <- function(x, full = TRUE, digits = NULL, ...) {
 
 #' @rdname to_fulltable
 #' @export
-as.data.frame.report <- function(x, ...){
+as.data.frame.report <- function(x, ...) {
   return(to_fulltable(x, ...))
 }
 

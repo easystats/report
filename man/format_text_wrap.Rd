@@ -15,9 +15,8 @@ format_text_wrap(x, width = NULL)
 Autowrap String
 }
 \examples{
-x <- paste(rep("a very long string", 50), collapse=" ")
-format_text_wrap(x, width=50)
-
+x <- paste(rep("a very long string", 50), collapse = " ")
+format_text_wrap(x, width = 50)
 }
 \author{
 \href{https://dominiquemakowski.github.io/}{Dominique Makowski}

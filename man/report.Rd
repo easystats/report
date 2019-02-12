@@ -14,9 +14,8 @@ report(x, ...)
 \description{
 Create textual reports. See the documentation for your object's class:
 \itemize{
- \item{\link[=report.data.frame]{data.frame}}
- \item{\link[=report.htest]{t-test}}
- \item{\link[=report.htest]{correlation}}
+ \item{\link[=report.data.frame]{Dataframes}}
+ \item{\link[=report.htest]{Correlations and t-tests}}
  }
 }
 \author{

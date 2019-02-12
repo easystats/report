@@ -17,10 +17,9 @@
 #' }
 #' @export
 interpret_r <- function(r, rules = "cohen1988", direction = TRUE) {
-  if(is.rules(rules)){
+  if (is.rules(rules)) {
     return(interpret(abs(r), rules))
-  } else{
-
+  } else {
     if (rules == "cohen1988") {
       text <- interpret(
         abs(r),
@@ -40,7 +39,6 @@ interpret_r <- function(r, rules = "cohen1988", direction = TRUE) {
     } else {
       stop("rules must be 'cohen1988', 'evans1996' or an object of type rules.")
     }
-
   }
 
 

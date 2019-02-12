@@ -18,7 +18,6 @@ Citation table of loaded packages (\link{show_packages} includes version and nam
 \examples{
 show_packages(sessionInfo())
 cite_packages(sessionInfo())
-
 }
 \author{
 \href{https://github.com/DominiqueMakowski}{Dominique Makowski}

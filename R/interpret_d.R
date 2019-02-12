@@ -15,9 +15,9 @@
 #' }
 #' @export
 interpret_d <- function(d, rules = "cohen1988") {
-  if(is.rules(rules)){
+  if (is.rules(rules)) {
     return(interpret(abs(d), rules))
-  } else{
+  } else {
     if (rules == "cohen1988") {
       return(interpret(abs(d), rules(c(0.2, 0.5, 0.8), c("very small", "small", "medium", "large"))))
     } else if (rules == "sawilowsky2009") {

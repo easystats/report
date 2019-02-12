@@ -22,7 +22,7 @@ format_value <- function(x, digits = 2) {
 #' @inherit format_value
 #' @export
 format_value_unless_integers <- function(x, digits = 2) {
-  if(!all(is.int(x))){
+  if (!all(is.int(x))) {
     x <- format_value(x, digits = digits)
   }
   return(x)
@@ -35,6 +35,6 @@ format_value_unless_integers <- function(x, digits = 2) {
 #' @param x Numeric value.
 #'
 #' @export
-is.int <- function(x){
+is.int <- function(x) {
   ifelse(x %% 1 == 0, TRUE, FALSE)
 }

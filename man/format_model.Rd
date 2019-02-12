@@ -13,7 +13,6 @@ format_model(model)
 Model Name Formatting
 }
 \examples{
-model <- lm(Sepal.Length ~ Species, data=iris)
+model <- lm(Sepal.Length ~ Species, data = iris)
 format_model(model)
-
 }

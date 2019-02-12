@@ -13,8 +13,8 @@ test_that("interpret_r", {
   testthat::expect_equal(interpret_r(0.21), "positive and small")
   testthat::expect_equal(interpret_r(0.7, rules = "evans1996"), "positive and strong")
   testthat::expect_equal(interpret_r(c(0.5, -0.08)), c("positive and large", "negative and very small"))
-  testthat::expect_equal(interpret_r(0.6, rules=rules(c(0.5), c("A", "B"))), "B")
-  testthat::expect_error(interpret_r(0.6, rules="DUPA"))
+  testthat::expect_equal(interpret_r(0.6, rules = rules(c(0.5), c("A", "B"))), "B")
+  testthat::expect_error(interpret_r(0.6, rules = "DUPA"))
 })
 
 
@@ -24,8 +24,8 @@ test_that("interpret_p", {
   testthat::expect_equal(interpret_p(0.021), "significant")
   testthat::expect_equal(interpret_p(0.08), "not significant")
   testthat::expect_equal(interpret_p(c(0.01, 0.08)), c("significant", "not significant"))
-  testthat::expect_equal(interpret_p(0.6, rules=rules(c(0.5), c("A", "B"))), "B")
-  testthat::expect_error(interpret_p(0.6, rules="DUPA"))
+  testthat::expect_equal(interpret_p(0.6, rules = rules(c(0.5), c("A", "B"))), "B")
+  testthat::expect_error(interpret_p(0.6, rules = "DUPA"))
 })
 
 
@@ -39,9 +39,8 @@ context("interpret_d")
 test_that("interpret_d", {
   testthat::expect_equal(interpret_d(0.021), "very small")
   testthat::expect_equal(interpret_d(0.6), "medium")
-  testthat::expect_equal(interpret_d(1.3, rules="sawilowsky2009"), "very large")
+  testthat::expect_equal(interpret_d(1.3, rules = "sawilowsky2009"), "very large")
   testthat::expect_equal(interpret_d(c(0.45, 0.85)), c("small", "large"))
-  testthat::expect_equal(interpret_d(0.6, rules=rules(c(0.5), c("A", "B"))), "B")
-  testthat::expect_error(interpret_d(0.6, rules="DUPA"))
+  testthat::expect_equal(interpret_d(0.6, rules = rules(c(0.5), c("A", "B"))), "B")
+  testthat::expect_error(interpret_d(0.6, rules = "DUPA"))
 })
-
