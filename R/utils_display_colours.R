@@ -1,0 +1,113 @@
+#' @keywords internal
+.rstudio_with_ansi_support <- function ()
+{
+  if (Sys.getenv("RSTUDIO", "") == "")
+    return(FALSE)
+  if ((cols <- Sys.getenv("RSTUDIO_CONSOLE_COLOR", "")) !=
+      "" && !is.na(as.numeric(cols))) {
+    return(TRUE)
+  }
+  requireNamespace("rstudioapi", quietly = TRUE) && rstudioapi::isAvailable() &&
+    rstudioapi::hasFun("getConsoleHasColor")
+}
+
+
+
+
+#' @keywords internal
+.supports_color <- function ()
+{
+  enabled <- getOption("crayon.enabled")
+  if (!is.null(enabled)) {
+    return(isTRUE(enabled))
+  }
+  if (.rstudio_with_ansi_support() && sink.number() == 0) {
+    return(TRUE)
+  }
+  if (!isatty(stdout())) {
+    return(FALSE)
+  }
+  if (Sys.info()['sysname'] == "windows") {
+    if (Sys.getenv("ConEmuANSI") == "ON") {
+      return(TRUE)
+    }
+    if (Sys.getenv("CMDER_ROOT") != "") {
+      return(TRUE)
+    }
+    return(FALSE)
+  }
+  # Is this useful?
+  # if (inside_emacs() && !is.na(emacs_version()[1]) && emacs_version()[1] >=
+  #     23) {
+  #   return(TRUE)
+  # }
+  if ("COLORTERM" %in% names(Sys.getenv())) {
+    return(TRUE)
+  }
+  if (Sys.getenv("TERM") == "dumb") {
+    return(FALSE)
+  }
+  grepl("^screen|^xterm|^vt100|color|ansi|cygwin|linux", Sys.getenv("TERM"),
+        ignore.case = TRUE, perl = TRUE)
+}
+
+
+
+
+#' @keywords internal
+.green <- function(x) {
+  if (.supports_color())
+    x <- paste0("\033[32m", as.character(x), "\033[39m")
+  x
+}
+
+#' @keywords internal
+.red <- function(x) {
+  if (.supports_color())
+    x <- paste0("\033[31m", as.character(x), "\033[39m")
+  x
+}
+
+#' @keywords internal
+.yellow <- function(x) {
+  if (.supports_color())
+    x <- paste0("\033[32m", as.character(x), "\033[39m")
+  x
+}
+
+#' @keywords internal
+.colour <- function(x, colour="red"){
+  if(colour=="red"){
+    return(.red(x))
+  } else if(colour=="yellow"){
+    return(.yellow(x))
+  } else if(colour=="green") {
+    return(.green(x))
+  } else{
+    warning(paste0("`color` ", colour, " not yet supported."))
+  }
+}
+
+
+
+
+
+#' Colour a column (Exported for test purposes)
+#' @keywords internal
+.colour_columns <- function(x, names, colour="red"){
+  x[, c(names)] <- sapply(x[, c(names)], .colour, colour=colour)
+  return(x)
+}
+
+
+
+#' Colour a column (Exported for test purposes)
+#' @keywords internal
+.colour_column_if <- function(x, name, condition=`<`, threshold=0, colour_if="green", colour_else="red"){
+  x_if <- which(condition(x[, c(name)], threshold))
+  x_else <- which(!condition(x[, c(name)], threshold))
+
+  x[, c(name)][x_if] <- .colour(x[, c(name)][x_if], colour_if)
+  x[, c(name)][x_else] <- .colour(x[, c(name)][x_else], colour_else)
+  return(x)
+}

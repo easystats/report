@@ -32,7 +32,8 @@ Suggests:
 	testthat,
 	covr,
 	circus,
-	ggplot2
+	ggplot2,
+	rstudioapi
 Remotes: 
 	easystats/insight,
 	easystats/parameters,

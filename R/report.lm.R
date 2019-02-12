@@ -1,3 +1,30 @@
+#' #' TEST
+#' #'
+#' #' @examples
+#' #' model <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
+#' #'
+#' #' @export
+#' model_table <- function(model){
+#'   table_full <- parameters::model_parameters(model)
+#'   table <- table_full
+#'
+#'   class(table_full) <-
+#'   out <- list("table_full" = table_full,
+#'               "table" = table)
+#'   class(out) <- c("", class(out))
+#'
+#' }
+#'
+#'
+
+
+
+
+
+
+
+
+
 #' #' Retrieve Data from Linear Models
 #' #'
 #' #' Attempts at retrieving data from a linear model.
