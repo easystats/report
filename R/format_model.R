@@ -10,6 +10,7 @@
 #' @importFrom insight model_info
 #' @export
 format_model <- function(model) {
+
   info <- insight::model_info(model)
 
   type <- ""
@@ -47,5 +48,6 @@ format_model <- function(model) {
                    info$link_function,
                    " link)")
   }
+
   return(type)
 }
