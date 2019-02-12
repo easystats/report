@@ -31,10 +31,12 @@ Suggests:
 	rmarkdown,
 	testthat,
 	covr,
+	circus,
 	ggplot2
 Remotes: 
 	easystats/insight,
 	easystats/parameters,
-	easystats/performance
+	easystats/performance,
+	easystats/circus
 RoxygenNote: 6.1.1
 Language: en-GB
