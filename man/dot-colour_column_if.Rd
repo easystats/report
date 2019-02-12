@@ -4,7 +4,7 @@
 \alias{.colour_column_if}
 \title{Colour a column (Exported for test purposes)}
 \usage{
-.colour_column_if(x, name, condition = `<`, threshold = 0,
+.colour_column_if(x, name, condition = `>`, threshold = 0,
   colour_if = "green", colour_else = "red")
 }
 \description{

@@ -7,7 +7,7 @@
 to_table(object, full = FALSE, digits = NULL, ...)
 }
 \arguments{
-\item{object}{Object of class \link{report}}
+\item{object}{Object of class \link{report}.}
 
 \item{full}{Show the full report.}
 

@@ -1,21 +1,24 @@
-#' #' TEST
-#' #'
-#' #' @examples
-#' #' model <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
-#' #'
-#' #' @export
-#' model_table <- function(model){
-#'   table_full <- parameters::model_parameters(model)
-#'   table <- table_full
+#' TEST
+#' @param model Object of class \link{lm}.
 #'
-#'   class(table_full) <-
-#'   out <- list("table_full" = table_full,
-#'               "table" = table)
-#'   class(out) <- c("", class(out))
-#'
-#' }
-#'
-#'
+#' @examples
+#' model <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
+#' model_table(model)$table
+#' @importFrom parameters model_parameters
+#' @export
+model_table <- function(model){
+  table_full <- parameters::model_parameters(model)
+  table <- table_full
+
+  class(table_full) <- c("report_table", class(table_full))
+  class(table) <- c("report_table", class(table))
+
+  out <- list("table_full" = table_full,
+              "table" = table)
+  return(out)
+}
+
+
 
 
 

@@ -18,7 +18,7 @@ report <- function(x, ...) {
 
 
 
-#' Test for objects of class \link{report}
+#' Test for objects of class \link{report}.
 #'
 #' @param x An arbitrary R object.
 #'
@@ -28,7 +28,7 @@ is.report <- function(x) inherits(x, "report")
 
 
 
-#' create objects of class \link{report}
+#' create objects of class \link{report}.
 #'
 #' @param x An arbitrary R object.
 #'
@@ -45,12 +45,10 @@ as.report <- function(x) {
 
 #' Report printing
 #'
-#' @param x Object of class \link{report}
+#' @param x Object of class \link{report}.
 #' @param full Show the full report.
 #' @param width Positive integer giving the target column for wrapping lines in the output.
 #' @param ... Arguments passed to or from other methods.
-#'
-#' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
 #'
 #' @export
 print.report <- function(x, full = FALSE, width = NULL, ...) {
@@ -83,7 +81,7 @@ to_fulltext <- function(x, full = TRUE, width = NULL, ...) {
 
 #' Report table display
 #'
-#' @param object Object of class \link{report}
+#' @param object Object of class \link{report}.
 #' @param full Show the full report.
 #' @param digits Number of digits.
 #' @param ... Arguments passed to or from other methods.
@@ -125,7 +123,7 @@ summary.report <- to_table
 
 #' Full report table display
 #'
-#' @param x Object of class \link{report}
+#' @param x Object of class \link{report}.
 #' @param full Show the full report (default to TRUE).
 #' @param digits Number of digits.
 #' @param ... Arguments passed to or from other methods.
@@ -147,7 +145,7 @@ as.data.frame.report <- function(x, ...) {
 
 #' Report values
 #'
-#' @param x Object of class \link{report}
+#' @param x Object of class \link{report}.
 #' @param ... Arguments passed to or from other methods.
 #'
 #' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}

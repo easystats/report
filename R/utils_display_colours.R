@@ -53,6 +53,12 @@
 
 
 
+#' @keywords internal
+.red <- function(x) {
+  if (.supports_color())
+    x <- paste0("\033[31m", as.character(x), "\033[39m")
+  x
+}
 
 #' @keywords internal
 .green <- function(x) {
@@ -62,16 +68,9 @@
 }
 
 #' @keywords internal
-.red <- function(x) {
-  if (.supports_color())
-    x <- paste0("\033[31m", as.character(x), "\033[39m")
-  x
-}
-
-#' @keywords internal
 .yellow <- function(x) {
   if (.supports_color())
-    x <- paste0("\033[32m", as.character(x), "\033[39m")
+    x <- paste0("\033[33m", as.character(x), "\033[39m")
   x
 }
 
@@ -103,11 +102,17 @@
 
 #' Colour a column (Exported for test purposes)
 #' @keywords internal
-.colour_column_if <- function(x, name, condition=`<`, threshold=0, colour_if="green", colour_else="red"){
-  x_if <- which(condition(x[, c(name)], threshold))
-  x_else <- which(!condition(x[, c(name)], threshold))
+.colour_column_if <- function(x, name, condition=`>`, threshold=0, colour_if="green", colour_else="red"){
+  if(name %in% names(x)){
+    x_if <- which(condition(x[, c(name)], threshold))
+    x_else <- which(!condition(x[, c(name)], threshold))
 
-  x[, c(name)][x_if] <- .colour(x[, c(name)][x_if], colour_if)
-  x[, c(name)][x_else] <- .colour(x[, c(name)][x_else], colour_else)
+    if(!is.null(colour_if)){
+      x[, c(name)][x_if] <- .colour(x[, c(name)][x_if], colour_if)
+    }
+    if(!is.null(colour_else)){
+      x[, c(name)][x_else] <- .colour(x[, c(name)][x_else], colour_else)
+    }
+  }
   return(x)
 }

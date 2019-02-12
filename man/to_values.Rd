@@ -7,7 +7,7 @@
 to_values(x, ...)
 }
 \arguments{
-\item{x}{Object of class \link{report}}
+\item{x}{Object of class \link{report}.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
