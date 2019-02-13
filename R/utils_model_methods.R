@@ -1,3 +1,39 @@
+#' Model Values
+#'
+#' model values See the documentation for your object's class:
+#' \itemize{
+#'  \item{\link[=model_values.lm]{lm}}
+#'  }
+#'
+#' @param model Statistical Model.
+#' @param ... Arguments passed to or from other methods.
+#'
+#'
+#' @export
+model_values <- function(model, ...) {
+  UseMethod("model_values")
+}
+
+
+
+#' Model table
+#'
+#' Model table. See the documentation for your object's class:
+#' \itemize{
+#'  \item{\link[=model_table.lm]{lm}}
+#'  }
+#'
+#' @param model Statistical Model.
+#' @param ... Arguments passed to or from other methods (see \link{model_parameters} and \link{model_performance}).
+#'
+#'
+#' @export
+model_table <- function(model, ...) {
+  UseMethod("model_table")
+}
+
+
+
 #' #' Retrieve Data
 #' #'
 #' #' Attempts at retrieving data from model. See the documentation for your object's class:
@@ -74,42 +110,7 @@
 #' model_initial <- function(model, ...) {
 #'   UseMethod("model_initial")
 #' }
-#'
-#'
-#'
-#' #' Model Parameters
-#' #'
-#' #' Model parameters. See the documentation for your object's class:
-#' #' \itemize{
-#' #'  \item{\link[=model_parameters.lm]{lm}}
-#' #'  }
-#' #'
-#' #' @param model Statistical Model.
-#' #' @param ... Arguments passed to or from other methods.
-#' #'
-#' #' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
-#' #'
-#' #' @export
-#' model_parameters <- function(model, ...) {
-#'   UseMethod("model_parameters")
-#' }
-#'
-#'
-#'
-#'
-#' #' Model Values
-#' #'
-#' #' model values See the documentation for your object's class:
-#' #' \itemize{
-#' #'  \item{\link[=model_values.lm]{lm}}
-#' #'  }
-#' #'
-#' #' @param model Statistical Model.
-#' #' @param ... Arguments passed to or from other methods.
-#' #'
-#' #' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
-#' #'
-#' #' @export
-#' model_values <- function(model, ...) {
-#'   UseMethod("model_values")
-#' }
+
+
+
+

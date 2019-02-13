@@ -75,6 +75,21 @@
 }
 
 #' @keywords internal
+.violet <- function(x) {
+  if (.supports_color())
+    x <- paste0("\033[35m", as.character(x), "\033[39m")
+  x
+}
+
+#' @keywords internal
+.cyan <- function(x) {
+  if (.supports_color())
+    x <- paste0("\033[36m", as.character(x), "\033[39m")
+  x
+}
+
+
+#' @keywords internal
 .colour <- function(x, colour="red"){
   if(colour=="red"){
     return(.red(x))
@@ -82,6 +97,10 @@
     return(.yellow(x))
   } else if(colour=="green") {
     return(.green(x))
+  } else if(colour=="violet") {
+    return(.violet(x))
+  } else if(colour=="cyan") {
+    return(.cyan(x))
   } else{
     warning(paste0("`color` ", colour, " not yet supported."))
   }

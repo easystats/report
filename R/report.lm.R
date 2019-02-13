@@ -1,14 +1,95 @@
-#' TEST
+#' Linear Models Values
+#'
+#' Extract all values of linear models.
+#'
 #' @param model Object of class \link{lm}.
+#' @param effsize Compute standardized parameters and interpret them using a set of rules. Can be "cohen1988" (default), "sawilowsky2009", NULL, or a custom set of \link{rules}.
+#' @param ... Arguments passed to or from other methods (see \link{model_parameters} and \link{model_performance}).
+#'
+#' @examples
+#' model <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
+#' model_values(model)
+#' @importFrom insight model_info
+#' @importFrom parameters model_parameters
+#' @importFrom performance model_performance
+#' @export
+model_values.lm <- function(model, effsize = "cohen1988", ...) {
+
+  # Information
+  out <- list()
+  out$info <- insight::model_info(model)
+
+  # Tables
+  if(!is.null(effsize)){
+    out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ...)
+    out$table_parameters$Effect_Size <- interpret_d(out$table_parameters$Std_beta, rules=effsize)
+  } else{
+    out$table_parameters <- parameters::model_parameters(model, ...)
+  }
+  out$table_performance <- performance::model_performance(model, ...)
+  out$table_parameters$Parameter <- as.character(out$table_parameters$Parameter)
+
+
+
+  # tables to values
+  out$parameters <- list()
+  for (param in out$table_parameters$Parameter) {
+    out$parameters[[param]] <- as.list(out$table_parameters[out$table_parameters$Parameter == param, ])
+  }
+
+  out$performance <- list()
+  for (perf in names(out$table_performance)) {
+    out$performance[[perf]] <- out$table_performance[[perf]]
+  }
+
+
+  class(out) <- c("values_lm", class(out))
+  return(out)
+}
+
+
+
+
+
+
+
+
+#' Create Tables for Linear Models
+#
+#' @param model Object of class \link{lm}.
+#' @param performance Add performance metrics on table.
+#' @param ... Arguments passed to or from other methods (see \link{model_parameters} and \link{model_performance}).
 #'
 #' @examples
 #' model <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
 #' model_table(model)$table
 #' @importFrom parameters model_parameters
 #' @export
-model_table <- function(model){
-  table_full <- parameters::model_parameters(model)
+model_table.lm <- function(model, performance=TRUE, ...){
+
+  if(!inherits(model, "values_lm")){
+    model <- model_values(model, ...)
+    }
+
+  table_full <- model$table_parameters
   table <- table_full
+  table <- table[, colnames(table) %in% c("Parameter", "beta", "CI_low", "CI_high", "p", "Std_beta", "Effect_Size")]
+
+  if(performance){
+    # Full ----
+    perf <- data.frame(
+      "Parameter" = colnames(model$table_performance),
+      "Fit" = as.numeric(model$table_performance[1, ]),
+      stringsAsFactors = FALSE)
+    table_full <- dplyr::full_join(table_full, perf, by="Parameter")
+    # Mini ----
+    perf <- data.frame(
+      "Parameter" = colnames(model$table_performance),
+      "Fit" = as.numeric(model$table_performance[1, ]),
+      stringsAsFactors = FALSE) %>%
+      dplyr::filter_("Parameter %in% c('R2', 'R2_adj')")
+    table <- dplyr::full_join(table, perf, by="Parameter")
+  }
 
   class(table_full) <- c("report_table", class(table_full))
   class(table) <- c("report_table", class(table))
@@ -17,6 +98,12 @@ model_table <- function(model){
               "table" = table)
   return(out)
 }
+
+#' @export
+model_table.values_lm <- model_table.lm
+
+
+
 
 
 
@@ -51,81 +138,7 @@ model_table <- function(model){
 #'
 #'
 #'
-#' #' Linear Models Parameters
-#' #'
-#' #' Parameters for linear models.
-#' #'
-#' #' @param model Object of class \link{lm}.
-#' #' @param CI Confidence Interval (CI) level. Default to 95\%.
-#' #' @param effsize Compute standardized parameters and interpret them using a set of rules. Can be "cohen1988" (default), "sawilowsky2009", NULL, or a custom set of \link{rules}.
-#' #' @param data Dataframe used to fit the model. Can be useful to compute standardized parameters.
-#' #' @param ... Arguments passed to or from other methods.
-#' #'
-#' #' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
-#' #'
-#' #' @export
-#' model_values.lm <- function(model, CI = 95, effsize = "cohen1988", data = NULL, ...) {
-#'
-#'   # Processing
-#'   table_parameters <- cbind(broom::tidy(model), broom::confint_tidy(model, CI / 100)) %>%
-#'     rename_(
-#'       "Parameter" = "term",
-#'       "beta" = "estimate",
-#'       "SE" = "std.error",
-#'       "t" = "statistic",
-#'       "p" = "p.value",
-#'       "CI_low" = "conf.low",
-#'       "CI_high" = "conf.high"
-#'     )
-#'
-#'
-#'   table_indices <- broom::glance(model) %>%
-#'     rename_(
-#'       "R2" = "r.squared",
-#'       "R2_adj" = "adj.r.squared",
-#'       "F" = "statistic",
-#'       "p" = "p.value",
-#'       "DoF" = "df",
-#'       "DoF_residual" = "df.residual"
-#'     )
-#'   table_indices$Formula <- Reduce(paste, deparse(stats::formula(model)))
-#'   table_indices$Model_Name <- "linear model"
-#'   table_indices$CI <- CI
-#'
-#'   # Effect Sizes
-#'   if (!is.null(effsize)) {
-#'     std_model <- standardize(model, data = data, effsize = NULL, robust = FALSE)
-#'     std_table <- cbind(broom::tidy(std_model), broom::confint_tidy(std_model, CI / 100)) %>%
-#'       rename_(
-#'         "Std_Parameter" = "term",
-#'         "Std_beta" = "estimate",
-#'         "Std_SE" = "std.error",
-#'         "Std_t" = "statistic",
-#'         "Std_p" = "p.value",
-#'         "Std_CI_low" = "conf.low",
-#'         "Std_CI_high" = "conf.high"
-#'       )
-#'     std_table <- select(std_table, one_of("Std_beta", "Std_SE", "Std_CI_low", "Std_CI_high"))
-#'     table_parameters <- cbind(table_parameters, std_table)
-#'   }
-#'
-#'
-#'   # Values
-#'   out <- as.list(table_indices)
-#'
-#'   table_parameters$DoF_residual <- out$DoF_residual
-#'   out$table_parameters <- table_parameters
-#'   out$table_indices <- table_indices
-#'
-#'   out$Parameters <- list()
-#'   for (parameter in table_parameters$Parameter) {
-#'     out$Parameters[[parameter]] <- as.list(table_parameters[table_parameters$Parameter == parameter, ])
-#'   }
-#'
-#'
-#'   class(out) <- c("values_lm", "list")
-#'   return(out)
-#' }
+
 #'
 #'
 #'
