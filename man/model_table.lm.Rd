@@ -4,12 +4,17 @@
 \alias{model_table.lm}
 \title{Create Tables for Linear Models}
 \usage{
-\method{model_table}{lm}(model, performance = TRUE, ...)
+\method{model_table}{lm}(model, parameters, performance,
+  performance_in_table = TRUE, ...)
 }
 \arguments{
 \item{model}{Object of class \link{lm}.}
 
-\item{performance}{Add performance metrics on table.}
+\item{parameters}{Parameters table \link{model_parameters}.}
+
+\item{performance}{Performance table \link{model_performance}.}
+
+\item{performance_in_table}{Add performance metrics on table.}
 
 \item{...}{Arguments passed to or from other methods (see \link{model_parameters} and \link{model_performance}).}
 }

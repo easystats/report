@@ -4,11 +4,11 @@
 \alias{report.character}
 \title{Character Vector Report}
 \usage{
-\method{report}{character}(x, n_characters = 3,
+\method{report}{character}(model, n_characters = 3,
   levels_percentage = FALSE, missing_percentage = FALSE, ...)
 }
 \arguments{
-\item{x}{Character vector.}
+\item{model}{Character vector.}
 
 \item{n_characters}{Number of different character entries to show. Can be "all".}
 

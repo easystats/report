@@ -1,7 +1,9 @@
 #' Create Tables for Linear Models
 #
 #' @param model Object of class \link{lm}.
-#' @param performance Add performance metrics on table.
+#' @param parameters Parameters table \link{model_parameters}.
+#' @param performance Performance table \link{model_performance}.
+#' @param performance_in_table Add performance metrics on table.
 #' @param ... Arguments passed to or from other methods (see \link{model_parameters} and \link{model_performance}).
 #'
 #' @examples
@@ -9,29 +11,25 @@
 #' model_table(model)$table
 #' @importFrom parameters model_parameters
 #' @export
-model_table.lm <- function(model, performance=TRUE, ...){
+model_table.lm <- function(model, parameters, performance, performance_in_table=TRUE, ...){
 
-  if(!inherits(model, "values_lm")){
-    model <- model_values(model, ...)
-  }
-
-  table_full <- model$table_parameters
+  table_full <- parameters
   table <- table_full
   table <- table[, colnames(table) %in% c("Parameter", "beta", "CI_low", "CI_high", "p", "Std_beta", "Effect_Size")]
 
-  if(performance){
+  if(performance_in_table){
     table_full[nrow(table_full)+1,] <- NA
     table[nrow(table)+1,] <- NA
     # Full ----
     perf <- data.frame(
-      "Parameter" = colnames(model$table_performance),
-      "Fit" = as.numeric(model$table_performance[1, ]),
+      "Parameter" = colnames(performance),
+      "Fit" = as.numeric(performance[1, ]),
       stringsAsFactors = FALSE)
     table_full <- dplyr::full_join(table_full, perf, by="Parameter")
     # Mini ----
     perf <- data.frame(
-      "Parameter" = colnames(model$table_performance),
-      "Fit" = as.numeric(model$table_performance[1, ]),
+      "Parameter" = colnames(performance),
+      "Fit" = as.numeric(performance[1, ]),
       stringsAsFactors = FALSE) %>%
       dplyr::filter_("Parameter %in% c('R2', 'R2_adj')")
     table <- dplyr::full_join(table, perf, by="Parameter")
@@ -44,6 +42,3 @@ model_table.lm <- function(model, performance=TRUE, ...){
               "table" = table)
   return(out)
 }
-
-#' @export
-model_table.values_lm <- model_table.lm

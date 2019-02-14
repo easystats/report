@@ -4,10 +4,10 @@
 \alias{report}
 \title{Create Reports}
 \usage{
-report(x, ...)
+report(model, ...)
 }
 \arguments{
-\item{x}{Object.}
+\item{model}{Object.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

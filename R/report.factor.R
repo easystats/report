@@ -2,7 +2,7 @@
 #'
 #' Create a report of a categorical vector.
 #'
-#' @param x Categorical vector.
+#' @param model Categorical vector.
 #' @param levels_percentage Show factor levels by number (default) or percentage.
 #' @param missing_percentage Show missings by number (default) or percentage.
 #' @param ... Arguments passed to or from other methods.
@@ -20,15 +20,15 @@
 #' @import dplyr
 #'
 #' @export
-report.factor <- function(x, levels_percentage = FALSE, missing_percentage = FALSE, ...) {
+report.factor <- function(model, levels_percentage = FALSE, missing_percentage = FALSE, ...) {
 
   # Table -------------------------------------------------------------------
-  table_full <- data.frame(Level = x) %>%
+  table_full <- data.frame(Level = model) %>%
     group_by_("Level") %>%
     summarise_(
       "n_Obs" = "n()",
-      "percentage_Obs" = "n() / length(x) * 100",
-      "n_Missing" = "sum(is.na(x))",
+      "percentage_Obs" = "n() / length(model) * 100",
+      "n_Missing" = "sum(is.na(model))",
       "percentage_Missing" = "n_Missing / n_Obs * 100"
     )
 

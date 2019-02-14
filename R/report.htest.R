@@ -2,7 +2,7 @@
 #'
 #' Create a report of an h-test object.
 #'
-#' @param x Object of class htest.
+#' @param model Object of class htest.
 #' @param effsize Effect size interpretation set of rules.
 #' @param ... Arguments passed to or from other methods.
 #'
@@ -19,11 +19,11 @@
 #' @import dplyr
 #'
 #' @export
-report.htest <- function(x, effsize = "cohen1988", ...) {
+report.htest <- function(model, effsize = "cohen1988", ...) {
 
 
   # Processing --------------------------------------------------------------
-  table_full <- broom::tidy(x) %>%
+  table_full <- broom::tidy(model) %>%
     rename_if_possible("p.value", "p") %>%
     rename_if_possible("conf.low", "CI_low") %>%
     rename_if_possible("conf.high", "CI_high") %>%
@@ -47,7 +47,7 @@ report.htest <- function(x, effsize = "cohen1988", ...) {
       effect <- paste0(
         "r(", table_full$DoF[1], ") = ",
         format_value(table_full$r[1]), ", ",
-        format_CI(table_full$CI_low[1], table_full$CI_high[1], ci = attributes(x$conf.int)$conf.level)
+        format_CI(table_full$CI_low[1], table_full$CI_high[1], ci = attributes(model$conf.int)$conf.level)
       )
       method <- "Pearson's correlation"
       table <- select(table_full, -one_of("t", "Method", "Alternative"))
@@ -75,7 +75,7 @@ report.htest <- function(x, effsize = "cohen1988", ...) {
       "The ",
       method,
       " between ",
-      x$data.name,
+      model$data.name,
       " is ",
       interpretation,
       interpret_p(values$p),
@@ -95,30 +95,30 @@ report.htest <- function(x, effsize = "cohen1988", ...) {
       table_full <- select(table_full, -one_of("estimate"))
     }
 
-    if (names(x$null.value) == "mean") {
-      table_full$Difference <- x$estimate - x$null.value
+    if (names(model$null.value) == "mean") {
+      table_full$Difference <- model$estimate - model$null.value
       means <- paste0(
         " (mean = ",
-        format_value(x$estimate),
+        format_value(model$estimate),
         ")"
       )
-      vars <- paste0(x$data.name, means, " and mu = ", x$null.value)
+      vars <- paste0(model$data.name, means, " and mu = ", model$null.value)
     } else {
-      table_full$Difference <- x$estimate[1] - x$estimate[2]
+      table_full$Difference <- model$estimate[1] - model$estimate[2]
       means <- paste0(
         c(
           paste0(
-            names(x$estimate), " = ",
-            format_value(x$estimate)
+            names(model$estimate), " = ",
+            format_value(model$estimate)
           ),
           paste0(
             "difference = ",
-            format_value(x$estimate[1] - x$estimate[2])
+            format_value(model$estimate[1] - model$estimate[2])
           )
         ),
         collapse = ", "
       )
-      vars <- paste0(x$data.name, " (", means, ")")
+      vars <- paste0(model$data.name, " (", means, ")")
     }
     table <- select(table_full, -one_of("Method", "Alternative"), -starts_with("Mean"))
 
@@ -126,20 +126,20 @@ report.htest <- function(x, effsize = "cohen1988", ...) {
     values <- as.list(table_full)
     text <- paste0(
       "The ",
-      stringr::str_trim(x$method),
+      stringr::str_trim(model$method),
       " suggests that the difference ",
-      ifelse(grepl(" by ", x$data.name), "of ", "between "),
+      ifelse(grepl(" by ", model$data.name), "of ", "between "),
       vars,
       " is ",
-      interpret_p(x$p.value),
+      interpret_p(model$p.value),
       " (t(",
-      format_value_unless_integers(x$parameter),
+      format_value_unless_integers(model$parameter),
       ") = ",
-      format_value(x$statistic),
+      format_value(model$statistic),
       ", ",
-      format_CI(x$conf.int[1], x$conf.int[2], ci = attributes(x$conf.int)$conf.level),
+      format_CI(model$conf.int[1], model$conf.int[2], ci = attributes(model$conf.int)$conf.level),
       ", p ",
-      format_p(x$p.value, stars = FALSE),
+      format_p(model$p.value, stars = FALSE),
       ")."
     )
     text_full <- text

@@ -6,13 +6,13 @@
 #'  \item{\link[=report.htest]{Correlations and t-tests}}
 #'  }
 #'
-#' @param x Object.
+#' @param model Object.
 #' @param ... Arguments passed to or from other methods.
 #'
 #' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
 #'
 #' @export
-report <- function(x, ...) {
+report <- function(model, ...) {
   UseMethod("report")
 }
 
@@ -20,22 +20,22 @@ report <- function(x, ...) {
 
 #' Test for objects of class \link{report}.
 #'
-#' @param x An arbitrary R object.
+#' @param model An arbitrary R object.
 #'
 #' @export
-is.report <- function(x) inherits(x, "report")
+is.report <- function(model) inherits(model, "report")
 
 
 
 
 #' create objects of class \link{report}.
 #'
-#' @param x An arbitrary R object.
+#' @param model An arbitrary R object.
 #'
 #' @export
-as.report <- function(x) {
-  class(x) <- c("report", class(x))
-  return(x)
+as.report <- function(model) {
+  class(model) <- c("report", class(model))
+  return(model)
 }
 
 

@@ -7,7 +7,7 @@ model_text_description_lm <- function(model, effsize="effsize"){
     " with ",
     format_text_collapse(insight::find_predictors(model, effects="fixed", flatten=TRUE))
   )
-  text_full <- paste0(text, " (formula = ", insight::find_formula(model)$conditional, ").")
+  text_full <- paste0(text, " (formula = ", format(insight::find_formula(model)$conditional), ").")
   text <- paste0(text, ".")
 
   # Effect size
