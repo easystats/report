@@ -21,7 +21,3 @@
 \description{
 Extract all values of linear models.
 }
-\examples{
-model <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
-model_values(model)
-}

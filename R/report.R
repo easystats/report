@@ -79,6 +79,7 @@ to_fulltext <- function(x, full = TRUE, width = NULL, ...) {
   to_text(x, full = full, width = width)
 }
 
+
 #' Report table display
 #'
 #' @param object Object of class \link{report}.

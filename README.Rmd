@@ -179,14 +179,20 @@ to_fulltext(r, width=100)
 to_table(r)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-knitr::kable(to_table(r, digits=2))
+table <- to_table(r, digits=2)
+# remove empty row because kable doens't handle it
+table <- table[rowSums(is.na(table)) != ncol(table),]
+knitr::kable(table)
 ```
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
 to_fulltable(r)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-knitr::kable(to_fulltable(r, digits=2))
+table <- to_fulltable(r, digits=2)
+# remove empty row because kable doens't handle it
+table <- table[rowSums(is.na(table)) != ncol(table),]
+knitr::kable(table)
 ```
 
 

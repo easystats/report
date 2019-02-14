@@ -4,7 +4,7 @@
 [![Build
 Status](https://travis-ci.org/easystats/report.svg?branch=master)](https://travis-ci.org/easystats/report)
 [![codecov](https://codecov.io/gh/easystats/report/branch/master/graph/badge.svg)](https://codecov.io/gh/easystats/report)
-[![HitCount](http://hits.dwyl.io/DominiqueMakowski/bayestestR.svg)](http://hits.dwyl.io/easystats/report)
+[![HitCount](http://hits.dwyl.io/easystats/report.svg)](http://hits.dwyl.io/easystats/report)
 [![Documentation](https://img.shields.io/badge/documentation-report-orange.svg?colorB=E91E63)](https://easystats.github.io/report/)
 
 ***“From R to Manuscript”***
@@ -187,8 +187,8 @@ to_fulltext(r)
 
     ##  We fitted a linear model to predict Sepal.Length with Petal.Length and Species (formula =
     ## Sepal.Length ~ Petal.Length + Species). Effect sizes were labelled following Cohen's (1988)
-    ## recommendations. The model explains a significant proportion of variance (R2 = 0.84, F(4, 146) =
-    ## 249.40, p < .001, adj. R2 = 0.83). The model's intercept is at 3.68(t() = 34.72, 95% CI [3.47,
+    ## recommendations. The model explains a significant proportion of variance (R2 = 0.84, F(3, 146) =
+    ## 249.40, p < .001, adj. R2 = 0.83). The model's intercept is at 3.68(t(146) = 34.72, 95% CI [3.47,
     ## 3.89], p < .001).
     ## 
     ## Within this model: 
@@ -203,23 +203,33 @@ to_fulltext(r)
 to_table(r)
 ```
 
-| Parameter         | beta   | CI\_low | CI\_high | p    |
-| :---------------- | :----- | :------ | :------- | :--- |
-| (Intercept)       | 3.68   | 3.47    | 3.89     | 0.00 |
-| Petal.Length      | 0.90   | 0.78    | 1.03     | 0.00 |
-| Speciesversicolor | \-1.60 | \-1.98  | \-1.22   | 0.00 |
-| Speciesvirginica  | \-2.12 | \-2.66  | \-1.58   | 0.00 |
+|   | Parameter         | beta   | CI\_low | CI\_high | p    | Std\_beta | Effect\_Size | Fit  |
+| - | :---------------- | :----- | :------ | :------- | :--- | :-------- | :----------- | :--- |
+| 1 | (Intercept)       | 3.68   | 3.47    | 3.89     | 0.00 | 1.50      | large        |      |
+| 2 | Petal.Length      | 0.90   | 0.78    | 1.03     | 0.00 | 1.93      | large        |      |
+| 3 | Speciesversicolor | \-1.60 | \-1.98  | \-1.22   | 0.00 | \-1.93    | large        |      |
+| 4 | Speciesvirginica  | \-2.12 | \-2.66  | \-1.58   | 0.00 | \-2.56    | large        |      |
+| 6 | R2                |        |         |          |      |           |              | 0.84 |
+| 7 | R2\_adj           |        |         |          |      |           |              | 0.83 |
 
 ``` r
 to_fulltable(r)
 ```
 
-| Parameter         | beta   | SE   | t      | DoF\_residual | CI\_low | CI\_high | p    | Std\_beta | Std\_SE | Std\_CI\_low | Std\_CI\_high |
-| :---------------- | :----- | :--- | :----- | :------------ | :------ | :------- | :--- | :-------- | :------ | :----------- | :------------ |
-| (Intercept)       | 3.68   | 0.11 | 34.72  | 146           | 3.47    | 3.89     | 0.00 | 1.50      | 0.19    | 1.12         | 1.87          |
-| Petal.Length      | 0.90   | 0.06 | 13.96  | 146           | 0.78    | 1.03     | 0.00 | 1.93      | 0.14    | 1.66         | 2.20          |
-| Speciesversicolor | \-1.60 | 0.19 | \-8.28 | 146           | \-1.98  | \-1.22   | 0.00 | \-1.93    | 0.23    | \-2.40       | \-1.47        |
-| Speciesvirginica  | \-2.12 | 0.27 | \-7.74 | 146           | \-2.66  | \-1.58   | 0.00 | \-2.56    | 0.33    | \-3.21       | \-1.90        |
+|    | Parameter         | beta   | SE   | CI\_low | CI\_high | t      | DoF\_residual | p    | Std\_beta | Std\_SE | Std\_CI\_low | Std\_CI\_high | Effect\_Size | Fit    |
+| -- | :---------------- | :----- | :--- | :------ | :------- | :----- | :------------ | :--- | :-------- | :------ | :----------- | :------------ | :----------- | :----- |
+| 1  | (Intercept)       | 3.68   | 0.11 | 3.47    | 3.89     | 34.72  | 146           | 0.00 | 1.50      | 0.19    | 1.12         | 1.87          | large        |        |
+| 2  | Petal.Length      | 0.90   | 0.06 | 0.78    | 1.03     | 13.96  | 146           | 0.00 | 1.93      | 0.14    | 1.66         | 2.20          | large        |        |
+| 3  | Speciesversicolor | \-1.60 | 0.19 | \-1.98  | \-1.22   | \-8.28 | 146           | 0.00 | \-1.93    | 0.23    | \-2.40       | \-1.47        | large        |        |
+| 4  | Speciesvirginica  | \-2.12 | 0.27 | \-2.66  | \-1.58   | \-7.74 | 146           | 0.00 | \-2.56    | 0.33    | \-3.21       | \-1.90        | large        |        |
+| 6  | AIC               |        |      |         |          |        |               |      |           |         |              |               |              | 106.23 |
+| 7  | BIC               |        |      |         |          |        |               |      |           |         |              |               |              | 121.29 |
+| 8  | R2                |        |      |         |          |        |               |      |           |         |              |               |              | 0.84   |
+| 9  | F                 |        |      |         |          |        |               |      |           |         |              |               |              | 249.40 |
+| 10 | DoF               |        |      |         |          |        |               |      |           |         |              |               |              | 3.00   |
+| 11 | DoF\_residual     |        |      |         |          |        |               |      |           |         |              |               |              | 146.00 |
+| 12 | p                 |        |      |         |          |        |               |      |           |         |              |               |              | 0.00   |
+| 13 | R2\_adj           |        |      |         |          |        |               |      |           |         |              |               |              | 0.83   |
 
 ## Credits
 
@@ -228,8 +238,3 @@ package as following:
 
   - Makowski, (2019). *Automated reporting of statistical models in R*.
     CRAN. doi: .
-
-Please remember that parts of the code in this package were inspired
-(*or shamelessly copied*) from other great packages, such as
-[sjstats](https://github.com/strengejacke/sjstats). Please consider
-citing them\!

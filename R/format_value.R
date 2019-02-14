@@ -22,7 +22,7 @@ format_value <- function(x, digits = 2) {
 #' @inherit format_value
 #' @export
 format_value_unless_integers <- function(x, digits = 2) {
-  if (!all(is.int(x))) {
+  if (!all(is.int(na.omit(x)))) {
     x <- format_value(x, digits = digits)
   }
   return(x)
