@@ -9,11 +9,8 @@ model_table(model, ...)
 \arguments{
 \item{model}{Statistical Model.}
 
-\item{...}{Arguments passed to or from other methods (see \link{model_parameters} and \link{model_performance}).}
+\item{...}{Arguments passed to or from other methods.}
 }
 \description{
-Model table. See the documentation for your object's class:
-\itemize{
- \item{\link[=model_table.lm]{lm}}
- }
+Model table
 }

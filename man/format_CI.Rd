@@ -4,14 +4,14 @@
 \alias{format_CI}
 \title{Confidence/Credible Interval (CI) Formatting}
 \usage{
-format_CI(CI_low, CI_high, CI = 95, digits = 2)
+format_CI(CI_low, CI_high, ci = 0.95, digits = 2)
 }
 \arguments{
 \item{CI_low}{Lower CI bound.}
 
 \item{CI_high}{Upper CI bound.}
 
-\item{CI}{CI level in percentage.}
+\item{ci}{CI level in percentage.}
 
 \item{digits}{Number of significant digits.}
 }
@@ -19,7 +19,7 @@ format_CI(CI_low, CI_high, CI = 95, digits = 2)
 Confidence/Credible Interval (CI) Formatting
 }
 \examples{
-format_CI(1.20, 3.57, CI = 90)
+format_CI(1.20, 3.57, ci = 90)
 }
 \author{
 \href{https://dominiquemakowski.github.io/}{Dominique Makowski}

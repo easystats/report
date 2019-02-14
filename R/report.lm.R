@@ -4,6 +4,7 @@
 #'
 #' @param model Object of class \link{lm}.
 #' @param effsize Compute standardized parameters and interpret them using a set of rules. Can be "cohen1988" (default), "sawilowsky2009", NULL, or a custom set of \link{rules}.
+#' @param ci Confidence Interval (CI) level. Default to 0.95 (95\%).
 #' @param ... Arguments passed to or from other methods (see \link{model_parameters} and \link{model_performance}).
 #'
 #' @examples
@@ -13,7 +14,7 @@
 #' @importFrom parameters model_parameters
 #' @importFrom performance model_performance
 #' @export
-model_values.lm <- function(model, effsize = "cohen1988", ...) {
+model_values.lm <- function(model, effsize = "cohen1988", ci=0.95, ...) {
 
   # Information
   out <- list()
@@ -21,15 +22,17 @@ model_values.lm <- function(model, effsize = "cohen1988", ...) {
 
   # Tables
   if(!is.null(effsize)){
-    out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ...)
+    out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ci=ci, ...)
     out$table_parameters$Effect_Size <- interpret_d(out$table_parameters$Std_beta, rules=effsize)
   } else{
-    out$table_parameters <- parameters::model_parameters(model, ...)
+    out$table_parameters <- parameters::model_parameters(model, ci=ci, ...)
   }
   out$table_performance <- performance::model_performance(model, ...)
   out$table_parameters$Parameter <- as.character(out$table_parameters$Parameter)
 
 
+  # Text
+  out$text_params <- model_text_parameters_lm(out$table_parameters, effsize = effsize, ci=ci, ...)
 
   # tables to values
   out$parameters <- list()
@@ -54,53 +57,13 @@ model_values.lm <- function(model, effsize = "cohen1988", ...) {
 
 
 
-#' Create Tables for Linear Models
-#
-#' @param model Object of class \link{lm}.
-#' @param performance Add performance metrics on table.
-#' @param ... Arguments passed to or from other methods (see \link{model_parameters} and \link{model_performance}).
-#'
-#' @examples
-#' model <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
-#' model_table(model)$table
-#' @importFrom parameters model_parameters
-#' @export
-model_table.lm <- function(model, performance=TRUE, ...){
 
-  if(!inherits(model, "values_lm")){
-    model <- model_values(model, ...)
-    }
 
-  table_full <- model$table_parameters
-  table <- table_full
-  table <- table[, colnames(table) %in% c("Parameter", "beta", "CI_low", "CI_high", "p", "Std_beta", "Effect_Size")]
 
-  if(performance){
-    # Full ----
-    perf <- data.frame(
-      "Parameter" = colnames(model$table_performance),
-      "Fit" = as.numeric(model$table_performance[1, ]),
-      stringsAsFactors = FALSE)
-    table_full <- dplyr::full_join(table_full, perf, by="Parameter")
-    # Mini ----
-    perf <- data.frame(
-      "Parameter" = colnames(model$table_performance),
-      "Fit" = as.numeric(model$table_performance[1, ]),
-      stringsAsFactors = FALSE) %>%
-      dplyr::filter_("Parameter %in% c('R2', 'R2_adj')")
-    table <- dplyr::full_join(table, perf, by="Parameter")
-  }
 
-  class(table_full) <- c("report_table", class(table_full))
-  class(table) <- c("report_table", class(table))
 
-  out <- list("table_full" = table_full,
-              "table" = table)
-  return(out)
-}
 
-#' @export
-model_table.values_lm <- model_table.lm
+
 
 
 
@@ -201,7 +164,7 @@ model_table.values_lm <- model_table.lm
 #' }
 #' #' @export
 #' model_description.values_lm <- model_description.lm
-#'
+
 #'
 #'
 #'

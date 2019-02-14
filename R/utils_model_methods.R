@@ -1,13 +1,7 @@
 #' Model Values
 #'
-#' model values See the documentation for your object's class:
-#' \itemize{
-#'  \item{\link[=model_values.lm]{lm}}
-#'  }
-#'
 #' @param model Statistical Model.
 #' @param ... Arguments passed to or from other methods.
-#'
 #'
 #' @export
 model_values <- function(model, ...) {
@@ -18,14 +12,8 @@ model_values <- function(model, ...) {
 
 #' Model table
 #'
-#' Model table. See the documentation for your object's class:
-#' \itemize{
-#'  \item{\link[=model_table.lm]{lm}}
-#'  }
-#'
 #' @param model Statistical Model.
-#' @param ... Arguments passed to or from other methods (see \link{model_parameters} and \link{model_performance}).
-#'
+#' @param ... Arguments passed to or from other methods.
 #'
 #' @export
 model_table <- function(model, ...) {
@@ -34,6 +22,26 @@ model_table <- function(model, ...) {
 
 
 
+#' Model text
+#'
+#' @param model Statistical Model.
+#' @param ... Arguments passed to or from other methods.
+#'
+#' @export
+model_text <- function(model, ...) {
+  UseMethod("model_text")
+}
+
+
+#' #' Parameters text
+#' #'
+#' #' @param model Statistical Model.
+#' #' @param ... Arguments passed to or from other methods.
+#' #'
+#' #' @export
+#' model_text_parameters <- function(model, ...) {
+#'   UseMethod("model_text_parameters")
+#' }
 #' #' Retrieve Data
 #' #'
 #' #' Attempts at retrieving data from model. See the documentation for your object's class:
@@ -102,7 +110,7 @@ model_table <- function(model, ...) {
 #' #'  }
 #' #'
 #' #' @param model Statistical Model.
-#' #' @param ... Arguments passed to or from other methods.
+#' #' @param ... Arguments passed to or from other methods (see \link{model_parameters} and \link{model_performance}).
 #' #'
 #' #' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
 #' #'
