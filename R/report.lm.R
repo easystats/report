@@ -8,7 +8,7 @@
 #' @importFrom parameters model_parameters
 #' @importFrom performance model_performance
 #' @export
-model_values.lm <- function(model, effsize = "cohen1988", ci = 0.95, performance_in_table = TRUE, ...) {
+model_values.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", ...) {
 
   # Information
   out <- list()
@@ -16,22 +16,25 @@ model_values.lm <- function(model, effsize = "cohen1988", ci = 0.95, performance
 
   # Core Tables
   if (!is.null(effsize)) {
-    out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ci = ci, ...)
+    if(standardize == FALSE){
+      warning("The effect sizes are computed from standardized coefficients. Setting `standardize` to TRUE.")
+    }
+    out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ci = ci, bootstrap = FALSE, ...)
     out$table_parameters$Effect_Size <- interpret_d(out$table_parameters$Std_beta, rules = effsize)
   } else {
-    out$table_parameters <- parameters::model_parameters(model, ci = ci, ...)
+    out$table_parameters <- parameters::model_parameters(model, ci = ci, standardize=standardize, bootstrap = FALSE,  ...)
   }
-  out$table_performance <- performance::model_performance(model, ...)
+  out$table_performance <- performance::model_performance(model, metrics = performance_metrics, ...)
   out$table_parameters$Parameter <- as.character(out$table_parameters$Parameter)
 
 
   # Text
-  modeltext <- model_text(model, performance = out$table_performance, parameters = out$table_parameters, ci = ci, effsize = effsize, ...)
+  modeltext <- model_text_lm(model, performance = out$table_performance, parameters = out$table_parameters, ci = ci, effsize = effsize, ...)
   out$text <- modeltext$text
   out$text_full <- modeltext$text_full
 
   # Tables
-  modeltable <- model_table(model, out$table_parameters, out$table_performance, performance_in_table = performance_in_table, ...)
+  modeltable <- model_table_lm(model, out$table_parameters, out$table_performance, performance_in_table = performance_in_table, ...)
   out$table <- modeltable$table
   out$table_full <- modeltable$table_full
 
@@ -86,10 +89,12 @@ model_values.lm <- function(model, effsize = "cohen1988", ci = 0.95, performance
 #' Create a report of a linear model.
 #'
 #' @param model Object of class \link{lm}.
-#' @param effsize Compute standardized parameters and interpret them using a set of rules. Can be "cohen1988" (default), "sawilowsky2009", NULL, or a custom set of \link{rules}.
 #' @param ci Confidence Interval (CI) level. Default to 0.95 (95\%).
+#' @param standardize Standardized coefficients. See \code{\link[parameters:model_parameters.lm]{model_parameters}}.
+#' @param effsize Interpret the standardized parameters using a set of rules. Can be "cohen1988" (default), "sawilowsky2009", NULL, or a custom set of \link{rules}.
 #' @param performance_in_table Add performance metrics on table.
-#' @param ... Arguments passed to or from other methods (see \link{model_parameters} and \link{model_performance}).
+#' @param performance_metrics See \code{\link[performance:model_performance.lm]{model_performance}}.
+#' @param ... Arguments passed to or from other methods.
 #'
 #' @examples
 #' model <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
@@ -99,8 +104,15 @@ model_values.lm <- function(model, effsize = "cohen1988", ci = 0.95, performance
 #' to_table(r)
 #' to_fulltable(r)
 #' @export
-report.lm <- function(model, ci = 0.95, effsize = "cohen1988", performance_in_table = TRUE, ...) {
-  values <- model_values(model, ci = ci, effsize = effsize, performance_in_table = performance_in_table, ...)
+report.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", ...) {
+
+  values <- model_values(model,
+                         ci = ci,
+                         standardize = standardize,
+                         effsize = effsize,
+                         performance_in_table = performance_in_table,
+                         performance_metrics = performance_metrics,
+                         ...)
 
 
   out <- list(

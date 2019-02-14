@@ -4,19 +4,24 @@
 \alias{model_values.lm}
 \title{Linear Models Values}
 \usage{
-\method{model_values}{lm}(model, effsize = "cohen1988", ci = 0.95,
-  performance_in_table = TRUE, ...)
+\method{model_values}{lm}(model, ci = 0.95, standardize = TRUE,
+  effsize = "cohen1988", performance_in_table = TRUE,
+  performance_metrics = "all", ...)
 }
 \arguments{
 \item{model}{Object of class \link{lm}.}
 
-\item{effsize}{Compute standardized parameters and interpret them using a set of rules. Can be "cohen1988" (default), "sawilowsky2009", NULL, or a custom set of \link{rules}.}
-
 \item{ci}{Confidence Interval (CI) level. Default to 0.95 (95\%).}
+
+\item{standardize}{Standardized coefficients. See \code{\link[parameters:model_parameters.lm]{model_parameters}}.}
+
+\item{effsize}{Interpret the standardized parameters using a set of rules. Can be "cohen1988" (default), "sawilowsky2009", NULL, or a custom set of \link{rules}.}
 
 \item{performance_in_table}{Add performance metrics on table.}
 
-\item{...}{Arguments passed to or from other methods (see \link{model_parameters} and \link{model_performance}).}
+\item{performance_metrics}{See \code{\link[performance:model_performance.lm]{model_performance}}.}
+
+\item{...}{Arguments passed to or from other methods.}
 }
 \description{
 Extract all values of linear models.

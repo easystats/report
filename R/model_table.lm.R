@@ -6,12 +6,8 @@
 #' @param performance_in_table Add performance metrics on table.
 #' @param ... Arguments passed to or from other methods (see \link{model_parameters} and \link{model_performance}).
 #'
-#' @examples
-#' model <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
-#' model_table(model)$table
-#' @importFrom parameters model_parameters
-#' @export
-model_table.lm <- function(model, parameters, performance, performance_in_table = TRUE, ...) {
+#' @keywords internal
+model_table_lm <- function(model, parameters, performance, performance_in_table = TRUE, ...) {
   table_full <- parameters
   table <- table_full
   table <- table[, colnames(table) %in% c("Parameter", "beta", "CI_low", "CI_high", "p", "Std_beta", "Effect_Size")]

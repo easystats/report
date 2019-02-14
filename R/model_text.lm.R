@@ -219,8 +219,8 @@ model_text_parameters_lm <- function(parameters, ci = 0.95, effsize = "cohen1988
 
 
 
-#' @export
-model_text.lm <- function(model, performance, parameters, ci = 0.95, effsize = "cohen1988", ...) {
+#' @keywords internal
+model_text_lm <- function(model, performance, parameters, ci = 0.95, effsize = "cohen1988", ...) {
   text_description <- model_text_description_lm(model, effsize = effsize)
   text_performance <- model_text_performance_lm(performance)
   text_initial <- model_text_initial_lm(parameters, ci = ci)
