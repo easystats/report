@@ -18,7 +18,7 @@ format_value <- function(x, digits = 2) {
 
 
 
-
+#' @importFrom stats na.omit
 #' @inherit format_value
 #' @export
 format_value_unless_integers <- function(x, digits = 2) {

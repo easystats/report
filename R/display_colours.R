@@ -1,10 +1,10 @@
 #' @keywords internal
-.rstudio_with_ansi_support <- function ()
-{
-  if (Sys.getenv("RSTUDIO", "") == "")
+.rstudio_with_ansi_support <- function() {
+  if (Sys.getenv("RSTUDIO", "") == "") {
     return(FALSE)
+  }
   if ((cols <- Sys.getenv("RSTUDIO_CONSOLE_COLOR", "")) !=
-      "" && !is.na(as.numeric(cols))) {
+    "" && !is.na(as.numeric(cols))) {
     return(TRUE)
   }
   requireNamespace("rstudioapi", quietly = TRUE) && rstudioapi::isAvailable() &&
@@ -15,8 +15,7 @@
 
 
 #' @keywords internal
-.supports_color <- function ()
-{
+.supports_color <- function() {
   enabled <- getOption("crayon.enabled")
   if (!is.null(enabled)) {
     return(isTRUE(enabled))
@@ -27,7 +26,7 @@
   if (!isatty(stdout())) {
     return(FALSE)
   }
-  if (Sys.info()['sysname'] == "windows") {
+  if (Sys.info()["sysname"] == "windows") {
     if (Sys.getenv("ConEmuANSI") == "ON") {
       return(TRUE)
     }
@@ -48,60 +47,66 @@
     return(FALSE)
   }
   grepl("^screen|^xterm|^vt100|color|ansi|cygwin|linux", Sys.getenv("TERM"),
-        ignore.case = TRUE, perl = TRUE)
+    ignore.case = TRUE, perl = TRUE
+  )
 }
 
 
 
 #' @keywords internal
 .red <- function(x) {
-  if (.supports_color())
+  if (.supports_color()) {
     x <- paste0("\033[31m", as.character(x), "\033[39m")
+  }
   x
 }
 
 #' @keywords internal
 .green <- function(x) {
-  if (.supports_color())
+  if (.supports_color()) {
     x <- paste0("\033[32m", as.character(x), "\033[39m")
+  }
   x
 }
 
 #' @keywords internal
 .yellow <- function(x) {
-  if (.supports_color())
+  if (.supports_color()) {
     x <- paste0("\033[33m", as.character(x), "\033[39m")
+  }
   x
 }
 
 #' @keywords internal
 .violet <- function(x) {
-  if (.supports_color())
+  if (.supports_color()) {
     x <- paste0("\033[35m", as.character(x), "\033[39m")
+  }
   x
 }
 
 #' @keywords internal
 .cyan <- function(x) {
-  if (.supports_color())
+  if (.supports_color()) {
     x <- paste0("\033[36m", as.character(x), "\033[39m")
+  }
   x
 }
 
 
 #' @keywords internal
-.colour <- function(x, colour="red"){
-  if(colour=="red"){
+.colour <- function(x, colour = "red") {
+  if (colour == "red") {
     return(.red(x))
-  } else if(colour=="yellow"){
+  } else if (colour == "yellow") {
     return(.yellow(x))
-  } else if(colour=="green") {
+  } else if (colour == "green") {
     return(.green(x))
-  } else if(colour=="violet") {
+  } else if (colour == "violet") {
     return(.violet(x))
-  } else if(colour=="cyan") {
+  } else if (colour == "cyan") {
     return(.cyan(x))
-  } else{
+  } else {
     warning(paste0("`color` ", colour, " not yet supported."))
   }
 }
@@ -112,8 +117,8 @@
 
 #' Colour a column (Exported for test purposes)
 #' @keywords internal
-.colour_columns <- function(x, names, colour="red"){
-  x[, c(names)] <- sapply(x[, c(names)], .colour, colour=colour)
+.colour_columns <- function(x, names, colour = "red") {
+  x[, c(names)] <- sapply(x[, c(names)], .colour, colour = colour)
   return(x)
 }
 
@@ -121,15 +126,15 @@
 
 #' Colour a column (Exported for test purposes)
 #' @keywords internal
-.colour_column_if <- function(x, name, condition=`>`, threshold=0, colour_if="green", colour_else="red"){
-  if(name %in% names(x)){
+.colour_column_if <- function(x, name, condition = `>`, threshold = 0, colour_if = "green", colour_else = "red") {
+  if (name %in% names(x)) {
     x_if <- which(condition(x[, c(name)], threshold))
     x_else <- which(!condition(x[, c(name)], threshold))
 
-    if(!is.null(colour_if)){
+    if (!is.null(colour_if)) {
       x[, c(name)][x_if] <- .colour(x[, c(name)][x_if], colour_if)
     }
-    if(!is.null(colour_else)){
+    if (!is.null(colour_else)) {
       x[, c(name)][x_else] <- .colour(x[, c(name)][x_else], colour_else)
     }
   }
