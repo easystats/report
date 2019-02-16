@@ -1,45 +1,4 @@
 #' @keywords internal
-model_text_description_lm <- function(model, effsize = "effsize") {
-  text <- paste0(
-    "We fitted a linear model to predict ",
-    insight::find_response(model),
-    " with ",
-    format_text_collapse(insight::find_predictors(model, effects = "fixed", flatten = TRUE))
-  )
-  text_full <- paste0(text, " (formula = ", format(insight::find_formula(model)$conditional), ").")
-  text <- paste0(text, ".")
-
-  # Effect size
-  if (!is.null(effsize)) {
-    if (is.character(effsize)) {
-      effsize_name <- ifelse(effsize == "cohen1988", "Cohen's (1988)",
-        ifelse(effsize == "sawilowsky2009", "Savilowsky's (2009)", effsize)
-      )
-      text_full <- paste0(text_full, " Effect sizes were labelled following ", effsize_name, " recommendations.")
-    } else {
-      text_full <- paste0(text_full, " Effect sizes were labelled following a custom set of rules.")
-    }
-  }
-
-  out <- list(
-    "text" = text,
-    "text_full" = text_full
-  )
-  return(out)
-}
-
-
-
-
-
-
-
-
-
-
-
-
-#' @keywords internal
 model_text_performance_lm <- function(performance) {
 
   # R2
@@ -141,7 +100,7 @@ model_text_parameters_lm <- function(parameters, ci = 0.95, effsize = "cohen1988
   parameters <- parameters[parameters$Parameter != "(Intercept)", ]
 
   # Effect size text
-  if ("Std_beta" %in% names(parameters)) {
+  if (!is.null(effsize) & "Std_beta" %in% names(parameters)) {
     parameters$effsize_text <- paste0(
       " and ",
       interpret_d(parameters$Std_beta, rules = effsize),
@@ -220,8 +179,8 @@ model_text_parameters_lm <- function(parameters, ci = 0.95, effsize = "cohen1988
 
 
 #' @keywords internal
-model_text_lm <- function(model, performance, parameters, ci = 0.95, effsize = "cohen1988", ...) {
-  text_description <- model_text_description_lm(model, effsize = effsize)
+model_text_lm <- function(model, performance, parameters, ci = 0.95, effsize = "cohen1988", boostrap = FALSE, ...) {
+  text_description <- model_text_description(model, effsize = effsize, boostrap = boostrap)
   text_performance <- model_text_performance_lm(performance)
   text_initial <- model_text_initial_lm(parameters, ci = ci)
   text_parameters <- model_text_parameters_lm(parameters, ci = ci, effsize = effsize)

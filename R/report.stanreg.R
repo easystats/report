@@ -1,14 +1,14 @@
-#' Linear Models Values
+#' Bayesian Models Values
 #'
-#' Extract all values of linear models.
+#' Extract all values of Bayesian models.
 #'
-#' @inheritParams report.lm
+#' @inheritParams report.stanreg
 #'
 #' @importFrom insight model_info
 #' @importFrom parameters model_parameters
 #' @importFrom performance model_performance
 #' @export
-model_values.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", boostrap = FALSE, ...) {
+model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize = NULL, performance_in_table = TRUE, performance_metrics = "all", estimate = "median", ...) {
 
   # Information
   out <- list()
@@ -19,18 +19,22 @@ model_values.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "coh
     if(standardize == FALSE){
       warning("The effect sizes are computed from standardized coefficients. Setting `standardize` to TRUE.")
     }
-    out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ci = ci, bootstrap = FALSE, ...)
-    out$table_parameters$Effect_Size <- interpret_d(out$table_parameters$Std_beta, rules = effsize)
+    out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ci = ci, estimate = tolower(estimate), ...)
+    effsize_df <- as.data.frame(sapply(out$table_parameters[names(out$table_parameters) %in% c(paste0("Std_", stringr::str_to_title(estimate)))], interpret_d, rules = effsize))
+    if(ncol(effsize_df > 1)){
+      names(effsize_df) <- paste0("Effect_Size_", stringr::str_remove_all(names(effsize_df), "Std_"))
+      out$table_parameters <- cbind(out$table_parameters, effsize_df)
+    } else{
+      out$table_parameters$Effect_Size <- effsize_df[1]
+    }
   } else {
-    out$table_parameters <- parameters::model_parameters(model, ci = ci, standardize=standardize, bootstrap = FALSE,  ...)
+    out$table_parameters <- parameters::model_parameters(model, ci = ci, standardize=standardize, estimate = estimate,  ...)
   }
   out$table_parameters$Parameter <- as.character(out$table_parameters$Parameter)
   out$table_performance <- performance::model_performance(model, metrics = performance_metrics, ...)
 
-
-
   # Text
-  modeltext <- model_text_lm(model, performance = out$table_performance, parameters = out$table_parameters, ci = ci, effsize = effsize, ...)
+  modeltext <- model_text_bayesian(model, performance = out$table_performance, parameters = out$table_parameters, ci = ci, effsize = effsize, ...)
   out$text <- modeltext$text
   out$text_full <- modeltext$text_full
 
@@ -105,7 +109,7 @@ model_values.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "coh
 #' to_table(r)
 #' to_fulltable(r)
 #' @export
-report.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", boostrap=FALSE, ...) {
+report.stanreg <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", ...) {
 
   values <- model_values(model,
                          ci = ci,

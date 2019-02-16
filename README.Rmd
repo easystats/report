@@ -43,7 +43,6 @@ options(knitr.kable.NA = '',
 `report`'s primary goal is to fill the gap between R's output and the formatted result description of your manuscript, with the automated use of **best practices** guidelines (*e.g.,* [APA](https://www.apastyle.org/)'s style guide), ensuring **standardization** and **quality** of results reporting.
 
 
-**Note: this package is the heir and successor to the [psycho](https://github.com/easystats/psycho.R) package.**
 
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}

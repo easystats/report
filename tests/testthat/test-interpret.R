@@ -44,3 +44,14 @@ test_that("interpret_d", {
   testthat::expect_equal(interpret_d(0.6, rules = rules(c(0.5), c("A", "B"))), "B")
   testthat::expect_error(interpret_d(0.6, rules = "DUPA"))
 })
+
+
+
+context("interpret_rope")
+test_that("interpret_rope", {
+  testthat::expect_equal(interpret_rope(0, ci = 0.9), "significant")
+  testthat::expect_equal(interpret_rope(c(50, 100), ci = 0.9), c("not significant", "negligible"))
+  testthat::expect_equal(interpret_rope(c(98, 99.1), ci=1), c("probably negligible", "negligible"))
+  testthat::expect_equal(interpret_rope(0.6, rules = rules(c(0.5), c("A", "B"))), "B")
+  testthat::expect_error(interpret_rope(0.6, rules = "DUPA"))
+})

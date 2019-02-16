@@ -6,7 +6,7 @@
 \usage{
 \method{report}{lm}(model, ci = 0.95, standardize = TRUE,
   effsize = "cohen1988", performance_in_table = TRUE,
-  performance_metrics = "all", ...)
+  performance_metrics = "all", boostrap = FALSE, ...)
 }
 \arguments{
 \item{model}{Object of class \link{lm}.}
