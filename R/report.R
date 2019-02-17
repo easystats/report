@@ -203,8 +203,8 @@ print.report_table <- function(x, digits = 2, ...) {
     .colour_column_if("p", condition = `<`, threshold = 0.05, colour_if = "bold", colour_else = NULL, digits = digits) %>%
     .colour_column_if("Pd", condition = `>`, threshold = 95, colour_if = "yellow", colour_else = NULL, digits = digits) %>%
     .colour_column_if("Fit", condition = `>`, threshold = 0, colour_if = "cyan", colour_else = "cyan", digits = digits) %>%
-    # .colour_columns("Fit", colour = "cyan") %>%
     dplyr::mutate_if(is.numeric, format_value_unless_integers, digits = digits)
+
   x[is.na(x)] <- ""
   .display(x)
 }

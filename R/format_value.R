@@ -23,16 +23,11 @@ format_value <- function(x, digits = 2) {
 #' @inherit format_value
 #' @export
 format_value_unless_integers <- function(x, digits = 2) {
-  if (is.numeric(x)) {
-    if (!all(is.int(stats::na.omit(x)))) {
-      x <- format_value(x, digits = digits)
-    }
-    # if(space_before_positive){
-    #   x <- as.character(x)
-    #   x[!startsWith(x, "-")] <- paste0(" ", x[!startsWith(x, "-")])
-    # }
+  if (is.numeric(x) && !all(is.int(stats::na.omit(x)))) {
+    format_value(x, digits = digits)
+  } else {
+    x
   }
-  return(x)
 }
 
 
