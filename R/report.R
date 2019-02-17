@@ -184,10 +184,9 @@ as.list.report <- to_values
 #'
 #' @export
 print.report_table <- function(x, digits = 2, ...) {
-  x <- dplyr::mutate_if(x, is.numeric, format_value, digits = digits)
-  x[is.na(x)] <- ""
 
-  x %>%
+
+  x <- x %>%
     .colour_column_if("beta", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red") %>%
     .colour_column_if("Median", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red") %>%
     .colour_column_if("Mean", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red") %>%
@@ -199,5 +198,7 @@ print.report_table <- function(x, digits = 2, ...) {
     .colour_column_if("p", condition = `<`, threshold = 0.05, colour_if = "yellow", colour_else = NULL) %>%
     .colour_column_if("Pd", condition = `>`, threshold = 95, colour_if = "yellow", colour_else = NULL) %>%
     .colour_columns("Fit", colour = "cyan") %>%
-    .display()
+    dplyr::mutate_if(is.numeric, format_value_unless_integers, digits = digits)
+  x[is.na(x)] <- ""
+  .display(x)
 }

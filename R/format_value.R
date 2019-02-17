@@ -9,24 +9,33 @@
 #' format_value(1.20)
 #' format_value(1.2)
 #' format_value(1.2012313)
-#' format_value(c(0.0045, 234))
+#' format_value(c(0.0045, 234, -23))
 #' @export
 format_value <- function(x, digits = 2) {
-  x <- ifelse(is.na(x), NA, trimws(format(round(x, digits), nsmall = digits)))
+  if(is.numeric(x)){
+    x <- ifelse(is.na(x), NA, trimws(format(round(x, digits), nsmall = digits)))
+  }
   return(x)
 }
-
 
 
 #' @importFrom stats na.omit
 #' @inherit format_value
 #' @export
 format_value_unless_integers <- function(x, digits = 2) {
-  if (!all(is.int(na.omit(x)))) {
-    x <- format_value(x, digits = digits)
+  if(is.numeric(x)){
+    if (!all(is.int(na.omit(x)))) {
+      x <- format_value(x, digits = digits)
+    }
+    # if(space_before_positive){
+    #   x <- as.character(x)
+    #   x[!startsWith(x, "-")] <- paste0(" ", x[!startsWith(x, "-")])
+    # }
   }
   return(x)
 }
+
+
 
 
 

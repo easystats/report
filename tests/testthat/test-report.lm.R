@@ -17,4 +17,10 @@ test_that("report.lm", {
 
   testthat::expect_warning(report(circus::download_model("lm_3"), standardize=FALSE))
 
+  r <- report(circus::download_model("lm_4"))
+  testthat::expect_equal(nrow(to_table(r)), 9)
+
+  r <- report(circus::download_model("lm_5"))
+  testthat::expect_equal(nrow(to_table(r)), 9)
+
 })
