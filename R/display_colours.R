@@ -56,7 +56,7 @@
 #' @keywords internal
 .red <- function(x) {
   if (.supports_color()) {
-    x[!is.na(x)] <- paste0("\033[31m", format_value_unless_integers(x[!is.na(x)], digits = 2), "\033[39m")
+    x[!is.na(x)] <- paste0("\033[31m", x[!is.na(x)], "\033[39m")
   }
   x
 }
@@ -64,7 +64,7 @@
 #' @keywords internal
 .green <- function(x) {
   if (.supports_color()) {
-    x[!is.na(x)] <- paste0("\033[32m", format_value_unless_integers(x[!is.na(x)], digits = 2), "\033[39m")
+    x[!is.na(x)] <- paste0("\033[32m", x[!is.na(x)], "\033[39m")
   }
   x
 }
@@ -72,7 +72,7 @@
 #' @keywords internal
 .yellow <- function(x) {
   if (.supports_color()) {
-    x[!is.na(x)] <- paste0("\033[33m", format_value_unless_integers(x[!is.na(x)], digits = 2), "\033[39m")
+    x[!is.na(x)] <- paste0("\033[33m", x[!is.na(x)], "\033[39m")
   }
   x
 }
@@ -80,7 +80,7 @@
 #' @keywords internal
 .violet <- function(x) {
   if (.supports_color()) {
-    x[!is.na(x)] <- paste0("\033[35m", format_value_unless_integers(x[!is.na(x)], digits = 2), "\033[39m")
+    x[!is.na(x)] <- paste0("\033[35m", x[!is.na(x)], "\033[39m")
   }
   x
 }
@@ -88,7 +88,7 @@
 #' @keywords internal
 .cyan <- function(x) {
   if (.supports_color()) {
-    x[!is.na(x)] <- paste0("\033[36m", format_value_unless_integers(x[!is.na(x)], digits = 2), "\033[39m")
+    x[!is.na(x)] <- paste0("\033[36m", x[!is.na(x)], "\033[39m")
   }
   x
 }
@@ -136,13 +136,18 @@
     x_if <- which(condition(x[, name], threshold))
     x_else <- which(!condition(x[, name], threshold))
 
+    xnew[, name] <- format(
+      round(x[, name], 2),
+      width = nchar(name),
+      nsmall = 2,
+      justify = "right"
+    )
+
     if (!is.null(colour_if)) {
-      xnew[, name][x_if] <- .colour(x[, name][x_if], colour_if)
+      xnew[, name][x_if] <- .colour(xnew[, name][x_if], colour_if)
     }
     if (!is.null(colour_else)) {
-      xnew[, name][x_else] <- .colour(x[, name][x_else], colour_else)
-    } else {
-      xnew[, name][x_else] <- format_value_unless_integers(x[, name][x_else])
+      xnew[, name][x_else] <- .colour(xnew[, name][x_else], colour_else)
     }
   }
 
@@ -158,8 +163,7 @@
     "(?:(?:[0-9]{1,3})?(?:(?:;[0-9]{0,3})*)?[A-M|f-m])",
     "|\\x{001b}[A-M]"
   )
-  color_cells <- grepl(ansi_regex, x, perl = TRUE)
-  return(color_cells)
+  grepl(ansi_regex, x, perl = TRUE)
 }
 
 
@@ -172,7 +176,5 @@
     "(?:(?:[0-9]{1,3})?(?:(?:;[0-9]{0,3})*)?[A-M|f-m])",
     "|\\x{001b}[A-M]"
   )
-  stripped_cells <- gsub(ansi_regex, "", x, perl = TRUE)
-
-  return(stripped_cells)
+  gsub(ansi_regex, "", x, perl = TRUE)
 }
