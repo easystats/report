@@ -3,7 +3,7 @@
 #' @param p Value or vector of p-values.
 #' @param rules Can be "default" or custom set of rules.
 #'
-#' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
+#' 
 #'
 #' @examples
 #' interpret_p(.02)

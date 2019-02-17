@@ -3,7 +3,7 @@
 #' @param x Numeric value.
 #' @param digits Number of significant digits.
 #'
-#' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
+#' 
 #'
 #' @examples
 #' format_value(1.20)

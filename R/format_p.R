@@ -4,7 +4,7 @@
 #' @param stars Add significance stars.
 #' @param stars_only Return only significance stars.
 #'
-#' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
+#' 
 #'
 #' @examples
 #' format_p(.02)

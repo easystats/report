@@ -8,7 +8,7 @@
 #' @param missing_percentage Show missings by number (default) or percentage.
 #' @param ... Arguments passed to or from other methods.
 #'
-#' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
+#' 
 #'
 #' @examples
 #' x <- c("A", "B", "C", "A", "B", "B", "D", "E", "B", "D", "A")
