@@ -11,11 +11,15 @@ Dataframe Pretty Printing
 }
 \examples{
 \dontrun{
-x <- model_parameters(lm(Sepal.Length ~ Species * Sepal.Width, data=iris))
-x <- .colour_column_if(x, name="CI_low", condition = `<`, threshold = 0,
-                       colour_if = "red", colour_else = "green")
-x <- .colour_column_if(x, name="p", condition = `<`, threshold = 0.05,
-                       colour_if = "yellow", colour_else = NULL)
+x <- model_parameters(lm(Sepal.Length ~ Species * Sepal.Width, data = iris))
+x <- .colour_column_if(x,
+  name = "CI_low", condition = `<`, threshold = 0,
+  colour_if = "red", colour_else = "green"
+)
+x <- .colour_column_if(x,
+  name = "p", condition = `<`, threshold = 0.05,
+  colour_if = "yellow", colour_else = NULL
+)
 .display.data.frame(x)
 }
 }

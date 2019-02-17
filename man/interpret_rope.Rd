@@ -17,8 +17,8 @@ interpret_rope(rope_percentage, ci = 0.9, rules = "default")
 ROPE percentage Interpretation
 }
 \examples{
-interpret_rope(0, ci=0.9)
-interpret_rope(c(0.5, 99), ci=1)
+interpret_rope(0, ci = 0.9)
+interpret_rope(c(0.5, 99), ci = 1)
 }
 \references{
 \href{https://easystats.github.io/bayestestR/articles/4_Guidelines.html}{BayestestR's reporting guidelines}

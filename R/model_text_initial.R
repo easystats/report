@@ -10,7 +10,7 @@ model_text_initial_lm <- function(parameters, ci = 0.95, ...) {
   text_full <- paste0(
     "The model's intercept is at ",
     format_value(intercept$beta),
-    "(t(",
+    " (t(",
     format_value_unless_integers(intercept$DoF_residual),
     ") = ",
     format_value(intercept$t),
@@ -33,7 +33,33 @@ model_text_initial_lm <- function(parameters, ci = 0.95, ...) {
 
 
 
+#' @keywords internal
+model_text_initial_logistic <- function(parameters, ci = 0.95, ...) {
+  intercept <- parameters[parameters$Parameter == "(Intercept)", ]
 
+  text <- paste0(
+    "The model's intercept is at ",
+    format_value(intercept$beta),
+    "."
+  )
+  text_full <- paste0(
+    "The model's intercept is at ",
+    format_value(intercept$beta),
+    " (z = ",
+    format_value(intercept$z),
+    ", ",
+    format_ci(intercept$CI_low, intercept$CI_high, ci),
+    ", p ",
+    format_p(intercept$p),
+    ")."
+  )
+
+  out <- list(
+    "text" = text,
+    "text_full" = text_full
+  )
+  return(out)
+}
 
 
 

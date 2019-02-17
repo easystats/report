@@ -65,7 +65,8 @@ model_text_description <- function(model, ci = 0.95, effsize = "effsize", bootst
   if (!is.null(effsize)) {
     if (is.character(effsize)) {
       effsize_name <- ifelse(effsize == "cohen1988", "Cohen's (1988)",
-        ifelse(effsize == "sawilowsky2009", "Savilowsky's (2009)", effsize)
+        ifelse(effsize == "sawilowsky2009", "Savilowsky's (2009)",
+               ifelse(effsize == "chen2010", "Chen's (2010)", effsize))
       )
       text_full <- paste0(text_full, " Effect sizes were labelled following ", effsize_name, " recommendations.")
     } else {

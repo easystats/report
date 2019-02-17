@@ -64,7 +64,8 @@ model_text_performance_logistic <- function(performance, ...) {
   if ("R2_Tjur" %in% names(performance)) {
     text <- paste0(
       "The model's explanatory power (Tjur's R2) is of ",
-      format_value(performance$R2_Tjur)
+      format_value(performance$R2_Tjur),
+      "."
     )
     text_full <- text
   }

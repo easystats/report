@@ -1,9 +1,10 @@
 #' @keywords internal
-model_text_parameters_lm <- function(parameters, ci = 0.95, effsize = "cohen1988", ...) {
+model_text_parameters_lm <- function(model, parameters, ci = 0.95, effsize = "cohen1988", ...) {
   parameters <- parameters[parameters$Parameter != "(Intercept)", ]
 
   # Effect size text
   if (!is.null(effsize) & "Std_beta" %in% names(parameters)) {
+
     parameters$effsize_text <- paste0(
       " and ",
       interpret_d(parameters$Std_beta, rules = effsize),
@@ -53,6 +54,8 @@ model_text_parameters_lm <- function(parameters, ci = 0.95, effsize = "cohen1988
     parameters$significant_full,
     " (beta = ",
     format_value(parameters$beta),
+    ", SE = " ,
+    format_value(parameters$SE),
     ", t(",
     format_value_unless_integers(parameters$DoF_residual),
     ") = ",
@@ -85,6 +88,95 @@ model_text_parameters_lm <- function(parameters, ci = 0.95, effsize = "cohen1988
 
 
 
+#' @keywords internal
+model_text_parameters_logistic <- function(model, parameters, ci = 0.95, effsize = "chen2010", ...) {
+  parameters <- parameters[parameters$Parameter != "(Intercept)", ]
+
+  # Effect size text
+  if (!is.null(effsize) & "Std_beta" %in% names(parameters)) {
+
+    modeltype <- insight::model_info(model)
+    if(modeltype$is_logit){
+      effsize_text <- interpret_odds(parameters$Std_beta, rules = effsize, log=TRUE)
+    } else{
+      effsize_text <- "[NO INTERPRETATION AVAILABLE]"
+    }
+
+
+    parameters$effsize_text <- paste0(
+      " and ",
+      effsize_text,
+      " (Std. beta = ",
+      format_value(parameters$Std_beta),
+      ")."
+    )
+    parameters$effsize_text_full <- paste0(
+      " and ",
+      effsize_text,
+      " (Std. beta = ",
+      format_value(parameters$Std_beta),
+      ", Std. SE = ",
+      format_value(parameters$Std_SE),
+      ", Std. ",
+      format_ci(parameters$Std_CI_low, parameters$Std_CI_high, ci),
+      ")."
+    )
+    parameters$significant_full <- paste0(interpret_direction(parameters$beta), ", ", interpret_p(parameters$p))
+  } else {
+    parameters$effsize_text <- "."
+    parameters$effsize_text_full <- "."
+    parameters$significant_full <- paste0(interpret_direction(parameters$beta), " and ", interpret_p(parameters$p))
+  }
+
+
+  text <- paste0(
+    "  - ",
+    parameters$Parameter,
+    " is ",
+    interpret_p(parameters$p),
+    " (beta = ",
+    format_value(parameters$beta),
+    ", ",
+    format_ci(parameters$CI_low, parameters$CI_high, ci),
+    ", p ",
+    format_p(parameters$p),
+    ")",
+    parameters$effsize_text
+  )
+  text <- paste0(c("\n\nWithin this model: ", text), collapse = "\n")
+
+  text_full <- paste0(
+    "  - ",
+    parameters$Parameter,
+    " is ",
+    parameters$significant_full,
+    " (beta = ",
+    format_value(parameters$beta),
+    ", SE = " ,
+    format_value(parameters$SE),
+    ", z = ",
+    format_value(parameters$z),
+    ", ",
+    format_ci(parameters$CI_low, parameters$CI_high, ci),
+    ", p ",
+    format_p(parameters$p),
+    ")",
+    parameters$effsize_text_full
+  )
+  text_full <- paste0(c("\n\nWithin this model: ", text_full), collapse = "\n")
+
+  out <- list(
+    "text" = text,
+    "text_full" = text_full
+  )
+  return(out)
+}
+
+
+
+
+
+
 
 
 
@@ -94,7 +186,7 @@ model_text_parameters_lm <- function(parameters, ci = 0.95, effsize = "cohen1988
 
 
 #' @keywords internal
-model_text_parameters_bayesian <- function(parameters, ci = 0.90, rope_full = TRUE, effsize = "cohen1988", ...) {
+model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_full = TRUE, effsize = "cohen1988", ...) {
   if (rope_full) {
     rope_ci <- 1
   } else {
@@ -222,9 +314,18 @@ model_text_parameters_bayesian <- function(parameters, ci = 0.90, rope_full = TR
       text <- paste0(text, " and ")
     }
 
+    modeltype <- insight::model_info(model)
+    if(modeltype$is_logit){
+      effsize_text <- interpret_odds(parameters[[estimate_name]], rules = effsize, log=TRUE)
+    } else if (modeltype$is_linear) {
+      effsize_text <- interpret_d(parameters[[estimate_name]], rules = effsize)
+    } else{
+      effsize_text <- "[NO INTERPRETATION AVAILABLE]"
+    }
+
     text <- paste0(
       text,
-      interpret_d(parameters[[estimate_name]], rules = effsize),
+      effsize_text,
       " (Std. ",
       estimate_name,
       " = ",
@@ -235,7 +336,7 @@ model_text_parameters_bayesian <- function(parameters, ci = 0.90, rope_full = TR
     if (estimate_name == "Median") {
       text_full <- paste0(
         text_full,
-        interpret_d(parameters[[estimate_name]], rules = effsize),
+        effsize_text,
         " (Std. ",
         estimate_name,
         " = ",

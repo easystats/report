@@ -8,7 +8,7 @@
 #' @importFrom parameters model_parameters
 #' @importFrom performance model_performance
 #' @export
-model_values.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, ...) {
+model_values.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "chen2010", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, ...) {
 
   # Information
   out <- list()
@@ -31,8 +31,8 @@ model_values.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "co
     # Text
     text_description <- model_text_description(model, effsize = effsize, ci = ci, bootstrap = bootstrap, ...)
     text_performance <- model_text_performance_logistic(out$table_performance)
-    text_initial <- model_text_initial_lm(out$table_parameters, ci = ci)
-    text_parameters <- model_text_parameters_lm(out$table_parameters, ci = ci, effsize = effsize, ...)
+    text_initial <- model_text_initial_logistic(out$table_parameters, ci = ci)
+    text_parameters <- model_text_parameters_logistic(model, out$table_parameters, ci = ci, effsize = effsize, ...)
 
     out$text <- paste(
       text_description$text,
@@ -56,7 +56,7 @@ model_values.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "co
     text_description <- model_text_description(model, effsize = effsize, ci = ci, bootstrap = bootstrap, ...)
     text_performance <- model_text_performance_logistic(out$table_performance)
     text_initial <- model_text_initial_bayesian(out$table_parameters, ci = ci)
-    text_parameters <- model_text_parameters_bayesian(out$table_parameters, ci = ci, effsize = effsize, ...)
+    text_parameters <- model_text_parameters_bayesian(model, out$table_parameters, ci = ci, effsize = effsize, ...)
 
     out$text <- paste(
       text_description$text,
@@ -131,7 +131,7 @@ model_values.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "co
 #' @param model Object of class \link{lm}.
 #' @param ci Confidence Interval (CI) level. Default to 0.95 (95\%).
 #' @param standardize Standardized coefficients. See \code{\link[parameters:model_parameters.lm]{model_parameters}}.
-#' @param effsize Interpret the standardized parameters using a set of rules. Can be "cohen1988" (default), "sawilowsky2009", NULL, or a custom set of \link{rules}.
+#' @param effsize Interpret the log odds ratio using a set of rules. Can be "chen2010" (default), "cohen1988", NULL, or a custom set of \link{rules}.
 #' @param performance_in_table Add performance metrics on table.
 #' @param performance_metrics See \code{\link[performance:model_performance.lm]{model_performance}}.
 #' @param bootstrap See \code{\link[parameters:model_parameters.lm]{model_parameters}}.
@@ -145,7 +145,7 @@ model_values.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "co
 #' to_table(r)
 #' to_fulltable(r)
 #' @export
-report.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, ...) {
+report.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "chen2010", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, ...) {
   values <- model_values(model,
     ci = ci,
     standardize = standardize,
