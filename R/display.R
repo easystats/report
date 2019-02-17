@@ -27,13 +27,10 @@
 #' @method .display data.frame
 #' @keywords internal
 .display.data.frame <- function(x, sep = " | ") {
-  df <- dplyr::mutate_if(x, is.numeric, format_value, digits = 2)
-  df <- as.data.frame(sapply(df, as.character), stringsAsFactors = FALSE)
+  df <- as.data.frame(sapply(x, format_value, digits = 2), stringsAsFactors = FALSE)
 
   # Add colnames as row
-  temp <- df
-  df[1, ] <- as.character(colnames(df))
-  df <- rbind(df[1, ], temp)
+  df <- rbind(Parameter = colnames(df), df)
 
   # Extract color info
   coloured_cells_index <- sapply(df, .colour_detect)
