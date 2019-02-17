@@ -46,7 +46,7 @@
   # Centre first row
   first_row <- as.character(aligned[1, ])
   for (i in 1:length(first_row)) {
-    aligned[1, i] <- format(stringr::str_trim(first_row[i]), width = nchar(first_row[i]), justify = "centre")
+    aligned[1, i] <- format(trimws(first_row[i]), width = nchar(first_row[i]), justify = "right")
   }
 
   # Replace coloured
