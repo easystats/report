@@ -36,7 +36,7 @@ is.report <- function(model) inherits(model, "report")
 #' @export
 as.report <- function(model) {
   class(model) <- c("report", class(model))
-  return(model)
+  model
 }
 
 
@@ -98,6 +98,11 @@ to_table <- function(object, full = FALSE, digits = NULL, ...) {
     table <- object$table
   }
 
+  if (inherits(object, "report_lm")) {
+    attr(table, "digits") <- digits
+    return(table)
+  }
+
   if (!is.null(digits) & ncol(dplyr::select_if(table, is.numeric)) > 0) {
     initial_order <- names(table)
     nums <- dplyr::select_if(table, is.numeric)
@@ -133,9 +138,7 @@ summary.report <- to_table
 #'
 #' @export
 to_fulltable <- function(x, full = TRUE, digits = NULL, ...) {
-  table <- to_table(x, digits = digits, full = full)
-
-  return(table)
+  to_table(x, digits = digits, full = full)
 }
 
 #' @rdname to_fulltable
@@ -184,18 +187,22 @@ as.list.report <- to_values
 #'
 #' @export
 print.report_table <- function(x, digits = 2, ...) {
+  dig <- attr(x, "digits", exact = TRUE)
+  if (missing(digits) && !is.null(dig))
+    digits <- as.numeric(dig)
+
   x <- x %>%
-    .colour_column_if("beta", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red") %>%
-    .colour_column_if("Median", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red") %>%
-    .colour_column_if("Mean", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red") %>%
-    .colour_column_if("MAP", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red") %>%
-    .colour_column_if("Std_beta", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red") %>%
-    .colour_column_if("Std_Median", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red") %>%
-    .colour_column_if("Std_Mean", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red") %>%
-    .colour_column_if("Std_MAP", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red") %>%
-    .colour_column_if("p", condition = `<`, threshold = 0.05, colour_if = "bold", colour_else = NULL) %>%
-    .colour_column_if("Pd", condition = `>`, threshold = 95, colour_if = "yellow", colour_else = NULL) %>%
-    .colour_column_if("Fit", condition = `>`, threshold = 0, colour_if = "cyan", colour_else = "cyan") %>%
+    .colour_column_if("beta", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
+    .colour_column_if("Median", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
+    .colour_column_if("Mean", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
+    .colour_column_if("MAP", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
+    .colour_column_if("Std_beta", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
+    .colour_column_if("Std_Median", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
+    .colour_column_if("Std_Mean", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
+    .colour_column_if("Std_MAP", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
+    .colour_column_if("p", condition = `<`, threshold = 0.05, colour_if = "bold", colour_else = NULL, digits = digits) %>%
+    .colour_column_if("Pd", condition = `>`, threshold = 95, colour_if = "yellow", colour_else = NULL, digits = digits) %>%
+    .colour_column_if("Fit", condition = `>`, threshold = 0, colour_if = "cyan", colour_else = "cyan", digits = digits) %>%
     # .colour_columns("Fit", colour = "cyan") %>%
     dplyr::mutate_if(is.numeric, format_value_unless_integers, digits = digits)
   x[is.na(x)] <- ""

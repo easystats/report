@@ -152,7 +152,7 @@
 
 #' Colour a column (Exported for test purposes)
 #' @keywords internal
-.colour_column_if <- function(x, name, condition = `>`, threshold = 0, colour_if = "green", colour_else = "red") {
+.colour_column_if <- function(x, name, condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = 2) {
   xnew <- x
 
   if (name %in% names(x)) {
@@ -160,9 +160,9 @@
     x_else <- which(!condition(x[, name], threshold))
 
     xnew[, name] <- format(
-      round(x[, name], 2),
+      round(x[, name], digits = digits),
       width = nchar(name),
-      nsmall = 2,
+      nsmall = digits,
       justify = "right"
     )
 

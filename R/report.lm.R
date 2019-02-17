@@ -164,5 +164,8 @@ report.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988
     text_full = values$text_full,
     values = values
   )
-  return(as.report(out))
+
+  rep <- as.report(out)
+  class(rep) <- c("report_lm", class(rep))
+  rep
 }
