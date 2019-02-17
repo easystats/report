@@ -1,40 +1,70 @@
 #' @keywords internal
-model_text_performance_bayesian <- function(performance, ci = 0.90, ...) {
+model_text_parameters_lm <- function(parameters, ci = 0.95, effsize = "cohen1988", ...) {
+  parameters <- parameters[parameters$Parameter != "(Intercept)", ]
 
-  # R2
-  if ("R2_Median" %in% names(performance)) {
-    text <- paste0(
-      "The model's explanatory power (R2's median) is of ",
-      format_value(performance$R2_Median)
+  # Effect size text
+  if (!is.null(effsize) & "Std_beta" %in% names(parameters)) {
+    parameters$effsize_text <- paste0(
+      " and ",
+      interpret_d(parameters$Std_beta, rules = effsize),
+      " (Std. beta = ",
+      format_value(parameters$Std_beta),
+      ")."
     )
-    text_full <- paste0(
-      "The model's explanatory power (R2's median) is of ",
-      format_value(performance$R2_Median),
-      " (MAD = ",
-      format_value(performance$R2_MAD),
-      ", ",
-      format_ci(performance$R2_CI_low, performance$R2_CI_high, ci = ci)
+    parameters$effsize_text_full <- paste0(
+      " and ",
+      interpret_d(parameters$Std_beta, rules = effsize),
+      " (Std. beta = ",
+      format_value(parameters$Std_beta),
+      ", Std. SE = ",
+      format_value(parameters$Std_SE),
+      ", Std. ",
+      format_ci(parameters$Std_CI_low, parameters$Std_CI_high, ci),
+      ")."
     )
-
-    if ("R2_LOO_adj" %in% names(performance)) {
-      text <- paste0(
-        text, " (LOO adj. R2 = ",
-        format_value(performance$R2_LOO_adj),
-        ")."
-      )
-      text_full <- paste0(
-        text_full, ", LOO adj. R2 = ",
-        format_value(performance$R2_LOO_adj),
-        ")."
-      )
-    } else {
-      text <- paste0(text, ".")
-      text_full <- paste0(text_full, ").")
-    }
+    parameters$significant_full <- paste0(interpret_direction(parameters$beta), ", ", interpret_p(parameters$p))
   } else {
-    text <- ""
-    text_full <- ""
+    parameters$effsize_text <- "."
+    parameters$effsize_text_full <- "."
+    parameters$significant_full <- paste0(interpret_direction(parameters$beta), " and ", interpret_p(parameters$p))
   }
+
+
+  text <- paste0(
+    "  - ",
+    parameters$Parameter,
+    " is ",
+    interpret_p(parameters$p),
+    " (beta = ",
+    format_value(parameters$beta),
+    ", ",
+    format_ci(parameters$CI_low, parameters$CI_high, ci),
+    ", p ",
+    format_p(parameters$p),
+    ")",
+    parameters$effsize_text
+  )
+  text <- paste0(c("\n\nWithin this model: ", text), collapse = "\n")
+
+  text_full <- paste0(
+    "  - ",
+    parameters$Parameter,
+    " is ",
+    parameters$significant_full,
+    " (beta = ",
+    format_value(parameters$beta),
+    ", t(",
+    format_value_unless_integers(parameters$DoF_residual),
+    ") = ",
+    format_value(parameters$t),
+    ", ",
+    format_ci(parameters$CI_low, parameters$CI_high, ci),
+    ", p ",
+    format_p(parameters$p),
+    ")",
+    parameters$effsize_text_full
+  )
+  text_full <- paste0(c("\n\nWithin this model: ", text_full), collapse = "\n")
 
   out <- list(
     "text" = text,
@@ -48,80 +78,9 @@ model_text_performance_bayesian <- function(performance, ci = 0.90, ...) {
 
 
 
-#' @keywords internal
-model_text_initial_bayesian <- function(parameters, ci = 0.90, ...) {
-  intercept <- parameters[parameters$Parameter == "(Intercept)", ]
-
-  if ("Median" %in% names(intercept)) {
-    text <- paste0(
-      "The model's intercept's median is ",
-      format_value(intercept$Median),
-      "."
-    )
-    text_full <- paste0(
-      "The model's intercept's median is ",
-      format_value(intercept$Median),
-      " (MAD = ",
-      format_value(intercept$MAD),
-      ", ",
-      format_ci(intercept$CI_low, intercept$CI_high, ci)
-    )
-  } else if ("Mean" %in% names(intercept)) {
-    text <- paste0(
-      "The model's intercept's mean is ",
-      format_value(intercept$Mean),
-      "."
-    )
-    text_full <- paste0(
-      "The model's intercept's mean is ",
-      format_value(intercept$Mean),
-      " (MAD = ",
-      format_value(intercept$SD),
-      ", ",
-      format_ci(intercept$CI_low, intercept$CI_high, ci)
-    )
-  } else if ("MAP" %in% names(intercept)) {
-    text <- paste0(
-      "The model's intercept's MAP is ",
-      format_value(intercept$MAP),
-      "."
-    )
-    text_full <- paste0(
-      "The model's intercept's MAP is ",
-      format_value(intercept$MAP),
-      " (",
-      format_ci(intercept$CI_low, intercept$CI_high, ci)
-    )
-  } else {
-    text <- ""
-    text_full <- "The intercept has no estimate ("
-  }
 
 
-  if ("pd" %in% names(intercept)) {
-    text_full <- paste0(
-      text_full,
-      ", ",
-      format_pd(intercept$pd)
-    )
-  }
 
-  if ("ROPE_Percentage" %in% names(intercept)) {
-    text_full <- paste0(
-      text_full,
-      ", ",
-      format_rope(intercept$ROPE_Percentage)
-    )
-  }
-
-  text_full <- paste0(text_full, ").")
-
-  out <- list(
-    "text" = text,
-    "text_full" = text_full
-  )
-  return(out)
-}
 
 
 
@@ -192,12 +151,12 @@ model_text_parameters_bayesian <- function(parameters, ci = 0.90, rope_full = TR
   }
 
   estimate <- paste0(estimate, format_ci(parameters$CI_low,
-    parameters$CI_high,
-    ci = ci
+                                         parameters$CI_high,
+                                         ci = ci
   ))
   estimate_full <- paste0(estimate_full, format_ci(parameters$CI_low,
-    parameters$CI_high,
-    ci = ci
+                                                   parameters$CI_high,
+                                                   ci = ci
   ))
 
 
@@ -285,8 +244,8 @@ model_text_parameters_bayesian <- function(parameters, ci = 0.90, rope_full = TR
         format_value(parameters$MAD),
         ", ",
         format_ci(parameters$Std_CI_low,
-          parameters$Std_CI_high,
-          ci = ci
+                  parameters$Std_CI_high,
+                  ci = ci
         ),
         ")."
       )
@@ -302,8 +261,8 @@ model_text_parameters_bayesian <- function(parameters, ci = 0.90, rope_full = TR
         format_value(parameters$SD),
         ", ",
         format_ci(parameters$Std_CI_low,
-          parameters$Std_CI_high,
-          ci = ci
+                  parameters$Std_CI_high,
+                  ci = ci
         ),
         ")."
       )
@@ -317,8 +276,8 @@ model_text_parameters_bayesian <- function(parameters, ci = 0.90, rope_full = TR
         format_value(parameters[[estimate_name]]),
         ", ",
         format_ci(parameters$Std_CI_low,
-          parameters$Std_CI_high,
-          ci = ci
+                  parameters$Std_CI_high,
+                  ci = ci
         ),
         ")."
       )
@@ -334,3 +293,4 @@ model_text_parameters_bayesian <- function(parameters, ci = 0.90, rope_full = TR
   )
   return(out)
 }
+
