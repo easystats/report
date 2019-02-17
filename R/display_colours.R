@@ -131,17 +131,17 @@
 #' @keywords internal
 .colour_column_if <- function(x, name, condition = `>`, threshold = 0, colour_if = "green", colour_else = "red") {
   if (name %in% names(x)) {
-    x_if <- which(condition(x[, c(name)], threshold))
-    x_else <- which(!condition(x[, c(name)], threshold))
+    x_if <- which(condition(x[, name], threshold))
+    x_else <- which(!condition(x[, name], threshold))
 
     xnew <- x
     if (!is.null(colour_if)) {
-      xnew[, c(name)][x_if] <- .colour(x[, c(name)][x_if], colour_if)
+      xnew[, name][x_if] <- .colour(x[, name][x_if], colour_if)
     }
     if (!is.null(colour_else)) {
-      xnew[, c(name)][x_else] <- .colour(x[, c(name)][x_else], colour_else)
+      xnew[, name][x_else] <- .colour(x[, name][x_else], colour_else)
     } else {
-      xnew[, c(name)][x_else] <- format_value_unless_integers(x[, c(name)][x_else])
+      xnew[, name][x_else] <- format_value_unless_integers(x[, name][x_else])
     }
 
     return(xnew)
