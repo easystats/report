@@ -127,7 +127,7 @@ report.htest <- function(model, effsize = "cohen1988", ...) {
     values <- as.list(table_full)
     text <- paste0(
       "The ",
-      stringr::str_trim(model$method),
+      trimws(model$method),
       " suggests that the difference ",
       ifelse(grepl(" by ", model$data.name), "of ", "between "),
       vars,
