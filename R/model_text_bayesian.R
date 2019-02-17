@@ -313,39 +313,3 @@ model_text_parameters_bayesian <- function(parameters, ci = 0.90, rope_full=TRUE
   )
   return(out)
 }
-
-
-
-
-
-
-
-
-
-#' @keywords internal
-model_text_bayesian <- function(model, performance, parameters, ci = 0.90, effsize = "cohen1988", rope_full = TRUE, ...) {
-  text_description <- model_text_description(model, effsize = effsize, ci=ci, rope_full=rope_full)
-  text_performance <- model_text_performance_bayesian(performance, ci=ci)
-  text_initial <- model_text_initial_bayesian(parameters, ci = ci)
-  text_parameters <- model_text_parameters_bayesian(parameters, ci = ci, effsize = effsize, rope_full=rope_full)
-
-  text <- paste(
-    text_description$text,
-    text_performance$text,
-    text_initial$text,
-    text_parameters$text
-  )
-
-  text_full <- paste(
-    text_description$text_full,
-    text_performance$text_full,
-    text_initial$text_full,
-    text_parameters$text_full
-  )
-
-  out <- list(
-    "text" = text,
-    "text_full" = text_full
-  )
-  return(out)
-}

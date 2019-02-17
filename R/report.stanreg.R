@@ -34,9 +34,23 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
   out$table_performance <- performance::model_performance(model, metrics = performance_metrics, ...)
 
   # Text
-  modeltext <- model_text_bayesian(model, performance = out$table_performance, parameters = out$table_parameters, ci = ci, effsize = effsize, ...)
-  out$text <- modeltext$text
-  out$text_full <- modeltext$text_full
+  text_description <- model_text_description(model, effsize = effsize, ci=ci, ...)
+  text_performance <- model_text_performance_bayesian(out$performance)
+  text_initial <- model_text_initial_bayesian(out$parameters, ci = ci)
+  text_parameters <- model_text_parameters_bayesian(out$parameters, ci = ci, effsize = effsize, ...)
+
+  out$text <- paste(
+    text_description$text,
+    text_performance$text,
+    text_initial$text,
+    text_parameters$text
+  )
+  out$text_full <- paste(
+    text_description$text_full,
+    text_performance$text_full,
+    text_initial$text_full,
+    text_parameters$text_full
+  )
 
   # Tables
   modeltable <- model_table_lm(model, out$table_parameters, out$table_performance, performance_in_table = performance_in_table, ...)
@@ -99,6 +113,7 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
 #' @param effsize Interpret the standardized parameters using a set of rules. Can be "cohen1988" (default), "sawilowsky2009", NULL, or a custom set of \link{rules}.
 #' @param performance_in_table Add performance metrics on table.
 #' @param performance_metrics See \code{\link[performance:model_performance.lm]{model_performance}}.
+#' @param estimate See \code{\link[parameters:model_parameters.lm]{model_parameters}}.
 #' @param ... Arguments passed to or from other methods.
 #'
 #' @examples
@@ -109,7 +124,7 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
 #' to_table(r)
 #' to_fulltable(r)
 #' @export
-report.stanreg <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", ...) {
+report.stanreg <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", estimate = "median", ...) {
 
   values <- model_values(model,
                          ci = ci,

@@ -6,7 +6,7 @@
 \usage{
 \method{report}{lm}(model, ci = 0.95, standardize = TRUE,
   effsize = "cohen1988", performance_in_table = TRUE,
-  performance_metrics = "all", boostrap = FALSE, ...)
+  performance_metrics = "all", bootstrap = FALSE, ...)
 }
 \arguments{
 \item{model}{Object of class \link{lm}.}
@@ -20,6 +20,8 @@
 \item{performance_in_table}{Add performance metrics on table.}
 
 \item{performance_metrics}{See \code{\link[performance:model_performance.lm]{model_performance}}.}
+
+\item{bootstrap}{See \code{\link[parameters:model_parameters.lm]{model_parameters}}.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

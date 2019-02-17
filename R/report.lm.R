@@ -8,7 +8,7 @@
 #' @importFrom parameters model_parameters
 #' @importFrom performance model_performance
 #' @export
-model_values.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", boostrap = FALSE, ...) {
+model_values.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, ...) {
 
   # Information
   out <- list()
@@ -19,25 +19,66 @@ model_values.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "coh
     if(standardize == FALSE){
       warning("The effect sizes are computed from standardized coefficients. Setting `standardize` to TRUE.")
     }
-    out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ci = ci, bootstrap = FALSE, ...)
-    out$table_parameters$Effect_Size <- interpret_d(out$table_parameters$Std_beta, rules = effsize)
+    out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ci = ci, bootstrap = bootstrap, ...)
   } else {
-    out$table_parameters <- parameters::model_parameters(model, ci = ci, standardize=standardize, bootstrap = FALSE,  ...)
+    out$table_parameters <- parameters::model_parameters(model, ci = ci, standardize=standardize, bootstrap = bootstrap,  ...)
   }
   out$table_parameters$Parameter <- as.character(out$table_parameters$Parameter)
   out$table_performance <- performance::model_performance(model, metrics = performance_metrics, ...)
 
 
+  if(bootstrap == FALSE){
+    # Text
+    text_description <- model_text_description(model, effsize = effsize, ci=ci, bootstrap=bootstrap, ...)
+    text_performance <- model_text_performance_lm(out$performance)
+    text_initial <- model_text_initial_lm(out$parameters, ci = ci)
+    text_parameters <- model_text_parameters_lm(out$parameters, ci = ci, effsize = effsize, ...)
 
-  # Text
-  modeltext <- model_text_lm(model, performance = out$table_performance, parameters = out$table_parameters, ci = ci, effsize = effsize, ...)
-  out$text <- modeltext$text
-  out$text_full <- modeltext$text_full
+    out$text <- paste(
+      text_description$text,
+      text_performance$text,
+      text_initial$text,
+      text_parameters$text
+    )
+    out$text_full <- paste(
+      text_description$text_full,
+      text_performance$text_full,
+      text_initial$text_full,
+      text_parameters$text_full
+    )
 
-  # Tables
-  modeltable <- model_table_lm(model, out$table_parameters, out$table_performance, performance_in_table = performance_in_table, ...)
-  out$table <- modeltable$table
-  out$table_full <- modeltable$table_full
+    # Tables
+    modeltable <- model_table_lm(model, out$table_parameters, out$table_performance, performance_in_table = performance_in_table, ...)
+    out$table <- modeltable$table
+    out$table_full <- modeltable$table_full
+
+
+  } else{
+    # Text
+    text_description <- model_text_description(model, effsize = effsize, ci=ci, bootstrap=bootstrap, ...)
+    text_performance <- model_text_performance_lm(out$performance)
+    text_initial <- model_text_initial_bayesian(out$parameters, ci = ci)
+    text_parameters <- model_text_parameters_bayesian(out$parameters, ci = ci, effsize = effsize, ...)
+
+    out$text <- paste(
+      text_description$text,
+      text_performance$text,
+      text_initial$text,
+      text_parameters$text
+    )
+    out$text_full <- paste(
+      text_description$text_full,
+      text_performance$text_full,
+      text_initial$text_full,
+      text_parameters$text_full
+    )
+
+    # Tables
+    modeltable <- model_table_bayesian(model, out$table_parameters, out$table_performance, performance_in_table = performance_in_table, ...)
+    out$table <- modeltable$table
+    out$table_full <- modeltable$table_full
+  }
+
 
   # tables to values
   out$parameters <- list()
@@ -95,6 +136,7 @@ model_values.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "coh
 #' @param effsize Interpret the standardized parameters using a set of rules. Can be "cohen1988" (default), "sawilowsky2009", NULL, or a custom set of \link{rules}.
 #' @param performance_in_table Add performance metrics on table.
 #' @param performance_metrics See \code{\link[performance:model_performance.lm]{model_performance}}.
+#' @param bootstrap See \code{\link[parameters:model_parameters.lm]{model_parameters}}.
 #' @param ... Arguments passed to or from other methods.
 #'
 #' @examples
@@ -105,7 +147,7 @@ model_values.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "coh
 #' to_table(r)
 #' to_fulltable(r)
 #' @export
-report.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", boostrap=FALSE, ...) {
+report.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", bootstrap=FALSE, ...) {
 
   values <- model_values(model,
                          ci = ci,
@@ -113,6 +155,7 @@ report.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988
                          effsize = effsize,
                          performance_in_table = performance_in_table,
                          performance_metrics = performance_metrics,
+                         bootstrap=bootstrap,
                          ...)
 
 

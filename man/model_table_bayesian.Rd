@@ -2,13 +2,13 @@
 % Please edit documentation in R/model_table_bayesian.R
 \name{model_table_bayesian}
 \alias{model_table_bayesian}
-\title{Create Tables for Linear Models}
+\title{Create Tables for Bayesian Linear Models}
 \usage{
 model_table_bayesian(model, parameters, performance,
   performance_in_table = TRUE, ...)
 }
 \arguments{
-\item{model}{Object of class \link{lm}.}
+\item{model}{Bayesian models.}
 
 \item{parameters}{Parameters table \link{model_parameters}.}
 
@@ -19,6 +19,6 @@ model_table_bayesian(model, parameters, performance,
 \item{...}{Arguments passed to or from other methods (see \link{model_parameters} and \link{model_performance}).}
 }
 \description{
-Create Tables for Linear Models
+Create Tables for Bayesian Linear Models
 }
 \keyword{internal}

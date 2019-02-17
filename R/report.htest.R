@@ -21,6 +21,7 @@
 #' @export
 report.htest <- function(model, effsize = "cohen1988", ...) {
 
+  # TODO: rewrite this using insight fucntions
 
   # Processing --------------------------------------------------------------
   table_full <- broom::tidy(model) %>%

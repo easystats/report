@@ -21,6 +21,8 @@
 
 \item{performance_metrics}{See \code{\link[performance:model_performance.lm]{model_performance}}.}
 
+\item{estimate}{See \code{\link[parameters:model_parameters.lm]{model_parameters}}.}
+
 \item{...}{Arguments passed to or from other methods.}
 }
 \description{

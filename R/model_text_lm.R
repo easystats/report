@@ -169,39 +169,3 @@ model_text_parameters_lm <- function(parameters, ci = 0.95, effsize = "cohen1988
   )
   return(out)
 }
-
-
-
-
-
-
-
-
-
-#' @keywords internal
-model_text_lm <- function(model, performance, parameters, ci = 0.95, effsize = "cohen1988", boostrap = FALSE, ...) {
-  text_description <- model_text_description(model, effsize = effsize, boostrap = boostrap)
-  text_performance <- model_text_performance_lm(performance)
-  text_initial <- model_text_initial_lm(parameters, ci = ci)
-  text_parameters <- model_text_parameters_lm(parameters, ci = ci, effsize = effsize)
-
-  text <- paste(
-    text_description$text,
-    text_performance$text,
-    text_initial$text,
-    text_parameters$text
-  )
-
-  text_full <- paste(
-    text_description$text_full,
-    text_performance$text_full,
-    text_initial$text_full,
-    text_parameters$text_full
-  )
-
-  out <- list(
-    "text" = text,
-    "text_full" = text_full
-  )
-  return(out)
-}
