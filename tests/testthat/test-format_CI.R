@@ -1,5 +1,5 @@
-context("format_CI")
+context("format_ci")
 
-test_that("format_CI", {
-  testthat::expect_equal(nchar(format_CI(1.2012313, 145)), 21, tol = 0)
+test_that("format_ci", {
+  testthat::expect_equal(nchar(format_ci(1.2012313, 145)), 21, tol = 0)
 })

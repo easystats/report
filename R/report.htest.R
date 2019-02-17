@@ -48,7 +48,7 @@ report.htest <- function(model, effsize = "cohen1988", ...) {
       effect <- paste0(
         "r(", table_full$DoF[1], ") = ",
         format_value(table_full$r[1]), ", ",
-        format_CI(table_full$CI_low[1], table_full$CI_high[1], ci = attributes(model$conf.int)$conf.level)
+        format_ci(table_full$CI_low[1], table_full$CI_high[1], ci = attributes(model$conf.int)$conf.level)
       )
       method <- "Pearson's correlation"
       table <- select(table_full, -one_of("t", "Method", "Alternative"))
@@ -138,7 +138,7 @@ report.htest <- function(model, effsize = "cohen1988", ...) {
       ") = ",
       format_value(model$statistic),
       ", ",
-      format_CI(model$conf.int[1], model$conf.int[2], ci = attributes(model$conf.int)$conf.level),
+      format_ci(model$conf.int[1], model$conf.int[2], ci = attributes(model$conf.int)$conf.level),
       ", p ",
       format_p(model$p.value, stars = FALSE),
       ")."

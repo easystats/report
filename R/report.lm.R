@@ -30,9 +30,9 @@ model_values.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "coh
   if(bootstrap == FALSE){
     # Text
     text_description <- model_text_description(model, effsize = effsize, ci=ci, bootstrap=bootstrap, ...)
-    text_performance <- model_text_performance_lm(out$performance)
-    text_initial <- model_text_initial_lm(out$parameters, ci = ci)
-    text_parameters <- model_text_parameters_lm(out$parameters, ci = ci, effsize = effsize, ...)
+    text_performance <- model_text_performance_lm(out$table_performance)
+    text_initial <- model_text_initial_lm(out$table_parameters, ci = ci)
+    text_parameters <- model_text_parameters_lm(out$table_parameters, ci = ci, effsize = effsize, ...)
 
     out$text <- paste(
       text_description$text,
@@ -56,9 +56,9 @@ model_values.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "coh
   } else{
     # Text
     text_description <- model_text_description(model, effsize = effsize, ci=ci, bootstrap=bootstrap, ...)
-    text_performance <- model_text_performance_lm(out$performance)
-    text_initial <- model_text_initial_bayesian(out$parameters, ci = ci)
-    text_parameters <- model_text_parameters_bayesian(out$parameters, ci = ci, effsize = effsize, ...)
+    text_performance <- model_text_performance_lm(out$table_performance)
+    text_initial <- model_text_initial_bayesian(out$table_parameters, ci = ci)
+    text_parameters <- model_text_parameters_bayesian(out$table_parameters, ci = ci, effsize = effsize, ...)
 
     out$text <- paste(
       text_description$text,

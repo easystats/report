@@ -118,7 +118,9 @@
 #' Colour a column (Exported for test purposes)
 #' @keywords internal
 .colour_columns <- function(x, names, colour = "red") {
-  x[, c(names)] <- sapply(x[, c(names)], .colour, colour = colour)
+  if(length(which(c(names) %in% names(x))) > 0){
+    x[, c(names)[c(names) %in% names(x)]] <- sapply(x[, c(names)[c(names) %in% names(x)]], .colour, colour = colour)
+  }
   return(x)
 }
 

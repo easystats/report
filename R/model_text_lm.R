@@ -1,5 +1,5 @@
 #' @keywords internal
-model_text_performance_lm <- function(performance) {
+model_text_performance_lm <- function(performance, ...) {
 
   # R2
   if ("R2" %in% names(performance)) {
@@ -55,7 +55,7 @@ model_text_performance_lm <- function(performance) {
 
 
 #' @keywords internal
-model_text_initial_lm <- function(parameters, ci = 0.95) {
+model_text_initial_lm <- function(parameters, ci = 0.95, ...) {
   intercept <- parameters[parameters$Parameter == "(Intercept)", ]
 
   text <- paste0(
@@ -71,7 +71,7 @@ model_text_initial_lm <- function(parameters, ci = 0.95) {
     ") = ",
     format_value(intercept$t),
     ", ",
-    format_CI(intercept$CI_low, intercept$CI_high, ci),
+    format_ci(intercept$CI_low, intercept$CI_high, ci),
     ", p ",
     format_p(intercept$p),
     ")."
@@ -96,7 +96,7 @@ model_text_initial_lm <- function(parameters, ci = 0.95) {
 
 
 #' @keywords internal
-model_text_parameters_lm <- function(parameters, ci = 0.95, effsize = "cohen1988") {
+model_text_parameters_lm <- function(parameters, ci = 0.95, effsize = "cohen1988", ...) {
   parameters <- parameters[parameters$Parameter != "(Intercept)", ]
 
   # Effect size text
@@ -116,7 +116,7 @@ model_text_parameters_lm <- function(parameters, ci = 0.95, effsize = "cohen1988
       ", Std. SE = ",
       format_value(parameters$Std_SE),
       ", Std. ",
-      format_CI(parameters$Std_CI_low, parameters$Std_CI_high, ci),
+      format_ci(parameters$Std_CI_low, parameters$Std_CI_high, ci),
       ")."
     )
     parameters$significant_full <- paste0(interpret_direction(parameters$beta), ", ", interpret_p(parameters$p))
@@ -135,7 +135,7 @@ model_text_parameters_lm <- function(parameters, ci = 0.95, effsize = "cohen1988
     " (beta = ",
     format_value(parameters$beta),
     ", ",
-    format_CI(parameters$CI_low, parameters$CI_high, ci),
+    format_ci(parameters$CI_low, parameters$CI_high, ci),
     ", p ",
     format_p(parameters$p),
     ")",
@@ -155,7 +155,7 @@ model_text_parameters_lm <- function(parameters, ci = 0.95, effsize = "cohen1988
     ") = ",
     format_value(parameters$t),
     ", ",
-    format_CI(parameters$CI_low, parameters$CI_high, ci),
+    format_ci(parameters$CI_low, parameters$CI_high, ci),
     ", p ",
     format_p(parameters$p),
     ")",

@@ -1,8 +1,8 @@
 #' @keywords internal
-model_text_description <- function(model, ci = 0.95, effsize = "effsize", boostrap = FALSE, n=500, test = c("pd", "rope"), rope_bounds = "default", rope_full = TRUE, ...) {
+model_text_description <- function(model, ci = 0.95, effsize = "effsize", bootstrap = FALSE, n=500, test = c("pd", "rope"), rope_bounds = "default", rope_full = TRUE, ...) {
 
-  if(boostrap){
-    boostrapped <- paste0("bootstrapped (n = ", n, ")")
+  if(bootstrap){
+    boostrapped <- paste0("bootstrapped (n = ", n, ") ")
   } else{
     boostrapped <- ""
   }

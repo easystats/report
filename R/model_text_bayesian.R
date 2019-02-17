@@ -1,5 +1,5 @@
 #' @keywords internal
-model_text_performance_bayesian <- function(performance, ci = 0.9) {
+model_text_performance_bayesian <- function(performance, ci = 0.90, ...) {
 
   # R2
   if ("R2_Median" %in% names(performance)) {
@@ -13,7 +13,7 @@ model_text_performance_bayesian <- function(performance, ci = 0.9) {
       " (MAD = ",
       format_value(performance$R2_MAD),
       ", ",
-      format_CI(performance$R2_CI_low, performance$R2_CI_high, ci=ci)
+      format_ci(performance$R2_CI_low, performance$R2_CI_high, ci=ci)
       )
 
     if ("R2_LOO_adj" %in% names(performance)) {
@@ -49,7 +49,7 @@ model_text_performance_bayesian <- function(performance, ci = 0.9) {
 
 
 #' @keywords internal
-model_text_initial_bayesian <- function(parameters, ci = 0.90) {
+model_text_initial_bayesian <- function(parameters, ci = 0.90, ...) {
   intercept <- parameters[parameters$Parameter == "(Intercept)", ]
 
   if("Median" %in% names(intercept)){
@@ -64,7 +64,7 @@ model_text_initial_bayesian <- function(parameters, ci = 0.90) {
       " (MAD = ",
       format_value(intercept$MAD),
       ", ",
-      format_CI(intercept$CI_low, intercept$CI_high, ci)
+      format_ci(intercept$CI_low, intercept$CI_high, ci)
       )
   } else if("Mean" %in% names(intercept)){
     text <- paste0(
@@ -78,7 +78,7 @@ model_text_initial_bayesian <- function(parameters, ci = 0.90) {
       " (MAD = ",
       format_value(intercept$SD),
       ", ",
-      format_CI(intercept$CI_low, intercept$CI_high, ci)
+      format_ci(intercept$CI_low, intercept$CI_high, ci)
     )
   } else if("MAP" %in% names(intercept)){
     text <- paste0(
@@ -90,7 +90,7 @@ model_text_initial_bayesian <- function(parameters, ci = 0.90) {
       "The model's intercept's MAP is ",
       format_value(intercept$MAP),
       " (",
-      format_CI(intercept$CI_low, intercept$CI_high, ci)
+      format_ci(intercept$CI_low, intercept$CI_high, ci)
     )
   } else{
     text <- ""
@@ -131,7 +131,7 @@ model_text_initial_bayesian <- function(parameters, ci = 0.90) {
 
 
 #' @keywords internal
-model_text_parameters_bayesian <- function(parameters, ci = 0.90, rope_full=TRUE, effsize = "cohen1988") {
+model_text_parameters_bayesian <- function(parameters, ci = 0.90, rope_full=TRUE, effsize = "cohen1988", ...) {
 
   if(rope_full){
     rope_ci <- 1
@@ -182,10 +182,10 @@ model_text_parameters_bayesian <- function(parameters, ci = 0.90, rope_full=TRUE
     stop("No estimate in parameters.")
   }
 
-  estimate <- paste0(estimate, format_CI(parameters$CI_low,
+  estimate <- paste0(estimate, format_ci(parameters$CI_low,
                                          parameters$CI_high,
                                          ci=ci))
-  estimate_full <- paste0(estimate_full, format_CI(parameters$CI_low,
+  estimate_full <- paste0(estimate_full, format_ci(parameters$CI_low,
                                          parameters$CI_high,
                                          ci=ci))
 
@@ -268,7 +268,7 @@ model_text_parameters_bayesian <- function(parameters, ci = 0.90, rope_full=TRUE
                      ", MAD = ",
                      format_value(parameters$MAD),
                      ", ",
-                     format_CI(parameters$Std_CI_low,
+                     format_ci(parameters$Std_CI_low,
                                parameters$Std_CI_high,
                                ci=ci),
                      ")."
@@ -283,7 +283,7 @@ model_text_parameters_bayesian <- function(parameters, ci = 0.90, rope_full=TRUE
                           ", SD = ",
                           format_value(parameters$SD),
                           ", ",
-                          format_CI(parameters$Std_CI_low,
+                          format_ci(parameters$Std_CI_low,
                                     parameters$Std_CI_high,
                                     ci=ci),
                           ")."
@@ -296,7 +296,7 @@ model_text_parameters_bayesian <- function(parameters, ci = 0.90, rope_full=TRUE
                           " = ",
                           format_value(parameters[[estimate_name]]),
                           ", ",
-                          format_CI(parameters$Std_CI_low,
+                          format_ci(parameters$Std_CI_low,
                                     parameters$Std_CI_high,
                                     ci=ci),
                           ")."

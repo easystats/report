@@ -184,7 +184,7 @@ as.list.report <- to_values
 #'
 #' @export
 print.report_table <- function(x, digits = 2, ...) {
-  x <- mutate_if(x, is.numeric, format_value, digits = digits)
+  x <- dplyr::mutate_if(x, is.numeric, format_value, digits = digits)
   x[is.na(x)] <- ""
 
   x %>%

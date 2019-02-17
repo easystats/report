@@ -19,7 +19,7 @@
   )
 
 
-  df <- mutate_if(x, is.numeric, format_value, digits = 2)
+  df <- dplyr::mutate_if(x, is.numeric, format_value, digits = 2)
   df <- as.data.frame(sapply(df, as.character), stringsAsFactors = FALSE)
 
   temp <- df
