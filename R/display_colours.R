@@ -54,6 +54,22 @@
 
 
 #' @keywords internal
+.blue <- function(x) {
+  if (.supports_color()) {
+    x[!is.na(x)] <- paste0("\033[33m", x[!is.na(x)], "\033[39m")
+  }
+  x
+}
+
+#' @keywords internal
+.bold <- function(x) {
+  if (.supports_color()) {
+    x[!is.na(x)] <- paste0("\033[1m", x[!is.na(x)], "\033[22m")
+  }
+  x
+}
+
+#' @keywords internal
 .red <- function(x) {
   if (.supports_color()) {
     x[!is.na(x)] <- paste0("\033[31m", x[!is.na(x)], "\033[39m")
@@ -96,19 +112,17 @@
 
 #' @keywords internal
 .colour <- function(x, colour = "red") {
-  if (colour == "red") {
-    return(.red(x))
-  } else if (colour == "yellow") {
-    return(.yellow(x))
-  } else if (colour == "green") {
-    return(.green(x))
-  } else if (colour == "violet") {
-    return(.violet(x))
-  } else if (colour == "cyan") {
-    return(.cyan(x))
-  } else {
+  switch(
+    colour,
+    red = .red(x),
+    yellow = .yellow(x),
+    green = .green(x),
+    blue = .blue(x),
+    violet = .violet(x),
+    cyan = .cyan(x),
+    bold = .bold(x),
     warning(paste0("`color` ", colour, " not yet supported."))
-  }
+  )
 }
 
 

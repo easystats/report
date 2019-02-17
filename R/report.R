@@ -193,7 +193,7 @@ print.report_table <- function(x, digits = 2, ...) {
     .colour_column_if("Std_Median", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red") %>%
     .colour_column_if("Std_Mean", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red") %>%
     .colour_column_if("Std_MAP", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red") %>%
-    .colour_column_if("p", condition = `<`, threshold = 0.05, colour_if = "yellow", colour_else = NULL) %>%
+    .colour_column_if("p", condition = `<`, threshold = 0.05, colour_if = "bold", colour_else = NULL) %>%
     .colour_column_if("Pd", condition = `>`, threshold = 95, colour_if = "yellow", colour_else = NULL) %>%
     .colour_column_if("Fit", condition = `>`, threshold = 0, colour_if = "cyan", colour_else = "cyan") %>%
     # .colour_columns("Fit", colour = "cyan") %>%
