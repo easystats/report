@@ -24,7 +24,7 @@ format_value <- function(x, digits = 2) {
 #' @export
 format_value_unless_integers <- function(x, digits = 2) {
   if (is.numeric(x)) {
-    if (!all(is.int(na.omit(x)))) {
+    if (!all(is.int(stats::na.omit(x)))) {
       x <- format_value(x, digits = digits)
     }
     # if(space_before_positive){
@@ -45,5 +45,5 @@ format_value_unless_integers <- function(x, digits = 2) {
 #'
 #' @export
 is.int <- function(x) {
-  ifelse(x %% 1 == 0, TRUE, FALSE)
+  x %% 1 == 0
 }

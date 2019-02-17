@@ -130,11 +130,12 @@
 #' Colour a column (Exported for test purposes)
 #' @keywords internal
 .colour_column_if <- function(x, name, condition = `>`, threshold = 0, colour_if = "green", colour_else = "red") {
+  xnew <- x
+
   if (name %in% names(x)) {
     x_if <- which(condition(x[, name], threshold))
     x_else <- which(!condition(x[, name], threshold))
 
-    xnew <- x
     if (!is.null(colour_if)) {
       xnew[, name][x_if] <- .colour(x[, name][x_if], colour_if)
     }
@@ -143,10 +144,9 @@
     } else {
       xnew[, name][x_else] <- format_value_unless_integers(x[, name][x_else])
     }
-
-    return(xnew)
   }
-  return(x)
+
+  xnew
 }
 
 
