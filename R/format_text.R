@@ -4,7 +4,7 @@
 #' @param sep Separator.
 #' @param last Last separator.
 #'
-#' 
+#'
 #'
 #' @examples
 #' format_text_collapse(c("A", "B", "C"))
@@ -30,7 +30,6 @@ format_text_collapse <- function(x, sep = ", ", last = " and ") {
 #' @examples
 #' x <- paste(rep("a very long string", 50), collapse = " ")
 #' format_text_wrap(x, width = 50)
-#' 
 #' @importFrom stringr str_split str_trim coll
 #' @export
 format_text_wrap <- function(x, width = NULL) {

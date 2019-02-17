@@ -21,6 +21,3 @@ Confidence/Credible Interval (CI) Formatting
 \examples{
 format_ci(1.20, 3.57, ci = 90)
 }
-\author{
-\href{https://dominiquemakowski.github.io/}{Dominique Makowski}
-}

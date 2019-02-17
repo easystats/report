@@ -21,6 +21,3 @@ interpret(0.021, rules_grid)
 interpret(0.08, rules_grid)
 interpret(c(0.01, 0.005, 0.08), rules_grid)
 }
-\author{
-\href{https://dominiquemakowski.github.io/}{Dominique Makowski}
-}

@@ -15,17 +15,14 @@ of **best practices** guidelines (*e.g.,*
 [APA](https://www.apastyle.org/)’s style guide), ensuring
 **standardization** and **quality** of results reporting.
 
-**Note: this package is the heir and successor to the
-[psycho](https://github.com/easystats/psycho.R) package.**
-
 ``` r
 # Example
 lm(Sepal.Length ~ Species, data=iris) %>% 
   report()
 ```
 
-    ##  We fitted a linear model to predict Sepal.Length with Species. The model's explanatory power (R2)
-    ## is of 0.62 (adj. R2 = 0.61). The model's intercept is at 5.01.
+    ##  We fitted a linear model to predict Sepal.Length with Species. The model's explanatory power is
+    ## substantial (R2 = 0.62, adj. R2 = 0.61). The model's intercept is at 5.01.
     ## 
     ## Within this model: 
     ##   - Speciesversicolor is significant (beta = 0.93, 95% CI [0.73, 1.13], p < .001) and large (Std.
@@ -160,9 +157,6 @@ report(t.test(iris$Sepal.Length, iris$Petal.Length))
 
 ### Linear Models (LM)
 
-The difference between regular and full reports becomes obvious for more
-complicated models.
-
 ``` r
 model <- lm(Sepal.Length ~ Petal.Length + Species, data=iris)
 r <- report(model)
@@ -171,7 +165,7 @@ to_text(r)
 ```
 
     ##  We fitted a linear model to predict Sepal.Length with Petal.Length and Species. The model's
-    ## explanatory power (R2) is of 0.84 (adj. R2 = 0.83). The model's intercept is at 3.68.
+    ## explanatory power is substantial (R2 = 0.84, adj. R2 = 0.83). The model's intercept is at 3.68.
     ## 
     ## Within this model: 
     ##   - Petal.Length is significant (beta = 0.90, 95% CI [0.78, 1.03], p < .001) and large (Std. beta =
@@ -182,54 +176,52 @@ to_text(r)
     ## beta = -2.56).
 
 ``` r
-to_fulltext(r)
-```
-
-    ##  We fitted a linear model to predict Sepal.Length with Petal.Length and Species (formula =
-    ## Sepal.Length ~ Petal.Length + Species). Effect sizes were labelled following Cohen's (1988)
-    ## recommendations. The model explains a significant proportion of variance (R2 = 0.84, F(3, 146) =
-    ## 249.40, p < .001, adj. R2 = 0.83). The model's intercept is at 3.68(t(146) = 34.72, 95% CI [3.47,
-    ## 3.89], p < .001).
-    ## 
-    ## Within this model: 
-    ##   - Petal.Length is positive, significant (beta = 0.90, t(146) = 13.96, 95% CI [0.78, 1.03], p <
-    ## .001) and large (Std. beta = 1.93, Std. SE = 0.14, Std. 95% CI [1.66, 2.20]).
-    ##   - Speciesversicolor is negative, significant (beta = -1.60, t(146) = -8.28, 95% CI [-1.98, -1.22],
-    ## p < .001) and large (Std. beta = -1.93, Std. SE = 0.23, Std. 95% CI [-2.40, -1.47]).
-    ##   - Speciesvirginica is negative, significant (beta = -2.12, t(146) = -7.74, 95% CI [-2.66, -1.58], p
-    ## < .001) and large (Std. beta = -2.56, Std. SE = 0.33, Std. 95% CI [-3.21, -1.90]).
-
-``` r
 to_table(r)
 ```
 
-|   | Parameter         | beta   | CI\_low | CI\_high | p    | Std\_beta | Effect\_Size | Fit  |
-| - | :---------------- | :----- | :------ | :------- | :--- | :-------- | :----------- | :--- |
-| 1 | (Intercept)       | 3.68   | 3.47    | 3.89     | 0.00 | 1.50      | large        |      |
-| 2 | Petal.Length      | 0.90   | 0.78    | 1.03     | 0.00 | 1.93      | large        |      |
-| 3 | Speciesversicolor | \-1.60 | \-1.98  | \-1.22   | 0.00 | \-1.93    | large        |      |
-| 4 | Speciesvirginica  | \-2.12 | \-2.66  | \-1.58   | 0.00 | \-2.56    | large        |      |
-| 6 | R2                |        |         |          |      |           |              | 0.84 |
-| 7 | R2\_adj           |        |         |          |      |           |              | 0.83 |
+|   | Parameter         | beta   | CI\_low | CI\_high | p    | Std\_beta | Fit  |
+| - | :---------------- | :----- | :------ | :------- | :--- | :-------- | :--- |
+| 1 | (Intercept)       | 3.68   | 3.47    | 3.89     | 0.00 | 1.50      |      |
+| 2 | Petal.Length      | 0.90   | 0.78    | 1.03     | 0.00 | 1.93      |      |
+| 3 | Speciesversicolor | \-1.60 | \-1.98  | \-1.22   | 0.00 | \-1.93    |      |
+| 4 | Speciesvirginica  | \-2.12 | \-2.66  | \-1.58   | 0.00 | \-2.56    |      |
+| 6 | R2                |        |         |          |      |           | 0.84 |
+| 7 | R2\_adj           |        |         |          |      |           | 0.83 |
+
+### General Linear Models (GLM)
+
+The difference between regular and full reports becomes obvious for more
+complicated models.
+
+``` r
+model <- glm(vs ~ wt + mpg, data=mtcars, family="binomial")
+r <- report(model)
+
+to_fulltext(r)
+```
+
+    ##  We fitted a logistic model to predict vs with wt and mpg (formula = vs ~ wt + mpg). Effect sizes
+    ## were labelled following Chen's (2010) recommendations. The model's explanatory power is substantial
+    ## (Tjur's R2 = 0.48). The model's intercept is at -12.54 (z = -1.48, 95% CI [-31.91, 2.92], p > .1).
+    ## 
+    ## Within this model: 
+    ##   - wt is positive, not significant (beta = 0.58, SE = 1.18, z = 0.49, 95% CI [-1.92, 2.94], p > .1)
+    ## and small (Std. beta = 0.57, Std. SE = 1.16, Std. 95% CI [-1.88, 2.87]).
+    ##   - mpg is positive, significant (beta = 0.52, SE = 0.26, z = 2.01, 95% CI [0.09, 1.17], p < .05) and
+    ## large (Std. beta = 3.16, Std. SE = 1.57, Std. 95% CI [0.56, 7.02]).
 
 ``` r
 to_fulltable(r)
 ```
 
-|    | Parameter         | beta   | SE   | CI\_low | CI\_high | t      | DoF\_residual | p    | Std\_beta | Std\_SE | Std\_CI\_low | Std\_CI\_high | Effect\_Size | Fit    |
-| -- | :---------------- | :----- | :--- | :------ | :------- | :----- | :------------ | :--- | :-------- | :------ | :----------- | :------------ | :----------- | :----- |
-| 1  | (Intercept)       | 3.68   | 0.11 | 3.47    | 3.89     | 34.72  | 146           | 0.00 | 1.50      | 0.19    | 1.12         | 1.87          | large        |        |
-| 2  | Petal.Length      | 0.90   | 0.06 | 0.78    | 1.03     | 13.96  | 146           | 0.00 | 1.93      | 0.14    | 1.66         | 2.20          | large        |        |
-| 3  | Speciesversicolor | \-1.60 | 0.19 | \-1.98  | \-1.22   | \-8.28 | 146           | 0.00 | \-1.93    | 0.23    | \-2.40       | \-1.47        | large        |        |
-| 4  | Speciesvirginica  | \-2.12 | 0.27 | \-2.66  | \-1.58   | \-7.74 | 146           | 0.00 | \-2.56    | 0.33    | \-3.21       | \-1.90        | large        |        |
-| 6  | AIC               |        |      |         |          |        |               |      |           |         |              |               |              | 106.23 |
-| 7  | BIC               |        |      |         |          |        |               |      |           |         |              |               |              | 121.29 |
-| 8  | R2                |        |      |         |          |        |               |      |           |         |              |               |              | 0.84   |
-| 9  | F                 |        |      |         |          |        |               |      |           |         |              |               |              | 249.40 |
-| 10 | DoF               |        |      |         |          |        |               |      |           |         |              |               |              | 3.00   |
-| 11 | DoF\_residual     |        |      |         |          |        |               |      |           |         |              |               |              | 146.00 |
-| 12 | p                 |        |      |         |          |        |               |      |           |         |              |               |              | 0.00   |
-| 13 | R2\_adj           |        |      |         |          |        |               |      |           |         |              |               |              | 0.83   |
+|   | Parameter   | beta    | SE   | CI\_low | CI\_high | z      | DoF\_residual | p    | Std\_beta | Std\_SE | Std\_CI\_low | Std\_CI\_high | Fit   |
+| - | :---------- | :------ | :--- | :------ | :------- | :----- | :------------ | :--- | :-------- | :------ | :----------- | :------------ | :---- |
+| 1 | (Intercept) | \-12.54 | 8.47 | \-31.91 | 2.92     | \-1.48 | 29            | 0.14 | \-0.14    | 0.51    | \-1.15       | 0.90          |       |
+| 2 | wt          | 0.58    | 1.18 | \-1.92  | 2.94     | 0.49   | 29            | 0.62 | 0.57      | 1.16    | \-1.88       | 2.87          |       |
+| 3 | mpg         | 0.52    | 0.26 | 0.09    | 1.17     | 2.01   | 29            | 0.04 | 3.16      | 1.57    | 0.56         | 7.02          |       |
+| 5 | AIC         |         |      |         |          |        |               |      |           |         |              |               | 31.30 |
+| 6 | BIC         |         |      |         |          |        |               |      |           |         |              |               | 35.70 |
+| 7 | R2\_Tjur    |         |      |         |          |        |               |      |           |         |              |               | 0.48  |
 
 ## Credits
 

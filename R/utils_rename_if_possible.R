@@ -6,7 +6,7 @@
 #' @param pattern Variable to replace.
 #' @param replacement New variable name.
 #'
-#' 
+#'
 #'
 #' @examples
 #' rename_if_possible(iris, "Sepal.Length", "length")

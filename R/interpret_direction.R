@@ -2,7 +2,7 @@
 #'
 #' @param x Numeric value.
 #'
-#' 
+#'
 #'
 #' @examples
 #' interpret_direction(.02)

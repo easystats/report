@@ -4,7 +4,7 @@
 #' @param rules Can be "cohen1988" (default), "evans1996" or custom set of rules.
 #' @param direction Return the parameter's direction.
 #'
-#' 
+#'
 #'
 #' @examples
 #' interpret_r(r = .015)

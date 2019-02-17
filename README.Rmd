@@ -151,7 +151,7 @@ print(report(t.test(iris$Sepal.Length, iris$Petal.Length)), width=100)
 ```
 ### Linear Models (LM)
 
-The difference between regular and full reports becomes obvious for more complicated models.
+
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
 model <- lm(Sepal.Length ~ Petal.Length + Species, data=iris)
@@ -166,30 +166,41 @@ r <- report(model)
 to_text(r, width=100)
 ```
 
-
-```{r message=FALSE, warning=FALSE, eval=FALSE}
-to_fulltext(r)
-```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-to_fulltext(r, width=100)
-```
-
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
 to_table(r)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 table <- to_table(r, digits=2)
-# remove empty row because kable doens't handle it
+# remove empty row because kable doesn't handle it
 table <- table[rowSums(is.na(table)) != ncol(table),]
 knitr::kable(table)
 ```
+
+### General Linear Models (GLM)
+
+The difference between regular and full reports becomes obvious for more complicated models.
+
+```{r message=FALSE, warning=FALSE, eval=FALSE}
+model <- glm(vs ~ wt + mpg, data=mtcars, family="binomial")
+r <- report(model)
+
+to_fulltext(r)
+```
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+model <- glm(vs ~ wt + mpg, data=mtcars, family="binomial")
+r <- report(model)
+
+to_fulltext(r, width=100)
+```
+
+
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
 to_fulltable(r)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 table <- to_fulltable(r, digits=2)
-# remove empty row because kable doens't handle it
+# remove empty row because kable doesn't handle it
 table <- table[rowSums(is.na(table)) != ncol(table),]
 knitr::kable(table)
 ```

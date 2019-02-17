@@ -3,7 +3,7 @@
 #' @param d Value or vector of d values.
 #' @param rules Can be "cohen1988" (default), "sawilowsky2009" or custom set of rules.
 #'
-#' 
+#'
 #'
 #' @examples
 #' interpret_d(.02)

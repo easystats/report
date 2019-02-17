@@ -1,18 +1,21 @@
 #' @keywords internal
 model_text_performance_lm <- function(performance, ...) {
-
   text <- ""
   text_full <- ""
 
   # R2
   if ("R2" %in% names(performance)) {
     text <- paste0(
-      "The model's explanatory power (R2) is of ",
+      "The model's explanatory power is ",
+      interpret_r2(performance$R2, rules = "cohen1988"),
+      " (R2 = ",
       format_value(performance$R2)
     )
     text_full <- paste0(
       "The model explains a ",
       interpret_p(performance$p),
+      " and ",
+      interpret_r2(performance$R2, rules = "cohen1988"),
       " proportion of variance (R2 = ",
       format_value(performance$R2),
       ", F(",
@@ -27,7 +30,7 @@ model_text_performance_lm <- function(performance, ...) {
 
     if ("R2" %in% names(performance)) {
       text <- paste0(
-        text, " (adj. R2 = ",
+        text, ", adj. R2 = ",
         format_value(performance$R2_adj),
         ")."
       )
@@ -56,16 +59,17 @@ model_text_performance_lm <- function(performance, ...) {
 
 #' @keywords internal
 model_text_performance_logistic <- function(performance, ...) {
-
   text <- ""
   text_full <- ""
 
   # R2
   if ("R2_Tjur" %in% names(performance)) {
     text <- paste0(
-      "The model's explanatory power (Tjur's R2) is of ",
+      "The model's explanatory power is ",
+      interpret_r2(performance$R2_Tjur, rules = "cohen1988"),
+      " (Tjur's R2 = ",
       format_value(performance$R2_Tjur),
-      "."
+      ")."
     )
     text_full <- text
   }
@@ -84,8 +88,6 @@ model_text_performance_logistic <- function(performance, ...) {
 
 #' @keywords internal
 model_text_performance_bayesian <- function(performance, ci = 0.90, ...) {
-
-
   text <- ""
   text_full <- ""
 
@@ -93,13 +95,17 @@ model_text_performance_bayesian <- function(performance, ci = 0.90, ...) {
   # R2
   if ("R2_Median" %in% names(performance)) {
     text <- paste0(
-      "The model's explanatory power (R2's median) is of ",
+      "The model's explanatory power is ",
+      interpret_r2(performance$R2_Median, rules = "cohen1988"),
+      " (R2's median = ",
       format_value(performance$R2_Median)
     )
     text_full <- paste0(
-      "The model's explanatory power (R2's median) is of ",
+      "The model's explanatory power is ",
+      interpret_r2(performance$R2_Median, rules = "cohen1988"),
+      " (R2's median = ",
       format_value(performance$R2_Median),
-      " (MAD = ",
+      ", MAD = ",
       format_value(performance$R2_MAD),
       ", ",
       format_ci(performance$R2_CI_low, performance$R2_CI_high, ci = ci)

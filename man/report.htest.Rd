@@ -27,6 +27,3 @@ report(t.test(iris$Sepal.Width, mu = 1))
 \seealso{
 report
 }
-\author{
-\href{https://dominiquemakowski.github.io/}{Dominique Makowski}
-}

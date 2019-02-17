@@ -14,6 +14,3 @@ to_values(x, ...)
 \description{
 Report values
 }
-\author{
-\href{https://dominiquemakowski.github.io/}{Dominique Makowski}
-}

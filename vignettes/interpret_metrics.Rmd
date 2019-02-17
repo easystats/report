@@ -1,5 +1,5 @@
 ---
-title: "Automated Interpretation of Metrics"
+title: "Automated Interpretation of Metrics and Effect Sizes"
 output: 
   github_document:
     toc: true
@@ -38,6 +38,58 @@ Readers should keep in mind that these thresholds are arbitrary and should be di
 `report` implements such sets of rules of thumb for a variety of indices in a flexible and explicit fashion.
 
 ## Supported Indices
+
+### Coefficient of determination  (R2)
+
+
+##### @falk1992primer
+
+```r
+interpret_r2(x, rules = "falk1992")
+```
+
+- **R2 < 0.1**: Negligible
+- **R2 > 0.1**: Adequate
+
+
+
+##### @cohen1988statistical
+
+```r
+interpret_r2(x, rules = "cohen1988")
+```
+
+- **R2 = 0 - 0.02**: Very weak
+- **R2 = 0.02 - 0.16**: Weak
+- **R2 = 0.16 - 0.26**: Moderate
+- **R2 > 0.26**: Substantial
+
+
+
+
+##### @chin1998partial
+
+```r
+interpret_r2(x, rules = "chin1998")
+```
+
+- **R2 = 0 - 0.19**: Very weak
+- **R2 = 0.19 - 0.33**: Weak
+- **R2 = 0.33 - 0.67**: Moderate
+- **R2 > 0.67**: Substantial
+
+##### @hair2011pls
+
+```r
+interpret_r2(x, rules = "hair2011")
+```
+
+- **R2 = 0 - 0.25**: Very weak
+- **R2 = 0.25 - 0.50**: Weak
+- **R2 = 0.50 - 0.75**: Moderate
+- **R2 > 0.75**: Substantial
+
+
 
 ### Correlation *r*
 

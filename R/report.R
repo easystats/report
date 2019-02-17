@@ -10,7 +10,7 @@
 #' @param model Object.
 #' @param ... Arguments passed to or from other methods.
 #'
-#' 
+#'
 #'
 #' @export
 report <- function(model, ...) {
@@ -88,7 +88,7 @@ to_fulltext <- function(x, full = TRUE, width = NULL, ...) {
 #' @param digits Number of digits.
 #' @param ... Arguments passed to or from other methods.
 #'
-#' 
+#'
 #'
 #' @export
 to_table <- function(object, full = FALSE, digits = NULL, ...) {
@@ -130,7 +130,7 @@ summary.report <- to_table
 #' @param digits Number of digits.
 #' @param ... Arguments passed to or from other methods.
 #'
-#' 
+#'
 #' @export
 to_fulltable <- function(x, full = TRUE, digits = NULL, ...) {
   table <- to_table(x, digits = digits, full = full)
@@ -150,7 +150,7 @@ as.data.frame.report <- function(x, ...) {
 #' @param x Object of class \link{report}.
 #' @param ... Arguments passed to or from other methods.
 #'
-#' 
+#'
 #'
 #' @export
 to_values <- function(x, ...) {

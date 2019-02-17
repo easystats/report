@@ -21,6 +21,3 @@ to_fulltable(x, full = TRUE, digits = NULL, ...)
 \description{
 Full report table display
 }
-\author{
-\href{https://dominiquemakowski.github.io/}{Dominique Makowski}
-}

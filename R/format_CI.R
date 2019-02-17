@@ -5,7 +5,7 @@
 #' @param ci CI level in percentage.
 #' @param digits Number of significant digits.
 #'
-#' 
+#'
 #'
 #' @examples
 #' format_ci(1.20, 3.57, ci = 90)

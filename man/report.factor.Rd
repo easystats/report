@@ -30,6 +30,3 @@ to_fulltable(report(x))
 \seealso{
 report
 }
-\author{
-\href{https://dominiquemakowski.github.io/}{Dominique Makowski}
-}

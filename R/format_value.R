@@ -3,7 +3,7 @@
 #' @param x Numeric value.
 #' @param digits Number of significant digits.
 #'
-#' 
+#'
 #'
 #' @examples
 #' format_value(1.20)

@@ -4,7 +4,6 @@ model_text_parameters_lm <- function(model, parameters, ci = 0.95, effsize = "co
 
   # Effect size text
   if (!is.null(effsize) & "Std_beta" %in% names(parameters)) {
-
     parameters$effsize_text <- paste0(
       " and ",
       interpret_d(parameters$Std_beta, rules = effsize),
@@ -54,7 +53,7 @@ model_text_parameters_lm <- function(model, parameters, ci = 0.95, effsize = "co
     parameters$significant_full,
     " (beta = ",
     format_value(parameters$beta),
-    ", SE = " ,
+    ", SE = ",
     format_value(parameters$SE),
     ", t(",
     format_value_unless_integers(parameters$DoF_residual),
@@ -94,11 +93,10 @@ model_text_parameters_logistic <- function(model, parameters, ci = 0.95, effsize
 
   # Effect size text
   if (!is.null(effsize) & "Std_beta" %in% names(parameters)) {
-
     modeltype <- insight::model_info(model)
-    if(modeltype$is_logit){
-      effsize_text <- interpret_odds(parameters$Std_beta, rules = effsize, log=TRUE)
-    } else{
+    if (modeltype$is_logit) {
+      effsize_text <- interpret_odds(parameters$Std_beta, rules = effsize, log = TRUE)
+    } else {
       effsize_text <- "[NO INTERPRETATION AVAILABLE]"
     }
 
@@ -152,7 +150,7 @@ model_text_parameters_logistic <- function(model, parameters, ci = 0.95, effsize
     parameters$significant_full,
     " (beta = ",
     format_value(parameters$beta),
-    ", SE = " ,
+    ", SE = ",
     format_value(parameters$SE),
     ", z = ",
     format_value(parameters$z),
@@ -243,12 +241,12 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
   }
 
   estimate <- paste0(estimate, format_ci(parameters$CI_low,
-                                         parameters$CI_high,
-                                         ci = ci
+    parameters$CI_high,
+    ci = ci
   ))
   estimate_full <- paste0(estimate_full, format_ci(parameters$CI_low,
-                                                   parameters$CI_high,
-                                                   ci = ci
+    parameters$CI_high,
+    ci = ci
   ))
 
 
@@ -315,11 +313,11 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
     }
 
     modeltype <- insight::model_info(model)
-    if(modeltype$is_logit){
-      effsize_text <- interpret_odds(parameters[[estimate_name]], rules = effsize, log=TRUE)
+    if (modeltype$is_logit) {
+      effsize_text <- interpret_odds(parameters[[estimate_name]], rules = effsize, log = TRUE)
     } else if (modeltype$is_linear) {
       effsize_text <- interpret_d(parameters[[estimate_name]], rules = effsize)
-    } else{
+    } else {
       effsize_text <- "[NO INTERPRETATION AVAILABLE]"
     }
 
@@ -345,8 +343,8 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
         format_value(parameters$MAD),
         ", ",
         format_ci(parameters$Std_CI_low,
-                  parameters$Std_CI_high,
-                  ci = ci
+          parameters$Std_CI_high,
+          ci = ci
         ),
         ")."
       )
@@ -362,8 +360,8 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
         format_value(parameters$SD),
         ", ",
         format_ci(parameters$Std_CI_low,
-                  parameters$Std_CI_high,
-                  ci = ci
+          parameters$Std_CI_high,
+          ci = ci
         ),
         ")."
       )
@@ -377,8 +375,8 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
         format_value(parameters[[estimate_name]]),
         ", ",
         format_ci(parameters$Std_CI_low,
-                  parameters$Std_CI_high,
-                  ci = ci
+          parameters$Std_CI_high,
+          ci = ci
         ),
         ")."
       )
@@ -394,4 +392,3 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
   )
   return(out)
 }
-

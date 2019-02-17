@@ -19,6 +19,3 @@ Create textual reports. See the documentation for your object's class:
  \item{\link[=report.lm]{Linear models (lm)}}
  }
 }
-\author{
-\href{https://dominiquemakowski.github.io/}{Dominique Makowski}
-}

@@ -28,7 +28,7 @@ model_table_lm <- function(model, parameters, performance, performance_in_table 
       "Fit" = as.numeric(performance[1, ]),
       stringsAsFactors = FALSE
     ) %>%
-      dplyr::filter_("Parameter %in% c('R2', 'R2_adj')")
+      dplyr::filter_("Parameter %in% c('R2', 'R2_adj', 'R2_Tjur')")
     table <- dplyr::full_join(table, perf, by = "Parameter")
   }
 

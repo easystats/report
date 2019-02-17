@@ -6,7 +6,7 @@
 #' @param effsize Effect size interpretation set of rules.
 #' @param ... Arguments passed to or from other methods.
 #'
-#' 
+#'
 #'
 #' @examples
 #' report(cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman"))

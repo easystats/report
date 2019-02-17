@@ -20,20 +20,18 @@ interpret_odds <- function(odds, rules = "chen2010", log = FALSE) {
     return(interpret(abs(odds), rules))
   } else {
     if (rules == "chen2010") {
-
       if (log == TRUE) {
         odds <- exp(abs(odds))
       }
 
       return(interpret(abs(odds), rules(c(1.68, 3.47, 6.71), c("very small", "small", "medium", "large"))))
-
     } else if (rules == "cohen1988") {
       if (log == FALSE) {
         odds <- log(odds)
       }
 
       d <- odds * (sqrt(3) / pi)
-      return(interpret_d(abs(d), rules=rules))
+      return(interpret_d(abs(d), rules = rules))
     } else {
       stop("rules must be 'chen2010', 'cohen1988' or an object of type rules.")
     }

@@ -19,6 +19,3 @@ Collapse Character Vector
 \examples{
 format_text_collapse(c("A", "B", "C"))
 }
-\author{
-\href{https://dominiquemakowski.github.io/}{Dominique Makowski}
-}
