@@ -90,6 +90,7 @@ report(t.test(iris$Sepal.Length, iris$Petal.Length))
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 print(report(t.test(iris$Sepal.Length, iris$Petal.Length)), width=100)
 ```
+
 ### Linear Models (LM)
 
 The difference between regular and full reports becomes obvious for more complicated models.

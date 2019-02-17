@@ -9,11 +9,12 @@ output:
     toc: true
     fig_width: 10.08
     fig_height: 6
-tags: [r, report]
+tags: [r, report, effect size, rules of thumb, guidelines, interpretation]
 vignette: >
   \usepackage[utf8]{inputenc}
 editor_options: 
   chunk_output_type: console
+bibliography: bibliography.bib
 ---
 
 ```{r, echo = FALSE}
@@ -30,7 +31,7 @@ options(knitr.kable.NA = '',
 
 ## Why?
 
-Many metrics used in statistics (indices of fit, model performance or parameter estimates) can be very abstract. A long experience is required to intuitively "*feel*" the meaning of their values. In order to facilitate the understanding of the results they are facing, many scientists use (often implicitly) some set of *rules of thumb*. In order to validate and standardize such interpretation grid, some authors validated and published them in the form of guidelines. One of the most famous interpertation grid was proposed by **Cohen (1988)** for a series of widely used indices, such as the correlation **r** (*r* = .20, small; *r* = .40, moderate and *r* = .60, large) or the **standardized difference** (*Cohen's d*). 
+The metrics used in statistics (indices of fit, model performance or parameter estimates) can be very abstract. A long experience is required to intuitively "*feel*" the meaning of their values. In order to facilitate the understanding of the results they are facing, many scientists use (often implicitly) some set of *rules of thumb*. Thus, in order to validate and standardize such interpretation grid, some authors validated and published them in the form of guidelines. One of the most famous interpertation grid was proposed by **Cohen (1988)** for a series of widely used indices, such as the correlation **r** (*r* = .20, small; *r* = .40, moderate and *r* = .60, large) or the **standardized difference** (*Cohen's d*). 
 
 Readers should keep in mind that these thresholds are arbitrary and should be discussed on a case-by-case basis, to avoid their crystalisation, as for the infamous ***p* < .05** example. 
 
@@ -40,9 +41,11 @@ Readers should keep in mind that these thresholds are arbitrary and should be di
 
 ### Correlation *r*
 
-##### **Cohen (1988)**
+##### @cohen1988statistical
 
-`interpret_r(x, rules = "cohen1988")`
+```r
+interpret_r(x, rules = "cohen1988")
+```
 
 - **r = 0 - 0.1**: Very small
 - **r = 0.1 - 0.3**: Small
@@ -50,6 +53,66 @@ Readers should keep in mind that these thresholds are arbitrary and should be di
 - **r > 0.5**: Large
 
 
-### Correlation *d*
+### Standardized Difference *d* (Cohen's *d*)
 
-TODO.
+The sandardized difference can be obtained through the standardization of linear model's parameters or data, in which they can be used as indices of effect size.
+
+
+##### @cohen1988statistical
+
+```r
+interpret_d(x, rules = "cohen1988")
+```
+
+- **d = 0 - 0.2**: Very small
+- **d = 0.2 - 0.5**: Small
+- **d = 0.5 - 0.8**: Medium
+- **d > 0.8**: Large
+
+##### @sawilowsky2009new
+
+```r
+interpret_d(x, rules = "sawilowsky2009")
+```
+
+- **d = 0 - 0.1**: Tiny
+- **d = 0.1 - 0.2**: Very small
+- **d = 0.2 - 0.5**: Small
+- **d = 0.5 - 0.8**: Medium
+- **d = 0.8 - 1.2**: Large
+- **d = 1.2 - 2**: Very large
+- **d > 2**: Huge
+
+
+### Odds ratio
+
+Odds ratio, and *log* odds ratio, are often found in epidemiological studies. However, they are also the parameters of ***logistic*** regressions, where they can be used as indices of effect size.
+
+##### @chen2010big
+
+```r
+interpret_odds(x, rules = "chen2010")
+```
+
+- **d = 0 - 1.68**: Very small
+- **d = 1.68 - 3.47**: Small
+- **d = 3.47 - 6.71**: Medium
+- **d > 6.71**: Large
+
+##### @cohen1988statistical
+
+```r
+interpret_odds(x, rules = "cohen1988")
+```
+
+This converts odds ratio to standardized difference *d* using the following formula [@cohen1988statistical;@sanchez2003effect]:
+
+```r
+d <- odds * (sqrt(3) / pi)
+```
+
+### Bayesian Indices (\% in ROPE, p*d*)
+
+The interpretation of Bayesian indices is detailed in [this article](https://easystats.github.io/bayestestR/articles/4_Guidelines.html).
+
+## References
