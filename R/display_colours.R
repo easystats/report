@@ -143,10 +143,13 @@
       justify = "right"
     )
 
-    if (!is.null(colour_if)) {
+    # remove NA
+    xnew[, name][trimws(xnew[, name]) == "NA"] <- ""
+
+    if (!is.null(colour_if) && length(x_if)) {
       xnew[, name][x_if] <- .colour(xnew[, name][x_if], colour_if)
     }
-    if (!is.null(colour_else)) {
+    if (!is.null(colour_else) && length(x_else)) {
       xnew[, name][x_else] <- .colour(xnew[, name][x_else], colour_else)
     }
   }
