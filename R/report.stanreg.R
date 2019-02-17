@@ -16,25 +16,25 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
 
   # Core Tables
   if (!is.null(effsize)) {
-    if(standardize == FALSE){
+    if (standardize == FALSE) {
       warning("The effect sizes are computed from standardized coefficients. Setting `standardize` to TRUE.")
     }
     out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ci = ci, estimate = tolower(estimate), ...)
     effsize_df <- as.data.frame(sapply(out$table_parameters[names(out$table_parameters) %in% c(paste0("Std_", stringr::str_to_title(estimate)))], interpret_d, rules = effsize))
-    if(ncol(effsize_df > 1)){
+    if (ncol(effsize_df > 1)) {
       names(effsize_df) <- paste0("Effect_Size_", stringr::str_remove_all(names(effsize_df), "Std_"))
       out$table_parameters <- cbind(out$table_parameters, effsize_df)
-    } else{
+    } else {
       out$table_parameters$Effect_Size <- effsize_df[1]
     }
   } else {
-    out$table_parameters <- parameters::model_parameters(model, ci = ci, standardize=standardize, estimate = estimate,  ...)
+    out$table_parameters <- parameters::model_parameters(model, ci = ci, standardize = standardize, estimate = estimate, ...)
   }
   out$table_parameters$Parameter <- as.character(out$table_parameters$Parameter)
   out$table_performance <- performance::model_performance(model, metrics = performance_metrics, ...)
 
   # Text
-  text_description <- model_text_description(model, effsize = effsize, ci=ci, ...)
+  text_description <- model_text_description(model, effsize = effsize, ci = ci, ...)
   text_performance <- model_text_performance_bayesian(out$performance)
   text_initial <- model_text_initial_bayesian(out$parameters, ci = ci)
   text_parameters <- model_text_parameters_bayesian(out$parameters, ci = ci, effsize = effsize, ...)
@@ -125,14 +125,14 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
 #' to_fulltable(r)
 #' @export
 report.stanreg <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", estimate = "median", ...) {
-
   values <- model_values(model,
-                         ci = ci,
-                         standardize = standardize,
-                         effsize = effsize,
-                         performance_in_table = performance_in_table,
-                         performance_metrics = performance_metrics,
-                         ...)
+    ci = ci,
+    standardize = standardize,
+    effsize = effsize,
+    performance_in_table = performance_in_table,
+    performance_metrics = performance_metrics,
+    ...
+  )
 
 
   out <- list(

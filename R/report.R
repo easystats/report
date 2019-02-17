@@ -184,8 +184,6 @@ as.list.report <- to_values
 #'
 #' @export
 print.report_table <- function(x, digits = 2, ...) {
-
-
   x <- x %>%
     .colour_column_if("beta", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red") %>%
     .colour_column_if("Median", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red") %>%

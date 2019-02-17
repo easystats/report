@@ -56,7 +56,7 @@
 #' @keywords internal
 .red <- function(x) {
   if (.supports_color()) {
-    x[!is.na(x)] <- paste0("\033[31m", format_value_unless_integers(x[!is.na(x)], digits=2), "\033[39m")
+    x[!is.na(x)] <- paste0("\033[31m", format_value_unless_integers(x[!is.na(x)], digits = 2), "\033[39m")
   }
   x
 }
@@ -64,7 +64,7 @@
 #' @keywords internal
 .green <- function(x) {
   if (.supports_color()) {
-    x[!is.na(x)] <- paste0("\033[32m", format_value_unless_integers(x[!is.na(x)], digits=2), "\033[39m")
+    x[!is.na(x)] <- paste0("\033[32m", format_value_unless_integers(x[!is.na(x)], digits = 2), "\033[39m")
   }
   x
 }
@@ -72,7 +72,7 @@
 #' @keywords internal
 .yellow <- function(x) {
   if (.supports_color()) {
-    x[!is.na(x)] <- paste0("\033[33m", format_value_unless_integers(x[!is.na(x)], digits=2), "\033[39m")
+    x[!is.na(x)] <- paste0("\033[33m", format_value_unless_integers(x[!is.na(x)], digits = 2), "\033[39m")
   }
   x
 }
@@ -80,7 +80,7 @@
 #' @keywords internal
 .violet <- function(x) {
   if (.supports_color()) {
-    x[!is.na(x)] <- paste0("\033[35m", format_value_unless_integers(x[!is.na(x)], digits=2), "\033[39m")
+    x[!is.na(x)] <- paste0("\033[35m", format_value_unless_integers(x[!is.na(x)], digits = 2), "\033[39m")
   }
   x
 }
@@ -88,7 +88,7 @@
 #' @keywords internal
 .cyan <- function(x) {
   if (.supports_color()) {
-    x[!is.na(x)] <- paste0("\033[36m", format_value_unless_integers(x[!is.na(x)], digits=2), "\033[39m")
+    x[!is.na(x)] <- paste0("\033[36m", format_value_unless_integers(x[!is.na(x)], digits = 2), "\033[39m")
   }
   x
 }
@@ -118,7 +118,7 @@
 #' Colour a column (Exported for test purposes)
 #' @keywords internal
 .colour_columns <- function(x, names, colour = "red") {
-  if(length(which(c(names) %in% names(x))) > 0){
+  if (length(which(c(names) %in% names(x))) > 0) {
     x[, c(names)[c(names) %in% names(x)]] <- sapply(x[, c(names)[c(names) %in% names(x)]], .colour, colour = colour)
   }
   return(x)
@@ -140,7 +140,7 @@
     }
     if (!is.null(colour_else)) {
       xnew[, c(name)][x_else] <- .colour(x[, c(name)][x_else], colour_else)
-    } else{
+    } else {
       xnew[, c(name)][x_else] <- format_value_unless_integers(x[, c(name)][x_else])
     }
 
@@ -152,7 +152,7 @@
 
 #' Detect coloured cells
 #' @keywords internal
-.colour_detect <- function(x){
+.colour_detect <- function(x) {
   ansi_regex <- paste0(
     "(?:(?:\\x{001b}\\[)|\\x{009b})",
     "(?:(?:[0-9]{1,3})?(?:(?:;[0-9]{0,3})*)?[A-M|f-m])",
@@ -166,7 +166,7 @@
 
 #' Remove ANSI color codes
 #' @keywords internal
-.colour_remove <- function(x){
+.colour_remove <- function(x) {
   ansi_regex <- paste0(
     "(?:(?:\\x{001b}\\[)|\\x{009b})",
     "(?:(?:[0-9]{1,3})?(?:(?:;[0-9]{0,3})*)?[A-M|f-m])",

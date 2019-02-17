@@ -12,7 +12,7 @@
 #' format_value(c(0.0045, 234, -23))
 #' @export
 format_value <- function(x, digits = 2) {
-  if(is.numeric(x)){
+  if (is.numeric(x)) {
     x <- ifelse(is.na(x), NA, trimws(format(round(x, digits), nsmall = digits)))
   }
   return(x)
@@ -23,7 +23,7 @@ format_value <- function(x, digits = 2) {
 #' @inherit format_value
 #' @export
 format_value_unless_integers <- function(x, digits = 2) {
-  if(is.numeric(x)){
+  if (is.numeric(x)) {
     if (!all(is.int(na.omit(x)))) {
       x <- format_value(x, digits = digits)
     }
