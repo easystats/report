@@ -54,6 +54,9 @@
   final[coloured_cells_index] <- coloured_cells
   # final[coloured_cells_index] <- paste0(" ", coloured_cells)
 
+  # left-align non-numeric columns
+  final[, 1] <- format(trimws(final[, 1]), justify = "left")
+
   # Transform to character
   rows <- c()
   for (row in 1:nrow(final)) {
