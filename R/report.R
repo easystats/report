@@ -98,7 +98,7 @@ to_table <- function(object, full = FALSE, digits = NULL, ...) {
     table <- object$table
   }
 
-  if (inherits(object, "report_lm")) {
+  if (inherits(object, "report_model")) {
     attr(table, "digits") <- digits
     return(table)
   }

@@ -166,6 +166,6 @@ report.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988
   )
 
   rep <- as.report(out)
-  class(rep) <- c("report_lm", class(rep))
+  class(rep) <- c("report_model", class(rep))
   rep
 }
