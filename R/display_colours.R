@@ -70,6 +70,14 @@
 }
 
 #' @keywords internal
+.italic <- function(x) {
+  if (.supports_color()) {
+    x[!is.na(x)] <- paste0("\033[3m", x[!is.na(x)], "\033[23m")
+  }
+  x
+}
+
+#' @keywords internal
 .red <- function(x) {
   if (.supports_color()) {
     x[!is.na(x)] <- paste0("\033[31m", x[!is.na(x)], "\033[39m")
@@ -121,6 +129,7 @@
     violet = .violet(x),
     cyan = .cyan(x),
     bold = .bold(x),
+    italic = .italic(x),
     warning(paste0("`color` ", colour, " not yet supported."))
   )
 }
