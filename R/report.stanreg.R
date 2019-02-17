@@ -22,7 +22,7 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
     out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ci = ci, estimate = tolower(estimate), ...)
     effsize_df <- as.data.frame(sapply(out$table_parameters[names(out$table_parameters) %in% c(paste0("Std_", stringr::str_to_title(estimate)))], interpret_d, rules = effsize))
     if (ncol(effsize_df > 1)) {
-      names(effsize_df) <- paste0("Effect_Size_", stringr::str_remove_all(names(effsize_df), "Std_"))
+      names(effsize_df) <- paste0("Effect_Size_", gsub("Std_", "", names(effsize_df)))
       out$table_parameters <- cbind(out$table_parameters, effsize_df)
     } else {
       out$table_parameters$Effect_Size <- effsize_df[1]

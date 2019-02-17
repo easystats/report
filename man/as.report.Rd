@@ -4,7 +4,7 @@
 \alias{as.report}
 \title{create objects of class \link{report}.}
 \usage{
-as.report(model, additional_class = NULL)
+as.report(model)
 }
 \arguments{
 \item{model}{An arbitrary R object.}
