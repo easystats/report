@@ -40,7 +40,6 @@ context("report.stanreg_lmer")
 
 test_that("report.stanreg_lmer", {
 
-  model <- circus::download_model("stanreg_lmerMod_1")
   r <- report(circus::download_model("stanreg_lmerMod_1"), effsize="cohen1988", standardize=TRUE)
   testthat::expect_equal(r$values$parameters$cyl$Median, 0.4062, tol = 0.05)
   testthat::expect_equal(ncol(to_table(r)), 8)

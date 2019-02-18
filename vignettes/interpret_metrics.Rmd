@@ -157,10 +157,10 @@ interpret_odds(x, rules = "chen2010")
 interpret_odds(x, rules = "cohen1988")
 ```
 
-This converts odds ratio to standardized difference *d* using the following formula [@cohen1988statistical;@sanchez2003effect]:
+This converts (log) odds ratio to standardized difference *d* using the following formula [@cohen1988statistical;@sanchez2003effect]:
 
 ```r
-d <- odds * (sqrt(3) / pi)
+d <- log_odds * (sqrt(3) / pi)
 ```
 
 ### Bayesian Indices (\% in ROPE, p*d*)

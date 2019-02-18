@@ -127,6 +127,29 @@ model_text_performance_bayesian <- function(performance, ci = 0.90, ...) {
     }
   }
 
+  if("R2_Fixed_Median" %in% names(performance)){
+    if(text != ""){
+      text <- paste0(text, " ")
+      text_full <- paste0(text_full, " ")
+    }
+
+    text <- paste0(text,
+                   "Within this model, the explanatory power related to the",
+                   " fixed effects (fixed R2's median) is of ",
+                   format_value(performance$R2_Fixed_Median),
+                   ".")
+
+    text_full <- paste0(text_full,
+                   "Within this model, the explanatory power related to the",
+                   " fixed effects (fixed R2's median) is of ",
+                   format_value(performance$R2_Fixed_Median),
+                   " (MAD = ",
+                   format_value(performance$R2_Fixed_MAD),
+                   ", ",
+                   format_ci(performance$R2_Fixed_CI_low, performance$R2_Fixed_CI_high, ci = ci),
+                   ").")
+  }
+
   out <- list(
     "text" = text,
     "text_full" = text_full
