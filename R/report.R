@@ -211,6 +211,12 @@ print.report_table <- function(x, digits = 2, ...) {
     dplyr::mutate_if(is.numeric, format_value_unless_integers, digits = digits)
 
   x[is.na(x)] <- ""
+
+  if (!is.null(x[["p"]])) {
+    fill <- .bold(sprintf("%*s", digits + 2, " "))
+    x[["p"]][x[["p"]] == ""] <- fill
+  }
+
   .display(x)
 }
 
