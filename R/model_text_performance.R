@@ -91,7 +91,6 @@ model_text_performance_bayesian <- function(performance, ci = 0.90, ...) {
   text <- ""
   text_full <- ""
 
-
   # R2
   if ("R2_Median" %in% names(performance)) {
     text <- paste0(

@@ -66,7 +66,7 @@ lm(Sepal.Length ~ Species, data=iris) %>%
 The package documentation can be found [**here**](https://easystats.github.io/report/). Check-out these tutorials:
 
 - [Get Started](https://easystats.github.io/report/articles/report.html)
-- [Automated Interpretation of Metrics](https://easystats.github.io/report/articles/interpret_metrics.html)
+- [Automated Interpretation of Metrics and Effect Sizes](https://easystats.github.io/report/articles/interpret_metrics.html)
 - [How to Cite Packages](https://easystats.github.io/report/articles/cite_packages.html)
 - [Supporting New Models](https://easystats.github.io/report/articles/supporting_new_models.html)
 
@@ -210,4 +210,4 @@ knitr::kable(table)
 
 If you like it, you can put a **star** on this repo, and cite the package as following:
 
-- Makowski, (2019). *Automated reporting of statistical models in R*. CRAN. doi: .
+- Makowski, D. \& Lüdecke, D. (2019). *Automated reporting of statistical models in R*. CRAN. doi: .

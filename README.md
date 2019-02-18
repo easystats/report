@@ -38,8 +38,8 @@ tutorials:
 
   - [Get
     Started](https://easystats.github.io/report/articles/report.html)
-  - [Automated Interpretation of
-    Metrics](https://easystats.github.io/report/articles/interpret_metrics.html)
+  - [Automated Interpretation of Metrics and Effect
+    Sizes](https://easystats.github.io/report/articles/interpret_metrics.html)
   - [How to Cite
     Packages](https://easystats.github.io/report/articles/cite_packages.html)
   - [Supporting New
@@ -179,14 +179,14 @@ to_text(r)
 to_table(r)
 ```
 
-|   | Parameter         | beta   | CI\_low | CI\_high | p    | Std\_beta | Fit  |
-| - | :---------------- | :----- | :------ | :------- | :--- | :-------- | :--- |
-| 1 | (Intercept)       | 3.68   | 3.47    | 3.89     | 0.00 | 1.50      |      |
-| 2 | Petal.Length      | 0.90   | 0.78    | 1.03     | 0.00 | 1.93      |      |
-| 3 | Speciesversicolor | \-1.60 | \-1.98  | \-1.22   | 0.00 | \-1.93    |      |
-| 4 | Speciesvirginica  | \-2.12 | \-2.66  | \-1.58   | 0.00 | \-2.56    |      |
-| 6 | R2                |        |         |          |      |           | 0.84 |
-| 7 | R2\_adj           |        |         |          |      |           | 0.83 |
+|   | Parameter         |     beta |  CI\_low | CI\_high | p | Std\_beta |    Fit |
+| - | :---------------- | -------: | -------: | -------: | -: | --------: | -----: |
+| 1 | (Intercept)       |   3.6835 |   3.4738 |    3.893 | 0 |     1.497 |        |
+| 2 | Petal.Length      |   0.9046 |   0.7765 |    1.033 | 0 |     1.928 |        |
+| 3 | Speciesversicolor | \-1.6010 | \-1.9833 |  \-1.219 | 0 |   \-1.933 |        |
+| 4 | Speciesvirginica  | \-2.1177 | \-2.6581 |  \-1.577 | 0 |   \-2.557 |        |
+| 6 | R2                |          |          |          |   |           | 0.8367 |
+| 7 | R2\_adj           |          |          |          |   |           | 0.8334 |
 
 ### General Linear Models (GLM)
 
@@ -228,5 +228,5 @@ to_fulltable(r)
 If you like it, you can put a **star** on this repo, and cite the
 package as following:
 
-  - Makowski, (2019). *Automated reporting of statistical models in R*.
-    CRAN. doi: .
+  - Makowski, D. & Lüdecke, D. (2019). *Automated reporting of
+    statistical models in R*. CRAN. doi: .

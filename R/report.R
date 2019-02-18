@@ -63,6 +63,10 @@ print.report <- function(x, full = FALSE, width = NULL, ...) {
     text <- format_text_wrap(text, width = width)
   }
 
+  # Colour
+  # TODO: Using regex matching.
+  # sub(".*beta = *(.*?) *,*", "\\1", text)
+
   cat(text, sep = "\n")
   invisible(text)
 }

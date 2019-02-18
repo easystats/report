@@ -1,16 +1,16 @@
 bibentry(
     bibtype="Article",
 	title="Automated reporting of statistical models in R",
-	author=person("Dominique", "Makowski"),
+	author=author={Makowski, Dominique and Lüdecke, Daniel,
     journal="CRAN",
     doi="",
 	year="2019",
 	note="R package",
-	url="https://github.com/neuropsychology/report",
+	url="https://github.com/easystats/report",
 
 	textVersion =
-  	paste("Makowski, D. (2019). Automated reporting of statistical models in R. CRAN.",
-        "Available from https://github.com/neuropsychology/report.",
+  	paste("Makowski, D. & Lüdecke, D. (2019). *Automated reporting of statistical models in R*. CRAN.",
+        "Available from https://github.com/easystats/report.",
 		"doi: .",
         sep=" "),
 
