@@ -26,7 +26,7 @@ context("report.stanreg_glm")
 test_that("report.stanreg_glm", {
 
   r <- report(circus::download_model("stanreg_glm_1"), effsize="cohen1988", standardize=TRUE)
-  testthat::expect_equal(r$values$parameters$wt$Median, 0.791, tol = 0.05)
+  testthat::expect_equal(r$values$parameters$wt$Median, 0.886, tol = 0.05)
   testthat::expect_equal(ncol(to_table(r)), 8)
 
   r <- report(circus::download_model("stanreg_glm_2"))
