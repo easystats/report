@@ -112,7 +112,7 @@ model_text_performance_bayesian <- function(performance, ci = 0.90, ...) {
 
     if ("R2_LOO_adj" %in% names(performance)) {
       text <- paste0(
-        text, " (LOO adj. R2 = ",
+        text, ", LOO adj. R2 = ",
         format_value(performance$R2_LOO_adj),
         ")."
       )
@@ -122,7 +122,7 @@ model_text_performance_bayesian <- function(performance, ci = 0.90, ...) {
         ")."
       )
     } else {
-      text <- paste0(text, ".")
+      text <- paste0(text, ").")
       text_full <- paste0(text_full, ").")
     }
   }

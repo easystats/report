@@ -29,7 +29,7 @@
 Create a report of a linear model.
 }
 \examples{
-model <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
+model <- glm(vs ~ disp, data = mtcars, family="binomial")
 r <- report(model)
 to_text(r)
 to_fulltext(r)

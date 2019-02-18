@@ -89,8 +89,6 @@ model_values.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "ch
     out$performance[[perf]] <- out$table_performance[[perf]]
   }
 
-
-  class(out) <- c("values_lm", class(out))
   return(out)
 }
 
@@ -138,7 +136,7 @@ model_values.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "ch
 #' @param ... Arguments passed to or from other methods.
 #'
 #' @examples
-#' model <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
+#' model <- glm(vs ~ disp, data = mtcars, family="binomial")
 #' r <- report(model)
 #' to_text(r)
 #' to_fulltext(r)

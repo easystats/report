@@ -2,7 +2,7 @@
 % Please edit documentation in R/report.stanreg.R
 \name{report.stanreg}
 \alias{report.stanreg}
-\title{Linear Models Report}
+\title{Bayesian Models Report}
 \usage{
 \method{report}{stanreg}(model, ci = 0.95, standardize = TRUE,
   effsize = "cohen1988", performance_in_table = TRUE,
@@ -29,10 +29,13 @@
 Create a report of a linear model.
 }
 \examples{
-model <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
+\dontrun{
+library(rstanarm)
+model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Length * Species, data = iris)
 r <- report(model)
 to_text(r)
 to_fulltext(r)
 to_table(r)
 to_fulltable(r)
+}
 }

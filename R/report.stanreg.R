@@ -53,7 +53,7 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
   )
 
   # Tables
-  modeltable <- model_table_lm(model, out$table_parameters, out$table_performance, performance_in_table = performance_in_table, ...)
+  modeltable <- model_table_bayesian(model, out$table_parameters, out$table_performance, performance_in_table = performance_in_table, ...)
   out$table <- modeltable$table
   out$table_full <- modeltable$table_full
 
@@ -68,8 +68,6 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
     out$performance[[perf]] <- out$table_performance[[perf]]
   }
 
-
-  class(out) <- c("values_lm", class(out))
   return(out)
 }
 
@@ -103,7 +101,7 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
 
 
 
-#' Linear Models Report
+#' Bayesian Models Report
 #'
 #' Create a report of a linear model.
 #'
@@ -117,12 +115,15 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
 #' @param ... Arguments passed to or from other methods.
 #'
 #' @examples
-#' model <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
+#' \dontrun{
+#' library(rstanarm)
+#' model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Length * Species, data = iris)
 #' r <- report(model)
 #' to_text(r)
 #' to_fulltext(r)
 #' to_table(r)
 #' to_fulltable(r)
+#' }
 #' @export
 report.stanreg <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", estimate = "median", ...) {
   values <- model_values(model,

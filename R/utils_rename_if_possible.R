@@ -10,7 +10,6 @@
 #'
 #' @examples
 #' rename_if_possible(iris, "Sepal.Length", "length")
-#' @import stringr
 #' @export
 rename_if_possible <- function(x, pattern, replacement) {
   names(x) <- replace(names(x), names(x) == pattern, replacement)

@@ -212,3 +212,17 @@ print.report_table <- function(x, digits = 2, ...) {
   x[is.na(x)] <- ""
   .display(x)
 }
+
+
+
+
+
+#' Model Values
+#'
+#' @param model Statistical Model.
+#' @param ... Arguments passed to or from other methods.
+#'
+#' @export
+model_values <- function(model, ...) {
+  UseMethod("model_values")
+}
