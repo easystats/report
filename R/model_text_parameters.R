@@ -235,7 +235,11 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
   }
 
   if (all(estimate_full != "")) {
-    estimate <- paste0(string_split_matrix(estimate_full, ", ")[1, ], ", ")
+    if(nrow(string_split_matrix(estimate_full, ", ")) > 1){
+      estimate <- paste0(string_split_matrix(estimate_full, ", ")[1, ], ", ")
+    } else{
+      estimate <- paste0(string_split_matrix(estimate_full, ", ")[, 1], ", ")
+    }
   } else {
     stop("No estimate in parameters.")
   }
