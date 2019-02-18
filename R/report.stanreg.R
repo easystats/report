@@ -29,7 +29,7 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
   # Text
   text_description <- model_text_description(model, effsize = effsize, ci = ci, ...)
   text_performance <- model_text_performance_bayesian(out$table_performance)
-  text_initial <- model_text_initial_bayesian(out$table_parameters, ci = ci)
+  text_initial <- model_text_initial_bayesian(model, out$table_parameters, ci = ci)
   text_parameters <- model_text_parameters_bayesian(model, out$table_parameters, ci = ci, effsize = effsize, ...)
 
   out$text <- paste(

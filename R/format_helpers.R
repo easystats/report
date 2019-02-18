@@ -1,5 +1,5 @@
 #' @keywords internal
-string_split_matrix <- function(x, pattern) {
+.string_split_matrix <- function(x, pattern) {
   l <- strsplit(x, pattern)
   max_length <- length(l[[which.max(lapply(l, length))]])
 

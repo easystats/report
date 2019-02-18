@@ -1,5 +1,5 @@
 #' @keywords internal
-model_text_initial_lm <- function(parameters, ci = 0.95, ...) {
+model_text_initial_lm <- function(model, parameters, ci = 0.95, ...) {
   intercept <- parameters[parameters$Parameter == "(Intercept)", ]
 
   text <- paste0(
@@ -8,7 +8,9 @@ model_text_initial_lm <- function(parameters, ci = 0.95, ...) {
     "."
   )
   text_full <- paste0(
-    "The model's intercept is at ",
+    "The model's intercept, corresponding to ",
+    .text_intercept(model),
+    ", is at ",
     format_value(intercept$beta),
     " (t(",
     format_value_unless_integers(intercept$DoF_residual),
@@ -34,7 +36,7 @@ model_text_initial_lm <- function(parameters, ci = 0.95, ...) {
 
 
 #' @keywords internal
-model_text_initial_logistic <- function(parameters, ci = 0.95, ...) {
+model_text_initial_logistic <- function(model, parameters, ci = 0.95, ...) {
   intercept <- parameters[parameters$Parameter == "(Intercept)", ]
 
   text <- paste0(
@@ -43,7 +45,9 @@ model_text_initial_logistic <- function(parameters, ci = 0.95, ...) {
     "."
   )
   text_full <- paste0(
-    "The model's intercept is at ",
+    "The model's intercept, corresponding to ",
+    .text_intercept(model),
+    ", is at ",
     format_value(intercept$beta),
     " (z = ",
     format_value(intercept$z),
@@ -66,17 +70,19 @@ model_text_initial_logistic <- function(parameters, ci = 0.95, ...) {
 
 
 #' @keywords internal
-model_text_initial_bayesian <- function(parameters, ci = 0.90, ...) {
+model_text_initial_bayesian <- function(model, parameters, ci = 0.90, ...) {
   intercept <- parameters[parameters$Parameter == "(Intercept)", ]
 
   if ("Median" %in% names(intercept)) {
     text <- paste0(
-      "The model's intercept's median is ",
+      "The model's intercept has a median of ",
       format_value(intercept$Median),
       "."
     )
     text_full <- paste0(
-      "The model's intercept's median is ",
+      "The model's intercept, corresponding to ",
+      .text_intercept(model),
+      ", has a median of ",
       format_value(intercept$Median),
       " (MAD = ",
       format_value(intercept$MAD),
@@ -90,7 +96,9 @@ model_text_initial_bayesian <- function(parameters, ci = 0.90, ...) {
       "."
     )
     text_full <- paste0(
-      "The model's intercept's mean is ",
+      "The model's intercept, corresponding to ",
+      .text_intercept(model),
+      ", has a mean of ",
       format_value(intercept$Mean),
       " (MAD = ",
       format_value(intercept$SD),
@@ -99,7 +107,9 @@ model_text_initial_bayesian <- function(parameters, ci = 0.90, ...) {
     )
   } else if ("MAP" %in% names(intercept)) {
     text <- paste0(
-      "The model's intercept's MAP is ",
+      "The model's intercept, corresponding to ",
+      .text_intercept(model),
+      ", has a MAP of ",
       format_value(intercept$MAP),
       "."
     )
@@ -138,4 +148,33 @@ model_text_initial_bayesian <- function(parameters, ci = 0.90, ...) {
     "text_full" = text_full
   )
   return(out)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#' @keywords internal
+.text_intercept <- function(model){
+    data <- insight::get_data(model)[insight::find_terms(model)$conditional]
+    text <- c()
+    for(col in names(data)){
+      if(is.numeric(data[[col]])){
+        text <- c(text, paste0(col," = 0"))
+      } else if(is.factor(data[[col]])){
+        text <- c(text, paste0(col," = ", levels(data[col])))
+      } else{
+        text <- c(text, paste0(col," = ???"))
+      }
+    }
+    return(format_text_collapse(text))
 }
