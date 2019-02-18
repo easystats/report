@@ -235,7 +235,7 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
   }
 
   if (all(estimate_full != "")) {
-    estimate <- paste0(string_split_matrix(estimate_full, ", ")[, 1], ", ")
+    estimate <- paste0(string_split_matrix(estimate_full, ", ")[1, ], ", ")
   } else {
     stop("No estimate in parameters.")
   }
@@ -339,9 +339,9 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
         estimate_name,
         " = ",
         format_value(parameters[[estimate_name]]),
-        ", MAD = ",
+        ", Std. MAD = ",
         format_value(parameters$MAD),
-        ", ",
+        ", Std. ",
         format_ci(parameters$Std_CI_low,
           parameters$Std_CI_high,
           ci = ci
@@ -356,9 +356,9 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
         estimate_name,
         " = ",
         format_value(parameters[[estimate_name]]),
-        ", SD = ",
+        ", Std. SD = ",
         format_value(parameters$SD),
-        ", ",
+        ", Std. ",
         format_ci(parameters$Std_CI_low,
           parameters$Std_CI_high,
           ci = ci
@@ -373,7 +373,7 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
         estimate_name,
         " = ",
         format_value(parameters[[estimate_name]]),
-        ", ",
+        ", Std. ",
         format_ci(parameters$Std_CI_low,
           parameters$Std_CI_high,
           ci = ci

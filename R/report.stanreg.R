@@ -20,13 +20,13 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
       warning("The effect sizes are computed from standardized coefficients. Setting `standardize` to TRUE.")
     }
     out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ci = ci, estimate = tolower(estimate), ...)
-    effsize_df <- as.data.frame(sapply(out$table_parameters[names(out$table_parameters) %in% c(paste0("Std_", stringr::str_to_title(estimate)))], interpret_d, rules = effsize))
-    if (ncol(effsize_df > 1)) {
-      names(effsize_df) <- paste0("Effect_Size_", gsub("Std_", "", names(effsize_df)))
-      out$table_parameters <- cbind(out$table_parameters, effsize_df)
-    } else {
-      out$table_parameters$Effect_Size <- effsize_df[1]
-    }
+    # effsize_df <- as.data.frame(sapply(out$table_parameters[names(out$table_parameters) %in% c(paste0("Std_", stringr::str_to_title(estimate)))], interpret_d, rules = effsize))
+    # if (ncol(effsize_df) > 1) {
+    #   names(effsize_df) <- paste0("Effect_Size_", gsub("Std_", "", names(effsize_df)))
+    #   out$table_parameters <- cbind(out$table_parameters, effsize_df)
+    # } else {
+    #   out$table_parameters$Effect_Size <- effsize_df[1]
+    # }
   } else {
     out$table_parameters <- parameters::model_parameters(model, ci = ci, standardize = standardize, estimate = estimate, ...)
   }
@@ -125,7 +125,7 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
 #' to_fulltable(r)
 #' }
 #' @export
-report.stanreg <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", estimate = "median", ...) {
+report.stanreg <- function(model, ci = 0.95, standardize = FALSE, effsize = NULL, performance_in_table = TRUE, performance_metrics = "all", estimate = "median", ...) {
   values <- model_values(model,
     ci = ci,
     standardize = standardize,

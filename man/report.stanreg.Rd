@@ -4,8 +4,8 @@
 \alias{report.stanreg}
 \title{Bayesian Models Report}
 \usage{
-\method{report}{stanreg}(model, ci = 0.95, standardize = TRUE,
-  effsize = "cohen1988", performance_in_table = TRUE,
+\method{report}{stanreg}(model, ci = 0.95, standardize = FALSE,
+  effsize = NULL, performance_in_table = TRUE,
   performance_metrics = "all", estimate = "median", ...)
 }
 \arguments{
