@@ -29,7 +29,7 @@ options(knitr.kable.NA = '',
 
 [![Build Status](https://travis-ci.org/easystats/report.svg?branch=master)](https://travis-ci.org/easystats/report)
 [![codecov](https://codecov.io/gh/easystats/report/branch/master/graph/badge.svg)](https://codecov.io/gh/easystats/report)
-[![HitCount](http://hits.dwyl.io/DominiqueMakowski/bayestestR.svg)](http://hits.dwyl.io/easystats/report) [![Documentation](https://img.shields.io/badge/documentation-report-orange.svg?colorB=E91E63)](https://easystats.github.io/report/)
+[![HitCount](http://hits.dwyl.io/easystats/report.svg)](http://hits.dwyl.io/easystats/report) [![Documentation](https://img.shields.io/badge/documentation-report-orange.svg?colorB=E91E63)](https://easystats.github.io/report/)
 
 
 
@@ -43,7 +43,6 @@ options(knitr.kable.NA = '',
 `report`'s primary goal is to fill the gap between R's output and the formatted result description of your manuscript, with the automated use of **best practices** guidelines (*e.g.,* [APA](https://www.apastyle.org/)'s style guide), ensuring **standardization** and **quality** of results reporting.
 
 
-**Note: this package is the heir and successor to the [psycho](https://github.com/easystats/psycho.R) package.**
 
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
@@ -152,7 +151,7 @@ print(report(t.test(iris$Sepal.Length, iris$Petal.Length)), width=100)
 ```
 ### Linear Models (LM)
 
-The difference between regular and full reports becomes obvious for more complicated models.
+
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
 model <- lm(Sepal.Length ~ Petal.Length + Species, data=iris)
@@ -167,26 +166,43 @@ r <- report(model)
 to_text(r, width=100)
 ```
 
-
-```{r message=FALSE, warning=FALSE, eval=FALSE}
-to_fulltext(r)
-```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-to_fulltext(r, width=100)
-```
-
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
 to_table(r)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-knitr::kable(to_table(r, digits=2))
+table <- to_table(r, digits=2)
+# remove empty row because kable doesn't handle it
+table <- table[rowSums(is.na(table)) != ncol(table),]
+knitr::kable(table)
 ```
+
+### General Linear Models (GLM)
+
+The difference between regular and full reports becomes obvious for more complicated models.
+
+```{r message=FALSE, warning=FALSE, eval=FALSE}
+model <- glm(vs ~ wt + mpg, data=mtcars, family="binomial")
+r <- report(model)
+
+to_fulltext(r)
+```
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+model <- glm(vs ~ wt + mpg, data=mtcars, family="binomial")
+r <- report(model)
+
+to_fulltext(r, width=100)
+```
+
+
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
 to_fulltable(r)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-knitr::kable(to_fulltable(r, digits=2))
+table <- to_fulltable(r, digits=2)
+# remove empty row because kable doesn't handle it
+table <- table[rowSums(is.na(table)) != ncol(table),]
+knitr::kable(table)
 ```
 
 

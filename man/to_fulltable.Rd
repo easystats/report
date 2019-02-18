@@ -10,7 +10,7 @@ to_fulltable(x, full = TRUE, digits = NULL, ...)
 \method{as.data.frame}{report}(x, ...)
 }
 \arguments{
-\item{x}{Object of class \link{report}}
+\item{x}{Object of class \link{report}.}
 
 \item{full}{Show the full report (default to TRUE).}
 
@@ -20,7 +20,4 @@ to_fulltable(x, full = TRUE, digits = NULL, ...)
 }
 \description{
 Full report table display
-}
-\author{
-\href{https://dominiquemakowski.github.io/}{Dominique Makowski}
 }

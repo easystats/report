@@ -24,6 +24,3 @@ interpret_d(c(.5, .02))
   \item Sawilowsky, S. S. (2009). New effect size rules of thumb.
 }
 }
-\author{
-\href{https://dominiquemakowski.github.io/}{Dominique Makowski}
-}

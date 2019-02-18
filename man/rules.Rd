@@ -19,6 +19,3 @@ Create a container for interpretation rules of thumb. See \link{interpret}.
 \examples{
 rules(c(0.05), c("significant", "not significant"), if_lower = TRUE)
 }
-\author{
-\href{https://dominiquemakowski.github.io/}{Dominique Makowski}
-}

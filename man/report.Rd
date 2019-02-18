@@ -4,21 +4,18 @@
 \alias{report}
 \title{Create Reports}
 \usage{
-report(x, ...)
+report(model, ...)
 }
 \arguments{
-\item{x}{Object.}
+\item{model}{Object.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
 \description{
 Create textual reports. See the documentation for your object's class:
 \itemize{
- \item{\link[=report.data.frame]{data.frame}}
- \item{\link[=report.htest]{t-test}}
- \item{\link[=report.htest]{correlation}}
+ \item{\link[=report.data.frame]{Dataframes}}
+ \item{\link[=report.htest]{Correlations and t-tests (htest)}}
+ \item{\link[=report.lm]{Linear models (lm)}}
  }
-}
-\author{
-\href{https://dominiquemakowski.github.io/}{Dominique Makowski}
 }

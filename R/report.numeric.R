@@ -2,14 +2,14 @@
 #'
 #' Create a report of a numeric vector.
 #'
-#' @param x Numeric vector.
+#' @param model Numeric vector.
 #' @param median Show \link{mean} and \link{sd} (default) or \link{median} and \link{mad}.
 #' @param dispersion Show dispersion (\link{sd} or \link{mad}).
 #' @param range Show range.
 #' @param missing_percentage Show missings by number (default) or percentage
 #' @param ... Arguments passed to or from other methods.
 #'
-#' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
+#'
 #'
 #' @examples
 #' x <- rnorm(1000)
@@ -23,26 +23,26 @@
 #' @importFrom stats mad sd
 #'
 #' @export
-report.numeric <- function(x, median = FALSE, dispersion = TRUE, range = TRUE, missing_percentage = FALSE, ...) {
-  if (length(unique(x)) == 2) {
-    if (is.null(names(x))) {
-      name <- deparse(substitute(x))
+report.numeric <- function(model, median = FALSE, dispersion = TRUE, range = TRUE, missing_percentage = FALSE, ...) {
+  if (length(unique(model)) == 2) {
+    if (is.null(names(model))) {
+      name <- deparse(substitute(model))
     } else {
-      name <- names(x)
+      name <- names(model)
     }
     warning(paste0("Variable `", name, "` contains only two different values. Consider converting it to a factor."))
   }
 
   # Table -------------------------------------------------------------------
   table_full <- data.frame(
-    Mean = mean(x),
-    SD = sd(x),
-    Median = median(x),
-    MAD = mad(x),
-    Min = min(x),
-    Max = max(x),
-    n_Obs = length(x),
-    n_Missing = sum(is.na(x))
+    Mean = mean(model),
+    SD = sd(model),
+    Median = median(model),
+    MAD = mad(model),
+    Min = min(model),
+    Max = max(model),
+    n_Obs = length(model),
+    n_Missing = sum(is.na(model))
   )
   table_full$percentage_Missing <- table_full$n_Missing / table_full$n_Obs * 100
 

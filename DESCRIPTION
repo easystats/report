@@ -3,32 +3,46 @@ Type: Package
 Title: Automated reporting of statistical models in R
 Version: 0.1.0
 Authors@R: c(
-    person("Dominique", 
-        "Makowski", 
-        email = "dom.makowski@gmail.com",
-        role = c("aut", "cre", "cph"), 
-        comment = c(ORCID = "0000-0001-5375-9967"))
+	person("Dominique", 
+		"Makowski", 
+		email = "dom.makowski@gmail.com",
+		role = c("aut", "cre"), 
+		comment = c(ORCID = "0000-0001-5375-9967")),
+	person("Daniel", 
+		"Lüdecke", 
+		role = c("aut"), 
+		email = "d.luedecke@uke.de", 
+		comment = c(ORCID = "0000-0002-8895-3206"))
 	)
 Maintainer: Dominique Makowski <dom.makowski@gmail.com>
 URL: https://github.com/easystats/report
 BugReports: https://github.com/easystats/report/issues
 Description: Converts statistical models into textual reports suited for publication.
-License: MIT + file LICENSE
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr
 Imports:
+	insight,
+	parameters,
+	performance,
 	dplyr,
-	tidyr,
 	stringr,
-	purrr,
-	broom
+	broom,
+	purrr
 Suggests:
 	spelling,
 	knitr,
 	rmarkdown,
 	testthat,
 	covr,
-	ggplot2
+	circus,
+	ggplot2,
+	rstudioapi
+Remotes: 
+	easystats/insight,
+	easystats/parameters,
+	easystats/performance,
+	easystats/circus
 RoxygenNote: 6.1.1
 Language: en-GB

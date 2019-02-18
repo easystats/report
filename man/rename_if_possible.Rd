@@ -19,6 +19,3 @@ Rename a variable in a dataframe if applicable.
 \examples{
 rename_if_possible(iris, "Sepal.Length", "length")
 }
-\author{
-\href{https://dominiquemakowski.github.io/}{Dominique Makowski}
-}

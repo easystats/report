@@ -18,5 +18,5 @@ Value Formatting
 format_value(1.20)
 format_value(1.2)
 format_value(1.2012313)
-format_value(c(0.0045, 234))
+format_value(c(0.0045, 234, -23))
 }

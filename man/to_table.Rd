@@ -7,7 +7,7 @@
 to_table(object, full = FALSE, digits = NULL, ...)
 }
 \arguments{
-\item{object}{Object of class \link{report}}
+\item{object}{Object of class \link{report}.}
 
 \item{full}{Show the full report.}
 
@@ -17,7 +17,4 @@ to_table(object, full = FALSE, digits = NULL, ...)
 }
 \description{
 Report table display
-}
-\author{
-\href{https://dominiquemakowski.github.io/}{Dominique Makowski}
 }

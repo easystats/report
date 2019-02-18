@@ -2,13 +2,13 @@
 % Please edit documentation in R/report.R
 \name{is.report}
 \alias{is.report}
-\title{Test for objects of class \link{report}}
+\title{Test for objects of class \link{report}.}
 \usage{
-is.report(x)
+is.report(model)
 }
 \arguments{
-\item{x}{An arbitrary R object.}
+\item{model}{An arbitrary R object.}
 }
 \description{
-Test for objects of class \link{report}
+Test for objects of class \link{report}.
 }

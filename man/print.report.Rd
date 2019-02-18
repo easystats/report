@@ -7,7 +7,7 @@
 \method{print}{report}(x, full = FALSE, width = NULL, ...)
 }
 \arguments{
-\item{x}{Object of class \link{report}}
+\item{x}{Object of class \link{report}.}
 
 \item{full}{Show the full report.}
 
@@ -17,7 +17,4 @@
 }
 \description{
 Report printing
-}
-\author{
-\href{https://dominiquemakowski.github.io/}{Dominique Makowski}
 }

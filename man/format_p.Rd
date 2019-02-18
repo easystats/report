@@ -19,6 +19,3 @@ p-values Formatting
 \examples{
 format_p(.02)
 }
-\author{
-\href{https://dominiquemakowski.github.io/}{Dominique Makowski}
-}

@@ -2,7 +2,7 @@
 #'
 #' @param x Numeric value.
 #'
-#' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
+#'
 #'
 #' @examples
 #' interpret_direction(.02)

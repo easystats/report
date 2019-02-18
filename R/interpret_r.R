@@ -4,7 +4,7 @@
 #' @param rules Can be "cohen1988" (default), "evans1996" or custom set of rules.
 #' @param direction Return the parameter's direction.
 #'
-#' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
+#'
 #'
 #' @examples
 #' interpret_r(r = .015)
@@ -17,10 +17,9 @@
 #' }
 #' @export
 interpret_r <- function(r, rules = "cohen1988", direction = TRUE) {
-  if(is.rules(rules)){
+  if (is.rules(rules)) {
     return(interpret(abs(r), rules))
-  } else{
-
+  } else {
     if (rules == "cohen1988") {
       text <- interpret(
         abs(r),
@@ -40,7 +39,6 @@ interpret_r <- function(r, rules = "cohen1988", direction = TRUE) {
     } else {
       stop("rules must be 'cohen1988', 'evans1996' or an object of type rules.")
     }
-
   }
 
 

@@ -4,12 +4,12 @@
 \alias{report.data.frame}
 \title{Dataframe Report}
 \usage{
-\method{report}{data.frame}(x, median = FALSE, dispersion = TRUE,
+\method{report}{data.frame}(model, median = FALSE, dispersion = TRUE,
   range = TRUE, levels_percentage = FALSE, n_characters = 3,
   missing_percentage = FALSE, ...)
 }
 \arguments{
-\item{x}{Numeric vector.}
+\item{model}{Numeric vector.}
 
 \item{median}{Show \link{mean} and \link{sd} (default) or \link{median} and \link{mad}.}
 
@@ -38,7 +38,4 @@ to_fulltable(report(x))
 }
 \seealso{
 report
-}
-\author{
-\href{https://dominiquemakowski.github.io/}{Dominique Makowski}
 }

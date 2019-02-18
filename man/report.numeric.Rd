@@ -4,11 +4,11 @@
 \alias{report.numeric}
 \title{Numeric Vector Report}
 \usage{
-\method{report}{numeric}(x, median = FALSE, dispersion = TRUE,
+\method{report}{numeric}(model, median = FALSE, dispersion = TRUE,
   range = TRUE, missing_percentage = FALSE, ...)
 }
 \arguments{
-\item{x}{Numeric vector.}
+\item{model}{Numeric vector.}
 
 \item{median}{Show \link{mean} and \link{sd} (default) or \link{median} and \link{mad}.}
 
@@ -33,7 +33,4 @@ to_fulltable(report(x))
 }
 \seealso{
 report
-}
-\author{
-\href{https://dominiquemakowski.github.io/}{Dominique Makowski}
 }

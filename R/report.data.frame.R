@@ -2,7 +2,7 @@
 #'
 #' Create a report of a dataframe.
 #'
-#' @param x Numeric vector.
+#' @param model Numeric vector.
 #' @param median Show \link{mean} and \link{sd} (default) or \link{median} and \link{mad}.
 #' @param dispersion Show dispersion (\link{sd} or \link{mad}).
 #' @param range Show range.
@@ -11,7 +11,7 @@
 #' @param missing_percentage Show missings by number (default) or percentage.
 #' @param ... Arguments passed to or from other methods.
 #'
-#' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
+#'
 #'
 #' @examples
 #' x <- iris
@@ -24,7 +24,7 @@
 #' @import dplyr
 #'
 #' @export
-report.data.frame <- function(x, median = FALSE, dispersion = TRUE, range = TRUE, levels_percentage = FALSE, n_characters = 3, missing_percentage = FALSE, ...) {
+report.data.frame <- function(model, median = FALSE, dispersion = TRUE, range = TRUE, levels_percentage = FALSE, n_characters = 3, missing_percentage = FALSE, ...) {
 
   # Table -------------------------------------------------------------------
   table_full <- data.frame()
@@ -33,8 +33,8 @@ report.data.frame <- function(x, median = FALSE, dispersion = TRUE, range = TRUE
   text <- ""
   values <- list()
 
-  for (col in names(x)) {
-    r <- report(x[[col]], median = median, dispersion = dispersion, range = range, levels_percentage = levels_percentage, n_characters = n_characters, missing_percentage = missing_percentage)
+  for (col in names(model)) {
+    r <- report(model[[col]], median = median, dispersion = dispersion, range = range, levels_percentage = levels_percentage, n_characters = n_characters, missing_percentage = missing_percentage)
 
     current_table <- r$table
     current_table$Variable <- col
@@ -67,8 +67,8 @@ report.data.frame <- function(x, median = FALSE, dispersion = TRUE, range = TRUE
     table_full <- select_(table_full, "Variable", "n_Obs", "everything()")
   }
 
-  text <- paste0("The data contains ", nrow(x), " observations of the following variables:", text)
-  text_full <- paste0("The data contains ", nrow(x), " observations of the following variables:", text_full)
+  text <- paste0("The data contains ", nrow(model), " observations of the following variables:", text)
+  text_full <- paste0("The data contains ", nrow(model), " observations of the following variables:", text_full)
 
   out <- list(
     text = text,
@@ -88,9 +88,9 @@ report.data.frame <- function(x, median = FALSE, dispersion = TRUE, range = TRUE
 #' @inheritParams report.data.frame
 #' @import dplyr
 #' @export
-report.grouped_df <- function(x, median = FALSE, dispersion = TRUE, range = TRUE, levels_percentage = FALSE, n_characters = 3, missing_percentage = FALSE, ...) {
-  groups <- group_vars(x)
-  ungrouped_x <- ungroup(x)
+report.grouped_df <- function(model, median = FALSE, dispersion = TRUE, range = TRUE, levels_percentage = FALSE, n_characters = 3, missing_percentage = FALSE, ...) {
+  groups <- group_vars(model)
+  ungrouped_x <- ungroup(model)
   xlist <- split(ungrouped_x, ungrouped_x[groups], sep = " - ")
 
 

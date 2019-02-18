@@ -4,11 +4,10 @@
 #' @param stars Add significance stars.
 #' @param stars_only Return only significance stars.
 #'
-#' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
+#'
 #'
 #' @examples
 #' format_p(.02)
-#' @importFrom stringr str_remove_all
 #' @export
 format_p <- function(p, stars = FALSE, stars_only = FALSE) {
   p <- ifelse(p < 0.001, "< .001***",
@@ -22,12 +21,10 @@ format_p <- function(p, stars = FALSE, stars_only = FALSE) {
   )
 
   if (stars_only == TRUE) {
-    p <- stringr::str_remove_all(p, "[^\\*]")
-  } else {
-    if (stars == FALSE) {
-      p <- stringr::str_remove_all(p, "\\*")
-    }
+    p <- gsub("[^\\*]", "", p)
+  } else if (stars == FALSE) {
+    p <- gsub("\\*", "", p)
   }
 
-  return(p)
+  p
 }

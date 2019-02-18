@@ -2,13 +2,13 @@
 #'
 #' Create a report of a character vector.
 #'
-#' @param x Character vector.
+#' @param model Character vector.
 #' @param n_characters Number of different character entries to show. Can be "all".
 #' @param levels_percentage Show characters entries by number (default) or percentage.
 #' @param missing_percentage Show missings by number (default) or percentage.
 #' @param ... Arguments passed to or from other methods.
 #'
-#' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
+#'
 #'
 #' @examples
 #' x <- c("A", "B", "C", "A", "B", "B", "D", "E", "B", "D", "A")
@@ -21,10 +21,10 @@
 #' @import dplyr
 #'
 #' @export
-report.character <- function(x, n_characters = 3, levels_percentage = FALSE, missing_percentage = FALSE, ...) {
-  n_char <- as.data.frame(sort(table(x), decreasing = TRUE))
+report.character <- function(model, n_characters = 3, levels_percentage = FALSE, missing_percentage = FALSE, ...) {
+  n_char <- as.data.frame(sort(table(model), decreasing = TRUE))
   names(n_char) <- c("Entry", "n_Entry")
-  n_char$percentage_Entry <- n_char$n_Entry / length(x)
+  n_char$percentage_Entry <- n_char$n_Entry / length(model)
 
   if (n_characters == "all" | n_characters > nrow(n_char)) {
     n_characters <- nrow(n_char)
@@ -34,8 +34,8 @@ report.character <- function(x, n_characters = 3, levels_percentage = FALSE, mis
 
   table_full <- data.frame(
     n_Entries = nrow(n_char),
-    n_Obs = length(x),
-    n_Missing = sum(is.na(x))
+    n_Obs = length(model),
+    n_Missing = sum(is.na(model))
   )
   table_full$percentage_Missing <- table_full$n_Missing / table_full$n_Obs * 100
 

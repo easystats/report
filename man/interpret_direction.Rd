@@ -17,6 +17,3 @@ interpret_direction(.02)
 interpret_direction(c(.5, -.02))
 #
 }
-\author{
-\href{https://dominiquemakowski.github.io/}{Dominique Makowski}
-}

@@ -7,7 +7,7 @@
 #' @param if_lower If true, each label will be given if the value is strictly lower than its breakpoint. The contrary if false.
 #'
 #'
-#' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
+#'
 #'
 #' @examples
 #' rules(c(0.05), c("significant", "not significant"), if_lower = TRUE)
@@ -46,7 +46,7 @@ is.rules <- function(x) inherits(x, "rules")
 #' @param x Vector of value break points (edges defining categories).
 #' @param rules Set of \link{rules}.
 #'
-#' @author \href{https://dominiquemakowski.github.io/}{Dominique Makowski}
+#'
 #' @examples
 #' rules_grid <- rules(c(0.01, 0.05), c("very significant", "significant", "not significant"))
 #' interpret(0.001, rules_grid)

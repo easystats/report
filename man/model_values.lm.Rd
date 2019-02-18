@@ -2,25 +2,29 @@
 % Please edit documentation in R/report.lm.R
 \name{model_values.lm}
 \alias{model_values.lm}
-\title{Linear Models Parameters}
+\title{Linear Models Values}
 \usage{
-\method{model_values}{lm}(model, CI = 95, effsize = "cohen1988",
-  data = NULL, ...)
+\method{model_values}{lm}(model, ci = 0.95, standardize = TRUE,
+  effsize = "cohen1988", performance_in_table = TRUE,
+  performance_metrics = "all", bootstrap = FALSE, ...)
 }
 \arguments{
 \item{model}{Object of class \link{lm}.}
 
-\item{CI}{Confidence Interval (CI) level. Default to 95\%.}
+\item{ci}{Confidence Interval (CI) level. Default to 0.95 (95\%).}
 
-\item{effsize}{Compute standardized parameters and interpret them using a set of rules. Can be "cohen1988" (default), "sawilowsky2009", NULL, or a custom set of \link{rules}.}
+\item{standardize}{Standardized coefficients. See \code{\link[parameters:model_parameters.lm]{model_parameters}}.}
 
-\item{data}{Dataframe used to fit the model. Can be useful to compute standardized parameters.}
+\item{effsize}{Interpret the standardized parameters using a set of rules. Can be "cohen1988" (default), "sawilowsky2009", NULL, or a custom set of \link{rules}.}
+
+\item{performance_in_table}{Add performance metrics on table.}
+
+\item{performance_metrics}{See \code{\link[performance:model_performance.lm]{model_performance}}.}
+
+\item{bootstrap}{See \code{\link[parameters:model_parameters.lm]{model_parameters}}.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
 \description{
-Parameters for linear models.
-}
-\author{
-\href{https://dominiquemakowski.github.io/}{Dominique Makowski}
+Extract all values of linear models.
 }

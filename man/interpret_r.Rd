@@ -29,6 +29,3 @@ interpret_r(r = c(.5, -.02))
 \seealso{
 Page 88 of APA's 6th Edition.
 }
-\author{
-\href{https://dominiquemakowski.github.io/}{Dominique Makowski}
-}

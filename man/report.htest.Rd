@@ -4,10 +4,10 @@
 \alias{report.htest}
 \title{h-test (Correlation, t-test...) Report}
 \usage{
-\method{report}{htest}(x, effsize = "cohen1988", ...)
+\method{report}{htest}(model, effsize = "cohen1988", ...)
 }
 \arguments{
-\item{x}{Object of class htest.}
+\item{model}{Object of class htest.}
 
 \item{effsize}{Effect size interpretation set of rules.}
 
@@ -26,7 +26,4 @@ report(t.test(iris$Sepal.Width, mu = 1))
 }
 \seealso{
 report
-}
-\author{
-\href{https://dominiquemakowski.github.io/}{Dominique Makowski}
 }

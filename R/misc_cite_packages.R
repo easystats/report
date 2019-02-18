@@ -1,15 +1,12 @@
 #' Cite Loaded Packages
 #'
-#' Citation table of loaded packages (\link{show_packages} includes version and name, and `\link{cite_packages} includes only the citation).
+#' Citation table of loaded packages (\link{show_packages} includes version and name, and \link{cite_packages} includes only the citation).
 #'
 #' @param session A \link[=sessionInfo]{sessionInfo} object.
 #'
 #' @examples
-#' \dontrun{
 #' show_packages(sessionInfo())
 #' cite_packages(sessionInfo())
-#' }
-#'
 #' @author \href{https://github.com/DominiqueMakowski}{Dominique Makowski}
 #' @import stringr dplyr
 #' @importFrom utils packageVersion
@@ -23,28 +20,27 @@ show_packages <- function(session) {
     pkg <- pkgs[[pkg_name]]
 
     citation <- format(citation(pkg_name))[[2]] %>%
-      stringr::str_split("\n") %>%
+      strsplit("\n") %>%
       purrr::flatten() %>%
       paste(collapse = "SPLIT") %>%
-      stringr::str_split("SPLITSPLIT")
+      strsplit("SPLITSPLIT")
 
     i <- 1
     while (stringr::str_detect(citation[[1]][i], "To cite ")) {
       i <- i + 1
     }
 
-    citation <- citation[[1]][i] %>%
-      stringr::str_remove_all("SPLIT") %>%
-      stringr::str_trim() %>%
-      stringr::str_squish()
+    citation <- gsub("\\s", "", gsub("SPLIT", "", citation[[1]][i]))
 
     citations <- c(citations, citation)
     versions <- c(versions, as.character(packageVersion(pkg_name)))
     names <- c(names, pkg_name)
   }
-  data <- data.frame("Package" = names,
-                    "Version" = versions,
-                    "References" = citations) %>%
+  data <- data.frame(
+    "Package" = names,
+    "Version" = versions,
+    "References" = citations
+  ) %>%
     arrange_("Package")
   return(data)
 }

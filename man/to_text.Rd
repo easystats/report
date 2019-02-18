@@ -7,7 +7,7 @@
 to_text(x, full = FALSE, width = NULL, ...)
 }
 \arguments{
-\item{x}{Object of class \link{report}}
+\item{x}{Object of class \link{report}.}
 
 \item{full}{Show the full report.}
 
