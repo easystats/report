@@ -5,6 +5,8 @@ test_that("interpret", {
   testthat::expect_equal(interpret(0.021, rules_grid), "significant")
   testthat::expect_equal(interpret(0.08, rules_grid), "not significant")
   testthat::expect_equal(interpret(c(0.01, 0.005, 0.08), rules_grid), c("significant", "very significant", "not significant"))
+  testthat::expect_error(interpret_r(0.6, rules = rules(c(0.5), c("A", "B", "C"))))
+  testthat::expect_error(interpret_r(0.6, rules = rules(c(0.5, 0.2, 0.7), c("A", "B", "C", "D"))))
 })
 
 
