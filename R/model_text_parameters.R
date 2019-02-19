@@ -235,18 +235,16 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
   }
 
   if (all(estimate_full != "")) {
-    if(nrow(.string_split_matrix(estimate_full, ", ")) > 1){
-      estimate <- paste0(.string_split_matrix(estimate_full, ", ")[1, ], ", ")
-    } else{
-      estimate <- paste0(.string_split_matrix(estimate_full, ", ")[, 1], ", ")
-    }
+    estimate <- .extract_main_estimate(estimate_full)
   } else {
-    stop("No estimate in parameters.")
+    estimate <- ""
   }
 
-  estimate <- paste0(estimate, format_ci(parameters$CI_low,
-    parameters$CI_high,
-    ci = ci
+  estimate <- paste0(estimate,
+                     ", ",
+                     format_ci(parameters$CI_low,
+                               parameters$CI_high,
+                               ci = ci
   ))
   estimate_full <- paste0(estimate_full, format_ci(parameters$CI_low,
     parameters$CI_high,
@@ -302,7 +300,7 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
       format_rope(parameters$ROPE_Percentage), ")"
     )
 
-    if (is.null(effsize) | !"Std_Median" %in% names(parameters)) {
+    if (is.null(effsize) | (!"Std_Median" %in% names(parameters) & !"Std_Mean" %in% names(parameters) &  !"Std_MAP" %in% names(parameters))) {
       text_full <- paste0(text_full, ".")
       text <- paste0(text, ".")
     }
@@ -310,7 +308,7 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
 
 
   # Effect size text
-  if (!is.null(effsize) & "Std_Median" %in% names(parameters)) {
+  if (!is.null(effsize) & ("Std_Median" %in% names(parameters) | "Std_Mean" %in% names(parameters) |  "Std_MAP" %in% names(parameters))) {
     if ("ROPE_Percentage" %in% names(parameters)) {
       text_full <- paste0(text_full, " and ")
       text <- paste0(text, " and ")
@@ -318,9 +316,9 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
 
     modeltype <- insight::model_info(model)
     if (modeltype$is_logit) {
-      effsize_text <- interpret_odds(parameters[[estimate_name]], rules = effsize, log = TRUE)
+      effsize_text <- interpret_odds(parameters[[paste0("Std_", estimate_name)]], rules = effsize, log = TRUE)
     } else if (modeltype$is_linear) {
-      effsize_text <- interpret_d(parameters[[estimate_name]], rules = effsize)
+      effsize_text <- interpret_d(parameters[[paste0("Std_", estimate_name)]], rules = effsize)
     } else {
       effsize_text <- "[NO INTERPRETATION AVAILABLE]"
     }
@@ -342,9 +340,9 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
         " (Std. ",
         estimate_name,
         " = ",
-        format_value(parameters[[estimate_name]]),
+        format_value(parameters$Std_Median),
         ", Std. MAD = ",
-        format_value(parameters$MAD),
+        format_value(parameters$Std_MAD),
         ", Std. ",
         format_ci(parameters$Std_CI_low,
           parameters$Std_CI_high,
@@ -355,13 +353,13 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
     } else if (estimate_name == "Mean") {
       text_full <- paste0(
         text_full,
-        interpret_d(parameters[[estimate_name]], rules = effsize),
+        effsize_text,
         " (Std. ",
         estimate_name,
         " = ",
-        format_value(parameters[[estimate_name]]),
+        format_value(parameters$Std_Mean),
         ", Std. SD = ",
-        format_value(parameters$SD),
+        format_value(parameters$Std_SD),
         ", Std. ",
         format_ci(parameters$Std_CI_low,
           parameters$Std_CI_high,
@@ -372,11 +370,11 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
     } else if (estimate_name == "MAP") {
       text_full <- paste0(
         text_full,
-        interpret_d(parameters[[estimate_name]], rules = effsize),
+        effsize_text,
         " (Std. ",
         estimate_name,
         " = ",
-        format_value(parameters[[estimate_name]]),
+        format_value(parameters$Std_MAP),
         ", Std. ",
         format_ci(parameters$Std_CI_low,
           parameters$Std_CI_high,
@@ -395,4 +393,15 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
     "text_full" = text_full
   )
   return(out)
+}
+
+
+
+
+
+#' @keywords internal
+.extract_main_estimate <- function(estimate_full){
+  l <- strsplit(estimate_full, ", ")
+  l <- lapply(l, `[[`, 1)
+  return(unlist(l))
 }
