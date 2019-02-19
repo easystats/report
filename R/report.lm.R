@@ -89,8 +89,8 @@ model_values.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "coh
     out$performance[[perf]] <- out$table_performance[[perf]]
   }
 
-#
-#   class(out) <- c("values_lm", class(out))
+  #
+  #   class(out) <- c("values_lm", class(out))
   return(out)
 }
 

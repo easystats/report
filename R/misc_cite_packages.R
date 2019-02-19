@@ -7,7 +7,6 @@
 #' @examples
 #' show_packages(sessionInfo())
 #' cite_packages(sessionInfo())
-#'
 #' @import stringr
 #' @import dplyr
 #' @importFrom utils packageVersion
@@ -18,7 +17,6 @@ show_packages <- function(session) {
   versions <- c()
   names <- c()
   for (pkg_name in names(pkgs)) {
-
     citation <- format(citation(pkg_name))[[2]] %>%
       strsplit("\n") %>%
       unlist() %>%
@@ -31,7 +29,7 @@ show_packages <- function(session) {
       i <- i + 1
     }
 
-    citation <- gsub("  ", " ", trimws(gsub("SPLIT", "", citation[i]), which="both"))
+    citation <- gsub("  ", " ", trimws(gsub("SPLIT", "", citation[i]), which = "both"))
 
     citations <- c(citations, citation)
     versions <- c(versions, as.character(packageVersion(pkg_name)))

@@ -89,8 +89,8 @@ model_values.lmerMod <- function(model, ci = 0.95, standardize = TRUE, effsize =
     out$performance[[perf]] <- out$table_performance[[perf]]
   }
 
-#
-#   class(out) <- c("values_lm", class(out))
+  #
+  #   class(out) <- c("values_lm", class(out))
   return(out)
 }
 
@@ -139,7 +139,7 @@ model_values.lmerMod <- function(model, ci = 0.95, standardize = TRUE, effsize =
 #'
 #' @examples
 #' \dontrun{
-#' model <- lmer(Sepal.Length ~ Petal.Length + (1|Species), data = iris)
+#' model <- lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 #' r <- report(model)
 #' to_text(r)
 #' to_fulltext(r)

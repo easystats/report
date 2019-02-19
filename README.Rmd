@@ -47,8 +47,8 @@ options(knitr.kable.NA = '',
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
 # Example
-lm(Sepal.Length ~ Species, data=iris) %>% 
-  report()
+model <- lm(Sepal.Length ~ Species, data=iris)
+report(model)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(report)
@@ -107,7 +107,9 @@ library("report")
 The `report` package works in a two steps fashion. First, creating a `report` object with the `report()` function (which takes different arguments depending on the type of object you are reporting). Then, this report can be displayed either textually, using `to_text()`, or as a table, using `to_table()`. Moreover, you can also access a more detailed (but less digest) version of the report using `to_fulltext()` and `to_fulltable()`. Finally, `to_values()` makes it easy to access all the internals of a model. 
 
 
-### Dataframes
+### Examples
+
+The `report()` function works on a variety of models, as well as dataframes:
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
 report(iris)
@@ -116,98 +118,56 @@ report(iris)
 print(report(iris), width=100)
 ```
 
-The reports nicely work within the [*tidyverse*](https://github.com/tidyverse):
+These reports nicely work within the [*tidyverse*](https://github.com/tidyverse) workflow:
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
-library(dplyr)
-
-iris %>% 
-  group_by(Species) %>% 
-  report(median = TRUE, range = FALSE)  # Display only the Median and MAD
-```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-library(dplyr)
-
-iris %>% 
-  group_by(Species) %>% 
-  report(median = TRUE, range = FALSE) %>% 
-  print(width=100)
-```
-
-### Correlations and t-tests
-
-```{r message=FALSE, warning=FALSE, eval=FALSE}
-report(cor.test(iris$Sepal.Length, iris$Petal.Length))
+# Correlation report
+cor.test(iris$Sepal.Length, iris$Petal.Length) %>% 
+  report()
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 print(report(cor.test(iris$Sepal.Length, iris$Petal.Length)), width=100)
 ```
 
-```{r message=FALSE, warning=FALSE, eval=FALSE}
-report(t.test(iris$Sepal.Length, iris$Petal.Length))
-```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-print(report(t.test(iris$Sepal.Length, iris$Petal.Length)), width=100)
-```
-### Linear Models (LM)
-
+You can also create tables with the `to_table()` and `to_fulltable()` functions:
 
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
-model <- lm(Sepal.Length ~ Petal.Length + Species, data=iris)
-r <- report(model)
-
-to_text(r)
+# Table report for a linear model
+lm(Sepal.Length ~ Petal.Length + Species, data=iris) %>% 
+  report() %>% 
+  to_table()
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-model <- lm(Sepal.Length ~ Petal.Length + Species, data=iris) 
-r <- report(model)
-
-to_text(r, width=100)
-```
-
-```{r message=FALSE, warning=FALSE, eval=FALSE}
-to_table(r)
-```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-table <- to_table(r, digits=2)
+table <- lm(Sepal.Length ~ Petal.Length + Species, data=iris) %>% 
+  report %>% 
+  to_table(digits=2)
 # remove empty row because kable doesn't handle it
 table <- table[rowSums(is.na(table)) != ncol(table),]
 knitr::kable(table)
 ```
 
-### General Linear Models (GLM)
-
-The difference between regular and full reports becomes obvious for more complicated models.
+Finally, you can also find more details using `to_fulltext()`:
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
-model <- glm(vs ~ wt + mpg, data=mtcars, family="binomial")
-r <- report(model)
+# Full report for a Bayesian logistic mixed model with effect sizes :O
+library(rstanarm)
 
-to_fulltext(r)
+stan_glmer(vs ~ mpg + (1|cyl), data=mtcars, family="binomial") %>% 
+  report(standardize=TRUE, effsize="cohen1988") %>% 
+  to_fulltext()
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-model <- glm(vs ~ wt + mpg, data=mtcars, family="binomial")
-r <- report(model)
+library(rstanarm)
+stuff <- capture.output(r <- rstanarm::stan_glmer(vs ~ mpg + (1|cyl), data=mtcars, family="binomial") %>% 
+  report(standardize=TRUE, effsize="cohen1988"))
 
 to_fulltext(r, width=100)
 ```
 
 
-
-```{r message=FALSE, warning=FALSE, eval=FALSE}
-to_fulltable(r)
-```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-table <- to_fulltable(r, digits=2)
-# remove empty row because kable doesn't handle it
-table <- table[rowSums(is.na(table)) != ncol(table),]
-knitr::kable(table)
-```
-
-
 ## Credits
 
-If you like it, you can put a **star** on this repo, and cite the package as following:
+If you like it, you can put a *star* on this repo, and cite the package as following:
 
 - Makowski, D. \& Lüdecke, D. (2019). *The report package for R: Ensuring the use of best practices for results reporting*. CRAN. doi: .

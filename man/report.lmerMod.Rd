@@ -30,7 +30,7 @@ Create a report of a mixed model.
 }
 \examples{
 \dontrun{
-model <- lmer(Sepal.Length ~ Petal.Length + (1|Species), data = iris)
+model <- lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 r <- report(model)
 to_text(r)
 to_fulltext(r)

@@ -17,8 +17,8 @@ of **best practices** guidelines (*e.g.,*
 
 ``` r
 # Example
-lm(Sepal.Length ~ Species, data=iris) %>% 
-  report()
+model <- lm(Sepal.Length ~ Species, data=iris)
+report(model)
 ```
 
     ##  We fitted a linear model to predict Sepal.Length with Species. The model's explanatory power is
@@ -97,7 +97,10 @@ table, using `to_table()`. Moreover, you can also access a more detailed
 `to_fulltable()`. Finally, `to_values()` makes it easy to access all the
 internals of a model.
 
-### Dataframes
+### Examples
+
+The `report()` function works on a variety of models, as well as
+dataframes:
 
 ``` r
 report(iris)
@@ -110,73 +113,26 @@ report(iris)
     ##   - Petal.Width: Mean = 1.20 +- 0.76 [0.10, 2.50]
     ##   - Species: 3 levels: setosa (n = 50); versicolor (n = 50); virginica (n = 50)
 
-The reports nicely work within the
-[*tidyverse*](https://github.com/tidyverse):
+These reports nicely work within the
+[*tidyverse*](https://github.com/tidyverse) workflow:
 
 ``` r
-library(dplyr)
-
-iris %>% 
-  group_by(Species) %>% 
-  report(median = TRUE, range = FALSE)  # Display only the Median and MAD
-```
-
-    ## The data contains 150 observations, grouped by Species, of the following variables:
-    ## - setosa (n = 50):
-    ##   - Sepal.Length: Median = 5.00 +- 0.30
-    ##   - Sepal.Width: Median = 3.40 +- 0.37
-    ##   - Petal.Length: Median = 1.50 +- 0.15
-    ##   - Petal.Width: Median = 0.20 +- 0.00
-    ## - versicolor (n = 50):
-    ##   - Sepal.Length: Median = 5.90 +- 0.52
-    ##   - Sepal.Width: Median = 2.80 +- 0.30
-    ##   - Petal.Length: Median = 4.35 +- 0.52
-    ##   - Petal.Width: Median = 1.30 +- 0.22
-    ## - virginica (n = 50):
-    ##   - Sepal.Length: Median = 6.50 +- 0.59
-    ##   - Sepal.Width: Median = 3.00 +- 0.30
-    ##   - Petal.Length: Median = 5.55 +- 0.67
-    ##   - Petal.Width: Median = 2.00 +- 0.30
-
-### Correlations and t-tests
-
-``` r
-report(cor.test(iris$Sepal.Length, iris$Petal.Length))
+# Correlation report
+cor.test(iris$Sepal.Length, iris$Petal.Length) %>% 
+  report()
 ```
 
     ## The Pearson's correlation between iris$Sepal.Length and iris$Petal.Length is positive, large and
     ## significant (r(148) = 0.87, 95% CI [0.83, 0.91], p < .001).
 
-``` r
-report(t.test(iris$Sepal.Length, iris$Petal.Length))
-```
-
-    ## The Welch Two Sample t-test suggests that the difference between iris$Sepal.Length and
-    ## iris$Petal.Length (mean of x = 5.84, mean of y = 3.76, difference = 2.09) is significant (t(211.54)
-    ## = 13.10, 95% CI [1.77, 2.40], p < .001).
-
-### Linear Models (LM)
+You can also create tables with the `to_table()` and `to_fulltable()`
+functions:
 
 ``` r
-model <- lm(Sepal.Length ~ Petal.Length + Species, data=iris)
-r <- report(model)
-
-to_text(r)
-```
-
-    ##  We fitted a linear model to predict Sepal.Length with Petal.Length and Species. The model's
-    ## explanatory power is substantial (R2 = 0.84, adj. R2 = 0.83). The model's intercept is at 3.68.
-    ## 
-    ## Within this model: 
-    ##   - Petal.Length is significant (beta = 0.90, 95% CI [0.78, 1.03], p < .001) and large (Std. beta =
-    ## 1.93).
-    ##   - Speciesversicolor is significant (beta = -1.60, 95% CI [-1.98, -1.22], p < .001) and large (Std.
-    ## beta = -1.93).
-    ##   - Speciesvirginica is significant (beta = -2.12, 95% CI [-2.66, -1.58], p < .001) and large (Std.
-    ## beta = -2.56).
-
-``` r
-to_table(r)
+# Table report for a linear model
+lm(Sepal.Length ~ Petal.Length + Species, data=iris) %>% 
+  report() %>% 
+  to_table()
 ```
 
 |   | Parameter         |     beta |  CI\_low | CI\_high | p | Std\_beta |    Fit |
@@ -188,45 +144,36 @@ to_table(r)
 | 6 | R2                |          |          |          |   |           | 0.8367 |
 | 7 | R2\_adj           |          |          |          |   |           | 0.8334 |
 
-### General Linear Models (GLM)
-
-The difference between regular and full reports becomes obvious for more
-complicated models.
+Finally, you can also find more details using `to_fulltext()`:
 
 ``` r
-model <- glm(vs ~ wt + mpg, data=mtcars, family="binomial")
-r <- report(model)
+# Full report for a Bayesian logistic mixed model with effect sizes :O
+library(rstanarm)
 
-to_fulltext(r)
+stan_glmer(vs ~ mpg + (1|cyl), data=mtcars, family="binomial") %>% 
+  report(standardize=TRUE, effsize="cohen1988") %>% 
+  to_fulltext()
 ```
 
-    ##  We fitted a logistic model to predict vs with wt and mpg (formula = vs ~ wt + mpg). Effect sizes
-    ## were labelled following Chen's (2010) recommendations. The model's explanatory power is substantial
-    ## (Tjur's R2 = 0.48). The model's intercept is at -12.54 (z = -1.48, 95% CI [-31.91, 2.92], p > .1).
+    ##  We fitted a Bayesian logistic mixed model to predict vs with mpg (formula = vs ~ mpg). The model
+    ## included cyl as random effects (formula = ~1 | cyl). The Region of Practical Equivalence (ROPE)
+    ## percentage was defined as the proportion of the posterior distribution within the [-0.05, 0.05]
+    ## range. Effect sizes were labelled following Cohen's (1988) recommendations. The model's explanatory
+    ## power is substantial (R2's median = 0.57, MAD = 0.09, 90% CI [0.43, 0.69], LOO adj. R2 = -25.23).
+    ## Within this model, the explanatory power related to the fixed effects (fixed R2's median) is of
+    ## 0.26 (MAD = 0.27, 90% CI [0.00, 0.48]). The model's intercept, corresponding to mpg = 0, has a
+    ## median of -5.06 (MAD = 4.23, pd = pd = 87.80%, 0.43% in ROPE).
     ## 
     ## Within this model: 
-    ##   - wt is positive, not significant (beta = 0.58, SE = 1.18, z = 0.49, 95% CI [-1.92, 2.94], p > .1)
-    ## and small (Std. beta = 0.57, Std. SE = 1.16, Std. 95% CI [-1.88, 2.87]).
-    ##   - mpg is positive, significant (beta = 0.52, SE = 0.26, z = 2.01, 95% CI [0.09, 1.17], p < .05) and
-    ## large (Std. beta = 3.16, Std. SE = 1.57, Std. 95% CI [0.56, 7.02]).
-
-``` r
-to_fulltable(r)
-```
-
-|   | Parameter   | beta    | SE   | CI\_low | CI\_high | z      | DoF\_residual | p    | Std\_beta | Std\_SE | Std\_CI\_low | Std\_CI\_high | Fit   |
-| - | :---------- | :------ | :--- | :------ | :------- | :----- | :------------ | :--- | :-------- | :------ | :----------- | :------------ | :---- |
-| 1 | (Intercept) | \-12.54 | 8.47 | \-31.91 | 2.92     | \-1.48 | 29            | 0.14 | \-0.14    | 0.51    | \-1.15       | 0.90          |       |
-| 2 | wt          | 0.58    | 1.18 | \-1.92  | 2.94     | 0.49   | 29            | 0.62 | 0.57      | 1.16    | \-1.88       | 2.87          |       |
-| 3 | mpg         | 0.52    | 0.26 | 0.09    | 1.17     | 2.01   | 29            | 0.04 | 3.16      | 1.57    | 0.56         | 7.02          |       |
-| 5 | AIC         |         |      |         |          |        |               |      |           |         |              |               | 31.30 |
-| 6 | BIC         |         |      |         |          |        |               |      |           |         |              |               | 35.70 |
-| 7 | R2\_Tjur    |         |      |         |          |        |               |      |           |         |              |               | 0.48  |
+    ##   - mpg has a probability of 85.60% of being positive (Median = 0.23, MAD = 0.21, 90% CI [-0.12,
+    ## 0.56]) and can be considered as not significant (11.05% in ROPE) and medium (Std. Median = 1.34,
+    ## Std. MAD = 1.30, Std. 90% CI [-0.80, 3.33]).
 
 ## Credits
 
-If you like it, you can put a **star** on this repo, and cite the
-package as following:
+If you like it, you can put a *star* on this repo, and cite the package
+as following:
 
-  - Makowski, D. & Lüdecke, D. (2019). *Automated reporting of
-    statistical models in R*. CRAN. doi: .
+  - Makowski, D. & Lüdecke, D. (2019). *The report package for R:
+    Ensuring the use of best practices for results reporting*. CRAN.
+    doi: .

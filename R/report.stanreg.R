@@ -19,9 +19,9 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
     if (standardize == FALSE) {
       warning("The effect sizes are computed from standardized coefficients. Setting `standardize` to TRUE.")
     }
-    out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ci = ci, estimate = tolower(parameters_estimate), test = tolower(parameters_test), rope_bounds = rope_bounds, rope_full=rope_full, diagnostic=parameters_diagnostic, ...)
+    out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ci = ci, estimate = tolower(parameters_estimate), test = tolower(parameters_test), rope_bounds = rope_bounds, rope_full = rope_full, diagnostic = parameters_diagnostic, ...)
   } else {
-    out$table_parameters <- parameters::model_parameters(model, ci = ci, standardize = standardize, estimate = tolower(parameters_estimate), test = tolower(parameters_test), rope_bounds = rope_bounds, rope_full=rope_full, diagnostic=parameters_diagnostic, ...)
+    out$table_parameters <- parameters::model_parameters(model, ci = ci, standardize = standardize, estimate = tolower(parameters_estimate), test = tolower(parameters_test), rope_bounds = rope_bounds, rope_full = rope_full, diagnostic = parameters_diagnostic, ...)
   }
   out$table_parameters$Parameter <- as.character(out$table_parameters$Parameter)
   out$table_performance <- performance::model_performance(model, metrics = performance_metrics)
@@ -120,8 +120,8 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
 #' to_fulltext(r)
 #' to_table(r)
 #' to_fulltable(r)
-#'
-#' model <- rstanarm::stan_lmer(Sepal.Length ~ Petal.Length + (1|Species), data = iris)
+#' 
+#' model <- rstanarm::stan_lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 #' report(model)
 #' }
 #' @export

@@ -81,32 +81,35 @@ model_text_initial_bayesian <- function(model, parameters, ci = 0.90, ...) {
       format_value(intercept$Median)
     )
 
-    intercept_values <- paste0(intercept_values,
-                               "MAD = ",
-                               format_value(intercept$MAD))
-    }
+    intercept_values <- paste0(
+      intercept_values,
+      "MAD = ",
+      format_value(intercept$MAD)
+    )
+  }
   if ("Mean" %in% names(intercept)) {
     comma <- ""
-    if(intercept_values != " ("){
+    if (intercept_values != " (") {
       comma <- paste0(", Mean = ", format_value(intercept$Mean), ", ")
-    } else{
+    } else {
       text <- paste0(
         "has a mean of ",
         format_value(intercept$Mean)
       )
     }
 
-    intercept_values <- paste0(intercept_values,
-                               comma,
-                               "SD = ",
-                               format_value(intercept$SD))
+    intercept_values <- paste0(
+      intercept_values,
+      comma,
+      "SD = ",
+      format_value(intercept$SD)
+    )
   }
   if ("MAP" %in% names(intercept)) {
-
     comma <- ""
-    if(intercept_values != " ("){
+    if (intercept_values != " (") {
       comma <- paste0(", MAP = ", format_value(intercept$MAP))
-    } else{
+    } else {
       text <- paste0(
         "has a MAP of ",
         format_value(intercept$MAP)
@@ -114,44 +117,48 @@ model_text_initial_bayesian <- function(model, parameters, ci = 0.90, ...) {
     }
 
     intercept_values <- paste0(intercept_values, comma)
-
-
   }
   if ("pd" %in% names(intercept)) {
     comma <- ""
-    if(intercept_values != " (") comma <- ", "
+    if (intercept_values != " (") comma <- ", "
 
-    intercept_values <- paste0(intercept_values,
-                               comma,
-                               "pd = ",
-                               format_pd(intercept$pd))
+    intercept_values <- paste0(
+      intercept_values,
+      comma,
+      "pd = ",
+      format_pd(intercept$pd)
+    )
   }
   if ("ROPE_Percentage" %in% names(intercept)) {
     comma <- ""
-    if(intercept_values != " (") comma <- ", "
+    if (intercept_values != " (") comma <- ", "
 
-    intercept_values <- paste0(intercept_values,
-                               comma,
-                               format_rope(intercept$ROPE_Percentage))
+    intercept_values <- paste0(
+      intercept_values,
+      comma,
+      format_rope(intercept$ROPE_Percentage)
+    )
   }
 
 
-  if(intercept_values == " ("){
+  if (intercept_values == " (") {
     intercept_values <- "."
-  } else{
+  } else {
     intercept_values <- paste0(intercept_values, ").")
   }
 
-  if(text == ""){
+  if (text == "") {
     text <- "has no point-estimate"
   }
 
 
-  text_full <- paste0("The model's intercept, corresponding to ",
-                      .text_intercept(model),
-                      ", ",
-                      text,
-                      intercept_values)
+  text_full <- paste0(
+    "The model's intercept, corresponding to ",
+    .text_intercept(model),
+    ", ",
+    text,
+    intercept_values
+  )
   text <- paste0("The model's intercept ", text, ".")
 
 
@@ -176,17 +183,17 @@ model_text_initial_bayesian <- function(model, parameters, ci = 0.90, ...) {
 
 
 #' @keywords internal
-.text_intercept <- function(model){
-    data <- insight::get_data(model)[insight::find_terms(model)$conditional]
-    text <- c()
-    for(col in names(data)){
-      if(is.numeric(data[[col]])){
-        text <- c(text, paste0(col," = 0"))
-      } else if(is.factor(data[[col]])){
-        text <- c(text, paste0(col," = ", levels(data[col])))
-      } else{
-        text <- c(text, paste0(col," = ???"))
-      }
+.text_intercept <- function(model) {
+  data <- insight::get_data(model)[insight::find_terms(model)$conditional]
+  text <- c()
+  for (col in names(data)) {
+    if (is.numeric(data[[col]])) {
+      text <- c(text, paste0(col, " = 0"))
+    } else if (is.factor(data[[col]])) {
+      text <- c(text, paste0(col, " = ", levels(data[col])))
+    } else {
+      text <- c(text, paste0(col, " = ???"))
     }
-    return(format_text_collapse(text))
+  }
+  return(format_text_collapse(text))
 }

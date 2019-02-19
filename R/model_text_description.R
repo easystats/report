@@ -82,4 +82,3 @@ model_text_description <- function(model, ci = 0.95, effsize = "effsize", bootst
   )
   return(out)
 }
-

@@ -5,5 +5,4 @@ test_that("report.lmerMod", {
 
   model <- circus::download_model("lmerMod_1")
   # r <- report(circus::download_model("lmer_1"))
-
 })

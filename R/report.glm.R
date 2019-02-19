@@ -129,7 +129,7 @@ model_values.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "ch
 #' @inheritParams report.lm
 #'
 #' @examples
-#' model <- glm(vs ~ disp, data = mtcars, family="binomial")
+#' model <- glm(vs ~ disp, data = mtcars, family = "binomial")
 #' r <- report(model)
 #' to_text(r)
 #' to_fulltext(r)

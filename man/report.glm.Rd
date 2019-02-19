@@ -29,7 +29,7 @@
 Create a report of a general linear model.
 }
 \examples{
-model <- glm(vs ~ disp, data = mtcars, family="binomial")
+model <- glm(vs ~ disp, data = mtcars, family = "binomial")
 r <- report(model)
 to_text(r)
 to_fulltext(r)

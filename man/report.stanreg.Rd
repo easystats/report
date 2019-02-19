@@ -48,7 +48,7 @@ to_fulltext(r)
 to_table(r)
 to_fulltable(r)
 
-model <- rstanarm::stan_lmer(Sepal.Length ~ Petal.Length + (1|Species), data = iris)
+model <- rstanarm::stan_lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 report(model)
 }
 }
