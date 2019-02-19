@@ -10,6 +10,12 @@
 #' @export
 model_values.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, ...) {
 
+  # Sanity checks
+  if(length(c(ci)) > 1){
+    warning(paste0("report does not support multiple `ci` values yet. Using ci = ", ci[1]), ".")
+    ci <- ci[1]
+  }
+
   # Information
   out <- list()
   out$info <- insight::model_info(model)

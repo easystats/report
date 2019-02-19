@@ -118,6 +118,16 @@ model_text_initial_bayesian <- function(model, parameters, ci = 0.90, ...) {
 
     intercept_values <- paste0(intercept_values, comma)
   }
+  if ("CI_low" %in% names(intercept)) {
+    comma <- ""
+    if (intercept_values != " (") comma <- ", "
+
+    intercept_values <- paste0(
+      intercept_values,
+      comma,
+      format_ci(intercept$CI_low, intercept$CI_high, ci)
+    )
+  }
   if ("pd" %in% names(intercept)) {
     comma <- ""
     if (intercept_values != " (") comma <- ", "
@@ -125,7 +135,6 @@ model_text_initial_bayesian <- function(model, parameters, ci = 0.90, ...) {
     intercept_values <- paste0(
       intercept_values,
       comma,
-      "pd = ",
       format_pd(intercept$pd)
     )
   }

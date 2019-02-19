@@ -26,6 +26,7 @@ Imports:
 	insight,
 	parameters,
 	performance,
+	bayestestR,
 	dplyr,
 	stringr,
 	broom
@@ -43,6 +44,7 @@ Remotes:
 	easystats/insight,
 	easystats/parameters,
 	easystats/performance,
+	easystats/bayestestR,
 	easystats/circus
 RoxygenNote: 6.1.1
 Language: en-GB

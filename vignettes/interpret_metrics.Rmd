@@ -33,7 +33,7 @@ options(knitr.kable.NA = '',
 
 The metrics used in statistics (indices of fit, model performance or parameter estimates) can be very abstract. A long experience is required to intuitively ***"feel"*** the meaning of their values. In order to facilitate the understanding of the results they are facing, many scientists use (often implicitly) some set of **rules of thumb**. Thus, in order to validate and standardize such interpretation grids, some authors validated and published them in the form of guidelines. One of the most famous interpertation grid was proposed by **Cohen (1988)** for a series of widely used indices, such as the correlation **r** (*r* = .20, small; *r* = .40, moderate and *r* = .60, large) or the **standardized difference** (*Cohen's d*). 
 
-The package **`report`** implements such sets of rules of thumb for a variety of indices in a flexible and explicit fashion, helping you understanding and reporting your results in a scientific yet meaningful way. However, readers should keep in mind that these thresholds, altough "*validated*", **remain arbitrary**. Thus, their use should be discussed on a case-by-case basis depending on the field, hypotheses, prior results and so on, to avoid their crystalisation, as for the infamous ***p* < .05** example.
+The package **`report`** implements such sets of rules of thumb for a variety of indices in a flexible and explicit fashion, helping you understanding and reporting your results in a scientific yet meaningful way. However, readers should keep in mind that these thresholds, altough *"validated"*, **remain arbitrary**. Thus, their use should be discussed on a case-by-case basis depending on the field, hypotheses, prior results and so on, to avoid their crystalisation, as for the infamous ***p* < .05** example.
 
 
 
@@ -42,7 +42,7 @@ The package **`report`** implements such sets of rules of thumb for a variety of
 ### Coefficient of determination  (R2)
 
 
-##### @falk1992primer
+#### @falk1992primer
 
 ```r
 interpret_r2(x, rules = "falk1992")
@@ -53,7 +53,7 @@ interpret_r2(x, rules = "falk1992")
 
 
 
-##### @cohen1988statistical
+#### @cohen1988statistical
 
 ```r
 interpret_r2(x, rules = "cohen1988")
@@ -67,7 +67,7 @@ interpret_r2(x, rules = "cohen1988")
 
 
 
-##### @chin1998partial
+#### @chin1998partial
 
 ```r
 interpret_r2(x, rules = "chin1998")
@@ -78,7 +78,7 @@ interpret_r2(x, rules = "chin1998")
 - **R2 = 0.33 - 0.67**: Moderate
 - **R2 > 0.67**: Substantial
 
-##### @hair2011pls
+#### @hair2011pls
 
 ```r
 interpret_r2(x, rules = "hair2011")
@@ -93,7 +93,7 @@ interpret_r2(x, rules = "hair2011")
 
 ### Correlation *r*
 
-##### @cohen1988statistical
+#### @cohen1988statistical
 
 ```r
 interpret_r(x, rules = "cohen1988")
@@ -110,7 +110,7 @@ interpret_r(x, rules = "cohen1988")
 The sandardized difference can be obtained through the standardization of linear model's parameters or data, in which they can be used as indices of effect size.
 
 
-##### @cohen1988statistical
+#### @cohen1988statistical
 
 ```r
 interpret_d(x, rules = "cohen1988")
@@ -121,7 +121,7 @@ interpret_d(x, rules = "cohen1988")
 - **d = 0.5 - 0.8**: Medium
 - **d > 0.8**: Large
 
-##### @sawilowsky2009new
+#### @sawilowsky2009new
 
 ```r
 interpret_d(x, rules = "sawilowsky2009")
@@ -140,7 +140,7 @@ interpret_d(x, rules = "sawilowsky2009")
 
 Odds ratio, and *log* odds ratio, are often found in epidemiological studies. However, they are also the parameters of ***logistic*** regressions, where they can be used as indices of effect size.
 
-##### @chen2010big
+#### @chen2010big
 
 ```r
 interpret_odds(x, rules = "chen2010")
@@ -151,7 +151,7 @@ interpret_odds(x, rules = "chen2010")
 - **d = 3.47 - 6.71**: Medium
 - **d > 6.71**: Large
 
-##### @cohen1988statistical
+#### @cohen1988statistical
 
 ```r
 interpret_odds(x, rules = "cohen1988")
