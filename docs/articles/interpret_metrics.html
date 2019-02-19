@@ -116,7 +116,7 @@
 <h2 class="hasAnchor">
 <a href="#why" class="anchor"></a>Why?</h2>
 <p>The metrics used in statistics (indices of fit, model performance or parameter estimates) can be very abstract. A long experience is required to intuitively <strong><em>“feel”</em></strong> the meaning of their values. In order to facilitate the understanding of the results they are facing, many scientists use (often implicitly) some set of <strong>rules of thumb</strong>. Thus, in order to validate and standardize such interpretation grids, some authors validated and published them in the form of guidelines. One of the most famous interpertation grid was proposed by <strong>Cohen (1988)</strong> for a series of widely used indices, such as the correlation <strong>r</strong> (<em>r</em> = .20, small; <em>r</em> = .40, moderate and <em>r</em> = .60, large) or the <strong>standardized difference</strong> (<em>Cohen’s d</em>).</p>
-<p>The package <strong><code>report</code></strong> implements such sets of rules of thumb for a variety of indices in a flexible and explicit fashion, helping you understanding and reporting your results in a scientific yet meaningful way. However, readers should keep in mind that these thresholds, altough “<em>validated</em>”, <strong>remain arbitrary</strong>. Thus, their use should be discussed on a case-by-case basis depending on the field, hypotheses, prior results and so on, to avoid their crystalisation, as for the infamous <strong><em>p</em> &lt; .05</strong> example.</p>
+<p>The package <strong><code>report</code></strong> implements such sets of rules of thumb for a variety of indices in a flexible and explicit fashion, helping you understanding and reporting your results in a scientific yet meaningful way. However, readers should keep in mind that these thresholds, altough <em>“validated”</em>, <strong>remain arbitrary</strong>. Thus, their use should be discussed on a case-by-case basis depending on the field, hypotheses, prior results and so on, to avoid their crystalisation, as for the infamous <strong><em>p</em> &lt; .05</strong> example.</p>
 </div>
 <div id="supported-indices" class="section level2">
 <h2 class="hasAnchor">
@@ -124,10 +124,10 @@
 <div id="coefficient-of-determination-r2" class="section level3">
 <h3 class="hasAnchor">
 <a href="#coefficient-of-determination-r2" class="anchor"></a>Coefficient of determination (R2)</h3>
-<div id="falk1992primer" class="section level5">
-<h5 class="hasAnchor">
+<div id="falk1992primer" class="section level4">
+<h4 class="hasAnchor">
 <a href="#falk1992primer" class="anchor"></a><span class="citation">Falk and Miller (1992)</span>
-</h5>
+</h4>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="../reference/interpret_r2.html">interpret_r2</a></span>(x, <span class="dt">rules =</span> <span class="st">"falk1992"</span>)</a></code></pre></div>
 <ul>
 <li>
@@ -136,10 +136,10 @@
 <strong>R2 &gt; 0.1</strong>: Adequate</li>
 </ul>
 </div>
-<div id="cohen1988statistical" class="section level5">
-<h5 class="hasAnchor">
+<div id="cohen1988statistical" class="section level4">
+<h4 class="hasAnchor">
 <a href="#cohen1988statistical" class="anchor"></a><span class="citation">Cohen (1988)</span>
-</h5>
+</h4>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="../reference/interpret_r2.html">interpret_r2</a></span>(x, <span class="dt">rules =</span> <span class="st">"cohen1988"</span>)</a></code></pre></div>
 <ul>
 <li>
@@ -152,10 +152,10 @@
 <strong>R2 &gt; 0.26</strong>: Substantial</li>
 </ul>
 </div>
-<div id="chin1998partial" class="section level5">
-<h5 class="hasAnchor">
+<div id="chin1998partial" class="section level4">
+<h4 class="hasAnchor">
 <a href="#chin1998partial" class="anchor"></a><span class="citation">Chin and others (1998)</span>
-</h5>
+</h4>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="../reference/interpret_r2.html">interpret_r2</a></span>(x, <span class="dt">rules =</span> <span class="st">"chin1998"</span>)</a></code></pre></div>
 <ul>
 <li>
@@ -168,10 +168,10 @@
 <strong>R2 &gt; 0.67</strong>: Substantial</li>
 </ul>
 </div>
-<div id="hair2011pls" class="section level5">
-<h5 class="hasAnchor">
+<div id="hair2011pls" class="section level4">
+<h4 class="hasAnchor">
 <a href="#hair2011pls" class="anchor"></a><span class="citation">Hair, Ringle, and Sarstedt (2011)</span>
-</h5>
+</h4>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="../reference/interpret_r2.html">interpret_r2</a></span>(x, <span class="dt">rules =</span> <span class="st">"hair2011"</span>)</a></code></pre></div>
 <ul>
 <li>
@@ -189,10 +189,10 @@
 <h3 class="hasAnchor">
 <a href="#correlation-r" class="anchor"></a>Correlation <em>r</em>
 </h3>
-<div id="cohen1988statistical-1" class="section level5">
-<h5 class="hasAnchor">
+<div id="cohen1988statistical-1" class="section level4">
+<h4 class="hasAnchor">
 <a href="#cohen1988statistical-1" class="anchor"></a><span class="citation">Cohen (1988)</span>
-</h5>
+</h4>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="../reference/interpret_r.html">interpret_r</a></span>(x, <span class="dt">rules =</span> <span class="st">"cohen1988"</span>)</a></code></pre></div>
 <ul>
 <li>
@@ -210,10 +210,10 @@
 <h3 class="hasAnchor">
 <a href="#standardized-difference-d-cohens-d" class="anchor"></a>Standardized Difference <em>d</em> (Cohen’s <em>d</em>)</h3>
 <p>The sandardized difference can be obtained through the standardization of linear model’s parameters or data, in which they can be used as indices of effect size.</p>
-<div id="cohen1988statistical-2" class="section level5">
-<h5 class="hasAnchor">
+<div id="cohen1988statistical-2" class="section level4">
+<h4 class="hasAnchor">
 <a href="#cohen1988statistical-2" class="anchor"></a><span class="citation">Cohen (1988)</span>
-</h5>
+</h4>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="../reference/interpret_d.html">interpret_d</a></span>(x, <span class="dt">rules =</span> <span class="st">"cohen1988"</span>)</a></code></pre></div>
 <ul>
 <li>
@@ -226,10 +226,10 @@
 <strong>d &gt; 0.8</strong>: Large</li>
 </ul>
 </div>
-<div id="sawilowsky2009new" class="section level5">
-<h5 class="hasAnchor">
+<div id="sawilowsky2009new" class="section level4">
+<h4 class="hasAnchor">
 <a href="#sawilowsky2009new" class="anchor"></a><span class="citation">Sawilowsky (2009)</span>
-</h5>
+</h4>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="../reference/interpret_d.html">interpret_d</a></span>(x, <span class="dt">rules =</span> <span class="st">"sawilowsky2009"</span>)</a></code></pre></div>
 <ul>
 <li>
@@ -253,10 +253,10 @@
 <h3 class="hasAnchor">
 <a href="#odds-ratio" class="anchor"></a>Odds ratio</h3>
 <p>Odds ratio, and <em>log</em> odds ratio, are often found in epidemiological studies. However, they are also the parameters of <strong><em>logistic</em></strong> regressions, where they can be used as indices of effect size.</p>
-<div id="chen2010big" class="section level5">
-<h5 class="hasAnchor">
+<div id="chen2010big" class="section level4">
+<h4 class="hasAnchor">
 <a href="#chen2010big" class="anchor"></a><span class="citation">Chen, Cohen, and Chen (2010)</span>
-</h5>
+</h4>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="../reference/interpret_odds.html">interpret_odds</a></span>(x, <span class="dt">rules =</span> <span class="st">"chen2010"</span>)</a></code></pre></div>
 <ul>
 <li>
@@ -269,10 +269,10 @@
 <strong>d &gt; 6.71</strong>: Large</li>
 </ul>
 </div>
-<div id="cohen1988statistical-3" class="section level5">
-<h5 class="hasAnchor">
+<div id="cohen1988statistical-3" class="section level4">
+<h4 class="hasAnchor">
 <a href="#cohen1988statistical-3" class="anchor"></a><span class="citation">Cohen (1988)</span>
-</h5>
+</h4>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw"><a href="../reference/interpret_odds.html">interpret_odds</a></span>(x, <span class="dt">rules =</span> <span class="st">"cohen1988"</span>)</a></code></pre></div>
 <p>This converts (log) odds ratio to standardized difference <em>d</em> using the following formula <span class="citation">(Cohen 1988; Sánchez-Meca, Marı́n-Martı́nez, and Chacón-Moscoso 2003)</span>:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">d &lt;-<span class="st"> </span>log_odds <span class="op">*</span><span class="st"> </span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/MathFun">sqrt</a></span>(<span class="dv">3</span>) <span class="op">/</span><span class="st"> </span>pi)</a></code></pre></div>

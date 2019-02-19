@@ -157,17 +157,17 @@ stan_glmer(vs ~ mpg + (1|cyl), data=mtcars, family="binomial") %>%
 
     ##  We fitted a Bayesian logistic mixed model to predict vs with mpg (formula = vs ~ mpg). The model
     ## included cyl as random effects (formula = ~1 | cyl). The Region of Practical Equivalence (ROPE)
-    ## percentage was defined as the proportion of the posterior distribution within the [-0.05, 0.05]
+    ## percentage was defined as the proportion of the posterior distribution within the [-0.18, 0.18]
     ## range. Effect sizes were labelled following Cohen's (1988) recommendations. The model's explanatory
-    ## power is substantial (R2's median = 0.57, MAD = 0.09, 90% CI [0.43, 0.69], LOO adj. R2 = -25.23).
+    ## power is substantial (R2's median = 0.57, MAD = 0.09, 90% CI [0.43, 0.69], LOO adj. R2 = -24.49).
     ## Within this model, the explanatory power related to the fixed effects (fixed R2's median) is of
-    ## 0.26 (MAD = 0.27, 90% CI [0.00, 0.48]). The model's intercept, corresponding to mpg = 0, has a
-    ## median of -5.06 (MAD = 4.23, pd = pd = 87.80%, 0.43% in ROPE).
+    ## 0.22 (MAD = 0.27, 90% CI [0.00, 0.48]). The model's intercept, corresponding to mpg = 0, has a
+    ## median of -4.83 (MAD = 4.23, 90% CI [-11.58, 2.26], pd = 86.33%, 0.62% in ROPE).
     ## 
     ## Within this model: 
-    ##   - mpg has a probability of 85.60% of being positive (Median = 0.23, MAD = 0.21, 90% CI [-0.12,
-    ## 0.56]) and can be considered as not significant (11.05% in ROPE) and medium (Std. Median = 1.34,
-    ## Std. MAD = 1.30, Std. 90% CI [-0.80, 3.33]).
+    ##   - mpg has a probability of 84.47% of being positive (Median = 0.21, MAD = 0.21, 90% CI [-0.12,
+    ## 0.54]) and can be considered as not significant (12.00% in ROPE) and medium (Std. Median = 1.33,
+    ## Std. MAD = 1.31, Std. 90% CI [-0.76, 3.44]).
 
 ## Credits
 
