@@ -1,6 +1,6 @@
 bibentry(
     bibtype="Article",
-	title="Automated reporting of statistical models in R",
+	title="The report package for R: Ensuring the use of best practices for results reporting",
 	author="Makowski, Dominique and Lüdecke, Daniel",
     journal="CRAN",
     doi="",
@@ -9,7 +9,7 @@ bibentry(
 	url="https://github.com/easystats/report",
 
 	textVersion =
-  	paste("Makowski, D. & Lüdecke, D. (2019). Automated reporting of statistical models in R. CRAN.",
+  	paste("Makowski, D. & Lüdecke, D. (2019). The report package for R: Ensuring the use of best practices for results reporting. CRAN.",
         "Available from https://github.com/easystats/report.",
 		"doi: .",
         sep=" "),

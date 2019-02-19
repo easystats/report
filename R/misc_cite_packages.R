@@ -31,7 +31,7 @@ show_packages <- function(session) {
       i <- i + 1
     }
 
-    citation <- gsub("  ", " ", trimws(gsub("\\s", " ", gsub("SPLIT", "", citation[i])), which="both"))
+    citation <- gsub("  ", " ", trimws(gsub("SPLIT", "", citation[i]), which="both"))
 
     citations <- c(citations, citation)
     versions <- c(versions, as.character(packageVersion(pkg_name)))

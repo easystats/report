@@ -210,4 +210,4 @@ knitr::kable(table)
 
 If you like it, you can put a **star** on this repo, and cite the package as following:
 
-- Makowski, D. \& Lüdecke, D. (2019). *Automated reporting of statistical models in R*. CRAN. doi: .
+- Makowski, D. \& Lüdecke, D. (2019). *The report package for R: Ensuring the use of best practices for results reporting*. CRAN. doi: .
