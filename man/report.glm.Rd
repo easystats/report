@@ -2,7 +2,7 @@
 % Please edit documentation in R/report.glm.R
 \name{report.glm}
 \alias{report.glm}
-\title{Linear Models Report}
+\title{General Linear Models Report}
 \usage{
 \method{report}{glm}(model, ci = 0.95, standardize = TRUE,
   effsize = "chen2010", performance_in_table = TRUE,
@@ -15,9 +15,9 @@
 
 \item{standardize}{Standardized coefficients. See \code{\link[parameters:model_parameters.lm]{model_parameters}}.}
 
-\item{effsize}{Interpret the log odds ratio using a set of rules. Can be "chen2010" (default), "cohen1988", NULL, or a custom set of \link{rules}.}
+\item{effsize}{\href{https://easystats.github.io/report/articles/interpret_metrics.html}{Interpret the standardized parameters} using a set of rules. Can be "cohen1988" (default for linear models), "chen2010" (default for logistic models), "sawilowsky2009", NULL, or a custom set of \link{rules}.}
 
-\item{performance_in_table}{Add performance metrics on table.}
+\item{performance_in_table}{Add performance metrics in table.}
 
 \item{performance_metrics}{See \code{\link[performance:model_performance.lm]{model_performance}}.}
 
@@ -26,7 +26,7 @@
 \item{...}{Arguments passed to or from other methods.}
 }
 \description{
-Create a report of a linear model.
+Create a report of a general linear model.
 }
 \examples{
 model <- glm(vs ~ disp, data = mtcars, family="binomial")

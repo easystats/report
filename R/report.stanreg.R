@@ -8,7 +8,7 @@
 #' @importFrom parameters model_parameters
 #' @importFrom performance model_performance
 #' @export
-model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize = NULL, performance_in_table = TRUE, performance_metrics = "all", estimate = "median", ...) {
+model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize = NULL, performance_in_table = TRUE, performance_metrics = "all", parameters_estimate = "median", parameters_test = c("pd", "rope"), parameters_diagnostic = TRUE, rope_bounds = "default", rope_full = TRUE, ...) {
 
   # Information
   out <- list()
@@ -19,9 +19,9 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
     if (standardize == FALSE) {
       warning("The effect sizes are computed from standardized coefficients. Setting `standardize` to TRUE.")
     }
-    out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ci = ci, estimate = tolower(estimate), ...)
+    out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ci = ci, estimate = tolower(parameters_estimate), test = tolower(parameters_test), rope_bounds = rope_bounds, rope_full=rope_full, diagnostic=parameters_diagnostic, ...)
   } else {
-    out$table_parameters <- parameters::model_parameters(model, ci = ci, standardize = standardize, estimate = estimate, ...)
+    out$table_parameters <- parameters::model_parameters(model, ci = ci, standardize = standardize, estimate = tolower(parameters_estimate), test = tolower(parameters_test), rope_bounds = rope_bounds, rope_full=rope_full, diagnostic=parameters_diagnostic, ...)
   }
   out$table_parameters$Parameter <- as.character(out$table_parameters$Parameter)
   out$table_performance <- performance::model_performance(model, metrics = performance_metrics)
@@ -99,12 +99,16 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
 #' Create a report of a linear model.
 #'
 #' @param model Object of class \link{lm}.
-#' @param ci Confidence Interval (CI) level. Default to 0.95 (95\%).
+#' @param ci \href{https://easystats.github.io/bayestestR/articles/1_IndicesDescription.html#hdi---the-credible-interval-ci}{Credible Interval} (CI) level. Default to 0.90 (90\%).
 #' @param standardize Standardized coefficients. See \code{\link[parameters:model_parameters.lm]{model_parameters}}.
-#' @param effsize Interpret the standardized parameters using a set of rules. Can be "cohen1988" (default), "sawilowsky2009", NULL, or a custom set of \link{rules}.
-#' @param performance_in_table Add performance metrics on table.
-#' @param performance_metrics See \code{\link[performance:model_performance.lm]{model_performance}}.
-#' @param estimate See \code{\link[parameters:model_parameters.lm]{model_parameters}}.
+#' @param effsize \href{https://easystats.github.io/report/articles/interpret_metrics.html}{Interpret the standardized parameters} using a set of rules. Can be "cohen1988" (default for linear models), "chen2010" (default for logistic models), "sawilowsky2009", NULL, or a custom set of \link{rules}.
+#' @param performance_in_table Add performance metrics in table.
+#' @param performance_metrics Can be \code{"all"} or a list of metrics to be computed (some of \code{c("LOO", "R2", "R2_adj")}).
+#' @param parameters_estimate The \href{https://easystats.github.io/bayestestR/articles/2_IndicesEstimationComparison.html}{point-estimate(s)} to compute. Can be a character or a list with "median", "mean" or "MAP".
+#' @param parameters_test What \href{https://easystats.github.io/bayestestR/articles/3_IndicesExistenceComparison.html}{indices of effect existence} to compute. Can be a character or a list with "p_direction", "rope" or "p_map".
+#' @param parameters_diagnostic Include sampling diagnostic metrics (effective sample, Rhat and MCSE).
+#' @param rope_bounds \href{https://easystats.github.io/bayestestR/articles/1_IndicesDescription.html#rope}{ROPE's} lower and higher bounds. Should be a list of two values (e.g., \code{c(-0.1, 0.1)}) or \code{"default"}. If \code{"default"}, the bounds are set to \code{x +- 0.1*SD(response)}.
+#' @param rope_full If TRUE, use the proportion of the entire posterior distribution for the equivalence test. Otherwise, use the proportion of HDI as indicated by the \code{ci} argument.
 #' @param ... Arguments passed to or from other methods.
 #'
 #' @examples
@@ -121,13 +125,18 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
 #' report(model)
 #' }
 #' @export
-report.stanreg <- function(model, ci = 0.95, standardize = FALSE, effsize = NULL, performance_in_table = TRUE, performance_metrics = "all", estimate = "median", ...) {
+report.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize = NULL, performance_in_table = TRUE, performance_metrics = "all", parameters_estimate = "median", parameters_test = c("pd", "rope"), parameters_diagnostic = TRUE, rope_bounds = "default", rope_full = TRUE, ...) {
   values <- model_values(model,
     ci = ci,
     standardize = standardize,
     effsize = effsize,
     performance_in_table = performance_in_table,
     performance_metrics = performance_metrics,
+    parameters_estimate = parameters_estimate,
+    parameters_test = parameters_test,
+    rope_bounds = rope_bounds,
+    rope_full = rope_full,
+    parameters_diagnostic = parameters_diagnostic,
     ...
   )
 

@@ -7,7 +7,7 @@
 #' @examples
 #' show_packages(sessionInfo())
 #' cite_packages(sessionInfo())
-#' @author \href{https://github.com/DominiqueMakowski}{Dominique Makowski}
+#'
 #' @import stringr
 #' @import dplyr
 #' @importFrom utils packageVersion

@@ -132,7 +132,7 @@ model_values.lmerMod <- function(model, ci = 0.95, standardize = TRUE, effsize =
 #' @param ci Confidence Interval (CI) level. Default to 0.95 (95\%).
 #' @param standardize Standardized coefficients. See \code{\link[parameters:model_parameters.lm]{model_parameters}}.
 #' @param effsize Interpret the standardized parameters using a set of rules. Can be "cohen1988" (default), "sawilowsky2009", NULL, or a custom set of \link{rules}.
-#' @param performance_in_table Add performance metrics on table.
+#' @param performance_in_table Add performance metrics in table.
 #' @param performance_metrics See \code{\link[performance:model_performance.lm]{model_performance}}.
 #' @param bootstrap See \code{\link[parameters:model_parameters.lm]{model_parameters}}.
 #' @param ... Arguments passed to or from other methods.

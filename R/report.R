@@ -4,7 +4,8 @@
 #' \itemize{
 #'  \item{\link[=report.data.frame]{Dataframes}}
 #'  \item{\link[=report.htest]{Correlations and t-tests (htest)}}
-#'  \item{\link[=report.lm]{Linear models (lm)}}
+#'  \item{\link[=report.lm]{(General) Linear models (glm and lm)}}
+#'  \item{\link[=report.stanreg]{Bayesian models (stanreg and brms)}}
 #'  }
 #'
 #' @param model Object.

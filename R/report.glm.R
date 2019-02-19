@@ -122,18 +122,11 @@ model_values.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "ch
 
 
 
-#' Linear Models Report
+#' General Linear Models Report
 #'
-#' Create a report of a linear model.
+#' Create a report of a general linear model.
 #'
-#' @param model Object of class \link{lm}.
-#' @param ci Confidence Interval (CI) level. Default to 0.95 (95\%).
-#' @param standardize Standardized coefficients. See \code{\link[parameters:model_parameters.lm]{model_parameters}}.
-#' @param effsize Interpret the log odds ratio using a set of rules. Can be "chen2010" (default), "cohen1988", NULL, or a custom set of \link{rules}.
-#' @param performance_in_table Add performance metrics on table.
-#' @param performance_metrics See \code{\link[performance:model_performance.lm]{model_performance}}.
-#' @param bootstrap See \code{\link[parameters:model_parameters.lm]{model_parameters}}.
-#' @param ... Arguments passed to or from other methods.
+#' @inheritParams report.lm
 #'
 #' @examples
 #' model <- glm(vs ~ disp, data = mtcars, family="binomial")
