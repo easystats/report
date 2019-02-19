@@ -1,14 +1,14 @@
-#' General Linear Models Values
+#' Mixed Models Values
 #'
-#' Extract all values of general linear models.
+#' Extract all values of mixed models.
 #'
-#' @inheritParams report.glm
+#' @inheritParams report.lm
 #'
 #' @importFrom insight model_info
 #' @importFrom parameters model_parameters
 #' @importFrom performance model_performance
 #' @export
-model_values.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "chen2010", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, ...) {
+model_values.lmerMod <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, ...) {
 
   # Information
   out <- list()
@@ -30,9 +30,9 @@ model_values.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "ch
   if (bootstrap == FALSE) {
     # Text
     text_description <- model_text_description(model, effsize = effsize, ci = ci, bootstrap = bootstrap, ...)
-    text_performance <- model_text_performance_logistic(out$table_performance)
-    text_initial <- model_text_initial_logistic(model, out$table_parameters, ci = ci)
-    text_parameters <- model_text_parameters_logistic(model, out$table_parameters, ci = ci, effsize = effsize, ...)
+    text_performance <- model_text_performance_lm(out$table_performance)
+    text_initial <- model_text_initial_lm(model, out$table_parameters, ci = ci)
+    text_parameters <- model_text_parameters_lm(model, out$table_parameters, ci = ci, effsize = effsize, ...)
 
     out$text <- paste(
       text_description$text,
@@ -54,7 +54,7 @@ model_values.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "ch
   } else {
     # Text
     text_description <- model_text_description(model, effsize = effsize, ci = ci, bootstrap = bootstrap, ...)
-    text_performance <- model_text_performance_logistic(out$table_performance)
+    text_performance <- model_text_performance_lm(out$table_performance)
     text_initial <- model_text_initial_bayesian(model, out$table_parameters, ci = ci)
     text_parameters <- model_text_parameters_bayesian(model, out$table_parameters, ci = ci, effsize = effsize, ...)
 
@@ -89,6 +89,8 @@ model_values.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "ch
     out$performance[[perf]] <- out$table_performance[[perf]]
   }
 
+  #
+  #   class(out) <- c("values_lm", class(out))
   return(out)
 }
 
@@ -122,21 +124,30 @@ model_values.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "ch
 
 
 
-#' General Linear Models Report
+#' Mixed Models Report
 #'
-#' Create a report of a general linear model.
+#' Create a report of a mixed model.
 #'
-#' @inheritParams report.lm
+#' @param model Object of class \link{lm}.
+#' @param ci Confidence Interval (CI) level. Default to 0.95 (95\%).
+#' @param standardize Standardized coefficients. See \code{\link[parameters:model_parameters.lm]{model_parameters}}.
+#' @param effsize Interpret the standardized parameters using a set of rules. Can be "cohen1988" (default), "sawilowsky2009", NULL, or a custom set of \link{rules}.
+#' @param performance_in_table Add performance metrics in table.
+#' @param performance_metrics See \code{\link[performance:model_performance.lm]{model_performance}}.
+#' @param bootstrap See \code{\link[parameters:model_parameters.lm]{model_parameters}}.
+#' @param ... Arguments passed to or from other methods.
 #'
 #' @examples
-#' model <- glm(vs ~ disp, data = mtcars, family = "binomial")
+#' \dontrun{
+#' model <- lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 #' r <- report(model)
 #' to_text(r)
 #' to_fulltext(r)
 #' to_table(r)
 #' to_fulltable(r)
+#' }
 #' @export
-report.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "chen2010", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, ...) {
+report.lmerMod <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, ...) {
   values <- model_values(model,
     ci = ci,
     standardize = standardize,
@@ -155,5 +166,8 @@ report.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "chen2010
     text_full = values$text_full,
     values = values
   )
-  return(as.report(out))
+
+  rep <- as.report(out)
+  class(rep) <- c("report_model", class(rep))
+  rep
 }

@@ -4,7 +4,8 @@
 #' \itemize{
 #'  \item{\link[=report.data.frame]{Dataframes}}
 #'  \item{\link[=report.htest]{Correlations and t-tests (htest)}}
-#'  \item{\link[=report.lm]{Linear models (lm)}}
+#'  \item{\link[=report.lm]{(General) Linear models (glm and lm)}}
+#'  \item{\link[=report.stanreg]{Bayesian models (stanreg and brms)}}
 #'  }
 #'
 #' @param model Object.
@@ -62,6 +63,10 @@ print.report <- function(x, full = FALSE, width = NULL, ...) {
   if (!is.null(width)) {
     text <- format_text_wrap(text, width = width)
   }
+
+  # Colour
+  # TODO: Using regex matching.
+  # sub(".*beta = *(.*?) *,*", "\\1", text)
 
   cat(text, sep = "\n")
   invisible(text)
@@ -188,8 +193,9 @@ as.list.report <- to_values
 #' @export
 print.report_table <- function(x, digits = 2, ...) {
   dig <- attr(x, "digits", exact = TRUE)
-  if (missing(digits) && !is.null(dig))
+  if (missing(digits) && !is.null(dig)) {
     digits <- as.numeric(dig)
+  }
 
   x <- x %>%
     .colour_column_if("beta", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
@@ -201,10 +207,31 @@ print.report_table <- function(x, digits = 2, ...) {
     .colour_column_if("Std_Mean", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
     .colour_column_if("Std_MAP", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
     .colour_column_if("p", condition = `<`, threshold = 0.05, colour_if = "bold", colour_else = NULL, digits = digits) %>%
-    .colour_column_if("Pd", condition = `>`, threshold = 95, colour_if = "yellow", colour_else = NULL, digits = digits) %>%
+    .colour_column_if("pd", condition = `>`, threshold = 95, colour_if = "yellow", colour_else = NULL, digits = digits) %>%
+    .colour_column_if("ROPE_Percentage", condition = `<`, threshold = 1, colour_if = "bold", colour_else = NULL, digits = digits) %>%
     .colour_column_if("Fit", condition = `>`, threshold = 0, colour_if = "cyan", colour_else = "cyan", digits = digits) %>%
     dplyr::mutate_if(is.numeric, format_value_unless_integers, digits = digits)
 
   x[is.na(x)] <- ""
+
+  if (!is.null(x[["p"]])) {
+    fill <- .bold(sprintf("%*s", digits + 2, " "))
+    x[["p"]][x[["p"]] == ""] <- fill
+  }
+
   .display(x)
+}
+
+
+
+
+
+#' Model Values
+#'
+#' @param model Statistical Model.
+#' @param ... Arguments passed to or from other methods.
+#'
+#' @export
+model_values <- function(model, ...) {
+  UseMethod("model_values")
 }

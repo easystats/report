@@ -7,8 +7,8 @@
 #' @examples
 #' show_packages(sessionInfo())
 #' cite_packages(sessionInfo())
-#' @author \href{https://github.com/DominiqueMakowski}{Dominique Makowski}
-#' @import stringr dplyr
+#' @import stringr
+#' @import dplyr
 #' @importFrom utils packageVersion
 #' @export
 show_packages <- function(session) {
@@ -17,20 +17,19 @@ show_packages <- function(session) {
   versions <- c()
   names <- c()
   for (pkg_name in names(pkgs)) {
-    pkg <- pkgs[[pkg_name]]
-
     citation <- format(citation(pkg_name))[[2]] %>%
       strsplit("\n") %>%
-      purrr::flatten() %>%
+      unlist() %>%
       paste(collapse = "SPLIT") %>%
-      strsplit("SPLITSPLIT")
+      strsplit("SPLITSPLIT") %>%
+      unlist()
 
     i <- 1
-    while (stringr::str_detect(citation[[1]][i], "To cite ")) {
+    while (stringr::str_detect(citation[i], "To cite ")) {
       i <- i + 1
     }
 
-    citation <- gsub("\\s", "", gsub("SPLIT", "", citation[[1]][i]))
+    citation <- gsub("  ", " ", trimws(gsub("SPLIT", "", citation[i]), which = "both"))
 
     citations <- c(citations, citation)
     versions <- c(versions, as.character(packageVersion(pkg_name)))

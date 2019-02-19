@@ -28,8 +28,7 @@ Imports:
 	performance,
 	dplyr,
 	stringr,
-	broom,
-	purrr
+	broom
 Suggests:
 	spelling,
 	knitr,
@@ -38,7 +37,8 @@ Suggests:
 	covr,
 	circus,
 	ggplot2,
-	rstudioapi
+	rstudioapi,
+	rstanarm
 Remotes: 
 	easystats/insight,
 	easystats/parameters,

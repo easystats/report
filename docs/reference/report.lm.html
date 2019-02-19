@@ -175,11 +175,11 @@
     </tr>
     <tr>
       <th>effsize</th>
-      <td><p>Interpret the standardized parameters using a set of rules. Can be "cohen1988" (default), "sawilowsky2009", NULL, or a custom set of <a href='rules.html'>rules</a>.</p></td>
+      <td><p><a href='https://easystats.github.io/report/articles/interpret_metrics.html'>Interpret the standardized parameters</a> using a set of rules. Can be "cohen1988" (default for linear models), "chen2010" (default for logistic models), "sawilowsky2009", NULL, or a custom set of <a href='rules.html'>rules</a>.</p></td>
     </tr>
     <tr>
       <th>performance_in_table</th>
-      <td><p>Add performance metrics on table.</p></td>
+      <td><p>Add performance metrics in table.</p></td>
     </tr>
     <tr>
       <th>performance_metrics</th>
@@ -206,41 +206,41 @@
 #&gt;   - Speciesversicolor is significant (beta = -1.81, 95% CI [-2.99, -0.62], p &lt; .01) and large (Std. beta = -0.88).
 #&gt;   - Speciesvirginica is significant (beta = -3.15, 95% CI [-4.41, -1.90], p &lt; .001) and large (Std. beta = -1.75).
 #&gt;   - Petal.Length:Speciesversicolor is not significant (beta = 0.29, 95% CI [-0.30, 0.87], p &gt; .1) and medium (Std. beta = 0.61).
-#&gt;   - Petal.Length:Speciesvirginica is not significant (beta = 0.45, 95% CI [-0.12, 1.03], p &gt; .1) and large (Std. beta = 0.97).</div><div class='input'><span class='fu'><a href='to_fulltext.html'>to_fulltext</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; We fitted a linear model to predict Sepal.Length with Petal.Length and Species (formula = Sepal.Length ~ Petal.Length * Species). Effect sizes were labelled following Cohen's (1988) recommendations. The model explains a significant and substantial proportion of variance (R2 = 0.84, F(5, 144) = 151.71, p &lt; .001, adj. R2 = 0.83). The model's intercept is at 4.21 (t(144) = 10.34, 95% CI [3.41, 5.02], p &lt; .001). 
+#&gt;   - Petal.Length:Speciesvirginica is not significant (beta = 0.45, 95% CI [-0.12, 1.03], p &gt; .1) and large (Std. beta = 0.97).</div><div class='input'><span class='fu'><a href='to_fulltext.html'>to_fulltext</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; We fitted a linear model to predict Sepal.Length with Petal.Length and Species (formula = Sepal.Length ~ Petal.Length * Species). Effect sizes were labelled following Cohen's (1988) recommendations. The model explains a significant and substantial proportion of variance (R2 = 0.84, F(5, 144) = 151.71, p &lt; .001, adj. R2 = 0.83). The model's intercept, corresponding to Petal.Length = 0 and Species = , is at 4.21 (t(144) = 10.34, 95% CI [3.41, 5.02], p &lt; .001). 
 #&gt; 
 #&gt; Within this model: 
 #&gt;   - Petal.Length is positive, not significant (beta = 0.54, SE = 0.28, t(144) = 1.96, 95% CI [0.00, 1.09], p = 0.05) and large (Std. beta = 1.16, Std. SE = 0.59, Std. 95% CI [-0.01, 2.32]).
 #&gt;   - Speciesversicolor is negative, significant (beta = -1.81, SE = 0.60, t(144) = -3.02, 95% CI [-2.99, -0.62], p &lt; .01) and large (Std. beta = -0.88, Std. SE = 0.77, Std. 95% CI [-2.41, 0.65]).
 #&gt;   - Speciesvirginica is negative, significant (beta = -3.15, SE = 0.63, t(144) = -4.97, 95% CI [-4.41, -1.90], p &lt; .001) and large (Std. beta = -1.75, Std. SE = 0.79, Std. 95% CI [-3.32, -0.18]).
 #&gt;   - Petal.Length:Speciesversicolor is positive, not significant (beta = 0.29, SE = 0.30, t(144) = 0.97, 95% CI [-0.30, 0.87], p &gt; .1) and medium (Std. beta = 0.61, Std. SE = 0.63, Std. 95% CI [-0.63, 1.85]).
-#&gt;   - Petal.Length:Speciesvirginica is positive, not significant (beta = 0.45, SE = 0.29, t(144) = 1.56, 95% CI [-0.12, 1.03], p &gt; .1) and large (Std. beta = 0.97, Std. SE = 0.62, Std. 95% CI [-0.26, 2.19]).</div><div class='input'><span class='fu'><a href='to_table.html'>to_table</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt;                      Parameter |  beta | CI_low | CI_high |    p | Std_beta |  Fit
+#&gt;   - Petal.Length:Speciesvirginica is positive, not significant (beta = 0.45, SE = 0.29, t(144) = 1.56, 95% CI [-0.12, 1.03], p &gt; .1) and large (Std. beta = 0.97, Std. SE = 0.62, Std. 95% CI [-0.26, 2.19]).</div><div class='input'><span class='fu'><a href='to_table.html'>to_table</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; Parameter                      |  beta | CI_low | CI_high |    p | Std_beta |  Fit
 #&gt; ----------------------------------------------------------------------------------
-#&gt;                    (Intercept) | <span style='color: #00BB00;'> 4.21</span><span> |   3.41 |    5.02 | </span><span style='color: #BBBB00;'>0.00</span><span> | </span><span style='color: #00BB00;'>    0.49</span><span> |     
-#&gt;                   Petal.Length | </span><span style='color: #00BB00;'> 0.54</span><span> |   0.00 |    1.09 | 0.05 | </span><span style='color: #00BB00;'>    1.16</span><span> |     
-#&gt;              Speciesversicolor | </span><span style='color: #BB0000;'>-1.81</span><span> |  -2.99 |   -0.62 | </span><span style='color: #BBBB00;'>0.00</span><span> | </span><span style='color: #BB0000;'>   -0.88</span><span> |     
-#&gt;               Speciesvirginica | </span><span style='color: #BB0000;'>-3.15</span><span> |  -4.41 |   -1.90 | </span><span style='color: #BBBB00;'>0.00</span><span> | </span><span style='color: #BB0000;'>   -1.75</span><span> |     
+#&gt; (Intercept)                    | <span style='color: #00BB00;'> 4.21</span><span> |   3.41 |    5.02 | </span><span style='font-weight: bold;'>0.00</span><span> | </span><span style='color: #00BB00;'>    0.49</span><span> |     
+#&gt; Petal.Length                   | </span><span style='color: #00BB00;'> 0.54</span><span> |   0.00 |    1.09 | 0.05 | </span><span style='color: #00BB00;'>    1.16</span><span> |     
+#&gt; Speciesversicolor              | </span><span style='color: #BB0000;'>-1.81</span><span> |  -2.99 |   -0.62 | </span><span style='font-weight: bold;'>0.00</span><span> | </span><span style='color: #BB0000;'>   -0.88</span><span> |     
+#&gt; Speciesvirginica               | </span><span style='color: #BB0000;'>-3.15</span><span> |  -4.41 |   -1.90 | </span><span style='font-weight: bold;'>0.00</span><span> | </span><span style='color: #BB0000;'>   -1.75</span><span> |     
 #&gt; Petal.Length:Speciesversicolor | </span><span style='color: #00BB00;'> 0.29</span><span> |  -0.30 |    0.87 | 0.33 | </span><span style='color: #00BB00;'>    0.61</span><span> |     
-#&gt;  Petal.Length:Speciesvirginica | </span><span style='color: #00BB00;'> 0.45</span><span> |  -0.12 |    1.03 | 0.12 | </span><span style='color: #00BB00;'>    0.97</span><span> |     
-#&gt;                                |       |        |         |      |          |     
-#&gt;                             R2 |       |        |         |      |          | </span><span style='color: #00BBBB;'>0.84</span><span>
-#&gt;                         R2_adj |       |        |         |      |          | </span><span style='color: #00BBBB;'>0.83</span><span>
-#&gt; </div><div class='input'><span class='fu'><a href='to_fulltable.html'>to_fulltable</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt;                      Parameter |  beta |   SE | CI_low | CI_high |     t | DoF_residual |    p | Std_beta | Std_SE | Std_CI_low | Std_CI_high |    Fit
+#&gt; Petal.Length:Speciesvirginica  | </span><span style='color: #00BB00;'> 0.45</span><span> |  -0.12 |    1.03 | 0.12 | </span><span style='color: #00BB00;'>    0.97</span><span> |     
+#&gt;                                |       |        |         | </span><span style='font-weight: bold;'>    </span><span> |          |     
+#&gt; R2                             |       |        |         | </span><span style='font-weight: bold;'>    </span><span> |          | </span><span style='color: #00BBBB;'>0.84</span><span>
+#&gt; R2_adj                         |       |        |         | </span><span style='font-weight: bold;'>    </span><span> |          | </span><span style='color: #00BBBB;'>0.83</span><span>
+#&gt; </div><div class='input'><span class='fu'><a href='to_fulltable.html'>to_fulltable</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; Parameter                      |  beta |   SE | CI_low | CI_high |     t | DoF_residual |    p | Std_beta | Std_SE | Std_CI_low | Std_CI_high |    Fit
 #&gt; ------------------------------------------------------------------------------------------------------------------------------------------------------
-#&gt;                    (Intercept) | </span><span style='color: #00BB00;'> 4.21</span><span> | 0.41 |   3.41 |    5.02 | 10.34 |          144 | </span><span style='color: #BBBB00;'>0.00</span><span> | </span><span style='color: #00BB00;'>    0.49</span><span> |   0.77 |      -1.03 |        2.01 |       
-#&gt;                   Petal.Length | </span><span style='color: #00BB00;'> 0.54</span><span> | 0.28 |   0.00 |    1.09 |  1.96 |          144 | 0.05 | </span><span style='color: #00BB00;'>    1.16</span><span> |   0.59 |      -0.01 |        2.32 |       
-#&gt;              Speciesversicolor | </span><span style='color: #BB0000;'>-1.81</span><span> | 0.60 |  -2.99 |   -0.62 | -3.02 |          144 | </span><span style='color: #BBBB00;'>0.00</span><span> | </span><span style='color: #BB0000;'>   -0.88</span><span> |   0.77 |      -2.41 |        0.65 |       
-#&gt;               Speciesvirginica | </span><span style='color: #BB0000;'>-3.15</span><span> | 0.63 |  -4.41 |   -1.90 | -4.97 |          144 | </span><span style='color: #BBBB00;'>0.00</span><span> | </span><span style='color: #BB0000;'>   -1.75</span><span> |   0.79 |      -3.32 |       -0.18 |       
+#&gt; (Intercept)                    | </span><span style='color: #00BB00;'> 4.21</span><span> | 0.41 |   3.41 |    5.02 | 10.34 |          144 | </span><span style='font-weight: bold;'>0.00</span><span> | </span><span style='color: #00BB00;'>    0.49</span><span> |   0.77 |      -1.03 |        2.01 |       
+#&gt; Petal.Length                   | </span><span style='color: #00BB00;'> 0.54</span><span> | 0.28 |   0.00 |    1.09 |  1.96 |          144 | 0.05 | </span><span style='color: #00BB00;'>    1.16</span><span> |   0.59 |      -0.01 |        2.32 |       
+#&gt; Speciesversicolor              | </span><span style='color: #BB0000;'>-1.81</span><span> | 0.60 |  -2.99 |   -0.62 | -3.02 |          144 | </span><span style='font-weight: bold;'>0.00</span><span> | </span><span style='color: #BB0000;'>   -0.88</span><span> |   0.77 |      -2.41 |        0.65 |       
+#&gt; Speciesvirginica               | </span><span style='color: #BB0000;'>-3.15</span><span> | 0.63 |  -4.41 |   -1.90 | -4.97 |          144 | </span><span style='font-weight: bold;'>0.00</span><span> | </span><span style='color: #BB0000;'>   -1.75</span><span> |   0.79 |      -3.32 |       -0.18 |       
 #&gt; Petal.Length:Speciesversicolor | </span><span style='color: #00BB00;'> 0.29</span><span> | 0.30 |  -0.30 |    0.87 |  0.97 |          144 | 0.33 | </span><span style='color: #00BB00;'>    0.61</span><span> |   0.63 |      -0.63 |        1.85 |       
-#&gt;  Petal.Length:Speciesvirginica | </span><span style='color: #00BB00;'> 0.45</span><span> | 0.29 |  -0.12 |    1.03 |  1.56 |          144 | 0.12 | </span><span style='color: #00BB00;'>    0.97</span><span> |   0.62 |      -0.26 |        2.19 |       
-#&gt;                                |       |      |        |         |       |              |      |          |        |            |             |       
-#&gt;                            AIC |       |      |        |         |       |              |      |          |        |            |             | </span><span style='color: #00BBBB;'>106.77</span><span>
-#&gt;                            BIC |       |      |        |         |       |              |      |          |        |            |             | </span><span style='color: #00BBBB;'>127.84</span><span>
-#&gt;                             R2 |       |      |        |         |       |              |      |          |        |            |             | </span><span style='color: #00BBBB;'>  0.84</span><span>
-#&gt;                              F |       |      |        |         |       |              |      |          |        |            |             | </span><span style='color: #00BBBB;'>151.71</span><span>
-#&gt;                            DoF |       |      |        |         |       |              |      |          |        |            |             | </span><span style='color: #00BBBB;'>  5.00</span><span>
-#&gt;                   DoF_residual |       |      |        |         |       |              |      |          |        |            |             | </span><span style='color: #00BBBB;'>144.00</span><span>
-#&gt;                              p |       |      |        |         |       |              |      |          |        |            |             | </span><span style='color: #00BBBB;'>  0.00</span><span>
-#&gt;                         R2_adj |       |      |        |         |       |              |      |          |        |            |             | </span><span style='color: #00BBBB;'>  0.83</span><span>
+#&gt; Petal.Length:Speciesvirginica  | </span><span style='color: #00BB00;'> 0.45</span><span> | 0.29 |  -0.12 |    1.03 |  1.56 |          144 | 0.12 | </span><span style='color: #00BB00;'>    0.97</span><span> |   0.62 |      -0.26 |        2.19 |       
+#&gt;                                |       |      |        |         |       |              | </span><span style='font-weight: bold;'>    </span><span> |          |        |            |             |       
+#&gt; AIC                            |       |      |        |         |       |              | </span><span style='font-weight: bold;'>    </span><span> |          |        |            |             | </span><span style='color: #00BBBB;'>106.77</span><span>
+#&gt; BIC                            |       |      |        |         |       |              | </span><span style='font-weight: bold;'>    </span><span> |          |        |            |             | </span><span style='color: #00BBBB;'>127.84</span><span>
+#&gt; R2                             |       |      |        |         |       |              | </span><span style='font-weight: bold;'>    </span><span> |          |        |            |             | </span><span style='color: #00BBBB;'>  0.84</span><span>
+#&gt; F                              |       |      |        |         |       |              | </span><span style='font-weight: bold;'>    </span><span> |          |        |            |             | </span><span style='color: #00BBBB;'>151.71</span><span>
+#&gt; DoF                            |       |      |        |         |       |              | </span><span style='font-weight: bold;'>    </span><span> |          |        |            |             | </span><span style='color: #00BBBB;'>  5.00</span><span>
+#&gt; DoF_residual                   |       |      |        |         |       |              | </span><span style='font-weight: bold;'>    </span><span> |          |        |            |             | </span><span style='color: #00BBBB;'>144.00</span><span>
+#&gt; p                              |       |      |        |         |       |              | </span><span style='font-weight: bold;'>    </span><span> |          |        |            |             | </span><span style='color: #00BBBB;'>  0.00</span><span>
+#&gt; R2_adj                         |       |      |        |         |       |              | </span><span style='font-weight: bold;'>    </span><span> |          |        |            |             | </span><span style='color: #00BBBB;'>  0.83</span><span>
 #&gt; </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

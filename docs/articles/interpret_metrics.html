@@ -115,9 +115,8 @@
 <div id="why" class="section level2">
 <h2 class="hasAnchor">
 <a href="#why" class="anchor"></a>Why?</h2>
-<p>The metrics used in statistics (indices of fit, model performance or parameter estimates) can be very abstract. A long experience is required to intuitively “<em>feel</em>” the meaning of their values. In order to facilitate the understanding of the results they are facing, many scientists use (often implicitly) some set of <em>rules of thumb</em>. Thus, in order to validate and standardize such interpretation grid, some authors validated and published them in the form of guidelines. One of the most famous interpertation grid was proposed by <strong>Cohen (1988)</strong> for a series of widely used indices, such as the correlation <strong>r</strong> (<em>r</em> = .20, small; <em>r</em> = .40, moderate and <em>r</em> = .60, large) or the <strong>standardized difference</strong> (<em>Cohen’s d</em>).</p>
-<p>Readers should keep in mind that these thresholds are arbitrary and should be discussed on a case-by-case basis, to avoid their crystalisation, as for the infamous <strong><em>p</em> &lt; .05</strong> example.</p>
-<p><code>report</code> implements such sets of rules of thumb for a variety of indices in a flexible and explicit fashion.</p>
+<p>The metrics used in statistics (indices of fit, model performance or parameter estimates) can be very abstract. A long experience is required to intuitively <strong><em>“feel”</em></strong> the meaning of their values. In order to facilitate the understanding of the results they are facing, many scientists use (often implicitly) some set of <strong>rules of thumb</strong>. Thus, in order to validate and standardize such interpretation grids, some authors validated and published them in the form of guidelines. One of the most famous interpertation grid was proposed by <strong>Cohen (1988)</strong> for a series of widely used indices, such as the correlation <strong>r</strong> (<em>r</em> = .20, small; <em>r</em> = .40, moderate and <em>r</em> = .60, large) or the <strong>standardized difference</strong> (<em>Cohen’s d</em>).</p>
+<p>The package <strong><code>report</code></strong> implements such sets of rules of thumb for a variety of indices in a flexible and explicit fashion, helping you understanding and reporting your results in a scientific yet meaningful way. However, readers should keep in mind that these thresholds, altough “<em>validated</em>”, <strong>remain arbitrary</strong>. Thus, their use should be discussed on a case-by-case basis depending on the field, hypotheses, prior results and so on, to avoid their crystalisation, as for the infamous <strong><em>p</em> &lt; .05</strong> example.</p>
 </div>
 <div id="supported-indices" class="section level2">
 <h2 class="hasAnchor">
@@ -275,8 +274,8 @@
 <a href="#cohen1988statistical-3" class="anchor"></a><span class="citation">Cohen (1988)</span>
 </h5>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw"><a href="../reference/interpret_odds.html">interpret_odds</a></span>(x, <span class="dt">rules =</span> <span class="st">"cohen1988"</span>)</a></code></pre></div>
-<p>This converts odds ratio to standardized difference <em>d</em> using the following formula <span class="citation">(Cohen 1988; Sánchez-Meca, Marı́n-Martı́nez, and Chacón-Moscoso 2003)</span>:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">d &lt;-<span class="st"> </span>odds <span class="op">*</span><span class="st"> </span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/MathFun">sqrt</a></span>(<span class="dv">3</span>) <span class="op">/</span><span class="st"> </span>pi)</a></code></pre></div>
+<p>This converts (log) odds ratio to standardized difference <em>d</em> using the following formula <span class="citation">(Cohen 1988; Sánchez-Meca, Marı́n-Martı́nez, and Chacón-Moscoso 2003)</span>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">d &lt;-<span class="st"> </span>log_odds <span class="op">*</span><span class="st"> </span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/MathFun">sqrt</a></span>(<span class="dv">3</span>) <span class="op">/</span><span class="st"> </span>pi)</a></code></pre></div>
 </div>
 </div>
 <div id="bayesian-indices-in-rope-pd" class="section level3">

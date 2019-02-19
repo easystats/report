@@ -57,6 +57,16 @@ test_that("interpret_rope", {
 })
 
 
+context("interpret_odds")
+test_that("interpret_odds", {
+  testthat::expect_equal(interpret_odds(2), "small")
+  testthat::expect_equal(interpret_odds(c(1, 3)), c("very small", "small"))
+  testthat::expect_equal(interpret_odds(c(1, 3), rules = "cohen1988"), c("very small", "medium"))
+  testthat::expect_equal(interpret_odds(0.6, rules = rules(c(0.5), c("A", "B"))), "B")
+  testthat::expect_error(interpret_odds(0.6, rules = "DUPA"))
+})
+
+
 context("interpret_r2")
 test_that("interpret_r2", {
   testthat::expect_equal(interpret_r2(0.4), "substantial")

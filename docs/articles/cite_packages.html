@@ -112,7 +112,7 @@
 
     
     
-<p><strong>Citing the packages, modules and softwares you used for your analysis is important</strong>, both from a <strong>reproducibility perspective</strong> (statistical routines are often implemented in different ways by different packages, which could explain possible discrepancies in the results. Saying <em>“I did this using this function from that package version 1.2.3”</em> is a way of protecting yourself by being transparent about what you have found doing what you have done), but also for <strong>acknowledging</strong> the work and time that people spent creating tools for others (sometimes at the expense of their own research).</p>
+<p><strong>Citing the packages, modules and softwares you used for your analysis is important</strong>, both from a <strong>reproducibility perspective</strong> (statistical routines are often implemented in different ways by different packages, which could explain possible discrepancies in the results. Saying <em>“I did this using this function from that package version 1.2.3”</em> is a way of <strong>protecting yourself</strong> by being transparent about what you have found doing what you have done), but also for <strong>acknowledging</strong> the work and time that people spent creating tools for others (sometimes at the expense of their own research).</p>
 <ul>
 <li><strong>That’s great, but how to <em>actually</em> cite them?</strong></li>
 <li><strong>I used about 100 packages, should I cite them <em>all</em>?</strong></li>
@@ -120,17 +120,17 @@
 <div id="what-should-i-cite" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-should-i-cite" class="anchor"></a>What should I cite?</h2>
-<p>Ideally, you should indeed cite all the packages that you used. However, it’s often not possible to cite them all in the manuscript body. Therefore, I would recommend the following:</p>
+<p>Ideally, you should indeed cite all the packages that you used. However, it’s often not possible to cite them all in the manuscript body. Therefore, we would recommend the following:</p>
 <div id="cite-the-mainimportant-packages-in-the-manuscript" class="section level3">
 <h3 class="hasAnchor">
 <a href="#cite-the-mainimportant-packages-in-the-manuscript" class="anchor"></a><strong>1. Cite the main/important packages in the manuscript</strong>
 </h3>
-<p>This should be done for the packages that were central to your specific study (<em>i.e.,</em> that got you the results that you reported) rather than data manipulation tools (<em>even though these are as much important</em>).</p>
+<p>This should be done for the packages that were central to your specific study (<em>i.e.,</em> that got you the results that you reported) rather than data manipulation tools (<em>even though these are as much, if not </em>more<em>, important</em>).</p>
 <div id="example" class="section level5">
 <h5 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example:</h5>
 <blockquote>
-<p>Statistics were done using R 3.5.0 (R Core Team, 2018), the <em>rstanarm</em> (<em>v2.13.1</em>; Gabry &amp; Goodrich, 2016) and the <em>report</em> (<em>v0.1.0</em>; Makowski, 2019) packages. The full reproducible code is available in <strong>Supplementary Materials</strong>.</p>
+<p>Statistics were done using R 3.5.0 (R Core Team, 2018), the <em>rstanarm</em> (<em>v2.13.1</em>; Gabry &amp; Goodrich, 2016) and the <em>report</em> (<em>v0.1.0</em>; Makowski &amp; Lüdecke, 2019) packages. The full reproducible code is available in <strong>Supplementary Materials</strong>.</p>
 </blockquote>
 </div>
 </div>
@@ -138,7 +138,7 @@
 <h3 class="hasAnchor">
 <a href="#present-everything-in-supplementary-materials" class="anchor"></a><strong>2. Present everything in Supplementary Materials</strong>
 </h3>
-<p>Then, in <em>Supplementary Materials</em>, you can show all the packages and functions you used. To do it quickly, explicitly and in a reproducible fashion, I cannot recommend more writing the <em>Supplementary Materials</em> with <a href="https://rmarkdown.rstudio.com/"><strong>R Markdown</strong></a>, which can generate <em>docs</em> and <em>pdf</em> files that you can submit along with your manuscript. Moreover, if you’re using R, you can include (usually at the end) every used package citation and their version using the <code><a href="../reference/show_packages.html">cite_packages()</a></code> function from the <a href="https://github.com/neuropsychology/report"><strong>report</strong></a> package.</p>
+<p>Then, in <em>Supplementary Materials</em>, you can show all the packages and functions you used. To do it quickly, explicitly and in a reproducible fashion, we recommend writing the <em>Supplementary Materials</em> with <a href="https://rmarkdown.rstudio.com/"><strong>R Markdown</strong></a>, which can generate <em>docs</em> and <em>pdf</em> files that you can submit along with your manuscript. Moreover, if you’re using R, you can include (usually at the end) every used package’s citation using the <code><a href="../reference/show_packages.html">cite_packages()</a></code> function from the <a href="https://github.com/easystats/report"><strong>report</strong></a> package.</p>
 <div id="example-1" class="section level5">
 <h5 class="hasAnchor">
 <a href="#example-1" class="anchor"></a>Example:</h5>
@@ -158,7 +158,7 @@
 </td>
 </tr>
 <tr class="even">
-<td align="left">Makowski, D. (2019). Automated reporting of statistical models in R. CRAN. Available from <a href="https://github.com/neuropsychology/report" class="uri">https://github.com/neuropsychology/report</a>. doi: .</td>
+<td align="left">Makowski, D. &amp; Lüdecke, D. (2019). The report package for R: Ensuring the use of best practices for results reporting. CRAN. Available from <a href="https://github.com/easystats/report" class="uri">https://github.com/easystats/report</a>. doi: .</td>
 </tr>
 <tr class="odd">
 <td align="left">Yihui Xie (2018). knitr: A General-Purpose Package for Dynamic Report Generation in R. R package version 1.21.</td>
@@ -186,7 +186,7 @@ A BibTeX entry for LaTeX users is
     note = {R package version 0.7.6},
     url = {https://CRAN.R-project.org/package=dplyr},
   }</code></pre>
-<p>For other languages, such as Python or Julia, it might be a little trickier, but a <strong>quick search on google (<em>or github</em>)</strong> should provide you with all the necessary information (version, authors and date). <strong>Finally, keep in mind that it’s better to have a slightly incomplete citation than no citation at all.</strong></p>
+<p>For other languages, such as Python or Julia, it might be a little trickier, but a quick search on google (or github) should provide you with all the necessary information (version, authors and date). <strong>Keep in mind that it’s better to have a slightly incomplete citation than no citation at all.</strong></p>
 </div>
   </div>
 

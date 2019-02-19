@@ -1,5 +1,5 @@
 ---
-title: "report"
+title: "Get Started"
 output: 
   github_document:
     toc: true
@@ -29,10 +29,9 @@ options(knitr.kable.NA = '',
 ```
 
 
-### Installation
+## Installation
 
-
-Run the following:
+First, install R. Then, run the following in the console:
 
 ```{r eval=FALSE, message=FALSE, warning=FALSE, eval=FALSE}
 install.packages("devtools")
@@ -43,36 +42,55 @@ library("report")
 ```
 
 
-### General Workflow
+## Functions
 
-The `report` package works in a two steps fashion. First, creating a `report` object with the `report()` function (which takes different arguments depending on the type of object you are reporting). Then, this report can be displayed either textually, using `to_text()`, or as a table, using `to_table()`. Moreover, you can also access a more detailed (but less digest) version of the report using `to_fulltext()` and `to_fulltable()`. Finally, `to_values()` makes it easy to access all the internals of a model. 
 
+The `report` package works in a two steps fashion. First, creating a `report` object with the `report()` function (which takes different arguments depending on the type of object you are reporting). Then, this report can be displayed either textually, using `to_text()`, or as a table, using `to_table()`. Moreover, you can also access a more detailed (but less digest) version of the report using `to_fulltext()` and `to_fulltable()`. Finally, `to_values()` makes it easy to access all the internals of a model.
+
+
+## Supported Objects
 
 ### Dataframes
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
-report(iris)
+r <- report(iris)
+to_text(r)
 ```
 ```{r message=FALSE, warning=FALSE}
-print(report(iris), width=100)
+r <- report(iris)
+print(to_text(r), width=100)
+```
+```{r message=FALSE, warning=FALSE, eval=FALSE}
+to_table(r)
+```
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+knitr::kable(to_table(r, digits=2))
 ```
 
-The reports nicely work within the *tidyverse*:
+### Grouped Dataframes
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
 library(dplyr)
 
-iris %>% 
+r <- iris %>% 
   group_by(Species) %>% 
   report(median = TRUE, range = FALSE)  # Display only the Median and MAD
+
+to_fulltext(r)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(dplyr)
 
-iris %>% 
+r <- iris %>% 
   group_by(Species) %>% 
-  report(median = TRUE, range = FALSE) %>% 
-  print(width=100)
+  report(median = TRUE, range = FALSE)  # Display only the Median and MAD
+to_fulltext(r, width=100)
+```
+```{r message=FALSE, warning=FALSE, eval=FALSE}
+to_fulltable(r)
+```
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+to_fulltable(r, digits=2)
 ```
 
 ### Correlations and t-tests
@@ -91,9 +109,7 @@ report(t.test(iris$Sepal.Length, iris$Petal.Length))
 print(report(t.test(iris$Sepal.Length, iris$Petal.Length)), width=100)
 ```
 
-### Linear Models (LM)
-
-The difference between regular and full reports becomes obvious for more complicated models.
+### Linear Models (LMs)
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
 model <- lm(Sepal.Length ~ Petal.Length + Species, data=iris)
@@ -108,24 +124,39 @@ r <- report(model)
 to_text(r, width=100)
 ```
 
-
-```{r message=FALSE, warning=FALSE, eval=FALSE}
-to_fulltext(r)
-```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-to_fulltext(r, width=100)
-```
-
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
 to_table(r)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-knitr::kable(to_table(r, digits=2))
+table <- to_table(r, digits=2)
+table <- table[rowSums(is.na(table)) != ncol(table),]
+knitr::kable(table)
+```
+
+
+
+### General Linear Models (GLMs)
+
+```{r message=FALSE, warning=FALSE, eval=FALSE}
+model <- glm(vs ~ mpg + cyl, data=mtcars, family="binomial")
+r <- report(model)
+
+to_fulltext(r)
+```
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+model <- glm(vs ~ mpg + cyl, data=mtcars, family="binomial")
+r <- report(model)
+
+to_fulltext(r, width=100)
 ```
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
 to_fulltable(r)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-knitr::kable(to_fulltable(r, digits=2))
+table <- to_fulltable(r, digits=2)
+table <- table[rowSums(is.na(table)) != ncol(table),]
+knitr::kable(table)
 ```
+
+### Bayesian Models

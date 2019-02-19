@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Bayesian Models Values — model_values.stanreg • report</title>
+<title>Mixed Models Report — report.lmerMod • report</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,9 +37,9 @@
 
 
 
-<meta property="og:title" content="Bayesian Models Values — model_values.stanreg" />
+<meta property="og:title" content="Mixed Models Report — report.lmerMod" />
 
-<meta property="og:description" content="Extract all values of Bayesian models." />
+<meta property="og:description" content="Create a report of a mixed model." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -142,23 +142,21 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Bayesian Models Values</h1>
-    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.stanreg.R'><code>R/report.stanreg.R</code></a></small>
-    <div class="hidden name"><code>model_values.stanreg.Rd</code></div>
+    <h1>Mixed Models Report</h1>
+    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.merMod.R'><code>R/report.merMod.R</code></a></small>
+    <div class="hidden name"><code>report.lmerMod.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Extract all values of Bayesian models.</p>
+    <p>Create a report of a mixed model.</p>
     
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for stanreg</span>
-<span class='fu'><a href='model_values.html'>model_values</a></span>(<span class='no'>model</span>, <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>0.9</span>, <span class='kw'>standardize</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>effsize</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>performance_in_table</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>performance_metrics</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='kw'>parameters_estimate</span> <span class='kw'>=</span> <span class='st'>"median"</span>,
-  <span class='kw'>parameters_test</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"pd"</span>, <span class='st'>"rope"</span>), <span class='kw'>parameters_diagnostic</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>rope_bounds</span> <span class='kw'>=</span> <span class='st'>"default"</span>, <span class='kw'>rope_full</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for lmerMod</span>
+<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>, <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>standardize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>effsize</span> <span class='kw'>=</span> <span class='st'>"cohen1988"</span>, <span class='kw'>performance_in_table</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>performance_metrics</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='kw'>bootstrap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -169,7 +167,7 @@
     </tr>
     <tr>
       <th>ci</th>
-      <td><p><a href='https://easystats.github.io/bayestestR/articles/1_IndicesDescription.html#hdi---the-credible-interval-ci'>Credible Interval</a> (CI) level. Default to 0.90 (90%).</p></td>
+      <td><p>Confidence Interval (CI) level. Default to 0.95 (95%).</p></td>
     </tr>
     <tr>
       <th>standardize</th>
@@ -177,7 +175,7 @@
     </tr>
     <tr>
       <th>effsize</th>
-      <td><p><a href='https://easystats.github.io/report/articles/interpret_metrics.html'>Interpret the standardized parameters</a> using a set of rules. Can be "cohen1988" (default for linear models), "chen2010" (default for logistic models), "sawilowsky2009", NULL, or a custom set of <a href='rules.html'>rules</a>.</p></td>
+      <td><p>Interpret the standardized parameters using a set of rules. Can be "cohen1988" (default), "sawilowsky2009", NULL, or a custom set of <a href='rules.html'>rules</a>.</p></td>
     </tr>
     <tr>
       <th>performance_in_table</th>
@@ -185,27 +183,11 @@
     </tr>
     <tr>
       <th>performance_metrics</th>
-      <td><p>Can be <code>"all"</code> or a list of metrics to be computed (some of <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("LOO", "R2", "R2_adj")</a></code>).</p></td>
+      <td><p>See <code><a href='https://www.rdocumentation.org/packages/performance/topics/model_performance.lm'>model_performance</a></code>.</p></td>
     </tr>
     <tr>
-      <th>parameters_estimate</th>
-      <td><p>The <a href='https://easystats.github.io/bayestestR/articles/2_IndicesEstimationComparison.html'>point-estimate(s)</a> to compute. Can be a character or a list with "median", "mean" or "MAP".</p></td>
-    </tr>
-    <tr>
-      <th>parameters_test</th>
-      <td><p>What <a href='https://easystats.github.io/bayestestR/articles/3_IndicesExistenceComparison.html'>indices of effect existence</a> to compute. Can be a character or a list with "p_direction", "rope" or "p_map".</p></td>
-    </tr>
-    <tr>
-      <th>parameters_diagnostic</th>
-      <td><p>Include sampling diagnostic metrics (effective sample, Rhat and MCSE).</p></td>
-    </tr>
-    <tr>
-      <th>rope_bounds</th>
-      <td><p><a href='https://easystats.github.io/bayestestR/articles/1_IndicesDescription.html#rope'>ROPE's</a> lower and higher bounds. Should be a list of two values (e.g., <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c(-0.1, 0.1)</a></code>) or <code>"default"</code>. If <code>"default"</code>, the bounds are set to <code>x +- 0.1*SD(response)</code>.</p></td>
-    </tr>
-    <tr>
-      <th>rope_full</th>
-      <td><p>If TRUE, use the proportion of the entire posterior distribution for the equivalence test. Otherwise, use the proportion of HDI as indicated by the <code>ci</code> argument.</p></td>
+      <th>bootstrap</th>
+      <td><p>See <code><a href='https://www.rdocumentation.org/packages/parameters/topics/model_parameters.lm'>model_parameters</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -214,12 +196,23 @@
     </table>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'>lmer</span>(<span class='no'>Sepal.Length</span> ~ <span class='no'>Petal.Length</span> + (<span class='fl'>1</span> <span class='kw'>|</span> <span class='no'>Species</span>), <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>)
+<span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>)
+<span class='fu'><a href='to_text.html'>to_text</a></span>(<span class='no'>r</span>)
+<span class='fu'><a href='to_fulltext.html'>to_fulltext</a></span>(<span class='no'>r</span>)
+<span class='fu'><a href='to_table.html'>to_table</a></span>(<span class='no'>r</span>)
+<span class='fu'><a href='to_fulltable.html'>to_fulltable</a></span>(<span class='no'>r</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+            
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

@@ -31,7 +31,7 @@ model_values.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "coh
     # Text
     text_description <- model_text_description(model, effsize = effsize, ci = ci, bootstrap = bootstrap, ...)
     text_performance <- model_text_performance_lm(out$table_performance)
-    text_initial <- model_text_initial_lm(out$table_parameters, ci = ci)
+    text_initial <- model_text_initial_lm(model, out$table_parameters, ci = ci)
     text_parameters <- model_text_parameters_lm(model, out$table_parameters, ci = ci, effsize = effsize, ...)
 
     out$text <- paste(
@@ -55,7 +55,7 @@ model_values.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "coh
     # Text
     text_description <- model_text_description(model, effsize = effsize, ci = ci, bootstrap = bootstrap, ...)
     text_performance <- model_text_performance_lm(out$table_performance)
-    text_initial <- model_text_initial_bayesian(out$table_parameters, ci = ci)
+    text_initial <- model_text_initial_bayesian(model, out$table_parameters, ci = ci)
     text_parameters <- model_text_parameters_bayesian(model, out$table_parameters, ci = ci, effsize = effsize, ...)
 
     out$text <- paste(
@@ -89,8 +89,8 @@ model_values.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "coh
     out$performance[[perf]] <- out$table_performance[[perf]]
   }
 
-
-  class(out) <- c("values_lm", class(out))
+  #
+  #   class(out) <- c("values_lm", class(out))
   return(out)
 }
 
@@ -131,8 +131,8 @@ model_values.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "coh
 #' @param model Object of class \link{lm}.
 #' @param ci Confidence Interval (CI) level. Default to 0.95 (95\%).
 #' @param standardize Standardized coefficients. See \code{\link[parameters:model_parameters.lm]{model_parameters}}.
-#' @param effsize Interpret the standardized parameters using a set of rules. Can be "cohen1988" (default), "sawilowsky2009", NULL, or a custom set of \link{rules}.
-#' @param performance_in_table Add performance metrics on table.
+#' @param effsize \href{https://easystats.github.io/report/articles/interpret_metrics.html}{Interpret the standardized parameters} using a set of rules. Can be "cohen1988" (default for linear models), "chen2010" (default for logistic models), "sawilowsky2009", NULL, or a custom set of \link{rules}.
+#' @param performance_in_table Add performance metrics in table.
 #' @param performance_metrics See \code{\link[performance:model_performance.lm]{model_performance}}.
 #' @param bootstrap See \code{\link[parameters:model_parameters.lm]{model_parameters}}.
 #' @param ... Arguments passed to or from other methods.

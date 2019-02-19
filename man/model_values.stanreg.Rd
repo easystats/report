@@ -6,22 +6,32 @@
 \usage{
 \method{model_values}{stanreg}(model, ci = 0.9, standardize = FALSE,
   effsize = NULL, performance_in_table = TRUE,
-  performance_metrics = "all", estimate = "median", ...)
+  performance_metrics = "all", parameters_estimate = "median",
+  parameters_test = c("pd", "rope"), parameters_diagnostic = TRUE,
+  rope_bounds = "default", rope_full = TRUE, ...)
 }
 \arguments{
 \item{model}{Object of class \link{lm}.}
 
-\item{ci}{Confidence Interval (CI) level. Default to 0.95 (95\%).}
+\item{ci}{\href{https://easystats.github.io/bayestestR/articles/1_IndicesDescription.html#hdi---the-credible-interval-ci}{Credible Interval} (CI) level. Default to 0.90 (90\%).}
 
 \item{standardize}{Standardized coefficients. See \code{\link[parameters:model_parameters.lm]{model_parameters}}.}
 
-\item{effsize}{Interpret the standardized parameters using a set of rules. Can be "cohen1988" (default), "sawilowsky2009", NULL, or a custom set of \link{rules}.}
+\item{effsize}{\href{https://easystats.github.io/report/articles/interpret_metrics.html}{Interpret the standardized parameters} using a set of rules. Can be "cohen1988" (default for linear models), "chen2010" (default for logistic models), "sawilowsky2009", NULL, or a custom set of \link{rules}.}
 
-\item{performance_in_table}{Add performance metrics on table.}
+\item{performance_in_table}{Add performance metrics in table.}
 
-\item{performance_metrics}{See \code{\link[performance:model_performance.lm]{model_performance}}.}
+\item{performance_metrics}{Can be \code{"all"} or a list of metrics to be computed (some of \code{c("LOO", "R2", "R2_adj")}).}
 
-\item{estimate}{See \code{\link[parameters:model_parameters.lm]{model_parameters}}.}
+\item{parameters_estimate}{The \href{https://easystats.github.io/bayestestR/articles/2_IndicesEstimationComparison.html}{point-estimate(s)} to compute. Can be a character or a list with "median", "mean" or "MAP".}
+
+\item{parameters_test}{What \href{https://easystats.github.io/bayestestR/articles/3_IndicesExistenceComparison.html}{indices of effect existence} to compute. Can be a character or a list with "p_direction", "rope" or "p_map".}
+
+\item{parameters_diagnostic}{Include sampling diagnostic metrics (effective sample, Rhat and MCSE).}
+
+\item{rope_bounds}{\href{https://easystats.github.io/bayestestR/articles/1_IndicesDescription.html#rope}{ROPE's} lower and higher bounds. Should be a list of two values (e.g., \code{c(-0.1, 0.1)}) or \code{"default"}. If \code{"default"}, the bounds are set to \code{x +- 0.1*SD(response)}.}
+
+\item{rope_full}{If TRUE, use the proportion of the entire posterior distribution for the equivalence test. Otherwise, use the proportion of HDI as indicated by the \code{ci} argument.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
