@@ -2,7 +2,6 @@
 #'
 #' @param r Value or vector of correlation coefficient.
 #' @param rules Can be "cohen1988" (default), "evans1996" or custom set of rules.
-#' @param direction Return the parameter's direction.
 #'
 #'
 #'
@@ -16,7 +15,7 @@
 #'   \item Evans, J. D. (1996). Straightforward statistics for the behavioral sciences. Thomson Brooks/Cole Publishing Co.
 #' }
 #' @export
-interpret_r <- function(r, rules = "cohen1988", direction = TRUE) {
+interpret_r <- function(r, rules = "cohen1988") {
   if (is.rules(rules)) {
     return(interpret(abs(r), rules))
   } else {
@@ -39,12 +38,6 @@ interpret_r <- function(r, rules = "cohen1988", direction = TRUE) {
     } else {
       stop("rules must be 'cohen1988', 'evans1996' or an object of type rules.")
     }
-  }
-
-
-
-  if (direction == TRUE) {
-    text <- ifelse(r >= 0, paste0("positive and ", text), paste0("negative and ", text))
   }
 
   return(text)

@@ -27,8 +27,7 @@ Imports:
 	parameters,
 	performance,
 	bayestestR,
-	dplyr,
-	broom
+	dplyr
 Suggests:
 	spelling,
 	knitr,

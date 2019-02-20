@@ -12,9 +12,9 @@ test_that("interpret", {
 
 context("interpret_r")
 test_that("interpret_r", {
-  testthat::expect_equal(interpret_r(0.21), "positive and small")
-  testthat::expect_equal(interpret_r(0.7, rules = "evans1996"), "positive and strong")
-  testthat::expect_equal(interpret_r(c(0.5, -0.08)), c("positive and large", "negative and very small"))
+  testthat::expect_equal(interpret_r(0.21), "small")
+  testthat::expect_equal(interpret_r(0.7, rules = "evans1996"), "strong")
+  testthat::expect_equal(interpret_r(c(0.5, -0.08)), c("large", "very small"))
   testthat::expect_equal(interpret_r(0.6, rules = rules(c(0.5), c("A", "B"))), "B")
   testthat::expect_error(interpret_r(0.6, rules = "DUPA"))
 })
