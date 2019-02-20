@@ -78,3 +78,13 @@ test_that("interpret_r2", {
   testthat::expect_equal(interpret_r2(0.6, rules = rules(c(0.5), c("A", "B"))), "B")
   testthat::expect_error(interpret_r2(0.6, rules = "DUPA"))
 })
+
+
+context("interpret_bf")
+test_that("interpret_bf", {
+  testthat::expect_equal(interpret_bf(-2), "no evidence against")
+  testthat::expect_equal(interpret_bf(c(0.8, 3.5), rules = "jeffreys1961"), c("anecdotal evidence against", "moderate evidence in favour of"))
+  testthat::expect_equal(interpret_bf(c(0.8, 3.5), rules = "raftery1995"), c("weak evidence against", "positive evidence in favour of"))
+  testthat::expect_equal(interpret_bf(2, rules = rules(c(0.5), c("A", "B"))), "B evidence in favour of")
+  testthat::expect_error(interpret_bf(2, rules = "DUPA"))
+})

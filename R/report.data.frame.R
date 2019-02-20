@@ -145,3 +145,373 @@ report.grouped_df <- function(model, median = FALSE, dispersion = TRUE, range = 
 
   return(as.report(out))
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+#' Character Vector Report
+#'
+#' Create a report of a character vector.
+#'
+#' @param model Character vector.
+#' @param n_characters Number of different character entries to show. Can be "all".
+#' @param levels_percentage Show characters entries by number (default) or percentage.
+#' @param missing_percentage Show missings by number (default) or percentage.
+#' @param ... Arguments passed to or from other methods.
+#'
+#'
+#'
+#' @examples
+#' x <- c("A", "B", "C", "A", "B", "B", "D", "E", "B", "D", "A")
+#' report(x)
+#' report(x, n_characters = 2, levels_percentage = TRUE, missing_percentage = TRUE)
+#' to_fulltext(report(x))
+#' to_table(report(x, n_characters = "all"))
+#' to_fulltable(report(x))
+#' @seealso report
+#' @import dplyr
+#'
+#' @export
+report.character <- function(model, n_characters = 3, levels_percentage = FALSE, missing_percentage = FALSE, ...) {
+  n_char <- as.data.frame(sort(table(model), decreasing = TRUE))
+  names(n_char) <- c("Entry", "n_Entry")
+  n_char$percentage_Entry <- n_char$n_Entry / length(model)
+
+  if (n_characters == "all" | n_characters > nrow(n_char)) {
+    n_characters <- nrow(n_char)
+  }
+
+  # Table -------------------------------------------------------------------
+
+  table_full <- data.frame(
+    n_Entries = nrow(n_char),
+    n_Obs = length(model),
+    n_Missing = sum(is.na(model))
+  )
+  table_full$percentage_Missing <- table_full$n_Missing / table_full$n_Obs * 100
+
+
+  if (levels_percentage == TRUE) {
+    text <- paste0(n_char$Entry, ", ", format_value(n_char$percentage_Entry), "%")
+  } else {
+    text <- paste0(n_char$Entry, ", n = ", n_char$n_Entry)
+  }
+
+  text <- text[1:n_characters]
+  text <- paste0(text, collapse = "; ")
+  table_full$Entries <- text
+  table <- table_full
+
+
+  if (nrow(n_char) > 1) {
+    text <- paste0(nrow(n_char), " entries: ", text)
+  } else {
+    text <- paste0(nrow(n_char), " entry: ", text)
+  }
+
+  if (nrow(n_char) - n_characters == 1) {
+    text <- paste0(text, " and ", nrow(n_char) - n_characters, " other")
+  }
+  if (nrow(n_char) - n_characters > 1) {
+    text <- paste0(text, " and ", nrow(n_char) - n_characters, " others")
+  }
+
+  text_full <- text
+
+
+  text_n_Missing <- paste0(table_full$n_Missing[1], " missing")
+  text_percentage_Missing <- paste0(format_value(table_full$percentage_Missing[1]), "% missing")
+  if (missing_percentage == TRUE) {
+    text_full <- paste0(text_full, "(", text_percentage_Missing, ")")
+    table <- dplyr::select(table, -one_of("n_Missing"))
+    if (table_full$n_Missing[1] > 0) {
+      text <- paste0(text, " (", text_percentage_Missing, ")")
+    }
+  } else {
+    text_full <- paste0(text_full, " (", text_n_Missing, ")")
+    table <- dplyr::select(table, -one_of("percentage_Missing"))
+    if (table_full$n_Missing[1] > 0) {
+      text <- paste0(text, " (", text_n_Missing, ")")
+    }
+  }
+
+
+  out <- list(
+    text = text,
+    text_full = text_full,
+    table = table,
+    table_full = table_full,
+    values = as.list(table_full)
+  )
+
+  return(as.report(out))
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#' Factor (Categorical Vector) Report
+#'
+#' Create a report of a categorical vector.
+#'
+#' @param model Categorical vector.
+#' @param levels_percentage Show factor levels by number (default) or percentage.
+#' @param missing_percentage Show missings by number (default) or percentage.
+#' @param ... Arguments passed to or from other methods.
+#'
+#'
+#'
+#' @examples
+#' x <- factor(rep(c("A", "B", "C"), 10))
+#' report(x)
+#' report(x, levels_percentage = TRUE, missing_percentage = TRUE)
+#' to_fulltext(report(x))
+#' to_table(report(x))
+#' to_fulltable(report(x))
+#' @seealso report
+#' @import dplyr
+#'
+#' @export
+report.factor <- function(model, levels_percentage = FALSE, missing_percentage = FALSE, ...) {
+
+  # Table -------------------------------------------------------------------
+  table_full <- data.frame(Level = model) %>%
+    group_by_("Level") %>%
+    summarise_(
+      "n_Obs" = "n()",
+      "percentage_Obs" = "n() / length(model) * 100",
+      "n_Missing" = "sum(is.na(model))",
+      "percentage_Missing" = "n_Missing / n_Obs * 100"
+    )
+
+  # Text --------------------------------------------------------------------
+  if (nrow(table_full) > 1) {
+    text_total_levels <- paste0(nrow(table_full), " levels: ")
+  } else {
+    text_total_levels <- paste0(nrow(table_full), " level: ")
+  }
+
+  text_levels <- paste0(table_full$Level)
+  text_n_Obs <- paste0("n = ", table_full$n_Obs)
+  text_percentage_Obs <- paste0(format_value(table_full$percentage_Obs), "%")
+  text_n_Missing <- paste0(table_full$n_Missing, " missing")
+  text_percentage_Missing <- paste0(format_value(table_full$percentage_Missing), "% missing")
+
+  text_full <- paste0(
+    text_levels, " (",
+    text_n_Obs, ", ",
+    text_percentage_Obs, "; "
+  )
+  # Selection ---------------------------------------------------------------
+  table <- table_full
+  if (levels_percentage == TRUE) {
+    text <- paste0(text_levels, " (", text_percentage_Obs)
+  } else {
+    table <- dplyr::select(table, -one_of("percentage_Obs"))
+    text <- paste0(text_levels, " (", text_n_Obs)
+  }
+
+
+  if (missing_percentage == TRUE) {
+    text_full <- paste0(text_full, text_percentage_Missing, ")")
+    table <- dplyr::select(table, -one_of("n_Missing"))
+    if (any(table_full$n_Missing > 0)) {
+      text <- paste0(text, "; ", text_percentage_Missing, ")")
+    } else {
+      text <- paste0(text, ")")
+    }
+  } else {
+    text_full <- paste0(text_full, text_n_Missing, ")")
+    table <- dplyr::select(table, -one_of("percentage_Missing"))
+    if (any(table_full$n_Missing > 0)) {
+      text <- paste0(text, "; ", text_n_Missing, ")")
+    } else {
+      text <- paste0(text, ")")
+    }
+  }
+
+  text <- paste0(text_total_levels, paste0(text, collapse = "; "))
+  text_full <- paste0(text_total_levels, paste0(text_full, collapse = "; "))
+
+  values <- list()
+  for (level in table_full$Level) {
+    values[[level]] <- as.list(table_full[table_full$Level == level, ])
+  }
+
+
+  out <- list(
+    text = text,
+    text_full = text_full,
+    table = table,
+    table_full = table_full,
+    values = values
+  )
+
+  return(as.report(out))
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+#' Numeric Vector Report
+#'
+#' Create a report of a numeric vector.
+#'
+#' @param model Numeric vector.
+#' @param median Show \link{mean} and \link{sd} (default) or \link{median} and \link{mad}.
+#' @param dispersion Show dispersion (\link{sd} or \link{mad}).
+#' @param range Show range.
+#' @param missing_percentage Show missings by number (default) or percentage
+#' @param ... Arguments passed to or from other methods.
+#'
+#'
+#'
+#' @examples
+#' x <- rnorm(1000)
+#' report(x)
+#' report(x, median = TRUE, dispersion = TRUE, range = TRUE, missing_percentage = TRUE)
+#' to_fulltext(report(x))
+#' to_table(report(x))
+#' to_fulltable(report(x))
+#' @seealso report
+#' @import dplyr
+#' @importFrom stats mad sd
+#'
+#' @export
+report.numeric <- function(model, median = FALSE, dispersion = TRUE, range = TRUE, missing_percentage = FALSE, ...) {
+  if (length(unique(model)) == 2) {
+    if (is.null(names(model))) {
+      name <- deparse(substitute(model))
+    } else {
+      name <- names(model)
+    }
+    warning(paste0("Variable `", name, "` contains only two different values. Consider converting it to a factor."))
+  }
+
+  # Table -------------------------------------------------------------------
+  table_full <- data.frame(
+    Mean = mean(model),
+    SD = sd(model),
+    Median = median(model),
+    MAD = mad(model),
+    Min = min(model),
+    Max = max(model),
+    n_Obs = length(model),
+    n_Missing = sum(is.na(model))
+  )
+  table_full$percentage_Missing <- table_full$n_Missing / table_full$n_Obs * 100
+
+
+  # Text --------------------------------------------------------------------
+  # Centrality
+  text_mean <- paste0("Mean = ", format_value(table_full$Mean[1]))
+  text_median <- paste0("Median = ", format_value(table_full$Median[1]))
+
+  # Dispersion
+  text_sd <- format_value(table_full$SD[1])
+  text_mad <- format_value(table_full$MAD[1])
+
+  # Range
+  text_range <- paste0(" [", format_value(table_full$Min[1]), ", ", format_value(table_full$Max[1]), "]")
+
+  # Missings
+  if (missing_percentage == TRUE) {
+    text_missing <- paste0(", ", format_value(table_full$percentage_Missing[1], 1), "% missing.")
+  } else {
+    text_missing <- paste0(", ", table_full$n_Missing[1], " missing.")
+  }
+
+
+
+  # Selection ---------------------------------------------------------------
+  table <- table_full
+  if (median == TRUE) {
+    if (dispersion == TRUE) {
+      text <- paste0(text_median, " +- ", text_mad)
+      table <- dplyr::select(table, -one_of("Mean", "SD"))
+    } else {
+      text <- text_median
+      table <- dplyr::select(table, -one_of("Mean", "SD", "MAD"))
+    }
+  } else {
+    if (dispersion == TRUE) {
+      text <- paste0(text_mean, " +- ", text_sd)
+      table <- dplyr::select(table, -one_of("Median", "MAD"))
+    } else {
+      text <- text_mean
+      table <- dplyr::select(table, -one_of("Median", "MAD", "SD"))
+    }
+  }
+
+  if (range == TRUE) {
+    text <- paste0(text, text_range)
+  } else {
+    table <- dplyr::select(table, -one_of("Min", "Max"))
+  }
+
+  if (missing_percentage == TRUE) {
+    table <- dplyr::select(table, -one_of("n_Missing"))
+  } else {
+    table <- dplyr::select(table, -one_of("percentage_Missing"))
+  }
+
+
+  # Text
+  text_full <- paste0(
+    text_mean, ", SD = ", text_sd, ", ",
+    text_median, ", MAD = ", text_mad, ", Range =",
+    text_range, text_missing
+  )
+
+  if (table_full$n_Missing[1] > 0) {
+    text <- paste0(text, text_missing)
+  }
+
+
+  out <- list(
+    text = text,
+    text_full = text_full,
+    table = table,
+    table_full = table_full,
+    values = as.list(table_full)
+  )
+
+  return(as.report(out))
+}

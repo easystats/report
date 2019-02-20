@@ -18,3 +18,7 @@ performance::model_performance
 
 #' @export
 insight::model_info
+
+#' @importFrom correlation correlation
+#' @export
+correlation::correlation

@@ -163,8 +163,39 @@ This converts (log) odds ratio to standardized difference *d* using the followin
 d <- log_odds * (sqrt(3) / pi)
 ```
 
-### Bayesian Indices (\% in ROPE, p*d*)
+### Bayes Factor (BF)
+
+The Bayes Factor if a useful measure of evidence against or in favour of a hypothesis. Note that **BFs** between 0 and 1, indicating evidence *against* the hypothesis, are converted via `bf = 1 / abs(bf)`.
+
+
+#### @jeffreys1961theory
+
+```r
+interpret_bf(x, rules = "jeffreys1961")
+```
+
+- **bf = 1 - 3**: Anecdotal
+- **bf = 3 - 10**: Moderate
+- **bf = 10 - 30**: Strong
+- **bf = 30 - 100**: Very strong
+- **bf > 100**: Extreme
+
+#### @raftery1995bayesian
+
+```r
+interpret_bf(x, rules = "raftery1995")
+```
+
+- **bf = 1 - 3**: Weak
+- **bf = 3 - 20**: Positive
+- **bf = 20 - 150**: Strong
+- **bf > 150**: Very strong
+
+### Other Bayesian Indices (\% in ROPE, p*d*)
+
 
 The interpretation of Bayesian indices is detailed in [this article](https://easystats.github.io/bayestestR/articles/4_Guidelines.html).
+
+
 
 ## References

@@ -13,7 +13,8 @@
 #' @export
 format_value <- function(x, digits = 2) {
   if (is.numeric(x)) {
-    x <- ifelse(is.na(x), NA, trimws(format(round(x, digits), nsmall = digits)))
+    # x <- ifelse(is.na(x), NA, trimws(format(round(x, digits), nsmall = digits)))
+    x <- ifelse(is.na(x), NA, sprintf(paste0("%.", digits, "f"), x))
   }
   return(x)
 }

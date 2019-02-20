@@ -1,6 +1,6 @@
 #' Probability of direction (pd) Formatting
 #'
-#' @param pd Lower CI bound.
+#' @param pd Probability of direction (pd).
 #' @param digits Number of significant digits.
 #'
 #' @examples

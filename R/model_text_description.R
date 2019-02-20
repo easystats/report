@@ -35,45 +35,12 @@ model_text_description <- function(model, ci = 0.95, effsize = "effsize", bootst
       stop("`rope_bounds` should be 'default' or a vector of 2 numeric values (e.g., c(-0.1, 0.1)).")
     }
 
-    if (rope_full) {
-      text_full <- paste0(
-        text_full,
-        " The Region of Practical Equivalence (ROPE) ",
-        "percentage was defined as the proportion of the ",
-        "posterior distribution within the [",
-        format_value(rope_bounds[1]),
-        ", ",
-        format_value(rope_bounds[2]),
-        "] range."
-      )
-    } else {
-      text_full <- paste0(
-        text_full,
-        " The Region of Practical Equivalence (ROPE) ",
-        "percentage was defined as the proportion of the ",
-        ci * 100, "% HDI within the [",
-        format_value(rope_bounds[1]),
-        ", ",
-        format_value(rope_bounds[2]),
-        "] range."
-      )
-    }
+    text_full <- paste0(text_full, .format_ROPE_description(rope_full, rope_bounds, ci))
   }
 
 
   # Effect size
-  if (!is.null(effsize)) {
-    if (is.character(effsize)) {
-      effsize_name <- ifelse(effsize == "cohen1988", "Cohen's (1988)",
-        ifelse(effsize == "sawilowsky2009", "Savilowsky's (2009)",
-          ifelse(effsize == "chen2010", "Chen's (2010)", effsize)
-        )
-      )
-      text_full <- paste0(text_full, " Effect sizes were labelled following ", effsize_name, " recommendations.")
-    } else {
-      text_full <- paste0(text_full, " Effect sizes were labelled following a custom set of rules.")
-    }
-  }
+  text_full <- paste0(text_full, .format_effsize_description(effsize))
 
 
   out <- list(
@@ -81,4 +48,57 @@ model_text_description <- function(model, ci = 0.95, effsize = "effsize", bootst
     "text_full" = text_full
   )
   return(out)
+}
+
+
+
+
+
+#' @keywords internal
+.format_ROPE_description <- function(rope_full, rope_bounds, ci){
+  if (rope_full) {
+    text_full <- paste0(
+      " The Region of Practical Equivalence (ROPE) ",
+      "percentage was defined as the proportion of the ",
+      "posterior distribution within the [",
+      format_value(rope_bounds[1]),
+      ", ",
+      format_value(rope_bounds[2]),
+      "] range."
+    )
+  } else {
+    text_full <- paste0(
+      " The Region of Practical Equivalence (ROPE) ",
+      "percentage was defined as the proportion of the ",
+      ci * 100, "% HDI within the [",
+      format_value(rope_bounds[1]),
+      ", ",
+      format_value(rope_bounds[2]),
+      "] range."
+    )
+
+    return(text_full)
+  }
+}
+
+
+
+
+.format_effsize_description <- function(effsize){
+  # Effect size
+  if (!is.null(effsize)) {
+    if (is.character(effsize)) {
+      effsize_name <- ifelse(effsize == "cohen1988", "Cohen's (1988)",
+                             ifelse(effsize == "sawilowsky2009", "Savilowsky's (2009)",
+                                    ifelse(effsize == "chen2010", "Chen's (2010)", effsize)
+                             )
+      )
+      text_full <- paste0(" Effect sizes were labelled following ", effsize_name, " recommendations.")
+    } else {
+      text_full <- paste0(" Effect sizes were labelled following a custom set of rules.")
+    }
+  } else{
+    text_full <- ""
+  }
+  return(text_full)
 }
