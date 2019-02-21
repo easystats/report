@@ -5,7 +5,8 @@
 #' @param model Object of class correlation
 #' @param effsize Effect size interpretation set of rules.
 #' @param stars Add significance stars in table. For frequentist correlations: \*p < .05, \*\*p < .01, \*\*\*p < .001. For Bayesian correlations: \*\*\*BF > 30, \*\*BF > 10, \*BF > 3.
-#' @param reorder Should the tables be reordered based on correlation pattern (currently only works with square matrices)?
+#' @param lower Remove the upper triangular part of the matrix.
+#' @param reorder Reorder the matrix based on correlation pattern (currently only works with square matrices)?
 #' @param ... Arguments passed to or from other methods.
 #'
 #'
@@ -16,7 +17,7 @@
 #' @seealso report
 #'
 #' @export
-report.correlation <- function(model, effsize = "cohen1988", stars=TRUE, reorder=TRUE, ...) {
+report.correlation <- function(model, effsize = "cohen1988", stars=TRUE, lower=TRUE, reorder=TRUE, ...) {
 
   # Text ----
 
@@ -125,7 +126,7 @@ report.correlation <- function(model, effsize = "cohen1988", stars=TRUE, reorder
   } else{
     data$Cell <- data$r
   }
-  r <- .create_cor_matrix(data, coltarget = "Cell", reorder=FALSE, lower=FALSE)
+  r <- .create_cor_matrix(data, coltarget = "Cell", reorder=FALSE, lower=lower)
   r$Parameter <- NULL
 
 
@@ -138,7 +139,7 @@ report.correlation <- function(model, effsize = "cohen1988", stars=TRUE, reorder
   if(stars){
     data$Cell <- paste0(data$Cell, .add_stars(data))
   }
-  table <- .create_cor_matrix(data, "Cell", reorder=reorder, lower=TRUE, dmat=r)
+  table <- .create_cor_matrix(data, "Cell", reorder=reorder, lower=lower, dmat=r)
 
   if("Median" %in% names(data)){
     data$Cell <- paste0("r's median = ", format_value(data$Median))
@@ -157,7 +158,7 @@ report.correlation <- function(model, effsize = "cohen1988", stars=TRUE, reorder
   if(stars){
     data$Cell <- paste0(data$Cell, .add_stars(data))
   }
-  table_full <- .create_cor_matrix(data, "Cell", reorder=reorder, lower=TRUE, dmat=r)
+  table_full <- .create_cor_matrix(data, "Cell", reorder=reorder, lower=lower, dmat=r)
 
 
   # Reorder columns
@@ -172,6 +173,9 @@ report.correlation <- function(model, effsize = "cohen1988", stars=TRUE, reorder
   # Remove empty
   table <- table[,colSums(is.na(table))<nrow(table)]
   table_full <- table_full[,colSums(is.na(table_full))<nrow(table_full)]
+
+  table <- table[rowSums(is.na(table)) != ncol(table[!names(table) %in% c("Parameter", "Group")]),]
+  table_full <- table[rowSums(is.na(table_full)) != ncol(table_full[!names(table_full) %in% c("Parameter", "Group")]),]
 
   out <- list(
     text = text,

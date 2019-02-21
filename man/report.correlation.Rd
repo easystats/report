@@ -5,7 +5,7 @@
 \title{Correlation Report}
 \usage{
 \method{report}{correlation}(model, effsize = "cohen1988",
-  stars = TRUE, reorder = TRUE, ...)
+  stars = TRUE, lower = TRUE, reorder = TRUE, ...)
 }
 \arguments{
 \item{model}{Object of class correlation}
@@ -14,7 +14,9 @@
 
 \item{stars}{Add significance stars in table. For frequentist correlations: \*p < .05, \*\*p < .01, \*\*\*p < .001. For Bayesian correlations: \*\*\*BF > 30, \*\*BF > 10, \*BF > 3.}
 
-\item{reorder}{Should the tables be reordered based on correlation pattern (currently only works with square matrices)?}
+\item{lower}{Remove the upper triangular part of the matrix.}
+
+\item{reorder}{Reorder the matrix based on correlation pattern (currently only works with square matrices)?}
 
 \item{...}{Arguments passed to or from other methods.}
 }
