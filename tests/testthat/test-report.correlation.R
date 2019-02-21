@@ -5,11 +5,15 @@ test_that("report.correlation", {
 
   r <- report(correlation(iris))
   testthat::expect_equal(nrow(r$values$data), 16)
+  testthat::expect_equal(nrow(to_table(r)), 4)
   r <-  report(correlation(dplyr::group_by(iris, Species), partial=TRUE, p_adjust = "bonf"))
   testthat::expect_equal(nrow(r$values$data), 48)
+  testthat::expect_equal(nrow(to_table(r)), 14)
   r <-  report(correlation(dplyr::group_by(iris, Species), partial="semi"), effsize="evans1996")
   testthat::expect_equal(nrow(r$values$data), 48)
+  testthat::expect_equal(nrow(to_table(r)), 14)
   r <-  report(correlation(iris, bayesian=TRUE))
   testthat::expect_equal(ncol(r$values$data), 10)
+  testthat::expect_equal(nrow(to_table(r)), 4)
 
 })
