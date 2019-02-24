@@ -4,14 +4,12 @@
 \alias{interpret_r}
 \title{Correlation Coefficient Interpretation}
 \usage{
-interpret_r(r, rules = "cohen1988", direction = TRUE)
+interpret_r(r, rules = "cohen1988")
 }
 \arguments{
 \item{r}{Value or vector of correlation coefficient.}
 
 \item{rules}{Can be "cohen1988" (default), "evans1996" or custom set of rules.}
-
-\item{direction}{Return the parameter's direction.}
 }
 \description{
 Correlation Coefficient Interpretation

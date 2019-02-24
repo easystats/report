@@ -26,9 +26,9 @@ Imports:
 	insight,
 	parameters,
 	performance,
-	dplyr,
-	stringr,
-	broom
+	bayestestR,
+	correlation,
+	dplyr
 Suggests:
 	spelling,
 	knitr,
@@ -38,11 +38,14 @@ Suggests:
 	circus,
 	ggplot2,
 	rstudioapi,
-	rstanarm
+	rstanarm,
+	BayesFactor
 Remotes: 
 	easystats/insight,
 	easystats/parameters,
 	easystats/performance,
+	easystats/bayestestR,
+	easystats/correlation,
 	easystats/circus
 RoxygenNote: 6.1.1
 Language: en-GB

@@ -5,7 +5,6 @@
 #' @examples
 #' model <- lm(Sepal.Length ~ Species, data = iris)
 #' format_model(model)
-#' @importFrom stringr str_detect
 #' @importFrom insight model_info
 #' @export
 format_model <- function(model) {
@@ -38,7 +37,7 @@ format_model <- function(model) {
 
   type <- paste0(type, "model")
 
-  if (stringr::str_detect(type, "general linear")) {
+  if (grepl("general linear", type)) {
     type <- paste0(
       type,
       " (",

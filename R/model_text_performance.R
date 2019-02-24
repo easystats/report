@@ -31,12 +31,12 @@ model_text_performance_lm <- function(performance, ...) {
     if ("R2" %in% names(performance)) {
       text <- paste0(
         text, ", adj. R2 = ",
-        format_value(performance$R2_adj),
+        format_value(performance$R2_adjusted),
         ")."
       )
       text_full <- paste0(
         text_full, ", adj. R2 = ",
-        format_value(performance$R2_adj),
+        format_value(performance$R2_adjusted),
         ")."
       )
     } else {
@@ -71,6 +71,27 @@ model_text_performance_logistic <- function(performance, ...) {
       format_value(performance$R2_Tjur),
       ")."
     )
+    text_full <- text
+  }
+  if ("R2_Nagelkerke" %in% names(performance)) {
+    text <- paste0(
+      "The model's explanatory power is ",
+      interpret_r2(performance$R2_Nagelkerke, rules = "cohen1988"),
+      " (Nagelkerke's R2 = ",
+      format_value(performance$R2_Nagelkerke),
+      ")."
+    )
+    text_full <- text
+  }
+  if ("R2_McFadden" %in% names(performance)) {
+    text <- paste0(
+      "The model's explanatory power is ",
+      interpret_r2(performance$R2_McFadden, rules = "cohen1988"),
+      " (McFadden's R2 = ",
+      format_value(performance$R2_McFadden),
+      ")."
+    )
+
     text_full <- text
   }
 
@@ -110,15 +131,15 @@ model_text_performance_bayesian <- function(performance, ci = 0.90, ...) {
       format_ci(performance$R2_CI_low, performance$R2_CI_high, ci = ci)
     )
 
-    if ("R2_LOO_adj" %in% names(performance)) {
+    if ("R2_LOO_adjusted" %in% names(performance)) {
       text <- paste0(
         text, ", LOO adj. R2 = ",
-        format_value(performance$R2_LOO_adj),
+        format_value(performance$R2_LOO_adjusted),
         ")."
       )
       text_full <- paste0(
         text_full, ", LOO adj. R2 = ",
-        format_value(performance$R2_LOO_adj),
+        format_value(performance$R2_LOO_adjusted),
         ")."
       )
     } else {

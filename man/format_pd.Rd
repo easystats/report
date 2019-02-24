@@ -7,7 +7,7 @@
 format_pd(pd, digits = 2)
 }
 \arguments{
-\item{pd}{Lower CI bound.}
+\item{pd}{Probability of direction (pd).}
 
 \item{digits}{Number of significant digits.}
 }

@@ -5,14 +5,16 @@ test_that("interpret", {
   testthat::expect_equal(interpret(0.021, rules_grid), "significant")
   testthat::expect_equal(interpret(0.08, rules_grid), "not significant")
   testthat::expect_equal(interpret(c(0.01, 0.005, 0.08), rules_grid), c("significant", "very significant", "not significant"))
+  testthat::expect_error(interpret_r(0.6, rules = rules(c(0.5), c("A", "B", "C"))))
+  testthat::expect_error(interpret_r(0.6, rules = rules(c(0.5, 0.2, 0.7), c("A", "B", "C", "D"))))
 })
 
 
 context("interpret_r")
 test_that("interpret_r", {
-  testthat::expect_equal(interpret_r(0.21), "positive and small")
-  testthat::expect_equal(interpret_r(0.7, rules = "evans1996"), "positive and strong")
-  testthat::expect_equal(interpret_r(c(0.5, -0.08)), c("positive and large", "negative and very small"))
+  testthat::expect_equal(interpret_r(0.21), "small")
+  testthat::expect_equal(interpret_r(0.7, rules = "evans1996"), "strong")
+  testthat::expect_equal(interpret_r(c(0.5, -0.08)), c("large", "very small"))
   testthat::expect_equal(interpret_r(0.6, rules = rules(c(0.5), c("A", "B"))), "B")
   testthat::expect_error(interpret_r(0.6, rules = "DUPA"))
 })
@@ -75,4 +77,14 @@ test_that("interpret_r2", {
   testthat::expect_equal(interpret_r2(c(0.1, 0.4), rules = "hair2011"), c("very weak", "weak"))
   testthat::expect_equal(interpret_r2(0.6, rules = rules(c(0.5), c("A", "B"))), "B")
   testthat::expect_error(interpret_r2(0.6, rules = "DUPA"))
+})
+
+
+context("interpret_bf")
+test_that("interpret_bf", {
+  testthat::expect_equal(interpret_bf(-2), "no evidence against")
+  testthat::expect_equal(interpret_bf(c(0.8, 3.5), rules = "jeffreys1961"), c("anecdotal evidence against", "moderate evidence in favour of"))
+  testthat::expect_equal(interpret_bf(c(0.8, 3.5), rules = "raftery1995"), c("weak evidence against", "positive evidence in favour of"))
+  testthat::expect_equal(interpret_bf(2, rules = rules(c(0.5), c("A", "B"))), "B evidence in favour of")
+  testthat::expect_error(interpret_bf(2, rules = "DUPA"))
 })

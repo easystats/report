@@ -30,10 +30,10 @@ format_text_collapse <- function(x, sep = ", ", last = " and ") {
 #' @examples
 #' x <- paste(rep("a very long string", 50), collapse = " ")
 #' format_text_wrap(x, width = 50)
-#' @importFrom stringr str_split coll
 #' @export
 format_text_wrap <- function(x, width = NULL) {
-  text <- stringr::str_split(x, stringr::coll("\n"), simplify = FALSE)
+  # text <- stringr::str_split(x, stringr::coll("\n"), simplify = FALSE)
+  text <- strsplit(x, "\n", perl = TRUE)
   text <- unlist(text)
 
   if (is.null(width)) {

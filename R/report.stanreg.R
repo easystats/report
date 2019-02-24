@@ -10,6 +10,12 @@
 #' @export
 model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize = NULL, performance_in_table = TRUE, performance_metrics = "all", parameters_estimate = "median", parameters_test = c("pd", "rope"), parameters_diagnostic = TRUE, rope_bounds = "default", rope_full = TRUE, ...) {
 
+  # Sanity checks
+  if(length(c(ci)) > 1){
+    warning(paste0("report does not support multiple `ci` values yet. Using ci = ", ci[1]), ".")
+    ci <- ci[1]
+  }
+
   # Information
   out <- list()
   out$info <- insight::model_info(model)
@@ -27,7 +33,7 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
   out$table_performance <- performance::model_performance(model, metrics = performance_metrics)
 
   # Text
-  text_description <- model_text_description(model, effsize = effsize, ci = ci, ...)
+  text_description <- model_text_description(model, effsize = effsize, ci = ci, standardize = standardize, test = tolower(parameters_test), rope_bounds = rope_bounds, rope_full = rope_full, ...)
   text_performance <- model_text_performance_bayesian(out$table_performance)
   text_initial <- model_text_initial_bayesian(model, out$table_parameters, ci = ci)
   text_parameters <- model_text_parameters_bayesian(model, out$table_parameters, ci = ci, effsize = effsize, ...)
@@ -120,7 +126,7 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
 #' to_fulltext(r)
 #' to_table(r)
 #' to_fulltable(r)
-#' 
+#'
 #' model <- rstanarm::stan_lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 #' report(model)
 #' }

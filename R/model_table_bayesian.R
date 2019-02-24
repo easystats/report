@@ -28,7 +28,7 @@ model_table_bayesian <- function(model, parameters, performance, performance_in_
       "Fit" = as.numeric(performance[1, ]),
       stringsAsFactors = FALSE
     ) %>%
-      dplyr::filter_("Parameter %in% c('R2', 'R2_adj', 'R2_Median', 'R2_Fixed_Median', 'R2_LOO_adj')")
+      dplyr::filter_("Parameter %in% c('R2', 'R2_adjusted', 'R2_Median', 'R2_Fixed_Median', 'R2_LOO_adjusted')")
     table <- dplyr::full_join(table, perf, by = "Parameter")
   }
 

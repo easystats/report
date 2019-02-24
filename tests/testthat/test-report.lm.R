@@ -22,6 +22,8 @@ test_that("report.lm", {
 
   r <- report(circus::download_model("lm_5"))
   testthat::expect_equal(nrow(to_table(r)), 9)
+
+  testthat::expect_warning(report(circus::download_model("lm_5"), ci=c(0.5, 0.9)))
 })
 
 
@@ -41,4 +43,6 @@ test_that("report.glm", {
   testthat::expect_equal(nrow(to_table(r)), 3)
   testthat::expect_is(capture.output(to_table(r)), "character")
   testthat::expect_equal(r$values$parameters$wt$beta, 0.993, tol = 0.1)
+
+  testthat::expect_warning(report(circus::download_model("glm_2"), ci=c(0.5, 0.9)))
 })

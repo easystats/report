@@ -20,7 +20,6 @@ Create a report of an h-test object.
 report(cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman"))
 report(t.test(iris$Sepal.Width, iris$Sepal.Length))
 report(t.test(iris$Sepal.Width, iris$Sepal.Length, var.equal = TRUE))
-report(t.test(iris$Sepal.Width, iris$Sepal.Length))
 report(t.test(mtcars$mpg ~ mtcars$vs))
 report(t.test(iris$Sepal.Width, mu = 1))
 }

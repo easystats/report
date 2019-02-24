@@ -12,89 +12,42 @@
 #' report(cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman"))
 #' report(t.test(iris$Sepal.Width, iris$Sepal.Length))
 #' report(t.test(iris$Sepal.Width, iris$Sepal.Length, var.equal = TRUE))
-#' report(t.test(iris$Sepal.Width, iris$Sepal.Length))
 #' report(t.test(mtcars$mpg ~ mtcars$vs))
 #' report(t.test(iris$Sepal.Width, mu = 1))
 #' @seealso report
-#' @import dplyr
 #'
 #' @export
 report.htest <- function(model, effsize = "cohen1988", ...) {
 
-  # TODO: rewrite this using insight fucntions
-
-  # Processing --------------------------------------------------------------
-  table_full <- broom::tidy(model) %>%
-    rename_if_possible("p.value", "p") %>%
-    rename_if_possible("conf.low", "CI_low") %>%
-    rename_if_possible("conf.high", "CI_high") %>%
-    rename_if_possible("parameter", "DoF") %>%
-    rename_if_possible("method", "Method") %>%
-    rename_if_possible("estimate1", "Mean_1") %>%
-    rename_if_possible("estimate2", "Mean_2") %>%
-    rename_if_possible("alternative", "Alternative")
+  table_full <- parameters::model_parameters(model)
+  table <- table_full
+  values <- as.list(table_full)
 
 
-  # Correlation -------------------------------------------------------------
-  if (grepl("correlation", table_full$Method[1])) {
-    if (grepl("Pearson", table_full$Method[1])) {
-      table_full <- table_full %>%
-        rename_if_possible("statistic", "t") %>%
-        rename_if_possible("estimate", "r")
-      interpretation <- paste0(
-        interpret_direction(table_full$r[1]),
-        ", ", interpret_r(table_full$r[1], effsize, direction = FALSE), " and "
-      )
-      effect <- paste0(
-        "r(", table_full$DoF[1], ") = ",
-        format_value(table_full$r[1]), ", ",
-        format_ci(table_full$CI_low[1], table_full$CI_high[1], ci = attributes(model$conf.int)$conf.level)
-      )
-      method <- "Pearson's correlation"
-      table <- select(table_full, -one_of("t", "Method", "Alternative"))
-    } else if (grepl("Spearman", table_full$Method[1])) {
-      table_full <- table_full %>%
-        rename_if_possible("statistic", "S") %>%
-        rename_if_possible("estimate", "rho")
-      interpretation <- paste0(interpret_direction(table_full$rho[1]), " and ")
-      effect <- paste0("rho = ", format_value(table_full$rho[1]))
-      method <- "Spearman's correlation"
-      table <- select(table_full, -one_of("S", "Method", "Alternative"))
-    } else {
-      table_full <- table_full %>%
-        rename_if_possible("statistic", "z") %>%
-        rename_if_possible("estimate", "tau")
-      interpretation <- interpret_direction(table_full$tau[1])
-      effect <- paste0(paste0("tau = ", format_value(table_full$tau[1])), " and ")
-      method <- "Kendall's correlation"
-      table <- select(table_full, -one_of("z", "Method", "Alternative"))
-    }
-
-    # Text
-    values <- as.list(table_full)
+  if(insight::model_info(model)$is_correlation){
+    estimate <- c("rho", "r", "tau")[c("rho", "r", "tau") %in% names(table)]
     text <- paste0(
       "The ",
-      method,
+      model$method,
       " between ",
       model$data.name,
       " is ",
-      interpretation,
-      interpret_p(values$p),
-      " (", effect,
+      interpret_direction(table[[estimate]]),
+      ", ",
+      interpret_p(table$p),
+      " and ",
+      interpret_r(table[[estimate]], rules=effsize),
+      " (",
+      estimate,
+      " = ",
+      format_value(table[[estimate]]),
       ", p ",
       format_p(values$p, stars = FALSE),
       ")."
     )
     text_full <- text
+  } else if(insight::model_info(model)$is_ttest){
 
-
-    # T-tests -------------------------------------------------------------
-  } else if (grepl("t-test", table_full$Method[1])) {
-    table_full <- table_full %>%
-      rename_if_possible("statistic", "t")
-    if ("estimate" %in% names(table_full)) {
-      table_full <- select(table_full, -one_of("estimate"))
-    }
 
     if (names(model$null.value) == "mean") {
       table_full$Difference <- model$estimate - model$null.value
@@ -121,10 +74,7 @@ report.htest <- function(model, effsize = "cohen1988", ...) {
       )
       vars <- paste0(model$data.name, " (", means, ")")
     }
-    table <- select(table_full, -one_of("Method", "Alternative"), -starts_with("Mean"))
 
-    # Text
-    values <- as.list(table_full)
     text <- paste0(
       "The ",
       trimws(model$method),
@@ -144,10 +94,10 @@ report.htest <- function(model, effsize = "cohen1988", ...) {
       ")."
     )
     text_full <- text
-    # Other -------------------------------------------------------------
-  } else {
-    stop(paste0("`report()` for the ", table_full$Method[1], " is not implemented yet."))
+  } else{
+    stop("reports not implemented for such h-tests yet.")
   }
+
 
   out <- list(
     text = text,

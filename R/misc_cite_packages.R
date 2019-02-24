@@ -7,7 +7,6 @@
 #' @examples
 #' show_packages(sessionInfo())
 #' cite_packages(sessionInfo())
-#' @import stringr
 #' @import dplyr
 #' @importFrom utils packageVersion
 #' @export
@@ -25,7 +24,7 @@ show_packages <- function(session) {
       unlist()
 
     i <- 1
-    while (stringr::str_detect(citation[i], "To cite ")) {
+    while (grepl("To cite ", citation[i])) {
       i <- i + 1
     }
 
