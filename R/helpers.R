@@ -7,7 +7,7 @@ create_performance_table <- function(performance, table_full, table_simple, elem
     "Fit" = as.numeric(performance[1, ]),
     stringsAsFactors = FALSE
   )
-  table_full <- merge(table_full, perf, by = "Parameter", all = TRUE)
+  table_full <- merge(table_full, perf, by = "Parameter", all = TRUE, sort = FALSE)
 
   # replaces
   # table_full <- dplyr::full_join(table_full, perf, by = "Parameter")
@@ -19,5 +19,5 @@ create_performance_table <- function(performance, table_full, table_simple, elem
   # replaces
   # table <- dplyr::full_join(table, perf, by = "Parameter")
 
-  list(table_full, table_simple)
+  list(table_full = table_full, table_simple = table_simple)
 }
