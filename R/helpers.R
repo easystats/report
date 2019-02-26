@@ -14,7 +14,7 @@ create_performance_table <- function(performance, table_full, table_simple, elem
 
   # Mini ----
   perf <- subset(perf, subset = Parameter %in% elements)
-  table_simple <- merge(table_simple, perf, by = "Parameter", all = TRUE)
+  table_simple <- merge(table_simple, perf, by = "Parameter", all = TRUE, sort = FALSE)
 
   # replaces
   # table <- dplyr::full_join(table, perf, by = "Parameter")
