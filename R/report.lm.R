@@ -8,7 +8,7 @@
 #' @importFrom parameters model_parameters
 #' @importFrom performance model_performance
 #' @export
-model_values.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, ...) {
+model_values.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, iterations = 500, ...) {
 
   # Sanity checks
   if(length(c(ci)) > 1){
@@ -25,9 +25,9 @@ model_values.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "coh
     if (standardize == FALSE) {
       warning("The effect sizes are computed from standardized coefficients. Setting `standardize` to TRUE.")
     }
-    out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ci = ci, bootstrap = bootstrap, ...)
+    out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ci = ci, bootstrap = bootstrap, iterations=iterations, ...)
   } else {
-    out$table_parameters <- parameters::model_parameters(model, ci = ci, standardize = standardize, bootstrap = bootstrap, ...)
+    out$table_parameters <- parameters::model_parameters(model, ci = ci, standardize = standardize, bootstrap = bootstrap, iterations=iterations, ...)
   }
   out$table_parameters$Parameter <- as.character(out$table_parameters$Parameter)
   out$table_performance <- performance::model_performance(model, metrics = performance_metrics, ...)
@@ -35,7 +35,7 @@ model_values.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "coh
 
   if (bootstrap == FALSE) {
     # Text
-    text_description <- model_text_description(model, effsize = effsize, ci = ci, bootstrap = bootstrap, ...)
+    text_description <- model_text_description(model, effsize = effsize, ci = ci, bootstrap = bootstrap, iterations=iterations, ...)
     text_performance <- model_text_performance_lm(out$table_performance)
     text_initial <- model_text_initial_lm(model, out$table_parameters, ci = ci)
     text_parameters <- model_text_parameters_lm(model, out$table_parameters, ci = ci, effsize = effsize, ...)
@@ -141,6 +141,7 @@ model_values.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "coh
 #' @param performance_in_table Add performance metrics in table.
 #' @param performance_metrics See \code{\link[performance:model_performance.lm]{model_performance}}.
 #' @param bootstrap See \code{\link[parameters:model_parameters.lm]{model_parameters}}.
+#' @param iterations The number of bootstrap replicates. This only apply in the case of bootsrapped frequentist models.
 #' @param ... Arguments passed to or from other methods.
 #'
 #' @examples
@@ -151,7 +152,7 @@ model_values.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "coh
 #' to_table(r)
 #' to_fulltable(r)
 #' @export
-report.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, ...) {
+report.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, iterations = 500, ...) {
   values <- model_values(model,
     ci = ci,
     standardize = standardize,
@@ -159,6 +160,7 @@ report.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988
     performance_in_table = performance_in_table,
     performance_metrics = performance_metrics,
     bootstrap = bootstrap,
+    iterations = iterations,
     ...
   )
 

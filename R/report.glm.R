@@ -8,7 +8,7 @@
 #' @importFrom parameters model_parameters
 #' @importFrom performance model_performance
 #' @export
-model_values.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "chen2010", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, ...) {
+model_values.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "chen2010", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, iterations=500, ...) {
 
   # Sanity checks
   if(length(c(ci)) > 1){
@@ -25,9 +25,9 @@ model_values.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "ch
     if (standardize == FALSE) {
       warning("The effect sizes are computed from standardized coefficients. Setting `standardize` to TRUE.")
     }
-    out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ci = ci, bootstrap = bootstrap, ...)
+    out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ci = ci, bootstrap = bootstrap, iterations=iterations, ...)
   } else {
-    out$table_parameters <- parameters::model_parameters(model, ci = ci, standardize = standardize, bootstrap = bootstrap, ...)
+    out$table_parameters <- parameters::model_parameters(model, ci = ci, standardize = standardize, bootstrap = bootstrap, iterations=iterations, ...)
   }
   out$table_parameters$Parameter <- as.character(out$table_parameters$Parameter)
   out$table_performance <- performance::model_performance(model, metrics = performance_metrics, ...)
@@ -142,7 +142,7 @@ model_values.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "ch
 #' to_table(r)
 #' to_fulltable(r)
 #' @export
-report.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "chen2010", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, ...) {
+report.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "chen2010", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, iterations=500, ...) {
   values <- model_values(model,
     ci = ci,
     standardize = standardize,
@@ -150,6 +150,7 @@ report.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "chen2010
     performance_in_table = performance_in_table,
     performance_metrics = performance_metrics,
     bootstrap = bootstrap,
+    iterations = iterations,
     ...
   )
 

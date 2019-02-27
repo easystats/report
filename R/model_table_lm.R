@@ -12,7 +12,7 @@ model_table_lm <- function(model, parameters, performance, performance_in_table 
   table_simple <- table_simple[, colnames(table_simple) %in% c("Parameter", "beta", "CI_low", "CI_high", "p", "Std_beta", "Effect_Size")]
 
   if (performance_in_table) {
-    tabs <- create_performance_table(
+    tabs <- .create_performance_table(
       performance,
       table_full,
       table_simple,

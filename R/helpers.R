@@ -1,4 +1,5 @@
-create_performance_table <- function(performance, table_full, table_simple, elements) {
+#' @keywords internal
+.create_performance_table <- function(performance, table_full, table_simple, elements) {
   table_full[nrow(table_full) + 1, ] <- NA
   table_simple[nrow(table_simple) + 1, ] <- NA
   # Full ----
@@ -13,7 +14,7 @@ create_performance_table <- function(performance, table_full, table_simple, elem
   # table_full <- dplyr::full_join(table_full, perf, by = "Parameter")
 
   # Mini ----
-  perf <- subset(perf, subset = Parameter %in% elements)
+  perf <- perf[perf$Parameter %in% elements, ]
   table_simple <- merge(table_simple, perf, by = "Parameter", all = TRUE, sort = FALSE)
 
   # replaces

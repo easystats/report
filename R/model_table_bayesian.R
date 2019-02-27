@@ -12,7 +12,7 @@ model_table_bayesian <- function(model, parameters, performance, performance_in_
   table_simple <- table_simple[, !colnames(table_simple) %in% c("MAD", "SD", "Std_MAD", "Std_SD", "Std_CI_low", "Std_CI_high", "ROPE_Equivalence", "Effective_Sample", "Rhat", "Effect_Size_Median")]
 
   if (performance_in_table) {
-    tabs <- create_performance_table(
+    tabs <- .create_performance_table(
       performance,
       table_full,
       table_simple,

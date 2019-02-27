@@ -112,7 +112,7 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
 #' @param performance_metrics Can be \code{"all"} or a list of metrics to be computed (some of \code{c("LOO", "R2", "R2_adj")}).
 #' @param parameters_estimate The \href{https://easystats.github.io/bayestestR/articles/2_IndicesEstimationComparison.html}{point-estimate(s)} to compute. Can be a character or a list with "median", "mean" or "MAP".
 #' @param parameters_test What \href{https://easystats.github.io/bayestestR/articles/3_IndicesExistenceComparison.html}{indices of effect existence} to compute. Can be a character or a list with "p_direction", "rope" or "p_map".
-#' @param parameters_diagnostic Include sampling diagnostic metrics (effective sample, Rhat and MCSE).
+#' @param parameters_diagnostic Include sampling diagnostic metrics (effective sample, Rhat and MCSE). \code{Effective Sample} should be as large as possible, altough for most applications, an effective sample size greater than 1,000 is sufficient for stable estimates (Bürkner, 2017). \code{Rhat} should not be larger than 1.1.
 #' @param rope_bounds \href{https://easystats.github.io/bayestestR/articles/1_IndicesDescription.html#rope}{ROPE's} lower and higher bounds. Should be a list of two values (e.g., \code{c(-0.1, 0.1)}) or \code{"default"}. If \code{"default"}, the bounds are set to \code{x +- 0.1*SD(response)}.
 #' @param rope_full If TRUE, use the proportion of the entire posterior distribution for the equivalence test. Otherwise, use the proportion of HDI as indicated by the \code{ci} argument.
 #' @param ... Arguments passed to or from other methods.

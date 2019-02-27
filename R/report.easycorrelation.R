@@ -2,7 +2,7 @@
 #'
 #' Create a report of a correlation object.
 #'
-#' @param model Object of class correlation
+#' @param model Object of class easycorrelation.
 #' @param effsize Effect size interpretation set of rules.
 #' @param stars Add significance stars in table. For frequentist correlations: \*p < .05, \*\*p < .01, \*\*\*p < .001. For Bayesian correlations: \*\*\*BF > 30, \*\*BF > 10, \*BF > 3.
 #' @param lower Remove the upper triangular part of the matrix.
@@ -17,7 +17,7 @@
 #' @seealso report
 #'
 #' @export
-report.correlation <- function(model, effsize = "cohen1988", stars=TRUE, lower=TRUE, reorder=TRUE, ...) {
+report.easycorrelation <- function(model, effsize = "cohen1988", stars=TRUE, lower=TRUE, reorder=TRUE, ...) {
 
   # Text ----
 
@@ -176,6 +176,10 @@ report.correlation <- function(model, effsize = "cohen1988", stars=TRUE, lower=T
 
   table <- table[rowSums(is.na(table)) != ncol(table[!names(table) %in% c("Parameter", "Group")]),]
   table_full <- table[rowSums(is.na(table_full)) != ncol(table_full[!names(table_full) %in% c("Parameter", "Group")]),]
+
+  # Reset row names
+  row.names(table) <- NULL
+  row.names(table_full) <- NULL
 
   out <- list(
     text = text,

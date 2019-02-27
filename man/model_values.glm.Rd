@@ -6,7 +6,8 @@
 \usage{
 \method{model_values}{glm}(model, ci = 0.95, standardize = TRUE,
   effsize = "chen2010", performance_in_table = TRUE,
-  performance_metrics = "all", bootstrap = FALSE, ...)
+  performance_metrics = "all", bootstrap = FALSE, iterations = 500,
+  ...)
 }
 \arguments{
 \item{model}{Object of class \link{lm}.}
@@ -22,6 +23,8 @@
 \item{performance_metrics}{See \code{\link[performance:model_performance.lm]{model_performance}}.}
 
 \item{bootstrap}{See \code{\link[parameters:model_parameters.lm]{model_parameters}}.}
+
+\item{iterations}{The number of bootstrap replicates. This only apply in the case of bootsrapped frequentist models.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
