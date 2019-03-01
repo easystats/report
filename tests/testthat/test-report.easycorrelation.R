@@ -1,6 +1,6 @@
-context("report.correlation")
+context("report.easycorrelation")
 
-test_that("report.correlation", {
+test_that("report.easycorrelation", {
   library(BayesFactor)
 
   r <- report(correlation(iris))
@@ -13,7 +13,7 @@ test_that("report.correlation", {
   testthat::expect_equal(nrow(r$values$data), 48)
   testthat::expect_equal(nrow(to_table(r)), 11)
   r <-  report(correlation(iris, bayesian=TRUE))
-  testthat::expect_equal(ncol(r$values$data), 10)
+  testthat::expect_equal(nrow(r$values$data), 16)
   testthat::expect_equal(nrow(to_table(r)), 3)
 
 })

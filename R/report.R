@@ -207,9 +207,9 @@ print.report_table <- function(x, digits = 2, ...) {
     .colour_column_if("Std_Median", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
     .colour_column_if("Std_Mean", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
     .colour_column_if("Std_MAP", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
-    .colour_column_if("p", condition = `<`, threshold = 0.05, colour_if = "bold", colour_else = NULL, digits = digits) %>%
+    .colour_column_if("p", condition = `<`, threshold = 0.05, colour_if = "yellow", colour_else = NULL, digits = digits) %>%
     .colour_column_if("pd", condition = `>`, threshold = 95, colour_if = "yellow", colour_else = NULL, digits = digits) %>%
-    .colour_column_if("ROPE_Percentage", condition = `<`, threshold = 1, colour_if = "bold", colour_else = NULL, digits = digits) %>%
+    .colour_column_if("ROPE_Percentage", condition = `<`, threshold = 1, colour_if = "yellow", colour_else = NULL, digits = digits) %>%
     .colour_column_if("Fit", condition = `>`, threshold = 0, colour_if = "cyan", colour_else = "cyan", digits = digits) %>%
     dplyr::mutate_if(is.numeric, format_value_unless_integers, digits = digits)
 

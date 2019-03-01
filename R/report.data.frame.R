@@ -427,12 +427,12 @@ report.numeric <- function(model, median = FALSE, dispersion = TRUE, range = TRU
 
   # Table -------------------------------------------------------------------
   table_full <- data.frame(
-    Mean = mean(model),
-    SD = sd(model),
+    Mean = mean(model, na.rm = TRUE),
+    SD = sd(model, na.rm = TRUE),
     Median = median(model),
-    MAD = mad(model),
-    Min = min(model),
-    Max = max(model),
+    MAD = mad(model, na.rm = TRUE),
+    Min = min(model, na.rm = TRUE),
+    Max = max(model, na.rm = TRUE),
     n_Obs = length(model),
     n_Missing = sum(is.na(model))
   )
@@ -464,7 +464,7 @@ report.numeric <- function(model, median = FALSE, dispersion = TRUE, range = TRU
   table <- table_full
   if (median == TRUE) {
     if (dispersion == TRUE) {
-      text <- paste0(text_median, " +- ", text_mad)
+      text <- paste0(text_median, ", MAD = ", text_mad)
       table <- dplyr::select(table, -one_of("Mean", "SD"))
     } else {
       text <- text_median
@@ -472,7 +472,7 @@ report.numeric <- function(model, median = FALSE, dispersion = TRUE, range = TRU
     }
   } else {
     if (dispersion == TRUE) {
-      text <- paste0(text_mean, " +- ", text_sd)
+      text <- paste0(text_mean, ", SD = ", text_sd)
       table <- dplyr::select(table, -one_of("Median", "MAD"))
     } else {
       text <- text_mean

@@ -7,18 +7,18 @@ model_text_parameters_lm <- function(model, parameters, ci = 0.95, effsize = "co
     parameters$effsize_text <- paste0(
       " and ",
       interpret_d(parameters$Std_beta, rules = effsize),
-      " (Std. beta = ",
+      " (std. beta = ",
       format_value(parameters$Std_beta),
       ")."
     )
     parameters$effsize_text_full <- paste0(
       " and ",
       interpret_d(parameters$Std_beta, rules = effsize),
-      " (Std. beta = ",
+      " (std. beta = ",
       format_value(parameters$Std_beta),
-      ", Std. SE = ",
+      ", std. SE = ",
       format_value(parameters$Std_SE),
-      ", Std. ",
+      ", std. ",
       format_ci(parameters$Std_CI_low, parameters$Std_CI_high, ci),
       ")."
     )
@@ -104,18 +104,18 @@ model_text_parameters_logistic <- function(model, parameters, ci = 0.95, effsize
     parameters$effsize_text <- paste0(
       " and ",
       effsize_text,
-      " (Std. beta = ",
+      " (std. beta = ",
       format_value(parameters$Std_beta),
       ")."
     )
     parameters$effsize_text_full <- paste0(
       " and ",
       effsize_text,
-      " (Std. beta = ",
+      " (std. beta = ",
       format_value(parameters$Std_beta),
-      ", Std. SE = ",
+      ", std. SE = ",
       format_value(parameters$Std_SE),
-      ", Std. ",
+      ", std. ",
       format_ci(parameters$Std_CI_low, parameters$Std_CI_high, ci),
       ")."
     )
@@ -200,7 +200,7 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
     estimate_name <- "Median"
     estimate_full <- paste0(
       estimate_full,
-      "Median = ",
+      "median = ",
       format_value(parameters$Median),
       ", MAD = ",
       format_value(parameters$MAD),
@@ -214,7 +214,7 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
     }
     estimate_full <- paste0(
       estimate_full,
-      "Mean = ",
+      "mean = ",
       format_value(parameters$Mean),
       ", SD = ",
       format_value(parameters$SD),
@@ -328,7 +328,7 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
     text <- paste0(
       text,
       effsize_text,
-      " (Std. ",
+      " (std. ",
       estimate_name,
       " = ",
       format_value(parameters[[estimate_name]]),
@@ -339,13 +339,13 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
       text_full <- paste0(
         text_full,
         effsize_text,
-        " (Std. ",
+        " (std. ",
         estimate_name,
         " = ",
         format_value(parameters$Std_Median),
-        ", Std. MAD = ",
+        ", std. MAD = ",
         format_value(parameters$Std_MAD),
-        ", Std. ",
+        ", std. ",
         format_ci(parameters$Std_CI_low,
           parameters$Std_CI_high,
           ci = ci
@@ -356,13 +356,13 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
       text_full <- paste0(
         text_full,
         effsize_text,
-        " (Std. ",
+        " (std. ",
         estimate_name,
         " = ",
         format_value(parameters$Std_Mean),
-        ", Std. SD = ",
+        ", std. SD = ",
         format_value(parameters$Std_SD),
-        ", Std. ",
+        ", std. ",
         format_ci(parameters$Std_CI_low,
           parameters$Std_CI_high,
           ci = ci
@@ -373,11 +373,11 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
       text_full <- paste0(
         text_full,
         effsize_text,
-        " (Std. ",
+        " (std. ",
         estimate_name,
         " = ",
         format_value(parameters$Std_MAP),
-        ", Std. ",
+        ", std. ",
         format_ci(parameters$Std_CI_low,
           parameters$Std_CI_high,
           ci = ci

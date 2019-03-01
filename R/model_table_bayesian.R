@@ -8,36 +8,25 @@
 #'
 #' @keywords internal
 model_table_bayesian <- function(model, parameters, performance, performance_in_table = TRUE, ...) {
-  table_full <- parameters
-  table <- table_full
-  table <- table[, !colnames(table) %in% c("MAD", "SD", "Std_MAD", "Std_SD", "Std_CI_low", "Std_CI_high", "ROPE_Equivalence", "Effective_Sample", "Rhat", "Effect_Size_Median")]
+  table_full <- table_simple <- parameters
+  table_simple <- table_simple[, colnames(table_simple) %in% c("Parameter", "Median", "Mean", "MAP", "CI_low", "CI_high", "pd", "ROPE_Percentage", "Std_Median", "Std_Mean", "Std_MAP")]
 
   if (performance_in_table) {
-    table_full[nrow(table_full) + 1, ] <- NA
-    table[nrow(table) + 1, ] <- NA
-    # Full ----
-    perf <- data.frame(
-      "Parameter" = colnames(performance),
-      "Fit" = as.numeric(performance[1, ]),
-      stringsAsFactors = FALSE
+    tabs <- .create_performance_table(
+      performance,
+      table_full,
+      table_simple,
+      elements = c('R2', 'R2_adjusted', 'R2_Median', 'R2_Fixed_Median', 'R2_LOO_adjusted')
     )
-    table_full <- dplyr::full_join(table_full, perf, by = "Parameter")
-    # Mini ----
-    perf <- data.frame(
-      "Parameter" = colnames(performance),
-      "Fit" = as.numeric(performance[1, ]),
-      stringsAsFactors = FALSE
-    ) %>%
-      dplyr::filter_("Parameter %in% c('R2', 'R2_adjusted', 'R2_Median', 'R2_Fixed_Median', 'R2_LOO_adjusted')")
-    table <- dplyr::full_join(table, perf, by = "Parameter")
+    table_full <- tabs$table_full
+    table_simple <- tabs$table_simple
   }
 
   class(table_full) <- c("report_table", class(table_full))
-  class(table) <- c("report_table", class(table))
+  class(table_simple) <- c("report_table", class(table_simple))
 
-  out <- list(
+  list(
     "table_full" = table_full,
-    "table" = table
+    "table" = table_simple
   )
-  return(out)
 }
