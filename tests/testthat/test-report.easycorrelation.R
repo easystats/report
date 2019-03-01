@@ -1,6 +1,6 @@
-context("report.correlation")
+context("report.easycorrelation")
 
-test_that("report.correlation", {
+test_that("report.easycorrelation", {
   library(BayesFactor)
 
   r <- report(correlation(iris))

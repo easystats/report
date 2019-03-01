@@ -5,18 +5,21 @@
 \title{Correlation Report}
 \usage{
 \method{report}{easycorrelation}(model, effsize = "cohen1988",
-  stars = TRUE, lower = TRUE, reorder = TRUE, ...)
+  stars = TRUE, lower = TRUE, reorder = TRUE,
+  reorder_method = "complete", ...)
 }
 \arguments{
 \item{model}{Object of class easycorrelation.}
 
-\item{effsize}{Effect size interpretation set of rules.}
+\item{effsize}{Effect size interpretation set of rules. Can be "cohen1988" (default), "evans1996" or custom set of rules.}
 
 \item{stars}{Add significance stars in table. For frequentist correlations: \*p < .05, \*\*p < .01, \*\*\*p < .001. For Bayesian correlations: \*\*\*BF > 30, \*\*BF > 10, \*BF > 3.}
 
 \item{lower}{Remove the upper triangular part of the matrix.}
 
 \item{reorder}{Reorder the matrix based on correlation pattern (currently only works with square matrices)?}
+
+\item{reorder_method}{Reordering method. See \link{hclust}.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

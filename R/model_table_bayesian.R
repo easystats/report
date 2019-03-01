@@ -9,7 +9,7 @@
 #' @keywords internal
 model_table_bayesian <- function(model, parameters, performance, performance_in_table = TRUE, ...) {
   table_full <- table_simple <- parameters
-  table_simple <- table_simple[, !colnames(table_simple) %in% c("MAD", "SD", "Std_MAD", "Std_SD", "Std_CI_low", "Std_CI_high", "ROPE_Equivalence", "Effective_Sample", "Rhat", "Effect_Size_Median")]
+  table_simple <- table_simple[, colnames(table_simple) %in% c("Parameter", "Median", "Mean", "MAP", "CI_low", "CI_high", "pd", "ROPE_Percentage", "Std_Median", "Std_Mean", "Std_MAP")]
 
   if (performance_in_table) {
     tabs <- .create_performance_table(

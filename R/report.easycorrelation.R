@@ -3,10 +3,11 @@
 #' Create a report of a correlation object.
 #'
 #' @param model Object of class easycorrelation.
-#' @param effsize Effect size interpretation set of rules.
+#' @param effsize Effect size interpretation set of rules. Can be "cohen1988" (default), "evans1996" or custom set of rules.
 #' @param stars Add significance stars in table. For frequentist correlations: \*p < .05, \*\*p < .01, \*\*\*p < .001. For Bayesian correlations: \*\*\*BF > 30, \*\*BF > 10, \*BF > 3.
 #' @param lower Remove the upper triangular part of the matrix.
 #' @param reorder Reorder the matrix based on correlation pattern (currently only works with square matrices)?
+#' @param reorder_method Reordering method. See \link{hclust}.
 #' @param ... Arguments passed to or from other methods.
 #'
 #'
@@ -17,7 +18,7 @@
 #' @seealso report
 #'
 #' @export
-report.easycorrelation <- function(model, effsize = "cohen1988", stars=TRUE, lower=TRUE, reorder=TRUE, ...) {
+report.easycorrelation <- function(model, effsize = "cohen1988", stars=TRUE, lower=TRUE, reorder=TRUE, reorder_method="complete", ...) {
 
   # Text ----
 
@@ -119,67 +120,44 @@ report.easycorrelation <- function(model, effsize = "cohen1988", stars=TRUE, low
 
 
   # Tables ----
-  # TODO: Improvements needed for a more efficient method
+  distance_matrix <- as.table(model, lower=FALSE, reorder=FALSE)
+
+  # Table
   data <- model
   if("Median" %in% names(data)){
-    data$Cell <- data$Median
+    data$value <- format_value(data$Median)
   } else{
-    data$Cell <- data$r
+    data$value <- format_value(data$r)
   }
-  r <- .create_cor_matrix(data, coltarget = "Cell", reorder=FALSE, lower=lower)
-  r$Parameter <- NULL
 
-
-
-  if("Median" %in% names(data)){
-    data$Cell <- format_value(data$Median)
-  } else{
-    data$Cell <- format_value(data$r)
-  }
   if(stars){
-    data$Cell <- paste0(data$Cell, .add_stars(data))
+    data$value <- paste0(data$value, .add_stars(data))
   }
-  table <- .create_cor_matrix(data, "Cell", reorder=reorder, lower=lower, dmat=r)
 
+
+  table <- as.table(data, which_column="value", lower=lower, reorder=reorder, reorder_method=reorder_method, reorder_distance=distance_matrix)
+
+  # Fulltable
   if("Median" %in% names(data)){
-    data$Cell <- paste0("r's median = ", format_value(data$Median))
+    data$value <- paste0("r's median = ", format_value(data$Median))
   } else{
-    data$Cell <- paste0("r = ", format_value(data$r))
+    data$value <- paste0("r = ", format_value(data$r))
   }
   if("CI_low" %in% names(data)){
-    data$Cell <- paste0(data$Cell, ", ", format_ci(data$CI_low, data$CI_high, info$ci))
+    data$value <- paste0(data$value, ", ", format_ci(data$CI_low, data$CI_high, info$ci))
   }
   if("p" %in% names(data)){
-    data$Cell <- paste0(data$Cell, ", p ", format_p(data$p))
+    data$value <- paste0(data$value, ", p ", format_p(data$p))
   }
   if("BF" %in% names(data)){
-    data$Cell <- paste0(data$Cell, ", ", format_bf(data$BF))
+    data$value <- paste0(data$value, ", ", format_bf(data$BF))
   }
   if(stars){
-    data$Cell <- paste0(data$Cell, .add_stars(data))
+    data$value <- paste0(data$value, .add_stars(data))
   }
-  table_full <- .create_cor_matrix(data, "Cell", reorder=reorder, lower=lower, dmat=r)
+  table_full <- as.table(data, which_column="value", lower=lower, reorder=reorder, reorder_method=reorder_method, reorder_distance=distance_matrix)
 
 
-  # Reorder columns
-  if("Group" %in% names(table)){
-    table <- table[c('Group', 'Parameter', names(table)[!names(table) %in% c('Group', 'Parameter')])]
-    table_full <- table_full[c('Group', 'Parameter', names(table_full)[!names(table_full) %in% c('Group', 'Parameter')])]
-  } else{
-    table <- table[c('Parameter', names(table)[!names(table) %in% c('Parameter')])]
-    table_full <- table_full[c('Parameter', names(table_full)[!names(table_full) %in% c('Parameter')])]
-  }
-
-  # Remove empty
-  table <- table[,colSums(is.na(table))<nrow(table)]
-  table_full <- table_full[,colSums(is.na(table_full))<nrow(table_full)]
-
-  table <- table[rowSums(is.na(table)) != ncol(table[!names(table) %in% c("Parameter", "Group")]),]
-  table_full <- table[rowSums(is.na(table_full)) != ncol(table_full[!names(table_full) %in% c("Parameter", "Group")]),]
-
-  # Reset row names
-  row.names(table) <- NULL
-  row.names(table_full) <- NULL
 
   out <- list(
     text = text,
@@ -191,6 +169,13 @@ report.easycorrelation <- function(model, effsize = "cohen1988", stars=TRUE, low
 
   return(as.report(out))
 }
+
+
+
+
+
+
+
 
 
 
@@ -213,85 +198,3 @@ report.easycorrelation <- function(model, effsize = "cohen1988", stars=TRUE, low
 
 
 
-
-
-
-#' @keywords internal
-.create_cor_matrix <- function(data, coltarget, reorder=TRUE, lower=TRUE, dmat = NULL){
-  if("Group" %in% names(data)){
-    datalist <- split(data, data$Group)
-    m <- data.frame()
-    for(group in names(datalist)){
-      dat <- datalist[[group]]
-      dat$Group <- NULL
-      dat <- .create_cor_matrix_core(dat, coltarget, reorder=FALSE, lower=lower, dmat = dmat)
-      dat$Group <- group
-      dat[nrow(dat) + 1, ] <- NA
-      m <- rbind(m, dat)
-    }
-    m <- m[-nrow(m),]
-  } else{
-    m <- .create_cor_matrix_core(data, coltarget, reorder=reorder, lower=lower, dmat = dmat)
-  }
-  return(m)
-}
-
-
-#' @keywords internal
-.create_cor_matrix_core <- function(data, coltarget, reorder=TRUE, lower=TRUE, dmat = NULL){
-  rows <- sort(unique(data$Parameter1))
-  cols <- sort(unique(data$Parameter2))
-  m <- data.frame(matrix(ncol=length(cols), nrow=length(rows)), row.names = rows)
-  colnames(m) <- cols
-
-  for(col in cols){
-    for(row in rows){
-      if(is.null(data[data$Parameter1 == row & data$Parameter2 == col, coltarget])){
-        cell <- NA
-      } else{
-        cell <- data[data$Parameter1 == row & data$Parameter2 == col, coltarget]
-      }
-      m[row, col] <- cell
-    }
-  }
-
-
-  if (reorder == TRUE & all(unique(rownames(m)) == unique(names(m)))) {
-    m <- .reorder_cor_matrix(m, dmat = dmat)
-  }
-  # Remove upper
-  if(lower==TRUE & all(unique(rownames(m)) == unique(names(m)))){
-    m[upper.tri(m, diag = TRUE)] <- NA
-  }
-
-  m$Parameter <- row.names(m)
-  row.names(m) <- NULL
-
-  return(m)
-}
-
-
-
-
-
-
-
-#' @importFrom stats as.dist hclust
-#' @keywords internal
-.reorder_cor_matrix <- function(mat, dmat = NULL) {
-  if (is.null(dmat)) {
-    dmat <- mat
-    dmat$Parameter <- NULL
-    dmat$Group <- NULL
-  }
-
-  if (ncol(mat) != nrow(mat) | ncol(dmat) != nrow(dmat)) {
-    warning("Matrix must be squared to be re-arranged.")
-    return(mat)
-  }
-
-  dmat <- as.dist((1 - dmat) / 2, diag = TRUE, upper = TRUE)
-  hc <- hclust(dmat)
-  mat <- mat[hc$order, hc$order]
-  return(mat)
-}
