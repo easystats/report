@@ -6,10 +6,10 @@
 \usage{
 \method{report}{stanreg}(model, ci = 0.9, standardize = FALSE,
   effsize = NULL, performance_in_table = TRUE,
-  performance_metrics = "all", parameters_estimate = "median",
-  parameters_test = c("pd", "rope"), parameters_diagnostic = TRUE,
-  parameters_priors = TRUE, rope_bounds = "default",
-  rope_full = TRUE, ...)
+  performance_metrics = c("R2", "R2_adj"),
+  parameters_estimate = "median", parameters_test = c("pd", "rope"),
+  parameters_diagnostic = TRUE, parameters_priors = TRUE,
+  rope_bounds = "default", rope_full = TRUE, ...)
 }
 \arguments{
 \item{model}{Object of class \link{lm}.}

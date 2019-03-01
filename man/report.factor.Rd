@@ -4,15 +4,12 @@
 \alias{report.factor}
 \title{Factor (Categorical Vector) Report}
 \usage{
-\method{report}{factor}(model, levels_percentage = FALSE,
-  missing_percentage = FALSE, ...)
+\method{report}{factor}(model, levels_percentage = FALSE, ...)
 }
 \arguments{
 \item{model}{Categorical vector.}
 
 \item{levels_percentage}{Show factor levels by number (default) or percentage.}
-
-\item{missing_percentage}{Show missings by number (default) or percentage.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
