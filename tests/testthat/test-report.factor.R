@@ -5,7 +5,6 @@ test_that("report.factor", {
   testthat::expect_equal(nrow(r$table), 3, tol = 0)
   testthat::expect_warning(r$table$Median)
 
-  r <- report(factor(rep(c("A", "B", "C"), 10)), levels_percentage = FALSE, missing_percentage = TRUE)
-  testthat::expect_equal(nrow(r$table), 3, tol = 0)
-  testthat::expect_equal(r$table$percentage_Missing, c(0, 0, 0), tol = 0)
+  r <- report(factor(rep(c("A", "B", "C", NA), 10)), levels_percentage = FALSE)
+  testthat::expect_equal(nrow(r$table), 4, tol = 0)
 })

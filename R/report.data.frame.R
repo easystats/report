@@ -284,7 +284,6 @@ report.character <- function(model, n_characters = 3, levels_percentage = FALSE,
 #'
 #' @param model Categorical vector.
 #' @param levels_percentage Show factor levels by number (default) or percentage.
-#' @param missing_percentage Show missings by number (default) or percentage.
 #' @param ... Arguments passed to or from other methods.
 #'
 #'
@@ -300,63 +299,47 @@ report.character <- function(model, n_characters = 3, levels_percentage = FALSE,
 #' @import dplyr
 #'
 #' @export
-report.factor <- function(model, levels_percentage = FALSE, missing_percentage = FALSE, ...) {
+report.factor <- function(model, levels_percentage = FALSE, ...) {
+
+  if(length(model[is.na(model)]) != 0){
+    model <- factor(ifelse(is.na(model), "missing", as.character(model)), levels = c(levels(model), "missing"))
+  }
 
   # Table -------------------------------------------------------------------
   table_full <- data.frame(Level = model) %>%
     group_by_("Level") %>%
     summarise_(
       "n_Obs" = "n()",
-      "percentage_Obs" = "n() / length(model) * 100",
-      "n_Missing" = "sum(is.na(model))",
-      "percentage_Missing" = "n_Missing / n_Obs * 100"
+      "percentage_Obs" = "n() / length(model) * 100"
     )
 
+  table_no_missing <- table_full[table_full$Level != "missing",]
   # Text --------------------------------------------------------------------
   if (nrow(table_full) > 1) {
-    text_total_levels <- paste0(nrow(table_full), " levels: ")
+    text_total_levels <- paste0(nrow(table_no_missing), " levels: ")
   } else {
-    text_total_levels <- paste0(nrow(table_full), " level: ")
+    text_total_levels <- paste0(nrow(table_no_missing), " level: ")
   }
 
   text_levels <- paste0(table_full$Level)
   text_n_Obs <- paste0("n = ", table_full$n_Obs)
   text_percentage_Obs <- paste0(format_value(table_full$percentage_Obs), "%")
-  text_n_Missing <- paste0(table_full$n_Missing, " missing")
-  text_percentage_Missing <- paste0(format_value(table_full$percentage_Missing), "% missing")
+
 
   text_full <- paste0(
     text_levels, " (",
     text_n_Obs, ", ",
-    text_percentage_Obs, "; "
+    text_percentage_Obs, ")"
   )
   # Selection ---------------------------------------------------------------
   table <- table_full
   if (levels_percentage == TRUE) {
-    text <- paste0(text_levels, " (", text_percentage_Obs)
+    text <- paste0(text_levels, " (", text_percentage_Obs, ")")
   } else {
     table <- dplyr::select(table, -one_of("percentage_Obs"))
-    text <- paste0(text_levels, " (", text_n_Obs)
+    text <- paste0(text_levels, " (", text_n_Obs, ")")
   }
 
-
-  if (missing_percentage == TRUE) {
-    text_full <- paste0(text_full, text_percentage_Missing, ")")
-    table <- dplyr::select(table, -one_of("n_Missing"))
-    if (any(table_full$n_Missing > 0)) {
-      text <- paste0(text, "; ", text_percentage_Missing, ")")
-    } else {
-      text <- paste0(text, ")")
-    }
-  } else {
-    text_full <- paste0(text_full, text_n_Missing, ")")
-    table <- dplyr::select(table, -one_of("percentage_Missing"))
-    if (any(table_full$n_Missing > 0)) {
-      text <- paste0(text, "; ", text_n_Missing, ")")
-    } else {
-      text <- paste0(text, ")")
-    }
-  }
 
   text <- paste0(text_total_levels, paste0(text, collapse = "; "))
   text_full <- paste0(text_total_levels, paste0(text_full, collapse = "; "))
