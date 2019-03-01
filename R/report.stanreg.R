@@ -8,7 +8,7 @@
 #' @importFrom parameters model_parameters
 #' @importFrom performance model_performance
 #' @export
-model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize = NULL, performance_in_table = TRUE, performance_metrics = "all", parameters_estimate = "median", parameters_test = c("pd", "rope"), parameters_diagnostic = TRUE, parameters_priors = TRUE, rope_bounds = "default", rope_full = TRUE, ...) {
+model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize = NULL, performance_in_table = TRUE, performance_metrics = c("R2", "R2_adj"), parameters_estimate = "median", parameters_test = c("pd", "rope"), parameters_diagnostic = TRUE, parameters_priors = TRUE, rope_bounds = "default", rope_full = TRUE, ...) {
 
   # Sanity checks
   if(length(c(ci)) > 1){
@@ -137,7 +137,7 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
 #' report(model)
 #' }
 #' @export
-report.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize = NULL, performance_in_table = TRUE, performance_metrics = "all", parameters_estimate = "median", parameters_test = c("pd", "rope"), parameters_diagnostic = TRUE, parameters_priors = TRUE, rope_bounds = "default", rope_full = TRUE, ...) {
+report.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize = NULL, performance_in_table = TRUE, performance_metrics = c("R2", "R2_adj"), parameters_estimate = "median", parameters_test = c("pd", "rope"), parameters_diagnostic = TRUE, parameters_priors = TRUE, rope_bounds = "default", rope_full = TRUE, ...) {
   values <- model_values(model,
     ci = ci,
     standardize = standardize,
