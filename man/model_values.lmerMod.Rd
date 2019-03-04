@@ -6,10 +6,11 @@
 \usage{
 \method{model_values}{lmerMod}(model, ci = 0.95, standardize = TRUE,
   effsize = "cohen1988", performance_in_table = TRUE,
-  performance_metrics = "all", bootstrap = FALSE, ...)
+  performance_metrics = "all", bootstrap = FALSE, p_method = "wald",
+  ci_method = "wald", ...)
 }
 \arguments{
-\item{model}{Object of class \link{lm}.}
+\item{model}{Mixed model.}
 
 \item{ci}{Confidence Interval (CI) level. Default to 0.95 (95\%).}
 
@@ -23,8 +24,18 @@
 
 \item{bootstrap}{See \code{\link[parameters:model_parameters.lm]{model_parameters}}.}
 
+\item{p_method}{Method for computing p values. See \link{p_value}.}
+
+\item{ci_method}{Method for computing confidence intervals (CI). See \link{ci}.}
+
 \item{...}{Arguments passed to or from other methods.}
 }
 \description{
 Extract all values of mixed models.
+}
+\examples{
+\dontrun{
+model <- circus::lmerMod_1
+}
+
 }

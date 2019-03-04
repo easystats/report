@@ -231,16 +231,16 @@ report.character <- function(model, n_characters = 3, levels_percentage = FALSE,
   text_n_Missing <- paste0(table_full$n_Missing[1], " missing")
   text_percentage_Missing <- paste0(format_value(table_full$percentage_Missing[1]), "% missing")
   if (missing_percentage == TRUE) {
-    text_full <- paste0(text_full, "(", text_percentage_Missing, ")")
+    text_full <- paste0(text_full, "(", text_percentage_Missing, ").")
     table <- dplyr::select(table, -one_of("n_Missing"))
     if (table_full$n_Missing[1] > 0) {
-      text <- paste0(text, " (", text_percentage_Missing, ")")
+      text <- paste0(text, " (", text_percentage_Missing, ").")
     }
   } else {
-    text_full <- paste0(text_full, " (", text_n_Missing, ")")
+    text_full <- paste0(text_full, " (", text_n_Missing, ").")
     table <- dplyr::select(table, -one_of("percentage_Missing"))
     if (table_full$n_Missing[1] > 0) {
-      text <- paste0(text, " (", text_n_Missing, ")")
+      text <- paste0(text, " (", text_n_Missing, ").")
     }
   }
 
@@ -341,8 +341,8 @@ report.factor <- function(model, levels_percentage = FALSE, ...) {
   }
 
 
-  text <- paste0(text_total_levels, paste0(text, collapse = "; "))
-  text_full <- paste0(text_total_levels, paste0(text_full, collapse = "; "))
+  text <- paste0(text_total_levels, format_text_collapse(text, sep = "; "), ".")
+  text_full <- paste0(text_total_levels, format_text_collapse(text_full, sep = "; "), ".")
 
   values <- list()
   for (level in table_full$Level) {
@@ -485,6 +485,8 @@ report.numeric <- function(model, median = FALSE, dispersion = TRUE, range = TRU
 
   if (table_full$n_Missing[1] > 0) {
     text <- paste0(text, text_missing)
+  } else{
+    text <- paste0(text, ".")
   }
 
 

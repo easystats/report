@@ -181,3 +181,52 @@ model_text_performance_bayesian <- function(performance, ci = 0.90, ...) {
   )
   return(out)
 }
+
+
+
+
+
+
+
+#' @keywords internal
+model_text_performance_mixed <- function(performance, ...) {
+  text <- ""
+
+  # R2 Conditional
+  if ("R2_conditional" %in% names(performance)) {
+    text <- paste0(
+      "The model's total explanatory power is ",
+      interpret_r2(performance$R2_conditional, rules = "cohen1988"),
+      " (conditional R2 = ",
+      format_value(performance$R2_conditional),
+      ")")
+  }
+
+  # R2 marginal
+  if ("R2_marginal" %in% names(performance)) {
+    if(text == ""){
+      text <- "The"
+    } else{
+      text <- paste0(text, " and the")
+    }
+    text <- paste0(text,
+      " part related to the",
+      " fixed effects only (marginal R2) is of ",
+      format_value(performance$R2_marginal),
+      ".")
+  } else{
+    text <- paste0(text, ".")
+  }
+
+
+  text_full <- text
+
+  # ICC
+  # ?
+
+  out <- list(
+    "text" = text,
+    "text_full" = text_full
+  )
+  return(out)
+}

@@ -54,11 +54,21 @@ model_text_parameters_lm <- function(model, parameters, ci = 0.95, effsize = "co
     " (beta = ",
     format_value(parameters$beta),
     ", SE = ",
-    format_value(parameters$SE),
-    ", t(",
-    format_value_unless_integers(parameters$DoF_residual),
-    ") = ",
-    format_value(parameters$t),
+    format_value(parameters$SE))
+
+  if("DoF_residual" %in% names(parameters)){
+    text_full <- paste0(text_full,
+                        ", t(",
+                        format_value_unless_integers(parameters$DoF_residual),
+                        ") = ",
+                        format_value(parameters$t))
+  } else{
+    text_full <- paste0(text_full,
+                        ", t = ",
+                        format_value(parameters$t))
+    }
+
+  text_full <- paste0(text_full,
     ", ",
     format_ci(parameters$CI_low, parameters$CI_high, ci),
     ", p ",
@@ -174,6 +184,79 @@ model_text_parameters_logistic <- function(model, parameters, ci = 0.95, effsize
 
 
 
+
+
+
+
+
+#' @keywords internal
+model_text_parameters_glm <- function(model, parameters, ci = 0.95, ...) {
+  parameters <- parameters[parameters$Parameter != "(Intercept)", ]
+
+  # Effect size text
+  if ("Std_beta" %in% names(parameters)) {
+    parameters$effsize_text <- paste0(
+      ", std. beta = ",
+      format_value(parameters$Std_beta),
+      ")."
+    )
+    parameters$effsize_text_full <- paste0(
+      ", std. beta = ",
+      format_value(parameters$Std_beta),
+      ", std. SE = ",
+      format_value(parameters$Std_SE),
+      ", std. ",
+      format_ci(parameters$Std_CI_low, parameters$Std_CI_high, ci),
+      ")."
+    )
+    parameters$significant_full <- paste0(interpret_direction(parameters$beta), ", ", interpret_p(parameters$p))
+  } else {
+    parameters$effsize_text <- ")."
+    parameters$effsize_text_full <- ")."
+    parameters$significant_full <- paste0(interpret_direction(parameters$beta), " and ", interpret_p(parameters$p))
+  }
+
+
+  text <- paste0(
+    "  - ",
+    parameters$Parameter,
+    " is ",
+    interpret_p(parameters$p),
+    " (beta = ",
+    format_value(parameters$beta),
+    ", ",
+    format_ci(parameters$CI_low, parameters$CI_high, ci),
+    ", p ",
+    format_p(parameters$p),
+    parameters$effsize_text
+  )
+  text <- paste0(c("\n\nWithin this model: ", text), collapse = "\n")
+
+  text_full <- paste0(
+    "  - ",
+    parameters$Parameter,
+    " is ",
+    parameters$significant_full,
+    " (beta = ",
+    format_value(parameters$beta),
+    ", SE = ",
+    format_value(parameters$SE),
+    ", z = ",
+    format_value(parameters$z),
+    ", ",
+    format_ci(parameters$CI_low, parameters$CI_high, ci),
+    ", p ",
+    format_p(parameters$p),
+    parameters$effsize_text_full
+  )
+  text_full <- paste0(c("\n\nWithin this model: ", text_full), collapse = "\n")
+
+  out <- list(
+    "text" = text,
+    "text_full" = text_full
+  )
+  return(out)
+}
 
 
 

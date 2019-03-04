@@ -1,11 +1,17 @@
 #' @keywords internal
-model_text_description <- function(model, ci = 0.95, effsize = "effsize", bootstrap = FALSE, iterations = 500, test = c("pd", "rope"), rope_bounds = "default", rope_full = TRUE, ...) {
+model_text_description <- function(model, ci = 0.95, effsize = "effsize", bootstrap = FALSE, iterations = 500, test = c("pd", "rope"), rope_bounds = "default", rope_full = TRUE, p_method = "wald", ci_method="wald", ...) {
+
+  # Model info
+  info <- insight::model_info(model)
+
+  # Boostrap
   if (bootstrap) {
     boostrapped <- paste0("bootstrapped (n = ", iterations, ") ")
   } else {
     boostrapped <- ""
   }
 
+  # Initial
   text <- paste0(
     "We fitted a ",
     boostrapped,
@@ -28,7 +34,7 @@ model_text_description <- function(model, ci = 0.95, effsize = "effsize", bootst
   }
 
   # ROPE
-  if ("rope" %in% tolower(c(test)) & model_info(model)$is_bayesian) {
+  if ("rope" %in% tolower(c(test)) & info$is_bayesian) {
     if (all(rope_bounds == "default")) {
       rope_bounds <- bayestestR::rope_bounds(model)
     } else if (!all(is.numeric(rope_bounds)) | length(rope_bounds) != 2) {
@@ -36,6 +42,26 @@ model_text_description <- function(model, ci = 0.95, effsize = "effsize", bootst
     }
 
     text_full <- paste0(text_full, .format_ROPE_description(rope_full, rope_bounds, ci))
+  }
+
+  # p values and CIs
+  if (model_info(model)$is_mixed & info$is_linear & !info$is_bayesian) {
+    if(ci_method == "wald" & p_method == "wald"){
+      text_full <- paste0(text_full, " Confidence intervals (CIs) and p values were computed using Wald approximation.")
+    } else{
+      if(ci_method == "wald"){
+        text_full <- paste0(text_full, " Confidence intervals (CIs) were computed using Wald approximation")
+      } else{
+        text_full <- paste0(text_full, " Confidence intervals (CIs) were obtained through bootstrapping")
+      }
+      if(p_method == "wald"){
+        text_full <- paste0(text_full, " and p values were computed using Wald approximation.")
+      } else{
+        text_full <- paste0(text_full, " and p values were computed using Kenward-Roger approximation.")
+      }
+    }
+  } else if(model_info(model)$is_mixed & !info$is_linear & !info$is_bayesian & ci_method != "wald") {
+    text_full <- paste0(text_full, " Confidence intervals (CIs) were obtained through bootstrapping.")
   }
 
 
