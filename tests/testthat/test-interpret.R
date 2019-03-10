@@ -88,3 +88,13 @@ test_that("interpret_bf", {
   testthat::expect_equal(interpret_bf(2, rules = rules(c(0.5), c("A", "B"))), "B evidence in favour of")
   testthat::expect_error(interpret_bf(2, rules = "DUPA"))
 })
+
+
+
+context("interpret_omega_squared")
+test_that("interpret_omega_squared", {
+  testthat::expect_equal(interpret_omega_squared(0.1), "medium")
+  testthat::expect_equal(interpret_omega_squared(c(0.1, 0.25)), c("medium", "large"))
+  testthat::expect_equal(interpret_omega_squared(0.6, rules = rules(c(0.5), c("A", "B"))), "B")
+  testthat::expect_error(interpret_omega_squared(0.6, rules = "DUPA"))
+})

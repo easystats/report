@@ -39,7 +39,9 @@ Suggests:
 	ggplot2,
 	rstudioapi,
 	rstanarm,
-	BayesFactor
+	BayesFactor,
+	caret,
+	randomForest
 Remotes: 
 	easystats/insight,
 	easystats/parameters,

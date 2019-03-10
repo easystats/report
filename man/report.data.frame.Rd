@@ -5,8 +5,8 @@
 \title{Dataframe Report}
 \usage{
 \method{report}{data.frame}(model, median = FALSE, dispersion = TRUE,
-  range = TRUE, levels_percentage = FALSE, n_characters = 3,
-  missing_percentage = FALSE, ...)
+  range = TRUE, distribution = FALSE, levels_percentage = FALSE,
+  n_characters = 3, missing_percentage = FALSE, ...)
 }
 \arguments{
 \item{model}{Numeric vector.}
@@ -16,6 +16,8 @@
 \item{dispersion}{Show dispersion (\link{sd} or \link{mad}).}
 
 \item{range}{Show range.}
+
+\item{distribution}{Returns Kurtosis and Skewness in table, and tries to guess the distribution of the numeric variable by using an internal machine learning model (see \link[parameters]{find_distribution}).}
 
 \item{levels_percentage}{Show characters entries and factor levels by number (default) or percentage.}
 

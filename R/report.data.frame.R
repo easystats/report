@@ -6,6 +6,7 @@
 #' @param median Show \link{mean} and \link{sd} (default) or \link{median} and \link{mad}.
 #' @param dispersion Show dispersion (\link{sd} or \link{mad}).
 #' @param range Show range.
+#' @param distribution Returns Kurtosis and Skewness in table, and tries to guess the distribution of the numeric variable by using an internal machine learning model (see \link[parameters]{find_distribution}).
 #' @param n_characters Number of different character entries to show. Can be "all".
 #' @param levels_percentage Show characters entries and factor levels by number (default) or percentage.
 #' @param missing_percentage Show missings by number (default) or percentage.
@@ -24,7 +25,7 @@
 #' @import dplyr
 #'
 #' @export
-report.data.frame <- function(model, median = FALSE, dispersion = TRUE, range = TRUE, levels_percentage = FALSE, n_characters = 3, missing_percentage = FALSE, ...) {
+report.data.frame <- function(model, median = FALSE, dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = FALSE, n_characters = 3, missing_percentage = FALSE, ...) {
 
   # Table -------------------------------------------------------------------
   table_full <- data.frame()
@@ -34,7 +35,7 @@ report.data.frame <- function(model, median = FALSE, dispersion = TRUE, range = 
   values <- list()
 
   for (col in names(model)) {
-    r <- report(model[[col]], median = median, dispersion = dispersion, range = range, levels_percentage = levels_percentage, n_characters = n_characters, missing_percentage = missing_percentage)
+    r <- report(model[[col]], median = median, dispersion = dispersion, range = range, distribution = distribution, levels_percentage = levels_percentage, n_characters = n_characters, missing_percentage = missing_percentage)
 
     current_table <- r$table
     current_table$Variable <- col
@@ -307,8 +308,8 @@ report.factor <- function(model, levels_percentage = FALSE, ...) {
 
   # Table -------------------------------------------------------------------
   table_full <- data.frame(Level = model) %>%
-    group_by_("Level") %>%
-    summarise_(
+    dplyr::group_by_("Level") %>%
+    dplyr::summarise_(
       "n_Obs" = "n()",
       "percentage_Obs" = "n() / length(model) * 100"
     )
@@ -336,7 +337,7 @@ report.factor <- function(model, levels_percentage = FALSE, ...) {
   if (levels_percentage == TRUE) {
     text <- paste0(text_levels, " (", text_percentage_Obs, ")")
   } else {
-    table <- dplyr::select(table, -one_of("percentage_Obs"))
+    table <- dplyr::select(table, -dplyr::one_of("percentage_Obs"))
     text <- paste0(text_levels, " (", text_n_Obs, ")")
   }
 
@@ -381,24 +382,27 @@ report.factor <- function(model, levels_percentage = FALSE, ...) {
 #' @param median Show \link{mean} and \link{sd} (default) or \link{median} and \link{mad}.
 #' @param dispersion Show dispersion (\link{sd} or \link{mad}).
 #' @param range Show range.
-#' @param missing_percentage Show missings by number (default) or percentage
+#' @param distribution Returns Kurtosis and Skewness in table, and tries to guess the distribution of the numeric variable by using an internal machine learning model (see \link[parameters]{find_distribution}).
+#' @param missing_percentage Show missings by number (default) or percentage.
 #' @param ... Arguments passed to or from other methods.
 #'
 #'
 #'
 #' @examples
+#' \dontrun{
 #' x <- rnorm(1000)
 #' report(x)
-#' report(x, median = TRUE, dispersion = TRUE, range = TRUE, missing_percentage = TRUE)
+#' report(x, median = TRUE, missing_percentage = TRUE, distribution=TRUE)
 #' to_fulltext(report(x))
 #' to_table(report(x))
 #' to_fulltable(report(x))
+#' }
 #' @seealso report
 #' @import dplyr
 #' @importFrom stats mad sd
 #'
 #' @export
-report.numeric <- function(model, median = FALSE, dispersion = TRUE, range = TRUE, missing_percentage = FALSE, ...) {
+report.numeric <- function(model, median = FALSE, dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = FALSE, ...) {
   if (length(unique(model)) == 2) {
     if (is.null(names(model))) {
       name <- deparse(substitute(model))
@@ -407,6 +411,8 @@ report.numeric <- function(model, median = FALSE, dispersion = TRUE, range = TRU
     }
     warning(paste0("Variable `", name, "` contains only two different values. Consider converting it to a factor."))
   }
+
+
 
   # Table -------------------------------------------------------------------
   table_full <- data.frame(
@@ -417,12 +423,32 @@ report.numeric <- function(model, median = FALSE, dispersion = TRUE, range = TRU
     Min = min(model, na.rm = TRUE),
     Max = max(model, na.rm = TRUE),
     n_Obs = length(model),
-    n_Missing = sum(is.na(model))
+    n_Missing = sum(is.na(model)),
+    Skewness = parameters::skewness(model),
+    Kurtosis = parameters::kurtosis(model)
   )
+
+  # Distribution
+  if(distribution == TRUE){
+    distrib <- parameters::find_distribution(model, probabilities=TRUE)
+    table_full$Distribution <- tools::toTitleCase(names(distrib[which.max(distrib)]))
+    table_full$Distribution_Certainty <- distrib[which.max(distrib)][[1]]
+  }
+
   table_full$percentage_Missing <- table_full$n_Missing / table_full$n_Obs * 100
 
 
   # Text --------------------------------------------------------------------
+  # Distribution
+  if(distribution){
+    text_distribution <- paste0(table_full$Distribution,
+                                " distribution (certainty = ",
+                                format_value(table_full$Distribution_Certainty*100),
+                                "%) with ")
+  } else{
+    text_distribution <- ""
+  }
+
   # Centrality
   text_mean <- paste0("Mean = ", format_value(table_full$Mean[1]))
   text_median <- paste0("Median = ", format_value(table_full$Median[1]))
@@ -475,9 +501,18 @@ report.numeric <- function(model, median = FALSE, dispersion = TRUE, range = TRU
     table <- dplyr::select(table, -one_of("percentage_Missing"))
   }
 
+  # Distribution
+  if(distribution == FALSE){
+    vars <- c("Skewness", "Kurtosis", "Distribution", "Distribution_Certainty")
+    table <- dplyr::select(table, -one_of(vars[vars %in% names(table)]))
+  }
+
+
+
 
   # Text
   text_full <- paste0(
+    text_distribution,
     text_mean, ", SD = ", text_sd, ", ",
     text_median, ", MAD = ", text_mad, ", Range =",
     text_range, text_missing

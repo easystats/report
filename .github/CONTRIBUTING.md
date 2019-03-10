@@ -9,7 +9,7 @@ It's alright, don't worry! You can always dig in the code, in the documentation 
 
 - **"I'd like to help, but I don't know where to start"**
 
-You can look around the [issues section](https://github.com/neuropsychology/report/issues) to find some features / ideas / bugs to start working on. You can also open an issue just to say that you're there, we might have some ideas adapted to your skills.
+You can look around the [issues section](https://github.com/neuropsychology/report/issues) to find some features / ideas / bugs to start working on. You can also open an issue just to say that you're there, we might have some ideas adapted to your skills. One of the "easy" way to start contributing is through tests improvement, which consists of building some edge-case models, and running them through all the functions with different arguments, to see if everything behaves as expected.
 
 - **"I'm not sure if my suggestion or idea is worthwile"**
 
