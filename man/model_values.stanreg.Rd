@@ -6,10 +6,10 @@
 \usage{
 \method{model_values}{stanreg}(model, ci = 0.9, standardize = FALSE,
   effsize = NULL, performance_in_table = TRUE,
-  performance_metrics = c("R2", "R2_adj"),
+  performance_metrics = c("R2", "R2_adjusted"),
   parameters_estimate = "median", parameters_test = c("pd", "rope"),
   parameters_diagnostic = TRUE, parameters_priors = TRUE,
-  rope_bounds = "default", rope_full = TRUE, ...)
+  rope_range = "default", rope_full = TRUE, ...)
 }
 \arguments{
 \item{model}{Object of class \link{lm}.}
@@ -32,7 +32,7 @@
 
 \item{parameters_priors}{Include priors specifications information. If set to true (current \code{rstanarm}' default), automatically adjusted priors' scale during fitting  will be displayed.}
 
-\item{rope_bounds}{\href{https://easystats.github.io/bayestestR/articles/1_IndicesDescription.html#rope}{ROPE's} lower and higher bounds. Should be a list of two values (e.g., \code{c(-0.1, 0.1)}) or \code{"default"}. If \code{"default"}, the bounds are set to \code{x +- 0.1*SD(response)}.}
+\item{rope_range}{\href{https://easystats.github.io/bayestestR/articles/1_IndicesDescription.html#rope}{ROPE's} lower and higher limits Should be a list of two values (e.g., \code{c(-0.1, 0.1)}) or \code{"default"}. If \code{"default"}, the bounds are set to \code{x +- 0.1*SD(response)}.}
 
 \item{rope_full}{If TRUE, use the proportion of the entire posterior distribution for the equivalence test. Otherwise, use the proportion of HDI as indicated by the \code{ci} argument.}
 

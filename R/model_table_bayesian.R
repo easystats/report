@@ -16,7 +16,7 @@ model_table_bayesian <- function(model, parameters, performance, performance_in_
       performance,
       table_full,
       table_simple,
-      elements = c('R2', 'R2_adjusted', 'R2_Median', 'R2_Fixed_Median', 'R2_LOO_adjusted')
+      elements = c('R2', 'R2_adjusted', 'R2_Median', 'R2_Fixed_Median', 'R2_LOO_adjusted', 'R2_marginal_Median')
     )
     table_full <- tabs$table_full
     table_simple <- tabs$table_simple

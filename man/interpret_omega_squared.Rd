@@ -7,9 +7,9 @@
 interpret_omega_squared(omega_squared, rules = "field2013")
 }
 \arguments{
-\item{rules}{Can be "field2013" (default) or custom set of rules.}
+\item{omega_squared}{Value or vector of d values.}
 
-\item{d}{Value or vector of d values.}
+\item{rules}{Can be "field2013" (default) or custom set of rules.}
 }
 \description{
 Omega Squared Interpretation

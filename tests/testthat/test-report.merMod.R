@@ -16,9 +16,9 @@ test_that("report.merMod", {
   testthat::expect_equal(ncol(to_table(r)), 7)
 
   r <- report(circus::download_model("merMod_2"))
-  testthat::expect_equal(nrow(to_table(r)), 5)
+  testthat::expect_equal(nrow(to_table(r)), 6)
   testthat::expect_is(capture.output(to_table(r)), "character")
-  testthat::expect_equal(r$values$parameters$cyl$beta, -1.249003, tol = 0.01)
+  testthat::expect_equal(r$values$parameters$cyl$beta, -4.77, tol = 0.01)
 
   # rename bayes 2
 })

@@ -1,6 +1,6 @@
 #' Omega Squared Interpretation
 #'
-#' @param d Value or vector of d values.
+#' @param omega_squared Value or vector of d values.
 #' @param rules Can be "field2013" (default) or custom set of rules.
 #'
 #'
