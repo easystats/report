@@ -39,12 +39,14 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
   text_initial <- model_text_initial_bayesian(model, out$table_parameters, ci = ci)
   text_parameters <- model_text_parameters_bayesian(model, out$table_parameters, ci = ci, effsize = effsize, ...)
 
+
   out$text <- paste(
     text_description$text,
     text_priors,
     "\n\n",
     text_performance$text,
     text_initial$text,
+    "\n\nWithin this model:\n",
     text_parameters$text
   )
   out$text_full <- paste(
@@ -53,6 +55,7 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
     "\n\n",
     text_performance$text_full,
     text_initial$text_full,
+    "\n\nWithin this model:\n",
     text_parameters$text_full
   )
 

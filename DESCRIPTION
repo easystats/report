@@ -41,13 +41,15 @@ Suggests:
 	rstanarm,
 	BayesFactor,
 	caret,
-	randomForest
+	randomForest,
+	estimate
 Remotes: 
 	easystats/insight,
 	easystats/parameters,
 	easystats/performance,
 	easystats/bayestestR,
 	easystats/correlation,
+	easystats/estimate,
 	easystats/circus
 RoxygenNote: 6.1.1
 Language: en-GB

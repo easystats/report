@@ -1,6 +1,6 @@
 #' @keywords internal
-model_text_parameters_lm <- function(model, parameters, ci = 0.95, effsize = "cohen1988", ...) {
-  parameters <- parameters[parameters$Parameter != "(Intercept)", ]
+model_text_parameters_lm <- function(model, parameters, ci = 0.95, effsize = "cohen1988", parameter_column="Parameter", ...) {
+  parameters <- parameters[parameters[[parameter_column]] != "(Intercept)", ]
 
   # Effect size text
   if (!is.null(effsize) & "Std_beta" %in% names(parameters)) {
@@ -32,7 +32,7 @@ model_text_parameters_lm <- function(model, parameters, ci = 0.95, effsize = "co
 
   text <- paste0(
     "  - ",
-    parameters$Parameter,
+    parameters[[parameter_column]],
     " is ",
     interpret_p(parameters$p),
     " (beta = ",
@@ -48,7 +48,7 @@ model_text_parameters_lm <- function(model, parameters, ci = 0.95, effsize = "co
 
   text_full <- paste0(
     "  - ",
-    parameters$Parameter,
+    parameters[[parameter_column]],
     " is ",
     parameters$significant_full,
     " (beta = ",
@@ -98,8 +98,8 @@ model_text_parameters_lm <- function(model, parameters, ci = 0.95, effsize = "co
 
 
 #' @keywords internal
-model_text_parameters_logistic <- function(model, parameters, ci = 0.95, effsize = "chen2010", ...) {
-  parameters <- parameters[parameters$Parameter != "(Intercept)", ]
+model_text_parameters_logistic <- function(model, parameters, ci = 0.95, effsize = "chen2010", parameter_column="Parameter", ...) {
+  parameters <- parameters[parameters[[parameter_column]] != "(Intercept)", ]
 
   # Effect size text
   if (!is.null(effsize) & "Std_beta" %in% names(parameters)) {
@@ -139,7 +139,7 @@ model_text_parameters_logistic <- function(model, parameters, ci = 0.95, effsize
 
   text <- paste0(
     "  - ",
-    parameters$Parameter,
+    parameters[[parameter_column]],
     " is ",
     interpret_p(parameters$p),
     " (beta = ",
@@ -155,7 +155,7 @@ model_text_parameters_logistic <- function(model, parameters, ci = 0.95, effsize
 
   text_full <- paste0(
     "  - ",
-    parameters$Parameter,
+    parameters[[parameter_column]],
     " is ",
     parameters$significant_full,
     " (beta = ",
@@ -190,8 +190,8 @@ model_text_parameters_logistic <- function(model, parameters, ci = 0.95, effsize
 
 
 #' @keywords internal
-model_text_parameters_glm <- function(model, parameters, ci = 0.95, ...) {
-  parameters <- parameters[parameters$Parameter != "(Intercept)", ]
+model_text_parameters_glm <- function(model, parameters, ci = 0.95, parameter_column="Parameter", ...) {
+  parameters <- parameters[parameters[[parameter_column]] != "(Intercept)", ]
 
   # Effect size text
   if ("Std_beta" %in% names(parameters)) {
@@ -219,7 +219,7 @@ model_text_parameters_glm <- function(model, parameters, ci = 0.95, ...) {
 
   text <- paste0(
     "  - ",
-    parameters$Parameter,
+    parameters[[parameter_column]],
     " is ",
     interpret_p(parameters$p),
     " (beta = ",
@@ -234,7 +234,7 @@ model_text_parameters_glm <- function(model, parameters, ci = 0.95, ...) {
 
   text_full <- paste0(
     "  - ",
-    parameters$Parameter,
+    parameters[[parameter_column]],
     " is ",
     parameters$significant_full,
     " (beta = ",
@@ -267,14 +267,14 @@ model_text_parameters_glm <- function(model, parameters, ci = 0.95, ...) {
 
 
 #' @keywords internal
-model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_full = TRUE, effsize = "cohen1988", ...) {
+model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_full = TRUE, effsize = "cohen1988", parameter_column="Parameter", ...) {
   if (rope_full) {
     rope_ci <- 1
   } else {
     rope_ci <- ci
   }
 
-  parameters <- parameters[parameters$Parameter != "(Intercept)", ]
+  parameters <- parameters[parameters[[parameter_column]] != "(Intercept)", ]
 
   # Estimates
   estimate_full <- ""
@@ -341,7 +341,7 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
   if ("pd" %in% names(parameters)) {
     text <- paste0(
       "  - ",
-      parameters$Parameter,
+      parameters[[parameter_column]],
       " has a probability of ",
       format_value(parameters$pd),
       "% of being ",
@@ -350,7 +350,7 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
   } else {
     text <- paste0(
       "  - ",
-      parameters$Parameter,
+      parameters[[parameter_column]],
       "'s ",
       estimate_name,
       " is ",
@@ -393,7 +393,7 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
 
 
   # Effect size text
-  if (!is.null(effsize) & ("Std_Median" %in% names(parameters) | "Std_Mean" %in% names(parameters) | "Std_MAP" %in% names(parameters))) {
+  if (!is.null(model) & !is.null(effsize) & ("Std_Median" %in% names(parameters) | "Std_Mean" %in% names(parameters) | "Std_MAP" %in% names(parameters))) {
     if ("ROPE_Percentage" %in% names(parameters)) {
       text_full <- paste0(text_full, " and ")
       text <- paste0(text, " and ")
@@ -470,8 +470,8 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
     }
   }
 
-  text <- paste0(c("\n\nWithin this model: ", text), collapse = "\n")
-  text_full <- paste0(c("\n\nWithin this model: ", text_full), collapse = "\n")
+  text <- paste0(text, collapse = "\n")
+  text_full <- paste0(text_full, collapse = "\n")
 
   out <- list(
     "text" = text,
@@ -479,6 +479,31 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
   )
   return(out)
 }
+
+
+
+
+
+
+
+
+#' @keywords internal
+.extract_main_estimate <- function(estimate_full) {
+  l <- strsplit(estimate_full, ", ")
+  l <- lapply(l, `[[`, 1)
+  return(unlist(l))
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
