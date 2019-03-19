@@ -28,6 +28,7 @@ Imports:
 	performance,
 	bayestestR,
 	correlation,
+	estimate,
 	dplyr
 Suggests:
 	spelling,
@@ -41,8 +42,7 @@ Suggests:
 	rstanarm,
 	BayesFactor,
 	caret,
-	randomForest,
-	estimate
+	randomForest
 Remotes: 
 	easystats/insight,
 	easystats/parameters,

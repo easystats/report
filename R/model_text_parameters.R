@@ -352,7 +352,7 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
       "  - ",
       parameters[[parameter_column]],
       "'s ",
-      estimate_name,
+      tolower(estimate_name),
       " is ",
       interpret_direction(parameters[[estimate_name]])
     )

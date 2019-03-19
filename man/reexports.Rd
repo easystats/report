@@ -7,6 +7,11 @@
 \alias{model_performance}
 \alias{model_info}
 \alias{correlation}
+\alias{estimate_means}
+\alias{estimate_contrasts}
+\alias{estimate_slopes}
+\alias{estimate_smooth}
+\alias{data_grid}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -15,6 +20,8 @@ below to see their documentation.
 
 \describe{
   \item{correlation}{\code{\link[correlation]{correlation}}}
+
+  \item{estimate}{\code{\link[estimate]{estimate_means}}, \code{\link[estimate]{estimate_contrasts}}, \code{\link[estimate]{estimate_slopes}}, \code{\link[estimate]{estimate_smooth}}, \code{\link[estimate]{data_grid}}}
 
   \item{insight}{\code{\link[insight]{model_info}}}
 

@@ -2,9 +2,18 @@
 % Please edit documentation in R/report.estimate.R
 \name{report.estimateContrasts}
 \alias{report.estimateContrasts}
-\title{Contrasts Estimate Report}
+\alias{report.estimateMeans}
+\alias{report.estimateSlopes}
+\alias{report.estimateSmooth}
+\title{Estimated Means, Contrasts, Slopes and Smooth Report}
 \usage{
 \method{report}{estimateContrasts}(model, ...)
+
+\method{report}{estimateMeans}(model, ...)
+
+\method{report}{estimateSlopes}(model, ...)
+
+\method{report}{estimateSmooth}(model, ...)
 }
 \arguments{
 \item{model}{Object of class \code{estimate}}
@@ -12,7 +21,7 @@
 \item{...}{Arguments passed to or from other methods.}
 }
 \description{
-Create a report of an contrasts estimate object.
+Create a report of an object from the \code{estimate} package.
 }
 \examples{
 \dontrun{
@@ -22,9 +31,24 @@ library(rstanarm)
 model <- stan_glm(Sepal.Width ~ Species * Petal.Width, data = iris)
 report(estimate_contrasts(model))
 report(estimate_contrasts(model, fixed = "Petal.Width"))
-report(estimate_contrasts(model, modulate = "Petal.Width", length = 4))
+report(estimate_contrasts(model, modulate = "Petal.Width", length = 2))
 }
 
+\dontrun{
+library(rstanarm)
+model <- stan_glm(Sepal.Width ~ Species * Petal.Width, data = iris)
+report(estimate_means(model))
+}
+\dontrun{
+library(rstanarm)
+model <- stan_glm(Sepal.Width ~ Species * Petal.Width, data = iris)
+report(estimate_slopes(model))
+}
+\dontrun{
+library(rstanarm)
+model <- stan_glm(Sepal.Width ~ poly(Petal.Length, 2), data=iris)
+report(estimate_smooth(model))
+}
 }
 \seealso{
 report
