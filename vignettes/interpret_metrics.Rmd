@@ -211,6 +211,15 @@ interpret_bf(x, rules = "raftery1995")
 - **bf = 20 - 150**: Strong
 - **bf > 150**: Very strong
 
+
+
+
+### Bayesian Convergence Diagnostic (Rthat and Effective Sample Size)
+
+
+Experts have suggested thresholds value to help interpreting and convergence and sampling quality. As such, `Rhat` should not be larger than 1.1 [@gelman1992inference] or 1.01 [@vehtari2019rank]. An `effective sample size` (ESS) greater than 1,000 is sufficient for stable estimates [@burkner2017brms].
+
+
 ### Other Bayesian Indices (\% in ROPE, *pd*)
 
 
