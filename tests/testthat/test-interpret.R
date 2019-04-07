@@ -98,3 +98,23 @@ test_that("interpret_omega_squared", {
   testthat::expect_equal(interpret_omega_squared(0.6, rules = rules(c(0.5), c("A", "B"))), "B")
   testthat::expect_error(interpret_omega_squared(0.6, rules = "DUPA"))
 })
+
+
+
+context("interpret_rhat")
+test_that("interpret_rhat", {
+  testthat::expect_equal(interpret_rhat(1), "converged")
+  testthat::expect_equal(interpret_rhat(c(1, 1.02)), c("converged", "failed"))
+  testthat::expect_equal(interpret_rhat(c(1, 1.02), rules="gelman1992"), c("converged", "converged"))
+  testthat::expect_equal(interpret_rhat(0.6, rules = rules(c(0.5), c("A", "B"))), "B")
+  testthat::expect_error(interpret_rhat(0.6, rules = "DUPA"))
+})
+
+
+context("interpret_effective_sample")
+test_that("interpret_effective_sample", {
+  testthat::expect_equal(interpret_effective_sample(1000), "sufficient")
+  testthat::expect_equal(interpret_effective_sample(c(1000, 800)), c("sufficient", "unsufficient"))
+  testthat::expect_equal(interpret_effective_sample(0.6, rules = rules(c(0.5), c("A", "B"))), "B")
+  testthat::expect_error(interpret_effective_sample(0.6, rules = "DUPA"))
+})

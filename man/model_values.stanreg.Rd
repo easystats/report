@@ -4,8 +4,8 @@
 \alias{model_values.stanreg}
 \title{Bayesian Models Values}
 \usage{
-\method{model_values}{stanreg}(model, ci = 0.9, standardize = FALSE,
-  effsize = NULL, performance_in_table = TRUE,
+\method{model_values}{stanreg}(model, ci = 0.9, ci_method = "default",
+  standardize = FALSE, effsize = NULL, performance_in_table = TRUE,
   performance_metrics = c("R2", "R2_adjusted"),
   parameters_estimate = "median", parameters_test = c("pd", "rope"),
   parameters_diagnostic = TRUE, parameters_priors = TRUE,
@@ -15,6 +15,8 @@
 \item{model}{Object of class \link{lm}.}
 
 \item{ci}{\href{https://easystats.github.io/bayestestR/articles/1_IndicesDescription.html#hdi---the-credible-interval-ci}{Credible Interval} (CI) level. Default to 0.90 (90\%).}
+
+\item{ci_method}{The type of index used for Credible Interval. Can be \code{"default"}, \link[bayestestR]{hdi} or "quantile" (see \link[bayestestR]{ci}). Default selects "hdi" for linear models and "quantile" for models with binary outcome.}
 
 \item{standardize}{Standardized coefficients. See \code{\link[parameters:model_parameters.lm]{model_parameters}}.}
 

@@ -8,13 +8,27 @@
 #' @importFrom parameters model_parameters
 #' @importFrom performance model_performance
 #' @export
-model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize = NULL, performance_in_table = TRUE, performance_metrics = c("R2", "R2_adjusted"), parameters_estimate = "median", parameters_test = c("pd", "rope"), parameters_diagnostic = TRUE, parameters_priors = TRUE, rope_range = "default", rope_full = TRUE, ...) {
+model_values.stanreg <- function(model, ci = 0.90, ci_method = "default", standardize = FALSE, effsize = NULL, performance_in_table = TRUE, performance_metrics = c("R2", "R2_adjusted"), parameters_estimate = "median", parameters_test = c("pd", "rope"), parameters_diagnostic = TRUE, parameters_priors = TRUE, rope_range = "default", rope_full = TRUE, ...) {
 
   # Sanity checks
   if(length(c(ci)) > 1){
     warning(paste0("report does not support multiple `ci` values yet. Using ci = ", ci[1]), ".")
     ci <- ci[1]
   }
+
+
+  # CI
+  if(ci_method == "default"){
+    if(insight::model_info(model)$is_binomial){
+      ci_method = "quantile"
+    } else{
+      ci_method = "hdi"
+    }
+  }
+  if(!ci_method %in% c("default", "quantile", "hdi")){
+    stop("`ci_method` should be 'default', 'hdi' or 'quantile'.")
+  }
+
 
   # Information
   out <- list()
@@ -25,15 +39,15 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
     if (standardize == FALSE) {
       warning("The effect sizes are computed from standardized coefficients. Setting `standardize` to TRUE.")
     }
-    out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ci = ci, estimate = tolower(parameters_estimate), test = tolower(parameters_test), rope_range = rope_range, rope_full = rope_full, diagnostic = parameters_diagnostic, priors = parameters_priors, ...)
+    out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ci = ci, ci_method=ci_method, estimate = tolower(parameters_estimate), test = tolower(parameters_test), rope_range = rope_range, rope_full = rope_full, diagnostic = parameters_diagnostic, priors = parameters_priors, ...)
   } else {
-    out$table_parameters <- parameters::model_parameters(model, ci = ci, standardize = standardize, estimate = tolower(parameters_estimate), test = tolower(parameters_test), rope_range = rope_range, rope_full = rope_full, diagnostic = parameters_diagnostic, priors = parameters_priors, ...)
+    out$table_parameters <- parameters::model_parameters(model, ci = ci, ci_method=ci_method, standardize = standardize, estimate = tolower(parameters_estimate), test = tolower(parameters_test), rope_range = rope_range, rope_full = rope_full, diagnostic = parameters_diagnostic, priors = parameters_priors, ...)
   }
   out$table_parameters$Parameter <- as.character(out$table_parameters$Parameter)
   out$table_performance <- performance::model_performance(model, metrics = performance_metrics)
 
   # Text
-  text_description <- model_text_description(model, effsize = effsize, ci = ci, standardize = standardize, test = tolower(parameters_test), rope_range = rope_range, rope_full = rope_full, ...)
+  text_description <- model_text_description(model, effsize = effsize, ci = ci, ci_method=ci_method, standardize = standardize, test = tolower(parameters_test), rope_range = rope_range, rope_full = rope_full, ...)
   text_priors <- model_text_priors(out$table_parameters)
   text_performance <- model_text_performance_bayesian(out$table_performance)
   text_initial <- model_text_initial_bayesian(model, out$table_parameters, ci = ci)
@@ -114,6 +128,7 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
 #'
 #' @param model Object of class \link{lm}.
 #' @param ci \href{https://easystats.github.io/bayestestR/articles/1_IndicesDescription.html#hdi---the-credible-interval-ci}{Credible Interval} (CI) level. Default to 0.90 (90\%).
+#' @param ci_method The type of index used for Credible Interval. Can be \code{"default"}, \link[bayestestR]{hdi} or "quantile" (see \link[bayestestR]{ci}). Default selects "hdi" for linear models and "quantile" for models with binary outcome.
 #' @param standardize Standardized coefficients. See \code{\link[parameters:model_parameters.lm]{model_parameters}}.
 #' @param effsize \href{https://easystats.github.io/report/articles/interpret_metrics.html}{Interpret the standardized parameters} using a set of rules. Can be "cohen1988" (default for linear models), "chen2010" (default for logistic models), "sawilowsky2009", NULL, or a custom set of \link{rules}.
 #' @param performance_in_table Add performance metrics in table.
@@ -140,9 +155,10 @@ model_values.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize 
 #' report(model)
 #' }
 #' @export
-report.stanreg <- function(model, ci = 0.90, standardize = FALSE, effsize = NULL, performance_in_table = TRUE, performance_metrics = c("R2", "R2_adjusted"), parameters_estimate = "median", parameters_test = c("pd", "rope"), parameters_diagnostic = TRUE, parameters_priors = TRUE, rope_range = "default", rope_full = TRUE, ...) {
+report.stanreg <- function(model, ci = 0.90, ci_method = "default", standardize = FALSE, effsize = NULL, performance_in_table = TRUE, performance_metrics = c("R2", "R2_adjusted"), parameters_estimate = "median", parameters_test = c("pd", "rope"), parameters_diagnostic = TRUE, parameters_priors = TRUE, rope_range = "default", rope_full = TRUE, ...) {
   values <- model_values(model,
     ci = ci,
+    ci_method = ci_method,
     standardize = standardize,
     effsize = effsize,
     performance_in_table = performance_in_table,

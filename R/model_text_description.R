@@ -1,5 +1,5 @@
 #' @keywords internal
-model_text_description <- function(model, ci = 0.95, effsize = "effsize", bootstrap = FALSE, iterations = 500, test = c("pd", "rope"), rope_range = "default", rope_full = TRUE, p_method = "wald", ci_method="wald", ...) {
+model_text_description <- function(model, ci = 0.95, ci_method="wald", effsize = "effsize", bootstrap = FALSE, iterations = 500, test = c("pd", "rope"), rope_range = "default", rope_full = TRUE, p_method = "wald", ...) {
 
   # Model info
   info <- insight::model_info(model)
@@ -45,6 +45,8 @@ model_text_description <- function(model, ci = 0.95, effsize = "effsize", bootst
     text_full <- paste0(text_full, text_random_full)
   }
 
+
+
   # ROPE
   if ("rope" %in% tolower(c(test)) & info$is_bayesian) {
     if (all(rope_range == "default")) {
@@ -57,14 +59,14 @@ model_text_description <- function(model, ci = 0.95, effsize = "effsize", bootst
   }
 
   # p values and CIs
-  if (model_info(model)$is_mixed & info$is_linear & !info$is_bayesian) {
+  if (info$is_mixed & info$is_linear & !info$is_bayesian) {
     if(ci_method == "wald" & p_method == "wald"){
-      text_full <- paste0(text_full, " Confidence intervals (CIs) and p values were computed using Wald approximation.")
+      text_full <- paste0(text_full, " The ", format_value(ci*100), "%", " Confidence Intervals (CIs) and p values were computed using Wald approximation.")
     } else{
       if(ci_method == "wald"){
-        text_full <- paste0(text_full, " Confidence intervals (CIs) were computed using Wald approximation")
+        text_full <- paste0(text_full, " The ", format_value(ci*100), "%", " Confidence Intervals (CIs) were computed using Wald approximation")
       } else{
-        text_full <- paste0(text_full, " Confidence intervals (CIs) were obtained through bootstrapping")
+        text_full <- paste0(text_full, " The ", format_value(ci*100), "%", " Confidence Intervals (CIs) were obtained through bootstrapping")
       }
       if(p_method == "wald"){
         text_full <- paste0(text_full, " and p values were computed using Wald approximation.")
@@ -72,8 +74,16 @@ model_text_description <- function(model, ci = 0.95, effsize = "effsize", bootst
         text_full <- paste0(text_full, " and p values were computed using Kenward-Roger approximation.")
       }
     }
-  } else if(model_info(model)$is_mixed & !info$is_linear & !info$is_bayesian & ci_method != "wald") {
-    text_full <- paste0(text_full, " Confidence intervals (CIs) were obtained through bootstrapping.")
+  } else if(info$is_mixed & !info$is_linear & !info$is_bayesian & ci_method != "wald") {
+    text_full <- paste0(text_full, " The ", format_value(ci*100), "%", " Confidence Intervals (CIs) were obtained through bootstrapping.")
+  } else if(info$is_bayesian){
+    if(ci_method == "hdi"){
+      text_full <- paste0(text_full, " The ", format_value(ci*100), "%", " Credible Intervals (CIs) were computed using the Highest Density Interval (HDI) method.")
+    } else if(ci_method == "quantile"){
+      text_full <- paste0(text_full, " The ", format_value(ci*100), "%", " Credible Intervals (CIs) were computed using the quantile method.")
+    } else{
+      text_full <- paste0(text_full, " The ", format_value(ci*100), "%", " Credible Intervals (CIs) were computed using ", ci_method, ".")
+    }
   }
 
 

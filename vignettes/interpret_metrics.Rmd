@@ -211,7 +211,7 @@ interpret_bf(x, rules = "raftery1995")
 - **bf = 20 - 150**: Strong
 - **bf > 150**: Very strong
 
-### Other Bayesian Indices (\% in ROPE, p*d*)
+### Other Bayesian Indices (\% in ROPE, *pd*)
 
 
 The interpretation of Bayesian indices is detailed in [this article](https://easystats.github.io/bayestestR/articles/4_Guidelines.html).

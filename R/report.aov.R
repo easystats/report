@@ -65,7 +65,7 @@ report.aov <- function(model, omega_squared = "partial", effsize = "field2013", 
     format_p(params$p),
     ") and can be considered as ",
     interpret_omega_squared(params$Omega_Squared_partial),
-    " (Omega squared = ",
+    " (partial omega squared = ",
     format_value(params$Omega_Squared_partial),
     ").")
 

@@ -470,6 +470,55 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
     }
   }
 
+  # Convergence
+  if("Rhat" %in% names(parameters)){
+    parameters$convergence <- interpret_rhat(parameters$Rhat, rules="vehtari2019")
+    parameters$diagnostic <- ifelse(parameters$convergence == "converged",
+                                    paste0(" The algorithm successfuly converged (Rhat = ",
+                                           format_value(parameters$Rhat, digits=3),
+                                           ")"),
+                                    paste0(" However, the algorithm might not have successfuly converged (Rhat = ",
+                                           format_value(parameters$Rhat, digits=3),
+                                           ")"))
+
+    if("Effective_Sample" %in% names(parameters)){
+      parameters$stability <- interpret_effective_sample(parameters$Effective_Sample, rules="burkner2017")
+      parameters$diagnostic <- ifelse(parameters$stability == "sufficient" & parameters$convergence == "converged",
+                                      paste0(parameters$diagnostic,
+                                             " and the estimates can be considered as stable (effective sample size = ",
+                                             format_value(parameters$Effective_Sample, digits=0),
+                                             ")."
+                                             ),
+                                      ifelse(parameters$stability == "sufficient" & parameters$convergence != "converged",
+                                             paste0(parameters$diagnostic,
+                                                    " even though the estimates can be considered as stable (effective sample size = ",
+                                                    format_value(parameters$Effective_Sample, digits=0),
+                                                    ")."
+                                             ),
+                                             ifelse(parameters$stability != "sufficient" & parameters$convergence == "converged",
+                                                    paste0(parameters$diagnostic,
+                                                           " but the estimates cannot be considered as stable (effective sample size = ",
+                                                           format_value(parameters$Effective_Sample, digits=0),
+                                                           ")."
+                                                    ),
+                                                    paste0(parameters$diagnostic,
+                                                           " and the estimates cannot be considered as stable (effective sample size = ",
+                                                           format_value(parameters$Effective_Sample, digits=0),
+                                                           ")."
+                                                    ))))
+      parameters$convergence <- ifelse(parameters$stability != "sufficient",
+                                       "failed",
+                                       parameters$convergence)
+    } else{
+      parameters$diagnostic <- paste0(parameters$diagnostic, ".")
+    }
+    text_full <- paste0(text_full, parameters$diagnostic)
+    text <- ifelse(parameters$convergence == "converged",
+                   text,
+                   paste0(text, parameters$diagnostic))
+  }
+
+
   text <- paste0(text, collapse = "\n")
   text_full <- paste0(text_full, collapse = "\n")
 

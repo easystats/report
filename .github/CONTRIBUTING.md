@@ -31,6 +31,17 @@ Authors of substantial contribution will be added within the [**authors**](https
 - Regarding the style guide, note this exception: we put readability and clarity before everything. Thus, we like underscores and full names (prefer `model_performance` over `modelperf` and `interpret_odds_logistic` over `intoddslog`).
 - Before you start to code, make sure you're on the `dev` branch (the most "advanced"). Then, create a new branch named by your feature (e.g., `report_for_bigmodels`) and do your changes. Finally, submit your branch to be merged into the `dev` branch. Then, every now and then, the dev branch will merge into `master`, as a new package version.
 
+## Checks to do before submission
+
+- Make sure **documentation** (roxygen) is good
+- Make sure to add **tests** for the new functions
+- Run:
+
+  - `styler::style_pkg()`: Automatic style formatting
+  - `lintr::lint_package()`: Style checks
+  - `devtools::check()`: General checks
+
+
 
 ## Useful Materials
 
