@@ -444,14 +444,14 @@ report.numeric <- function(model, median = FALSE, dispersion = TRUE, range = TRU
     text_distribution <- paste0(table_full$Distribution,
                                 " distribution (certainty = ",
                                 format_value(table_full$Distribution_Certainty*100),
-                                "%) with ")
+                                "%) with m")
   } else{
-    text_distribution <- ""
+    text_distribution <- "M"
   }
 
   # Centrality
-  text_mean <- paste0("Mean = ", format_value(table_full$Mean[1]))
-  text_median <- paste0("Median = ", format_value(table_full$Median[1]))
+  text_mean <- paste0(text_distribution, "ean = ", format_value(table_full$Mean[1]))
+  text_median <- paste0(text_distribution, "edian = ", format_value(table_full$Median[1]))
 
   # Dispersion
   text_sd <- format_value(table_full$SD[1])
