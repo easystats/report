@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Numeric Vector Report — report.numeric • report</title>
+<title>Bayes Factor Interpretation — interpret_bf • report</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,9 +37,9 @@
 
 
 
-<meta property="og:title" content="Numeric Vector Report — report.numeric" />
+<meta property="og:title" content="Bayes Factor Interpretation — interpret_bf" />
 
-<meta property="og:description" content="Create a report of a numeric vector." />
+<meta property="og:description" content="Bayes Factor Interpretation" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -142,76 +142,54 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Numeric Vector Report</h1>
-    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.data.frame.R'><code>R/report.data.frame.R</code></a></small>
-    <div class="hidden name"><code>report.numeric.Rd</code></div>
+    <h1>Bayes Factor Interpretation</h1>
+    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/interpret_bf.R'><code>R/interpret_bf.R</code></a></small>
+    <div class="hidden name"><code>interpret_bf.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create a report of a numeric vector.</p>
+    <p>Bayes Factor Interpretation</p>
     
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for numeric</span>
-<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>, <span class='kw'>median</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>dispersion</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>range</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>distribution</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>interpret_bf</span>(<span class='no'>bf</span>, <span class='kw'>rules</span> <span class='kw'>=</span> <span class='st'>"jeffreys1961"</span>, <span class='kw'>include_bf</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>model</th>
-      <td><p>Numeric vector.</p></td>
+      <th>bf</th>
+      <td><p>Value or vector of (log) odds ratio values.</p></td>
     </tr>
     <tr>
-      <th>median</th>
-      <td><p>Show <a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a> and <a href='https://www.rdocumentation.org/packages/stats/topics/sd'>sd</a> (default) or <a href='https://www.rdocumentation.org/packages/stats/topics/median'>median</a> and <a href='https://www.rdocumentation.org/packages/stats/topics/mad'>mad</a>.</p></td>
+      <th>rules</th>
+      <td><p>Can be "jeffreys1961" (default), "raftery1995" or custom set of rules.</p></td>
     </tr>
     <tr>
-      <th>dispersion</th>
-      <td><p>Show dispersion (<a href='https://www.rdocumentation.org/packages/stats/topics/sd'>sd</a> or <a href='https://www.rdocumentation.org/packages/stats/topics/mad'>mad</a>).</p></td>
-    </tr>
-    <tr>
-      <th>range</th>
-      <td><p>Show range.</p></td>
-    </tr>
-    <tr>
-      <th>distribution</th>
-      <td><p>Returns Kurtosis and Skewness in table, and tries to guess the distribution of the numeric variable by using an internal machine learning model (see <a href='https://www.rdocumentation.org/packages/parameters/topics/find_distribution'>find_distribution</a>).</p></td>
-    </tr>
-    <tr>
-      <th>missing_percentage</th>
-      <td><p>Show missings by number (default) or percentage.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Arguments passed to or from other methods.</p></td>
+      <th>include_bf</th>
+      <td><p>Include the BF in the output.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <div class='dont-index'><p>report</p></div>
+    <ul>
+<li><p>Jeffreys, H. (1961), Theory of Probability, 3rd ed., Oxford University Press, Oxford.</p></li>
+<li><p>Raftery, A. E. (1995). Bayesian model selection in social research. Sociological methodology, 25, 111-164.</p></li>
+<li><p>Jarosz, A. F., &amp; Wiley, J. (2014). What are the odds? A practical guide to computing and reporting Bayes factors. The Journal of Problem Solving, 7(1), 2.</p></li>
+</ul>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>1000</span>)
-<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>)
-<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>, <span class='kw'>median</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>distribution</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='to_fulltext.html'>to_fulltext</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))
-<span class='fu'><a href='to_table.html'>to_table</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))
-<span class='fu'><a href='to_fulltable.html'>to_fulltable</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))
-<span class='co'># }</span></pre>
+    <pre class="examples"><div class='input'><span class='fu'>interpret_bf</span>(<span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] "anecdotal evidence in favour of"</div><div class='input'><span class='fu'>interpret_bf</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>2</span>))</div><div class='output co'>#&gt; [1] "moderate evidence in favour of"  "anecdotal evidence in favour of"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#see-also">See also</a></li>
+      <li><a href="#references">References</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

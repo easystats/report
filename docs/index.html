@@ -113,15 +113,15 @@
 <p><strong><em>“From R to Manuscript”</em></strong></p>
 <p><code>report</code>’s primary goal is to fill the gap between R’s output and the formatted result description of your manuscript, with the automated use of <strong>best practices</strong> guidelines (<em>e.g.,</em> <a href="https://www.apastyle.org/">APA</a>’s style guide), ensuring <strong>standardization</strong> and <strong>quality</strong> of results reporting.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Example</span></a>
-<a class="sourceLine" id="cb1-2" title="2">model &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Species, <span class="dt">data=</span>iris)</a>
+<a class="sourceLine" id="cb1-2" title="2">model &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Species, <span class="dt">data =</span> iris)</a>
 <a class="sourceLine" id="cb1-3" title="3"><span class="kw"><a href="reference/report.html">report</a></span>(model)</a></code></pre></div>
 <pre><code>##  We fitted a linear model to predict Sepal.Length with Species. The model's explanatory power is
 ## substantial (R2 = 0.62, adj. R2 = 0.61). The model's intercept is at 5.01.
 ## 
 ## Within this model: 
-##   - Speciesversicolor is significant (beta = 0.93, 95% CI [0.73, 1.13], p &lt; .001) and large (Std.
+##   - Speciesversicolor is significant (beta = 0.93, 95% CI [0.73, 1.13], p &lt; .001) and large (std.
 ## beta = 1.12).
-##   - Speciesvirginica is significant (beta = 1.58, 95% CI [1.38, 1.79], p &lt; .001) and large (Std. beta
+##   - Speciesvirginica is significant (beta = 1.58, 95% CI [1.38, 1.79], p &lt; .001) and large (std. beta
 ## = 1.91).</code></pre>
 <div id="documentation" class="section level2">
 <h2 class="hasAnchor">
@@ -137,14 +137,14 @@
 <div id="contribute" class="section level2">
 <h2 class="hasAnchor">
 <a href="#contribute" class="anchor"></a>Contribute</h2>
-<p><strong><code>report</code> is a young package in need of affection</strong>. You can easily hop aboard the <a href="CONTRIBUTING.html">developpment</a> of this open-source software and improve psychological science by doing the following:</p>
+<p><strong><code>report</code> is a young package in need of affection</strong>. You can easily be a part of the <a href="CONTRIBUTING.html">developping</a> community of this open-source software and improve science by doing the following:</p>
 <ul>
 <li>Create or check existing <a href="https://github.com/easystats/report/issues"><img src="reference/figures/issue_bug.png" height="25"></a> issues to report, replicate, understand or solve some bugs.</li>
 <li>Create or check existing <a href="https://github.com/easystats/report/issues"><img src="reference/figures/issue_featureidea.png" height="25"></a> issues to suggest or discuss a new feature.</li>
 <li>Check existing <a href="https://github.com/easystats/report/issues"><img src="reference/figures/issue_help.png" height="25"></a> issues to see things that we’d like to implement, but where help is needed to do it.</li>
 <li>Check existing <a href="https://github.com/easystats/report/issues"><img src="reference/figures/issue_opinion.png" height="25"></a> issues to give your opinion and participate in package’s design discussions.</li>
 </ul>
-<p>Don’t be shy, try to code and submit a pull request (See the <a href="CONTRIBUTING.html">contributing guide</a>). Even if unperfect, we will help you make it great! All contributors will be very graciously rewarded someday :smirk:.</p>
+<p>Don’t be shy, try to code and submit a pull request (See the <a href="CONTRIBUTING.html">contributing guide</a>). Even if unperfect, we will help you make it great!</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -163,28 +163,32 @@
 <a href="#general-workflow" class="anchor"></a>General Workflow</h3>
 <p>The <code>report</code> package works in a two steps fashion. First, creating a <code>report</code> object with the <code><a href="reference/report.html">report()</a></code> function (which takes different arguments depending on the type of object you are reporting). Then, this report can be displayed either textually, using <code><a href="reference/to_text.html">to_text()</a></code>, or as a table, using <code><a href="reference/to_table.html">to_table()</a></code>. Moreover, you can also access a more detailed (but less digest) version of the report using <code><a href="reference/to_fulltext.html">to_fulltext()</a></code> and <code><a href="reference/to_fulltable.html">to_fulltable()</a></code>. Finally, <code><a href="reference/to_values.html">to_values()</a></code> makes it easy to access all the internals of a model.</p>
 </div>
+<div id="supported-packages" class="section level3">
+<h3 class="hasAnchor">
+<a href="#supported-packages" class="anchor"></a>Supported Packages</h3>
+<p>Currently supported objects by <strong>report</strong> include <a href="https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cor.test.html"><code>cor.test</code></a>, <a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html"><code>t.test</code></a> <a href="https://github.com/easystats/correlation"><code>correlation</code></a>, <a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/glm.html"><code>glm</code></a>, <a href="https://github.com/lme4/lme4/"><code><a href="https://www.rdocumentation.org/packages/lme4/topics/merMod-class">lme4::merMod</a></code></a>, <a href="https://github.com/stan-dev/rstanarm"><code>rstanarm::stanreg</code></a>.</p>
+</div>
 <div id="examples" class="section level3">
 <h3 class="hasAnchor">
 <a href="#examples" class="anchor"></a>Examples</h3>
 <p>The <code><a href="reference/report.html">report()</a></code> function works on a variety of models, as well as dataframes:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="reference/report.html">report</a></span>(iris)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Dataframe report</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="kw"><a href="reference/report.html">report</a></span>(iris)</a></code></pre></div>
 <pre><code>## The data contains 150 observations of the following variables:
-##   - Sepal.Length: Mean = 5.84 +- 0.83 [4.30, 7.90]
-##   - Sepal.Width: Mean = 3.06 +- 0.44 [2.00, 4.40]
-##   - Petal.Length: Mean = 3.76 +- 1.77 [1.00, 6.90]
-##   - Petal.Width: Mean = 1.20 +- 0.76 [0.10, 2.50]
-##   - Species: 3 levels: setosa (n = 50); versicolor (n = 50); virginica (n = 50)</code></pre>
+##   - Sepal.Length: Mean = 5.84, SD = 0.83 [4.30, 7.90].
+##   - Sepal.Width: Mean = 3.06, SD = 0.44 [2.00, 4.40].
+##   - Petal.Length: Mean = 3.76, SD = 1.77 [1.00, 6.90].
+##   - Petal.Width: Mean = 1.20, SD = 0.76 [0.10, 2.50].
+##   - Species: 3 levels: setosa (n = 50); versicolor (n = 50) and virginica (n = 50).</code></pre>
 <p>These reports nicely work within the <a href="https://github.com/tidyverse"><em>tidyverse</em></a> workflow:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Correlation report</span></a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/cor.test">cor.test</a></span>(iris<span class="op">$</span>Sepal.Length, iris<span class="op">$</span>Petal.Length) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="st">  </span><span class="kw"><a href="reference/report.html">report</a></span>()</a></code></pre></div>
-<pre><code>## The Pearson's correlation between iris$Sepal.Length and iris$Petal.Length is positive, large and
-## significant (r(148) = 0.87, 95% CI [0.83, 0.91], p &lt; .001).</code></pre>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/cor.test">cor.test</a></span>(iris<span class="op">$</span>Sepal.Length, iris<span class="op">$</span>Petal.Length) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/report.html">report</a></span>()</a></code></pre></div>
+<pre><code>## The Pearson's product-moment correlation between iris$Sepal.Length and iris$Petal.Length is
+## positive, significant and large (r = 0.87, p &lt; .001).</code></pre>
 <p>You can also create tables with the <code><a href="reference/to_table.html">to_table()</a></code> and <code><a href="reference/to_fulltable.html">to_fulltable()</a></code> functions:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># Table report for a linear model</span></a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Petal.Length <span class="op">+</span><span class="st"> </span>Species, <span class="dt">data=</span>iris) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb9-3" title="3"><span class="st">  </span><span class="kw"><a href="reference/report.html">report</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb9-4" title="4"><span class="st">  </span><span class="kw"><a href="reference/to_table.html">to_table</a></span>()</a></code></pre></div>
+<a class="sourceLine" id="cb9-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Petal.Length <span class="op">+</span><span class="st"> </span>Species, <span class="dt">data =</span> iris) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/report.html">report</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="st">    </span><span class="kw"><a href="reference/to_table.html">to_table</a></span>()</a></code></pre></div>
 <table class="table table">
 <thead><tr class="header">
 <th></th>
@@ -249,7 +253,7 @@
 </tr>
 <tr class="even">
 <td>7</td>
-<td align="left">R2_adj</td>
+<td align="left">R2_adjusted</td>
 <td align="right"></td>
 <td align="right"></td>
 <td align="right"></td>
@@ -260,25 +264,30 @@
 </tbody>
 </table>
 <p>Finally, you can also find more details using <code><a href="reference/to_fulltext.html">to_fulltext()</a></code>:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="co"># Full report for a Bayesian logistic mixed model with effect sizes :O</span></a>
-<a class="sourceLine" id="cb10-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(rstanarm)</a>
-<a class="sourceLine" id="cb10-3" title="3"></a>
-<a class="sourceLine" id="cb10-4" title="4"><span class="kw">stan_glmer</span>(vs <span class="op">~</span><span class="st"> </span>mpg <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>cyl), <span class="dt">data=</span>mtcars, <span class="dt">family=</span><span class="st">"binomial"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb10-5" title="5"><span class="st">  </span><span class="kw"><a href="reference/report.html">report</a></span>(<span class="dt">standardize=</span><span class="ot">TRUE</span>, <span class="dt">effsize=</span><span class="st">"cohen1988"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb10-6" title="6"><span class="st">  </span><span class="kw"><a href="reference/to_fulltext.html">to_fulltext</a></span>()</a></code></pre></div>
-<pre><code>##  We fitted a Bayesian logistic mixed model to predict vs with mpg (formula = vs ~ mpg). The model
-## included cyl as random effects (formula = ~1 | cyl). The Region of Practical Equivalence (ROPE)
-## percentage was defined as the proportion of the posterior distribution within the [-0.18, 0.18]
-## range. Effect sizes were labelled following Cohen's (1988) recommendations. The model's explanatory
-## power is substantial (R2's median = 0.56, MAD = 0.09, 90% CI [0.43, 0.69], LOO adj. R2 = -24.75).
-## Within this model, the explanatory power related to the fixed effects (fixed R2's median) is of
-## 0.26 (MAD = 0.27, 90% CI [0.00, 0.49]). The model's intercept, corresponding to mpg = 0, has a
-## median of -5.21 (MAD = 4.36, 90% CI [-12.46, 1.93], pd = 87.40%, 0.57% in ROPE).
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="co"># Full report for a Bayesian logistic mixed model with effect</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="co"># sizes</span></a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(rstanarm)</a>
+<a class="sourceLine" id="cb10-4" title="4"></a>
+<a class="sourceLine" id="cb10-5" title="5"><span class="kw">stan_glmer</span>(vs <span class="op">~</span><span class="st"> </span>mpg <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>cyl), <span class="dt">data =</span> mtcars, <span class="dt">family =</span> <span class="st">"binomial"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="st">    </span><span class="kw"><a href="reference/report.html">report</a></span>(<span class="dt">standardize =</span> <span class="ot">TRUE</span>, <span class="dt">effsize =</span> <span class="st">"cohen1988"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/to_fulltext.html">to_fulltext</a></span>()</a></code></pre></div>
+<pre><code>##  We fitted a Bayesian logistic mixed model (using sampling algorithm with 4 chains of 2000
+## iterations and a warmup of 1000) to predict vs with mpg (formula = vs ~ mpg). The model included
+## cyl as random effects (formula = ~1 | cyl). The Region of Practical Equivalence (ROPE) percentage
+## was defined as the proportion of the posterior distribution within the [-0.06, 0.06] range. The
+## 90.00% Credible Intervals (CIs) were computed using the quantile method. Effect sizes were labelled
+## following Cohen's (1988) recommendations. Priors over parameters were set as normal (mean = 0.00,
+## SD = 0.41) distributions.
 ## 
-## Within this model: 
-##   - mpg has a probability of 85.52% of being positive (Median = 0.23, MAD = 0.22, 90% CI [-0.12,
-## 0.56]) and can be considered as not significant (11.25% in ROPE) and medium (Std. Median = 1.27,
-## Std. MAD = 1.28, Std. 90% CI [-0.67, 3.62]).</code></pre>
+##   The model's total explanatory power is substantial (R2's median = 0.56, MAD = 0.09, 90% CI [0.43,
+## 0.69]). Within this model, the explanatory power related to the fixed effects alone (marginal R2's
+## median) is of 0.26 (MAD = 0.27, 90% CI [0.48, 0.48]). The model's intercept, corresponding to mpg =
+## 0, has a median of -5.12 (MAD = 4.32, 90% CI [-11.93, 2.15], pd = 88.40%, 0.47% in ROPE).
+## 
+## Within this model:
+##    - mpg has a probability of 86.30% of being positive (median = 0.23, MAD = 0.21, 90% CI [-0.11,
+## 0.57]) and can be considered as not significant (12.22% in ROPE) and medium (std. Median = 1.35,
+## std. MAD = 1.30, std. 90% CI [-0.79, 3.46]). The algorithm successfuly converged (Rhat = 1.002) and
+## the estimates can be considered as stable (effective sample size = 1437).</code></pre>
 </div>
 </div>
 <div id="credits" class="section level2">

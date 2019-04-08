@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Numeric Vector Report — report.numeric • report</title>
+<title>Effective Sample Size Interpretation — interpret_effective_sample • report</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,9 +37,9 @@
 
 
 
-<meta property="og:title" content="Numeric Vector Report — report.numeric" />
+<meta property="og:title" content="Effective Sample Size Interpretation — interpret_effective_sample" />
 
-<meta property="og:description" content="Create a report of a numeric vector." />
+<meta property="og:description" content="Effective Sample Size Interpretation" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -142,76 +142,48 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Numeric Vector Report</h1>
-    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.data.frame.R'><code>R/report.data.frame.R</code></a></small>
-    <div class="hidden name"><code>report.numeric.Rd</code></div>
+    <h1>Effective Sample Size Interpretation</h1>
+    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/interpret_effective_sample.R'><code>R/interpret_effective_sample.R</code></a></small>
+    <div class="hidden name"><code>interpret_effective_sample.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create a report of a numeric vector.</p>
+    <p>Effective Sample Size Interpretation</p>
     
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for numeric</span>
-<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>, <span class='kw'>median</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>dispersion</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>range</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>distribution</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>interpret_effective_sample</span>(<span class='no'>effective_sample</span>, <span class='kw'>rules</span> <span class='kw'>=</span> <span class='st'>"burkner2017"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>model</th>
-      <td><p>Numeric vector.</p></td>
+      <th>effective_sample</th>
+      <td><p>Value or vector of Rhat values.</p></td>
     </tr>
     <tr>
-      <th>median</th>
-      <td><p>Show <a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a> and <a href='https://www.rdocumentation.org/packages/stats/topics/sd'>sd</a> (default) or <a href='https://www.rdocumentation.org/packages/stats/topics/median'>median</a> and <a href='https://www.rdocumentation.org/packages/stats/topics/mad'>mad</a>.</p></td>
-    </tr>
-    <tr>
-      <th>dispersion</th>
-      <td><p>Show dispersion (<a href='https://www.rdocumentation.org/packages/stats/topics/sd'>sd</a> or <a href='https://www.rdocumentation.org/packages/stats/topics/mad'>mad</a>).</p></td>
-    </tr>
-    <tr>
-      <th>range</th>
-      <td><p>Show range.</p></td>
-    </tr>
-    <tr>
-      <th>distribution</th>
-      <td><p>Returns Kurtosis and Skewness in table, and tries to guess the distribution of the numeric variable by using an internal machine learning model (see <a href='https://www.rdocumentation.org/packages/parameters/topics/find_distribution'>find_distribution</a>).</p></td>
-    </tr>
-    <tr>
-      <th>missing_percentage</th>
-      <td><p>Show missings by number (default) or percentage.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Arguments passed to or from other methods.</p></td>
+      <th>rules</th>
+      <td><p>Can be "burkner2017" (default) or custom set of rules.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <div class='dont-index'><p>report</p></div>
+    <ul>
+<li><p>Bürkner, P. C. (2017). brms: An R package for Bayesian multilevel models using Stan. Journal of Statistical Software, 80(1), 1-28.</p></li>
+</ul>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>1000</span>)
-<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>)
-<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>, <span class='kw'>median</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>distribution</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='to_fulltext.html'>to_fulltext</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))
-<span class='fu'><a href='to_table.html'>to_table</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))
-<span class='fu'><a href='to_fulltable.html'>to_fulltable</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))
-<span class='co'># }</span></pre>
+    <pre class="examples"><div class='input'><span class='fu'>interpret_effective_sample</span>(<span class='fl'>1001</span>)</div><div class='output co'>#&gt; [1] "sufficient"</div><div class='input'><span class='fu'>interpret_effective_sample</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>852</span>, <span class='fl'>1200</span>))</div><div class='output co'>#&gt; [1] "unsufficient" "sufficient"  </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#see-also">See also</a></li>
+      <li><a href="#references">References</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

@@ -189,11 +189,27 @@
 <h3 class="hasAnchor">
 <a href="#correlation-r" class="anchor"></a>Correlation <em>r</em>
 </h3>
+<div id="gignac2016effect" class="section level4">
+<h4 class="hasAnchor">
+<a href="#gignac2016effect" class="anchor"></a><span class="citation">Gignac and Szodorai (2016)</span>
+</h4>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="../reference/interpret_r.html">interpret_r</a></span>(x, <span class="dt">rules =</span> <span class="st">"gignac2016"</span>)</a></code></pre></div>
+<ul>
+<li>
+<strong>r = 0 - 0.1</strong>: Very small</li>
+<li>
+<strong>r = 0.1 - 0.2</strong>: Small</li>
+<li>
+<strong>r = 0.2 - 0.3</strong>: Moderate (“typical”)</li>
+<li>
+<strong>r &gt; 0.3</strong>: Large</li>
+</ul>
+</div>
 <div id="cohen1988statistical-1" class="section level4">
 <h4 class="hasAnchor">
 <a href="#cohen1988statistical-1" class="anchor"></a><span class="citation">Cohen (1988)</span>
 </h4>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="../reference/interpret_r.html">interpret_r</a></span>(x, <span class="dt">rules =</span> <span class="st">"cohen1988"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="../reference/interpret_r.html">interpret_r</a></span>(x, <span class="dt">rules =</span> <span class="st">"cohen1988"</span>)</a></code></pre></div>
 <ul>
 <li>
 <strong>r = 0 - 0.1</strong>: Very small</li>
@@ -205,6 +221,24 @@
 <strong>r &gt; 0.5</strong>: Large</li>
 </ul>
 </div>
+<div id="evans1996straightforward" class="section level4">
+<h4 class="hasAnchor">
+<a href="#evans1996straightforward" class="anchor"></a><span class="citation">Evans (1996)</span>
+</h4>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="../reference/interpret_r.html">interpret_r</a></span>(x, <span class="dt">rules =</span> <span class="st">"evans1996"</span>)</a></code></pre></div>
+<ul>
+<li>
+<strong>r = 0 - 0.2</strong>: Very weak</li>
+<li>
+<strong>r = 0.2 - 0.4</strong>: Weak</li>
+<li>
+<strong>r = 0.4 - 0.6</strong>: Moderate</li>
+<li>
+<strong>r = 0.6 - 0.8</strong>: Strong</li>
+<li>
+<strong>r &gt; 0.8</strong>: Very strong</li>
+</ul>
+</div>
 </div>
 <div id="standardized-difference-d-cohens-d" class="section level3">
 <h3 class="hasAnchor">
@@ -214,7 +248,7 @@
 <h4 class="hasAnchor">
 <a href="#cohen1988statistical-2" class="anchor"></a><span class="citation">Cohen (1988)</span>
 </h4>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="../reference/interpret_d.html">interpret_d</a></span>(x, <span class="dt">rules =</span> <span class="st">"cohen1988"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="../reference/interpret_d.html">interpret_d</a></span>(x, <span class="dt">rules =</span> <span class="st">"cohen1988"</span>)</a></code></pre></div>
 <ul>
 <li>
 <strong>d = 0 - 0.2</strong>: Very small</li>
@@ -230,7 +264,7 @@
 <h4 class="hasAnchor">
 <a href="#sawilowsky2009new" class="anchor"></a><span class="citation">Sawilowsky (2009)</span>
 </h4>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="../reference/interpret_d.html">interpret_d</a></span>(x, <span class="dt">rules =</span> <span class="st">"sawilowsky2009"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw"><a href="../reference/interpret_d.html">interpret_d</a></span>(x, <span class="dt">rules =</span> <span class="st">"sawilowsky2009"</span>)</a></code></pre></div>
 <ul>
 <li>
 <strong>d = 0 - 0.1</strong>: Tiny</li>
@@ -257,7 +291,7 @@
 <h4 class="hasAnchor">
 <a href="#chen2010big" class="anchor"></a><span class="citation">Chen, Cohen, and Chen (2010)</span>
 </h4>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="../reference/interpret_odds.html">interpret_odds</a></span>(x, <span class="dt">rules =</span> <span class="st">"chen2010"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="../reference/interpret_odds.html">interpret_odds</a></span>(x, <span class="dt">rules =</span> <span class="st">"chen2010"</span>)</a></code></pre></div>
 <ul>
 <li>
 <strong>d = 0 - 1.68</strong>: Very small</li>
@@ -273,14 +307,79 @@
 <h4 class="hasAnchor">
 <a href="#cohen1988statistical-3" class="anchor"></a><span class="citation">Cohen (1988)</span>
 </h4>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw"><a href="../reference/interpret_odds.html">interpret_odds</a></span>(x, <span class="dt">rules =</span> <span class="st">"cohen1988"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw"><a href="../reference/interpret_odds.html">interpret_odds</a></span>(x, <span class="dt">rules =</span> <span class="st">"cohen1988"</span>)</a></code></pre></div>
 <p>This converts (log) odds ratio to standardized difference <em>d</em> using the following formula <span class="citation">(Cohen 1988; Sánchez-Meca, Marı́n-Martı́nez, and Chacón-Moscoso 2003)</span>:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">d &lt;-<span class="st"> </span>log_odds <span class="op">*</span><span class="st"> </span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/MathFun">sqrt</a></span>(<span class="dv">3</span>) <span class="op">/</span><span class="st"> </span>pi)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">d &lt;-<span class="st"> </span>log_odds <span class="op">*</span><span class="st"> </span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/MathFun">sqrt</a></span>(<span class="dv">3</span>) <span class="op">/</span><span class="st"> </span>pi)</a></code></pre></div>
 </div>
 </div>
-<div id="bayesian-indices-in-rope-pd" class="section level3">
+<div id="omega-squared" class="section level3">
 <h3 class="hasAnchor">
-<a href="#bayesian-indices-in-rope-pd" class="anchor"></a>Bayesian Indices (% in ROPE, p<em>d</em>)</h3>
+<a href="#omega-squared" class="anchor"></a>Omega Squared</h3>
+<p>The Omega squared is a measure of effect size used in ANOVAs. It is an estimate of how much variance in the response variables are accounted for by the explanatory variables. Omega squared is widely viewed as a lesser biased alternative to eta-squared, especially when sample sizes are small.</p>
+<div id="field2013discovering" class="section level4">
+<h4 class="hasAnchor">
+<a href="#field2013discovering" class="anchor"></a><span class="citation">Field (2013)</span>
+</h4>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw"><a href="../reference/interpret_omega_squared.html">interpret_omega_squared</a></span>(x, <span class="dt">rules =</span> <span class="st">"field2013"</span>)</a></code></pre></div>
+<ul>
+<li>
+<strong>Omega Squared = 0 - 0.01</strong>: Very small</li>
+<li>
+<strong>Omega Squared = 0.01 - 0.06</strong>: Small</li>
+<li>
+<strong>Omega Squared = 0.06 - 0.14</strong>: Medium</li>
+<li>
+<strong>Omega Squared &gt; 0.14</strong>: Large</li>
+</ul>
+</div>
+</div>
+<div id="bayes-factor-bf" class="section level3">
+<h3 class="hasAnchor">
+<a href="#bayes-factor-bf" class="anchor"></a>Bayes Factor (BF)</h3>
+<p>The Bayes Factor if a useful measure of evidence against or in favour of a hypothesis. Note that <strong>BFs</strong> between 0 and 1, indicating evidence <em>against</em> the hypothesis, are converted via <code>bf = 1 / abs(bf)</code>.</p>
+<div id="jeffreys1961theory" class="section level4">
+<h4 class="hasAnchor">
+<a href="#jeffreys1961theory" class="anchor"></a><span class="citation">Jeffreys (1961)</span>
+</h4>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw"><a href="../reference/interpret_bf.html">interpret_bf</a></span>(x, <span class="dt">rules =</span> <span class="st">"jeffreys1961"</span>)</a></code></pre></div>
+<ul>
+<li>
+<strong>bf = 1 - 3</strong>: Anecdotal</li>
+<li>
+<strong>bf = 3 - 10</strong>: Moderate</li>
+<li>
+<strong>bf = 10 - 30</strong>: Strong</li>
+<li>
+<strong>bf = 30 - 100</strong>: Very strong</li>
+<li>
+<strong>bf &gt; 100</strong>: Extreme</li>
+</ul>
+</div>
+<div id="raftery1995bayesian" class="section level4">
+<h4 class="hasAnchor">
+<a href="#raftery1995bayesian" class="anchor"></a><span class="citation">Raftery (1995)</span>
+</h4>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw"><a href="../reference/interpret_bf.html">interpret_bf</a></span>(x, <span class="dt">rules =</span> <span class="st">"raftery1995"</span>)</a></code></pre></div>
+<ul>
+<li>
+<strong>bf = 1 - 3</strong>: Weak</li>
+<li>
+<strong>bf = 3 - 20</strong>: Positive</li>
+<li>
+<strong>bf = 20 - 150</strong>: Strong</li>
+<li>
+<strong>bf &gt; 150</strong>: Very strong</li>
+</ul>
+</div>
+</div>
+<div id="bayesian-convergence-diagnostic-rthat-and-effective-sample-size" class="section level3">
+<h3 class="hasAnchor">
+<a href="#bayesian-convergence-diagnostic-rthat-and-effective-sample-size" class="anchor"></a>Bayesian Convergence Diagnostic (Rthat and Effective Sample Size)</h3>
+<p>Experts have suggested thresholds value to help interpreting and convergence and sampling quality. As such, <code>Rhat</code> should not be larger than 1.1 <span class="citation">(Gelman, Rubin, and others 1992)</span> or 1.01 <span class="citation">(Vehtari et al. 2019)</span>. An <code>effective sample size</code> (ESS) greater than 1,000 is sufficient for stable estimates <span class="citation">(Bürkner and others 2017)</span>.</p>
+</div>
+<div id="other-bayesian-indices-in-rope-pd" class="section level3">
+<h3 class="hasAnchor">
+<a href="#other-bayesian-indices-in-rope-pd" class="anchor"></a>Other Bayesian Indices (% in ROPE, <em>pd</em>)</h3>
 <p>The interpretation of Bayesian indices is detailed in <a href="https://easystats.github.io/bayestestR/articles/4_Guidelines.html">this article</a>.</p>
 </div>
 </div>
@@ -288,6 +387,9 @@
 <h2 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h2>
 <div id="refs" class="references">
+<div id="ref-burkner2017brms">
+<p>Bürkner, Paul-Christian, and others. 2017. “Brms: An R Package for Bayesian Multilevel Models Using Stan.” <em>Journal of Statistical Software</em> 80 (1): 1–28.</p>
+</div>
 <div id="ref-chen2010big">
 <p>Chen, Henian, Patricia Cohen, and Sophie Chen. 2010. “How Big Is a Big Odds Ratio? Interpreting the Magnitudes of Odds Ratios in Epidemiological Studies.” <em>Communications in Statistics—Simulation and Computation</em> 39 (4): 860–64.</p>
 </div>
@@ -297,17 +399,38 @@
 <div id="ref-cohen1988statistical">
 <p>Cohen, Jacob. 1988. “Statistical Power Analysis for the Social Sciences.”</p>
 </div>
+<div id="ref-evans1996straightforward">
+<p>Evans, James D. 1996. <em>Straightforward Statistics for the Behavioral Sciences.</em> Thomson Brooks/Cole Publishing Co.</p>
+</div>
 <div id="ref-falk1992primer">
 <p>Falk, R Frank, and Nancy B Miller. 1992. <em>A Primer for Soft Modeling.</em> University of Akron Press.</p>
 </div>
+<div id="ref-field2013discovering">
+<p>Field, Andy. 2013. <em>Discovering Statistics Using Ibm Spss Statistics</em>. sage.</p>
+</div>
+<div id="ref-gelman1992inference">
+<p>Gelman, Andrew, Donald B Rubin, and others. 1992. “Inference from Iterative Simulation Using Multiple Sequences.” <em>Statistical Science</em> 7 (4): 457–72.</p>
+</div>
+<div id="ref-gignac2016effect">
+<p>Gignac, Gilles E, and Eva T Szodorai. 2016. “Effect Size Guidelines for Individual Differences Researchers.” <em>Personality and Individual Differences</em> 102: 74–78.</p>
+</div>
 <div id="ref-hair2011pls">
 <p>Hair, Joe F, Christian M Ringle, and Marko Sarstedt. 2011. “PLS-Sem: Indeed a Silver Bullet.” <em>Journal of Marketing Theory and Practice</em> 19 (2): 139–52.</p>
+</div>
+<div id="ref-jeffreys1961theory">
+<p>Jeffreys, Harold. 1961. “Theory of Probability, Clarendon.” Oxford.</p>
+</div>
+<div id="ref-raftery1995bayesian">
+<p>Raftery, Adrian E. 1995. “Bayesian Model Selection in Social Research.” <em>Sociological Methodology</em> 25: 111–64.</p>
 </div>
 <div id="ref-sawilowsky2009new">
 <p>Sawilowsky, Shlomo S. 2009. “New Effect Size Rules of Thumb.”</p>
 </div>
 <div id="ref-sanchez2003effect">
 <p>Sánchez-Meca, Julio, Fulgencio Marı́n-Martı́nez, and Salvador Chacón-Moscoso. 2003. “Effect-Size Indices for Dichotomized Outcomes in Meta-Analysis.” <em>Psychological Methods</em> 8 (4): 448.</p>
+</div>
+<div id="ref-vehtari2019rank">
+<p>Vehtari, Aki, Andrew Gelman, Daniel Simpson, Bob Carpenter, and Paul-Christian Bürkner. 2019. <em>arXiv Preprint arXiv:1903.08008</em>.</p>
 </div>
 </div>
 </div>

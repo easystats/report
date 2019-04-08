@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Numeric Vector Report — report.numeric • report</title>
+<title>Correlation Report — report.easycorrelation • report</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,9 +37,9 @@
 
 
 
-<meta property="og:title" content="Numeric Vector Report — report.numeric" />
+<meta property="og:title" content="Correlation Report — report.easycorrelation" />
 
-<meta property="og:description" content="Create a report of a numeric vector." />
+<meta property="og:description" content="Create a report of a correlation object." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -142,48 +142,48 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Numeric Vector Report</h1>
-    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.data.frame.R'><code>R/report.data.frame.R</code></a></small>
-    <div class="hidden name"><code>report.numeric.Rd</code></div>
+    <h1>Correlation Report</h1>
+    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.easycorrelation.R'><code>R/report.easycorrelation.R</code></a></small>
+    <div class="hidden name"><code>report.easycorrelation.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create a report of a numeric vector.</p>
+    <p>Create a report of a correlation object.</p>
     
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for numeric</span>
-<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>, <span class='kw'>median</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>dispersion</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>range</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>distribution</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for easycorrelation</span>
+<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>, <span class='kw'>effsize</span> <span class='kw'>=</span> <span class='st'>"cohen1988"</span>,
+  <span class='kw'>stars</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>lower</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>reorder</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>reorder_method</span> <span class='kw'>=</span> <span class='st'>"complete"</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>model</th>
-      <td><p>Numeric vector.</p></td>
+      <td><p>Object of class easycorrelation.</p></td>
     </tr>
     <tr>
-      <th>median</th>
-      <td><p>Show <a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a> and <a href='https://www.rdocumentation.org/packages/stats/topics/sd'>sd</a> (default) or <a href='https://www.rdocumentation.org/packages/stats/topics/median'>median</a> and <a href='https://www.rdocumentation.org/packages/stats/topics/mad'>mad</a>.</p></td>
+      <th>effsize</th>
+      <td><p>Effect size interpretation set of rules. Can be "cohen1988" (default), "evans1996" or custom set of rules.</p></td>
     </tr>
     <tr>
-      <th>dispersion</th>
-      <td><p>Show dispersion (<a href='https://www.rdocumentation.org/packages/stats/topics/sd'>sd</a> or <a href='https://www.rdocumentation.org/packages/stats/topics/mad'>mad</a>).</p></td>
+      <th>stars</th>
+      <td><p>Add significance stars in table. For frequentist correlations: \*p &lt; .05, \*\*p &lt; .01, \*\*\*p &lt; .001. For Bayesian correlations: \*\*\*BF &gt; 30, \*\*BF &gt; 10, \*BF &gt; 3.</p></td>
     </tr>
     <tr>
-      <th>range</th>
-      <td><p>Show range.</p></td>
+      <th>lower</th>
+      <td><p>Remove the upper triangular part of the matrix.</p></td>
     </tr>
     <tr>
-      <th>distribution</th>
-      <td><p>Returns Kurtosis and Skewness in table, and tries to guess the distribution of the numeric variable by using an internal machine learning model (see <a href='https://www.rdocumentation.org/packages/parameters/topics/find_distribution'>find_distribution</a>).</p></td>
+      <th>reorder</th>
+      <td><p>Reorder the matrix based on correlation pattern (currently only works with square matrices)?</p></td>
     </tr>
     <tr>
-      <th>missing_percentage</th>
-      <td><p>Show missings by number (default) or percentage.</p></td>
+      <th>reorder_method</th>
+      <td><p>Reordering method. See <a href='https://www.rdocumentation.org/packages/stats/topics/hclust'>hclust</a>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -197,14 +197,25 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>1000</span>)
-<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>)
-<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>, <span class='kw'>median</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>distribution</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='to_fulltext.html'>to_fulltext</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))
-<span class='fu'><a href='to_table.html'>to_table</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))
-<span class='fu'><a href='to_fulltable.html'>to_fulltable</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))
-<span class='co'># }</span></pre>
+    <pre class="examples"><div class='input'><span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/correlation/topics/correlation'>correlation</a></span>(<span class='no'>iris</span>)
+<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>)</div><div class='output co'>#&gt; We ran a correlation analysis with p-values adjusted using holm correction. Effect sizes were labelled following Cohen's (1988) recommendations.
+#&gt; 
+#&gt;   - the correlation between Sepal.Length and Sepal.Length is positive, significant and large (r = 1.00, 95% CI [1.00, 1.00], p &lt; .001).
+#&gt;   - the correlation between Sepal.Width and Sepal.Length is negative, not significant and small (r = -0.12, 95% CI [-0.27, 0.04], p &gt; .1).
+#&gt;   - the correlation between Petal.Length and Sepal.Length is positive, significant and large (r = 0.87, 95% CI [0.83, 0.91], p &lt; .001).
+#&gt;   - the correlation between Petal.Width and Sepal.Length is positive, significant and large (r = 0.82, 95% CI [0.76, 0.86], p &lt; .001).
+#&gt;   - the correlation between Sepal.Length and Sepal.Width is negative, not significant and small (r = -0.12, 95% CI [-0.27, 0.04], p &gt; .1).
+#&gt;   - the correlation between Sepal.Width and Sepal.Width is positive, significant and large (r = 1.00, 95% CI [1.00, 1.00], p &lt; .001).
+#&gt;   - the correlation between Petal.Length and Sepal.Width is negative, significant and moderate (r = -0.43, 95% CI [-0.55, -0.29], p &lt; .001).
+#&gt;   - the correlation between Petal.Width and Sepal.Width is negative, significant and moderate (r = -0.37, 95% CI [-0.50, -0.22], p &lt; .001).
+#&gt;   - the correlation between Sepal.Length and Petal.Length is positive, significant and large (r = 0.87, 95% CI [0.83, 0.91], p &lt; .001).
+#&gt;   - the correlation between Sepal.Width and Petal.Length is negative, significant and moderate (r = -0.43, 95% CI [-0.55, -0.29], p &lt; .001).
+#&gt;   - the correlation between Petal.Length and Petal.Length is positive, significant and large (r = 1.00, 95% CI [1.00, 1.00], p &lt; .001).
+#&gt;   - the correlation between Petal.Width and Petal.Length is positive, significant and large (r = 0.96, 95% CI [0.95, 0.97], p &lt; .001).
+#&gt;   - the correlation between Sepal.Length and Petal.Width is positive, significant and large (r = 0.82, 95% CI [0.76, 0.86], p &lt; .001).
+#&gt;   - the correlation between Sepal.Width and Petal.Width is negative, significant and moderate (r = -0.37, 95% CI [-0.50, -0.22], p &lt; .001).
+#&gt;   - the correlation between Petal.Length and Petal.Width is positive, significant and large (r = 0.96, 95% CI [0.95, 0.97], p &lt; .001).
+#&gt;   - the correlation between Petal.Width and Petal.Width is positive, significant and large (r = 1.00, 95% CI [1.00, 1.00], p &lt; .001).</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

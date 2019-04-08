@@ -143,7 +143,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Linear Models Values</h1>
-    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.lm.R'><code>R/report.lm.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.glm.R'><code>R/report.glm.R</code></a></small>
     <div class="hidden name"><code>model_values.lm.Rd</code></div>
     </div>
 
@@ -156,7 +156,8 @@
     <pre class="usage"><span class='co'># S3 method for lm</span>
 <span class='fu'><a href='model_values.html'>model_values</a></span>(<span class='no'>model</span>, <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>standardize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>effsize</span> <span class='kw'>=</span> <span class='st'>"cohen1988"</span>, <span class='kw'>performance_in_table</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>performance_metrics</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='kw'>bootstrap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>performance_metrics</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='kw'>bootstrap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>iterations</span> <span class='kw'>=</span> <span class='fl'>500</span>,
+  <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -188,6 +189,10 @@
     <tr>
       <th>bootstrap</th>
       <td><p>See <code><a href='https://www.rdocumentation.org/packages/parameters/topics/model_parameters.lm'>model_parameters</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>iterations</th>
+      <td><p>The number of bootstrap replicates. This only apply in the case of bootsrapped frequentist models.</p></td>
     </tr>
     <tr>
       <th>...</th>

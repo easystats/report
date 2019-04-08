@@ -4,12 +4,12 @@
 \alias{interpret_r}
 \title{Correlation Coefficient Interpretation}
 \usage{
-interpret_r(r, rules = "cohen1988")
+interpret_r(r, rules = "gignac2016")
 }
 \arguments{
 \item{r}{Value or vector of correlation coefficient.}
 
-\item{rules}{Can be "cohen1988" (default), "evans1996" or custom set of rules.}
+\item{rules}{Can be "gignac2016" (default), cohen1988", "evans1996" or custom set of rules.}
 }
 \description{
 Correlation Coefficient Interpretation
@@ -17,9 +17,11 @@ Correlation Coefficient Interpretation
 \examples{
 interpret_r(r = .015)
 interpret_r(r = c(.5, -.02))
+
 }
 \references{
 \itemize{
+  \item Gignac, G. E., & Szodorai, E. T. (2016). Effect size guidelines for individual differences researchers. Personality and individual differences, 102, 74-78.
   \item Cohen, J. (1988). Statistical power analysis for the behavioural sciences.
   \item Evans, J. D. (1996). Straightforward statistics for the behavioral sciences. Thomson Brooks/Cole Publishing Co.
 }

@@ -156,14 +156,21 @@
     <pre class="usage"><span class='co'># S3 method for lmerMod</span>
 <span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>, <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>standardize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>effsize</span> <span class='kw'>=</span> <span class='st'>"cohen1988"</span>, <span class='kw'>performance_in_table</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>performance_metrics</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='kw'>bootstrap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>performance_metrics</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='kw'>bootstrap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>p_method</span> <span class='kw'>=</span> <span class='st'>"wald"</span>,
+  <span class='kw'>ci_method</span> <span class='kw'>=</span> <span class='st'>"wald"</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for merMod</span>
+<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>, <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>standardize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>effsize</span> <span class='kw'>=</span> <span class='st'>"chen2010"</span>, <span class='kw'>performance_in_table</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>performance_metrics</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='kw'>bootstrap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>ci_method</span> <span class='kw'>=</span> <span class='st'>"wald"</span>,
+  <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>model</th>
-      <td><p>Object of class <a href='https://www.rdocumentation.org/packages/stats/topics/lm'>lm</a>.</p></td>
+      <td><p>Mixed model.</p></td>
     </tr>
     <tr>
       <th>ci</th>
@@ -175,7 +182,7 @@
     </tr>
     <tr>
       <th>effsize</th>
-      <td><p>Interpret the standardized parameters using a set of rules. Can be "cohen1988" (default), "sawilowsky2009", NULL, or a custom set of <a href='rules.html'>rules</a>.</p></td>
+      <td><p><a href='https://easystats.github.io/report/articles/interpret_metrics.html'>Interpret the standardized parameters</a> using a set of rules. Can be "cohen1988" (default for linear models), "chen2010" (default for logistic models), "sawilowsky2009", NULL, or a custom set of <a href='rules.html'>rules</a>.</p></td>
     </tr>
     <tr>
       <th>performance_in_table</th>
@@ -188,6 +195,14 @@
     <tr>
       <th>bootstrap</th>
       <td><p>See <code><a href='https://www.rdocumentation.org/packages/parameters/topics/model_parameters.lm'>model_parameters</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>p_method</th>
+      <td><p>Method for computing p values. See p_value.</p></td>
+    </tr>
+    <tr>
+      <th>ci_method</th>
+      <td><p>Method for computing confidence intervals (CI). See ci.</p></td>
     </tr>
     <tr>
       <th>...</th>

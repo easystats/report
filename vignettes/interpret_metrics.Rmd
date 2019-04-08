@@ -93,6 +93,21 @@ interpret_r2(x, rules = "hair2011")
 
 ### Correlation *r*
 
+
+
+#### @gignac2016effect
+
+```r
+interpret_r(x, rules = "gignac2016")
+```
+
+- **r = 0 - 0.1**: Very small
+- **r = 0.1 - 0.2**: Small 
+- **r = 0.2 - 0.3**: Moderate ("typical")
+- **r > 0.3**: Large
+
+
+
 #### @cohen1988statistical
 
 ```r
@@ -103,6 +118,20 @@ interpret_r(x, rules = "cohen1988")
 - **r = 0.1 - 0.3**: Small
 - **r = 0.3 - 0.5**: Moderate
 - **r > 0.5**: Large
+
+
+#### @evans1996straightforward
+
+```r
+interpret_r(x, rules = "evans1996")
+```
+
+- **r = 0 - 0.2**: Very weak
+- **r = 0.2 - 0.4**: Weak
+- **r = 0.4 - 0.6**: Moderate
+- **r = 0.6 - 0.8**: Strong
+- **r > 0.8**: Very strong
+
 
 
 ### Standardized Difference *d* (Cohen's *d*)

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Numeric Vector Report — report.numeric • report</title>
+<title>ANOVAs Report — report.aov • report</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,9 +37,9 @@
 
 
 
-<meta property="og:title" content="Numeric Vector Report — report.numeric" />
+<meta property="og:title" content="ANOVAs Report — report.aov" />
 
-<meta property="og:description" content="Create a report of a numeric vector." />
+<meta property="og:description" content="Create a report of an ANOVA." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -142,48 +142,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Numeric Vector Report</h1>
-    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.data.frame.R'><code>R/report.data.frame.R</code></a></small>
-    <div class="hidden name"><code>report.numeric.Rd</code></div>
+    <h1>ANOVAs Report</h1>
+    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.aov.R'><code>R/report.aov.R</code></a></small>
+    <div class="hidden name"><code>report.aov.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create a report of a numeric vector.</p>
+    <p>Create a report of an ANOVA.</p>
     
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for numeric</span>
-<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>, <span class='kw'>median</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>dispersion</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>range</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>distribution</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for aov</span>
+<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>, <span class='kw'>omega_squared</span> <span class='kw'>=</span> <span class='st'>"partial"</span>,
+  <span class='kw'>effsize</span> <span class='kw'>=</span> <span class='st'>"field2013"</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>model</th>
-      <td><p>Numeric vector.</p></td>
+      <td><p>Object of class <code>aov</code>, <code>anova</code> or <code>aovlist</code>.</p></td>
     </tr>
     <tr>
-      <th>median</th>
-      <td><p>Show <a href='https://www.rdocumentation.org/packages/base/topics/mean'>mean</a> and <a href='https://www.rdocumentation.org/packages/stats/topics/sd'>sd</a> (default) or <a href='https://www.rdocumentation.org/packages/stats/topics/median'>median</a> and <a href='https://www.rdocumentation.org/packages/stats/topics/mad'>mad</a>.</p></td>
+      <th>omega_squared</th>
+      <td><p>Compute omega squared as indices of effect size. Can be <code>NULL</code>, "partial" (default) or "raw" for non-partial indices.</p></td>
     </tr>
     <tr>
-      <th>dispersion</th>
-      <td><p>Show dispersion (<a href='https://www.rdocumentation.org/packages/stats/topics/sd'>sd</a> or <a href='https://www.rdocumentation.org/packages/stats/topics/mad'>mad</a>).</p></td>
-    </tr>
-    <tr>
-      <th>range</th>
-      <td><p>Show range.</p></td>
-    </tr>
-    <tr>
-      <th>distribution</th>
-      <td><p>Returns Kurtosis and Skewness in table, and tries to guess the distribution of the numeric variable by using an internal machine learning model (see <a href='https://www.rdocumentation.org/packages/parameters/topics/find_distribution'>find_distribution</a>).</p></td>
-    </tr>
-    <tr>
-      <th>missing_percentage</th>
-      <td><p>Show missings by number (default) or percentage.</p></td>
+      <th>effsize</th>
+      <td><p>Effect size interpretation set of rules.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -197,13 +184,24 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>1000</span>)
-<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>)
-<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>, <span class='kw'>median</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>distribution</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='to_fulltext.html'>to_fulltext</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))
-<span class='fu'><a href='to_table.html'>to_table</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))
-<span class='fu'><a href='to_fulltable.html'>to_fulltable</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))
+    <pre class="examples"><div class='input'><span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='no'>iris</span>
+<span class='no'>data</span>$<span class='no'>Cat1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"X"</span>, <span class='st'>"X"</span>, <span class='st'>"Y"</span>), <span class='kw'>length.out</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/nrow'>nrow</a></span>(<span class='no'>data</span>))
+<span class='no'>data</span>$<span class='no'>Cat2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"A"</span>, <span class='st'>"B"</span>), <span class='kw'>length.out</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/nrow'>nrow</a></span>(<span class='no'>data</span>))
+<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/aov'>aov</a></span>(<span class='no'>Sepal.Length</span> ~ <span class='no'>Species</span> * <span class='no'>Cat1</span> * <span class='no'>Cat2</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>data</span>)
+<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>)</div><div class='output co'>#&gt; The ANOVA suggests that:
+#&gt; 
+#&gt;   - The effect of Species is significant (F(2, 138) = 115.28, p &lt; .001) and can be considered as large (partial omega squared = 0.60).
+#&gt;   - The effect of Cat1 is not significant (F(1, 138) = 0.01, p &gt; .1) and can be considered as very small (partial omega squared = -0.01).
+#&gt;   - The effect of Cat2 is not significant (F(1, 138) = 0.01, p &gt; .1) and can be considered as very small (partial omega squared = -0.01).
+#&gt;   - The interaction between Species and Cat1 is not significant (F(2, 138) = 0.51, p &gt; .1) and can be considered as very small (partial omega squared = -0.01).
+#&gt;   - The interaction between Species and Cat2 is not significant (F(2, 138) = 0.94, p &gt; .1) and can be considered as very small (partial omega squared = -0.00).
+#&gt;   - The interaction between Cat1 and Cat2 is not significant (F(1, 138) = 0.91, p &gt; .1) and can be considered as very small (partial omega squared = -0.00).
+#&gt;   - The interaction between Species, Cat1 and Cat2 is not significant (F(2, 138) = 0.13, p &gt; .1) and can be considered as very small (partial omega squared = -0.01).</div><div class='input'>
+
+</div><span class='co'># NOT RUN {</span>
+<span class='fu'><a href='report.html'>report</a></span>(<span class='kw pkg'>circus</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/circus/topics/aov_1'>aov_1</a></span>)
+<span class='fu'><a href='report.html'>report</a></span>(<span class='kw pkg'>circus</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/circus/topics/anova_1'>anova_1</a></span>)
+<span class='fu'><a href='report.html'>report</a></span>(<span class='kw pkg'>circus</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/circus/topics/aovlist_1'>aovlist_1</a></span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
