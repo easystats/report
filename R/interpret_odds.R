@@ -1,7 +1,7 @@
 #' Odds ratio Interpretation
 #'
 #' @param odds Value or vector of (log) odds ratio values.
-#' @param rules Can be "chen2010" (default), "cohen1988" (through transformation to standardized difference) or custom set of rules.
+#' @param rules Can be "chen2010" (default), "cohen1988" (through transformation to standardized difference, see \link[parameters]{odds_to_d}) or custom set of rules.
 #' @param log Are the provided values log odds ratio.
 #'
 #'
@@ -26,11 +26,7 @@ interpret_odds <- function(odds, rules = "chen2010", log = FALSE) {
 
       return(interpret(abs(odds), rules(c(1.68, 3.47, 6.71), c("very small", "small", "medium", "large"))))
     } else if (rules == "cohen1988") {
-      if (log == FALSE) {
-        odds <- log(odds)
-      }
-
-      d <- odds * (sqrt(3) / pi)
+      d <- parameters::odds_to_d(odds, log=log)
       return(interpret_d(abs(d), rules = rules))
     } else {
       stop("rules must be 'chen2010', 'cohen1988' or an object of type rules.")

@@ -72,14 +72,14 @@ The package documentation can be found [**here**](https://easystats.github.io/re
 
 ## Contribute
 
-**`report` is a young package in need of affection**. You can easily hop aboard the [developpment](.github/CONTRIBUTING.md) of this open-source software and improve psychological science by doing the following:
+**`report` is a young package in need of affection**. You can easily be a part of the [developping](.github/CONTRIBUTING.md) community of this open-source software and improve science by doing the following:
 
 - Create or check existing <a href=https://github.com/easystats/report/issues><img src="man/figures/issue_bug.png" height="25"></a> issues to report, replicate, understand or solve some bugs.
 - Create or check existing <a href=https://github.com/easystats/report/issues><img src="man/figures/issue_featureidea.png" height="25"></a> issues to suggest or discuss a new feature.
 - Check existing <a href=https://github.com/easystats/report/issues><img src="man/figures/issue_help.png" height="25"></a> issues to see things that we'd like to implement, but where help is needed to do it.
 - Check existing <a href=https://github.com/easystats/report/issues><img src="man/figures/issue_opinion.png" height="25"></a> issues to give your opinion and participate in package's design discussions.
 
-Don't be shy, try to code and submit a pull request (See the [contributing guide](.github/CONTRIBUTING.md)). Even if unperfect, we will help you make it great! All contributors will be very graciously rewarded someday :smirk:.
+Don't be shy, try to code and submit a pull request (See the [contributing guide](.github/CONTRIBUTING.md)). Even if unperfect, we will help you make it great!
 
 
 
@@ -106,12 +106,16 @@ library("report")
 
 The `report` package works in a two steps fashion. First, creating a `report` object with the `report()` function (which takes different arguments depending on the type of object you are reporting). Then, this report can be displayed either textually, using `to_text()`, or as a table, using `to_table()`. Moreover, you can also access a more detailed (but less digest) version of the report using `to_fulltext()` and `to_fulltable()`. Finally, `to_values()` makes it easy to access all the internals of a model. 
 
+### Supported Packages
+
+Currently supported objects by **report** include [`cor.test`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cor.test.html), [`t.test`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html) [`correlation`](https://github.com/easystats/correlation), [`glm`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/glm.html), [`lme4::merMod`](https://github.com/lme4/lme4/), [`rstanarm::stanreg`](https://github.com/stan-dev/rstanarm).
 
 ### Examples
 
 The `report()` function works on a variety of models, as well as dataframes:
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
+# Dataframe report
 report(iris)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -150,7 +154,7 @@ knitr::kable(table)
 Finally, you can also find more details using `to_fulltext()`:
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
-# Full report for a Bayesian logistic mixed model with effect sizes :O
+# Full report for a Bayesian logistic mixed model with effect sizes
 library(rstanarm)
 
 stan_glmer(vs ~ mpg + (1|cyl), data=mtcars, family="binomial") %>% 

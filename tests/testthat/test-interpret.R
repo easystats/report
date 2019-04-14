@@ -12,9 +12,10 @@ test_that("interpret", {
 
 context("interpret_r")
 test_that("interpret_r", {
-  testthat::expect_equal(interpret_r(0.21), "small")
+  testthat::expect_equal(interpret_r(0.21), "moderate")
+  testthat::expect_equal(interpret_r(0.21, rules="cohen1988"), "small")
   testthat::expect_equal(interpret_r(0.7, rules = "evans1996"), "strong")
-  testthat::expect_equal(interpret_r(c(0.5, -0.08)), c("large", "very small"))
+  testthat::expect_equal(interpret_r(c(0.5, -0.08), rules="cohen1988"), c("large", "very small"))
   testthat::expect_equal(interpret_r(0.6, rules = rules(c(0.5), c("A", "B"))), "B")
   testthat::expect_error(interpret_r(0.6, rules = "DUPA"))
 })
@@ -87,4 +88,34 @@ test_that("interpret_bf", {
   testthat::expect_equal(interpret_bf(c(0.8, 3.5), rules = "raftery1995"), c("weak evidence against", "positive evidence in favour of"))
   testthat::expect_equal(interpret_bf(2, rules = rules(c(0.5), c("A", "B"))), "B evidence in favour of")
   testthat::expect_error(interpret_bf(2, rules = "DUPA"))
+})
+
+
+
+context("interpret_omega_squared")
+test_that("interpret_omega_squared", {
+  testthat::expect_equal(interpret_omega_squared(0.1), "medium")
+  testthat::expect_equal(interpret_omega_squared(c(0.1, 0.25)), c("medium", "large"))
+  testthat::expect_equal(interpret_omega_squared(0.6, rules = rules(c(0.5), c("A", "B"))), "B")
+  testthat::expect_error(interpret_omega_squared(0.6, rules = "DUPA"))
+})
+
+
+
+context("interpret_rhat")
+test_that("interpret_rhat", {
+  testthat::expect_equal(interpret_rhat(1), "converged")
+  testthat::expect_equal(interpret_rhat(c(1, 1.02)), c("converged", "failed"))
+  testthat::expect_equal(interpret_rhat(c(1, 1.02), rules="gelman1992"), c("converged", "converged"))
+  testthat::expect_equal(interpret_rhat(0.6, rules = rules(c(0.5), c("A", "B"))), "B")
+  testthat::expect_error(interpret_rhat(0.6, rules = "DUPA"))
+})
+
+
+context("interpret_effective_sample")
+test_that("interpret_effective_sample", {
+  testthat::expect_equal(interpret_effective_sample(1000), "sufficient")
+  testthat::expect_equal(interpret_effective_sample(c(1000, 800)), c("sufficient", "unsufficient"))
+  testthat::expect_equal(interpret_effective_sample(0.6, rules = rules(c(0.5), c("A", "B"))), "B")
+  testthat::expect_error(interpret_effective_sample(0.6, rules = "DUPA"))
 })

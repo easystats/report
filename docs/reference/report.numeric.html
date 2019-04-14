@@ -143,7 +143,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Numeric Vector Report</h1>
-    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.numeric.R'><code>R/report.numeric.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.data.frame.R'><code>R/report.data.frame.R</code></a></small>
     <div class="hidden name"><code>report.numeric.Rd</code></div>
     </div>
 
@@ -155,7 +155,8 @@
 
     <pre class="usage"><span class='co'># S3 method for numeric</span>
 <span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>, <span class='kw'>median</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>dispersion</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>range</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>range</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>distribution</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -177,8 +178,12 @@
       <td><p>Show range.</p></td>
     </tr>
     <tr>
+      <th>distribution</th>
+      <td><p>Returns Kurtosis and Skewness in table, and tries to guess the distribution of the numeric variable by using an internal machine learning model (see <a href='https://www.rdocumentation.org/packages/parameters/topics/find_distribution'>find_distribution</a>).</p></td>
+    </tr>
+    <tr>
       <th>missing_percentage</th>
-      <td><p>Show missings by number (default) or percentage</p></td>
+      <td><p>Show missings by number (default) or percentage.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -192,12 +197,14 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>1000</span>)
-<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; Mean = 0.00 +- 1.00 [-2.94, 2.76]</div><div class='input'><span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>, <span class='kw'>median</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>dispersion</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; Median = 0.01 +- 1.00 [-2.94, 2.76]</div><div class='input'><span class='fu'><a href='to_fulltext.html'>to_fulltext</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; Mean = 0.00, SD = 1.00, Median = 0.01, MAD = 1.00, Range = [-2.94, 2.76], 0 missing.</div><div class='input'><span class='fu'><a href='to_table.html'>to_table</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt;          Mean       SD       Min      Max n_Obs n_Missing
-#&gt; 1 0.004339615 1.000001 -2.938978 2.755418  1000         0</div><div class='input'><span class='fu'><a href='to_fulltable.html'>to_fulltable</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt;          Mean       SD      Median      MAD       Min      Max n_Obs n_Missing
-#&gt; 1 0.004339615 1.000001 0.008579051 1.002888 -2.938978 2.755418  1000         0
-#&gt;   percentage_Missing
-#&gt; 1                  0</div></pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>1000</span>)
+<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>, <span class='kw'>median</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>distribution</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
+<span class='fu'><a href='to_fulltext.html'>to_fulltext</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))
+<span class='fu'><a href='to_table.html'>to_table</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))
+<span class='fu'><a href='to_fulltable.html'>to_fulltable</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

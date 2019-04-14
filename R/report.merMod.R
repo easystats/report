@@ -2,83 +2,90 @@
 #'
 #' Extract all values of mixed models.
 #'
-#' @inheritParams report.lm
+#' @inheritParams report.merMod
+#'
+#' @examples
+#' \dontrun{
+#' model <- circus::lmerMod_1
+#' }
 #'
 #' @importFrom insight model_info
 #' @importFrom parameters model_parameters
 #' @importFrom performance model_performance
 #' @export
-model_values.lmerMod <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, ...) {
+model_values.lmerMod <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, p_method = "wald", ci_method="wald", ...) {
 
-  # Information
+  # Sanity checks -----------------------------------------------------------
+  if(length(c(ci)) > 1){
+    warning(paste0("report does not support multiple `ci` values yet. Using ci = ", ci[1]), ".")
+    ci <- ci[1]
+  }
+
+  # Information -----------------------------------------------------------
   out <- list()
   out$info <- insight::model_info(model)
 
-  # Core Tables
+  # Core Tables -----------------------------------------------------------
   if (!is.null(effsize)) {
     if (standardize == FALSE) {
       warning("The effect sizes are computed from standardized coefficients. Setting `standardize` to TRUE.")
     }
-    out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ci = ci, bootstrap = bootstrap, ...)
+    out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ci = ci, bootstrap = bootstrap, p_method = p_method, ci_method=ci_method, ...)
   } else {
-    out$table_parameters <- parameters::model_parameters(model, ci = ci, standardize = standardize, bootstrap = bootstrap, ...)
+    out$table_parameters <- parameters::model_parameters(model, ci = ci, standardize = standardize, bootstrap = bootstrap, p_method = p_method, ci_method=ci_method, ...)
   }
   out$table_parameters$Parameter <- as.character(out$table_parameters$Parameter)
   out$table_performance <- performance::model_performance(model, metrics = performance_metrics, ...)
 
 
+  # Text --------------------------------------------------------------------
+  text_description <- model_text_description(model, effsize = effsize, ci = ci, bootstrap = bootstrap, p_method = p_method, ci_method = ci_method, ...)
+  text_performance <- model_text_performance_mixed(out$table_performance)
+
+  # Initial and Parameters
   if (bootstrap == FALSE) {
-    # Text
-    text_description <- model_text_description(model, effsize = effsize, ci = ci, bootstrap = bootstrap, ...)
-    text_performance <- model_text_performance_lm(out$table_performance)
-    text_initial <- model_text_initial_lm(model, out$table_parameters, ci = ci)
-    text_parameters <- model_text_parameters_lm(model, out$table_parameters, ci = ci, effsize = effsize, ...)
+    text_initial <- model_text_initial_glm(model, out$table_parameters, ci = ci)
 
-    out$text <- paste(
-      text_description$text,
-      text_performance$text,
-      text_initial$text,
-      text_parameters$text
-    )
-    out$text_full <- paste(
-      text_description$text_full,
-      text_performance$text_full,
-      text_initial$text_full,
-      text_parameters$text_full
-    )
+    if(out$info$is_linear){
+      text_parameters <- model_text_parameters_lm(model, out$table_parameters, ci = ci, effsize = effsize, ...)
+    } else if(out$info$is_logit){
+      text_parameters <- model_text_parameters_logistic(model, out$table_parameters, ci = ci, effsize = effsize, ...)
+    } else{
+      text_parameters <- model_text_parameters_glm(model, out$table_parameters, ci = ci, effsize = effsize, ...)
+    }
 
-    # Tables
-    modeltable <- model_table_lm(model, out$table_parameters, out$table_performance, performance_in_table = performance_in_table, ...)
+    modeltable <- model_table_glm(model, out$table_parameters, out$table_performance, performance_in_table = performance_in_table, ...)
     out$table <- modeltable$table
     out$table_full <- modeltable$table_full
   } else {
-    # Text
-    text_description <- model_text_description(model, effsize = effsize, ci = ci, bootstrap = bootstrap, ...)
-    text_performance <- model_text_performance_lm(out$table_performance)
     text_initial <- model_text_initial_bayesian(model, out$table_parameters, ci = ci)
     text_parameters <- model_text_parameters_bayesian(model, out$table_parameters, ci = ci, effsize = effsize, ...)
 
-    out$text <- paste(
-      text_description$text,
-      text_performance$text,
-      text_initial$text,
-      text_parameters$text
-    )
-    out$text_full <- paste(
-      text_description$text_full,
-      text_performance$text_full,
-      text_initial$text_full,
-      text_parameters$text_full
-    )
-
-    # Tables
     modeltable <- model_table_bayesian(model, out$table_parameters, out$table_performance, performance_in_table = performance_in_table, ...)
     out$table <- modeltable$table
     out$table_full <- modeltable$table_full
   }
 
 
-  # tables to values
+  # Combine text --------------------------------------------------------------------
+
+
+  out$text <- paste(
+    text_description$text,
+    text_performance$text,
+    text_initial$text,
+    text_parameters$text
+  )
+  out$text_full <- paste(
+    text_description$text_full,
+    text_performance$text_full,
+    text_initial$text_full,
+    text_parameters$text_full
+  )
+
+
+  # To values ---------------------------------------------------------------
+
   out$parameters <- list()
   for (param in out$table_parameters$Parameter) {
     out$parameters[[param]] <- as.list(out$table_parameters[out$table_parameters$Parameter == param, ])
@@ -94,7 +101,8 @@ model_values.lmerMod <- function(model, ci = 0.95, standardize = TRUE, effsize =
   return(out)
 }
 
-
+#' @export
+model_values.merMod <- model_values.lmerMod
 
 
 
@@ -128,14 +136,10 @@ model_values.lmerMod <- function(model, ci = 0.95, standardize = TRUE, effsize =
 #'
 #' Create a report of a mixed model.
 #'
-#' @param model Object of class \link{lm}.
-#' @param ci Confidence Interval (CI) level. Default to 0.95 (95\%).
-#' @param standardize Standardized coefficients. See \code{\link[parameters:model_parameters.lm]{model_parameters}}.
-#' @param effsize Interpret the standardized parameters using a set of rules. Can be "cohen1988" (default), "sawilowsky2009", NULL, or a custom set of \link{rules}.
-#' @param performance_in_table Add performance metrics in table.
-#' @param performance_metrics See \code{\link[performance:model_performance.lm]{model_performance}}.
-#' @param bootstrap See \code{\link[parameters:model_parameters.lm]{model_parameters}}.
-#' @param ... Arguments passed to or from other methods.
+#' @param model Mixed model.
+#' @inheritParams report.lm
+#' @param p_method Method for computing p values. See \link{p_value}.
+#' @param ci_method Method for computing confidence intervals (CI). See \link{ci}.
 #'
 #' @examples
 #' \dontrun{
@@ -147,7 +151,7 @@ model_values.lmerMod <- function(model, ci = 0.95, standardize = TRUE, effsize =
 #' to_fulltable(r)
 #' }
 #' @export
-report.lmerMod <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, ...) {
+report.lmerMod <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, p_method = "wald", ci_method="wald", ...) {
   values <- model_values(model,
     ci = ci,
     standardize = standardize,
@@ -155,6 +159,8 @@ report.lmerMod <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohe
     performance_in_table = performance_in_table,
     performance_metrics = performance_metrics,
     bootstrap = bootstrap,
+    p_method=p_method,
+    ci_method=ci_method,
     ...
   )
 
@@ -171,3 +177,39 @@ report.lmerMod <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohe
   class(rep) <- c("report_model", class(rep))
   rep
 }
+
+
+
+
+
+
+
+
+#' @rdname report.lmerMod
+#' @export
+report.merMod <- function(model, ci = 0.95, standardize = TRUE, effsize = "chen2010", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, ci_method="wald", ...) {
+  values <- model_values(model,
+                         ci = ci,
+                         standardize = standardize,
+                         effsize = effsize,
+                         performance_in_table = performance_in_table,
+                         performance_metrics = performance_metrics,
+                         bootstrap = bootstrap,
+                         ci_method=ci_method,
+                         ...
+  )
+
+
+  out <- list(
+    table = values$table,
+    table_full = values$table_full,
+    text = values$text,
+    text_full = values$text_full,
+    values = values
+  )
+
+  rep <- as.report(out)
+  class(rep) <- c("report_model", class(rep))
+  rep
+}
+

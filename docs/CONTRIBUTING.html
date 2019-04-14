@@ -154,7 +154,7 @@
 <ul>
 <li><strong>“I’d like to help, but I don’t know where to start”</strong></li>
 </ul>
-<p>You can look around the <a href="https://github.com/neuropsychology/report/issues">issues section</a> to find some features / ideas / bugs to start working on. You can also open an issue just to say that you’re there, we might have some ideas adapted to your skills.</p>
+<p>You can look around the <a href="https://github.com/neuropsychology/report/issues">issues section</a> to find some features / ideas / bugs to start working on. You can also open an issue just to say that you’re there, we might have some ideas adapted to your skills. One of the “easy” way to start contributing is through tests improvement, which consists of building some edge-case models, and running them through all the functions with different arguments, to see if everything behaves as expected.</p>
 <ul>
 <li><strong>“I’m not sure if my suggestion or idea is worthwile”</strong></li>
 </ul>
@@ -172,6 +172,25 @@
 <li>Before submitting a change, please read the <a href="https://style.tidyverse.org/"><strong>R style guide</strong></a> to keep some consistency in code formatting.</li>
 <li>Regarding the style guide, note this exception: we put readability and clarity before everything. Thus, we like underscores and full names (prefer <code>model_performance</code> over <code>modelperf</code> and <code>interpret_odds_logistic</code> over <code>intoddslog</code>).</li>
 <li>Before you start to code, make sure you’re on the <code>dev</code> branch (the most “advanced”). Then, create a new branch named by your feature (e.g., <code>report_for_bigmodels</code>) and do your changes. Finally, submit your branch to be merged into the <code>dev</code> branch. Then, every now and then, the dev branch will merge into <code>master</code>, as a new package version.</li>
+</ul>
+</div>
+<div id="checks-to-do-before-submission" class="section level2">
+<h2 class="hasAnchor">
+<a href="#checks-to-do-before-submission" class="anchor"></a>Checks to do before submission</h2>
+<ul>
+<li><p>Make sure <strong>documentation</strong> (roxygen) is good</p></li>
+<li><p>Make sure to add <strong>tests</strong> for the new functions</p></li>
+<li>
+<p>Run:</p>
+<ul>
+<li>
+<code><a href="https://www.rdocumentation.org/packages/styler/topics/style_pkg">styler::style_pkg()</a></code>: Automatic style formatting</li>
+<li>
+<code><a href="https://www.rdocumentation.org/packages/lintr/topics/lint_package">lintr::lint_package()</a></code>: Style checks</li>
+<li>
+<code><a href="https://www.rdocumentation.org/packages/devtools/topics/check">devtools::check()</a></code>: General checks</li>
+</ul>
+</li>
 </ul>
 </div>
 <div id="useful-materials" class="section level2">

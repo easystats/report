@@ -5,7 +5,8 @@
 \title{Numeric Vector Report}
 \usage{
 \method{report}{numeric}(model, median = FALSE, dispersion = TRUE,
-  range = TRUE, missing_percentage = FALSE, ...)
+  range = TRUE, distribution = FALSE, missing_percentage = FALSE,
+  ...)
 }
 \arguments{
 \item{model}{Numeric vector.}
@@ -16,7 +17,9 @@
 
 \item{range}{Show range.}
 
-\item{missing_percentage}{Show missings by number (default) or percentage}
+\item{distribution}{Returns Kurtosis and Skewness in table, and tries to guess the distribution of the numeric variable by using an internal machine learning model (see \link[parameters]{find_distribution}).}
+
+\item{missing_percentage}{Show missings by number (default) or percentage.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
@@ -24,12 +27,14 @@
 Create a report of a numeric vector.
 }
 \examples{
+\dontrun{
 x <- rnorm(1000)
 report(x)
-report(x, median = TRUE, dispersion = TRUE, range = TRUE, missing_percentage = TRUE)
+report(x, median = TRUE, missing_percentage = TRUE, distribution=TRUE)
 to_fulltext(report(x))
 to_table(report(x))
 to_fulltable(report(x))
+}
 }
 \seealso{
 report

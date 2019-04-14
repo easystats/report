@@ -1,5 +1,5 @@
 #' @keywords internal
-model_text_initial_lm <- function(model, parameters, ci = 0.95, ...) {
+model_text_initial_glm <- function(model, parameters, ci = 0.95, ...) {
   intercept <- parameters[parameters$Parameter == "(Intercept)", ]
 
   text <- paste0(
@@ -11,46 +11,27 @@ model_text_initial_lm <- function(model, parameters, ci = 0.95, ...) {
     "The model's intercept, corresponding to ",
     .text_intercept(model),
     ", is at ",
-    format_value(intercept$beta),
-    " (t(",
-    format_value_unless_integers(intercept$DoF_residual),
-    ") = ",
-    format_value(intercept$t),
-    ", ",
-    format_ci(intercept$CI_low, intercept$CI_high, ci),
-    ", p ",
-    format_p(intercept$p),
-    ")."
-  )
+    format_value(intercept$beta))
 
-  out <- list(
-    "text" = text,
-    "text_full" = text_full
-  )
-  return(out)
-}
+  if(insight::model_info(model)$is_linear){
+    if("DoF_residual" %in% names(intercept)){
+      text_full <- paste0(text_full,
+                          " (t(",
+                          format_value_unless_integers(intercept$DoF_residual),
+                          ") = ",
+                          format_value(intercept$t))
+    } else{
+      text_full <- paste0(text_full,
+                          " (t = ",
+                          format_value(intercept$t))
+    }
 
-
-
-
-
-
-#' @keywords internal
-model_text_initial_logistic <- function(model, parameters, ci = 0.95, ...) {
-  intercept <- parameters[parameters$Parameter == "(Intercept)", ]
-
-  text <- paste0(
-    "The model's intercept is at ",
-    format_value(intercept$beta),
-    "."
-  )
-  text_full <- paste0(
-    "The model's intercept, corresponding to ",
-    .text_intercept(model),
-    ", is at ",
-    format_value(intercept$beta),
-    " (z = ",
-    format_value(intercept$z),
+  } else{
+    text_full <- paste0(text_full,
+                        " (z = ",
+                        format_value(intercept$z))
+  }
+  text_full <- paste0(text_full,
     ", ",
     format_ci(intercept$CI_low, intercept$CI_high, ci),
     ", p ",

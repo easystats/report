@@ -12,13 +12,13 @@ model_text_priors <- function(parameters){
 
   values <- paste0(params$Prior_Distribution, " (", values, ")")
 
-  if(length(unique(values)) == 1){
+  if(length(unique(values)) == 1 & nrow(params) > 1){
     text <- paste0("all set as ", values[1])
   } else{
     text <- paste0("set as ", format_text_collapse(values))
   }
 
-  text <- paste0("Prior distributions over parameters were ", text, " distributions.")
+  text <- paste0("Priors over parameters were ", text, " distributions.")
   return(text)
 
 }

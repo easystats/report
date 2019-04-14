@@ -1,25 +1,35 @@
 #' Correlation Coefficient Interpretation
 #'
 #' @param r Value or vector of correlation coefficient.
-#' @param rules Can be "cohen1988" (default), "evans1996" or custom set of rules.
+#' @param rules Can be "gignac2016" (default), cohen1988", "evans1996" or custom set of rules.
 #'
 #'
 #'
 #' @examples
 #' interpret_r(r = .015)
 #' interpret_r(r = c(.5, -.02))
+#'
 #' @seealso Page 88 of APA's 6th Edition.
 #' @references
 #' \itemize{
+#'   \item Gignac, G. E., & Szodorai, E. T. (2016). Effect size guidelines for individual differences researchers. Personality and individual differences, 102, 74-78.
 #'   \item Cohen, J. (1988). Statistical power analysis for the behavioural sciences.
 #'   \item Evans, J. D. (1996). Straightforward statistics for the behavioral sciences. Thomson Brooks/Cole Publishing Co.
 #' }
 #' @export
-interpret_r <- function(r, rules = "cohen1988") {
+interpret_r <- function(r, rules = "gignac2016") {
   if (is.rules(rules)) {
     return(interpret(abs(r), rules))
   } else {
-    if (rules == "cohen1988") {
+    if (rules == "gignac2016") {
+      text <- interpret(
+        abs(r),
+        rules(
+          c(0.1, 0.2, 0.3),
+          c("very small", "small", "moderate", "large")
+        )
+      )
+    } else if (rules == "cohen1988") {
       text <- interpret(
         abs(r),
         rules(
@@ -36,7 +46,7 @@ interpret_r <- function(r, rules = "cohen1988") {
         )
       )
     } else {
-      stop("rules must be 'cohen1988', 'evans1996' or an object of type rules.")
+      stop("rules must be 'gignac2016', 'cohen1988', 'evans1996' or an object of type rules.")
     }
   }
 

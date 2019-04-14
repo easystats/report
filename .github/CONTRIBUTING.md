@@ -9,7 +9,7 @@ It's alright, don't worry! You can always dig in the code, in the documentation 
 
 - **"I'd like to help, but I don't know where to start"**
 
-You can look around the [issues section](https://github.com/neuropsychology/report/issues) to find some features / ideas / bugs to start working on. You can also open an issue just to say that you're there, we might have some ideas adapted to your skills.
+You can look around the [issues section](https://github.com/neuropsychology/report/issues) to find some features / ideas / bugs to start working on. You can also open an issue just to say that you're there, we might have some ideas adapted to your skills. One of the "easy" way to start contributing is through tests improvement, which consists of building some edge-case models, and running them through all the functions with different arguments, to see if everything behaves as expected.
 
 - **"I'm not sure if my suggestion or idea is worthwile"**
 
@@ -30,6 +30,17 @@ Authors of substantial contribution will be added within the [**authors**](https
 - Before submitting a change, please read the [**R style guide**](https://style.tidyverse.org/) to keep some consistency in code formatting.
 - Regarding the style guide, note this exception: we put readability and clarity before everything. Thus, we like underscores and full names (prefer `model_performance` over `modelperf` and `interpret_odds_logistic` over `intoddslog`).
 - Before you start to code, make sure you're on the `dev` branch (the most "advanced"). Then, create a new branch named by your feature (e.g., `report_for_bigmodels`) and do your changes. Finally, submit your branch to be merged into the `dev` branch. Then, every now and then, the dev branch will merge into `master`, as a new package version.
+
+## Checks to do before submission
+
+- Make sure **documentation** (roxygen) is good
+- Make sure to add **tests** for the new functions
+- Run:
+
+  - `styler::style_pkg()`: Automatic style formatting
+  - `lintr::lint_package()`: Style checks
+  - `devtools::check()`: General checks
+
 
 
 ## Useful Materials

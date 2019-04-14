@@ -143,7 +143,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Factor (Categorical Vector) Report</h1>
-    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.factor.R'><code>R/report.factor.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.data.frame.R'><code>R/report.data.frame.R</code></a></small>
     <div class="hidden name"><code>report.factor.Rd</code></div>
     </div>
 
@@ -154,8 +154,7 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for factor</span>
-<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>, <span class='kw'>levels_percentage</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>, <span class='kw'>levels_percentage</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -167,10 +166,6 @@
     <tr>
       <th>levels_percentage</th>
       <td><p>Show factor levels by number (default) or percentage.</p></td>
-    </tr>
-    <tr>
-      <th>missing_percentage</th>
-      <td><p>Show missings by number (default) or percentage.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -185,17 +180,17 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/factor'>factor</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"A"</span>, <span class='st'>"B"</span>, <span class='st'>"C"</span>), <span class='fl'>10</span>))
-<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; 3 levels: A (n = 10); B (n = 10); C (n = 10)</div><div class='input'><span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>, <span class='kw'>levels_percentage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; 3 levels: A (33.33%); B (33.33%); C (33.33%)</div><div class='input'><span class='fu'><a href='to_fulltext.html'>to_fulltext</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; 3 levels: A (n = 10, 33.33%; 0 missing); B (n = 10, 33.33%; 0 missing); C (n = 10, 33.33%; 0 missing)</div><div class='input'><span class='fu'><a href='to_table.html'>to_table</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 3 x 3</span><span>
-#&gt;   Level n_Obs n_Missing
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> A        10         0
-#&gt; </span><span style='color: #555555;'>2</span><span> B        10         0
-#&gt; </span><span style='color: #555555;'>3</span><span> C        10         0</div><div class='input'><span class='fu'><a href='to_fulltable.html'>to_fulltable</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 5</span><span>
-#&gt;   Level n_Obs percentage_Obs n_Missing percentage_Missing
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> A        10           33.3         0                  0
-#&gt; </span><span style='color: #555555;'>2</span><span> B        10           33.3         0                  0
-#&gt; </span><span style='color: #555555;'>3</span><span> C        10           33.3         0                  0</div></span></pre>
+<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; 3 levels: A (n = 10); B (n = 10) and C (n = 10).</div><div class='input'><span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>, <span class='kw'>levels_percentage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; 3 levels: A (33.33%); B (33.33%) and C (33.33%).</div><div class='input'><span class='fu'><a href='to_fulltext.html'>to_fulltext</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; 3 levels: A (n = 10, 33.33%); B (n = 10, 33.33%) and C (n = 10, 33.33%).</div><div class='input'><span class='fu'><a href='to_table.html'>to_table</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 3 x 2</span><span>
+#&gt;   Level n_Obs
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> A        10
+#&gt; </span><span style='color: #555555;'>2</span><span> B        10
+#&gt; </span><span style='color: #555555;'>3</span><span> C        10</div><div class='input'><span class='fu'><a href='to_fulltable.html'>to_fulltable</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 3 x 3</span><span>
+#&gt;   Level n_Obs percentage_Obs
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> A        10           33.3
+#&gt; </span><span style='color: #555555;'>2</span><span> B        10           33.3
+#&gt; </span><span style='color: #555555;'>3</span><span> C        10           33.3</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -28,6 +28,7 @@ Imports:
 	performance,
 	bayestestR,
 	correlation,
+	estimate,
 	dplyr
 Suggests:
 	spelling,
@@ -39,13 +40,16 @@ Suggests:
 	ggplot2,
 	rstudioapi,
 	rstanarm,
-	BayesFactor
+	BayesFactor,
+	caret,
+	randomForest
 Remotes: 
 	easystats/insight,
 	easystats/parameters,
 	easystats/performance,
 	easystats/bayestestR,
 	easystats/correlation,
+	easystats/estimate,
 	easystats/circus
 RoxygenNote: 6.1.1
 Language: en-GB

@@ -4,17 +4,19 @@
 \alias{model_values.stanreg}
 \title{Bayesian Models Values}
 \usage{
-\method{model_values}{stanreg}(model, ci = 0.9, standardize = FALSE,
-  effsize = NULL, performance_in_table = TRUE,
-  performance_metrics = c("R2", "R2_adj"),
+\method{model_values}{stanreg}(model, ci = 0.9, ci_method = "default",
+  standardize = FALSE, effsize = NULL, performance_in_table = TRUE,
+  performance_metrics = c("R2", "R2_adjusted"),
   parameters_estimate = "median", parameters_test = c("pd", "rope"),
   parameters_diagnostic = TRUE, parameters_priors = TRUE,
-  rope_bounds = "default", rope_full = TRUE, ...)
+  rope_range = "default", rope_full = TRUE, ...)
 }
 \arguments{
 \item{model}{Object of class \link{lm}.}
 
 \item{ci}{\href{https://easystats.github.io/bayestestR/articles/1_IndicesDescription.html#hdi---the-credible-interval-ci}{Credible Interval} (CI) level. Default to 0.90 (90\%).}
+
+\item{ci_method}{The type of index used for Credible Interval. Can be \code{"default"}, \link[bayestestR]{hdi} or "quantile" (see \link[bayestestR]{ci}). Default selects "hdi" for linear models and "quantile" for models with binary outcome.}
 
 \item{standardize}{Standardized coefficients. See \code{\link[parameters:model_parameters.lm]{model_parameters}}.}
 
@@ -32,7 +34,7 @@
 
 \item{parameters_priors}{Include priors specifications information. If set to true (current \code{rstanarm}' default), automatically adjusted priors' scale during fitting  will be displayed.}
 
-\item{rope_bounds}{\href{https://easystats.github.io/bayestestR/articles/1_IndicesDescription.html#rope}{ROPE's} lower and higher bounds. Should be a list of two values (e.g., \code{c(-0.1, 0.1)}) or \code{"default"}. If \code{"default"}, the bounds are set to \code{x +- 0.1*SD(response)}.}
+\item{rope_range}{\href{https://easystats.github.io/bayestestR/articles/1_IndicesDescription.html#rope}{ROPE's} lower and higher limits Should be a list of two values (e.g., \code{c(-0.1, 0.1)}) or \code{"default"}. If \code{"default"}, the bounds are set to \code{x +- 0.1*SD(response)}.}
 
 \item{rope_full}{If TRUE, use the proportion of the entire posterior distribution for the equivalence test. Otherwise, use the proportion of HDI as indicated by the \code{ci} argument.}
 

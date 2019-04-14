@@ -156,14 +156,15 @@
     <pre class="usage"><span class='co'># S3 method for lmerMod</span>
 <span class='fu'><a href='model_values.html'>model_values</a></span>(<span class='no'>model</span>, <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>standardize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>effsize</span> <span class='kw'>=</span> <span class='st'>"cohen1988"</span>, <span class='kw'>performance_in_table</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>performance_metrics</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='kw'>bootstrap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>performance_metrics</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='kw'>bootstrap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>p_method</span> <span class='kw'>=</span> <span class='st'>"wald"</span>,
+  <span class='kw'>ci_method</span> <span class='kw'>=</span> <span class='st'>"wald"</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>model</th>
-      <td><p>Object of class <a href='https://www.rdocumentation.org/packages/stats/topics/lm'>lm</a>.</p></td>
+      <td><p>Mixed model.</p></td>
     </tr>
     <tr>
       <th>ci</th>
@@ -190,18 +191,33 @@
       <td><p>See <code><a href='https://www.rdocumentation.org/packages/parameters/topics/model_parameters.lm'>model_parameters</a></code>.</p></td>
     </tr>
     <tr>
+      <th>p_method</th>
+      <td><p>Method for computing p values. See p_value.</p></td>
+    </tr>
+    <tr>
+      <th>ci_method</th>
+      <td><p>Method for computing confidence intervals (CI). See ci.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>Arguments passed to or from other methods.</p></td>
     </tr>
     </table>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>circus</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/circus/topics/lmerMod_1'>lmerMod_1</a></span>
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+            
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

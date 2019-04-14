@@ -121,7 +121,7 @@ model_text_performance_bayesian <- function(performance, ci = 0.90, ...) {
       format_value(performance$R2_Median)
     )
     text_full <- paste0(
-      "The model's explanatory power is ",
+      "The model's total explanatory power is ",
       interpret_r2(performance$R2_Median, rules = "cohen1988"),
       " (R2's median = ",
       format_value(performance$R2_Median),
@@ -148,7 +148,7 @@ model_text_performance_bayesian <- function(performance, ci = 0.90, ...) {
     }
   }
 
-  if ("R2_Fixed_Median" %in% names(performance)) {
+  if ("R2_marginal_Median" %in% names(performance)) {
     if (text != "") {
       text <- paste0(text, " ")
       text_full <- paste0(text_full, " ")
@@ -157,23 +157,72 @@ model_text_performance_bayesian <- function(performance, ci = 0.90, ...) {
     text <- paste0(
       text,
       "Within this model, the explanatory power related to the",
-      " fixed effects (fixed R2's median) is of ",
-      format_value(performance$R2_Fixed_Median),
+      " fixed effects alone (marginal R2's median) is of ",
+      format_value(performance$R2_marginal_Median),
       "."
     )
 
     text_full <- paste0(
       text_full,
       "Within this model, the explanatory power related to the",
-      " fixed effects (fixed R2's median) is of ",
-      format_value(performance$R2_Fixed_Median),
+      " fixed effects alone (marginal R2's median) is of ",
+      format_value(performance$R2_marginal_Median),
       " (MAD = ",
-      format_value(performance$R2_Fixed_MAD),
+      format_value(performance$R2_marginal_MAD),
       ", ",
-      format_ci(performance$R2_Fixed_CI_low, performance$R2_Fixed_CI_high, ci = ci),
+      format_ci(performance$R2_marginal_CI_high, performance$R2_marginal_CI_high, ci = ci),
       ")."
     )
   }
+
+  out <- list(
+    "text" = text,
+    "text_full" = text_full
+  )
+  return(out)
+}
+
+
+
+
+
+
+
+#' @keywords internal
+model_text_performance_mixed <- function(performance, ...) {
+  text <- ""
+
+  # R2 Conditional
+  if ("R2_conditional" %in% names(performance)) {
+    text <- paste0(
+      "The model's total explanatory power is ",
+      interpret_r2(performance$R2_conditional, rules = "cohen1988"),
+      " (conditional R2 = ",
+      format_value(performance$R2_conditional),
+      ")")
+  }
+
+  # R2 marginal
+  if ("R2_marginal" %in% names(performance)) {
+    if(text == ""){
+      text <- "The"
+    } else{
+      text <- paste0(text, " and the")
+    }
+    text <- paste0(text,
+      " part related to the",
+      " fixed effects alone (marginal R2) is of ",
+      format_value(performance$R2_marginal),
+      ".")
+  } else{
+    text <- paste0(text, ".")
+  }
+
+
+  text_full <- text
+
+  # ICC
+  # ?
 
   out <- list(
     "text" = text,
