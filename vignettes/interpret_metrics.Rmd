@@ -97,6 +97,8 @@ interpret_r2(x, rules = "hair2011")
 
 #### @gignac2016effect
 
+Gignac's rules of thumb are actually one of few interpretation grid justified and based on actual data, in this case on the distribution of effect magnitudes in the litterature.
+
 ```r
 interpret_r(x, rules = "gignac2016")
 ```
@@ -137,6 +139,19 @@ interpret_r(x, rules = "evans1996")
 ### Standardized Difference *d* (Cohen's *d*)
 
 The sandardized difference can be obtained through the standardization of linear model's parameters or data, in which they can be used as indices of effect size.
+
+#### @gignac2016effect
+
+Gignac's rules of thumb are actually one of few interpretation grid justified and based on actual data, in this case on the distribution of effect magnitudes in the litterature.
+
+```r
+interpret_d(x, rules = "gignac2016")
+```
+
+- **d = 0 - 0.2**: Very small
+- **d = 0.2 - 0.4**: Small
+- **d = 0.4 - 0.6**: Medium
+- **d > 0.6**: Large
 
 
 #### @cohen1988statistical

@@ -4,17 +4,19 @@
 \alias{model_values.lmerMod}
 \title{Mixed Models Values}
 \usage{
-\method{model_values}{lmerMod}(model, ci = 0.95, standardize = TRUE,
-  effsize = "cohen1988", performance_in_table = TRUE,
-  performance_metrics = "all", bootstrap = FALSE, p_method = "wald",
-  ci_method = "wald", ...)
+\method{model_values}{lmerMod}(model, ci = 0.95, standardize = "refit",
+  standardize_robust = FALSE, effsize = "cohen1988",
+  performance_in_table = TRUE, performance_metrics = "all",
+  bootstrap = FALSE, p_method = "wald", ci_method = "wald", ...)
 }
 \arguments{
 \item{model}{Mixed model.}
 
 \item{ci}{Confidence Interval (CI) level. Default to 0.95 (95\%).}
 
-\item{standardize}{Standardized coefficients. See \code{\link[parameters:model_parameters.lm]{model_parameters}}.}
+\item{standardize}{Add standardized parameters. Can be FALSE or a character indicating the standardization method (see \link{standardize_parameters}).}
+
+\item{standardize_robust}{Robust standardization. See \link{standardize_parameters}.}
 
 \item{effsize}{\href{https://easystats.github.io/report/articles/interpret_metrics.html}{Interpret the standardized parameters} using a set of rules. Can be "cohen1988" (default for linear models), "chen2010" (default for logistic models), "sawilowsky2009", NULL, or a custom set of \link{rules}.}
 
@@ -22,13 +24,13 @@
 
 \item{performance_metrics}{See \code{\link[performance:model_performance.lm]{model_performance}}.}
 
-\item{bootstrap}{See \code{\link[parameters:model_parameters.lm]{model_parameters}}.}
+\item{bootstrap}{Should estimates be based on bootsrapped model? If TRUE, then arguments of \link[=model_parameters.stanreg]{Bayesian regressions} apply.}
 
 \item{p_method}{Method for computing p values. See \link{p_value}.}
 
 \item{ci_method}{Method for computing confidence intervals (CI). See \link{ci}.}
 
-\item{...}{Arguments passed to or from other methods.}
+\item{...}{Arguments passed to or from other methods (e.g., to \link[=standardize.lm]{standardize}).}
 }
 \description{
 Extract all values of mixed models.

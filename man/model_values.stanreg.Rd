@@ -5,11 +5,12 @@
 \title{Bayesian Models Values}
 \usage{
 \method{model_values}{stanreg}(model, ci = 0.9, ci_method = "default",
-  standardize = FALSE, effsize = NULL, performance_in_table = TRUE,
-  performance_metrics = c("R2", "R2_adjusted"),
-  parameters_estimate = "median", parameters_test = c("pd", "rope"),
-  parameters_diagnostic = TRUE, parameters_priors = TRUE,
-  rope_range = "default", rope_full = TRUE, ...)
+  standardize = FALSE, standardize_robust = FALSE, effsize = NULL,
+  performance_in_table = TRUE, performance_metrics = c("R2",
+  "R2_adjusted"), parameters_estimate = "median",
+  parameters_test = c("pd", "rope"), parameters_diagnostic = TRUE,
+  parameters_priors = TRUE, rope_range = "default", rope_full = TRUE,
+  ...)
 }
 \arguments{
 \item{model}{Object of class \link{lm}.}
