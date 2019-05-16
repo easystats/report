@@ -29,15 +29,21 @@ options(knitr.kable.NA = '',
 ```
 
 
-## Why?
+# Why?
 
-The metrics used in statistics (indices of fit, model performance or parameter estimates) can be very abstract. A long experience is required to intuitively ***"feel"*** the meaning of their values. In order to facilitate the understanding of the results they are facing, many scientists use (often implicitly) some set of **rules of thumb**. Thus, in order to validate and standardize such interpretation grids, some authors validated and published them in the form of guidelines. One of the most famous interpertation grid was proposed by **Cohen (1988)** for a series of widely used indices, such as the correlation **r** (*r* = .20, small; *r* = .40, moderate and *r* = .60, large) or the **standardized difference** (*Cohen's d*). 
+The metrics used in statistics (indices of fit, model performance or parameter estimates) can be very abstract. A long experience is required to intuitively ***"feel"*** the meaning of their values. In order to facilitate the understanding of the results they are facing, many scientists use (often implicitly) some set of **rules of thumb**. Thus, in order to validate and standardize such interpretation grids, some authors validated and published them in the form of guidelines. 
 
-The package **`report`** implements such sets of rules of thumb for a variety of indices in a flexible and explicit fashion, helping you understanding and reporting your results in a scientific yet meaningful way. However, readers should keep in mind that these thresholds, altough *"validated"*, **remain arbitrary**. Thus, their use should be discussed on a case-by-case basis depending on the field, hypotheses, prior results and so on, to avoid their crystalisation, as for the infamous ***p* < .05** example.
+One of the most famous interpertation grid was proposed by **Cohen (1988)** for a series of widely used indices, such as the correlation **r** (*r* = .20, small; *r* = .40, moderate and *r* = .60, large) or the **standardized difference** (*Cohen's d*). However, there is now a clear evidence that Cohen's guidelines (which he himself later disavowed; Funder, 2019) are much too stringent and not particularly meaningful taken out of context [@funder2019evaluating]. This led to the emergence of a litterature discussing and creating new sets of rules of thumb.  
+
+Altough **everybody agrees on the fact that effect size interpretation in a study should be justified with a rationale** (and depend on the context, the field, the litterature, the hypothesis, etc.), these pre-baked rules can still nevertheless be useful to give a rough idea or frame of reference to understand scientific results.
+
+The package **`report`** implements such sets of rules of thumb for a variety of indices in a flexible and explicit fashion, helping you understanding and reporting your results in a scientific yet meaningful way. Again, readers should keep in mind that these thresholds, altough *"validated"*, **remain arbitrary**. Thus, their use should be discussed on a case-by-case basis depending on the field, hypotheses, prior results and so on, to avoid their crystalisation, as for the infamous ***p* < .05** example.
+
+Moreovere, some authors suggest the counter-intuitive idea that *very large effects*, especially in the context of psychological research, is likely to be a "gross overestimate that will rarely be found in a large sample or in a replication" [@funder2019evaluating]. They suggest that smaller effect size are worth taking seriously (as they can be potentially consequential), as well as more believable.
+
+# Supported Indices
 
 
-
-## Supported Indices
 
 ### Coefficient of determination  (R2)
 
@@ -94,6 +100,17 @@ interpret_r2(x, rules = "hair2011")
 ### Correlation *r*
 
 
+```r
+interpret_r(x, rules = "funder2019")
+```
+
+- **r = 0 - 0.05**: Very small
+- **r = 0.05 - 0.1**: Small
+- **r = 0.1 - 0.2**: Medium 
+- **r = 0.2 - 0.3**: Large
+- **r > 0.4**: Very large
+
+
 
 #### @gignac2016effect
 
@@ -139,6 +156,16 @@ interpret_r(x, rules = "evans1996")
 ### Standardized Difference *d* (Cohen's *d*)
 
 The sandardized difference can be obtained through the standardization of linear model's parameters or data, in which they can be used as indices of effect size.
+
+```r
+interpret_d(x, rules = "funder2019")
+```
+
+- **r = 0 - 0.1**: Very small
+- **r = 0.1 - 0.2**: Small
+- **r = 0.2 - 0.4**: Medium 
+- **r = 0.4 - 0.6**: Large
+- **r > 0.6**: Very large
 
 #### @gignac2016effect
 
