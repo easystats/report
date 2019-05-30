@@ -48,7 +48,7 @@ tutorials:
 ## Contribute
 
 **`report` is a young package in need of affection**. You can easily be
-a part of the [developping](.github/CONTRIBUTING.md) community of this
+a part of the [developing](.github/CONTRIBUTING.md) community of this
 open-source software and improve science by doing the following:
 
   - Create or check existing
@@ -67,8 +67,8 @@ open-source software and improve science by doing the following:
     discussions.
 
 Don’t be shy, try to code and submit a pull request (See the
-[contributing guide](.github/CONTRIBUTING.md)). Even if unperfect, we
-will help you make it great\!
+[contributing guide](.github/CONTRIBUTING.md)). Even if it's not
+perfect, we will help you make it great\!
 
 ## Installation
 
@@ -87,14 +87,12 @@ library("report")
 
 ### General Workflow
 
-The `report` package works in a two steps fashion. First, creating a
-`report` object with the `report()` function (which takes different
-arguments depending on the type of object you are reporting). Then, this
-report can be displayed either textually, using `to_text()`, or as a
-table, using `to_table()`. Moreover, you can also access a more detailed
-(but less digest) version of the report using `to_fulltext()` and
-`to_fulltable()`. Finally, `to_values()` makes it easy to access all the
-internals of a model.
+The `report` package works in a two step fashion. First, you create a `report` object with
+the `report()` function (which takes different arguments depending on the type of object you are
+reporting). Then, this report can be displayed either textually, using `to_text()`, or as a table,
+using `to_table()`. Moreover, you can access a more detailed (but less digested) version of the
+report using `to_fulltext()` and `to_fulltable()`. Finally, `to_values()` makes it easy to access
+all the internals of a model.
 
 ### Supported Packages
 
