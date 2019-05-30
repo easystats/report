@@ -9,11 +9,11 @@ Status](https://travis-ci.org/easystats/report.svg?branch=master)](https://travi
 
 ***“From R to Manuscript”***
 
-`report`’s primary goal is to fill the gap between R’s output and the
-formatted result description of your manuscript, with the automated use
-of **best practices** guidelines (*e.g.,*
-[APA](https://www.apastyle.org/)’s style guide), ensuring
-**standardization** and **quality** of results reporting.
+`report`'s primary goal is to bridge the gap between R's output and
+the formatted results contained in your manuscript. It automatically
+produces reports of models and dataframes according to **best practice**
+guidelines (*e.g.,* [APA](https://www.apastyle.org/)'s style guide),
+ensuring **standardization** and **quality** in results reporting.
 
 ``` r
 # Example
