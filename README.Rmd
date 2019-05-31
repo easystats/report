@@ -40,7 +40,7 @@ options(knitr.kable.NA = '',
 
 ***"From R to Manuscript"***
 
-`report`'s primary goal is to fill the gap between R's output and the formatted result description of your manuscript, with the automated use of **best practices** guidelines (*e.g.,* [APA](https://www.apastyle.org/)'s style guide), ensuring **standardization** and **quality** of results reporting.
+`report`'s primary goal is to bridge the gap between R's output and the formatted results contained in your manuscript. It automatically produces reports of models and dataframes according to **best practice** guidelines (*e.g.,* [APA](https://www.apastyle.org/)'s style guide), ensuring **standardization** and **quality** in results reporting.
 
 
 
@@ -72,14 +72,14 @@ The package documentation can be found [**here**](https://easystats.github.io/re
 
 ## Contribute
 
-**`report` is a young package in need of affection**. You can easily be a part of the [developping](.github/CONTRIBUTING.md) community of this open-source software and improve science by doing the following:
+**`report` is a young package in need of affection**. You can easily be a part of the [developing](.github/CONTRIBUTING.md) community of this open-source software and improve science by doing the following:
 
 - Create or check existing <a href=https://github.com/easystats/report/issues><img src="man/figures/issue_bug.png" height="25"></a> issues to report, replicate, understand or solve some bugs.
 - Create or check existing <a href=https://github.com/easystats/report/issues><img src="man/figures/issue_featureidea.png" height="25"></a> issues to suggest or discuss a new feature.
 - Check existing <a href=https://github.com/easystats/report/issues><img src="man/figures/issue_help.png" height="25"></a> issues to see things that we'd like to implement, but where help is needed to do it.
 - Check existing <a href=https://github.com/easystats/report/issues><img src="man/figures/issue_opinion.png" height="25"></a> issues to give your opinion and participate in package's design discussions.
 
-Don't be shy, try to code and submit a pull request (See the [contributing guide](.github/CONTRIBUTING.md)). Even if unperfect, we will help you make it great!
+Don't be shy, try to code and submit a pull request (See the [contributing guide](.github/CONTRIBUTING.md)). Even if it's not perfect, we will help you make it great!
 
 
 
@@ -104,7 +104,7 @@ library("report")
 
 ### General Workflow
 
-The `report` package works in a two steps fashion. First, creating a `report` object with the `report()` function (which takes different arguments depending on the type of object you are reporting). Then, this report can be displayed either textually, using `to_text()`, or as a table, using `to_table()`. Moreover, you can also access a more detailed (but less digest) version of the report using `to_fulltext()` and `to_fulltable()`. Finally, `to_values()` makes it easy to access all the internals of a model. 
+The `report` package works in a two step fashion. First, you create a `report` object with the `report()` function (which takes different arguments depending on the type of object you are reporting). Then, this report object can be displayed either textually, using `to_text()`, or as a table, using `to_table()`. Moreover, you can access a more detailed (but less digested) version of the report using `to_fulltext()` and `to_fulltable()`. Finally, `to_values()` makes it easy to access all the internals of a model.
 
 ### Supported Packages
 
@@ -172,6 +172,6 @@ to_fulltext(r, width=100)
 
 ## Credits
 
-If you like it, you can put a *star* on this repo, and cite the package as following:
+If you like it, you can put a *star* on this repo, and cite the package as follows:
 
 - Makowski, D. \& Lüdecke, D. (2019). *The report package for R: Ensuring the use of best practices for results reporting*. CRAN. doi: .
