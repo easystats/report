@@ -17,11 +17,6 @@
 #' report(model)
 #'
 #'
-#' \dontrun{
-#' report(circus::aov_1)
-#' report(circus::anova_1)
-#' report(circus::aovlist_1)
-#' }
 #' @seealso report
 #'
 #' @export
@@ -64,9 +59,9 @@ report.aov <- function(model, omega_squared = "partial", effsize = "field2013", 
     ", p ",
     format_p(params$p),
     ") and can be considered as ",
-    interpret_omega_squared(params$Omega_Squared_partial),
+    interpret_omega_squared(params$Omega_Sq),
     " (partial omega squared = ",
-    format_value(params$Omega_Squared_partial),
+    format_value(params$Omega_Sq_partial),
     ").")
 
   if("Group" %in% names(params)){
