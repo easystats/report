@@ -8,7 +8,7 @@
 #' @importFrom parameters model_parameters
 #' @importFrom performance model_performance
 #' @export
-model_values.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, iterations = 500, ...) {
+model_values.lm <- function(model, ci = 0.95, standardize = "refit", standardize_robust = FALSE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, iterations = 500, ...) {
 
   # Sanity checks -----------------------------------------------------------
   if(length(c(ci)) > 1){
@@ -26,9 +26,9 @@ model_values.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "coh
     if (standardize == FALSE) {
       warning("The effect sizes are computed from standardized coefficients. Setting `standardize` to TRUE.")
     }
-    out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ci = ci, bootstrap = bootstrap, iterations=iterations, ...)
+    out$table_parameters <- parameters::model_parameters(model, ci = ci, standardize = TRUE, standardize_robust = standardize_robust, bootstrap = bootstrap, iterations=iterations, ...)
   } else {
-    out$table_parameters <- parameters::model_parameters(model, ci = ci, standardize = standardize, bootstrap = bootstrap, iterations=iterations, ...)
+    out$table_parameters <- parameters::model_parameters(model, ci = ci, standardize = standardize, standardize_robust = standardize_robust, bootstrap = bootstrap, iterations=iterations, ...)
   }
   out$table_parameters$Parameter <- as.character(out$table_parameters$Parameter)
   out$table_performance <- performance::model_performance(model, metrics = performance_metrics, ...)
@@ -138,17 +138,16 @@ model_values.glm <- model_values.lm
 #'
 #' Create a report of a (general) linear model.
 #'
-#' @param model Object of class \link{lm}.
-#' @param ci Confidence Interval (CI) level. Default to 0.95 (95\%).
-#' @param standardize Standardized coefficients. See \code{\link[parameters:model_parameters.lm]{model_parameters}}.
+#' @inheritParams parameters::model_parameters.lm
+#'
 #' @param effsize \href{https://easystats.github.io/report/articles/interpret_metrics.html}{Interpret the standardized parameters} using a set of rules. Can be "cohen1988" (default for linear models), "chen2010" (default for logistic models), "sawilowsky2009", NULL, or a custom set of \link{rules}.
 #' @param performance_in_table Add performance metrics in table.
 #' @param performance_metrics See \code{\link[performance:model_performance.lm]{model_performance}}.
-#' @param bootstrap See \code{\link[parameters:model_parameters.lm]{model_parameters}}.
-#' @param iterations The number of bootstrap replicates. This only apply in the case of bootsrapped frequentist models.
-#' @param ... Arguments passed to or from other methods.
+
 #'
 #' @examples
+#' library(report)
+#'
 #' model <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
 #' r <- report(model)
 #' to_text(r)
@@ -164,7 +163,7 @@ model_values.glm <- model_values.lm
 #' to_table(r)
 #' to_fulltable(r)
 #' @export
-report.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, iterations = 500, ...) {
+report.lm <- function(model, ci = 0.95, standardize = "refit", standardize_robust = FALSE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, iterations = 500, ...) {
   values <- model_values(model,
     ci = ci,
     standardize = standardize,
@@ -209,10 +208,11 @@ report.lm <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988
 #' @rdname report.lm
 #'
 #' @export
-report.glm <- function(model, ci = 0.95, standardize = TRUE, effsize = "chen2010", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, iterations=500, ...) {
+report.glm <- function(model, ci = 0.95, standardize = "refit", standardize_robust = FALSE, effsize = "chen2010", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, iterations=500, ...) {
   values <- model_values(model,
                          ci = ci,
                          standardize = standardize,
+                         standardize_robust = standardize_robust,
                          effsize = effsize,
                          performance_in_table = performance_in_table,
                          performance_metrics = performance_metrics,

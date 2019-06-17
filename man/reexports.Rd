@@ -3,9 +3,6 @@
 \docType{import}
 \name{reexports}
 \alias{reexports}
-\alias{model_parameters}
-\alias{model_performance}
-\alias{model_info}
 \alias{correlation}
 \alias{estimate_means}
 \alias{estimate_contrasts}
@@ -19,14 +16,8 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{correlation}{\code{\link[correlation]{correlation}}}
+  \item{correlation}{\code{\link[correlation]{correlation}}, \code{\link[correlation]{correlation}}}
 
   \item{estimate}{\code{\link[estimate]{estimate_means}}, \code{\link[estimate]{estimate_contrasts}}, \code{\link[estimate]{estimate_slopes}}, \code{\link[estimate]{estimate_smooth}}, \code{\link[estimate]{data_grid}}}
-
-  \item{insight}{\code{\link[insight]{model_info}}}
-
-  \item{parameters}{\code{\link[parameters]{model_parameters}}}
-
-  \item{performance}{\code{\link[performance]{model_performance}}}
 }}
 

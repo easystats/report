@@ -41,9 +41,8 @@ test_that("interpret_direction", {
 context("interpret_d")
 test_that("interpret_d", {
   testthat::expect_equal(interpret_d(0.021), "very small")
-  testthat::expect_equal(interpret_d(0.6), "medium")
   testthat::expect_equal(interpret_d(1.3, rules = "sawilowsky2009"), "very large")
-  testthat::expect_equal(interpret_d(c(0.45, 0.85)), c("small", "large"))
+  testthat::expect_equal(interpret_d(c(0.45, 0.85)), c("medium", "large"), rules="cohen1988")
   testthat::expect_equal(interpret_d(0.6, rules = rules(c(0.5), c("A", "B"))), "B")
   testthat::expect_error(interpret_d(0.6, rules = "DUPA"))
 })

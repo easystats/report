@@ -138,7 +138,9 @@ model_text_description <- function(model, ci = 0.95, ci_method="wald", effsize =
     if (is.character(effsize)) {
       effsize_name <- ifelse(effsize == "cohen1988", "Cohen's (1988)",
                              ifelse(effsize == "sawilowsky2009", "Savilowsky's (2009)",
-                                    ifelse(effsize == "chen2010", "Chen's (2010)", effsize)
+                                    ifelse(effsize == "gignac2016", "Gignac's (2016)",
+                                          ifelse(effsize == "chen2010", "Chen's (2010)", effsize)
+                                    )
                              )
       )
       text_full <- paste0(" Effect sizes were labelled following ", effsize_name, " recommendations.")

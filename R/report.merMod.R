@@ -13,7 +13,7 @@
 #' @importFrom parameters model_parameters
 #' @importFrom performance model_performance
 #' @export
-model_values.lmerMod <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, p_method = "wald", ci_method="wald", ...) {
+model_values.lmerMod <- function(model, ci = 0.95, standardize = "refit", standardize_robust = FALSE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, p_method = "wald", ci_method="wald", ...) {
 
   # Sanity checks -----------------------------------------------------------
   if(length(c(ci)) > 1){
@@ -30,9 +30,9 @@ model_values.lmerMod <- function(model, ci = 0.95, standardize = TRUE, effsize =
     if (standardize == FALSE) {
       warning("The effect sizes are computed from standardized coefficients. Setting `standardize` to TRUE.")
     }
-    out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ci = ci, bootstrap = bootstrap, p_method = p_method, ci_method=ci_method, ...)
+    out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, standardize_robust = standardize_robust, ci = ci, bootstrap = bootstrap, p_method = p_method, ci_method=ci_method, ...)
   } else {
-    out$table_parameters <- parameters::model_parameters(model, ci = ci, standardize = standardize, bootstrap = bootstrap, p_method = p_method, ci_method=ci_method, ...)
+    out$table_parameters <- parameters::model_parameters(model, ci = ci, standardize = standardize, standardize_robust = standardize_robust, bootstrap = bootstrap, p_method = p_method, ci_method=ci_method, ...)
   }
   out$table_parameters$Parameter <- as.character(out$table_parameters$Parameter)
   out$table_performance <- performance::model_performance(model, metrics = performance_metrics, ...)
@@ -151,10 +151,11 @@ model_values.merMod <- model_values.lmerMod
 #' to_fulltable(r)
 #' }
 #' @export
-report.lmerMod <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, p_method = "wald", ci_method="wald", ...) {
+report.lmerMod <- function(model, ci = 0.95, standardize = "refit", standardize_robust = FALSE, effsize = "cohen1988", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, p_method = "wald", ci_method="wald", ...) {
   values <- model_values(model,
     ci = ci,
     standardize = standardize,
+    standardize_robust = standardize_robust,
     effsize = effsize,
     performance_in_table = performance_in_table,
     performance_metrics = performance_metrics,
@@ -187,10 +188,11 @@ report.lmerMod <- function(model, ci = 0.95, standardize = TRUE, effsize = "cohe
 
 #' @rdname report.lmerMod
 #' @export
-report.merMod <- function(model, ci = 0.95, standardize = TRUE, effsize = "chen2010", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, ci_method="wald", ...) {
+report.merMod <- function(model, ci = 0.95, standardize = "refit", standardize_robust = FALSE, effsize = "chen2010", performance_in_table = TRUE, performance_metrics = "all", bootstrap = FALSE, ci_method="wald", ...) {
   values <- model_values(model,
                          ci = ci,
                          standardize = standardize,
+                         standardize_robust = standardize_robust,
                          effsize = effsize,
                          performance_in_table = performance_in_table,
                          performance_metrics = performance_metrics,

@@ -8,7 +8,7 @@
 #' @importFrom parameters model_parameters
 #' @importFrom performance model_performance
 #' @export
-model_values.stanreg <- function(model, ci = 0.90, ci_method = "default", standardize = FALSE, effsize = NULL, performance_in_table = TRUE, performance_metrics = c("R2", "R2_adjusted"), parameters_estimate = "median", parameters_test = c("pd", "rope"), parameters_diagnostic = TRUE, parameters_priors = TRUE, rope_range = "default", rope_full = TRUE, ...) {
+model_values.stanreg <- function(model, ci = 0.90, ci_method = "default", standardize = FALSE, standardize_robust = FALSE, effsize = NULL, performance_in_table = TRUE, performance_metrics = c("R2", "R2_adjusted"), parameters_estimate = "median", parameters_test = c("pd", "rope"), parameters_diagnostic = TRUE, parameters_priors = TRUE, rope_range = "default", rope_full = TRUE, ...) {
 
   # Sanity checks
   if(length(c(ci)) > 1){
@@ -39,9 +39,9 @@ model_values.stanreg <- function(model, ci = 0.90, ci_method = "default", standa
     if (standardize == FALSE) {
       warning("The effect sizes are computed from standardized coefficients. Setting `standardize` to TRUE.")
     }
-    out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, ci = ci, ci_method=ci_method, estimate = tolower(parameters_estimate), test = tolower(parameters_test), rope_range = rope_range, rope_full = rope_full, diagnostic = parameters_diagnostic, priors = parameters_priors, ...)
+    out$table_parameters <- parameters::model_parameters(model, standardize = TRUE, standardize_robust = standardize_robust, ci = ci, ci_method=ci_method, estimate = tolower(parameters_estimate), test = tolower(parameters_test), rope_range = rope_range, rope_full = rope_full, diagnostic = parameters_diagnostic, priors = parameters_priors, ...)
   } else {
-    out$table_parameters <- parameters::model_parameters(model, ci = ci, ci_method=ci_method, standardize = standardize, estimate = tolower(parameters_estimate), test = tolower(parameters_test), rope_range = rope_range, rope_full = rope_full, diagnostic = parameters_diagnostic, priors = parameters_priors, ...)
+    out$table_parameters <- parameters::model_parameters(model, ci = ci, ci_method=ci_method, standardize = standardize, standardize_robust = standardize_robust, estimate = tolower(parameters_estimate), test = tolower(parameters_test), rope_range = rope_range, rope_full = rope_full, diagnostic = parameters_diagnostic, priors = parameters_priors, ...)
   }
   out$table_parameters$Parameter <- as.character(out$table_parameters$Parameter)
   out$table_performance <- performance::model_performance(model, metrics = performance_metrics)
@@ -155,11 +155,12 @@ model_values.stanreg <- function(model, ci = 0.90, ci_method = "default", standa
 #' report(model)
 #' }
 #' @export
-report.stanreg <- function(model, ci = 0.90, ci_method = "default", standardize = FALSE, effsize = NULL, performance_in_table = TRUE, performance_metrics = c("R2", "R2_adjusted"), parameters_estimate = "median", parameters_test = c("pd", "rope"), parameters_diagnostic = TRUE, parameters_priors = TRUE, rope_range = "default", rope_full = TRUE, ...) {
+report.stanreg <- function(model, ci = 0.90, ci_method = "default", standardize = FALSE, standardize_robust = FALSE, effsize = NULL, performance_in_table = TRUE, performance_metrics = c("R2", "R2_adjusted"), parameters_estimate = "median", parameters_test = c("pd", "rope"), parameters_diagnostic = TRUE, parameters_priors = TRUE, rope_range = "default", rope_full = TRUE, ...) {
   values <- model_values(model,
     ci = ci,
     ci_method = ci_method,
     standardize = standardize,
+    standardize_robust = standardize_robust,
     effsize = effsize,
     performance_in_table = performance_in_table,
     performance_metrics = performance_metrics,
