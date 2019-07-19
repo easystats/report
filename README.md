@@ -16,7 +16,7 @@ of **best practices** guidelines (*e.g.,*
 **standardization** and **quality** of results reporting.
 
 :warning::warning::warning:
-**The `report` package is currently pretty much broken as we are outsourcing, developping and stabilizing the functions on which it is built. Please note that most of the values reported by `report` can be obtained via the `model_parameters()` function in the [`parameters`](https://github.com/easystats/parameters) package and the `model_performance()` function in the [`performance`](https://github.com/easystats/performance) package. Sorry for the inconvenience, we will fix report soon!** 
+**The `report` package is currently pretty much broken as we are outsourcing, developing and stabilizing the functions on which it is built. Please note that most of the values reported by `report` can be obtained via the `model_parameters()` function in the [`parameters`](https://github.com/easystats/parameters) package and the `model_performance()` function in the [`performance`](https://github.com/easystats/performance) package. Sorry for the inconvenience, we will fix report soon!** 
 :warning::warning::warning:
 
 ``` r
@@ -52,7 +52,7 @@ tutorials:
 ## Contribute
 
 **`report` is a young package in need of affection**. You can easily be
-a part of the [developping](.github/CONTRIBUTING.md) community of this
+a part of the [developing](.github/CONTRIBUTING.md) community of this
 open-source software and improve science by doing the following:
 
   - Create or check existing
