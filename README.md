@@ -15,6 +15,10 @@ produces reports of models and dataframes according to **best practice**
 guidelines (*e.g.,* [APA](https://www.apastyle.org/)'s style guide),
 ensuring **standardization** and **quality** in results reporting.
 
+:warning::warning::warning:
+**The `report` package is currently pretty much broken as we are outsourcing, developing and stabilizing the functions on which it is built. Please note that most of the values reported by `report` can be obtained via the `model_parameters()` function in the [`parameters`](https://github.com/easystats/parameters) package and the `model_performance()` function in the [`performance`](https://github.com/easystats/performance) package. Sorry for the inconvenience, we will fix report soon!** 
+:warning::warning::warning:
+
 ``` r
 # Example
 model <- lm(Sepal.Length ~ Species, data=iris)
