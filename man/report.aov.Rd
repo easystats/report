@@ -27,11 +27,6 @@ model <- aov(Sepal.Length ~ Species * Cat1 * Cat2, data=data)
 report(model)
 
 
-\dontrun{
-report(circus::aov_1)
-report(circus::anova_1)
-report(circus::aovlist_1)
-}
 }
 \seealso{
 report

@@ -267,12 +267,7 @@ model_text_parameters_glm <- function(model, parameters, ci = 0.95, parameter_co
 
 
 #' @keywords internal
-model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_full = TRUE, effsize = "cohen1988", parameter_column="Parameter", ...) {
-  if (rope_full) {
-    rope_ci <- 1
-  } else {
-    rope_ci <- ci
-  }
+model_text_parameters_bayesian <- function(model, parameters, ci = 0.89, rope_ci = 1, effsize = "cohen1988", parameter_column="Parameter", ...) {
 
   parameters <- parameters[parameters[[parameter_column]] != "(Intercept)", ]
 
@@ -284,11 +279,15 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
     estimate_full <- paste0(
       estimate_full,
       "median = ",
-      format_value(parameters$Median),
-      ", MAD = ",
-      format_value(parameters$MAD),
-      ", "
-    )
+      parameters::format_value(parameters$Median))
+
+    if ("MAD" %in% names(parameters)) {
+      estimate_full <- paste0(
+        estimate_full,
+        ", MAD = ",
+        parameters::format_value(parameters$MAD),
+        ", ")
+    }
   }
 
   if ("Mean" %in% names(parameters)) {
@@ -298,9 +297,9 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
     estimate_full <- paste0(
       estimate_full,
       "mean = ",
-      format_value(parameters$Mean),
+      parameters::format_value(parameters$Mean),
       ", SD = ",
-      format_value(parameters$SD),
+      parameters::format_value(parameters$SD),
       ", "
     )
   }
@@ -312,7 +311,7 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
     estimate_full <- paste0(
       estimate_full,
       "MAP = ",
-      format_value(parameters$MAP),
+      parameters::format_value(parameters$MAP),
       ", "
     )
   }
@@ -326,12 +325,12 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
   estimate <- paste0(
     estimate,
     ", ",
-    format_ci(parameters$CI_low,
+    parmeters::format_ci(parameters$CI_low,
       parameters$CI_high,
       ci = ci
     )
   )
-  estimate_full <- paste0(estimate_full, format_ci(parameters$CI_low,
+  estimate_full <- paste0(estimate_full, parameters::format_ci(parameters$CI_low,
     parameters$CI_high,
     ci = ci
   ))
@@ -343,7 +342,7 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
       "  - ",
       parameters[[parameter_column]],
       " has a probability of ",
-      format_value(parameters$pd),
+      parameters::format_value(parameters$pd),
       "% of being ",
       interpret_direction(parameters[[estimate_name]])
     )
@@ -376,13 +375,13 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
       text_full,
       interpret_rope(parameters$ROPE_Percentage, ci = rope_ci),
       " (",
-      format_rope(parameters$ROPE_Percentage), ")"
+      parameters::format_rope(parameters$ROPE_Percentage), ")"
     )
     text <- paste0(
       text,
       interpret_rope(parameters$ROPE_Percentage, ci = rope_ci),
       " (",
-      format_rope(parameters$ROPE_Percentage), ")"
+      parameters::format_rope(parameters$ROPE_Percentage), ")"
     )
 
     if (is.null(effsize) | (!"Std_Median" %in% names(parameters) & !"Std_Mean" %in% names(parameters) & !"Std_MAP" %in% names(parameters))) {
@@ -414,7 +413,7 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
       " (std. ",
       estimate_name,
       " = ",
-      format_value(parameters[[estimate_name]]),
+      parameters::format_value(parameters[[estimate_name]]),
       ")."
     )
 
@@ -425,11 +424,11 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
         " (std. ",
         estimate_name,
         " = ",
-        format_value(parameters$Std_Median),
+        parameters::format_value(parameters$Std_Median),
         ", std. MAD = ",
-        format_value(parameters$Std_MAD),
+        parameters::format_value(parameters$Std_MAD),
         ", std. ",
-        format_ci(parameters$Std_CI_low,
+        parameters::format_ci(parameters$Std_CI_low,
           parameters$Std_CI_high,
           ci = ci
         ),
@@ -442,11 +441,11 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
         " (std. ",
         estimate_name,
         " = ",
-        format_value(parameters$Std_Mean),
+        parameters::format_value(parameters$Std_Mean),
         ", std. SD = ",
-        format_value(parameters$Std_SD),
+        parameters::format_value(parameters$Std_SD),
         ", std. ",
-        format_ci(parameters$Std_CI_low,
+        parameters::format_ci(parameters$Std_CI_low,
           parameters$Std_CI_high,
           ci = ci
         ),
@@ -459,9 +458,9 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
         " (std. ",
         estimate_name,
         " = ",
-        format_value(parameters$Std_MAP),
+        parameters::format_value(parameters$Std_MAP),
         ", std. ",
-        format_ci(parameters$Std_CI_low,
+        parameters::format_ci(parameters$Std_CI_low,
           parameters$Std_CI_high,
           ci = ci
         ),
@@ -475,10 +474,10 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
     parameters$convergence <- interpret_rhat(parameters$Rhat, rules="vehtari2019")
     parameters$diagnostic <- ifelse(parameters$convergence == "converged",
                                     paste0(" The algorithm successfuly converged (Rhat = ",
-                                           format_value(parameters$Rhat, digits=3),
+                                           parameters::format_value(parameters$Rhat, digits=3),
                                            ")"),
                                     paste0(" However, the algorithm might not have successfuly converged (Rhat = ",
-                                           format_value(parameters$Rhat, digits=3),
+                                           parameters::format_value(parameters$Rhat, digits=3),
                                            ")"))
 
     if("Effective_Sample" %in% names(parameters)){
@@ -486,24 +485,24 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
       parameters$diagnostic <- ifelse(parameters$stability == "sufficient" & parameters$convergence == "converged",
                                       paste0(parameters$diagnostic,
                                              " and the estimates can be considered as stable (effective sample size = ",
-                                             format_value(parameters$Effective_Sample, digits=0),
+                                             parameters::format_value(parameters$Effective_Sample, digits=0),
                                              ")."
                                              ),
                                       ifelse(parameters$stability == "sufficient" & parameters$convergence != "converged",
                                              paste0(parameters$diagnostic,
                                                     " even though the estimates can be considered as stable (effective sample size = ",
-                                                    format_value(parameters$Effective_Sample, digits=0),
+                                                    parameters::format_value(parameters$Effective_Sample, digits=0),
                                                     ")."
                                              ),
                                              ifelse(parameters$stability != "sufficient" & parameters$convergence == "converged",
                                                     paste0(parameters$diagnostic,
                                                            " but the estimates cannot be considered as stable (effective sample size = ",
-                                                           format_value(parameters$Effective_Sample, digits=0),
+                                                           parameters::format_value(parameters$Effective_Sample, digits=0),
                                                            ")."
                                                     ),
                                                     paste0(parameters$diagnostic,
                                                            " and the estimates cannot be considered as stable (effective sample size = ",
-                                                           format_value(parameters$Effective_Sample, digits=0),
+                                                           parameters::format_value(parameters$Effective_Sample, digits=0),
                                                            ")."
                                                     ))))
       parameters$convergence <- ifelse(parameters$stability != "sufficient",
@@ -540,27 +539,6 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.90, rope_fu
 .extract_main_estimate <- function(estimate_full) {
   l <- strsplit(estimate_full, ", ")
   l <- lapply(l, `[[`, 1)
-  return(unlist(l))
+  unlist(l)
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#' @keywords internal
-.extract_main_estimate <- function(estimate_full) {
-  l <- strsplit(estimate_full, ", ")
-  l <- lapply(l, `[[`, 1)
-  return(unlist(l))
-}

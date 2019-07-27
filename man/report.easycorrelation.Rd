@@ -17,7 +17,7 @@
 
 \item{lower}{Remove the upper triangular part of the matrix.}
 
-\item{reorder}{Reorder the matrix based on correlation pattern (currently only works with square matrices)?}
+\item{reorder}{Reorder the matrix based on correlation pattern (currently only works with square matrices).}
 
 \item{reorder_method}{Reordering method. See \link{hclust}.}
 

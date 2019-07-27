@@ -6,7 +6,7 @@
 #' @param effsize Effect size interpretation set of rules. Can be "cohen1988" (default), "evans1996" or custom set of rules.
 #' @param stars Add significance stars in table. For frequentist correlations: \*p < .05, \*\*p < .01, \*\*\*p < .001. For Bayesian correlations: \*\*\*BF > 30, \*\*BF > 10, \*BF > 3.
 #' @param lower Remove the upper triangular part of the matrix.
-#' @param reorder Reorder the matrix based on correlation pattern (currently only works with square matrices)?
+#' @param reorder Reorder the matrix based on correlation pattern (currently only works with square matrices).
 #' @param reorder_method Reordering method. See \link{hclust}.
 #' @param ... Arguments passed to or from other methods.
 #'

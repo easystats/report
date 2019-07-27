@@ -20,9 +20,9 @@
 
 \item{ci}{Confidence Interval (CI) level. Default to 0.95 (95\%).}
 
-\item{standardize}{Add standardized parameters. Can be FALSE or a character indicating the standardization method (see \link{standardize_parameters}).}
+\item{standardize}{Add standardized parameters. Can be FALSE or a character indicating the standardization method (see \code{\link{parameters_standardize}}).}
 
-\item{standardize_robust}{Robust standardization. See \link{standardize_parameters}.}
+\item{standardize_robust}{Robust standardization. See \code{\link{parameters_standardize}}.}
 
 \item{effsize}{\href{https://easystats.github.io/report/articles/interpret_metrics.html}{Interpret the standardized parameters} using a set of rules. Can be "cohen1988" (default for linear models), "chen2010" (default for logistic models), "sawilowsky2009", NULL, or a custom set of \link{rules}.}
 
