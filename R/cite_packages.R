@@ -7,7 +7,6 @@
 #' @examples
 #' show_packages(sessionInfo())
 #' cite_packages(sessionInfo())
-#' @import dplyr
 #' @importFrom utils packageVersion
 #' @export
 show_packages <- function(session) {
@@ -16,12 +15,10 @@ show_packages <- function(session) {
   versions <- c()
   names <- c()
   for (pkg_name in names(pkgs)) {
-    citation <- format(citation(pkg_name))[[2]] %>%
-      strsplit("\n") %>%
-      unlist() %>%
-      paste(collapse = "SPLIT") %>%
-      strsplit("SPLITSPLIT") %>%
-      unlist()
+    citation <- format(citation(pkg_name))[[2]]
+    citation <- unlist(strsplit(citation, "\n"))
+    citation <- paste(citation, collapse = "SPLIT")
+    citation <- unlist(strsplit(citation, "SPLITSPLIT"))
 
     i <- 1
     while (grepl("To cite ", citation[i])) {
@@ -34,20 +31,22 @@ show_packages <- function(session) {
     versions <- c(versions, as.character(packageVersion(pkg_name)))
     names <- c(names, pkg_name)
   }
+
   data <- data.frame(
     "Package" = names,
     "Version" = versions,
     "References" = citations
-  ) %>%
-    arrange_("Package")
-  return(data)
+  )
+
+  data[order(data$Package),]
 }
 
 #' @rdname show_packages
 #' @export
 cite_packages <- function(session) {
   data <- show_packages(session)
-  data <- select(data, -one_of("Package", "Version")) %>%
-    arrange_("References")
-  return(data)
+  data$Package <- NULL
+  data$Version <- NULL
+
+  data[order(data$References),]
 }

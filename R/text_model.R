@@ -3,14 +3,13 @@
 #' Model textual description.
 #'
 #' @param model Object.
-#' @param details Add details.
 #' @param ... Arguments passed to or from other methods.
 #'
 #'
 #' @seealso report
 #'
 #' @export
-text_model <- function(model, details = FALSE, ...) {
+text_model <- function(model, ...) {
   UseMethod("text_model")
 }
 
@@ -108,5 +107,38 @@ text_model <- function(model, details = FALSE, ...) {
       "] range."
     )
   }
+  text
+}
+
+
+
+#' @keywords internal
+.text_standardize <- function(standardize, standardize_robust = FALSE){
+
+  if (standardize == "refit") {
+    if(standardize_robust == TRUE){
+      robust <- "(using the median and the MAD, a robust equivalent of the SD) "
+    } else{
+      robust <- ""
+    }
+    text <- paste0(" Standardized parameters were obtained by fitting the model on a standardized version ", robust, "of the dataset.")
+  } else if (standardize == "2sd") {
+    if(standardize_robust == TRUE){
+      robust <- "MAD (a robust equivalent of the SD) "
+    } else{
+      robust <- "SD "
+    }
+    text <- paste0(" Standardized parameters were obtained by standardizing the data by 2 times the ", robust, " (see Gelman, 2008).")
+  } else if (standardize == "full" | standardize == "classic") {
+    if(standardize_robust == TRUE){
+      robust <- "median and the MAD (a robust equivalent of the SD) of the response variable."
+    } else{
+      robust <- "mean and the SD of the response variable."
+    }
+    text <- paste0(" Parameters were scaled by the ", robust)
+  } else{
+    text <- paste0(" Parameters were standardized using the ", standardize, " method.")
+  }
+
   text
 }

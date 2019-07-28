@@ -127,7 +127,7 @@ to_table <- function(object, full = FALSE, digits = NULL, ...) {
     }
   }
 
-  return(table)
+  table
 }
 
 #' @export
@@ -151,7 +151,7 @@ to_fulltable <- function(x, full = TRUE, digits = NULL, ...) {
 #' @rdname to_fulltable
 #' @export
 as.data.frame.report <- function(x, ...) {
-  return(to_fulltable(x, ...))
+  to_fulltable(x, ...)
 }
 
 
@@ -165,9 +165,9 @@ as.data.frame.report <- function(x, ...) {
 #' @export
 to_values <- function(x, ...) {
   if (!"values" %in% names(x)) {
-    return(as.list(x$table_full))
+    as.list(x$table_full)
   } else {
-    return(x$values)
+    x$values
   }
 }
 #' @export
@@ -186,50 +186,52 @@ as.list.report <- to_values
 
 
 
-#' Parameters table printing
-#'
-#' @param x Object of class \code{table_report}.
-#' @param digits Number of digits.
-#' @param ... Arguments passed to or from other methods.
-#'
-#' @export
-print.report_table <- function(x, digits = 2, ...) {
-  dig <- attr(x, "digits", exact = TRUE)
-  if (missing(digits) && !is.null(dig)) {
-    digits <- as.numeric(dig)
-  }
-
-  x <- x %>%
-    .colour_column_if("beta", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
-    .colour_column_if("Difference", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
-    .colour_column_if("Median", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
-    .colour_column_if("Mean", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
-    .colour_column_if("MAP", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
-    .colour_column_if("Std_beta", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
-    .colour_column_if("Std_Median", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
-    .colour_column_if("Std_Mean", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
-    .colour_column_if("Std_MAP", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
-    .colour_column_if("p", condition = `<`, threshold = 0.05, colour_if = "yellow", colour_else = NULL, digits = digits) %>%
-    .colour_column_if("pd", condition = `>`, threshold = 95, colour_if = "yellow", colour_else = NULL, digits = digits) %>%
-    .colour_column_if("ROPE_Percentage", condition = `<`, threshold = 1, colour_if = "yellow", colour_else = NULL, digits = digits) %>%
-    .colour_column_if("Fit", condition = `>`, threshold = 0, colour_if = "cyan", colour_else = "cyan", digits = digits) %>%
-    dplyr::mutate_if(is.numeric, format_value_unless_integers, digits = digits)
-
-  x[is.na(x)] <- ""
-
-  if (!is.null(x[["p"]])) {
-    fill <- .bold(sprintf("%*s", digits + 2, " "))
-    x[["p"]][x[["p"]] == ""] <- fill
-  }
-
-  .display(x)
-}
+# #' Parameters table printing
+# #'
+# #' @param x Object of class \code{table_report}.
+# #' @param digits Number of digits.
+# #' @param ... Arguments passed to or from other methods.
+# #'
+# #' @export
+# print.report_table <- function(x, digits = 2, ...) {
+#   dig <- attr(x, "digits", exact = TRUE)
+#   if (missing(digits) && !is.null(dig)) {
+#     digits <- as.numeric(dig)
+#   }
+#
+#   x <- x %>%
+#     .colour_column_if("beta", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
+#     .colour_column_if("Difference", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
+#     .colour_column_if("Median", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
+#     .colour_column_if("Mean", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
+#     .colour_column_if("MAP", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
+#     .colour_column_if("Std_beta", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
+#     .colour_column_if("Std_Median", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
+#     .colour_column_if("Std_Mean", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
+#     .colour_column_if("Std_MAP", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
+#     .colour_column_if("p", condition = `<`, threshold = 0.05, colour_if = "yellow", colour_else = NULL, digits = digits) %>%
+#     .colour_column_if("pd", condition = `>`, threshold = 95, colour_if = "yellow", colour_else = NULL, digits = digits) %>%
+#     .colour_column_if("ROPE_Percentage", condition = `<`, threshold = 1, colour_if = "yellow", colour_else = NULL, digits = digits) %>%
+#     .colour_column_if("Fit", condition = `>`, threshold = 0, colour_if = "cyan", colour_else = "cyan", digits = digits) %>%
+#     dplyr::mutate_if(is.numeric, format_value_unless_integers, digits = digits)
+#
+#   x[is.na(x)] <- ""
+#
+#   if (!is.null(x[["p"]])) {
+#     fill <- .bold(sprintf("%*s", digits + 2, " "))
+#     x[["p"]][x[["p"]] == ""] <- fill
+#   }
+#
+#   .display(x)
+# }
 
 
 
 
 
 #' Model Values
+#'
+#' Return values contained in report.
 #'
 #' @param model Statistical Model.
 #' @param ... Arguments passed to or from other methods.

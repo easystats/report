@@ -1,12 +1,52 @@
+#' Parameters textual reporting
+#'
+#' Convert parameters table to text.
+#'
+#' @param model Object.
+#' @param parameters Parameters table.
+#' @param prefix The bullet in front of each sentence.
+#' @param ... Arguments passed to or from other methods.
+#'
+#'
+#' @seealso report
+#'
+#' @export
+text_parameters <- function(model, parameters, prefix = "  - ", ...) {
+  UseMethod("text_parameters")
+}
+
+
+
+
+
+
+
 #' @keywords internal
-.text_parameters_direction <- function(parameters, parameter_column = "Parameter"){
+.text_parameters_names <- function(parameters, parameter_column = "Parameter"){
+  names <- parameters[[parameter_column]]
+
+  # Regular effects
+  names[!grepl(" * ", names, fixed = TRUE)] <- paste0("The effect of ", names[!grepl(" * ", names, fixed = TRUE)])
+
+  interactions <- names[grepl(" * ", names, fixed = TRUE)]
+  interactions <- unlist(lapply(strsplit(interactions, " * ", fixed = TRUE), function(x) {
+    new <- paste(head(x, -1), collapse = " * ")
+    new <- paste(tail(x, 1),  "on", new)
+    new
+  }))
+  names[grepl(" * ", names, fixed = TRUE)] <- paste0("The interaction effect of ", interactions)
+  names
+}
+
+
+#' @keywords internal
+.text_parameters_direction <- function(parameters){
 
   estimate_name <- names(parameters)[names(parameters) %in% c("Coefficient", "Median", "Mean", "MAP")][1]
 
   if(length(estimate_name) == 1){
     if("pd" %in% names(parameters)){
       text <- paste0(
-        parameters[[parameter_column]],
         " has a probability of ",
         parameters::format_pd(parameters$pd, name = NULL),
         " of being ",
@@ -14,13 +54,12 @@
       )
     } else{
       text <- paste0(
-        parameters[[parameter_column]],
         " is ",
         interpret_direction(parameters[[estimate_name]])
       )
     }
   } else{
-    text <- parameters[[parameter_column]]
+    text <- ""
   }
 
   text
@@ -36,8 +75,12 @@
 
   estimate_name <- names(parameters)[names(parameters) %in% c("Std_Coefficient", "Std_Median", "Std_Mean", "Std_MAP")][1]
 
-  if(type == "d"){
-    text <- interpret_d(parameters[[estimate_name]], rules = effsize)
+  if(!is.na(estimate_name)){
+    if(type == "d"){
+      text <- interpret_d(parameters[[estimate_name]], rules = effsize)
+    }
+  } else{
+    text <- ""
   }
 
   text
@@ -144,53 +187,62 @@
   }
 
 
+  # ROPE
+  if ("p" %in% names(parameters)) {
+    text <- paste0(
+      .add_comma(text),
+      parameters::format_p(parameters$p)
+    )
+  }
+
+
   # Standardized stuff
   if ("Std_Coefficient" %in% names(parameters)) {
     text <- paste0(
       .add_comma(text),
-      "beta (std.) = ",
+      "std. beta = ",
       parameters::format_value(parameters$Std_Coefficient))
   }
 
   if ("Std_SE" %in% names(parameters)) {
     text <- paste0(
       .add_comma(text),
-      "SE (std.) = ",
+      "std. SE = ",
       parameters::format_value(parameters$Std_SE))
   }
 
   if ("Std_Median" %in% names(parameters)) {
     text <- paste0(
       .add_comma(text),
-      "median (std.) = ",
+      "std. median = ",
       parameters::format_value(parameters$Std_Median))
   }
 
   if ("Std_MAD" %in% names(parameters)) {
     text <- paste0(
       .add_comma(text),
-      "MAD (std.) = ",
+      "std. MAD = ",
       parameters::format_value(parameters$Std_MAD))
   }
 
   if ("Std_Mean" %in% names(parameters)) {
     text <- paste0(
       .add_comma(text),
-      "mean (std.) = ",
+      "std. mean = ",
       parameters::format_value(parameters$Std_Mean))
   }
 
   if ("Std_SD" %in% names(parameters)) {
     text <- paste0(
       .add_comma(text),
-      "SD (std.) = ",
+      "std. SD = ",
       parameters::format_value(parameters$Std_SD))
   }
 
   if ("Std_MAP" %in% names(parameters)) {
     text <- paste0(
       .add_comma(text),
-      "MAP (std.) = ",
+      "std. MAP = ",
       parameters::format_value(parameters$Std_MAP)
     )
   }
@@ -206,15 +258,17 @@
 
 
 
+
+
+
 #' @keywords internal
-.text_parameters_combine <- function(direction = "", significance = "", size = "", indices = ""){
+.text_parameters_combine <- function(direction = "", size = "", significance = "", indices = ""){
 
   text <- direction
-  text <- ifelse(significance != "" | size != "", paste0(text, " and can be considered as "), text)
-  text <- paste0(text, size)
 
-  text <- ifelse(significance != "" & size != "", paste0(text, " and ", significance),
-                 ifelse(significance == "" & size != "", paste0(text, significance), text))
+  text <- ifelse(significance != "" & size != "", paste0(text, " and can be considered as ", size, " and ", significance),
+                 ifelse(significance != "" & size == "", paste0(text, " and ", significance),
+                        ifelse(significance == "" & size != "", paste0(text, " and can be considered as ", size), text)))
 
   text <- paste0(text, " (", indices, ").")
   text
@@ -229,5 +283,5 @@
 
 #' @keywords internal
 .add_comma <- function(text){
-  ifelse(substring(text, nchar(text)-1) != ", ", paste0(text, ", "), text)
+  ifelse(substring(text, nchar(text)-1) != ", " & text != "", paste0(text, ", "), text)
 }

@@ -1,22 +1,3 @@
-#' Parameters textual reporting
-#'
-#' Convert parameters table to text.
-#'
-#' @param model Object.
-#' @param parameters Parameters table.
-#' @param prefix The bullet in front of each sentence.
-#' @param ... Arguments passed to or from other methods.
-#'
-#'
-#' @seealso report
-#'
-#' @export
-text_parameters <- function(model, parameters, prefix = "  - ", ...) {
- UseMethod("text_parameters")
-}
-
-
-
 #' @export
 text_parameters.estimate_contrasts <- function(model, parameters = NULL, prefix = "  - ", effsize = "funder2019", ...){
   if(is.null(parameters)){

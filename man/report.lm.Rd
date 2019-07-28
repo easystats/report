@@ -2,21 +2,17 @@
 % Please edit documentation in R/report.glm.R
 \name{report.lm}
 \alias{report.lm}
-\alias{report.glm}
 \title{(General) Linear Models Report}
 \usage{
-\method{report}{lm}(model, ci = 0.95, standardize = "refit",
-  standardize_robust = FALSE, effsize = "cohen1988",
-  performance_in_table = TRUE, performance_metrics = "all",
-  bootstrap = FALSE, iterations = 500, ...)
-
-\method{report}{glm}(model, ci = 0.95, standardize = "refit",
-  standardize_robust = FALSE, effsize = "chen2010",
-  performance_in_table = TRUE, performance_metrics = "all",
-  bootstrap = FALSE, iterations = 500, ...)
+\method{report}{lm}(model, effsize = "funder2019", ci = 0.95,
+  standardize = "refit", standardize_robust = FALSE,
+  bootstrap = FALSE, iterations = 500, performance_metrics = "all",
+  ...)
 }
 \arguments{
 \item{model}{Frequentist regression object.}
+
+\item{effsize}{\href{https://easystats.github.io/report/articles/interpret_metrics.html}{Interpret the standardized parameters} using a set of rules. Can be "cohen1988" (default for linear models), "chen2010" (default for logistic models), "sawilowsky2009", NULL, or a custom set of \link{rules}.}
 
 \item{ci}{Confidence Interval (CI) level. Default to 0.95 (95\%).}
 
@@ -24,15 +20,11 @@
 
 \item{standardize_robust}{Robust standardization. See \code{\link{parameters_standardize}}.}
 
-\item{effsize}{\href{https://easystats.github.io/report/articles/interpret_metrics.html}{Interpret the standardized parameters} using a set of rules. Can be "cohen1988" (default for linear models), "chen2010" (default for logistic models), "sawilowsky2009", NULL, or a custom set of \link{rules}.}
-
-\item{performance_in_table}{Add performance metrics in table.}
-
-\item{performance_metrics}{See \code{\link[performance:model_performance.lm]{model_performance}}.}
-
 \item{bootstrap}{Should estimates be based on bootsrapped model? If TRUE, then arguments of \link[=model_parameters.stanreg]{Bayesian regressions} apply.}
 
 \item{iterations}{The number of bootstrap replicates. This only apply in the case of bootsrapped frequentist models.}
+
+\item{performance_metrics}{See \code{\link[performance:model_performance.lm]{model_performance}}.}
 
 \item{...}{Arguments passed to or from other methods (e.g., to \link[=standardize.lm]{standardize}).}
 }

@@ -12,5 +12,5 @@ model_values(model, ...)
 \item{...}{Arguments passed to or from other methods.}
 }
 \description{
-Model Values
+Return values contained in report.
 }

@@ -325,7 +325,7 @@ model_text_parameters_bayesian <- function(model, parameters, ci = 0.89, rope_ci
   estimate <- paste0(
     estimate,
     ", ",
-    parmeters::format_ci(parameters$CI_low,
+    parameters::format_ci(parameters$CI_low,
       parameters$CI_high,
       ci = ci
     )

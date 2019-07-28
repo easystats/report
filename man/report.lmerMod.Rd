@@ -26,8 +26,6 @@
 
 \item{effsize}{\href{https://easystats.github.io/report/articles/interpret_metrics.html}{Interpret the standardized parameters} using a set of rules. Can be "cohen1988" (default for linear models), "chen2010" (default for logistic models), "sawilowsky2009", NULL, or a custom set of \link{rules}.}
 
-\item{performance_in_table}{Add performance metrics in table.}
-
 \item{performance_metrics}{See \code{\link[performance:model_performance.lm]{model_performance}}.}
 
 \item{bootstrap}{Should estimates be based on bootsrapped model? If TRUE, then arguments of \link[=model_parameters.stanreg]{Bayesian regressions} apply.}

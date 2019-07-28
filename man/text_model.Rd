@@ -4,12 +4,10 @@
 \alias{text_model}
 \title{Model description textual reporting}
 \usage{
-text_model(model, details = FALSE, ...)
+text_model(model, ...)
 }
 \arguments{
 \item{model}{Object.}
-
-\item{details}{Add details.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

@@ -33,11 +33,13 @@ report.estimate_contrasts <- function(model, effsize = "funder2019", ...) {
   table <- table_full[!names(table_full) %in% c("MAD", "SD", "t", "z", "df")]
 
   # Text ----
-  text <- text_model(model, details = FALSE, effsize = effsize)
-  text_full <- text_model(model, details = TRUE, effsize = effsize)
 
+  # Description
+  text <- text_model(model, effsize = effsize)
+  text_full <- text$text_full
+  text <- text$text
 
-  ## Params
+  # Params
   text <- paste0(text, text_parameters(model, table))
   text_full <- paste0(text_full, text_parameters(model, table_full))
 
@@ -97,6 +99,8 @@ report.estimate_smooth <- function(model, ...) {
   table_full <- table <- model
 
   # Text ----
+
+  ## Description
   description <- paste0("The effect of ",
                         attributes(model)$smooth,
                         " can be described by the following linear approximation:\n\n")
