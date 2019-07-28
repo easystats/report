@@ -12,8 +12,6 @@ text_initial(model, parameters, ...)
 \item{parameters}{Parameters table.}
 
 \item{...}{Arguments passed to or from other methods.}
-
-\item{prefix}{The bullet in front of each sentence.}
 }
 \description{
 Convert initial state parameters table to text.

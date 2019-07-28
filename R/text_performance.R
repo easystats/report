@@ -10,6 +10,6 @@
 #' @seealso report
 #'
 #' @export
-text_performance <- function(model, parameters, prefix = "  - ", ...) {
+text_performance <- function(model, performance, ...) {
   UseMethod("text_performance")
 }

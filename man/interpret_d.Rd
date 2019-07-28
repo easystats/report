@@ -9,7 +9,7 @@ interpret_d(d, rules = "funder2019")
 \arguments{
 \item{d}{Value or vector of d values.}
 
-\item{rules}{Can be "funder2019" (default), "gignac2016", "cohen1988", "sawilowsky2009" or custom set of rules.}
+\item{rules}{Can be "funder2019" (default), "gignac2016", "cohen1988", "sawilowsky2009" or custom set of \code{\link{rules}}.}
 }
 \description{
 Interpretation of indices using different sets of rules of thumb.

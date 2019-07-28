@@ -11,7 +11,7 @@ interpret_rope(rope_percentage, ci = 0.9, rules = "default")
 
 \item{ci}{The Credible Interval (CI) probability, corresponding to the proportion of HDI, that was used. Can be \code{1} in the case of "full ROPE".}
 
-\item{rules}{Can be \href{https://easystats.github.io/bayestestR/articles/4_Guidelines.html}{"default"} or custom set of rules.}
+\item{rules}{Can be \href{https://easystats.github.io/bayestestR/articles/guidelines.html}{"default"} or custom set of rules.}
 }
 \description{
 ROPE percentage Interpretation
@@ -21,5 +21,5 @@ interpret_rope(0, ci = 0.9)
 interpret_rope(c(0.005, 0.99), ci = 1)
 }
 \references{
-\href{https://easystats.github.io/bayestestR/articles/4_Guidelines.html}{BayestestR's reporting guidelines}
+\href{https://easystats.github.io/bayestestR/articles/guidelines.html}{BayestestR's reporting guidelines}
 }

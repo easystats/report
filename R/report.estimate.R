@@ -3,6 +3,7 @@
 #' Create a report of an object from the \code{estimate} package.
 #'
 #' @param model Object of class \code{estimate}.
+#' @inheritParams report.lm
 #' @param ... Arguments passed to or from other methods.
 #'
 #'

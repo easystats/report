@@ -2,13 +2,16 @@
 % Please edit documentation in R/report.R
 \name{as.report}
 \alias{as.report}
-\title{create objects of class \link{report}.}
+\alias{is.report}
+\title{Create and test objects of class \link{report}.}
 \usage{
 as.report(model)
+
+is.report(model)
 }
 \arguments{
 \item{model}{An arbitrary R object.}
 }
 \description{
-create objects of class \link{report}.
+Create and test objects of class \link{report}.
 }

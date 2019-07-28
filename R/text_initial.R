@@ -4,7 +4,6 @@
 #'
 #' @param model Object.
 #' @param parameters Parameters table.
-#' @param prefix The bullet in front of each sentence.
 #' @param ... Arguments passed to or from other methods.
 #'
 #'
@@ -38,12 +37,12 @@ text_initial.lm <- function(model, parameters, ci = 0.95, ...) {
   intercept[[coefficient]] <- NULL
 
   text <- paste0(
-    "The model's intercept is at ",
+    " The model's intercept is at ",
     parameters::format_value(is_at),
     "."
   )
   text_full <- paste0(
-    "The model's intercept, corresponding to ",
+    " The model's intercept, corresponding to ",
     .find_intercept(model),
     ", is at ",
     parameters::format_value(is_at),

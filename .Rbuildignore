@@ -12,3 +12,4 @@
 ^README.Rmd
 ^logo.png
 ^pkgdown/.
+^R/old/.

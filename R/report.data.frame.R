@@ -101,7 +101,7 @@ report.grouped_df <- function(model, median = FALSE, dispersion = TRUE, range = 
   text <- paste0(
     "The data contains ", nrow(ungrouped_x),
     " observations, grouped by ",
-    format_text_collapse(groups),
+    format_text(groups),
     ", of the following variables:"
   )
   text_full <- text
@@ -325,8 +325,8 @@ report.factor <- function(model, levels_percentage = FALSE, ...) {
   }
 
 
-  text <- paste0(text_total_levels, format_text_collapse(text, sep = "; "), ".")
-  text_full <- paste0(text_total_levels, format_text_collapse(text_full, sep = "; "), ".")
+  text <- paste0(text_total_levels, format_text(text, sep = "; "), ".")
+  text_full <- paste0(text_total_levels, format_text(text_full, sep = "; "), ".")
 
   values <- list()
   for (level in table_full$Level) {

@@ -4,14 +4,14 @@
 \alias{text_performance}
 \title{Performance textual reporting}
 \usage{
-text_performance(model, parameters, prefix = "  - ", ...)
+text_performance(model, performance, ...)
 }
 \arguments{
 \item{model}{Object.}
 
-\item{...}{Arguments passed to or from other methods.}
-
 \item{performance}{Performance table.}
+
+\item{...}{Arguments passed to or from other methods.}
 }
 \description{
 Convert performance table to text.

@@ -20,19 +20,7 @@ report <- function(model, ...) {
   UseMethod("report")
 }
 
-
-
-#' Test for objects of class \link{report}.
-#'
-#' @param model An arbitrary R object.
-#'
-#' @export
-is.report <- function(model) inherits(model, "report")
-
-
-
-
-#' create objects of class \link{report}.
+#' Create and test objects of class \link{report}.
 #'
 #' @param model An arbitrary R object.
 #'
@@ -43,7 +31,9 @@ as.report <- function(model) {
 }
 
 
-
+#' @rdname as.report
+#' @export
+is.report <- function(model) inherits(model, "report")
 
 
 
@@ -55,113 +45,64 @@ as.report <- function(model) {
 #' @param ... Arguments passed to or from other methods.
 #'
 #' @export
-print.report <- function(x, full = FALSE, width = NULL, ...) {
+to_text <- function(x, full = FALSE, width = NULL, ...) {
   if (full == TRUE) {
-    text <- x$text_full
+    text <- format_text(x$text_full, width = width)
   } else {
-    text <- x$text
+    text <- format_text(x$text)
   }
-
-  if (!is.null(width)) {
-    text <- format_text_wrap(text, width = width)
-  }
-
-  # Colour
-  # TODO: Using regex matching.
-  # sub(".*beta = *(.*?) *,*", "\\1", text)
 
   cat(text, sep = "\n")
   invisible(text)
 }
 
-#' @inherit print.report
-#'
 #' @export
-to_text <- print.report
+print.report <- to_text
 
-
-#' @inherit to_text
-#'
+#' @rdname to_text
 #' @export
 to_fulltext <- function(x, full = TRUE, width = NULL, ...) {
   to_text(x, full = full, width = width)
 }
 
 
-#' Report table display
-#'
-#' @param object Object of class \link{report}.
-#' @param full Show the full report.
-#' @param digits Number of digits.
-#' @param ... Arguments passed to or from other methods.
-#'
-#'
-#'
+
+
+
+
+
+#' @rdname to_text
 #' @export
-to_table <- function(object, full = FALSE, digits = NULL, ...) {
+to_table <- function(x, full = FALSE, ...) {
   if (full == TRUE) {
-    table <- object$table_full
+    table <- x$table_full
   } else {
-    table <- object$table
+    table <- x$table
   }
 
-  if (inherits(object, "report_model")) {
-    attr(table, "digits") <- digits
-    return(table)
-  }
-
-  if (!is.null(digits) & ncol(dplyr::select_if(table, is.numeric)) > 0) {
-    initial_order <- names(table)
-    nums <- dplyr::select_if(table, is.numeric)
-    nums <- sapply(nums, format_value_unless_integers, digits = digits)
-    fact <- dplyr::select_if(table, is.character)
-    fact <- cbind(fact, dplyr::select_if(table, is.factor))
-    if (ncol(fact) == 0) {
-      table <- nums
-    } else {
-      table <- cbind(fact, nums)
-    }
-    table <- table[initial_order]
-    if (inherits(table, "character")) {
-      table <- as.data.frame(t(table))
-    }
-  }
-
-  table
+  cat(parameters::format_table(table))
 }
 
 #' @export
-summary.report <- to_table
-
-
-
-#' Full report table display
-#'
-#' @param x Object of class \link{report}.
-#' @param full Show the full report (default to TRUE).
-#' @param digits Number of digits.
-#' @param ... Arguments passed to or from other methods.
-#'
-#'
-#' @export
-to_fulltable <- function(x, full = TRUE, digits = NULL, ...) {
-  to_table(x, digits = digits, full = full)
+summary.report <-  function(object, full = FALSE, ...) {
+  to_table(object, full = full, ...)
 }
 
-#' @rdname to_fulltable
+
+
+#' @rdname to_text
+#' @export
+to_fulltable <- function(x, full = TRUE, ...) {
+  to_table(x, full = full)
+}
+
 #' @export
 as.data.frame.report <- function(x, ...) {
   to_fulltable(x, ...)
 }
 
 
-#' Report values
-#'
-#' @param x Object of class \link{report}.
-#' @param ... Arguments passed to or from other methods.
-#'
-#'
-#'
+#' @rdname to_text
 #' @export
 to_values <- function(x, ...) {
   if (!"values" %in% names(x)) {
@@ -176,7 +117,25 @@ as.list.report <- to_values
 
 
 
+#' @rdname to_text
+#' @export
+to_values <- function(x, ...) {
+  if (any(class(x) %in% c("parameters_model")) && "Parameter" %in% names(x)) {
+    vals <- list()
 
+    for(param in x$Parameter){
+      vals[[param]] <- as.list(x[x$Parameter == param, ])
+    }
+
+  } else if (any(class(x) %in% c("report")) && !"values" %in% names(x)) {
+    vals <- as.list(x$table_full)
+  } else if("values" %in% names(x)) {
+    vals <- x$values
+  } else{
+    stop("Impossible to transform that to values!")
+  }
+  vals
+}
 
 
 
@@ -237,6 +196,6 @@ as.list.report <- to_values
 #' @param ... Arguments passed to or from other methods.
 #'
 #' @export
-model_values <- function(model, ...) {
-  UseMethod("model_values")
-}
+# model_values <- function(model, ...) {
+#   UseMethod("model_values")
+# }

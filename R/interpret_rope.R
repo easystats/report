@@ -2,9 +2,9 @@
 #'
 #' @param rope_percentage Value or vector of ROPE-percentages.
 #' @param ci The Credible Interval (CI) probability, corresponding to the proportion of HDI, that was used. Can be \code{1} in the case of "full ROPE".
-#' @param rules Can be \href{https://easystats.github.io/bayestestR/articles/4_Guidelines.html}{"default"} or custom set of rules.
+#' @param rules Can be \href{https://easystats.github.io/bayestestR/articles/guidelines.html}{"default"} or custom set of rules.
 #'
-#' @references \href{https://easystats.github.io/bayestestR/articles/4_Guidelines.html}{BayestestR's reporting guidelines}
+#' @references \href{https://easystats.github.io/bayestestR/articles/guidelines.html}{BayestestR's reporting guidelines}
 #' @examples
 #' interpret_rope(0, ci = 0.9)
 #' interpret_rope(c(0.005, 0.99), ci = 1)
