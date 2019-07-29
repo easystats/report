@@ -14,7 +14,7 @@ test_that("report", {
   testthat::expect_is(as.data.frame(r), "data.frame")
   testthat::expect_is(summary(r), "data.frame")
   testthat::expect_is(summary(r, digits = 2), "data.frame")
-  testthat::expect_is(summary(report(iris), digits = 2)$n_Obs, "factor")
+  testthat::expect_is(summary(report(iris))$n_Obs, "integer")
 
   testthat::expect_is(as.list(r), "list")
   testthat::expect_is(to_values(r), "list")

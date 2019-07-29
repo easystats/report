@@ -413,7 +413,7 @@ report.numeric <- function(model, median = FALSE, dispersion = TRUE, range = TRU
   text_mad <- parameters::format_value(table_full$MAD[1])
 
   # Range
-  text_range <- paste0(" [", parameters::format_value(table_full$Min[1]), ", ", parameters::format_value(table_full$Max[1]), "]")
+  text_range <- paste0(", [", parameters::format_value(table_full$Min[1]), ", ", parameters::format_value(table_full$Max[1]), "]")
 
   # Missings
   if (missing_percentage == TRUE) {

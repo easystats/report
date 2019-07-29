@@ -35,7 +35,8 @@ show_packages <- function(session) {
   data <- data.frame(
     "Package" = names,
     "Version" = versions,
-    "References" = citations
+    "References" = citations,
+    stringsAsFactors = FALSE
   )
 
   data[order(data$Package),]
@@ -48,5 +49,5 @@ cite_packages <- function(session) {
   data$Package <- NULL
   data$Version <- NULL
 
-  data[order(data$References),]
+ as.data.frame(data[order(data$References),])
 }

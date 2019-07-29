@@ -81,6 +81,7 @@ to_table <- function(x, full = FALSE, ...) {
   }
 
   cat(parameters::format_table(table))
+  invisible(table)
 }
 
 #' @export
