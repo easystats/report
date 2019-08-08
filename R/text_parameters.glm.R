@@ -5,10 +5,13 @@ text_parameters.lm <- function(model, parameters = NULL, prefix = "  - ", ci = 0
     parameters$Parameter <- attributes(parameters)$clean_names
   }
 
-  params <- as.data.frame(parameters[!parameters$Parameter %in% c("(Intercept)"), ])
+  # Intercept-only
+  if(all(insight::find_parameters(model, flatten = FALSE) == "(Intercept)") == FALSE){
+    parameters <- as.data.frame(parameters[!parameters$Parameter %in% c("(Intercept)"), ])
+  }
 
-  text_full <- .text_parameters(params, ci = ci, effsize = effsize, type = "d", prefix = prefix)
-  text <- .text_parameters(params[names(params) %in% c("Parameter", "Coefficient", "Median", "Mean", "MAP", "CI_low", "CI_high", "p", "pd", "ROPE_Percentage", "BF", "Std_Coefficient", "Std_Median", "Std_Mean", "Std_MAP")], ci = ci, effsize = effsize, type = "d", prefix = prefix)
+  text_full <- .text_parameters(parameters, ci = ci, effsize = effsize, type = "d", prefix = prefix)
+  text <- .text_parameters(parameters[names(parameters) %in% c("Parameter", "Coefficient", "Median", "Mean", "MAP", "CI_low", "CI_high", "p", "pd", "ROPE_Percentage", "BF", "Std_Coefficient", "Std_Median", "Std_Mean", "Std_MAP")], ci = ci, effsize = effsize, type = "d", prefix = prefix)
 
   list(
     "text" = text,
@@ -20,10 +23,10 @@ text_parameters.lm <- function(model, parameters = NULL, prefix = "  - ", ci = 0
 
 
 #' @keywords internal
-.text_parameters <- function(params, ci, effsize, type, prefix = "  - "){
-  text <- .text_parameters_combine(direction = .text_parameters_direction(params),
-                                   size = .text_parameters_size(params, effsize = effsize, type = "d"),
-                                   significance = .text_parameters_significance(params),
-                                   indices = .text_parameters_indices(params, ci = ci))
-  paste0(paste0(prefix, .text_parameters_names(params), text), collapse = "\n")
+.text_parameters <- function(parameters, ci, effsize, type, prefix = "  - "){
+  text <- .text_parameters_combine(direction = .text_parameters_direction(parameters),
+                                   size = .text_parameters_size(parameters, effsize = effsize, type = "d"),
+                                   significance = .text_parameters_significance(parameters),
+                                   indices = .text_parameters_indices(parameters, ci = ci))
+  paste0(paste0(prefix, .text_parameters_names(parameters), text), collapse = "\n")
 }

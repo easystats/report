@@ -23,10 +23,12 @@ report <- function(model, ...) {
 #' Create and test objects of class \link{report}.
 #'
 #' @param model An arbitrary R object.
+#' @param ... Args to be saved as attributes.
 #'
 #' @export
-as.report <- function(model) {
+as.report <- function(model, ...) {
   class(model) <- c("report", class(model))
+  attributes(model) <- c(attributes(model), list(...))
   model
 }
 
@@ -80,9 +82,18 @@ to_table <- function(x, full = FALSE, ...) {
     table <- x$table
   }
 
-  cat(parameters::format_table(table))
-  invisible(table)
+  class(table) <- c("report_table", class(table))
+  attributes(table) <- c(attributes(table), attributes(x)[!names(attributes(x)) %in% names(attributes(table))])
+  table
 }
+
+#' @export
+print.report_table <- function(x, ...){
+  table <- parameters::format_table(x)
+  cat(table)
+}
+
+
 
 #' @export
 summary.report <-  function(object, full = FALSE, ...) {

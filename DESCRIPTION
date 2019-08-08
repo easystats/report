@@ -24,17 +24,17 @@ LazyData: true
 VignetteBuilder: knitr
 Imports:
 	insight (>= 0.4.0),
-	bayestestR (>= 0.2.4),
-	performance,
-	parameters,
-	correlation,
-	estimate,
+	bayestestR (>= 0.2.5),
+	performance (>= 0.3.0),
+	parameters (>= 0.1.0),
 	dplyr
 Suggests:
 	knitr,
 	rmarkdown,
 	testthat,
 	covr,
+	correlation,
+	estimate,
 	ggplot2,
 	rstudioapi,
 	rstanarm,

@@ -41,7 +41,7 @@ report.htest <- function(model, effsize = "cohen1988", ...) {
       estimate,
       " = ",
       parameters::format_value(table[[estimate]]),
-      ", p ",
+      ", ",
       parameters::format_p(values$p, stars = FALSE),
       ")."
     )
@@ -89,7 +89,7 @@ report.htest <- function(model, effsize = "cohen1988", ...) {
       parameters::format_value(model$statistic),
       ", ",
       parameters::format_ci(model$conf.int[1], model$conf.int[2], ci = attributes(model$conf.int)$conf.level),
-      ", p ",
+      ", ",
       parameters::format_p(model$p.value, stars = FALSE),
       ")."
     )
@@ -107,5 +107,5 @@ report.htest <- function(model, effsize = "cohen1988", ...) {
     values = as.list(table_full)
   )
 
-  return(as.report(out))
+  return(as.report(out, effsize = effsize, ...))
 }

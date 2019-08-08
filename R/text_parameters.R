@@ -71,6 +71,11 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
 
 #' @keywords internal
 .text_parameters_size <- function(parameters, effsize = "cohen1988", type = "d"){
+
+  if(is.null(effsize) || is.na(effsize)){
+    return("")
+  }
+
   text <- ""
 
   estimate_name <- names(parameters)[names(parameters) %in% c("Std_Coefficient", "Std_Median", "Std_Mean", "Std_MAP")][1]

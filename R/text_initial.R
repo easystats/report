@@ -42,9 +42,9 @@ text_initial.lm <- function(model, parameters, ci = 0.95, ...) {
     "."
   )
   text_full <- paste0(
-    " The model's intercept, corresponding to ",
+    " The model's intercept",
     .find_intercept(model),
-    ", is at ",
+    " is at ",
     parameters::format_value(is_at),
     " (",
     .text_parameters_indices(intercept, ci = ci),
@@ -63,7 +63,14 @@ text_initial.lm <- function(model, parameters, ci = 0.95, ...) {
 
 #' @keywords internal
 .find_intercept <- function(model) {
-  data <- insight::get_data(model)[insight::find_terms(model)$conditional]
+
+  # Intercept-only
+  if(all(insight::find_parameters(model, flatten = FALSE) == "(Intercept)")){
+    return("")
+  }
+
+  terms <- insight::find_variables(model)$conditional
+  data <- insight::get_data(model)[terms %in% names(insight::get_data(model))]
   text <- c()
   for (col in names(data)) {
     if (is.numeric(data[[col]])) {
@@ -77,7 +84,7 @@ text_initial.lm <- function(model, parameters, ci = 0.95, ...) {
       text <- c(text, paste0(col, " = [?]"))
     }
   }
-  format_text(text)
+  paste0(", corresponding to ", format_text(text), ",")
 }
 
 

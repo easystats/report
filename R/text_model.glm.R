@@ -26,12 +26,14 @@ text_model.glm <- function(model, ci = NULL, ci_method=NULL, standardize = "refi
 
 
   # To predict
-  to_predict_text <- paste0(
-    " to predict ",
-    insight::find_response(model),
-    " with ",
-    format_text(insight::find_predictors(model, effects = "fixed", flatten = TRUE))
-  )
+  to_predict_text <- paste0(" to predict ", insight::find_response(model))
+  if(all(insight::find_parameters(model, flatten = FALSE) == "(Intercept)") == FALSE){
+    to_predict_text <- paste0(to_predict_text,
+      " with ",
+      format_text(insight::find_predictors(model, effects = "fixed", flatten = TRUE))
+    )
+  }
+
 
   text_full <- paste0(text_full, to_predict_text, " (formula = ", format(insight::find_formula(model)$conditional), ").")
   text <- paste0(text, to_predict_text, ".")

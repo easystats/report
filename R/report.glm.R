@@ -59,7 +59,7 @@ report.lm <- function(model, effsize = "funder2019", ci = 0.95, standardize = "r
 
   # Combine text
   text <- paste0(text_model$text, text_perf$text, text_intercept$text, " Whithin this model:\n\n", text_params$text)
-  text_full <- paste0(text_model$text_fullt, text_perf$text_full, text_intercept$text_full, " Whithin this model:\n\n", text_params$text_full)
+  text_full <- paste0(text_model$text_full, text_perf$text_full, text_intercept$text_full, " Whithin this model:\n\n", text_params$text_full)
 
 
   out <- list(
@@ -70,7 +70,7 @@ report.lm <- function(model, effsize = "funder2019", ci = 0.95, standardize = "r
     values = c(to_values(parameters), as.list(performance))
   )
 
-  rep <- as.report(out)
+  rep <- as.report(out, effsize = effsize, ci = ci, standardize = standardize, standardize_robust = standardize_robust, bootstrap = bootstrap, iterations = iterations, performance_metrics = performance_metrics, ...)
   rep
 }
 
@@ -81,7 +81,8 @@ report.lm <- function(model, effsize = "funder2019", ci = 0.95, standardize = "r
 
 
 
-
+#' @export
+report.glm <- report.lm
 
 
 

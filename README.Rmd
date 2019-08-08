@@ -14,7 +14,7 @@ editor_options:
 
 # report <img src='man/figures/logo.png' align="right" height="139" />
 
-```{r, echo = FALSE}
+```{r, message=FALSE, warning=FALSE, echo = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   tidy.opts=list(width.cutoff=60),
@@ -24,6 +24,8 @@ knitr::opts_chunk$set(
 options(knitr.kable.NA = '',
         digits = 4,
         width=60)
+
+library(dplyr)
 ```
 
 
@@ -46,14 +48,13 @@ options(knitr.kable.NA = '',
 
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
+library(report)
+
 # Example
 model <- lm(Sepal.Length ~ Species, data=iris)
 report(model)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-library(report)
-library(dplyr)
-
 # Example
 lm(Sepal.Length ~ Species, data=iris) %>% 
   report() %>% 
@@ -136,20 +137,13 @@ print(report(cor.test(iris$Sepal.Length, iris$Petal.Length)), width=100)
 You can also create tables with the `to_table()` and `to_fulltable()` functions:
 
 
-```{r message=FALSE, warning=FALSE, eval=FALSE}
+```{r message=FALSE, warning=FALSE}
 # Table report for a linear model
 lm(Sepal.Length ~ Petal.Length + Species, data=iris) %>% 
   report() %>% 
   to_table()
 ```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-table <- lm(Sepal.Length ~ Petal.Length + Species, data=iris) %>% 
-  report %>% 
-  to_table(digits=2)
-# remove empty row because kable doesn't handle it
-table <- table[rowSums(is.na(table)) != ncol(table),]
-knitr::kable(table)
-```
+
 
 Finally, you can also find more details using `to_fulltext()`:
 

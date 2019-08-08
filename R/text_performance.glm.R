@@ -3,6 +3,11 @@ text_performance.lm <- function(model, performance, ...) {
   text <- ""
   text_full <- ""
 
+  # Intercept-only
+  if(all(insight::find_parameters(model, flatten = FALSE) == "(Intercept)")){
+    return(list("text" = text, "text_full" = text_full))
+  }
+
   # R2
   if ("R2" %in% names(performance)) {
 
@@ -27,7 +32,7 @@ text_performance.lm <- function(model, performance, ...) {
       parameters::format_value(r2$df_residual, protect_integers = TRUE),
       ") = ",
       parameters::format_value(r2$`F`),
-      ", p ",
+      ", ",
       parameters::format_p(r2$p)
     )
 
