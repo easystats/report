@@ -2,9 +2,15 @@
 % Please edit documentation in R/report.glm.R
 \name{report.lm}
 \alias{report.lm}
+\alias{report.glm}
 \title{(General) Linear Models Report}
 \usage{
 \method{report}{lm}(model, effsize = "funder2019", ci = 0.95,
+  standardize = "refit", standardize_robust = FALSE,
+  bootstrap = FALSE, iterations = 500, performance_metrics = "all",
+  ...)
+
+\method{report}{glm}(model, effsize = "chen2010", ci = 0.95,
   standardize = "refit", standardize_robust = FALSE,
   bootstrap = FALSE, iterations = 500, performance_metrics = "all",
   ...)

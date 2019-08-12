@@ -83,6 +83,8 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
   if(!is.na(estimate_name)){
     if(type == "d"){
       text <- interpret_d(parameters[[estimate_name]], rules = effsize)
+    } else if(type == "logodds"){
+      text <- interpret_odds(parameters[[estimate_name]], rules = effsize, log=TRUE)
     }
   } else{
     text <- ""
