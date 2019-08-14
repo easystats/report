@@ -23,8 +23,6 @@
 #' to_fulltext(report(x))
 #' to_table(report(x))
 #' to_fulltable(report(x))
-#'
-#'
 #' @seealso report
 #' @import dplyr
 #'
@@ -284,8 +282,7 @@ report.character <- function(model, n_characters = 3, levels_percentage = FALSE,
 #'
 #' @export
 report.factor <- function(model, levels_percentage = FALSE, ...) {
-
-  if(length(model[is.na(model)]) != 0){
+  if (length(model[is.na(model)]) != 0) {
     model <- factor(ifelse(is.na(model), "missing", as.character(model)), levels = c(levels(model), "missing"))
   }
 
@@ -297,7 +294,7 @@ report.factor <- function(model, levels_percentage = FALSE, ...) {
       "percentage_Obs" = "n() / length(model) * 100"
     )
 
-  table_no_missing <- table_full[table_full$Level != "missing",]
+  table_no_missing <- table_full[table_full$Level != "missing", ]
   # Text --------------------------------------------------------------------
   if (nrow(table_full) > 1) {
     text_total_levels <- paste0(nrow(table_no_missing), " levels: ")
@@ -362,7 +359,7 @@ report.factor <- function(model, levels_percentage = FALSE, ...) {
 #' \dontrun{
 #' x <- rnorm(1000)
 #' report(x)
-#' report(x, median = TRUE, missing_percentage = TRUE, distribution=TRUE)
+#' report(x, median = TRUE, missing_percentage = TRUE, distribution = TRUE)
 #' to_fulltext(report(x))
 #' to_table(report(x))
 #' to_fulltable(report(x))
@@ -457,7 +454,7 @@ report.numeric <- function(model, median = FALSE, dispersion = TRUE, range = TRU
   }
 
   # Distribution
-  if(distribution == FALSE){
+  if (distribution == FALSE) {
     vars <- c("Skewness", "Kurtosis")
     table <- dplyr::select(table, -one_of(vars[vars %in% names(table)]))
   }
@@ -474,7 +471,7 @@ report.numeric <- function(model, median = FALSE, dispersion = TRUE, range = TRU
 
   if (table_full$n_Missing[1] > 0) {
     text <- paste0(text, text_missing)
-  } else{
+  } else {
     text <- paste0(text, ".")
   }
 

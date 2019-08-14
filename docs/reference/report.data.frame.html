@@ -37,6 +37,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 <meta property="og:title" content="Dataframe Report — report.data.frame" />
 
 <meta property="og:description" content="Create a report of a dataframe." />
@@ -155,15 +157,26 @@
 
     <pre class="usage"><span class='co'># S3 method for data.frame</span>
 <span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>, <span class='kw'>median</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>dispersion</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>range</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>distribution</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>levels_percentage</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>n_characters</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>range</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>distribution</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>levels_percentage</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>n_characters</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for character</span>
+<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>, <span class='kw'>n_characters</span> <span class='kw'>=</span> <span class='fl'>3</span>,
+  <span class='kw'>levels_percentage</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for factor</span>
+<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>, <span class='kw'>levels_percentage</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for numeric</span>
+<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>, <span class='kw'>median</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>dispersion</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>range</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>distribution</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>model</th>
-      <td><p>Numeric vector.</p></td>
+      <td><p>A data.frame or a vector.</p></td>
     </tr>
     <tr>
       <th>median</th>
@@ -179,7 +192,7 @@
     </tr>
     <tr>
       <th>distribution</th>
-      <td><p>Returns Kurtosis and Skewness in table, and tries to guess the distribution of the numeric variable by using an internal machine learning model (see <a href='https://www.rdocumentation.org/packages/parameters/topics/find_distribution'>find_distribution</a>).</p></td>
+      <td><p>Returns Kurtosis and Skewness in table.</p></td>
     </tr>
     <tr>
       <th>levels_percentage</th>
@@ -201,46 +214,67 @@
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>report</p></div>
+    <div class='dont-index'><p>report</p>
+<p>report</p>
+<p>report</p>
+<p>report</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>iris</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>report</span>)
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='no'>iris</span>
+
 <span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; The data contains 150 observations of the following variables:
-#&gt;   - Sepal.Length: Mean = 5.84, SD = 0.83 [4.30, 7.90].
-#&gt;   - Sepal.Width: Mean = 3.06, SD = 0.44 [2.00, 4.40].
-#&gt;   - Petal.Length: Mean = 3.76, SD = 1.77 [1.00, 6.90].
-#&gt;   - Petal.Width: Mean = 1.20, SD = 0.76 [0.10, 2.50].
+#&gt;   - Sepal.Length: Mean = 5.84, SD = 0.83, [4.30, 7.90].
+#&gt;   - Sepal.Width: Mean = 3.06, SD = 0.44, [2.00, 4.40].
+#&gt;   - Petal.Length: Mean = 3.76, SD = 1.77, [1.00, 6.90].
+#&gt;   - Petal.Width: Mean = 1.20, SD = 0.76, [0.10, 2.50].
 #&gt;   - Species: 3 levels: setosa (n = 50); versicolor (n = 50) and virginica (n = 50).</div><div class='input'><span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>, <span class='kw'>median</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>dispersion</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; The data contains 150 observations of the following variables:
-#&gt;   - Sepal.Length: Median = 5.80, MAD = 1.04 [4.30, 7.90].
-#&gt;   - Sepal.Width: Median = 3.00, MAD = 0.44 [2.00, 4.40].
-#&gt;   - Petal.Length: Median = 4.35, MAD = 1.85 [1.00, 6.90].
-#&gt;   - Petal.Width: Median = 1.30, MAD = 1.04 [0.10, 2.50].
-#&gt;   - Species: 3 levels: setosa (n = 50); versicolor (n = 50) and virginica (n = 50).</div><div class='input'><span class='fu'><a href='to_fulltext.html'>to_fulltext</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; The data contains 150 observations of the following variables:
-#&gt;   - Sepal.Length: MMean = 5.84, SD = 0.83, Median = 5.80, MAD = 1.04, Range = [4.30, 7.90], 0 missing.
-#&gt;   - Sepal.Width: MMean = 3.06, SD = 0.44, Median = 3.00, MAD = 0.44, Range = [2.00, 4.40], 0 missing.
-#&gt;   - Petal.Length: MMean = 3.76, SD = 1.77, Median = 4.35, MAD = 1.85, Range = [1.00, 6.90], 0 missing.
-#&gt;   - Petal.Width: MMean = 1.20, SD = 0.76, Median = 1.30, MAD = 1.04, Range = [0.10, 2.50], 0 missing.
-#&gt;   - Species: 3 levels: setosa (n = 50, 33.33%); versicolor (n = 50, 33.33%) and virginica (n = 50, 33.33%).</div><div class='input'><span class='fu'><a href='to_table.html'>to_table</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt;       Variable      Level n_Obs     Mean        SD Min Max n_Missing
-#&gt; 1      Species     setosa    50       NA        NA  NA  NA        NA
-#&gt; 2      Species versicolor    50       NA        NA  NA  NA        NA
-#&gt; 3      Species  virginica    50       NA        NA  NA  NA        NA
-#&gt; 4 Petal.Length       &lt;NA&gt;   150 3.758000 1.7652982 1.0 6.9         0
-#&gt; 5  Petal.Width       &lt;NA&gt;   150 1.199333 0.7622377 0.1 2.5         0
-#&gt; 6  Sepal.Width       &lt;NA&gt;   150 3.057333 0.4358663 2.0 4.4         0</div><div class='input'><span class='fu'><a href='to_fulltable.html'>to_fulltable</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt;       Variable      Level n_Obs     Mean        SD Median     MAD Min Max
-#&gt; 1      Species     setosa    50       NA        NA     NA      NA  NA  NA
-#&gt; 2      Species versicolor    50       NA        NA     NA      NA  NA  NA
-#&gt; 3      Species  virginica    50       NA        NA     NA      NA  NA  NA
-#&gt; 4 Petal.Length       &lt;NA&gt;   150 3.758000 1.7652982   4.35 1.85325 1.0 6.9
-#&gt; 5  Petal.Width       &lt;NA&gt;   150 1.199333 0.7622377   1.30 1.03782 0.1 2.5
-#&gt; 6  Sepal.Width       &lt;NA&gt;   150 3.057333 0.4358663   3.00 0.44478 2.0 4.4
-#&gt;   n_Missing   Skewness Kurtosis percentage_Missing percentage_Obs
-#&gt; 1        NA         NA       NA                 NA       33.33333
-#&gt; 2        NA         NA       NA                 NA       33.33333
-#&gt; 3        NA         NA       NA                 NA       33.33333
-#&gt; 4         0 -0.2721277 1.604464                  0             NA
-#&gt; 5         0 -0.1019342 1.663933                  0             NA
-#&gt; 6         0  0.3157671 3.180976                  0             NA</div></pre>
+#&gt;   - Sepal.Length: Median = 5.80, MAD = 1.04, [4.30, 7.90].
+#&gt;   - Sepal.Width: Median = 3.00, MAD = 0.44, [2.00, 4.40].
+#&gt;   - Petal.Length: Median = 4.35, MAD = 1.85, [1.00, 6.90].
+#&gt;   - Petal.Width: Median = 1.30, MAD = 1.04, [0.10, 2.50].
+#&gt;   - Species: 3 levels: setosa (n = 50); versicolor (n = 50) and virginica (n = 50).</div><div class='input'><span class='fu'><a href='to_text.html'>to_fulltext</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; The data contains 150 observations of the following variables:
+#&gt;   - Sepal.Length: Mean = 5.84, SD = 0.83, Median = 5.80, MAD = 1.04, Range =, [4.30, 7.90], 0 missing.
+#&gt;   - Sepal.Width: Mean = 3.06, SD = 0.44, Median = 3.00, MAD = 0.44, Range =, [2.00, 4.40], 0 missing.
+#&gt;   - Petal.Length: Mean = 3.76, SD = 1.77, Median = 4.35, MAD = 1.85, Range =, [1.00, 6.90], 0 missing.
+#&gt;   - Petal.Width: Mean = 1.20, SD = 0.76, Median = 1.30, MAD = 1.04, Range =, [0.10, 2.50], 0 missing.
+#&gt;   - Species: 3 levels: setosa (n = 50, 33.33%); versicolor (n = 50, 33.33%) and virginica (n = 50, 33.33%).</div><div class='input'><span class='fu'><a href='to_text.html'>to_table</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; Variable     |      Level |  n_Obs | Mean |   SD |  Min |  Max | n_Missing | Skewness | Kurtosis
+#&gt; ------------------------------------------------------------------------------------------------
+#&gt; Species      |     setosa |  50.00 |      |      |      |      |           |          |         
+#&gt; Species      | versicolor |  50.00 |      |      |      |      |           |          |         
+#&gt; Species      |  virginica |  50.00 |      |      |      |      |           |          |         
+#&gt; Petal.Length |            | 150.00 | 3.76 | 1.77 | 1.00 | 6.90 |      0.00 |    -0.27 |    -1.40
+#&gt; Petal.Width  |            | 150.00 | 1.20 | 0.76 | 0.10 | 2.50 |      0.00 |    -0.10 |    -1.34
+#&gt; Sepal.Width  |            | 150.00 | 3.06 | 0.44 | 2.00 | 4.40 |      0.00 |     0.32 |     0.18</div><div class='input'><span class='fu'><a href='to_text.html'>to_fulltable</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; Variable     |      Level |  n_Obs | Mean |   SD | Median |  MAD |  Min |  Max | n_Missing | Skewness | Kurtosis | percentage_Missing | percentage_Obs
+#&gt; ------------------------------------------------------------------------------------------------------------------------------------------------------
+#&gt; Species      |     setosa |  50.00 |      |      |        |      |      |      |           |          |          |                    |          33.33
+#&gt; Species      | versicolor |  50.00 |      |      |        |      |      |      |           |          |          |                    |          33.33
+#&gt; Species      |  virginica |  50.00 |      |      |        |      |      |      |           |          |          |                    |          33.33
+#&gt; Petal.Length |            | 150.00 | 3.76 | 1.77 |   4.35 | 1.85 | 1.00 | 6.90 |      0.00 |    -0.27 |    -1.40 |               0.00 |               
+#&gt; Petal.Width  |            | 150.00 | 1.20 | 0.76 |   1.30 | 1.04 | 0.10 | 2.50 |      0.00 |    -0.10 |    -1.34 |               0.00 |               
+#&gt; Sepal.Width  |            | 150.00 | 3.06 | 0.44 |   3.00 | 0.44 | 2.00 | 4.40 |      0.00 |     0.32 |     0.18 |               0.00 |               </div><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"A"</span>, <span class='st'>"B"</span>, <span class='st'>"C"</span>, <span class='st'>"A"</span>, <span class='st'>"B"</span>, <span class='st'>"B"</span>, <span class='st'>"D"</span>, <span class='st'>"E"</span>, <span class='st'>"B"</span>, <span class='st'>"D"</span>, <span class='st'>"A"</span>)
+<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; 5 entries: B, n = 4; A, n = 3; D, n = 2 and 2 others</div><div class='input'><span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>, <span class='kw'>n_characters</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>levels_percentage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; 5 entries: B, 0.36%; A, 0.27% and 3 others</div><div class='input'><span class='fu'><a href='to_text.html'>to_fulltext</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; 5 entries: B, n = 4; A, n = 3; D, n = 2 and 2 others (0 missing).</div><div class='input'><span class='fu'><a href='to_text.html'>to_table</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>, <span class='kw'>n_characters</span> <span class='kw'>=</span> <span class='st'>"all"</span>))</div><div class='output co'>#&gt; n_Entries | n_Obs | n_Missing |                                          Entries
+#&gt; --------------------------------------------------------------------------------
+#&gt; 5.00      | 11.00 |      0.00 | B, n = 4; A, n = 3; D, n = 2; C, n = 1; E, n = 1</div><div class='input'><span class='fu'><a href='to_text.html'>to_fulltable</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; n_Entries | n_Obs | n_Missing | percentage_Missing |                      Entries
+#&gt; ---------------------------------------------------------------------------------
+#&gt; 5.00      | 11.00 |      0.00 |               0.00 | B, n = 4; A, n = 3; D, n = 2</div><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/factor'>factor</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"A"</span>, <span class='st'>"B"</span>, <span class='st'>"C"</span>), <span class='fl'>10</span>))
+<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; 3 levels: A (n = 10); B (n = 10) and C (n = 10).</div><div class='input'><span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>, <span class='kw'>levels_percentage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; 3 levels: A (33.33%); B (33.33%) and C (33.33%).</div><div class='input'><span class='fu'><a href='to_text.html'>to_fulltext</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; 3 levels: A (n = 10, 33.33%); B (n = 10, 33.33%) and C (n = 10, 33.33%).</div><div class='input'><span class='fu'><a href='to_text.html'>to_table</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; Level | n_Obs
+#&gt; -------------
+#&gt; A     | 10.00
+#&gt; B     | 10.00
+#&gt; C     | 10.00</div><div class='input'><span class='fu'><a href='to_text.html'>to_fulltable</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))</div><div class='output co'>#&gt; Level | n_Obs | percentage_Obs
+#&gt; ------------------------------
+#&gt; A     | 10.00 |          33.33
+#&gt; B     | 10.00 |          33.33
+#&gt; C     | 10.00 |          33.33</div><span class='co'># NOT RUN {</span>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/Normal'>rnorm</a></span>(<span class='fl'>1000</span>)
+<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>)
+<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>, <span class='kw'>median</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>missing_percentage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>distribution</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'><a href='to_text.html'>to_fulltext</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))
+<span class='fu'><a href='to_text.html'>to_table</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))
+<span class='fu'><a href='to_text.html'>to_fulltable</a></span>(<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>x</span>))
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

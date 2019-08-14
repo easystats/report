@@ -23,10 +23,13 @@ model <- lm(Sepal.Length ~ Species, data=iris)
 report(model)
 ```
 
-    ## We fitted a linear model to predict Sepal.Length with Species. The model's explanatory power is substantial (R2 = 0.62, adj. R2 = 0.61). The model's intercept is at 5.01. Within this model:
+    ## We fitted a linear model to predict Sepal.Length with Species. The model's explanatory power is
+    ## substantial (R2 = 0.62, adj. R2 = 0.61). The model's intercept is at 5.01. Within this model:
     ## 
-    ##   - The effect of Species (versicolor) is positive and can be considered as very large and significant (beta = 0.93, 95% CI [0.73, 1.13], p < .001, std. beta = 1.12).
-    ##   - The effect of Species (virginica) is positive and can be considered as very large and significant (beta = 1.58, 95% CI [1.38, 1.79], p < .001, std. beta = 1.91).
+    ##   - The effect of Species (versicolor) is positive and can be considered as very large and
+    ## significant (beta = 0.93, 95% CI [0.73, 1.13], p < .001, std. beta = 1.12).
+    ##   - The effect of Species (virginica) is positive and can be considered as very large and significant
+    ## (beta = 1.58, 95% CI [1.38, 1.79], p < .001, std. beta = 1.91).
 
 ## Documentation
 
@@ -134,7 +137,8 @@ cor.test(iris$Sepal.Length, iris$Petal.Length) %>%
   report()
 ```
 
-    ## The Pearson's product-moment correlation between iris$Sepal.Length and iris$Petal.Length is positive, significant and large (r = 0.87, p < .001).
+    ## The Pearson's product-moment correlation between iris$Sepal.Length and iris$Petal.Length is
+    ## positive, significant and large (r = 0.87, p < .001).
 
 You can also create tables with the `to_table()` and `to_fulltable()`
 functions:
@@ -174,15 +178,15 @@ stan_glmer(vs ~ mpg + (1|cyl), data=mtcars, family="binomial") %>%
     ## (CIs) were based on Highest Density Intervals (HDI). Parameters were scaled by the mean and the SD
     ## of the response variable. Effect sizes were labelled following Cohen's (1988) recommendations.
     ## 
-    ## The model's explanatory power is substantial (R2's median = 0.56, 89% CI [0.43, 0.69] Within this
-    ## model, the explanatory power related to the fixed effects alone (marginal R2's median) is of 0.26
+    ## The model's explanatory power is substantial (R2's median = 0.57, 89% CI [0.44, 0.69] Within this
+    ## model, the explanatory power related to the fixed effects alone (marginal R2's median) is of 0.24
     ## (89% CI [0.00, 0.48]). The model's intercept, corresponding to vs = 0, mpg = 0 and cyl = 0, is at
-    ## -5.04 (89% CI [-12.41, 1.72], 1.50% in ROPE, std. median = 0.00). Within this model:
+    ## -4.91 (89% CI [-11.35, 2.48], 1.70% in ROPE, std. median = 0.00). Within this model:
     ## 
-    ##   - The effect of mpg has a probability of 86.12% of being positive and can be considered as medium
-    ## and not significant (median = 0.23, 89% CI [-0.14, 0.54], 39.10% in ROPE, std. median = 1.36). The
-    ## algorithm successfuly converged (Rhat = 1.002) and the estimates can be considered as stable (ESS =
-    ## 1286).
+    ##   - The effect of mpg has a probability of 84.60% of being positive and can be considered as medium
+    ## and not significant (median = 0.21, 89% CI [-0.11, 0.56], 40.58% in ROPE, std. median = 1.29). The
+    ## algorithm successfuly converged (Rhat = 1.003) and the estimates can be considered as stable (ESS =
+    ## 1344).
 
 ## Credits
 

@@ -4,13 +4,12 @@ text_performance.lm <- function(model, performance, ...) {
   text_full <- ""
 
   # Intercept-only
-  if(all(insight::find_parameters(model, flatten = FALSE) == "(Intercept)")){
+  if (all(insight::find_parameters(model, flatten = FALSE) == "(Intercept)")) {
     return(list("text" = text, "text_full" = text_full))
   }
 
   # R2
   if ("R2" %in% names(performance)) {
-
     r2 <- attributes(performance)$r2
 
     text <- paste0(
@@ -69,7 +68,7 @@ text_performance.glm <- function(model, performance, ...) {
   text <- ""
 
   # Intercept-only
-  if(all(insight::find_parameters(model, flatten = FALSE) == "(Intercept)")){
+  if (all(insight::find_parameters(model, flatten = FALSE) == "(Intercept)")) {
     return(list("text" = text, "text_full" = text))
   }
 
@@ -126,22 +125,25 @@ text_performance.merMod <- function(model, performance, ...) {
       interpret_r2(performance$R2_conditional, rules = "cohen1988"),
       " (conditional R2 = ",
       parameters::format_value(performance$R2_conditional),
-      ")")
+      ")"
+    )
   }
 
   # R2 marginal
   if ("R2_marginal" %in% names(performance)) {
-    if(text == ""){
+    if (text == "") {
       text <- "The"
-    } else{
+    } else {
       text <- paste0(text, " and the")
     }
-    text <- paste0(text,
-                   " part related to the",
-                   " fixed effects alone (marginal R2) is of ",
-                   parameters::format_value(performance$R2_marginal),
-                   ".")
-  } else{
+    text <- paste0(
+      text,
+      " part related to the",
+      " fixed effects alone (marginal R2) is of ",
+      parameters::format_value(performance$R2_marginal),
+      "."
+    )
+  } else {
     text <- paste0(text, ".")
   }
 
@@ -149,7 +151,7 @@ text_performance.merMod <- function(model, performance, ...) {
   # ICC
   # ?
 
- list(
+  list(
     "text" = text,
     "text_full" = text
   )
@@ -170,7 +172,7 @@ text_performance.stanreg <- function(model, performance, ...) {
   text_full <- ""
 
   # Intercept-only
-  if(all(insight::find_parameters(model, flatten = FALSE) == "(Intercept)")){
+  if (all(insight::find_parameters(model, flatten = FALSE) == "(Intercept)")) {
     return(list("text" = text, "text_full" = text))
   }
 
@@ -184,12 +186,15 @@ text_performance.stanreg <- function(model, performance, ...) {
       "The model's explanatory power is ",
       interpret_r2(r2_val, rules = "cohen1988"),
       " (R2's median = ",
-      parameters::format_value(r2_val))
+      parameters::format_value(r2_val)
+    )
 
 
-    text_full <- paste0(text,
-                        ", ",
-                        parameters::format_ci(r2_ci$CI_low, r2_ci$CI_high, r2_ci$CI / 100))
+    text_full <- paste0(
+      text,
+      ", ",
+      parameters::format_ci(r2_ci$CI_low, r2_ci$CI_high, r2_ci$CI / 100)
+    )
 
 
     if ("R2_adjusted" %in% names(performance)) {
@@ -207,7 +212,6 @@ text_performance.stanreg <- function(model, performance, ...) {
   }
 
   if ("R2_marginal" %in% names(performance)) {
-
     r2 <- attributes(performance)$r2_bayes
     r2_val <- r2$Estimates$R2_Bayes_marginal$Median
     r2_ci <- r2$CI$R2_Bayes_marginal
@@ -241,8 +245,3 @@ text_performance.stanreg <- function(model, performance, ...) {
     "text_full" = text_full
   )
 }
-
-
-
-
-

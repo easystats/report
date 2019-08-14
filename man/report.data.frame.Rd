@@ -50,8 +50,6 @@ report(x, median = TRUE, dispersion = TRUE, range = TRUE, missing_percentage = T
 to_fulltext(report(x))
 to_table(report(x))
 to_fulltable(report(x))
-
-
 x <- c("A", "B", "C", "A", "B", "B", "D", "E", "B", "D", "A")
 report(x)
 report(x, n_characters = 2, levels_percentage = TRUE, missing_percentage = TRUE)
@@ -67,7 +65,7 @@ to_fulltable(report(x))
 \dontrun{
 x <- rnorm(1000)
 report(x)
-report(x, median = TRUE, missing_percentage = TRUE, distribution=TRUE)
+report(x, median = TRUE, missing_percentage = TRUE, distribution = TRUE)
 to_fulltext(report(x))
 to_table(report(x))
 to_fulltable(report(x))

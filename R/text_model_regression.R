@@ -1,5 +1,5 @@
 #' @export
-text_model.glm <- function(model, parameters, ci = NULL, ci_method=NULL, standardize = "refit", standardize_robust = FALSE, effsize = NULL, bootstrap = FALSE, iterations = 500, test = NULL, rope_range = NULL, rope_ci = NULL, p_method = NULL, ...) {
+text_model.glm <- function(model, parameters, ci = NULL, ci_method = NULL, standardize = "refit", standardize_robust = FALSE, effsize = NULL, bootstrap = FALSE, iterations = 500, test = NULL, rope_range = NULL, rope_ci = NULL, p_method = NULL, ...) {
 
   # Model info
   info <- insight::model_info(model)
@@ -15,20 +15,24 @@ text_model.glm <- function(model, parameters, ci = NULL, ci_method=NULL, standar
   text <- paste0(
     "We fitted a ",
     boostrapped,
-    format_model(model))
+    format_model(model)
+  )
   text_full <- text
 
   # Algorithm
-  text_full <- paste0(text_full,
-                      " (estimated using ",
-                      format_algorithm(model),
-                      ")")
+  text_full <- paste0(
+    text_full,
+    " (estimated using ",
+    format_algorithm(model),
+    ")"
+  )
 
 
   # To predict
   to_predict_text <- paste0(" to predict ", insight::find_response(model))
-  if(all(insight::find_parameters(model, flatten = FALSE) == "(Intercept)") == FALSE){
-    to_predict_text <- paste0(to_predict_text,
+  if (all(insight::find_parameters(model, flatten = FALSE) == "(Intercept)") == FALSE) {
+    to_predict_text <- paste0(
+      to_predict_text,
       " with ",
       format_text(insight::find_predictors(model, effects = "fixed", flatten = TRUE))
     )
@@ -49,26 +53,34 @@ text_model.glm <- function(model, parameters, ci = NULL, ci_method=NULL, standar
 
 
   # Details
-  if(info$is_bayesian | bootstrap == TRUE){
+  if (info$is_bayesian | bootstrap == TRUE) {
     text_full <- paste0(text_full, .text_priors(parameters))
 
-    if(!is.null(rope_range)){
-      if(rope_range == "default") rope_range <- bayestestR::rope_range(model)
-      text_full <- paste0(text_full,
-                            .text_rope(rope_range, rope_ci))
+    if (!is.null(rope_range)) {
+      if (rope_range == "default") rope_range <- bayestestR::rope_range(model)
+      text_full <- paste0(
+        text_full,
+        .text_rope(rope_range, rope_ci)
+      )
     }
   }
-  if(!is.null(ci_method)){
-    text_full <- paste0(text_full,
-                          .text_ci(ci, ci_method = ci_method, p_method = p_method))
+  if (!is.null(ci_method)) {
+    text_full <- paste0(
+      text_full,
+      .text_ci(ci, ci_method = ci_method, p_method = p_method)
+    )
   }
-  if(!is.null(standardize)){
-    text_full <- paste0(text_full,
-                        .text_standardize(standardize, standardize_robust))
+  if (!is.null(standardize)) {
+    text_full <- paste0(
+      text_full,
+      .text_standardize(standardize, standardize_robust)
+    )
   }
-  if(!is.null(effsize)){
-    text_full <- paste0(text_full,
-                          .text_effsize(effsize))
+  if (!is.null(effsize)) {
+    text_full <- paste0(
+      text_full,
+      .text_effsize(effsize)
+    )
   }
 
 

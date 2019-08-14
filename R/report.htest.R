@@ -18,13 +18,12 @@
 #'
 #' @export
 report.htest <- function(model, effsize = "cohen1988", ...) {
-
   table_full <- parameters::model_parameters(model)
   table <- table_full
   values <- as.list(table_full)
 
 
-  if(insight::model_info(model)$is_correlation){
+  if (insight::model_info(model)$is_correlation) {
     estimate <- c("rho", "r", "tau")[c("rho", "r", "tau") %in% names(table)]
     text <- paste0(
       "The ",
@@ -36,7 +35,7 @@ report.htest <- function(model, effsize = "cohen1988", ...) {
       ", ",
       interpret_p(table$p),
       " and ",
-      interpret_r(table[[estimate]], rules=effsize),
+      interpret_r(table[[estimate]], rules = effsize),
       " (",
       estimate,
       " = ",
@@ -46,9 +45,7 @@ report.htest <- function(model, effsize = "cohen1988", ...) {
       ")."
     )
     text_full <- text
-  } else if(insight::model_info(model)$is_ttest){
-
-
+  } else if (insight::model_info(model)$is_ttest) {
     if (names(model$null.value) == "mean") {
       table_full$Difference <- model$estimate - model$null.value
       means <- paste0(
@@ -94,7 +91,7 @@ report.htest <- function(model, effsize = "cohen1988", ...) {
       ")."
     )
     text_full <- text
-  } else{
+  } else {
     stop("reports not implemented for such h-tests yet.")
   }
 

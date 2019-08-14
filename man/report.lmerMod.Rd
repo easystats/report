@@ -47,7 +47,7 @@ to_table(r)
 to_fulltable(r)
 
 
-model <- glmer(vs ~ disp + (1|am), data = mtcars, family = "binomial")
+model <- glmer(vs ~ disp + (1 | am), data = mtcars, family = "binomial")
 r <- report(model)
 to_text(r)
 to_fulltext(r)

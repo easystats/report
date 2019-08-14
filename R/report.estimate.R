@@ -90,7 +90,7 @@ report.estimate_slopes <- report.estimate_contrasts
 #' @examples
 #' \dontrun{
 #' library(rstanarm)
-#' model <- stan_glm(Sepal.Width ~ poly(Petal.Length, 2), data=iris)
+#' model <- stan_glm(Sepal.Width ~ poly(Petal.Length, 2), data = iris)
 #' report(estimate_smooth(model))
 #' }
 #' @rdname report.estimate_contrasts
@@ -102,27 +102,28 @@ report.estimate_smooth <- function(model, ...) {
   # Text ----
 
   ## Description
-  description <- paste0("The effect of ",
-                        attributes(model)$smooth,
-                        " can be described by the following linear approximation:\n\n")
+  description <- paste0(
+    "The effect of ",
+    attributes(model)$smooth,
+    " can be described by the following linear approximation:\n\n"
+  )
 
 
   ## Params
   parameters <- table_full
-  if(is.null(attributes(model)$levels)){
+  if (is.null(attributes(model)$levels)) {
     text <- .format_smooth_part(parameters)
-
-  } else{
+  } else {
     parameters$Group <- paste(parameters[, attributes(model)$levels])
     text <- c()
-    for(group in unique(parameters$Group)){
+    for (group in unique(parameters$Group)) {
       text <- c(text, paste0("- In ", group))
 
       current_params <- parameters[parameters$Group == group, ]
       current_text <- .format_smooth_part(current_params)
       text <- c(text, current_text)
-      }
     }
+  }
 
   text <- paste0(description, paste0(text, collapse = "\n"))
 
@@ -142,23 +143,28 @@ report.estimate_smooth <- function(model, ...) {
 
 
 #' @keywords internal
-.format_smooth_part <- function(parameters, prefix = "  - "){
+.format_smooth_part <- function(parameters, prefix = "  - ") {
   parameters$trend_text <- ifelse(!is.na(parameters$Trend),
-                                 paste0(interpret_direction(parameters$Trend),
-                                        " trend (linear coefficient = ",
-                                        parameters::format_value(parameters$Trend),
-                                        ")"),
-                                 "part")
+    paste0(
+      interpret_direction(parameters$Trend),
+      " trend (linear coefficient = ",
+      parameters::format_value(parameters$Trend),
+      ")"
+    ),
+    "part"
+  )
 
-  text <- paste0(prefix,
-                 "A ",
-                 parameters$trend_text,
-                 " starting at ",
-                 parameters::format_value(parameters$Start),
-                 " and ending at ",
-                 parameters::format_value(parameters$End),
-                 " (",
-                 parameters::format_value(parameters$Size*100),
-                 "% of the total size)")
+  text <- paste0(
+    prefix,
+    "A ",
+    parameters$trend_text,
+    " starting at ",
+    parameters::format_value(parameters$Start),
+    " and ending at ",
+    parameters::format_value(parameters$End),
+    " (",
+    parameters::format_value(parameters$Size * 100),
+    "% of the total size)"
+  )
   text
 }

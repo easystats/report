@@ -51,7 +51,7 @@ report(estimate_slopes(model))
 }
 \dontrun{
 library(rstanarm)
-model <- stan_glm(Sepal.Width ~ poly(Petal.Length, 2), data=iris)
+model <- stan_glm(Sepal.Width ~ poly(Petal.Length, 2), data = iris)
 report(estimate_smooth(model))
 }
 }

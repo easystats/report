@@ -51,7 +51,7 @@ to_text <- function(x, full = FALSE, width = NULL, ...) {
   if (full == TRUE) {
     text <- format_text(x$text_full, width = width)
   } else {
-    text <- format_text(x$text)
+    text <- format_text(x$text, width = width)
   }
 
   cat(text, sep = "\n")
@@ -88,7 +88,7 @@ to_table <- function(x, full = FALSE, ...) {
 }
 
 #' @export
-print.report_table <- function(x, ...){
+print.report_table <- function(x, ...) {
   table <- parameters::format_table(parameters::parameters_table(x))
   cat(table)
 }
@@ -96,7 +96,7 @@ print.report_table <- function(x, ...){
 
 
 #' @export
-summary.report <-  function(object, full = FALSE, ...) {
+summary.report <- function(object, full = FALSE, ...) {
   to_table(object, full = full, ...)
 }
 
@@ -135,15 +135,14 @@ to_values <- function(x, ...) {
   if (any(class(x) %in% c("parameters_model")) && "Parameter" %in% names(x)) {
     vals <- list()
 
-    for(param in x$Parameter){
+    for (param in x$Parameter) {
       vals[[param]] <- as.list(x[x$Parameter == param, ])
     }
-
   } else if (any(class(x) %in% c("report")) && !"values" %in% names(x)) {
     vals <- as.list(x$table_full)
-  } else if("values" %in% names(x)) {
+  } else if ("values" %in% names(x)) {
     vals <- x$values
-  } else{
+  } else {
     stop("Impossible to transform that to values!")
   }
   vals

@@ -6,5 +6,3 @@ test_that("format_text", {
   x <- paste(rep("a very long string", 50), collapse = " \n")
   testthat::expect_equal(nchar(format_text(x, width = 25)), 999, tol = 0)
 })
-
-

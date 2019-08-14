@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Bayes Factor Interpretation — interpret_bf • report</title>
+<title>Bayes Factor (BF) Interpretation — interpret_bf • report</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,9 +37,11 @@
 
 
 
-<meta property="og:title" content="Bayes Factor Interpretation — interpret_bf" />
+  <link href="../extra.css" rel="stylesheet">
+  
+<meta property="og:title" content="Bayes Factor (BF) Interpretation — interpret_bf" />
 
-<meta property="og:description" content="Bayes Factor Interpretation" />
+<meta property="og:description" content="Bayes Factor (BF) Interpretation" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -142,33 +144,33 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Bayes Factor Interpretation</h1>
+    <h1>Bayes Factor (BF) Interpretation</h1>
     <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/interpret_bf.R'><code>R/interpret_bf.R</code></a></small>
     <div class="hidden name"><code>interpret_bf.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Bayes Factor Interpretation</p>
+    <p>Bayes Factor (BF) Interpretation</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>interpret_bf</span>(<span class='no'>bf</span>, <span class='kw'>rules</span> <span class='kw'>=</span> <span class='st'>"jeffreys1961"</span>, <span class='kw'>include_bf</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>interpret_bf</span>(<span class='no'>bf</span>, <span class='kw'>rules</span> <span class='kw'>=</span> <span class='st'>"jeffreys1961"</span>, <span class='kw'>include_value</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>bf</th>
-      <td><p>Value or vector of (log) odds ratio values.</p></td>
+      <td><p>Value or vector of Bayes factor (BF) values.</p></td>
     </tr>
     <tr>
       <th>rules</th>
-      <td><p>Can be "jeffreys1961" (default), "raftery1995" or custom set of rules.</p></td>
+      <td><p>Can be "jeffreys1961" (default), "raftery1995" or custom set of <code><a href='rules.html'>rules</a></code>.</p></td>
     </tr>
     <tr>
-      <th>include_bf</th>
-      <td><p>Include the BF in the output.</p></td>
+      <th>include_value</th>
+      <td><p>Include the value in the output.</p></td>
     </tr>
     </table>
     

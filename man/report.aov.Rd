@@ -28,10 +28,8 @@ Create a report of an ANOVA.
 data <- iris
 data$Cat1 <- rep(c("X", "X", "Y"), length.out = nrow(data))
 data$Cat2 <- rep(c("A", "B"), length.out = nrow(data))
-model <- aov(Sepal.Length ~ Species * Cat1 * Cat2, data=data)
+model <- aov(Sepal.Length ~ Species * Cat1 * Cat2, data = data)
 report(model, omega_squared = "partial")
-
-
 }
 \seealso{
 report

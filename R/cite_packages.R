@@ -39,7 +39,7 @@ show_packages <- function(session) {
     stringsAsFactors = FALSE
   )
 
-  data[order(data$Package),]
+  data[order(data$Package), ]
 }
 
 #' @rdname show_packages
@@ -49,5 +49,5 @@ cite_packages <- function(session) {
   data$Package <- NULL
   data$Version <- NULL
 
- as.data.frame(data[order(data$References),])
+  as.data.frame(data[order(data$References), ])
 }

@@ -37,6 +37,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 <meta property="og:title" content="(General) Linear Models Report — report.lm" />
 
 <meta property="og:description" content="Create a report of a (general) linear model." />
@@ -154,15 +156,9 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for lm</span>
-<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>, <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>standardize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>effsize</span> <span class='kw'>=</span> <span class='st'>"cohen1988"</span>, <span class='kw'>performance_in_table</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>performance_metrics</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='kw'>bootstrap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>iterations</span> <span class='kw'>=</span> <span class='fl'>500</span>,
-  <span class='no'>...</span>)
-
-<span class='co'># S3 method for glm</span>
-<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>, <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>standardize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>effsize</span> <span class='kw'>=</span> <span class='st'>"chen2010"</span>, <span class='kw'>performance_in_table</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>performance_metrics</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='kw'>bootstrap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>iterations</span> <span class='kw'>=</span> <span class='fl'>500</span>,
+<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>, <span class='kw'>effsize</span> <span class='kw'>=</span> <span class='st'>"default"</span>, <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
+  <span class='kw'>standardize</span> <span class='kw'>=</span> <span class='st'>"refit"</span>, <span class='kw'>standardize_robust</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>bootstrap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>iterations</span> <span class='kw'>=</span> <span class='fl'>500</span>, <span class='kw'>performance_metrics</span> <span class='kw'>=</span> <span class='st'>"all"</span>,
   <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -170,7 +166,11 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>model</th>
-      <td><p>Object of class <a href='https://www.rdocumentation.org/packages/stats/topics/lm'>lm</a>.</p></td>
+      <td><p>Frequentist regression object.</p></td>
+    </tr>
+    <tr>
+      <th>effsize</th>
+      <td><p><a href='https://easystats.github.io/report/articles/interpret_metrics.html'>Interpret the standardized parameters</a> using a set of rules. Default corresponds to "funder2019" for linear models and "chen2010" for logistic models.</p></td>
     </tr>
     <tr>
       <th>ci</th>
@@ -178,102 +178,103 @@
     </tr>
     <tr>
       <th>standardize</th>
-      <td><p>Standardized coefficients. See <code><a href='https://www.rdocumentation.org/packages/parameters/topics/model_parameters.lm'>model_parameters</a></code>.</p></td>
+      <td><p>Add standardized parameters. Can be FALSE or a character indicating the standardization method (see <code>parameters_standardize</code>).</p></td>
     </tr>
     <tr>
-      <th>effsize</th>
-      <td><p><a href='https://easystats.github.io/report/articles/interpret_metrics.html'>Interpret the standardized parameters</a> using a set of rules. Can be "cohen1988" (default for linear models), "chen2010" (default for logistic models), "sawilowsky2009", NULL, or a custom set of <a href='rules.html'>rules</a>.</p></td>
-    </tr>
-    <tr>
-      <th>performance_in_table</th>
-      <td><p>Add performance metrics in table.</p></td>
-    </tr>
-    <tr>
-      <th>performance_metrics</th>
-      <td><p>See <code><a href='https://www.rdocumentation.org/packages/performance/topics/model_performance.lm'>model_performance</a></code>.</p></td>
+      <th>standardize_robust</th>
+      <td><p>Robust standardization. See <code>parameters_standardize</code>.</p></td>
     </tr>
     <tr>
       <th>bootstrap</th>
-      <td><p>See <code><a href='https://www.rdocumentation.org/packages/parameters/topics/model_parameters.lm'>model_parameters</a></code>.</p></td>
+      <td><p>Should estimates be based on bootsrapped model? If TRUE, then arguments of Bayesian regressions apply.</p></td>
     </tr>
     <tr>
       <th>iterations</th>
       <td><p>The number of bootstrap replicates. This only apply in the case of bootsrapped frequentist models.</p></td>
     </tr>
     <tr>
+      <th>performance_metrics</th>
+      <td><p>See <code><a href='https://www.rdocumentation.org/packages/performance/topics/model_performance.lm'>model_performance</a></code>.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
-      <td><p>Arguments passed to or from other methods.</p></td>
+      <td><p>Arguments passed to or from other methods (e.g., to standardize).</p></td>
     </tr>
     </table>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/lm'>lm</a></span>(<span class='no'>Sepal.Length</span> ~ <span class='no'>Petal.Length</span> * <span class='no'>Species</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>report</span>)
+
+<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/lm'>lm</a></span>(<span class='no'>Sepal.Length</span> ~ <span class='no'>Petal.Length</span> * <span class='no'>Species</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>)
 <span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>)
-<span class='fu'><a href='to_text.html'>to_text</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; We fitted a linear model to predict Sepal.Length with Petal.Length and Species. The model's explanatory power is substantial (R2 = 0.84, adj. R2 = 0.83). The model's intercept is at 4.21. 
+<span class='fu'><a href='to_text.html'>to_text</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; We fitted a linear model to predict Sepal.Length with Petal.Length and Species. The model's explanatory power is substantial (R2 = 0.84, adj. R2 = 0.83). The model's intercept is at 4.21. Within this model:
 #&gt; 
-#&gt; Within this model: 
-#&gt;   - Petal.Length is not significant (beta = 0.54, 95% CI [-0.00, 1.09], p = 0.05) and large (std. beta = 1.16).
-#&gt;   - Speciesversicolor is significant (beta = -1.81, 95% CI [-2.99, -0.62], p &lt; .01) and large (std. beta = -0.88).
-#&gt;   - Speciesvirginica is significant (beta = -3.15, 95% CI [-4.41, -1.90], p &lt; .001) and large (std. beta = -1.75).
-#&gt;   - Petal.Length:Speciesversicolor is not significant (beta = 0.29, 95% CI [-0.30, 0.87], p &gt; .1) and medium (std. beta = 0.61).
-#&gt;   - Petal.Length:Speciesvirginica is not significant (beta = 0.45, 95% CI [-0.12, 1.03], p &gt; .1) and large (std. beta = 0.97).</div><div class='input'><span class='fu'><a href='to_fulltext.html'>to_fulltext</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; We fitted a linear model (using OLS algorithm) to predict Sepal.Length with Petal.Length and Species (formula = Sepal.Length ~ Petal.Length * Species). Effect sizes were labelled following Cohen's (1988) recommendations. The model explains a not significant and substantial proportion of variance (R2 = 0.84, F(, ) = , p , adj. R2 = 0.83). The model's intercept, corresponding to Petal.Length = 0 and Species = , is at 4.21 (t(144) = 10.34, 95% CI [3.41, 5.02], p &lt; .001). 
+#&gt;   - The effect of Petal.Length is positive and can be considered as very large and not significant (beta = 0.54, 95% CI [0.00, 1.09], p = 0.05, std. beta = 1.16).
+#&gt;   - The effect of Species (versicolor) is negative and can be considered as very large and significant (beta = -1.81, 95% CI [-2.99, -0.62], p &lt; .01, std. beta = -0.88).
+#&gt;   - The effect of Species (virginica) is negative and can be considered as very large and significant (beta = -3.15, 95% CI [-4.41, -1.90], p &lt; .001, std. beta = -1.75).
+#&gt;   - The interaction effect of Species (versicolor) on Petal.Length is positive and can be considered as medium and not significant (beta = 0.29, 95% CI [-0.30, 0.87], p &gt; .1, std. beta = 0.61).
+#&gt;   - The interaction effect of Species (virginica) on Petal.Length is positive and can be considered as very large and not significant (beta = 0.45, 95% CI [-0.12, 1.03], p &gt; .1, std. beta = 0.97).</div><div class='input'><span class='fu'><a href='to_text.html'>to_fulltext</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; We fitted a linear model (estimated using OLS) to predict Sepal.Length with Petal.Length and Species (formula = Sepal.Length ~ Petal.Length * Species). Standardized parameters were obtained by fitting the model on a standardized version of the dataset. Effect sizes were labelled following Funder's (2019) recommendations.
 #&gt; 
-#&gt; Within this model: 
-#&gt;   - Petal.Length is positive, not significant (beta = 0.54, SE = 0.28, t(144) = 1.96, 95% CI [-0.00, 1.09], p = 0.05) and large (std. beta = 1.16, std. SE = 0.59, std. 95% CI [-0.01, 2.32]).
-#&gt;   - Speciesversicolor is negative, significant (beta = -1.81, SE = 0.60, t(144) = -3.02, 95% CI [-2.99, -0.62], p &lt; .01) and large (std. beta = -0.88, std. SE = 0.77, std. 95% CI [-2.41, 0.65]).
-#&gt;   - Speciesvirginica is negative, significant (beta = -3.15, SE = 0.63, t(144) = -4.97, 95% CI [-4.41, -1.90], p &lt; .001) and large (std. beta = -1.75, std. SE = 0.79, std. 95% CI [-3.32, -0.18]).
-#&gt;   - Petal.Length:Speciesversicolor is positive, not significant (beta = 0.29, SE = 0.30, t(144) = 0.97, 95% CI [-0.30, 0.87], p &gt; .1) and medium (std. beta = 0.61, std. SE = 0.63, std. 95% CI [-0.63, 1.85]).
-#&gt;   - Petal.Length:Speciesvirginica is positive, not significant (beta = 0.45, SE = 0.29, t(144) = 1.56, 95% CI [-0.12, 1.03], p &gt; .1) and large (std. beta = 0.97, std. SE = 0.62, std. 95% CI [-0.26, 2.19]).</div><div class='input'><span class='fu'><a href='to_table.html'>to_table</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; Parameter                      |  beta | CI_low | CI_high |    p | Std_beta |  Fit
-#&gt; ----------------------------------------------------------------------------------
-#&gt; (Intercept)                    | <span style='color: #00BB00;'> 4.21</span><span> |   3.41 |    5.02 | </span><span style='color: #BBBB00;'>0.00</span><span> | </span><span style='color: #00BB00;'>    0.49</span><span> |     
-#&gt; Petal.Length                   | </span><span style='color: #00BB00;'> 0.54</span><span> |  -0.00 |    1.09 | 0.05 | </span><span style='color: #00BB00;'>    1.16</span><span> |     
-#&gt; Speciesversicolor              | </span><span style='color: #BB0000;'>-1.81</span><span> |  -2.99 |   -0.62 | </span><span style='color: #BBBB00;'>0.00</span><span> | </span><span style='color: #BB0000;'>   -0.88</span><span> |     
-#&gt; Speciesvirginica               | </span><span style='color: #BB0000;'>-3.15</span><span> |  -4.41 |   -1.90 | </span><span style='color: #BBBB00;'>0.00</span><span> | </span><span style='color: #BB0000;'>   -1.75</span><span> |     
-#&gt; Petal.Length:Speciesversicolor | </span><span style='color: #00BB00;'> 0.29</span><span> |  -0.30 |    0.87 | 0.33 | </span><span style='color: #00BB00;'>    0.61</span><span> |     
-#&gt; Petal.Length:Speciesvirginica  | </span><span style='color: #00BB00;'> 0.45</span><span> |  -0.12 |    1.03 | 0.12 | </span><span style='color: #00BB00;'>    0.97</span><span> |     
-#&gt;                                |       |        |         | </span><span style='font-weight: bold;'>    </span><span> |          |     
-#&gt; R2                             |       |        |         | </span><span style='font-weight: bold;'>    </span><span> |          | </span><span style='color: #00BBBB;'>0.84</span><span>
-#&gt; R2_adjusted                    |       |        |         | </span><span style='font-weight: bold;'>    </span><span> |          | </span><span style='color: #00BBBB;'>0.83</span><span>
-#&gt; </div><div class='input'><span class='fu'><a href='to_fulltable.html'>to_fulltable</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; Parameter                      |  beta |   SE | CI_low | CI_high |     t | DoF_residual |    p | Std_beta | Std_SE | Std_CI_low | Std_CI_high |    Fit
-#&gt; ------------------------------------------------------------------------------------------------------------------------------------------------------
-#&gt; (Intercept)                    | </span><span style='color: #00BB00;'> 4.21</span><span> | 0.41 |   3.41 |    5.02 | 10.34 |          144 | </span><span style='color: #BBBB00;'>0.00</span><span> | </span><span style='color: #00BB00;'>    0.49</span><span> |   0.77 |      -1.03 |        2.01 |       
-#&gt; Petal.Length                   | </span><span style='color: #00BB00;'> 0.54</span><span> | 0.28 |  -0.00 |    1.09 |  1.96 |          144 | 0.05 | </span><span style='color: #00BB00;'>    1.16</span><span> |   0.59 |      -0.01 |        2.32 |       
-#&gt; Speciesversicolor              | </span><span style='color: #BB0000;'>-1.81</span><span> | 0.60 |  -2.99 |   -0.62 | -3.02 |          144 | </span><span style='color: #BBBB00;'>0.00</span><span> | </span><span style='color: #BB0000;'>   -0.88</span><span> |   0.77 |      -2.41 |        0.65 |       
-#&gt; Speciesvirginica               | </span><span style='color: #BB0000;'>-3.15</span><span> | 0.63 |  -4.41 |   -1.90 | -4.97 |          144 | </span><span style='color: #BBBB00;'>0.00</span><span> | </span><span style='color: #BB0000;'>   -1.75</span><span> |   0.79 |      -3.32 |       -0.18 |       
-#&gt; Petal.Length:Speciesversicolor | </span><span style='color: #00BB00;'> 0.29</span><span> | 0.30 |  -0.30 |    0.87 |  0.97 |          144 | 0.33 | </span><span style='color: #00BB00;'>    0.61</span><span> |   0.63 |      -0.63 |        1.85 |       
-#&gt; Petal.Length:Speciesvirginica  | </span><span style='color: #00BB00;'> 0.45</span><span> | 0.29 |  -0.12 |    1.03 |  1.56 |          144 | 0.12 | </span><span style='color: #00BB00;'>    0.97</span><span> |   0.62 |      -0.26 |        2.19 |       
-#&gt;                                |       |      |        |         |       |              | </span><span style='font-weight: bold;'>    </span><span> |          |        |            |             |       
-#&gt; AIC                            |       |      |        |         |       |              | </span><span style='font-weight: bold;'>    </span><span> |          |        |            |             | </span><span style='color: #00BBBB;'>106.77</span><span>
-#&gt; BIC                            |       |      |        |         |       |              | </span><span style='font-weight: bold;'>    </span><span> |          |        |            |             | </span><span style='color: #00BBBB;'>127.84</span><span>
-#&gt; R2                             |       |      |        |         |       |              | </span><span style='font-weight: bold;'>    </span><span> |          |        |            |             | </span><span style='color: #00BBBB;'>  0.84</span><span>
-#&gt; R2_adjusted                    |       |      |        |         |       |              | </span><span style='font-weight: bold;'>    </span><span> |          |        |            |             | </span><span style='color: #00BBBB;'>  0.83</span><span>
-#&gt; X0.329653168404125             |       |      |        |         |       |              | </span><span style='font-weight: bold;'>    </span><span> |          |        |            |             | </span><span style='color: #00BBBB;'>  0.33</span><span>
-#&gt; </div><div class='input'>
+#&gt; 
+#&gt; 
+#&gt; The model explains a significant and substantial proportion of variance (R2 = 0.84, F(5, 144) = 151.71, p &lt; .001, adj. R2 = 0.83). The model's intercept, corresponding to Sepal.Length = 0, Petal.Length = 0 and Species = setosa, is at 4.21 (SE = 0.41, 95% CI [3.41, 5.02], p &lt; .001, std. intercept = 0.49). Within this model:
+#&gt; 
+#&gt;   - The effect of Petal.Length is positive and can be considered as very large and not significant (beta = 0.54, SE = 0.28, 95% CI [0.00, 1.09], p = 0.05, std. beta = 1.16).
+#&gt;   - The effect of Species (versicolor) is negative and can be considered as very large and significant (beta = -1.81, SE = 0.60, 95% CI [-2.99, -0.62], p &lt; .01, std. beta = -0.88).
+#&gt;   - The effect of Species (virginica) is negative and can be considered as very large and significant (beta = -3.15, SE = 0.63, 95% CI [-4.41, -1.90], p &lt; .001, std. beta = -1.75).
+#&gt;   - The interaction effect of Species (versicolor) on Petal.Length is positive and can be considered as medium and not significant (beta = 0.29, SE = 0.30, 95% CI [-0.30, 0.87], p &gt; .1, std. beta = 0.61).
+#&gt;   - The interaction effect of Species (virginica) on Petal.Length is positive and can be considered as very large and not significant (beta = 0.45, SE = 0.29, 95% CI [-0.12, 1.03], p &gt; .1, std. beta = 0.97).</div><div class='input'><span class='fu'><a href='to_text.html'>to_table</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; Parameter                      | Coefficient |         95% CI |      p | Coefficient (std.) |  Fit
+#&gt; --------------------------------------------------------------------------------------------------
+#&gt; (Intercept)                    |        4.21 |   [3.41, 5.02] | &lt; .001 |               0.49 |     
+#&gt; Petal.Length                   |        0.54 |   [0.00, 1.09] |   0.05 |               1.16 |     
+#&gt; Speciesversicolor              |       -1.81 | [-2.99, -0.62] |  &lt; .01 |              -0.88 |     
+#&gt; Speciesvirginica               |       -3.15 | [-4.41, -1.90] | &lt; .001 |              -1.75 |     
+#&gt; Petal.Length:Speciesversicolor |        0.29 |  [-0.30, 0.87] |   &gt; .1 |               0.61 |     
+#&gt; Petal.Length:Speciesvirginica  |        0.45 |  [-0.12, 1.03] |   &gt; .1 |               0.97 |     
+#&gt;                                |             |                |        |                    |     
+#&gt; R2                             |             |                |        |                    | 0.84
+#&gt; R2 (adj.)                      |             |                |        |                    | 0.83</div><div class='input'><span class='fu'><a href='to_text.html'>to_fulltable</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; Parameter                           | Coefficient |   SE |         95% CI |     t |  df |      p | Coefficient (std.) |    Fit
+#&gt; ------------------------------------------------------------------------------------------------------------------------------
+#&gt; (Intercept)                         |        4.21 | 0.41 |   [3.41, 5.02] | 10.34 | 144 | &lt; .001 |               0.49 |       
+#&gt; Petal.Length                        |        0.54 | 0.28 |   [0.00, 1.09] |  1.96 | 144 |   0.05 |               1.16 |       
+#&gt; Species (versicolor)                |       -1.81 | 0.60 | [-2.99, -0.62] | -3.02 | 144 |  &lt; .01 |              -0.88 |       
+#&gt; Species (virginica)                 |       -3.15 | 0.63 | [-4.41, -1.90] | -4.97 | 144 | &lt; .001 |              -1.75 |       
+#&gt; Petal.Length * Species (versicolor) |        0.29 | 0.30 |  [-0.30, 0.87] |  0.97 | 144 |   &gt; .1 |               0.61 |       
+#&gt; Petal.Length * Species (virginica)  |        0.45 | 0.29 |  [-0.12, 1.03] |  1.56 | 144 |   &gt; .1 |               0.97 |       
+#&gt;                                     |             |      |                |       |     |        |                    |       
+#&gt; AIC                                 |             |      |                |       |     |        |                    | 106.77
+#&gt; BIC                                 |             |      |                |       |     |        |                    | 127.84
+#&gt; R2                                  |             |      |                |       |     |        |                    |   0.84
+#&gt; R2 (adj.)                           |             |      |                |       |     |        |                    |   0.83
+#&gt; RMSE                                |             |      |                |       |     |        |                    |   0.33</div><div class='input'>
 
 <span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/glm'>glm</a></span>(<span class='no'>vs</span> ~ <span class='no'>disp</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='st'>"binomial"</span>)
 <span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>)
-<span class='fu'><a href='to_text.html'>to_text</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; We fitted a logistic model to predict vs with disp. The model's explanatory power is substantial (Tjur's R2 = 0.53). The model's intercept is at 4.14. 
+<span class='fu'><a href='to_text.html'>to_text</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; We fitted a logistic model to predict vs with disp. The model's explanatory power is substantial (Tjur's R2 = 0.53). The model's intercept is at 4.14. Within this model:
 #&gt; 
-#&gt; Within this model: 
-#&gt;   - disp is significant (beta = -0.02, 95% CI [-0.04, -0.01], p &lt; .01) and large (std. beta = -2.68).</div><div class='input'><span class='fu'><a href='to_fulltext.html'>to_fulltext</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; We fitted a logistic model (using ML algorithm) to predict vs with disp (formula = vs ~ disp). Effect sizes were labelled following Chen's (2010) recommendations. The model's explanatory power is substantial (Tjur's R2 = 0.53). The model's intercept, corresponding to disp = 0, is at 4.14 (z = 2.98, 95% CI [1.81, 7.44], p &lt; .01). 
+#&gt;   - The effect of disp is negative and can be considered as large and significant (beta = -0.02, 95% CI [-0.04, -0.01], p &lt; .01, std. beta = -2.68).</div><div class='input'><span class='fu'><a href='to_text.html'>to_fulltext</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; We fitted a logistic model (estimated using ML) to predict vs with disp (formula = vs ~ disp). Standardized parameters were obtained by fitting the model on a standardized version of the dataset. Effect sizes were labelled following Chen's (2010) recommendations.
 #&gt; 
-#&gt; Within this model: 
-#&gt;   - disp is negative, significant (beta = -0.02, SE = 0.01, z = -3.03, 95% CI [-0.04, -0.01], p &lt; .01) and large (std. beta = -2.68, std. SE = 0.88, std. 95% CI [-4.90, -1.27]).</div><div class='input'><span class='fu'><a href='to_table.html'>to_table</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; Parameter   |  beta | CI_low | CI_high |    p | Std_beta |  Fit
-#&gt; ---------------------------------------------------------------
-#&gt; (Intercept) | </span><span style='color: #00BB00;'> 4.14</span><span> |   1.81 |    7.44 | </span><span style='color: #BBBB00;'>0.00</span><span> | </span><span style='color: #BB0000;'>   -0.85</span><span> |     
-#&gt; disp        | </span><span style='color: #BB0000;'>-0.02</span><span> |  -0.04 |   -0.01 | </span><span style='color: #BBBB00;'>0.00</span><span> | </span><span style='color: #BB0000;'>   -2.68</span><span> |     
-#&gt;             |       |        |         | </span><span style='font-weight: bold;'>    </span><span> |          |     
-#&gt; R2_Tjur     |       |        |         | </span><span style='font-weight: bold;'>    </span><span> |          | </span><span style='color: #00BBBB;'>0.53</span><span>
-#&gt; </div><div class='input'><span class='fu'><a href='to_fulltable.html'>to_fulltable</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; Parameter   |  beta |   SE | CI_low | CI_high |     z | DoF_residual |    p | Std_beta | Std_SE | Std_CI_low | Std_CI_high |   Fit
-#&gt; ----------------------------------------------------------------------------------------------------------------------------------
-#&gt; (Intercept) | </span><span style='color: #00BB00;'> 4.14</span><span> | 1.39 |   1.81 |    7.44 |  2.98 |           30 | </span><span style='color: #BBBB00;'>0.00</span><span> | </span><span style='color: #BB0000;'>   -0.85</span><span> |   0.64 |      -2.42 |        0.27 |      
-#&gt; disp        | </span><span style='color: #BB0000;'>-0.02</span><span> | 0.01 |  -0.04 |   -0.01 | -3.03 |           30 | </span><span style='color: #BBBB00;'>0.00</span><span> | </span><span style='color: #BB0000;'>   -2.68</span><span> |   0.88 |      -4.90 |       -1.27 |      
-#&gt;             |       |      |        |         |       |              | </span><span style='font-weight: bold;'>    </span><span> |          |        |            |             |      
-#&gt; AIC         |       |      |        |         |       |              | </span><span style='font-weight: bold;'>    </span><span> |          |        |            |             | </span><span style='color: #00BBBB;'>26.70</span><span>
-#&gt; BIC         |       |      |        |         |       |              | </span><span style='font-weight: bold;'>    </span><span> |          |        |            |             | </span><span style='color: #00BBBB;'>29.63</span><span>
-#&gt; R2_Tjur     |       |      |        |         |       |              | </span><span style='font-weight: bold;'>    </span><span> |          |        |            |             | </span><span style='color: #00BBBB;'> 0.53</span><span>
-#&gt; </div></span></pre>
+#&gt; The model's explanatory power is substantial (Tjur's R2 = 0.53). The model's intercept, corresponding to vs = 0 and disp = 0, is at 4.14 (SE = 1.39, 95% CI [1.81, 7.44], p &lt; .01, std. intercept = -0.85). Within this model:
+#&gt; 
+#&gt;   - The effect of disp is negative and can be considered as large and significant (beta = -0.02, SE = 0.01, 95% CI [-0.04, -0.01], p &lt; .01, std. beta = -2.68).</div><div class='input'><span class='fu'><a href='to_text.html'>to_table</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; Parameter   | Coefficient |         95% CI |     p | Coefficient (std.) |  Fit
+#&gt; ------------------------------------------------------------------------------
+#&gt; (Intercept) |        4.14 |   [1.81, 7.44] | &lt; .01 |              -0.85 |     
+#&gt; disp        |       -0.02 | [-0.04, -0.01] | &lt; .01 |              -2.68 |     
+#&gt;             |             |                |       |                    |     
+#&gt; Tjur's R2   |             |                |       |                    | 0.53</div><div class='input'><span class='fu'><a href='to_text.html'>to_fulltable</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; Parameter       | Coefficient |   SE |         95% CI |     z | df |     p | Coefficient (std.) |    Fit
+#&gt; --------------------------------------------------------------------------------------------------------
+#&gt; (Intercept)     |        4.14 | 1.39 |   [1.81, 7.44] |  2.98 | 30 | &lt; .01 |              -0.85 |       
+#&gt; disp            |       -0.02 | 0.01 | [-0.04, -0.01] | -3.03 | 30 | &lt; .01 |              -2.68 |       
+#&gt;                 |             |      |                |       |    |       |                    |       
+#&gt; AIC             |             |      |                |       |    |       |                    |  26.70
+#&gt; BIC             |             |      |                |       |    |       |                    |  29.63
+#&gt; Tjur's R2       |             |      |                |       |    |       |                    |   0.53
+#&gt; RMSE            |             |      |                |       |    |       |                    |   0.84
+#&gt; LOGLOSS         |             |      |                |       |    |       |                    |   0.35
+#&gt; SCORE_LOG       |             |      |                |       |    |       |                    | -11.07
+#&gt; SCORE_SPHERICAL |             |      |                |       |    |       |                    |   0.10
+#&gt; PCP             |             |      |                |       |    |       |                    |   0.77</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

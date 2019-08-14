@@ -9,19 +9,19 @@ test_that("report.stanreg_lm", {
 
   testthat::expect_error(report(insight::download_model("stanreg_lm_1"), bootstrap = TRUE, n = 10))
 
-  r <- report(insight::download_model("stanreg_lm_1"), effsize = "cohen1988", standardize = "refit", centrality  = "Mean")
+  r <- report(insight::download_model("stanreg_lm_1"), effsize = "cohen1988", standardize = "refit", centrality = "Mean")
   testthat::expect_equal(r$values$wt$Mean, -5.3397, tol = 0.2)
 
-  testthat::expect_warning(report(insight::download_model("stanreg_lm_1"), effsize = "cohen1988", standardize = TRUE, centrality  = "MAP"))
+  testthat::expect_warning(report(insight::download_model("stanreg_lm_1"), effsize = "cohen1988", standardize = TRUE, centrality = "MAP"))
 
-  r <- report(insight::download_model("stanreg_lm_1"), effsize = "cohen1988", rope_ci = 0.95, standardize = "full", centrality  = "all")
+  r <- report(insight::download_model("stanreg_lm_1"), effsize = "cohen1988", rope_ci = 0.95, standardize = "full", centrality = "all")
   testthat::expect_equal(r$values$wt$Median, -5.336, tol = 0.2)
   testthat::expect_equal(c(nrow(to_table(r)), ncol(to_table(r))), c(5, 12))
 
   testthat::expect_warning(report(insight::download_model("stanreg_lm_1"), ci = c(0.8, 0.9)))
   testthat::expect_error(report(insight::download_model("stanreg_lm_1"), rope_range = c(0.1, 0.2, 0.3)))
 
-  r <- report(insight::download_model("stanreg_lm_3"), standardize = FALSE, effsize="cohen1988")
+  r <- report(insight::download_model("stanreg_lm_3"), standardize = FALSE, effsize = "cohen1988")
 })
 
 

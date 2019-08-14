@@ -1,10 +1,9 @@
 #' @keywords internal
 .add_performance_table <- function(parameters, performance) {
-
   table <- parameters
 
   # Pretty names
-  if(!is.null(attributes(parameters)$pretty_names)){
+  if (!is.null(attributes(parameters)$pretty_names)) {
     table$Parameter <- attributes(parameters)$pretty_names[parameters$Parameter]
   }
 

@@ -37,8 +37,7 @@ format_text <- function(x, sep = ", ", last = " and ", width = NULL) {
 
 #' @keywords internal
 .format_text_wrap <- function(x, width = NULL) {
-
-  if(is.null(width)){
+  if (is.null(width)) {
     return(x)
   }
 

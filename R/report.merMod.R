@@ -17,14 +17,14 @@
 #' to_fulltable(r)
 #'
 #'
-#' model <- glmer(vs ~ disp + (1|am), data = mtcars, family = "binomial")
+#' model <- glmer(vs ~ disp + (1 | am), data = mtcars, family = "binomial")
 #' r <- report(model)
 #' to_text(r)
 #' to_fulltext(r)
 #' to_table(r)
 #' to_fulltable(r)
 #' @export
-report.lmerMod <- function(model, effsize = "default", ci = 0.95, standardize = "refit", standardize_robust = FALSE, bootstrap = FALSE, iterations = 500, performance_metrics = "all", p_method = "wald", ci_method="wald", ...) {
+report.lmerMod <- function(model, effsize = "default", ci = 0.95, standardize = "refit", standardize_robust = FALSE, bootstrap = FALSE, iterations = 500, performance_metrics = "all", p_method = "wald", ci_method = "wald", ...) {
   .report_regressions(model, effsize = effsize, ci = ci, standardize = standardize, standardize_robust = standardize_robust, bootstrap = bootstrap, iterations = iterations, performance_metrics = performance_metrics, p_method = p_method, ci_method = ci_method, ...)
 }
 

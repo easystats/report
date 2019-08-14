@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>re-export magrittr pipe operator — %&gt;% • report</title>
+<title>Format text — format_text • report</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -39,9 +39,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="re-export magrittr pipe operator — %&gt;%" />
+<meta property="og:title" content="Format text — format_text" />
 
-<meta property="og:description" content="re-export magrittr pipe operator" />
+<meta property="og:description" content="Format text" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -144,24 +144,72 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>re-export magrittr pipe operator</h1>
-    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/utils_reexports.R'><code>R/utils_reexports.R</code></a></small>
-    <div class="hidden name"><code>pipe.Rd</code></div>
+    <h1>Format text</h1>
+    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/format_text.R'><code>R/format_text.R</code></a></small>
+    <div class="hidden name"><code>format_text.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>re-export magrittr pipe operator</p>
+    <p>Format text</p>
     
     </div>
 
-        
+    <pre class="usage"><span class='fu'>format_text</span>(<span class='no'>x</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>", "</span>, <span class='kw'>last</span> <span class='kw'>=</span> <span class='st'>" and "</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>Character vector.</p></td>
+    </tr>
+    <tr>
+      <th>sep</th>
+      <td><p>Separator.</p></td>
+    </tr>
+    <tr>
+      <th>last</th>
+      <td><p>Last separator.</p></td>
+    </tr>
+    <tr>
+      <th>width</th>
+      <td><p>Positive integer giving the target column for wrapping lines in the output. Can be "auto".</p></td>
+    </tr>
+    </table>
+    
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>format_text</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"A"</span>, <span class='st'>"B"</span>, <span class='st'>"C"</span>))</div><div class='output co'>#&gt; [1] "A, B and C"</div><div class='input'>
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='st'>"a very long string"</span>, <span class='fl'>50</span>), <span class='kw'>collapse</span> <span class='kw'>=</span> <span class='st'>" "</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/cat'>cat</a></span>(<span class='fu'>format_text</span>(<span class='no'>x</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>50</span>))</div><div class='output co'>#&gt; a very long string a very long string a very long
+#&gt; string a very long string a very long string a
+#&gt; very long string a very long string a very long
+#&gt; string a very long string a very long string a
+#&gt; very long string a very long string a very long
+#&gt; string a very long string a very long string a
+#&gt; very long string a very long string a very long
+#&gt; string a very long string a very long string a
+#&gt; very long string a very long string a very long
+#&gt; string a very long string a very long string a
+#&gt; very long string a very long string a very long
+#&gt; string a very long string a very long string a
+#&gt; very long string a very long string a very long
+#&gt; string a very long string a very long string a
+#&gt; very long string a very long string a very long
+#&gt; string a very long string a very long string a
+#&gt; very long string a very long string a very long
+#&gt; string a very long string a very long string a
+#&gt; very long string a very long string a very long
+#&gt; string a very long string a very long string</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-                </ul>
+      <li><a href="#arguments">Arguments</a></li>
+            
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

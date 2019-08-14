@@ -12,50 +12,58 @@ format_algorithm <- function(model) {
 
   text <- ""
 
-  if(is.null(algorithm$algorithm)){
+  if (is.null(algorithm$algorithm)) {
     return(text)
   }
 
   # Name
   text <- algorithm$algorithm
-  if(text == "sampling"){
+  if (text == "sampling") {
     text <- "MCMC sampling"
   }
 
   # Chains
-  if(!is.null(algorithm$chains)){
-    text <- paste0(text,
-                   " with ",
-                   algorithm$chains,
-                   " chains")
-    if(!is.null(algorithm$iterations)){
-      text <- paste0(text,
-                     " of ",
-                     algorithm$iterations,
-                     " iterations")
+  if (!is.null(algorithm$chains)) {
+    text <- paste0(
+      text,
+      " with ",
+      algorithm$chains,
+      " chains"
+    )
+    if (!is.null(algorithm$iterations)) {
+      text <- paste0(
+        text,
+        " of ",
+        algorithm$iterations,
+        " iterations"
+      )
     }
-    if(!is.null(algorithm$warmup)){
-      text <- paste0(text,
-                     " and a warmup of ",
-                     algorithm$warmup)
+    if (!is.null(algorithm$warmup)) {
+      text <- paste0(
+        text,
+        " and a warmup of ",
+        algorithm$warmup
+      )
     }
     # Thinning?
   }
 
   # Optimizer
-  if(!is.null(algorithm$optimizer)){
+  if (!is.null(algorithm$optimizer)) {
     optimizer <- algorithm$optimizer
 
-    if(optimizer == "bobyqa"){
+    if (optimizer == "bobyqa") {
       optimizer <- "BOBYQA"
     }
-    if(optimizer == "Nelder_Mead"){
+    if (optimizer == "Nelder_Mead") {
       optimizer <- "Nelder-Mead"
     }
-    text <- paste0(text,
-                   " and ",
-                   optimizer,
-                   " optimizer")
+    text <- paste0(
+      text,
+      " and ",
+      optimizer,
+      " optimizer"
+    )
   }
 
 

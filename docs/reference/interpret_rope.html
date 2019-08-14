@@ -37,6 +37,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 <meta property="og:title" content="ROPE percentage Interpretation — interpret_rope" />
 
 <meta property="og:description" content="ROPE percentage Interpretation" />
@@ -164,21 +166,21 @@
     </tr>
     <tr>
       <th>ci</th>
-      <td><p>The Credible Interval (CI) probability, corresponding to the proportion of HDI, that was used.</p></td>
+      <td><p>The Credible Interval (CI) probability, corresponding to the proportion of HDI, that was used. Can be <code>1</code> in the case of "full ROPE".</p></td>
     </tr>
     <tr>
       <th>rules</th>
-      <td><p>Can be <a href='https://easystats.github.io/bayestestR/articles/4_Guidelines.html'>"default"</a> or custom set of rules.</p></td>
+      <td><p>Can be <a href='https://easystats.github.io/bayestestR/articles/guidelines.html'>"default"</a> or custom set of rules.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p><a href='https://easystats.github.io/bayestestR/articles/4_Guidelines.html'>BayestestR's reporting guidelines</a></p>
+    <p><a href='https://easystats.github.io/bayestestR/articles/guidelines.html'>BayestestR's reporting guidelines</a></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>interpret_rope</span>(<span class='fl'>0</span>, <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>0.9</span>)</div><div class='output co'>#&gt; [1] "significant"</div><div class='input'><span class='fu'>interpret_rope</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>99</span>), <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] "significant"         "probably negligible"</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>interpret_rope</span>(<span class='fl'>0</span>, <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>0.9</span>)</div><div class='output co'>#&gt; [1] "significant"</div><div class='input'><span class='fu'>interpret_rope</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.005</span>, <span class='fl'>0.99</span>), <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] "significant"         "probably negligible"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

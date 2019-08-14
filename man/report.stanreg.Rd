@@ -61,15 +61,18 @@ library(report)
 library(rstanarm)
 
 model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Length * Species,
-                            data = iris, iter = 100, refresh = 0)
+  data = iris, iter = 100, refresh = 0
+)
 r <- report(model)
 to_text(r)
 to_fulltext(r)
 to_table(r)
 to_fulltable(r)
-
+\donttest{
 model <- rstanarm::stan_lmer(Sepal.Length ~ Petal.Length + (1 | Species),
-                             data = iris, iter = 100, refresh = 0)
+  data = iris, iter = 100, refresh = 0
+)
 report(model)
+}
 
 }

@@ -22,7 +22,7 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
 
 
 #' @keywords internal
-.text_parameters_names <- function(parameters, parameter_column = "Parameter"){
+.text_parameters_names <- function(parameters, parameter_column = "Parameter") {
   names <- parameters[[parameter_column]]
 
   # Regular effects
@@ -31,7 +31,7 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
   interactions <- names[grepl(" * ", names, fixed = TRUE)]
   interactions <- unlist(lapply(strsplit(interactions, " * ", fixed = TRUE), function(x) {
     new <- paste(head(x, -1), collapse = " * ")
-    new <- paste(tail(x, 1),  "on", new)
+    new <- paste(tail(x, 1), "on", new)
     new
   }))
   names[grepl(" * ", names, fixed = TRUE)] <- paste0("The interaction effect of ", interactions)
@@ -40,25 +40,24 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
 
 
 #' @keywords internal
-.text_parameters_direction <- function(parameters){
-
+.text_parameters_direction <- function(parameters) {
   estimate_name <- names(parameters)[names(parameters) %in% c("Coefficient", "Median", "Mean", "MAP")][1]
 
-  if(length(estimate_name) == 1){
-    if("pd" %in% names(parameters)){
+  if (length(estimate_name) == 1) {
+    if ("pd" %in% names(parameters)) {
       text <- paste0(
         " has a probability of ",
         parameters::format_pd(parameters$pd, name = NULL),
         " of being ",
         interpret_direction(parameters[[estimate_name]])
       )
-    } else{
+    } else {
       text <- paste0(
         " is ",
         interpret_direction(parameters[[estimate_name]])
       )
     }
-  } else{
+  } else {
     text <- ""
   }
 
@@ -70,9 +69,8 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
 
 
 #' @keywords internal
-.text_parameters_size <- function(parameters, effsize = "cohen1988", type = "d"){
-
-  if(is.null(effsize) || is.na(effsize)){
+.text_parameters_size <- function(parameters, effsize = "cohen1988", type = "d") {
+  if (is.null(effsize) || is.na(effsize)) {
     return("")
   }
 
@@ -80,13 +78,13 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
 
   estimate_name <- names(parameters)[names(parameters) %in% c("Std_Coefficient", "Std_Median", "Std_Mean", "Std_MAP")][1]
 
-  if(!is.na(estimate_name)){
-    if(type == "d"){
+  if (!is.na(estimate_name)) {
+    if (type == "d") {
       text <- interpret_d(parameters[[estimate_name]], rules = effsize)
-    } else if(type == "logodds"){
-      text <- interpret_odds(parameters[[estimate_name]], rules = effsize, log=TRUE)
+    } else if (type == "logodds") {
+      text <- interpret_odds(parameters[[estimate_name]], rules = effsize, log = TRUE)
     }
-  } else{
+  } else {
     text <- ""
   }
 
@@ -98,14 +96,14 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
 
 
 #' @keywords internal
-.text_parameters_significance <- function(parameters, rope_ci = 1){
+.text_parameters_significance <- function(parameters, rope_ci = 1) {
   text <- ""
 
-  if("p" %in% names(parameters)){
+  if ("p" %in% names(parameters)) {
     text <- interpret_p(parameters$p)
   }
 
-  if("ROPE_Percentage" %in% names(parameters) & !is.null(rope_ci)){
+  if ("ROPE_Percentage" %in% names(parameters) & !is.null(rope_ci)) {
     text <- interpret_rope(parameters$ROPE_Percentage, ci = rope_ci)
   }
   text
@@ -114,15 +112,15 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
 
 
 #' @keywords internal
-.text_parameters_indices <- function(parameters, ci = 0.89){
-
+.text_parameters_indices <- function(parameters, ci = 0.89) {
   text <- ""
 
   if ("Coefficient" %in% names(parameters)) {
     text <- paste0(
       text,
       "beta = ",
-      parameters::format_value(parameters$Coefficient))
+      parameters::format_value(parameters$Coefficient)
+    )
   }
 
   if ("Difference" %in% names(parameters)) {
@@ -137,35 +135,40 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
     text <- paste0(
       .add_comma(text),
       "SE = ",
-      parameters::format_value(parameters$SE))
+      parameters::format_value(parameters$SE)
+    )
   }
 
   if ("Median" %in% names(parameters)) {
     text <- paste0(
       text,
       "median = ",
-      parameters::format_value(parameters$Median))
+      parameters::format_value(parameters$Median)
+    )
   }
 
   if ("MAD" %in% names(parameters)) {
     text <- paste0(
       .add_comma(text),
       "MAD = ",
-      parameters::format_value(parameters$MAD))
+      parameters::format_value(parameters$MAD)
+    )
   }
 
   if ("Mean" %in% names(parameters)) {
     text <- paste0(
       .add_comma(text),
       "mean = ",
-      parameters::format_value(parameters$Mean))
+      parameters::format_value(parameters$Mean)
+    )
   }
 
   if ("SD" %in% names(parameters)) {
     text <- paste0(
       .add_comma(text),
       "SD = ",
-      parameters::format_value(parameters$SD))
+      parameters::format_value(parameters$SD)
+    )
   }
 
   if ("MAP" %in% names(parameters)) {
@@ -208,42 +211,48 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
     text <- paste0(
       .add_comma(text),
       "std. beta = ",
-      parameters::format_value(parameters$Std_Coefficient))
+      parameters::format_value(parameters$Std_Coefficient)
+    )
   }
 
   if ("Std_SE" %in% names(parameters)) {
     text <- paste0(
       .add_comma(text),
       "std. SE = ",
-      parameters::format_value(parameters$Std_SE))
+      parameters::format_value(parameters$Std_SE)
+    )
   }
 
   if ("Std_Median" %in% names(parameters)) {
     text <- paste0(
       .add_comma(text),
       "std. median = ",
-      parameters::format_value(parameters$Std_Median))
+      parameters::format_value(parameters$Std_Median)
+    )
   }
 
   if ("Std_MAD" %in% names(parameters)) {
     text <- paste0(
       .add_comma(text),
       "std. MAD = ",
-      parameters::format_value(parameters$Std_MAD))
+      parameters::format_value(parameters$Std_MAD)
+    )
   }
 
   if ("Std_Mean" %in% names(parameters)) {
     text <- paste0(
       .add_comma(text),
       "std. mean = ",
-      parameters::format_value(parameters$Std_Mean))
+      parameters::format_value(parameters$Std_Mean)
+    )
   }
 
   if ("Std_SD" %in% names(parameters)) {
     text <- paste0(
       .add_comma(text),
       "std. SD = ",
-      parameters::format_value(parameters$Std_SD))
+      parameters::format_value(parameters$Std_SD)
+    )
   }
 
   if ("Std_MAP" %in% names(parameters)) {
@@ -261,56 +270,69 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
 
 
 #' @keywords internal
-.text_parameters_bayesian_diagnostic <- function(parameters, bayesian_diagnostic = TRUE){
+.text_parameters_bayesian_diagnostic <- function(parameters, bayesian_diagnostic = TRUE) {
   # Convergence
-  if("Rhat" %in% names(parameters)){
-    convergence <- interpret_rhat(parameters$Rhat, rules="vehtari2019")
+  if ("Rhat" %in% names(parameters)) {
+    convergence <- interpret_rhat(parameters$Rhat, rules = "vehtari2019")
     diagnostic <- ifelse(convergence == "converged",
-                                    paste0(" The algorithm successfuly converged (Rhat = ",
-                                           parameters::format_value(parameters$Rhat, digits=3),
-                                           ")"),
-                                    paste0(" However, the algorithm might not have successfuly converged (Rhat = ",
-                                           parameters::format_value(parameters$Rhat, digits=3),
-                                           ")"))
+      paste0(
+        " The algorithm successfuly converged (Rhat = ",
+        parameters::format_value(parameters$Rhat, digits = 3),
+        ")"
+      ),
+      paste0(
+        " However, the algorithm might not have successfuly converged (Rhat = ",
+        parameters::format_value(parameters$Rhat, digits = 3),
+        ")"
+      )
+    )
 
-    if("ESS" %in% names(parameters)){
-      stability <- interpret_effective_sample(parameters$ESS, rules="burkner2017")
+    if ("ESS" %in% names(parameters)) {
+      stability <- interpret_effective_sample(parameters$ESS, rules = "burkner2017")
       diagnostic <- ifelse(stability == "sufficient" & convergence == "converged",
-                                      paste0(diagnostic,
-                                             " and the estimates can be considered as stable (ESS = ",
-                                             parameters::format_value(parameters$ESS, digits=0),
-                                             ")."
-                                      ),
-                                      ifelse(stability == "sufficient" & convergence != "converged",
-                                             paste0(diagnostic,
-                                                    " even though the estimates can be considered as stable (ESS = ",
-                                                    parameters::format_value(parameters$ESS, digits=0),
-                                                    ")."
-                                             ),
-                                             ifelse(stability != "sufficient" & convergence == "converged",
-                                                    paste0(diagnostic,
-                                                           " but the estimates cannot be considered as stable (ESS = ",
-                                                           parameters::format_value(parameters$ESS, digits=0),
-                                                           ")."
-                                                    ),
-                                                    paste0(diagnostic,
-                                                           " and the estimates cannot be considered as stable (ESS = ",
-                                                           parameters::format_value(parameters$ESS, digits=0),
-                                                           ")."
-                                                    ))))
+        paste0(
+          diagnostic,
+          " and the estimates can be considered as stable (ESS = ",
+          parameters::format_value(parameters$ESS, digits = 0),
+          ")."
+        ),
+        ifelse(stability == "sufficient" & convergence != "converged",
+          paste0(
+            diagnostic,
+            " even though the estimates can be considered as stable (ESS = ",
+            parameters::format_value(parameters$ESS, digits = 0),
+            ")."
+          ),
+          ifelse(stability != "sufficient" & convergence == "converged",
+            paste0(
+              diagnostic,
+              " but the estimates cannot be considered as stable (ESS = ",
+              parameters::format_value(parameters$ESS, digits = 0),
+              ")."
+            ),
+            paste0(
+              diagnostic,
+              " and the estimates cannot be considered as stable (ESS = ",
+              parameters::format_value(parameters$ESS, digits = 0),
+              ")."
+            )
+          )
+        )
+      )
       convergence <- ifelse(stability != "sufficient",
-                                       "failed",
-                                       convergence)
-    } else{
+        "failed",
+        convergence
+      )
+    } else {
       diagnostic <- paste0(diagnostic, ".")
     }
-  } else{
+  } else {
     diagnostic <- ""
   }
 
-  if(bayesian_diagnostic){
+  if (bayesian_diagnostic) {
     diagnostic
-  } else{
+  } else {
     ifelse(parameters$convergence == "converged", diagnostic, "")
   }
 }
@@ -320,13 +342,14 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
 
 
 #' @keywords internal
-.text_parameters_combine <- function(direction = "", size = "", significance = "", indices = "", bayesian_diagnostic = ""){
-
+.text_parameters_combine <- function(direction = "", size = "", significance = "", indices = "", bayesian_diagnostic = "") {
   text <- direction
 
   text <- ifelse(significance != "" & size != "", paste0(text, " and can be considered as ", size, " and ", significance),
-                 ifelse(significance != "" & size == "", paste0(text, " and can be considered as ", significance),
-                        ifelse(significance == "" & size != "", paste0(text, " and can be considered as ", size), text)))
+    ifelse(significance != "" & size == "", paste0(text, " and can be considered as ", significance),
+      ifelse(significance == "" & size != "", paste0(text, " and can be considered as ", size), text)
+    )
+  )
 
   text <- paste0(text, " (", indices, ").")
   paste0(text, bayesian_diagnostic)
@@ -339,6 +362,6 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
 
 
 #' @keywords internal
-.add_comma <- function(text){
-  ifelse(substring(text, nchar(text)-1) != ", " & text != "", paste0(text, ", "), text)
+.add_comma <- function(text) {
+  ifelse(substring(text, nchar(text) - 1) != ", " & text != "", paste0(text, ", "), text)
 }

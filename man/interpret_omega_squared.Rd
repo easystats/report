@@ -17,7 +17,6 @@ Omega Squared Interpretation
 \examples{
 interpret_omega_squared(.02)
 interpret_omega_squared(c(.5, .02))
-
 }
 \references{
 \itemize{

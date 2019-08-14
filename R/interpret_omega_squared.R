@@ -8,7 +8,6 @@
 #' @examples
 #' interpret_omega_squared(.02)
 #' interpret_omega_squared(c(.5, .02))
-#'
 #' @seealso http://imaging.mrc-cbu.cam.ac.uk/statswiki/FAQ/effectSize
 #'
 #'

@@ -159,10 +159,9 @@ stan_glmer(vs ~ mpg + (1|cyl), data=mtcars, family="binomial") %>%
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(rstanarm)
-stuff <- capture.output(r <- rstanarm::stan_glmer(vs ~ mpg + (1|cyl), data=mtcars, family="binomial") %>% 
-  report(standardize="full", effsize="cohen1988"))
-
-to_fulltext(r, width=100)
+rstanarm::stan_glmer(vs ~ mpg + (1|cyl), data=mtcars, family="binomial", refresh = 0) %>% 
+  report(standardize="full", effsize="cohen1988") %>% 
+  to_fulltext(width=100)
 ```
 
 

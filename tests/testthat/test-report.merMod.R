@@ -19,5 +19,4 @@ test_that("report.merMod", {
   testthat::expect_equal(c(nrow(to_table(r)), ncol(to_table(r))), c(6, 7))
   testthat::expect_is(capture.output(to_table(r)), "character")
   testthat::expect_equal(r$values$cyl$Coefficient, -4.77, tol = 0.01)
-
 })

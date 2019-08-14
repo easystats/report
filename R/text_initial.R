@@ -55,7 +55,8 @@ text_initial.merMod <- text_initial.lm
     parameters::format_value(is_at),
     " (",
     .text_parameters_indices(intercept, ci = ci),
-    ").")
+    ")."
+  )
 
   text_full <- gsub("std. beta", "std. intercept", text_full, fixed = TRUE)
 
@@ -72,7 +73,7 @@ text_initial.merMod <- text_initial.lm
 .find_intercept <- function(model) {
 
   # Intercept-only
-  if(all(insight::find_parameters(model, flatten = FALSE) == "(Intercept)")){
+  if (all(insight::find_parameters(model, flatten = FALSE) == "(Intercept)")) {
     return("")
   }
 
@@ -93,5 +94,3 @@ text_initial.merMod <- text_initial.lm
   }
   paste0(", corresponding to ", format_text(text), ",")
 }
-
-

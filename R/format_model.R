@@ -10,9 +10,9 @@
 format_model <- function(model) {
   info <- insight::model_info(model)
 
-  if(all(insight::find_parameters(model, flatten = FALSE) == "(Intercept)")){
+  if (all(insight::find_parameters(model, flatten = FALSE) == "(Intercept)")) {
     type <- "constant (intercept-only) "
-  } else{
+  } else {
     type <- ""
   }
 

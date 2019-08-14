@@ -15,7 +15,8 @@
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Automated Interpretation of Metrics and Effect Sizes">
+<script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<meta property="og:title" content="Automated Interpretation of Metrics and Effect Sizes">
 <meta property="og:description" content="">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
@@ -112,15 +113,18 @@
 
     
     
-<div id="why" class="section level2">
-<h2 class="hasAnchor">
-<a href="#why" class="anchor"></a>Why?</h2>
-<p>The metrics used in statistics (indices of fit, model performance or parameter estimates) can be very abstract. A long experience is required to intuitively <strong><em>“feel”</em></strong> the meaning of their values. In order to facilitate the understanding of the results they are facing, many scientists use (often implicitly) some set of <strong>rules of thumb</strong>. Thus, in order to validate and standardize such interpretation grids, some authors validated and published them in the form of guidelines. One of the most famous interpertation grid was proposed by <strong>Cohen (1988)</strong> for a series of widely used indices, such as the correlation <strong>r</strong> (<em>r</em> = .20, small; <em>r</em> = .40, moderate and <em>r</em> = .60, large) or the <strong>standardized difference</strong> (<em>Cohen’s d</em>).</p>
-<p>The package <strong><code>report</code></strong> implements such sets of rules of thumb for a variety of indices in a flexible and explicit fashion, helping you understanding and reporting your results in a scientific yet meaningful way. However, readers should keep in mind that these thresholds, altough <em>“validated”</em>, <strong>remain arbitrary</strong>. Thus, their use should be discussed on a case-by-case basis depending on the field, hypotheses, prior results and so on, to avoid their crystalisation, as for the infamous <strong><em>p</em> &lt; .05</strong> example.</p>
+<div id="why" class="section level1">
+<h1 class="hasAnchor">
+<a href="#why" class="anchor"></a>Why?</h1>
+<p>The metrics used in statistics (indices of fit, model performance or parameter estimates) can be very abstract. A long experience is required to intuitively <strong><em>“feel”</em></strong> the meaning of their values. In order to facilitate the understanding of the results they are facing, many scientists use (often implicitly) some set of <strong>rules of thumb</strong>. Thus, in order to validate and standardize such interpretation grids, some authors validated and published them in the form of guidelines.</p>
+<p>One of the most famous interpertation grid was proposed by <strong>Cohen (1988)</strong> for a series of widely used indices, such as the correlation <strong>r</strong> (<em>r</em> = .20, small; <em>r</em> = .40, moderate and <em>r</em> = .60, large) or the <strong>standardized difference</strong> (<em>Cohen’s d</em>). However, there is now a clear evidence that Cohen’s guidelines (which he himself later disavowed; Funder, 2019) are much too stringent and not particularly meaningful taken out of context <span class="citation">(Funder and Ozer 2019)</span>. This led to the emergence of a litterature discussing and creating new sets of rules of thumb.</p>
+<p>Altough <strong>everybody agrees on the fact that effect size interpretation in a study should be justified with a rationale</strong> (and depend on the context, the field, the litterature, the hypothesis, etc.), these pre-baked rules can still nevertheless be useful to give a rough idea or frame of reference to understand scientific results.</p>
+<p>The package <strong><code>report</code></strong> implements such sets of rules of thumb for a variety of indices in a flexible and explicit fashion, helping you understanding and reporting your results in a scientific yet meaningful way. Again, readers should keep in mind that these thresholds, altough <em>“validated”</em>, <strong>remain arbitrary</strong>. Thus, their use should be discussed on a case-by-case basis depending on the field, hypotheses, prior results and so on, to avoid their crystalisation, as for the infamous <strong><em>p</em> &lt; .05</strong> example.</p>
+<p>Moreovere, some authors suggest the counter-intuitive idea that <em>very large effects</em>, especially in the context of psychological research, is likely to be a “gross overestimate that will rarely be found in a large sample or in a replication” <span class="citation">(Funder and Ozer 2019)</span>. They suggest that smaller effect size are worth taking seriously (as they can be potentially consequential), as well as more believable.</p>
 </div>
-<div id="supported-indices" class="section level2">
-<h2 class="hasAnchor">
-<a href="#supported-indices" class="anchor"></a>Supported Indices</h2>
+<div id="supported-indices" class="section level1">
+<h1 class="hasAnchor">
+<a href="#supported-indices" class="anchor"></a>Supported Indices</h1>
 <div id="coefficient-of-determination-r2" class="section level3">
 <h3 class="hasAnchor">
 <a href="#coefficient-of-determination-r2" class="anchor"></a>Coefficient of determination (R2)</h3>
@@ -189,11 +193,25 @@
 <h3 class="hasAnchor">
 <a href="#correlation-r" class="anchor"></a>Correlation <em>r</em>
 </h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="../reference/interpret_r.html">interpret_r</a></span>(x, <span class="dt">rules =</span> <span class="st">"funder2019"</span>)</a></code></pre></div>
+<ul>
+<li>
+<strong>r = 0 - 0.05</strong>: Very small</li>
+<li>
+<strong>r = 0.05 - 0.1</strong>: Small</li>
+<li>
+<strong>r = 0.1 - 0.2</strong>: Medium</li>
+<li>
+<strong>r = 0.2 - 0.3</strong>: Large</li>
+<li>
+<strong>r &gt; 0.4</strong>: Very large</li>
+</ul>
 <div id="gignac2016effect" class="section level4">
 <h4 class="hasAnchor">
 <a href="#gignac2016effect" class="anchor"></a><span class="citation">Gignac and Szodorai (2016)</span>
 </h4>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="../reference/interpret_r.html">interpret_r</a></span>(x, <span class="dt">rules =</span> <span class="st">"gignac2016"</span>)</a></code></pre></div>
+<p>Gignac’s rules of thumb are actually one of few interpretation grid justified and based on actual data, in this case on the distribution of effect magnitudes in the litterature.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="../reference/interpret_r.html">interpret_r</a></span>(x, <span class="dt">rules =</span> <span class="st">"gignac2016"</span>)</a></code></pre></div>
 <ul>
 <li>
 <strong>r = 0 - 0.1</strong>: Very small</li>
@@ -209,7 +227,7 @@
 <h4 class="hasAnchor">
 <a href="#cohen1988statistical-1" class="anchor"></a><span class="citation">Cohen (1988)</span>
 </h4>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="../reference/interpret_r.html">interpret_r</a></span>(x, <span class="dt">rules =</span> <span class="st">"cohen1988"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="../reference/interpret_r.html">interpret_r</a></span>(x, <span class="dt">rules =</span> <span class="st">"cohen1988"</span>)</a></code></pre></div>
 <ul>
 <li>
 <strong>r = 0 - 0.1</strong>: Very small</li>
@@ -225,7 +243,7 @@
 <h4 class="hasAnchor">
 <a href="#evans1996straightforward" class="anchor"></a><span class="citation">Evans (1996)</span>
 </h4>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="../reference/interpret_r.html">interpret_r</a></span>(x, <span class="dt">rules =</span> <span class="st">"evans1996"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="../reference/interpret_r.html">interpret_r</a></span>(x, <span class="dt">rules =</span> <span class="st">"evans1996"</span>)</a></code></pre></div>
 <ul>
 <li>
 <strong>r = 0 - 0.2</strong>: Very weak</li>
@@ -244,11 +262,41 @@
 <h3 class="hasAnchor">
 <a href="#standardized-difference-d-cohens-d" class="anchor"></a>Standardized Difference <em>d</em> (Cohen’s <em>d</em>)</h3>
 <p>The sandardized difference can be obtained through the standardization of linear model’s parameters or data, in which they can be used as indices of effect size.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw"><a href="../reference/interpret_d.html">interpret_d</a></span>(x, <span class="dt">rules =</span> <span class="st">"funder2019"</span>)</a></code></pre></div>
+<ul>
+<li>
+<strong>r = 0 - 0.1</strong>: Very small</li>
+<li>
+<strong>r = 0.1 - 0.2</strong>: Small</li>
+<li>
+<strong>r = 0.2 - 0.4</strong>: Medium</li>
+<li>
+<strong>r = 0.4 - 0.6</strong>: Large</li>
+<li>
+<strong>r &gt; 0.6</strong>: Very large</li>
+</ul>
+<div id="gignac2016effect-1" class="section level4">
+<h4 class="hasAnchor">
+<a href="#gignac2016effect-1" class="anchor"></a><span class="citation">Gignac and Szodorai (2016)</span>
+</h4>
+<p>Gignac’s rules of thumb are actually one of few interpretation grid justified and based on actual data, in this case on the distribution of effect magnitudes in the litterature.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="../reference/interpret_d.html">interpret_d</a></span>(x, <span class="dt">rules =</span> <span class="st">"gignac2016"</span>)</a></code></pre></div>
+<ul>
+<li>
+<strong>d = 0 - 0.2</strong>: Very small</li>
+<li>
+<strong>d = 0.2 - 0.4</strong>: Small</li>
+<li>
+<strong>d = 0.4 - 0.6</strong>: Medium</li>
+<li>
+<strong>d &gt; 0.6</strong>: Large</li>
+</ul>
+</div>
 <div id="cohen1988statistical-2" class="section level4">
 <h4 class="hasAnchor">
 <a href="#cohen1988statistical-2" class="anchor"></a><span class="citation">Cohen (1988)</span>
 </h4>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="../reference/interpret_d.html">interpret_d</a></span>(x, <span class="dt">rules =</span> <span class="st">"cohen1988"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw"><a href="../reference/interpret_d.html">interpret_d</a></span>(x, <span class="dt">rules =</span> <span class="st">"cohen1988"</span>)</a></code></pre></div>
 <ul>
 <li>
 <strong>d = 0 - 0.2</strong>: Very small</li>
@@ -264,7 +312,7 @@
 <h4 class="hasAnchor">
 <a href="#sawilowsky2009new" class="anchor"></a><span class="citation">Sawilowsky (2009)</span>
 </h4>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw"><a href="../reference/interpret_d.html">interpret_d</a></span>(x, <span class="dt">rules =</span> <span class="st">"sawilowsky2009"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw"><a href="../reference/interpret_d.html">interpret_d</a></span>(x, <span class="dt">rules =</span> <span class="st">"sawilowsky2009"</span>)</a></code></pre></div>
 <ul>
 <li>
 <strong>d = 0 - 0.1</strong>: Tiny</li>
@@ -291,7 +339,7 @@
 <h4 class="hasAnchor">
 <a href="#chen2010big" class="anchor"></a><span class="citation">Chen, Cohen, and Chen (2010)</span>
 </h4>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="../reference/interpret_odds.html">interpret_odds</a></span>(x, <span class="dt">rules =</span> <span class="st">"chen2010"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw"><a href="../reference/interpret_odds.html">interpret_odds</a></span>(x, <span class="dt">rules =</span> <span class="st">"chen2010"</span>)</a></code></pre></div>
 <ul>
 <li>
 <strong>d = 0 - 1.68</strong>: Very small</li>
@@ -307,9 +355,9 @@
 <h4 class="hasAnchor">
 <a href="#cohen1988statistical-3" class="anchor"></a><span class="citation">Cohen (1988)</span>
 </h4>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw"><a href="../reference/interpret_odds.html">interpret_odds</a></span>(x, <span class="dt">rules =</span> <span class="st">"cohen1988"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw"><a href="../reference/interpret_odds.html">interpret_odds</a></span>(x, <span class="dt">rules =</span> <span class="st">"cohen1988"</span>)</a></code></pre></div>
 <p>This converts (log) odds ratio to standardized difference <em>d</em> using the following formula <span class="citation">(Cohen 1988; Sánchez-Meca, Marı́n-Martı́nez, and Chacón-Moscoso 2003)</span>:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">d &lt;-<span class="st"> </span>log_odds <span class="op">*</span><span class="st"> </span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/MathFun">sqrt</a></span>(<span class="dv">3</span>) <span class="op">/</span><span class="st"> </span>pi)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">d &lt;-<span class="st"> </span>log_odds <span class="op">*</span><span class="st"> </span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/MathFun">sqrt</a></span>(<span class="dv">3</span>) <span class="op">/</span><span class="st"> </span>pi)</a></code></pre></div>
 </div>
 </div>
 <div id="omega-squared" class="section level3">
@@ -320,7 +368,7 @@
 <h4 class="hasAnchor">
 <a href="#field2013discovering" class="anchor"></a><span class="citation">Field (2013)</span>
 </h4>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw"><a href="../reference/interpret_omega_squared.html">interpret_omega_squared</a></span>(x, <span class="dt">rules =</span> <span class="st">"field2013"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw"><a href="../reference/interpret_omega_squared.html">interpret_omega_squared</a></span>(x, <span class="dt">rules =</span> <span class="st">"field2013"</span>)</a></code></pre></div>
 <ul>
 <li>
 <strong>Omega Squared = 0 - 0.01</strong>: Very small</li>
@@ -336,12 +384,17 @@
 <div id="bayes-factor-bf" class="section level3">
 <h3 class="hasAnchor">
 <a href="#bayes-factor-bf" class="anchor"></a>Bayes Factor (BF)</h3>
-<p>The Bayes Factor if a useful measure of evidence against or in favour of a hypothesis. Note that <strong>BFs</strong> between 0 and 1, indicating evidence <em>against</em> the hypothesis, are converted via <code>bf = 1 / abs(bf)</code>.</p>
+<p><strong>Bayes factors (BF)</strong> are continuous measures of relative evidence, with a Bayes factor greater than 1 giving evidence in favor of one of the models (the numerator), and a Bayes factor smaller than 1 giving evidence in favor of the other model (the denominator). Yet, it is common to interpret the <strong>magnitude</strong> of relative evidence based on conventions of intervals (presented below), such that the values of a <em>BF</em><sub>10</sub> (comparing the alternative to the null) can be interpreted as:</p>
+<p>For human readability, it is recommended to report BFs so that the ratios are larger than 1 - for example, it’s harder to understand a <em>BF</em><sub>10</sub>=0.07 (indicating the data are 0.07 times more probable under the alternative) than a <em>BF</em><sub>01</sub>=1/0.07=14.3 (indicating the data are 14.3 times more probable under the null. <strong>BFs</strong> between 0 and 1, indicating evidence <em>against</em> the hypothesis, can be converted via <code>bf = 1 / abs(bf)</code>.</p>
+<p>One can report <strong>Bayes factors</strong> using the following sentence:</p>
+<blockquote>
+<p>There is a strong evidence against the null hypothesis (BF = 12.2).</p>
+</blockquote>
 <div id="jeffreys1961theory" class="section level4">
 <h4 class="hasAnchor">
 <a href="#jeffreys1961theory" class="anchor"></a><span class="citation">Jeffreys (1961)</span>
 </h4>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw"><a href="../reference/interpret_bf.html">interpret_bf</a></span>(x, <span class="dt">rules =</span> <span class="st">"jeffreys1961"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw"><a href="../reference/interpret_bf.html">interpret_bf</a></span>(x, <span class="dt">rules =</span> <span class="st">"jeffreys1961"</span>)</a></code></pre></div>
 <ul>
 <li>
 <strong>bf = 1 - 3</strong>: Anecdotal</li>
@@ -359,7 +412,7 @@
 <h4 class="hasAnchor">
 <a href="#raftery1995bayesian" class="anchor"></a><span class="citation">Raftery (1995)</span>
 </h4>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw"><a href="../reference/interpret_bf.html">interpret_bf</a></span>(x, <span class="dt">rules =</span> <span class="st">"raftery1995"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw"><a href="../reference/interpret_bf.html">interpret_bf</a></span>(x, <span class="dt">rules =</span> <span class="st">"raftery1995"</span>)</a></code></pre></div>
 <ul>
 <li>
 <strong>bf = 1 - 3</strong>: Weak</li>
@@ -381,7 +434,6 @@
 <h3 class="hasAnchor">
 <a href="#other-bayesian-indices-in-rope-pd" class="anchor"></a>Other Bayesian Indices (% in ROPE, <em>pd</em>)</h3>
 <p>The interpretation of Bayesian indices is detailed in <a href="https://easystats.github.io/bayestestR/articles/4_Guidelines.html">this article</a>.</p>
-</div>
 </div>
 <div id="references" class="section level2 unnumbered">
 <h2 class="hasAnchor">
@@ -407,6 +459,9 @@
 </div>
 <div id="ref-field2013discovering">
 <p>Field, Andy. 2013. <em>Discovering Statistics Using Ibm Spss Statistics</em>. sage.</p>
+</div>
+<div id="ref-funder2019evaluating">
+<p>Funder, David C, and Daniel J Ozer. 2019. “Evaluating Effect Size in Psychological Research: Sense and Nonsense.” <em>Advances in Methods and Practices in Psychological Science</em>, 2515245919847202.</p>
 </div>
 <div id="ref-gelman1992inference">
 <p>Gelman, Andrew, Donald B Rubin, and others. 1992. “Inference from Iterative Simulation Using Multiple Sequences.” <em>Statistical Science</em> 7 (4): 457–72.</p>
@@ -434,6 +489,7 @@
 </div>
 </div>
 </div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -442,8 +498,11 @@
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#why">Why?</a></li>
-      <li><a href="#supported-indices">Supported Indices</a></li>
-      <li><a href="#references">References</a></li>
+      <li>
+<a href="#supported-indices">Supported Indices</a><ul class="nav nav-pills nav-stacked">
+<li><a href="#references">References</a></li>
+      </ul>
+</li>
       </ul>
 </div>
       </div>

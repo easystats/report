@@ -10,7 +10,7 @@ test_that("report.lm", {
   testthat::expect_equal(ncol(to_table(r)), 7)
 
   r <- report(insight::download_model("lm_1"), bootstrap = TRUE, n = 500)
-  testthat::expect_equal(r$values$wt$Coefficient,  -5.35, tol = 0.2)
+  testthat::expect_equal(r$values$wt$Coefficient, -5.35, tol = 0.2)
 
   r <- report(insight::download_model("lm_2"), effsize = NULL)
   testthat::expect_equal(c(ncol(to_table(r)), nrow(to_table(r))), c(7, 6))
@@ -49,5 +49,5 @@ test_that("report.glm", {
   testthat::expect_is(capture.output(to_table(r)), "character")
   testthat::expect_equal(r$values$wt$Coefficient, 2.1, tol = 0.1)
 
-  testthat::expect_warning(report(insight::download_model("glm_2"), ci=c(0.5, 0.9)))
+  testthat::expect_warning(report(insight::download_model("glm_2"), ci = c(0.5, 0.9)))
 })
