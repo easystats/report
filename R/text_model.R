@@ -62,8 +62,8 @@ text_model <- function(model, ...) {
   # P values
   if(!is.null(p_method)){
     if(text != "") text <- paste0(text, " and ")
-    if(p_method == "wald" & ci_method != "wald") text <- paste0(text, "p values were computed using Wald approximation")
-    if(p_method == "kenward") text <- paste0(text, "p values were computed using Kenward-Roger approximation")
+    if(p_method == "wald" & ci_method != "wald") text <- paste0(text, "p-values were computed using Wald approximation")
+    if(p_method == "kenward") text <- paste0(text, "p-values were computed using Kenward-Roger approximation")
   }
 
 
@@ -141,4 +141,31 @@ text_model <- function(model, ...) {
   }
 
   text
+}
+
+
+
+#' @keywords internal
+.text_priors <- function(parameters){
+
+  params <- parameters[parameters$Parameter != "(Intercept)", ]
+
+  # Return empty if no priors info
+  if(!"Prior_Distribution" %in% names(params) | nrow(params) == 0){
+    return("")
+  }
+
+  values <- ifelse(params$Prior_Distribution == "normal",
+                   paste0("mean = ", parameters::format_value(params$Prior_Location), ", SD = ", parameters::format_value(params$Prior_Scale)),
+                   paste0("location = ", parameters::format_value(params$Prior_Location), ", scale = ", parameters::format_value(params$Prior_Scale)))
+
+  values <- paste0(params$Prior_Distribution, " (", values, ")")
+
+  if(length(unique(values)) == 1 & nrow(params) > 1){
+    text <- paste0("all set as ", values[1])
+  } else{
+    text <- paste0("set as ", format_text(values))
+  }
+
+  paste0(" Priors over parameters were ", text, " distributions.")
 }

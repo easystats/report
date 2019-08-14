@@ -260,16 +260,67 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
 
 
 
+#' @keywords internal
+.text_parameters_bayesian_diagnostic <- function(parameters, bayesian_diagnostic = TRUE){
+  # Convergence
+  if("Rhat" %in% names(parameters)){
+    convergence <- interpret_rhat(parameters$Rhat, rules="vehtari2019")
+    diagnostic <- ifelse(convergence == "converged",
+                                    paste0(" The algorithm successfuly converged (Rhat = ",
+                                           parameters::format_value(parameters$Rhat, digits=3),
+                                           ")"),
+                                    paste0(" However, the algorithm might not have successfuly converged (Rhat = ",
+                                           parameters::format_value(parameters$Rhat, digits=3),
+                                           ")"))
 
+    if("ESS" %in% names(parameters)){
+      stability <- interpret_effective_sample(parameters$ESS, rules="burkner2017")
+      diagnostic <- ifelse(stability == "sufficient" & convergence == "converged",
+                                      paste0(diagnostic,
+                                             " and the estimates can be considered as stable (ESS = ",
+                                             parameters::format_value(parameters$ESS, digits=0),
+                                             ")."
+                                      ),
+                                      ifelse(stability == "sufficient" & convergence != "converged",
+                                             paste0(diagnostic,
+                                                    " even though the estimates can be considered as stable (ESS = ",
+                                                    parameters::format_value(parameters$ESS, digits=0),
+                                                    ")."
+                                             ),
+                                             ifelse(stability != "sufficient" & convergence == "converged",
+                                                    paste0(diagnostic,
+                                                           " but the estimates cannot be considered as stable (ESS = ",
+                                                           parameters::format_value(parameters$ESS, digits=0),
+                                                           ")."
+                                                    ),
+                                                    paste0(diagnostic,
+                                                           " and the estimates cannot be considered as stable (ESS = ",
+                                                           parameters::format_value(parameters$ESS, digits=0),
+                                                           ")."
+                                                    ))))
+      convergence <- ifelse(stability != "sufficient",
+                                       "failed",
+                                       convergence)
+    } else{
+      diagnostic <- paste0(diagnostic, ".")
+    }
+  } else{
+    diagnostic <- ""
+  }
 
-
+  if(bayesian_diagnostic){
+    diagnostic
+  } else{
+    ifelse(parameters$convergence == "converged", diagnostic, "")
+  }
+}
 
 
 
 
 
 #' @keywords internal
-.text_parameters_combine <- function(direction = "", size = "", significance = "", indices = ""){
+.text_parameters_combine <- function(direction = "", size = "", significance = "", indices = "", bayesian_diagnostic = ""){
 
   text <- direction
 
@@ -278,8 +329,7 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
                         ifelse(significance == "" & size != "", paste0(text, " and can be considered as ", size), text)))
 
   text <- paste0(text, " (", indices, ").")
-  text
-
+  paste0(text, bayesian_diagnostic)
 }
 
 

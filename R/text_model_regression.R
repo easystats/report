@@ -1,12 +1,12 @@
 #' @export
-text_model.glm <- function(model, ci = NULL, ci_method=NULL, standardize = "refit", standardize_robust = FALSE, effsize = NULL, bootstrap = FALSE, iterations = 500, test = NULL, rope_range = NULL, rope_ci = NULL, p_method = NULL, ...) {
+text_model.glm <- function(model, parameters, ci = NULL, ci_method=NULL, standardize = "refit", standardize_robust = FALSE, effsize = NULL, bootstrap = FALSE, iterations = 500, test = NULL, rope_range = NULL, rope_ci = NULL, p_method = NULL, ...) {
 
   # Model info
   info <- insight::model_info(model)
 
   # Boostrap
   if (bootstrap) {
-    boostrapped <- paste0("bootstrapped (n = ", iterations, ") ")
+    boostrapped <- paste0("bootstrapped (", iterations, " iterations) ")
   } else {
     boostrapped <- ""
   }
@@ -50,6 +50,8 @@ text_model.glm <- function(model, ci = NULL, ci_method=NULL, standardize = "refi
 
   # Details
   if(info$is_bayesian | bootstrap == TRUE){
+    text_full <- paste0(text_full, .text_priors(parameters))
+
     if(!is.null(rope_range)){
       if(rope_range == "default") rope_range <- bayestestR::rope_range(model)
       text_full <- paste0(text_full,
@@ -58,7 +60,7 @@ text_model.glm <- function(model, ci = NULL, ci_method=NULL, standardize = "refi
   }
   if(!is.null(ci_method)){
     text_full <- paste0(text_full,
-                          .text_ci(ci, ci_method))
+                          .text_ci(ci, ci_method = ci_method, p_method = p_method))
   }
   if(!is.null(standardize)){
     text_full <- paste0(text_full,
@@ -79,3 +81,9 @@ text_model.glm <- function(model, ci = NULL, ci_method=NULL, standardize = "refi
 
 #' @export
 text_model.lm <- text_model.glm
+
+#' @export
+text_model.merMod <- text_model.glm
+
+#' @export
+text_model.stanreg <- text_model.glm

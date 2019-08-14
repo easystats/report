@@ -25,6 +25,13 @@ text_initial.lm <- function(model, parameters, ci = 0.95, ...) {
   .text_intercept(model, parameters, ci = ci, ...)
 }
 
+#' @export
+text_initial.glm <- text_initial.lm
+
+#' @export
+text_initial.merMod <- text_initial.lm
+
+
 
 
 #' @keywords internal

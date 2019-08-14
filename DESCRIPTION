@@ -36,6 +36,7 @@ Suggests:
 	correlation,
 	estimate,
 	ggplot2,
+	lme4,
 	rstudioapi,
 	rstanarm,
 	BayesFactor,
