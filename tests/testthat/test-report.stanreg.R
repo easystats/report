@@ -45,7 +45,7 @@ test_that("report.stanreg_lmer", {
   testthat::expect_equal(r$values$cyl$Median, 0.406, tol = 0.2)
   testthat::expect_equal(c(nrow(to_table(r)), ncol(to_table(r))), c(6, 8))
 
-  # r <- report(insight::download_model("stanreg_merMod_1"), effsize = "chen2010", standardize = "full")
-  # testthat::expect_equal(r$values$cyl$Median, -1.72, tol = 0.2)
-  # testthat::expect_equal(c(nrow(to_table(r)), ncol(to_table(r))), c(5, 8))
+  r <- report(insight::download_model("stanreg_merMod_1"), effsize = "chen2010", standardize = "full")
+  testthat::expect_equal(r$values$cyl$Median, -1.72, tol = 0.2)
+  testthat::expect_equal(c(nrow(to_table(r)), ncol(to_table(r))), c(5, 8))
 })

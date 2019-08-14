@@ -44,6 +44,7 @@ Suggests:
 	randomForest
 Remotes: 
 	easystats/parameters,
+	easystats/performance,
 	easystats/correlation,
 	easystats/estimate
 RoxygenNote: 6.1.1
