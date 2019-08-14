@@ -6,7 +6,7 @@
 #'  \item{\link[=report.htest]{Correlations and t-tests (htest)}}
 #'  \item{\link[=report.aov]{ANOVAs}}
 #'  \item{\link[=report.lm]{(General) Linear models (glm and lm)}}
-#'  \item{\link[=report.lmerMod]{(General) Linear mixed models (glmer and lmer)}}
+#'  \item{\link[=report.lmerMod]{Mixed models (glmer and lmer)}}
 #'  \item{\link[=report.stanreg]{Bayesian models (stanreg and brms)}}
 #'  }
 #'

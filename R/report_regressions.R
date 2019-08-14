@@ -23,9 +23,13 @@
   # Tables -------------------
   performance <- performance::model_performance(model, metrics = performance_metrics, ...)
 
-  if(bootstrap & !info$is_bayesian){
-    if(is.null(ci_method) || ci_method %in% c("wald", "boot")) ci_method <- "quantile" # Avoid issues in parameters_bootstrap for mixed models
-    parameters <- parameters::model_parameters(model, ci = ci, standardize = standardize, standardize_robust = standardize_robust, bootstrap = bootstrap, iterations = iterations, p_method = p_method, ci_method = ci_method, ...)
+  if(bootstrap){
+    if(!info$is_bayesian){
+      if(is.null(ci_method) || ci_method %in% c("wald", "boot")) ci_method <- "quantile" # Avoid issues in parameters_bootstrap for mixed models
+      parameters <- parameters::model_parameters(model, ci = ci, standardize = standardize, standardize_robust = standardize_robust, bootstrap = bootstrap, iterations = iterations, p_method = p_method, ci_method = ci_method, ...)
+    } else{
+      stop("Bootstrapping is not supported for Bayesian models. Deactivate it by setting `bootstrap = FALSE`.")
+    }
   } else{
     parameters <- parameters::model_parameters(model, ci = ci, standardize = standardize, standardize_robust = standardize_robust, bootstrap = bootstrap, iterations = iterations, p_method = p_method, ci_method = ci_method, centrality = centrality, dispersion = dispersion, test = test, rope_range = rope_range, rope_ci = rope_ci, bf_prior = bf_prior, diagnostic = diagnostic, ...)
   }
@@ -52,8 +56,8 @@
   text_params <- text_parameters(model, parameters = parameters, prefix = "  - ", ci = ci, effsize = effsize)
 
   # Combine text
-  text <- paste0(text_model$text, text_perf$text, text_intercept$text, " Within this model:\n\n", text_params$text)
-  text_full <- paste0(text_model$text_full, text_perf$text_full, text_intercept$text_full, " Within this model:\n\n", text_params$text_full)
+  text <- paste0(text_model$text, " ", text_perf$text, text_intercept$text, " Within this model:\n\n", text_params$text)
+  text_full <- paste0(text_model$text_full, "\n\n", text_perf$text_full, text_intercept$text_full, " Within this model:\n\n", text_params$text_full)
 
 
   out <- list(

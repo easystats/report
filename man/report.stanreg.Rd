@@ -59,7 +59,7 @@ Create a report of Bayesian models.
 \examples{
 library(report)
 library(rstanarm)
-\dontrun{
+
 model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Length * Species,
                             data = iris, iter = 100, refresh = 0)
 r <- report(model)
@@ -71,6 +71,5 @@ to_fulltable(r)
 model <- rstanarm::stan_lmer(Sepal.Length ~ Petal.Length + (1 | Species),
                              data = iris, iter = 100, refresh = 0)
 report(model)
-}
 
 }

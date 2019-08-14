@@ -325,7 +325,7 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
   text <- direction
 
   text <- ifelse(significance != "" & size != "", paste0(text, " and can be considered as ", size, " and ", significance),
-                 ifelse(significance != "" & size == "", paste0(text, " and ", significance),
+                 ifelse(significance != "" & size == "", paste0(text, " and can be considered as ", significance),
                         ifelse(significance == "" & size != "", paste0(text, " and can be considered as ", size), text)))
 
   text <- paste0(text, " (", indices, ").")

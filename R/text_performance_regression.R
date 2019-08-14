@@ -14,7 +14,7 @@ text_performance.lm <- function(model, performance, ...) {
     r2 <- attributes(performance)$r2
 
     text <- paste0(
-      "\n\nThe model's explanatory power is ",
+      "The model's explanatory power is ",
       interpret_r2(performance$R2, rules = "cohen1988"),
       " (R2 = ",
       parameters::format_value(performance$R2)
@@ -176,33 +176,42 @@ text_performance.stanreg <- function(model, performance, ...) {
 
   # R2
   if ("R2" %in% names(performance)) {
+    r2 <- attributes(performance)$r2_bayes
+    r2_val <- r2$Estimates$R2_Bayes$Median
+    r2_ci <- r2$CI$R2_Bayes
 
     text <- paste0(
       "The model's explanatory power is ",
-      interpret_r2(performance$R2, rules = "cohen1988"),
-      " (R2 = ",
-      parameters::format_value(performance$R2)
-    )
+      interpret_r2(r2_val, rules = "cohen1988"),
+      " (R2's median = ",
+      parameters::format_value(r2_val))
+
+
     text_full <- paste0(text,
-                        ", SD = ",
-                        parameters::format_value(performance$R2_SE))
+                        ", ",
+                        parameters::format_ci(r2_ci$CI_low, r2_ci$CI_high, r2_ci$CI / 100))
 
 
-    if ("R2_LOO_adjusted" %in% names(performance)) {
+    if ("R2_adjusted" %in% names(performance)) {
       text <- paste0(
         text, ", adj. R2 = ",
-        parameters::format_value(performance$R2_LOO_adjusted),
+        parameters::format_value(performance$R2_adjusted),
         ")."
       )
       text_full <- paste0(
         text_full, ", adj. R2 = ",
-        parameters::format_value(performance$R2_LOO_adjusted),
+        parameters::format_value(performance$R2_adjusted),
         ")."
       )
     }
   }
 
   if ("R2_marginal" %in% names(performance)) {
+
+    r2 <- attributes(performance)$r2_bayes
+    r2_val <- r2$Estimates$R2_Bayes_marginal$Median
+    r2_ci <- r2$CI$R2_Bayes_marginal
+
     if (text != "") {
       text <- paste0(text, " ")
       text_full <- paste0(text_full, " ")
@@ -211,18 +220,18 @@ text_performance.stanreg <- function(model, performance, ...) {
     text <- paste0(
       text,
       "Within this model, the explanatory power related to the",
-      " fixed effects alone (marginal R2) is of ",
-      parameters::format_value(performance$R2_marginal),
+      " fixed effects alone (marginal R2's median) is of ",
+      parameters::format_value(r2_val),
       "."
     )
 
     text_full <- paste0(
       text_full,
       "Within this model, the explanatory power related to the",
-      " fixed effects alone (marginal R2) is of ",
-      parameters::format_value(performance$R2_marginal),
-      " (SD = ",
-      parameters::format_value(performance$R2_marginal_SE),
+      " fixed effects alone (marginal R2's median) is of ",
+      parameters::format_value(r2_val),
+      " (",
+      parameters::format_ci(r2_ci$CI_low, r2_ci$CI_high, r2_ci$CI / 100),
       ")."
     )
   }
