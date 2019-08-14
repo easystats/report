@@ -19,26 +19,22 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   tidy.opts=list(width.cutoff=60),
   tidy=TRUE,
-  fig.path = "README-"
+  dpi=450,
+  fig.path = "man/figures/"
 )
 options(knitr.kable.NA = '',
         digits = 4,
         width=60)
 
 library(dplyr)
+library(report)
 ```
 
 
+[![CRAN](http://www.r-pkg.org/badges/version/report)](https://cran.r-project.org/package=report)
+[![downloads](http://cranlogs.r-pkg.org/badges/report)](https://cran.r-project.org/package=report)
 [![Build Status](https://travis-ci.org/easystats/report.svg?branch=master)](https://travis-ci.org/easystats/report)
 [![codecov](https://codecov.io/gh/easystats/report/branch/master/graph/badge.svg)](https://codecov.io/gh/easystats/report)
-[![HitCount](http://hits.dwyl.io/easystats/report.svg)](http://hits.dwyl.io/easystats/report) [![Documentation](https://img.shields.io/badge/documentation-report-orange.svg?colorB=E91E63)](https://easystats.github.io/report/)
-
-
-
-
-
-
-
 
 ***"From R to Manuscript"***
 
@@ -64,12 +60,18 @@ lm(Sepal.Length ~ Species, data=iris) %>%
 
 ## Documentation
 
+[![Documentation](https://img.shields.io/badge/documentation-report-orange.svg?colorB=E91E63)](https://easystats.github.io/report/)
+[![Blog](https://img.shields.io/badge/blog-easystats-orange.svg?colorB=FF9800)](https://easystats.github.io/blog/posts/)
+[![Features](https://img.shields.io/badge/features-report-orange.svg?colorB=2196F3)](https://easystats.github.io/report/reference/index.html)
+
+
 The package documentation can be found [**here**](https://easystats.github.io/report/). Check-out these tutorials:
 
 - [Get Started](https://easystats.github.io/report/articles/report.html)
 - [Automated Interpretation of Metrics and Effect Sizes](https://easystats.github.io/report/articles/interpret_metrics.html)
 - [How to Cite Packages](https://easystats.github.io/report/articles/cite_packages.html)
 - [Supporting New Models](https://easystats.github.io/report/articles/supporting_new_models.html)
+
 
 ## Contribute
 
@@ -152,13 +154,13 @@ Finally, you can also find more details using `to_fulltext()`:
 library(rstanarm)
 
 stan_glmer(vs ~ mpg + (1|cyl), data=mtcars, family="binomial") %>% 
-  report(standardize=TRUE, effsize="cohen1988") %>% 
+  report(standardize="full", effsize="cohen1988") %>% 
   to_fulltext()
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(rstanarm)
 stuff <- capture.output(r <- rstanarm::stan_glmer(vs ~ mpg + (1|cyl), data=mtcars, family="binomial") %>% 
-  report(standardize=TRUE, effsize="cohen1988"))
+  report(standardize="full", effsize="cohen1988"))
 
 to_fulltext(r, width=100)
 ```
@@ -168,4 +170,4 @@ to_fulltext(r, width=100)
 
 If you like it, you can put a *star* on this repo, and cite the package as follows:
 
-- Makowski, D. \& Lüdecke, D. (2019). *The report package for R: Ensuring the use of best practices for results reporting*. CRAN. doi: .
+- Makowski \& Lüdecke (2019). *The report package for R: Ensuring the use of best practices for results reporting*. CRAN. doi: .

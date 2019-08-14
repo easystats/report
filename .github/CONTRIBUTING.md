@@ -1,7 +1,10 @@
-# Contribution Guidelines
+# Contribution Guidelines 
+
+<sup>easystats guidelines 0.1.0</sup>
+
 **All people are very much welcome to contribute to code, documentation, testing and suggestions.**
 
-`report` is a beginner-friendly package. Even if you're new to all this open-source way of life, new to coding and github stuff, we encourage you to try submitting pull requests (PRs). 
+This package aims at being beginner-friendly. Even if you're new to this open-source way of life, new to coding and github stuff, we encourage you to try submitting pull requests (PRs). 
 
 - **"I'd like to help, but I'm not good enough with programming yet"**
 
@@ -9,7 +12,7 @@ It's alright, don't worry! You can always dig in the code, in the documentation 
 
 - **"I'd like to help, but I don't know where to start"**
 
-You can look around the [issues section](https://github.com/neuropsychology/report/issues) to find some features / ideas / bugs to start working on. You can also open an issue just to say that you're there, we might have some ideas adapted to your skills. One of the "easy" way to start contributing is through tests improvement, which consists of building some edge-case models, and running them through all the functions with different arguments, to see if everything behaves as expected.
+You can look around the **issue section** to find some features / ideas / bugs to start working on. You can also open a new issue **just to say that you're there, interested in helping out**. We might have some ideas adapted to your skills.
 
 - **"I'm not sure if my suggestion or idea is worthwile"**
 
@@ -17,19 +20,18 @@ Enough with the impostor syndrom! All suggestions and opinions are good, and eve
 
 - **"Why should I waste my time with this? Do I get any credit?"**
 
-Authors of substantial contribution will be added within the [**authors**](https://neuropsychology.github.io/report/blob/master/DESCRIPTION) list. We're also very keen on including contributors to eventual publications.
+Software contributions are getting more and more valued in the academic world, so it is a good time to collaborate with us! Authors of substantial contributions will be added within the **authors** list. We're also very keen on including them to eventual academic publications.
 
 
 **Anyway, starting is the most important! You will then enter a *whole new world, a new fantastic point of view*... So fork this repo, do some changes and submit them. We will then work together to make the best out of it :)**
 
 
-
 ## Code
 
 - Please document and comment your code, so that the purpose of each step (or code line) is stated in a clear and understandable way.
-- Before submitting a change, please read the [**R style guide**](https://style.tidyverse.org/) to keep some consistency in code formatting.
+- Before submitting a change, please read the [**R style guide**](https://style.tidyverse.org/) and in particular our [**easystats convention of code-style**](https://github.com/easystats/easystats#convention-of-code-style) to keep some consistency in code formatting.
 - Regarding the style guide, note this exception: we put readability and clarity before everything. Thus, we like underscores and full names (prefer `model_performance` over `modelperf` and `interpret_odds_logistic` over `intoddslog`).
-- Before you start to code, make sure you're on the `dev` branch (the most "advanced"). Then, create a new branch named by your feature (e.g., `report_for_bigmodels`) and do your changes. Finally, submit your branch to be merged into the `dev` branch. Then, every now and then, the dev branch will merge into `master`, as a new package version.
+- Before you start to code, make sure you're on the `dev` branch (the most "advanced"). Then, you can create a new branch named by your feature (e.g., `feature_lightsaber`) and do your changes. Finally, submit your branch to be merged into the `dev` branch. Then, every now and then, the dev branch will merge into `master`, as a new package version.
 
 ## Checks to do before submission
 
@@ -46,3 +48,5 @@ Authors of substantial contribution will be added within the [**authors**](https
 ## Useful Materials
 
 - [Understanding the GitHub flow](https://guides.github.com/introduction/flow/)
+
+
