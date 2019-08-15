@@ -8,7 +8,6 @@
 #' @examples
 #' interpret_r(r = .015)
 #' interpret_r(r = c(.5, -.02))
-#'
 #' @seealso Page 88 of APA's 6th Edition.
 #' @references
 #' \itemize{
@@ -27,7 +26,7 @@ interpret_r <- function(r, rules = "funder2019") {
         abs(r),
         rules(
           c(0.05, 0.1, 0.2, 0.3, 0.4),
-          c("very small", "small", "medium", "large", "very large")
+          c("tiny", "very small", "small", "medium", "large", "very large")
         )
       )
     } else if (rules == "gignac2016") {
@@ -59,5 +58,5 @@ interpret_r <- function(r, rules = "funder2019") {
     }
   }
 
-  return(text)
+  text
 }

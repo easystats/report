@@ -15,7 +15,8 @@
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Automated reporting of statistical models in R">
+<script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
+<meta property="og:title" content="Automated reporting of statistical models in R">
 <meta property="og:description" content="Converts statistical models into textual reports suited for publication.">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
@@ -111,21 +112,20 @@
 </h1></div>
 
 <p><strong><em>“From R to Manuscript”</em></strong></p>
-<p><code>report</code>’s primary goal is to fill the gap between R’s output and the formatted result description of your manuscript, with the automated use of <strong>best practices</strong> guidelines (<em>e.g.,</em> <a href="https://www.apastyle.org/">APA</a>’s style guide), ensuring <strong>standardization</strong> and <strong>quality</strong> of results reporting.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Example</span></a>
-<a class="sourceLine" id="cb1-2" title="2">model &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Species, <span class="dt">data =</span> iris)</a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="kw"><a href="reference/report.html">report</a></span>(model)</a></code></pre></div>
-<pre><code>##  We fitted a linear model to predict Sepal.Length with Species. The model's explanatory power is
-## substantial (R2 = 0.62, adj. R2 = 0.61). The model's intercept is at 5.01.
+<p><code>report</code>’s primary goal is to bridge the gap between R’s output and the formatted results contained in your manuscript. It automatically produces reports of models and dataframes according to <strong>best practice</strong> guidelines (<em>e.g.,</em> <a href="https://www.apastyle.org/">APA</a>’s style guide), ensuring <strong>standardization</strong> and <strong>quality</strong> in results reporting.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(report)</a>
+<a class="sourceLine" id="cb1-2" title="2"></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="co"># Example</span></a>
+<a class="sourceLine" id="cb1-4" title="4">model &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Species, <span class="dt">data=</span>iris)</a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="kw"><a href="reference/report.html">report</a></span>(model)</a></code></pre></div>
+<pre><code>## We fitted a linear model to predict Sepal.Length with Species. The model's explanatory power is substantial (R2 = 0.62, adj. R2 = 0.61). The model's intercept is at 5.01. Within this model:
 ## 
-## Within this model: 
-##   - Speciesversicolor is significant (beta = 0.93, 95% CI [0.73, 1.13], p &lt; .001) and large (std.
-## beta = 1.12).
-##   - Speciesvirginica is significant (beta = 1.58, 95% CI [1.38, 1.79], p &lt; .001) and large (std. beta
-## = 1.91).</code></pre>
+##   - The effect of Species (versicolor) is positive and can be considered as very large and significant (beta = 0.93, 95% CI [0.73, 1.13], p &lt; .001, std. beta = 1.12).
+##   - The effect of Species (virginica) is positive and can be considered as very large and significant (beta = 1.58, 95% CI [1.38, 1.79], p &lt; .001, std. beta = 1.91).</code></pre>
 <div id="documentation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#documentation" class="anchor"></a>Documentation</h2>
+<p><a href="https://easystats.github.io/report/"><img src="https://img.shields.io/badge/documentation-report-orange.svg?colorB=E91E63" alt="Documentation"></a> <a href="https://easystats.github.io/blog/posts/"><img src="https://img.shields.io/badge/blog-easystats-orange.svg?colorB=FF9800" alt="Blog"></a> <a href="https://easystats.github.io/report/reference/index.html"><img src="https://img.shields.io/badge/features-report-orange.svg?colorB=2196F3" alt="Features"></a></p>
 <p>The package documentation can be found <a href="https://easystats.github.io/report/"><strong>here</strong></a>. Check-out these tutorials:</p>
 <ul>
 <li><a href="https://easystats.github.io/report/articles/report.html">Get Started</a></li>
@@ -137,14 +137,14 @@
 <div id="contribute" class="section level2">
 <h2 class="hasAnchor">
 <a href="#contribute" class="anchor"></a>Contribute</h2>
-<p><strong><code>report</code> is a young package in need of affection</strong>. You can easily be a part of the <a href="CONTRIBUTING.html">developping</a> community of this open-source software and improve science by doing the following:</p>
+<p><strong><code>report</code> is a young package in need of affection</strong>. You can easily be a part of the <a href="CONTRIBUTING.html">developing</a> community of this open-source software and improve science by doing the following:</p>
 <ul>
 <li>Create or check existing <a href="https://github.com/easystats/report/issues"><img src="reference/figures/issue_bug.png" height="25"></a> issues to report, replicate, understand or solve some bugs.</li>
 <li>Create or check existing <a href="https://github.com/easystats/report/issues"><img src="reference/figures/issue_featureidea.png" height="25"></a> issues to suggest or discuss a new feature.</li>
 <li>Check existing <a href="https://github.com/easystats/report/issues"><img src="reference/figures/issue_help.png" height="25"></a> issues to see things that we’d like to implement, but where help is needed to do it.</li>
 <li>Check existing <a href="https://github.com/easystats/report/issues"><img src="reference/figures/issue_opinion.png" height="25"></a> issues to give your opinion and participate in package’s design discussions.</li>
 </ul>
-<p>Don’t be shy, try to code and submit a pull request (See the <a href="CONTRIBUTING.html">contributing guide</a>). Even if unperfect, we will help you make it great!</p>
+<p>Don’t be shy, try to code and submit a pull request (See the <a href="CONTRIBUTING.html">contributing guide</a>). Even if it’s not perfect, we will help you make it great!</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -161,7 +161,7 @@
 <div id="general-workflow" class="section level3">
 <h3 class="hasAnchor">
 <a href="#general-workflow" class="anchor"></a>General Workflow</h3>
-<p>The <code>report</code> package works in a two steps fashion. First, creating a <code>report</code> object with the <code><a href="reference/report.html">report()</a></code> function (which takes different arguments depending on the type of object you are reporting). Then, this report can be displayed either textually, using <code><a href="reference/to_text.html">to_text()</a></code>, or as a table, using <code><a href="reference/to_table.html">to_table()</a></code>. Moreover, you can also access a more detailed (but less digest) version of the report using <code><a href="reference/to_fulltext.html">to_fulltext()</a></code> and <code><a href="reference/to_fulltable.html">to_fulltable()</a></code>. Finally, <code><a href="reference/to_values.html">to_values()</a></code> makes it easy to access all the internals of a model.</p>
+<p>The <code>report</code> package works in a two step fashion. First, you create a <code>report</code> object with the <code><a href="reference/report.html">report()</a></code> function (which takes different arguments depending on the type of object you are reporting). Then, this report object can be displayed either textually, using <code><a href="reference/to_text.html">to_text()</a></code>, or as a table, using <code><a href="reference/to_text.html">to_table()</a></code>. Moreover, you can access a more detailed (but less digested) version of the report using <code><a href="reference/to_text.html">to_fulltext()</a></code> and <code><a href="reference/to_text.html">to_fulltable()</a></code>. Finally, <code><a href="reference/to_text.html">to_values()</a></code> makes it easy to access all the internals of a model.</p>
 </div>
 <div id="supported-packages" class="section level3">
 <h3 class="hasAnchor">
@@ -175,127 +175,62 @@
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Dataframe report</span></a>
 <a class="sourceLine" id="cb5-2" title="2"><span class="kw"><a href="reference/report.html">report</a></span>(iris)</a></code></pre></div>
 <pre><code>## The data contains 150 observations of the following variables:
-##   - Sepal.Length: Mean = 5.84, SD = 0.83 [4.30, 7.90].
-##   - Sepal.Width: Mean = 3.06, SD = 0.44 [2.00, 4.40].
-##   - Petal.Length: Mean = 3.76, SD = 1.77 [1.00, 6.90].
-##   - Petal.Width: Mean = 1.20, SD = 0.76 [0.10, 2.50].
+##   - Sepal.Length: Mean = 5.84, SD = 0.83, [4.30, 7.90].
+##   - Sepal.Width: Mean = 3.06, SD = 0.44, [2.00, 4.40].
+##   - Petal.Length: Mean = 3.76, SD = 1.77, [1.00, 6.90].
+##   - Petal.Width: Mean = 1.20, SD = 0.76, [0.10, 2.50].
 ##   - Species: 3 levels: setosa (n = 50); versicolor (n = 50) and virginica (n = 50).</code></pre>
 <p>These reports nicely work within the <a href="https://github.com/tidyverse"><em>tidyverse</em></a> workflow:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Correlation report</span></a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/cor.test">cor.test</a></span>(iris<span class="op">$</span>Sepal.Length, iris<span class="op">$</span>Petal.Length) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/report.html">report</a></span>()</a></code></pre></div>
-<pre><code>## The Pearson's product-moment correlation between iris$Sepal.Length and iris$Petal.Length is
-## positive, significant and large (r = 0.87, p &lt; .001).</code></pre>
-<p>You can also create tables with the <code><a href="reference/to_table.html">to_table()</a></code> and <code><a href="reference/to_fulltable.html">to_fulltable()</a></code> functions:</p>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/cor.test">cor.test</a></span>(iris<span class="op">$</span>Sepal.Length, iris<span class="op">$</span>Petal.Length) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="st">  </span><span class="kw"><a href="reference/report.html">report</a></span>()</a></code></pre></div>
+<pre><code>## The Pearson's product-moment correlation between iris$Sepal.Length and iris$Petal.Length is positive, significant and large (r = 0.87, p &lt; .001).</code></pre>
+<p>You can also create tables with the <code><a href="reference/to_text.html">to_table()</a></code> and <code><a href="reference/to_text.html">to_fulltable()</a></code> functions:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># Table report for a linear model</span></a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Petal.Length <span class="op">+</span><span class="st"> </span>Species, <span class="dt">data =</span> iris) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/report.html">report</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb9-3" title="3"><span class="st">    </span><span class="kw"><a href="reference/to_table.html">to_table</a></span>()</a></code></pre></div>
-<table class="table table">
-<thead><tr class="header">
-<th></th>
-<th align="left">Parameter</th>
-<th align="right">beta</th>
-<th align="right">CI_low</th>
-<th align="right">CI_high</th>
-<th align="right">p</th>
-<th align="right">Std_beta</th>
-<th align="right">Fit</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td align="left">(Intercept)</td>
-<td align="right">3.6835</td>
-<td align="right">3.4738</td>
-<td align="right">3.893</td>
-<td align="right">0</td>
-<td align="right">1.497</td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td align="left">Petal.Length</td>
-<td align="right">0.9046</td>
-<td align="right">0.7765</td>
-<td align="right">1.033</td>
-<td align="right">0</td>
-<td align="right">1.928</td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td align="left">Speciesversicolor</td>
-<td align="right">-1.6010</td>
-<td align="right">-1.9833</td>
-<td align="right">-1.219</td>
-<td align="right">0</td>
-<td align="right">-1.933</td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td align="left">Speciesvirginica</td>
-<td align="right">-2.1177</td>
-<td align="right">-2.6581</td>
-<td align="right">-1.577</td>
-<td align="right">0</td>
-<td align="right">-2.557</td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
-<td>6</td>
-<td align="left">R2</td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right">0.8367</td>
-</tr>
-<tr class="even">
-<td>7</td>
-<td align="left">R2_adjusted</td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right">0.8334</td>
-</tr>
-</tbody>
-</table>
-<p>Finally, you can also find more details using <code><a href="reference/to_fulltext.html">to_fulltext()</a></code>:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="co"># Full report for a Bayesian logistic mixed model with effect</span></a>
-<a class="sourceLine" id="cb10-2" title="2"><span class="co"># sizes</span></a>
-<a class="sourceLine" id="cb10-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(rstanarm)</a>
-<a class="sourceLine" id="cb10-4" title="4"></a>
-<a class="sourceLine" id="cb10-5" title="5"><span class="kw">stan_glmer</span>(vs <span class="op">~</span><span class="st"> </span>mpg <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>cyl), <span class="dt">data =</span> mtcars, <span class="dt">family =</span> <span class="st">"binomial"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb10-6" title="6"><span class="st">    </span><span class="kw"><a href="reference/report.html">report</a></span>(<span class="dt">standardize =</span> <span class="ot">TRUE</span>, <span class="dt">effsize =</span> <span class="st">"cohen1988"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/to_fulltext.html">to_fulltext</a></span>()</a></code></pre></div>
-<pre><code>##  We fitted a Bayesian logistic mixed model (using sampling algorithm with 4 chains of 2000
+<a class="sourceLine" id="cb9-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Petal.Length <span class="op">+</span><span class="st"> </span>Species, <span class="dt">data=</span>iris) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="st">  </span><span class="kw"><a href="reference/report.html">report</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="st">  </span><span class="kw"><a href="reference/to_text.html">to_table</a></span>()</a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="co">## Parameter         | Coefficient |         95% CI |      p | Coefficient (std.) |  Fit</span></a>
+<a class="sourceLine" id="cb9-6" title="6"><span class="co">## -------------------------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb9-7" title="7"><span class="co">## (Intercept)       |        3.68 |   [3.47, 3.89] | &lt; .001 |               1.50 |     </span></a>
+<a class="sourceLine" id="cb9-8" title="8"><span class="co">## Petal.Length      |        0.90 |   [0.78, 1.03] | &lt; .001 |               1.93 |     </span></a>
+<a class="sourceLine" id="cb9-9" title="9"><span class="co">## Speciesversicolor |       -1.60 | [-1.98, -1.22] | &lt; .001 |              -1.93 |     </span></a>
+<a class="sourceLine" id="cb9-10" title="10"><span class="co">## Speciesvirginica  |       -2.12 | [-2.66, -1.58] | &lt; .001 |              -2.56 |     </span></a>
+<a class="sourceLine" id="cb9-11" title="11"><span class="co">##                   |             |                |        |                    |     </span></a>
+<a class="sourceLine" id="cb9-12" title="12"><span class="co">## R2                |             |                |        |                    | 0.84</span></a>
+<a class="sourceLine" id="cb9-13" title="13"><span class="co">## R2 (adj.)         |             |                |        |                    | 0.83</span></a></code></pre></div>
+<p>Finally, you can also find more details using <code><a href="reference/to_text.html">to_fulltext()</a></code>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="co"># Full report for a Bayesian logistic mixed model with effect sizes</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(rstanarm)</a>
+<a class="sourceLine" id="cb10-3" title="3"></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="kw">stan_glmer</span>(vs <span class="op">~</span><span class="st"> </span>mpg <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>cyl), <span class="dt">data=</span>mtcars, <span class="dt">family=</span><span class="st">"binomial"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-5" title="5"><span class="st">  </span><span class="kw"><a href="reference/report.html">report</a></span>(<span class="dt">standardize=</span><span class="st">"full"</span>, <span class="dt">effsize=</span><span class="st">"cohen1988"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="st">  </span><span class="kw"><a href="reference/to_text.html">to_fulltext</a></span>()</a></code></pre></div>
+<pre><code>## We fitted a Bayesian logistic mixed model (estimated using MCMC sampling with 4 chains of 2000
 ## iterations and a warmup of 1000) to predict vs with mpg (formula = vs ~ mpg). The model included
-## cyl as random effects (formula = ~1 | cyl). The Region of Practical Equivalence (ROPE) percentage
-## was defined as the proportion of the posterior distribution within the [-0.06, 0.06] range. The
-## 90.00% Credible Intervals (CIs) were computed using the quantile method. Effect sizes were labelled
-## following Cohen's (1988) recommendations. Priors over parameters were set as normal (mean = 0.00,
-## SD = 0.41) distributions.
+## cyl as random effects (formula = ~1 | cyl). Priors over parameters were set as normal (mean = 0.00,
+## SD = 0.41) distributions. The Region of Practical Equivalence (ROPE) percentage was defined as the
+## proportion of the posterior distribution within the [-0.18, 0.18] range. The 89% Credible Intervals
+## (CIs) were based on Highest Density Intervals (HDI). Parameters were scaled by the mean and the SD
+## of the response variable. Effect sizes were labelled following Cohen's (1988) recommendations.
 ## 
-##   The model's total explanatory power is substantial (R2's median = 0.57, MAD = 0.09, 90% CI [0.43,
-## 0.69]). Within this model, the explanatory power related to the fixed effects alone (marginal R2's
-## median) is of 0.26 (MAD = 0.27, 90% CI [0.48, 0.48]). The model's intercept, corresponding to mpg =
-## 0, has a median of -5.01 (MAD = 4.34, 90% CI [-12.22, 2.50], pd = 86.17%, 0.65% in ROPE).
+## The model's explanatory power is substantial (R2's median = 0.57, 89% CI [0.42, 0.69] Within this
+## model, the explanatory power related to the fixed effects alone (marginal R2's median) is of 0.27
+## (89% CI [0.00, 0.48]). The model's intercept, corresponding to vs = 0, mpg = 0 and cyl = 0, is at
+## -5.16 (89% CI [-12.09, 2.10], 1.55% in ROPE, std. median = 0.00). Within this model:
 ## 
-## Within this model:
-##    - mpg has a probability of 84.78% of being positive (median = 0.23, MAD = 0.22, 90% CI [-0.11,
-## 0.58]) and can be considered as not significant (11.95% in ROPE) and medium (std. Median = 1.38,
-## std. MAD = 1.32, std. 90% CI [-0.71, 3.45]). The algorithm successfuly converged (Rhat = 1.006) and
-## the estimates can be considered as stable (effective sample size = 1425).</code></pre>
+##   - The effect of mpg has a probability of 86.00% of being positive and can be considered as medium
+## and not significant (median = 0.23, 89% CI [-0.11, 0.56], 38.10% in ROPE, std. median = 1.41). The
+## algorithm successfuly converged (Rhat = 1.001) and the estimates can be considered as stable (ESS =
+## 1276).</code></pre>
 </div>
 </div>
 <div id="credits" class="section level2">
 <h2 class="hasAnchor">
 <a href="#credits" class="anchor"></a>Credits</h2>
-<p>If you like it, you can put a <em>star</em> on this repo, and cite the package as following:</p>
+<p>If you like it, you can put a <em>star</em> on this repo, and cite the package as follows:</p>
 <ul>
-<li>Makowski, D. &amp; Lüdecke, D. (2019). <em>The report package for R: Ensuring the use of best practices for results reporting</em>. CRAN. doi: .</li>
+<li>Makowski &amp; Lüdecke (2019). <em>The report package for R: Ensuring the use of best practices for results reporting</em>. CRAN. doi: .</li>
 </ul>
 </div>
 </div>
@@ -336,10 +271,10 @@
       <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
+<li><a href="https://cran.r-project.org/package=report"><img src="http://www.r-pkg.org/badges/version/report" alt="CRAN"></a></li>
+<li><a href="https://cran.r-project.org/package=report"><img src="http://cranlogs.r-pkg.org/badges/report" alt="downloads"></a></li>
 <li><a href="https://travis-ci.org/easystats/report"><img src="https://travis-ci.org/easystats/report.svg?branch=master" alt="Build Status"></a></li>
 <li><a href="https://codecov.io/gh/easystats/report"><img src="https://codecov.io/gh/easystats/report/branch/master/graph/badge.svg" alt="codecov"></a></li>
-<li><a href="http://hits.dwyl.io/easystats/report"><img src="http://hits.dwyl.io/easystats/report.svg" alt="HitCount"></a></li>
-<li><a href="https://easystats.github.io/report/"><img src="https://img.shields.io/badge/documentation-report-orange.svg?colorB=E91E63" alt="Documentation"></a></li>
 </ul>
 </div>
 </div>

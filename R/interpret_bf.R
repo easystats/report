@@ -1,8 +1,8 @@
-#' Bayes Factor Interpretation
+#' Bayes Factor (BF) Interpretation
 #'
-#' @param bf Value or vector of (log) odds ratio values.
-#' @param rules Can be "jeffreys1961" (default), "raftery1995" or custom set of rules.
-#' @param include_bf Include the BF in the output.
+#' @param bf Value or vector of Bayes factor (BF) values.
+#' @param rules Can be "jeffreys1961" (default), "raftery1995" or custom set of \code{\link{rules}}.
+#' @param include_value Include the value in the output.
 #'
 #'
 #' @examples
@@ -15,7 +15,7 @@
 #'  \item Jarosz, A. F., & Wiley, J. (2014). What are the odds? A practical guide to computing and reporting Bayes factors. The Journal of Problem Solving, 7(1), 2.
 #'  }
 #' @export
-interpret_bf <- function(bf, rules = "jeffreys1961", include_bf=FALSE) {
+interpret_bf <- function(bf, rules = "jeffreys1961", include_value = FALSE) {
   ori_bf <- bf
 
   dir <- ifelse(bf < 1, "against", "in favour of")
@@ -35,10 +35,9 @@ interpret_bf <- function(bf, rules = "jeffreys1961", include_bf=FALSE) {
     }
   }
 
-  if(include_bf == FALSE){
+  if (include_value == FALSE) {
     return(paste0(interpretation, " evidence ", dir))
-  } else{
-    return(paste0(interpretation, " evidence (", format_bf(ori_bf), ") ", dir))
+  } else {
+    return(paste0(interpretation, " evidence (", parameters::format_bf(ori_bf), ") ", dir))
   }
-
 }

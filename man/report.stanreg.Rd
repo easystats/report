@@ -4,57 +4,76 @@
 \alias{report.stanreg}
 \title{Bayesian Models Report}
 \usage{
-\method{report}{stanreg}(model, ci = 0.9, ci_method = "default",
-  standardize = FALSE, standardize_robust = FALSE, effsize = NULL,
-  performance_in_table = TRUE, performance_metrics = c("R2",
-  "R2_adjusted"), parameters_estimate = "median",
-  parameters_test = c("pd", "rope"), parameters_diagnostic = TRUE,
-  parameters_priors = TRUE, rope_range = "default", rope_full = TRUE,
-  ...)
+\method{report}{stanreg}(model, effsize = "default", ci = 0.89,
+  standardize = "refit", standardize_robust = FALSE,
+  centrality = "median", dispersion = FALSE, ci_method = "hdi",
+  test = c("pd", "rope"), rope_range = "default", rope_ci = 1,
+  bf_prior = NULL, diagnostic = c("ESS", "Rhat"),
+  performance_metrics = "all", ...)
 }
 \arguments{
-\item{model}{Object of class \link{lm}.}
+\item{model}{Frequentist regression object.}
 
-\item{ci}{\href{https://easystats.github.io/bayestestR/articles/1_IndicesDescription.html#hdi---the-credible-interval-ci}{Credible Interval} (CI) level. Default to 0.90 (90\%).}
+\item{effsize}{\href{https://easystats.github.io/report/articles/interpret_metrics.html}{Interpret the standardized parameters} using a set of rules. Default corresponds to "funder2019" for linear models and "chen2010" for logistic models.}
 
-\item{ci_method}{The type of index used for Credible Interval. Can be \code{"default"}, \link[bayestestR]{hdi} or "quantile" (see \link[bayestestR]{ci}). Default selects "hdi" for linear models and "quantile" for models with binary outcome.}
+\item{ci}{Confidence Interval (CI) level. Default to 0.95 (95\%).}
 
-\item{standardize}{Standardized coefficients. See \code{\link[parameters:model_parameters.lm]{model_parameters}}.}
+\item{standardize}{Add standardized parameters. Can be FALSE or a character indicating the standardization method (see \code{\link{parameters_standardize}}).}
 
-\item{effsize}{\href{https://easystats.github.io/report/articles/interpret_metrics.html}{Interpret the standardized parameters} using a set of rules. Can be "cohen1988" (default for linear models), "chen2010" (default for logistic models), "sawilowsky2009", NULL, or a custom set of \link{rules}.}
+\item{standardize_robust}{Robust standardization. See \code{\link{parameters_standardize}}.}
 
-\item{performance_in_table}{Add performance metrics in table.}
+\item{centrality}{The point-estimates (centrality indices) to compute.  Character (vector) or list with one or more of these options: \code{"median"}, \code{"mean"}, \code{"MAP"} or \code{"all"}.}
 
-\item{performance_metrics}{Can be \code{"all"} or a list of metrics to be computed (some of \code{c("LOO", "R2", "R2_adj")}).}
+\item{dispersion}{Logical, if \code{TRUE}, computes indices of dispersion related to the estimate(s) (\code{SD} and \code{MAD} for \code{mean} and \code{median}, respectively).}
 
-\item{parameters_estimate}{The \href{https://easystats.github.io/bayestestR/articles/2_IndicesEstimationComparison.html}{point-estimate(s)} to compute. Can be a character or a list with "median", "mean" or "MAP".}
+\item{ci_method}{The type of index used for Credible Interval. Can be
+\code{"HDI"} (default, see \code{\link{hdi}}) or \code{"ETI"}
+(see \code{\link{eti}}).}
 
-\item{parameters_test}{What \href{https://easystats.github.io/bayestestR/articles/3_IndicesExistenceComparison.html}{indices of effect existence} to compute. Can be a character or a list with "p_direction", "rope" or "p_map".}
+\item{test}{The indices of effect existence to compute. Character (vector) or
+list with one or more of these options: \code{"p_direction"} (or \code{"pd"}),
+\code{"rope"}, \code{"p_map"}, \code{"equivalence_test"} (or \code{"equitest"}),
+\code{"bayesfactor"} (or \code{"bf"}) or \code{"all"} to compute all tests.#'
+For each "test", the corresponding \pkg{bayestestR} function is called
+(e.g. \code{\link{rope}} or \code{\link{p_direction}}) and its results
+included in the summary output.}
 
-\item{parameters_diagnostic}{Include sampling diagnostic metrics (effective sample, Rhat and MCSE). \code{Effective Sample} should be as large as possible, altough for most applications, an effective sample size greater than 1,000 is sufficient for stable estimates (Bürkner, 2017). \code{Rhat} should not be larger than 1.1.}
+\item{rope_range}{ROPE's lower and higher bounds. Should be a list of two
+values (e.g., \code{c(-0.1, 0.1)}) or \code{"default"}. If \code{"default"},
+the bounds are set to \code{x +- 0.1*SD(response)}.}
 
-\item{parameters_priors}{Include priors specifications information. If set to true (current \code{rstanarm}' default), automatically adjusted priors' scale during fitting  will be displayed.}
+\item{rope_ci}{The Credible Interval (CI) probability, corresponding to the
+proportion of HDI, to use for the percentage in ROPE.}
 
-\item{rope_range}{\href{https://easystats.github.io/bayestestR/articles/1_IndicesDescription.html#rope}{ROPE's} lower and higher limits Should be a list of two values (e.g., \code{c(-0.1, 0.1)}) or \code{"default"}. If \code{"default"}, the bounds are set to \code{x +- 0.1*SD(response)}.}
+\item{bf_prior}{Distribution representing a prior for the computation of Bayes factors. Used if the input is a posterior, otherwise (in the case of models) ignored.}
 
-\item{rope_full}{If TRUE, use the proportion of the entire posterior distribution for the equivalence test. Otherwise, use the proportion of HDI as indicated by the \code{ci} argument.}
+\item{diagnostic}{Diagnostic metrics to compute.  Character (vector) or list with one or more of these options: \code{"ESS"}, \code{"Rhat"}, \code{"MCSE"} or \code{"all"}.}
 
-\item{...}{Arguments passed to or from other methods.}
+\item{performance_metrics}{See \code{\link[performance:model_performance.lm]{model_performance}}.}
+
+\item{...}{Arguments passed to or from other methods (e.g., to \link[=standardize.lm]{standardize}).}
 }
 \description{
-Create a report of a linear model.
+Create a report of Bayesian models.
 }
 \examples{
-\dontrun{
+library(report)
 library(rstanarm)
-model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Length * Species, data = iris)
+
+model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Length * Species,
+  data = iris, iter = 100, refresh = 0
+)
 r <- report(model)
 to_text(r)
 to_fulltext(r)
 to_table(r)
 to_fulltable(r)
 
-model <- rstanarm::stan_lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
+\donttest{
+model <- rstanarm::stan_lmer(Sepal.Length ~ Petal.Length + (1 | Species),
+  data = iris, iter = 100, refresh = 0
+)
 report(model)
 }
+
 }

@@ -4,12 +4,12 @@
 \alias{interpret_d}
 \title{Standardized Difference (Cohen's d) Interpretation}
 \usage{
-interpret_d(d, rules = "gignac2016")
+interpret_d(d, rules = "funder2019")
 }
 \arguments{
 \item{d}{Value or vector of d values.}
 
-\item{rules}{Can be "gignac2016" (default), "cohen1988", "sawilowsky2009" or custom set of rules.}
+\item{rules}{Can be "funder2019" (default), "gignac2016", "cohen1988", "sawilowsky2009" or custom set of \code{\link{rules}}.}
 }
 \description{
 Interpretation of indices using different sets of rules of thumb.
@@ -21,6 +21,7 @@ interpret_d(c(.5, .02))
 }
 \references{
 \itemize{
+  \item Funder, D. C., & Ozer, D. J. (2019). Evaluating effect size in psychological research: sense and nonsense. Advances in Methods and Practices in Psychological Science.
   \item Gignac, G. E., & Szodorai, E. T. (2016). Effect size guidelines for individual differences researchers. Personality and individual differences, 102, 74-78.
   \item Cohen, J. (1988). Statistical power analysis for the behavioural sciences.
   \item Sawilowsky, S. S. (2009). New effect size rules of thumb.

@@ -2,37 +2,29 @@
 % Please edit documentation in R/report.glm.R
 \name{report.lm}
 \alias{report.lm}
-\alias{report.glm}
 \title{(General) Linear Models Report}
 \usage{
-\method{report}{lm}(model, ci = 0.95, standardize = "refit",
-  standardize_robust = FALSE, effsize = "cohen1988",
-  performance_in_table = TRUE, performance_metrics = "all",
-  bootstrap = FALSE, iterations = 500, ...)
-
-\method{report}{glm}(model, ci = 0.95, standardize = "refit",
-  standardize_robust = FALSE, effsize = "chen2010",
-  performance_in_table = TRUE, performance_metrics = "all",
-  bootstrap = FALSE, iterations = 500, ...)
+\method{report}{lm}(model, effsize = "default", ci = 0.95,
+  standardize = "refit", standardize_robust = FALSE,
+  bootstrap = FALSE, iterations = 500, performance_metrics = "all",
+  ...)
 }
 \arguments{
-\item{model}{Object of class \link{lm}.}
+\item{model}{Frequentist regression object.}
+
+\item{effsize}{\href{https://easystats.github.io/report/articles/interpret_metrics.html}{Interpret the standardized parameters} using a set of rules. Default corresponds to "funder2019" for linear models and "chen2010" for logistic models.}
 
 \item{ci}{Confidence Interval (CI) level. Default to 0.95 (95\%).}
 
-\item{standardize}{Add standardized parameters. Can be FALSE or a character indicating the standardization method (see \link{standardize_parameters}).}
+\item{standardize}{Add standardized parameters. Can be FALSE or a character indicating the standardization method (see \code{\link{parameters_standardize}}).}
 
-\item{standardize_robust}{Robust standardization. See \link{standardize_parameters}.}
-
-\item{effsize}{\href{https://easystats.github.io/report/articles/interpret_metrics.html}{Interpret the standardized parameters} using a set of rules. Can be "cohen1988" (default for linear models), "chen2010" (default for logistic models), "sawilowsky2009", NULL, or a custom set of \link{rules}.}
-
-\item{performance_in_table}{Add performance metrics in table.}
-
-\item{performance_metrics}{See \code{\link[performance:model_performance.lm]{model_performance}}.}
+\item{standardize_robust}{Robust standardization. See \code{\link{parameters_standardize}}.}
 
 \item{bootstrap}{Should estimates be based on bootsrapped model? If TRUE, then arguments of \link[=model_parameters.stanreg]{Bayesian regressions} apply.}
 
 \item{iterations}{The number of bootstrap replicates. This only apply in the case of bootsrapped frequentist models.}
+
+\item{performance_metrics}{See \code{\link[performance:model_performance.lm]{model_performance}}.}
 
 \item{...}{Arguments passed to or from other methods (e.g., to \link[=standardize.lm]{standardize}).}
 }

@@ -1,17 +1,29 @@
-#' Collapse Character Vector
+#' Format text
+#'
 #'
 #' @param x Character vector.
 #' @param sep Separator.
 #' @param last Last separator.
-#'
+#' @param width Positive integer giving the target column for wrapping lines in the output. Can be "auto".
 #'
 #'
 #' @examples
-#' format_text_collapse(c("A", "B", "C"))
+#' format_text(c("A", "B", "C"))
+#'
+#' x <- paste(rep("a very long string", 50), collapse = " ")
+#' cat(format_text(x, width = 50))
 #' @importFrom utils head tail
 #'
 #' @export
-format_text_collapse <- function(x, sep = ", ", last = " and ") {
+format_text <- function(x, sep = ", ", last = " and ", width = NULL) {
+  .format_text_wrap(.format_text_collapse(x, sep = sep, last = last), width = width)
+}
+
+
+
+#' @importFrom utils head tail
+#' @keywords internal
+.format_text_collapse <- function(x, sep = ", ", last = " and ", width = NULL) {
   if (length(x) == 1) {
     return(x)
   } else {
@@ -22,21 +34,17 @@ format_text_collapse <- function(x, sep = ", ", last = " and ") {
 }
 
 
-#' Autowrap String
-#'
-#' @param x Character vector.
-#' @param width Positive integer giving the target column for wrapping lines in the output.
-#'
-#' @examples
-#' x <- paste(rep("a very long string", 50), collapse = " ")
-#' format_text_wrap(x, width = 50)
-#' @export
-format_text_wrap <- function(x, width = NULL) {
-  # text <- stringr::str_split(x, stringr::coll("\n"), simplify = FALSE)
+
+#' @keywords internal
+.format_text_wrap <- function(x, width = NULL) {
+  if (is.null(width)) {
+    return(x)
+  }
+
   text <- strsplit(x, "\n", perl = TRUE)
   text <- unlist(text)
 
-  if (is.null(width)) {
+  if (width == "auto") {
     width <- 0.9 * getOption("width")
   }
 
@@ -50,5 +58,5 @@ format_text_wrap <- function(x, width = NULL) {
     }
     wrapped <- paste0(wrapped, s, "\n")
   }
-  return(wrapped)
+  wrapped
 }

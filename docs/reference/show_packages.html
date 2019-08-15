@@ -37,6 +37,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 <meta property="og:title" content="Cite Loaded Packages — show_packages" />
 
 <meta property="og:description" content="Citation table of loaded packages (show_packages includes version and name, and cite_packages includes only the citation)." />
@@ -143,7 +145,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Cite Loaded Packages</h1>
-    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/misc_cite_packages.R'><code>R/misc_cite_packages.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/cite_packages.R'><code>R/cite_packages.R</code></a></small>
     <div class="hidden name"><code>show_packages.Rd</code></div>
     </div>
 
@@ -169,13 +171,25 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>show_packages</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/sessionInfo'>sessionInfo</a></span>())</div><div class='output co'>#&gt;    Package Version
-#&gt; 1   report   0.1.0
-#&gt; 2 testthat   2.0.1
-#&gt;                                                                                                                                                                                References
-#&gt; 1 Makowski, D. &amp; Lüdecke, D. (2019). The report package for R: Ensuring the use of best practices for results reporting. CRAN. Available from https://github.com/easystats/report. doi: .
-#&gt; 2                                                                                       Hadley Wickham. testthat: Get Started with Testing. The R Journal, vol. 3, no. 1, pp. 5--10, 2011</div><div class='input'><span class='fu'>cite_packages</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/sessionInfo'>sessionInfo</a></span>())</div><div class='output co'>#&gt;                                                                                                                                                                                References
-#&gt; 1                                                                                       Hadley Wickham. testthat: Get Started with Testing. The R Journal, vol. 3, no. 1, pp. 5--10, 2011
-#&gt; 2 Makowski, D. &amp; Lüdecke, D. (2019). The report package for R: Ensuring the use of best practices for results reporting. CRAN. Available from https://github.com/easystats/report. doi: .</div></pre>
+#&gt; 3     lme4  1.1.21
+#&gt; 4   Matrix  1.2.17
+#&gt; 2     Rcpp   1.0.1
+#&gt; 5   report   0.1.0
+#&gt; 1 rstanarm  2.18.2
+#&gt; 6 testthat   2.1.1
+#&gt;                                                                                                                                                                                  References
+#&gt; 3 Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015). Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical Software, 67(1), 1-48. doi:10.18637/jss.v067.i01.
+#&gt; 4                        Douglas Bates and Martin Maechler (2019). Matrix: Sparse and Dense Matrix Classes and Methods. R package version 1.2-17. https://CRAN.R-project.org/package=Matrix
+#&gt; 2                  Dirk Eddelbuettel and Romain Francois (2011). Rcpp: Seamless R and C++ Integration. Journal of Statistical Software, 40(8), 1-18. URL http://www.jstatsoft.org/v40/i08/.
+#&gt; 5   Makowski, D. &amp; Lüdecke, D. (2019). The report package for R: Ensuring the use of best practices for results reporting. CRAN. Available from https://github.com/easystats/report. doi: .
+#&gt; 1                                 Goodrich B, Gabry J, Ali I &amp; Brilleman S. (2018). rstanarm: Bayesian applied regression modeling via Stan. R package version 2.17.4. http://mc-stan.org/.
+#&gt; 6                                                                                         Hadley Wickham. testthat: Get Started with Testing. The R Journal, vol. 3, no. 1, pp. 5--10, 2011</div><div class='input'><span class='fu'>cite_packages</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/sessionInfo'>sessionInfo</a></span>())</div><div class='output co'>#&gt;                                                                                                                                                              data[order(data$References), ]
+#&gt; 1                  Dirk Eddelbuettel and Romain Francois (2011). Rcpp: Seamless R and C++ Integration. Journal of Statistical Software, 40(8), 1-18. URL http://www.jstatsoft.org/v40/i08/.
+#&gt; 2                        Douglas Bates and Martin Maechler (2019). Matrix: Sparse and Dense Matrix Classes and Methods. R package version 1.2-17. https://CRAN.R-project.org/package=Matrix
+#&gt; 3 Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015). Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical Software, 67(1), 1-48. doi:10.18637/jss.v067.i01.
+#&gt; 4                                 Goodrich B, Gabry J, Ali I &amp; Brilleman S. (2018). rstanarm: Bayesian applied regression modeling via Stan. R package version 2.17.4. http://mc-stan.org/.
+#&gt; 5                                                                                         Hadley Wickham. testthat: Get Started with Testing. The R Journal, vol. 3, no. 1, pp. 5--10, 2011
+#&gt; 6   Makowski, D. &amp; Lüdecke, D. (2019). The report package for R: Ensuring the use of best practices for results reporting. CRAN. Available from https://github.com/easystats/report. doi: .</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

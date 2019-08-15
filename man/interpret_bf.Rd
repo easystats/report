@@ -2,19 +2,19 @@
 % Please edit documentation in R/interpret_bf.R
 \name{interpret_bf}
 \alias{interpret_bf}
-\title{Bayes Factor Interpretation}
+\title{Bayes Factor (BF) Interpretation}
 \usage{
-interpret_bf(bf, rules = "jeffreys1961", include_bf = FALSE)
+interpret_bf(bf, rules = "jeffreys1961", include_value = FALSE)
 }
 \arguments{
-\item{bf}{Value or vector of (log) odds ratio values.}
+\item{bf}{Value or vector of Bayes factor (BF) values.}
 
-\item{rules}{Can be "jeffreys1961" (default), "raftery1995" or custom set of rules.}
+\item{rules}{Can be "jeffreys1961" (default), "raftery1995" or custom set of \code{\link{rules}}.}
 
-\item{include_bf}{Include the BF in the output.}
+\item{include_value}{Include the value in the output.}
 }
 \description{
-Bayes Factor Interpretation
+Bayes Factor (BF) Interpretation
 }
 \examples{
 interpret_bf(1)

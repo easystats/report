@@ -6,7 +6,7 @@
 #'  \item{\link[=report.htest]{Correlations and t-tests (htest)}}
 #'  \item{\link[=report.aov]{ANOVAs}}
 #'  \item{\link[=report.lm]{(General) Linear models (glm and lm)}}
-#'  \item{\link[=report.lmerMod]{(General) Linear mixed models (glmer and lmer)}}
+#'  \item{\link[=report.lmerMod]{Mixed models (glmer and lmer)}}
 #'  \item{\link[=report.stanreg]{Bayesian models (stanreg and brms)}}
 #'  }
 #'
@@ -20,30 +20,22 @@ report <- function(model, ...) {
   UseMethod("report")
 }
 
-
-
-#' Test for objects of class \link{report}.
+#' Create and test objects of class \link{report}.
 #'
 #' @param model An arbitrary R object.
+#' @param ... Args to be saved as attributes.
 #'
 #' @export
-is.report <- function(model) inherits(model, "report")
-
-
-
-
-#' create objects of class \link{report}.
-#'
-#' @param model An arbitrary R object.
-#'
-#' @export
-as.report <- function(model) {
+as.report <- function(model, ...) {
   class(model) <- c("report", class(model))
+  attributes(model) <- c(attributes(model), list(...))
   model
 }
 
 
-
+#' @rdname as.report
+#' @export
+is.report <- function(model) inherits(model, "report")
 
 
 
@@ -55,119 +47,80 @@ as.report <- function(model) {
 #' @param ... Arguments passed to or from other methods.
 #'
 #' @export
-print.report <- function(x, full = FALSE, width = NULL, ...) {
+to_text <- function(x, full = FALSE, width = NULL, ...) {
   if (full == TRUE) {
-    text <- x$text_full
+    text <- format_text(x$text_full, width = width)
   } else {
-    text <- x$text
+    text <- format_text(x$text, width = width)
   }
-
-  if (!is.null(width)) {
-    text <- format_text_wrap(text, width = width)
-  }
-
-  # Colour
-  # TODO: Using regex matching.
-  # sub(".*beta = *(.*?) *,*", "\\1", text)
 
   cat(text, sep = "\n")
   invisible(text)
 }
 
-#' @inherit print.report
-#'
 #' @export
-to_text <- print.report
+print.report <- to_text
 
-
-#' @inherit to_text
-#'
+#' @rdname to_text
 #' @export
 to_fulltext <- function(x, full = TRUE, width = NULL, ...) {
   to_text(x, full = full, width = width)
 }
 
 
-#' Report table display
-#'
-#' @param object Object of class \link{report}.
-#' @param full Show the full report.
-#' @param digits Number of digits.
-#' @param ... Arguments passed to or from other methods.
-#'
-#'
-#'
+
+
+
+
+
+#' @rdname to_text
 #' @export
-to_table <- function(object, full = FALSE, digits = NULL, ...) {
+to_table <- function(x, full = FALSE, ...) {
   if (full == TRUE) {
-    table <- object$table_full
+    table <- x$table_full
   } else {
-    table <- object$table
+    table <- x$table
   }
 
-  if (inherits(object, "report_model")) {
-    attr(table, "digits") <- digits
-    return(table)
-  }
-
-  if (!is.null(digits) & ncol(dplyr::select_if(table, is.numeric)) > 0) {
-    initial_order <- names(table)
-    nums <- dplyr::select_if(table, is.numeric)
-    nums <- sapply(nums, format_value_unless_integers, digits = digits)
-    fact <- dplyr::select_if(table, is.character)
-    fact <- cbind(fact, dplyr::select_if(table, is.factor))
-    if (ncol(fact) == 0) {
-      table <- nums
-    } else {
-      table <- cbind(fact, nums)
-    }
-    table <- table[initial_order]
-    if (inherits(table, "character")) {
-      table <- as.data.frame(t(table))
-    }
-  }
-
-  return(table)
+  class(table) <- c("report_table", class(table))
+  attributes(table) <- c(attributes(table), attributes(x)[!names(attributes(x)) %in% names(attributes(table))])
+  table
 }
 
 #' @export
-summary.report <- to_table
-
-
-
-#' Full report table display
-#'
-#' @param x Object of class \link{report}.
-#' @param full Show the full report (default to TRUE).
-#' @param digits Number of digits.
-#' @param ... Arguments passed to or from other methods.
-#'
-#'
-#' @export
-to_fulltable <- function(x, full = TRUE, digits = NULL, ...) {
-  to_table(x, digits = digits, full = full)
+print.report_table <- function(x, ...) {
+  table <- parameters::format_table(parameters::parameters_table(x))
+  cat(table)
 }
 
-#' @rdname to_fulltable
+
+
+#' @export
+summary.report <- function(object, full = FALSE, ...) {
+  to_table(object, full = full, ...)
+}
+
+
+
+#' @rdname to_text
+#' @export
+to_fulltable <- function(x, full = TRUE, ...) {
+  to_table(x, full = full)
+}
+
 #' @export
 as.data.frame.report <- function(x, ...) {
-  return(to_fulltable(x, ...))
+  to_fulltable(x, ...)
 }
 
 
-#' Report values
-#'
-#' @param x Object of class \link{report}.
-#' @param ... Arguments passed to or from other methods.
-#'
-#'
-#'
+#' @rdname to_text
 #' @export
 to_values <- function(x, ...) {
   if (!"values" %in% names(x)) {
-    return(as.list(x$table_full))
+    as.list(x$table_full)
   } else {
-    return(x$values)
+    x$values
   }
 }
 #' @export
@@ -176,54 +129,71 @@ as.list.report <- to_values
 
 
 
-
-
-
-
-
-
-
-
-
-
-#' Parameters table printing
-#'
-#' @param x Object of class \code{table_report}.
-#' @param digits Number of digits.
-#' @param ... Arguments passed to or from other methods.
-#'
+#' @rdname to_text
 #' @export
-print.report_table <- function(x, digits = 2, ...) {
-  dig <- attr(x, "digits", exact = TRUE)
-  if (missing(digits) && !is.null(dig)) {
-    digits <- as.numeric(dig)
+to_values <- function(x, ...) {
+  if (any(class(x) %in% c("parameters_model")) && "Parameter" %in% names(x)) {
+    vals <- list()
+
+    for (param in x$Parameter) {
+      vals[[param]] <- as.list(x[x$Parameter == param, ])
+    }
+  } else if (any(class(x) %in% c("report")) && !"values" %in% names(x)) {
+    vals <- as.list(x$table_full)
+  } else if ("values" %in% names(x)) {
+    vals <- x$values
+  } else {
+    stop("Impossible to transform that to values!")
   }
-
-  x <- x %>%
-    .colour_column_if("beta", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
-    .colour_column_if("Difference", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
-    .colour_column_if("Median", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
-    .colour_column_if("Mean", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
-    .colour_column_if("MAP", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
-    .colour_column_if("Std_beta", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
-    .colour_column_if("Std_Median", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
-    .colour_column_if("Std_Mean", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
-    .colour_column_if("Std_MAP", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
-    .colour_column_if("p", condition = `<`, threshold = 0.05, colour_if = "yellow", colour_else = NULL, digits = digits) %>%
-    .colour_column_if("pd", condition = `>`, threshold = 95, colour_if = "yellow", colour_else = NULL, digits = digits) %>%
-    .colour_column_if("ROPE_Percentage", condition = `<`, threshold = 1, colour_if = "yellow", colour_else = NULL, digits = digits) %>%
-    .colour_column_if("Fit", condition = `>`, threshold = 0, colour_if = "cyan", colour_else = "cyan", digits = digits) %>%
-    dplyr::mutate_if(is.numeric, format_value_unless_integers, digits = digits)
-
-  x[is.na(x)] <- ""
-
-  if (!is.null(x[["p"]])) {
-    fill <- .bold(sprintf("%*s", digits + 2, " "))
-    x[["p"]][x[["p"]] == ""] <- fill
-  }
-
-  .display(x)
+  vals
 }
+
+
+
+
+
+
+
+
+
+# #' Parameters table printing
+# #'
+# #' @param x Object of class \code{table_report}.
+# #' @param digits Number of digits.
+# #' @param ... Arguments passed to or from other methods.
+# #'
+# #' @export
+# print.report_table <- function(x, digits = 2, ...) {
+#   dig <- attr(x, "digits", exact = TRUE)
+#   if (missing(digits) && !is.null(dig)) {
+#     digits <- as.numeric(dig)
+#   }
+#
+#   x <- x %>%
+#     .colour_column_if("beta", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
+#     .colour_column_if("Difference", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
+#     .colour_column_if("Median", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
+#     .colour_column_if("Mean", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
+#     .colour_column_if("MAP", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
+#     .colour_column_if("Std_beta", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
+#     .colour_column_if("Std_Median", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
+#     .colour_column_if("Std_Mean", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
+#     .colour_column_if("Std_MAP", condition = `>`, threshold = 0, colour_if = "green", colour_else = "red", digits = digits) %>%
+#     .colour_column_if("p", condition = `<`, threshold = 0.05, colour_if = "yellow", colour_else = NULL, digits = digits) %>%
+#     .colour_column_if("pd", condition = `>`, threshold = 95, colour_if = "yellow", colour_else = NULL, digits = digits) %>%
+#     .colour_column_if("ROPE_Percentage", condition = `<`, threshold = 1, colour_if = "yellow", colour_else = NULL, digits = digits) %>%
+#     .colour_column_if("Fit", condition = `>`, threshold = 0, colour_if = "cyan", colour_else = "cyan", digits = digits) %>%
+#     dplyr::mutate_if(is.numeric, format_value_unless_integers, digits = digits)
+#
+#   x[is.na(x)] <- ""
+#
+#   if (!is.null(x[["p"]])) {
+#     fill <- .bold(sprintf("%*s", digits + 2, " "))
+#     x[["p"]][x[["p"]] == ""] <- fill
+#   }
+#
+#   .display(x)
+# }
 
 
 
@@ -231,10 +201,12 @@ print.report_table <- function(x, digits = 2, ...) {
 
 #' Model Values
 #'
+#' Return values contained in report.
+#'
 #' @param model Statistical Model.
 #' @param ... Arguments passed to or from other methods.
 #'
 #' @export
-model_values <- function(model, ...) {
-  UseMethod("model_values")
-}
+# model_values <- function(model, ...) {
+#   UseMethod("model_values")
+# }

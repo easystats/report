@@ -26,7 +26,7 @@ interpret_odds <- function(odds, rules = "chen2010", log = FALSE) {
 
       return(interpret(abs(odds), rules(c(1.68, 3.47, 6.71), c("very small", "small", "medium", "large"))))
     } else if (rules == "cohen1988") {
-      d <- parameters::odds_to_d(odds, log=log)
+      d <- parameters::odds_to_d(odds, log = log)
       return(interpret_d(abs(d), rules = rules))
     } else {
       stop("rules must be 'chen2010', 'cohen1988' or an object of type rules.")

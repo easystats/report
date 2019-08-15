@@ -14,46 +14,43 @@ editor_options:
 
 # report <img src='man/figures/logo.png' align="right" height="139" />
 
-```{r, echo = FALSE}
+```{r, message=FALSE, warning=FALSE, echo = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   tidy.opts=list(width.cutoff=60),
   tidy=TRUE,
-  fig.path = "README-"
+  dpi=450,
+  fig.path = "man/figures/"
 )
 options(knitr.kable.NA = '',
         digits = 4,
         width=60)
+
+library(dplyr)
+library(report)
 ```
 
 
+[![CRAN](http://www.r-pkg.org/badges/version/report)](https://cran.r-project.org/package=report)
+[![downloads](http://cranlogs.r-pkg.org/badges/report)](https://cran.r-project.org/package=report)
 [![Build Status](https://travis-ci.org/easystats/report.svg?branch=master)](https://travis-ci.org/easystats/report)
 [![codecov](https://codecov.io/gh/easystats/report/branch/master/graph/badge.svg)](https://codecov.io/gh/easystats/report)
-[![HitCount](http://hits.dwyl.io/easystats/report.svg)](http://hits.dwyl.io/easystats/report) [![Documentation](https://img.shields.io/badge/documentation-report-orange.svg?colorB=E91E63)](https://easystats.github.io/report/)
-
-
-
-
-
-
-
 
 ***"From R to Manuscript"***
 
-`report`'s primary goal is to fill the gap between R's output and the formatted result description of your manuscript, with the automated use of **best practices** guidelines (*e.g.,* [APA](https://www.apastyle.org/)'s style guide), ensuring **standardization** and **quality** of results reporting.
+`report`'s primary goal is to bridge the gap between R's output and the formatted results contained in your manuscript. It automatically produces reports of models and dataframes according to **best practice** guidelines (*e.g.,* [APA](https://www.apastyle.org/)'s style guide), ensuring **standardization** and **quality** in results reporting.
 
 
 
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
+library(report)
+
 # Example
 model <- lm(Sepal.Length ~ Species, data=iris)
 report(model)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-library(report)
-library(dplyr)
-
 # Example
 lm(Sepal.Length ~ Species, data=iris) %>% 
   report() %>% 
@@ -63,6 +60,11 @@ lm(Sepal.Length ~ Species, data=iris) %>%
 
 ## Documentation
 
+[![Documentation](https://img.shields.io/badge/documentation-report-orange.svg?colorB=E91E63)](https://easystats.github.io/report/)
+[![Blog](https://img.shields.io/badge/blog-easystats-orange.svg?colorB=FF9800)](https://easystats.github.io/blog/posts/)
+[![Features](https://img.shields.io/badge/features-report-orange.svg?colorB=2196F3)](https://easystats.github.io/report/reference/index.html)
+
+
 The package documentation can be found [**here**](https://easystats.github.io/report/). Check-out these tutorials:
 
 - [Get Started](https://easystats.github.io/report/articles/report.html)
@@ -70,16 +72,17 @@ The package documentation can be found [**here**](https://easystats.github.io/re
 - [How to Cite Packages](https://easystats.github.io/report/articles/cite_packages.html)
 - [Supporting New Models](https://easystats.github.io/report/articles/supporting_new_models.html)
 
+
 ## Contribute
 
-**`report` is a young package in need of affection**. You can easily be a part of the [developping](.github/CONTRIBUTING.md) community of this open-source software and improve science by doing the following:
+**`report` is a young package in need of affection**. You can easily be a part of the [developing](.github/CONTRIBUTING.md) community of this open-source software and improve science by doing the following:
 
 - Create or check existing <a href=https://github.com/easystats/report/issues><img src="man/figures/issue_bug.png" height="25"></a> issues to report, replicate, understand or solve some bugs.
 - Create or check existing <a href=https://github.com/easystats/report/issues><img src="man/figures/issue_featureidea.png" height="25"></a> issues to suggest or discuss a new feature.
 - Check existing <a href=https://github.com/easystats/report/issues><img src="man/figures/issue_help.png" height="25"></a> issues to see things that we'd like to implement, but where help is needed to do it.
 - Check existing <a href=https://github.com/easystats/report/issues><img src="man/figures/issue_opinion.png" height="25"></a> issues to give your opinion and participate in package's design discussions.
 
-Don't be shy, try to code and submit a pull request (See the [contributing guide](.github/CONTRIBUTING.md)). Even if unperfect, we will help you make it great!
+Don't be shy, try to code and submit a pull request (See the [contributing guide](.github/CONTRIBUTING.md)). Even if it's not perfect, we will help you make it great!
 
 
 
@@ -90,6 +93,8 @@ Run the following:
 
 ```{r eval=FALSE, message=FALSE, warning=FALSE, eval=FALSE}
 install.packages("devtools")
+devtools::install_github("easystats/performance")
+devtools::install_github("easystats/parameters")
 devtools::install_github("easystats/report")
 ```
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
@@ -104,7 +109,7 @@ library("report")
 
 ### General Workflow
 
-The `report` package works in a two steps fashion. First, creating a `report` object with the `report()` function (which takes different arguments depending on the type of object you are reporting). Then, this report can be displayed either textually, using `to_text()`, or as a table, using `to_table()`. Moreover, you can also access a more detailed (but less digest) version of the report using `to_fulltext()` and `to_fulltable()`. Finally, `to_values()` makes it easy to access all the internals of a model. 
+The `report` package works in a two step fashion. First, you create a `report` object with the `report()` function (which takes different arguments depending on the type of object you are reporting). Then, this report object can be displayed either textually, using `to_text()`, or as a table, using `to_table()`. Moreover, you can access a more detailed (but less digested) version of the report using `to_fulltext()` and `to_fulltable()`. Finally, `to_values()` makes it easy to access all the internals of a model.
 
 ### Supported Packages
 
@@ -136,20 +141,13 @@ print(report(cor.test(iris$Sepal.Length, iris$Petal.Length)), width=100)
 You can also create tables with the `to_table()` and `to_fulltable()` functions:
 
 
-```{r message=FALSE, warning=FALSE, eval=FALSE}
+```{r message=FALSE, warning=FALSE}
 # Table report for a linear model
 lm(Sepal.Length ~ Petal.Length + Species, data=iris) %>% 
   report() %>% 
   to_table()
 ```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-table <- lm(Sepal.Length ~ Petal.Length + Species, data=iris) %>% 
-  report %>% 
-  to_table(digits=2)
-# remove empty row because kable doesn't handle it
-table <- table[rowSums(is.na(table)) != ncol(table),]
-knitr::kable(table)
-```
+
 
 Finally, you can also find more details using `to_fulltext()`:
 
@@ -158,20 +156,19 @@ Finally, you can also find more details using `to_fulltext()`:
 library(rstanarm)
 
 stan_glmer(vs ~ mpg + (1|cyl), data=mtcars, family="binomial") %>% 
-  report(standardize=TRUE, effsize="cohen1988") %>% 
+  report(standardize="full", effsize="cohen1988") %>% 
   to_fulltext()
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(rstanarm)
-stuff <- capture.output(r <- rstanarm::stan_glmer(vs ~ mpg + (1|cyl), data=mtcars, family="binomial") %>% 
-  report(standardize=TRUE, effsize="cohen1988"))
-
-to_fulltext(r, width=100)
+rstanarm::stan_glmer(vs ~ mpg + (1|cyl), data=mtcars, family="binomial", refresh = 0) %>% 
+  report(standardize="full", effsize="cohen1988") %>% 
+  to_fulltext(width=100)
 ```
 
 
 ## Credits
 
-If you like it, you can put a *star* on this repo, and cite the package as following:
+If you like it, you can put a *star* on this repo, and cite the package as follows:
 
-- Makowski, D. \& Lüdecke, D. (2019). *The report package for R: Ensuring the use of best practices for results reporting*. CRAN. doi: .
+- Makowski \& Lüdecke (2019). *The report package for R: Ensuring the use of best practices for results reporting*. CRAN. doi: .

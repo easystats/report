@@ -253,11 +253,15 @@ interpret_omega_squared(x, rules = "field2013")
 
 
 
-
 ### Bayes Factor (BF)
 
-The Bayes Factor if a useful measure of evidence against or in favour of a hypothesis. Note that **BFs** between 0 and 1, indicating evidence *against* the hypothesis, are converted via `bf = 1 / abs(bf)`.
+**Bayes factors (BF)** are continuous measures of relative evidence, with a Bayes factor greater than 1 giving evidence in favor of one of the models (the numerator), and a Bayes factor smaller than 1 giving evidence in favor of the other model (the denominator). Yet, it is common to interpret the **magnitude** of relative evidence based on conventions of intervals (presented below), such that the values of a *BF*<sub>10</sub> (comparing the alternative to the null) can be interpreted as:
 
+For human readability, it is recommended to report BFs so that the ratios are larger than 1 - for example, it's harder to understand a *BF*<sub>10</sub>\=0.07 (indicating the data are 0.07 times more probable under the alternative) than a *BF*<sub>01</sub>\=1/0.07\=14.3 (indicating the data are 14.3 times more probable under the null. **BFs** between 0 and 1, indicating evidence *against* the hypothesis, can be converted via `bf = 1 / abs(bf)`.
+
+One can report **Bayes factors** using the following sentence:
+
+> There is a strong evidence against the null hypothesis (BF = 12.2).
 
 #### @jeffreys1961theory
 

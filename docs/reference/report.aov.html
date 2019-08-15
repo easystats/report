@@ -37,6 +37,8 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 <meta property="og:title" content="ANOVAs Report — report.aov" />
 
 <meta property="og:description" content="Create a report of an ANOVA." />
@@ -154,8 +156,9 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for aov</span>
-<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>, <span class='kw'>omega_squared</span> <span class='kw'>=</span> <span class='st'>"partial"</span>,
-  <span class='kw'>effsize</span> <span class='kw'>=</span> <span class='st'>"field2013"</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>, <span class='kw'>effsize</span> <span class='kw'>=</span> <span class='st'>"field2013"</span>,
+  <span class='kw'>omega_squared</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>eta_squared</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>epsilon_squared</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -165,12 +168,20 @@
       <td><p>Object of class <code>aov</code>, <code>anova</code> or <code>aovlist</code>.</p></td>
     </tr>
     <tr>
-      <th>omega_squared</th>
-      <td><p>Compute omega squared as indices of effect size. Can be <code>NULL</code>, "partial" (default) or "raw" for non-partial indices.</p></td>
-    </tr>
-    <tr>
       <th>effsize</th>
       <td><p>Effect size interpretation set of rules.</p></td>
+    </tr>
+    <tr>
+      <th>omega_squared</th>
+      <td><p>Compute omega squared as index of effect size. Can be "partial" (adjusted for effect size) or "raw".</p></td>
+    </tr>
+    <tr>
+      <th>eta_squared</th>
+      <td><p>Compute eta squared as index of effect size. Can be "partial" (adjusted for effect size) or "raw".</p></td>
+    </tr>
+    <tr>
+      <th>epsilon_squared</th>
+      <td><p>Compute epsilon squared as index of effect size.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -187,22 +198,16 @@
     <pre class="examples"><div class='input'><span class='no'>data</span> <span class='kw'>&lt;-</span> <span class='no'>iris</span>
 <span class='no'>data</span>$<span class='no'>Cat1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"X"</span>, <span class='st'>"X"</span>, <span class='st'>"Y"</span>), <span class='kw'>length.out</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/nrow'>nrow</a></span>(<span class='no'>data</span>))
 <span class='no'>data</span>$<span class='no'>Cat2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"A"</span>, <span class='st'>"B"</span>), <span class='kw'>length.out</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/nrow'>nrow</a></span>(<span class='no'>data</span>))
-<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/aov'>aov</a></span>(<span class='no'>Sepal.Length</span> ~ <span class='no'>Species</span> * <span class='no'>Cat1</span> * <span class='no'>Cat2</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>data</span>)
-<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>)</div><div class='output co'>#&gt; The ANOVA suggests that:
+<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/aov'>aov</a></span>(<span class='no'>Sepal.Length</span> ~ <span class='no'>Species</span> * <span class='no'>Cat1</span> * <span class='no'>Cat2</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>data</span>)
+<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>, <span class='kw'>omega_squared</span> <span class='kw'>=</span> <span class='st'>"partial"</span>)</div><div class='output co'>#&gt; The ANOVA suggests that:
 #&gt; 
-#&gt;   - The effect of Species is significant (F(2, 138) = 115.28, p &lt; .001) and can be considered as large (partial omega squared = 0.60).
-#&gt;   - The effect of Cat1 is not significant (F(1, 138) = 0.01, p &gt; .1) and can be considered as very small (partial omega squared = -0.01).
-#&gt;   - The effect of Cat2 is not significant (F(1, 138) = 0.01, p &gt; .1) and can be considered as very small (partial omega squared = -0.01).
+#&gt;   - The main effect of Species is significant (F(2, 138) = 115.28, p &lt; .001) and can be considered as large (partial omega squared = 0.60).
+#&gt;   - The main effect of Cat1 is not significant (F(1, 138) = 0.01, p &gt; .1) and can be considered as very small (partial omega squared = -0.01).
+#&gt;   - The main effect of Cat2 is not significant (F(1, 138) = 0.01, p &gt; .1) and can be considered as very small (partial omega squared = -0.01).
 #&gt;   - The interaction between Species and Cat1 is not significant (F(2, 138) = 0.51, p &gt; .1) and can be considered as very small (partial omega squared = -0.01).
-#&gt;   - The interaction between Species and Cat2 is not significant (F(2, 138) = 0.94, p &gt; .1) and can be considered as very small (partial omega squared = -0.00).
-#&gt;   - The interaction between Cat1 and Cat2 is not significant (F(1, 138) = 0.91, p &gt; .1) and can be considered as very small (partial omega squared = -0.00).
-#&gt;   - The interaction between Species, Cat1 and Cat2 is not significant (F(2, 138) = 0.13, p &gt; .1) and can be considered as very small (partial omega squared = -0.01).</div><div class='input'>
-
-</div><span class='co'># NOT RUN {</span>
-<span class='fu'><a href='report.html'>report</a></span>(<span class='kw pkg'>circus</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/circus/topics/aov_1'>aov_1</a></span>)
-<span class='fu'><a href='report.html'>report</a></span>(<span class='kw pkg'>circus</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/circus/topics/anova_1'>anova_1</a></span>)
-<span class='fu'><a href='report.html'>report</a></span>(<span class='kw pkg'>circus</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/circus/topics/aovlist_1'>aovlist_1</a></span>)
-<span class='co'># }</span></pre>
+#&gt;   - The interaction between Species and Cat2 is not significant (F(2, 138) = 0.94, p &gt; .1) and can be considered as very small (partial omega squared = 0.00).
+#&gt;   - The interaction between Cat1 and Cat2 is not significant (F(1, 138) = 0.91, p &gt; .1) and can be considered as very small (partial omega squared = 0.00).
+#&gt;   - The interaction between Species, Cat1 and Cat2 is not significant (F(2, 138) = 0.13, p &gt; .1) and can be considered as very small (partial omega squared = -0.01).</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

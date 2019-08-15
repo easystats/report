@@ -2,11 +2,11 @@
 #'
 #' Create a report of a dataframe.
 #'
-#' @param model Numeric vector.
+#' @param model A data.frame or a vector.
 #' @param median Show \link{mean} and \link{sd} (default) or \link{median} and \link{mad}.
 #' @param dispersion Show dispersion (\link{sd} or \link{mad}).
 #' @param range Show range.
-#' @param distribution Returns Kurtosis and Skewness in table, and tries to guess the distribution of the numeric variable by using an internal machine learning model (see \link[parameters]{find_distribution}).
+#' @param distribution Returns Kurtosis and Skewness in table.
 #' @param n_characters Number of different character entries to show. Can be "all".
 #' @param levels_percentage Show characters entries and factor levels by number (default) or percentage.
 #' @param missing_percentage Show missings by number (default) or percentage.
@@ -15,7 +15,9 @@
 #'
 #'
 #' @examples
+#' library(report)
 #' x <- iris
+#'
 #' report(x)
 #' report(x, median = TRUE, dispersion = TRUE, range = TRUE, missing_percentage = TRUE)
 #' to_fulltext(report(x))
@@ -25,7 +27,7 @@
 #' @import dplyr
 #'
 #' @export
-report.data.frame <- function(model, median = FALSE, dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = FALSE, n_characters = 3, missing_percentage = FALSE, ...) {
+report.data.frame <- function(model, median = FALSE, dispersion = TRUE, range = TRUE, distribution = TRUE, levels_percentage = FALSE, n_characters = 3, missing_percentage = FALSE, ...) {
 
   # Table -------------------------------------------------------------------
   table_full <- data.frame()
@@ -79,17 +81,16 @@ report.data.frame <- function(model, median = FALSE, dispersion = TRUE, range = 
     values = values
   )
 
-  return(as.report(out))
+  as.report(out)
 }
 
 
 
 
 
-#' @inheritParams report.data.frame
 #' @import dplyr
 #' @export
-report.grouped_df <- function(model, median = FALSE, dispersion = TRUE, range = TRUE, levels_percentage = FALSE, n_characters = 3, missing_percentage = FALSE, ...) {
+report.grouped_df <- function(model, median = FALSE, dispersion = TRUE, range = TRUE, distribution = TRUE, levels_percentage = FALSE, n_characters = 3, missing_percentage = FALSE, ...) {
   groups <- group_vars(model)
   ungrouped_x <- ungroup(model)
   xlist <- split(ungrouped_x, ungrouped_x[groups], sep = " - ")
@@ -98,7 +99,7 @@ report.grouped_df <- function(model, median = FALSE, dispersion = TRUE, range = 
   text <- paste0(
     "The data contains ", nrow(ungrouped_x),
     " observations, grouped by ",
-    format_text_collapse(groups),
+    format_text(groups),
     ", of the following variables:"
   )
   text_full <- text
@@ -110,7 +111,7 @@ report.grouped_df <- function(model, median = FALSE, dispersion = TRUE, range = 
   for (group in names(xlist)) {
     data <- xlist[[group]]
     data <- dplyr::select(data, -dplyr::one_of(groups))
-    r <- report(data, median = median, dispersion = dispersion, range = range, levels_percentage = levels_percentage, n_characters = n_characters, missing_percentage = missing_percentage)
+    r <- report(data, median = median, dispersion = dispersion, range = range, distribution = distribution, levels_percentage = levels_percentage, n_characters = n_characters, missing_percentage = missing_percentage)
 
     current_text <- ""
     current_text_full <- ""
@@ -144,7 +145,7 @@ report.grouped_df <- function(model, median = FALSE, dispersion = TRUE, range = 
     values = values
   )
 
-  return(as.report(out))
+  as.report(out)
 }
 
 
@@ -159,18 +160,7 @@ report.grouped_df <- function(model, median = FALSE, dispersion = TRUE, range = 
 
 
 
-#' Character Vector Report
-#'
-#' Create a report of a character vector.
-#'
-#' @param model Character vector.
-#' @param n_characters Number of different character entries to show. Can be "all".
-#' @param levels_percentage Show characters entries by number (default) or percentage.
-#' @param missing_percentage Show missings by number (default) or percentage.
-#' @param ... Arguments passed to or from other methods.
-#'
-#'
-#'
+#' @rdname report.data.frame
 #' @examples
 #' x <- c("A", "B", "C", "A", "B", "B", "D", "E", "B", "D", "A")
 #' report(x)
@@ -202,7 +192,7 @@ report.character <- function(model, n_characters = 3, levels_percentage = FALSE,
 
 
   if (levels_percentage == TRUE) {
-    text <- paste0(n_char$Entry, ", ", format_value(n_char$percentage_Entry), "%")
+    text <- paste0(n_char$Entry, ", ", parameters::format_value(n_char$percentage_Entry), "%")
   } else {
     text <- paste0(n_char$Entry, ", n = ", n_char$n_Entry)
   }
@@ -230,7 +220,7 @@ report.character <- function(model, n_characters = 3, levels_percentage = FALSE,
 
 
   text_n_Missing <- paste0(table_full$n_Missing[1], " missing")
-  text_percentage_Missing <- paste0(format_value(table_full$percentage_Missing[1]), "% missing")
+  text_percentage_Missing <- paste0(parameters::format_value(table_full$percentage_Missing[1]), "% missing")
   if (missing_percentage == TRUE) {
     text_full <- paste0(text_full, "(", text_percentage_Missing, ").")
     table <- dplyr::select(table, -one_of("n_Missing"))
@@ -254,7 +244,7 @@ report.character <- function(model, n_characters = 3, levels_percentage = FALSE,
     values = as.list(table_full)
   )
 
-  return(as.report(out))
+  as.report(out)
 }
 
 
@@ -279,16 +269,7 @@ report.character <- function(model, n_characters = 3, levels_percentage = FALSE,
 
 
 
-#' Factor (Categorical Vector) Report
-#'
-#' Create a report of a categorical vector.
-#'
-#' @param model Categorical vector.
-#' @param levels_percentage Show factor levels by number (default) or percentage.
-#' @param ... Arguments passed to or from other methods.
-#'
-#'
-#'
+#' @rdname report.data.frame
 #' @examples
 #' x <- factor(rep(c("A", "B", "C"), 10))
 #' report(x)
@@ -301,8 +282,7 @@ report.character <- function(model, n_characters = 3, levels_percentage = FALSE,
 #'
 #' @export
 report.factor <- function(model, levels_percentage = FALSE, ...) {
-
-  if(length(model[is.na(model)]) != 0){
+  if (length(model[is.na(model)]) != 0) {
     model <- factor(ifelse(is.na(model), "missing", as.character(model)), levels = c(levels(model), "missing"))
   }
 
@@ -314,7 +294,7 @@ report.factor <- function(model, levels_percentage = FALSE, ...) {
       "percentage_Obs" = "n() / length(model) * 100"
     )
 
-  table_no_missing <- table_full[table_full$Level != "missing",]
+  table_no_missing <- table_full[table_full$Level != "missing", ]
   # Text --------------------------------------------------------------------
   if (nrow(table_full) > 1) {
     text_total_levels <- paste0(nrow(table_no_missing), " levels: ")
@@ -324,7 +304,7 @@ report.factor <- function(model, levels_percentage = FALSE, ...) {
 
   text_levels <- paste0(table_full$Level)
   text_n_Obs <- paste0("n = ", table_full$n_Obs)
-  text_percentage_Obs <- paste0(format_value(table_full$percentage_Obs), "%")
+  text_percentage_Obs <- paste0(parameters::format_value(table_full$percentage_Obs), "%")
 
 
   text_full <- paste0(
@@ -342,8 +322,8 @@ report.factor <- function(model, levels_percentage = FALSE, ...) {
   }
 
 
-  text <- paste0(text_total_levels, format_text_collapse(text, sep = "; "), ".")
-  text_full <- paste0(text_total_levels, format_text_collapse(text_full, sep = "; "), ".")
+  text <- paste0(text_total_levels, format_text(text, sep = "; "), ".")
+  text_full <- paste0(text_total_levels, format_text(text_full, sep = "; "), ".")
 
   values <- list()
   for (level in table_full$Level) {
@@ -359,7 +339,7 @@ report.factor <- function(model, levels_percentage = FALSE, ...) {
     values = values
   )
 
-  return(as.report(out))
+  as.report(out)
 }
 
 
@@ -374,25 +354,12 @@ report.factor <- function(model, levels_percentage = FALSE, ...) {
 
 
 
-#' Numeric Vector Report
-#'
-#' Create a report of a numeric vector.
-#'
-#' @param model Numeric vector.
-#' @param median Show \link{mean} and \link{sd} (default) or \link{median} and \link{mad}.
-#' @param dispersion Show dispersion (\link{sd} or \link{mad}).
-#' @param range Show range.
-#' @param distribution Returns Kurtosis and Skewness in table, and tries to guess the distribution of the numeric variable by using an internal machine learning model (see \link[parameters]{find_distribution}).
-#' @param missing_percentage Show missings by number (default) or percentage.
-#' @param ... Arguments passed to or from other methods.
-#'
-#'
-#'
+#' @rdname report.data.frame
 #' @examples
 #' \dontrun{
 #' x <- rnorm(1000)
 #' report(x)
-#' report(x, median = TRUE, missing_percentage = TRUE, distribution=TRUE)
+#' report(x, median = TRUE, missing_percentage = TRUE, distribution = TRUE)
 #' to_fulltext(report(x))
 #' to_table(report(x))
 #' to_fulltable(report(x))
@@ -402,7 +369,7 @@ report.factor <- function(model, levels_percentage = FALSE, ...) {
 #' @importFrom stats mad sd
 #'
 #' @export
-report.numeric <- function(model, median = FALSE, dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = FALSE, ...) {
+report.numeric <- function(model, median = FALSE, dispersion = TRUE, range = TRUE, distribution = TRUE, missing_percentage = FALSE, ...) {
   if (length(unique(model)) == 2) {
     if (is.null(names(model))) {
       name <- deparse(substitute(model))
@@ -428,41 +395,26 @@ report.numeric <- function(model, median = FALSE, dispersion = TRUE, range = TRU
     Kurtosis = parameters::kurtosis(model)
   )
 
-  # Distribution
-  if(distribution == TRUE){
-    distrib <- parameters::find_distribution(model, probabilities=TRUE)
-    table_full$Distribution <- tools::toTitleCase(names(distrib[which.max(distrib)]))
-    table_full$Distribution_Certainty <- distrib[which.max(distrib)][[1]]
-  }
 
   table_full$percentage_Missing <- table_full$n_Missing / table_full$n_Obs * 100
 
 
   # Text --------------------------------------------------------------------
-  # Distribution
-  if(distribution){
-    text_distribution <- paste0(table_full$Distribution,
-                                " distribution (certainty = ",
-                                format_value(table_full$Distribution_Certainty*100),
-                                "%) with m")
-  } else{
-    text_distribution <- "M"
-  }
 
   # Centrality
-  text_mean <- paste0(text_distribution, "ean = ", format_value(table_full$Mean[1]))
-  text_median <- paste0(text_distribution, "edian = ", format_value(table_full$Median[1]))
+  text_mean <- paste0("Mean = ", parameters::format_value(table_full$Mean[1]))
+  text_median <- paste0("Median = ", parameters::format_value(table_full$Median[1]))
 
   # Dispersion
-  text_sd <- format_value(table_full$SD[1])
-  text_mad <- format_value(table_full$MAD[1])
+  text_sd <- parameters::format_value(table_full$SD[1])
+  text_mad <- parameters::format_value(table_full$MAD[1])
 
   # Range
-  text_range <- paste0(" [", format_value(table_full$Min[1]), ", ", format_value(table_full$Max[1]), "]")
+  text_range <- paste0(", [", parameters::format_value(table_full$Min[1]), ", ", parameters::format_value(table_full$Max[1]), "]")
 
   # Missings
   if (missing_percentage == TRUE) {
-    text_missing <- paste0(", ", format_value(table_full$percentage_Missing[1], 1), "% missing.")
+    text_missing <- paste0(", ", parameters::format_value(table_full$percentage_Missing[1], 1), "% missing.")
   } else {
     text_missing <- paste0(", ", table_full$n_Missing[1], " missing.")
   }
@@ -502,8 +454,8 @@ report.numeric <- function(model, median = FALSE, dispersion = TRUE, range = TRU
   }
 
   # Distribution
-  if(distribution == FALSE){
-    vars <- c("Skewness", "Kurtosis", "Distribution", "Distribution_Certainty")
+  if (distribution == FALSE) {
+    vars <- c("Skewness", "Kurtosis")
     table <- dplyr::select(table, -one_of(vars[vars %in% names(table)]))
   }
 
@@ -512,7 +464,6 @@ report.numeric <- function(model, median = FALSE, dispersion = TRUE, range = TRU
 
   # Text
   text_full <- paste0(
-    text_distribution,
     text_mean, ", SD = ", text_sd, ", ",
     text_median, ", MAD = ", text_mad, ", Range =",
     text_range, text_missing
@@ -520,7 +471,7 @@ report.numeric <- function(model, median = FALSE, dispersion = TRUE, range = TRU
 
   if (table_full$n_Missing[1] > 0) {
     text <- paste0(text, text_missing)
-  } else{
+  } else {
     text <- paste0(text, ".")
   }
 
@@ -533,5 +484,5 @@ report.numeric <- function(model, median = FALSE, dispersion = TRUE, range = TRU
     values = as.list(table_full)
   )
 
-  return(as.report(out))
+  as.report(out)
 }

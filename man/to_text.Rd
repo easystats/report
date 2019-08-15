@@ -2,9 +2,23 @@
 % Please edit documentation in R/report.R
 \name{to_text}
 \alias{to_text}
+\alias{to_fulltext}
+\alias{to_table}
+\alias{to_fulltable}
+\alias{to_values}
 \title{Report printing}
 \usage{
 to_text(x, full = FALSE, width = NULL, ...)
+
+to_fulltext(x, full = TRUE, width = NULL, ...)
+
+to_table(x, full = FALSE, ...)
+
+to_fulltable(x, full = TRUE, ...)
+
+to_values(x, ...)
+
+to_values(x, ...)
 }
 \arguments{
 \item{x}{Object of class \link{report}.}

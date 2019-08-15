@@ -2,17 +2,17 @@
 % Please edit documentation in R/interpret_effective_sample.R
 \name{interpret_effective_sample}
 \alias{interpret_effective_sample}
-\title{Effective Sample Size Interpretation}
+\title{Effective Sample Size (ESS) Interpretation}
 \usage{
 interpret_effective_sample(effective_sample, rules = "burkner2017")
 }
 \arguments{
-\item{effective_sample}{Value or vector of Rhat values.}
+\item{effective_sample}{Value or vector of effective sample (ESS) values.}
 
-\item{rules}{Can be "burkner2017" (default) or custom set of rules.}
+\item{rules}{Can be "burkner2017" (default) or custom set of \code{\link{rules}}.}
 }
 \description{
-Effective Sample Size Interpretation
+Effective Sample Size (ESS) Interpretation
 }
 \examples{
 interpret_effective_sample(1001)

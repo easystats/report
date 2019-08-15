@@ -2,14 +2,25 @@
 % Please edit documentation in R/report.data.frame.R
 \name{report.data.frame}
 \alias{report.data.frame}
+\alias{report.character}
+\alias{report.factor}
+\alias{report.numeric}
 \title{Dataframe Report}
 \usage{
 \method{report}{data.frame}(model, median = FALSE, dispersion = TRUE,
-  range = TRUE, distribution = FALSE, levels_percentage = FALSE,
+  range = TRUE, distribution = TRUE, levels_percentage = FALSE,
   n_characters = 3, missing_percentage = FALSE, ...)
+
+\method{report}{character}(model, n_characters = 3,
+  levels_percentage = FALSE, missing_percentage = FALSE, ...)
+
+\method{report}{factor}(model, levels_percentage = FALSE, ...)
+
+\method{report}{numeric}(model, median = FALSE, dispersion = TRUE,
+  range = TRUE, distribution = TRUE, missing_percentage = FALSE, ...)
 }
 \arguments{
-\item{model}{Numeric vector.}
+\item{model}{A data.frame or a vector.}
 
 \item{median}{Show \link{mean} and \link{sd} (default) or \link{median} and \link{mad}.}
 
@@ -17,7 +28,7 @@
 
 \item{range}{Show range.}
 
-\item{distribution}{Returns Kurtosis and Skewness in table, and tries to guess the distribution of the numeric variable by using an internal machine learning model (see \link[parameters]{find_distribution}).}
+\item{distribution}{Returns Kurtosis and Skewness in table.}
 
 \item{levels_percentage}{Show characters entries and factor levels by number (default) or percentage.}
 
@@ -31,13 +42,41 @@
 Create a report of a dataframe.
 }
 \examples{
+library(report)
 x <- iris
+
 report(x)
 report(x, median = TRUE, dispersion = TRUE, range = TRUE, missing_percentage = TRUE)
 to_fulltext(report(x))
 to_table(report(x))
 to_fulltable(report(x))
+x <- c("A", "B", "C", "A", "B", "B", "D", "E", "B", "D", "A")
+report(x)
+report(x, n_characters = 2, levels_percentage = TRUE, missing_percentage = TRUE)
+to_fulltext(report(x))
+to_table(report(x, n_characters = "all"))
+to_fulltable(report(x))
+x <- factor(rep(c("A", "B", "C"), 10))
+report(x)
+report(x, levels_percentage = TRUE, missing_percentage = TRUE)
+to_fulltext(report(x))
+to_table(report(x))
+to_fulltable(report(x))
+\dontrun{
+x <- rnorm(1000)
+report(x)
+report(x, median = TRUE, missing_percentage = TRUE, distribution = TRUE)
+to_fulltext(report(x))
+to_table(report(x))
+to_fulltable(report(x))
+}
 }
 \seealso{
+report
+
+report
+
+report
+
 report
 }

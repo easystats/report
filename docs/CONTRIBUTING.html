@@ -37,6 +37,8 @@
 
 
 
+  <link href="extra.css" rel="stylesheet">
+  
 <meta property="og:title" content="Contribution Guidelines" />
 
 <meta property="og:image" content="/logo.png" />
@@ -145,8 +147,9 @@
 
 <div id="contribution-guidelines" class="section level1">
 
+<p><sup>easystats guidelines 0.1.0</sup></p>
 <p><strong>All people are very much welcome to contribute to code, documentation, testing and suggestions.</strong></p>
-<p><code>report</code> is a beginner-friendly package. Even if you’re new to all this open-source way of life, new to coding and github stuff, we encourage you to try submitting pull requests (PRs).</p>
+<p>This package aims at being beginner-friendly. Even if you’re new to this open-source way of life, new to coding and github stuff, we encourage you to try submitting pull requests (PRs).</p>
 <ul>
 <li><strong>“I’d like to help, but I’m not good enough with programming yet”</strong></li>
 </ul>
@@ -154,7 +157,7 @@
 <ul>
 <li><strong>“I’d like to help, but I don’t know where to start”</strong></li>
 </ul>
-<p>You can look around the <a href="https://github.com/neuropsychology/report/issues">issues section</a> to find some features / ideas / bugs to start working on. You can also open an issue just to say that you’re there, we might have some ideas adapted to your skills. One of the “easy” way to start contributing is through tests improvement, which consists of building some edge-case models, and running them through all the functions with different arguments, to see if everything behaves as expected.</p>
+<p>You can look around the <strong>issue section</strong> to find some features / ideas / bugs to start working on. You can also open a new issue <strong>just to say that you’re there, interested in helping out</strong>. We might have some ideas adapted to your skills.</p>
 <ul>
 <li><strong>“I’m not sure if my suggestion or idea is worthwile”</strong></li>
 </ul>
@@ -162,16 +165,16 @@
 <ul>
 <li><strong>“Why should I waste my time with this? Do I get any credit?”</strong></li>
 </ul>
-<p>Authors of substantial contribution will be added within the <a href="https://neuropsychology.github.io/report/blob/master/DESCRIPTION"><strong>authors</strong></a> list. We’re also very keen on including contributors to eventual publications.</p>
+<p>Software contributions are getting more and more valued in the academic world, so it is a good time to collaborate with us! Authors of substantial contributions will be added within the <strong>authors</strong> list. We’re also very keen on including them to eventual academic publications.</p>
 <p><strong>Anyway, starting is the most important! You will then enter a <em>whole new world, a new fantastic point of view</em>… So fork this repo, do some changes and submit them. We will then work together to make the best out of it :)</strong></p>
 <div id="code" class="section level2">
 <h2 class="hasAnchor">
 <a href="#code" class="anchor"></a>Code</h2>
 <ul>
 <li>Please document and comment your code, so that the purpose of each step (or code line) is stated in a clear and understandable way.</li>
-<li>Before submitting a change, please read the <a href="https://style.tidyverse.org/"><strong>R style guide</strong></a> to keep some consistency in code formatting.</li>
+<li>Before submitting a change, please read the <a href="https://style.tidyverse.org/"><strong>R style guide</strong></a> and in particular our <a href="https://github.com/easystats/easystats#convention-of-code-style"><strong>easystats convention of code-style</strong></a> to keep some consistency in code formatting.</li>
 <li>Regarding the style guide, note this exception: we put readability and clarity before everything. Thus, we like underscores and full names (prefer <code>model_performance</code> over <code>modelperf</code> and <code>interpret_odds_logistic</code> over <code>intoddslog</code>).</li>
-<li>Before you start to code, make sure you’re on the <code>dev</code> branch (the most “advanced”). Then, create a new branch named by your feature (e.g., <code>report_for_bigmodels</code>) and do your changes. Finally, submit your branch to be merged into the <code>dev</code> branch. Then, every now and then, the dev branch will merge into <code>master</code>, as a new package version.</li>
+<li>Before you start to code, make sure you’re on the <code>dev</code> branch (the most “advanced”). Then, you can create a new branch named by your feature (e.g., <code>feature_lightsaber</code>) and do your changes. Finally, submit your branch to be merged into the <code>dev</code> branch. Then, every now and then, the dev branch will merge into <code>master</code>, as a new package version.</li>
 </ul>
 </div>
 <div id="checks-to-do-before-submission" class="section level2">
@@ -186,7 +189,7 @@
 <li>
 <code><a href="https://www.rdocumentation.org/packages/styler/topics/style_pkg">styler::style_pkg()</a></code>: Automatic style formatting</li>
 <li>
-<code><a href="https://www.rdocumentation.org/packages/lintr/topics/lint_package">lintr::lint_package()</a></code>: Style checks</li>
+<code>lintr::lint_package()</code>: Style checks</li>
 <li>
 <code><a href="https://www.rdocumentation.org/packages/devtools/topics/check">devtools::check()</a></code>: General checks</li>
 </ul>

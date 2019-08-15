@@ -15,7 +15,8 @@
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Get Started">
+<script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<meta property="og:title" content="Get Started">
 <meta property="og:description" content="">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
@@ -123,7 +124,7 @@
 <div id="functions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#functions" class="anchor"></a>Functions</h2>
-<p>The <code>report</code> package works in a two steps fashion. First, creating a <code>report</code> object with the <code><a href="../reference/report.html">report()</a></code> function (which takes different arguments depending on the type of object you are reporting). Then, this report can be displayed either textually, using <code><a href="../reference/to_text.html">to_text()</a></code>, or as a table, using <code><a href="../reference/to_table.html">to_table()</a></code>. Moreover, you can also access a more detailed (but less digest) version of the report using <code><a href="../reference/to_fulltext.html">to_fulltext()</a></code> and <code><a href="../reference/to_fulltable.html">to_fulltable()</a></code>. Finally, <code><a href="../reference/to_values.html">to_values()</a></code> makes it easy to access all the internals of a model.</p>
+<p>The <code>report</code> package works in a two steps fashion. First, creating a <code>report</code> object with the <code><a href="../reference/report.html">report()</a></code> function (which takes different arguments depending on the type of object you are reporting). Then, this report can be displayed either textually, using <code><a href="../reference/to_text.html">to_text()</a></code>, or as a table, using <code><a href="../reference/to_text.html">to_table()</a></code>. Moreover, you can also access a more detailed (but less digest) version of the report using <code><a href="../reference/to_text.html">to_fulltext()</a></code> and <code><a href="../reference/to_text.html">to_fulltable()</a></code>. Finally, <code><a href="../reference/to_text.html">to_values()</a></code> makes it easy to access all the internals of a model.</p>
 </div>
 <div id="supported-objects" class="section level2">
 <h2 class="hasAnchor">
@@ -134,86 +135,100 @@
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">r &lt;-<span class="st"> </span><span class="kw"><a href="../reference/report.html">report</a></span>(iris)</a>
 <a class="sourceLine" id="cb3-2" title="2"><span class="kw"><a href="../reference/to_text.html">to_text</a></span>(r)</a></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">r &lt;-<span class="st"> </span><span class="kw"><a href="../reference/report.html">report</a></span>(iris)</a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(<span class="kw"><a href="../reference/to_text.html">to_text</a></span>(r), <span class="dt">width =</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(<span class="kw"><a href="../reference/to_text.html">to_text</a></span>(r), <span class="dt">width=</span><span class="dv">100</span>)</a>
 <a class="sourceLine" id="cb4-3" title="3"><span class="co">## The data contains 150 observations of the following variables:</span></a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="co">##   - Sepal.Length: Mean = 5.84, SD = 0.83 [4.30, 7.90].</span></a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="co">##   - Sepal.Width: Mean = 3.06, SD = 0.44 [2.00, 4.40].</span></a>
-<a class="sourceLine" id="cb4-6" title="6"><span class="co">##   - Petal.Length: Mean = 3.76, SD = 1.77 [1.00, 6.90].</span></a>
-<a class="sourceLine" id="cb4-7" title="7"><span class="co">##   - Petal.Width: Mean = 1.20, SD = 0.76 [0.10, 2.50].</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="co">##   - Sepal.Length: Mean = 5.84, SD = 0.83, [4.30, 7.90].</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="co">##   - Sepal.Width: Mean = 3.06, SD = 0.44, [2.00, 4.40].</span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="co">##   - Petal.Length: Mean = 3.76, SD = 1.77, [1.00, 6.90].</span></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="co">##   - Petal.Width: Mean = 1.20, SD = 0.76, [0.10, 2.50].</span></a>
 <a class="sourceLine" id="cb4-8" title="8"><span class="co">##   - Species: 3 levels: setosa (n = 50); versicolor (n = 50) and virginica (n = 50).</span></a>
-<a class="sourceLine" id="cb4-9" title="9"><span class="co">## [1] "The data contains 150 observations of the following variables:\n  - Sepal.Length: Mean = 5.84, SD = 0.83 [4.30, 7.90].\n  - Sepal.Width: Mean = 3.06, SD = 0.44 [2.00, 4.40].\n  - Petal.Length: Mean = 3.76, SD = 1.77 [1.00, 6.90].\n  - Petal.Width: Mean = 1.20, SD = 0.76 [0.10, 2.50].\n  - Species: 3 levels: setosa (n = 50); versicolor (n = 50) and virginica (n = 50)."</span></a></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="../reference/to_table.html">to_table</a></span>(r)</a></code></pre></div>
+<a class="sourceLine" id="cb4-9" title="9"><span class="co">## [1] "The data contains 150 observations of the following variables:\n  - Sepal.Length: Mean = 5.84, SD = 0.83, [4.30, 7.90].\n  - Sepal.Width: Mean = 3.06, SD = 0.44, [2.00, 4.40].\n  - Petal.Length: Mean = 3.76, SD = 1.77, [1.00, 6.90].\n  - Petal.Width: Mean = 1.20, SD = 0.76, [0.10, 2.50].\n  - Species: 3 levels: setosa (n = 50); versicolor (n = 50) and virginica (n = 50)."</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="../reference/to_text.html">to_table</a></span>(r)</a></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">Variable</th>
 <th align="left">Level</th>
-<th align="left">n_Obs</th>
-<th align="left">Mean</th>
-<th align="left">SD</th>
-<th align="left">Min</th>
-<th align="left">Max</th>
-<th align="left">n_Missing</th>
+<th align="right">n_Obs</th>
+<th align="right">Mean</th>
+<th align="right">SD</th>
+<th align="right">Min</th>
+<th align="right">Max</th>
+<th align="right">n_Missing</th>
+<th align="right">Skewness</th>
+<th align="right">Kurtosis</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td align="left">Species</td>
 <td align="left">setosa</td>
-<td align="left">50</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
+<td align="right">50</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
 </tr>
 <tr class="even">
 <td align="left">Species</td>
 <td align="left">versicolor</td>
-<td align="left">50</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
+<td align="right">50</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
 </tr>
 <tr class="odd">
 <td align="left">Species</td>
 <td align="left">virginica</td>
-<td align="left">50</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
+<td align="right">50</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
 </tr>
 <tr class="even">
 <td align="left">Petal.Length</td>
 <td align="left"></td>
-<td align="left">150</td>
-<td align="left">3.76</td>
-<td align="left">1.77</td>
-<td align="left">1.00</td>
-<td align="left">6.90</td>
-<td align="left">0</td>
+<td align="right">150</td>
+<td align="right">3.758</td>
+<td align="right">1.7653</td>
+<td align="right">1.0</td>
+<td align="right">6.9</td>
+<td align="right">0</td>
+<td align="right">-0.2721</td>
+<td align="right">-1.395</td>
 </tr>
 <tr class="odd">
 <td align="left">Petal.Width</td>
 <td align="left"></td>
-<td align="left">150</td>
-<td align="left">1.20</td>
-<td align="left">0.76</td>
-<td align="left">0.10</td>
-<td align="left">2.50</td>
-<td align="left">0</td>
+<td align="right">150</td>
+<td align="right">1.199</td>
+<td align="right">0.7622</td>
+<td align="right">0.1</td>
+<td align="right">2.5</td>
+<td align="right">0</td>
+<td align="right">-0.1019</td>
+<td align="right">-1.336</td>
 </tr>
 <tr class="even">
 <td align="left">Sepal.Width</td>
 <td align="left"></td>
-<td align="left">150</td>
-<td align="left">3.06</td>
-<td align="left">0.44</td>
-<td align="left">2.00</td>
-<td align="left">4.40</td>
-<td align="left">0</td>
+<td align="right">150</td>
+<td align="right">3.057</td>
+<td align="right">0.4359</td>
+<td align="right">2.0</td>
+<td align="right">4.4</td>
+<td align="right">0</td>
+<td align="right">0.3158</td>
+<td align="right">0.181</td>
 </tr>
 </tbody>
 </table>
@@ -223,91 +238,76 @@
 <a href="#grouped-dataframes" class="anchor"></a>Grouped Dataframes</h3>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a>
 <a class="sourceLine" id="cb6-2" title="2"></a>
-<a class="sourceLine" id="cb6-3" title="3">r &lt;-<span class="st"> </span>iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/report.html">report</a></span>(<span class="dt">median =</span> <span class="ot">TRUE</span>, <span class="dt">range =</span> <span class="ot">FALSE</span>)  <span class="co"># Display only the Median and MAD</span></a>
-<a class="sourceLine" id="cb6-4" title="4"></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="kw"><a href="../reference/to_fulltext.html">to_fulltext</a></span>(r)</a></code></pre></div>
+<a class="sourceLine" id="cb6-3" title="3">r &lt;-<span class="st"> </span>iris <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="st">  </span><span class="kw"><a href="../reference/report.html">report</a></span>(<span class="dt">median =</span> <span class="ot">TRUE</span>, <span class="dt">range =</span> <span class="ot">FALSE</span>)  <span class="co"># Display only the Median and MAD</span></a>
+<a class="sourceLine" id="cb6-6" title="6"></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="kw"><a href="../reference/to_text.html">to_fulltext</a></span>(r)</a></code></pre></div>
 <pre><code>## The data contains 150 observations, grouped by Species, of the following variables:
 ## - setosa (n = 50):
-##   - Sepal.Length: MMean = 5.01, SD = 0.35, Median = 5.00, MAD = 0.30, Range = [4.30, 5.80], 0
+##   - Sepal.Length: Mean = 5.01, SD = 0.35, Median = 5.00, MAD = 0.30, Range =, [4.30, 5.80], 0
 ## missing.
-##   - Sepal.Width: MMean = 3.43, SD = 0.38, Median = 3.40, MAD = 0.37, Range = [2.30, 4.40], 0 missing.
-##   - Petal.Length: MMean = 1.46, SD = 0.17, Median = 1.50, MAD = 0.15, Range = [1.00, 1.90], 0
+##   - Sepal.Width: Mean = 3.43, SD = 0.38, Median = 3.40, MAD = 0.37, Range =, [2.30, 4.40], 0 missing.
+##   - Petal.Length: Mean = 1.46, SD = 0.17, Median = 1.50, MAD = 0.15, Range =, [1.00, 1.90], 0
 ## missing.
-##   - Petal.Width: MMean = 0.25, SD = 0.11, Median = 0.20, MAD = 0.00, Range = [0.10, 0.60], 0 missing.
+##   - Petal.Width: Mean = 0.25, SD = 0.11, Median = 0.20, MAD = 0.00, Range =, [0.10, 0.60], 0 missing.
 ## - versicolor (n = 50):
-##   - Sepal.Length: MMean = 5.94, SD = 0.52, Median = 5.90, MAD = 0.52, Range = [4.90, 7.00], 0
+##   - Sepal.Length: Mean = 5.94, SD = 0.52, Median = 5.90, MAD = 0.52, Range =, [4.90, 7.00], 0
 ## missing.
-##   - Sepal.Width: MMean = 2.77, SD = 0.31, Median = 2.80, MAD = 0.30, Range = [2.00, 3.40], 0 missing.
-##   - Petal.Length: MMean = 4.26, SD = 0.47, Median = 4.35, MAD = 0.52, Range = [3.00, 5.10], 0
+##   - Sepal.Width: Mean = 2.77, SD = 0.31, Median = 2.80, MAD = 0.30, Range =, [2.00, 3.40], 0 missing.
+##   - Petal.Length: Mean = 4.26, SD = 0.47, Median = 4.35, MAD = 0.52, Range =, [3.00, 5.10], 0
 ## missing.
-##   - Petal.Width: MMean = 1.33, SD = 0.20, Median = 1.30, MAD = 0.22, Range = [1.00, 1.80], 0 missing.
+##   - Petal.Width: Mean = 1.33, SD = 0.20, Median = 1.30, MAD = 0.22, Range =, [1.00, 1.80], 0 missing.
 ## - virginica (n = 50):
-##   - Sepal.Length: MMean = 6.59, SD = 0.64, Median = 6.50, MAD = 0.59, Range = [4.90, 7.90], 0
+##   - Sepal.Length: Mean = 6.59, SD = 0.64, Median = 6.50, MAD = 0.59, Range =, [4.90, 7.90], 0
 ## missing.
-##   - Sepal.Width: MMean = 2.97, SD = 0.32, Median = 3.00, MAD = 0.30, Range = [2.20, 3.80], 0 missing.
-##   - Petal.Length: MMean = 5.55, SD = 0.55, Median = 5.55, MAD = 0.67, Range = [4.50, 6.90], 0
+##   - Sepal.Width: Mean = 2.97, SD = 0.32, Median = 3.00, MAD = 0.30, Range =, [2.20, 3.80], 0 missing.
+##   - Petal.Length: Mean = 5.55, SD = 0.55, Median = 5.55, MAD = 0.67, Range =, [4.50, 6.90], 0
 ## missing.
-##   - Petal.Width: MMean = 2.03, SD = 0.27, Median = 2.00, MAD = 0.30, Range = [1.40, 2.50], 0 missing.</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="../reference/to_fulltable.html">to_fulltable</a></span>(r)</a></code></pre></div>
-<pre><code>##        Group     Variable n_Obs Mean   SD Median  MAD  Min
-## 1     setosa  Petal.Width    50 0.25 0.11   0.20 0.00 0.10
-## 2     setosa Petal.Length    50 1.46 0.17   1.50 0.15 1.00
-## 3     setosa  Sepal.Width    50 3.43 0.38   3.40 0.37 2.30
-## 4 versicolor  Petal.Width    50 1.33 0.20   1.30 0.22 1.00
-## 5 versicolor  Sepal.Width    50 2.77 0.31   2.80 0.30 2.00
-## 6 versicolor Petal.Length    50 4.26 0.47   4.35 0.52 3.00
-## 7  virginica  Petal.Width    50 2.03 0.27   2.00 0.30 1.40
-## 8  virginica  Sepal.Width    50 2.97 0.32   3.00 0.30 2.20
-## 9  virginica Petal.Length    50 5.55 0.55   5.55 0.67 4.50
-##    Max n_Missing Skewness Kurtosis percentage_Missing
-## 1 0.60         0     1.22     4.43                  0
-## 2 1.90         0     0.10     3.80                  0
-## 3 4.40         0     0.04     3.74                  0
-## 4 1.80         0    -0.03     2.51                  0
-## 5 3.40         0    -0.35     2.55                  0
-## 6 5.10         0    -0.59     2.93                  0
-## 7 2.50         0    -0.13     2.34                  0
-## 8 3.80         0     0.35     3.52                  0
-## 9 6.90         0     0.53     2.74                  0</code></pre>
+##   - Petal.Width: Mean = 2.03, SD = 0.27, Median = 2.00, MAD = 0.30, Range =, [1.40, 2.50], 0 missing.</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="../reference/to_text.html">to_fulltable</a></span>(r)</a></code></pre></div>
+<pre><code>## Group      |     Variable | n_Obs | Mean |   SD | Median |  MAD |  Min |  Max | n_Missing | Skewness | Kurtosis | percentage_Missing
+## ------------------------------------------------------------------------------------------------------------------------------------
+## setosa     |  Petal.Width | 50.00 | 0.25 | 0.11 |   0.20 | 0.00 | 0.10 | 0.60 |      0.00 |     1.22 |     1.43 |               0.00
+## setosa     | Petal.Length | 50.00 | 1.46 | 0.17 |   1.50 | 0.15 | 1.00 | 1.90 |      0.00 |     0.10 |     0.80 |               0.00
+## setosa     |  Sepal.Width | 50.00 | 3.43 | 0.38 |   3.40 | 0.37 | 2.30 | 4.40 |      0.00 |     0.04 |     0.74 |               0.00
+## versicolor |  Petal.Width | 50.00 | 1.33 | 0.20 |   1.30 | 0.22 | 1.00 | 1.80 |      0.00 |    -0.03 |    -0.49 |               0.00
+## versicolor |  Sepal.Width | 50.00 | 2.77 | 0.31 |   2.80 | 0.30 | 2.00 | 3.40 |      0.00 |    -0.35 |    -0.45 |               0.00
+## versicolor | Petal.Length | 50.00 | 4.26 | 0.47 |   4.35 | 0.52 | 3.00 | 5.10 |      0.00 |    -0.59 |    -0.07 |               0.00
+## virginica  |  Petal.Width | 50.00 | 2.03 | 0.27 |   2.00 | 0.30 | 1.40 | 2.50 |      0.00 |    -0.13 |    -0.66 |               0.00
+## virginica  |  Sepal.Width | 50.00 | 2.97 | 0.32 |   3.00 | 0.30 | 2.20 | 3.80 |      0.00 |     0.35 |     0.52 |               0.00
+## virginica  | Petal.Length | 50.00 | 5.55 | 0.55 |   5.55 | 0.67 | 4.50 | 6.90 |      0.00 |     0.53 |    -0.26 |               0.00</code></pre>
 </div>
 <div id="correlations-and-t-tests" class="section level3">
 <h3 class="hasAnchor">
 <a href="#correlations-and-t-tests" class="anchor"></a>Correlations and t-tests</h3>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="../reference/report.html">report</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/cor.test">cor.test</a></span>(iris<span class="op">$</span>Sepal.Length, iris<span class="op">$</span>Petal.Length))</a></code></pre></div>
-<pre><code>## The Pearson's product-moment correlation between iris$Sepal.Length and iris$Petal.Length is
-## positive, significant and large (r = 0.87, p &lt; .001).</code></pre>
+<pre><code>## The Pearson's product-moment correlation between iris$Sepal.Length and iris$Petal.Length is positive, significant and large (r = 0.87, p &lt; .001).</code></pre>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw"><a href="../reference/report.html">report</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/t.test">t.test</a></span>(iris<span class="op">$</span>Sepal.Length, iris<span class="op">$</span>Petal.Length))</a></code></pre></div>
-<pre><code>## The Welch Two Sample t-test suggests that the difference between iris$Sepal.Length and
-## iris$Petal.Length (mean of x = 5.84, mean of y = 3.76, difference = 2.09) is significant (t(211.54)
-## = 13.10, 95% CI [1.77, 2.40], p &lt; .001).</code></pre>
+<pre><code>## The Welch Two Sample t-test suggests that the difference between iris$Sepal.Length and iris$Petal.Length (mean of x = 5.84, mean of y = 3.76, difference = 2.09) is significant (t(211.54) = 13.10, 95% CI [1.77, 2.40], p &lt; .001).</code></pre>
 </div>
 <div id="linear-models-lms" class="section level3">
 <h3 class="hasAnchor">
 <a href="#linear-models-lms" class="anchor"></a>Linear Models (LMs)</h3>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">model &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Petal.Length <span class="op">+</span><span class="st"> </span>Species, <span class="dt">data =</span> iris)</a>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">model &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>Petal.Length <span class="op">+</span><span class="st"> </span>Species, <span class="dt">data=</span>iris)</a>
 <a class="sourceLine" id="cb14-2" title="2">r &lt;-<span class="st"> </span><span class="kw"><a href="../reference/report.html">report</a></span>(model)</a>
 <a class="sourceLine" id="cb14-3" title="3"></a>
 <a class="sourceLine" id="cb14-4" title="4"><span class="kw"><a href="../reference/to_text.html">to_text</a></span>(r)</a></code></pre></div>
-<pre><code>##  We fitted a linear model to predict Sepal.Length with Petal.Length and Species. The model's
-## explanatory power is substantial (R2 = 0.84, adj. R2 = 0.83). The model's intercept is at 3.68.
+<pre><code>## We fitted a linear model to predict Sepal.Length with Petal.Length and Species. The model's explanatory power is substantial (R2 = 0.84, adj. R2 = 0.83). The model's intercept is at 3.68. Within this model:
 ## 
-## Within this model: 
-##   - Petal.Length is significant (beta = 0.90, 95% CI [0.78, 1.03], p &lt; .001) and large (std. beta =
-## 1.93).
-##   - Speciesversicolor is significant (beta = -1.60, 95% CI [-1.98, -1.22], p &lt; .001) and large (std.
-## beta = -1.93).
-##   - Speciesvirginica is significant (beta = -2.12, 95% CI [-2.66, -1.58], p &lt; .001) and large (std.
-## beta = -2.56).</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw"><a href="../reference/to_table.html">to_table</a></span>(r)</a></code></pre></div>
+##   - The effect of Petal.Length is positive and can be considered as very large and significant (beta = 0.90, 95% CI [0.78, 1.03], p &lt; .001, std. beta = 1.93).
+##   - The effect of Species (versicolor) is negative and can be considered as very large and significant (beta = -1.60, 95% CI [-1.98, -1.22], p &lt; .001, std. beta = -1.93).
+##   - The effect of Species (virginica) is negative and can be considered as very large and significant (beta = -2.12, 95% CI [-2.66, -1.58], p &lt; .001, std. beta = -2.56).</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw"><a href="../reference/to_text.html">to_table</a></span>(r)</a></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th></th>
 <th align="left">Parameter</th>
-<th align="right">beta</th>
+<th align="right">Coefficient</th>
 <th align="right">CI_low</th>
 <th align="right">CI_high</th>
 <th align="right">p</th>
-<th align="right">Std_beta</th>
+<th align="right">Std_Coefficient</th>
 <th align="right">Fit</th>
 </tr></thead>
 <tbody>
@@ -363,7 +363,7 @@
 </tr>
 <tr class="even">
 <td>7</td>
-<td align="left">R2_adjusted</td>
+<td align="left">R2 (adj.)</td>
 <td align="right"></td>
 <td align="right"></td>
 <td align="right"></td>
@@ -377,134 +377,180 @@
 <div id="general-linear-models-glms" class="section level3">
 <h3 class="hasAnchor">
 <a href="#general-linear-models-glms" class="anchor"></a>General Linear Models (GLMs)</h3>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">model &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/glm">glm</a></span>(vs <span class="op">~</span><span class="st"> </span>mpg <span class="op">+</span><span class="st"> </span>cyl, <span class="dt">data =</span> mtcars, <span class="dt">family =</span> <span class="st">"binomial"</span>)</a>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">model &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/glm">glm</a></span>(vs <span class="op">~</span><span class="st"> </span>mpg <span class="op">+</span><span class="st"> </span>cyl, <span class="dt">data=</span>mtcars, <span class="dt">family=</span><span class="st">"binomial"</span>)</a>
 <a class="sourceLine" id="cb17-2" title="2">r &lt;-<span class="st"> </span><span class="kw"><a href="../reference/report.html">report</a></span>(model)</a>
 <a class="sourceLine" id="cb17-3" title="3"></a>
-<a class="sourceLine" id="cb17-4" title="4"><span class="kw"><a href="../reference/to_fulltext.html">to_fulltext</a></span>(r)</a></code></pre></div>
-<pre><code>##  We fitted a logistic model (using ML algorithm) to predict vs with mpg and cyl (formula = vs ~ mpg
-## + cyl). Effect sizes were labelled following Chen's (2010) recommendations. The model's explanatory
-## power is substantial (Tjur's R2 = 0.67). The model's intercept, corresponding to mpg = 0 and cyl =
-## 0, is at 15.97 (z = 1.45, 95% CI [-2.71, 44.69], p &gt; .1).
+<a class="sourceLine" id="cb17-4" title="4"><span class="kw"><a href="../reference/to_text.html">to_fulltext</a></span>(r)</a></code></pre></div>
+<pre><code>## We fitted a logistic model (estimated using ML) to predict vs with mpg and cyl (formula = vs ~ mpg
+## + cyl). Standardized parameters were obtained by fitting the model on a standardized version of the
+## dataset. Effect sizes were labelled following Chen's (2010) recommendations.
 ## 
-## Within this model: 
-##   - mpg is negative, not significant (beta = -0.16, SE = 0.24, z = -0.68, 95% CI [-0.71, 0.34], p &gt;
-## .1) and small (std. beta = -0.98, std. SE = 1.45, std. 95% CI [-4.28, 2.03]).
-##   - cyl is negative, significant (beta = -2.15, SE = 1.08, z = -1.99, 95% CI [-5.19, -0.54], p &lt; .05)
-## and large (std. beta = -3.84, std. SE = 1.93, std. 95% CI [-9.26, -0.97]).</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw"><a href="../reference/to_fulltable.html">to_fulltable</a></span>(r)</a></code></pre></div>
+## The model's explanatory power is substantial (Tjur's R2 = 0.67). The model's intercept,
+## corresponding to vs = 0, mpg = 0 and cyl = 0, is at 15.97 (SE = 11.02, 95% CI [-2.71, 44.69], p &gt;
+## .1, std. intercept = -0.60). Within this model:
+## 
+##   - The effect of mpg is negative and can be considered as small and not significant (beta = -0.16,
+## SE = 0.24, 95% CI [-0.71, 0.34], p &gt; .1, std. beta = -0.98).
+##   - The effect of cyl is negative and can be considered as large and significant (beta = -2.15, SE =
+## 1.08, 95% CI [-5.19, -0.54], p &lt; .05, std. beta = -3.84).</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw"><a href="../reference/to_text.html">to_fulltable</a></span>(r)</a></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th></th>
 <th align="left">Parameter</th>
-<th align="left">beta</th>
-<th align="left">SE</th>
-<th align="left">CI_low</th>
-<th align="left">CI_high</th>
-<th align="left">z</th>
-<th align="left">DoF_residual</th>
-<th align="left">p</th>
-<th align="left">Std_beta</th>
-<th align="left">Std_SE</th>
-<th align="left">Std_CI_low</th>
-<th align="left">Std_CI_high</th>
-<th align="left">Fit</th>
+<th align="right">Coefficient</th>
+<th align="right">SE</th>
+<th align="right">CI_low</th>
+<th align="right">CI_high</th>
+<th align="right">z</th>
+<th align="right">df_residual</th>
+<th align="right">p</th>
+<th align="right">Std_Coefficient</th>
+<th align="right">Fit</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td>1</td>
 <td align="left">(Intercept)</td>
-<td align="left">15.97</td>
-<td align="left">11.02</td>
-<td align="left">-2.71</td>
-<td align="left">44.69</td>
-<td align="left">1.45</td>
-<td align="left">29</td>
-<td align="left">0.15</td>
-<td align="left">-0.60</td>
-<td align="left">0.65</td>
-<td align="left">-2.07</td>
-<td align="left">0.62</td>
-<td align="left"></td>
+<td align="right">15.9714</td>
+<td align="right">11.0224</td>
+<td align="right">-2.7094</td>
+<td align="right">44.6936</td>
+<td align="right">1.4490</td>
+<td align="right">29</td>
+<td align="right">0.1473</td>
+<td align="right">-0.6012</td>
+<td align="right"></td>
 </tr>
 <tr class="even">
 <td>2</td>
 <td align="left">mpg</td>
-<td align="left">-0.16</td>
-<td align="left">0.24</td>
-<td align="left">-0.71</td>
-<td align="left">0.34</td>
-<td align="left">-0.68</td>
-<td align="left">29</td>
-<td align="left">0.50</td>
-<td align="left">-0.98</td>
-<td align="left">1.45</td>
-<td align="left">-4.28</td>
-<td align="left">2.03</td>
-<td align="left"></td>
+<td align="right">-0.1633</td>
+<td align="right">0.2399</td>
+<td align="right">-0.7098</td>
+<td align="right">0.3374</td>
+<td align="right">-0.6807</td>
+<td align="right">29</td>
+<td align="right">0.4961</td>
+<td align="right">-0.9842</td>
+<td align="right"></td>
 </tr>
 <tr class="odd">
 <td>3</td>
 <td align="left">cyl</td>
-<td align="left">-2.15</td>
-<td align="left">1.08</td>
-<td align="left">-5.19</td>
-<td align="left">-0.54</td>
-<td align="left">-1.99</td>
-<td align="left">29</td>
-<td align="left">0.05</td>
-<td align="left">-3.84</td>
-<td align="left">1.93</td>
-<td align="left">-9.26</td>
-<td align="left">-0.97</td>
-<td align="left"></td>
+<td align="right">-2.1482</td>
+<td align="right">1.0811</td>
+<td align="right">-5.1872</td>
+<td align="right">-0.5406</td>
+<td align="right">-1.9869</td>
+<td align="right">29</td>
+<td align="right">0.0469</td>
+<td align="right">-3.8365</td>
+<td align="right"></td>
 </tr>
 <tr class="even">
 <td>5</td>
 <td align="left">AIC</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">23.49</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">23.4911</td>
 </tr>
 <tr class="odd">
 <td>6</td>
 <td align="left">BIC</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">27.89</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">27.8883</td>
 </tr>
 <tr class="even">
 <td>7</td>
-<td align="left">R2_Tjur</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">0.67</td>
+<td align="left">Tjur’s R2</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">0.6666</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td align="left">RMSE</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">0.7393</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td align="left">LOGLOSS</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">0.2733</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td align="left">SCORE_LOG</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">-14.8485</td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td align="left">SCORE_SPHERICAL</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">0.1158</td>
+</tr>
+<tr class="odd">
+<td>12</td>
+<td align="left">PCP</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">0.8359</td>
 </tr>
 </tbody>
 </table>

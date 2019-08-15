@@ -1,6 +1,6 @@
 #' Omega Squared Interpretation
 #'
-#' @param omega_squared Value or vector of d values.
+#' @param omega_squared Value or vector of omega squared values.
 #' @param rules Can be "field2013" (default) or custom set of rules.
 #'
 #'
@@ -8,7 +8,6 @@
 #' @examples
 #' interpret_omega_squared(.02)
 #' interpret_omega_squared(c(.5, .02))
-#'
 #' @seealso http://imaging.mrc-cbu.cam.ac.uk/statswiki/FAQ/effectSize
 #'
 #'

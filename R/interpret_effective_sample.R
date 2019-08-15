@@ -1,7 +1,7 @@
-#' Effective Sample Size Interpretation
+#' Effective Sample Size (ESS) Interpretation
 #'
-#' @param effective_sample Value or vector of Rhat values.
-#' @param rules Can be "burkner2017" (default) or custom set of rules.
+#' @param effective_sample Value or vector of effective sample (ESS) values.
+#' @param rules Can be "burkner2017" (default) or custom set of \code{\link{rules}}.
 #'
 #'
 #' @examples

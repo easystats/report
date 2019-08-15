@@ -37,9 +37,11 @@
 
 
 
+  <link href="../extra.css" rel="stylesheet">
+  
 <meta property="og:title" content="Mixed Models Report — report.lmerMod" />
 
-<meta property="og:description" content="Create a report of a mixed model." />
+<meta property="og:description" content="Create a report of a mixed model (lme4)." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -149,28 +151,26 @@
 
     <div class="ref-description">
     
-    <p>Create a report of a mixed model.</p>
+    <p>Create a report of a mixed model (lme4).</p>
     
     </div>
 
     <pre class="usage"><span class='co'># S3 method for lmerMod</span>
-<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>, <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>standardize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>effsize</span> <span class='kw'>=</span> <span class='st'>"cohen1988"</span>, <span class='kw'>performance_in_table</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>performance_metrics</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='kw'>bootstrap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>p_method</span> <span class='kw'>=</span> <span class='st'>"wald"</span>,
-  <span class='kw'>ci_method</span> <span class='kw'>=</span> <span class='st'>"wald"</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for merMod</span>
-<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>, <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>standardize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>effsize</span> <span class='kw'>=</span> <span class='st'>"chen2010"</span>, <span class='kw'>performance_in_table</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>performance_metrics</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='kw'>bootstrap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>ci_method</span> <span class='kw'>=</span> <span class='st'>"wald"</span>,
-  <span class='no'>...</span>)</pre>
+<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>, <span class='kw'>effsize</span> <span class='kw'>=</span> <span class='st'>"default"</span>, <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
+  <span class='kw'>standardize</span> <span class='kw'>=</span> <span class='st'>"refit"</span>, <span class='kw'>standardize_robust</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>bootstrap</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>iterations</span> <span class='kw'>=</span> <span class='fl'>500</span>, <span class='kw'>performance_metrics</span> <span class='kw'>=</span> <span class='st'>"all"</span>,
+  <span class='kw'>p_method</span> <span class='kw'>=</span> <span class='st'>"wald"</span>, <span class='kw'>ci_method</span> <span class='kw'>=</span> <span class='st'>"wald"</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>model</th>
-      <td><p>Mixed model.</p></td>
+      <td><p>Frequentist regression object.</p></td>
+    </tr>
+    <tr>
+      <th>effsize</th>
+      <td><p><a href='https://easystats.github.io/report/articles/interpret_metrics.html'>Interpret the standardized parameters</a> using a set of rules. Default corresponds to "funder2019" for linear models and "chen2010" for logistic models.</p></td>
     </tr>
     <tr>
       <th>ci</th>
@@ -178,23 +178,23 @@
     </tr>
     <tr>
       <th>standardize</th>
-      <td><p>Standardized coefficients. See <code><a href='https://www.rdocumentation.org/packages/parameters/topics/model_parameters.lm'>model_parameters</a></code>.</p></td>
+      <td><p>Add standardized parameters. Can be FALSE or a character indicating the standardization method (see <code>parameters_standardize</code>).</p></td>
     </tr>
     <tr>
-      <th>effsize</th>
-      <td><p><a href='https://easystats.github.io/report/articles/interpret_metrics.html'>Interpret the standardized parameters</a> using a set of rules. Can be "cohen1988" (default for linear models), "chen2010" (default for logistic models), "sawilowsky2009", NULL, or a custom set of <a href='rules.html'>rules</a>.</p></td>
+      <th>standardize_robust</th>
+      <td><p>Robust standardization. See <code>parameters_standardize</code>.</p></td>
     </tr>
     <tr>
-      <th>performance_in_table</th>
-      <td><p>Add performance metrics in table.</p></td>
+      <th>bootstrap</th>
+      <td><p>Should estimates be based on bootsrapped model? If TRUE, then arguments of Bayesian regressions apply.</p></td>
+    </tr>
+    <tr>
+      <th>iterations</th>
+      <td><p>The number of bootstrap replicates. This only apply in the case of bootsrapped frequentist models.</p></td>
     </tr>
     <tr>
       <th>performance_metrics</th>
       <td><p>See <code><a href='https://www.rdocumentation.org/packages/performance/topics/model_performance.lm'>model_performance</a></code>.</p></td>
-    </tr>
-    <tr>
-      <th>bootstrap</th>
-      <td><p>See <code><a href='https://www.rdocumentation.org/packages/parameters/topics/model_parameters.lm'>model_parameters</a></code>.</p></td>
     </tr>
     <tr>
       <th>p_method</th>
@@ -206,20 +206,67 @@
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Arguments passed to or from other methods.</p></td>
+      <td><p>Arguments passed to or from other methods (e.g., to standardize).</p></td>
     </tr>
     </table>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'>lmer</span>(<span class='no'>Sepal.Length</span> ~ <span class='no'>Petal.Length</span> + (<span class='fl'>1</span> <span class='kw'>|</span> <span class='no'>Species</span>), <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>lme4</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: Matrix</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>report</span>)
+
+<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/lme4/topics/lmer'>lmer</a></span>(<span class='no'>Sepal.Length</span> ~ <span class='no'>Petal.Length</span> + (<span class='fl'>1</span> <span class='kw'>|</span> <span class='no'>Species</span>), <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>)
 <span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>)
-<span class='fu'><a href='to_text.html'>to_text</a></span>(<span class='no'>r</span>)
-<span class='fu'><a href='to_fulltext.html'>to_fulltext</a></span>(<span class='no'>r</span>)
-<span class='fu'><a href='to_table.html'>to_table</a></span>(<span class='no'>r</span>)
-<span class='fu'><a href='to_fulltable.html'>to_fulltable</a></span>(<span class='no'>r</span>)
-<span class='co'># }</span></pre>
+<span class='fu'><a href='to_text.html'>to_text</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; We fitted a linear mixed model to predict Sepal.Length with Petal.Length. The model included Species as random effects. The model's total explanatory power is substantial (conditional R2 = 0.97) and the part related to the fixed effects alone (marginal R2) is of 0.66. The model's intercept is at 2.50. Within this model:
+#&gt; 
+#&gt;   - The effect of Petal.Length is positive and can be considered as very large and significant (beta = 0.89, 95% CI [-0.85, 2.63], p &lt; .001, std. beta = 1.89).</div><div class='input'><span class='fu'><a href='to_text.html'>to_fulltext</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; We fitted a linear mixed model (estimated using REML and nloptwrap optimizer) to predict Sepal.Length with Petal.Length (formula = Sepal.Length ~ Petal.Length). The model included Species as random effects (formula = ~1 | Species). The 95% Confidence Intervals (CIs) and p values were computed using Wald approximation and . Standardized parameters were obtained by fitting the model on a standardized version of the dataset. Effect sizes were labelled following Funder's (2019) recommendations.
+#&gt; 
+#&gt; The model's total explanatory power is substantial (conditional R2 = 0.97) and the part related to the fixed effects alone (marginal R2) is of 0.66. The model's intercept, corresponding to Sepal.Length = 0, Petal.Length = 0 and Species = setosa, is at 2.50 (SE = 0.67, 95% CI [-2.40, 7.41], p &lt; .001, std. intercept = 0.00). Within this model:
+#&gt; 
+#&gt;   - The effect of Petal.Length is positive and can be considered as very large and significant (beta = 0.89, SE = 0.06, 95% CI [-0.85, 2.63], p &lt; .001, std. beta = 1.89).</div><div class='input'><span class='fu'><a href='to_text.html'>to_table</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; Parameter      | Coefficient |        95% CI |      p | Coefficient (std.) |  Fit
+#&gt; ---------------------------------------------------------------------------------
+#&gt; (Intercept)    |        2.50 | [-2.40, 7.41] | &lt; .001 |               0.00 |     
+#&gt; Petal.Length   |        0.89 | [-0.85, 2.63] | &lt; .001 |               1.89 |     
+#&gt;                |             |               |        |                    |     
+#&gt; R2_conditional |             |               |        |                    | 0.97
+#&gt; R2_marginal    |             |               |        |                    | 0.66</div><div class='input'><span class='fu'><a href='to_text.html'>to_fulltable</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; Parameter      | Coefficient |   SE |        95% CI |     t |      p | Coefficient (std.) |    Fit
+#&gt; --------------------------------------------------------------------------------------------------
+#&gt; (Intercept)    |        2.50 | 0.67 | [-2.40, 7.41] |  3.75 | &lt; .001 |               0.00 |       
+#&gt; Petal.Length   |        0.89 | 0.06 | [-0.85, 2.63] | 13.93 | &lt; .001 |               1.89 |       
+#&gt;                |             |      |               |       |        |                    |       
+#&gt; AIC            |             |      |               |       |        |                    | 127.79
+#&gt; BIC            |             |      |               |       |        |                    | 139.84
+#&gt; R2_conditional |             |      |               |       |        |                    |   0.97
+#&gt; R2_marginal    |             |      |               |       |        |                    |   0.66
+#&gt; ICC            |             |      |               |       |        |                    |   0.91
+#&gt; RMSE           |             |      |               |       |        |                    |   0.33</div><div class='input'>
+
+<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/lme4/topics/glmer'>glmer</a></span>(<span class='no'>vs</span> ~ <span class='no'>disp</span> + (<span class='fl'>1</span> <span class='kw'>|</span> <span class='no'>am</span>), <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='st'>"binomial"</span>)
+<span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Variable `c(1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, ` contains only two different values. Consider converting it to a factor.Variable `0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1)` contains only two different values. Consider converting it to a factor.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Variable `c(1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, ` contains only two different values. Consider converting it to a factor.Variable `0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1)` contains only two different values. Consider converting it to a factor.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Variable `c(1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, ` contains only two different values. Consider converting it to a factor.Variable `0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1)` contains only two different values. Consider converting it to a factor.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Variable `c(1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, ` contains only two different values. Consider converting it to a factor.Variable `0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1)` contains only two different values. Consider converting it to a factor.</span></div><div class='input'><span class='fu'><a href='to_text.html'>to_text</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; We fitted a logistic mixed model to predict vs with disp. The model included am as random effects. The model's total explanatory power is substantial (conditional R2 = 0.99) and the part related to the fixed effects alone (marginal R2) is of 0.77. The model's intercept is at 25.49. Within this model:
+#&gt; 
+#&gt;   - The effect of disp is negative and can be considered as large and not significant (beta = -0.13, 95% CI [0.13, -0.39], p &gt; .1, std. beta = -16.53).</div><div class='input'><span class='fu'><a href='to_text.html'>to_fulltext</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; We fitted a logistic mixed model (estimated using ML and Nelder-Mead optimizer) to predict vs with disp (formula = vs ~ disp). The model included am as random effects (formula = ~1 | am). The 95% Confidence Intervals (CIs) and p values were computed using Wald approximation and . Standardized parameters were obtained by fitting the model on a standardized version of the dataset. Effect sizes were labelled following Chen's (2010) recommendations.
+#&gt; 
+#&gt; The model's total explanatory power is substantial (conditional R2 = 0.99) and the part related to the fixed effects alone (marginal R2) is of 0.77. The model's intercept, corresponding to vs = 0, disp = 0 and am = 0, is at 25.49 (SE = 22.83, 95% CI [-24.47, 75.44], p &gt; .1, std. intercept = -5.28). Within this model:
+#&gt; 
+#&gt;   - The effect of disp is negative and can be considered as large and not significant (beta = -0.13, SE = 0.11, 95% CI [0.13, -0.39], p &gt; .1, std. beta = -16.53).</div><div class='input'><span class='fu'><a href='to_text.html'>to_table</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; Parameter      | Coefficient |          95% CI |    p | Coefficient (std.) |  Fit
+#&gt; ---------------------------------------------------------------------------------
+#&gt; (Intercept)    |       25.49 | [-24.47, 75.44] | &gt; .1 |              -5.28 |     
+#&gt; disp           |       -0.13 |   [0.13, -0.39] | &gt; .1 |             -16.53 |     
+#&gt;                |             |                 |      |                    |     
+#&gt; R2_conditional |             |                 |      |                    | 0.99
+#&gt; R2_marginal    |             |                 |      |                    | 0.77</div><div class='input'><span class='fu'><a href='to_text.html'>to_fulltable</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; Parameter       | Coefficient |    SE |          95% CI |     z |    p | Coefficient (std.) |    Fit
+#&gt; ----------------------------------------------------------------------------------------------------
+#&gt; (Intercept)     |       25.49 | 22.83 | [-24.47, 75.44] |  1.12 | &gt; .1 |              -5.28 |       
+#&gt; disp            |       -0.13 |  0.11 |   [0.13, -0.39] | -1.18 | &gt; .1 |             -16.53 |       
+#&gt;                 |             |       |                 |       |      |                    |       
+#&gt; AIC             |             |       |                 |       |      |                    |  21.12
+#&gt; BIC             |             |       |                 |       |      |                    |  25.51
+#&gt; R2_conditional  |             |       |                 |       |      |                    |   0.99
+#&gt; R2_marginal     |             |       |                 |       |      |                    |   0.77
+#&gt; ICC             |             |       |                 |       |      |                    |   0.96
+#&gt; RMSE            |             |       |                 |       |      |                    |   0.40
+#&gt; LOGLOSS         |             |       |                 |       |      |                    |   0.08
+#&gt; SCORE_LOG       |             |       |                 |       |      |                    | -44.95
+#&gt; SCORE_SPHERICAL |             |       |                 |       |      |                    |   0.12</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

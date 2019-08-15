@@ -3,9 +3,8 @@
 #' Create a report of an ANOVA.
 #'
 #' @param model Object of class \code{aov}, \code{anova} or \code{aovlist}.
-#' @param omega_squared Compute omega squared as indices of effect size. Can be \code{NULL}, "partial" (default) or "raw" for non-partial indices.
 #' @param effsize Effect size interpretation set of rules.
-#' @param ... Arguments passed to or from other methods.
+#' @inheritParams parameters::model_parameters.aov
 #'
 #'
 #'
@@ -13,65 +12,62 @@
 #' data <- iris
 #' data$Cat1 <- rep(c("X", "X", "Y"), length.out = nrow(data))
 #' data$Cat2 <- rep(c("A", "B"), length.out = nrow(data))
-#' model <- aov(Sepal.Length ~ Species * Cat1 * Cat2, data=data)
-#' report(model)
-#'
-#'
-#' \dontrun{
-#' report(circus::aov_1)
-#' report(circus::anova_1)
-#' report(circus::aovlist_1)
-#' }
+#' model <- aov(Sepal.Length ~ Species * Cat1 * Cat2, data = data)
+#' report(model, omega_squared = "partial")
 #' @seealso report
 #'
 #' @export
-report.aov <- function(model, omega_squared = "partial", effsize = "field2013", ...) {
+report.aov <- function(model, effsize = "field2013", omega_squared = NULL, eta_squared = NULL, epsilon_squared = NULL, ...) {
+  table_full <- parameters::model_parameters(model, omega_squared = omega_squared, eta_squared = eta_squared, epsilon_squared = epsilon_squared, ...)
 
-  table_full <- parameters::model_parameters(model, omega_squared=omega_squared, ...)
-  table <- table_full
-
-  params <- table_full[table_full$Parameter != "Residuals", ]
-  if("Group" %in% names(params)){
-    params <- params[params$Group == "Within", ]
+  parameters <- table_full[table_full$Parameter != "Residuals", ]
+  if ("Group" %in% names(parameters)) {
+    parameters <- parameters[parameters$Group == "Within", ]
   }
 
-  if("Residuals" %in% table_full$Parameter){
-    DoF_residual <- table_full[table_full$Parameter == "Residuals", "DoF"]
-  } else{
+  # Get residuals' DoFs
+  if ("Residuals" %in% table_full$Parameter) {
+    DoF_residual <- table_full[table_full$Parameter == "Residuals", "df"]
+  } else {
     DoF_residual <- NULL
   }
 
-  text <- sapply(params$Parameter, .format_aov_varname, simplify = TRUE, USE.NAMES=FALSE)
+  # Text parameters
+  text <- sapply(parameters$Parameter, .format_aov_varname, simplify = TRUE, USE.NAMES = FALSE)
 
+  # DoFs
   text <- paste0(
     text,
     " is ",
-    interpret_p(params$p),
+    interpret_p(parameters$p),
     " (F(",
-    format_value_unless_integers(params$DoF))
+    parameters::format_value(parameters$df, protect_integers = TRUE)
+  )
 
-  if(!is.null(DoF_residual)){
-    text <- paste0(text, ", ", format_value_unless_integers(DoF_residual))
-  } else if("DoF_Residuals" %in% names(params)){
-    text <- paste0(text, ", ", format_value_unless_integers(params$DoF_Residuals))
+  if (!is.null(DoF_residual)) {
+    text <- paste0(text, ", ", parameters::format_value(DoF_residual, protect_integers = TRUE))
+  } else if ("DoF_Residuals" %in% names(parameters)) {
+    text <- paste0(text, ", ", parameters::format_value(parameters$DoF_Residuals, protect_integers = TRUE))
   }
 
-
+  # Indices
   text <- paste0(
     text,
     ") = ",
-    format_value(params$`F`),
-    ", p ",
-    format_p(params$p),
-    ") and can be considered as ",
-    interpret_omega_squared(params$Omega_Squared_partial),
-    " (partial omega squared = ",
-    format_value(params$Omega_Squared_partial),
-    ").")
+    parameters::format_value(parameters$`F`),
+    ", ",
+    parameters::format_p(parameters$p)
+  )
 
-  if("Group" %in% names(params)){
+  # Effect size
+  text <- paste0(
+    text,
+    .format_aov_effsize(parameters, effsize = effsize)
+  )
+
+  if ("Group" %in% names(parameters)) {
     text <- paste0("The repeated-measures ANOVA suggests that:\n\n", paste0(text, collapse = "\n"))
-  } else{
+  } else {
     text <- paste0("The ANOVA suggests that:\n\n", paste0(text, collapse = "\n"))
   }
 
@@ -79,12 +75,12 @@ report.aov <- function(model, omega_squared = "partial", effsize = "field2013", 
   out <- list(
     text = text,
     text_full = text,
-    table = table,
+    table = table_full,
     table_full = table_full,
-    values = as.list(table_full)
+    values = to_values(parameters)
   )
 
-  return(as.report(out))
+  as.report(out, effsize = effsize, omega_squared = omega_squared, eta_squared = eta_squared, epsilon_squared = epsilon_squared, ...)
 }
 
 
@@ -97,18 +93,55 @@ report.aovlist <- report.aov
 
 
 
+#' @keywords internal
+.format_aov_effsize <- function(parameters, effsize = "field2013") {
+  if ("Omega_Sq_partial" %in% names(parameters)) {
+    out <- paste0(
+      ") and can be considered as ",
+      interpret_omega_squared(parameters$Omega_Sq_partial, rules = effsize),
+      " (partial omega squared = ",
+      parameters::format_value(parameters$Omega_Sq_partial),
+      ")."
+    )
+  } else if ("Omega_Sq" %in% names(parameters)) {
+    out <- paste0(
+      ") and can be considered as ",
+      interpret_omega_squared(parameters$Omega_Sq, rules = effsize),
+      " (omega squared = ",
+      parameters::format_value(parameters$Omega_Sq),
+      ")."
+    )
+  } else if ("Eta_Sq" %in% names(parameters)) {
+    out <- paste0(
+      ", eta squared = ",
+      parameters::format_value(parameters$Eta_Sq),
+      ")."
+    )
+  } else if ("Epsilon_sq" %in% names(parameters)) {
+    out <- paste0(
+      ", epsilon squared = ",
+      parameters::format_value(parameters$Epsilon_sq),
+      ")."
+    )
+  } else {
+    out <- ")."
+  }
+
+  out
+}
 
 
 
 
 
 
-.format_aov_varname <- function(names){
+#' @keywords internal
+.format_aov_varname <- function(names) {
   if (grepl(":", names)) {
-    varname <- format_text_collapse(unlist(strsplit(names, ":", fixed=TRUE)))
+    varname <- format_text(unlist(strsplit(names, ":", fixed = TRUE)))
     varname <- paste0("  - The interaction between ", varname)
   } else {
-    varname <- paste0("  - The effect of ", names)
+    varname <- paste0("  - The main effect of ", names)
   }
-  return(varname)
+  varname
 }

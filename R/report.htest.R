@@ -18,13 +18,12 @@
 #'
 #' @export
 report.htest <- function(model, effsize = "cohen1988", ...) {
-
   table_full <- parameters::model_parameters(model)
   table <- table_full
   values <- as.list(table_full)
 
 
-  if(insight::model_info(model)$is_correlation){
+  if (insight::model_info(model)$is_correlation) {
     estimate <- c("rho", "r", "tau")[c("rho", "r", "tau") %in% names(table)]
     text <- paste0(
       "The ",
@@ -36,24 +35,22 @@ report.htest <- function(model, effsize = "cohen1988", ...) {
       ", ",
       interpret_p(table$p),
       " and ",
-      interpret_r(table[[estimate]], rules=effsize),
+      interpret_r(table[[estimate]], rules = effsize),
       " (",
       estimate,
       " = ",
-      format_value(table[[estimate]]),
-      ", p ",
-      format_p(values$p, stars = FALSE),
+      parameters::format_value(table[[estimate]]),
+      ", ",
+      parameters::format_p(values$p, stars = FALSE),
       ")."
     )
     text_full <- text
-  } else if(insight::model_info(model)$is_ttest){
-
-
+  } else if (insight::model_info(model)$is_ttest) {
     if (names(model$null.value) == "mean") {
       table_full$Difference <- model$estimate - model$null.value
       means <- paste0(
         " (mean = ",
-        format_value(model$estimate),
+        parameters::format_value(model$estimate),
         ")"
       )
       vars <- paste0(model$data.name, means, " and mu = ", model$null.value)
@@ -63,11 +60,11 @@ report.htest <- function(model, effsize = "cohen1988", ...) {
         c(
           paste0(
             names(model$estimate), " = ",
-            format_value(model$estimate)
+            parameters::format_value(model$estimate)
           ),
           paste0(
             "difference = ",
-            format_value(model$estimate[1] - model$estimate[2])
+            parameters::format_value(model$estimate[1] - model$estimate[2])
           )
         ),
         collapse = ", "
@@ -84,17 +81,17 @@ report.htest <- function(model, effsize = "cohen1988", ...) {
       " is ",
       interpret_p(model$p.value),
       " (t(",
-      format_value_unless_integers(model$parameter),
+      parameters::format_value(model$parameter, protect_integers = TRUE),
       ") = ",
-      format_value(model$statistic),
+      parameters::format_value(model$statistic),
       ", ",
-      format_ci(model$conf.int[1], model$conf.int[2], ci = attributes(model$conf.int)$conf.level),
-      ", p ",
-      format_p(model$p.value, stars = FALSE),
+      parameters::format_ci(model$conf.int[1], model$conf.int[2], ci = attributes(model$conf.int)$conf.level),
+      ", ",
+      parameters::format_p(model$p.value, stars = FALSE),
       ")."
     )
     text_full <- text
-  } else{
+  } else {
     stop("reports not implemented for such h-tests yet.")
   }
 
@@ -107,5 +104,5 @@ report.htest <- function(model, effsize = "cohen1988", ...) {
     values = as.list(table_full)
   )
 
-  return(as.report(out))
+  return(as.report(out, effsize = effsize, ...))
 }

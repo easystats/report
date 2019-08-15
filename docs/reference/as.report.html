@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>create objects of class <a href='report.html'>report</a>. — as.report • report</title>
+<title>Create and test objects of class <a href='report.html'>report</a>. — as.report • report</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,9 +37,11 @@
 
 
 
-<meta property="og:title" content="create objects of class <a href='report.html'>report</a>. — as.report" />
+  <link href="../extra.css" rel="stylesheet">
+  
+<meta property="og:title" content="Create and test objects of class <a href='report.html'>report</a>. — as.report" />
 
-<meta property="og:description" content="create objects of class report." />
+<meta property="og:description" content="Create and test objects of class report." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -142,18 +144,20 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>create objects of class <a href='report.html'>report</a>.</h1>
+    <h1>Create and test objects of class <a href='report.html'>report</a>.</h1>
     <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.R'><code>R/report.R</code></a></small>
     <div class="hidden name"><code>as.report.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>create objects of class <a href='report.html'>report</a>.</p>
+    <p>Create and test objects of class <a href='report.html'>report</a>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>as.report</span>(<span class='no'>model</span>)</pre>
+    <pre class="usage"><span class='fu'>as.report</span>(<span class='no'>model</span>, <span class='no'>...</span>)
+
+<span class='fu'>is.report</span>(<span class='no'>model</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -161,6 +165,10 @@
     <tr>
       <th>model</th>
       <td><p>An arbitrary R object.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Args to be saved as attributes.</p></td>
     </tr>
     </table>
     

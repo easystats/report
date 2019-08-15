@@ -4,15 +4,20 @@
 \alias{report.aov}
 \title{ANOVAs Report}
 \usage{
-\method{report}{aov}(model, omega_squared = "partial",
-  effsize = "field2013", ...)
+\method{report}{aov}(model, effsize = "field2013",
+  omega_squared = NULL, eta_squared = NULL, epsilon_squared = NULL,
+  ...)
 }
 \arguments{
 \item{model}{Object of class \code{aov}, \code{anova} or \code{aovlist}.}
 
-\item{omega_squared}{Compute omega squared as indices of effect size. Can be \code{NULL}, "partial" (default) or "raw" for non-partial indices.}
-
 \item{effsize}{Effect size interpretation set of rules.}
+
+\item{omega_squared}{Compute \link[=eta_squared]{omega squared} as index of effect size. Can be "partial" (adjusted for effect size) or "raw".}
+
+\item{eta_squared}{Compute \link[=eta_squared]{eta squared} as index of effect size. Can be "partial" (adjusted for effect size) or "raw".}
+
+\item{epsilon_squared}{Compute \link[=eta_squared]{epsilon squared} as index of effect size.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
@@ -23,15 +28,8 @@ Create a report of an ANOVA.
 data <- iris
 data$Cat1 <- rep(c("X", "X", "Y"), length.out = nrow(data))
 data$Cat2 <- rep(c("A", "B"), length.out = nrow(data))
-model <- aov(Sepal.Length ~ Species * Cat1 * Cat2, data=data)
-report(model)
-
-
-\dontrun{
-report(circus::aov_1)
-report(circus::anova_1)
-report(circus::aovlist_1)
-}
+model <- aov(Sepal.Length ~ Species * Cat1 * Cat2, data = data)
+report(model, omega_squared = "partial")
 }
 \seealso{
 report
