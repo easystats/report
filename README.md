@@ -81,6 +81,8 @@ Run the following:
 
 ``` r
 install.packages("devtools")
+devtools::install_github("easystats/performance")
+devtools::install_github("easystats/parameters")
 devtools::install_github("easystats/report")
 ```
 
@@ -178,15 +180,15 @@ stan_glmer(vs ~ mpg + (1|cyl), data=mtcars, family="binomial") %>%
     ## (CIs) were based on Highest Density Intervals (HDI). Parameters were scaled by the mean and the SD
     ## of the response variable. Effect sizes were labelled following Cohen's (1988) recommendations.
     ## 
-    ## The model's explanatory power is substantial (R2's median = 0.57, 89% CI [0.44, 0.69] Within this
+    ## The model's explanatory power is substantial (R2's median = 0.57, 89% CI [0.43, 0.69] Within this
     ## model, the explanatory power related to the fixed effects alone (marginal R2's median) is of 0.24
     ## (89% CI [0.00, 0.48]). The model's intercept, corresponding to vs = 0, mpg = 0 and cyl = 0, is at
-    ## -4.91 (89% CI [-11.35, 2.48], 1.70% in ROPE, std. median = 0.00). Within this model:
+    ## -5.22 (89% CI [-11.89, 1.95], 1.47% in ROPE, std. median = 0.00). Within this model:
     ## 
-    ##   - The effect of mpg has a probability of 84.60% of being positive and can be considered as medium
-    ## and not significant (median = 0.21, 89% CI [-0.11, 0.56], 40.58% in ROPE, std. median = 1.29). The
-    ## algorithm successfuly converged (Rhat = 1.003) and the estimates can be considered as stable (ESS =
-    ## 1344).
+    ##   - The effect of mpg has a probability of 84.55% of being positive and can be considered as medium
+    ## and not significant (median = 0.22, 89% CI [-0.10, 0.59], 38.98% in ROPE, std. median = 1.33).
+    ## However, the algorithm might not have successfuly converged (Rhat = 1.012) and the estimates cannot
+    ## be considered as stable (ESS = 355).
 
 ## Credits
 

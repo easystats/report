@@ -93,6 +93,8 @@ Run the following:
 
 ```{r eval=FALSE, message=FALSE, warning=FALSE, eval=FALSE}
 install.packages("devtools")
+devtools::install_github("easystats/performance")
+devtools::install_github("easystats/parameters")
 devtools::install_github("easystats/report")
 ```
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
