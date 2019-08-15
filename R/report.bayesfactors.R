@@ -1,6 +1,122 @@
+#' Models' Bayes factor Report
+#'
+#' Create a report of Bayes factors for model comparison.
+#'
+#' @param model Object of class \code{bayesfactor_inclusion}.
+#' @param ... Arguments passed to or from other methods.
+#' @inheritParams interpret_bf
+#'
+#'
+#' @examples
+#' \dontrun{
+#' library(bayestestR)
+#' library(report)
+#'
+#' mo0 <- lm(Sepal.Length ~ 1, data = iris)
+#' mo1 <- lm(Sepal.Length ~ Species, data = iris)
+#' mo2 <- lm(Sepal.Length ~ Species + Petal.Length, data = iris)
+#' mo3 <- lm(Sepal.Length ~ Species * Petal.Length, data = iris)
+#'
+#' BFmodels <- bayesfactor_models(mo1, mo2, mo3, denominator = mo0)
+#'
+#' bf_report <- report(BFmodels, digits = 3)
+#' to_table(bf_report)
+#' to_text(bf_report, full = FALSE)
+#'
+#' }
+#' @seealso report
+#'
+#' @export
+report.bayesfactor_models <- function(model, rules = "jeffreys1961", ...){
+
+  model$Model[model$Model == "1"] <- "(Intercept only)"
+  denominator <- attr(model,"denominator")
+  BF_method <- attr(model,"BF_method")
+  max_den <- which.max(model$BF)
+  min_den <- which.min(model$BF)
+
+  #### text ####
+  model_ind <- rep("",nrow(model))
+  model_ind[max_den] <- " (the most supported model)"
+  model_ind[min_den] <- " (the least supported model)"
+  model_ind <- model_ind[-denominator]
+
+  bf_text <- paste0(
+    "Compared to the ", model$Model[denominator]," model, ",
+    "we found ",
+    paste0(
+      interpret_bf(model$BF[-denominator],rules = rules, include_value = TRUE),
+      " the ", model$Model[-denominator]," model",model_ind,
+      collapse = "; "
+    ),
+    "."
+  )
+
+
+  #### text full ####
+  if (grepl("BIC", BF_method)) {
+    bf_explain <- paste0(
+      "Bayes factors were computed using the BIC approximation, ",
+      "by which BF10 = exp((BIC0 - BIC1)/2). "
+    )
+  } else if (grepl("JZS", BF_method)) {
+    bf_explain <- paste0(
+      "Bayes factors were computed with the `BayesFactor` package, ",
+      "using JZS priors. "
+    )
+  } else if (grepl("bridgesampling", BF_method)) {
+    bf_explain <- paste0(
+      "Bayes factors were computed by comparing marginal likelihoods, ",
+      "using the `bridgesampling` package. "
+    )
+  }
+
+  bf_text_full <- paste0(bf_explain,bf_text)
+
+
+  #### table ####
+  model$Model <- paste0(" [", seq_len(nrow(model)), "] ", model$Model)
+  bf_table <- as.data.frame(model)
+  bf_table$BF <- bayestestR:::.format_big_small(model$BF, ...)
+  colnames(bf_table) <- c("Model","Bayes factor")
+
+  table_footer <- matrix(rep("",6),nrow = 3)
+  table_footer[2,1] <- paste0("Bayes Factor Type: ",BF_method)
+  table_footer[3,1] <- paste0("Against denominator - model ",denominator)
+  colnames(table_footer) <- colnames(bf_table)
+  bf_table <- rbind(bf_table,table_footer)
+
+
+  #### table full ####
+  bf_table_full <- head(bf_table, -1)
+  bf_table_full$BF2 <- c(bayestestR:::.format_big_small(model$BF/model$BF[max_den]),"","")
+
+  colnames(bf_table_full) <- c("Model",
+                               paste0("BF (against model ",denominator,")"),
+                               paste0("BF (against best model ",max_den,")"))
+
+
+
+
+
+  #### values ####
+  bf_values <- as.list(setNames(model$BF,model$Model))
+
+  out <- list(
+    text = bf_text,
+    text_full = bf_text_full,
+    table = bf_table,
+    table_full = bf_table_full,
+    values = bf_values
+  )
+
+  return(as.report(out, rules = rules, denominator = denominator, BF_method = BF_method, ...))
+}
+
+
 #' Inclusion Bayes factor Report
 #'
-#' Create a report of an h-test object.
+#' Create a report of inclusion Bayes factors.
 #'
 #' @param model Object of class \code{bayesfactor_inclusion}.
 #' @param ... Arguments passed to or from other methods.
@@ -48,7 +164,7 @@ report.bayesfactor_inclusion <- function(model, rules = "jeffreys1961", ...){
     "for each predictor. Since each model has a prior probability",
     # custom priors?
     switch(!is.null(priorOdds) + 1,NULL,paste0(" (here we used subjective prior odds of ",
-                                             paste0(priorOdds, collapse = ", "), ")")),
+                                               paste0(priorOdds, collapse = ", "), ")")),
     ", it is possible to sum the prior probability of all models that include ",
     "a predictor of interest (the prior inclusion probability), and of all ",
     "models that do not include that predictor (the prior exclusion probability). ",
