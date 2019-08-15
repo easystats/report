@@ -111,11 +111,7 @@ library("report")
 
 The `report` package works in a two step fashion. First, you create a `report` object with the `report()` function (which takes different arguments depending on the type of object you are reporting). Then, this report object can be displayed either textually, using `to_text()`, or as a table, using `to_table()`. Moreover, you can access a more detailed (but less digested) version of the report using `to_fulltext()` and `to_fulltable()`. Finally, `to_values()` makes it easy to access all the internals of a model.
 
-### Supported Packages
-
-Currently supported objects by **report** include [`cor.test`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cor.test.html), [`t.test`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html) [`correlation`](https://github.com/easystats/correlation), [`glm`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/glm.html), [`lme4::merMod`](https://github.com/lme4/lme4/), [`rstanarm::stanreg`](https://github.com/stan-dev/rstanarm).
-
-### Examples
+### Features
 
 The `report()` function works on a variety of models, as well as dataframes:
 
@@ -165,6 +161,25 @@ rstanarm::stan_glmer(vs ~ mpg + (1|cyl), data=mtcars, family="binomial", refresh
   report(standardize="full", effsize="cohen1988") %>% 
   to_fulltext(width=100)
 ```
+
+## Examples
+
+### Supported Packages
+
+Currently supported objects by **report** include [`cor.test`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cor.test.html), [`t.test`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html), [`correlation`](https://github.com/easystats/correlation), [`glm`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/glm.html), [`lme4::merMod`](https://github.com/lme4/lme4/), [`rstanarm::stanreg`](https://github.com/stan-dev/rstanarm), [`estimate`](https://github.com/easystats/estimate).
+
+### *t*-tests and correlations
+
+```{r message=FALSE, warning=FALSE, eval=FALSE}
+t.test(mtcars$mpg ~ mtcars$am) %>% 
+  report()
+```
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+t.test(mtcars$mpg ~ mtcars$am) %>% 
+  report() %>% 
+  to_text(width=100)
+```
+
 
 
 ## Credits

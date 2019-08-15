@@ -12,6 +12,9 @@ test_that("report.stanreg_lm", {
   r <- report(insight::download_model("stanreg_lm_1"), effsize = "cohen1988", standardize = "refit", centrality = "Mean")
   testthat::expect_equal(r$values$wt$Mean, -5.3397, tol = 0.2)
 
+  r <- report(insight::download_model("stanreg_lm_1"), effsize = "cohen1988", standardize = "refit", test = "bf")
+  # testthat::expect_equal(r$values$wt$Mean, -5.3397, tol = 0.2)
+
   testthat::expect_warning(report(insight::download_model("stanreg_lm_1"), effsize = "cohen1988", standardize = TRUE, centrality = "MAP"))
 
   r <- report(insight::download_model("stanreg_lm_1"), effsize = "cohen1988", rope_ci = 0.95, standardize = "full", centrality = "all")
