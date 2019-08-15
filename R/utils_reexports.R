@@ -1,6 +1,6 @@
 #' re-export magrittr pipe operator
 #'
-#' @importFrom dplyr %>%
+#' @importFrom magrittr %>%
 #' @name %>%
 #' @rdname pipe
 #' @export
