@@ -59,15 +59,15 @@ report.data.frame <- function(model, median = FALSE, dispersion = TRUE, range = 
   }
   if ("Level" %in% names(table)) {
     if ("percentage_Obs" %in% names(table)) {
-      table <- select_(table, "Variable", "Level", "n_Obs", "percentage_Obs", "everything()")
-      table_full <- select_(table_full, "Variable", "Level", "n_Obs", "percentage_Obs", "everything()")
+      table <- .order_columns(table, c("Variable", "Level", "n_Obs", "percentage_Obs"))
+      table_full <- .order_columns(table_full, c("Variable", "Level", "n_Obs", "percentage_Obs"))
     } else {
-      table <- select_(table, "Variable", "Level", "n_Obs", "everything()")
-      table_full <- select_(table_full, "Variable", "Level", "n_Obs", "everything()")
+      table <- .order_columns(table, c("Variable", "Level", "n_Obs"))
+      table_full <- .order_columns(table_full, c("Variable", "Level", "n_Obs"))
     }
   } else {
-    table <- select_(table, "Variable", "n_Obs", "everything()")
-    table_full <- select_(table_full, "Variable", "n_Obs", "everything()")
+    table <- .order_columns(table, c("Variable", "n_Obs"))
+    table_full <- .order_columns(table_full, c("Variable", "n_Obs"))
   }
 
   text <- paste0("The data contains ", nrow(model), " observations of the following variables:", text)
@@ -485,4 +485,12 @@ report.numeric <- function(model, median = FALSE, dispersion = TRUE, range = TRU
   )
 
   as.report(out)
+}
+
+
+
+
+.order_columns <- function(df, cols) {
+  remaining_columns <- setdiff(colnames(df), cols)
+  df[, c(cols, remaining_columns)]
 }
