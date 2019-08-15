@@ -134,8 +134,8 @@ report.grouped_df <- function(model, median = FALSE, dispersion = TRUE, range = 
     values[[group]] <- r$values
   }
 
-  table <- dplyr::select_(table, "Group", "everything()")
-  table_full <- dplyr::select_(table_full, "Group", "everything()")
+  table <- .order_columns(table, "Group")
+  table_full <- .order_columns(table_full, "Group")
 
   out <- list(
     text = text,
