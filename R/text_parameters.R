@@ -196,16 +196,6 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
     )
   }
 
-
-  # ROPE
-  if ("p" %in% names(parameters)) {
-    text <- paste0(
-      .add_comma(text),
-      parameters::format_p(parameters$p)
-    )
-  }
-
-
   # Standardized stuff
   if ("Std_Coefficient" %in% names(parameters)) {
     text <- paste0(
@@ -260,6 +250,36 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
       .add_comma(text),
       "std. MAP = ",
       parameters::format_value(parameters$Std_MAP)
+    )
+  }
+
+  # ROPE
+  if ("p" %in% names(parameters)) {
+    text <- paste0(
+      .add_comma(text),
+      parameters::format_p(parameters$p)
+    )
+  }
+
+  # Bayes factor
+  if ("BF" %in% names(parameters)) {
+    .add_bf <- function(bf, ...){
+      ori_bf <- bf
+      dir <- ifelse(log(bf) < 0,"BF01", "BF10")
+
+      bf[bf < 1] <- 1 / bf[bf < 1]
+
+      paste0(
+        parameters::format_bf(bf, name = dir),
+        ", considered ",
+        report::interpret_bf(ori_bf, include_value = FALSE, ...),
+        " the effect"
+      )
+    }
+
+    text <- paste0(
+      .add_comma(text),
+      .add_bf(parameters$BF)
     )
   }
 
