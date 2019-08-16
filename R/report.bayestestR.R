@@ -25,7 +25,7 @@
 #'
 #' }
 #' @seealso report
-#'
+#' @importFrom stats setNames
 #' @export
 report.bayesfactor_models <- function(model, rules = "jeffreys1961", ...){
 
@@ -110,8 +110,15 @@ report.bayesfactor_models <- function(model, rules = "jeffreys1961", ...){
     values = bf_values
   )
 
-  return(as.report(out, rules = rules, denominator = denominator, BF_method = BF_method, ...))
+  as.report(out, rules = rules, denominator = denominator, BF_method = BF_method, ...)
 }
+
+
+
+
+
+
+
 
 
 #' Inclusion Bayes factor Report
@@ -142,7 +149,7 @@ report.bayesfactor_models <- function(model, rules = "jeffreys1961", ...){
 #'
 #' }
 #' @seealso report
-#'
+#' @importFrom stats setNames
 #' @export
 report.bayesfactor_inclusion <- function(model, rules = "jeffreys1961", ...){
   matched <- attr(model,"matched")
@@ -169,7 +176,7 @@ report.bayesfactor_inclusion <- function(model, rules = "jeffreys1961", ...){
     "a predictor of interest (the prior inclusion probability), and of all ",
     "models that do not include that predictor (the prior exclusion probability). ",
     "After the data are observed, we can similarly consider the sums of the ",
-    "posterior models’ probabilities to obtain the posterior inclusion ",
+    "posterior models' probabilities to obtain the posterior inclusion ",
     "probability and the posterior exclusion probability. The change from ",
     "prior to posterior inclusion odds is the Inclusion Bayes factor. ",
     # matched models?
@@ -229,6 +236,6 @@ report.bayesfactor_inclusion <- function(model, rules = "jeffreys1961", ...){
     values = bf_values
   )
 
-  return(as.report(out, rules = rules, priorOdds = priorOdds, matched = matched, ...))
+  as.report(out, rules = rules, priorOdds = priorOdds, matched = matched, ...)
 }
 
