@@ -38,6 +38,7 @@ Suggests:
 	estimate,
 	ggplot2,
 	lme4,
+	logspline,
 	rstudioapi,
 	rstanarm,
 	BayesFactor,

@@ -282,6 +282,8 @@ report.character <- function(model, n_characters = 3, levels_percentage = FALSE,
 #'
 #' @export
 report.factor <- function(model, levels_percentage = FALSE, ...) {
+  model <- as.factor(model)
+
   if (length(model[is.na(model)]) != 0) {
     model <- factor(ifelse(is.na(model), "missing", as.character(model)), levels = c(levels(model), "missing"))
   }
@@ -343,7 +345,8 @@ report.factor <- function(model, levels_percentage = FALSE, ...) {
 }
 
 
-
+#' @export
+report.logical <- report.factor
 
 
 
