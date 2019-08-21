@@ -46,22 +46,25 @@ text_model <- function(model, ...) {
   text <- ""
   # Frequentist --------------------------------
 
-  # wald
-  if (ci_method == "wald") {
-    if (!is.null(p_method) && p_method == "wald") {
-      text <- paste0(" The ", parameters::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) and p values were computed using Wald approximation")
-    } else {
-      text <- paste0(" The ", parameters::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) were computed using Wald approximation")
-    }
+  if (!is.null(p_method) && p_method == "wald" && !is.null(ci_method) && ci_method == "wald") {
+    return(paste0(" The ", parameters::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) and p-values were computed using Wald approximation."))
   }
 
-  # bootstrap
-  if (ci_method == "boot") text <- paste0(" The ", parameters::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) were obtained through bootstrapping")
+
+  # CI
+  if (ci_method == "wald") {
+    text <- paste0(" The ", parameters::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) were computed using Wald approximation")
+  } else if (ci_method == "boot"){
+    text <- paste0(" The ", parameters::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) were obtained through bootstrapping")
+  } else{
+    text <- paste0(" The ", parameters::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) were obtained through ", ci_method)
+  }
+
 
   # P values
   if (!is.null(p_method)) {
     if (text != "") text <- paste0(text, " and ")
-    if (p_method == "wald" & ci_method != "wald") text <- paste0(text, "p-values were computed using Wald approximation")
+    if (p_method == "wald") text <- paste0(text, "p-values were computed using Wald approximation")
     if (p_method == "kenward") text <- paste0(text, "p-values were computed using Kenward-Roger approximation")
   }
 
@@ -126,7 +129,7 @@ text_model <- function(model, ...) {
       robust <- "SD "
     }
     text <- paste0(" Standardized parameters were obtained by standardizing the data by 2 times the ", robust, " (see Gelman, 2008).")
-  } else if (standardize == "full" | standardize == "classic") {
+  } else if (standardize == "smart" | standardize == "classic") {
     if (standardize_robust == TRUE) {
       robust <- "median and the MAD (a robust equivalent of the SD) of the response variable."
     } else {

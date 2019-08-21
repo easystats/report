@@ -43,7 +43,7 @@ library(report)
 
 
 
-```{r message=FALSE, warning=FALSE, eval=FALSE}
+```{r eval=FALSE, message=FALSE, warning=FALSE}
 library(report)
 
 # Example

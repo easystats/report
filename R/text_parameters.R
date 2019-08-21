@@ -43,6 +43,31 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
 .text_parameters_direction <- function(parameters) {
   estimate_name <- names(parameters)[names(parameters) %in% c("Coefficient", "Median", "Mean", "MAP")][1]
 
+
+  # Bayes factor
+  # if ("BF" %in% names(parameters)) {
+  #   .add_bf <- function(bf, ...){
+  #     ori_bf <- bf
+  #     dir <- ifelse(log(bf) < 0,"BF01", "BF10")
+  #
+  #     bf[bf < 1] <- 1 / bf[bf < 1]
+  #
+  #     paste0(
+  #       parameters::format_bf(bf, name = dir),
+  #       ", considered ",
+  #       report::interpret_bf(ori_bf, include_value = FALSE, ...),
+  #       " the effect"
+  #     )
+  #   }
+  #
+  #   text <- paste0(
+  #     .add_comma(text),
+  #     .add_bf(parameters$BF)
+  #   )
+  # }
+
+
+  # Probability of Direction
   if (length(estimate_name) == 1) {
     if ("pd" %in% names(parameters)) {
       text <- paste0(
@@ -63,7 +88,6 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
 
   text
 }
-
 
 
 
@@ -258,28 +282,6 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
     text <- paste0(
       .add_comma(text),
       parameters::format_p(parameters$p)
-    )
-  }
-
-  # Bayes factor
-  if ("BF" %in% names(parameters)) {
-    .add_bf <- function(bf, ...){
-      ori_bf <- bf
-      dir <- ifelse(log(bf) < 0,"BF01", "BF10")
-
-      bf[bf < 1] <- 1 / bf[bf < 1]
-
-      paste0(
-        parameters::format_bf(bf, name = dir),
-        ", considered ",
-        report::interpret_bf(ori_bf, include_value = FALSE, ...),
-        " the effect"
-      )
-    }
-
-    text <- paste0(
-      .add_comma(text),
-      .add_bf(parameters$BF)
     )
   }
 
