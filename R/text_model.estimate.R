@@ -1,6 +1,6 @@
 #' @export
 text_model.estimate_contrasts <- function(model, effsize = "funder2019", ...) {
-  text <- paste0("We ran a contrast anaysis based on estimated marginal means at different levels of the ", attributes(model)$levels, " factor")
+  text <- paste0("We ran a contrast anaysis based on estimated marginal means at different levels of the ", format_text(attributes(model)$levels), " factor", ifelse(length(attributes(model)$levels) > 1, "s", ""))
 
   if (!is.null(attributes(model)$fixed)) {
     text <- paste0(
@@ -33,6 +33,7 @@ text_model.estimate_contrasts <- function(model, effsize = "funder2019", ...) {
       .text_effsize(effsize)
     )
   }
+
 
   text_full <- paste0(
     text_full,

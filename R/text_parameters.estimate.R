@@ -24,6 +24,7 @@ text_parameters.estimate_contrasts <- function(model, parameters = NULL, prefix 
 
   # Create text
   text <- .text_parameters_combine(
+    names = .text_parameters_names(parameters),
     direction = .text_parameters_direction(parameters),
     size = .text_parameters_size(parameters, effsize = effsize, type = "d"),
     significance = .text_parameters_significance(parameters, rope_ci = attributes(model)$rope_ci),
@@ -59,6 +60,7 @@ text_parameters.estimate_slopes <- function(model, parameters = NULL, prefix = "
 
   # Create text
   text <- .text_parameters_combine(
+    names = .text_parameters_names(parameters),
     direction = .text_parameters_direction(parameters),
     size = .text_parameters_size(parameters, effsize = effsize, type = "d"),
     significance = .text_parameters_significance(parameters, rope_ci = attributes(model)$rope_ci),
