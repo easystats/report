@@ -5,7 +5,6 @@
 \title{Bayesian Models Report}
 \usage{
 \method{report}{stanreg}(model, effsize = "default", ci = 0.89,
-  standardize = "refit", standardize_robust = FALSE,
   standardize = "smart", standardize_robust = FALSE,
   centrality = "median", dispersion = FALSE, ci_method = "hdi",
   test = c("pd", "rope"), rope_range = "default", rope_ci = 1,
