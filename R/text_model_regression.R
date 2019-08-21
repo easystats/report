@@ -46,7 +46,7 @@ text_model.glm <- function(model, parameters, ci = NULL, ci_method = NULL, stand
   if (!is.null(insight::find_terms(model)$random)) {
     text_random <- format_text(insight::find_terms(model)$random)
     text_random <- paste0(" The model included ", text_random, " as random effects")
-    text_random_full <- paste0(text_random, " (formula = ", format(insight::find_formula(model)$random), ").")
+    text_random_full <- paste0(text_random, " (formula = ", paste0(format(insight::find_formula(model)$random), collapse = " + "), ").")
     text <- paste0(text, text_random, ".")
     text_full <- paste0(text_full, text_random_full)
   }
