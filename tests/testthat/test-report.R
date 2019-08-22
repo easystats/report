@@ -3,7 +3,7 @@ context("report")
 
 test_that("report", {
   r <- report(seq(0, 1, length.out = 100))
-  testthat::expect_equal(nchar(print(r, width = 10)), 35)
+  testthat::expect_equal(nchar(print(r, width = 10)), 46)
   testthat::expect_is(print(r), "character")
   testthat::expect_is(to_text(r), "character")
   testthat::expect_is(to_fulltext(r), "character")
