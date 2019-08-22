@@ -60,15 +60,15 @@ report.data.frame <- function(model, median = FALSE, centrality = TRUE, dispersi
   }
   if ("Level" %in% names(table)) {
     if ("percentage_Obs" %in% names(table)) {
-      table <- select_(table, "Variable", "Level", "n_Obs", "percentage_Obs", "everything()")
-      table_full <- select_(table_full, "Variable", "Level", "n_Obs", "percentage_Obs", "everything()")
+      table <- .order_columns(table, c("Variable", "Level", "n_Obs", "percentage_Obs"))
+      table_full <- .order_columns(table_full, c("Variable", "Level", "n_Obs", "percentage_Obs"))
     } else {
-      table <- select_(table, "Variable", "Level", "n_Obs", "everything()")
-      table_full <- select_(table_full, "Variable", "Level", "n_Obs", "everything()")
+      table <- .order_columns(table, c("Variable", "Level", "n_Obs"))
+      table_full <- .order_columns(table_full, c("Variable", "Level", "n_Obs"))
     }
   } else {
-    table <- select_(table, "Variable", "n_Obs", "everything()")
-    table_full <- select_(table_full, "Variable", "n_Obs", "everything()")
+    table <- .order_columns(table, c("Variable", "n_Obs"))
+    table_full <- .order_columns(table_full, c("Variable", "n_Obs"))
   }
 
   text <- paste0("The data contains ", nrow(model), " observations of the following variables:", text)
@@ -111,7 +111,7 @@ report.grouped_df <- function(model, median = FALSE, centrality = TRUE, dispersi
   values <- list()
   for (group in names(xlist)) {
     data <- xlist[[group]]
-    data <- dplyr::select(data, -dplyr::one_of(groups))
+    data <- .remove_columns(data, groups)
     r <- report(data, median = median, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, levels_percentage = levels_percentage, n_characters = n_characters, missing_percentage = missing_percentage)
 
     current_text <- ""
@@ -135,8 +135,8 @@ report.grouped_df <- function(model, median = FALSE, centrality = TRUE, dispersi
     values[[group]] <- r$values
   }
 
-  table <- dplyr::select_(table, "Group", "everything()")
-  table_full <- dplyr::select_(table_full, "Group", "everything()")
+  table <- .order_columns(table, "Group")
+  table_full <- .order_columns(table_full, "Group")
 
   out <- list(
     text = text,
@@ -224,13 +224,13 @@ report.character <- function(model, n_characters = 3, levels_percentage = FALSE,
   text_percentage_Missing <- paste0(parameters::format_value(table_full$percentage_Missing[1]), "% missing")
   if (missing_percentage == TRUE) {
     text_full <- paste0(text_full, "(", text_percentage_Missing, ")")
-    table <- dplyr::select(table, -one_of("n_Missing"))
+    table <- .remove_columns(table, "n_Missing")
     if (table_full$n_Missing[1] > 0) {
       text <- paste0(text, " (", text_percentage_Missing, ")")
     }
   } else {
     text_full <- paste0(text_full, " (", text_n_Missing, ")")
-    table <- dplyr::select(table, -one_of("percentage_Missing"))
+    table <- .remove_columns(table, "percentage_Missing")
     if (table_full$n_Missing[1] > 0) {
       text <- paste0(text, " (", text_n_Missing, ")")
     }
@@ -320,7 +320,7 @@ report.factor <- function(model, levels_percentage = FALSE, ...) {
   if (levels_percentage == TRUE) {
     text <- paste0(text_levels, " (", text_percentage_Obs, ")")
   } else {
-    table <- dplyr::select(table, -dplyr::one_of("percentage_Obs"))
+    table <- .remove_columns(table, "percentage_Obs")
     text <- paste0(text_levels, " (", text_n_Obs, ")")
   }
 
@@ -438,36 +438,36 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
     if (median == TRUE) {
       if (dispersion == TRUE) {
         text <- paste0(text_median, ", MAD = ", text_mad)
-        table <- dplyr::select(table, -one_of("Mean", "SD"))
+        table <- .remove_columns(table, c("Mean", "SD"))
       } else {
         text <- text_median
-        table <- dplyr::select(table, -one_of("Mean", "SD", "MAD"))
+        table <- .remove_columns(table, c("Mean", "SD", "MAD"))
       }
     } else {
       if (dispersion == TRUE) {
         text <- paste0(text_mean, ", SD = ", text_sd)
-        table <- dplyr::select(table, -one_of("Median", "MAD"))
+        table <- .remove_columns(table, c("Median", "MAD"))
       } else {
         text <- text_mean
-        table <- dplyr::select(table, -one_of("Median", "MAD", "SD"))
+        table <- .remove_columns(table, c("Median", "MAD", "SD"))
       }
     }
   } else{
     if (median == TRUE) {
       if (dispersion == TRUE) {
         text <- paste0("MAD = ", text_mad)
-        table <- dplyr::select(table, -one_of("Mean", "Median", "SD"))
+        table <- .remove_columns(table, c("Mean", "Median", "SD"))
       } else {
         text <- ""
-        table <- dplyr::select(table, -one_of("Mean", "Median", "SD", "MAD"))
+        table <- .remove_columns(table, c("Mean", "Median", "SD", "MAD"))
       }
     } else {
       if (dispersion == TRUE) {
         text <- paste0("SD = ", text_sd)
-        table <- dplyr::select(table, -one_of("Mean", "Median", "MAD"))
+        table <- .remove_columns(table, c("Mean", "Median", "MAD"))
       } else {
         text <- ""
-        table <- dplyr::select(table, -one_of("Mean", "Median", "MAD", "SD"))
+        table <- .remove_columns(table, c("Mean", "Median", "MAD", "SD"))
       }
     }
   }
@@ -476,27 +476,26 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
   if (range == TRUE) {
     text <- paste0(text, ", range: ", text_range)
   } else {
-    table <- dplyr::select(table, -one_of("Min", "Max"))
+    table <- .remove_columns(table, c("Min", "Max"))
   }
+
 
   # Missing
   if(!is.null(missing_percentage)){
     if (missing_percentage == TRUE) {
-      table <- dplyr::select(table, -one_of("n_Missing"))
+      table <- .remove_columns(table, "n_Missing")
     } else {
-      table <- dplyr::select(table, -one_of("percentage_Missing"))
+      table <- .remove_columns(table, "percentage_Missing")
     }
   } else{
-    table <- dplyr::select(table, -one_of(c("percentage_Missing", "n_Missing")))
+    table <- .remove_columns(table, c("percentage_Missing", "n_Missing"))
   }
 
   # Distribution
   if (distribution == FALSE) {
     vars <- c("Skewness", "Kurtosis")
-    table <- dplyr::select(table, -one_of(vars[vars %in% names(table)]))
+    table <- .remove_columns(table, vars[vars %in% names(table)])
   }
-
-
 
 
   # Text
@@ -520,4 +519,18 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
   )
 
   as.report(out)
+}
+
+
+
+#' @keywords internal
+.order_columns <- function(df, cols) {
+  remaining_columns <- setdiff(colnames(df), cols)
+  df[, c(cols, remaining_columns)]
+}
+
+
+#' @keywords internal
+.remove_columns <- function(df, cols) {
+  df[!(colnames(df) %in% cols)]
 }

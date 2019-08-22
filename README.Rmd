@@ -152,13 +152,13 @@ Finally, you can also find more details using `to_fulltext()`:
 library(rstanarm)
 
 stan_glmer(vs ~ mpg + (1|cyl), data=mtcars, family="binomial") %>% 
-  report(standardize="full", effsize="cohen1988") %>% 
+  report(standardize="smart", effsize="cohen1988") %>% 
   to_fulltext()
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(rstanarm)
 rstanarm::stan_glmer(vs ~ mpg + (1|cyl), data=mtcars, family="binomial", refresh = 0) %>% 
-  report(standardize="full", effsize="cohen1988") %>% 
+  report(standardize="smart", effsize="cohen1988") %>% 
   to_fulltext(width=100)
 ```
 

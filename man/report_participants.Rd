@@ -5,7 +5,7 @@
 \title{Reporting the participant data}
 \usage{
 report_participants(data, age = "Age", sex = "Sex",
-  participant = NULL, spell_n = FALSE)
+  participant = NULL, spell_n = FALSE, ...)
 }
 \arguments{
 \item{data}{A dataframe.}
@@ -17,6 +17,8 @@ report_participants(data, age = "Age", sex = "Sex",
 \item{participant}{The name of the participants' identifier column (for instance in the case of repeated measures).}
 
 \item{spell_n}{Fully spell the sample size ("Three participants" instead of "3 participants").}
+
+\item{...}{Arguments passed to or from other methods.}
 }
 \description{
 A helper function to help you format the participants data (age, sex, ...) in the participants section.

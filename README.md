@@ -27,9 +27,9 @@ report(model)
     ## substantial (R2 = 0.62, adj. R2 = 0.61). The model's intercept is at 5.01. Within this model:
     ## 
     ##   - The effect of Species (versicolor) is positive and can be considered as very large and
-    ## significant (beta = 0.93, 95% CI [0.73, 1.13], p < .001, std. beta = 1.12).
+    ## significant (beta = 0.93, 95% CI [0.73, 1.13], std. beta = 1.12, p < .001).
     ##   - The effect of Species (virginica) is positive and can be considered as very large and significant
-    ## (beta = 1.58, 95% CI [1.38, 1.79], p < .001, std. beta = 1.91).
+    ## (beta = 1.58, 95% CI [1.38, 1.79], std. beta = 1.91, p < .001).
 
 ## Documentation
 
@@ -103,17 +103,7 @@ as a table, using `to_table()`. Moreover, you can access a more detailed
 `to_fulltable()`. Finally, `to_values()` makes it easy to access all the
 internals of a model.
 
-### Supported Packages
-
-Currently supported objects by **report** include
-[`cor.test`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cor.test.html),
-[`t.test`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html)
-[`correlation`](https://github.com/easystats/correlation),
-[`glm`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/glm.html),
-[`lme4::merMod`](https://github.com/lme4/lme4/),
-[`rstanarm::stanreg`](https://github.com/stan-dev/rstanarm).
-
-### Examples
+### Features
 
 The `report()` function works on a variety of models, as well as
 dataframes:
@@ -124,11 +114,11 @@ report(iris)
 ```
 
     ## The data contains 150 observations of the following variables:
-    ##   - Sepal.Length: Mean = 5.84, SD = 0.83, [4.30, 7.90].
-    ##   - Sepal.Width: Mean = 3.06, SD = 0.44, [2.00, 4.40].
-    ##   - Petal.Length: Mean = 3.76, SD = 1.77, [1.00, 6.90].
-    ##   - Petal.Width: Mean = 1.20, SD = 0.76, [0.10, 2.50].
-    ##   - Species: 3 levels: setosa (n = 50); versicolor (n = 50) and virginica (n = 50).
+    ##   - Sepal.Length: Mean = 5.84, SD = 0.83, range: 4.30-7.90
+    ##   - Sepal.Width: Mean = 3.06, SD = 0.44, range: 2-4.40
+    ##   - Petal.Length: Mean = 3.76, SD = 1.77, range: 1-6.90
+    ##   - Petal.Width: Mean = 1.20, SD = 0.76, range: 0.10-2.50
+    ##   - Species: 3 levels: setosa (n = 50); versicolor (n = 50) and virginica (n = 50)
 
 These reports nicely work within the
 [*tidyverse*](https://github.com/tidyverse) workflow:
@@ -168,7 +158,7 @@ Finally, you can also find more details using `to_fulltext()`:
 library(rstanarm)
 
 stan_glmer(vs ~ mpg + (1|cyl), data=mtcars, family="binomial") %>% 
-  report(standardize="full", effsize="cohen1988") %>% 
+  report(standardize="smart", effsize="cohen1988") %>% 
   to_fulltext()
 ```
 
@@ -183,12 +173,49 @@ stan_glmer(vs ~ mpg + (1|cyl), data=mtcars, family="binomial") %>%
     ## The model's explanatory power is substantial (R2's median = 0.57, 89% CI [0.43, 0.69] Within this
     ## model, the explanatory power related to the fixed effects alone (marginal R2's median) is of 0.24
     ## (89% CI [0.00, 0.48]). The model's intercept, corresponding to vs = 0, mpg = 0 and cyl = 0, is at
-    ## -5.22 (89% CI [-11.89, 1.95], 1.47% in ROPE, std. median = 0.00). Within this model:
+    ## -5.07 (89% CI [-11.97, 1.57], 2.33% in ROPE, std. median = 0.00). Within this model:
     ## 
-    ##   - The effect of mpg has a probability of 84.55% of being positive and can be considered as medium
-    ## and not significant (median = 0.22, 89% CI [-0.10, 0.59], 38.98% in ROPE, std. median = 1.33).
-    ## However, the algorithm might not have successfuly converged (Rhat = 1.012) and the estimates cannot
-    ## be considered as stable (ESS = 355).
+    ##   - The effect of mpg has a probability of 85.75% of being positive and can be considered as medium
+    ## and not significant (median = 0.23, 89% CI [-0.12, 0.53], 40.00% in ROPE, std. median = 1.37). The
+    ## algorithm successfuly converged (Rhat = 1.001) and the estimates can be considered as stable (ESS =
+    ## 1446).
+
+## Examples
+
+### Supported Packages
+
+Currently supported objects by **report** include
+[`cor.test`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cor.test.html),
+[`t.test`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html),
+[`correlation`](https://github.com/easystats/correlation),
+[`glm`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/glm.html),
+[`lme4::merMod`](https://github.com/lme4/lme4/),
+[`rstanarm::stanreg`](https://github.com/stan-dev/rstanarm),
+[`estimate`](https://github.com/easystats/estimate).
+
+### *t*-tests and correlations
+
+``` r
+t.test(mtcars$mpg ~ mtcars$am) %>% 
+  report()
+```
+
+    ## The Welch Two Sample t-test suggests that the difference of mtcars$mpg by mtcars$am (mean in group
+    ## 0 = 17.15, mean in group 1 = 24.39, difference = -7.24) is significant (t(18.33) = -3.77, 95% CI
+    ## [-11.28, -3.21], p < .01).
+
+### Miscellaneous
+
+#### Report participants details
+
+``` r
+data <- data.frame("Age" = c(22, 23, 54, 21),
+                   "Sex" = c("F", "F", "M", "M"))
+
+paste(report_participants(data, spell_n = TRUE),
+      "were recruited in the study by means of torture and coercion.")
+## [1] "Four participants (Mean age = 30.00, SD = 16.02, range: 21-54, 50.00% females) were recruited in the study by means of torture and coercion."
+```
 
 ## Credits
 

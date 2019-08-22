@@ -27,7 +27,8 @@ Imports:
 	bayestestR (>= 0.2.5),
 	performance (>= 0.3.0),
 	parameters (>= 0.1.0),
-	dplyr
+	dplyr,
+	magrittr
 Suggests:
 	knitr,
 	rmarkdown,
