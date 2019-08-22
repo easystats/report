@@ -8,7 +8,7 @@
 \title{Dataframe Report}
 \usage{
 \method{report}{data.frame}(model, median = FALSE, centrality = TRUE,
-  dispersion = TRUE, range = TRUE, distribution = TRUE,
+  dispersion = TRUE, range = TRUE, distribution = FALSE,
   levels_percentage = FALSE, n_characters = 3,
   missing_percentage = FALSE, ...)
 
@@ -18,7 +18,7 @@
 \method{report}{factor}(model, levels_percentage = FALSE, ...)
 
 \method{report}{numeric}(model, median = FALSE, centrality = TRUE,
-  dispersion = TRUE, range = TRUE, distribution = TRUE,
+  dispersion = TRUE, range = TRUE, distribution = FALSE,
   missing_percentage = FALSE, ...)
 }
 \arguments{
@@ -49,11 +49,11 @@ Create a report of a dataframe.
 library(report)
 x <- iris
 
-report(x)
-report(x, median = TRUE, dispersion = TRUE, range = TRUE, missing_percentage = TRUE)
-to_fulltext(report(x))
-to_table(report(x))
-to_fulltable(report(x))
+report(iris)
+r <- report(iris, median = TRUE, dispersion = FALSE, distribution = TRUE, missing_percentage = TRUE)
+to_fulltext(r)
+to_table(r)
+to_fulltable(r)
 x <- c("A", "B", "C", "A", "B", "B", "D", "E", "B", "D", "A")
 report(x)
 report(x, n_characters = 2, levels_percentage = TRUE, missing_percentage = TRUE)
@@ -69,7 +69,7 @@ to_fulltable(report(x))
 \dontrun{
 x <- rnorm(1000)
 report(x)
-report(x, median = TRUE, missing_percentage = TRUE, distribution = TRUE)
+report(x, median = TRUE, missing_percentage = TRUE, distribution = TRUE, distribution = TRUE)
 to_fulltext(report(x))
 to_table(report(x))
 to_fulltable(report(x))
