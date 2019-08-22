@@ -69,7 +69,7 @@ to_fulltable(report(x))
 \dontrun{
 x <- rnorm(1000)
 report(x)
-report(x, median = TRUE, missing_percentage = TRUE, distribution = TRUE, distribution = TRUE)
+report(x, median = TRUE, missing_percentage = TRUE, distribution = TRUE)
 to_fulltext(report(x))
 to_table(report(x))
 to_fulltable(report(x))

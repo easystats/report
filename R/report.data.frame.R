@@ -360,7 +360,7 @@ report.logical <- report.factor
 #' \dontrun{
 #' x <- rnorm(1000)
 #' report(x)
-#' report(x, median = TRUE, missing_percentage = TRUE, distribution = TRUE, distribution = TRUE)
+#' report(x, median = TRUE, missing_percentage = TRUE, distribution = TRUE)
 #' to_fulltext(report(x))
 #' to_table(report(x))
 #' to_fulltable(report(x))
@@ -512,7 +512,7 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
     text_range, text_distribution, text_missing
   )
 
-  if (table_full$n_Missing[1] > 0) {
+  if (!is.null(missing_percentage)) {
     text <- paste0(text, text_missing)
   }
 
