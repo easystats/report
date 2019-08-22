@@ -390,9 +390,9 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
     Min = min(model, na.rm = TRUE),
     Max = max(model, na.rm = TRUE),
     n_Obs = length(model),
-    n_Missing = sum(is.na(model)),
     Skewness = parameters::skewness(model),
-    Kurtosis = parameters::kurtosis(model)
+    Kurtosis = parameters::kurtosis(model),
+    n_Missing = sum(is.na(model))
   )
 
 
@@ -493,11 +493,14 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
   if(!is.null(missing_percentage)){
     if (missing_percentage == TRUE) {
       table <- .remove_columns(table, "n_Missing")
+      table_full <- .remove_columns(table_full, "n_Missing")
     } else {
       table <- .remove_columns(table, "percentage_Missing")
+      table_full <- .remove_columns(table_full, "percentage_Missing")
     }
   } else{
     table <- .remove_columns(table, c("percentage_Missing", "n_Missing"))
+    table_full <- .remove_columns(table_full, c("percentage_Missing", "n_Missing"))
   }
 
 
