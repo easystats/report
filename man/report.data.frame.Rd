@@ -7,24 +7,28 @@
 \alias{report.numeric}
 \title{Dataframe Report}
 \usage{
-\method{report}{data.frame}(model, median = FALSE, dispersion = TRUE,
-  range = TRUE, distribution = TRUE, levels_percentage = FALSE,
-  n_characters = 3, missing_percentage = FALSE, ...)
+\method{report}{data.frame}(model, median = FALSE, centrality = TRUE,
+  dispersion = TRUE, range = TRUE, distribution = TRUE,
+  levels_percentage = FALSE, n_characters = 3,
+  missing_percentage = FALSE, ...)
 
 \method{report}{character}(model, n_characters = 3,
   levels_percentage = FALSE, missing_percentage = FALSE, ...)
 
 \method{report}{factor}(model, levels_percentage = FALSE, ...)
 
-\method{report}{numeric}(model, median = FALSE, dispersion = TRUE,
-  range = TRUE, distribution = TRUE, missing_percentage = FALSE, ...)
+\method{report}{numeric}(model, median = FALSE, centrality = TRUE,
+  dispersion = TRUE, range = TRUE, distribution = TRUE,
+  missing_percentage = FALSE, ...)
 }
 \arguments{
 \item{model}{A data.frame or a vector.}
 
 \item{median}{Show \link{mean} and \link{sd} (default) or \link{median} and \link{mad}.}
 
-\item{dispersion}{Show dispersion (\link{sd} or \link{mad}).}
+\item{centrality}{Show index of centrality (\link{mean} or \link{median}).}
+
+\item{dispersion}{Show index of dispersion (\link{sd} or \link{mad}).}
 
 \item{range}{Show range.}
 
