@@ -417,11 +417,16 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
   text_range <- paste0(parameters::format_value(table_full$Min[1], protect_integers = TRUE), "-", parameters::format_value(table_full$Max[1], protect_integers = TRUE))
 
   # Missings
-  if (missing_percentage == TRUE) {
-    text_missing <- paste0(", ", parameters::format_value(table_full$percentage_Missing[1], protect_integers = TRUE), "% missing")
-  } else {
-    text_missing <- paste0(", ", table_full$n_Missing[1], " missing")
+  if(!is.null(missing_percentage)){
+    if (missing_percentage == TRUE) {
+      text_missing <- paste0(", ", parameters::format_value(table_full$percentage_Missing[1], protect_integers = TRUE), "% missing")
+    } else {
+      text_missing <- paste0(", ", table_full$n_Missing[1], " missing")
+    }
+  } else{
+    text_missing <- ""
   }
+
 
 
 
@@ -475,10 +480,14 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
   }
 
   # Missing
-  if (missing_percentage == TRUE) {
-    table <- dplyr::select(table, -one_of("n_Missing"))
-  } else {
-    table <- dplyr::select(table, -one_of("percentage_Missing"))
+  if(!is.null(missing_percentage)){
+    if (missing_percentage == TRUE) {
+      table <- dplyr::select(table, -one_of("n_Missing"))
+    } else {
+      table <- dplyr::select(table, -one_of("percentage_Missing"))
+    }
+  } else{
+    table <- dplyr::select(table, -one_of(c("percentage_Missing", "n_Missing")))
   }
 
   # Distribution

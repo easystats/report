@@ -7,6 +7,8 @@
 #' @param sex The name of the column containing the sex. Note that classes should be some of c("Male", "M", "Female", "F").
 #' @param participant The name of the participants' identifier column (for instance in the case of repeated measures).
 #' @param spell_n Fully spell the sample size ("Three participants" instead of "3 participants").
+#' @inheritParams report.numeric
+#'
 #'
 #' @examples
 #' library(report)
@@ -28,7 +30,7 @@
 #'
 #' @importFrom stats aggregate
 #' @export
-report_participants <- function(data, age = "Age", sex = "Sex", participant = NULL, spell_n = FALSE){
+report_participants <- function(data, age = "Age", sex = "Sex", participant = NULL, spell_n = FALSE, ...){
 
   # Sanity checks
   if(is.null(age)){
@@ -58,7 +60,7 @@ report_participants <- function(data, age = "Age", sex = "Sex", participant = NU
          " participants (Mean age = ",
          parameters::format_value(mean(data[[age]], na.rm = TRUE)),
          ", ",
-         report(data[[age]], centrality = FALSE)$text,
+         report(data[[age]], centrality = FALSE, missing_percentage = NULL, ...)$text,
          ", ",
          parameters::format_value(length(data[[sex]][tolower(data[[sex]]) %in% c("female", "f")])/nrow(data)*100),
          "% females)")
