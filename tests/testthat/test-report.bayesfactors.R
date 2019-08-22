@@ -9,6 +9,11 @@ mo2 <- lm(Sepal.Length ~ Species + Petal.Length, data = iris)
 mo3 <- lm(Sepal.Length ~ Species * Petal.Length, data = iris)
 
 BFmodels <- bayesfactor_models(mo1, mo2, mo3, denominator = mo0)
+
+test_that("models", {
+  expect_known_value(report(BFmodels),"bf_mods",update = FALSE)
+})
+
 inc_bf <- bayesfactor_inclusion(BFmodels, prior_odds = c(1,2,3), match_models = TRUE)
 
 test_that("inclusion", {

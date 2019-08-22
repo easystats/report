@@ -39,14 +39,15 @@ report.bayesfactor_models <- function(model, rules = "jeffreys1961", ...){
   model_ind <- rep("",nrow(model))
   model_ind[max_den] <- " (the most supported model)"
   model_ind[min_den] <- " (the least supported model)"
-  model_ind <- model_ind[-denominator]
 
+  summ_inds <- c(max_den,min_den)
+  summ_inds <- summ_inds[summ_inds!=denominator]
   bf_text <- paste0(
-    "Compared to the ", model$Model[denominator]," model, ",
+    "Compared to the ", model$Model[denominator]," model",model_ind[denominator],", ",
     "we found ",
     paste0(
-      interpret_bf(model$BF[-denominator],rules = rules, include_value = TRUE),
-      " the ", model$Model[-denominator]," model",model_ind,
+      interpret_bf(model$BF[summ_inds],rules = rules, include_value = TRUE),
+      " the ", model$Model[summ_inds]," model",model_ind[summ_inds],
       collapse = "; "
     ),
     "."
@@ -71,7 +72,16 @@ report.bayesfactor_models <- function(model, rules = "jeffreys1961", ...){
     )
   }
 
-  bf_text_full <- paste0(bf_explain,bf_text)
+  bf_text_full <- paste0(bf_explain,paste0(
+    "Compared to the ", model$Model[denominator]," model",model_ind[denominator],", ",
+    "we found ",
+    paste0(
+      interpret_bf(model$BF[-denominator],rules = rules, include_value = TRUE),
+      " the ", model$Model[-denominator]," model",model_ind[-denominator],
+      collapse = "; "
+    ),
+    "."
+  ))
 
 
   #### table ####
