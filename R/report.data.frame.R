@@ -19,16 +19,15 @@
 #' library(report)
 #' x <- iris
 #'
-#' report(x)
-#' report(x, median = TRUE, dispersion = TRUE, range = TRUE, missing_percentage = TRUE)
-#' to_fulltext(report(x))
-#' to_table(report(x))
-#' to_fulltable(report(x))
+#' report(iris)
+#' r <- report(iris, median = TRUE, dispersion = FALSE, distribution = TRUE, missing_percentage = TRUE)
+#' to_fulltext(r)
+#' to_table(r)
+#' to_fulltable(r)
 #' @seealso report
-#' @import dplyr
 #'
 #' @export
-report.data.frame <- function(model, median = FALSE, centrality = TRUE, dispersion = TRUE, range = TRUE, distribution = TRUE, levels_percentage = FALSE, n_characters = 3, missing_percentage = FALSE, ...) {
+report.data.frame <- function(model, median = FALSE, centrality = TRUE, dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = FALSE, n_characters = 3, missing_percentage = FALSE, ...) {
 
   # Table -------------------------------------------------------------------
   table_full <- data.frame()
@@ -91,9 +90,9 @@ report.data.frame <- function(model, median = FALSE, centrality = TRUE, dispersi
 
 #' @import dplyr
 #' @export
-report.grouped_df <- function(model, median = FALSE, centrality = TRUE, dispersion = TRUE, range = TRUE, distribution = TRUE, levels_percentage = FALSE, n_characters = 3, missing_percentage = FALSE, ...) {
-  groups <- group_vars(model)
-  ungrouped_x <- ungroup(model)
+report.grouped_df <- function(model, median = FALSE, centrality = TRUE, dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = FALSE, n_characters = 3, missing_percentage = FALSE, ...) {
+  groups <- dplyr::group_vars(model)
+  ungrouped_x <- dplyr::ungroup(model)
   xlist <- split(ungrouped_x, ungrouped_x[groups], sep = " - ")
 
 
@@ -170,7 +169,6 @@ report.grouped_df <- function(model, median = FALSE, centrality = TRUE, dispersi
 #' to_table(report(x, n_characters = "all"))
 #' to_fulltable(report(x))
 #' @seealso report
-#' @import dplyr
 #'
 #' @export
 report.character <- function(model, n_characters = 3, levels_percentage = FALSE, missing_percentage = FALSE, ...) {
@@ -279,7 +277,6 @@ report.character <- function(model, n_characters = 3, levels_percentage = FALSE,
 #' to_table(report(x))
 #' to_fulltable(report(x))
 #' @seealso report
-#' @import dplyr
 #'
 #' @export
 report.factor <- function(model, levels_percentage = FALSE, ...) {
@@ -363,17 +360,16 @@ report.logical <- report.factor
 #' \dontrun{
 #' x <- rnorm(1000)
 #' report(x)
-#' report(x, median = TRUE, missing_percentage = TRUE, distribution = TRUE)
+#' report(x, median = TRUE, missing_percentage = TRUE, distribution = TRUE, distribution = TRUE)
 #' to_fulltext(report(x))
 #' to_table(report(x))
 #' to_fulltable(report(x))
 #' }
 #' @seealso report
-#' @import dplyr
 #' @importFrom stats mad sd
 #'
 #' @export
-report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion = TRUE, range = TRUE, distribution = TRUE, missing_percentage = FALSE, ...) {
+report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = FALSE, ...) {
   if (length(unique(model)) == 2) {
     if (is.null(names(model))) {
       name <- deparse(substitute(model))
@@ -415,6 +411,12 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
 
   # Range
   text_range <- paste0(parameters::format_value(table_full$Min[1], protect_integers = TRUE), "-", parameters::format_value(table_full$Max[1], protect_integers = TRUE))
+
+  # Distribution
+  text_distribution <- paste0("Skewness = ",
+                              parameters::format_value(table_full$Skewness[1]),
+                              ", Kurtosis = ",
+                              parameters::format_value(table_full$Kurtosis[1]))
 
   # Missings
   if(!is.null(missing_percentage)){
@@ -479,6 +481,13 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
     table <- .remove_columns(table, c("Min", "Max"))
   }
 
+  # Distribution
+  if (distribution == TRUE) {
+    text <- paste0(text, ", ", text_distribution)
+  } else {
+    table <- .remove_columns(table, c("Skewness", "Kurtosis"))
+  }
+
 
   # Missing
   if(!is.null(missing_percentage)){
@@ -491,18 +500,13 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
     table <- .remove_columns(table, c("percentage_Missing", "n_Missing"))
   }
 
-  # Distribution
-  if (distribution == FALSE) {
-    vars <- c("Skewness", "Kurtosis")
-    table <- .remove_columns(table, vars[vars %in% names(table)])
-  }
 
 
   # Text
   text_full <- paste0(
     text_mean, ", SD = ", text_sd, ", ",
     text_median, ", MAD = ", text_mad, ", range: ",
-    text_range, text_missing
+    text_range, text_distribution, text_missing
   )
 
   if (table_full$n_Missing[1] > 0) {
