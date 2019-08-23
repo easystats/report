@@ -17,7 +17,6 @@
 #'
 #' @examples
 #' library(report)
-#' x <- iris
 #'
 #' report(iris)
 #' r <- report(iris, median = TRUE, dispersion = FALSE, distribution = TRUE, missing_percentage = TRUE)
@@ -42,12 +41,21 @@ report.data.frame <- function(model, median = FALSE, centrality = TRUE, dispersi
     current_table <- r$table
     current_table$Variable <- col
     r$values$table <- current_table
-    table <- merge(table, current_table, all = TRUE)
+    if(nrow(table) == 0){
+      table <- current_table
+    } else{
+      table <- merge(table, current_table, all = TRUE)
+    }
+
 
     current_table <- r$table_full
     current_table$Variable <- col
     r$values$table_full <- current_table
-    table_full <- merge(table_full, current_table, all = TRUE)
+    if(nrow(table_full) == 0){
+      table_full <- current_table
+    } else{
+      table_full <- merge(table_full, current_table, all = TRUE)
+    }
 
     text_full <- paste0(text_full, "\n  - ", col, ": ", r$text_full)
     text <- paste0(text, "\n  - ", col, ": ", r$text)

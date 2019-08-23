@@ -47,7 +47,6 @@ Create a report of a dataframe.
 }
 \examples{
 library(report)
-x <- iris
 
 report(iris)
 r <- report(iris, median = TRUE, dispersion = FALSE, distribution = TRUE, missing_percentage = TRUE)

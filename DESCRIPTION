@@ -31,6 +31,7 @@ Imports:
 	magrittr
 Suggests:
 	knitr,
+	lavaan,
 	rmarkdown,
 	testthat,
 	covr,
