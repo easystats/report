@@ -45,9 +45,7 @@ Suggests:
 	BayesFactor,
 	caret,
 	randomForest
-Remotes: 
-	easystats/parameters,
-	easystats/performance,
+Remotes:
 	easystats/correlation,
 	easystats/estimate
 RoxygenNote: 6.1.1

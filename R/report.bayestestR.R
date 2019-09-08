@@ -8,7 +8,7 @@
 #'
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' library(bayestestR)
 #' library(report)
 #'
@@ -141,7 +141,7 @@ report.bayesfactor_models <- function(model, rules = "jeffreys1961", ...){
 #'
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' library(bayestestR)
 #' library(report)
 #'

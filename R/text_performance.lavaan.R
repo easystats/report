@@ -6,7 +6,19 @@ text_performance.lm <- function(model, performance, ...) {
 
   # Datatable
 
+
   # Chisq
+  if(all(c("Chisq_p", "Chisq", "Chisq_DoF") %in% names(performance))){
+    sig <- "can be rejected"
+    if(interpret_p(performance$Chisq_p) == "significant"){
+      sig <- "is plausible"
+    }
+    text <- paste0(text,
+                   "The hypothesis of a good fit ",
+                   sig,
+                   "Chisq(",
+                   format_value(performance$Chisq_DoF))
+  }
 
   list(
     "text" = text,
