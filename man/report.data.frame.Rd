@@ -7,24 +7,28 @@
 \alias{report.numeric}
 \title{Dataframe Report}
 \usage{
-\method{report}{data.frame}(model, median = FALSE, dispersion = TRUE,
-  range = TRUE, distribution = TRUE, levels_percentage = FALSE,
-  n_characters = 3, missing_percentage = FALSE, ...)
+\method{report}{data.frame}(model, median = FALSE, centrality = TRUE,
+  dispersion = TRUE, range = TRUE, distribution = FALSE,
+  levels_percentage = FALSE, n_characters = 3,
+  missing_percentage = FALSE, ...)
 
 \method{report}{character}(model, n_characters = 3,
   levels_percentage = FALSE, missing_percentage = FALSE, ...)
 
 \method{report}{factor}(model, levels_percentage = FALSE, ...)
 
-\method{report}{numeric}(model, median = FALSE, dispersion = TRUE,
-  range = TRUE, distribution = TRUE, missing_percentage = FALSE, ...)
+\method{report}{numeric}(model, median = FALSE, centrality = TRUE,
+  dispersion = TRUE, range = TRUE, distribution = FALSE,
+  missing_percentage = FALSE, ...)
 }
 \arguments{
 \item{model}{A data.frame or a vector.}
 
 \item{median}{Show \link{mean} and \link{sd} (default) or \link{median} and \link{mad}.}
 
-\item{dispersion}{Show dispersion (\link{sd} or \link{mad}).}
+\item{centrality}{Show index of centrality (\link{mean} or \link{median}).}
+
+\item{dispersion}{Show index of dispersion (\link{sd} or \link{mad}).}
 
 \item{range}{Show range.}
 
@@ -43,13 +47,12 @@ Create a report of a dataframe.
 }
 \examples{
 library(report)
-x <- iris
 
-report(x)
-report(x, median = TRUE, dispersion = TRUE, range = TRUE, missing_percentage = TRUE)
-to_fulltext(report(x))
-to_table(report(x))
-to_fulltable(report(x))
+report(iris)
+r <- report(iris, median = TRUE, dispersion = FALSE, distribution = TRUE, missing_percentage = TRUE)
+to_fulltext(r)
+to_table(r)
+to_fulltable(r)
 x <- c("A", "B", "C", "A", "B", "B", "D", "E", "B", "D", "A")
 report(x)
 report(x, n_characters = 2, levels_percentage = TRUE, missing_percentage = TRUE)

@@ -41,7 +41,7 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
 
 #' @keywords internal
 .text_parameters_direction <- function(parameters) {
-  estimate_name <- names(parameters)[names(parameters) %in% c("Coefficient", "Median", "Mean", "MAP")][1]
+  estimate_name <- names(parameters)[names(parameters) %in% c("Coefficient", "Difference", "Median", "Mean", "MAP")][1]
 
 
   # Bayes factor
@@ -100,7 +100,7 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
 
   text <- ""
 
-  estimate_name <- names(parameters)[names(parameters) %in% c("Std_Coefficient", "Std_Median", "Std_Mean", "Std_MAP")][1]
+  estimate_name <- names(parameters)[names(parameters) %in% c("Std_Coefficient", "Std_Difference", "Std_Median", "Std_Mean", "Std_MAP")][1]
 
   if (!is.na(estimate_name)) {
     if (type == "d") {
@@ -226,6 +226,14 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
       .add_comma(text),
       "std. beta = ",
       parameters::format_value(parameters$Std_Coefficient)
+    )
+  }
+
+  if ("Std_Difference" %in% names(parameters)) {
+    text <- paste0(
+      .add_comma(text),
+      "std. difference = ",
+      parameters::format_value(parameters$Std_Difference)
     )
   }
 
@@ -364,8 +372,8 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
 
 
 #' @keywords internal
-.text_parameters_combine <- function(direction = "", size = "", significance = "", indices = "", bayesian_diagnostic = "") {
-  text <- direction
+.text_parameters_combine <- function(names = "", direction = "", size = "", significance = "", indices = "", bayesian_diagnostic = "") {
+  text <- paste0(names, direction)
 
   text <- ifelse(significance != "" & size != "", paste0(text, " and can be considered as ", size, " and ", significance),
     ifelse(significance != "" & size == "", paste0(text, " and can be considered as ", significance),
