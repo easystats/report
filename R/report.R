@@ -89,7 +89,7 @@ to_table <- function(x, full = FALSE, ...) {
 
 #' @export
 print.report_table <- function(x, ...) {
-  table <- parameters::format_table(parameters::parameters_table(x))
+  table <- insight::format_table(parameters::parameters_table(x))
   cat(table)
 }
 
