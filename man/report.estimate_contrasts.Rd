@@ -26,8 +26,16 @@
 Create a report of an object from the \code{estimate} package.
 }
 \examples{
-\dontrun{
 library(estimate)
+library(report)
+library(lme4)
+
+data <- iris
+data$Group <- ifelse(data$Sepal.Width > 3, "A","B")
+
+model <- lm(Petal.Width ~ Species * Group, data = data)
+report(estimate_contrasts(model))
+\dontrun{
 library(rstanarm)
 
 model <- stan_glm(Sepal.Width ~ Species * Petal.Width, data = iris)

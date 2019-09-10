@@ -8,7 +8,7 @@
 #'
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' library(bayestestR)
 #' library(report)
 #'
@@ -39,14 +39,15 @@ report.bayesfactor_models <- function(model, rules = "jeffreys1961", ...){
   model_ind <- rep("",nrow(model))
   model_ind[max_den] <- " (the most supported model)"
   model_ind[min_den] <- " (the least supported model)"
-  model_ind <- model_ind[-denominator]
 
+  summ_inds <- c(max_den,min_den)
+  summ_inds <- summ_inds[summ_inds!=denominator]
   bf_text <- paste0(
-    "Compared to the ", model$Model[denominator]," model, ",
+    "Compared to the ", model$Model[denominator]," model",model_ind[denominator],", ",
     "we found ",
     paste0(
-      interpret_bf(model$BF[-denominator],rules = rules, include_value = TRUE),
-      " the ", model$Model[-denominator]," model",model_ind,
+      interpret_bf(model$BF[summ_inds],rules = rules, include_value = TRUE),
+      " the ", model$Model[summ_inds]," model",model_ind[summ_inds],
       collapse = "; "
     ),
     "."
@@ -71,7 +72,16 @@ report.bayesfactor_models <- function(model, rules = "jeffreys1961", ...){
     )
   }
 
-  bf_text_full <- paste0(bf_explain,bf_text)
+  bf_text_full <- paste0(bf_explain,paste0(
+    "Compared to the ", model$Model[denominator]," model",model_ind[denominator],", ",
+    "we found ",
+    paste0(
+      interpret_bf(model$BF[-denominator],rules = rules, include_value = TRUE),
+      " the ", model$Model[-denominator]," model",model_ind[-denominator],
+      collapse = "; "
+    ),
+    "."
+  ))
 
 
   #### table ####
@@ -131,7 +141,7 @@ report.bayesfactor_models <- function(model, rules = "jeffreys1961", ...){
 #'
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' library(bayestestR)
 #' library(report)
 #'
@@ -156,11 +166,15 @@ report.bayesfactor_inclusion <- function(model, rules = "jeffreys1961", ...){
   priorOdds <- attr(model,"priorOdds")
 
   #### text ####
+  bf_results <- data.frame(Term = rownames(model), stringsAsFactors = FALSE)
+  bf_results$evidence <- interpret_bf(model$BF,rules = rules, include_value = TRUE)
+  bf_results$postprob <- paste0(round(model$p_posterior*100,...),"%")
+
   bf_text <- paste0(
-    "We found ",
+    "Bayesian model averaging (BMA) was used to obtain the average evidence ",
+    "for each predictor. We found ",
     paste0(
-      paste0(interpret_bf(model$BF,rules = rules, include_value = TRUE),
-             " including ", rownames(model)),
+      paste0(bf_results$evidence," including ",bf_results$Term),
       collapse = "; "
     ),"."
   )
@@ -191,11 +205,18 @@ report.bayesfactor_inclusion <- function(model, rules = "jeffreys1961", ...){
              "evidence (see Mathot, 2017). "
            ))
   )
-  bf_text_full <- paste0(bf_explain,bf_text)
-
-
-
-
+  bf_text_full <- paste0(
+    bf_explain,
+    paste0(
+      "We found ",
+      paste0(
+        paste0(bf_results$evidence," including ",bf_results$Term,
+               ", with models including ",bf_results$Term,
+               " having an overall posterior probability of ",bf_results$postprob),
+        collapse = "; "
+      ),"."
+    )
+  )
 
   #### table ####
   bf_table <- as.data.frame(model)
@@ -213,7 +234,7 @@ report.bayesfactor_inclusion <- function(model, rules = "jeffreys1961", ...){
            "Across all models,"),
     ifelse(is.null(priorOdds),
            "assuming unifor prior odds.",
-           paste0("with custom prior odds (", paste0(priorOdds, collapse = ", "), ")."))
+           paste0("with custom prior odds of [", paste0(priorOdds, collapse = ", "), "]."))
   )
   # pad with empty cells:
   colnames(table_footer) <- colnames(bf_table)

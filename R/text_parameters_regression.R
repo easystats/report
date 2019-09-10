@@ -45,11 +45,12 @@ text_parameters.stanreg <- text_parameters.lm
 #' @keywords internal
 .text_parameters <- function(parameters, ci, effsize, type = "d", prefix = "  - ", bayesian_diagnostic = FALSE) {
   text <- .text_parameters_combine(
+    names = .text_parameters_names(parameters),
     direction = .text_parameters_direction(parameters),
     size = .text_parameters_size(parameters, effsize = effsize, type = type),
     significance = .text_parameters_significance(parameters),
     indices = .text_parameters_indices(parameters, ci = ci),
     bayesian_diagnostic = .text_parameters_bayesian_diagnostic(parameters, bayesian_diagnostic = bayesian_diagnostic)
   )
-  paste0(paste0(prefix, .text_parameters_names(parameters), text), collapse = "\n")
+  paste0(paste0(prefix, text), collapse = "\n")
 }

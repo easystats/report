@@ -9,8 +9,16 @@
 #'
 #'
 #' @examples
-#' \dontrun{
 #' library(estimate)
+#' library(report)
+#' library(lme4)
+#'
+#' data <- iris
+#' data$Group <- ifelse(data$Sepal.Width > 3, "A","B")
+#'
+#' model <- lm(Petal.Width ~ Species * Group, data = data)
+#' report(estimate_contrasts(model))
+#' \dontrun{
 #' library(rstanarm)
 #'
 #' model <- stan_glm(Sepal.Width ~ Species * Petal.Width, data = iris)
@@ -41,8 +49,8 @@ report.estimate_contrasts <- function(model, effsize = "funder2019", ...) {
   text <- text$text
 
   # Params
-  text <- paste0(text, text_parameters(model, table))
-  text_full <- paste0(text_full, text_parameters(model, table_full))
+  text <- paste0(text, text_parameters(model, parameters = table))
+  text_full <- paste0(text_full, text_parameters(model, parameters = table_full))
 
   out <- list(
     text = text,
