@@ -224,7 +224,7 @@ report.bayesfactor_inclusion <- function(model, rules = "jeffreys1961", ...){
   bf_table <- cbind(Terms = rownames(bf_table),bf_table)
   rownames(bf_table) <- NULL
   bf_table$`Inclusion BF` <- bayestestR:::.format_big_small(bf_table$`Inclusion BF`,...)
-  bf_table[,2:3] <- parameters::format_value(bf_table[,2:3], ...)
+  bf_table[,2:3] <- insight::format_value(bf_table[,2:3], ...)
 
   # make table footer
   table_footer <- matrix(rep("",12),nrow = 3)

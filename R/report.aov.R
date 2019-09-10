@@ -41,20 +41,20 @@ report.aov <- function(model, effsize = "field2013", omega_squared = NULL, eta_s
     " is ",
     interpret_p(parameters$p),
     " (F(",
-    parameters::format_value(parameters$df, protect_integers = TRUE)
+    insight::format_value(parameters$df, protect_integers = TRUE)
   )
 
   if (!is.null(DoF_residual)) {
-    text <- paste0(text, ", ", parameters::format_value(DoF_residual, protect_integers = TRUE))
+    text <- paste0(text, ", ", insight::format_value(DoF_residual, protect_integers = TRUE))
   } else if ("DoF_Residuals" %in% names(parameters)) {
-    text <- paste0(text, ", ", parameters::format_value(parameters$DoF_Residuals, protect_integers = TRUE))
+    text <- paste0(text, ", ", insight::format_value(parameters$DoF_Residuals, protect_integers = TRUE))
   }
 
   # Indices
   text <- paste0(
     text,
     ") = ",
-    parameters::format_value(parameters$`F`),
+    insight::format_value(parameters$`F`),
     ", ",
     parameters::format_p(parameters$p)
   )
@@ -100,7 +100,7 @@ report.aovlist <- report.aov
       ") and can be considered as ",
       interpret_omega_squared(parameters$Omega_Sq_partial, rules = effsize),
       " (partial omega squared = ",
-      parameters::format_value(parameters$Omega_Sq_partial),
+      insight::format_value(parameters$Omega_Sq_partial),
       ")."
     )
   } else if ("Omega_Sq" %in% names(parameters)) {
@@ -108,19 +108,19 @@ report.aovlist <- report.aov
       ") and can be considered as ",
       interpret_omega_squared(parameters$Omega_Sq, rules = effsize),
       " (omega squared = ",
-      parameters::format_value(parameters$Omega_Sq),
+      insight::format_value(parameters$Omega_Sq),
       ")."
     )
   } else if ("Eta_Sq" %in% names(parameters)) {
     out <- paste0(
       ", eta squared = ",
-      parameters::format_value(parameters$Eta_Sq),
+      insight::format_value(parameters$Eta_Sq),
       ")."
     )
   } else if ("Epsilon_sq" %in% names(parameters)) {
     out <- paste0(
       ", epsilon squared = ",
-      parameters::format_value(parameters$Epsilon_sq),
+      insight::format_value(parameters$Epsilon_sq),
       ")."
     )
   } else {

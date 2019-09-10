@@ -47,17 +47,17 @@ text_model <- function(model, ...) {
   # Frequentist --------------------------------
 
   if (!is.null(p_method) && p_method == "wald" && !is.null(ci_method) && ci_method == "wald") {
-    return(paste0(" The ", parameters::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) and p-values were computed using Wald approximation."))
+    return(paste0(" The ", insight::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) and p-values were computed using Wald approximation."))
   }
 
 
   # CI
   if (ci_method == "wald") {
-    text <- paste0(" The ", parameters::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) were computed using Wald approximation")
+    text <- paste0(" The ", insight::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) were computed using Wald approximation")
   } else if (ci_method == "boot"){
-    text <- paste0(" The ", parameters::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) were obtained through bootstrapping")
+    text <- paste0(" The ", insight::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) were obtained through bootstrapping")
   } else{
-    text <- paste0(" The ", parameters::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) were obtained through ", ci_method)
+    text <- paste0(" The ", insight::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) were obtained through ", ci_method)
   }
 
 
@@ -71,11 +71,11 @@ text_model <- function(model, ...) {
 
   # Bayesian --------------------------------
   if (tolower(ci_method) == "hdi") {
-    text <- paste0(" The ", parameters::format_value(ci * 100, protect_integers = TRUE), "%", " Credible Intervals (CIs) were based on Highest Density Intervals (HDI)")
+    text <- paste0(" The ", insight::format_value(ci * 100, protect_integers = TRUE), "%", " Credible Intervals (CIs) were based on Highest Density Intervals (HDI)")
   }
 
   if (tolower(ci_method) %in% c("eti", "quantile", "ci")) {
-    text <- paste0(" The ", parameters::format_value(ci * 100, protect_integers = TRUE), "%", " Credible Intervals (CIs) are Equal-Tailed Intervals (ETI) computed using quantiles")
+    text <- paste0(" The ", insight::format_value(ci * 100, protect_integers = TRUE), "%", " Credible Intervals (CIs) are Equal-Tailed Intervals (ETI) computed using quantiles")
   }
 
   paste0(text, ".")
@@ -92,9 +92,9 @@ text_model <- function(model, ...) {
       " The Region of Practical Equivalence (ROPE) ",
       "percentage was defined as the proportion of the ",
       "posterior distribution within the [",
-      parameters::format_value(rope_range[1]),
+      insight::format_value(rope_range[1]),
       ", ",
-      parameters::format_value(rope_range[2]),
+      insight::format_value(rope_range[2]),
       "] range."
     )
   } else {
@@ -102,9 +102,9 @@ text_model <- function(model, ...) {
       " The Region of Practical Equivalence (ROPE) ",
       "percentage was defined as the proportion of the ",
       rope_ci * 100, "% CI within the [",
-      parameters::format_value(rope_range[1]),
+      insight::format_value(rope_range[1]),
       ", ",
-      parameters::format_value(rope_range[2]),
+      insight::format_value(rope_range[2]),
       "] range."
     )
   }
@@ -155,8 +155,8 @@ text_model <- function(model, ...) {
   }
 
   values <- ifelse(params$Prior_Distribution == "normal",
-    paste0("mean = ", parameters::format_value(params$Prior_Location), ", SD = ", parameters::format_value(params$Prior_Scale)),
-    paste0("location = ", parameters::format_value(params$Prior_Location), ", scale = ", parameters::format_value(params$Prior_Scale))
+    paste0("mean = ", insight::format_value(params$Prior_Location), ", SD = ", insight::format_value(params$Prior_Scale)),
+    paste0("location = ", insight::format_value(params$Prior_Location), ", scale = ", insight::format_value(params$Prior_Scale))
   )
 
   values <- paste0(params$Prior_Distribution, " (", values, ")")

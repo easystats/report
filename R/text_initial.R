@@ -39,20 +39,20 @@ text_initial.merMod <- text_initial.lm
   intercept <- parameters[parameters$Parameter == "(Intercept)", ]
 
   coefficient <- names(parameters)[names(parameters) %in% c("Coefficient", "Median", "Mean", "MAP")][1]
-  is_at <- parameters::format_value(intercept[[coefficient]])
+  is_at <- insight::format_value(intercept[[coefficient]])
 
   intercept[[coefficient]] <- NULL
 
   text <- paste0(
     " The model's intercept is at ",
-    parameters::format_value(is_at),
+    insight::format_value(is_at),
     "."
   )
   text_full <- paste0(
     " The model's intercept",
     .find_intercept(model),
     " is at ",
-    parameters::format_value(is_at),
+    insight::format_value(is_at),
     " (",
     .text_parameters_indices(intercept, ci = ci),
     ")."
