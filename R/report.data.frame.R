@@ -192,7 +192,7 @@ report.character <- function(model, n_characters = 3, levels_percentage = FALSE,
 
 
   if (levels_percentage == TRUE) {
-    text <- paste0(n_char$Entry, ", ", parameters::format_value(n_char$percentage_Entry), "%")
+    text <- paste0(n_char$Entry, ", ", insight::format_value(n_char$percentage_Entry), "%")
   } else {
     text <- paste0(n_char$Entry, ", n = ", n_char$n_Entry)
   }
@@ -220,7 +220,7 @@ report.character <- function(model, n_characters = 3, levels_percentage = FALSE,
 
 
   text_n_Missing <- paste0(table_full$n_Missing[1], " missing")
-  text_percentage_Missing <- paste0(parameters::format_value(table_full$percentage_Missing[1]), "% missing")
+  text_percentage_Missing <- paste0(insight::format_value(table_full$percentage_Missing[1]), "% missing")
   if (missing_percentage == TRUE) {
     text_full <- paste0(text_full, "(", text_percentage_Missing, ").")
     table <- .remove_columns(table, "n_Missing")
@@ -306,7 +306,7 @@ report.factor <- function(model, levels_percentage = FALSE, ...) {
 
   text_levels <- paste0(table_full$Level)
   text_n_Obs <- paste0("n = ", table_full$n_Obs)
-  text_percentage_Obs <- paste0(parameters::format_value(table_full$percentage_Obs), "%")
+  text_percentage_Obs <- paste0(insight::format_value(table_full$percentage_Obs), "%")
 
 
   text_full <- paste0(
@@ -405,19 +405,19 @@ report.numeric <- function(model, median = FALSE, dispersion = TRUE, range = TRU
   # Text --------------------------------------------------------------------
 
   # Centrality
-  text_mean <- paste0("Mean = ", parameters::format_value(table_full$Mean[1]))
-  text_median <- paste0("Median = ", parameters::format_value(table_full$Median[1]))
+  text_mean <- paste0("Mean = ", insight::format_value(table_full$Mean[1]))
+  text_median <- paste0("Median = ", insight::format_value(table_full$Median[1]))
 
   # Dispersion
-  text_sd <- parameters::format_value(table_full$SD[1])
-  text_mad <- parameters::format_value(table_full$MAD[1])
+  text_sd <- insight::format_value(table_full$SD[1])
+  text_mad <- insight::format_value(table_full$MAD[1])
 
   # Range
-  text_range <- paste0(", [", parameters::format_value(table_full$Min[1]), ", ", parameters::format_value(table_full$Max[1]), "]")
+  text_range <- paste0(", [", insight::format_value(table_full$Min[1]), ", ", insight::format_value(table_full$Max[1]), "]")
 
   # Missings
   if (missing_percentage == TRUE) {
-    text_missing <- paste0(", ", parameters::format_value(table_full$percentage_Missing[1], 1), "% missing.")
+    text_missing <- paste0(", ", insight::format_value(table_full$percentage_Missing[1], 1), "% missing.")
   } else {
     text_missing <- paste0(", ", table_full$n_Missing[1], " missing.")
   }

@@ -143,7 +143,7 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
     text <- paste0(
       text,
       "beta = ",
-      parameters::format_value(parameters$Coefficient)
+      insight::format_value(parameters$Coefficient)
     )
   }
 
@@ -151,7 +151,7 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
     text <- paste0(
       text,
       "Difference = ",
-      parameters::format_value(parameters$Difference)
+      insight::format_value(parameters$Difference)
     )
   }
 
@@ -159,7 +159,7 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
     text <- paste0(
       .add_comma(text),
       "SE = ",
-      parameters::format_value(parameters$SE)
+      insight::format_value(parameters$SE)
     )
   }
 
@@ -167,7 +167,7 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
     text <- paste0(
       text,
       "median = ",
-      parameters::format_value(parameters$Median)
+      insight::format_value(parameters$Median)
     )
   }
 
@@ -175,7 +175,7 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
     text <- paste0(
       .add_comma(text),
       "MAD = ",
-      parameters::format_value(parameters$MAD)
+      insight::format_value(parameters$MAD)
     )
   }
 
@@ -183,7 +183,7 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
     text <- paste0(
       .add_comma(text),
       "mean = ",
-      parameters::format_value(parameters$Mean)
+      insight::format_value(parameters$Mean)
     )
   }
 
@@ -191,7 +191,7 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
     text <- paste0(
       .add_comma(text),
       "SD = ",
-      parameters::format_value(parameters$SD)
+      insight::format_value(parameters$SD)
     )
   }
 
@@ -199,7 +199,7 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
     text <- paste0(
       .add_comma(text),
       "MAP = ",
-      parameters::format_value(parameters$MAP)
+      insight::format_value(parameters$MAP)
     )
   }
 
@@ -225,7 +225,7 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
     text <- paste0(
       .add_comma(text),
       "std. beta = ",
-      parameters::format_value(parameters$Std_Coefficient)
+      insight::format_value(parameters$Std_Coefficient)
     )
   }
 
@@ -233,7 +233,7 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
     text <- paste0(
       .add_comma(text),
       "std. SE = ",
-      parameters::format_value(parameters$Std_SE)
+      insight::format_value(parameters$Std_SE)
     )
   }
 
@@ -241,7 +241,7 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
     text <- paste0(
       .add_comma(text),
       "std. median = ",
-      parameters::format_value(parameters$Std_Median)
+      insight::format_value(parameters$Std_Median)
     )
   }
 
@@ -249,7 +249,7 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
     text <- paste0(
       .add_comma(text),
       "std. MAD = ",
-      parameters::format_value(parameters$Std_MAD)
+      insight::format_value(parameters$Std_MAD)
     )
   }
 
@@ -257,7 +257,7 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
     text <- paste0(
       .add_comma(text),
       "std. mean = ",
-      parameters::format_value(parameters$Std_Mean)
+      insight::format_value(parameters$Std_Mean)
     )
   }
 
@@ -265,7 +265,7 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
     text <- paste0(
       .add_comma(text),
       "std. SD = ",
-      parameters::format_value(parameters$Std_SD)
+      insight::format_value(parameters$Std_SD)
     )
   }
 
@@ -273,7 +273,7 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
     text <- paste0(
       .add_comma(text),
       "std. MAP = ",
-      parameters::format_value(parameters$Std_MAP)
+      insight::format_value(parameters$Std_MAP)
     )
   }
 
@@ -299,12 +299,12 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
     diagnostic <- ifelse(convergence == "converged",
       paste0(
         " The algorithm successfuly converged (Rhat = ",
-        parameters::format_value(parameters$Rhat, digits = 3),
+        insight::format_value(parameters$Rhat, digits = 3),
         ")"
       ),
       paste0(
         " However, the algorithm might not have successfuly converged (Rhat = ",
-        parameters::format_value(parameters$Rhat, digits = 3),
+        insight::format_value(parameters$Rhat, digits = 3),
         ")"
       )
     )
@@ -315,27 +315,27 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
         paste0(
           diagnostic,
           " and the estimates can be considered as stable (ESS = ",
-          parameters::format_value(parameters$ESS, digits = 0),
+          insight::format_value(parameters$ESS, digits = 0),
           ")."
         ),
         ifelse(stability == "sufficient" & convergence != "converged",
           paste0(
             diagnostic,
             " even though the estimates can be considered as stable (ESS = ",
-            parameters::format_value(parameters$ESS, digits = 0),
+            insight::format_value(parameters$ESS, digits = 0),
             ")."
           ),
           ifelse(stability != "sufficient" & convergence == "converged",
             paste0(
               diagnostic,
               " but the estimates cannot be considered as stable (ESS = ",
-              parameters::format_value(parameters$ESS, digits = 0),
+              insight::format_value(parameters$ESS, digits = 0),
               ")."
             ),
             paste0(
               diagnostic,
               " and the estimates cannot be considered as stable (ESS = ",
-              parameters::format_value(parameters$ESS, digits = 0),
+              insight::format_value(parameters$ESS, digits = 0),
               ")."
             )
           )

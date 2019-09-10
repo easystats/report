@@ -39,7 +39,7 @@ report.htest <- function(model, effsize = "cohen1988", ...) {
       " (",
       estimate,
       " = ",
-      parameters::format_value(table[[estimate]]),
+      insight::format_value(table[[estimate]]),
       ", ",
       parameters::format_p(values$p, stars = FALSE),
       ")."
@@ -50,7 +50,7 @@ report.htest <- function(model, effsize = "cohen1988", ...) {
       table_full$Difference <- model$estimate - model$null.value
       means <- paste0(
         " (mean = ",
-        parameters::format_value(model$estimate),
+        insight::format_value(model$estimate),
         ")"
       )
       vars <- paste0(model$data.name, means, " and mu = ", model$null.value)
@@ -60,11 +60,11 @@ report.htest <- function(model, effsize = "cohen1988", ...) {
         c(
           paste0(
             names(model$estimate), " = ",
-            parameters::format_value(model$estimate)
+            insight::format_value(model$estimate)
           ),
           paste0(
             "difference = ",
-            parameters::format_value(model$estimate[1] - model$estimate[2])
+            insight::format_value(model$estimate[1] - model$estimate[2])
           )
         ),
         collapse = ", "
@@ -81,9 +81,9 @@ report.htest <- function(model, effsize = "cohen1988", ...) {
       " is ",
       interpret_p(model$p.value),
       " (t(",
-      parameters::format_value(model$parameter, protect_integers = TRUE),
+      insight::format_value(model$parameter, protect_integers = TRUE),
       ") = ",
-      parameters::format_value(model$statistic),
+      insight::format_value(model$statistic),
       ", ",
       parameters::format_ci(model$conf.int[1], model$conf.int[2], ci = attributes(model$conf.int)$conf.level),
       ", ",

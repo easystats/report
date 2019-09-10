@@ -16,7 +16,7 @@ text_performance.lm <- function(model, performance, ...) {
       "The model's explanatory power is ",
       interpret_r2(performance$R2, rules = "cohen1988"),
       " (R2 = ",
-      parameters::format_value(performance$R2)
+      insight::format_value(performance$R2)
     )
     text_full <- paste0(
       "\n\nThe model explains a ",
@@ -24,13 +24,13 @@ text_performance.lm <- function(model, performance, ...) {
       " and ",
       interpret_r2(performance$R2, rules = "cohen1988"),
       " proportion of variance (R2 = ",
-      parameters::format_value(performance$R2),
+      insight::format_value(performance$R2),
       ", F(",
-      parameters::format_value(r2$df, protect_integers = TRUE),
+      insight::format_value(r2$df, protect_integers = TRUE),
       ", ",
-      parameters::format_value(r2$df_residual, protect_integers = TRUE),
+      insight::format_value(r2$df_residual, protect_integers = TRUE),
       ") = ",
-      parameters::format_value(r2$`F`),
+      insight::format_value(r2$`F`),
       ", ",
       parameters::format_p(r2$p)
     )
@@ -38,12 +38,12 @@ text_performance.lm <- function(model, performance, ...) {
     if ("R2_adjusted" %in% names(performance)) {
       text <- paste0(
         text, ", adj. R2 = ",
-        parameters::format_value(performance$R2_adjusted),
+        insight::format_value(performance$R2_adjusted),
         ")."
       )
       text_full <- paste0(
         text_full, ", adj. R2 = ",
-        parameters::format_value(performance$R2_adjusted),
+        insight::format_value(performance$R2_adjusted),
         ")."
       )
     } else {
@@ -78,7 +78,7 @@ text_performance.glm <- function(model, performance, ...) {
       "The model's explanatory power is ",
       interpret_r2(performance$R2_Tjur, rules = "cohen1988"),
       " (Tjur's R2 = ",
-      parameters::format_value(performance$R2_Tjur),
+      insight::format_value(performance$R2_Tjur),
       ")."
     )
   }
@@ -87,7 +87,7 @@ text_performance.glm <- function(model, performance, ...) {
       "The model's explanatory power is ",
       interpret_r2(performance$R2_Nagelkerke, rules = "cohen1988"),
       " (Nagelkerke's R2 = ",
-      parameters::format_value(performance$R2_Nagelkerke),
+      insight::format_value(performance$R2_Nagelkerke),
       ")."
     )
   }
@@ -96,7 +96,7 @@ text_performance.glm <- function(model, performance, ...) {
       "The model's explanatory power is ",
       interpret_r2(performance$R2_McFadden, rules = "cohen1988"),
       " (McFadden's R2 = ",
-      parameters::format_value(performance$R2_McFadden),
+      insight::format_value(performance$R2_McFadden),
       ")."
     )
   }
@@ -124,7 +124,7 @@ text_performance.merMod <- function(model, performance, ...) {
       "The model's total explanatory power is ",
       interpret_r2(performance$R2_conditional, rules = "cohen1988"),
       " (conditional R2 = ",
-      parameters::format_value(performance$R2_conditional),
+      insight::format_value(performance$R2_conditional),
       ")"
     )
   }
@@ -140,7 +140,7 @@ text_performance.merMod <- function(model, performance, ...) {
       text,
       " part related to the",
       " fixed effects alone (marginal R2) is of ",
-      parameters::format_value(performance$R2_marginal),
+      insight::format_value(performance$R2_marginal),
       "."
     )
   } else {
@@ -186,7 +186,7 @@ text_performance.stanreg <- function(model, performance, ...) {
       "The model's explanatory power is ",
       interpret_r2(r2_val, rules = "cohen1988"),
       " (R2's median = ",
-      parameters::format_value(r2_val)
+      insight::format_value(r2_val)
     )
 
 
@@ -200,12 +200,12 @@ text_performance.stanreg <- function(model, performance, ...) {
     if ("R2_adjusted" %in% names(performance)) {
       text <- paste0(
         text, ", adj. R2 = ",
-        parameters::format_value(performance$R2_adjusted),
+        insight::format_value(performance$R2_adjusted),
         ")."
       )
       text_full <- paste0(
         text_full, ", adj. R2 = ",
-        parameters::format_value(performance$R2_adjusted),
+        insight::format_value(performance$R2_adjusted),
         ")."
       )
     }
@@ -225,7 +225,7 @@ text_performance.stanreg <- function(model, performance, ...) {
       text,
       "Within this model, the explanatory power related to the",
       " fixed effects alone (marginal R2's median) is of ",
-      parameters::format_value(r2_val),
+      insight::format_value(r2_val),
       "."
     )
 
@@ -233,7 +233,7 @@ text_performance.stanreg <- function(model, performance, ...) {
       text_full,
       "Within this model, the explanatory power related to the",
       " fixed effects alone (marginal R2's median) is of ",
-      parameters::format_value(r2_val),
+      insight::format_value(r2_val),
       " (",
       parameters::format_ci(r2_ci$CI_low, r2_ci$CI_high, r2_ci$CI / 100),
       ")."

@@ -148,7 +148,7 @@ report.estimate_smooth <- function(model, ...) {
     paste0(
       interpret_direction(parameters$Trend),
       " trend (linear coefficient = ",
-      parameters::format_value(parameters$Trend),
+      insight::format_value(parameters$Trend),
       ")"
     ),
     "part"
@@ -159,11 +159,11 @@ report.estimate_smooth <- function(model, ...) {
     "A ",
     parameters$trend_text,
     " starting at ",
-    parameters::format_value(parameters$Start),
+    insight::format_value(parameters$Start),
     " and ending at ",
-    parameters::format_value(parameters$End),
+    insight::format_value(parameters$End),
     " (",
-    parameters::format_value(parameters$Size * 100),
+    insight::format_value(parameters$Size * 100),
     "% of the total size)"
   )
   text

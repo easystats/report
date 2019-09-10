@@ -11,7 +11,7 @@ text_parameters.estimate_contrasts <- function(model, parameters = NULL, prefix 
       parameters$Level1, " and ",
       parameters$Level2, " when ",
       attributes(model)$modulate, " is ",
-      parameters::format_value(parameters[[attributes(model)$modulate]], protect_integers = TRUE)
+      insight::format_value(parameters[[attributes(model)$modulate]], protect_integers = TRUE)
     )
   } else {
     parameters$Parameter <- paste0(
@@ -47,7 +47,7 @@ text_parameters.estimate_slopes <- function(model, parameters = NULL, prefix = "
       "The marginal effect at ",
       parameters[[levels]], " when ",
       attributes(model)$modulate, " is ",
-      parameters::format_value(parameters[[attributes(model)$modulate]], protect_integers = TRUE)
+      insight::format_value(parameters[[attributes(model)$modulate]], protect_integers = TRUE)
     )
   } else {
     parameters$Parameter <- paste0(
@@ -85,7 +85,7 @@ text_parameters.estimate_means <- function(model, parameters = NULL, prefix = " 
     parameters$Parameter <- paste0(
       parameters[, levels], " when ",
       attributes(model)$modulate, " is ",
-      parameters::format_value(parameters[[attributes(model)$modulate]], protect_integers = TRUE)
+      insight::format_value(parameters[[attributes(model)$modulate]], protect_integers = TRUE)
     )
   } else {
     parameters$Parameter <- parameters[, levels]
