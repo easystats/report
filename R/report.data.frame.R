@@ -418,18 +418,18 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
   text_mad <- insight::format_value(table_full$MAD[1])
 
   # Range
-  text_range <- paste0(parameters::format_value(table_full$Min[1], protect_integers = TRUE), "-", parameters::format_value(table_full$Max[1], protect_integers = TRUE))
+  text_range <- paste0(insight::format_value(table_full$Min[1], protect_integers = TRUE), "-", insight::format_value(table_full$Max[1], protect_integers = TRUE))
 
   # Distribution
   text_distribution <- paste0("Skewness = ",
-                              parameters::format_value(table_full$Skewness[1]),
+                              insight::format_value(table_full$Skewness[1]),
                               ", Kurtosis = ",
-                              parameters::format_value(table_full$Kurtosis[1]))
+                              insight::format_value(table_full$Kurtosis[1]))
 
   # Missings
   if(!is.null(missing_percentage)){
     if (missing_percentage == TRUE) {
-      text_missing <- paste0(", ", parameters::format_value(table_full$percentage_Missing[1], protect_integers = TRUE), "% missing")
+      text_missing <- paste0(", ", insight::format_value(table_full$percentage_Missing[1], protect_integers = TRUE), "% missing")
     } else {
       text_missing <- paste0(", ", table_full$n_Missing[1], " missing")
     }
