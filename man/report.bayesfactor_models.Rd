@@ -17,7 +17,7 @@
 Create a report of Bayes factors for model comparison.
 }
 \examples{
-\dontrun{
+\donttest{
 library(bayestestR)
 library(report)
 

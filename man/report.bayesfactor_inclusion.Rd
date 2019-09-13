@@ -18,7 +18,7 @@
 Create a report of inclusion Bayes factors.
 }
 \examples{
-\dontrun{
+\donttest{
 library(bayestestR)
 library(report)
 
