@@ -418,7 +418,7 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
   text_mad <- insight::format_value(table_full$MAD[1])
 
   # Range
-  text_range <- paste0(insight::format_value(table_full$Min[1], protect_integers = TRUE), "-", insight::format_value(table_full$Max[1], protect_integers = TRUE))
+  text_range <- paste0("[", insight::format_value(table_full$Min[1], protect_integers = TRUE), ", ", insight::format_value(table_full$Max[1], protect_integers = TRUE), "]")
 
   # Distribution
   text_distribution <- paste0("Skewness = ",
@@ -484,7 +484,7 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
 
   # Range
   if (range == TRUE) {
-    text <- paste0(text, ", range: ", text_range)
+    text <- paste0(text, ", range = ", text_range)
   } else {
     table <- .remove_columns(table, c("Min", "Max"))
   }

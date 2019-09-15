@@ -48,6 +48,8 @@ report_participants <- function(data, age = "Age", sex = "Sex", participant = NU
       "Age" = stats::aggregate(data[[age]], by=list(data[[participant]]), FUN=mean)[[2]],
       "Sex" = stats::aggregate(data[[sex]], by=list(data[[participant]]), FUN=head, n = 1)[[2]]
     )
+    age <- "Age"
+    sex = "Sex"
   }
 
   if(spell_n){
