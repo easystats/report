@@ -35,9 +35,6 @@ report.lavaan <- function(model, effsize = "funder2019", ci = 0.95, standardize 
     performance[names(performance) %in% c("Chisq", "GFI", "AGFI", "NFI", "NNFI", "CFI", "RMSEA", "SRMR", 'RFI', 'PNFI', "IFI", "RNI", "AIC", "BIC", "BIC (adj.)")]
   )
 
-
-
-
 }
 
 

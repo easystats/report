@@ -13,11 +13,11 @@
 
 \item{effsize}{Effect size interpretation set of rules.}
 
-\item{omega_squared}{Compute \link[=eta_squared]{omega squared} as index of effect size. Can be "partial" (adjusted for effect size) or "raw".}
+\item{omega_squared}{Compute \link[parameters:eta_squared]{omega squared} as index of effect size. Can be "partial" (adjusted for effect size) or "raw".}
 
-\item{eta_squared}{Compute \link[=eta_squared]{eta squared} as index of effect size. Can be "partial" (adjusted for effect size) or "raw".}
+\item{eta_squared}{Compute \link[parameters:eta_squared]{eta squared} as index of effect size. Can be "partial" (adjusted for effect size) or "raw".}
 
-\item{epsilon_squared}{Compute \link[=eta_squared]{epsilon squared} as index of effect size.}
+\item{epsilon_squared}{Compute \link[parameters:eta_squared]{epsilon squared} as index of effect size.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

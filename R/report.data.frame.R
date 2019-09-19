@@ -35,11 +35,13 @@ report.data.frame <- function(model, median = FALSE, centrality = TRUE, dispersi
   text <- ""
   values <- list()
 
-  for (col in names(model)) {
+  for (i in 1:ncol(model)) {
+    col <- names(model)[i]
     r <- report(model[[col]], median = median, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, levels_percentage = levels_percentage, n_characters = n_characters, missing_percentage = missing_percentage)
 
     current_table <- r$table
     current_table$Variable <- col
+    current_table$.order <- i
     r$values$table <- current_table
     if(nrow(table) == 0){
       table <- current_table
@@ -50,6 +52,7 @@ report.data.frame <- function(model, median = FALSE, centrality = TRUE, dispersi
 
     current_table <- r$table_full
     current_table$Variable <- col
+    current_table$.order <- i
     r$values$table_full <- current_table
     if(nrow(table_full) == 0){
       table_full <- current_table
@@ -78,6 +81,13 @@ report.data.frame <- function(model, median = FALSE, centrality = TRUE, dispersi
     table_full <- .order_columns(table_full, c("Variable", "n_Obs"))
   }
 
+  # Reorder cols
+  table <- table[order(table$`.order`), ]
+  table$`.order` <- NULL
+  table_full <- table_full[order(table_full$`.order`), ]
+  table_full$`.order` <- NULL
+
+  # Concatenate text
   text <- paste0("The data contains ", nrow(model), " observations of the following variables:", text)
   text_full <- paste0("The data contains ", nrow(model), " observations of the following variables:", text_full)
 

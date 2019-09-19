@@ -23,7 +23,10 @@ Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr
 Imports:
-	insight (>= 0.4.0),
+	insight (>= 0.5.0),
+	bayestestR (>= 0.2.5),
+	performance (>= 0.3.0),
+	parameters (>= 0.1.0),
 	stats,
 	utils,
 	dplyr,
