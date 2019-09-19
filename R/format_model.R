@@ -20,7 +20,7 @@ format_model <- function(model) {
     type <- paste0(type, "Bayesian ")
   }
 
-  if (info$is_zeroinf) {
+  if (info$is_zero_inflated) {
     type <- paste0(type, "zero-inflated ")
   }
   # TODO: hurdle?
