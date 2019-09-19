@@ -233,7 +233,7 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
     text <- paste0(
       .add_comma(text),
       "std. difference = ",
-      parameters::format_value(parameters$Std_Difference)
+      insight::format_value(parameters$Std_Difference)
     )
   }
 

@@ -48,6 +48,8 @@ report_participants <- function(data, age = "Age", sex = "Sex", participant = NU
       "Age" = stats::aggregate(data[[age]], by=list(data[[participant]]), FUN=mean)[[2]],
       "Sex" = stats::aggregate(data[[sex]], by=list(data[[participant]]), FUN=head, n = 1)[[2]]
     )
+    age <- "Age"
+    sex = "Sex"
   }
 
   if(spell_n){
@@ -58,11 +60,11 @@ report_participants <- function(data, age = "Age", sex = "Sex", participant = NU
 
   text <- paste0(size,
          " participants (Mean age = ",
-         parameters::format_value(mean(data[[age]], na.rm = TRUE)),
+         insight::format_value(mean(data[[age]], na.rm = TRUE)),
          ", ",
          report(data[[age]], centrality = FALSE, missing_percentage = NULL, ...)$text,
          ", ",
-         parameters::format_value(length(data[[sex]][tolower(data[[sex]]) %in% c("female", "f")])/nrow(data)*100),
+         insight::format_value(length(data[[sex]][tolower(data[[sex]]) %in% c("female", "f")])/nrow(data)*100),
          "% females)")
 
   text

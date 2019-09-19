@@ -39,8 +39,15 @@ show_packages <- function(session) {
     stringsAsFactors = FALSE
   )
 
-  data[order(data$Package), ]
+  x <- data[order(data$Package), ]
+  row.names(x) <- NULL
+  class(x) <- c("report_packages", class(x))
+  x
 }
+
+
+
+
 
 #' @rdname show_packages
 #' @export
@@ -49,5 +56,25 @@ cite_packages <- function(session) {
   data$Package <- NULL
   data$Version <- NULL
 
-  as.data.frame(data[order(data$References), ])
+  x <- as.data.frame(data[order(data$References), ])
+  row.names(x) <- NULL
+  class(x) <- c("report_packages", class(x))
+  x
+}
+
+
+
+
+
+#' @export
+report.sessionInfo <- function(model, ...){
+  show_packages(model)
+}
+
+
+
+
+#' @export
+print.report_packages <- function(x, ...){
+  cat(insight::format_table(x, ...))
 }

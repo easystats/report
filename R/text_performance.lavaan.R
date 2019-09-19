@@ -17,7 +17,7 @@ text_performance.lm <- function(model, performance, ...) {
                    "The hypothesis of a good fit ",
                    sig,
                    "Chisq(",
-                   format_value(performance$Chisq_DoF))
+                   insight::format_value(performance$Chisq_DoF))
   }
 
   list(

@@ -7,6 +7,6 @@ test_that("report_participants", {
                      "Participant" = c("S1", "S1", "s2", "s2", "s3", "s3"))
 
 
-  testthat::expect_equal(nchar(report_participants(data, age = "Age", sex = "Sex", participant = "Participant")), 74)
-  testthat::expect_equal(nchar(report_participants(data, participant = "Participant", spell_n = TRUE)), 78)
+  testthat::expect_equal(nchar(report_participants(data, age = "Age", sex = "Sex", participant = "Participant")), 78)
+  testthat::expect_equal(nchar(report_participants(data, participant = "Participant", spell_n = TRUE)), 82)
 })

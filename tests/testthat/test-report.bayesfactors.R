@@ -3,19 +3,19 @@ context("bayesfactor_*")
 library(report)
 library(bayestestR)
 
-mo0 <- lm(Sepal.Length ~ 1, data = iris)
-mo1 <- lm(Sepal.Length ~ Species, data = iris)
-mo2 <- lm(Sepal.Length ~ Species + Petal.Length, data = iris)
-mo3 <- lm(Sepal.Length ~ Species * Petal.Length, data = iris)
+mod0 <- lm(Sepal.Length ~ 1, data = iris)
+mod1 <- lm(Sepal.Length ~ Species, data = iris)
+mod2 <- lm(Sepal.Length ~ Species + Petal.Length, data = iris)
+mod3 <- lm(Sepal.Length ~ Species * Petal.Length, data = iris)
 
-BFmodels <- bayesfactor_models(mo1, mo2, mo3, denominator = mo0)
+BFmodels <- bayesfactor_models(mod1, mod2, mod3, denominator = mod0)
 
-test_that("models", {
-  expect_known_value(report(BFmodels),"bf_mods",update = FALSE)
+testthat::test_that("models", {
+  testthat::expect_equal(nchar(report::to_text(report(BFmodels))), 178)
 })
 
 inc_bf <- bayesfactor_inclusion(BFmodels, prior_odds = c(1,2,3), match_models = TRUE)
 
-test_that("inclusion", {
-  expect_known_value(report(inc_bf),"bf_inc",update = FALSE)
+testthat::test_that("inclusion", {
+  testthat::expect_equal(nchar(report::to_text(report(inc_bf))), 292)
 })
