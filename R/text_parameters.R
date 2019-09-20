@@ -22,11 +22,11 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
 
 
 #' @keywords internal
-.text_parameters_names <- function(parameters, parameter_column = "Parameter") {
+.text_parameters_names <- function(parameters, parameter_column = "Parameter", label = "effect of ") {
   names <- parameters[[parameter_column]]
 
   # Regular effects
-  names[!grepl(" * ", names, fixed = TRUE)] <- paste0("The effect of ", names[!grepl(" * ", names, fixed = TRUE)])
+  names[!grepl(" * ", names, fixed = TRUE)] <- paste0("The ", label, names[!grepl(" * ", names, fixed = TRUE)])
 
   interactions <- names[grepl(" * ", names, fixed = TRUE)]
   interactions <- unlist(lapply(strsplit(interactions, " * ", fixed = TRUE), function(x) {
@@ -34,7 +34,7 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
     new <- paste(tail(x, 1), "on", new)
     new
   }))
-  names[grepl(" * ", names, fixed = TRUE)] <- paste0("The interaction effect of ", interactions)
+  names[grepl(" * ", names, fixed = TRUE)] <- paste0("The interaction ", label, interactions)
   names
 }
 
@@ -107,6 +107,8 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
       text <- interpret_d(parameters[[estimate_name]], rules = effsize)
     } else if (type == "logodds") {
       text <- interpret_odds(parameters[[estimate_name]], rules = effsize, log = TRUE)
+    } else if (type == "r") {
+      text <- interpret_r(parameters[[estimate_name]], rules = effsize)
     }
   } else {
     text <- ""
@@ -136,13 +138,15 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
 
 
 #' @keywords internal
-.text_parameters_indices <- function(parameters, ci = 0.89) {
+.text_parameters_indices <- function(parameters, ci = 0.89, coefname = "beta") {
+
   text <- ""
 
   if ("Coefficient" %in% names(parameters)) {
     text <- paste0(
       text,
-      "beta = ",
+      coefname,
+      " = ",
       insight::format_value(parameters$Coefficient)
     )
   }

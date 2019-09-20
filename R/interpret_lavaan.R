@@ -84,19 +84,6 @@ interpret_cfi <- function(x, rules = "default") {
 }
 
 
-#' @rdname interpret_gfi
-#' @export
-interpret_cfi <- function(x, rules = "default") {
-  if (is.rules(rules)) {
-    return(interpret(x, rules))
-  } else {
-    if (rules == "default") {
-      return(interpret(x, rules(c(0.90), c("poor", "satisfactory"))))
-    } else {
-      stop("rules must be 'default' or an object of type rules.")
-    }
-  }
-}
 
 
 #' @rdname interpret_gfi

@@ -23,8 +23,6 @@ interpret_nnfi(x, rules = "byrne1994")
 
 interpret_cfi(x, rules = "default")
 
-interpret_cfi(x, rules = "default")
-
 interpret_rmsea(x, rules = "default")
 
 interpret_srmr(x, rules = "default")
