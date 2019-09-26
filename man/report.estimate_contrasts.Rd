@@ -28,7 +28,6 @@ Create a report of an object from the \code{estimate} package.
 \examples{
 library(estimate)
 library(report)
-library(lme4)
 
 data <- iris
 data$Group <- ifelse(data$Sepal.Width > 3, "A","B")

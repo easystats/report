@@ -15,6 +15,8 @@
   perf_names[perf_names == "R2_adjusted"] <- "R2 (adj.)"
   perf_names[perf_names == "R2_Tjur"] <- "Tjur's R2"
   perf_names[perf_names == "BIC_adjusted"] <- "BIC (adj.)"
+  perf_names[perf_names == "R2_conditional"] <- "R2 (conditional)"
+  perf_names[perf_names == "R2_marginal"] <- "R2 (marginal)"
 
 
   # add performance
