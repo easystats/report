@@ -33,7 +33,7 @@ text_parameters.lavaan <- function(model, parameters = NULL, prefix = "  - ", ef
       significance = .text_parameters_significance(params),
       indices = .text_parameters_indices(params, ci = attributes(parameters)$ci)
     )
-    text_loadings <- paste0(paste0(prefix, text_loadings), collapse = "\n")
+    text_loadings <- paste0("The loadings were the following:\n", paste0(paste0(prefix, text_loadings), collapse = "\n"))
   } else{
     text_loadings <- ""
   }
@@ -49,7 +49,7 @@ text_parameters.lavaan <- function(model, parameters = NULL, prefix = "  - ", ef
       significance = .text_parameters_significance(params),
       indices = .text_parameters_indices(params[names(params)[names(params) != "Std_Coefficient"]], ci = attributes(parameters)$ci, coefname = "r")
     )
-    text_correlations <- paste0(paste0(prefix, text_correlations), collapse = "\n")
+    text_correlations <- paste0("The correlations presented the following characteristics:\n", paste0(paste0(prefix, text_correlations), collapse = "\n"))
   } else{
     text_correlations <- ""
   }
@@ -65,7 +65,7 @@ text_parameters.lavaan <- function(model, parameters = NULL, prefix = "  - ", ef
       significance = .text_parameters_significance(params),
       indices = .text_parameters_indices(params, ci = attributes(parameters)$ci)
     )
-    text_regressions <- paste0(paste0(prefix, text_regressions), collapse = "\n")
+    text_regressions <- paste0("The regression parameters were estimated as follows:\n", paste0(paste0(prefix, text_regressions), collapse = "\n"))
   } else{
     text_regressions <- ""
   }

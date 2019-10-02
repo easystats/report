@@ -3,23 +3,22 @@ text_model.lavaan <- function(model, standardize = TRUE, effsize = "funder2019",
 
 
 
-  text_full <- paste0("We ran a ",
+  text_full <- paste0("The ",
                  toupper(model@call$model.type),
                  " model (estimated using ",
                  model@Model@estimator,
                  " and the ",
                  model@Options$optim.method,
-                 " optimizer)."
+                 " optimizer)"
                  )
 
   text <- paste0("We ran a ",
                  toupper(model@call$model.type),
-                 " model."
+                 " model"
   )
 
 
   convergence <- paste0(
-    "The model ",
     ifelse(model@optim$converged, "successfuly converged", "dit not converge"),
     " (AIC = ",
     insight::format_value(model@loglik$AIC),
