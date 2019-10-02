@@ -14,7 +14,9 @@
 #'                speed   =~ x7 + x8 + x9 "
 #'
 #' model <- lavaan::cfa(structure, data = HolzingerSwineford1939)
-#' report(model)
+#' r <- report(model)
+#' to_fulltext(r)
+#' to_table(r)
 #' @export
 report.lavaan <- function(model, effsize = "funder2019", ci = 0.95, standardize = TRUE, performance_metrics = "all", ...) {
 
@@ -64,6 +66,3 @@ report.lavaan <- function(model, effsize = "funder2019", ci = 0.95, standardize 
   as.report(out)
 
 }
-
-
-

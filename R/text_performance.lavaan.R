@@ -7,14 +7,14 @@ text_performance.lavaan <- function(model, performance, ...) {
 
   # Chisq
   if(all(c("Chisq_p", "Chisq", "Chisq_df") %in% names(performance))){
-    sig <- "can be rejected"
+    sig <- "significantly"
     if(performance$Chisq_p > .05){
-      sig <- "is plausible"
+      sig <- "not significantly"
     }
     text <- paste0(text,
-                   "The hypothesis of a good fit ",
+                   "The model is ",
                    sig,
-                   " (Chi2(",
+                   " different from a baseline model (Chi2(",
                    insight::format_value(performance$Chisq_df, protect_integers = TRUE),
                    ") = ",
                    insight::format_value(performance$Chisq),

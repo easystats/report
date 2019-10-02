@@ -32,5 +32,7 @@ structure <- " visual  =~ x1 + x2 + x3
                speed   =~ x7 + x8 + x9 "
 
 model <- lavaan::cfa(structure, data = HolzingerSwineford1939)
-report(model)
+r <- report(model)
+to_fulltext(r)
+to_table(r)
 }

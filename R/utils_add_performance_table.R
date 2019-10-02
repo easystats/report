@@ -32,5 +32,6 @@
 
 
   table <- merge(table, perf_vertical, by = name_parameter, all = TRUE, sort = FALSE)
+  class(table) <- class(parameters)
   table
 }
