@@ -16,10 +16,6 @@
 
 \item{ci}{Confidence Interval (CI) level. Default to 0.95 (95\%).}
 
-\item{standardize}{Add standardized parameters. Can be \code{FALSE} or a character indicating the standardization method (see \code{\link[=parameters_standardize]{parameters_standardize()}}), such as \code{"refit"}, \code{"2sd"}, \code{"smart"} or \code{"classic"}. The two former are based on model refitting using a standardized version of data. It is the most accurate, although computationally heavy (as it must re-fit a second model). The "smart" and "classic" are post-hoc methods, fast, but inaccurate (especially if the model includes interactions).}
-
-\item{standardize_robust}{Robust standardization. See \code{\link[=parameters_standardize]{parameters_standardize}}.}
-
 \item{bootstrap}{Should estimates be based on bootstrapped model? If \code{TRUE}, then arguments of \link[=model_parameters.stanreg]{Bayesian regressions} apply (see also \code{\link[=parameters_bootstrap]{parameters_bootstrap()}}).}
 
 \item{iterations}{The number of bootstrap replicates. This only apply in the case of bootstrapped frequentist models.}
@@ -30,7 +26,7 @@
 
 \item{ci_method}{Method for computing confidence intervals (CI). See \code{\link[=ci]{ci()}}.}
 
-\item{...}{Arguments passed to or from other methods (e.g., to \code{\link[=standardize.lm]{standardize()}}).}
+\item{...}{Arguments passed to or from other methods.}
 }
 \description{
 Create a report of a mixed model (lme4).

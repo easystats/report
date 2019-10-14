@@ -5,7 +5,8 @@
 \title{Reporting the participant data}
 \usage{
 report_participants(data, age = "Age", sex = "Sex",
-  participants = NULL, group = NULL, spell_n = FALSE, ...)
+  education = "Education", participants = NULL, group = NULL,
+  spell_n = FALSE, ...)
 }
 \arguments{
 \item{data}{A dataframe.}
@@ -31,6 +32,16 @@ data <- data.frame("Age" = c(22, 23, 54, 21, 8, 42),
                    "Sex" = c("F", "F", "M", "M", "M", "F"))
 
 report_participants(data, age = "Age", sex = "Sex")
+
+# Years of education (relative to high school graduation)
+data$Education <- c(0, 8, -3, -5, 3, 5)
+report_participants(data, age = "Age", sex = "Sex", education = "Education")
+
+# Education as factor
+data$Education2 <- c("Bachelor", "PhD", "Highschool",
+                     "Highschool", "Bachelor", "Bachelor")
+report_participants(data, age = "Age", sex = "Sex", education = "Education2")
+
 
 # Repeated measures data
 data <- data.frame("Age" = c(22, 22, 54, 54, 8, 8),

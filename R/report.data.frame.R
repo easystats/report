@@ -333,10 +333,10 @@ report.factor <- function(model, levels_percentage = FALSE, ...) {
   # Selection ---------------------------------------------------------------
   table <- table_full
   if (levels_percentage == TRUE) {
-    text <- paste0(text_levels, " (", text_percentage_Obs, ")")
+    text <- paste0(text_levels, ", ", text_percentage_Obs)
   } else {
     table <- .remove_columns(table, "percentage_Obs")
-    text <- paste0(text_levels, " (", text_n_Obs, ")")
+    text <- paste0(text_levels, ", ", text_n_Obs)
   }
 
 
