@@ -119,7 +119,7 @@ report_participants <- function(data, age = "Age", sex = "Sex", education = "Edu
     ""
   } else{
     paste0(insight::format_value(length(data[[sex]][tolower(data[[sex]]) %in% c("female", "f")])/nrow(data)*100),
-    "% females)")
+    "% females")
   }
 
   text_education <- if(all(is.na(data[[education]]))){
