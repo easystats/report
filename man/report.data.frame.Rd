@@ -9,10 +9,10 @@
 \usage{
 \method{report}{data.frame}(model, median = FALSE, centrality = TRUE,
   dispersion = TRUE, range = TRUE, distribution = FALSE,
-  levels_percentage = FALSE, n_characters = 3,
+  levels_percentage = FALSE, n_entries = 3,
   missing_percentage = FALSE, ...)
 
-\method{report}{character}(model, n_characters = 3,
+\method{report}{character}(model, n_entries = 3,
   levels_percentage = FALSE, missing_percentage = FALSE, ...)
 
 \method{report}{factor}(model, levels_percentage = FALSE, ...)
@@ -36,7 +36,7 @@
 
 \item{levels_percentage}{Show characters entries and factor levels by number (default) or percentage.}
 
-\item{n_characters}{Number of different character entries to show. Can be "all".}
+\item{n_entries}{Number of different character entries to show. Can be "all".}
 
 \item{missing_percentage}{Show missings by number (default) or percentage.}
 
@@ -55,9 +55,9 @@ to_table(r)
 to_fulltable(r)
 x <- c("A", "B", "C", "A", "B", "B", "D", "E", "B", "D", "A")
 report(x)
-report(x, n_characters = 2, levels_percentage = TRUE, missing_percentage = TRUE)
+report(x, n_entries = 2, levels_percentage = TRUE, missing_percentage = TRUE)
 to_fulltext(report(x))
-to_table(report(x, n_characters = "all"))
+to_table(report(x, n_entries = "all"))
 to_fulltable(report(x))
 x <- factor(rep(c("A", "B", "C"), 10))
 report(x)

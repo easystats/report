@@ -8,7 +8,7 @@
 #' @param dispersion Show index of dispersion (\link{sd} or \link{mad}).
 #' @param range Show range.
 #' @param distribution Returns Kurtosis and Skewness in table.
-#' @param n_characters Number of different character entries to show. Can be "all".
+#' @param n_entries Number of different character entries to show. Can be "all".
 #' @param levels_percentage Show characters entries and factor levels by number (default) or percentage.
 #' @param missing_percentage Show missings by number (default) or percentage.
 #' @param ... Arguments passed to or from other methods.
@@ -26,7 +26,7 @@
 #' @seealso report
 #'
 #' @export
-report.data.frame <- function(model, median = FALSE, centrality = TRUE, dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = FALSE, n_characters = 3, missing_percentage = FALSE, ...) {
+report.data.frame <- function(model, median = FALSE, centrality = TRUE, dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = FALSE, n_entries = 3, missing_percentage = FALSE, ...) {
 
   # Table -------------------------------------------------------------------
   table_full <- data.frame()
@@ -37,7 +37,7 @@ report.data.frame <- function(model, median = FALSE, centrality = TRUE, dispersi
 
   for (i in 1:ncol(model)) {
     col <- names(model)[i]
-    r <- report(model[[col]], median = median, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, levels_percentage = levels_percentage, n_characters = n_characters, missing_percentage = missing_percentage)
+    r <- report(model[[col]], median = median, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, levels_percentage = levels_percentage, n_entries = n_entries, missing_percentage = missing_percentage)
 
     current_table <- r$table
     current_table$Variable <- col
@@ -108,7 +108,7 @@ report.data.frame <- function(model, median = FALSE, centrality = TRUE, dispersi
 
 #' @import dplyr
 #' @export
-report.grouped_df <- function(model, median = FALSE, centrality = TRUE, dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = FALSE, n_characters = 3, missing_percentage = FALSE, ...) {
+report.grouped_df <- function(model, median = FALSE, centrality = TRUE, dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = FALSE, n_entries = 3, missing_percentage = FALSE, ...) {
   groups <- dplyr::group_vars(model)
   ungrouped_x <- dplyr::ungroup(model)
   xlist <- split(ungrouped_x, ungrouped_x[groups], sep = " - ")
@@ -129,7 +129,7 @@ report.grouped_df <- function(model, median = FALSE, centrality = TRUE, dispersi
   for (group in names(xlist)) {
     data <- xlist[[group]]
     data <- .remove_columns(data, groups)
-    r <- report(data, median = median, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, levels_percentage = levels_percentage, n_characters = n_characters, missing_percentage = missing_percentage)
+    r <- report(data, median = median, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, levels_percentage = levels_percentage, n_entries = n_entries, missing_percentage = missing_percentage)
 
     current_text <- ""
     current_text_full <- ""
@@ -182,20 +182,20 @@ report.grouped_df <- function(model, median = FALSE, centrality = TRUE, dispersi
 #' @examples
 #' x <- c("A", "B", "C", "A", "B", "B", "D", "E", "B", "D", "A")
 #' report(x)
-#' report(x, n_characters = 2, levels_percentage = TRUE, missing_percentage = TRUE)
+#' report(x, n_entries = 2, levels_percentage = TRUE, missing_percentage = TRUE)
 #' to_fulltext(report(x))
-#' to_table(report(x, n_characters = "all"))
+#' to_table(report(x, n_entries = "all"))
 #' to_fulltable(report(x))
 #' @seealso report
 #'
 #' @export
-report.character <- function(model, n_characters = 3, levels_percentage = FALSE, missing_percentage = FALSE, ...) {
+report.character <- function(model, n_entries = 3, levels_percentage = FALSE, missing_percentage = FALSE, ...) {
   n_char <- as.data.frame(sort(table(model), decreasing = TRUE))
   names(n_char) <- c("Entry", "n_Entry")
   n_char$percentage_Entry <- n_char$n_Entry / length(model)
 
-  if (n_characters == "all" | n_characters > nrow(n_char)) {
-    n_characters <- nrow(n_char)
+  if (n_entries == "all" | n_entries > nrow(n_char)) {
+    n_entries <- nrow(n_char)
   }
 
   # Table -------------------------------------------------------------------
@@ -209,12 +209,12 @@ report.character <- function(model, n_characters = 3, levels_percentage = FALSE,
 
 
   if (levels_percentage == TRUE) {
-    text <- paste0(n_char$Entry, ", ", insight::format_value(n_char$percentage_Entry), "%")
+    text <- paste0(n_char$Entry, ", ", insight::format_value(n_char$percentage_Entry * 100), "%")
   } else {
     text <- paste0(n_char$Entry, ", n = ", n_char$n_Entry)
   }
 
-  text <- text[1:n_characters]
+  text <- text[1:n_entries]
   text <- paste0(text, collapse = "; ")
   table_full$Entries <- text
   table <- table_full
@@ -226,11 +226,11 @@ report.character <- function(model, n_characters = 3, levels_percentage = FALSE,
     text <- paste0(nrow(n_char), " entry: ", text)
   }
 
-  if (nrow(n_char) - n_characters == 1) {
-    text <- paste0(text, " and ", nrow(n_char) - n_characters, " other")
+  if (nrow(n_char) - n_entries == 1) {
+    text <- paste0(text, " and ", nrow(n_char) - n_entries, " other")
   }
-  if (nrow(n_char) - n_characters > 1) {
-    text <- paste0(text, " and ", nrow(n_char) - n_characters, " others")
+  if (nrow(n_char) - n_entries > 1) {
+    text <- paste0(text, " and ", nrow(n_char) - n_entries, " others")
   }
 
   text_full <- text

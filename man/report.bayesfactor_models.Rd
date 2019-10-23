@@ -9,8 +9,6 @@
 \arguments{
 \item{model}{Object of class \code{bayesfactor_inclusion}.}
 
-\item{rules}{Can be "jeffreys1961" (default), "raftery1995" or custom set of \code{\link{rules}}.}
-
 \item{...}{Arguments passed to or from other methods.}
 }
 \description{
