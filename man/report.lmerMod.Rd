@@ -10,7 +10,7 @@
   p_method = "wald", ci_method = "wald", ...)
 }
 \arguments{
-\item{model}{Model object.}
+\item{model}{A mixed model.}
 
 \item{effsize}{\href{https://easystats.github.io/report/articles/interpret_metrics.html}{Interpret the standardized parameters} using a set of rules. Default corresponds to "funder2019" for linear models and "chen2010" for logistic models.}
 
@@ -24,7 +24,7 @@
 
 \item{p_method}{Method for computing p values. See \code{\link[=p_value]{p_value()}}.}
 
-\item{ci_method}{Method for computing confidence intervals (CI). See \code{\link[=ci]{ci()}}.}
+\item{ci_method}{Method for computing confidence intervals (CI). See \code{\link[=ci.merMod]{ci()}}.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

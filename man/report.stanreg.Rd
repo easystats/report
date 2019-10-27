@@ -12,7 +12,7 @@
   performance_metrics = "all", ...)
 }
 \arguments{
-\item{model}{Model object.}
+\item{model}{Bayesian model.}
 
 \item{effsize}{\href{https://easystats.github.io/report/articles/interpret_metrics.html}{Interpret the standardized parameters} using a set of rules. Default corresponds to "funder2019" for linear models and "chen2010" for logistic models.}
 
