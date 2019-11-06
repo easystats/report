@@ -57,8 +57,8 @@ report_participants <- function(data, age = "Age", sex = "Sex", education = "Edu
   if (!is.null(group)) {
     text <- c()
     for (i in split(data, data[group])) {
-      current_text <- .report_participant(data, age = age, sex = sex, education = education, participants = participants, spell_n = spell_n)
-      pre_text <- paste0("the ", paste0(names(i[group]), " - ", as.character(sapply(i[group], unique)), collapse = " and "), " group: ")
+      current_text <- .report_participant(i, age = age, sex = sex, education = education, participants = participants, spell_n = spell_n)
+      pre_text <- paste0("the '", paste0(names(i[group]), " - ", as.character(sapply(i[group], unique)), collapse = " and "), "' group: ")
       text <- c(text, paste0(pre_text, current_text))
     }
     text <- paste("For", format_text(text, sep = ", for ", last = " and for "))
@@ -138,9 +138,9 @@ report_participants <- function(data, age = "Age", sex = "Sex", education = "Edu
 
   paste0(size,
          " participants (",
-         ifelse(text_age == "", "", paste0(text_age, "; ")),
-         ifelse(text_sex == "", "", paste0(text_sex, "; ")),
-         text_education,
+         ifelse(text_age == "", "", text_age),
+         ifelse(text_sex == "", "", paste0(ifelse(text_age == "", "", "; "), text_sex)),
+         ifelse(text_education == "", "", paste0(ifelse(text_age == "" & text_sex == "", "", "; "), text_education)),
          ")"
          )
 }
