@@ -8,7 +8,7 @@
   standardize = TRUE, performance_metrics = "all", ...)
 }
 \arguments{
-\item{model}{Model object.}
+\item{model}{CFA or SEM created by the \code{lavaan::cfa} or \code{lavaan::sem} functions.}
 
 \item{effsize}{\href{https://easystats.github.io/report/articles/interpret_metrics.html}{Interpret the standardized parameters} using a set of rules. Default corresponds to "funder2019" for linear models and "chen2010" for logistic models.}
 
