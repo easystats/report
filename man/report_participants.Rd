@@ -4,8 +4,14 @@
 \alias{report_participants}
 \title{Reporting the participant data}
 \usage{
-report_participants(data, age = "Age", sex = "Sex",
-  participant = NULL, spell_n = FALSE, ...)
+report_participants(
+  data,
+  age = "Age",
+  sex = "Sex",
+  participant = NULL,
+  spell_n = FALSE,
+  ...
+)
 }
 \arguments{
 \item{data}{A dataframe.}

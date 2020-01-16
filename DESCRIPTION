@@ -50,5 +50,5 @@ Suggests:
 Remotes:
 	easystats/correlation,
 	easystats/estimate
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Language: en-GB

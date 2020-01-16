@@ -2,7 +2,7 @@
 #'
 #' Create a report of a (general) linear model.
 #'
-#' @inheritParams parameters::model_parameters.lm
+#' @inheritParams parameters::model_parameters.default
 #' @param effsize \href{https://easystats.github.io/report/articles/interpret_metrics.html}{Interpret the standardized parameters} using a set of rules. Default corresponds to "funder2019" for linear models and "chen2010" for logistic models.
 #' @param performance_metrics See \code{\link[performance:model_performance.lm]{model_performance}}.
 

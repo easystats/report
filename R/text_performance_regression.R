@@ -193,7 +193,7 @@ text_performance.stanreg <- function(model, performance, ...) {
     text_full <- paste0(
       text,
       ", ",
-      parameters::format_ci(r2_ci$CI_low, r2_ci$CI_high, r2_ci$CI / 100)
+      insight::format_ci(r2_ci$CI_low, r2_ci$CI_high, r2_ci$CI / 100)
     )
 
 
@@ -235,7 +235,7 @@ text_performance.stanreg <- function(model, performance, ...) {
       " fixed effects alone (marginal R2's median) is of ",
       insight::format_value(r2_val),
       " (",
-      parameters::format_ci(r2_ci$CI_low, r2_ci$CI_high, r2_ci$CI / 100),
+      insight::format_ci(r2_ci$CI_low, r2_ci$CI_high, r2_ci$CI / 100),
       ")."
     )
   }

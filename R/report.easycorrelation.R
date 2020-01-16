@@ -63,7 +63,7 @@
 #'   }
 #'
 #'   if("CI_low" %in% names(model)){
-#'     ci_text <- paste0(", ", format_ci(model$CI_low, model$CI_high, info$ci))
+#'     ci_text <- paste0(", ", insight::format_ci(model$CI_low, model$CI_high, info$ci))
 #'   } else{
 #'     ci_text <- ""
 #'   }
@@ -144,7 +144,7 @@
 #'     data$value <- paste0("r = ", format_value(data$r))
 #'   }
 #'   if("CI_low" %in% names(data)){
-#'     data$value <- paste0(data$value, ", ", format_ci(data$CI_low, data$CI_high, info$ci))
+#'     data$value <- paste0(data$value, ", ", insight::format_ci(data$CI_low, data$CI_high, info$ci))
 #'   }
 #'   if("p" %in% names(data)){
 #'     data$value <- paste0(data$value, ", p ", format_p(data$p))
