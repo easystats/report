@@ -212,7 +212,7 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
   if (all(c("CI_low", "CI_high") %in% names(parameters))) {
     text <- paste0(
       .add_comma(text),
-      parameters::format_ci(parameters$CI_low, parameters$CI_high, ci = ci)
+      insight::format_ci(parameters$CI_low, parameters$CI_high, ci = ci)
     )
   }
 

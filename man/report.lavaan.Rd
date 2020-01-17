@@ -4,17 +4,23 @@
 \alias{report.lavaan}
 \title{SEM / CFA lavaan Models Report}
 \usage{
-\method{report}{lavaan}(model, effsize = "funder2019", ci = 0.95,
-  standardize = TRUE, performance_metrics = "all", ...)
+\method{report}{lavaan}(
+  model,
+  effsize = "funder2019",
+  ci = 0.95,
+  standardize = TRUE,
+  performance_metrics = "all",
+  ...
+)
 }
 \arguments{
-\item{model}{CFA or SEM created by the \code{lavaan::cfa} or \code{lavaan::sem} functions.}
+\item{model}{Model object.}
 
 \item{effsize}{\href{https://easystats.github.io/report/articles/interpret_metrics.html}{Interpret the standardized parameters} using a set of rules. Default corresponds to "funder2019" for linear models and "chen2010" for logistic models.}
 
 \item{ci}{Confidence Interval (CI) level. Default to 0.95 (95\%).}
 
-\item{standardize}{Return standardized parameters (standardized coefficients). See \code{lavaan::standardizedsolution}.}
+\item{standardize}{The method used for standardizing the parameters. Can be \code{"refit"}, \code{"posthoc"}, \code{"smart"}, \code{"basic"} or \code{NULL} (default) for no standardization. See 'Details' in \code{\link[effectsize]{standardize_parameters}}.}
 
 \item{performance_metrics}{See \code{\link[performance:model_performance.lm]{model_performance}}.}
 

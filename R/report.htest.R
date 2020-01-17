@@ -16,6 +16,8 @@
 #' report(t.test(iris$Sepal.Width, mu = 1))
 #' @seealso report
 #'
+#' @importFrom insight format_ci
+#'
 #' @export
 report.htest <- function(model, effsize = "cohen1988", ...) {
   table_full <- parameters::model_parameters(model)
@@ -85,7 +87,7 @@ report.htest <- function(model, effsize = "cohen1988", ...) {
       ") = ",
       insight::format_value(model$statistic),
       ", ",
-      parameters::format_ci(model$conf.int[1], model$conf.int[2], ci = attributes(model$conf.int)$conf.level),
+      insight::format_ci(model$conf.int[1], model$conf.int[2], ci = attributes(model$conf.int)$conf.level),
       ", ",
       parameters::format_p(model$p.value, stars = FALSE),
       ")."

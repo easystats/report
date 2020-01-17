@@ -4,18 +4,23 @@
 \alias{report.aov}
 \title{ANOVAs Report}
 \usage{
-\method{report}{aov}(model, effsize = "field2013",
-  omega_squared = NULL, eta_squared = NULL, epsilon_squared = NULL,
-  ...)
+\method{report}{aov}(
+  model,
+  effsize = "field2013",
+  omega_squared = NULL,
+  eta_squared = NULL,
+  epsilon_squared = NULL,
+  ...
+)
 }
 \arguments{
 \item{model}{Object of class \code{aov}, \code{anova} or \code{aovlist}.}
 
 \item{effsize}{Effect size interpretation set of rules.}
 
-\item{omega_squared}{Compute omega squared as index of effect size. Can be "partial" (adjusted for effect size) or "raw".}
+\item{omega_squared}{Compute omega squared as index of effect size. Can be \code{"partial"} (adjusted for effect size) or \code{"raw"}.}
 
-\item{eta_squared}{Compute eta squared as index of effect size. Can be "partial" (adjusted for effect size) or "raw".}
+\item{eta_squared}{Compute eta squared as index of effect size. Can be \code{"partial"} (adjusted for effect size) or \code{"raw"}.}
 
 \item{epsilon_squared}{Compute epsilon squared as index of effect size.}
 
