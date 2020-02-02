@@ -52,8 +52,8 @@
   text_params <- text_parameters(model, parameters = parameters, prefix = "  - ", ci = ci, effsize = effsize)
 
   # Combine text
-  text <- paste0(text_model$text, text_perf$text, text_intercept$text, " Whithin this model:\n\n", text_params$text)
-  text_full <- paste0(text_model$text_full, text_perf$text_full, text_intercept$text_full, " Whithin this model:\n\n", text_params$text_full)
+  text <- paste0(text_model$text, text_perf$text, text_intercept$text, " Within this model:\n\n", text_params$text)
+  text_full <- paste0(text_model$text_full, text_perf$text_full, text_intercept$text_full, " Within this model:\n\n", text_params$text_full)
 
 
   out <- list(
