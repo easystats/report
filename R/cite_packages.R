@@ -9,7 +9,12 @@
 #' cite_packages(sessionInfo())
 #' @importFrom utils packageVersion
 #' @export
-show_packages <- function(session) {
+show_packages <- function(session=NULL) {
+
+  if(is.null(session)){
+    session <- sessionInfo()
+  }
+
   pkgs <- session$otherPkgs
   citations <- c()
   versions <- c()
@@ -52,12 +57,9 @@ show_packages <- function(session) {
 #' @rdname show_packages
 #' @export
 cite_packages <- function(session) {
-  data <- show_packages(session)
-  data$Package <- NULL
-  data$Version <- NULL
+  x <- show_packages(session)
+  x <- data.frame(References = x$References[order(x$References)])
 
-  x <- as.data.frame(data[order(data$References), ])
-  row.names(x) <- NULL
   class(x) <- c("report_packages", class(x))
   x
 }

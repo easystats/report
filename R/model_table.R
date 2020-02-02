@@ -4,6 +4,10 @@
 #'
 #' @param model A statistical model.
 #'
+#' @examples
+#' model <- lm(Sepal.Length ~ Petal.Width, data=iris)
+#' model_table(model)
+#'
 #' @export
 model_table <- function(model, ...){
   UseMethod("model_table")
