@@ -12,3 +12,8 @@ model_table(model, ...)
 \description{
 Create a reportable table (no pun intended) for your model.
 }
+\examples{
+model <- lm(Sepal.Length ~ Petal.Width, data=iris)
+model_table(model)
+
+}

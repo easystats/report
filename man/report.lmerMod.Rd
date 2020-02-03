@@ -25,7 +25,7 @@
 
 \item{ci}{Confidence Interval (CI) level. Default to 0.95 (95\%).}
 
-\item{standardize}{The method used for standardizing the parameters. Can be \code{"refit"}, \code{"posthoc"}, \code{"smart"}, \code{"basic"} or \code{NULL} (default) for no standardization. See 'Details' in \code{\link[effectsize]{standardize_parameters}}.}
+\item{standardize}{The method used for standardizing the parameters. Can be \code{"refit"}, \code{"posthoc"}, \code{"smart"}, \code{"basic"} or \code{NULL} (default) for no standardization. See 'Details' in \code{\link[effectsize]{standardize_parameters}}. Note that robust estimation (i.e. \code{robust=TRUE}) of standardized parameters only works when \code{standardize="refit"}.}
 
 \item{bootstrap}{Should estimates be based on bootstrapped model? If \code{TRUE}, then arguments of \link[parameters:model_parameters.stanreg]{Bayesian regressions} apply (see also \code{\link[parameters:parameters_bootstrap]{parameters_bootstrap()}}).}
 

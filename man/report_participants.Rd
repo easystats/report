@@ -8,7 +8,9 @@ report_participants(
   data,
   age = "Age",
   sex = "Sex",
-  participant = NULL,
+  education = "Education",
+  participants = NULL,
+  group = NULL,
   spell_n = FALSE,
   ...
 )

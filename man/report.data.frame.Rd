@@ -15,14 +15,14 @@
   range = TRUE,
   distribution = FALSE,
   levels_percentage = FALSE,
-  n_characters = 3,
+  n_entries = 3,
   missing_percentage = FALSE,
   ...
 )
 
 \method{report}{character}(
   model,
-  n_characters = 3,
+  n_entries = 3,
   levels_percentage = FALSE,
   missing_percentage = FALSE,
   ...

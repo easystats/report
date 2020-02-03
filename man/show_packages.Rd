@@ -5,7 +5,7 @@
 \alias{cite_packages}
 \title{Cite Loaded Packages}
 \usage{
-show_packages(session)
+show_packages(session = NULL)
 
 cite_packages(session)
 }
@@ -13,7 +13,7 @@ cite_packages(session)
 \item{session}{A \link[=sessionInfo]{sessionInfo} object.}
 }
 \description{
-Citation table of loaded packages (\link{show_packages} includes version and name, and \link{cite_packages} includes only the citation).
+Citation table of loaded packages (\link{show_packages} includes version and name, and \link{cite_packages} includes only the citation). This is useful for including the package list in reference-like section at the end of your stats report.
 }
 \examples{
 show_packages(sessionInfo())

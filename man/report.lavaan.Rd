@@ -20,7 +20,7 @@
 
 \item{ci}{Confidence Interval (CI) level. Default to 0.95 (95\%).}
 
-\item{standardize}{The method used for standardizing the parameters. Can be \code{"refit"}, \code{"posthoc"}, \code{"smart"}, \code{"basic"} or \code{NULL} (default) for no standardization. See 'Details' in \code{\link[effectsize]{standardize_parameters}}.}
+\item{standardize}{The method used for standardizing the parameters. Can be \code{"refit"}, \code{"posthoc"}, \code{"smart"}, \code{"basic"} or \code{NULL} (default) for no standardization. See 'Details' in \code{\link[effectsize]{standardize_parameters}}. Note that robust estimation (i.e. \code{robust=TRUE}) of standardized parameters only works when \code{standardize="refit"}.}
 
 \item{performance_metrics}{See \code{\link[performance:model_performance.lm]{model_performance}}.}
 
