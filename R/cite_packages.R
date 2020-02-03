@@ -1,6 +1,6 @@
 #' Cite Loaded Packages
 #'
-#' Citation table of loaded packages (\link{show_packages} includes version and name, and \link{cite_packages} includes only the citation).
+#' Citation table of loaded packages (\link{show_packages} includes version and name, and \link{cite_packages} includes only the citation). This is useful for including the package list in reference-like section at the end of your stats report.
 #'
 #' @param session A \link[=sessionInfo]{sessionInfo} object.
 #'
