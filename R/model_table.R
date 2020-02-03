@@ -19,15 +19,25 @@ model_table <- function(model, ...){
 # Methods -----------------------------------------------------------------
 
 
+#' @export
+summary.model_table <- function(object, ...){
+  object$table
+}
+
+
+
+#' @export
+print.model_table <- function(x, ...){
+  print(x$table_full, ...)
+}
+
 
 #' @export
 print.report_table <- function(x, ...){
-  x$table_full
+  table <- insight::format_table(x)
+  cat(table)
 }
 
 
 
-#' @export
-summary.report_table <- function(object, ...){
-  object$table
-}
+

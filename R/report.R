@@ -87,11 +87,6 @@ to_table <- function(x, full = FALSE, ...) {
   table
 }
 
-#' @export
-print.report_table <- function(x, ...) {
-  table <- insight::format_table(parameters::parameters_table(x))
-  cat(table)
-}
 
 
 
@@ -195,18 +190,3 @@ to_values <- function(x, ...) {
 #   .display(x)
 # }
 
-
-
-
-
-#' Model Values
-#'
-#' Return values contained in report.
-#'
-#' @param model Statistical Model.
-#' @param ... Arguments passed to or from other methods.
-#'
-#' @export
-# model_values <- function(model, ...) {
-#   UseMethod("model_values")
-# }

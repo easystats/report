@@ -56,7 +56,9 @@ model_table.lm <- function(model, ci = 0.95, bootstrap = FALSE, iterations = 500
                                   performance[names(performance) %in%  c('R2', 'R2_adjusted', 'R2_Tjur', 'R2_Nagelkerke', 'R2_McFadden', 'R2_conditional', 'R2_marginal')])
 
   # Prepare output
+  class(table) <- c("report_table", class(table))
+  class(table_full) <- c("report_table", class(table_full))
   out <- list(table = table, table_full = table_full)
-  class(out) <- c("report_table", class(out))
+  class(out) <- c("model_table", class(out))
   out
 }
