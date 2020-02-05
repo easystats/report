@@ -31,7 +31,7 @@
 
 \item{performance_metrics}{See \code{\link[performance:model_performance.lm]{model_performance}}.}
 
-\item{...}{Arguments passed to or from other methods.}
+\item{...}{Arguments passed to or from other methods. For instance, when \code{bootstrap = TRUE}, arguments like \code{ci_method} are passed down to \code{\link[bayestestR]{describe_posterior}}.}
 }
 \description{
 Create a report of a (general) linear model.

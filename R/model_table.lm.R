@@ -55,10 +55,6 @@ model_table.lm <- function(model, ci = 0.95, bootstrap = FALSE, iterations = 500
   table <- .add_performance_table(parameters[names(parameters) %in% c("Parameter", "Coefficient", "Median", "Mean", "MAP", "CI_low", "CI_high", "p", "pd", "ROPE_Percentage", "BF", "Std_Coefficient", "Std_Median", "Std_Mean", "Std_MAP")],
                                   performance[names(performance) %in%  c('R2', 'R2_adjusted', 'R2_Tjur', 'R2_Nagelkerke', 'R2_McFadden', 'R2_conditional', 'R2_marginal')])
 
-  # Prepare output
-  class(table) <- c("report_table", class(table))
-  class(table_full) <- c("report_table", class(table_full))
-  out <- list(table = table, table_full = table_full)
-  class(out) <- c("model_table", class(out))
-  out
+  # Return output
+  .model_table_return_output(table, table_full)
 }

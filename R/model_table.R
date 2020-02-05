@@ -9,6 +9,10 @@
 #' model_table(model)
 #' summary(model_table(model))
 #'
+#' model <- t.test(Sepal.Length ~ Species, data=iris[1:100,])
+#' model_table(model)
+#' summary(model_table(model))
+#'
 #' @export
 model_table <- function(model, ...){
   UseMethod("model_table")
@@ -41,3 +45,14 @@ print.report_table <- function(x, ...){
 
 
 
+# Utils -------------------------------------------------------------------
+
+
+#' @keywords internal
+.model_table_return_output <- function(table, table_full){
+  class(table) <- c("report_table", class(table))
+  class(table_full) <- c("report_table", class(table_full))
+  out <- list(table = table, table_full = table_full)
+  class(out) <- c("model_table", class(out))
+  out
+}
