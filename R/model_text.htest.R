@@ -36,18 +36,8 @@ model_text.htest <- function(model, effsize="funder2019", ...){
       vars <- paste0(model$data.name, means, " and mu = ", model$null.value)
     } else {
       table$Difference <- model$estimate[1] - model$estimate[2]
-      means <- paste0(
-        c(
-          paste0(
-            names(model$estimate), " = ",
-            insight::format_value(model$estimate)
-          ),
-          paste0(
-            "difference = ",
-            insight::format_value(model$estimate[1] - model$estimate[2])
-          )
-        ),
-        collapse = ", "
+      means <- paste0(names(model$estimate), " = ",
+                      insight::format_value(model$estimate), collapse = ", "
       )
       vars <- paste0(model$data.name, " (", means, ")")
     }
