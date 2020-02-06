@@ -1,6 +1,6 @@
-#' Rename a Variable
+#' Safe Dataframe Modification
 #'
-#' Rename a variable in a dataframe if applicable.
+#' Rename/remove a variable in a dataframe if exists.
 #'
 #' @param x Dataframe.
 #' @param pattern Variable to replace.
@@ -10,8 +10,19 @@
 #'
 #' @examples
 #' rename_if_possible(iris, "Sepal.Length", "length")
+#' rename_if_possible(iris, "FakeCol", "length")
+#' remove_if_possible(iris, "Sepal.Length")
 #' @export
 rename_if_possible <- function(x, pattern, replacement) {
   names(x) <- replace(names(x), names(x) == pattern, replacement)
-  return(x)
+  x
 }
+
+
+
+#' @rdname rename_if_possible
+#' @export
+remove_if_possible <- function(x, pattern) {
+  x[!names(x) %in% c(pattern)]
+}
+
