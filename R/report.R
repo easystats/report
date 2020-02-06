@@ -13,8 +13,20 @@
 #' @param model Object.
 #' @param ... Arguments passed to or from other methods.
 #'
+#' @examples
+#' model <- t.test(Sepal.Length ~ Species, data=iris[1:100,])
+#' r <- report(model)
 #'
+#' # Text
+#' r
+#' summary(r)
 #'
+#' # Tables
+#' as.data.frame(r)
+#' as.table(r)
+#'
+#' # List
+#' as.list(r)
 #' @export
 report <- function(model, ...) {
   UseMethod("report")
@@ -22,14 +34,14 @@ report <- function(model, ...) {
 
 #' Create and test objects of class \link{report}.
 #'
-#' @param model An arbitrary R object.
+#' @param x An arbitrary R object.
 #' @param ... Args to be saved as attributes.
 #'
 #' @export
-as.report <- function(model, ...) {
-  class(model) <- c("report", class(model))
-  attributes(model) <- c(attributes(model), list(...))
-  model
+as.report <- function(x, ...) {
+  class(x) <- c("report", class(x))
+  attributes(x) <- c(attributes(x), list(...))
+  x
 }
 
 
@@ -47,24 +59,19 @@ is.report <- function(model) inherits(model, "report")
 #' @param ... Arguments passed to or from other methods.
 #'
 #' @export
-to_text <- function(x, full = FALSE, width = NULL, ...) {
-  if (full == TRUE) {
-    text <- format_text(x$text_full, width = width)
-  } else {
-    text <- format_text(x$text, width = width)
-  }
-
-  cat(text, sep = "\n")
-  invisible(text)
+to_text <- function(x, ...) {
+  x$text
 }
 
 #' @export
-print.report <- to_text
+print.report <- function(x, ...) {
+  print(x$text, ...)
+}
 
-#' @rdname to_text
+
 #' @export
-to_fulltext <- function(x, full = TRUE, width = NULL, ...) {
-  to_text(x, full = full, width = width)
+summary.report <- function(object, ...) {
+  summary(to_text(object, ...))
 }
 
 
@@ -75,54 +82,19 @@ to_fulltext <- function(x, full = TRUE, width = NULL, ...) {
 
 #' @rdname to_text
 #' @export
-to_table <- function(x, full = FALSE, ...) {
-  if (full == TRUE) {
-    table <- x$table_full
-  } else {
-    table <- x$table
-  }
-
-  class(table) <- c("report_table", class(table))
-  attributes(table) <- c(attributes(table), attributes(x)[!names(attributes(x)) %in% names(attributes(table))])
-  table
+to_table <- function(x, ...) {
+  x$table
 }
 
 
+#' @export
+as.data.frame.report <- to_table
 
 
 #' @export
-summary.report <- function(object, full = FALSE, ...) {
-  to_table(object, full = full, ...)
+as.table.report <- function(x, ...) {
+  summary(to_table(x, ...))
 }
-
-
-
-#' @rdname to_text
-#' @export
-to_fulltable <- function(x, full = TRUE, ...) {
-  to_table(x, full = full)
-}
-
-#' @export
-as.data.frame.report <- function(x, ...) {
-  to_fulltable(x, ...)
-}
-
-
-#' @rdname to_text
-#' @export
-to_values <- function(x, ...) {
-  if (!"values" %in% names(x)) {
-    as.list(x$table_full)
-  } else {
-    x$values
-  }
-}
-#' @export
-as.list.report <- to_values
-
-
-
 
 #' @rdname to_text
 #' @export
@@ -134,14 +106,20 @@ to_values <- function(x, ...) {
       vals[[param]] <- as.list(x[x$Parameter == param, ])
     }
   } else if (any(class(x) %in% c("report")) && !"values" %in% names(x)) {
-    vals <- as.list(x$table_full)
-  } else if ("values" %in% names(x)) {
-    vals <- x$values
+    vals <- as.list(x$table$table_full, ...)
   } else {
-    stop("Impossible to transform that to values!")
+    as.list(x, ...)
   }
   vals
 }
+
+#' @export
+as.list.report <- to_values
+
+
+
+
+
 
 
 

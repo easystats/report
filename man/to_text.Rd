@@ -2,32 +2,24 @@
 % Please edit documentation in R/report.R
 \name{to_text}
 \alias{to_text}
-\alias{to_fulltext}
 \alias{to_table}
-\alias{to_fulltable}
 \alias{to_values}
 \title{Report printing}
 \usage{
-to_text(x, full = FALSE, width = NULL, ...)
+to_text(x, ...)
 
-to_fulltext(x, full = TRUE, width = NULL, ...)
-
-to_table(x, full = FALSE, ...)
-
-to_fulltable(x, full = TRUE, ...)
-
-to_values(x, ...)
+to_table(x, ...)
 
 to_values(x, ...)
 }
 \arguments{
 \item{x}{Object of class \link{report}.}
 
+\item{...}{Arguments passed to or from other methods.}
+
 \item{full}{Show the full report.}
 
 \item{width}{Positive integer giving the target column for wrapping lines in the output.}
-
-\item{...}{Arguments passed to or from other methods.}
 }
 \description{
 Report printing

@@ -1,5 +1,5 @@
 #' @export
-model_text.htest <- function(model, effsize="funder2019", ...){
+model_text.htest <- function(model, effsize = "funder2019", ...){
 
   table <- model_table(model)$table_full
 
@@ -67,7 +67,7 @@ model_text.htest <- function(model, effsize="funder2019", ...){
       ", ",
       parameters::format_p(table$p, stars = FALSE),
       ") and can be considered as ",
-      effectsize::interpret_d(table$Cohens_d),
+      effectsize::interpret_d(table$Cohens_d, rules=effsize),
       " (Cohen's d = ",
       insight::format_value(table$Cohens_d),
       ")."

@@ -22,3 +22,18 @@ Create textual reports. See the documentation for your object's class:
  \item{\link[=report.stanreg]{Bayesian models (stanreg and brms)}}
  }
 }
+\examples{
+model <- t.test(Sepal.Length ~ Species, data=iris[1:100,])
+r <- report(model)
+
+# Text
+r
+summary(r)
+
+# Tables
+as.data.frame(r)
+as.table(r)
+
+# List
+as.list(r)
+}

@@ -2,9 +2,12 @@
 % Please edit documentation in R/utils_rename_if_possible.R
 \name{rename_if_possible}
 \alias{rename_if_possible}
-\title{Rename a Variable}
+\alias{remove_if_possible}
+\title{Safe Dataframe Modification}
 \usage{
 rename_if_possible(x, pattern, replacement)
+
+remove_if_possible(x, pattern)
 }
 \arguments{
 \item{x}{Dataframe.}
@@ -14,8 +17,10 @@ rename_if_possible(x, pattern, replacement)
 \item{replacement}{New variable name.}
 }
 \description{
-Rename a variable in a dataframe if applicable.
+Rename/remove a variable in a dataframe if exists.
 }
 \examples{
 rename_if_possible(iris, "Sepal.Length", "length")
+rename_if_possible(iris, "FakeCol", "length")
+remove_if_possible(iris, "Sepal.Length")
 }
