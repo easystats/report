@@ -33,6 +33,7 @@ Imports:
 	performance (>= 0.4.0),
 	parameters (>= 0.2.0),
 	effectsize,
+	modelbased,
 	stats,
 	utils,
 	dplyr,
@@ -44,7 +45,6 @@ Suggests:
 	testthat,
 	covr,
 	correlation,
-	estimate,
 	ggplot2,
 	lme4,
 	logspline,
@@ -56,7 +56,7 @@ Suggests:
 Remotes:
 	easystats/parameters,
 	easystats/correlation,
-	easystats/estimate,
+	easystats/modelbased,
 	easystats/effectsize
 RoxygenNote: 7.0.2
 Language: en-GB

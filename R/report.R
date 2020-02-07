@@ -68,6 +68,10 @@ to_text <- function(x, ...) {
 }
 
 #' @export
+as.character.report <- to_text
+
+
+#' @export
 print.report <- function(x, width = NULL, ...) {
   print(x$text, width = NULL, ...)
 }

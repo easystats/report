@@ -92,6 +92,15 @@ model_table.logical <- model_table.factor
 
 
 
+
+
+
+
+
+
+
+
+
 #' @keywords internal
 .order_columns <- function(df, cols) {
   remaining_columns <- setdiff(colnames(df), cols)
