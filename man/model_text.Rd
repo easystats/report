@@ -8,15 +8,13 @@ model_text(model, ...)
 }
 \arguments{
 \item{model}{A statistical model.}
+
+\item{...}{Arguments passed to or from other methods. For instance, when \code{bootstrap = TRUE}, arguments like \code{ci_method} are passed down to \code{\link[bayestestR]{describe_posterior}}.}
 }
 \description{
 Create a reportable textual output for your model.
 }
 \examples{
-model <- lm(Sepal.Length ~ Petal.Width, data=iris)
-model_text(model)
-summary(model_text(model))
-
 model <- t.test(Sepal.Length ~ Species, data=iris[1:100,])
 model_text(model)
 summary(model_text(model))

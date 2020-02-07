@@ -14,15 +14,17 @@ report(model, ...)
 \description{
 Create textual reports. See the documentation for your object's class:
 \itemize{
- \item{\link[=report.data.frame]{Dataframes and vectors}}
+ \item{Dataframes and vectors}
  \item{\link[=report.htest]{Correlations and t-tests (htest)}}
- \item{\link[=report.aov]{ANOVAs}}
- \item{\link[=report.lm]{(General) Linear models (glm and lm)}}
- \item{\link[=report.lmerMod]{Mixed models (glmer and lmer)}}
- \item{\link[=report.stanreg]{Bayesian models (stanreg and brms)}}
+ \item{ANOVAs}
+ \item{(General) Linear models (glm and lm)}
+ \item{Mixed models (glmer and lmer)}
+ \item{Bayesian models (stanreg and brms)}
  }
 }
 \examples{
+library(report)
+
 model <- t.test(Sepal.Length ~ Species, data=iris[1:100,])
 r <- report(model)
 
@@ -32,7 +34,7 @@ summary(r)
 
 # Tables
 as.data.frame(r)
-as.table(r)
+summary(as.data.frame(r))  # equivalent to as.table(r)
 
 # List
 as.list(r)

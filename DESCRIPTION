@@ -32,6 +32,7 @@ Imports:
 	bayestestR (>= 0.4.0),
 	performance (>= 0.4.0),
 	parameters (>= 0.2.0),
+	effectsize,
 	stats,
 	utils,
 	dplyr,
@@ -53,8 +54,9 @@ Suggests:
 	caret,
 	randomForest
 Remotes:
+	easystats/parameters,
 	easystats/correlation,
-	easystats/estimate
+	easystats/estimate,
 	easystats/effectsize
 RoxygenNote: 7.0.2
 Language: en-GB

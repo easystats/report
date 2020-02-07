@@ -3,12 +3,9 @@
 #' Create a reportable textual output for your model.
 #'
 #' @param model A statistical model.
+#' @inheritParams model_table
 #'
 #' @examples
-#' model <- lm(Sepal.Length ~ Petal.Width, data=iris)
-#' model_text(model)
-#' summary(model_text(model))
-#'
 #' model <- t.test(Sepal.Length ~ Species, data=iris[1:100,])
 #' model_text(model)
 #' summary(model_text(model))
@@ -32,14 +29,17 @@ summary.model_text <- function(object, ...){
 
 
 #' @export
-print.model_text <- function(x, ...){
-  print(x$text_full, ...)
+print.model_text <- function(x, width = NULL, ...){
+  print(x$text_full, width = NULL, ...)
 }
 
 
 #' @export
-print.report_text <- function(x, ...){
-  cat(x, ...)
+print.report_text <- function(x, width = NULL, ...){
+  text <- format_text(x, width = width, ...)
+
+  cat(text, sep = "\n")
+  invisible(text)
 }
 
 
@@ -47,7 +47,7 @@ print.report_text <- function(x, ...){
 
 
 #' @keywords internal
-.model_text_return_output <- function(text, text_full){
+as.model_text <- function(text, text_full){
   class(text) <- c("report_text", class(text))
   class(text_full) <- c("report_text", class(text_full))
   out <- list(text = text, text_full = text_full)

@@ -16,10 +16,6 @@ to_values(x, ...)
 \item{x}{Object of class \link{report}.}
 
 \item{...}{Arguments passed to or from other methods.}
-
-\item{full}{Show the full report.}
-
-\item{width}{Positive integer giving the target column for wrapping lines in the output.}
 }
 \description{
 Report printing

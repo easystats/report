@@ -7,7 +7,7 @@
 #' @examples
 #' show_packages(sessionInfo())
 #' cite_packages(sessionInfo())
-#' @importFrom utils packageVersion
+#' @importFrom utils packageVersion sessionInfo
 #' @export
 show_packages <- function(session=NULL) {
 

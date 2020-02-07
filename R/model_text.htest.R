@@ -1,3 +1,5 @@
+#' @rdname report.htest
+#' @seealso report
 #' @export
 model_text.htest <- function(model, effsize = "funder2019", ...){
 
@@ -5,6 +7,46 @@ model_text.htest <- function(model, effsize = "funder2019", ...){
 
   if (insight::model_info(model)$is_correlation) {
     estimate <- c("rho", "r", "tau")[c("rho", "r", "tau") %in% names(table)]
+
+    # CI
+    if(is.null(attributes(model$conf.int)$conf.level)){
+      ci_text <- ""
+    } else{
+      ci_text <- paste0(", ", insight::format_ci(table$CI_low, table$CI_high, ci = attributes(model$conf.int)$conf.level))
+    }
+
+    # Statistic
+    if("t" %in% names(table)){
+      stats_text <- paste0(", t(", insight::format_value(table$df, protect_integers = TRUE), ") = ", insight::format_value(table$t))
+    } else if("S" %in% names(table)){
+      stats_text <- paste0(", S = ", insight::format_value(table$S))
+    } else{
+      stats_text <- "D"
+    }
+
+
+    # Text
+    text_full <- paste0(
+      "The ",
+      model$method,
+      " between ",
+      model$data.name,
+      " is ",
+      effectsize::interpret_direction(table[[estimate]]),
+      ", ",
+      effectsize::interpret_p(table$p),
+      " and ",
+      effectsize::interpret_r(table[[estimate]], rules = effsize),
+      " (",
+      estimate,
+      " = ",
+      insight::format_value(table[[estimate]]),
+      ci_text,
+      stats_text,
+      ", ",
+      parameters::format_p(table$p, stars = FALSE, digits="apa"),
+      ")."
+    )
     text <- paste0(
       "The ",
       model$method,
@@ -20,11 +62,12 @@ model_text.htest <- function(model, effsize = "funder2019", ...){
       estimate,
       " = ",
       insight::format_value(table[[estimate]]),
+      ci_text,
       ", ",
-      parameters::format_p(table$p, stars = FALSE),
+      parameters::format_p(table$p, stars = FALSE, digits="apa"),
       ")."
     )
-    text_full <- text
+
   } else if (insight::model_info(model)$is_ttest) {
 
     # If against mu
@@ -65,7 +108,7 @@ model_text.htest <- function(model, effsize = "funder2019", ...){
       ") = ",
       insight::format_value(model$statistic),
       ", ",
-      parameters::format_p(table$p, stars = FALSE),
+      parameters::format_p(table$p, stars = FALSE, digits="apa"),
       ") and can be considered as ",
       effectsize::interpret_d(table$Cohens_d, rules=effsize),
       " (Cohen's d = ",
@@ -86,7 +129,7 @@ model_text.htest <- function(model, effsize = "funder2019", ...){
       ", ",
       insight::format_ci(model$conf.int[1], model$conf.int[2], ci = attributes(model$conf.int)$conf.level),
       ", ",
-      parameters::format_p(table$p, stars = FALSE),
+      parameters::format_p(table$p, stars = FALSE, digits="apa"),
       ", Cohen's d = ",
       insight::format_value(table$Cohens_d),
       ")."
@@ -96,5 +139,5 @@ model_text.htest <- function(model, effsize = "funder2019", ...){
   }
 
   # Return output
-  .model_text_return_output(text, text_full)
+  as.model_text(text, text_full)
 }

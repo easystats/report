@@ -1,3 +1,5 @@
+#' @rdname report.htest
+#' @seealso report
 #' @export
 model_table.htest <- function(model, ...){
   table_full <- parameters::model_parameters(model)
@@ -10,5 +12,5 @@ model_table.htest <- function(model, ...){
 
   table <- remove_if_possible(table_full, c("Parameter", "Group", "Mean_Group1", "Mean_Group2", "Method"))
   # Return output
-  .model_table_return_output(table, table_full)
+  as.model_table(table, table_full)
 }

@@ -7,7 +7,7 @@
 \usage{
 as.report(x, ...)
 
-is.report(model)
+is.report(x)
 }
 \arguments{
 \item{x}{An arbitrary R object.}

@@ -1,6 +1,8 @@
+#' @rdname model_table
+#' @inheritParams parameters::model_parameters.default
 #' @export
 model_table.lm <- function(model, ci = 0.95, bootstrap = FALSE, iterations = 500, ...){
-  .model_table_regression(model, ci=ci, bootstrap=bootstrap, iterations=iteration)
+  .model_table_regression(model, ci=ci, bootstrap=bootstrap, iterations=iterations)
 }
 
 
@@ -56,5 +58,5 @@ model_table.lm <- function(model, ci = 0.95, bootstrap = FALSE, iterations = 500
                                   performance[names(performance) %in%  c('R2', 'R2_adjusted', 'R2_Tjur', 'R2_Nagelkerke', 'R2_McFadden', 'R2_conditional', 'R2_marginal')])
 
   # Return output
-  .model_table_return_output(table, table_full)
+  as.model_table(table, table_full)
 }

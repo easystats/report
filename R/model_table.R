@@ -49,7 +49,7 @@ print.report_table <- function(x, ...){
 
 
 #' @keywords internal
-.model_table_return_output <- function(table, table_full){
+as.model_table <- function(table, table_full){
   class(table) <- c("report_table", class(table))
   class(table_full) <- c("report_table", class(table_full))
   out <- list(table = table, table_full = table_full)

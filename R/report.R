@@ -2,18 +2,20 @@
 #'
 #' Create textual reports. See the documentation for your object's class:
 #' \itemize{
-#'  \item{\link[=report.data.frame]{Dataframes and vectors}}
+#'  \item{Dataframes and vectors}
 #'  \item{\link[=report.htest]{Correlations and t-tests (htest)}}
-#'  \item{\link[=report.aov]{ANOVAs}}
-#'  \item{\link[=report.lm]{(General) Linear models (glm and lm)}}
-#'  \item{\link[=report.lmerMod]{Mixed models (glmer and lmer)}}
-#'  \item{\link[=report.stanreg]{Bayesian models (stanreg and brms)}}
+#'  \item{ANOVAs}
+#'  \item{(General) Linear models (glm and lm)}
+#'  \item{Mixed models (glmer and lmer)}
+#'  \item{Bayesian models (stanreg and brms)}
 #'  }
 #'
 #' @param model Object.
 #' @param ... Arguments passed to or from other methods.
 #'
 #' @examples
+#' library(report)
+#'
 #' model <- t.test(Sepal.Length ~ Species, data=iris[1:100,])
 #' r <- report(model)
 #'
@@ -23,7 +25,7 @@
 #'
 #' # Tables
 #' as.data.frame(r)
-#' as.table(r)
+#' summary(as.data.frame(r))  # equivalent to as.table(r)
 #'
 #' # List
 #' as.list(r)
@@ -31,6 +33,8 @@
 report <- function(model, ...) {
   UseMethod("report")
 }
+
+
 
 #' Create and test objects of class \link{report}.
 #'
@@ -45,17 +49,17 @@ as.report <- function(x, ...) {
 }
 
 
+
+
 #' @rdname as.report
 #' @export
-is.report <- function(model) inherits(model, "report")
+is.report <- function(x) inherits(x, "report")
 
 
 
 #' Report printing
 #'
 #' @param x Object of class \link{report}.
-#' @param full Show the full report.
-#' @param width Positive integer giving the target column for wrapping lines in the output.
 #' @param ... Arguments passed to or from other methods.
 #'
 #' @export
@@ -64,14 +68,14 @@ to_text <- function(x, ...) {
 }
 
 #' @export
-print.report <- function(x, ...) {
-  print(x$text, ...)
+print.report <- function(x, width = NULL, ...) {
+  print(x$text, width = NULL, ...)
 }
 
 
 #' @export
-summary.report <- function(object, ...) {
-  summary(to_text(object, ...))
+summary.report <- function(object, width = NULL, ...) {
+  summary(to_text(object, width = NULL, ...))
 }
 
 
@@ -105,7 +109,9 @@ to_values <- function(x, ...) {
     for (param in x$Parameter) {
       vals[[param]] <- as.list(x[x$Parameter == param, ])
     }
-  } else if (any(class(x) %in% c("report")) && !"values" %in% names(x)) {
+  } else if ("values" %in% names(x)) {
+    vals <- x$values
+  } else if ("report" %in% class(x)){
     vals <- as.list(x$table$table_full, ...)
   } else {
     as.list(x, ...)

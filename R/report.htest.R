@@ -10,6 +10,7 @@
 #'
 #' @examples
 #' report(cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman"))
+#' report(cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "pearson"))
 #' report(t.test(iris$Sepal.Width, iris$Sepal.Length))
 #' report(t.test(iris$Sepal.Width, iris$Sepal.Length, var.equal = TRUE))
 #' report(t.test(mtcars$mpg ~ mtcars$vs))
@@ -19,7 +20,7 @@
 #' @importFrom insight format_ci
 #'
 #' @export
-report.htest <- function(model, effsize = "cohen1988", ...) {
+report.htest <- function(model, effsize = "funder2019", ...) {
 
   table <- model_table(model)
   text <- model_text(model, effsize=effsize)
@@ -29,5 +30,5 @@ report.htest <- function(model, effsize = "cohen1988", ...) {
     table = table
   )
 
-  return(as.report(out, effsize = effsize, ...))
+  as.report(out, effsize = effsize, ...)
 }
