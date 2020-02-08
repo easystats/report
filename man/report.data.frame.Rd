@@ -75,8 +75,20 @@ summary(model_table(x))
 summary(model_text(x))
 library(report)
 
-report(iris)
 r <- report(iris, median = TRUE, dispersion = FALSE, distribution = TRUE, missing_percentage = TRUE)
+r
+summary(r)
+as.data.frame(r)
+summary(as.data.frame(r))
+
+library(dplyr)
+r <- iris \%>\%
+ dplyr::group_by(Species) \%>\%
+ report()
+r
+summary(r)
+as.data.frame(r)
+summary(as.data.frame(r))
 
 x <- factor(rep(c("A", "B", "C"), 10))
 report(x)

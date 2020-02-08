@@ -55,7 +55,7 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
   text_range <- paste0("[", insight::format_value(table_full$Min[1], protect_integers = TRUE), ", ", insight::format_value(table_full$Max[1], protect_integers = TRUE), "]")
 
   # Distribution
-  text_distribution <- paste0("Skewness = ",
+  text_distribution <- paste0(", Skewness = ",
                               insight::format_value(table_full$Skewness[1]),
                               ", Kurtosis = ",
                               insight::format_value(table_full$Kurtosis[1]))
@@ -125,7 +125,7 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
 
   # Distribution
   if (distribution == TRUE) {
-    text <- paste0(text, ", ", text_distribution)
+    text <- paste0(text, text_distribution)
   } else {
     table <- remove_if_possible(table, c("Skewness", "Kurtosis"))
   }

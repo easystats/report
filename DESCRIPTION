@@ -36,8 +36,7 @@ Imports:
 	modelbased,
 	stats,
 	utils,
-	dplyr,
-	magrittr
+	dplyr
 Suggests:
 	knitr,
 	lavaan,

@@ -27,6 +27,11 @@ summary.model_text <- function(object, ...){
 }
 
 
+#' @export
+as.character.model_text <- function(x, ...){
+  x$text_full
+}
+
 
 #' @export
 print.model_text <- function(x, width = NULL, ...){

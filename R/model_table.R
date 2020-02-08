@@ -29,6 +29,11 @@ summary.model_table <- function(object, ...){
 }
 
 
+#' @export
+as.data.frame.model_table <- function(x, ...){
+  x$table_full
+}
+
 
 #' @export
 print.model_table <- function(x, ...){
@@ -40,6 +45,7 @@ print.model_table <- function(x, ...){
 print.report_table <- function(x, ...){
   table <- insight::format_table(x)
   cat(table)
+  invisible(table)
 }
 
 
