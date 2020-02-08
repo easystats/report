@@ -159,6 +159,7 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
   }
 
 
+  # Output
   table <- as.model_table(table, table_full)
   text <- as.model_text(text, text_full)
 

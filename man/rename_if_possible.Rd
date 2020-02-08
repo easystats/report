@@ -3,11 +3,14 @@
 \name{rename_if_possible}
 \alias{rename_if_possible}
 \alias{remove_if_possible}
+\alias{reorder_if_possible}
 \title{Safe Dataframe Modification}
 \usage{
 rename_if_possible(x, pattern, replacement)
 
 remove_if_possible(x, pattern)
+
+reorder_if_possible(x, cols)
 }
 \arguments{
 \item{x}{Dataframe.}
@@ -15,6 +18,8 @@ remove_if_possible(x, pattern)
 \item{pattern}{Variable to replace.}
 
 \item{replacement}{New variable name.}
+
+\item{cols}{Order of columns.}
 }
 \description{
 Rename/remove a variable in a dataframe if exists.
@@ -23,4 +28,5 @@ Rename/remove a variable in a dataframe if exists.
 rename_if_possible(iris, "Sepal.Length", "length")
 rename_if_possible(iris, "FakeCol", "length")
 remove_if_possible(iris, "Sepal.Length")
+reorder_if_possible(iris, c("Species", "Sepal.Length"))
 }
