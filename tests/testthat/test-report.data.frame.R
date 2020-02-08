@@ -2,7 +2,7 @@ context("report.data.frame")
 
 # test_that("report.data.frame", {
 #   r <- report(iris)
-#   testthat::expect_equal(nrow(r$table), 7, tol = 0)
+#   testthat::expect_equal(nrow(as.data.frame(r)), 7, tol = 0)
 #   testthat::expect_null(r$table$Median)
 #
 #   r <- report(iris, levels_percentage = FALSE, missing_percentage = TRUE, median = TRUE, range = FALSE, dispersion = FALSE)

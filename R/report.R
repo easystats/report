@@ -57,56 +57,72 @@ is.report <- function(x) inherits(x, "report")
 
 
 
-#' Report printing
+# Access ------------------------------------------------------------------
+
+#' Access report components
 #'
-#' @param x Object of class \link{report}.
+#' @param r Object of class \link{report}.
 #' @param ... Arguments passed to or from other methods.
 #'
 #' @export
-to_text <- function(x, ...) {
-  x$text
+text_long <- function(r, ...) {
+  r$texts$text_long
 }
 
+#' @rdname text_long
 #' @export
-as.character.report <- to_text
+text_short <- function(r, ...) {
+  r$texts$text_short
+}
+
+#' @rdname text_long
+#' @export
+table_long <- function(r, ...) {
+  r$tables$table_long
+}
+
+#' @rdname text_long
+#' @export
+table_short <- function(r, ...) {
+  r$tables$table_short
+}
+
+
+# Generic Methods --------------------------------------------------
 
 
 #' @export
 print.report <- function(x, width = NULL, ...) {
-  print(x$text, width = NULL, ...)
+  print(x$texts, width = NULL, ...)
 }
 
 
 #' @export
-summary.report <- function(object, width = NULL, ...) {
-  summary(to_text(object, width = NULL, ...))
+as.character.report <- function(x, ...) {
+  x$texts$text_long
 }
 
-
-
-
-
-
-
-#' @rdname to_text
 #' @export
-to_table <- function(x, ...) {
-  x$table
+summary.report <- function(object, ...) {
+  object$texts$text_short
 }
 
-
 #' @export
-as.data.frame.report <- to_table
-
+as.data.frame.report <- function(x, ...) {
+  x$tables$table_long
+}
 
 #' @export
 as.table.report <- function(x, ...) {
-  summary(to_table(x, ...))
+  x$tables$table_short
 }
 
-#' @rdname to_text
+
+# Values ------------------------------------------------------------------
+
+
 #' @export
-to_values <- function(x, ...) {
+as.list.report <- function(x, ...) {
   if (any(class(x) %in% c("parameters_model")) && "Parameter" %in% names(x)) {
     vals <- list()
 
@@ -116,17 +132,12 @@ to_values <- function(x, ...) {
   } else if ("values" %in% names(x)) {
     vals <- x$values
   } else if ("report" %in% class(x)){
-    vals <- as.list(x$table$table_full, ...)
+    vals <- as.list(x$tables$table_long, ...)
   } else {
     as.list(x, ...)
   }
   vals
 }
-
-#' @export
-as.list.report <- to_values
-
-
 
 
 

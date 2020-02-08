@@ -160,12 +160,12 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
 
 
   # Output
-  table <- as.model_table(table, table_full)
-  text <- as.model_text(text, text_full)
+  tables <- as.model_table(table, table_full)
+  texts <- as.model_text(text, text_full)
 
   out <- list(
-    text = text,
-    table = table
+    texts = texts,
+    tables = tables
   )
 
   as.report(out, ...)
@@ -176,12 +176,12 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
 #' @export
 model_table.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = FALSE, ...) {
   r <- report(model, median=median, centrality=centrality, dispersion=dispersion, range=range, distribution=distribution, missing_percentage=missing_percentage, ...)
-  as.data.frame(r)
+  r$tables
 }
 
 
 #' @export
 model_text.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = FALSE, ...) {
   r <- report(model, median=median, centrality=centrality, dispersion=dispersion, range=range, distribution=distribution, missing_percentage=missing_percentage, ...)
-  as.character(r)
+  r$texts
 }

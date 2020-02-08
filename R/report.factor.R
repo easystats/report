@@ -58,12 +58,12 @@ report.factor <- function(model, levels_percentage = FALSE, ...) {
 
 
   # Output
-  table <- as.model_table(table, table_full)
-  text <- as.model_text(text, text_full)
+  tables <- as.model_table(table, table_full)
+  texts <- as.model_text(text, text_full)
 
   out <- list(
-    text = text,
-    table = table
+    texts = texts,
+    tables = tables
   )
 
   as.report(out, ...)
@@ -79,12 +79,12 @@ report.logical <- report.factor
 #' @export
 model_table.factor <- function(model, levels_percentage = FALSE, ...) {
   r <- report(model, levels_percentage = levels_percentage, ...)
-  as.data.frame(r)
+  r$tables
 }
 
 
 #' @export
 model_text.factor <- function(model, levels_percentage = FALSE, ...) {
   r <- report(model, levels_percentage = levels_percentage, ...)
-  as.character(r)
+  r$texts
 }

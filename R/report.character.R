@@ -72,12 +72,12 @@ report.character <- function(model, n_entries = 3, levels_percentage = FALSE, mi
 
 
   # Output
-  table <- as.model_table(table, table_full)
-  text <- as.model_text(text, text_full)
+  tables <- as.model_table(table, table_full)
+  texts <- as.model_text(text, text_full)
 
   out <- list(
-    text = text,
-    table = table
+    texts = texts,
+    tables = tables
   )
 
   as.report(out, ...)
@@ -92,12 +92,12 @@ report.character <- function(model, n_entries = 3, levels_percentage = FALSE, mi
 #' @export
 model_table.character <- function(model, n_entries = 3, levels_percentage = FALSE, missing_percentage = FALSE, ...) {
   r <- report(model, n_entries = n_entries, levels_percentage = levels_percentage, missing_percentage = missing_percentage, ...)
-  as.data.frame(r)
+  r$tables
 }
 
 
 #' @export
 model_text.character <- function(model, n_entries = 3, levels_percentage = FALSE, missing_percentage = FALSE, ...) {
   r <- report(model, n_entries = n_entries, levels_percentage = levels_percentage, missing_percentage = missing_percentage, ...)
-  as.character(r)
+  r$texts
 }

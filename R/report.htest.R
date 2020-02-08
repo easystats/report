@@ -22,12 +22,12 @@
 #' @export
 report.htest <- function(model, effsize = "funder2019", ...) {
 
-  table <- model_table(model)
-  text <- model_text(model, effsize=effsize)
+  tables <- model_table(model)
+  texts <- model_text(model, effsize=effsize)
 
   out <- list(
-    text = text,
-    table = table
+    texts = texts,
+    tables = tables
   )
 
   as.report(out, effsize = effsize, ...)

@@ -3,7 +3,7 @@
 #' @export
 model_text.htest <- function(model, effsize = "funder2019", ...){
 
-  table <- model_table(model)$table_full
+  table <- model_table(model)$table_long
 
   if (insight::model_info(model)$is_correlation) {
     estimate <- c("rho", "r", "tau")[c("rho", "r", "tau") %in% names(table)]

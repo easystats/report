@@ -25,19 +25,19 @@ model_table <- function(model, ...){
 
 #' @export
 summary.model_table <- function(object, ...){
-  object$table
+  object$table_short
 }
 
 
 #' @export
 as.data.frame.model_table <- function(x, ...){
-  x$table_full
+  x$table_long
 }
 
 
 #' @export
 print.model_table <- function(x, ...){
-  print(x$table_full, ...)
+  print(x$table_long, ...)
 }
 
 
@@ -55,10 +55,10 @@ print.report_table <- function(x, ...){
 
 
 #' @keywords internal
-as.model_table <- function(table, table_full){
-  class(table) <- c("report_table", class(table))
-  class(table_full) <- c("report_table", class(table_full))
-  out <- list(table = table, table_full = table_full)
+as.model_table <- function(table_short, table_long){
+  class(table_short) <- c("report_table", class(table_short))
+  class(table_long) <- c("report_table", class(table_long))
+  out <- list(table_short = table_short, table_long = table_long)
   class(out) <- c("model_table", class(out))
   out
 }
