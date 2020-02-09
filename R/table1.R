@@ -38,7 +38,7 @@ table1 <- function(data, centrality = "mean", select = NULL, exclude = NULL, gro
       .generate_descriptive_table(x, centrality, digits)
     })
     # remember values of first columns
-    variable <- result[[1]]["Variable"]
+    variable <- result[[1]]["Characteristic"]
     # column names for groups
     cn <- sprintf("%s (n=%g)", names(result), as.vector(table(data[[group_by]])))
     # just extract summary columns
@@ -85,7 +85,7 @@ table1 <- function(data, centrality = "mean", select = NULL, exclude = NULL, gro
   }
 
   data.frame(
-    Variable = column,
+    Characteristic = column,
     Summary = .summary,
     stringsAsFactors = FALSE
   )
@@ -95,7 +95,7 @@ table1 <- function(data, centrality = "mean", select = NULL, exclude = NULL, gro
 .table1_row.factor <- function(x, column, digits = 1, ...) {
   .summary <- sapply(prop.table(table(x)), function(i) sprintf("%.1f", 100 * i))
   data.frame(
-    Variable = sprintf("%s [%s], %%", column, names(.summary)),
+    Characteristic = sprintf("%s [%s], %%", column, names(.summary)),
     Summary = as.vector(.summary),
     stringsAsFactors = FALSE
   )
