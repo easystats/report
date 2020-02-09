@@ -59,6 +59,13 @@ table1 <- function(data, centrality = "mean", select = NULL, exclude = NULL, gro
 }
 
 
+
+
+
+
+# helper ------------------------
+
+
 .generate_descriptive_table <- function(x, centrality, digits) {
   do.call(rbind, lapply(colnames(x), function(cn) {
     .table1_row(x[[cn]], column = cn, centrality = centrality, digits = digits)
@@ -66,9 +73,17 @@ table1 <- function(data, centrality = "mean", select = NULL, exclude = NULL, gro
 }
 
 
+
+
+
+
+# create a "table row", i.e. a summary from a variable ------------------------
+
+
 .table1_row <- function(x, digits = 1, ...) {
   UseMethod(".table1_row")
 }
+
 
 
 .table1_row.numeric <- function(x, column, centrality = "mean", digits = 1, ...) {
@@ -92,6 +107,7 @@ table1 <- function(data, centrality = "mean", select = NULL, exclude = NULL, gro
 }
 
 
+
 .table1_row.factor <- function(x, column, digits = 1, ...) {
   proportions <- prop.table(table(x))
   # for binary factors, just need one level
@@ -107,6 +123,13 @@ table1 <- function(data, centrality = "mean", select = NULL, exclude = NULL, gro
 }
 
 
+.table1_row.character <- .table1_row.factor
+
+
+
+
+
+# print-method --------------------------------------------
 
 
 #' @importFrom insight print_colour format_table
