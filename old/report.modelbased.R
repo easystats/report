@@ -1,15 +1,15 @@
 #' Estimated Means, Contrasts, Slopes and Smooth Report
 #'
-#' Create a report of an object from the \code{estimate} package.
+#' Create a report of an object from the \code{modelbased} package.
 #'
-#' @param model Object of class \code{estimate}.
-#' @inheritParams report.lm
-#' @param ... Arguments passed to or from other methods.
+#' @param model Object of class \code{modelbased}.
+#' @param interpretation Effect size interpretation set of rules (see \link[effectsize]{interpret_d} and \link[effectsize]{interpret_r}).
+#' @inheritParams report
 #'
 #'
 #'
 #' @examples
-#' library(estimate)
+#' library(modelbased)
 #' library(report)
 #'
 #' data <- iris
