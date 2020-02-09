@@ -93,7 +93,12 @@ table1 <- function(data, centrality = "mean", select = NULL, exclude = NULL, gro
 
 
 .table1_row.factor <- function(x, column, digits = 1, ...) {
-  .summary <- sapply(prop.table(table(x)), function(i) sprintf("%.1f", 100 * i))
+  proportions <- prop.table(table(x))
+  # for binary factors, just need one level
+  if (length(proportions) == 2) {
+    proportions <- proportions[2]
+  }
+  .summary <- sapply(proportions, function(i) sprintf("%.1f", 100 * i))
   data.frame(
     Characteristic = sprintf("%s [%s], %%", column, names(.summary)),
     Summary = as.vector(.summary),
