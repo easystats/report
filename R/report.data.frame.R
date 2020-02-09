@@ -52,7 +52,7 @@ report.data.frame <- function(model, median = FALSE, centrality = TRUE, dispersi
     current_table$Variable <- col
     current_table$.order <- i
 
-    if(nrow(table) == 0){
+    if(nrow(table) == 0) {
       table <- current_table
     } else{
       table <- merge(table, current_table, all = TRUE)
@@ -63,7 +63,7 @@ report.data.frame <- function(model, median = FALSE, centrality = TRUE, dispersi
     current_table$Variable <- col
     current_table$.order <- i
 
-    if(nrow(table_full) == 0){
+    if(nrow(table_full) == 0) {
       table_full <- current_table
     } else{
       table_full <- merge(table_full, current_table, all = TRUE)
