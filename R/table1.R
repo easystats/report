@@ -37,11 +37,19 @@ table1 <- function(data, centrality = "mean", select = NULL, exclude = NULL, gro
       x[[group_by]] <- NULL
       .generate_descriptive_table(x, centrality, digits)
     })
+    # remember values of first columns
     variable <- result[[1]]["Variable"]
-    cn <- sprintf("Summary (%s)", names(result))
+    # column names for groups
+    cn <- sprintf("%s (n=%g)", names(result), as.vector(table(data[[group_by]])))
+    # just extract summary columns
     summaries <- do.call(cbind, lapply(result, function(i) i["Summary"]))
     colnames(summaries) <- cn
-    cbind(variable, summaries)
+    # bind all together, including total column
+    cbind(
+      variable,
+      summaries,
+      Total = .generate_descriptive_table(data[setdiff(variables, group_by)], centrality, digits)[["Summary"]]
+    )
   } else {
     .generate_descriptive_table(data[variables], centrality, digits)
   }
@@ -70,6 +78,12 @@ table1 <- function(data, centrality = "mean", select = NULL, exclude = NULL, gro
     sprintf("%.*f (%.*f)", digits, stats::median(x, na.rm = TRUE), digits, stats::mad(x, na.rm = TRUE))
   }
 
+  if (centrality == "mean") {
+    column <- sprintf("Mean %s (SD)", column)
+  } else {
+    column <- sprintf("Median %s (MAD)", column)
+  }
+
   data.frame(
     Variable = column,
     Summary = .summary,
@@ -79,9 +93,9 @@ table1 <- function(data, centrality = "mean", select = NULL, exclude = NULL, gro
 
 
 .table1_row.factor <- function(x, column, digits = 1, ...) {
-  .summary <- sapply(prop.table(table(x)), function(i) sprintf("%.1f%%", 100 * i))
+  .summary <- sapply(prop.table(table(x)), function(i) sprintf("%.1f", 100 * i))
   data.frame(
-    Variable = sprintf("%s [%s]", column, names(.summary)),
+    Variable = sprintf("%s [%s], %%", column, names(.summary)),
     Summary = as.vector(.summary),
     stringsAsFactors = FALSE
   )
