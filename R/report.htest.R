@@ -3,8 +3,8 @@
 #' Create a report of an h-test object.
 #'
 #' @param model Object of class htest.
-#' @param effsize Effect size interpretation set of rules.
-#' @param ... Arguments passed to or from other methods.
+#' @param interpretation Effect size interpretation set of rules (see \link[effectsize]{interpret_d} and \link[effectsize]{interpret_r}).
+#' @inheritParams report
 #'
 #'
 #'
@@ -20,15 +20,15 @@
 #' @importFrom insight format_ci
 #'
 #' @export
-report.htest <- function(model, effsize = "funder2019", ...) {
+report.htest <- function(model, interpretation = "funder2019", ...) {
 
   tables <- model_table(model)
-  texts <- model_text(model, effsize=effsize)
+  texts <- model_text(model, interpretation=interpretation)
 
   out <- list(
     texts = texts,
     tables = tables
   )
 
-  as.report(out, effsize = effsize, ...)
+  as.report(out, interpretation = interpretation, ...)
 }

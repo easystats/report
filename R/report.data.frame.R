@@ -11,7 +11,7 @@
 #' @param n_entries Number of different character entries to show. Can be "all".
 #' @param levels_percentage Show characters entries and factor levels by number (default) or percentage.
 #' @param missing_percentage Show missings by number (default) or percentage.
-#' @param ... Arguments passed to or from other methods.
+#' @inheritParams report
 #'
 #'
 #'

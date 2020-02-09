@@ -9,16 +9,16 @@
 \usage{
 \method{model_table}{htest}(model, ...)
 
-\method{model_text}{htest}(model, effsize = "funder2019", ...)
+\method{model_text}{htest}(model, interpretation = "funder2019", ...)
 
-\method{report}{htest}(model, effsize = "funder2019", ...)
+\method{report}{htest}(model, interpretation = "funder2019", ...)
 }
 \arguments{
 \item{model}{Object of class htest.}
 
 \item{...}{Arguments passed to or from other methods.}
 
-\item{effsize}{Effect size interpretation set of rules.}
+\item{interpretation}{Effect size interpretation set of rules (see \link[effectsize]{interpret_d} and \link[effectsize]{interpret_r}).}
 }
 \description{
 Create a report of an h-test object.
