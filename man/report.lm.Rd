@@ -23,7 +23,7 @@
 
 \item{ci}{Confidence Interval (CI) level. Default to 0.95 (95\%).}
 
-\item{standardize}{The method used for standardizing the parameters. Can be \code{"refit"}, \code{"posthoc"}, \code{"smart"}, \code{"basic"} or \code{NULL} (default) for no standardization. See 'Details' in \code{\link[effectsize]{standardize_parameters}}. Note that robust estimation (i.e. \code{robust=TRUE}) of standardized parameters only works when \code{standardize="refit"}.}
+\item{standardize}{The method used for standardizing the parameters. Can be \code{"refit"}, \code{"posthoc"}, \code{"smart"}, \code{"basic"} or \code{NULL} (default) for no standardization. See 'Details' in \code{\link[effectsize]{standardize_parameters}}.}
 
 \item{bootstrap}{Should estimates be based on bootstrapped model? If \code{TRUE}, then arguments of \link[parameters:model_parameters.stanreg]{Bayesian regressions} apply (see also \code{\link[parameters:parameters_bootstrap]{parameters_bootstrap()}}).}
 
@@ -31,7 +31,7 @@
 
 \item{performance_metrics}{See \code{\link[performance:model_performance.lm]{model_performance}}.}
 
-\item{...}{Arguments passed to or from other methods. For instance, when \code{bootstrap = TRUE}, arguments like \code{ci_method} are passed down to \code{\link[bayestestR]{describe_posterior}}.}
+\item{...}{Arguments passed to or from other methods.}
 }
 \description{
 Create a report of a (general) linear model.
