@@ -5,6 +5,7 @@
 #' @param data A dataframe.
 #' @param age The name of the column containing the age.
 #' @param sex The name of the column containing the sex. Note that classes should be some of c("Male", "M", "Female", "F").
+#' @param education The name of the column containing education information.
 #' @param participants The name of the participants' identifier column (for instance in the case of repeated measures).
 #' @param group A character vector indicating the name(s) of the column(s) used for stratified description.
 #' @param spell_n Fully spell the sample size ("Three participants" instead of "3 participants").
