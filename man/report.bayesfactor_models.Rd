@@ -2,9 +2,12 @@
 % Please edit documentation in R/report.bayestestR.R
 \name{report.bayesfactor_models}
 \alias{report.bayesfactor_models}
+\alias{report.bayesfactor_inclusion}
 \title{Models' Bayes factor Report}
 \usage{
 \method{report}{bayesfactor_models}(model, interpretation = "jeffreys1961", ...)
+
+\method{report}{bayesfactor_inclusion}(model, interpretation = "jeffreys1961", ...)
 }
 \arguments{
 \item{model}{Object of class \code{bayesfactor_inclusion}.}
@@ -17,7 +20,6 @@
 Create a report of Bayes factors for model comparison.
 }
 \examples{
-\donttest{
 library(bayestestR)
 library(report)
 
@@ -26,13 +28,19 @@ mo1 <- lm(Sepal.Length ~ Species, data = iris)
 mo2 <- lm(Sepal.Length ~ Species + Petal.Length, data = iris)
 mo3 <- lm(Sepal.Length ~ Species * Petal.Length, data = iris)
 
+# Bayes factor - models
 BFmodels <- bayesfactor_models(mo1, mo2, mo3, denominator = mo0)
 
-bf_report <- report(BFmodels, digits = 3)
-to_table(bf_report)
-to_text(bf_report, full = FALSE)
+r <- report(BFmodels)
+r
+table_short(r)
 
-}
+# Bayes factor - inclusion
+inc_bf <- bayesfactor_inclusion(BFmodels, prior_odds = c(1,2,3), match_models = TRUE)
+
+r <- report(inc_bf)
+r
+table_short(r)
 }
 \seealso{
 report
