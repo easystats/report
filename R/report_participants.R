@@ -75,63 +75,63 @@ report_participants <- function(data, age = "Age", sex = "Sex", education = "Edu
 #' @keywords internal
 .report_participant <- function(data, age = "Age", sex = "Sex", education = "Education", participants = NULL, spell_n = FALSE, ...){
   # Sanity checks
-  if(is.null(age) | !age %in% names(data)){
+  if (is.null(age) | !age %in% names(data)) {
     data$Age <- NA
     age <- "Age"
   }
-  if(is.null(sex) | !sex %in% names(data)){
+  if (is.null(sex) | !sex %in% names(data)) {
     data$Sex <- NA
     sex <- "Sex"
   }
-  if(is.null(education) | !education %in% names(data)){
+  if (is.null(education) | !education %in% names(data)) {
     data$Education <- NA
     education <- "Education"
   }
 
   # Grouped data
-  if(!is.null(participants)){
+  if (!is.null(participants)) {
     data <- data.frame(
-      "Age" = stats::aggregate(data[[age]], by=list(data[[participants]]), FUN=mean)[[2]],
-      "Sex" = stats::aggregate(data[[sex]], by=list(data[[participants]]), FUN=head, n = 1)[[2]],
-      "Education" = stats::aggregate(data[[education]], by=list(data[[participants]]), FUN=head, n = 1)[[2]]
+      "Age" = stats::aggregate(data[[age]], by = list(data[[participants]]), FUN = mean)[[2]],
+      "Sex" = stats::aggregate(data[[sex]], by = list(data[[participants]]), FUN = head, n = 1)[[2]],
+      "Education" = stats::aggregate(data[[education]], by = list(data[[participants]]), FUN = head, n = 1)[[2]]
     )
     age <- "Age"
     sex = "Sex"
     education = "Education"
   }
 
-  if(spell_n){
+  if (spell_n) {
     size <- tools::toTitleCase(parameters::format_number(nrow(data)))
   } else{
     size <- nrow(data)
   }
 
   # Create text
-  text_age <- if(all(is.na(data[[age]]))){
+  text_age <- if (all(is.na(data[[age]]))) {
     ""
-  } else{
+  } else {
     paste0("Mean age = ",
            insight::format_value(mean(data[[age]], na.rm = TRUE)),
            ", ",
            report(data[[age]], centrality = FALSE, missing_percentage = NULL, ...)$text)
   }
 
-  text_sex <- if(all(is.na(data[[sex]]))){
+  text_sex <- if (all(is.na(data[[sex]]))) {
     ""
   } else{
     paste0(insight::format_value(length(data[[sex]][tolower(data[[sex]]) %in% c("female", "f")])/nrow(data)*100),
     "% females")
   }
 
-  text_education <- if(all(is.na(data[[education]]))){
+  text_education <- if (all(is.na(data[[education]]))) {
     ""
-  } else{
-    if(is.numeric(data[[education]])){
+  } else {
+    if (is.numeric(data[[education]])) {
       paste0("Mean education = ",
              insight::format_value(mean(data[[education]], na.rm = TRUE)),
              ", ",
              report(data[[education]], centrality = FALSE, missing_percentage = NULL, ...)$text)
-    } else{
+    } else {
       report(as.factor(data[[education]]), levels_percentage = TRUE, ...)$text
     }
   }
