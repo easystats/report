@@ -6,9 +6,9 @@
 \usage{
 report_participants(
   data,
-  age = "Age",
-  sex = "Sex",
-  education = "Education",
+  age = NULL,
+  sex = NULL,
+  education = NULL,
   participants = NULL,
   group = NULL,
   spell_n = FALSE,

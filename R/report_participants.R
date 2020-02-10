@@ -53,7 +53,22 @@
 #'
 #' @importFrom stats aggregate
 #' @export
-report_participants <- function(data, age = "Age", sex = "Sex", education = "Education", participants = NULL, group = NULL, spell_n = FALSE, ...){
+report_participants <- function(data, age = NULL, sex = NULL, education = NULL, participants = NULL, group = NULL, spell_n = FALSE, ...){
+
+  # find age variable automatically
+  if (is.null(age)) {
+    age <- .find_age_in_data(data)
+  }
+
+  # find sex variable automatically
+  if (is.null(sex)) {
+    sex <- .find_sex_in_data(data)
+  }
+
+  # find education variable automatically
+  if (is.null(education)) {
+    education <- .find_education_in_data(data)
+  }
 
   if (!is.null(group)) {
     text <- c()
@@ -144,4 +159,60 @@ report_participants <- function(data, age = "Age", sex = "Sex", education = "Edu
          ifelse(text_education == "", "", paste0(ifelse(text_age == "" & text_sex == "", "", "; "), text_education)),
          ")"
          )
+}
+
+
+
+
+.find_age_in_data <- function(data) {
+  if ("Age" %in% colnames(data))
+    "Age"
+  else if ("age" %in% colnames(data))
+    "age"
+  else if (any(grepl("^Age", colnames(data))))
+    grep("^Age", colnames(data), value = TRUE)[1]
+  else if (any(grepl("^age", colnames(data))))
+    grep("^age", colnames(data), value = TRUE)[1]
+  else
+    NULL
+}
+
+
+.find_sex_in_data <- function(data) {
+  if ("Sex" %in% colnames(data))
+    "Sex"
+  else if ("sex" %in% colnames(data))
+    "sex"
+  else if (any(grepl("^Sex", colnames(data))))
+    grep("^Sex", colnames(data), value = TRUE)[1]
+  else if (any(grepl("^sex", colnames(data))))
+    grep("^sex", colnames(data), value = TRUE)[1]
+  else if ("Gender" %in% colnames(data))
+    "Gender"
+  else if ("gender" %in% colnames(data))
+    "gender"
+  else if (any(grepl("^Gender", colnames(data))))
+    grep("^Gender", colnames(data), value = TRUE)[1]
+  else if (any(grepl("^gender", colnames(data))))
+    grep("^gender", colnames(data), value = TRUE)[1]
+  else
+    NULL
+}
+
+
+.find_education_in_data <- function(data) {
+  if ("Education" %in% colnames(data))
+    "Education"
+  else if ("education" %in% colnames(data))
+    "education"
+  else if (any(grepl("^Education", colnames(data))))
+    grep("^Education", colnames(data), value = TRUE)[1]
+  else if (any(grepl("^education", colnames(data))))
+    grep("^education", colnames(data), value = TRUE)[1]
+  else if ("isced" %in% colnames(data))
+    "isced"
+  else if (any(grepl("^isced", colnames(data))))
+    grep("^isced", colnames(data), value = TRUE)[1]
+  else
+    NULL
 }
