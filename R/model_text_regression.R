@@ -1,6 +1,6 @@
-#' @examples
-#' model <- lm(Sepal.Length ~ Species, data=iris)
-#' effsize = "default"; ci = 0.95; standardize = "refit"; standardize_robust = FALSE; bootstrap = FALSE; iterations = 500; performance_metrics = "all"; p_method = NULL; ci_method = NULL; centrality = "median"; dispersion = FALSE; test = c("pd", "rope"); rope_range = "default"; rope_ci = 1; bf_prior = NULL; diagnostic = c("ESS", "Rhat")
+# @examples
+# model <- lm(Sepal.Length ~ Species, data=iris)
+# effsize = "default"; ci = 0.95; standardize = "refit"; standardize_robust = FALSE; bootstrap = FALSE; iterations = 500; performance_metrics = "all"; p_method = NULL; ci_method = NULL; centrality = "median"; dispersion = FALSE; test = c("pd", "rope"); rope_range = "default"; rope_ci = 1; bf_prior = NULL; diagnostic = c("ESS", "Rhat")
 #' @keywords internal
 .model_text_regression <- function(model, interpretation = "default", ci = 0.95, standardize = "refit", standardize_robust = FALSE, bootstrap = FALSE, iterations = 500, performance_metrics = "all", p_method = NULL, ci_method = NULL, centrality = "median", dispersion = FALSE, test = c("pd", "rope"), rope_range = "default", rope_ci = 1, bf_prior = NULL, diagnostic = c("ESS", "Rhat"), ...) {
 
@@ -10,8 +10,8 @@
   # Sanity checks -----------------------------------------------------------
 
   # Default effsize
-  if(!is.null(interpretation) && interpretation == "default"){
-    if(insight::model_info(model)$is_binomial){
+  if (!is.null(interpretation) && interpretation == "default") {
+    if (insight::model_info(model)$is_binomial) {
       interpretation <- "chen2010"
     } else{
       interpretation <- "funder2019"
