@@ -1,22 +1,23 @@
-#' Create Table 1 (Sample Description)
+#' Sample Description
 #'
-#' Create Table 1 (Sample Description).
+#' Create sample description table (Table 1).
 #'
 #' @param data A data frame for which descriptive statistics should be created.
+#' @param group_by Character vector, indicating the column for possible grouping of the descriptive table.
 #' @param centrality Character, indicates the statistics that should be calculated for numeric variables. May be \code{"mean"} (for mean and standard deviation) or \code{"median"} (for median and median absolute deviation) as summary.
 #' @param select Character vector, with column names that should be included in the descriptive table.
 #' @param exclude Character vector, with column names that should be excluded from the descriptive table.
-#' @param group_by Character vector, indicating the column for possible grouping of the descriptive table.
 #' @param digits Number of decimals.
+#' @inheritParams report.data.frame
 #'
 #' @examples
 #' data(iris)
-#' table1(iris[, 1:4])
-#' table1(iris, select = c("Sepal.Length", "Petal.Length", "Species"))
-#' table1(iris, group_by = "Species")
+#' report_groups(iris[, 1:4])
+#' report_groups(iris, select = c("Sepal.Length", "Petal.Length", "Species"))
+#' report_groups(iris, group_by = "Species")
 #' @importFrom stats median sd mad
 #' @export
-table1 <- function(data, centrality = "mean", select = NULL, exclude = NULL, group_by = NULL, digits = 1, ...) {
+report_groups <- function(data, group_by = NULL, centrality = "mean", select = NULL, exclude = NULL, digits = 1, ...) {
   variables <- colnames(data)
 
   # variables to keep
