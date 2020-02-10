@@ -1,34 +1,29 @@
-#' Model description textual reporting
-#'
-#' Model textual description.
-#'
-#' @param model Object.
-#' @param ... Arguments passed to or from other methods.
-#'
-#'
-#' @seealso report
-#'
-#' @export
-text_model <- function(model, ...) {
-  UseMethod("text_model")
+#' @keywords internal
+.text_description <- function(model, ...) {
+  UseMethod(".text_description")
 }
 
 
 
 
+# Subparts ----------------------------------------------------------------
 
-.text_effsize <- function(effsize) {
+
+
+
+#' @keywords internal
+.text_effsize <- function(interpretation) {
   # Effect size
-  if (!is.null(effsize)) {
-    if (is.character(effsize)) {
-      effsize_name <- ifelse(effsize == "cohen1988", "Cohen's (1988)",
-        ifelse(effsize == "sawilowsky2009", "Savilowsky's (2009)",
-          ifelse(effsize == "gignac2016", "Gignac's (2016)",
-            ifelse(effsize == "funder2019", "Funder's (2019)",
-              ifelse(effsize == "chen2010", "Chen's (2010)", effsize)
-            )
-          )
-        )
+  if (!is.null(interpretation)) {
+    if (is.character(interpretation)) {
+      effsize_name <- ifelse(interpretation == "cohen1988", "Cohen's (1988)",
+                             ifelse(interpretation == "sawilowsky2009", "Savilowsky's (2009)",
+                                    ifelse(interpretation == "gignac2016", "Gignac's (2016)",
+                                           ifelse(interpretation == "funder2019", "Funder's (2019)",
+                                                  ifelse(interpretation == "chen2010", "Chen's (2010)", interpretation)
+                                           )
+                                    )
+                             )
       )
       text <- paste0(" Effect sizes were labelled following ", effsize_name, " recommendations.")
     } else {
@@ -155,8 +150,8 @@ text_model <- function(model, ...) {
   }
 
   values <- ifelse(params$Prior_Distribution == "normal",
-    paste0("mean = ", insight::format_value(params$Prior_Location), ", SD = ", insight::format_value(params$Prior_Scale)),
-    paste0("location = ", insight::format_value(params$Prior_Location), ", scale = ", insight::format_value(params$Prior_Scale))
+                   paste0("mean = ", insight::format_value(params$Prior_Location), ", SD = ", insight::format_value(params$Prior_Scale)),
+                   paste0("location = ", insight::format_value(params$Prior_Location), ", scale = ", insight::format_value(params$Prior_Scale))
   )
 
   values <- paste0(params$Prior_Distribution, " (", values, ")")
