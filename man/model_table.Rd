@@ -24,12 +24,11 @@ model_table(model, ...)
 Create a reportable table (no pun intended) for your model.
 }
 \examples{
-model <- lm(Sepal.Length ~ Petal.Width, data=iris)
+model <- lm(Sepal.Length ~ Petal.Width, data = iris)
 model_table(model)
 summary(model_table(model))
 
-model <- t.test(Sepal.Length ~ Species, data=iris[1:100,])
+model <- t.test(Sepal.Length ~ Species, data = iris[1:100, ])
 model_table(model)
 summary(model_table(model))
-
 }

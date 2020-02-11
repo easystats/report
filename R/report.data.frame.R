@@ -26,13 +26,12 @@
 #'
 #' library(dplyr)
 #' r <- iris %>%
-#'  dplyr::group_by(Species) %>%
-#'  report()
+#'   dplyr::group_by(Species) %>%
+#'   report()
 #' r
 #' summary(r)
 #' as.data.frame(r)
 #' summary(as.data.frame(r))
-#'
 #' @seealso report
 #'
 #' @export
@@ -54,7 +53,7 @@ report.data.frame <- function(model, median = FALSE, centrality = TRUE, dispersi
 
     if (nrow(table) == 0) {
       table <- current_table
-    } else{
+    } else {
       table <- merge(table, current_table, all = TRUE)
     }
 
@@ -65,7 +64,7 @@ report.data.frame <- function(model, median = FALSE, centrality = TRUE, dispersi
 
     if (nrow(table_full) == 0) {
       table_full <- current_table
-    } else{
+    } else {
       table_full <- merge(table_full, current_table, all = TRUE)
     }
 

@@ -73,13 +73,13 @@ report_participants <- function(data, age = NULL, sex = NULL, education = NULL, 
   if (!is.null(group)) {
     text <- c()
     for (i in split(data, data[group])) {
-      current_text <- .report_participant(i, age = age, sex = sex, education = education, participants = participants, spell_n = spell_n)
+      current_text <- .report_participants(i, age = age, sex = sex, education = education, participants = participants, spell_n = spell_n)
       pre_text <- paste0("the '", paste0(names(i[group]), " - ", as.character(sapply(i[group], unique)), collapse = " and "), "' group: ")
       text <- c(text, paste0(pre_text, current_text))
     }
     text <- paste("For", format_text(text, sep = ", for ", last = " and for "))
   } else {
-    text <- .report_participant(data, age = age, sex = sex, education = education, participants = participants, spell_n = spell_n, ...)
+    text <- .report_participants(data, age = age, sex = sex, education = education, participants = participants, spell_n = spell_n, ...)
   }
   text
 }
@@ -88,7 +88,7 @@ report_participants <- function(data, age = NULL, sex = NULL, education = NULL, 
 
 
 #' @keywords internal
-.report_participant <- function(data, age = "Age", sex = "Sex", education = "Education", participants = NULL, spell_n = FALSE, ...){
+.report_participants <- function(data, age = "Age", sex = "Sex", education = "Education", participants = NULL, spell_n = FALSE, ...){
   # Sanity checks
   if (is.null(age) | !age %in% names(data)) {
     data$Age <- NA
@@ -163,7 +163,7 @@ report_participants <- function(data, age = NULL, sex = NULL, education = NULL, 
 
 
 
-
+#' @keywords internal
 .find_age_in_data <- function(data) {
   if ("Age" %in% colnames(data))
     "Age"
@@ -174,10 +174,10 @@ report_participants <- function(data, age = NULL, sex = NULL, education = NULL, 
   else if (any(grepl("^age", colnames(data))))
     grep("^age", colnames(data), value = TRUE)[1]
   else
-    NULL
+    ""
 }
 
-
+#' @keywords internal
 .find_sex_in_data <- function(data) {
   if ("Sex" %in% colnames(data))
     "Sex"
@@ -196,10 +196,10 @@ report_participants <- function(data, age = NULL, sex = NULL, education = NULL, 
   else if (any(grepl("^gender", colnames(data))))
     grep("^gender", colnames(data), value = TRUE)[1]
   else
-    NULL
+    ""
 }
 
-
+#' @keywords internal
 .find_education_in_data <- function(data) {
   if ("Education" %in% colnames(data))
     "Education"
@@ -214,5 +214,5 @@ report_participants <- function(data, age = NULL, sex = NULL, education = NULL, 
   else if (any(grepl("^isced", colnames(data))))
     grep("^isced", colnames(data), value = TRUE)[1]
   else
-    NULL
+    ""
 }

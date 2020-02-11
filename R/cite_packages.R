@@ -9,9 +9,8 @@
 #' cite_packages(sessionInfo())
 #' @importFrom utils packageVersion sessionInfo
 #' @export
-show_packages <- function(session=NULL) {
-
-  if(is.null(session)){
+show_packages <- function(session = NULL) {
+  if (is.null(session)) {
     session <- sessionInfo()
   }
 
@@ -69,7 +68,7 @@ cite_packages <- function(session) {
 
 
 #' @export
-report.sessionInfo <- function(model, ...){
+report.sessionInfo <- function(model, ...) {
   show_packages(model)
 }
 
@@ -77,6 +76,6 @@ report.sessionInfo <- function(model, ...){
 
 
 #' @export
-print.report_packages <- function(x, ...){
+print.report_packages <- function(x, ...) {
   cat(insight::format_table(x, ...))
 }

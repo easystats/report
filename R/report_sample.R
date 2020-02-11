@@ -12,12 +12,12 @@
 #'
 #' @examples
 #' data(iris)
-#' report_groups(iris[, 1:4])
-#' report_groups(iris, select = c("Sepal.Length", "Petal.Length", "Species"))
-#' report_groups(iris, group_by = "Species")
+#' report_sample(iris[, 1:4])
+#' report_sample(iris, select = c("Sepal.Length", "Petal.Length", "Species"))
+#' report_sample(iris, group_by = "Species")
 #' @importFrom stats median sd mad
 #' @export
-report_groups <- function(data, group_by = NULL, centrality = "mean", select = NULL, exclude = NULL, digits = 1, ...) {
+report_sample <- function(data, group_by = NULL, centrality = "mean", select = NULL, exclude = NULL, digits = 1, ...) {
   variables <- colnames(data)
 
   # variables to keep

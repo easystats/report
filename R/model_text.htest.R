@@ -1,26 +1,25 @@
 #' @rdname report.htest
 #' @seealso report
 #' @export
-model_text.htest <- function(model, interpretation = "funder2019", ...){
-
+model_text.htest <- function(model, interpretation = "funder2019", ...) {
   table <- model_table(model)$table_long
 
   if (insight::model_info(model)$is_correlation) {
     estimate <- c("rho", "r", "tau")[c("rho", "r", "tau") %in% names(table)]
 
     # CI
-    if(is.null(attributes(model$conf.int)$conf.level)){
+    if (is.null(attributes(model$conf.int)$conf.level)) {
       ci_text <- ""
-    } else{
+    } else {
       ci_text <- paste0(", ", insight::format_ci(table$CI_low, table$CI_high, ci = attributes(model$conf.int)$conf.level))
     }
 
     # Statistic
-    if("t" %in% names(table)){
+    if ("t" %in% names(table)) {
       stats_text <- paste0(", t(", insight::format_value(table$df, protect_integers = TRUE), ") = ", insight::format_value(table$t))
-    } else if("S" %in% names(table)){
+    } else if ("S" %in% names(table)) {
       stats_text <- paste0(", S = ", insight::format_value(table$S))
-    } else{
+    } else {
       stats_text <- "D"
     }
 
@@ -44,7 +43,7 @@ model_text.htest <- function(model, interpretation = "funder2019", ...){
       ci_text,
       stats_text,
       ", ",
-      parameters::format_p(table$p, stars = FALSE, digits="apa"),
+      parameters::format_p(table$p, stars = FALSE, digits = "apa"),
       ")."
     )
     text <- paste0(
@@ -64,10 +63,9 @@ model_text.htest <- function(model, interpretation = "funder2019", ...){
       insight::format_value(table[[estimate]]),
       ci_text,
       ", ",
-      parameters::format_p(table$p, stars = FALSE, digits="apa"),
+      parameters::format_p(table$p, stars = FALSE, digits = "apa"),
       ")."
     )
-
   } else if (insight::model_info(model)$is_ttest) {
 
     # If against mu
@@ -81,11 +79,12 @@ model_text.htest <- function(model, interpretation = "funder2019", ...){
       vars_full <- paste0(model$data.name, means, " and mu = ", model$null.value)
       vars <- paste0(model$data.name, " and mu = ", model$null.value)
 
-    # If between two groups
+      # If between two groups
     } else {
       table$Difference <- model$estimate[1] - model$estimate[2]
       means <- paste0(names(model$estimate), " = ",
-                      insight::format_value(model$estimate), collapse = ", "
+        insight::format_value(model$estimate),
+        collapse = ", "
       )
       vars_full <- paste0(model$data.name, " (", means, ")")
       vars <- paste0(model$data.name)
@@ -108,9 +107,9 @@ model_text.htest <- function(model, interpretation = "funder2019", ...){
       ") = ",
       insight::format_value(model$statistic),
       ", ",
-      parameters::format_p(table$p, stars = FALSE, digits="apa"),
+      parameters::format_p(table$p, stars = FALSE, digits = "apa"),
       ") and can be considered as ",
-      effectsize::interpret_d(table$Cohens_d, rules=interpretation),
+      effectsize::interpret_d(table$Cohens_d, rules = interpretation),
       " (Cohen's d = ",
       insight::format_value(table$Cohens_d),
       ")."
@@ -129,7 +128,7 @@ model_text.htest <- function(model, interpretation = "funder2019", ...){
       ", ",
       insight::format_ci(model$conf.int[1], model$conf.int[2], ci = attributes(model$conf.int)$conf.level),
       ", ",
-      parameters::format_p(table$p, stars = FALSE, digits="apa"),
+      parameters::format_p(table$p, stars = FALSE, digits = "apa"),
       ", Cohen's d = ",
       insight::format_value(table$Cohens_d),
       ")."

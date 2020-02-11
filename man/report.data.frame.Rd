@@ -83,13 +83,12 @@ summary(as.data.frame(r))
 
 library(dplyr)
 r <- iris \%>\%
- dplyr::group_by(Species) \%>\%
- report()
+  dplyr::group_by(Species) \%>\%
+  report()
 r
 summary(r)
 as.data.frame(r)
 summary(as.data.frame(r))
-
 x <- factor(rep(c("A", "B", "C"), 10))
 report(x)
 model_table(x)

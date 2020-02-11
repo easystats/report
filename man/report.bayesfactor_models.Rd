@@ -36,7 +36,7 @@ r
 table_short(r)
 
 # Bayes factor - inclusion
-inc_bf <- bayesfactor_inclusion(BFmodels, prior_odds = c(1,2,3), match_models = TRUE)
+inc_bf <- bayesfactor_inclusion(BFmodels, prior_odds = c(1, 2, 3), match_models = TRUE)
 
 r <- report(inc_bf)
 r

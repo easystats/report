@@ -15,8 +15,7 @@ model_text(model, ...)
 Create a reportable textual output for your model.
 }
 \examples{
-model <- t.test(Sepal.Length ~ Species, data=iris[1:100,])
+model <- t.test(Sepal.Length ~ Species, data = iris[1:100, ])
 model_text(model)
 summary(model_text(model))
-
 }

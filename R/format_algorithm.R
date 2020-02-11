@@ -7,8 +7,8 @@
 #' format_algorithm(model)
 #'
 #' if (require("lme4")) {
-#' model <- lme4::lmer(Sepal.Length ~ Sepal.Width + (1|Species), data = iris)
-#' format_algorithm(model)
+#'   model <- lme4::lmer(Sepal.Length ~ Sepal.Width + (1 | Species), data = iris)
+#'   format_algorithm(model)
 #' }
 #' @importFrom insight find_algorithm
 #' @export

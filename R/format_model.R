@@ -7,10 +7,9 @@
 #' format_model(model)
 #'
 #' if (require("lme4")) {
-#' model <- lme4::lmer(Sepal.Length ~ Sepal.Width + (1|Species), data = iris)
-#' format_model(model)
+#'   model <- lme4::lmer(Sepal.Length ~ Sepal.Width + (1 | Species), data = iris)
+#'   format_model(model)
 #' }
-#'
 #' @importFrom insight model_info
 #' @export
 format_model <- function(model) {

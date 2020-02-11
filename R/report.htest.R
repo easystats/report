@@ -21,9 +21,8 @@
 #'
 #' @export
 report.htest <- function(model, interpretation = "funder2019", ...) {
-
   tables <- model_table(model)
-  texts <- model_text(model, interpretation=interpretation)
+  texts <- model_text(model, interpretation = interpretation)
 
   out <- list(
     texts = texts,

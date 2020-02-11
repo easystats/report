@@ -3,7 +3,6 @@
 # effsize = "default"; ci = 0.95; standardize = "refit"; standardize_robust = FALSE; bootstrap = FALSE; iterations = 500; performance_metrics = "all"; p_method = NULL; ci_method = NULL; centrality = "median"; dispersion = FALSE; test = c("pd", "rope"); rope_range = "default"; rope_ci = 1; bf_prior = NULL; diagnostic = c("ESS", "Rhat")
 #' @keywords internal
 .model_text_regression <- function(model, interpretation = "default", ci = 0.95, standardize = "refit", standardize_robust = FALSE, bootstrap = FALSE, iterations = 500, performance_metrics = "all", p_method = NULL, ci_method = NULL, centrality = "median", dispersion = FALSE, test = c("pd", "rope"), rope_range = "default", rope_ci = 1, bf_prior = NULL, diagnostic = c("ESS", "Rhat"), ...) {
-
   tables <- model_table(model, ci = ci, standardize = standardize, standardize_robust = standardize_robust, bootstrap = bootstrap, iterations = iterations, performance_metrics = performance_metrics, p_method = p_method, ci_method = ci_method, centrality = centrality, dispersion = dispersion, test = test, rope_range = rope_range, rope_ci = rope_ci, bf_prior = bf_prior, diagnostic = diagnostic, ...)
 
 
@@ -13,7 +12,7 @@
   if (!is.null(interpretation) && interpretation == "default") {
     if (insight::model_info(model)$is_binomial) {
       interpretation <- "chen2010"
-    } else{
+    } else {
       interpretation <- "funder2019"
     }
   }
