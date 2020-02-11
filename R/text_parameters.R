@@ -1,18 +1,6 @@
-#' Parameters textual reporting
-#'
-#' Convert parameters table to text.
-#'
-#' @param model Object.
-#' @param parameters Parameters table.
-#' @param prefix The bullet in front of each sentence.
-#' @param ... Arguments passed to or from other methods.
-#'
-#'
-#' @seealso report
-#'
-#' @export
-text_parameters <- function(model, parameters, prefix = "  - ", ...) {
-  UseMethod("text_parameters")
+#' @keywords internal
+.text_parameters <- function(model, parameters, prefix = "  - ", ...) {
+  UseMethod(".text_parameters")
 }
 
 
@@ -74,12 +62,12 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
         " has a probability of ",
         parameters::format_pd(parameters$pd, name = NULL),
         " of being ",
-        interpret_direction(parameters[[estimate_name]])
+        effectsize::interpret_direction(parameters[[estimate_name]])
       )
     } else {
       text <- paste0(
         " is ",
-        interpret_direction(parameters[[estimate_name]])
+        effectsize::interpret_direction(parameters[[estimate_name]])
       )
     }
   } else {
@@ -93,8 +81,8 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
 
 
 #' @keywords internal
-.text_parameters_size <- function(parameters, effsize = "cohen1988", type = "d") {
-  if (is.null(effsize) || is.na(effsize)) {
+.text_parameters_size <- function(parameters, interpretation = "cohen1988", type = "d") {
+  if (is.null(interpretation) || is.na(interpretation)) {
     return("")
   }
 
@@ -104,11 +92,11 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
 
   if (!is.na(estimate_name)) {
     if (type == "d") {
-      text <- interpret_d(parameters[[estimate_name]], rules = effsize)
+      text <- effectsize::interpret_d(parameters[[estimate_name]], rules = interpretation)
     } else if (type == "logodds") {
-      text <- interpret_odds(parameters[[estimate_name]], rules = effsize, log = TRUE)
+      text <- effectsize::interpret_odds(parameters[[estimate_name]], rules = interpretation, log = TRUE)
     } else if (type == "r") {
-      text <- interpret_r(parameters[[estimate_name]], rules = effsize)
+      text <- effectsize::interpret_r(parameters[[estimate_name]], rules = interpretation)
     }
   } else {
     text <- ""
@@ -126,11 +114,11 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
   text <- ""
 
   if ("p" %in% names(parameters)) {
-    text <- interpret_p(parameters$p)
+    text <- effectsize::interpret_p(parameters$p)
   }
 
   if ("ROPE_Percentage" %in% names(parameters) & !is.null(rope_ci)) {
-    text <- interpret_rope(parameters$ROPE_Percentage, ci = rope_ci)
+    text <- effectsize::interpret_rope(parameters$ROPE_Percentage, ci = rope_ci)
   }
   text
 }
@@ -307,7 +295,7 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
 .text_parameters_bayesian_diagnostic <- function(parameters, bayesian_diagnostic = TRUE) {
   # Convergence
   if ("Rhat" %in% names(parameters)) {
-    convergence <- interpret_rhat(parameters$Rhat, rules = "vehtari2019")
+    convergence <- effectsize::interpret_rhat(parameters$Rhat, rules = "vehtari2019")
     diagnostic <- ifelse(convergence == "converged",
       paste0(
         " The algorithm successfuly converged (Rhat = ",
@@ -322,7 +310,7 @@ text_parameters <- function(model, parameters, prefix = "  - ", ...) {
     )
 
     if ("ESS" %in% names(parameters)) {
-      stability <- interpret_effective_sample(parameters$ESS, rules = "burkner2017")
+      stability <- effectsize::interpret_ess(parameters$ESS, rules = "burkner2017")
       diagnostic <- ifelse(stability == "sufficient" & convergence == "converged",
         paste0(
           diagnostic,

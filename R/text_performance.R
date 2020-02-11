@@ -1,7 +1,15 @@
-#' @export
-text_performance.lm <- function(model, performance, ...) {
+#' @keywords internal
+.text_performance <- function(model, tables, ...) {
+  UseMethod(".text_performance")
+}
+
+
+
+#' @keywords internal
+.text_performance.lm <- function(model, performance, ...) {
   text <- ""
   text_full <- ""
+
 
   # Intercept-only
   if (all(insight::find_parameters(model, flatten = FALSE) == "(Intercept)")) {
@@ -14,15 +22,15 @@ text_performance.lm <- function(model, performance, ...) {
 
     text <- paste0(
       "The model's explanatory power is ",
-      interpret_r2(performance$R2, rules = "cohen1988"),
+      effectsize::interpret_r2(performance$R2, rules = "cohen1988"),
       " (R2 = ",
       insight::format_value(performance$R2)
     )
     text_full <- paste0(
       "\n\nThe model explains a ",
-      interpret_p(r2$p),
+      effectsize::interpret_p(r2$p),
       " and ",
-      interpret_r2(performance$R2, rules = "cohen1988"),
+      effectsize::interpret_r2(performance$R2, rules = "cohen1988"),
       " proportion of variance (R2 = ",
       insight::format_value(performance$R2),
       ", F(",
@@ -54,8 +62,8 @@ text_performance.lm <- function(model, performance, ...) {
 
 
   list(
-    "text" = text,
-    "text_full" = text_full
+    "text_short" = text,
+    "text_long" = text_full
   )
 }
 
@@ -63,7 +71,7 @@ text_performance.lm <- function(model, performance, ...) {
 
 
 
-#' @export
+#' @keywords internal
 text_performance.glm <- function(model, performance, ...) {
   text <- ""
 
@@ -76,7 +84,7 @@ text_performance.glm <- function(model, performance, ...) {
   if ("R2_Tjur" %in% names(performance)) {
     text <- paste0(
       "The model's explanatory power is ",
-      interpret_r2(performance$R2_Tjur, rules = "cohen1988"),
+      effectsize::interpret_r2(performance$R2_Tjur, rules = "cohen1988"),
       " (Tjur's R2 = ",
       insight::format_value(performance$R2_Tjur),
       ")."
@@ -85,7 +93,7 @@ text_performance.glm <- function(model, performance, ...) {
   if ("R2_Nagelkerke" %in% names(performance)) {
     text <- paste0(
       "The model's explanatory power is ",
-      interpret_r2(performance$R2_Nagelkerke, rules = "cohen1988"),
+      effectsize::interpret_r2(performance$R2_Nagelkerke, rules = "cohen1988"),
       " (Nagelkerke's R2 = ",
       insight::format_value(performance$R2_Nagelkerke),
       ")."
@@ -94,7 +102,7 @@ text_performance.glm <- function(model, performance, ...) {
   if ("R2_McFadden" %in% names(performance)) {
     text <- paste0(
       "The model's explanatory power is ",
-      interpret_r2(performance$R2_McFadden, rules = "cohen1988"),
+      effectsize::interpret_r2(performance$R2_McFadden, rules = "cohen1988"),
       " (McFadden's R2 = ",
       insight::format_value(performance$R2_McFadden),
       ")."
@@ -102,8 +110,8 @@ text_performance.glm <- function(model, performance, ...) {
   }
 
   list(
-    "text" = text,
-    "text_full" = text
+    "text_short" = text,
+    "text_long" = text
   )
 }
 
@@ -114,7 +122,7 @@ text_performance.glm <- function(model, performance, ...) {
 # Mixed -------------------------------------------------------------------
 
 
-#' @export
+#' @keywords internal
 text_performance.merMod <- function(model, performance, ...) {
   text <- ""
 
@@ -122,7 +130,7 @@ text_performance.merMod <- function(model, performance, ...) {
   if ("R2_conditional" %in% names(performance)) {
     text <- paste0(
       "The model's total explanatory power is ",
-      interpret_r2(performance$R2_conditional, rules = "cohen1988"),
+      effectsize::interpret_r2(performance$R2_conditional, rules = "cohen1988"),
       " (conditional R2 = ",
       insight::format_value(performance$R2_conditional),
       ")"
@@ -152,8 +160,8 @@ text_performance.merMod <- function(model, performance, ...) {
   # ?
 
   list(
-    "text" = text,
-    "text_full" = text
+    "text_short" = text,
+    "text_long" = text
   )
 }
 
@@ -166,7 +174,7 @@ text_performance.merMod <- function(model, performance, ...) {
 # Bayesian ----------------------------------------------------------------
 
 
-#' @export
+#' @keywords internal
 text_performance.stanreg <- function(model, performance, ...) {
   text <- ""
   text_full <- ""
@@ -184,7 +192,7 @@ text_performance.stanreg <- function(model, performance, ...) {
 
     text <- paste0(
       "The model's explanatory power is ",
-      interpret_r2(r2_val, rules = "cohen1988"),
+      effectsize::interpret_r2(r2_val, rules = "cohen1988"),
       " (R2's median = ",
       insight::format_value(r2_val)
     )
@@ -241,7 +249,7 @@ text_performance.stanreg <- function(model, performance, ...) {
   }
 
   list(
-    "text" = text,
-    "text_full" = text_full
+    "text_short" = text,
+    "text_long" = text_full
   )
 }

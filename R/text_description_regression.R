@@ -92,8 +92,8 @@
 
 
   list(
-    "text" = text,
-    "text_full" = text_full
+    "text_short" = text,
+    "text_long" = text_full
   )
 }
 

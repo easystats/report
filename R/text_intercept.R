@@ -1,17 +1,6 @@
-#' Initial model state textual reporting
-#'
-#' Convert initial state parameters table to text.
-#'
-#' @param model Object.
-#' @param parameters Parameters table.
-#' @param ... Arguments passed to or from other methods.
-#'
-#'
-#' @seealso report
-#'
 #' @export
-text_initial <- function(model, parameters, ...) {
-  UseMethod("text_initial")
+.text_intercept <- function(model, parameters, ...) {
+  UseMethod(".text_intercept")
 }
 
 
@@ -21,21 +10,21 @@ text_initial <- function(model, parameters, ...) {
 
 
 #' @export
-text_initial.lm <- function(model, parameters, ci = 0.95, ...) {
-  .text_intercept(model, parameters, ci = ci, ...)
+.text_intercept.lm <- function(model, parameters, ci = 0.95, ...) {
+  .text_intercept_regression(model, parameters, ci = ci, ...)
 }
 
 #' @export
-text_initial.glm <- text_initial.lm
+.text_intercept.glm <- .text_intercept.lm
 
 #' @export
-text_initial.merMod <- text_initial.lm
+.text_intercept.merMod <- .text_intercept.lm
 
 
 
 
 #' @keywords internal
-.text_intercept <- function(model, parameters, ci = 0.95, ...) {
+.text_intercept_regression <- function(model, parameters, ci = 0.95, ...) {
   intercept <- parameters[parameters$Parameter == "(Intercept)", ]
 
   coefficient <- names(parameters)[names(parameters) %in% c("Coefficient", "Median", "Mean", "MAP")][1]
