@@ -1,6 +1,11 @@
-#' @keywords internal
-.text_parameters <- function(model, parameters, prefix = "  - ", ...) {
-  UseMethod(".text_parameters")
+#' @rdname report_model
+#' @param prefix Prefix character that appears in front of each line.
+#' @examples
+#' model <- lm(Sepal.Length ~ Species, data=iris)
+#' report_parameters(model)
+#' @export
+report_parameters <- function(model, parameters, prefix = "  - ", ...) {
+  UseMethod("report_parameters")
 }
 
 
@@ -10,7 +15,7 @@
 
 
 #' @keywords internal
-.text_parameters_names <- function(parameters, parameter_column = "Parameter", label = "effect of ") {
+.report_parameters_names <- function(parameters, parameter_column = "Parameter", label = "effect of ") {
   names <- parameters[[parameter_column]]
 
   # Regular effects
@@ -28,7 +33,7 @@
 
 
 #' @keywords internal
-.text_parameters_direction <- function(parameters) {
+.report_parameters_direction <- function(parameters) {
   estimate_name <- names(parameters)[names(parameters) %in% c("Coefficient", "Difference", "Median", "Mean", "MAP")][1]
 
 
@@ -81,7 +86,7 @@
 
 
 #' @keywords internal
-.text_parameters_size <- function(parameters, interpretation = "cohen1988", type = "d") {
+.report_parameters_size <- function(parameters, interpretation = "cohen1988", type = "d") {
   if (is.null(interpretation) || is.na(interpretation)) {
     return("")
   }
@@ -110,7 +115,7 @@
 
 
 #' @keywords internal
-.text_parameters_significance <- function(parameters, rope_ci = 1) {
+.report_parameters_significance <- function(parameters, rope_ci = 1) {
   text <- ""
 
   if ("p" %in% names(parameters)) {
@@ -126,7 +131,7 @@
 
 
 #' @keywords internal
-.text_parameters_indices <- function(parameters, ci = 0.89, coefname = "beta") {
+.report_parameters_indices <- function(parameters, ci = 0.89, coefname = "beta") {
 
   text <- ""
 
@@ -292,7 +297,7 @@
 
 
 #' @keywords internal
-.text_parameters_bayesian_diagnostic <- function(parameters, bayesian_diagnostic = TRUE) {
+.report_parameters_bayesian_diagnostic <- function(parameters, bayesian_diagnostic = TRUE) {
   # Convergence
   if ("Rhat" %in% names(parameters)) {
     convergence <- effectsize::interpret_rhat(parameters$Rhat, rules = "vehtari2019")
@@ -364,7 +369,7 @@
 
 
 #' @keywords internal
-.text_parameters_combine <- function(names = "", direction = "", size = "", significance = "", indices = "", bayesian_diagnostic = "") {
+.report_parameters_combine <- function(names = "", direction = "", size = "", significance = "", indices = "", bayesian_diagnostic = "") {
   text <- paste0(names, direction)
 
   text <- ifelse(significance != "" & size != "", paste0(text, " and can be considered as ", size, " and ", significance),

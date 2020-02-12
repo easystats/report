@@ -15,7 +15,7 @@ report_intercept <- function(model, parameters, ...) {
 
 #' @export
 report_intercept.lm <- function(model, parameters = NULL, ci = 0.95, ...) {
-  report_intercept_regression(model, parameters = NULL, ci = ci, ...)
+  .report_intercept_regression(model, parameters = NULL, ci = ci, ...)
 }
 
 #' @export
@@ -28,7 +28,7 @@ report_intercept.merMod <- report_intercept.lm
 
 
 #' @keywords internal
-report_intercept_regression <- function(model, parameters = NULL, ci = 0.95, ...) {
+.report_intercept_regression <- function(model, parameters = NULL, ci = 0.95, ...) {
 
   if (is.null(parameters)){
     parameters <- parameters::model_parameters(model, ci = ci, ...)
@@ -52,7 +52,7 @@ report_intercept_regression <- function(model, parameters = NULL, ci = 0.95, ...
     " is at ",
     insight::format_value(is_at),
     " (",
-    .text_parameters_indices(intercept, ci = ci),
+    .report_parameters_indices(intercept, ci = ci),
     ")."
   )
 

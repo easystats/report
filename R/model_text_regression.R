@@ -41,7 +41,7 @@
   text_intercept <- report_intercept(model, parameters = parameters, ci = ci)
 
   # Params
-  text_params <- .text_parameters(model, tables = tables$table_long, prefix = "  - ", ci = ci, interpretation = interpretation)
+  text_params <- report_parameters(model, tables = tables$table_long, prefix = "  - ", ci = ci, interpretation = interpretation)
   #
   # # Combine text
   text_short <- paste0(text_model$text, text_perf$text, text_intercept$text, " Within this model:\n\n", text_params$text)
