@@ -286,7 +286,7 @@ report_parameters <- function(model, parameters, prefix = "  - ", ...) {
   if ("p" %in% names(parameters)) {
     text <- paste0(
       .add_comma(text),
-      parameters::format_p(parameters$p)
+      parameters::format_p(parameters$p, digits="apa")
     )
   }
 

@@ -3,10 +3,8 @@
 #' @inheritParams effectsize::standardize_parameters
 #' @inheritParams parameters::model_parameters.merMod
 #' @inheritParams parameters::model_parameters.stanreg
-#' @inheritParams report
-#' @param interpretation Effect size interpretation set of rules.
+#' @inheritParams report.lm
 #' @param parameters A parameters table obtained via \code{parameters::model_parameters()}.
-#' @param standardize_robust  Logical, if \code{TRUE}, robust standard errors are calculated (if possible), and confidence intervals and p-values are based on these robust standard errors.
 #' @export
 report_model.glm <- function(model, parameters = NULL, ci = NULL, ci_method = NULL, standardize = "refit", standardize_robust = FALSE, interpretation = NULL, bootstrap = FALSE, iterations = 500, test = NULL, rope_range = NULL, rope_ci = NULL, df_method = NULL, ...) {
 

@@ -1,5 +1,29 @@
-# model <- lm(Sepal.Length ~ Species, data=iris)
-# interpretation = "default"; ci = 0.95; standardize = "refit"; standardize_robust = FALSE; bootstrap = FALSE; iterations = 500; performance_metrics = "all"; p_method = NULL; ci_method = NULL; centrality = "median"; dispersion = FALSE; test = c("pd", "rope"); rope_range = "default"; rope_ci = 1; bf_prior = NULL; diagnostic = c("ESS", "Rhat")
+#' @rdname model_text
+#' @inheritParams parameters::model_parameters.default
+#' @inheritParams report
+#'
+#' @examples
+#' model <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
+#' model_text(model)
+#' summary(model_text(model))
+#' @export
+model_text.lm <- function(model, ...) {
+  .model_text_regression(model, ...)
+}
+
+
+#' @export
+model_text.glm <- model_text.lm
+
+
+
+
+
+
+
+
+
+
 #' @importFrom stats complete.cases
 #' @keywords internal
 .model_text_regression <- function(model, interpretation = "default", ci = 0.95, standardize = "refit", standardize_robust = FALSE, bootstrap = FALSE, iterations = 500, performance_metrics = "all", p_method = NULL, ci_method = NULL, centrality = "median", dispersion = FALSE, test = c("pd", "rope"), rope_range = "default", rope_ci = 1, bf_prior = NULL, diagnostic = c("ESS", "Rhat"), ...) {
@@ -41,11 +65,11 @@
   text_intercept <- report_intercept(model, parameters = parameters, ci = ci)
 
   # Params
-  text_params <- report_parameters(model, tables = tables$table_long, prefix = "  - ", ci = ci, interpretation = interpretation)
+  text_params <- report_parameters(model, parameters = parameters, prefix = "  - ", ci = ci, interpretation = interpretation, ...)
   #
   # # Combine text
-  text_short <- paste0(text_model$text, text_perf$text, text_intercept$text, " Within this model:\n\n", text_params$text)
-  text_long <- paste0(text_model$text_full, text_perf$text_full, text_intercept$text_full, " Within this model:\n\n", text_params$text_full)
+  text_short <- paste0(text_model$text_short, text_perf$text_short, text_intercept$text_short, " Within this model:\n\n", text_params$text_short)
+  text_long <- paste0(text_model$text_long, text_perf$text_long, text_intercept$text_long, " Within this model:\n\n", text_params$text_long)
 
 
   # Return output
