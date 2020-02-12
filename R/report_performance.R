@@ -1,12 +1,22 @@
-#' @keywords internal
-.text_performance <- function(model, tables, ...) {
-  UseMethod(".text_performance")
+#' @rdname report_model
+#' @param performance A performance table obtained via \code{performance::model_performance()}.
+#' @examples
+#' model <- lm(Sepal.Length ~ Species, data=iris)
+#' report_performance(model)
+#' @export
+report_performance <- function(model, performance = NULL, ...) {
+  UseMethod("report_performance")
 }
 
 
 
-#' @keywords internal
-.text_performance.lm <- function(model, performance, ...) {
+#' @export
+report_performance.lm <- function(model, performance = NULL, ...) {
+
+  if(is.null(performance)){
+    performance <- performance::model_performance(model, ...)
+  }
+
   text <- ""
   text_full <- ""
 
@@ -71,8 +81,13 @@
 
 
 
-#' @keywords internal
-text_performance.glm <- function(model, performance, ...) {
+#' @export
+report_performance.glm <- function(model, performance = NULL, ...) {
+
+  if(is.null(performance)){
+    performance <- performance::model_performance(model, ...)
+  }
+
   text <- ""
 
   # Intercept-only
@@ -122,8 +137,13 @@ text_performance.glm <- function(model, performance, ...) {
 # Mixed -------------------------------------------------------------------
 
 
-#' @keywords internal
-text_performance.merMod <- function(model, performance, ...) {
+#' @export
+report_performance.merMod <- function(model, performance = NULL, ...) {
+
+  if(is.null(performance)){
+    performance <- performance::model_performance(model, ...)
+  }
+
   text <- ""
 
   # R2 Conditional
@@ -174,8 +194,13 @@ text_performance.merMod <- function(model, performance, ...) {
 # Bayesian ----------------------------------------------------------------
 
 
-#' @keywords internal
-text_performance.stanreg <- function(model, performance, ...) {
+#' @export
+report_performance.stanreg <- function(model, performance = NULL, ...) {
+
+  if(is.null(performance)){
+    performance <- performance::model_performance(model, ...)
+  }
+
   text <- ""
   text_full <- ""
 

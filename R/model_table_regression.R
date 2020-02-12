@@ -1,8 +1,8 @@
 #' @rdname model_table
 #' @inheritParams parameters::model_parameters.default
 #' @export
-model_table.lm <- function(model, ci = 0.95, bootstrap = FALSE, iterations = 500, ...) {
-  .model_table_regression(model, ci = ci, bootstrap = bootstrap, iterations = iterations)
+model_table.lm <- function(model, ...) {
+  .model_table_regression(model, ...)
 }
 
 
@@ -17,7 +17,7 @@ model_table.lm <- function(model, ci = 0.95, bootstrap = FALSE, iterations = 500
 
 
 #' @keywords internal
-.model_table_regression <- function(model, ci = 0.95, ci_method = NULL, p_method = NULL, bootstrap = FALSE, iterations = 500, centrality = "median", dispersion = FALSE, test = c("pd", "rope"), rope_range = "default", rope_ci = 1, bf_prior = NULL, diagnostic = c("ESS", "Rhat"), ...) {
+.model_table_regression <- function(model, performance = NULL, ci = 0.95, ci_method = NULL, p_method = NULL, bootstrap = FALSE, iterations = 500, centrality = "median", dispersion = FALSE, test = c("pd", "rope"), rope_range = "default", rope_ci = 1, bf_prior = NULL, diagnostic = c("ESS", "Rhat"), ...) {
 
   # Sanity checks --------------------------------------------------------------
   info <- insight::model_info(model)
@@ -47,8 +47,9 @@ model_table.lm <- function(model, ci = 0.95, bootstrap = FALSE, iterations = 500
   parameters <- cbind(parameters, effsize)
 
   # Performance ----------------------------------------------------------------
-  performance <- performance::model_performance(model, metrics = "all", ...)
-
+  if (is.null(performance)){
+    performance <- performance::model_performance(model, metrics = "all", ...)
+  }
 
 
 

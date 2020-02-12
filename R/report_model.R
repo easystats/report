@@ -1,6 +1,18 @@
-#' @keywords internal
-.text_description <- function(model, ...) {
-  UseMethod(".text_description")
+#' Model description
+#'
+#' Model textual description.
+#'
+#' @param model Object.
+#' @param ... Arguments passed to or from other methods.
+#'
+#' @examples
+#' model <- lm(Sepal.Length ~ Species, data=iris)
+#' report_model(model)
+#' @seealso report
+#'
+#' @export
+report_model <- function(model, ...) {
+  UseMethod("report_model")
 }
 
 
@@ -37,11 +49,11 @@
 
 
 #' @keywords internal
-.text_ci <- function(ci, ci_method, p_method = NULL) {
+.text_ci <- function(ci, ci_method, df_method = NULL) {
   text <- ""
   # Frequentist --------------------------------
 
-  if (!is.null(p_method) && p_method == "wald" && !is.null(ci_method) && ci_method == "wald") {
+  if (!is.null(df_method) && df_method == "wald" && !is.null(ci_method) && ci_method == "wald") {
     return(paste0(" The ", insight::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) and p-values were computed using Wald approximation."))
   }
 
@@ -57,10 +69,10 @@
 
 
   # P values
-  if (!is.null(p_method)) {
+  if (!is.null(df_method)) {
     if (text != "") text <- paste0(text, " and ")
-    if (p_method == "wald") text <- paste0(text, "p-values were computed using Wald approximation")
-    if (p_method == "kenward") text <- paste0(text, "p-values were computed using Kenward-Roger approximation")
+    if (df_method == "wald") text <- paste0(text, "p-values were computed using Wald approximation")
+    if (df_method == "kenward") text <- paste0(text, "p-values were computed using Kenward-Roger approximation")
   }
 
 

@@ -1,6 +1,10 @@
+#' @rdname report_model
+#' @examples
+#' model <- lm(Sepal.Length ~ Species, data=iris)
+#' report_intercept(model)
 #' @export
-.text_intercept <- function(model, parameters, ...) {
-  UseMethod(".text_intercept")
+report_intercept <- function(model, parameters, ...) {
+  UseMethod("report_intercept")
 }
 
 
@@ -10,21 +14,26 @@
 
 
 #' @export
-.text_intercept.lm <- function(model, parameters, ci = 0.95, ...) {
-  .text_intercept_regression(model, parameters, ci = ci, ...)
+report_intercept.lm <- function(model, parameters = NULL, ci = 0.95, ...) {
+  report_intercept_regression(model, parameters = NULL, ci = ci, ...)
 }
 
 #' @export
-.text_intercept.glm <- .text_intercept.lm
+report_intercept.glm <- report_intercept.lm
 
 #' @export
-.text_intercept.merMod <- .text_intercept.lm
+report_intercept.merMod <- report_intercept.lm
 
 
 
 
 #' @keywords internal
-.text_intercept_regression <- function(model, parameters, ci = 0.95, ...) {
+report_intercept_regression <- function(model, parameters = NULL, ci = 0.95, ...) {
+
+  if (is.null(parameters)){
+    parameters <- parameters::model_parameters(model, ci = ci, ...)
+  }
+
   intercept <- parameters[parameters$Parameter == "(Intercept)", ]
 
   coefficient <- names(parameters)[names(parameters) %in% c("Coefficient", "Median", "Mean", "MAP")][1]

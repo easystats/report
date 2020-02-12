@@ -1,12 +1,14 @@
-#' @keywords internal
-.text_description.glm <- function(model, tables, ci = NULL, ci_method = NULL, standardize = "refit", standardize_robust = FALSE, interpretation = NULL, bootstrap = FALSE, iterations = 500, test = NULL, rope_range = NULL, rope_ci = NULL, p_method = NULL, ...) {
-
-  # Get parameters table
-  parameters <- tables$table_long
-  if("Fit" %in% names(parameters)){
-    parameters <- parameters[is.na(parameters$Fit) & !is.na(parameters$Parameter),]# Remove performance part
-  }
-
+#' @rdname report_model
+#' @inheritParams model_table
+#' @inheritParams effectsize::standardize_parameters
+#' @inheritParams parameters::model_parameters.merMod
+#' @inheritParams parameters::model_parameters.stanreg
+#' @inheritParams report
+#' @param interpretation Effect size interpretation set of rules.
+#' @param parameters A parameters table obtained via \code{parameters::model_parameters()}.
+#' @param standardize_robust  Logical, if \code{TRUE}, robust standard errors are calculated (if possible), and confidence intervals and p-values are based on these robust standard errors.
+#' @export
+report_model.glm <- function(model, parameters = NULL, ci = NULL, ci_method = NULL, standardize = "refit", standardize_robust = FALSE, interpretation = NULL, bootstrap = FALSE, iterations = 500, test = NULL, rope_range = NULL, rope_ci = NULL, df_method = NULL, ...) {
 
   # Model info
   info <- insight::model_info(model)
@@ -61,6 +63,9 @@
 
   # Details
   if (info$is_bayesian | bootstrap == TRUE) {
+    if (is.null(parameters)){
+      parameters::model_parameters(model, ...)
+    }
     text_full <- paste0(text_full, .text_priors(parameters))
 
     if (!is.null(rope_range)) {
@@ -74,7 +79,7 @@
   if (!is.null(ci_method)) {
     text_full <- paste0(
       text_full,
-      .text_ci(ci, ci_method = ci_method, p_method = p_method)
+      .text_ci(ci, ci_method = ci_method, df_method = df_method)
     )
   }
   if (!is.null(standardize)) {
@@ -90,19 +95,15 @@
     )
   }
 
-
-  list(
-    "text_short" = text,
-    "text_long" = text_full
-  )
+  as.model_text(text, text_full)
 }
 
 
 #' @export
-.text_description.lm <- .text_description.glm
+report_model.lm <- report_model.glm
 
 #' @export
-.text_description.merMod <- .text_description.glm
+report_model.merMod <- report_model.glm
 
 #' @export
-.text_description.stanreg <- .text_description.glm
+report_model.stanreg <- report_model.glm
