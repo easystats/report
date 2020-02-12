@@ -70,11 +70,7 @@ report_performance.lm <- function(model, performance = NULL, ...) {
     }
   }
 
-
-  list(
-    "text_short" = text,
-    "text_long" = text_full
-  )
+  as.model_text(text, text_full)
 }
 
 
@@ -124,10 +120,7 @@ report_performance.glm <- function(model, performance = NULL, ...) {
     )
   }
 
-  list(
-    "text_short" = text,
-    "text_long" = text
-  )
+  as.model_text(text, text)
 }
 
 
@@ -179,10 +172,7 @@ report_performance.merMod <- function(model, performance = NULL, ...) {
   # ICC
   # ?
 
-  list(
-    "text_short" = text,
-    "text_long" = text
-  )
+  as.model_text(text, text)
 }
 
 
@@ -273,8 +263,5 @@ report_performance.stanreg <- function(model, performance = NULL, ...) {
     )
   }
 
-  list(
-    "text_short" = text,
-    "text_long" = text_full
-  )
+  as.model_text(text, text_full)
 }

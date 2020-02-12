@@ -58,10 +58,7 @@ report_intercept.merMod <- report_intercept.lm
 
   text_full <- gsub("std. beta", "std. intercept", text_full, fixed = TRUE)
 
-  list(
-    "text" = text,
-    "text_full" = text_full
-  )
+  as.model_text(text, text_full)
 }
 
 
