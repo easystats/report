@@ -1,7 +1,6 @@
 #' @export
 report_parameters.lm <- function(model, parameters = NULL, prefix = "  - ", ci = 0.95, interpretation = "funder2019", ...) {
-
-  if(is.null(parameters)){
+  if (is.null(parameters)) {
     parameters <- parameters::model_parameters(model, ...)
   }
 

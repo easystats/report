@@ -6,11 +6,11 @@
 #' @param ... Arguments passed to or from other methods.
 #'
 #' @examples
-#' model <- lm(Sepal.Length ~ Species, data=iris)
+#' model <- lm(Sepal.Length ~ Species, data = iris)
 #' report_model(model)
 #'
 #' library(lme4)
-#' model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1|Species), data=iris)
+#' model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 #' report_model(model)
 #' @seealso report
 #'
@@ -33,13 +33,13 @@ report_model <- function(model, ...) {
   if (!is.null(interpretation)) {
     if (is.character(interpretation)) {
       effsize_name <- ifelse(interpretation == "cohen1988", "Cohen's (1988)",
-                             ifelse(interpretation == "sawilowsky2009", "Savilowsky's (2009)",
-                                    ifelse(interpretation == "gignac2016", "Gignac's (2016)",
-                                           ifelse(interpretation == "funder2019", "Funder's (2019)",
-                                                  ifelse(interpretation == "chen2010", "Chen's (2010)", interpretation)
-                                           )
-                                    )
-                             )
+        ifelse(interpretation == "sawilowsky2009", "Savilowsky's (2009)",
+          ifelse(interpretation == "gignac2016", "Gignac's (2016)",
+            ifelse(interpretation == "funder2019", "Funder's (2019)",
+              ifelse(interpretation == "chen2010", "Chen's (2010)", interpretation)
+            )
+          )
+        )
       )
       text <- paste0(" Effect sizes were labelled following ", effsize_name, " recommendations.")
     } else {
@@ -65,9 +65,9 @@ report_model <- function(model, ...) {
   # CI
   if (ci_method == "wald") {
     text <- paste0(" The ", insight::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) were computed using Wald approximation")
-  } else if (ci_method == "boot"){
+  } else if (ci_method == "boot") {
     text <- paste0(" The ", insight::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) were obtained through bootstrapping")
-  } else{
+  } else {
     text <- paste0(" The ", insight::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) were obtained through ", ci_method)
   }
 
@@ -166,8 +166,8 @@ report_model <- function(model, ...) {
   }
 
   values <- ifelse(params$Prior_Distribution == "normal",
-                   paste0("mean = ", insight::format_value(params$Prior_Location), ", SD = ", insight::format_value(params$Prior_Scale)),
-                   paste0("location = ", insight::format_value(params$Prior_Location), ", scale = ", insight::format_value(params$Prior_Scale))
+    paste0("mean = ", insight::format_value(params$Prior_Location), ", SD = ", insight::format_value(params$Prior_Scale)),
+    paste0("location = ", insight::format_value(params$Prior_Location), ", scale = ", insight::format_value(params$Prior_Scale))
   )
 
   values <- paste0(params$Prior_Distribution, " (", values, ")")

@@ -1,10 +1,10 @@
 #' @rdname report_model
 #' @examples
-#' model <- lm(Sepal.Length ~ Species, data=iris)
+#' model <- lm(Sepal.Length ~ Species, data = iris)
 #' report_intercept(model)
 #'
 #' library(lme4)
-#' model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1|Species), data=iris)
+#' model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 #' report_intercept(model)
 #' @export
 report_intercept <- function(model, parameters, ...) {
@@ -33,8 +33,7 @@ report_intercept.merMod <- report_intercept.lm
 
 #' @keywords internal
 .report_intercept_regression <- function(model, parameters = NULL, ci = 0.95, ...) {
-
-  if (is.null(parameters)){
+  if (is.null(parameters)) {
     parameters <- parameters::model_parameters(model, ci = ci, ...)
   }
 

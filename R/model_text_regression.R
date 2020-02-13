@@ -36,8 +36,8 @@ model_text.glm <- model_text.lm
 
   # Get back tables
   parameters <- tables$table_long
-  if("Fit" %in% names(parameters)){
-    parameters <- parameters[is.na(parameters$Fit) & !is.na(parameters$Parameter),]# Remove performance part
+  if ("Fit" %in% names(parameters)) {
+    parameters <- parameters[is.na(parameters$Fit) & !is.na(parameters$Parameter), ] # Remove performance part
   }
 
   # Sanity checks -----------------------------------------------------------

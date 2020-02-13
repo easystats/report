@@ -13,7 +13,7 @@ testthat::test_that("models", {
   testthat::expect_equal(nchar(text_short(report(BFmodels))), 186)
 })
 
-inc_bf <- bayesfactor_inclusion(BFmodels, prior_odds = c(1,2,3), match_models = TRUE)
+inc_bf <- bayesfactor_inclusion(BFmodels, prior_odds = c(1, 2, 3), match_models = TRUE)
 
 testthat::test_that("inclusion", {
   testthat::expect_equal(nchar(text_short(report(inc_bf))), 308)

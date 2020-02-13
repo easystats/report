@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create and test objects of class <a href='report.html'>report</a>. — as.report • report</title>
+<title>Text summary — model_text • report</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -44,8 +44,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Create and test objects of class <a href='report.html'>report</a>. — as.report" />
-<meta property="og:description" content="Create and test objects of class report." />
+<meta property="og:title" content="Text summary — model_text" />
+<meta property="og:description" content="Create a reportable textual output for your model." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -146,38 +146,58 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create and test objects of class <a href='report.html'>report</a>.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.R'><code>R/report.R</code></a></small>
-    <div class="hidden name"><code>as.report.Rd</code></div>
+    <h1>Text summary</h1>
+    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/model_text.R'><code>R/model_text.R</code></a>, <a href='https://github.com/easystats/report/blob/master/R/model_text_regression.R'><code>R/model_text_regression.R</code></a></small>
+    <div class="hidden name"><code>model_text.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create and test objects of class <a href='report.html'>report</a>.</p>
+    <p>Create a reportable textual output for your model.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as.report</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>model_text</span>(<span class='no'>model</span>, <span class='no'>...</span>)
 
-<span class='fu'>is.report</span>(<span class='no'>x</span>)</pre>
+<span class='co'># S3 method for lm</span>
+<span class='fu'>model_text</span>(<span class='no'>model</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>An arbitrary R object.</p></td>
+      <th>model</th>
+      <td><p>A statistical model.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Args to be saved as attributes.</p></td>
+      <td><p>Arguments passed to or from other methods. For instance, when <code>bootstrap = TRUE</code>, arguments like <code>ci_method</code> are passed down to <code><a href='https://rdrr.io/pkg/bayestestR/man/describe_posterior.html'>describe_posterior</a></code>.</p></td>
     </tr>
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span>(<span class='no'>Sepal.Length</span> ~ <span class='no'>Species</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>[<span class='fl'>1</span>:<span class='fl'>100</span>, ])
+<span class='fu'>model_text</span>(<span class='no'>model</span>)</div><div class='output co'>#&gt; The Welch Two Sample t-test suggests that the difference of Sepal.Length by Species (mean in group setosa = 5.01, mean in group versicolor = 5.94) is significant (difference = -0.93, 95% CI [-1.11, -0.75], t(86.54) = -10.52, p &lt; .001) and can be considered as very large (Cohen's d = -2.26).</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'>model_text</span>(<span class='no'>model</span>))</div><div class='output co'>#&gt; The Welch Two Sample t-test suggests that the difference of Sepal.Length by Species is significant (difference = -0.93, 95% CI [-1.11, -0.75], p &lt; .001, Cohen's d = -2.26).</div><div class='input'><span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>Sepal.Length</span> ~ <span class='no'>Petal.Length</span> * <span class='no'>Species</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>)
+<span class='fu'>model_text</span>(<span class='no'>model</span>)</div><div class='output co'>#&gt; We fitted a linear model (estimated using OLS) to predict Sepal.Length with Petal.Length and Species (formula = Sepal.Length ~ Petal.Length * Species). Standardized parameters were obtained by fitting the model on a standardized version of the dataset. Effect sizes were labelled following Funder's (2019) recommendations.
+#&gt; 
+#&gt; The model explains a significant and substantial proportion of variance (R2 = 0.84, F(5, 144) = 151.71, p &lt; .001, adj. R2 = 0.83). The model's intercept, corresponding to Sepal.Length = 0, Petal.Length = 0 and Species = setosa, is at 4.21 (SE = 0.41, 95% CI [3.41, 5.02], p &lt; .001). Within this model:
+#&gt; 
+#&gt;   - The effect of Petal.Length is positive and can be considered as very large and not significant (beta = 1.16, SE = 0.59, 95% CI [-0.01, 2.32], std. beta = 1.16, p = 0.052).
+#&gt;   - The effect of Speciesversicolor is negative and can be considered as medium and not significant (beta = -0.88, SE = 0.77, 95% CI [-2.41, 0.65], std. beta = 0.61, p = 0.256).
+#&gt;   - The effect of Speciesvirginica is negative and can be considered as very large and significant (beta = -1.75, SE = 0.79, 95% CI [-3.32, -0.18], std. beta = 0.97, p &lt; .05).
+#&gt;   - The effect of Petal.Length:Speciesversicolor is positive and can be considered as very large and not significant (beta = 0.61, SE = 0.63, 95% CI [-0.63, 1.85], std. beta = -0.88, p = 0.334).
+#&gt;   - The effect of Petal.Length:Speciesvirginica is positive and can be considered as very large and not significant (beta = 0.97, SE = 0.62, 95% CI [-0.26, 2.19], std. beta = -1.75, p = 0.120).</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'>model_text</span>(<span class='no'>model</span>))</div><div class='output co'>#&gt; We fitted a linear model to predict Sepal.Length with Petal.Length and Species.The model's explanatory power is substantial (R2 = 0.84, adj. R2 = 0.83). The model's intercept is at 4.21. Within this model:
+#&gt; 
+#&gt;   - The effect of Petal.Length is positive and can be considered as very large and not significant (beta = 1.16, 95% CI [-0.01, 2.32], std. beta = 1.16, p = 0.052).
+#&gt;   - The effect of Speciesversicolor is negative and can be considered as medium and not significant (beta = -0.88, 95% CI [-2.41, 0.65], std. beta = 0.61, p = 0.256).
+#&gt;   - The effect of Speciesvirginica is negative and can be considered as very large and significant (beta = -1.75, 95% CI [-3.32, -0.18], std. beta = 0.97, p &lt; .05).
+#&gt;   - The effect of Petal.Length:Speciesversicolor is positive and can be considered as very large and not significant (beta = 0.61, 95% CI [-0.63, 1.85], std. beta = -0.88, p = 0.334).
+#&gt;   - The effect of Petal.Length:Speciesvirginica is positive and can be considered as very large and not significant (beta = 0.97, 95% CI [-0.26, 2.19], std. beta = -1.75, p = 0.120).</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

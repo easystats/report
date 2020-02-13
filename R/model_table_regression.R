@@ -47,7 +47,7 @@ model_table.lm <- function(model, ...) {
   parameters <- cbind(parameters, effsize)
 
   # Performance ----------------------------------------------------------------
-  if (is.null(performance)){
+  if (is.null(performance)) {
     performance <- performance::model_performance(model, metrics = "all", ...)
   }
 

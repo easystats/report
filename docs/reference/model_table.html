@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create and test objects of class <a href='report.html'>report</a>. — as.report • report</title>
+<title>Table Summary — model_table • report</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -44,8 +44,8 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Create and test objects of class <a href='report.html'>report</a>. — as.report" />
-<meta property="og:description" content="Create and test objects of class report." />
+<meta property="og:title" content="Table Summary — model_table" />
+<meta property="og:description" content="Create a reportable table (no pun intended) for your model." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -146,38 +146,64 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create and test objects of class <a href='report.html'>report</a>.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.R'><code>R/report.R</code></a></small>
-    <div class="hidden name"><code>as.report.Rd</code></div>
+    <h1>Table Summary</h1>
+    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/model_table.R'><code>R/model_table.R</code></a>, <a href='https://github.com/easystats/report/blob/master/R/model_table_regression.R'><code>R/model_table_regression.R</code></a></small>
+    <div class="hidden name"><code>model_table.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create and test objects of class <a href='report.html'>report</a>.</p>
+    <p>Create a reportable table (no pun intended) for your model.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as.report</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>model_table</span>(<span class='no'>model</span>, <span class='no'>...</span>)
 
-<span class='fu'>is.report</span>(<span class='no'>x</span>)</pre>
+<span class='co'># S3 method for lm</span>
+<span class='fu'>model_table</span>(<span class='no'>model</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>An arbitrary R object.</p></td>
+      <th>model</th>
+      <td><p>A statistical model.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Args to be saved as attributes.</p></td>
+      <td><p>Arguments passed to or from other methods. For instance, when <code>bootstrap = TRUE</code>, arguments like <code>ci_method</code> are passed down to <code><a href='https://rdrr.io/pkg/bayestestR/man/describe_posterior.html'>describe_posterior</a></code>.</p></td>
     </tr>
     </table>
 
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='no'>Sepal.Length</span> ~ <span class='no'>Petal.Width</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>)
+<span class='fu'>model_table</span>(<span class='no'>model</span>)</div><div class='output co'>#&gt; Parameter   | Coefficient |   SE | CI_low | CI_high |     t | df_error |    p | Std_Coefficient |    Fit
+#&gt; --------------------------------------------------------------------------------------------------------
+#&gt; (Intercept) |        4.78 | 0.07 |   4.63 |    4.92 | 65.51 |      148 | 0.00 |            0.00 |       
+#&gt; Petal.Width |        0.89 | 0.05 |   0.79 |    0.99 | 17.30 |      148 | 0.00 |            0.82 |       
+#&gt;             |             |      |        |         |       |          |      |                 |       
+#&gt; AIC         |             |      |        |         |       |          |      |                 | 208.22
+#&gt; BIC         |             |      |        |         |       |          |      |                 | 217.25
+#&gt; R2          |             |      |        |         |       |          |      |                 |   0.67
+#&gt; R2 (adj.)   |             |      |        |         |       |          |      |                 |   0.67
+#&gt; RMSE        |             |      |        |         |       |          |      |                 |   0.47</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'>model_table</span>(<span class='no'>model</span>))</div><div class='output co'>#&gt; Parameter   | Coefficient | CI_low | CI_high |    p | Std_Coefficient |  Fit
+#&gt; ----------------------------------------------------------------------------
+#&gt; (Intercept) |        4.78 |   4.63 |    4.92 | 0.00 |            0.00 |     
+#&gt; Petal.Width |        0.89 |   0.79 |    0.99 | 0.00 |            0.82 |     
+#&gt;             |             |        |         |      |                 |     
+#&gt; R2          |             |        |         |      |                 | 0.67
+#&gt; R2 (adj.)   |             |        |         |      |                 | 0.67</div><div class='input'>
+<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span>(<span class='no'>Sepal.Length</span> ~ <span class='no'>Species</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>[<span class='fl'>1</span>:<span class='fl'>100</span>, ])
+<span class='fu'>model_table</span>(<span class='no'>model</span>)</div><div class='output co'>#&gt; Parameter    |   Group | Mean_Group1 | Mean_Group2 | Difference |      t |    df |    p | CI_low | CI_high |                  Method | Cohens_d
+#&gt; -----------------------------------------------------------------------------------------------------------------------------------------------
+#&gt; Sepal.Length | Species |        5.01 |        5.94 |       0.93 | -10.52 | 86.54 | 0.00 |  -1.11 |   -0.75 | Welch Two Sample t-test |    -2.26</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'>model_table</span>(<span class='no'>model</span>))</div><div class='output co'>#&gt; Difference |      t |    df |    p | CI_low | CI_high | Cohens_d
+#&gt; ----------------------------------------------------------------
+#&gt;       0.93 | -10.52 | 86.54 | 0.00 |  -1.11 |   -0.75 |    -2.26</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

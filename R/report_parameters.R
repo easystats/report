@@ -1,11 +1,11 @@
 #' @rdname report_model
 #' @param prefix Prefix character that appears in front of each line.
 #' @examples
-#' model <- lm(Sepal.Length ~ Species, data=iris)
+#' model <- lm(Sepal.Length ~ Species, data = iris)
 #' report_parameters(model)
 #'
 #' library(lme4)
-#' model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1|Species), data=iris)
+#' model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 #' report_parameters(model)
 #' @export
 report_parameters <- function(model, parameters, prefix = "  - ", ...) {
@@ -136,7 +136,6 @@ report_parameters <- function(model, parameters, prefix = "  - ", ...) {
 
 #' @keywords internal
 .report_parameters_indices <- function(parameters, ci = 0.89, coefname = "beta") {
-
   text <- ""
 
   if ("Coefficient" %in% names(parameters)) {
@@ -290,7 +289,7 @@ report_parameters <- function(model, parameters, prefix = "  - ", ...) {
   if ("p" %in% names(parameters)) {
     text <- paste0(
       .add_comma(text),
-      parameters::format_p(parameters$p, digits="apa")
+      parameters::format_p(parameters$p, digits = "apa")
     )
   }
 

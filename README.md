@@ -23,13 +23,12 @@ model <- lm(Sepal.Length ~ Species, data=iris)
 report(model)
 ```
 
-    ## We fitted a linear model to predict Sepal.Length with Species. The model's explanatory power is
-    ## substantial (R2 = 0.62, adj. R2 = 0.61). The model's intercept is at 5.01. Within this model:
+    ## We fitted a linear model (estimated using OLS) to predict Sepal.Length with Species (formula = Sepal.Length ~ Species). Standardized parameters were obtained by fitting the model on a standardized version of the dataset. Effect sizes were labelled following Funder's (2019) recommendations.
     ## 
-    ##   - The effect of Species (versicolor) is positive and can be considered as very large and
-    ## significant (beta = 0.93, 95% CI [0.73, 1.13], std. beta = 1.12, p < .001).
-    ##   - The effect of Species (virginica) is positive and can be considered as very large and significant
-    ## (beta = 1.58, 95% CI [1.38, 1.79], std. beta = 1.91, p < .001).
+    ## The model explains a significant and substantial proportion of variance (R2 = 0.62, F(2, 147) = 119.26, p < .001, adj. R2 = 0.61). The model's intercept, corresponding to Sepal.Length = 0 and Species = setosa, is at 5.01 (SE = 0.07, 95% CI [4.86, 5.15], p < .001). Within this model:
+    ## 
+    ##   - The effect of Speciesversicolor is positive and can be considered as very large and significant (beta = 1.12, SE = 0.12, 95% CI [0.88, 1.37], std. beta = 1.12, p < .001).
+    ##   - The effect of Speciesvirginica is positive and can be considered as very large and significant (beta = 1.91, SE = 0.12, 95% CI [1.66, 2.16], std. beta = 1.91, p < .001).
 
 ## Documentation
 
@@ -43,8 +42,6 @@ tutorials:
 
   - [Get
     Started](https://easystats.github.io/report/articles/report.html)
-  - [Automated Interpretation of Metrics and Effect
-    Sizes](https://easystats.github.io/report/articles/interpret_metrics.html)
   - [How to Cite
     Packages](https://easystats.github.io/report/articles/cite_packages.html)
   - [Supporting New
@@ -81,8 +78,6 @@ Run the following:
 
 ``` r
 install.packages("devtools")
-devtools::install_github("easystats/performance")
-devtools::install_github("easystats/parameters")
 devtools::install_github("easystats/report")
 ```
 
@@ -114,11 +109,11 @@ report(iris)
 ```
 
     ## The data contains 150 observations of the following variables:
-    ##   - Sepal.Length: Mean = 5.84, SD = 0.83, range: 4.30-7.90
-    ##   - Sepal.Width: Mean = 3.06, SD = 0.44, range: 2-4.40
-    ##   - Petal.Length: Mean = 3.76, SD = 1.77, range: 1-6.90
-    ##   - Petal.Width: Mean = 1.20, SD = 0.76, range: 0.10-2.50
-    ##   - Species: 3 levels: setosa (n = 50); versicolor (n = 50) and virginica (n = 50)
+    ##   - Sepal.Length: Mean = 5.84, SD = 0.83, Median = 5.80, MAD = 1.04, range: [4.30, 7.90], Skewness = 0.31, Kurtosis = -0.57, 0 missing
+    ##   - Sepal.Width: Mean = 3.06, SD = 0.44, Median = 3.00, MAD = 0.44, range: [2, 4.40], Skewness = 0.32, Kurtosis = 0.18, 0 missing
+    ##   - Petal.Length: Mean = 3.76, SD = 1.77, Median = 4.35, MAD = 1.85, range: [1, 6.90], Skewness = -0.27, Kurtosis = -1.40, 0 missing
+    ##   - Petal.Width: Mean = 1.20, SD = 0.76, Median = 1.30, MAD = 1.04, range: [0.10, 2.50], Skewness = -0.10, Kurtosis = -1.34, 0 missing
+    ##   - Species: 3 levels: setosa (n = 50, 33.33%); versicolor (n = 50, 33.33%) and virginica (n = 50, 33.33%)
 
 These reports nicely work within the
 [*tidyverse*](https://github.com/tidyverse) workflow:
@@ -129,56 +124,26 @@ cor.test(iris$Sepal.Length, iris$Petal.Length) %>%
   report()
 ```
 
-    ## The Pearson's product-moment correlation between iris$Sepal.Length and iris$Petal.Length is
-    ## positive, significant and large (r = 0.87, p < .001).
+    ## The Pearson's product-moment correlation between iris$Sepal.Length and iris$Petal.Length is positive, significant and very large (r = 0.87, 95% CI [0.83, 0.91], t(148) = 21.65, p < .001).
 
-You can also create tables with the `to_table()` and `to_fulltable()`
+You can also create tables with the `table_short()` and `table_long()`
 functions:
 
 ``` r
 # Table report for a linear model
 lm(Sepal.Length ~ Petal.Length + Species, data=iris) %>% 
   report() %>% 
-  to_table()
-## Parameter         | Coefficient |         95% CI |      p | Coefficient (std.) |  Fit
-## -------------------------------------------------------------------------------------
-## (Intercept)       |        3.68 |   [3.47, 3.89] | < .001 |               1.50 |     
-## Petal.Length      |        0.90 |   [0.78, 1.03] | < .001 |               1.93 |     
-## Speciesversicolor |       -1.60 | [-1.98, -1.22] | < .001 |              -1.93 |     
-## Speciesvirginica  |       -2.12 | [-2.66, -1.58] | < .001 |              -2.56 |     
-##                   |             |                |        |                    |     
-## R2                |             |                |        |                    | 0.84
-## R2 (adj.)         |             |                |        |                    | 0.83
+  table_short()
+## Parameter         | Coefficient | CI_low | CI_high |    p | Std_Coefficient |  Fit
+## ----------------------------------------------------------------------------------
+## (Intercept)       |        1.50 |   1.12 |    1.87 | 0.00 |            1.50 |     
+## Petal.Length      |        1.93 |   1.66 |    2.20 | 0.00 |            1.93 |     
+## Speciesversicolor |       -1.93 |  -2.40 |   -1.47 | 0.00 |           -1.93 |     
+## Speciesvirginica  |       -2.56 |  -3.21 |   -1.90 | 0.00 |           -2.56 |     
+##                   |             |        |         |      |                 |     
+## R2                |             |        |         |      |                 | 0.84
+## R2 (adj.)         |             |        |         |      |                 | 0.83
 ```
-
-Finally, you can also find more details using `to_fulltext()`:
-
-``` r
-# Full report for a Bayesian logistic mixed model with effect sizes
-library(rstanarm)
-
-stan_glmer(vs ~ mpg + (1|cyl), data=mtcars, family="binomial") %>% 
-  report(standardize="smart", effsize="cohen1988") %>% 
-  to_fulltext()
-```
-
-    ## We fitted a Bayesian logistic mixed model (estimated using MCMC sampling with 4 chains of 2000
-    ## iterations and a warmup of 1000) to predict vs with mpg (formula = vs ~ mpg). The model included
-    ## cyl as random effects (formula = ~1 | cyl). Priors over parameters were set as normal (mean = 0.00,
-    ## SD = 0.41) distributions. The Region of Practical Equivalence (ROPE) percentage was defined as the
-    ## proportion of the posterior distribution within the [-0.18, 0.18] range. The 89% Credible Intervals
-    ## (CIs) were based on Highest Density Intervals (HDI). Parameters were scaled by the mean and the SD
-    ## of the response variable. Effect sizes were labelled following Cohen's (1988) recommendations.
-    ## 
-    ## The model's explanatory power is substantial (R2's median = 0.57, 89% CI [0.43, 0.69] Within this
-    ## model, the explanatory power related to the fixed effects alone (marginal R2's median) is of 0.24
-    ## (89% CI [0.00, 0.48]). The model's intercept, corresponding to vs = 0, mpg = 0 and cyl = 0, is at
-    ## -5.07 (89% CI [-11.97, 1.57], 2.33% in ROPE, std. median = 0.00). Within this model:
-    ## 
-    ##   - The effect of mpg has a probability of 85.75% of being positive and can be considered as medium
-    ## and not significant (median = 0.23, 89% CI [-0.12, 0.53], 40.00% in ROPE, std. median = 1.37). The
-    ## algorithm successfuly converged (Rhat = 1.001) and the estimates can be considered as stable (ESS =
-    ## 1446).
 
 ## Examples
 
@@ -191,7 +156,7 @@ Currently supported objects by **report** include
 [`glm`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/glm.html),
 [`lme4::merMod`](https://github.com/lme4/lme4/),
 [`rstanarm::stanreg`](https://github.com/stan-dev/rstanarm),
-[`estimate`](https://github.com/easystats/estimate).
+[`modelbased`](https://github.com/easystats/modelbased).
 
 ### *t*-tests and correlations
 
@@ -200,9 +165,7 @@ t.test(mtcars$mpg ~ mtcars$am) %>%
   report()
 ```
 
-    ## The Welch Two Sample t-test suggests that the difference of mtcars$mpg by mtcars$am (mean in group
-    ## 0 = 17.15, mean in group 1 = 24.39, difference = -7.24) is significant (t(18.33) = -3.77, 95% CI
-    ## [-11.28, -3.21], p < .01).
+    ## The Welch Two Sample t-test suggests that the difference of mtcars$mpg by mtcars$am (mean in group 0 = 17.15, mean in group 1 = 24.39) is significant (difference = -7.24, 95% CI [-11.28, -3.21], t(18.33) = -3.77, p < .01) and can be considered as very large (Cohen's d = -1.76).
 
 ### Miscellaneous
 
@@ -214,7 +177,7 @@ data <- data.frame("Age" = c(22, 23, 54, 21),
 
 paste(report_participants(data, spell_n = TRUE),
       "were recruited in the study by means of torture and coercion.")
-## [1] "Four participants (Mean age = 30.00, SD = 16.02, range: 21-54, 50.00% females) were recruited in the study by means of torture and coercion."
+## [1] "Four participants (Mean age = 30.00, Mean = 30.00, SD = 16.02, Median = 22.50, MAD = 1.48, range: [21, 54], Skewness = 1.98, Kurtosis = -0.67; 50.00% females) were recruited in the study by means of torture and coercion."
 ```
 
 ## Credits

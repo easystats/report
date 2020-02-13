@@ -33,7 +33,7 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
     Max = max(model, na.rm = TRUE),
     n_Obs = length(model),
     Skewness = parameters::skewness(model),
-    Kurtosis = parameters::kurtosis(model, type=1),
+    Kurtosis = parameters::kurtosis(model, type = 1),
     n_Missing = sum(is.na(model))
   )
 
@@ -55,19 +55,21 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
   text_range <- paste0("[", insight::format_value(table_full$Min[1], protect_integers = TRUE), ", ", insight::format_value(table_full$Max[1], protect_integers = TRUE), "]")
 
   # Distribution
-  text_distribution <- paste0(", Skewness = ",
-                              insight::format_value(table_full$Skewness[1]),
-                              ", Kurtosis = ",
-                              insight::format_value(table_full$Kurtosis[1]))
+  text_distribution <- paste0(
+    ", Skewness = ",
+    insight::format_value(table_full$Skewness[1]),
+    ", Kurtosis = ",
+    insight::format_value(table_full$Kurtosis[1])
+  )
 
   # Missings
-  if(!is.null(missing_percentage)){
+  if (!is.null(missing_percentage)) {
     if (missing_percentage == TRUE) {
       text_missing <- paste0(", ", insight::format_value(table_full$percentage_Missing[1], protect_integers = TRUE), "% missing")
     } else {
       text_missing <- paste0(", ", table_full$n_Missing[1], " missing")
     }
-  } else{
+  } else {
     text_missing <- ""
   }
 
@@ -78,7 +80,7 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
   table <- table_full
 
   # Centrality and dispersion
-  if(centrality == TRUE){
+  if (centrality == TRUE) {
     if (median == TRUE) {
       if (dispersion == TRUE) {
         text <- paste0(text_median, ", MAD = ", text_mad)
@@ -96,7 +98,7 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
         table <- remove_if_possible(table, c("Median", "MAD", "SD"))
       }
     }
-  } else{
+  } else {
     if (median == TRUE) {
       if (dispersion == TRUE) {
         text <- paste0("MAD = ", text_mad)
@@ -132,7 +134,7 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
 
 
   # Missing
-  if(!is.null(missing_percentage)){
+  if (!is.null(missing_percentage)) {
     if (missing_percentage == TRUE) {
       table <- remove_if_possible(table, "n_Missing")
       table_full <- remove_if_possible(table_full, "n_Missing")
@@ -140,7 +142,7 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
       table <- remove_if_possible(table, "percentage_Missing")
       table_full <- remove_if_possible(table_full, "percentage_Missing")
     }
-  } else{
+  } else {
     table <- remove_if_possible(table, c("percentage_Missing", "n_Missing"))
     table_full <- remove_if_possible(table_full, c("percentage_Missing", "n_Missing"))
   }
@@ -175,13 +177,13 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
 
 #' @export
 model_table.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = FALSE, ...) {
-  r <- report(model, median=median, centrality=centrality, dispersion=dispersion, range=range, distribution=distribution, missing_percentage=missing_percentage, ...)
+  r <- report(model, median = median, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, missing_percentage = missing_percentage, ...)
   r$tables
 }
 
 
 #' @export
 model_text.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = FALSE, ...) {
-  r <- report(model, median=median, centrality=centrality, dispersion=dispersion, range=range, distribution=distribution, missing_percentage=missing_percentage, ...)
+  r <- report(model, median = median, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, missing_percentage = missing_percentage, ...)
   r$texts
 }

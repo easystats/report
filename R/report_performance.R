@@ -1,11 +1,11 @@
 #' @rdname report_model
 #' @param performance A performance table obtained via \code{performance::model_performance()}.
 #' @examples
-#' model <- lm(Sepal.Length ~ Species, data=iris)
+#' model <- lm(Sepal.Length ~ Species, data = iris)
 #' report_performance(model)
 #'
 #' library(lme4)
-#' model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1|Species), data=iris)
+#' model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 #' report_performance(model)
 #' @export
 report_performance <- function(model, performance = NULL, ...) {
@@ -16,8 +16,7 @@ report_performance <- function(model, performance = NULL, ...) {
 
 #' @export
 report_performance.lm <- function(model, performance = NULL, ...) {
-
-  if(is.null(performance)){
+  if (is.null(performance)) {
     performance <- performance::model_performance(model, ...)
   }
 
@@ -83,8 +82,7 @@ report_performance.lm <- function(model, performance = NULL, ...) {
 
 #' @export
 report_performance.glm <- function(model, performance = NULL, ...) {
-
-  if(is.null(performance)){
+  if (is.null(performance)) {
     performance <- performance::model_performance(model, ...)
   }
 
@@ -136,8 +134,7 @@ report_performance.glm <- function(model, performance = NULL, ...) {
 
 #' @export
 report_performance.merMod <- function(model, performance = NULL, ...) {
-
-  if(is.null(performance)){
+  if (is.null(performance)) {
     performance <- performance::model_performance(model, ...)
   }
 
@@ -190,8 +187,7 @@ report_performance.merMod <- function(model, performance = NULL, ...) {
 
 #' @export
 report_performance.stanreg <- function(model, performance = NULL, ...) {
-
-  if(is.null(performance)){
+  if (is.null(performance)) {
     performance <- performance::model_performance(model, ...)
   }
 

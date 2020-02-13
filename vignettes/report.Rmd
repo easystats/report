@@ -54,18 +54,16 @@ The `report` package works in a two steps fashion. First, creating a `report` ob
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
 r <- report(iris)
-to_text(r)
+text_short(r)
 ```
 ```{r message=FALSE, warning=FALSE}
 r <- report(iris)
-print(to_text(r), width=100)
+print(text_short(r), width=100)
 ```
-```{r message=FALSE, warning=FALSE, eval=FALSE}
-to_table(r)
+```{r message=FALSE, warning=FALSE}
+table_short(r)
 ```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-knitr::kable(to_table(r, digits=2))
-```
+
 
 ### Grouped Dataframes
 
@@ -76,7 +74,7 @@ r <- iris %>%
   group_by(Species) %>% 
   report(median = TRUE, range = FALSE)  # Display only the Median and MAD
 
-to_fulltext(r)
+text_short(r)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(dplyr)
@@ -84,14 +82,12 @@ library(dplyr)
 r <- iris %>% 
   group_by(Species) %>% 
   report(median = TRUE, range = FALSE)  # Display only the Median and MAD
-to_fulltext(r, width=100)
+print(text_short(r), width=100)
 ```
-```{r message=FALSE, warning=FALSE, eval=FALSE}
-to_fulltable(r)
+```{r message=FALSE, warning=FALSE, eval=TRUE}
+table_long(r)
 ```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-to_fulltable(r, digits=2)
-```
+
 
 ### Correlations and t-tests
 
@@ -115,23 +111,19 @@ print(report(t.test(iris$Sepal.Length, iris$Petal.Length)), width=100)
 model <- lm(Sepal.Length ~ Petal.Length + Species, data=iris)
 r <- report(model)
 
-to_text(r)
+text_short(r)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 model <- lm(Sepal.Length ~ Petal.Length + Species, data=iris) 
 r <- report(model)
 
-to_text(r, width=100)
+print(text_short(r), width=100)
 ```
 
-```{r message=FALSE, warning=FALSE, eval=FALSE}
-to_table(r)
+```{r message=FALSE, warning=FALSE, eval=TRUE}
+table_short(r)
 ```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-table <- to_table(r, digits=2)
-table <- table[rowSums(is.na(table)) != ncol(table),]
-knitr::kable(table)
-```
+
 
 
 
@@ -141,22 +133,18 @@ knitr::kable(table)
 model <- glm(vs ~ mpg + cyl, data=mtcars, family="binomial")
 r <- report(model)
 
-to_fulltext(r)
+text_long(r)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 model <- glm(vs ~ mpg + cyl, data=mtcars, family="binomial")
 r <- report(model)
 
-to_fulltext(r, width=100)
+print(text_long(r), width=100)
 ```
 
-```{r message=FALSE, warning=FALSE, eval=FALSE}
-to_fulltable(r)
+```{r message=FALSE, warning=FALSE, eval=TRUE}
+table_long(r)
 ```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-table <- to_fulltable(r, digits=2)
-table <- table[rowSums(is.na(table)) != ncol(table),]
-knitr::kable(table)
-```
+
 
 ### Bayesian Models
