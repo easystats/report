@@ -5,8 +5,14 @@ model_table.lm <- function(model, ...) {
   .model_table_regression(model, ...)
 }
 
+#' @export
+model_table.glm <- model_table.lm
 
+#' @export
+model_table.merMod <- model_table.lm
 
+#' @export
+model_table.stanreg <- model_table.lm
 
 
 

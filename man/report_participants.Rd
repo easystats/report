@@ -37,8 +37,10 @@ A helper function to help you format the participants data (age, sex, ...) in th
 }
 \examples{
 library(report)
-data <- data.frame("Age" = c(22, 23, 54, 21, 8, 42),
-                   "Sex" = c("F", "F", "M", "M", "M", "F"))
+data <- data.frame(
+  "Age" = c(22, 23, 54, 21, 8, 42),
+  "Sex" = c("F", "F", "M", "M", "M", "F")
+)
 
 report_participants(data, age = "Age", sex = "Sex")
 
@@ -47,31 +49,40 @@ data$Education <- c(0, 8, -3, -5, 3, 5)
 report_participants(data, age = "Age", sex = "Sex", education = "Education")
 
 # Education as factor
-data$Education2 <- c("Bachelor", "PhD", "Highschool",
-                     "Highschool", "Bachelor", "Bachelor")
+data$Education2 <- c(
+  "Bachelor", "PhD", "Highschool",
+  "Highschool", "Bachelor", "Bachelor"
+)
 report_participants(data, age = "Age", sex = "Sex", education = "Education2")
 
 
 # Repeated measures data
-data <- data.frame("Age" = c(22, 22, 54, 54, 8, 8),
-                   "Sex" = c("F", "F", "M", "M", "F", "F"),
-                   "Participant" = c("S1", "S1", "s2", "s2", "s3", "s3"))
+data <- data.frame(
+  "Age" = c(22, 22, 54, 54, 8, 8),
+  "Sex" = c("F", "F", "M", "M", "F", "F"),
+  "Participant" = c("S1", "S1", "s2", "s2", "s3", "s3")
+)
 
 report_participants(data, age = "Age", sex = "Sex", participants = "Participant")
 
 # Grouped data
-data <- data.frame("Age" = c(22, 22, 54, 54, 8, 8, 42, 42),
-                   "Sex" = c("F", "F", "M", "M", "F", "F", "M", "M"),
-                   "Participant" = c("S1", "S1", "s2", "s2", "s3", "s3", "s4", "s4"),
-                   "Condition" = c("A", "A", "A", "A", "B", "B", "B", "B"))
+data <- data.frame(
+  "Age" = c(22, 22, 54, 54, 8, 8, 42, 42),
+  "Sex" = c("F", "F", "M", "M", "F", "F", "M", "M"),
+  "Participant" = c("S1", "S1", "s2", "s2", "s3", "s3", "s4", "s4"),
+  "Condition" = c("A", "A", "A", "A", "B", "B", "B", "B")
+)
 
-report_participants(data, age = "Age",
-                          sex = "Sex",
-                          participants = "Participant",
-                          group = "Condition")
+report_participants(data,
+  age = "Age",
+  sex = "Sex",
+  participants = "Participant",
+  group = "Condition"
+)
 
 # Spell sample size
-paste(report_participants(data, participants = "Participant", spell_n = TRUE),
-      "were recruited in the study by means of torture and coercion.")
-
+paste(
+  report_participants(data, participants = "Participant", spell_n = TRUE),
+  "were recruited in the study by means of torture and coercion."
+)
 }

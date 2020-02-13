@@ -15,9 +15,11 @@ model_text.lm <- function(model, ...) {
 #' @export
 model_text.glm <- model_text.lm
 
+#' @export
+model_text.merMod <- model_text.lm
 
-
-
+#' @export
+model_text.stanreg <- model_text.lm
 
 
 

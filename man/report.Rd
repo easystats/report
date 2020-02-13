@@ -25,7 +25,7 @@ Create textual reports. See the documentation for your object's class:
 \examples{
 library(report)
 
-model <- t.test(Sepal.Length ~ Species, data=iris[1:100,])
+model <- t.test(Sepal.Length ~ Species, data = iris[1:100, ])
 r <- report(model)
 
 # Text
@@ -34,7 +34,7 @@ summary(r)
 
 # Tables
 as.data.frame(r)
-summary(as.data.frame(r))  # equivalent to as.table(r)
+summary(as.data.frame(r)) # equivalent to as.table(r)
 
 # List
 as.list(r)
