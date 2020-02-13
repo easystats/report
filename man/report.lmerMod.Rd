@@ -28,7 +28,7 @@
 
 \item{standardize_robust}{Logical, if \code{TRUE}, robust standard errors are calculated (if possible), and confidence intervals and p-values are based on these robust standard errors.}
 
-\item{bootstrap}{Should estimates be based on bootstrapped model? If \code{TRUE}, then arguments of \link[parameters:model_parameters.stanreg]{Bayesian regressions} apply (see also \code{\link[parameters:parameters_bootstrap]{parameters_bootstrap()}}).}
+\item{bootstrap}{Should estimates be based on bootstrapped model? If \code{TRUE}, then arguments of \link[parameters:model_parameters.stanreg]{Bayesian regressions} apply (see also \code{\link[parameters:bootstrap_parameters]{bootstrap_parameters()}}).}
 
 \item{iterations}{The number of bootstrap replicates. This only apply in the case of bootstrapped frequentist models.}
 

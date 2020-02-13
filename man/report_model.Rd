@@ -54,7 +54,7 @@ report_performance(model, performance = NULL, ...)
 
 \item{interpretation}{\href{https://easystats.github.io/effectsize/articles/interpret.html}{Interpret the standardized parameters} using a set of rules. Default corresponds to "funder2019" for linear models and "chen2010" for logistic models.}
 
-\item{bootstrap}{Should estimates be based on bootstrapped model? If \code{TRUE}, then arguments of \link[parameters:model_parameters.stanreg]{Bayesian regressions} apply (see also \code{\link[parameters:parameters_bootstrap]{parameters_bootstrap()}}).}
+\item{bootstrap}{Should estimates be based on bootstrapped model? If \code{TRUE}, then arguments of \link[parameters:model_parameters.stanreg]{Bayesian regressions} apply (see also \code{\link[parameters:bootstrap_parameters]{bootstrap_parameters()}}).}
 
 \item{iterations}{The number of bootstrap replicates. This only apply in the case of bootstrapped frequentist models.}
 
