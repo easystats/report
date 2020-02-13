@@ -3,6 +3,10 @@
 #' @examples
 #' model <- lm(Sepal.Length ~ Species, data=iris)
 #' report_parameters(model)
+#'
+#' library(lme4)
+#' model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1|Species), data=iris)
+#' report_parameters(model)
 #' @export
 report_parameters <- function(model, parameters, prefix = "  - ", ...) {
   UseMethod("report_parameters")

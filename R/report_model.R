@@ -8,6 +8,10 @@
 #' @examples
 #' model <- lm(Sepal.Length ~ Species, data=iris)
 #' report_model(model)
+#'
+#' library(lme4)
+#' model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1|Species), data=iris)
+#' report_model(model)
 #' @seealso report
 #'
 #' @export

@@ -85,11 +85,27 @@ Model textual description.
 \examples{
 model <- lm(Sepal.Length ~ Species, data=iris)
 report_intercept(model)
+
+library(lme4)
+model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1|Species), data=iris)
+report_intercept(model)
 model <- lm(Sepal.Length ~ Species, data=iris)
+report_model(model)
+
+library(lme4)
+model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1|Species), data=iris)
 report_model(model)
 model <- lm(Sepal.Length ~ Species, data=iris)
 report_parameters(model)
+
+library(lme4)
+model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1|Species), data=iris)
+report_parameters(model)
 model <- lm(Sepal.Length ~ Species, data=iris)
+report_performance(model)
+
+library(lme4)
+model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1|Species), data=iris)
 report_performance(model)
 }
 \seealso{

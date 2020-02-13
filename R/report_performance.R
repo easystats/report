@@ -3,6 +3,10 @@
 #' @examples
 #' model <- lm(Sepal.Length ~ Species, data=iris)
 #' report_performance(model)
+#'
+#' library(lme4)
+#' model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1|Species), data=iris)
+#' report_performance(model)
 #' @export
 report_performance <- function(model, performance = NULL, ...) {
   UseMethod("report_performance")

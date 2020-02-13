@@ -1,5 +1,10 @@
 #' @export
 report_parameters.lm <- function(model, parameters = NULL, prefix = "  - ", ci = 0.95, interpretation = "funder2019", ...) {
+
+  if(is.null(parameters)){
+    parameters <- parameters::model_parameters(model, ...)
+  }
+
   if (!is.null(attributes(parameters)$pretty_names)) {
     parameters$Parameter <- attributes(parameters)$pretty_names[parameters$Parameter]
   }
@@ -24,13 +29,13 @@ report_parameters.lm <- function(model, parameters = NULL, prefix = "  - ", ci =
 
 
 
-#' @keywords internal
+#' @export
 report_parameters.glm <- report_parameters.lm
 
-#' @keywords internal
+#' @export
 report_parameters.merMod <- report_parameters.lm
 
-#' @keywords internal
+#' @export
 report_parameters.stanreg <- report_parameters.lm
 
 
@@ -40,7 +45,7 @@ report_parameters.stanreg <- report_parameters.lm
 
 
 #' @keywords internal
-.report_parameters_regression <- function(parameters, ci, interpretation, type = "d", prefix = "  - ", bayesian_diagnostic = FALSE) {
+.report_parameters_regression <- function(parameters, ci = 0.95, interpretation = "funder2019", type = "d", prefix = "  - ", bayesian_diagnostic = FALSE) {
   text <- .report_parameters_combine(
     names = .report_parameters_names(parameters),
     direction = .report_parameters_direction(parameters),

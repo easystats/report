@@ -2,6 +2,10 @@
 #' @examples
 #' model <- lm(Sepal.Length ~ Species, data=iris)
 #' report_intercept(model)
+#'
+#' library(lme4)
+#' model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1|Species), data=iris)
+#' report_intercept(model)
 #' @export
 report_intercept <- function(model, parameters, ...) {
   UseMethod("report_intercept")
