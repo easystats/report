@@ -1,8 +1,8 @@
-#' Safe Dataframe Modification
+#' Safe data frame Modification
 #'
-#' Rename/remove a variable in a dataframe if exists.
+#' Rename/remove a variable in a data frame if exists.
 #'
-#' @param x Dataframe.
+#' @param x Data frame.
 #' @param pattern Variable to replace.
 #' @param replacement New variable name.
 #' @param cols Order of columns.
@@ -25,7 +25,7 @@ rename_if_possible <- function(x, pattern, replacement) {
 #' @rdname rename_if_possible
 #' @export
 remove_if_possible <- function(x, pattern) {
-  x[!names(x) %in% c(pattern)]
+  x[!names(x) %in% pattern]
 }
 
 
@@ -36,4 +36,36 @@ remove_if_possible <- function(x, pattern) {
 reorder_if_possible <- function(x, cols) {
   remaining_columns <- setdiff(colnames(x), cols)
   x[, c(cols, remaining_columns)]
+}
+
+
+# returns the row-indices for grouped data frames
+#' @keywords internal
+.group_indices <- function(x) {
+  # dplyr < 0.8.0 returns attribute "indices"
+  grps <- attr(x, "groups", exact = TRUE)
+
+  # dplyr < 0.8.0?
+  if (is.null(grps)) {
+    attr(x, "indices", exact = TRUE)
+  } else {
+    grps[[".rows"]]
+  }
+}
+
+
+
+# returns the variables that were used for grouping data frames (dplyr::group_var())
+#' @keywords internal
+.group_vars <- function(x) {
+  # dplyr < 0.8.0 returns attribute "indices"
+  grps <- attr(x, "groups", exact = TRUE)
+
+  # dplyr < 0.8.0?
+  if (is.null(grps)) {
+    ## TODO fix for dplyr < 0.8
+    attr(x, "vars", exact = TRUE)
+  } else {
+    setdiff(colnames(grps), ".rows")
+  }
 }

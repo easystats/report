@@ -111,11 +111,10 @@ report.data.frame <- function(model, median = FALSE, centrality = TRUE, dispersi
 
 
 
-#' @importFrom dplyr group_vars ungroup
 #' @export
 report.grouped_df <- function(model, median = FALSE, centrality = TRUE, dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = FALSE, n_entries = 3, missing_percentage = FALSE, ...) {
-  groups <- dplyr::group_vars(model)
-  ungrouped_x <- dplyr::ungroup(model)
+  groups <- .group_vars(model)
+  ungrouped_x <- as.data.frame(model)
   xlist <- split(ungrouped_x, ungrouped_x[groups], sep = " - ")
 
 
