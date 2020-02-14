@@ -15,21 +15,25 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -39,12 +43,12 @@
 
   <link href="../extra.css" rel="stylesheet">
   
+
 <meta property="og:title" content="Bayesian Models Report — report.stanreg" />
-
 <meta property="og:description" content="Create a report of Bayesian models." />
-
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -67,6 +71,7 @@
 
   gtag('config', 'UA-97457476-8');
 </script>
+
 
   </head>
 
@@ -92,7 +97,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -113,9 +118,6 @@
       <a href="../articles/cite_packages.html">How to Cite Packages</a>
     </li>
     <li>
-      <a href="../articles/interpret_metrics.html">Automated Interpretation of Metrics and Effect Sizes</a>
-    </li>
-    <li>
       <a href="../articles/supporting_new_models.html">Supporting New Models</a>
     </li>
   </ul>
@@ -124,11 +126,10 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/easystats/report">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -139,40 +140,50 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Bayesian Models Report</h1>
-    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.stanreg.R'><code>R/report.stanreg.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report_regression.R'><code>R/report_regression.R</code></a></small>
     <div class="hidden name"><code>report.stanreg.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
     <p>Create a report of Bayesian models.</p>
-    
     </div>
 
     <pre class="usage"><span class='co'># S3 method for stanreg</span>
-<span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>, <span class='kw'>effsize</span> <span class='kw'>=</span> <span class='st'>"default"</span>, <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>0.89</span>,
-  <span class='kw'>standardize</span> <span class='kw'>=</span> <span class='st'>"refit"</span>, <span class='kw'>standardize_robust</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>centrality</span> <span class='kw'>=</span> <span class='st'>"median"</span>, <span class='kw'>dispersion</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>ci_method</span> <span class='kw'>=</span> <span class='st'>"hdi"</span>,
-  <span class='kw'>test</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"pd"</span>, <span class='st'>"rope"</span>), <span class='kw'>rope_range</span> <span class='kw'>=</span> <span class='st'>"default"</span>, <span class='kw'>rope_ci</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>bf_prior</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>diagnostic</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"ESS"</span>, <span class='st'>"Rhat"</span>),
-  <span class='kw'>performance_metrics</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='no'>...</span>)</pre>
-    
+<span class='fu'><a href='report.html'>report</a></span>(
+  <span class='no'>model</span>,
+  <span class='kw'>interpretation</span> <span class='kw'>=</span> <span class='st'>"default"</span>,
+  <span class='kw'>ci</span> <span class='kw'>=</span> <span class='fl'>0.89</span>,
+  <span class='kw'>standardize</span> <span class='kw'>=</span> <span class='st'>"smart"</span>,
+  <span class='kw'>standardize_robust</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>centrality</span> <span class='kw'>=</span> <span class='st'>"median"</span>,
+  <span class='kw'>dispersion</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>ci_method</span> <span class='kw'>=</span> <span class='st'>"hdi"</span>,
+  <span class='kw'>test</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"pd"</span>, <span class='st'>"rope"</span>),
+  <span class='kw'>rope_range</span> <span class='kw'>=</span> <span class='st'>"default"</span>,
+  <span class='kw'>rope_ci</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>bf_prior</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>diagnostic</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ESS"</span>, <span class='st'>"Rhat"</span>),
+  <span class='kw'>performance_metrics</span> <span class='kw'>=</span> <span class='st'>"all"</span>,
+  <span class='no'>...</span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>model</th>
-      <td><p>Frequentist regression object.</p></td>
+      <td><p>Model object.</p></td>
     </tr>
     <tr>
-      <th>effsize</th>
-      <td><p><a href='https://easystats.github.io/report/articles/interpret_metrics.html'>Interpret the standardized parameters</a> using a set of rules. Default corresponds to "funder2019" for linear models and "chen2010" for logistic models.</p></td>
+      <th>interpretation</th>
+      <td><p><a href='https://easystats.github.io/effectsize/articles/interpret.html'>Interpret the standardized parameters</a> using a set of rules. Default corresponds to "funder2019" for linear models and "chen2010" for logistic models.</p></td>
     </tr>
     <tr>
       <th>ci</th>
@@ -180,11 +191,11 @@
     </tr>
     <tr>
       <th>standardize</th>
-      <td><p>Add standardized parameters. Can be FALSE or a character indicating the standardization method (see <code>parameters_standardize</code>).</p></td>
+      <td><p>The method used for standardizing the parameters. Can be <code>"refit"</code>, <code>"posthoc"</code>, <code>"smart"</code>, <code>"basic"</code> or <code>NULL</code> (default) for no standardization. See 'Details' in <code><a href='https://rdrr.io/pkg/effectsize/man/standardize_parameters.html'>standardize_parameters</a></code>. Note that robust estimation (i.e. <code>robust=TRUE</code>) of standardized parameters only works when <code>standardize="refit"</code>.</p></td>
     </tr>
     <tr>
       <th>standardize_robust</th>
-      <td><p>Robust standardization. See <code>parameters_standardize</code>.</p></td>
+      <td><p>Logical, if <code>TRUE</code>, robust standard errors are calculated (if possible), and confidence intervals and p-values are based on these robust standard errors.</p></td>
     </tr>
     <tr>
       <th>centrality</th>
@@ -197,23 +208,24 @@
     <tr>
       <th>ci_method</th>
       <td><p>The type of index used for Credible Interval. Can be
-<code>"HDI"</code> (default, see <code>hdi</code>) or <code>"ETI"</code>
-(see <code>eti</code>).</p></td>
+<code>"HDI"</code> (default, see <code><a href='https://rdrr.io/pkg/bayestestR/man/hdi.html'>hdi</a></code>), <code>"ETI"</code>
+(see <code><a href='https://rdrr.io/pkg/bayestestR/man/eti.html'>eti</a></code>) or <code>"SI"</code>
+(see <code><a href='https://rdrr.io/pkg/bayestestR/man/si.html'>si</a></code>).</p></td>
     </tr>
     <tr>
       <th>test</th>
       <td><p>The indices of effect existence to compute. Character (vector) or
 list with one or more of these options: <code>"p_direction"</code> (or <code>"pd"</code>),
 <code>"rope"</code>, <code>"p_map"</code>, <code>"equivalence_test"</code> (or <code>"equitest"</code>),
-<code>"bayesfactor"</code> (or <code>"bf"</code>) or <code>"all"</code> to compute all tests.#'
+<code>"bayesfactor"</code> (or <code>"bf"</code>) or <code>"all"</code> to compute all tests.
 For each "test", the corresponding <span class="pkg">bayestestR</span> function is called
-(e.g. <code>rope</code> or <code>p_direction</code>) and its results
+(e.g. <code><a href='https://rdrr.io/pkg/bayestestR/man/rope.html'>rope</a></code> or <code><a href='https://rdrr.io/pkg/bayestestR/man/p_direction.html'>p_direction</a></code>) and its results
 included in the summary output.</p></td>
     </tr>
     <tr>
       <th>rope_range</th>
       <td><p>ROPE's lower and higher bounds. Should be a list of two
-values (e.g., <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c(-0.1, 0.1)</a></code>) or <code>"default"</code>. If <code>"default"</code>,
+values (e.g., <code><a href='https://rdrr.io/r/base/c.html'>c(-0.1, 0.1)</a></code>) or <code>"default"</code>. If <code>"default"</code>,
 the bounds are set to <code>x +- 0.1*SD(response)</code>.</p></td>
     </tr>
     <tr>
@@ -223,7 +235,7 @@ proportion of HDI, to use for the percentage in ROPE.</p></td>
     </tr>
     <tr>
       <th>bf_prior</th>
-      <td><p>Distribution representing a prior for the computation of Bayes factors. Used if the input is a posterior, otherwise (in the case of models) ignored.</p></td>
+      <td><p>Distribution representing a prior for the computation of Bayes factors / SI. Used if the input is a posterior, otherwise (in the case of models) ignored.</p></td>
     </tr>
     <tr>
       <th>diagnostic</th>
@@ -231,76 +243,32 @@ proportion of HDI, to use for the percentage in ROPE.</p></td>
     </tr>
     <tr>
       <th>performance_metrics</th>
-      <td><p>See <code><a href='https://www.rdocumentation.org/packages/performance/topics/model_performance.lm'>model_performance</a></code>.</p></td>
+      <td><p>See <code><a href='https://rdrr.io/pkg/performance/man/model_performance.lm.html'>model_performance</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Arguments passed to or from other methods (e.g., to standardize).</p></td>
+      <td><p>Arguments passed to or from other methods. For instance, when <code>bootstrap = TRUE</code>, arguments like <code>ci_method</code> are passed down to <code><a href='https://rdrr.io/pkg/bayestestR/man/describe_posterior.html'>describe_posterior</a></code>.</p></td>
     </tr>
     </table>
-    
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>report</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>rstanarm</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: Rcpp</span></div><div class='output co'>#&gt; <span class='message'>Registered S3 method overwritten by 'xts':</span>
-#&gt; <span class='message'>  method     from</span>
-#&gt; <span class='message'>  as.zoo.xts zoo </span></div><div class='output co'>#&gt; <span class='message'>rstanarm (Version 2.18.2, packaged: 2018-11-08 22:19:38 UTC)</span></div><div class='output co'>#&gt; <span class='message'>- Do not expect the default priors to remain the same in future rstanarm versions.</span></div><div class='output co'>#&gt; <span class='message'>Thus, R scripts should specify priors explicitly, even if they are just the defaults.</span></div><div class='output co'>#&gt; <span class='message'>- For execution on a local, multicore CPU with excess RAM we recommend calling</span></div><div class='output co'>#&gt; <span class='message'>options(mc.cores = parallel::detectCores())</span></div><div class='output co'>#&gt; <span class='message'>- Plotting theme set to bayesplot::theme_default().</span></div><div class='input'>
-<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>rstanarm</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/rstanarm/topics/stan_glm'>stan_glm</a></span>(<span class='no'>Sepal.Length</span> ~ <span class='no'>Petal.Length</span> * <span class='no'>Species</span>,
-  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>, <span class='kw'>iter</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>refresh</span> <span class='kw'>=</span> <span class='fl'>0</span>
-)</div><div class='output co'>#&gt; <span class='warning'>Warning: The largest R-hat is 1.1, indicating chains have not mixed.</span>
-#&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
-#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#r-hat</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>report</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>rstanarm</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: Rcpp</span></div><div class='output co'>#&gt; <span class='message'>rstanarm (Version 2.19.2, packaged: 2019-10-01 20:20:33 UTC)</span></div><div class='output co'>#&gt; <span class='message'>- Do not expect the default priors to remain the same in future rstanarm versions.</span></div><div class='output co'>#&gt; <span class='message'>Thus, R scripts should specify priors explicitly, even if they are just the defaults.</span></div><div class='output co'>#&gt; <span class='message'>- For execution on a local, multicore CPU with excess RAM we recommend calling</span></div><div class='output co'>#&gt; <span class='message'>options(mc.cores = parallel::detectCores())</span></div><div class='output co'>#&gt; <span class='message'>- bayesplot theme set to bayesplot::theme_default()</span></div><div class='output co'>#&gt; <span class='message'>   * Does _not_ affect other ggplot2 plots</span></div><div class='output co'>#&gt; <span class='message'>   * See ?bayesplot_theme_set for details on theme setting</span></div><div class='input'>
+<span class='co'># \donttest{</span>
+<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>rstanarm</span><span class='kw ns'>::</span><span class='fu'><a href='https://mc-stan.org/rstanarm/reference/stan_glm.html'>stan_glm</a></span>(<span class='no'>Sepal.Length</span> ~ <span class='no'>Petal.Length</span> * <span class='no'>Species</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>, <span class='kw'>iter</span> <span class='kw'>=</span> <span class='fl'>500</span>, <span class='kw'>refresh</span> <span class='kw'>=</span> <span class='fl'>0</span>
+)</div><div class='output co'>#&gt; <span class='warning'>Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.</span>
 #&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
 #&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#bulk-ess</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.</span>
 #&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
-#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#tail-ess</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Markov chains did not converge! Do not analyze results!</span></div><div class='input'><span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>)</div><div class='output co'>#&gt; <span class='message'>Possible multicollinearity between Petal.Length:Speciesversicolor and Speciesversicolor (r = 0.87), Petal.Length:Speciesvirginica and Speciesvirginica (r = 0.75), Petal.Length:Speciesvirginica and Petal.Length:Speciesversicolor (r = 0.87). This might lead to inappropriate results. See 'Details' in '?rope'.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The largest R-hat is 1.36, indicating chains have not mixed.</span>
-#&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
-#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#r-hat</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.</span>
+#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#tail-ess</span></div><div class='input'><span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>)</div><div class='output co'>#&gt; <span class='message'>Possible multicollinearity between Petal.Length:Speciesversicolor and Speciesversicolor (r = 0.85), Petal.Length:Speciesvirginica and Speciesvirginica (r = 0.81), Petal.Length:Speciesvirginica and Petal.Length:Speciesversicolor (r = 0.86). This might lead to inappropriate results. See 'Details' in '?rope'.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.</span>
 #&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
 #&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#bulk-ess</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.</span>
 #&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
-#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#tail-ess</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Markov chains did not converge! Do not analyze results!</span></div><div class='input'><span class='fu'><a href='to_text.html'>to_text</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; We fitted a Bayesian linear model to predict Sepal.Length with Petal.Length and Species. The model's explanatory power is substantial (R2's median = 0.84, adj. R2 = 0.83). The model's intercept is at 3.93. Within this model:
-#&gt; 
-#&gt;   - The effect of Petal.Length has a probability of 99.50% of being positive and can be considered as very large and significant (median = 0.74, 89% CI [0.36, 1.05], 0% in ROPE, std. median = 1.01).
-#&gt;   - The effect of Species (versicolor) has a probability of 100% of being negative and can be considered as large and significant (median = -1.36, 89% CI [-2.37, -0.79], 0% in ROPE, std. median = -0.67).
-#&gt;   - The effect of Species (virginica) has a probability of 100% of being negative and can be considered as very large and significant (median = -2.70, 89% CI [-3.47, -1.95], 0% in ROPE, std. median = -1.62).
-#&gt;   - The interaction effect of Species (versicolor) on Petal.Length has a probability of 60.50% of being positive and can be considered as large and not significant (median = 0.09, 89% CI [-0.29, 0.46], 24.50% in ROPE, std. median = 0.72).
-#&gt;   - The interaction effect of Species (virginica) on Petal.Length has a probability of 88.50% of being positive and can be considered as very large and not significant (median = 0.24, 89% CI [-0.06, 0.61], 14.50% in ROPE, std. median = 1.19).</div><div class='input'><span class='fu'><a href='to_text.html'>to_fulltext</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains of 100 iterations and a warmup of 50) to predict Sepal.Length with Petal.Length and Species (formula = Sepal.Length ~ Petal.Length * Species). Priors over parameters were set as normal (mean = 0.00, SD = 1.17), normal (mean = 0.00, SD = 2.07), normal (mean = 0.00, SD = 2.07), normal (mean = 0.00, SD = 1.02) and normal (mean = 0.00, SD = 0.78) distributions. The Region of Practical Equivalence (ROPE) percentage was defined as the proportion of the posterior distribution within the [-0.08, 0.08] range. The 89% Credible Intervals (CIs) were based on Highest Density Intervals (HDI). Standardized parameters were obtained by fitting the model on a standardized version of the dataset. Effect sizes were labelled following Funder's (2019) recommendations.
-#&gt; 
-#&gt; The model's explanatory power is substantial (R2's median = 0.84, 89% CI [0.82, 0.85], adj. R2 = 0.83). The model's intercept, corresponding to Sepal.Length = 0, Petal.Length = 0 and Species = setosa, is at 3.93 (89% CI [3.44, 4.49], 0% in ROPE, std. median = 0.30). Within this model:
-#&gt; 
-#&gt;   - The effect of Petal.Length has a probability of 99.50% of being positive and can be considered as very large and significant (median = 0.74, 89% CI [0.36, 1.05], 0% in ROPE, std. median = 1.01). However, the algorithm might not have successfuly converged (Rhat = 1.100) and the estimates cannot be considered as stable (ESS = 36).
-#&gt;   - The effect of Species (versicolor) has a probability of 100% of being negative and can be considered as large and significant (median = -1.36, 89% CI [-2.37, -0.79], 0% in ROPE, std. median = -0.67). However, the algorithm might not have successfuly converged (Rhat = 1.022) and the estimates cannot be considered as stable (ESS = 78).
-#&gt;   - The effect of Species (virginica) has a probability of 100% of being negative and can be considered as very large and significant (median = -2.70, 89% CI [-3.47, -1.95], 0% in ROPE, std. median = -1.62). However, the algorithm might not have successfuly converged (Rhat = 1.019) and the estimates cannot be considered as stable (ESS = 90).
-#&gt;   - The interaction effect of Species (versicolor) on Petal.Length has a probability of 60.50% of being positive and can be considered as large and not significant (median = 0.09, 89% CI [-0.29, 0.46], 24.50% in ROPE, std. median = 0.72). However, the algorithm might not have successfuly converged (Rhat = 1.075) and the estimates cannot be considered as stable (ESS = 48).
-#&gt;   - The interaction effect of Species (virginica) on Petal.Length has a probability of 88.50% of being positive and can be considered as very large and not significant (median = 0.24, 89% CI [-0.06, 0.61], 14.50% in ROPE, std. median = 1.19). However, the algorithm might not have successfuly converged (Rhat = 1.074) and the estimates cannot be considered as stable (ESS = 42).</div><div class='input'><span class='fu'><a href='to_text.html'>to_table</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; Parameter                      | Median |         89% CI |     pd | % in ROPE | Median (std.) |  Fit
-#&gt; ----------------------------------------------------------------------------------------------------
-#&gt; (Intercept)                    |   3.93 |   [3.44, 4.49] |   100% |        0% |          0.30 |     
-#&gt; Petal.Length                   |   0.74 |   [0.36, 1.05] | 99.50% |        0% |          1.01 |     
-#&gt; Speciesversicolor              |  -1.36 | [-2.37, -0.79] |   100% |        0% |         -0.67 |     
-#&gt; Speciesvirginica               |  -2.70 | [-3.47, -1.95] |   100% |        0% |         -1.62 |     
-#&gt; Petal.Length:Speciesversicolor |   0.09 |  [-0.29, 0.46] | 60.50% |    24.50% |          0.72 |     
-#&gt; Petal.Length:Speciesvirginica  |   0.24 |  [-0.06, 0.61] | 88.50% |    14.50% |          1.19 |     
-#&gt;                                |        |                |        |           |               |     
-#&gt; R2                             |        |                |        |           |               | 0.84
-#&gt; R2 (adj.)                      |        |                |        |           |               | 0.83</div><div class='input'><span class='fu'><a href='to_text.html'>to_fulltable</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; Parameter                           | Median |         89% CI |     pd | % in ROPE | ESS |  Rhat |              Prior | Median (std.) |    Fit
-#&gt; ----------------------------------------------------------------------------------------------------------------------------------------------
-#&gt; (Intercept)                         |   3.93 |   [3.44, 4.49] |   100% |        0% |  37 | 1.097 | Normal (0 +- 8.28) |          0.30 |       
-#&gt; Petal.Length                        |   0.74 |   [0.36, 1.05] | 99.50% |        0% |  36 | 1.100 | Normal (0 +- 1.17) |          1.01 |       
-#&gt; Species (versicolor)                |  -1.36 | [-2.37, -0.79] |   100% |        0% |  78 | 1.022 | Normal (0 +- 2.07) |         -0.67 |       
-#&gt; Species (virginica)                 |  -2.70 | [-3.47, -1.95] |   100% |        0% |  90 | 1.019 | Normal (0 +- 2.07) |         -1.62 |       
-#&gt; Petal.Length * Species (versicolor) |   0.09 |  [-0.29, 0.46] | 60.50% |    24.50% |  48 | 1.075 | Normal (0 +- 1.02) |          0.72 |       
-#&gt; Petal.Length * Species (virginica)  |   0.24 |  [-0.06, 0.61] | 88.50% |    14.50% |  42 | 1.074 | Normal (0 +- 0.78) |          1.19 |       
-#&gt;                                     |        |                |        |           |     |       |          NA ( +- ) |               |       
-#&gt; ELPD                                |        |                |        |           |     |       |          NA ( +- ) |               | -53.26
-#&gt; ELPD_SE                             |        |                |        |           |     |       |          NA ( +- ) |               |   8.20
-#&gt; LOOIC                               |        |                |        |           |     |       |          NA ( +- ) |               | 106.53
-#&gt; LOOIC_SE                            |        |                |        |           |     |       |          NA ( +- ) |               |  16.41
-#&gt; WAIC                                |        |                |        |           |     |       |          NA ( +- ) |               | 106.41
-#&gt; R2                                  |        |                |        |           |     |       |          NA ( +- ) |               |   0.84
-#&gt; R2 (adj.)                           |        |                |        |           |     |       |          NA ( +- ) |               |   0.83
-#&gt; RMSE                                |        |                |        |           |     |       |          NA ( +- ) |               |   0.35</div><div class='input'>
-<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>rstanarm</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/rstanarm/topics/stan_glmer'>stan_lmer</a></span>(<span class='no'>Sepal.Length</span> ~ <span class='no'>Petal.Length</span> + (<span class='fl'>1</span> <span class='kw'>|</span> <span class='no'>Species</span>),
+#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#tail-ess</span></div><div class='output co'>#&gt; <span class='error'>Error: $ operator is invalid for atomic vectors</span></div><div class='input'><span class='fu'><a href='text_long.html'>text_short</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; <span class='error'>Error in text_short(r): object 'r' not found</span></div><div class='input'><span class='fu'><a href='text_long.html'>text_long</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; <span class='error'>Error in text_long(r): object 'r' not found</span></div><div class='input'><span class='fu'><a href='text_long.html'>table_short</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; <span class='error'>Error in table_short(r): object 'r' not found</span></div><div class='input'><span class='fu'><a href='text_long.html'>table_long</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; <span class='error'>Error in table_long(r): object 'r' not found</span></div><div class='input'>
+
+<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>rstanarm</span><span class='kw ns'>::</span><span class='fu'><a href='https://mc-stan.org/rstanarm/reference/stan_glmer.html'>stan_lmer</a></span>(<span class='no'>Sepal.Length</span> ~ <span class='no'>Petal.Length</span> + (<span class='fl'>1</span> <span class='kw'>|</span> <span class='no'>Species</span>),
   <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>, <span class='kw'>iter</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>refresh</span> <span class='kw'>=</span> <span class='fl'>0</span>
 )</div><div class='output co'>#&gt; <span class='warning'>Warning: The largest R-hat is 1.07, indicating chains have not mixed.</span>
 #&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
@@ -308,40 +276,43 @@ proportion of HDI, to use for the percentage in ROPE.</p></td>
 #&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
 #&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#bulk-ess</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.</span>
 #&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
-#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#tail-ess</span></div><div class='input'><span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: The largest R-hat is 1.08, indicating chains have not mixed.</span>
+#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#tail-ess</span></div><div class='input'><span class='fu'><a href='report.html'>report</a></span>(<span class='no'>model</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: The largest R-hat is 1.09, indicating chains have not mixed.</span>
 #&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
 #&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#r-hat</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.</span>
 #&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
 #&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#bulk-ess</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.</span>
 #&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
-#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#tail-ess</span></div><div class='output co'>#&gt; We fitted a Bayesian linear mixed model to predict Sepal.Length with Petal.Length. The model included Species as random effects. The model's explanatory power is substantial (R2's median = 0.83, adj. R2 = 0.83). Within this model, the explanatory power related to the fixed effects alone (marginal R2's median) is of 0.74. The model's intercept is at 2.37. Within this model:
-#&gt; 
-#&gt;   - The effect of Petal.Length has a probability of 100% of being positive and can be considered as very large and significant (median = 0.88, 89% CI [0.76, 0.97], 0% in ROPE, std. median = 1.86).</div></pre>
+#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#tail-ess</span></div><div class='output co'>#&gt; <span class='error'>Error: $ operator is invalid for atomic vectors</span></div><div class='input'># }
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='https://dominiquemakowski.github.io/'>Dominique Makowski</a>, <a href='https://github.com/strengejacke'>Daniel Lüdecke</a>.</p>
+  <p>Developed by <a href='https://dominiquemakowski.github.io/'>Dominique Makowski</a>, <a href='https://github.com/strengejacke'>Daniel Lüdecke</a>, Mattan S. Ben-Shachar.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
