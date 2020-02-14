@@ -54,7 +54,8 @@ report(model)
 # Example
 lm(Sepal.Length ~ Species, data=iris) %>% 
   report() %>% 
-  to_text(width=100)
+  text_long() %>% 
+  print(width=100)
 ```
 
 
@@ -68,7 +69,6 @@ lm(Sepal.Length ~ Species, data=iris) %>%
 The package documentation can be found [**here**](https://easystats.github.io/report/). Check-out these tutorials:
 
 - [Get Started](https://easystats.github.io/report/articles/report.html)
-- [Automated Interpretation of Metrics and Effect Sizes](https://easystats.github.io/report/articles/interpret_metrics.html)
 - [How to Cite Packages](https://easystats.github.io/report/articles/cite_packages.html)
 - [Supporting New Models](https://easystats.github.io/report/articles/supporting_new_models.html)
 
@@ -93,8 +93,6 @@ Run the following:
 
 ```{r eval=FALSE, message=FALSE, warning=FALSE, eval=FALSE}
 install.packages("devtools")
-devtools::install_github("easystats/performance")
-devtools::install_github("easystats/parameters")
 devtools::install_github("easystats/report")
 ```
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
@@ -134,39 +132,23 @@ cor.test(iris$Sepal.Length, iris$Petal.Length) %>%
 print(report(cor.test(iris$Sepal.Length, iris$Petal.Length)), width=100)
 ```
 
-You can also create tables with the `to_table()` and `to_fulltable()` functions:
+You can also create tables with the `table_short()` and `table_long()` functions:
 
 
 ```{r message=FALSE, warning=FALSE}
 # Table report for a linear model
 lm(Sepal.Length ~ Petal.Length + Species, data=iris) %>% 
   report() %>% 
-  to_table()
+  table_short()
 ```
 
 
-Finally, you can also find more details using `to_fulltext()`:
-
-```{r message=FALSE, warning=FALSE, eval=FALSE}
-# Full report for a Bayesian logistic mixed model with effect sizes
-library(rstanarm)
-
-stan_glmer(vs ~ mpg + (1|cyl), data=mtcars, family="binomial") %>% 
-  report(standardize="smart", effsize="cohen1988") %>% 
-  to_fulltext()
-```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-library(rstanarm)
-rstanarm::stan_glmer(vs ~ mpg + (1|cyl), data=mtcars, family="binomial", refresh = 0) %>% 
-  report(standardize="smart", effsize="cohen1988") %>% 
-  to_fulltext(width=100)
-```
 
 ## Examples
 
 ### Supported Packages
 
-Currently supported objects by **report** include [`cor.test`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cor.test.html), [`t.test`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html), [`correlation`](https://github.com/easystats/correlation), [`glm`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/glm.html), [`lme4::merMod`](https://github.com/lme4/lme4/), [`rstanarm::stanreg`](https://github.com/stan-dev/rstanarm), [`estimate`](https://github.com/easystats/estimate).
+Currently supported objects by **report** include [`cor.test`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cor.test.html), [`t.test`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html), [`correlation`](https://github.com/easystats/correlation), [`glm`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/glm.html), [`lme4::merMod`](https://github.com/lme4/lme4/), [`rstanarm::stanreg`](https://github.com/stan-dev/rstanarm), [`modelbased`](https://github.com/easystats/modelbased).
 
 ### *t*-tests and correlations
 
@@ -177,7 +159,8 @@ t.test(mtcars$mpg ~ mtcars$am) %>%
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 t.test(mtcars$mpg ~ mtcars$am) %>% 
   report() %>% 
-  to_text(width=100)
+  text_long() %>% 
+  print(width=100)
 ```
 
 

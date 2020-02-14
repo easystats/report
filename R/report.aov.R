@@ -3,21 +3,22 @@
 #' Create a report of an ANOVA.
 #'
 #' @param model Object of class \code{aov}, \code{anova} or \code{aovlist}.
-#' @param effsize Effect size interpretation set of rules.
+#' @param interpretation Effect size interpretation set of rules (see \link[effectsize]{interpret_omega_squared}).
 #' @inheritParams parameters::model_parameters.aov
 #'
 #'
 #'
 #' @examples
 #' data <- iris
-#' data$Cat1 <- rep(c("X", "X", "Y"), length.out = nrow(data))
-#' data$Cat2 <- rep(c("A", "B"), length.out = nrow(data))
-#' model <- aov(Sepal.Length ~ Species * Cat1 * Cat2, data = data)
-#' report(model, omega_squared = "partial")
+#' data$Cat1 <- rep(c("A", "B"), length.out = nrow(data))
+#' model <- aov(Sepal.Length ~ Species * Cat1, data = data)
+#' r <- report(model)
+#' r
+#' table_short(r)
 #' @seealso report
 #'
 #' @export
-report.aov <- function(model, effsize = "field2013", omega_squared = NULL, eta_squared = NULL, epsilon_squared = NULL, ...) {
+report.aov <- function(model, interpretation = "field2013", omega_squared = "partial", eta_squared = NULL, epsilon_squared = NULL, ...) {
   table_full <- parameters::model_parameters(model, omega_squared = omega_squared, eta_squared = eta_squared, epsilon_squared = epsilon_squared, ...)
 
   parameters <- table_full[table_full$Parameter != "Residuals", ]
@@ -39,7 +40,7 @@ report.aov <- function(model, effsize = "field2013", omega_squared = NULL, eta_s
   text <- paste0(
     text,
     " is ",
-    interpret_p(parameters$p),
+    effectsize::interpret_p(parameters$p),
     " (F(",
     insight::format_value(parameters$df, protect_integers = TRUE)
   )
@@ -62,7 +63,7 @@ report.aov <- function(model, effsize = "field2013", omega_squared = NULL, eta_s
   # Effect size
   text <- paste0(
     text,
-    .format_aov_effsize(parameters, effsize = effsize)
+    .format_aov_effsize(parameters, interpretation = interpretation)
   )
 
   if ("Group" %in% names(parameters)) {
@@ -72,15 +73,15 @@ report.aov <- function(model, effsize = "field2013", omega_squared = NULL, eta_s
   }
 
 
+  tables <- as.model_table(table_full, table_full)
+  texts <- as.model_text(text, text)
+
   out <- list(
-    text = text,
-    text_full = text,
-    table = table_full,
-    table_full = table_full,
-    values = to_values(parameters)
+    texts = texts,
+    tables = tables
   )
 
-  as.report(out, effsize = effsize, omega_squared = omega_squared, eta_squared = eta_squared, epsilon_squared = epsilon_squared, ...)
+  as.report(out, interpretation = interpretation, omega_squared = omega_squared, eta_squared = eta_squared, epsilon_squared = epsilon_squared, ...)
 }
 
 
@@ -93,12 +94,20 @@ report.aovlist <- report.aov
 
 
 
+
+
+
+
+
+# internals ---------------------------------------------------------------
+
+
 #' @keywords internal
-.format_aov_effsize <- function(parameters, effsize = "field2013") {
+.format_aov_effsize <- function(parameters, interpretation = "field2013") {
   if ("Omega_Sq_partial" %in% names(parameters)) {
     out <- paste0(
       ") and can be considered as ",
-      interpret_omega_squared(parameters$Omega_Sq_partial, rules = effsize),
+      effectsize::interpret_omega_squared(parameters$Omega_Sq_partial, rules = interpretation),
       " (partial omega squared = ",
       insight::format_value(parameters$Omega_Sq_partial),
       ")."
@@ -106,7 +115,7 @@ report.aovlist <- report.aov
   } else if ("Omega_Sq" %in% names(parameters)) {
     out <- paste0(
       ") and can be considered as ",
-      interpret_omega_squared(parameters$Omega_Sq, rules = effsize),
+      effectsize::interpret_omega_squared(parameters$Omega_Sq, rules = interpretation),
       " (omega squared = ",
       insight::format_value(parameters$Omega_Sq),
       ")."

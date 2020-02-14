@@ -12,7 +12,12 @@ Authors@R: c(
 		"Lüdecke", 
 		role = c("aut"), 
 		email = "d.luedecke@uke.de", 
-		comment = c(ORCID = "0000-0002-8895-3206"))
+		comment = c(ORCID = "0000-0002-8895-3206")),
+	person("Mattan S.", 
+		"Ben-Shachar", 
+		role = c("aut"), 
+		email = "matanshm@post.bgu.ac.il", 
+		comment = c(ORCID = "0000-0002-4287-4801"))
 	)
 Maintainer: Dominique Makowski <dom.makowski@gmail.com>
 URL: https://github.com/easystats/report
@@ -23,14 +28,15 @@ Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr
 Imports:
-	insight (>= 0.5.0),
-	bayestestR (>= 0.2.5),
-	performance (>= 0.3.0),
-	parameters (>= 0.1.0),
+	insight (>= 0.6.0),
+	bayestestR (>= 0.4.0),
+	performance (>= 0.4.0),
+	parameters (>= 0.2.0),
+	effectsize,
+	modelbased,
 	stats,
 	utils,
-	dplyr,
-	magrittr
+	dplyr
 Suggests:
 	knitr,
 	lavaan,
@@ -38,7 +44,6 @@ Suggests:
 	testthat,
 	covr,
 	correlation,
-	estimate,
 	ggplot2,
 	lme4,
 	logspline,
@@ -48,7 +53,9 @@ Suggests:
 	caret,
 	randomForest
 Remotes:
+	easystats/parameters,
 	easystats/correlation,
-	easystats/estimate
+	easystats/modelbased,
+	easystats/effectsize
 RoxygenNote: 7.0.2
 Language: en-GB

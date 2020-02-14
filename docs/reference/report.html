@@ -15,21 +15,25 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -39,19 +43,20 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Create Reports — report" />
 
+<meta property="og:title" content="Create Reports — report" />
 <meta property="og:description" content="Create textual reports. See the documentation for your object's class:
-Dataframes
+Dataframes and vectors
 Correlations and t-tests (htest)
 ANOVAs
 (General) Linear models (glm and lm)
 Mixed models (glmer and lmer)
 Bayesian models (stanreg and brms)
-" />
 
+" />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -74,6 +79,7 @@ Bayesian models (stanreg and brms)
 
   gtag('config', 'UA-97457476-8');
 </script>
+
 
   </head>
 
@@ -99,7 +105,7 @@ Bayesian models (stanreg and brms)
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -120,9 +126,6 @@ Bayesian models (stanreg and brms)
       <a href="../articles/cite_packages.html">How to Cite Packages</a>
     </li>
     <li>
-      <a href="../articles/interpret_metrics.html">Automated Interpretation of Metrics and Effect Sizes</a>
-    </li>
-    <li>
       <a href="../articles/supporting_new_models.html">Supporting New Models</a>
     </li>
   </ul>
@@ -131,11 +134,10 @@ Bayesian models (stanreg and brms)
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/easystats/report">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -146,6 +148,7 @@ Bayesian models (stanreg and brms)
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -157,20 +160,19 @@ Bayesian models (stanreg and brms)
     </div>
 
     <div class="ref-description">
-    
     <p>Create textual reports. See the documentation for your object's class:</p><ul>
-<li><p><a href='report.data.frame.html'>Dataframes</a></p></li>
+<li><p>Dataframes and vectors</p></li>
 <li><p><a href='report.htest.html'>Correlations and t-tests (htest)</a></p></li>
-<li><p><a href='report.aov.html'>ANOVAs</a></p></li>
-<li><p><a href='report.lm.html'>(General) Linear models (glm and lm)</a></p></li>
-<li><p><a href='report.lmerMod.html'>Mixed models (glmer and lmer)</a></p></li>
-<li><p><a href='report.stanreg.html'>Bayesian models (stanreg and brms)</a></p></li>
+<li><p>ANOVAs</p></li>
+<li><p>(General) Linear models (glm and lm)</p></li>
+<li><p>Mixed models (glmer and lmer)</p></li>
+<li><p>Bayesian models (stanreg and brms)</p></li>
 </ul>
-    
+
     </div>
 
     <pre class="usage"><span class='fu'>report</span>(<span class='no'>model</span>, <span class='no'>...</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -183,31 +185,110 @@ Bayesian models (stanreg and brms)
       <td><p>Arguments passed to or from other methods.</p></td>
     </tr>
     </table>
-    
 
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>report</span>)
+
+<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span>(<span class='no'>Sepal.Length</span> ~ <span class='no'>Species</span>, <span class='kw'>data</span><span class='kw'>=</span><span class='no'>iris</span>[<span class='fl'>1</span>:<span class='fl'>100</span>,])
+<span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'>report</span>(<span class='no'>model</span>)
+
+<span class='co'># Text</span>
+<span class='no'>r</span></div><div class='output co'>#&gt; The Welch Two Sample t-test suggests that the difference of Sepal.Length by Species (mean in group setosa = 5.01, mean in group versicolor = 5.94) is significant (difference = -0.93, 95% CI [-1.11, -0.75], t(86.54) = -10.52, p &lt; .001) and can be considered as very large (Cohen's d = -2.26).</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; The Welch Two Sample t-test suggests that the difference of Sepal.Length by Species is significant (difference = -0.93, 95% CI [-1.11, -0.75], p &lt; .001, Cohen's d = -2.26).</div><div class='input'>
+<span class='co'># Tables</span>
+<span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; Parameter    |   Group | Mean_Group1 | Mean_Group2 | Difference |      t |    df |    p | CI_low | CI_high |                  Method | Cohens_d
+#&gt; -----------------------------------------------------------------------------------------------------------------------------------------------
+#&gt; Sepal.Length | Species |        5.01 |        5.94 |       0.93 | -10.52 | 86.54 | 0.00 |  -1.11 |   -0.75 | Welch Two Sample t-test |    -2.26</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='no'>r</span>))  <span class='co'># equivalent to as.table(r)</span></div><div class='output co'>#&gt;         Parameter     Group    Mean_Group1     Mean_Group2      Difference  
+#&gt;  Sepal.Length:1   Species:1   Min.   :5.006   Min.   :5.936   Min.   :0.93  
+#&gt;                               1st Qu.:5.006   1st Qu.:5.936   1st Qu.:0.93  
+#&gt;                               Median :5.006   Median :5.936   Median :0.93  
+#&gt;                               Mean   :5.006   Mean   :5.936   Mean   :0.93  
+#&gt;                               3rd Qu.:5.006   3rd Qu.:5.936   3rd Qu.:0.93  
+#&gt;                               Max.   :5.006   Max.   :5.936   Max.   :0.93  
+#&gt;        t                df              p                 CI_low      
+#&gt;  Min.   :-10.52   Min.   :86.54   Min.   :3.747e-17   Min.   :-1.106  
+#&gt;  1st Qu.:-10.52   1st Qu.:86.54   1st Qu.:3.747e-17   1st Qu.:-1.106  
+#&gt;  Median :-10.52   Median :86.54   Median :3.747e-17   Median :-1.106  
+#&gt;  Mean   :-10.52   Mean   :86.54   Mean   :3.747e-17   Mean   :-1.106  
+#&gt;  3rd Qu.:-10.52   3rd Qu.:86.54   3rd Qu.:3.747e-17   3rd Qu.:-1.106  
+#&gt;  Max.   :-10.52   Max.   :86.54   Max.   :3.747e-17   Max.   :-1.106  
+#&gt;     CI_high                            Method     Cohens_d     
+#&gt;  Min.   :-0.7543   Welch Two Sample t-test:1   Min.   :-2.262  
+#&gt;  1st Qu.:-0.7543                               1st Qu.:-2.262  
+#&gt;  Median :-0.7543                               Median :-2.262  
+#&gt;  Mean   :-0.7543                               Mean   :-2.262  
+#&gt;  3rd Qu.:-0.7543                               3rd Qu.:-2.262  
+#&gt;  Max.   :-0.7543                               Max.   :-2.262  </div><div class='input'>
+<span class='co'># List</span>
+<span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span>(<span class='no'>r</span>)</div><div class='output co'>#&gt; $Parameter
+#&gt; [1] Sepal.Length
+#&gt; Levels: Sepal.Length
+#&gt; 
+#&gt; $Group
+#&gt; [1] Species
+#&gt; Levels: Species
+#&gt; 
+#&gt; $Mean_Group1
+#&gt; [1] 5.006
+#&gt; 
+#&gt; $Mean_Group2
+#&gt; [1] 5.936
+#&gt; 
+#&gt; $Difference
+#&gt; [1] 0.93
+#&gt; 
+#&gt; $t
+#&gt; [1] -10.52099
+#&gt; 
+#&gt; $df
+#&gt; [1] 86.538
+#&gt; 
+#&gt; $p
+#&gt; [1] 3.746743e-17
+#&gt; 
+#&gt; $CI_low
+#&gt; [1] -1.105707
+#&gt; 
+#&gt; $CI_high
+#&gt; [1] -0.7542926
+#&gt; 
+#&gt; $Method
+#&gt; [1] Welch Two Sample t-test
+#&gt; Levels: Welch Two Sample t-test
+#&gt; 
+#&gt; $Cohens_d
+#&gt; [1] -2.26195
+#&gt; 
+#&gt; attr(,"ci")
+#&gt; [1] 0.95</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='https://dominiquemakowski.github.io/'>Dominique Makowski</a>, <a href='https://github.com/strengejacke'>Daniel Lüdecke</a>.</p>
+  <p>Developed by <a href='https://dominiquemakowski.github.io/'>Dominique Makowski</a>, <a href='https://github.com/strengejacke'>Daniel Lüdecke</a>, Mattan S. Ben-Shachar.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

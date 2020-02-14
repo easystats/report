@@ -2,151 +2,145 @@
 #'
 #' Create textual reports. See the documentation for your object's class:
 #' \itemize{
-#'  \item{\link[=report.data.frame]{Dataframes and vectors}}
+#'  \item{Dataframes and vectors}
 #'  \item{\link[=report.htest]{Correlations and t-tests (htest)}}
-#'  \item{\link[=report.aov]{ANOVAs}}
-#'  \item{\link[=report.lm]{(General) Linear models (glm and lm)}}
-#'  \item{\link[=report.lmerMod]{Mixed models (glmer and lmer)}}
-#'  \item{\link[=report.stanreg]{Bayesian models (stanreg and brms)}}
+#'  \item{ANOVAs}
+#'  \item{(General) Linear models (glm and lm)}
+#'  \item{Mixed models (glmer and lmer)}
+#'  \item{Bayesian models (stanreg and brms)}
 #'  }
 #'
 #' @param model Object.
 #' @param ... Arguments passed to or from other methods.
 #'
+#' @examples
+#' library(report)
 #'
+#' model <- t.test(Sepal.Length ~ Species, data = iris[1:100, ])
+#' r <- report(model)
 #'
+#' # Text
+#' r
+#' summary(r)
+#'
+#' # Tables
+#' as.data.frame(r)
+#' summary(as.data.frame(r)) # equivalent to as.table(r)
+#'
+#' # List
+#' as.list(r)
 #' @export
 report <- function(model, ...) {
   UseMethod("report")
 }
 
+
+
 #' Create and test objects of class \link{report}.
 #'
-#' @param model An arbitrary R object.
+#' @param x An arbitrary R object.
 #' @param ... Args to be saved as attributes.
 #'
 #' @export
-as.report <- function(model, ...) {
-  class(model) <- c("report", class(model))
-  attributes(model) <- c(attributes(model), list(...))
-  model
+as.report <- function(x, ...) {
+  class(x) <- c("report", class(x))
+  attributes(x) <- c(attributes(x), list(...))
+  x
 }
+
+
 
 
 #' @rdname as.report
 #' @export
-is.report <- function(model) inherits(model, "report")
+is.report <- function(x) inherits(x, "report")
 
 
 
-#' Report printing
+# Access ------------------------------------------------------------------
+
+#' Access report components
 #'
-#' @param x Object of class \link{report}.
-#' @param full Show the full report.
-#' @param width Positive integer giving the target column for wrapping lines in the output.
+#' @param r Object of class \link{report}.
 #' @param ... Arguments passed to or from other methods.
 #'
 #' @export
-to_text <- function(x, full = FALSE, width = NULL, ...) {
-  if (full == TRUE) {
-    text <- format_text(x$text_full, width = width)
-  } else {
-    text <- format_text(x$text, width = width)
-  }
-
-  cat(text, sep = "\n")
-  invisible(text)
+text_long <- function(r, ...) {
+  r$texts$text_long
 }
 
+#' @rdname text_long
 #' @export
-print.report <- to_text
-
-#' @rdname to_text
-#' @export
-to_fulltext <- function(x, full = TRUE, width = NULL, ...) {
-  to_text(x, full = full, width = width)
+text_short <- function(r, ...) {
+  r$texts$text_short
 }
 
-
-
-
-
-
-
-#' @rdname to_text
+#' @rdname text_long
 #' @export
-to_table <- function(x, full = FALSE, ...) {
-  if (full == TRUE) {
-    table <- x$table_full
-  } else {
-    table <- x$table
-  }
-
-  class(table) <- c("report_table", class(table))
-  attributes(table) <- c(attributes(table), attributes(x)[!names(attributes(x)) %in% names(attributes(table))])
-  table
+table_long <- function(r, ...) {
+  r$tables$table_long
 }
 
+#' @rdname text_long
 #' @export
-print.report_table <- function(x, ...) {
-  table <- insight::format_table(parameters::parameters_table(x))
-  cat(table)
+table_short <- function(r, ...) {
+  r$tables$table_short
 }
 
 
+# Generic Methods --------------------------------------------------
+
 
 #' @export
-summary.report <- function(object, full = FALSE, ...) {
-  to_table(object, full = full, ...)
+print.report <- function(x, width = NULL, ...) {
+  print(x$texts, width = NULL, ...)
 }
 
 
-
-#' @rdname to_text
 #' @export
-to_fulltable <- function(x, full = TRUE, ...) {
-  to_table(x, full = full)
+as.character.report <- function(x, ...) {
+  x$texts$text_long
+}
+
+#' @export
+summary.report <- function(object, ...) {
+  object$texts$text_short
 }
 
 #' @export
 as.data.frame.report <- function(x, ...) {
-  to_fulltable(x, ...)
+  x$tables$table_long
+}
+
+#' @export
+as.table.report <- function(x, ...) {
+  x$tables$table_short
 }
 
 
-#' @rdname to_text
+# Values ------------------------------------------------------------------
+
+
 #' @export
-to_values <- function(x, ...) {
-  if (!"values" %in% names(x)) {
-    as.list(x$table_full)
-  } else {
-    x$values
-  }
-}
-#' @export
-as.list.report <- to_values
-
-
-
-
-#' @rdname to_text
-#' @export
-to_values <- function(x, ...) {
+as.list.report <- function(x, ...) {
   if (any(class(x) %in% c("parameters_model")) && "Parameter" %in% names(x)) {
     vals <- list()
 
     for (param in x$Parameter) {
       vals[[param]] <- as.list(x[x$Parameter == param, ])
     }
-  } else if (any(class(x) %in% c("report")) && !"values" %in% names(x)) {
-    vals <- as.list(x$table_full)
   } else if ("values" %in% names(x)) {
     vals <- x$values
+  } else if ("report" %in% class(x)) {
+    vals <- as.list(x$tables$table_long, ...)
   } else {
-    stop("Impossible to transform that to values!")
+    as.list(x, ...)
   }
   vals
 }
+
+
+
 
 
 
@@ -193,20 +187,4 @@ to_values <- function(x, ...) {
 #   }
 #
 #   .display(x)
-# }
-
-
-
-
-
-#' Model Values
-#'
-#' Return values contained in report.
-#'
-#' @param model Statistical Model.
-#' @param ... Arguments passed to or from other methods.
-#'
-#' @export
-# model_values <- function(model, ...) {
-#   UseMethod("model_values")
 # }
