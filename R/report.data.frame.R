@@ -1,13 +1,13 @@
-#' Dataframe Report
+#' Data frame Report
 #'
-#' Create a report of a dataframe.
+#' Create a report of a data frame.
 #'
 #' @param model A data.frame or a vector.
 #' @param median Show \link{mean} and \link{sd} (default) or \link{median} and \link{mad}.
 #' @param centrality Show index of centrality (\link{mean} or \link{median}).
 #' @param dispersion Show index of dispersion (\link{sd} or \link{mad}).
 #' @param range Show range.
-#' @param distribution Returns Kurtosis and Skewness in table.
+#' @param distribution Returns kurtosis and skewness in table.
 #' @param n_entries Number of different character entries to show. Can be "all".
 #' @param levels_percentage Show characters entries and factor levels by number (default) or percentage.
 #' @param missing_percentage Show missings by number (default) or percentage.
@@ -24,14 +24,15 @@
 #' as.data.frame(r)
 #' summary(as.data.frame(r))
 #'
-#' library(dplyr)
-#' r <- iris %>%
-#'   dplyr::group_by(Species) %>%
-#'   report()
-#' r
-#' summary(r)
-#' as.data.frame(r)
-#' summary(as.data.frame(r))
+#' if (require("dplyr")) {
+#'   r <- iris %>%
+#'     dplyr::group_by(Species) %>%
+#'     report()
+#'   r
+#'   summary(r)
+#'   as.data.frame(r)
+#'   summary(as.data.frame(r))
+#' }
 #' @seealso report
 #'
 #' @export

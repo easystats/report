@@ -6,7 +6,7 @@
 \alias{report.data.frame}
 \alias{report.factor}
 \alias{report.numeric}
-\title{Dataframe Report}
+\title{Data frame Report}
 \usage{
 \method{report}{character}(
   model,
@@ -61,10 +61,10 @@
 
 \item{range}{Show range.}
 
-\item{distribution}{Returns Kurtosis and Skewness in table.}
+\item{distribution}{Returns kurtosis and skewness in table.}
 }
 \description{
-Create a report of a dataframe.
+Create a report of a data frame.
 }
 \examples{
 x <- c("A", "B", "C", "A", "B", "B", "D", "E", "B", "D", "A")
@@ -81,14 +81,15 @@ summary(r)
 as.data.frame(r)
 summary(as.data.frame(r))
 
-library(dplyr)
-r <- iris \%>\%
-  dplyr::group_by(Species) \%>\%
-  report()
-r
-summary(r)
-as.data.frame(r)
-summary(as.data.frame(r))
+if (require("dplyr")) {
+  r <- iris \%>\%
+    dplyr::group_by(Species) \%>\%
+    report()
+  r
+  summary(r)
+  as.data.frame(r)
+  summary(as.data.frame(r))
+}
 x <- factor(rep(c("A", "B", "C"), 10))
 report(x)
 model_table(x)

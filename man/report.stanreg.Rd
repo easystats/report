@@ -70,23 +70,20 @@ Create a report of Bayesian models.
 }
 \examples{
 library(report)
-library(rstanarm)
-
+if (require("rstanarm")) {
+  model <- stan_glm(Sepal.Length ~ Petal.Length * Species,
+    data = iris, iter = 250, refresh = 0
+  )
+  r <- report(model)
+  text_short(r)
+  text_long(r)
+  table_short(r)
+  table_long(r)
 \donttest{
-model <- rstanarm::stan_glm(Sepal.Length ~ Petal.Length * Species,
-  data = iris, iter = 500, refresh = 0
-)
-r <- report(model)
-text_short(r)
-text_long(r)
-table_short(r)
-table_long(r)
-
-
-model <- rstanarm::stan_lmer(Sepal.Length ~ Petal.Length + (1 | Species),
-  data = iris, iter = 100, refresh = 0
-)
-report(model)
+  model <- stan_lmer(Sepal.Length ~ Petal.Length + (1 | Species),
+    data = iris, iter = 100, refresh = 0
+  )
+  report(model)
 }
-
+}
 }

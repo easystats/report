@@ -19,13 +19,16 @@ editor_options:
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  tidy.opts=list(width.cutoff=60),
-  tidy=TRUE,
+  tidy.opts = list(width.cutoff = 60),
+  tidy = TRUE,
   fig.path = "README-"
 )
 options(knitr.kable.NA = '',
         digits = 4,
-        width=60)
+        width = 60)
+if (!requireNamespace("dplyr", quietly = TRUE)) {
+  knitr::opts_chunk$set(eval = FALSE)
+}
 ```
 
 
@@ -58,7 +61,7 @@ text_short(r)
 ```
 ```{r message=FALSE, warning=FALSE}
 r <- report(iris)
-print(text_short(r), width=100)
+print(text_short(r), width = 100)
 ```
 ```{r message=FALSE, warning=FALSE}
 table_short(r)

@@ -19,12 +19,14 @@ editor_options:
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  tidy.opts=list(width.cutoff=60),
-  tidy=TRUE,
+  tidy.opts = list(width.cutoff = 60),
+  tidy = TRUE,
   fig.path = "README-"
 )
-options(knitr.kable.NA = '',
-        digits = 4)
+options(knitr.kable.NA = '', digits = 4)
+if (!requireNamespace("dplyr", quietly = TRUE)) {
+  knitr::opts_chunk$set(eval = FALSE)
+}
 ```
 
 

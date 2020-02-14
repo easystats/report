@@ -35,8 +35,7 @@ Imports:
 	effectsize,
 	modelbased,
 	stats,
-	utils,
-	dplyr
+	utils
 Suggests:
 	knitr,
 	lavaan,
@@ -44,6 +43,7 @@ Suggests:
 	testthat,
 	covr,
 	correlation,
+	dplyr,
 	ggplot2,
 	lme4,
 	logspline,
