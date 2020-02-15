@@ -98,6 +98,11 @@ report_participants <- function(data, age = NULL, sex = NULL, education = NULL, 
 
 
 
+
+
+
+
+
 #' @keywords internal
 .report_participants <- function(data, age = "Age", sex = "Sex", education = "Education", participants = NULL, spell_n = FALSE, ...) {
   # Sanity checks
@@ -140,9 +145,11 @@ report_participants <- function(data, age = NULL, sex = NULL, education = NULL, 
       "Mean age = ",
       insight::format_value(mean(data[[age]], na.rm = TRUE)),
       ", ",
-      report(data[[age]], centrality = FALSE, missing_percentage = NULL, ...)$text
+      report(data[[age]], centrality = FALSE, missing_percentage = NULL, ...)$texts$text_short
     )
+
   }
+
 
   text_sex <- if (all(is.na(data[[sex]]))) {
     ""
@@ -161,10 +168,12 @@ report_participants <- function(data, age = NULL, sex = NULL, education = NULL, 
         "Mean education = ",
         insight::format_value(mean(data[[education]], na.rm = TRUE)),
         ", ",
-        report(data[[education]], centrality = FALSE, missing_percentage = NULL, ...)$text
+        report(data[[education]], centrality = FALSE, missing_percentage = NULL, ...)$texts$text_short
       )
     } else {
-      report(as.factor(data[[education]]), levels_percentage = TRUE, ...)$text
+      txt <- as.character(report(as.factor(data[[education]]), levels_percentage = TRUE, ...)$texts$text_short)
+      txt <- strsplit(txt, ":", fixed=TRUE)[[1]][2]
+      paste0("Education:", txt)
     }
   }
 
