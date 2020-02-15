@@ -23,12 +23,19 @@ model <- lm(Sepal.Length ~ Species, data=iris)
 report(model)
 ```
 
-    ## We fitted a linear model (estimated using OLS) to predict Sepal.Length with Species (formula = Sepal.Length ~ Species). Standardized parameters were obtained by fitting the model on a standardized version of the dataset. Effect sizes were labelled following Funder's (2019) recommendations.
+    ## We fitted a linear model (estimated using OLS) to predict Sepal.Length with Species (formula =
+    ## Sepal.Length ~ Species). Standardized parameters were obtained by fitting the model on a
+    ## standardized version of the dataset. Effect sizes were labelled following Funder's (2019)
+    ## recommendations.
     ## 
-    ## The model explains a significant and substantial proportion of variance (R2 = 0.62, F(2, 147) = 119.26, p < .001, adj. R2 = 0.61). The model's intercept, corresponding to Sepal.Length = 0 and Species = setosa, is at 5.01 (SE = 0.07, 95% CI [4.86, 5.15], p < .001). Within this model:
+    ## The model explains a significant and substantial proportion of variance (R2 = 0.62, F(2, 147) =
+    ## 119.26, p < .001, adj. R2 = 0.61). The model's intercept, corresponding to Sepal.Length = 0 and
+    ## Species = setosa, is at 5.01 (SE = 0.07, 95% CI [4.86, 5.15], p < .001). Within this model:
     ## 
-    ##   - The effect of Speciesversicolor is positive and can be considered as very large and significant (beta = 1.12, SE = 0.12, 95% CI [0.88, 1.37], std. beta = 1.12, p < .001).
-    ##   - The effect of Speciesvirginica is positive and can be considered as very large and significant (beta = 1.91, SE = 0.12, 95% CI [1.66, 2.16], std. beta = 1.91, p < .001).
+    ##   - The effect of Speciesversicolor is positive and can be considered as very large and significant
+    ## (beta = 1.12, SE = 0.12, 95% CI [0.88, 1.37], std. beta = 1.12, p < .001).
+    ##   - The effect of Speciesvirginica is positive and can be considered as very large and significant
+    ## (beta = 1.91, SE = 0.12, 95% CI [1.66, 2.16], std. beta = 1.91, p < .001).
 
 ## Documentation
 
@@ -85,18 +92,19 @@ devtools::install_github("easystats/report")
 library("report")
 ```
 
-## Report all the things <a href=https://easystats.github.io/Psycho.jl/latest/><img src="https://www.memecreator.org/static/images/templates/2776.jpg" height="100"></a>
+## Report all the things <a href=https://easystats.github.io/Psycho.jl/latest/><img src="man/figures/allthethings.jpg" height="100"></a>
 
 ### General Workflow
 
 The `report` package works in a two step fashion. First, you create a
 `report` object with the `report()` function (which takes different
 arguments depending on the type of object you are reporting). Then, this
-report object can be displayed either textually, using `to_text()`, or
-as a table, using `to_table()`. Moreover, you can access a more detailed
-(but less digested) version of the report using `to_fulltext()` and
-`to_fulltable()`. Finally, `to_values()` makes it easy to access all the
-internals of a model.
+report object can be displayed either textually, using `text_short()`,
+or as a table, using `table_short()`. Moreover, you can access a more
+detailed (but less digested) version of the report using `text_long()`
+and `table_short()`.
+
+[![workflow](man/figures/workflow.png)](https://easystats.github.io/report/)
 
 ### Features
 
@@ -165,7 +173,9 @@ t.test(mtcars$mpg ~ mtcars$am) %>%
   report()
 ```
 
-    ## The Welch Two Sample t-test suggests that the difference of mtcars$mpg by mtcars$am (mean in group 0 = 17.15, mean in group 1 = 24.39) is significant (difference = -7.24, 95% CI [-11.28, -3.21], t(18.33) = -3.77, p < .01) and can be considered as very large (Cohen's d = -1.76).
+    ## The Welch Two Sample t-test suggests that the difference of mtcars$mpg by mtcars$am (mean in group
+    ## 0 = 17.15, mean in group 1 = 24.39) is significant (difference = -7.24, 95% CI [-11.28, -3.21],
+    ## t(18.33) = -3.77, p < .01) and can be considered as very large (Cohen's d = -1.76).
 
 ### Miscellaneous
 
@@ -177,7 +187,7 @@ data <- data.frame("Age" = c(22, 23, 54, 21),
 
 paste(report_participants(data, spell_n = TRUE),
       "were recruited in the study by means of torture and coercion.")
-## [1] "Four participants (Mean age = 30.00, Mean = 30.00, SD = 16.02, Median = 22.50, MAD = 1.48, range: [21, 54], Skewness = 1.98, Kurtosis = -0.67; 50.00% females) were recruited in the study by means of torture and coercion."
+## [1] "Four participants (Mean age = 30.00, SD = 16.02, range = [21, 54]; 50.00% females) were recruited in the study by means of torture and coercion."
 ```
 
 ## Credits
