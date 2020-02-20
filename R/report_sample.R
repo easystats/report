@@ -17,8 +17,13 @@
 #' report_sample(iris, group_by = "Species")
 #' @importFrom stats median sd mad
 #' @export
-report_sample <- function(data, group_by = NULL, centrality = "mean", select = NULL, exclude = NULL, digits = 1, ...) {
+report_sample <- function(data, group_by = NULL, centrality = "mean", select = NULL, exclude = NULL, weights = NULL, digits = 1, ...) {
   variables <- colnames(data)
+
+  # variables to keep
+  if (!is.null(weights)) {
+    select <- c(select, weights)
+  }
 
   # variables to keep
   if (!is.null(select)) {
@@ -36,7 +41,7 @@ report_sample <- function(data, group_by = NULL, centrality = "mean", select = N
   out <- if (isTRUE(grouping)) {
     result <- lapply(split(data[variables], factor(data[[group_by]])), function(x) {
       x[[group_by]] <- NULL
-      .generate_descriptive_table(x, centrality, digits)
+      .generate_descriptive_table(x, centrality, weights, digits)
     })
     # remember values of first columns
     variable <- result[[1]]["Characteristic"]
@@ -49,10 +54,10 @@ report_sample <- function(data, group_by = NULL, centrality = "mean", select = N
     cbind(
       variable,
       summaries,
-      Total = .generate_descriptive_table(data[setdiff(variables, group_by)], centrality, digits)[["Summary"]]
+      Total = .generate_descriptive_table(data[setdiff(variables, group_by)], centrality, weights, digits)[["Summary"]]
     )
   } else {
-    .generate_descriptive_table(data[variables], centrality, digits)
+    .generate_descriptive_table(data[variables], centrality, weights, digits)
   }
 
   class(out) <- c("report_table1", class(out))
@@ -67,9 +72,16 @@ report_sample <- function(data, group_by = NULL, centrality = "mean", select = N
 # helper ------------------------
 
 
-.generate_descriptive_table <- function(x, centrality, digits) {
-  do.call(rbind, lapply(colnames(x), function(cn) {
-    .table1_row(x[[cn]], column = cn, centrality = centrality, digits = digits)
+.generate_descriptive_table <- function(x, centrality, weights, digits) {
+  if (!is.null(weights)) {
+    w <- x[[weights]]
+    columns <- setdiff(colnames(x), weights)
+  } else {
+    w <- NULL
+    columns <- colnames(x)
+  }
+  do.call(rbind, lapply(columns, function(cn) {
+    .table1_row(x[[cn]], column = cn, centrality = centrality, weights = w, digits = digits)
   }))
 }
 
@@ -87,11 +99,11 @@ report_sample <- function(data, group_by = NULL, centrality = "mean", select = N
 
 
 
-.table1_row.numeric <- function(x, column, centrality = "mean", digits = 1, ...) {
+.table1_row.numeric <- function(x, column, centrality = "mean", weights = NULL, digits = 1, ...) {
   .summary <- if (centrality == "mean") {
-    sprintf("%.*f (%.*f)", digits, mean(x, na.rm = TRUE), digits, stats::sd(x, na.rm = TRUE))
+    sprintf("%.*f (%.*f)", digits, .weighted_mean(x, weights), digits, .weighted_sd(x, weights))
   } else {
-    sprintf("%.*f (%.*f)", digits, stats::median(x, na.rm = TRUE), digits, stats::mad(x, na.rm = TRUE))
+    sprintf("%.*f (%.*f)", digits, .weighted_median(x, weights), digits, stats::mad(x, na.rm = TRUE))
   }
 
   if (centrality == "mean") {
@@ -109,8 +121,18 @@ report_sample <- function(data, group_by = NULL, centrality = "mean", select = N
 
 
 
-.table1_row.factor <- function(x, column, digits = 1, ...) {
-  proportions <- prop.table(table(x))
+#' @importFrom stats na.omit xtabs na.omit
+.table1_row.factor <- function(x, column, weights = NULL, digits = 1, ...) {
+  if (!is.null(weights)) {
+    x[is.na(weights)] <- NA
+    weights[is.na(x)] <- NA
+    weights <- stats::na.omit(weights)
+    x <- stats::na.omit(x)
+    proportions <- prop.table(stats::xtabs(weights ~ x))
+  } else {
+    proportions <- prop.table(table(x))
+  }
+
   # for binary factors, just need one level
   if (length(proportions) == 2) {
     proportions <- proportions[2]
@@ -138,4 +160,72 @@ report_sample <- function(data, group_by = NULL, centrality = "mean", select = N
 print.report_table1 <- function(x, ...) {
   insight::print_colour("# Descriptive Statistics\n\n", "blue")
   cat(insight::format_table(x))
+}
+
+
+
+
+
+
+
+# helper for weighted stuff --------------------------
+
+
+#' @importFrom stats var
+.weighted_variance <- function(x, weights = NULL) {
+  if (is.null(weights)) {
+    return(stats::var(x, na.rm = TRUE))
+  }
+  x[is.na(weights)] <- NA
+  weights[is.na(x)] <- NA
+  weights <- stats::na.omit(weights)
+  x <- stats::na.omit(x)
+  xbar <- sum(weights * x) / sum(weights)
+  sum(weights * ((x - xbar) ^ 2)) / (sum(weights) - 1)
+}
+
+
+
+#' @importFrom stats sd
+.weighted_sd <- function(x, weights = NULL) {
+  if (is.null(weights)) {
+    return(stats::sd(x, na.rm = TRUE))
+  }
+  sqrt(.weighted_variance(x, weights))
+}
+
+
+
+#' @importFrom stats median
+.weighted_median <- function(x, weights = NULL, p = 0.5) {
+  if (is.null(weights)) {
+    return(stats::median(x, na.rm = TRUE))
+  }
+  x[is.na(weights)] <- NA
+  weights[is.na(x)] <- NA
+  weights <- stats::na.omit(weights)
+  x <- stats::na.omit(x)
+  order <- order(x)
+  x <- x[order]
+  weights <- weights[order]
+  rw <- cumsum(weights) / sum(weights)
+  md.values <- min(which(rw >= p))
+  if (rw[md.values] == p)
+    mean(x[md.values:(md.values + 1)])
+  else
+    x[md.values]
+}
+
+
+
+#' @importFrom stats weighted.mean
+.weighted_mean <- function(x, weights = NULL) {
+  if (is.null(weights)) {
+    return(mean(x, na.rm = TRUE))
+  }
+  x[is.na(weights)] <- NA
+  weights[is.na(x)] <- NA
+  weights <- stats::na.omit(weights)
+  x <- stats::na.omit(x)
+  stats::weighted.mean(x, w = weights, na.rm = TRUE)
 }

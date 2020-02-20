@@ -10,6 +10,7 @@ report_sample(
   centrality = "mean",
   select = NULL,
   exclude = NULL,
+  weights = NULL,
   digits = 1,
   ...
 )
