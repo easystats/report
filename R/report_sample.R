@@ -7,6 +7,7 @@
 #' @param centrality Character, indicates the statistics that should be calculated for numeric variables. May be \code{"mean"} (for mean and standard deviation) or \code{"median"} (for median and median absolute deviation) as summary.
 #' @param select Character vector, with column names that should be included in the descriptive table.
 #' @param exclude Character vector, with column names that should be excluded from the descriptive table.
+#' @param weights Character vector, indicating the name of a potential weight-variable. Reported descriptive statistics will be weighted by \code{weight}.
 #' @param digits Number of decimals.
 #' @inheritParams report.data.frame
 #'

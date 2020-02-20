@@ -26,6 +26,8 @@ report_sample(
 
 \item{exclude}{Character vector, with column names that should be excluded from the descriptive table.}
 
+\item{weights}{Character vector, indicating the name of a potential weight-variable. Reported descriptive statistics will be weighted by \code{weight}.}
+
 \item{digits}{Number of decimals.}
 
 \item{...}{Arguments passed to or from other methods.}
