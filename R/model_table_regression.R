@@ -40,17 +40,15 @@ model_table.stanreg <- model_table.lm
   # Parameters -----------------------------------------------------------------
   if (bootstrap & !info$is_bayesian) {
     if (is.null(ci_method) || ci_method %in% c("wald", "boot")) ci_method <- "quantile" # Avoid issues in parameters_bootstrap for mixed models
-    parameters <- parameters::model_parameters(model, ci = ci, bootstrap = bootstrap, iterations = iterations, p_method = p_method, ci_method = ci_method, ...)
+    parameters <- parameters::model_parameters(model, ci = ci, bootstrap = bootstrap, iterations = iterations, p_method = p_method, ci_method = ci_method, standardize = NULL)
   } else {
-    parameters <- parameters::model_parameters(model, ci = ci, bootstrap = bootstrap, iterations = iterations, p_method = p_method, ci_method = ci_method, centrality = centrality, dispersion = dispersion, test = test, rope_range = rope_range, rope_ci = rope_ci, bf_prior = bf_prior, diagnostic = diagnostic, ...)
+    parameters <- parameters::model_parameters(model, ci = ci, bootstrap = bootstrap, iterations = iterations, p_method = p_method, ci_method = ci_method, centrality = centrality, dispersion = dispersion, test = test, rope_range = rope_range, rope_ci = rope_ci, bf_prior = bf_prior, diagnostic = diagnostic, standardize = NULL)
   }
 
 
   # Effect Size ----------------------------------------------------------------
   effsize <- effectsize::standardize_parameters(model, method = "refit", robust = FALSE, two_sd = FALSE, centrality = centrality, ...)
-  effsize <- effsize[order(parameters$Parameter), ]
-  effsize$Parameter <- NULL
-  parameters <- cbind(parameters, effsize)
+  parameters <- merge(parameters, effsize, by = "Parameter", sort = FALSE)
 
   # Performance ----------------------------------------------------------------
   if (is.null(performance)) {
