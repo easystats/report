@@ -32,8 +32,8 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
     Min = min(model, na.rm = TRUE),
     Max = max(model, na.rm = TRUE),
     n_Obs = length(model),
-    Skewness = parameters::skewness(model),
-    Kurtosis = parameters::kurtosis(model, type = 1),
+    Skewness = parameters::skewness(model)$Skewness,
+    Kurtosis = parameters::kurtosis(model, type = 1)$Kurtosis,
     n_Missing = sum(is.na(model))
   )
 
