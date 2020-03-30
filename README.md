@@ -102,7 +102,7 @@ arguments depending on the type of object you are reporting). Then, this
 report object can be displayed either textually, using `text_short()`,
 or as a table, using `table_short()`. Moreover, you can access a more
 detailed (but less digested) version of the report using `text_long()`
-and `table_short()`.
+and `table_long()`.
 
 [![workflow](man/figures/workflow.png)](https://easystats.github.io/report/)
 
