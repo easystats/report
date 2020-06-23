@@ -64,7 +64,7 @@ report_sample <- function(data, group_by = NULL, centrality = "mean", select = N
 
   # Remove Total column if need be
   if(isFALSE(total)){
-    data$Total <- NULL
+    out$Total <- NULL
   }
 
 
