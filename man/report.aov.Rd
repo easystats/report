@@ -20,9 +20,9 @@
 
 \item{omega_squared}{Compute omega squared as index of effect size. Can be \code{"partial"} (adjusted for effect size) or \code{"raw"}.}
 
-\item{eta_squared}{Compute eta squared as index of effect size. Can be \code{"partial"} (adjusted for effect size) or \code{"raw"}.}
+\item{eta_squared}{Compute eta squared as index of effect size. Can be \code{"partial"} (adjusted for effect size), \code{"raw"}  or \code{"adjusted"} (the latter option only for anova-tables from mixed models).}
 
-\item{epsilon_squared}{Compute epsilon squared as index of effect size.}
+\item{epsilon_squared}{Compute epsilon squared as index of effect size. Can be \code{"partial"} (adjusted for effect size) or \code{"raw"}.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

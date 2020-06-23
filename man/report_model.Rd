@@ -41,7 +41,7 @@ report_performance(model, performance = NULL, ...)
 
 \item{...}{Arguments passed to or from other methods.}
 
-\item{ci}{Confidence Interval (CI) level. Default to 0.95 (95\%).}
+\item{ci}{Confidence Interval (CI) level}
 
 \item{ci_method}{The type of index used for Credible Interval. Can be
 \code{"HDI"} (default, see \code{\link[bayestestR:hdi]{hdi}}), \code{"ETI"}

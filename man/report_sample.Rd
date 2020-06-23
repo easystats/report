@@ -11,7 +11,8 @@ report_sample(
   select = NULL,
   exclude = NULL,
   weights = NULL,
-  digits = 1,
+  total = TRUE,
+  digits = 2,
   ...
 )
 }
@@ -27,6 +28,8 @@ report_sample(
 \item{exclude}{Character vector, with column names that should be excluded from the descriptive table.}
 
 \item{weights}{Character vector, indicating the name of a potential weight-variable. Reported descriptive statistics will be weighted by \code{weight}.}
+
+\item{total}{Add a \code{Total} column.}
 
 \item{digits}{Number of decimals.}
 

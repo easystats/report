@@ -57,5 +57,5 @@ Remotes:
 	easystats/correlation,
 	easystats/modelbased,
 	easystats/effectsize
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 Language: en-GB
