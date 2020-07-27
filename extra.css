@@ -1,0 +1,24 @@
+/* Syntax highlighting ---------------------------------------------------- */ 
+
+/*pre {*/ 
+/*  overflow: auto;*/ 
+/*  word-wrap: normal;*/ 
+/*  word-break: normal;*/ 
+/*  border: 1px solid #eee;*/ 
+/*  background-color: #455A64;*/ 
+/*}*/ 
+
+
+
+/*.fl      {color: #1514b5;}*/ 
+/*.fu      {color: #FF9800;}*/  /* function */
+/*.ch,.st  {color: #CDDC39;}*/  /* string */
+/*.kw      {color: #FFC107;}*/  /* keyword */
+/*.co      {color: #9E9E9E;}*/  /* comment */
+
+/*.message { color: #EEEEEE;   font-weight: bolder;}*/ 
+/*.error   { color: #f44336;  font-weight: bolder;}*/ 
+/*.warning { color: #9C27B0; font-weight: bolder;}*/ 
+
+.ch,.st  {color: orange;} /* string */
+.co      {color: #BDBDBD;}  /* comment */
