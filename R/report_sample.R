@@ -8,6 +8,7 @@
 #' @param select Character vector, with column names that should be included in the descriptive table.
 #' @param exclude Character vector, with column names that should be excluded from the descriptive table.
 #' @param weights Character vector, indicating the name of a potential weight-variable. Reported descriptive statistics will be weighted by \code{weight}.
+#' @param total Add a \code{Total} column.
 #' @param digits Number of decimals.
 #' @inheritParams report.data.frame
 #'
@@ -18,7 +19,7 @@
 #' report_sample(iris, group_by = "Species")
 #' @importFrom stats median sd mad
 #' @export
-report_sample <- function(data, group_by = NULL, centrality = "mean", select = NULL, exclude = NULL, weights = NULL, digits = 1, ...) {
+report_sample <- function(data, group_by = NULL, centrality = "mean", select = NULL, exclude = NULL, weights = NULL, total=TRUE, digits = 2, ...) {
   variables <- colnames(data)
 
   # variables to keep
@@ -45,7 +46,7 @@ report_sample <- function(data, group_by = NULL, centrality = "mean", select = N
       .generate_descriptive_table(x, centrality, weights, digits)
     })
     # remember values of first columns
-    variable <- result[[1]]["Characteristic"]
+    variable <- result[[1]]["Variable"]
     # column names for groups
     cn <- sprintf("%s (n=%g)", names(result), as.vector(table(data[[group_by]])))
     # just extract summary columns
@@ -60,6 +61,12 @@ report_sample <- function(data, group_by = NULL, centrality = "mean", select = N
   } else {
     .generate_descriptive_table(data[variables], centrality, weights, digits)
   }
+
+  # Remove Total column if need be
+  if(isFALSE(total)){
+    out$Total <- NULL
+  }
+
 
   class(out) <- c("report_table1", class(out))
   out
@@ -114,7 +121,7 @@ report_sample <- function(data, group_by = NULL, centrality = "mean", select = N
   }
 
   data.frame(
-    Characteristic = column,
+    Variable = column,
     Summary = .summary,
     stringsAsFactors = FALSE
   )
@@ -140,7 +147,7 @@ report_sample <- function(data, group_by = NULL, centrality = "mean", select = N
   }
   .summary <- sapply(proportions, function(i) sprintf("%.1f", 100 * i))
   data.frame(
-    Characteristic = sprintf("%s [%s], %%", column, names(.summary)),
+    Variable = sprintf("%s [%s], %%", column, names(.summary)),
     Summary = as.vector(.summary),
     stringsAsFactors = FALSE
   )
