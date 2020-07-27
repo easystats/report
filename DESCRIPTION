@@ -41,7 +41,6 @@ Suggests:
 	lavaan,
 	rmarkdown,
 	testthat,
-	covr,
 	correlation,
 	dplyr,
 	ggplot2,
@@ -52,10 +51,5 @@ Suggests:
 	BayesFactor,
 	caret,
 	randomForest
-Remotes:
-	easystats/parameters,
-	easystats/correlation,
-	easystats/modelbased,
-	easystats/effectsize
 RoxygenNote: 7.0.2
 Language: en-GB
