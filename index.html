@@ -17,8 +17,7 @@
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
-<meta property="og:title" content="Automated reporting of statistical models in R">
+<script src="pkgdown.js"></script><meta property="og:title" content="Automated reporting of statistical models in R">
 <meta property="og:description" content="Converts statistical models into textual reports suited for publication.">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -112,7 +111,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/easystats/report">report</a></span>)
 
 <span class="co"># Example</span>
-<span class="kw">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="kw">Sepal.Length</span> <span class="op">~</span> <span class="kw">Species</span>, data=<span class="kw">iris</span>)
+<span class="kw">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="kw">Sepal.Length</span> <span class="op">~</span> <span class="kw">Species</span>, data = <span class="kw">iris</span>)
 <span class="fu"><a href="reference/report.html">report</a></span>(<span class="kw">model</span>)
 </pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">## We fitted a linear model (estimated using OLS) to predict Sepal.Length with Species (formula =</span></span>
@@ -125,9 +124,9 @@
 <span id="cb2-8"><a href="#cb2-8"></a><span class="co">## Species = setosa, is at 5.01 (SE = 0.07, 95% CI [4.86, 5.15], p &lt; .001). Within this model:</span></span>
 <span id="cb2-9"><a href="#cb2-9"></a><span class="co">## </span></span>
 <span id="cb2-10"><a href="#cb2-10"></a><span class="co">##   - The effect of Speciesversicolor is positive and can be considered as very large and significant</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="co">## (beta = 1.12, SE = 0.12, 95% CI [0.88, 1.37], std. beta = 1.12, p &lt; .001).</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="co">## (beta = 0.93, SE = 0.10, std. beta = 1.12, p &lt; .001).</span></span>
 <span id="cb2-12"><a href="#cb2-12"></a><span class="co">##   - The effect of Speciesvirginica is positive and can be considered as very large and significant</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="co">## (beta = 1.91, SE = 0.12, 95% CI [1.66, 2.16], std. beta = 1.91, p &lt; .001).</span></span></code></pre></div>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="co">## (beta = 1.58, SE = 0.10, std. beta = 1.91, p &lt; .001).</span></span></code></pre></div>
 <div id="documentation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#documentation" class="anchor"></a>Documentation</h2>
@@ -170,7 +169,7 @@
 <div id="general-workflow" class="section level3">
 <h3 class="hasAnchor">
 <a href="#general-workflow" class="anchor"></a>General Workflow</h3>
-<p>The <code>report</code> package works in a two step fashion. First, you create a <code>report</code> object with the <code><a href="reference/report.html">report()</a></code> function (which takes different arguments depending on the type of object you are reporting). Then, this report object can be displayed either textually, using <code><a href="reference/text_long.html">text_short()</a></code>, or as a table, using <code><a href="reference/text_long.html">table_short()</a></code>. Moreover, you can access a more detailed (but less digested) version of the report using <code><a href="reference/text_long.html">text_long()</a></code> and <code><a href="reference/text_long.html">table_long()</a></code>.</p>
+<p>The <code>report</code> package works in a two step fashion. First, you create a <code>report</code> object with the <code><a href="reference/report.html">report()</a></code> function (which takes different arguments depending on the type of object you are reporting). Then, this report object can be displayed either textually, using <code><a href="reference/text_long.html">text_short()</a></code>, or as a table, using <code><a href="reference/text_long.html">table_short()</a></code>. Moreover, you can access a more detailed (but less digested) version of the report using <code><a href="reference/text_long.html">text_long()</a></code> and <code><a href="reference/text_long.html">table_short()</a></code>.</p>
 <p><a href="https://easystats.github.io/report/"><img src="reference/figures/workflow.png" alt="workflow"></a></p>
 </div>
 <div id="features" class="section level3">
@@ -190,25 +189,23 @@
 <p>These reports nicely work within the <a href="https://github.com/tidyverse"><em>tidyverse</em></a> workflow:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="co"># Correlation report</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span>(<span class="kw">iris</span><span class="op">$</span><span class="kw">Sepal.Length</span>, <span class="kw">iris</span><span class="op">$</span><span class="kw">Petal.Length</span>) <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="reference/report.html">report</a></span>()
+<span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span>(<span class="kw">iris</span><span class="op">$</span><span class="kw">Sepal.Length</span>, <span class="kw">iris</span><span class="op">$</span><span class="kw">Petal.Length</span>) <span class="op">%&gt;%</span> <span class="fu"><a href="reference/report.html">report</a></span>()
 </pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">## The Pearson's product-moment correlation between iris$Sepal.Length and iris$Petal.Length is positive, significant and very large (r = 0.87, 95% CI [0.83, 0.91], t(148) = 21.65, p &lt; .001).</span></span></code></pre></div>
 <p>You can also create tables with the <code><a href="reference/text_long.html">table_short()</a></code> and <code><a href="reference/text_long.html">table_long()</a></code> functions:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="co"># Table report for a linear model</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="kw">Sepal.Length</span> <span class="op">~</span> <span class="kw">Petal.Length</span> <span class="op">+</span> <span class="kw">Species</span>, data=<span class="kw">iris</span>) <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="reference/report.html">report</a></span>() <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="reference/text_long.html">table_short</a></span>()
-<span class="co">## Parameter         | Coefficient | CI_low | CI_high |    p | Std_Coefficient |  Fit</span>
-<span class="co">## ----------------------------------------------------------------------------------</span>
-<span class="co">## (Intercept)       |        1.50 |   1.12 |    1.87 | 0.00 |            1.50 |     </span>
-<span class="co">## Petal.Length      |        1.93 |   1.66 |    2.20 | 0.00 |            1.93 |     </span>
-<span class="co">## Speciesversicolor |       -1.93 |  -2.40 |   -1.47 | 0.00 |           -1.93 |     </span>
-<span class="co">## Speciesvirginica  |       -2.56 |  -3.21 |   -1.90 | 0.00 |           -2.56 |     </span>
-<span class="co">##                   |             |        |         |      |                 |     </span>
-<span class="co">## R2                |             |        |         |      |                 | 0.84</span>
-<span class="co">## R2 (adj.)         |             |        |         |      |                 | 0.83</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="kw">Sepal.Length</span> <span class="op">~</span> <span class="kw">Petal.Length</span> <span class="op">+</span> <span class="kw">Species</span>, data = <span class="kw">iris</span>) <span class="op">%&gt;%</span> <span class="fu"><a href="reference/report.html">report</a></span>() <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="reference/text_long.html">table_short</a></span>()
+<span class="co">## Parameter         | Coefficient |        p | Std_Coefficient |  Fit</span>
+<span class="co">## -------------------------------------------------------------------</span>
+<span class="co">## (Intercept)       |        3.68 | 1.97e-72 |            1.50 |     </span>
+<span class="co">## Petal.Length      |        0.90 | 1.12e-28 |            1.93 |     </span>
+<span class="co">## Speciesversicolor |       -1.60 | 7.37e-14 |           -1.93 |     </span>
+<span class="co">## Speciesvirginica  |       -2.12 | 1.48e-12 |           -2.56 |     </span>
+<span class="co">##                   |             |          |                 |     </span>
+<span class="co">## R2                |             |          |                 | 0.84</span>
+<span class="co">## R2 (adj.)         |             |          |                 | 0.83</span>
 </pre></div>
 </div>
 </div>
@@ -224,12 +221,20 @@
 <h3 class="hasAnchor">
 <a href="#t-tests-and-correlations" class="anchor"></a><em>t</em>-tests and correlations</h3>
 <div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span>(<span class="kw">mtcars</span><span class="op">$</span><span class="kw">mpg</span> <span class="op">~</span> <span class="kw">mtcars</span><span class="op">$</span><span class="kw">am</span>) <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="reference/report.html">report</a></span>()
+<span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span>(<span class="kw">mtcars</span><span class="op">$</span><span class="kw">mpg</span> <span class="op">~</span> <span class="kw">mtcars</span><span class="op">$</span><span class="kw">am</span>) <span class="op">%&gt;%</span> <span class="fu"><a href="reference/report.html">report</a></span>()
 </pre></div>
 <div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">## The Welch Two Sample t-test suggests that the difference of mtcars$mpg by mtcars$am (mean in group</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="co">## 0 = 17.15, mean in group 1 = 24.39) is significant (difference = -7.24, 95% CI [-11.28, -3.21],</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="co">## t(18.33) = -3.77, p &lt; .01) and can be considered as very large (Cohen's d = -1.76).</span></span></code></pre></div>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="co">## t(18.33) = -3.77, p &lt; .01) and can be considered as very large (Cohen's d = -1.76)., The Welch Two</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co">## Sample t-test suggests that the difference of mtcars$mpg by mtcars$am (mean in group 0 = 17.15,</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="co">## mean in group 1 = 24.39) is significant (difference = -7.24, 95% CI [-11.28, -3.21], t(18.33) =</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="co">## -3.77, p &lt; .01) and can be considered as very large (Cohen's d = 0.95)., The Welch Two Sample</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="co">## t-test suggests that the difference of mtcars$mpg by mtcars$am (mean in group 0 = 17.15, mean in</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="co">## group 1 = 24.39) is significant (difference = -7.24, 95% CI [-11.28, -3.21], t(18.33) = -3.77, p &lt;</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="co">## .01) and can be considered as very large (Cohen's d = -2.82). and The Welch Two Sample t-test</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="co">## suggests that the difference of mtcars$mpg by mtcars$am (mean in group 0 = 17.15, mean in group 1 =</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a><span class="co">## 24.39) is significant (difference = -7.24, 95% CI [-11.28, -3.21], t(18.33) = -3.77, p &lt; .01) and</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a><span class="co">## can be considered as large (Cohen's d = -0.67).</span></span></code></pre></div>
 </div>
 <div id="miscellaneous" class="section level3">
 <h3 class="hasAnchor">
@@ -238,11 +243,10 @@
 <h4 class="hasAnchor">
 <a href="#report-participants-details" class="anchor"></a>Report participants details</h4>
 <div class="sourceCode" id="cb12"><pre class="downlit">
-<span class="kw">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="st">"Age"</span> = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">22</span>, <span class="fl">23</span>, <span class="fl">54</span>, <span class="fl">21</span>),
-                   <span class="st">"Sex"</span> = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"F"</span>, <span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"M"</span>))
+<span class="kw">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(Age = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">22</span>, <span class="fl">23</span>, <span class="fl">54</span>, <span class="fl">21</span>), Sex = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"F"</span>, <span class="st">"F"</span>, 
+    <span class="st">"M"</span>, <span class="st">"M"</span>))
 
-<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="fu"><a href="reference/report_participants.html">report_participants</a></span>(<span class="kw">data</span>, spell_n = <span class="fl">TRUE</span>),
-      <span class="st">"were recruited in the study by means of torture and coercion."</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="fu"><a href="reference/report_participants.html">report_participants</a></span>(<span class="kw">data</span>, spell_n = <span class="fl">TRUE</span>), <span class="st">"were recruited in the study by means of torture and coercion."</span>)
 <span class="co">## [1] "Four participants (Mean age = 30.00, SD = 16.02, range = [21, 54]; 50.00% females) were recruited in the study by means of torture and coercion."</span>
 </pre></div>
 </div>
@@ -303,8 +307,6 @@
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=report"><img src="http://www.r-pkg.org/badges/version/report" alt="CRAN"></a></li>
 <li><a href="https://cran.r-project.org/package=report"><img src="http://cranlogs.r-pkg.org/badges/report" alt="downloads"></a></li>
-<li><a href="https://travis-ci.org/easystats/report"><img src="https://travis-ci.org/easystats/report.svg?branch=master" alt="Build Status"></a></li>
-<li><a href="https://codecov.io/gh/easystats/report"><img src="https://codecov.io/gh/easystats/report/branch/master/graph/badge.svg" alt="codecov"></a></li>
 </ul>
 </div>
 </div>
