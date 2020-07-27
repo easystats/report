@@ -3,9 +3,6 @@
 
 [![CRAN](http://www.r-pkg.org/badges/version/report)](https://cran.r-project.org/package=report)
 [![downloads](http://cranlogs.r-pkg.org/badges/report)](https://cran.r-project.org/package=report)
-[![Build
-Status](https://travis-ci.org/easystats/report.svg?branch=master)](https://travis-ci.org/easystats/report)
-[![codecov](https://codecov.io/gh/easystats/report/branch/master/graph/badge.svg)](https://codecov.io/gh/easystats/report)
 
 ***“From R to Manuscript”***
 
@@ -19,7 +16,7 @@ ensuring **standardization** and **quality** in results reporting.
 library(report)
 
 # Example
-model <- lm(Sepal.Length ~ Species, data=iris)
+model <- lm(Sepal.Length ~ Species, data = iris)
 report(model)
 ```
 
@@ -33,9 +30,9 @@ report(model)
     ## Species = setosa, is at 5.01 (SE = 0.07, 95% CI [4.86, 5.15], p < .001). Within this model:
     ## 
     ##   - The effect of Speciesversicolor is positive and can be considered as very large and significant
-    ## (beta = 1.12, SE = 0.12, 95% CI [0.88, 1.37], std. beta = 1.12, p < .001).
+    ## (beta = 0.93, SE = 0.10, std. beta = 1.12, p < .001).
     ##   - The effect of Speciesvirginica is positive and can be considered as very large and significant
-    ## (beta = 1.91, SE = 0.12, 95% CI [1.66, 2.16], std. beta = 1.91, p < .001).
+    ## (beta = 1.58, SE = 0.10, std. beta = 1.91, p < .001).
 
 ## Documentation
 
@@ -102,7 +99,7 @@ arguments depending on the type of object you are reporting). Then, this
 report object can be displayed either textually, using `text_short()`,
 or as a table, using `table_short()`. Moreover, you can access a more
 detailed (but less digested) version of the report using `text_long()`
-and `table_long()`.
+and `table_short()`.
 
 [![workflow](man/figures/workflow.png)](https://easystats.github.io/report/)
 
@@ -128,8 +125,7 @@ These reports nicely work within the
 
 ``` r
 # Correlation report
-cor.test(iris$Sepal.Length, iris$Petal.Length) %>% 
-  report()
+cor.test(iris$Sepal.Length, iris$Petal.Length) %>% report()
 ```
 
     ## The Pearson's product-moment correlation between iris$Sepal.Length and iris$Petal.Length is positive, significant and very large (r = 0.87, 95% CI [0.83, 0.91], t(148) = 21.65, p < .001).
@@ -139,18 +135,17 @@ functions:
 
 ``` r
 # Table report for a linear model
-lm(Sepal.Length ~ Petal.Length + Species, data=iris) %>% 
-  report() %>% 
-  table_short()
-## Parameter         | Coefficient | CI_low | CI_high |    p | Std_Coefficient |  Fit
-## ----------------------------------------------------------------------------------
-## (Intercept)       |        1.50 |   1.12 |    1.87 | 0.00 |            1.50 |     
-## Petal.Length      |        1.93 |   1.66 |    2.20 | 0.00 |            1.93 |     
-## Speciesversicolor |       -1.93 |  -2.40 |   -1.47 | 0.00 |           -1.93 |     
-## Speciesvirginica  |       -2.56 |  -3.21 |   -1.90 | 0.00 |           -2.56 |     
-##                   |             |        |         |      |                 |     
-## R2                |             |        |         |      |                 | 0.84
-## R2 (adj.)         |             |        |         |      |                 | 0.83
+lm(Sepal.Length ~ Petal.Length + Species, data = iris) %>% report() %>% 
+    table_short()
+## Parameter         | Coefficient |        p | Std_Coefficient |  Fit
+## -------------------------------------------------------------------
+## (Intercept)       |        3.68 | 1.97e-72 |            1.50 |     
+## Petal.Length      |        0.90 | 1.12e-28 |            1.93 |     
+## Speciesversicolor |       -1.60 | 7.37e-14 |           -1.93 |     
+## Speciesvirginica  |       -2.12 | 1.48e-12 |           -2.56 |     
+##                   |             |          |                 |     
+## R2                |             |          |                 | 0.84
+## R2 (adj.)         |             |          |                 | 0.83
 ```
 
 ## Examples
@@ -169,24 +164,31 @@ Currently supported objects by **report** include
 ### *t*-tests and correlations
 
 ``` r
-t.test(mtcars$mpg ~ mtcars$am) %>% 
-  report()
+t.test(mtcars$mpg ~ mtcars$am) %>% report()
 ```
 
     ## The Welch Two Sample t-test suggests that the difference of mtcars$mpg by mtcars$am (mean in group
     ## 0 = 17.15, mean in group 1 = 24.39) is significant (difference = -7.24, 95% CI [-11.28, -3.21],
-    ## t(18.33) = -3.77, p < .01) and can be considered as very large (Cohen's d = -1.76).
+    ## t(18.33) = -3.77, p < .01) and can be considered as very large (Cohen's d = -1.76)., The Welch Two
+    ## Sample t-test suggests that the difference of mtcars$mpg by mtcars$am (mean in group 0 = 17.15,
+    ## mean in group 1 = 24.39) is significant (difference = -7.24, 95% CI [-11.28, -3.21], t(18.33) =
+    ## -3.77, p < .01) and can be considered as very large (Cohen's d = 0.95)., The Welch Two Sample
+    ## t-test suggests that the difference of mtcars$mpg by mtcars$am (mean in group 0 = 17.15, mean in
+    ## group 1 = 24.39) is significant (difference = -7.24, 95% CI [-11.28, -3.21], t(18.33) = -3.77, p <
+    ## .01) and can be considered as very large (Cohen's d = -2.82). and The Welch Two Sample t-test
+    ## suggests that the difference of mtcars$mpg by mtcars$am (mean in group 0 = 17.15, mean in group 1 =
+    ## 24.39) is significant (difference = -7.24, 95% CI [-11.28, -3.21], t(18.33) = -3.77, p < .01) and
+    ## can be considered as large (Cohen's d = -0.67).
 
 ### Miscellaneous
 
 #### Report participants details
 
 ``` r
-data <- data.frame("Age" = c(22, 23, 54, 21),
-                   "Sex" = c("F", "F", "M", "M"))
+data <- data.frame(Age = c(22, 23, 54, 21), Sex = c("F", "F", 
+    "M", "M"))
 
-paste(report_participants(data, spell_n = TRUE),
-      "were recruited in the study by means of torture and coercion.")
+paste(report_participants(data, spell_n = TRUE), "were recruited in the study by means of torture and coercion.")
 ## [1] "Four participants (Mean age = 30.00, SD = 16.02, range = [21, 54]; 50.00% females) were recruited in the study by means of torture and coercion."
 ```
 

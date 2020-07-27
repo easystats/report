@@ -29,11 +29,9 @@ LazyData: true
 VignetteBuilder: knitr
 Imports:
 	insight (>= 0.6.0),
-	bayestestR (>= 0.4.0),
-	performance (>= 0.4.0),
-	parameters (>= 0.2.0),
+	parameters,
 	effectsize,
-	modelbased,
+	performance,
 	stats,
 	utils
 Suggests:
@@ -51,5 +49,5 @@ Suggests:
 	BayesFactor,
 	caret,
 	randomForest
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Language: en-GB

@@ -21,7 +21,9 @@ model_table.stanreg <- model_table.lm
 
 
 
-
+#' @importFrom parameters model_parameters
+#' @importFrom effectsize standardize_parameters
+#' @importFrom performance model_performance
 #' @keywords internal
 .model_table_regression <- function(model, performance = NULL, ci = 0.95, ci_method = NULL, p_method = NULL, bootstrap = FALSE, iterations = 500, centrality = "median", dispersion = FALSE, test = c("pd", "rope"), rope_range = "default", rope_ci = 1, bf_prior = NULL, diagnostic = c("ESS", "Rhat"), ...) {
 

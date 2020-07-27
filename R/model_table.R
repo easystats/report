@@ -40,6 +40,7 @@ print.model_table <- function(x, ...) {
 }
 
 
+#' @importFrom insight format_table
 #' @export
 print.report_table <- function(x, ...) {
   table <- insight::format_table(x)

@@ -1,5 +1,8 @@
 #' @rdname report.htest
 #' @seealso report
+#' @importFrom effectsize t_to_d
+#' @importFrom parameters model_parameters
+#' @importFrom insight model_info
 #' @export
 model_table.htest <- function(model, ...) {
   table_full <- parameters::model_parameters(model)
