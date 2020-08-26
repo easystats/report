@@ -109,9 +109,9 @@ model_text.htest <- function(model, interpretation = "funder2019", ...) {
       ", ",
       parameters::format_p(table$p, stars = FALSE, digits = "apa"),
       ") and can be considered as ",
-      effectsize::interpret_d(table$Cohens_d, rules = interpretation),
+      effectsize::interpret_d(table$Cohens_d, rules = interpretation)[1],
       " (Cohen's d = ",
-      insight::format_value(table$Cohens_d),
+      insight::format_value(table$Cohens_d)$d,
       ")."
     )
 
