@@ -9,7 +9,7 @@ report_parameters.default <- function(model, parameters = NULL, prefix = "  - ",
   }
 
   # Intercept-only
-  if (all(insight::find_parameters(model, flatten = FALSE) == "(Intercept)") == FALSE) {
+  if (insight::is_nullmodel(model)) {
     parameters <- as.data.frame(parameters[!parameters$Parameter %in% c("(Intercept)"), ])
   }
 
