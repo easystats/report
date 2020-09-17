@@ -18,15 +18,9 @@ report_intercept <- function(model, parameters, ...) {
 
 
 #' @export
-report_intercept.lm <- function(model, parameters = NULL, ci = 0.95, ...) {
+report_intercept.default <- function(model, parameters = NULL, ci = 0.95, ...) {
   .report_intercept_regression(model, parameters = NULL, ci = ci, ...)
 }
-
-#' @export
-report_intercept.glm <- report_intercept.lm
-
-#' @export
-report_intercept.merMod <- report_intercept.lm
 
 
 

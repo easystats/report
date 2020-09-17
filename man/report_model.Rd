@@ -4,7 +4,7 @@
 \name{report_intercept}
 \alias{report_intercept}
 \alias{report_model}
-\alias{report_model.glm}
+\alias{report_model.default}
 \alias{report_parameters}
 \alias{report_performance}
 \title{Model description}
@@ -13,7 +13,7 @@ report_intercept(model, parameters, ...)
 
 report_model(model, ...)
 
-\method{report_model}{glm}(
+\method{report_model}{default}(
   model,
   parameters = NULL,
   ci = NULL,

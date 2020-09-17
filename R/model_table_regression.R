@@ -1,22 +1,38 @@
 #' @rdname model_table
 #' @inheritParams parameters::model_parameters.default
 #' @export
-model_table.lm <- function(model, ...) {
-  .model_table_regression(model, ...)
+model_table.default <- function(model, ...) {
+  out <- tryCatch(
+    {
+      .model_table_regression(model, ...)
+    },
+    error = function(e) { NULL }
+  )
+
+  if (is.null(out)) {
+    warning("Models of class ", class(model)[1], " are not yet supported.", call. = FALSE)
+  }
+
+  out
 }
 
-#' @export
-model_table.glm <- model_table.lm
 
-#' @export
-model_table.merMod <- model_table.lm
 
 #' @export
-model_table.stanreg <- model_table.lm
+model_table.lme <- function(model, standardize = NULL, ...) {
+  out <- tryCatch(
+    {
+      .model_table_regression(model, standardize = NULL, ...)
+    },
+    error = function(e) { NULL }
+  )
 
+  if (is.null(out)) {
+    warning("Models of class ", class(model)[1], " are not yet supported.", call. = FALSE)
+  }
 
-
-
+  out
+}
 
 
 
@@ -29,6 +45,11 @@ model_table.stanreg <- model_table.lm
 
   # Sanity checks --------------------------------------------------------------
   info <- insight::model_info(model)
+
+  # correct DF method
+  if (is.null(df_method)) {
+    df_method <- "wald"
+  }
 
   # Multiple CIs
   if (length(ci) > 1) {

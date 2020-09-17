@@ -46,6 +46,10 @@ report.lm <- function(model, interpretation = "default", ci = 0.95, standardize 
 #' @export
 report.glm <- report.lm
 
+#' @export
+report.lme <- report.lm
+
+
 
 
 # merMod ------------------------------------------------------------------
@@ -96,6 +100,9 @@ report.lmerMod <- function(model, interpretation = "default", ci = 0.95, standar
 
 #' @export
 report.merMod <- report.lmerMod
+
+#' @export
+report.glmmTMB <- report.lmerMod
 
 
 

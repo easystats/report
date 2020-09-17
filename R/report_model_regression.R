@@ -6,7 +6,7 @@
 #' @inheritParams report.lm
 #' @param parameters A parameters table obtained via \code{parameters::model_parameters()}.
 #' @export
-report_model.glm <- function(model, parameters = NULL, ci = NULL, ci_method = NULL, standardize = "refit", standardize_robust = FALSE, interpretation = NULL, bootstrap = FALSE, iterations = 500, test = NULL, rope_range = NULL, rope_ci = NULL, df_method = NULL, ...) {
+report_model.default <- function(model, parameters = NULL, ci = NULL, ci_method = NULL, standardize = "refit", standardize_robust = FALSE, interpretation = NULL, bootstrap = FALSE, iterations = 500, test = NULL, rope_range = NULL, rope_ci = NULL, df_method = NULL, ...) {
 
   # Model info
   info <- insight::model_info(model)
@@ -95,13 +95,3 @@ report_model.glm <- function(model, parameters = NULL, ci = NULL, ci_method = NU
 
   as.model_text(text, text_full)
 }
-
-
-#' @export
-report_model.lm <- report_model.glm
-
-#' @export
-report_model.merMod <- report_model.glm
-
-#' @export
-report_model.stanreg <- report_model.glm

@@ -1,5 +1,5 @@
 #' @export
-report_parameters.lm <- function(model, parameters = NULL, prefix = "  - ", ci = 0.95, interpretation = "funder2019", ...) {
+report_parameters.default <- function(model, parameters = NULL, prefix = "  - ", ci = 0.95, interpretation = "funder2019", ...) {
   if (is.null(parameters)) {
     parameters <- parameters::model_parameters(model, ...)
   }
@@ -25,17 +25,6 @@ report_parameters.lm <- function(model, parameters = NULL, prefix = "  - ", ci =
   as.model_text(text, text_full)
 }
 
-
-
-
-#' @export
-report_parameters.glm <- report_parameters.lm
-
-#' @export
-report_parameters.merMod <- report_parameters.lm
-
-#' @export
-report_parameters.stanreg <- report_parameters.lm
 
 
 

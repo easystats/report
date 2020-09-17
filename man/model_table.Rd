@@ -2,12 +2,12 @@
 % Please edit documentation in R/model_table.R, R/model_table_regression.R
 \name{model_table}
 \alias{model_table}
-\alias{model_table.lm}
+\alias{model_table.default}
 \title{Table Summary}
 \usage{
 model_table(model, ...)
 
-\method{model_table}{lm}(model, ...)
+\method{model_table}{default}(model, ...)
 }
 \arguments{
 \item{model}{A statistical model.}

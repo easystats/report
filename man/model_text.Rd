@@ -2,12 +2,12 @@
 % Please edit documentation in R/model_text.R, R/model_text_regression.R
 \name{model_text}
 \alias{model_text}
-\alias{model_text.lm}
+\alias{model_text.default}
 \title{Text summary}
 \usage{
 model_text(model, ...)
 
-\method{model_text}{lm}(model, ...)
+\method{model_text}{default}(model, ...)
 }
 \arguments{
 \item{model}{A statistical model.}

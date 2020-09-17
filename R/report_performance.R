@@ -179,6 +179,16 @@ report_performance.merMod <- function(model, performance = NULL, ...) {
 
 
 
+#' @export
+report_performance.lme <- report_performance.merMod
+
+#' @export
+report_performance.glmmTMB <- report_performance.merMod
+
+
+
+
+
 
 
 
