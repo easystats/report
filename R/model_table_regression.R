@@ -77,7 +77,7 @@ model_table.lme <- function(model, standardize = NULL, ...) {
     colnames(effsize)[ci_columns] <- paste0("Std_", colnames(effsize)[ci_columns])
 
     # find common columns for merging
-    merge_by <- intersect(c("Parameter", "Component"), unique(c(colnames(effsize), colnames(parameters))))
+    merge_by <- intersect(c("Parameter", "Component"), intersect(colnames(effsize), colnames(parameters)))
     parameters <- merge(parameters, effsize, by = merge_by, sort = FALSE)
     parameters$CI <- NULL
   }
