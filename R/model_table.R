@@ -41,9 +41,10 @@ print.model_table <- function(x, ...) {
 
 
 #' @importFrom insight format_table
+#' @importFrom parameters parameters_table
 #' @export
 print.report_table <- function(x, ...) {
-  table <- insight::format_table(x)
+  table <- insight::format_table(parameters::parameters_table(x))
   cat(table)
   invisible(table)
 }
