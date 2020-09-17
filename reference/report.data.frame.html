@@ -252,11 +252,11 @@
 </div><div class='output co'>#&gt; 5 entries: B, n = 4; A, n = 3; D, n = 2 and 2 others (0 missing)</div><div class='input'><span class='fu'><a href='model_table.html'>model_table</a></span>(<span class='kw'>x</span>)
 </div><div class='output co'>#&gt; n_Entries | n_Obs | n_Missing | percentage_Missing |                      Entries
 #&gt; ---------------------------------------------------------------------------------
-#&gt;         5 |    11 |         0 |                  0 | B, n = 4; A, n = 3; D, n = 2</div><div class='input'><span class='fu'><a href='model_text.html'>model_text</a></span>(<span class='kw'>x</span>)
+#&gt; 5.00      |    11 |         0 |               0.00 | B, n = 4; A, n = 3; D, n = 2</div><div class='input'><span class='fu'><a href='model_text.html'>model_text</a></span>(<span class='kw'>x</span>)
 </div><div class='output co'>#&gt; 5 entries: B, n = 4; A, n = 3; D, n = 2 and 2 others (0 missing)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'><a href='model_table.html'>model_table</a></span>(<span class='kw'>x</span>))
 </div><div class='output co'>#&gt; n_Entries | n_Obs | n_Missing |                      Entries
 #&gt; ------------------------------------------------------------
-#&gt;         5 |    11 |         0 | B, n = 4; A, n = 3; D, n = 2</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'><a href='model_text.html'>model_text</a></span>(<span class='kw'>x</span>))
+#&gt; 5.00      |    11 |         0 | B, n = 4; A, n = 3; D, n = 2</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'><a href='model_text.html'>model_text</a></span>(<span class='kw'>x</span>))
 </div><div class='output co'>#&gt; 5 entries: B, n = 4; A, n = 3; D, n = 2 and 2 others</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/easystats/report'>report</a></span>)
 
 <span class='kw'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span>(<span class='kw'>iris</span>, median = <span class='fl'>TRUE</span>, dispersion = <span class='fl'>FALSE</span>, distribution = <span class='fl'>TRUE</span>, missing_percentage = <span class='fl'>TRUE</span>)
@@ -275,10 +275,10 @@
 #&gt;   - Species: 3 levels: setosa, n = 50; versicolor, n = 50 and virginica, n = 50</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='kw'>r</span>)
 </div><div class='output co'>#&gt; Variable     |      Level | n_Obs | Mean |   SD | Median |  MAD |  Min |  Max | Skewness | Kurtosis | percentage_Missing | percentage_Obs
 #&gt; -----------------------------------------------------------------------------------------------------------------------------------------
-#&gt; Sepal.Length |            |   150 | 5.84 | 0.83 |   5.80 | 1.04 | 4.30 | 7.90 |     0.31 |    -0.57 |                  0 |               
-#&gt; Sepal.Width  |            |   150 | 3.06 | 0.44 |   3.00 | 0.44 | 2.00 | 4.40 |     0.32 |     0.18 |                  0 |               
-#&gt; Petal.Length |            |   150 | 3.76 | 1.77 |   4.35 | 1.85 | 1.00 | 6.90 |    -0.27 |    -1.40 |                  0 |               
-#&gt; Petal.Width  |            |   150 | 1.20 | 0.76 |   1.30 | 1.04 | 0.10 | 2.50 |    -0.10 |    -1.34 |                  0 |               
+#&gt; Sepal.Length |            |   150 | 5.84 | 0.83 |   5.80 | 1.04 | 4.30 | 7.90 |     0.31 |    -0.57 |               0.00 |               
+#&gt; Sepal.Width  |            |   150 | 3.06 | 0.44 |   3.00 | 0.44 | 2.00 | 4.40 |     0.32 |     0.18 |               0.00 |               
+#&gt; Petal.Length |            |   150 | 3.76 | 1.77 |   4.35 | 1.85 | 1.00 | 6.90 |    -0.27 |    -1.40 |               0.00 |               
+#&gt; Petal.Width  |            |   150 | 1.20 | 0.76 |   1.30 | 1.04 | 0.10 | 2.50 |    -0.10 |    -1.34 |               0.00 |               
 #&gt; Species      |     setosa |    50 |      |      |        |      |      |      |          |          |                    |          33.33
 #&gt; Species      | versicolor |    50 |      |      |        |      |      |      |          |          |                    |          33.33
 #&gt; Species      |  virginica |    50 |      |      |        |      |      |      |          |          |                    |          33.33</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='kw'>r</span>))

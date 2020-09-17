@@ -233,22 +233,22 @@
 ## Within this model:
 ## 
 ##   - The effect of Petal.Length is positive and can be considered as very large and significant (beta
-## = 0.90, std. beta = 1.93, p &lt; .001).
+## = 0.90, 95% CI [0.78, 1.03], std. beta = 1.93, p &lt; .001).
 ##   - The effect of Speciesversicolor is negative and can be considered as very large and significant
-## (beta = -1.60, std. beta = -1.93, p &lt; .001).
+## (beta = -1.60, 95% CI [-1.98, -1.22], std. beta = -1.93, p &lt; .001).
 ##   - The effect of Speciesvirginica is negative and can be considered as very large and significant
-## (beta = -2.12, std. beta = -2.56, p &lt; .001).</code></pre>
+## (beta = -2.12, 95% CI [-2.66, -1.58], std. beta = -2.56, p &lt; .001).</code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit">
 <span class="fu"><a href="../reference/text_long.html">table_short</a></span>(<span class="kw">r</span>)
-<span class="co">## Parameter         | Coefficient |        p | Std_Coefficient |  Fit</span>
-<span class="co">## -------------------------------------------------------------------</span>
-<span class="co">## (Intercept)       |        3.68 | 1.97e-72 |            1.50 |     </span>
-<span class="co">## Petal.Length      |        0.90 | 1.12e-28 |            1.93 |     </span>
-<span class="co">## Speciesversicolor |       -1.60 | 7.37e-14 |           -1.93 |     </span>
-<span class="co">## Speciesvirginica  |       -2.12 | 1.48e-12 |           -2.56 |     </span>
-<span class="co">##                   |             |          |                 |     </span>
-<span class="co">## R2                |             |          |                 | 0.84</span>
-<span class="co">## R2 (adj.)         |             |          |                 | 0.83</span>
+<span class="co">## Parameter         | Coefficient |             CI |      p | Coefficient (std.) |  Fit</span>
+<span class="co">## -------------------------------------------------------------------------------------</span>
+<span class="co">## (Intercept)       |        3.68 | [ 3.47,  3.89] | &lt; .001 |               1.50 |     </span>
+<span class="co">## Petal.Length      |        0.90 | [ 0.78,  1.03] | &lt; .001 |               1.93 |     </span>
+<span class="co">## Speciesversicolor |       -1.60 | [-1.98, -1.22] | &lt; .001 |              -1.93 |     </span>
+<span class="co">## Speciesvirginica  |       -2.12 | [-2.66, -1.58] | &lt; .001 |              -2.56 |     </span>
+<span class="co">##                   |             |                |        |                    |     </span>
+<span class="co">## R2                |             |                |        |                    | 0.84</span>
+<span class="co">## R2 (adj.)         |             |                |        |                    | 0.83</span>
 </pre></div>
 </div>
 <div id="general-linear-models-glms" class="section level3">
@@ -267,25 +267,25 @@
 ## and cyl = 0, is at 15.97 (SE = 11.02, 95% CI [-2.71, 44.69], p = 0.147). Within this model:
 ## 
 ##   - The effect of mpg is negative and can be considered as small and not significant (beta = -0.16,
-## SE = 0.24, std. beta = -0.98, p = 0.496).
+## SE = 0.24, 95% CI [-0.71, 0.34], std. beta = -0.98, p = 0.496).
 ##   - The effect of cyl is negative and can be considered as large and significant (beta = -2.15, SE =
-## 1.08, std. beta = -3.84, p &lt; .05).</code></pre>
+## 1.08, 95% CI [-5.19, -0.54], std. beta = -3.84, p &lt; .05).</code></pre>
 <div class="sourceCode" id="cb18"><pre class="downlit">
 <span class="fu"><a href="../reference/text_long.html">table_long</a></span>(<span class="kw">r</span>)
-<span class="co">## Parameter       | Coefficient |    SE | CI_low.x | CI_high.x |     z | df_error |    p | Std_Coefficient |   CI | CI_low.y | CI_high.y |    Fit</span>
-<span class="co">## -----------------------------------------------------------------------------------------------------------------------------------------------</span>
-<span class="co">## (Intercept)     |       15.97 | 11.02 |    -2.71 |     44.69 |  1.45 |      Inf | 0.15 |           -0.60 | 0.95 |    -2.07 |      0.62 |       </span>
-<span class="co">## mpg             |       -0.16 |  0.24 |    -0.71 |      0.34 | -0.68 |      Inf | 0.50 |           -0.98 | 0.95 |    -4.28 |      2.03 |       </span>
-<span class="co">## cyl             |       -2.15 |  1.08 |    -5.19 |     -0.54 | -1.99 |      Inf | 0.05 |           -3.84 | 0.95 |    -9.26 |     -0.97 |       </span>
-<span class="co">##                 |             |       |          |           |       |          |      |                 |      |          |           |       </span>
-<span class="co">## AIC             |             |       |          |           |       |          |      |                 |      |          |           |  23.49</span>
-<span class="co">## BIC             |             |       |          |           |       |          |      |                 |      |          |           |  27.89</span>
-<span class="co">## Tjur's R2       |             |       |          |           |       |          |      |                 |      |          |           |   0.67</span>
-<span class="co">## RMSE            |             |       |          |           |       |          |      |                 |      |          |           |   0.74</span>
-<span class="co">## LOGLOSS         |             |       |          |           |       |          |      |                 |      |          |           |   0.27</span>
-<span class="co">## SCORE_LOG       |             |       |          |           |       |          |      |                 |      |          |           | -14.85</span>
-<span class="co">## SCORE_SPHERICAL |             |       |          |           |       |          |      |                 |      |          |           |   0.12</span>
-<span class="co">## PCP             |             |       |          |           |       |          |      |                 |      |          |           |   0.84</span>
+<span class="co">## Parameter       | Coefficient |    SE |             CI |     z |  df |     p | Coefficient (std.) |    Fit</span>
+<span class="co">## ----------------------------------------------------------------------------------------------------------</span>
+<span class="co">## (Intercept)     |       15.97 | 11.02 | [-2.71, 44.69] |  1.45 | Inf | 0.147 |              -0.60 |       </span>
+<span class="co">## mpg             |       -0.16 |  0.24 | [-0.71,  0.34] | -0.68 | Inf | 0.496 |              -0.98 |       </span>
+<span class="co">## cyl             |       -2.15 |  1.08 | [-5.19, -0.54] | -1.99 | Inf | 0.047 |              -3.84 |       </span>
+<span class="co">##                 |             |       |                |       |     |       |                    |       </span>
+<span class="co">## AIC             |             |       |                |       |     |       |                    |  23.49</span>
+<span class="co">## BIC             |             |       |                |       |     |       |                    |  27.89</span>
+<span class="co">## Tjur's R2       |             |       |                |       |     |       |                    |   0.67</span>
+<span class="co">## RMSE            |             |       |                |       |     |       |                    |   0.74</span>
+<span class="co">## LOGLOSS         |             |       |                |       |     |       |                    |   0.27</span>
+<span class="co">## SCORE_LOG       |             |       |                |       |     |       |                    | -14.85</span>
+<span class="co">## SCORE_SPHERICAL |             |       |                |       |     |       |                    |   0.12</span>
+<span class="co">## PCP             |             |       |                |       |     |       |                    |   0.84</span>
 </pre></div>
 </div>
 <div id="bayesian-models" class="section level3">
