@@ -16,6 +16,7 @@ model_text.default <- function(model, ...) {
 
 
 #' @importFrom stats complete.cases
+#' @importFrom insight is_nullmodel
 #' @keywords internal
 .model_text_regression <- function(model, interpretation = "default", ci = 0.95, standardize = "refit", standardize_robust = FALSE, bootstrap = FALSE, iterations = 500, performance_metrics = "all", df_method = NULL, ci_method = NULL, centrality = "median", dispersion = FALSE, test = c("pd", "rope"), rope_range = "default", rope_ci = 1, bf_prior = NULL, diagnostic = c("ESS", "Rhat"), ...) {
   tables <- model_table(model, ci = ci, standardize = standardize, standardize_robust = standardize_robust, bootstrap = bootstrap, iterations = iterations, performance_metrics = performance_metrics, df_method = df_method, ci_method = ci_method, centrality = centrality, dispersion = dispersion, test = test, rope_range = rope_range, rope_ci = rope_ci, bf_prior = bf_prior, diagnostic = diagnostic, ...)
@@ -57,10 +58,15 @@ model_text.default <- function(model, ...) {
 
   # Params
   text_params <- report_parameters(model, parameters = parameters, prefix = "  - ", ci = ci, interpretation = interpretation, ...)
-  #
-  # # Combine text
-  text_short <- paste0(text_model$text_short, text_perf$text_short, text_intercept$text_short, " Within this model:\n\n", text_params$text_short)
-  text_long <- paste0(text_model$text_long, text_perf$text_long, text_intercept$text_long, " Within this model:\n\n", text_params$text_long)
+
+  # Combine text
+  if (insight::is_nullmodel(model)) {
+    text_short <- paste0(text_model$text_short, text_perf$text_short, text_intercept$text_short, "\n")
+    text_long <- paste0(text_model$text_long, text_perf$text_long, text_intercept$text_long, "\n")
+  } else {
+    text_short <- paste0(text_model$text_short, text_perf$text_short, text_intercept$text_short, " Within this model:\n\n", text_params$text_short)
+    text_long <- paste0(text_model$text_long, text_perf$text_long, text_intercept$text_long, " Within this model:\n\n", text_params$text_long)
+  }
 
 
   # Return output

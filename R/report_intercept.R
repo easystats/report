@@ -61,11 +61,12 @@ report_intercept.default <- function(model, parameters = NULL, ci = 0.95, ...) {
 
 
 
+#' @importFrom insight is_nullmodel
 #' @keywords internal
 .find_intercept <- function(model) {
 
   # Intercept-only
-  if (all(insight::find_parameters(model, flatten = FALSE) == "(Intercept)")) {
+  if (insight::is_nullmodel(model)) {
     return("")
   }
 

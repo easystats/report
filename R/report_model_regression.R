@@ -5,11 +5,15 @@
 #' @inheritParams parameters::model_parameters.stanreg
 #' @inheritParams report.lm
 #' @param parameters A parameters table obtained via \code{parameters::model_parameters()}.
+#' @importFrom insight is_nullmodel model_info find_predictors find_formula
+#' @importFrom parameters model_parameters
+#' @importFrom bayestestR rope_range
 #' @export
 report_model.default <- function(model, parameters = NULL, ci = NULL, ci_method = NULL, standardize = "refit", standardize_robust = FALSE, interpretation = NULL, bootstrap = FALSE, iterations = 500, test = NULL, rope_range = NULL, rope_ci = NULL, df_method = NULL, ...) {
 
   # Model info
   info <- insight::model_info(model)
+  is_nullmodel <- insight::is_nullmodel(model)
 
   # Boostrap
   if (bootstrap) {
@@ -37,7 +41,7 @@ report_model.default <- function(model, parameters = NULL, ci = NULL, ci_method 
 
   # To predict
   to_predict_text <- paste0(" to predict ", insight::find_response(model))
-  if (all(insight::find_parameters(model, flatten = FALSE) == "(Intercept)") == FALSE) {
+  if (!is_nullmodel) {
     to_predict_text <- paste0(
       to_predict_text,
       " with ",
@@ -80,7 +84,7 @@ report_model.default <- function(model, parameters = NULL, ci = NULL, ci_method 
       .text_ci(ci, ci_method = ci_method, df_method = df_method)
     )
   }
-  if (!is.null(standardize)) {
+  if (!is.null(standardize) && !is_nullmodel) {
     text_full <- paste0(
       text_full,
       .text_standardize(standardize, standardize_robust)
