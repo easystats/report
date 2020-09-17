@@ -1,5 +1,4 @@
-context("format_model")
-
+if (require("testthat") && require("insight") && require("httr"))
 test_that("format_model", {
   testthat::expect_equal(format_model(insight::download_model("lm_1")), "linear model")
   testthat::expect_equal(format_model(insight::download_model("glm_1")), "logistic model")

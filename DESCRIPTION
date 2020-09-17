@@ -28,26 +28,27 @@ Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr
 Imports:
-	insight (>= 0.6.0),
+	insight,
+	bayestestR,
+	correlation,
 	parameters,
 	effectsize,
 	performance,
 	stats,
 	utils
 Suggests:
-	knitr,
-	lavaan,
-	rmarkdown,
-	testthat,
-	correlation,
-	dplyr,
-	ggplot2,
-	lme4,
-	logspline,
-	rstudioapi,
-	rstanarm,
 	BayesFactor,
 	caret,
-	randomForest
+	dplyr,
+	ggplot2,
+	httr,
+	knitr,
+	lavaan,
+	lme4,
+	logspline,
+	rstanarm,
+	randomForest,
+	rmarkdown,
+	testthat
 RoxygenNote: 7.1.1
 Language: en-GB

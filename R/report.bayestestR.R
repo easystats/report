@@ -8,7 +8,6 @@
 #'
 #'
 #' @examples
-#' library(bayestestR)
 #' library(report)
 #'
 #' mo0 <- lm(Sepal.Length ~ 1, data = iris)
@@ -16,20 +15,23 @@
 #' mo2 <- lm(Sepal.Length ~ Species + Petal.Length, data = iris)
 #' mo3 <- lm(Sepal.Length ~ Species * Petal.Length, data = iris)
 #'
-#' # Bayes factor - models
-#' BFmodels <- bayesfactor_models(mo1, mo2, mo3, denominator = mo0)
+#' if (require("bayestestR")) {
+#'   # Bayes factor - models
+#'   BFmodels <- bayesfactor_models(mo1, mo2, mo3, denominator = mo0)
 #'
-#' r <- report(BFmodels)
-#' r
-#' table_short(r)
+#'   r <- report(BFmodels)
+#'   r
+#'   table_short(r)
 #'
-#' # Bayes factor - inclusion
-#' inc_bf <- bayesfactor_inclusion(BFmodels, prior_odds = c(1, 2, 3), match_models = TRUE)
+#'   # Bayes factor - inclusion
+#'   inc_bf <- bayesfactor_inclusion(BFmodels, prior_odds = c(1, 2, 3), match_models = TRUE)
 #'
-#' r <- report(inc_bf)
-#' r
-#' table_short(r)
+#'   r <- report(inc_bf)
+#'   r
+#'   table_short(r)
+#' }
 #' @seealso report
+#' @importFrom effectsize interpret_bf
 #' @importFrom stats setNames
 #' @export
 report.bayesfactor_models <- function(model, interpretation = "jeffreys1961", ...) {
@@ -133,6 +135,8 @@ report.bayesfactor_models <- function(model, interpretation = "jeffreys1961", ..
 
 
 #' @rdname report.bayesfactor_models
+#' @importFrom effectsize interpret_bf
+#' @importFrom insight format_value
 #' @importFrom stats setNames
 #' @export
 report.bayesfactor_inclusion <- function(model, interpretation = "jeffreys1961", ...) {
