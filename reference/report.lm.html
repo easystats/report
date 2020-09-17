@@ -219,6 +219,7 @@
 <span class='fu'><a href='text_long.html'>text_short</a></span>(<span class='kw'>r</span>)
 </div><div class='output co'>#&gt; We fitted a linear model to predict Sepal.Length with Petal.Length and Species.The model's explanatory power is substantial (R2 = 0.84, adj. R2 = 0.83). The model's intercept is at 4.21. Within this model:
 #&gt; 
+#&gt;   - The effect of (Intercept) is positive and can be considered as medium and significant (beta = 4.21, 95% CI [3.41, 5.02], std. beta = 0.49, p &lt; .001).
 #&gt;   - The effect of Petal.Length is positive and can be considered as very large and not significant (beta = 0.54, 95% CI [0.00, 1.09], std. beta = 1.16, p = 0.052).
 #&gt;   - The effect of Speciesversicolor is negative and can be considered as very large and significant (beta = -1.81, 95% CI [-2.99, -0.62], std. beta = -0.88, p &lt; .01).
 #&gt;   - The effect of Speciesvirginica is negative and can be considered as very large and significant (beta = -3.15, 95% CI [-4.41, -1.90], std. beta = -1.75, p &lt; .001).
@@ -228,6 +229,7 @@
 #&gt; 
 #&gt; The model explains a significant and substantial proportion of variance (R2 = 0.84, F(5, 144) = 151.71, p &lt; .001, adj. R2 = 0.83). The model's intercept, corresponding to Sepal.Length = 0, Petal.Length = 0 and Species = setosa, is at 4.21 (SE = 0.41, 95% CI [3.41, 5.02], p &lt; .001). Within this model:
 #&gt; 
+#&gt;   - The effect of (Intercept) is positive and can be considered as medium and significant (beta = 4.21, SE = 0.41, 95% CI [3.41, 5.02], std. beta = 0.49, p &lt; .001).
 #&gt;   - The effect of Petal.Length is positive and can be considered as very large and not significant (beta = 0.54, SE = 0.28, 95% CI [0.00, 1.09], std. beta = 1.16, p = 0.052).
 #&gt;   - The effect of Speciesversicolor is negative and can be considered as very large and significant (beta = -1.81, SE = 0.60, 95% CI [-2.99, -0.62], std. beta = -0.88, p &lt; .01).
 #&gt;   - The effect of Speciesvirginica is negative and can be considered as very large and significant (beta = -3.15, SE = 0.63, 95% CI [-4.41, -1.90], std. beta = -1.75, p &lt; .001).
@@ -264,9 +266,11 @@
 </div><div class='output co'>#&gt; <span class='message'>Waiting for profiling to be done...</span></div><div class='output co'>#&gt; <span class='message'>Waiting for profiling to be done...</span></div><div class='output co'>#&gt; <span class='message'>Waiting for profiling to be done...</span></div><div class='input'><span class='fu'><a href='text_long.html'>text_short</a></span>(<span class='kw'>r</span>)
 </div><div class='output co'>#&gt; We fitted a logistic model to predict vs with disp.The model's explanatory power is substantial (Tjur's R2 = 0.53). The model's intercept is at 4.14. Within this model:
 #&gt; 
+#&gt;   - The effect of (Intercept) is positive and can be considered as small and significant (beta = 4.14, 95% CI [1.41, 6.86], std. beta = -0.85, p &lt; .01).
 #&gt;   - The effect of disp is negative and can be considered as large and significant (beta = -0.02, 95% CI [-0.04, -0.01], std. beta = -2.68, p &lt; .01).</div><div class='input'><span class='fu'><a href='text_long.html'>text_long</a></span>(<span class='kw'>r</span>)
 </div><div class='output co'>#&gt; We fitted a logistic model (estimated using ML) to predict vs with disp (formula = vs ~ disp). Standardized parameters were obtained by fitting the model on a standardized version of the dataset. Effect sizes were labelled following Chen's (2010) recommendations.The model's explanatory power is substantial (Tjur's R2 = 0.53). The model's intercept, corresponding to vs = 0 and disp = 0, is at 4.14 (SE = 1.39, 95% CI [1.81, 7.44], p &lt; .01). Within this model:
 #&gt; 
+#&gt;   - The effect of (Intercept) is positive and can be considered as small and significant (beta = 4.14, SE = 1.39, 95% CI [1.41, 6.86], std. beta = -0.85, p &lt; .01).
 #&gt;   - The effect of disp is negative and can be considered as large and significant (beta = -0.02, SE = 0.01, 95% CI [-0.04, -0.01], std. beta = -2.68, p &lt; .01).</div><div class='input'><span class='fu'><a href='text_long.html'>table_short</a></span>(<span class='kw'>r</span>)
 </div><div class='output co'>#&gt; Parameter   | Coefficient |             CI |     p | Coefficient (std.) |  Fit
 #&gt; ------------------------------------------------------------------------------
