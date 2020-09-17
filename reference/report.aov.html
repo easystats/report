@@ -204,11 +204,13 @@
 <span class='kw'>data</span><span class='op'>$</span><span class='kw'>Cat1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"A"</span>, <span class='st'>"B"</span>), length.out = <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='kw'>data</span>))
 <span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Species</span> <span class='op'>*</span> <span class='kw'>Cat1</span>, data = <span class='kw'>data</span>)
 <span class='kw'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span>(<span class='kw'>model</span>)
-<span class='kw'>r</span></div><div class='output co'>#&gt; The ANOVA suggests that:
+<span class='kw'>r</span>
+</div><div class='output co'>#&gt; The ANOVA suggests that:
 #&gt; 
 #&gt;   - The main effect of Species is significant (F(2, 144) = 118.43, p &lt; .001) and can be considered as large (partial omega squared = 0.61).
 #&gt;   - The main effect of Cat1 is not significant (F(1, 144) = 0.01, p = 0.937) and can be considered as very small (partial omega squared = -0.01).
-#&gt;   - The interaction between Species and Cat1 is not significant (F(2, 144) = 0.98, p = 0.377) and can be considered as very small (partial omega squared = -2.40e-04).</div><div class='input'><span class='fu'><a href='text_long.html'>table_short</a></span>(<span class='kw'>r</span>)</div><div class='output co'>#&gt; Parameter    | Sum_Squares |  df | Mean_Square |      F |        p | Omega_Sq_partial
+#&gt;   - The interaction between Species and Cat1 is not significant (F(2, 144) = 0.98, p = 0.377) and can be considered as very small (partial omega squared = -2.40e-04).</div><div class='input'><span class='fu'><a href='text_long.html'>table_short</a></span>(<span class='kw'>r</span>)
+</div><div class='output co'>#&gt; Parameter    | Sum_Squares |  df | Mean_Square |      F |        p | Omega_Sq_partial
 #&gt; -------------------------------------------------------------------------------------
 #&gt; Species      |       63.21 |   2 |       31.61 | 118.43 | 3.87e-31 |             0.61
 #&gt; Cat1         |        0.00 |   1 |        0.00 |   0.01 |     0.94 |            -0.01
@@ -229,7 +231,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

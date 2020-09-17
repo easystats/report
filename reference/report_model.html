@@ -269,25 +269,33 @@ proportion of HDI, to use for the percentage in ROPE.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Species</span>, data = <span class='kw'>iris</span>)
-<span class='fu'>report_intercept</span>(<span class='kw'>model</span>)</div><div class='output co'>#&gt;  The model's intercept, corresponding to Sepal.Length = 0 and Species = setosa, is at 5.01 (SE = 0.07, 95% CI [4.86, 5.15], p &lt; .001).</div><div class='input'>
+<span class='fu'>report_intercept</span>(<span class='kw'>model</span>)
+</div><div class='output co'>#&gt;  The model's intercept, corresponding to Sepal.Length = 0 and Species = setosa, is at 5.01 (SE = 0.07, 95% CI [4.86, 5.15], p &lt; .001).</div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/lme4/lme4'>lme4</a></span>)
 <span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='kw'>lme4</span>::<span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Petal.Length</span> <span class='op'>+</span> (<span class='fl'>1</span> <span class='op'>|</span> <span class='kw'>Species</span>), data = <span class='kw'>iris</span>)
-<span class='fu'>report_intercept</span>(<span class='kw'>model</span>)</div><div class='output co'>#&gt;  The model's intercept, corresponding to Sepal.Length = 0, Petal.Length = 0 and Species = setosa, is at 2.50 (SE = 0.67, 95% CI [1.20, 3.81], p &lt; .001).</div><div class='input'><span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Species</span>, data = <span class='kw'>iris</span>)
-<span class='fu'>report_model</span>(<span class='kw'>model</span>)</div><div class='output co'>#&gt; We fitted a linear model (estimated using OLS) to predict Sepal.Length with Species (formula = Sepal.Length ~ Species). Standardized parameters were obtained by fitting the model on a standardized version of the dataset.</div><div class='input'>
+<span class='fu'>report_intercept</span>(<span class='kw'>model</span>)
+</div><div class='output co'>#&gt;  The model's intercept, corresponding to Sepal.Length = 0, Petal.Length = 0 and Species = setosa, is at 2.50 (SE = 0.67, 95% CI [1.20, 3.81], p &lt; .001).</div><div class='input'><span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Species</span>, data = <span class='kw'>iris</span>)
+<span class='fu'>report_model</span>(<span class='kw'>model</span>)
+</div><div class='output co'>#&gt; We fitted a linear model (estimated using OLS) to predict Sepal.Length with Species (formula = Sepal.Length ~ Species). Standardized parameters were obtained by fitting the model on a standardized version of the dataset.</div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/lme4/lme4'>lme4</a></span>)
 <span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='kw'>lme4</span>::<span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Petal.Length</span> <span class='op'>+</span> (<span class='fl'>1</span> <span class='op'>|</span> <span class='kw'>Species</span>), data = <span class='kw'>iris</span>)
-<span class='fu'>report_model</span>(<span class='kw'>model</span>)</div><div class='output co'>#&gt; We fitted a linear mixed model (estimated using REML and nloptwrap optimizer) to predict Sepal.Length with Petal.Length (formula = Sepal.Length ~ Petal.Length). The model included Species as random effects (formula = ~1 | Species). Standardized parameters were obtained by fitting the model on a standardized version of the dataset.</div><div class='input'><span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Species</span>, data = <span class='kw'>iris</span>)
-<span class='fu'>report_parameters</span>(<span class='kw'>model</span>)</div><div class='output co'>#&gt;   - The effect of Species [versicolor] is positive and can be considered as significant (beta = 0.93, SE = 0.10, 95% CI [0.73, 1.13], p &lt; .001).
+<span class='fu'>report_model</span>(<span class='kw'>model</span>)
+</div><div class='output co'>#&gt; We fitted a linear mixed model (estimated using REML and nloptwrap optimizer) to predict Sepal.Length with Petal.Length (formula = Sepal.Length ~ Petal.Length). The model included Species as random effects (formula = ~1 | Species). Standardized parameters were obtained by fitting the model on a standardized version of the dataset.</div><div class='input'><span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Species</span>, data = <span class='kw'>iris</span>)
+<span class='fu'>report_parameters</span>(<span class='kw'>model</span>)
+</div><div class='output co'>#&gt;   - The effect of Species [versicolor] is positive and can be considered as significant (beta = 0.93, SE = 0.10, 95% CI [0.73, 1.13], p &lt; .001).
 #&gt;   - The effect of Species [virginica] is positive and can be considered as significant (beta = 1.58, SE = 0.10, 95% CI [1.38, 1.79], p &lt; .001).</div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/lme4/lme4'>lme4</a></span>)
 <span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='kw'>lme4</span>::<span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Petal.Length</span> <span class='op'>+</span> (<span class='fl'>1</span> <span class='op'>|</span> <span class='kw'>Species</span>), data = <span class='kw'>iris</span>)
-<span class='fu'>report_parameters</span>(<span class='kw'>model</span>)</div><div class='output co'>#&gt;   - The effect of Petal.Length is positive and can be considered as significant (beta = 0.89, SE = 0.06, 95% CI [0.76, 1.01], p &lt; .001).</div><div class='input'><span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Species</span>, data = <span class='kw'>iris</span>)
-<span class='fu'>report_performance</span>(<span class='kw'>model</span>)</div><div class='output co'>#&gt; 
+<span class='fu'>report_parameters</span>(<span class='kw'>model</span>)
+</div><div class='output co'>#&gt;   - The effect of Petal.Length is positive and can be considered as significant (beta = 0.89, SE = 0.06, 95% CI [0.76, 1.01], p &lt; .001).</div><div class='input'><span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Species</span>, data = <span class='kw'>iris</span>)
+<span class='fu'>report_performance</span>(<span class='kw'>model</span>)
+</div><div class='output co'>#&gt; 
 #&gt; 
 #&gt; The model explains a significant and substantial proportion of variance (R2 = 0.62, F(2, 147) = 119.26, p &lt; .001, adj. R2 = 0.61).</div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/lme4/lme4'>lme4</a></span>)
 <span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='kw'>lme4</span>::<span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Petal.Length</span> <span class='op'>+</span> (<span class='fl'>1</span> <span class='op'>|</span> <span class='kw'>Species</span>), data = <span class='kw'>iris</span>)
-<span class='fu'>report_performance</span>(<span class='kw'>model</span>)</div><div class='output co'>#&gt; The model's total explanatory power is substantial (conditional R2 = 0.97) and the part related to the fixed effects alone (marginal R2) is of 0.66.</div></pre>
+<span class='fu'>report_performance</span>(<span class='kw'>model</span>)
+</div><div class='output co'>#&gt; The model's total explanatory power is substantial (conditional R2 = 0.97) and the part related to the fixed effects alone (marginal R2) is of 0.66.</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -303,7 +311,7 @@ proportion of HDI, to use for the percentage in ROPE.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

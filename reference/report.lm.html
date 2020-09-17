@@ -216,13 +216,15 @@
 
 <span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Petal.Length</span> <span class='op'>*</span> <span class='kw'>Species</span>, data = <span class='kw'>iris</span>)
 <span class='kw'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span>(<span class='kw'>model</span>)
-<span class='fu'><a href='text_long.html'>text_short</a></span>(<span class='kw'>r</span>)</div><div class='output co'>#&gt; We fitted a linear model to predict Sepal.Length with Petal.Length and Species.The model's explanatory power is substantial (R2 = 0.84, adj. R2 = 0.83). The model's intercept is at 4.21. Within this model:
+<span class='fu'><a href='text_long.html'>text_short</a></span>(<span class='kw'>r</span>)
+</div><div class='output co'>#&gt; We fitted a linear model to predict Sepal.Length with Petal.Length and Species.The model's explanatory power is substantial (R2 = 0.84, adj. R2 = 0.83). The model's intercept is at 4.21. Within this model:
 #&gt; 
 #&gt;   - The effect of Petal.Length is positive and can be considered as very large and not significant (beta = 0.54, std. beta = 1.16, p = 0.052).
 #&gt;   - The effect of Speciesversicolor is negative and can be considered as very large and significant (beta = -1.81, std. beta = -0.88, p &lt; .01).
 #&gt;   - The effect of Speciesvirginica is negative and can be considered as very large and significant (beta = -3.15, std. beta = -1.75, p &lt; .001).
 #&gt;   - The effect of Petal.Length:Speciesversicolor is positive and can be considered as medium and not significant (beta = 0.29, std. beta = 0.61, p = 0.334).
-#&gt;   - The effect of Petal.Length:Speciesvirginica is positive and can be considered as very large and not significant (beta = 0.45, std. beta = 0.97, p = 0.120).</div><div class='input'><span class='fu'><a href='text_long.html'>text_long</a></span>(<span class='kw'>r</span>)</div><div class='output co'>#&gt; We fitted a linear model (estimated using OLS) to predict Sepal.Length with Petal.Length and Species (formula = Sepal.Length ~ Petal.Length * Species). Standardized parameters were obtained by fitting the model on a standardized version of the dataset. Effect sizes were labelled following Funder's (2019) recommendations.
+#&gt;   - The effect of Petal.Length:Speciesvirginica is positive and can be considered as very large and not significant (beta = 0.45, std. beta = 0.97, p = 0.120).</div><div class='input'><span class='fu'><a href='text_long.html'>text_long</a></span>(<span class='kw'>r</span>)
+</div><div class='output co'>#&gt; We fitted a linear model (estimated using OLS) to predict Sepal.Length with Petal.Length and Species (formula = Sepal.Length ~ Petal.Length * Species). Standardized parameters were obtained by fitting the model on a standardized version of the dataset. Effect sizes were labelled following Funder's (2019) recommendations.
 #&gt; 
 #&gt; The model explains a significant and substantial proportion of variance (R2 = 0.84, F(5, 144) = 151.71, p &lt; .001, adj. R2 = 0.83). The model's intercept, corresponding to Sepal.Length = 0, Petal.Length = 0 and Species = setosa, is at 4.21 (SE = 0.41, 95% CI [3.41, 5.02], p &lt; .001). Within this model:
 #&gt; 
@@ -230,7 +232,8 @@
 #&gt;   - The effect of Speciesversicolor is negative and can be considered as very large and significant (beta = -1.81, SE = 0.60, std. beta = -0.88, p &lt; .01).
 #&gt;   - The effect of Speciesvirginica is negative and can be considered as very large and significant (beta = -3.15, SE = 0.63, std. beta = -1.75, p &lt; .001).
 #&gt;   - The effect of Petal.Length:Speciesversicolor is positive and can be considered as medium and not significant (beta = 0.29, SE = 0.30, std. beta = 0.61, p = 0.334).
-#&gt;   - The effect of Petal.Length:Speciesvirginica is positive and can be considered as very large and not significant (beta = 0.45, SE = 0.29, std. beta = 0.97, p = 0.120).</div><div class='input'><span class='fu'><a href='text_long.html'>table_short</a></span>(<span class='kw'>r</span>)</div><div class='output co'>#&gt; Parameter                      | Coefficient |        p | Std_Coefficient |  Fit
+#&gt;   - The effect of Petal.Length:Speciesvirginica is positive and can be considered as very large and not significant (beta = 0.45, SE = 0.29, std. beta = 0.97, p = 0.120).</div><div class='input'><span class='fu'><a href='text_long.html'>table_short</a></span>(<span class='kw'>r</span>)
+</div><div class='output co'>#&gt; Parameter                      | Coefficient |        p | Std_Coefficient |  Fit
 #&gt; --------------------------------------------------------------------------------
 #&gt; (Intercept)                    |        4.21 | 4.33e-19 |            0.49 |     
 #&gt; Petal.Length                   |        0.54 |     0.05 |            1.16 |     
@@ -240,7 +243,8 @@
 #&gt; Petal.Length:Speciesvirginica  |        0.45 |     0.12 |            0.97 |     
 #&gt;                                |             |          |                 |     
 #&gt; R2                             |             |          |                 | 0.84
-#&gt; R2 (adj.)                      |             |          |                 | 0.83</div><div class='input'><span class='fu'><a href='text_long.html'>table_long</a></span>(<span class='kw'>r</span>)</div><div class='output co'>#&gt; Parameter                      | Coefficient |   SE | CI_low.x | CI_high.x |     t | df_error |        p | Std_Coefficient |   CI | CI_low.y | CI_high.y |    Fit
+#&gt; R2 (adj.)                      |             |          |                 | 0.83</div><div class='input'><span class='fu'><a href='text_long.html'>table_long</a></span>(<span class='kw'>r</span>)
+</div><div class='output co'>#&gt; Parameter                      | Coefficient |   SE | CI_low.x | CI_high.x |     t | df_error |        p | Std_Coefficient |   CI | CI_low.y | CI_high.y |    Fit
 #&gt; -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 #&gt; (Intercept)                    |        4.21 | 0.41 |     3.41 |      5.02 | 10.34 |      144 | 4.33e-19 |            0.49 | 0.95 |    -1.03 |      2.01 |       
 #&gt; Petal.Length                   |        0.54 | 0.28 |     0.00 |      1.09 |  1.96 |      144 |     0.05 |            1.16 | 0.95 |    -0.01 |      2.32 |       
@@ -256,16 +260,21 @@
 #&gt; RMSE                           |             |      |          |           |       |          |          |                 |      |          |           |   0.33</div><div class='input'>
 
 <span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(<span class='kw'>vs</span> <span class='op'>~</span> <span class='kw'>disp</span>, data = <span class='kw'>mtcars</span>, family = <span class='st'>"binomial"</span>)
-<span class='kw'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span>(<span class='kw'>model</span>)</div><div class='output co'>#&gt; <span class='message'>Waiting for profiling to be done...</span></div><div class='output co'>#&gt; <span class='message'>Waiting for profiling to be done...</span></div><div class='output co'>#&gt; <span class='message'>Waiting for profiling to be done...</span></div><div class='input'><span class='fu'><a href='text_long.html'>text_short</a></span>(<span class='kw'>r</span>)</div><div class='output co'>#&gt; We fitted a logistic model to predict vs with disp.The model's explanatory power is substantial (Tjur's R2 = 0.53). The model's intercept is at 4.14. Within this model:
+<span class='kw'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span>(<span class='kw'>model</span>)
+</div><div class='output co'>#&gt; <span class='message'>Waiting for profiling to be done...</span></div><div class='output co'>#&gt; <span class='message'>Waiting for profiling to be done...</span></div><div class='output co'>#&gt; <span class='message'>Waiting for profiling to be done...</span></div><div class='input'><span class='fu'><a href='text_long.html'>text_short</a></span>(<span class='kw'>r</span>)
+</div><div class='output co'>#&gt; We fitted a logistic model to predict vs with disp.The model's explanatory power is substantial (Tjur's R2 = 0.53). The model's intercept is at 4.14. Within this model:
 #&gt; 
-#&gt;   - The effect of disp is negative and can be considered as large and significant (beta = -0.02, std. beta = -2.68, p &lt; .01).</div><div class='input'><span class='fu'><a href='text_long.html'>text_long</a></span>(<span class='kw'>r</span>)</div><div class='output co'>#&gt; We fitted a logistic model (estimated using ML) to predict vs with disp (formula = vs ~ disp). Standardized parameters were obtained by fitting the model on a standardized version of the dataset. Effect sizes were labelled following Chen's (2010) recommendations.The model's explanatory power is substantial (Tjur's R2 = 0.53). The model's intercept, corresponding to vs = 0 and disp = 0, is at 4.14 (SE = 1.39, 95% CI [1.81, 7.44], p &lt; .01). Within this model:
+#&gt;   - The effect of disp is negative and can be considered as large and significant (beta = -0.02, std. beta = -2.68, p &lt; .01).</div><div class='input'><span class='fu'><a href='text_long.html'>text_long</a></span>(<span class='kw'>r</span>)
+</div><div class='output co'>#&gt; We fitted a logistic model (estimated using ML) to predict vs with disp (formula = vs ~ disp). Standardized parameters were obtained by fitting the model on a standardized version of the dataset. Effect sizes were labelled following Chen's (2010) recommendations.The model's explanatory power is substantial (Tjur's R2 = 0.53). The model's intercept, corresponding to vs = 0 and disp = 0, is at 4.14 (SE = 1.39, 95% CI [1.81, 7.44], p &lt; .01). Within this model:
 #&gt; 
-#&gt;   - The effect of disp is negative and can be considered as large and significant (beta = -0.02, SE = 0.01, std. beta = -2.68, p &lt; .01).</div><div class='input'><span class='fu'><a href='text_long.html'>table_short</a></span>(<span class='kw'>r</span>)</div><div class='output co'>#&gt; Parameter   | Coefficient |    p | Std_Coefficient |  Fit
+#&gt;   - The effect of disp is negative and can be considered as large and significant (beta = -0.02, SE = 0.01, std. beta = -2.68, p &lt; .01).</div><div class='input'><span class='fu'><a href='text_long.html'>table_short</a></span>(<span class='kw'>r</span>)
+</div><div class='output co'>#&gt; Parameter   | Coefficient |    p | Std_Coefficient |  Fit
 #&gt; ---------------------------------------------------------
 #&gt; (Intercept) |        4.14 | 0.00 |           -0.85 |     
 #&gt; disp        |       -0.02 | 0.00 |           -2.68 |     
 #&gt;             |             |      |                 |     
-#&gt; Tjur's R2   |             |      |                 | 0.53</div><div class='input'><span class='fu'><a href='text_long.html'>table_long</a></span>(<span class='kw'>r</span>)</div><div class='output co'>#&gt; Parameter       | Coefficient |   SE | CI_low.x | CI_high.x |     z | df_error |    p | Std_Coefficient |   CI | CI_low.y | CI_high.y |    Fit
+#&gt; Tjur's R2   |             |      |                 | 0.53</div><div class='input'><span class='fu'><a href='text_long.html'>table_long</a></span>(<span class='kw'>r</span>)
+</div><div class='output co'>#&gt; Parameter       | Coefficient |   SE | CI_low.x | CI_high.x |     z | df_error |    p | Std_Coefficient |   CI | CI_low.y | CI_high.y |    Fit
 #&gt; ----------------------------------------------------------------------------------------------------------------------------------------------
 #&gt; (Intercept)     |        4.14 | 1.39 |     1.81 |      7.44 |  2.98 |      Inf | 0.00 |           -0.85 | 0.95 |    -2.42 |      0.27 |       
 #&gt; disp            |       -0.02 | 0.01 |    -0.04 |     -0.01 | -3.03 |      Inf | 0.00 |           -2.68 | 0.95 |    -4.90 |     -1.27 |       
@@ -293,7 +302,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

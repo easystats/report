@@ -195,11 +195,15 @@ Bayesian models (stanreg and brms)
 <span class='kw'>r</span> <span class='op'>&lt;-</span> <span class='fu'>report</span>(<span class='kw'>model</span>)
 
 <span class='co'># Text</span>
-<span class='kw'>r</span></div><div class='output co'>#&gt; The Welch Two Sample t-test suggests that the difference of Sepal.Length by Species (mean in group setosa = 5.01, mean in group versicolor = 5.94) is significant (difference = -0.93, 95% CI [-1.11, -0.75], t(86.54) = -10.52, p &lt; .001) and can be considered as very large (Cohen's d = -2.26).</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>r</span>)</div><div class='output co'>#&gt; The Welch Two Sample t-test suggests that the difference of Sepal.Length by Species is significant (difference = -0.93, 95% CI [-1.11, -0.75], p &lt; .001, Cohen's d = -2.26)., The Welch Two Sample t-test suggests that the difference of Sepal.Length by Species is significant (difference = -0.93, 95% CI [-1.11, -0.75], p &lt; .001, Cohen's d = 0.95)., The Welch Two Sample t-test suggests that the difference of Sepal.Length by Species is significant (difference = -0.93, 95% CI [-1.11, -0.75], p &lt; .001, Cohen's d = -2.80). and The Welch Two Sample t-test suggests that the difference of Sepal.Length by Species is significant (difference = -0.93, 95% CI [-1.11, -0.75], p &lt; .001, Cohen's d = -1.72).</div><div class='input'>
+<span class='kw'>r</span>
+</div><div class='output co'>#&gt; The Welch Two Sample t-test suggests that the difference of Sepal.Length by Species (mean in group setosa = 5.01, mean in group versicolor = 5.94) is significant (difference = -0.93, 95% CI [-1.11, -0.75], t(86.54) = -10.52, p &lt; .001) and can be considered as very large (Cohen's d = -2.26).</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>r</span>)
+</div><div class='output co'>#&gt; The Welch Two Sample t-test suggests that the difference of Sepal.Length by Species is significant (difference = -0.93, 95% CI [-1.11, -0.75], p &lt; .001, Cohen's d = -2.26)., The Welch Two Sample t-test suggests that the difference of Sepal.Length by Species is significant (difference = -0.93, 95% CI [-1.11, -0.75], p &lt; .001, Cohen's d = 0.95)., The Welch Two Sample t-test suggests that the difference of Sepal.Length by Species is significant (difference = -0.93, 95% CI [-1.11, -0.75], p &lt; .001, Cohen's d = -2.80). and The Welch Two Sample t-test suggests that the difference of Sepal.Length by Species is significant (difference = -0.93, 95% CI [-1.11, -0.75], p &lt; .001, Cohen's d = -1.72).</div><div class='input'>
 <span class='co'># Tables</span>
-<span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='kw'>r</span>)</div><div class='output co'>#&gt; Parameter    |   Group | Mean_Group1 | Mean_Group2 | Difference |      t |    df |        p | CI_low | CI_high |                  Method |          Cohens_d |   NA |                NA |                NA
+<span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='kw'>r</span>)
+</div><div class='output co'>#&gt; Parameter    |   Group | Mean_Group1 | Mean_Group2 | Difference |      t |    df |        p | CI_low | CI_high |                  Method |          Cohens_d |   NA |                NA |                NA
 #&gt; -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#&gt; Sepal.Length | Species |        5.01 |        5.94 |       0.93 | -10.52 | 86.54 | 3.75e-17 |  -1.11 |   -0.75 | Welch Two Sample t-test | -2.26195008985566 | 0.95 | -2.79697052759621 | -1.71861295662386</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='kw'>r</span>)) <span class='co'># equivalent to as.table(r)</span></div><div class='output co'>#&gt;   Parameter            Group            Mean_Group1     Mean_Group2   
+#&gt; Sepal.Length | Species |        5.01 |        5.94 |       0.93 | -10.52 | 86.54 | 3.75e-17 |  -1.11 |   -0.75 | Welch Two Sample t-test | -2.26195008985566 | 0.95 | -2.79697052759621 | -1.71861295662386</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='kw'>r</span>)) <span class='co'># equivalent to as.table(r)</span>
+</div><div class='output co'>#&gt;   Parameter            Group            Mean_Group1     Mean_Group2   
 #&gt;  Length:1           Length:1           Min.   :5.006   Min.   :5.936  
 #&gt;  Class :character   Class :character   1st Qu.:5.006   1st Qu.:5.936  
 #&gt;  Mode  :character   Mode  :character   Median :5.006   Median :5.936  
@@ -228,7 +232,8 @@ Bayesian models (stanreg and brms)
 #&gt;  3rd Qu.:-2.2619501    3rd Qu.:0.95          3rd Qu.:-2.7969705    3rd Qu.:-1.718613   
 #&gt;  Max.   :-2.2619501    Max.   :0.95          Max.   :-2.7969705    Max.   :-1.718613   </div><div class='input'>
 <span class='co'># List</span>
-<span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span>(<span class='kw'>r</span>)</div><div class='output co'>#&gt; $Parameter
+<span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span>(<span class='kw'>r</span>)
+</div><div class='output co'>#&gt; $Parameter
 #&gt; [1] "Sepal.Length"
 #&gt; 
 #&gt; $Group
@@ -283,7 +288,7 @@ Bayesian models (stanreg and brms)
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

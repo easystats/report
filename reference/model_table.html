@@ -177,7 +177,8 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Petal.Width</span>, data = <span class='kw'>iris</span>)
-<span class='fu'>model_table</span>(<span class='kw'>model</span>)</div><div class='output co'>#&gt; Parameter   | Coefficient |   SE | CI_low.x | CI_high.x |     t | df_error |         p | Std_Coefficient |   CI | CI_low.y | CI_high.y |    Fit
+<span class='fu'>model_table</span>(<span class='kw'>model</span>)
+</div><div class='output co'>#&gt; Parameter   | Coefficient |   SE | CI_low.x | CI_high.x |     t | df_error |         p | Std_Coefficient |   CI | CI_low.y | CI_high.y |    Fit
 #&gt; -----------------------------------------------------------------------------------------------------------------------------------------------
 #&gt; (Intercept) |        4.78 | 0.07 |     4.63 |      4.92 | 65.51 |      148 | 3.34e-111 |       -1.36e-15 | 0.95 |    -0.09 |      0.09 |       
 #&gt; Petal.Width |        0.89 | 0.05 |     0.79 |      0.99 | 17.30 |      148 |  2.33e-37 |            0.82 | 0.95 |     0.72 |      0.91 |       
@@ -186,7 +187,8 @@
 #&gt; BIC         |             |      |          |           |       |          |           |                 |      |          |           | 217.25
 #&gt; R2          |             |      |          |           |       |          |           |                 |      |          |           |   0.67
 #&gt; R2 (adj.)   |             |      |          |           |       |          |           |                 |      |          |           |   0.67
-#&gt; RMSE        |             |      |          |           |       |          |           |                 |      |          |           |   0.47</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'>model_table</span>(<span class='kw'>model</span>))</div><div class='output co'>#&gt; Parameter   | Coefficient |         p | Std_Coefficient |  Fit
+#&gt; RMSE        |             |      |          |           |       |          |           |                 |      |          |           |   0.47</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'>model_table</span>(<span class='kw'>model</span>))
+</div><div class='output co'>#&gt; Parameter   | Coefficient |         p | Std_Coefficient |  Fit
 #&gt; --------------------------------------------------------------
 #&gt; (Intercept) |        4.78 | 3.34e-111 |       -1.36e-15 |     
 #&gt; Petal.Width |        0.89 |  2.33e-37 |            0.82 |     
@@ -194,9 +196,11 @@
 #&gt; R2          |             |           |                 | 0.67
 #&gt; R2 (adj.)   |             |           |                 | 0.67</div><div class='input'>
 <span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Species</span>, data = <span class='kw'>iris</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>100</span>, ])
-<span class='fu'>model_table</span>(<span class='kw'>model</span>)</div><div class='output co'>#&gt; Parameter    |   Group | Mean_Group1 | Mean_Group2 | Difference |      t |    df |        p | CI_low | CI_high |                  Method |          Cohens_d |   NA |                NA |                NA
+<span class='fu'>model_table</span>(<span class='kw'>model</span>)
+</div><div class='output co'>#&gt; Parameter    |   Group | Mean_Group1 | Mean_Group2 | Difference |      t |    df |        p | CI_low | CI_high |                  Method |          Cohens_d |   NA |                NA |                NA
 #&gt; -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#&gt; Sepal.Length | Species |        5.01 |        5.94 |       0.93 | -10.52 | 86.54 | 3.75e-17 |  -1.11 |   -0.75 | Welch Two Sample t-test | -2.26195008985566 | 0.95 | -2.79697052759621 | -1.71861295662386</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'>model_table</span>(<span class='kw'>model</span>))</div><div class='output co'>#&gt; Difference |      t |    df |        p | CI_low | CI_high |          Cohens_d |   NA |                NA |                NA
+#&gt; Sepal.Length | Species |        5.01 |        5.94 |       0.93 | -10.52 | 86.54 | 3.75e-17 |  -1.11 |   -0.75 | Welch Two Sample t-test | -2.26195008985566 | 0.95 | -2.79697052759621 | -1.71861295662386</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'>model_table</span>(<span class='kw'>model</span>))
+</div><div class='output co'>#&gt; Difference |      t |    df |        p | CI_low | CI_high |          Cohens_d |   NA |                NA |                NA
 #&gt; ----------------------------------------------------------------------------------------------------------------------------
 #&gt;       0.93 | -10.52 | 86.54 | 3.75e-17 |  -1.11 |   -0.75 | -2.26195008985566 | 0.95 | -2.79697052759621 | -1.71861295662386</div></pre>
   </div>
@@ -214,7 +218,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

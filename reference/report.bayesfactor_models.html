@@ -184,22 +184,29 @@
     <div class='dont-index'><p>report</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://easystats.github.io/bayestestR'>bayestestR</a></span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/easystats/report'>report</a></span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/easystats/report'>report</a></span>)
 
 <span class='kw'>mo0</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='fl'>1</span>, data = <span class='kw'>iris</span>)
 <span class='kw'>mo1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Species</span>, data = <span class='kw'>iris</span>)
 <span class='kw'>mo2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Species</span> <span class='op'>+</span> <span class='kw'>Petal.Length</span>, data = <span class='kw'>iris</span>)
 <span class='kw'>mo3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Species</span> <span class='op'>*</span> <span class='kw'>Petal.Length</span>, data = <span class='kw'>iris</span>)
 
-<span class='co'># Bayes factor - models</span>
-<span class='kw'>BFmodels</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/bayestestR/man/bayesfactor_models.html'>bayesfactor_models</a></span>(<span class='kw'>mo1</span>, <span class='kw'>mo2</span>, <span class='kw'>mo3</span>, denominator = <span class='kw'>mo0</span>)
+<span class='co'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='st'><a href='https://easystats.github.io/bayestestR'>"bayestestR"</a></span>)) {
+  <span class='co'># Bayes factor - models</span>
+  <span class='kw'>BFmodels</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/bayestestR/man/bayesfactor_models.html'>bayesfactor_models</a></span>(<span class='kw'>mo1</span>, <span class='kw'>mo2</span>, <span class='kw'>mo3</span>, denominator = <span class='kw'>mo0</span>)
 
-<span class='kw'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span>(<span class='kw'>BFmodels</span>)</div><div class='output co'>#&gt; <span class='error'>Error in get(name, envir = asNamespace(pkg), inherits = FALSE): object '.format_big_small' not found</span></div><div class='input'><span class='kw'>r</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'r' not found</span></div><div class='input'><span class='fu'><a href='text_long.html'>table_short</a></span>(<span class='kw'>r</span>)</div><div class='output co'>#&gt; <span class='error'>Error in table_short(r): object 'r' not found</span></div><div class='input'>
-<span class='co'># Bayes factor - inclusion</span>
-<span class='kw'>inc_bf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/bayestestR/man/bayesfactor_inclusion.html'>bayesfactor_inclusion</a></span>(<span class='kw'>BFmodels</span>, prior_odds = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span>), match_models = <span class='fl'>TRUE</span>)
+  <span class='kw'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span>(<span class='kw'>BFmodels</span>)
+  <span class='kw'>r</span>
+  <span class='fu'><a href='text_long.html'>table_short</a></span>(<span class='kw'>r</span>)
 
-<span class='kw'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span>(<span class='kw'>inc_bf</span>)</div><div class='output co'>#&gt; <span class='error'>Error in get(name, envir = asNamespace(pkg), inherits = FALSE): object '.format_big_small' not found</span></div><div class='input'><span class='kw'>r</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'r' not found</span></div><div class='input'><span class='fu'><a href='text_long.html'>table_short</a></span>(<span class='kw'>r</span>)</div><div class='output co'>#&gt; <span class='error'>Error in table_short(r): object 'r' not found</span></div></pre>
+  <span class='co'># Bayes factor - inclusion</span>
+  <span class='kw'>inc_bf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/bayestestR/man/bayesfactor_inclusion.html'>bayesfactor_inclusion</a></span>(<span class='kw'>BFmodels</span>, prior_odds = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span>), match_models = <span class='fl'>TRUE</span>)
+
+  <span class='kw'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span>(<span class='kw'>inc_bf</span>)
+  <span class='kw'>r</span>
+  <span class='fu'><a href='text_long.html'>table_short</a></span>(<span class='kw'>r</span>)
+}
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: bayestestR</span></div><div class='output co'>#&gt; <span class='error'>Error in get(name, envir = asNamespace(pkg), inherits = FALSE): object '.format_big_small' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -215,7 +222,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

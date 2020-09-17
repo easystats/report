@@ -222,17 +222,21 @@
 
 <span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Petal.Length</span> <span class='op'>+</span> (<span class='fl'>1</span> <span class='op'>|</span> <span class='kw'>Species</span>), data = <span class='kw'>iris</span>)
 <span class='kw'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span>(<span class='kw'>model</span>)
-<span class='fu'><a href='text_long.html'>text_short</a></span>(<span class='kw'>r</span>)</div><div class='output co'>#&gt; We fitted a linear mixed model to predict Sepal.Length with Petal.Length. The model included Species as random effects.The model's total explanatory power is substantial (conditional R2 = 0.97) and the part related to the fixed effects alone (marginal R2) is of 0.66. The model's intercept is at 2.50. Within this model:
+<span class='fu'><a href='text_long.html'>text_short</a></span>(<span class='kw'>r</span>)
+</div><div class='output co'>#&gt; We fitted a linear mixed model to predict Sepal.Length with Petal.Length. The model included Species as random effects.The model's total explanatory power is substantial (conditional R2 = 0.97) and the part related to the fixed effects alone (marginal R2) is of 0.66. The model's intercept is at 2.50. Within this model:
 #&gt; 
-#&gt;   - The effect of Petal.Length is positive and can be considered as very large and significant (beta = 0.89, std. beta = 1.89, p &lt; .001).</div><div class='input'><span class='fu'><a href='text_long.html'>text_long</a></span>(<span class='kw'>r</span>)</div><div class='output co'>#&gt; We fitted a linear mixed model (estimated using REML and nloptwrap optimizer) to predict Sepal.Length with Petal.Length (formula = Sepal.Length ~ Petal.Length). The model included Species as random effects (formula = ~1 | Species). Standardized parameters were obtained by fitting the model on a standardized version of the dataset. Effect sizes were labelled following Funder's (2019) recommendations.The model's total explanatory power is substantial (conditional R2 = 0.97) and the part related to the fixed effects alone (marginal R2) is of 0.66. The model's intercept, corresponding to Sepal.Length = 0, Petal.Length = 0 and Species = setosa, is at 2.50 (SE = 0.67, 95% CI [1.20, 3.81], p &lt; .001). Within this model:
+#&gt;   - The effect of Petal.Length is positive and can be considered as very large and significant (beta = 0.89, std. beta = 1.89, p &lt; .001).</div><div class='input'><span class='fu'><a href='text_long.html'>text_long</a></span>(<span class='kw'>r</span>)
+</div><div class='output co'>#&gt; We fitted a linear mixed model (estimated using REML and nloptwrap optimizer) to predict Sepal.Length with Petal.Length (formula = Sepal.Length ~ Petal.Length). The model included Species as random effects (formula = ~1 | Species). Standardized parameters were obtained by fitting the model on a standardized version of the dataset. Effect sizes were labelled following Funder's (2019) recommendations.The model's total explanatory power is substantial (conditional R2 = 0.97) and the part related to the fixed effects alone (marginal R2) is of 0.66. The model's intercept, corresponding to Sepal.Length = 0, Petal.Length = 0 and Species = setosa, is at 2.50 (SE = 0.67, 95% CI [1.20, 3.81], p &lt; .001). Within this model:
 #&gt; 
-#&gt;   - The effect of Petal.Length is positive and can be considered as very large and significant (beta = 0.89, SE = 0.06, std. beta = 1.89, p &lt; .001).</div><div class='input'><span class='fu'><a href='text_long.html'>table_short</a></span>(<span class='kw'>r</span>)</div><div class='output co'>#&gt; Parameter        | Coefficient |        p | Std_Coefficient |  Fit
+#&gt;   - The effect of Petal.Length is positive and can be considered as very large and significant (beta = 0.89, SE = 0.06, std. beta = 1.89, p &lt; .001).</div><div class='input'><span class='fu'><a href='text_long.html'>table_short</a></span>(<span class='kw'>r</span>)
+</div><div class='output co'>#&gt; Parameter        | Coefficient |        p | Std_Coefficient |  Fit
 #&gt; ------------------------------------------------------------------
 #&gt; (Intercept)      |        2.50 | 1.75e-04 |       -1.46e-13 |     
 #&gt; Petal.Length     |        0.89 | 4.34e-44 |            1.89 |     
 #&gt;                  |             |          |                 |     
 #&gt; R2 (conditional) |             |          |                 | 0.97
-#&gt; R2 (marginal)    |             |          |                 | 0.66</div><div class='input'><span class='fu'><a href='text_long.html'>table_long</a></span>(<span class='kw'>r</span>)</div><div class='output co'>#&gt; Parameter        | Coefficient |   SE | CI_low.x | CI_high.x |     t | df_error |        p | Std_Coefficient |   CI | CI_low.y | CI_high.y |    Fit
+#&gt; R2 (marginal)    |             |          |                 | 0.66</div><div class='input'><span class='fu'><a href='text_long.html'>table_long</a></span>(<span class='kw'>r</span>)
+</div><div class='output co'>#&gt; Parameter        | Coefficient |   SE | CI_low.x | CI_high.x |     t | df_error |        p | Std_Coefficient |   CI | CI_low.y | CI_high.y |    Fit
 #&gt; ---------------------------------------------------------------------------------------------------------------------------------------------------
 #&gt; (Intercept)      |        2.50 | 0.67 |     1.20 |      3.81 |  3.75 |      146 | 1.75e-04 |       -1.46e-13 | 0.95 |    -1.47 |      1.47 |       
 #&gt; Petal.Length     |        0.89 | 0.06 |     0.76 |      1.01 | 13.93 |      146 | 4.34e-44 |            1.89 | 0.95 |     1.63 |      2.16 |       
@@ -246,17 +250,21 @@
 
 <span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lme4/man/glmer.html'>glmer</a></span>(<span class='kw'>vs</span> <span class='op'>~</span> <span class='kw'>disp</span> <span class='op'>+</span> (<span class='fl'>1</span> <span class='op'>|</span> <span class='kw'>am</span>), data = <span class='kw'>mtcars</span>, family = <span class='st'>"binomial"</span>)
 <span class='kw'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span>(<span class='kw'>model</span>)
-<span class='fu'><a href='text_long.html'>text_short</a></span>(<span class='kw'>r</span>)</div><div class='output co'>#&gt; We fitted a logistic mixed model to predict vs with disp. The model included am as random effects.The model's total explanatory power is substantial (conditional R2 = 0.99) and the part related to the fixed effects alone (marginal R2) is of 0.77. The model's intercept is at 25.49. Within this model:
+<span class='fu'><a href='text_long.html'>text_short</a></span>(<span class='kw'>r</span>)
+</div><div class='output co'>#&gt; We fitted a logistic mixed model to predict vs with disp. The model included am as random effects.The model's total explanatory power is substantial (conditional R2 = 0.99) and the part related to the fixed effects alone (marginal R2) is of 0.77. The model's intercept is at 25.49. Within this model:
 #&gt; 
-#&gt;   - The effect of disp is negative and can be considered as large and not significant (beta = -0.13, std. beta = -16.53, p = 0.236).</div><div class='input'><span class='fu'><a href='text_long.html'>text_long</a></span>(<span class='kw'>r</span>)</div><div class='output co'>#&gt; We fitted a logistic mixed model (estimated using ML and Nelder-Mead optimizer) to predict vs with disp (formula = vs ~ disp). The model included am as random effects (formula = ~1 | am). Standardized parameters were obtained by fitting the model on a standardized version of the dataset. Effect sizes were labelled following Chen's (2010) recommendations.The model's total explanatory power is substantial (conditional R2 = 0.99) and the part related to the fixed effects alone (marginal R2) is of 0.77. The model's intercept, corresponding to vs = 0, disp = 0 and am = 0, is at 25.49 (SE = 22.84, 95% CI [-19.27, 70.24], p = 0.264). Within this model:
+#&gt;   - The effect of disp is negative and can be considered as large and not significant (beta = -0.13, std. beta = -16.53, p = 0.236).</div><div class='input'><span class='fu'><a href='text_long.html'>text_long</a></span>(<span class='kw'>r</span>)
+</div><div class='output co'>#&gt; We fitted a logistic mixed model (estimated using ML and Nelder-Mead optimizer) to predict vs with disp (formula = vs ~ disp). The model included am as random effects (formula = ~1 | am). Standardized parameters were obtained by fitting the model on a standardized version of the dataset. Effect sizes were labelled following Chen's (2010) recommendations.The model's total explanatory power is substantial (conditional R2 = 0.99) and the part related to the fixed effects alone (marginal R2) is of 0.77. The model's intercept, corresponding to vs = 0, disp = 0 and am = 0, is at 25.49 (SE = 22.84, 95% CI [-19.27, 70.24], p = 0.264). Within this model:
 #&gt; 
-#&gt;   - The effect of disp is negative and can be considered as large and not significant (beta = -0.13, SE = 0.11, std. beta = -16.53, p = 0.236).</div><div class='input'><span class='fu'><a href='text_long.html'>table_short</a></span>(<span class='kw'>r</span>)</div><div class='output co'>#&gt; Parameter        | Coefficient |    p | Std_Coefficient |  Fit
+#&gt;   - The effect of disp is negative and can be considered as large and not significant (beta = -0.13, SE = 0.11, std. beta = -16.53, p = 0.236).</div><div class='input'><span class='fu'><a href='text_long.html'>table_short</a></span>(<span class='kw'>r</span>)
+</div><div class='output co'>#&gt; Parameter        | Coefficient |    p | Std_Coefficient |  Fit
 #&gt; --------------------------------------------------------------
 #&gt; (Intercept)      |       25.49 | 0.26 |           -5.28 |     
 #&gt; disp             |       -0.13 | 0.24 |          -16.53 |     
 #&gt;                  |             |      |                 |     
 #&gt; R2 (conditional) |             |      |                 | 0.99
-#&gt; R2 (marginal)    |             |      |                 | 0.77</div><div class='input'><span class='fu'><a href='text_long.html'>table_long</a></span>(<span class='kw'>r</span>)</div><div class='output co'>#&gt; Parameter        | Coefficient |    SE | CI_low.x | CI_high.x |     z | df_error |    p | Std_Coefficient |   CI | CI_low.y | CI_high.y |    Fit
+#&gt; R2 (marginal)    |             |      |                 | 0.77</div><div class='input'><span class='fu'><a href='text_long.html'>table_long</a></span>(<span class='kw'>r</span>)
+</div><div class='output co'>#&gt; Parameter        | Coefficient |    SE | CI_low.x | CI_high.x |     z | df_error |    p | Std_Coefficient |   CI | CI_low.y | CI_high.y |    Fit
 #&gt; ------------------------------------------------------------------------------------------------------------------------------------------------
 #&gt; (Intercept)      |       25.49 | 22.84 |   -19.27 |     70.24 |  1.12 |      Inf | 0.26 |           -5.28 | 0.95 |   -20.17 |      9.62 |       
 #&gt; disp             |       -0.13 |  0.11 |    -0.35 |      0.09 | -1.18 |      Inf | 0.24 |          -16.53 | 0.95 |   -43.88 |     10.83 |       
@@ -285,7 +293,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

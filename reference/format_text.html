@@ -181,9 +181,11 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>format_text</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"A"</span>, <span class='st'>"B"</span>, <span class='st'>"C"</span>))</div><div class='output co'>#&gt; [1] "A, B and C"</div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'>format_text</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"A"</span>, <span class='st'>"B"</span>, <span class='st'>"C"</span>))
+</div><div class='output co'>#&gt; [1] "A, B and C"</div><div class='input'>
 <span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"a very long string"</span>, <span class='fl'>50</span>), collapse = <span class='st'>" "</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'>format_text</span>(<span class='kw'>x</span>, width = <span class='fl'>50</span>))</div><div class='output co'>#&gt; a very long string a very long string a very long
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'>format_text</span>(<span class='kw'>x</span>, width = <span class='fl'>50</span>))
+</div><div class='output co'>#&gt; a very long string a very long string a very long
 #&gt; string a very long string a very long string a
 #&gt; very long string a very long string a very long
 #&gt; string a very long string a very long string a
@@ -218,7 +220,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

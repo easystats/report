@@ -212,14 +212,16 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='kw'>iris</span>)
-<span class='fu'>report_sample</span>(<span class='kw'>iris</span>[, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span>])</div><div class='output co'>#&gt; <span style='color: #0000BB;'># Descriptive Statistics
+<span class='fu'>report_sample</span>(<span class='kw'>iris</span>[, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span>])
+</div><div class='output co'>#&gt; <span style='color: #0000BB;'># Descriptive Statistics
 #&gt; 
 #&gt; </span><span>Variable               |     Summary
 #&gt; ------------------------------------
 #&gt; Mean Sepal.Length (SD) | 5.84 (0.83)
 #&gt; Mean Sepal.Width (SD)  | 3.06 (0.44)
 #&gt; Mean Petal.Length (SD) | 3.76 (1.77)
-#&gt; Mean Petal.Width (SD)  | 1.20 (0.76)</div><div class='input'><span class='fu'>report_sample</span>(<span class='kw'>iris</span>, select = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Sepal.Length"</span>, <span class='st'>"Petal.Length"</span>, <span class='st'>"Species"</span>))</div><div class='output co'>#&gt; </span><span style='color: #0000BB;'># Descriptive Statistics
+#&gt; Mean Petal.Width (SD)  | 1.20 (0.76)</div><div class='input'><span class='fu'>report_sample</span>(<span class='kw'>iris</span>, select = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Sepal.Length"</span>, <span class='st'>"Petal.Length"</span>, <span class='st'>"Species"</span>))
+</div><div class='output co'>#&gt; </span><span style='color: #0000BB;'># Descriptive Statistics
 #&gt; 
 #&gt; </span><span>Variable                |     Summary
 #&gt; -------------------------------------
@@ -227,7 +229,8 @@
 #&gt; Mean Petal.Length (SD)  | 3.76 (1.77)
 #&gt; Species [setosa], %     |        33.3
 #&gt; Species [versicolor], % |        33.3
-#&gt; Species [virginica], %  |        33.3</div><div class='input'><span class='fu'>report_sample</span>(<span class='kw'>iris</span>, group_by = <span class='st'>"Species"</span>)</div><div class='output co'>#&gt; </span><span style='color: #0000BB;'># Descriptive Statistics
+#&gt; Species [virginica], %  |        33.3</div><div class='input'><span class='fu'>report_sample</span>(<span class='kw'>iris</span>, group_by = <span class='st'>"Species"</span>)
+</div><div class='output co'>#&gt; </span><span style='color: #0000BB;'># Descriptive Statistics
 #&gt; 
 #&gt; </span><span>Variable               | setosa (n=50) | versicolor (n=50) | virginica (n=50) |       Total
 #&gt; -------------------------------------------------------------------------------------------
@@ -250,7 +253,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
