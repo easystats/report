@@ -93,8 +93,8 @@ report.data.frame <- function(model, median = FALSE, centrality = TRUE, dispersi
   table_full$`.order` <- NULL
 
   # Concatenate text
-  text <- paste0("The data contains ", nrow(model), " observations of the following variables:", text)
-  text_full <- paste0("The data contains ", nrow(model), " observations of the following variables:", text_full)
+  text <- paste0("The data contains ", nrow(model), " observations of the following variables:\n", text)
+  text_full <- paste0("The data contains ", nrow(model), " observations of the following variables:\n", text_full)
 
   # Output
   tables <- as.model_table(table, table_full)
