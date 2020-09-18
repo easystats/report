@@ -14,6 +14,9 @@ report_performance <- function(model, performance = NULL, ...) {
 
 
 
+#' @importFrom performance model_performance
+#' @importFrom insight find_parameters
+#' @importFrom effectsize interpret_r2 interpret_p
 #' @export
 report_performance.lm <- function(model, performance = NULL, ...) {
   if (is.null(performance)) {
@@ -53,7 +56,7 @@ report_performance.lm <- function(model, performance = NULL, ...) {
       ") = ",
       insight::format_value(r2$`F`),
       ", ",
-      parameters::format_p(r2$p)
+      insight::format_p(r2$p)
     )
 
     if ("R2_adjusted" %in% names(performance)) {

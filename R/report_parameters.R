@@ -36,6 +36,8 @@ report_parameters <- function(model, parameters, prefix = "  - ", ...) {
 }
 
 
+#' @importFrom parameters format_pd
+#' @importFrom effectsize interpret_direction
 #' @keywords internal
 .report_parameters_direction <- function(parameters) {
   estimate_name <- names(parameters)[names(parameters) %in% c("Coefficient", "Difference", "Median", "Mean", "MAP")][1]
@@ -89,6 +91,7 @@ report_parameters <- function(model, parameters, prefix = "  - ", ...) {
 
 
 
+#' @importFrom effectsize interpret_d interpret_odds interpret_r
 #' @keywords internal
 .report_parameters_size <- function(parameters, interpretation = "cohen1988", type = "d") {
   if (is.null(interpretation) || is.na(interpretation)) {
@@ -118,6 +121,7 @@ report_parameters <- function(model, parameters, prefix = "  - ", ...) {
 
 
 
+#' @importFrom effectsize interpret_p interpret_rope
 #' @keywords internal
 .report_parameters_significance <- function(parameters, rope_ci = 1) {
   text <- ""
@@ -134,6 +138,7 @@ report_parameters <- function(model, parameters, prefix = "  - ", ...) {
 
 
 
+#' @importFrom insight format_rope format_value format_ci format_p
 #' @keywords internal
 .report_parameters_indices <- function(parameters, ci = 0.89, coefname = "beta") {
   text <- ""
@@ -216,7 +221,7 @@ report_parameters <- function(model, parameters, prefix = "  - ", ...) {
   if ("ROPE_Percentage" %in% names(parameters)) {
     text <- paste0(
       .add_comma(text),
-      parameters::format_rope(parameters$ROPE_Percentage)
+      insight::format_rope(parameters$ROPE_Percentage)
     )
   }
 
@@ -299,6 +304,7 @@ report_parameters <- function(model, parameters, prefix = "  - ", ...) {
 
 
 
+#' @importFrom effectsize interpret_rhat interpret_ess
 #' @keywords internal
 .report_parameters_bayesian_diagnostic <- function(parameters, bayesian_diagnostic = TRUE) {
   # Convergence

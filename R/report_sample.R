@@ -129,7 +129,7 @@ report_sample <- function(data, group_by = NULL, centrality = "mean", select = N
 
 
 
-#' @importFrom stats na.omit xtabs na.omit
+#' @importFrom stats na.omit xtabs
 .table1_row.factor <- function(x, column, weights = NULL, digits = 1, ...) {
   if (!is.null(weights)) {
     x[is.na(weights)] <- NA
@@ -179,7 +179,7 @@ print.report_table1 <- function(x, ...) {
 # helper for weighted stuff --------------------------
 
 
-#' @importFrom stats var
+#' @importFrom stats var na.omit
 .weighted_variance <- function(x, weights = NULL) {
   if (is.null(weights)) {
     return(stats::var(x, na.rm = TRUE))

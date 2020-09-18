@@ -9,6 +9,7 @@
 #' summary(model_text(x))
 #' @seealso report
 #' @importFrom stats mad sd
+#' @importFrom parameters skewness kurtosis
 #'
 #' @export
 report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = FALSE, ...) {
