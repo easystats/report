@@ -102,7 +102,9 @@ report_participants <- function(data, age = NULL, sex = NULL, education = NULL, 
 
 
 
-
+#' @importFrom stats aggregate
+#' @importFrom insight format_number format_value
+#' @importFrom tools toTitleCase
 #' @keywords internal
 .report_participants <- function(data, age = "Age", sex = "Sex", education = "Education", participants = NULL, spell_n = FALSE, ...) {
   # Sanity checks
@@ -132,7 +134,7 @@ report_participants <- function(data, age = NULL, sex = NULL, education = NULL, 
   }
 
   if (spell_n) {
-    size <- tools::toTitleCase(parameters::format_number(nrow(data)))
+    size <- tools::toTitleCase(insight::format_number(nrow(data)))
   } else {
     size <- nrow(data)
   }
@@ -172,7 +174,7 @@ report_participants <- function(data, age = NULL, sex = NULL, education = NULL, 
       )
     } else {
       txt <- as.character(report(as.factor(data[[education]]), levels_percentage = TRUE, ...)$texts$text_short)
-      txt <- strsplit(txt, ":", fixed=TRUE)[[1]][2]
+      txt <- strsplit(txt, ":", fixed = TRUE)[[1]][2]
       paste0("Education:", txt)
     }
   }

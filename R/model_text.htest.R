@@ -1,5 +1,6 @@
 #' @rdname report.htest
 #' @seealso report
+#' @importFrom insight format_ci format_value format_p model_info
 #' @export
 model_text.htest <- function(model, interpretation = "funder2019", ...) {
   table <- model_table(model)$table_long
@@ -43,7 +44,7 @@ model_text.htest <- function(model, interpretation = "funder2019", ...) {
       ci_text,
       stats_text,
       ", ",
-      parameters::format_p(table$p, stars = FALSE, digits = "apa"),
+      insight::format_p(table$p, stars = FALSE, digits = "apa"),
       ")."
     )
     text <- paste0(
@@ -63,7 +64,7 @@ model_text.htest <- function(model, interpretation = "funder2019", ...) {
       insight::format_value(table[[estimate]]),
       ci_text,
       ", ",
-      parameters::format_p(table$p, stars = FALSE, digits = "apa"),
+      insight::format_p(table$p, stars = FALSE, digits = "apa"),
       ")."
     )
   } else if (insight::model_info(model)$is_ttest) {
@@ -107,7 +108,7 @@ model_text.htest <- function(model, interpretation = "funder2019", ...) {
       ") = ",
       insight::format_value(model$statistic),
       ", ",
-      parameters::format_p(table$p, stars = FALSE, digits = "apa"),
+      insight::format_p(table$p, stars = FALSE, digits = "apa"),
       ") and can be considered as ",
       effectsize::interpret_d(table$Cohens_d, rules = interpretation)[1],
       " (Cohen's d = ",
@@ -128,7 +129,7 @@ model_text.htest <- function(model, interpretation = "funder2019", ...) {
       ", ",
       insight::format_ci(model$conf.int[1], model$conf.int[2], ci = attributes(model$conf.int)$conf.level),
       ", ",
-      parameters::format_p(table$p, stars = FALSE, digits = "apa"),
+      insight::format_p(table$p, stars = FALSE, digits = "apa"),
       ", Cohen's d = ",
       insight::format_value(table$Cohens_d),
       ")."
