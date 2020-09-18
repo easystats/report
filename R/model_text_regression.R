@@ -48,7 +48,7 @@ model_text.default <- function(model, ...) {
   # Text -------------------
 
   # Description
-  text_model <- report_model(model, parameters, ci = ci, standardize = standardize, standardize_robust = standardize_robust, interpretation = interpretation, bootstrap = bootstrap, iterations = iterations, p_method = p_method, ci_method = ci_method, centrality = centrality, dispersion = dispersion, test = test, rope_range = rope_range, rope_ci = rope_ci, ...)
+  text_model <- report_model(model, parameters, ci = ci, standardize = standardize, standardize_robust = standardize_robust, interpretation = interpretation, bootstrap = bootstrap, iterations = iterations, df_method = df_method, ci_method = ci_method, centrality = centrality, dispersion = dispersion, test = test, rope_range = rope_range, rope_ci = rope_ci, ...)
 
   # Performance
   text_perf <- report_performance(model, performance = performance, ...)
