@@ -5,7 +5,7 @@
 #' @inheritParams parameters::model_parameters.stanreg
 #' @inheritParams report.lm
 #' @param parameters A parameters table obtained via \code{parameters::model_parameters()}.
-#' @importFrom insight is_nullmodel model_info find_predictors find_formula
+#' @importFrom insight is_nullmodel model_info find_predictors find_formula find_response find_terms
 #' @importFrom parameters model_parameters
 #' @importFrom bayestestR rope_range
 #' @export

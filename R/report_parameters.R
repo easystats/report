@@ -36,7 +36,7 @@ report_parameters <- function(model, parameters, prefix = "  - ", ...) {
 }
 
 
-#' @importFrom parameters format_pd
+#' @importFrom insight format_pd
 #' @importFrom effectsize interpret_direction
 #' @keywords internal
 .report_parameters_direction <- function(parameters) {
@@ -71,7 +71,7 @@ report_parameters <- function(model, parameters, prefix = "  - ", ...) {
     if ("pd" %in% names(parameters)) {
       text <- paste0(
         " has a probability of ",
-        parameters::format_pd(parameters$pd, name = NULL),
+        insight::format_pd(parameters$pd, name = NULL),
         " of being ",
         effectsize::interpret_direction(parameters[[estimate_name]])
       )
@@ -294,7 +294,7 @@ report_parameters <- function(model, parameters, prefix = "  - ", ...) {
   if ("p" %in% names(parameters)) {
     text <- paste0(
       .add_comma(text),
-      parameters::format_p(parameters$p, digits = "apa")
+      insight::format_p(parameters$p, digits = "apa")
     )
   }
 

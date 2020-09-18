@@ -1,6 +1,7 @@
 #' @rdname report.htest
 #' @seealso report
 #' @importFrom insight format_ci format_value format_p model_info
+#' @importFrom effectsize interpret_direction interpret_p interpret_r
 #' @export
 model_text.htest <- function(model, interpretation = "funder2019", ...) {
   table <- model_table(model)$table_long

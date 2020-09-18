@@ -61,7 +61,7 @@ report_intercept.default <- function(model, parameters = NULL, ci = 0.95, ...) {
 
 
 
-#' @importFrom insight is_nullmodel
+#' @importFrom insight is_nullmodel get_data find_variables
 #' @keywords internal
 .find_intercept <- function(model) {
 
