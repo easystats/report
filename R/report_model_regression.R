@@ -50,14 +50,14 @@ report_model.default <- function(model, parameters = NULL, ci = NULL, ci_method 
   }
 
 
-  text_full <- paste0(text_full, to_predict_text, " (formula = ", format(insight::find_formula(model)$conditional), ").")
+  text_full <- paste0(text_full, to_predict_text, " (formula = ", .safe_deparse(insight::find_formula(model)$conditional), ").")
   text <- paste0(text, to_predict_text, ".")
 
   # Random
   if (!is.null(insight::find_terms(model)$random)) {
     text_random <- format_text(insight::find_terms(model)$random)
     text_random <- paste0(" The model included ", text_random, " as random effects")
-    text_random_full <- paste0(text_random, " (formula = ", paste0(format(insight::find_formula(model)$random), collapse = " + "), ").")
+    text_random_full <- paste0(text_random, " (formula = ", paste0(.safe_deparse(insight::find_formula(model)$random), collapse = " + "), ").")
     text <- paste0(text, text_random, ".")
     text_full <- paste0(text_full, text_random_full)
   }
