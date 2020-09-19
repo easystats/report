@@ -1,6 +1,6 @@
 Package: report
 Type: Package
-Title: Automated reporting of statistical models in R
+Title: Automated Reporting of Statistical Models in R
 Version: 0.1.0
 Authors@R: c(
 	person("Dominique", 
@@ -20,9 +20,9 @@ Authors@R: c(
 		comment = c(ORCID = "0000-0002-4287-4801"))
 	)
 Maintainer: Dominique Makowski <dom.makowski@gmail.com>
-URL: https://github.com/easystats/report
+URL: https://easystats.github.io/report/
 BugReports: https://github.com/easystats/report/issues
-Description: Converts statistical models into textual reports suited for publication.
+Description: Bridge the gap between R’s output and the formatted results contained in your manuscript. This package converts statistical models and data frames into textual reports suited for publication, ensuring standardization and quality in results reporting.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
