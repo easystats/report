@@ -18,6 +18,11 @@ model_table.default <- function(model, ...) {
 
 
 
+
+
+# Model table for mixed models ----------------------
+
+
 #' @export
 model_table.lme <- function(model, standardize = NULL, ...) {
   out <- tryCatch(
@@ -35,6 +40,27 @@ model_table.lme <- function(model, standardize = NULL, ...) {
 }
 
 
+#' @export
+model_table.glmmTMB <- model_table.lme
+
+#' @export
+model_table.lmerMod <- model_table.lme
+
+#' @export
+model_table.merMod <- model_table.lme
+
+#' @export
+model_table.MixMod <- model_table.lme
+
+#' @export
+model_table.mixed <- model_table.lme
+
+
+
+
+
+
+# Workhorse ---------------------------
 
 
 #' @importFrom parameters model_parameters
