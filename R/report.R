@@ -3,11 +3,11 @@
 #' Create textual reports. See the documentation for your object's class:
 #' \itemize{
 #'  \item{\link[=report.data.frame]{Dataframes and vectors}}
-#'  \item{\link[=report.htest]{Correlations and t-tests (htest)}}
+#'  \item{\link[=report.htest]{Correlations and t-tests} (\code{htest})}
 #'  \item{\link[=report.aov]{ANOVAs}}
-#'  \item{\link[=report.lm]{(General) Linear models (glm and lm)}}
-#'  \item{\link[=report.lmerMod]{Mixed models (glmer and lmer)}}
-#'  \item{\link[=report.stanreg]{Bayesian models (stanreg and brms)}}
+#'  \item{\link[=report.lm]{(General) Linear models} (\code{glm, lm, ...})}
+#'  \item{\link[=report.lmerMod]{Mixed models} \code{(glmer, lmer, glmmTMB, ...)}}
+#'  \item{\link[=report.stanreg]{Bayesian models} \code{(stanreg, brms...)}}
 #'  }
 #'
 #' @param model Object.
