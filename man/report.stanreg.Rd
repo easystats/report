@@ -69,6 +69,7 @@ proportion of HDI, to use for the percentage in ROPE.}
 Create a report of Bayesian models.
 }
 \examples{
+\donttest{
 library(report)
 if (require("rstanarm")) {
   model <- stan_glm(Sepal.Length ~ Petal.Length * Species,
@@ -79,11 +80,9 @@ if (require("rstanarm")) {
   text_long(r)
   table_short(r)
   table_long(r)
-\donttest{
   model <- stan_lmer(Sepal.Length ~ Petal.Length + (1 | Species),
     data = iris, iter = 100, refresh = 0
   )
   report(model)
-}
-}
+}}
 }
