@@ -62,9 +62,9 @@ model_table.lme <- function(model, standardize = NULL, ...) {
 
   # Parameters -----------------------------------------------------------------
   if (bootstrap & !info$is_bayesian) {
-    parameters <- parameters::model_parameters(model, ci = ci, bootstrap = bootstrap, iterations = iterations, df_method = df_method, standardize = NULL)
+    parameters <- parameters::model_parameters(model, ci = ci, bootstrap = bootstrap, iterations = iterations, df_method = df_method, standardize = NULL, wb_component = FALSE)
   } else {
-    parameters <- parameters::model_parameters(model, ci = ci, bootstrap = bootstrap, iterations = iterations, df_method = df_method, ci_method = ci_method, centrality = centrality, dispersion = dispersion, test = test, rope_range = rope_range, rope_ci = rope_ci, bf_prior = bf_prior, diagnostic = diagnostic, standardize = NULL)
+    parameters <- parameters::model_parameters(model, ci = ci, bootstrap = bootstrap, iterations = iterations, df_method = df_method, ci_method = ci_method, centrality = centrality, dispersion = dispersion, test = test, rope_range = rope_range, rope_ci = rope_ci, bf_prior = bf_prior, diagnostic = diagnostic, standardize = NULL, wb_component = FALSE)
   }
 
   # save pretty names
