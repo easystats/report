@@ -94,7 +94,9 @@ report.bayesfactor_models <- function(model, interpretation = "jeffreys1961", ..
   #### table ####
   model$Model <- paste0(" [", seq_len(nrow(model)), "] ", model$Model)
   bf_table <- as.data.frame(model)
-  bf_table$BF <- insight::format_bf(model$BF, name = NULL, protect_ratio = TRUE)
+  ## TODO add protect_ratio once insight 0.9.6 or higher on CRAN
+  # bf_table$BF <- insight::format_bf(model$BF, name = NULL, protect_ratio = TRUE)
+  bf_table$BF <- insight::format_bf(model$BF, name = NULL)
   colnames(bf_table) <- c("Model", "Bayes factor")
 
   table_footer <- matrix(rep("", 6), nrow = 3)
@@ -106,7 +108,9 @@ report.bayesfactor_models <- function(model, interpretation = "jeffreys1961", ..
 
   #### table full ####
   bf_table_full <- head(bf_table, -1)
-  bf_table_full$BF2 <- c(insight::format_bf(model$BF / model$BF[max_den], name = NULL, protect_ratio = TRUE), "", "")
+  ## TODO add protect_ratio once insight 0.9.6 or higher on CRAN
+  # bf_table_full$BF2 <- c(insight::format_bf(model$BF / model$BF[max_den], name = NULL, protect_ratio = TRUE), "", "")
+  bf_table_full$BF2 <- c(insight::format_bf(model$BF / model$BF[max_den], name = NULL), "", "")
 
   colnames(bf_table_full) <- c(
     "Model",
@@ -207,7 +211,9 @@ report.bayesfactor_inclusion <- function(model, interpretation = "jeffreys1961",
   colnames(bf_table) <- c("Pr(prior)", "Pr(posterior)", "Inclusion BF")
   bf_table <- cbind(Terms = rownames(bf_table), bf_table)
   rownames(bf_table) <- NULL
-  bf_table$`Inclusion BF` <- insight::format_bf(bf_table$`Inclusion BF`, name = NULL, protect_ratio = TRUE)
+  ## TODO add protect_ratio once insight 0.9.6 or higher on CRAN
+  # bf_table$`Inclusion BF` <- insight::format_bf(bf_table$`Inclusion BF`, name = NULL, protect_ratio = TRUE)
+  bf_table$`Inclusion BF` <- insight::format_bf(bf_table$`Inclusion BF`, name = NULL)
   bf_table[, 2:3] <- insight::format_value(bf_table[, 2:3], ...)
 
   # make table footer
