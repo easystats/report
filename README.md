@@ -29,10 +29,12 @@ report(model)
     ## 119.26, p < .001, adj. R2 = 0.61). The model's intercept, corresponding to Sepal.Length = 0 and
     ## Species = setosa, is at 5.01 (SE = 0.07, 95% CI [4.86, 5.15], p < .001). Within this model:
     ## 
-    ##   - The effect of Speciesversicolor is positive and can be considered as very large and significant
-    ## (beta = 0.93, SE = 0.10, std. beta = 1.12, p < .001).
-    ##   - The effect of Speciesvirginica is positive and can be considered as very large and significant
-    ## (beta = 1.58, SE = 0.10, std. beta = 1.91, p < .001).
+    ##   - The effect of (Intercept) is positive and can be considered as very large and significant (beta =
+    ## 5.01, SE = 0.07, 95% CI [4.86, 5.15], std. beta = -1.01, p < .001).
+    ##   - The effect of Species [versicolor] is positive and can be considered as very large and
+    ## significant (beta = 0.93, SE = 0.10, 95% CI [0.73, 1.13], std. beta = 1.12, p < .001).
+    ##   - The effect of Species [virginica] is positive and can be considered as very large and significant
+    ## (beta = 1.58, SE = 0.10, 95% CI [1.38, 1.79], std. beta = 1.91, p < .001).
 
 ## Documentation
 
@@ -114,6 +116,7 @@ report(iris)
 ```
 
     ## The data contains 150 observations of the following variables:
+    ## 
     ##   - Sepal.Length: Mean = 5.84, SD = 0.83, Median = 5.80, MAD = 1.04, range: [4.30, 7.90], Skewness = 0.31, Kurtosis = -0.57, 0 missing
     ##   - Sepal.Width: Mean = 3.06, SD = 0.44, Median = 3.00, MAD = 0.44, range: [2, 4.40], Skewness = 0.32, Kurtosis = 0.18, 0 missing
     ##   - Petal.Length: Mean = 3.76, SD = 1.77, Median = 4.35, MAD = 1.85, range: [1, 6.90], Skewness = -0.27, Kurtosis = -1.40, 0 missing
@@ -137,15 +140,15 @@ functions:
 # Table report for a linear model
 lm(Sepal.Length ~ Petal.Length + Species, data = iris) %>% report() %>% 
     table_short()
-## Parameter         | Coefficient |        p | Std_Coefficient |  Fit
-## -------------------------------------------------------------------
-## (Intercept)       |        3.68 | 1.97e-72 |            1.50 |     
-## Petal.Length      |        0.90 | 1.12e-28 |            1.93 |     
-## Speciesversicolor |       -1.60 | 7.37e-14 |           -1.93 |     
-## Speciesvirginica  |       -2.12 | 1.48e-12 |           -2.56 |     
-##                   |             |          |                 |     
-## R2                |             |          |                 | 0.84
-## R2 (adj.)         |             |          |                 | 0.83
+## Parameter            | Coefficient |             CI |      p | Coefficient (std.) |  Fit
+## ----------------------------------------------------------------------------------------
+## (Intercept)          |        3.68 | [ 3.47,  3.89] | < .001 |               1.50 |     
+## Petal.Length         |        0.90 | [ 0.78,  1.03] | < .001 |               1.93 |     
+## Species [versicolor] |       -1.60 | [-1.98, -1.22] | < .001 |              -1.93 |     
+## Species [virginica]  |       -2.12 | [-2.66, -1.58] | < .001 |              -2.56 |     
+##                      |             |                |        |                    |     
+## R2                   |             |                |        |                    | 0.84
+## R2 (adj.)            |             |                |        |                    | 0.83
 ```
 
 ## Examples
@@ -169,16 +172,7 @@ t.test(mtcars$mpg ~ mtcars$am) %>% report()
 
     ## The Welch Two Sample t-test suggests that the difference of mtcars$mpg by mtcars$am (mean in group
     ## 0 = 17.15, mean in group 1 = 24.39) is significant (difference = -7.24, 95% CI [-11.28, -3.21],
-    ## t(18.33) = -3.77, p < .01) and can be considered as very large (Cohen's d = -1.76)., The Welch Two
-    ## Sample t-test suggests that the difference of mtcars$mpg by mtcars$am (mean in group 0 = 17.15,
-    ## mean in group 1 = 24.39) is significant (difference = -7.24, 95% CI [-11.28, -3.21], t(18.33) =
-    ## -3.77, p < .01) and can be considered as very large (Cohen's d = 0.95)., The Welch Two Sample
-    ## t-test suggests that the difference of mtcars$mpg by mtcars$am (mean in group 0 = 17.15, mean in
-    ## group 1 = 24.39) is significant (difference = -7.24, 95% CI [-11.28, -3.21], t(18.33) = -3.77, p <
-    ## .01) and can be considered as very large (Cohen's d = -2.82). and The Welch Two Sample t-test
-    ## suggests that the difference of mtcars$mpg by mtcars$am (mean in group 0 = 17.15, mean in group 1 =
-    ## 24.39) is significant (difference = -7.24, 95% CI [-11.28, -3.21], t(18.33) = -3.77, p < .01) and
-    ## can be considered as large (Cohen's d = -0.67).
+    ## t(18.33) = -3.77, p < .01) and can be considered as very large (Cohen's d = -1.76).
 
 ### Miscellaneous
 

@@ -50,10 +50,10 @@ report(model)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Example
-lm(Sepal.Length ~ Species, data=iris) %>% 
+lm(Sepal.Length ~ Species, data = iris) %>% 
   report() %>% 
   text_long() %>% 
-  print(width=100)
+  print(width = 100)
 ```
 
 
@@ -118,7 +118,7 @@ The `report()` function works on a variety of models, as well as dataframes:
 report(iris)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-print(report(iris), width=100)
+print(report(iris), width = 100)
 ```
 
 These reports nicely work within the [*tidyverse*](https://github.com/tidyverse) workflow:
@@ -129,7 +129,7 @@ cor.test(iris$Sepal.Length, iris$Petal.Length) %>%
   report()
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-print(report(cor.test(iris$Sepal.Length, iris$Petal.Length)), width=100)
+print(report(cor.test(iris$Sepal.Length, iris$Petal.Length)), width = 100)
 ```
 
 You can also create tables with the `table_short()` and `table_long()` functions:
@@ -137,7 +137,7 @@ You can also create tables with the `table_short()` and `table_long()` functions
 
 ```{r message=FALSE, warning=FALSE}
 # Table report for a linear model
-lm(Sepal.Length ~ Petal.Length + Species, data=iris) %>% 
+lm(Sepal.Length ~ Petal.Length + Species, data = iris) %>% 
   report() %>% 
   table_short()
 ```
@@ -160,7 +160,7 @@ t.test(mtcars$mpg ~ mtcars$am) %>%
 t.test(mtcars$mpg ~ mtcars$am) %>% 
   report() %>% 
   text_long() %>% 
-  print(width=100)
+  print(width = 100)
 ```
 
 
