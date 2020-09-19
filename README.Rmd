@@ -146,10 +146,6 @@ lm(Sepal.Length ~ Petal.Length + Species, data = iris) %>%
 
 ## Examples
 
-### Supported Packages
-
-Currently supported objects by **report** include [`cor.test`](https://stat.ethz.ch/R-manual/R-patched/library/stats/html/cor.test.html), [`t.test`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html), [`correlation`](https://github.com/easystats/correlation), [`glm`](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/glm.html), [`lme4::merMod`](https://github.com/lme4/lme4/), [`rstanarm::stanreg`](https://github.com/stan-dev/rstanarm), [`modelbased`](https://github.com/easystats/modelbased).
-
 ### *t*-tests and correlations
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
