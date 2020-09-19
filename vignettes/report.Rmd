@@ -48,7 +48,7 @@ library("report")
 ## Functions
 
 
-The `report` package works in a two steps fashion. First, creating a `report` object with the `report()` function (which takes different arguments depending on the type of object you are reporting). Then, this report can be displayed either textually, using `text_short()`, or as a table, using `table_short()`. Moreover, you can also access a more detailed (but less digest) version of the report using `text_long()` and `table_long()`. Finally, `to_values()` makes it easy to access all the internals of a model.
+The `report` package works in a two steps fashion. First, creating a `report` object with the `report()` function (which takes different arguments depending on the type of object you are reporting). Then, this report can be displayed either textually, using `text_short()`, or as a table, using `table_short()`. Moreover, you can also access a more detailed (but less digest) version of the report using `text_long()` and `table_long()`.
 
 
 ## Supported Objects
