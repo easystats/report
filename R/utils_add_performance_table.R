@@ -26,6 +26,9 @@
     stringsAsFactors = FALSE
   )
 
+  # remove missing values
+  perf_vertical <- perf_vertical[!is.na(perf_vertical$Fit), ]
+
   # Name parameter column
   name_parameter <- names(parameters)[names(parameters) %in% c("Parameter", "Link")][1]
   names(perf_vertical)[1] <- name_parameter
