@@ -123,10 +123,12 @@
 <span id="cb2-7"><a href="#cb2-7"></a><span class="co">## 119.26, p &lt; .001, adj. R2 = 0.61). The model's intercept, corresponding to Sepal.Length = 0 and</span></span>
 <span id="cb2-8"><a href="#cb2-8"></a><span class="co">## Species = setosa, is at 5.01 (SE = 0.07, 95% CI [4.86, 5.15], p &lt; .001). Within this model:</span></span>
 <span id="cb2-9"><a href="#cb2-9"></a><span class="co">## </span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co">##   - The effect of Speciesversicolor is positive and can be considered as very large and significant</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="co">## (beta = 0.93, SE = 0.10, std. beta = 1.12, p &lt; .001).</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="co">##   - The effect of Speciesvirginica is positive and can be considered as very large and significant</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="co">## (beta = 1.58, SE = 0.10, std. beta = 1.91, p &lt; .001).</span></span></code></pre></div>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co">##   - The effect of (Intercept) is positive and can be considered as very large and significant (beta =</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="co">## 5.01, SE = 0.07, 95% CI [4.86, 5.15], std. beta = -1.01, p &lt; .001).</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="co">##   - The effect of Species [versicolor] is positive and can be considered as very large and</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="co">## significant (beta = 0.93, SE = 0.10, 95% CI [0.73, 1.13], std. beta = 1.12, p &lt; .001).</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="co">##   - The effect of Species [virginica] is positive and can be considered as very large and significant</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="co">## (beta = 1.58, SE = 0.10, 95% CI [1.38, 1.79], std. beta = 1.91, p &lt; .001).</span></span></code></pre></div>
 <div id="documentation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#documentation" class="anchor"></a>Documentation</h2>
@@ -181,11 +183,12 @@
 <span class="fu"><a href="reference/report.html">report</a></span>(<span class="kw">iris</span>)
 </pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">## The data contains 150 observations of the following variables:</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="co">##   - Sepal.Length: Mean = 5.84, SD = 0.83, Median = 5.80, MAD = 1.04, range: [4.30, 7.90], Skewness = 0.31, Kurtosis = -0.57, 0 missing</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="co">##   - Sepal.Width: Mean = 3.06, SD = 0.44, Median = 3.00, MAD = 0.44, range: [2, 4.40], Skewness = 0.32, Kurtosis = 0.18, 0 missing</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co">##   - Petal.Length: Mean = 3.76, SD = 1.77, Median = 4.35, MAD = 1.85, range: [1, 6.90], Skewness = -0.27, Kurtosis = -1.40, 0 missing</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="co">##   - Petal.Width: Mean = 1.20, SD = 0.76, Median = 1.30, MAD = 1.04, range: [0.10, 2.50], Skewness = -0.10, Kurtosis = -1.34, 0 missing</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="co">##   - Species: 3 levels: setosa (n = 50, 33.33%); versicolor (n = 50, 33.33%) and virginica (n = 50, 33.33%)</span></span></code></pre></div>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co">## </span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">##   - Sepal.Length: Mean = 5.84, SD = 0.83, Median = 5.80, MAD = 1.04, range: [4.30, 7.90], Skewness = 0.31, Kurtosis = -0.57, 0 missing</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">##   - Sepal.Width: Mean = 3.06, SD = 0.44, Median = 3.00, MAD = 0.44, range: [2, 4.40], Skewness = 0.32, Kurtosis = 0.18, 0 missing</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">##   - Petal.Length: Mean = 3.76, SD = 1.77, Median = 4.35, MAD = 1.85, range: [1, 6.90], Skewness = -0.27, Kurtosis = -1.40, 0 missing</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">##   - Petal.Width: Mean = 1.20, SD = 0.76, Median = 1.30, MAD = 1.04, range: [0.10, 2.50], Skewness = -0.10, Kurtosis = -1.34, 0 missing</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">##   - Species: 3 levels: setosa (n = 50, 33.33%); versicolor (n = 50, 33.33%) and virginica (n = 50, 33.33%)</span></span></code></pre></div>
 <p>These reports nicely work within the <a href="https://github.com/tidyverse"><em>tidyverse</em></a> workflow:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="co"># Correlation report</span>
@@ -197,15 +200,15 @@
 <span class="co"># Table report for a linear model</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="kw">Sepal.Length</span> <span class="op">~</span> <span class="kw">Petal.Length</span> <span class="op">+</span> <span class="kw">Species</span>, data = <span class="kw">iris</span>) <span class="op">%&gt;%</span> <span class="fu"><a href="reference/report.html">report</a></span>() <span class="op">%&gt;%</span> 
     <span class="fu"><a href="reference/text_long.html">table_short</a></span>()
-<span class="co">## Parameter         | Coefficient |        p | Std_Coefficient |  Fit</span>
-<span class="co">## -------------------------------------------------------------------</span>
-<span class="co">## (Intercept)       |        3.68 | 1.97e-72 |            1.50 |     </span>
-<span class="co">## Petal.Length      |        0.90 | 1.12e-28 |            1.93 |     </span>
-<span class="co">## Speciesversicolor |       -1.60 | 7.37e-14 |           -1.93 |     </span>
-<span class="co">## Speciesvirginica  |       -2.12 | 1.48e-12 |           -2.56 |     </span>
-<span class="co">##                   |             |          |                 |     </span>
-<span class="co">## R2                |             |          |                 | 0.84</span>
-<span class="co">## R2 (adj.)         |             |          |                 | 0.83</span>
+<span class="co">## Parameter            | Coefficient |             CI |      p | Coefficient (std.) |  Fit</span>
+<span class="co">## ----------------------------------------------------------------------------------------</span>
+<span class="co">## (Intercept)          |        3.68 | [ 3.47,  3.89] | &lt; .001 |               1.50 |     </span>
+<span class="co">## Petal.Length         |        0.90 | [ 0.78,  1.03] | &lt; .001 |               1.93 |     </span>
+<span class="co">## Species [versicolor] |       -1.60 | [-1.98, -1.22] | &lt; .001 |              -1.93 |     </span>
+<span class="co">## Species [virginica]  |       -2.12 | [-2.66, -1.58] | &lt; .001 |              -2.56 |     </span>
+<span class="co">##                      |             |                |        |                    |     </span>
+<span class="co">## R2                   |             |                |        |                    | 0.84</span>
+<span class="co">## R2 (adj.)            |             |                |        |                    | 0.83</span>
 </pre></div>
 </div>
 </div>
@@ -225,16 +228,7 @@
 </pre></div>
 <div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">## The Welch Two Sample t-test suggests that the difference of mtcars$mpg by mtcars$am (mean in group</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="co">## 0 = 17.15, mean in group 1 = 24.39) is significant (difference = -7.24, 95% CI [-11.28, -3.21],</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="co">## t(18.33) = -3.77, p &lt; .01) and can be considered as very large (Cohen's d = -1.76)., The Welch Two</span></span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="co">## Sample t-test suggests that the difference of mtcars$mpg by mtcars$am (mean in group 0 = 17.15,</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="co">## mean in group 1 = 24.39) is significant (difference = -7.24, 95% CI [-11.28, -3.21], t(18.33) =</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="co">## -3.77, p &lt; .01) and can be considered as very large (Cohen's d = 0.95)., The Welch Two Sample</span></span>
-<span id="cb11-7"><a href="#cb11-7"></a><span class="co">## t-test suggests that the difference of mtcars$mpg by mtcars$am (mean in group 0 = 17.15, mean in</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a><span class="co">## group 1 = 24.39) is significant (difference = -7.24, 95% CI [-11.28, -3.21], t(18.33) = -3.77, p &lt;</span></span>
-<span id="cb11-9"><a href="#cb11-9"></a><span class="co">## .01) and can be considered as very large (Cohen's d = -2.82). and The Welch Two Sample t-test</span></span>
-<span id="cb11-10"><a href="#cb11-10"></a><span class="co">## suggests that the difference of mtcars$mpg by mtcars$am (mean in group 0 = 17.15, mean in group 1 =</span></span>
-<span id="cb11-11"><a href="#cb11-11"></a><span class="co">## 24.39) is significant (difference = -7.24, 95% CI [-11.28, -3.21], t(18.33) = -3.77, p &lt; .01) and</span></span>
-<span id="cb11-12"><a href="#cb11-12"></a><span class="co">## can be considered as large (Cohen's d = -0.67).</span></span></code></pre></div>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="co">## t(18.33) = -3.77, p &lt; .01) and can be considered as very large (Cohen's d = -1.76).</span></span></code></pre></div>
 </div>
 <div id="miscellaneous" class="section level3">
 <h3 class="hasAnchor">
