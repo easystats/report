@@ -38,16 +38,11 @@ Imports:
 	utils
 Suggests:
 	BayesFactor,
-	caret,
 	dplyr,
-	ggplot2,
 	httr,
 	knitr,
-	lavaan,
 	lme4,
-	logspline,
 	rstanarm,
-	randomForest,
 	rmarkdown,
 	testthat
 RoxygenNote: 7.1.1
