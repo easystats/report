@@ -106,5 +106,8 @@ model_table.lme <- function(model, standardize = NULL, ...) {
   )
 
   # Return output
-  as.model_table(table, table_full)
+  out <- as.model_table(table, table_full)
+  attr(out, "performance_table") <- performance
+
+  out
 }

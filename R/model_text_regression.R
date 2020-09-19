@@ -19,12 +19,16 @@ model_text.default <- function(model, ...) {
 #' @importFrom insight is_nullmodel
 #' @keywords internal
 .model_text_regression <- function(model, interpretation = "default", ci = 0.95, standardize = "refit", standardize_robust = FALSE, bootstrap = FALSE, iterations = 500, performance_metrics = "all", df_method = NULL, ci_method = NULL, centrality = "median", dispersion = FALSE, test = c("pd", "rope"), rope_range = "default", rope_ci = 1, bf_prior = NULL, diagnostic = c("ESS", "Rhat"), ...) {
-  tables <- model_table(model, ci = ci, standardize = standardize, standardize_robust = standardize_robust, bootstrap = bootstrap, iterations = iterations, performance_metrics = performance_metrics, df_method = df_method, ci_method = ci_method, centrality = centrality, dispersion = dispersion, test = test, rope_range = rope_range, rope_ci = rope_ci, bf_prior = bf_prior, diagnostic = diagnostic, ...)
+  performance_table <- list(...)$performance_table
+  if (is.null(performance_table)) {
+    performance_table <- performance::model_performance(model, metrics = performance_metrics, ...)
+  }
+  tables <- model_table(model, ci = ci, standardize = standardize, standardize_robust = standardize_robust, bootstrap = bootstrap, iterations = iterations, performance_metrics = performance_metrics, df_method = df_method, ci_method = ci_method, centrality = centrality, dispersion = dispersion, test = test, rope_range = rope_range, rope_ci = rope_ci, bf_prior = bf_prior, diagnostic = diagnostic, performance = performance_table, ...)
 
   # Get tables
   # TODO: it's a bit dumb to merge both tables and then re-separate them.
-  performance <- performance::model_performance(model, metrics = performance_metrics, ...)
-  tables <- model_table(model, performance = performance, ci = ci, standardize = standardize, standardize_robust = standardize_robust, interpretation = interpretation, bootstrap = bootstrap, iterations = iterations, performance_metrics = performance_metrics, df_method = df_method, ci_method = ci_method, centrality = centrality, dispersion = dispersion, test = test, rope_range = rope_range, rope_ci = rope_ci, ...)
+  # performance <- performance::model_performance(model, metrics = performance_metrics, ...)
+  # tables <- model_table(model, performance = performance, ci = ci, standardize = standardize, standardize_robust = standardize_robust, interpretation = interpretation, bootstrap = bootstrap, iterations = iterations, performance_metrics = performance_metrics, df_method = df_method, ci_method = ci_method, centrality = centrality, dispersion = dispersion, test = test, rope_range = rope_range, rope_ci = rope_ci, ...)
 
   # Get back tables
   parameters <- tables$table_long
@@ -51,7 +55,7 @@ model_text.default <- function(model, ...) {
   text_model <- report_model(model, parameters, ci = ci, standardize = standardize, standardize_robust = standardize_robust, interpretation = interpretation, bootstrap = bootstrap, iterations = iterations, df_method = df_method, ci_method = ci_method, centrality = centrality, dispersion = dispersion, test = test, rope_range = rope_range, rope_ci = rope_ci, ...)
 
   # Performance
-  text_perf <- report_performance(model, performance = performance, ...)
+  text_perf <- report_performance(model, performance = performance_table, ...)
 
   # Intercept
   text_intercept <- report_intercept(model, parameters = parameters, ci = ci)

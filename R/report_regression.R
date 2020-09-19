@@ -164,7 +164,7 @@ report.stanreg <- function(model, interpretation = "default", ci = 0.89, standar
 #' @keywords internal
 .report_regression <- function(model, interpretation = "default", ci = 0.95, standardize = "refit", standardize_robust = FALSE, bootstrap = FALSE, iterations = 500, performance_metrics = "all", ...) {
   tables <- model_table(model, ci = ci, standardize = standardize, standardize_robust = standardize_robust, bootstrap = bootstrap, iterations = iterations, performance_metrics = performance_metrics, ...)
-  texts <- model_text(model, interpretation = interpretation, ci = ci, standardize = standardize, standardize_robust = standardize_robust, bootstrap = bootstrap, iterations = iterations, performance_metrics = performance_metrics, ...)
+  texts <- model_text(model, interpretation = interpretation, ci = ci, standardize = standardize, standardize_robust = standardize_robust, bootstrap = bootstrap, iterations = iterations, performance_metrics = performance_metrics, performance_table = attributes(tables)$performance_table, ...)
 
   out <- list(
     texts = texts,
