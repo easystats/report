@@ -42,6 +42,7 @@ Suggests:
 	httr,
 	knitr,
 	lme4,
+	logspline,
 	rstanarm,
 	rmarkdown,
 	testthat
