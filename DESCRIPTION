@@ -30,7 +30,6 @@ VignetteBuilder: knitr
 Imports:
 	insight,
 	bayestestR,
-	correlation,
 	parameters,
 	effectsize,
 	performance,
