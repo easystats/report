@@ -8,7 +8,7 @@
   model,
   interpretation = "default",
   ci = 0.95,
-  standardize = "refit",
+  standardize = NULL,
   standardize_robust = FALSE,
   bootstrap = FALSE,
   iterations = 500,

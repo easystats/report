@@ -80,7 +80,7 @@ report.lme <- report.lm
 #' table_short(r)
 #' table_long(r)
 #' @export
-report.lmerMod <- function(model, interpretation = "default", ci = 0.95, standardize = "refit", standardize_robust = FALSE, bootstrap = FALSE, iterations = 500, performance_metrics = "all", df_method = "wald", ...) {
+report.lmerMod <- function(model, interpretation = "default", ci = 0.95, standardize = NULL, standardize_robust = FALSE, bootstrap = FALSE, iterations = 500, performance_metrics = "all", df_method = "wald", ...) {
   .report_regression(
     model,
     interpretation = interpretation,
@@ -97,12 +97,36 @@ report.lmerMod <- function(model, interpretation = "default", ci = 0.95, standar
 
 
 
+#' @export
+report.glmmTMB <- function(model, interpretation = "default", ci = 0.95, standardize = NULL, standardize_robust = FALSE, bootstrap = FALSE, iterations = 500, performance_metrics = "all", df_method = "wald", ...) {
+  .report_regression(
+    model,
+    interpretation = interpretation,
+    ci = ci,
+    standardize = standardize,
+    standardize_robust = standardize_robust,
+    bootstrap = bootstrap,
+    iterations = iterations,
+    performance_metrics = performance_metrics,
+    df_method = "wald",
+    ...
+  )
+}
+
+#' @export
+report.glmmTMB <- report.lmerMod
+
+#' @export
+report.MixMod <- report.lmerMod
 
 #' @export
 report.merMod <- report.lmerMod
 
 #' @export
-report.glmmTMB <- report.lmerMod
+report.mixed <- report.lmerMod
+
+
+
 
 
 
