@@ -76,7 +76,8 @@ summary(model_table(x))
 summary(model_text(x))
 library(report)
 
-r <- report(iris, centrality = "median", dispersion = FALSE, distribution = TRUE, missing_percentage = TRUE)
+r <- report(iris, centrality = "median", dispersion = FALSE,
+            distribution = TRUE, missing_percentage = TRUE)
 r
 summary(r)
 as.data.frame(r)
@@ -106,7 +107,5 @@ summary(model_table(x))
 summary(model_text(x))
 }
 \seealso{
-report
-
 report
 }

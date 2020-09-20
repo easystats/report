@@ -15,7 +15,8 @@
 #' @examples
 #' library(report)
 #'
-#' r <- report(iris, centrality = "median", dispersion = FALSE, distribution = TRUE, missing_percentage = TRUE)
+#' r <- report(iris, centrality = "median", dispersion = FALSE,
+#'             distribution = TRUE, missing_percentage = TRUE)
 #' r
 #' summary(r)
 #' as.data.frame(r)
@@ -30,8 +31,6 @@
 #'   as.data.frame(r)
 #'   summary(as.data.frame(r))
 #' }
-#' @seealso report
-#'
 #' @export
 report.data.frame <- function(model, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = FALSE, n_entries = 3, missing_percentage = FALSE, ...) {
 
