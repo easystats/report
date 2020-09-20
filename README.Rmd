@@ -44,12 +44,10 @@ library(report)
 ```{r eval=FALSE, message=FALSE, warning=FALSE}
 library(report)
 
-# Example
 model <- lm(Sepal.Length ~ Species, data=iris)
 report(model)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-# Example
 lm(Sepal.Length ~ Species, data = iris) %>% 
   report() %>% 
   text_long() %>% 
@@ -109,12 +107,9 @@ The `report` package works in a two step fashion. First, you create a `report` o
 
 [![workflow](man/figures/workflow.png)](https://easystats.github.io/report/)
 
-### Features
-
-The `report()` function works on a variety of models, as well as dataframes:
+The `report()` function works on a variety of models, as well as other objects such as dataframes:
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
-# Dataframe report
 report(iris)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -124,7 +119,6 @@ print(report(iris), width = 100)
 These reports nicely work within the [*tidyverse*](https://github.com/tidyverse) workflow:
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
-# Correlation report
 cor.test(iris$Sepal.Length, iris$Petal.Length) %>% 
   report()
 ```
@@ -136,15 +130,12 @@ You can also create tables with the `table_short()` and `table_long()` functions
 
 
 ```{r message=FALSE, warning=FALSE}
-# Table report for a linear model
 lm(Sepal.Length ~ Petal.Length + Species, data = iris) %>% 
   report() %>% 
   table_short()
 ```
 
 
-
-## Examples
 
 ### *t*-tests and correlations
 
@@ -160,9 +151,9 @@ t.test(mtcars$mpg ~ mtcars$am) %>%
 ```
 
 
-### Miscellaneous
+### Report participants details
 
-#### Report participants details
+This can be useful to complete the **Participants** paragraph of your manuscript.
 
 ```{r message=FALSE, warning=FALSE}
 data <- data.frame("Age" = c(22, 23, 54, 21),
@@ -177,4 +168,4 @@ paste(report_participants(data, spell_n = TRUE),
 
 If you like it, you can put a *star* on this repo, and cite the package as follows:
 
-- Makowski \& Lüdecke (2019). *The report package for R: Ensuring the use of best practices for results reporting*. CRAN. doi: .
+- Makowski, D., Ben-Shachar, M. S., \& Lüdecke, D. (2019). (2020). *The report package for R: Ensuring the use of best practices for results reporting*. CRAN.
