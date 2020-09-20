@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create Reports — report • report</title>
+<title>Automatic report of R objects — report • report</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,16 +46,8 @@
 
 
 
-<meta property="og:title" content="Create Reports — report" />
-<meta property="og:description" content="Create textual reports. See the documentation for your object's class:
-Dataframes and vectors
-Correlations and t-tests (htest)
-ANOVAs
-Regression models (glm, lm, ...)
-Mixed models (glmer, lmer, glmmTMB, ...)
-Bayesian models (stanreg, brms...)
-
-" />
+<meta property="og:title" content="Automatic report of R objects — report" />
+<meta property="og:description" content="Create reports of different objects. See the documentation for your object's class:" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -145,21 +137,13 @@ Bayesian models (stanreg, brms...)
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create Reports</h1>
+    <h1>Automatic report of R objects</h1>
     <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.R'><code>R/report.R</code></a></small>
     <div class="hidden name"><code>report.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create textual reports. See the documentation for your object's class:</p><ul>
-<li><p><a href='report.character.html'>Dataframes and vectors</a></p></li>
-<li><p><a href='model_text.htest.html'>Correlations and t-tests</a> (<code>htest</code>)</p></li>
-<li><p><a href='report.aov.html'>ANOVAs</a></p></li>
-<li><p><a href='report.default.html'>Regression models</a> (<code>glm, lm, ...</code>)</p></li>
-<li><p><a href='report.lmerMod.html'>Mixed models</a> <code>(glmer, lmer, glmmTMB, ...)</code></p></li>
-<li><p><a href='report.stanreg.html'>Bayesian models</a> <code>(stanreg, brms...)</code></p></li>
-</ul>
-
+    <p>Create reports of different objects. See the documentation for your object's class:</p>
     </div>
 
     <pre class="usage"><span class='fu'>report</span>(<span class='kw'>model</span>, <span class='kw'>...</span>)</pre>
@@ -182,6 +166,33 @@ Bayesian models (stanreg, brms...)
     <p>A list-object of class <code>report</code>, which contains further list-objects
 with a short and long description of the model summary, as well as a short
 and long table of parameters and fit indices.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    
+<ul>
+<li><p><a href='report.character.html'>Dataframes and vectors</a></p></li>
+<li><p><a href='model_text.htest.html'>Correlations and t-tests</a> (<code>htest</code>)</p></li>
+<li><p><a href='report.aov.html'>ANOVAs</a></p></li>
+<li><p><a href='report.default.html'>Regression models</a> (<code>glm, lm, ...</code>)</p></li>
+<li><p><a href='report.lmerMod.html'>Mixed models</a> <code>(glmer, lmer, glmmTMB, ...)</code></p></li>
+<li><p><a href='report.stanreg.html'>Bayesian models</a> <code>(stanreg, brms...)</code></p></li>
+</ul>
+
+
+
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Change output type</h3>
+<p>The <code>report()</code> function generates a report-object that contain in itself
+different representations (e.g., text, tables, plots). These different representations
+can be accessed via several functions, such as:</p>
+<ul>
+<li><p><strong><code><a href='text_long.html'>text_long()</a></code></strong>: Detailed text.</p></li>
+<li><p><strong><code><a href='text_long.html'>text_short()</a></code></strong>: Minimal text giving the minimal information.</p></li>
+<li><p><strong><code><a href='text_long.html'>table_long()</a></code></strong>: Comprehensive table including most available indices.</p></li>
+<li><p><strong><code><a href='text_long.html'>table_short()</a></code></strong>: Minimal table.</p></li>
+</ul>
+
+<p>Note that for some report objects, some of these representations might be identical.</p>
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='text_long.html'>table_short</a></code> or <code><a href='text_long.html'>text_short</a></code> to access the
