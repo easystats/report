@@ -26,7 +26,10 @@ model_text.default <- function(model, ...) {
   if (is.null(performance_table)) {
     performance_table <- performance::model_performance(model, metrics = performance_metrics, ...)
   }
-  tables <- model_table(model, ci = ci, standardize = standardize, standardize_robust = standardize_robust, bootstrap = bootstrap, iterations = iterations, performance_metrics = performance_metrics, df_method = df_method, ci_method = ci_method, centrality = centrality, dispersion = dispersion, test = test, rope_range = rope_range, rope_ci = rope_ci, bf_prior = bf_prior, diagnostic = diagnostic, performance = performance_table, ...)
+  tables <- list(...)$model_table
+  if (is.null(tables)) {
+    tables <- model_table(model, ci = ci, standardize = standardize, standardize_robust = standardize_robust, bootstrap = bootstrap, iterations = iterations, performance_metrics = performance_metrics, df_method = df_method, ci_method = ci_method, centrality = centrality, dispersion = dispersion, test = test, rope_range = rope_range, rope_ci = rope_ci, bf_prior = bf_prior, diagnostic = diagnostic, performance = performance_table, ...)
+  }
 
   # Get tables
   # TODO: it's a bit dumb to merge both tables and then re-separate them.

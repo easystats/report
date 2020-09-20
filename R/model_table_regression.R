@@ -73,7 +73,11 @@ model_table.mixed <- model_table.lme
 
   # correct DF method
   if (is.null(df_method)) {
-    df_method <- "wald"
+    if (class(model)[1] == "glm") {
+      df_method <- "profile"
+    } else {
+      df_method <- "wald"
+    }
   }
 
   # Multiple CIs
