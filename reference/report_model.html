@@ -185,7 +185,7 @@
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Arguments passed to or from other methods.</p></td>
+      <td><p>Arguments passed to other methods, in particular <code><a href='https://rdrr.io/pkg/parameters/man/model_parameters.html'>model_parameters()</a></code>.</p></td>
     </tr>
     <tr>
       <th>ci</th>
@@ -253,9 +253,11 @@ proportion of HDI, to use for the percentage in ROPE.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <div class='dont-index'><p>report</p></div>
+    <p>A list with elements of class <code>report_text</code> (which are character
+vectors), containing a short and long version of the textual output of the
+model summary.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Species</span>, data = <span class='kw'>iris</span>)
