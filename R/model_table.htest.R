@@ -1,4 +1,3 @@
-#' @rdname report.htest
 #' @seealso report
 #' @importFrom effectsize t_to_d
 #' @importFrom parameters model_parameters

@@ -3,8 +3,64 @@ authors:
     href: https://dominiquemakowski.github.io/
   Daniel Lüdecke:
     href: https://github.com/strengejacke
+  Mattan S. Ben-Shachar:
+    href: https://github.com/mattansb
 
 template:
   params:
-    ganalytics: UA-97457476-8
-    bootswatch: cosmo
+    bootswatch: flatly
+
+reference:
+- title: "Create Generic Report Objects"
+  contents:
+  - report
+  - report.aov
+  - report.lm
+  - report.lmerMod
+  - report.stanreg
+  - report.htest
+  - report.bayesfactor_models
+  - report.character
+
+- title: "Create Specific Report Objects"
+  contents:
+  - report_intercept
+  - report_participants
+  - report_sample
+
+- title: "Extract Tables and Summaries from Reports"
+  contents:
+  - model_table
+  - model_text
+  - text_short
+
+- title: "Utilities"
+  contents:
+  - as.report
+  - rename_if_possible
+  - show_packages
+
+- title: "String Formatting"
+  contents:
+  - format_algorithm
+  - format_model
+  - format_text
+-
+
+navbar:
+  type: default
+  left:
+  - icon: fa-home fa-lg
+    href: index.html
+  - text: News
+    href: news/index.html
+  - text: Reference
+    href: reference/index.html
+  - text: Articles
+    menu:
+      - text: Overview of the report Package
+        href: articles/report.html
+      - text: How to Cite Packages
+        href: articles/cite_packages.html
+      - text: Supporting New Models
+        href: articles/supporting_new_models.html
