@@ -262,24 +262,24 @@ related content of the report-object.</p></div>
 
 <span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(<span class='kw'>vs</span> <span class='op'>~</span> <span class='kw'>disp</span>, data = <span class='kw'>mtcars</span>, family = <span class='st'>"binomial"</span>)
 <span class='kw'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span>(<span class='kw'>model</span>)
-</div><div class='output co'>#&gt; <span class='message'>Waiting for profiling to be done...</span></div><div class='output co'>#&gt; <span class='message'>Waiting for profiling to be done...</span></div><div class='input'><span class='fu'><a href='text_long.html'>text_short</a></span>(<span class='kw'>r</span>)
+</div><div class='output co'>#&gt; <span class='message'>Waiting for profiling to be done...</span></div><div class='input'><span class='fu'><a href='text_long.html'>text_short</a></span>(<span class='kw'>r</span>)
 </div><div class='output co'>#&gt; We fitted a logistic model to predict vs with disp.The model's explanatory power is substantial (Tjur's R2 = 0.53). The model's intercept is at 4.14. Within this model:
 #&gt; 
-#&gt;   - The effect of (Intercept) is positive and can be considered as small and significant (beta = 4.14, 95% CI [1.41, 6.86], std. beta = -0.85, p &lt; .01).
+#&gt;   - The effect of (Intercept) is positive and can be considered as small and significant (beta = 4.14, 95% CI [1.81, 7.44], std. beta = -0.85, p &lt; .01).
 #&gt;   - The effect of disp is negative and can be considered as large and significant (beta = -0.02, 95% CI [-0.04, -0.01], std. beta = -2.68, p &lt; .01).</div><div class='input'><span class='fu'><a href='text_long.html'>text_long</a></span>(<span class='kw'>r</span>)
 </div><div class='output co'>#&gt; We fitted a logistic model (estimated using ML) to predict vs with disp (formula = vs ~ disp). Standardized parameters were obtained by fitting the model on a standardized version of the dataset. Effect sizes were labelled following Chen's (2010) recommendations.The model's explanatory power is substantial (Tjur's R2 = 0.53). The model's intercept, corresponding to vs = 0 and disp = 0, is at 4.14 (SE = 1.39, 95% CI [1.81, 7.44], p &lt; .01). Within this model:
 #&gt; 
-#&gt;   - The effect of (Intercept) is positive and can be considered as small and significant (beta = 4.14, SE = 1.39, 95% CI [1.41, 6.86], std. beta = -0.85, p &lt; .01).
+#&gt;   - The effect of (Intercept) is positive and can be considered as small and significant (beta = 4.14, SE = 1.39, 95% CI [1.81, 7.44], std. beta = -0.85, p &lt; .01).
 #&gt;   - The effect of disp is negative and can be considered as large and significant (beta = -0.02, SE = 0.01, 95% CI [-0.04, -0.01], std. beta = -2.68, p &lt; .01).</div><div class='input'><span class='fu'><a href='text_long.html'>table_short</a></span>(<span class='kw'>r</span>)
 </div><div class='output co'>#&gt; Parameter   | Coefficient |             CI |     p | Coefficient (std.) |  Fit
 #&gt; ------------------------------------------------------------------------------
-#&gt; (Intercept) |        4.14 | [ 1.41,  6.86] | 0.003 |              -0.85 |     
+#&gt; (Intercept) |        4.14 | [ 1.81,  7.44] | 0.003 |              -0.85 |     
 #&gt; disp        |       -0.02 | [-0.04, -0.01] | 0.002 |              -2.68 |     
 #&gt;             |             |                |       |                    |     
 #&gt; Tjur's R2   |             |                |       |                    | 0.53</div><div class='input'><span class='fu'><a href='text_long.html'>table_long</a></span>(<span class='kw'>r</span>)
 </div><div class='output co'>#&gt; Parameter       | Coefficient |   SE |             CI |     z |  df |     p | Coefficient (std.) |    Fit
 #&gt; ---------------------------------------------------------------------------------------------------------
-#&gt; (Intercept)     |        4.14 | 1.39 | [ 1.41,  6.86] |  2.98 | Inf | 0.003 |              -0.85 |       
+#&gt; (Intercept)     |        4.14 | 1.39 | [ 1.81,  7.44] |  2.98 | Inf | 0.003 |              -0.85 |       
 #&gt; disp            |       -0.02 | 0.01 | [-0.04, -0.01] | -3.03 | Inf | 0.002 |              -2.68 |       
 #&gt;                 |             |      |                |       |     |       |                    |       
 #&gt; AIC             |             |      |                |       |     |       |                    |  26.70
