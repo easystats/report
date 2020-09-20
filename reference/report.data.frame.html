@@ -158,8 +158,7 @@
 <span class='co'># S3 method for data.frame</span>
 <span class='fu'><a href='report.html'>report</a></span>(
   <span class='kw'>model</span>,
-  median = <span class='fl'>FALSE</span>,
-  centrality = <span class='fl'>TRUE</span>,
+  centrality = <span class='st'>"mean"</span>,
   dispersion = <span class='fl'>TRUE</span>,
   range = <span class='fl'>TRUE</span>,
   distribution = <span class='fl'>FALSE</span>,
@@ -175,8 +174,7 @@
 <span class='co'># S3 method for numeric</span>
 <span class='fu'><a href='report.html'>report</a></span>(
   <span class='kw'>model</span>,
-  median = <span class='fl'>FALSE</span>,
-  centrality = <span class='fl'>TRUE</span>,
+  centrality = <span class='st'>"mean"</span>,
   dispersion = <span class='fl'>TRUE</span>,
   range = <span class='fl'>TRUE</span>,
   distribution = <span class='fl'>FALSE</span>,
@@ -208,16 +206,12 @@
       <td><p>Arguments passed to or from other methods.</p></td>
     </tr>
     <tr>
-      <th>median</th>
-      <td><p>Show <a href='https://rdrr.io/r/base/mean.html'>mean</a> and <a href='https://rdrr.io/r/stats/sd.html'>sd</a> (default) or <a href='https://rdrr.io/r/stats/median.html'>median</a> and <a href='https://rdrr.io/r/stats/mad.html'>mad</a>.</p></td>
-    </tr>
-    <tr>
       <th>centrality</th>
-      <td><p>Show index of centrality (<a href='https://rdrr.io/r/base/mean.html'>mean</a> or <a href='https://rdrr.io/r/stats/median.html'>median</a>).</p></td>
+      <td><p>Character vector, indicating the index of centrality (either <code>"mean"</code> or <code>"median"</code>).</p></td>
     </tr>
     <tr>
       <th>dispersion</th>
-      <td><p>Show index of dispersion (<a href='https://rdrr.io/r/stats/sd.html'>sd</a> or <a href='https://rdrr.io/r/stats/mad.html'>mad</a>).</p></td>
+      <td><p>Show index of dispersion (<a href='https://rdrr.io/r/stats/sd.html'>sd</a> if <code>centrality = "mean"</code>, or <a href='https://rdrr.io/r/stats/mad.html'>mad</a> if <code>centrality = "median"</code>).</p></td>
     </tr>
     <tr>
       <th>range</th>
@@ -252,7 +246,7 @@ and long table of parameters and fit indices.</p>
 #&gt; 5.00      |    11 |         0 | B, n = 4; A, n = 3; D, n = 2</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'><a href='model_text.html'>model_text</a></span>(<span class='kw'>x</span>))
 </div><div class='output co'>#&gt; 5 entries: B, n = 4; A, n = 3; D, n = 2 and 2 others</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://easystats.github.io/report'>report</a></span>)
 
-<span class='kw'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span>(<span class='kw'>iris</span>, median = <span class='fl'>TRUE</span>, dispersion = <span class='fl'>FALSE</span>, distribution = <span class='fl'>TRUE</span>, missing_percentage = <span class='fl'>TRUE</span>)
+<span class='kw'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span>(<span class='kw'>iris</span>, centrality = <span class='st'>"median"</span>, dispersion = <span class='fl'>FALSE</span>, distribution = <span class='fl'>TRUE</span>, missing_percentage = <span class='fl'>TRUE</span>)
 <span class='kw'>r</span>
 </div><div class='output co'>#&gt; The data contains 150 observations of the following variables:
 #&gt; 
@@ -359,7 +353,7 @@ and long table of parameters and fit indices.</p>
 #&gt; C     |    10</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'><a href='model_text.html'>model_text</a></span>(<span class='kw'>x</span>))
 </div><div class='output co'>#&gt; 3 levels: A, n = 10; B, n = 10 and C, n = 10</div><div class='input'><span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>1000</span>)
 <span class='fu'><a href='report.html'>report</a></span>(<span class='kw'>x</span>)
-</div><div class='output co'>#&gt; Mean = 0.00, SD = 1.00, Median = 0.01, MAD = 1.00, range: [-2.94, 2.76], Skewness = 0.00, Kurtosis = -0.20, 0 missing</div><div class='input'><span class='fu'><a href='report.html'>report</a></span>(<span class='kw'>x</span>, median = <span class='fl'>TRUE</span>, missing_percentage = <span class='fl'>TRUE</span>, distribution = <span class='fl'>TRUE</span>)
+</div><div class='output co'>#&gt; Mean = 0.00, SD = 1.00, Median = 0.01, MAD = 1.00, range: [-2.94, 2.76], Skewness = 0.00, Kurtosis = -0.20, 0 missing</div><div class='input'><span class='fu'><a href='report.html'>report</a></span>(<span class='kw'>x</span>, centrality = <span class='st'>"median"</span>, missing_percentage = <span class='fl'>TRUE</span>, distribution = <span class='fl'>TRUE</span>)
 </div><div class='output co'>#&gt; Mean = 0.00, SD = 1.00, Median = 0.01, MAD = 1.00, range: [-2.94, 2.76], Skewness = 0.00, Kurtosis = -0.20, 0% missing</div><div class='input'><span class='fu'><a href='model_table.html'>model_table</a></span>(<span class='kw'>x</span>)
 </div><div class='output co'>#&gt; Mean |   SD | Median |  MAD |   Min |  Max | n_Obs | Skewness | Kurtosis | n_Missing
 #&gt; ------------------------------------------------------------------------------------
