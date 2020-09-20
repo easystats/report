@@ -5,12 +5,12 @@
 #'  \item{\link[=report.data.frame]{Dataframes and vectors}}
 #'  \item{\link[=report.htest]{Correlations and t-tests} (\code{htest})}
 #'  \item{\link[=report.aov]{ANOVAs}}
-#'  \item{\link[=report.default]{(Generalized) Linear models} (\code{glm, lm, ...})}
+#'  \item{\link[=report.default]{Regression models} (\code{glm, lm, ...})}
 #'  \item{\link[=report.lmerMod]{Mixed models} \code{(glmer, lmer, glmmTMB, ...)}}
 #'  \item{\link[=report.stanreg]{Bayesian models} \code{(stanreg, brms...)}}
 #'  }
 #'
-#' @param model Object.
+#' @param model A statistical model. For data frame or character methods, a data frame or character respectively.
 #' @param ... Arguments passed to or from other methods.
 #'
 #' @return A list-object of class \code{report}, which contains further list-objects
