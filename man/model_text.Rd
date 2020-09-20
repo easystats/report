@@ -14,8 +14,18 @@ model_text(model, ...)
 
 \item{...}{Arguments passed to or from other methods. For instance, when \code{bootstrap = TRUE}, arguments like \code{ci_method} are passed down to \code{\link[bayestestR]{describe_posterior}}.}
 }
+\value{
+A list with elements of class \code{report_text} (which are character
+vectors), containing a short and long version of the textual output of the
+model summary.
+}
 \description{
 Create a reportable textual output for your model.
+}
+\note{
+Arguments in \code{...} are described in the \code{\link{report}} function help.
+
+Arguments in \code{...} are described in the \code{\link{report}} function help.
 }
 \examples{
 model <- t.test(Sepal.Length ~ Species, data = iris[1:100, ])

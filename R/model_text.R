@@ -5,6 +5,12 @@
 #' @param model A statistical model.
 #' @inheritParams model_table
 #'
+#' @return A list with elements of class \code{report_text} (which are character
+#' vectors), containing a short and long version of the textual output of the
+#' model summary.
+#'
+#' @note Arguments in \code{...} are described in the \code{\link{report}} function help.
+#'
 #' @examples
 #' model <- t.test(Sepal.Length ~ Species, data = iris[1:100, ])
 #' model_text(model)

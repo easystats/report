@@ -1,4 +1,5 @@
 #' @rdname report.data.frame
+#' @inherit report return seealso
 #' @examples
 #' x <- factor(rep(c("A", "B", "C"), 10))
 #' report(x)
@@ -6,7 +7,6 @@
 #' model_text(x)
 #' summary(model_table(x))
 #' summary(model_text(x))
-#' @seealso report
 #' @export
 report.factor <- function(model, levels_percentage = FALSE, ...) {
   model <- as.factor(model)

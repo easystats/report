@@ -17,9 +17,9 @@
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{
-A list-object of class \code{report}, which contains further list-objects
-with a short and long description of the model summary, as well as a short
-and long table of parameters and fit indices.
+A list with elements of class \code{report_text} (which are character
+vectors), containing a short and long version of the textual output of the
+model summary.
 }
 \description{
 Create a report of an h-test object.
@@ -34,5 +34,6 @@ report(t.test(iris$Sepal.Width, mu = 1))
 
 }
 \seealso{
-report
+\code{\link{table_short}} or \code{\link{text_short}} to access the
+related content of the report-object.
 }

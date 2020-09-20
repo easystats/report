@@ -1,6 +1,9 @@
 #' @rdname model_text
 #' @inheritParams parameters::model_parameters.default
 #' @inheritParams report
+#' @inherit model_text return
+#'
+#' @note Arguments in \code{...} are described in the \code{\link{report}} function help.
 #'
 #' @examples
 #' model <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)

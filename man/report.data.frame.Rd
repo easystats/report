@@ -63,6 +63,11 @@
 
 \item{distribution}{Returns kurtosis and skewness in table.}
 }
+\value{
+A list-object of class \code{report}, which contains further list-objects
+with a short and long description of the model summary, as well as a short
+and long table of parameters and fit indices.
+}
 \description{
 Create a report of a data frame.
 }
@@ -105,10 +110,6 @@ summary(model_table(x))
 summary(model_text(x))
 }
 \seealso{
-report
-
-report
-
 report
 
 report

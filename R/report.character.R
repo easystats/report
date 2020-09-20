@@ -1,4 +1,5 @@
 #' @rdname report.data.frame
+#' @inherit report return seealso
 #' @examples
 #' x <- c("A", "B", "C", "A", "B", "B", "D", "E", "B", "D", "A")
 #' report(x)
@@ -6,7 +7,6 @@
 #' model_text(x)
 #' summary(model_table(x))
 #' summary(model_text(x))
-#' @seealso report
 #' @export
 report.character <- function(model, n_entries = 3, levels_percentage = FALSE, missing_percentage = FALSE, ...) {
   n_char <- as.data.frame(sort(table(model), decreasing = TRUE))

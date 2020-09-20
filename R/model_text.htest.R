@@ -1,5 +1,5 @@
 #' @rdname report.htest
-#' @seealso report
+#' @inherit model_text return
 #' @importFrom insight format_ci format_value format_p model_info
 #' @importFrom effectsize interpret_direction interpret_p interpret_r
 #' @export
