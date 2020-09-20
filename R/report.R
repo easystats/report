@@ -1,6 +1,7 @@
-#' Create Reports
+#' Automatic report of R objects
 #'
-#' Create textual reports. See the documentation for your object's class:
+#' Create reports of different objects. See the documentation for your object's class:
+#'
 #' \itemize{
 #'  \item{\link[=report.data.frame]{Dataframes and vectors}}
 #'  \item{\link[=report.htest]{Correlations and t-tests} (\code{htest})}
@@ -12,6 +13,23 @@
 #'
 #' @param model A statistical model. For data frame or character methods, a data frame or character respectively.
 #' @param ... Arguments passed to or from other methods.
+#'
+#' @details
+#'
+#' \subsection{Change output type}{
+#' The \code{report()} function generates a report-object that contain in itself
+#' different representations (e.g., text, tables, plots). These different representations
+#' can be accessed via several functions, such as:
+#'
+#' \itemize{
+#' \item \strong{\code{text_long()}}: Detailed text.
+#' \item \strong{\code{text_short()}}: Minimal text giving the minimal information.
+#' \item \strong{\code{table_long()}}: Comprehensive table including most available indices.
+#' \item \strong{\code{table_short()}}: Minimal table.
+#' }
+#'
+#' Note that for some report objects, some of these representations might be identical.
+#' }
 #'
 #' @return A list-object of class \code{report}, which contains further list-objects
 #' with a short and long description of the model summary, as well as a short
@@ -43,10 +61,14 @@ report <- function(model, ...) {
 
 
 
-#' Create and test objects of class \link{report}.
+#' Create or test objects of class \link{report}.
+#'
+#' Allows to create or test whether an object is of the \code{report} class.
 #'
 #' @param x An arbitrary R object.
 #' @param ... Args to be saved as attributes.
+#'
+#' @return A report object or a \code{TRUE/FALSE} value.
 #'
 #' @export
 as.report <- function(x, ...) {
@@ -66,7 +88,14 @@ is.report <- function(x) inherits(x, "report")
 
 # Access ------------------------------------------------------------------
 
-#' Access report components
+#' Modify report output.
+#'
+#' Functions to access different representations of a report-object.
+#' See the details section below.
+#'
+#' @inherit report details
+#'
+#' @return Character string or dataframe depending on the method.
 #'
 #' @param r Object of class \link{report}.
 #' @param ... Arguments passed to or from other methods.

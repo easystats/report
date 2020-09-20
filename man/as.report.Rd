@@ -3,7 +3,7 @@
 \name{as.report}
 \alias{as.report}
 \alias{is.report}
-\title{Create and test objects of class \link{report}.}
+\title{Create or test objects of class \link{report}.}
 \usage{
 as.report(x, ...)
 
@@ -14,6 +14,9 @@ is.report(x)
 
 \item{...}{Args to be saved as attributes.}
 }
+\value{
+A report object or a \code{TRUE/FALSE} value.
+}
 \description{
-Create and test objects of class \link{report}.
+Allows to create or test whether an object is of the \code{report} class.
 }

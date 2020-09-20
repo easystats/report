@@ -5,7 +5,7 @@
 \alias{text_short}
 \alias{table_long}
 \alias{table_short}
-\title{Access report components}
+\title{Modify report output.}
 \usage{
 text_long(r, ...)
 
@@ -20,6 +20,37 @@ table_short(r, ...)
 
 \item{...}{Arguments passed to or from other methods.}
 }
+\value{
+Character string or dataframe depending on the method.
+}
 \description{
-Access report components
+Functions to access different representations of a report-object.
+See the details section below.
+}
+\details{
+\itemize{
+ \item{\link[=report.data.frame]{Dataframes and vectors}}
+ \item{\link[=report.htest]{Correlations and t-tests} (\code{htest})}
+ \item{\link[=report.aov]{ANOVAs}}
+ \item{\link[=report.default]{Regression models} (\code{glm, lm, ...})}
+ \item{\link[=report.lmerMod]{Mixed models} \code{(glmer, lmer, glmmTMB, ...)}}
+ \item{\link[=report.stanreg]{Bayesian models} \code{(stanreg, brms...)}}
+ }
+
+
+
+\subsection{Change output type}{
+The \code{report()} function generates a report-object that contain in itself
+different representations (e.g., text, tables, plots). These different representations
+can be accessed via several functions, such as:
+
+\itemize{
+\item \strong{\code{text_long()}}: Detailed text.
+\item \strong{\code{text_short()}}: Minimal text giving the minimal information.
+\item \strong{\code{table_long()}}: Comprehensive table including most available indices.
+\item \strong{\code{table_short()}}: Minimal table.
+}
+
+Note that for some report objects, some of these representations might be identical.
+}
 }

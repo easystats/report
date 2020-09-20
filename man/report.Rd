@@ -2,7 +2,7 @@
 % Please edit documentation in R/report.R
 \name{report}
 \alias{report}
-\title{Create Reports}
+\title{Automatic report of R objects}
 \usage{
 report(model, ...)
 }
@@ -17,7 +17,9 @@ with a short and long description of the model summary, as well as a short
 and long table of parameters and fit indices.
 }
 \description{
-Create textual reports. See the documentation for your object's class:
+Create reports of different objects. See the documentation for your object's class:
+}
+\details{
 \itemize{
  \item{\link[=report.data.frame]{Dataframes and vectors}}
  \item{\link[=report.htest]{Correlations and t-tests} (\code{htest})}
@@ -26,6 +28,23 @@ Create textual reports. See the documentation for your object's class:
  \item{\link[=report.lmerMod]{Mixed models} \code{(glmer, lmer, glmmTMB, ...)}}
  \item{\link[=report.stanreg]{Bayesian models} \code{(stanreg, brms...)}}
  }
+
+
+
+\subsection{Change output type}{
+The \code{report()} function generates a report-object that contain in itself
+different representations (e.g., text, tables, plots). These different representations
+can be accessed via several functions, such as:
+
+\itemize{
+\item \strong{\code{text_long()}}: Detailed text.
+\item \strong{\code{text_short()}}: Minimal text giving the minimal information.
+\item \strong{\code{table_long()}}: Comprehensive table including most available indices.
+\item \strong{\code{table_short()}}: Minimal table.
+}
+
+Note that for some report objects, some of these representations might be identical.
+}
 }
 \examples{
 library(report)
