@@ -65,6 +65,11 @@ proportion of HDI, to use for the percentage in ROPE.}
 
 \item{...}{Arguments passed to or from other methods. For instance, when \code{bootstrap = TRUE}, arguments like \code{ci_method} are passed down to \code{\link[bayestestR]{describe_posterior}}.}
 }
+\value{
+A list-object of class \code{report}, which contains further list-objects
+with a short and long description of the model summary, as well as a short
+and long table of parameters and fit indices.
+}
 \description{
 Create a report of Bayesian models.
 }
@@ -85,4 +90,8 @@ if (require("rstanarm")) {
   )
   report(model)
 }}
+}
+\seealso{
+\code{\link{table_short}} or \code{\link{text_short}} to access the
+related content of the report-object.
 }

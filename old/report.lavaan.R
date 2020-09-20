@@ -4,6 +4,7 @@
 #'
 #' @inheritParams report.lm
 #' @inheritParams parameters::model_parameters.lavaan
+#' @inherit report return seealso
 #'
 #' @examples
 #' library(report)
@@ -40,7 +41,7 @@ report.lavaan <- function(model, effsize = "funder2019", ci = 0.95, standardize 
 
   # Params
   params <- parameters
-  if(standardize){
+  if (standardize){
     params$Std_Coefficient <- params$Coefficient
   }
 

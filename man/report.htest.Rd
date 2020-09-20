@@ -16,6 +16,11 @@
 
 \item{...}{Arguments passed to or from other methods.}
 }
+\value{
+A list-object of class \code{report}, which contains further list-objects
+with a short and long description of the model summary, as well as a short
+and long table of parameters and fit indices.
+}
 \description{
 Create a report of an h-test object.
 }
@@ -26,9 +31,8 @@ report(t.test(iris$Sepal.Width, iris$Sepal.Length))
 report(t.test(iris$Sepal.Width, iris$Sepal.Length, var.equal = TRUE))
 report(t.test(mtcars$mpg ~ mtcars$vs))
 report(t.test(iris$Sepal.Width, mu = 1))
+
 }
 \seealso{
-report
-
 report
 }

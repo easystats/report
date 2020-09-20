@@ -5,8 +5,7 @@
 #' @param model Object of class htest.
 #' @param interpretation Effect size interpretation set of rules (see \link[effectsize]{interpret_d} and \link[effectsize]{interpret_r}).
 #' @inheritParams report
-#'
-#'
+#' @inherit report return seealso
 #'
 #' @examples
 #' report(cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman"))
@@ -15,10 +14,8 @@
 #' report(t.test(iris$Sepal.Width, iris$Sepal.Length, var.equal = TRUE))
 #' report(t.test(mtcars$mpg ~ mtcars$vs))
 #' report(t.test(iris$Sepal.Width, mu = 1))
-#' @seealso report
 #'
 #' @importFrom insight format_ci
-#'
 #' @export
 report.htest <- function(model, interpretation = "funder2019", ...) {
   tables <- model_table(model)

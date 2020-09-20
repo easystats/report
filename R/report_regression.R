@@ -8,6 +8,7 @@
 #' @param interpretation \href{https://easystats.github.io/effectsize/articles/interpret.html}{Interpret the standardized parameters} using a set of rules. Default corresponds to "funder2019" for linear models and "chen2010" for logistic models.
 #' @param performance_metrics See \code{\link[performance:model_performance.lm]{model_performance}}.
 #' @param standardize_robust  Logical, if \code{TRUE}, robust standard errors are calculated (if possible), and confidence intervals and p-values are based on these robust standard errors.
+#' @inherit report return seealso
 #'
 #' @examples
 #' library(report)
@@ -60,6 +61,7 @@ report.lme <- report.lm
 #'
 #' @inheritParams report.lm
 #' @inheritParams parameters::model_parameters.merMod
+#' @inherit report return seealso
 #'
 #' @examples
 #' library(lme4)
@@ -124,6 +126,7 @@ report.mixed <- report.lmerMod
 #'
 #' @inheritParams report.lm
 #' @inheritParams parameters::model_parameters.stanreg
+#' @inherit report return seealso
 #'
 #' @examples
 #' \donttest{
