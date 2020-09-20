@@ -160,10 +160,18 @@
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Arguments passed to or from other methods. For instance, when <code>bootstrap = TRUE</code>, arguments like <code>ci_method</code> are passed down to <code><a href='https://rdrr.io/pkg/bayestestR/man/describe_posterior.html'>describe_posterior</a></code>.</p></td>
+      <td><p>Arguments passed to other methods, in particular <code><a href='https://rdrr.io/pkg/parameters/man/model_parameters.html'>model_parameters()</a></code>.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A list with elements of class <code>report_table</code> (which are data
+frame), containing a short and long version of the table output of the
+model summary.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>Arguments in <code>...</code> are described in the <code><a href='report.html'>report</a></code> function help.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Petal.Width</span>, data = <span class='kw'>iris</span>)
