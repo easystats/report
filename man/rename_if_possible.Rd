@@ -15,11 +15,14 @@ reorder_if_possible(x, cols)
 \arguments{
 \item{x}{Data frame.}
 
-\item{pattern}{Variable to replace.}
+\item{pattern}{Variable to replace or remove.}
 
 \item{replacement}{New variable name.}
 
 \item{cols}{Order of columns.}
+}
+\value{
+A modified data frame.
 }
 \description{
 Rename/remove a variable in a data frame if exists.

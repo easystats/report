@@ -3,11 +3,11 @@
 #' Rename/remove a variable in a data frame if exists.
 #'
 #' @param x Data frame.
-#' @param pattern Variable to replace.
+#' @param pattern Variable to replace or remove.
 #' @param replacement New variable name.
 #' @param cols Order of columns.
 #'
-#'
+#' @return A modified data frame.
 #'
 #' @examples
 #' rename_if_possible(iris, "Sepal.Length", "length")
