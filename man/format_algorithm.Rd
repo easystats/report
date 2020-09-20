@@ -9,6 +9,9 @@ format_algorithm(model)
 \arguments{
 \item{model}{A statistical model.}
 }
+\value{
+A formatted character vector.
+}
 \description{
 Model Algorithm Formatting
 }

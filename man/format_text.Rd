@@ -15,6 +15,9 @@ format_text(x, sep = ", ", last = " and ", width = NULL)
 
 \item{width}{Positive integer giving the target column for wrapping lines in the output. Can be "auto".}
 }
+\value{
+A formatted character vector.
+}
 \description{
 Format text
 }

@@ -1,6 +1,7 @@
 #' Model Name Formatting
 #'
 #' @param model A statistical model.
+#' @inherit format_algorithm return
 #'
 #' @examples
 #' model <- lm(Sepal.Length ~ Species, data = iris)

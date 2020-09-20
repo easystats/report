@@ -9,6 +9,9 @@ format_model(model)
 \arguments{
 \item{model}{A statistical model.}
 }
+\value{
+A formatted character vector.
+}
 \description{
 Model Name Formatting
 }

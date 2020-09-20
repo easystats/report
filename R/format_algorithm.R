@@ -2,6 +2,8 @@
 #'
 #' @param model A statistical model.
 #'
+#' @return A formatted character vector.
+#'
 #' @examples
 #' model <- lm(Sepal.Length ~ Species, data = iris)
 #' format_algorithm(model)

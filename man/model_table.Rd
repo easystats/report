@@ -12,10 +12,18 @@ model_table(model, ...)
 \arguments{
 \item{model}{A statistical model.}
 
-\item{...}{Arguments passed to or from other methods. For instance, when \code{bootstrap = TRUE}, arguments like \code{ci_method} are passed down to \code{\link[bayestestR]{describe_posterior}}.}
+\item{...}{Arguments passed to other methods, in particular \code{\link[parameters:model_parameters]{model_parameters()}}.}
+}
+\value{
+A list with elements of class \code{report_table} (which are data
+frame), containing a short and long version of the table output of the
+model summary.
 }
 \description{
 Create a reportable table (no pun intended) for your model.
+}
+\note{
+Arguments in \code{...} are described in the \code{\link{report}} function help.
 }
 \examples{
 model <- lm(Sepal.Length ~ Petal.Width, data = iris)

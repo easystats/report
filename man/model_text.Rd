@@ -12,7 +12,7 @@ model_text(model, ...)
 \arguments{
 \item{model}{A statistical model.}
 
-\item{...}{Arguments passed to or from other methods. For instance, when \code{bootstrap = TRUE}, arguments like \code{ci_method} are passed down to \code{\link[bayestestR]{describe_posterior}}.}
+\item{...}{Arguments passed to other methods, in particular \code{\link[parameters:model_parameters]{model_parameters()}}.}
 }
 \value{
 A list with elements of class \code{report_text} (which are character

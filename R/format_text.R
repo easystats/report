@@ -5,7 +5,7 @@
 #' @param sep Separator.
 #' @param last Last separator.
 #' @param width Positive integer giving the target column for wrapping lines in the output. Can be "auto".
-#'
+#' @inherit format_algorithm return
 #'
 #' @examples
 #' format_text(c("A", "B", "C"))

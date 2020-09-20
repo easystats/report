@@ -1,5 +1,4 @@
 #' @rdname model_table
-#' @inheritParams parameters::model_parameters.default
 #' @export
 model_table.default <- function(model, ...) {
   out <- tryCatch(

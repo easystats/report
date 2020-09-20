@@ -3,6 +3,13 @@
 #' Create a reportable table (no pun intended) for your model.
 #'
 #' @param model A statistical model.
+#' @param ... Arguments passed to other methods, in particular \code{\link[parameters:model_parameters]{model_parameters()}}.
+#'
+#' @return A list with elements of class \code{report_table} (which are data
+#' frame), containing a short and long version of the table output of the
+#' model summary.
+#'
+#' @note Arguments in \code{...} are described in the \code{\link{report}} function help.
 #'
 #' @examples
 #' model <- lm(Sepal.Length ~ Petal.Width, data = iris)
