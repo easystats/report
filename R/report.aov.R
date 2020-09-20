@@ -5,8 +5,7 @@
 #' @param model Object of class \code{aov}, \code{anova} or \code{aovlist}.
 #' @param interpretation Effect size interpretation set of rules (see \link[effectsize]{interpret_omega_squared}).
 #' @inheritParams parameters::model_parameters.aov
-#'
-#'
+#' @inherit report return seealso
 #'
 #' @examples
 #' data <- iris
@@ -15,7 +14,6 @@
 #' r <- report(model)
 #' r
 #' table_short(r)
-#' @seealso report
 #'
 #' @export
 report.aov <- function(model, interpretation = "field2013", omega_squared = "partial", eta_squared = NULL, epsilon_squared = NULL, ...) {

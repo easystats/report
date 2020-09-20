@@ -5,7 +5,7 @@
 #' @param model Object of class \code{bayesfactor_inclusion}.
 #' @param interpretation Effect size interpretation set of rules (see \link[effectsize]{interpret_bf}).
 #' @inheritParams report
-#'
+#' @inherit report return seealso
 #'
 #' @examples
 #' library(report)
@@ -30,7 +30,6 @@
 #'   r
 #'   table_short(r)
 #' }
-#' @seealso report
 #' @importFrom effectsize interpret_bf
 #' @importFrom stats setNames
 #' @importFrom insight format_bf

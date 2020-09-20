@@ -16,6 +16,11 @@
 
 \item{...}{Arguments passed to or from other methods.}
 }
+\value{
+A list-object of class \code{report}, which contains further list-objects
+with a short and long description of the model summary, as well as a short
+and long table of parameters and fit indices.
+}
 \description{
 Create a report of Bayes factors for model comparison.
 }
@@ -44,5 +49,6 @@ if (require("bayestestR")) {
 }
 }
 \seealso{
-report
+\code{\link{table_short}} or \code{\link{text_short}} to access the
+related content of the report-object.
 }
