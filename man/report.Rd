@@ -22,7 +22,7 @@ Create textual reports. See the documentation for your object's class:
  \item{\link[=report.data.frame]{Dataframes and vectors}}
  \item{\link[=report.htest]{Correlations and t-tests} (\code{htest})}
  \item{\link[=report.aov]{ANOVAs}}
- \item{\link[=report.lm]{(General) Linear models} (\code{glm, lm, ...})}
+ \item{\link[=report.default]{(Generalized) Linear models} (\code{glm, lm, ...})}
  \item{\link[=report.lmerMod]{Mixed models} \code{(glmer, lmer, glmmTMB, ...)}}
  \item{\link[=report.stanreg]{Bayesian models} \code{(stanreg, brms...)}}
  }

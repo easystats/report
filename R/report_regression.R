@@ -28,27 +28,32 @@
 #' table_short(r)
 #' table_long(r)
 #' @export
-report.lm <- function(model, interpretation = "default", ci = 0.95, standardize = "refit", standardize_robust = FALSE, bootstrap = FALSE, iterations = 500, performance_metrics = "all", ...) {
-  .report_regression(
-    model,
-    interpretation = interpretation,
-    ci = ci,
-    standardize = standardize,
-    standardize_robust = standardize_robust,
-    bootstrap = bootstrap,
-    iterations = iterations,
-    performance_metrics = performance_metrics,
-    ...
+report.default <- function(model, interpretation = "default", ci = 0.95, standardize = "refit", standardize_robust = FALSE, bootstrap = FALSE, iterations = 500, performance_metrics = "all", ...) {
+  out <- tryCatch(
+    {
+      .report_regression(
+        model,
+        interpretation = interpretation,
+        ci = ci,
+        standardize = standardize,
+        standardize_robust = standardize_robust,
+        bootstrap = bootstrap,
+        iterations = iterations,
+        performance_metrics = performance_metrics,
+        ...
+      )
+    },
+    error = function(e) { NULL }
   )
+
+  if (is.null(out)) {
+    warning("Models of class ", class(model)[1], " are not yet supported.", call. = FALSE)
+  }
+
+  out
 }
 
 
-
-#' @export
-report.glm <- report.lm
-
-#' @export
-report.lme <- report.lm
 
 
 
@@ -59,7 +64,7 @@ report.lme <- report.lm
 #'
 #' Create a report of a mixed model (lme4).
 #'
-#' @inheritParams report.lm
+#' @inheritParams report.default
 #' @inheritParams parameters::model_parameters.merMod
 #' @inherit report return seealso
 #'
@@ -124,7 +129,7 @@ report.mixed <- report.lmerMod
 #'
 #' Create a report of Bayesian models.
 #'
-#' @inheritParams report.lm
+#' @inheritParams report.default
 #' @inheritParams parameters::model_parameters.stanreg
 #' @inherit report return seealso
 #'

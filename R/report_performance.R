@@ -18,7 +18,7 @@ report_performance <- function(model, performance = NULL, ...) {
 #' @importFrom insight find_parameters
 #' @importFrom effectsize interpret_r2 interpret_p
 #' @export
-report_performance.lm <- function(model, performance = NULL, ...) {
+report_performance.default <- function(model, performance = NULL, ...) {
   if (is.null(performance)) {
     performance <- performance::model_performance(model, ...)
   }
@@ -28,12 +28,14 @@ report_performance.lm <- function(model, performance = NULL, ...) {
 
 
   # Intercept-only
-  if (all(insight::find_parameters(model, flatten = FALSE) == "(Intercept)")) {
+  if (insight::is_nullmodel(model)) {
     return(list("text" = text, "text_full" = text_full))
   }
 
-  # R2
-  if ("R2" %in% names(performance)) {
+  modelinfo <- insight::model_info(model)
+
+  # R2 linear models ----
+  if ("R2" %in% names(performance) || modelinfo$is_linear) {
     r2 <- attributes(performance)$r2
 
     text <- paste0(
@@ -42,22 +44,31 @@ report_performance.lm <- function(model, performance = NULL, ...) {
       " (R2 = ",
       insight::format_value(performance$R2)
     )
-    text_full <- paste0(
-      "\n\nThe model explains a ",
-      effectsize::interpret_p(r2$p),
-      " and ",
-      effectsize::interpret_r2(performance$R2, rules = "cohen1988"),
-      " proportion of variance (R2 = ",
-      insight::format_value(performance$R2),
-      ", F(",
-      insight::format_value(r2$df, protect_integers = TRUE),
-      ", ",
-      insight::format_value(r2$df_residual, protect_integers = TRUE),
-      ") = ",
-      insight::format_value(r2$`F`),
-      ", ",
-      insight::format_p(r2$p)
+    text_full <- tryCatch(
+      {
+        paste0(
+          "\n\nThe model explains a ",
+          effectsize::interpret_p(r2$p),
+          " and ",
+          effectsize::interpret_r2(performance$R2, rules = "cohen1988"),
+          " proportion of variance (R2 = ",
+          insight::format_value(performance$R2),
+          ", F(",
+          insight::format_value(r2$df, protect_integers = TRUE),
+          ", ",
+          insight::format_value(r2$df_residual, protect_integers = TRUE),
+          ") = ",
+          insight::format_value(r2$`F`),
+          ", ",
+          insight::format_p(r2$p)
+        )
+      },
+      error = function(e) { NULL }
     )
+
+    if (is.null(text_full)) {
+      text_full <- text
+    }
 
     if ("R2_adjusted" %in% names(performance)) {
       text <- paste0(
@@ -76,29 +87,9 @@ report_performance.lm <- function(model, performance = NULL, ...) {
     }
   }
 
-  as.model_text(text, text_full)
-}
-
-
-
-
-
-#' @export
-report_performance.glm <- function(model, performance = NULL, ...) {
-  if (is.null(performance)) {
-    performance <- performance::model_performance(model, ...)
-  }
-
-  text <- ""
-
-  # Intercept-only
-  if (all(insight::find_parameters(model, flatten = FALSE) == "(Intercept)")) {
-    return(list("text" = text, "text_full" = text))
-  }
-
-  # R2
+  # Tjur's R2
   if ("R2_Tjur" %in% names(performance)) {
-    text <- paste0(
+    text <- text_full <- paste0(
       "The model's explanatory power is ",
       effectsize::interpret_r2(performance$R2_Tjur, rules = "cohen1988"),
       " (Tjur's R2 = ",
@@ -106,8 +97,10 @@ report_performance.glm <- function(model, performance = NULL, ...) {
       ")."
     )
   }
+
+  # Nagelkerke's R2
   if ("R2_Nagelkerke" %in% names(performance)) {
-    text <- paste0(
+    text <- text_full <- paste0(
       "The model's explanatory power is ",
       effectsize::interpret_r2(performance$R2_Nagelkerke, rules = "cohen1988"),
       " (Nagelkerke's R2 = ",
@@ -115,8 +108,21 @@ report_performance.glm <- function(model, performance = NULL, ...) {
       ")."
     )
   }
+
+  # CoxSnell's R2
+  if ("R2_CoxSnell" %in% names(performance)) {
+    text <- text_full <- paste0(
+      "The model's explanatory power is ",
+      effectsize::interpret_r2(performance$R2_CoxSnell, rules = "cohen1988"),
+      " (R2_CoxSnell's R2 = ",
+      insight::format_value(performance$R2_CoxSnell),
+      ")."
+    )
+  }
+
+  # McFadden's R2
   if ("R2_McFadden" %in% names(performance)) {
-    text <- paste0(
+    text <- text_full <- paste0(
       "The model's explanatory power is ",
       effectsize::interpret_r2(performance$R2_McFadden, rules = "cohen1988"),
       " (McFadden's R2 = ",
@@ -125,9 +131,8 @@ report_performance.glm <- function(model, performance = NULL, ...) {
     )
   }
 
-  as.model_text(text, text)
+  as.model_text(text, text_full)
 }
-
 
 
 
@@ -188,8 +193,14 @@ report_performance.lme <- report_performance.merMod
 #' @export
 report_performance.glmmTMB <- report_performance.merMod
 
+#' @export
+report_performance.mixed <- report_performance.merMod
 
+#' @export
+report_performance.MixMod <- report_performance.merMod
 
+#' @export
+report_performance.wbm <- report_performance.merMod
 
 
 
