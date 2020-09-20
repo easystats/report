@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>h-test (Correlation, t-test...) Report — model_table.htest • report</title>
+<title>h-test (Correlation, t-test...) Report — model_text.htest • report</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -19,7 +19,7 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="h-test (Correlation, t-test...) Report — model_table.htest" />
+<meta property="og:title" content="h-test (Correlation, t-test...) Report — model_text.htest" />
 <meta property="og:description" content="Create a report of an h-test object." />
 <meta property="og:image" content="/logo.png" />
 
@@ -62,16 +62,6 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-97457476-8"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-97457476-8');
-</script>
 
 
   </head>
@@ -98,12 +88,12 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="../articles/report.html">Get started</a>
+  <a href="../news/index.html">News</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -116,15 +106,15 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/report.html">Overview of the report Package</a>
+    </li>
+    <li>
       <a href="../articles/cite_packages.html">How to Cite Packages</a>
     </li>
     <li>
       <a href="../articles/supporting_new_models.html">Supporting New Models</a>
     </li>
   </ul>
-</li>
-<li>
-  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -148,7 +138,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>h-test (Correlation, t-test...) Report</h1>
-    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/model_table.htest.R'><code>R/model_table.htest.R</code></a>, <a href='https://github.com/easystats/report/blob/master/R/model_text.htest.R'><code>R/model_text.htest.R</code></a>, <a href='https://github.com/easystats/report/blob/master/R/report.htest.R'><code>R/report.htest.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/model_text.htest.R'><code>R/model_text.htest.R</code></a>, <a href='https://github.com/easystats/report/blob/master/R/report.htest.R'><code>R/report.htest.R</code></a></small>
     <div class="hidden name"><code>report.htest.Rd</code></div>
     </div>
 
@@ -157,9 +147,6 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for htest</span>
-<span class='fu'><a href='model_table.html'>model_table</a></span>(<span class='kw'>model</span>, <span class='kw'>...</span>)
-
-<span class='co'># S3 method for htest</span>
 <span class='fu'><a href='model_text.html'>model_text</a></span>(<span class='kw'>model</span>, interpretation = <span class='st'>"funder2019"</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for htest</span>
@@ -173,19 +160,18 @@
       <td><p>Object of class htest.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Arguments passed to or from other methods.</p></td>
-    </tr>
-    <tr>
       <th>interpretation</th>
       <td><p>Effect size interpretation set of rules (see <a href='https://rdrr.io/pkg/effectsize/man/interpret_d.html'>interpret_d</a> and <a href='https://rdrr.io/pkg/effectsize/man/interpret_r.html'>interpret_r</a>).</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Arguments passed to or from other methods.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>report</p>
-<p>report</p>
 <p>report</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -207,7 +193,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='https://dominiquemakowski.github.io/'>Dominique Makowski</a>, <a href='https://github.com/strengejacke'>Daniel Lüdecke</a>, Mattan S. Ben-Shachar.</p>
+  <p>Developed by <a href='https://dominiquemakowski.github.io/'>Dominique Makowski</a>, <a href='https://github.com/strengejacke'>Daniel Lüdecke</a>, <a href='https://github.com/mattansb'>Mattan S. Ben-Shachar</a>.</p>
 </div>
 
 <div class="pkgdown">
