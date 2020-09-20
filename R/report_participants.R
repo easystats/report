@@ -141,16 +141,11 @@ report_participants <- function(data, age = NULL, sex = NULL, education = NULL, 
   }
 
   # Create text
-  text_age <- if (all(is.na(data[[age]]))) {
-    ""
+  if (all(is.na(data[[age]]))) {
+    text_age <- ""
   } else {
-    paste0(
-      "Mean age = ",
-      insight::format_value(mean(data[[age]], na.rm = TRUE)),
-      ", ",
-      report(data[[age]], centrality = FALSE, missing_percentage = NULL, ...)$texts$text_short
-    )
-
+    text_age <- report(data[[age]], centrality = "mean", missing_percentage = NULL, ...)$texts$text_short
+    text_age <- sub("Mean =", "Mean age =", text_age, fixed = TRUE)
   }
 
 
@@ -163,20 +158,16 @@ report_participants <- function(data, age = NULL, sex = NULL, education = NULL, 
     )
   }
 
-  text_education <- if (all(is.na(data[[education]]))) {
-    ""
+  if (all(is.na(data[[education]]))) {
+    text_education <- ""
   } else {
     if (is.numeric(data[[education]])) {
-      paste0(
-        "Mean education = ",
-        insight::format_value(mean(data[[education]], na.rm = TRUE)),
-        ", ",
-        report(data[[education]], centrality = FALSE, missing_percentage = NULL, ...)$texts$text_short
-      )
+      text_education <- report(data[[education]], centrality = "mean", missing_percentage = NULL, ...)$texts$text_short
+      text_education <- sub("Mean =", "Mean education =", text_education, fixed = TRUE)
     } else {
       txt <- as.character(report(as.factor(data[[education]]), levels_percentage = TRUE, ...)$texts$text_short)
       txt <- strsplit(txt, ":", fixed = TRUE)[[1]][2]
-      paste0("Education:", txt)
+      text_education <- paste0("Education:", txt)
     }
   }
 

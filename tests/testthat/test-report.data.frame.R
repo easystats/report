@@ -50,7 +50,7 @@ test_that("report.numeric", {
   testthat::expect_equal(as.data.frame(r)$Mean, 0.5, tol = 0)
   testthat::expect_null(as.table(r)$Median)
 
-  r <- report(seq(0, 1, length.out = 100), median = TRUE, range = FALSE, dispersion = FALSE, missing_percentage = TRUE)
+  r <- report(seq(0, 1, length.out = 100), centrality = "median", range = FALSE, dispersion = FALSE, missing_percentage = TRUE)
   testthat::expect_equal(as.table(r)$Median, 0.5, tol = 0)
   testthat::expect_equal(as.table(r)$percentage_Missing, 0, tol = 0)
   testthat::expect_null(as.table(r)$Mean)

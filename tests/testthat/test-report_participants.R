@@ -1,6 +1,3 @@
-context("report_participants")
-
-
 test_that("report_participants", {
   data <- data.frame(
     "Age" = c(22, 22, 54, 54, 8, 8),

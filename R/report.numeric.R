@@ -2,17 +2,17 @@
 #' @examples
 #' x <- rnorm(1000)
 #' report(x)
-#' report(x, median = TRUE, missing_percentage = TRUE, distribution = TRUE)
+#' report(x, centrality = "median", missing_percentage = TRUE, distribution = TRUE)
 #' model_table(x)
 #' model_text(x)
 #' summary(model_table(x))
 #' summary(model_text(x))
 #' @seealso report
-#' @importFrom stats mad sd
+#' @importFrom stats mad sd median
 #' @importFrom parameters skewness kurtosis
 #'
 #' @export
-report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = FALSE, ...) {
+report.numeric <- function(model, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = FALSE, ...) {
   if (length(unique(model)) == 2) {
     if (is.null(names(model))) {
       name <- deparse(substitute(model))
@@ -27,9 +27,9 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
   # Table -------------------------------------------------------------------
   table_full <- data.frame(
     Mean = mean(model, na.rm = TRUE),
-    SD = sd(model, na.rm = TRUE),
-    Median = median(model),
-    MAD = mad(model, na.rm = TRUE),
+    SD = stats::sd(model, na.rm = TRUE),
+    Median = stats::median(model),
+    MAD = stats::mad(model, na.rm = TRUE),
     Min = min(model, na.rm = TRUE),
     Max = max(model, na.rm = TRUE),
     n_Obs = length(model),
@@ -81,8 +81,8 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
   table <- table_full
 
   # Centrality and dispersion
-  if (centrality == TRUE) {
-    if (median == TRUE) {
+  if (!isFALSE(centrality) && !is.null(centrality)) {
+    if (centrality == "median") {
       if (dispersion == TRUE) {
         text <- paste0(text_median, ", MAD = ", text_mad)
         table <- remove_if_possible(table, c("Mean", "SD"))
@@ -100,23 +100,7 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
       }
     }
   } else {
-    if (median == TRUE) {
-      if (dispersion == TRUE) {
-        text <- paste0("MAD = ", text_mad)
-        table <- remove_if_possible(table, c("Mean", "Median", "SD"))
-      } else {
-        text <- ""
-        table <- remove_if_possible(table, c("Mean", "Median", "SD", "MAD"))
-      }
-    } else {
-      if (dispersion == TRUE) {
-        text <- paste0("SD = ", text_sd)
-        table <- remove_if_possible(table, c("Mean", "Median", "MAD"))
-      } else {
-        text <- ""
-        table <- remove_if_possible(table, c("Mean", "Median", "MAD", "SD"))
-      }
-    }
+    text <- ""
   }
 
   # Range
@@ -177,14 +161,14 @@ report.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion 
 
 
 #' @export
-model_table.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = FALSE, ...) {
-  r <- report(model, median = median, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, missing_percentage = missing_percentage, ...)
+model_table.numeric <- function(model, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = FALSE, ...) {
+  r <- report(model, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, missing_percentage = missing_percentage, ...)
   r$tables
 }
 
 
 #' @export
-model_text.numeric <- function(model, median = FALSE, centrality = TRUE, dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = FALSE, ...) {
-  r <- report(model, median = median, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, missing_percentage = missing_percentage, ...)
+model_text.numeric <- function(model, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = FALSE, ...) {
+  r <- report(model, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, missing_percentage = missing_percentage, ...)
   r$texts
 }

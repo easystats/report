@@ -3,9 +3,8 @@
 #' Create a report of a data frame.
 #'
 #' @param model A data.frame or a vector.
-#' @param median Show \link{mean} and \link{sd} (default) or \link{median} and \link{mad}.
-#' @param centrality Show index of centrality (\link{mean} or \link{median}).
-#' @param dispersion Show index of dispersion (\link{sd} or \link{mad}).
+#' @param centrality Character vector, indicating the index of centrality (either \code{"mean"} or \code{"median"}).
+#' @param dispersion Show index of dispersion (\link{sd} if \code{centrality = "mean"}, or \link{mad} if \code{centrality = "median"}).
 #' @param range Show range.
 #' @param distribution Returns kurtosis and skewness in table.
 #' @param n_entries Number of different character entries to show. Can be "all".
@@ -13,12 +12,10 @@
 #' @param missing_percentage Show missings by number (default) or percentage.
 #' @inheritParams report
 #'
-#'
-#'
 #' @examples
 #' library(report)
 #'
-#' r <- report(iris, median = TRUE, dispersion = FALSE, distribution = TRUE, missing_percentage = TRUE)
+#' r <- report(iris, centrality = "median", dispersion = FALSE, distribution = TRUE, missing_percentage = TRUE)
 #' r
 #' summary(r)
 #' as.data.frame(r)
@@ -36,7 +33,7 @@
 #' @seealso report
 #'
 #' @export
-report.data.frame <- function(model, median = FALSE, centrality = TRUE, dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = FALSE, n_entries = 3, missing_percentage = FALSE, ...) {
+report.data.frame <- function(model, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = FALSE, n_entries = 3, missing_percentage = FALSE, ...) {
 
   # Table -------------------------------------------------------------------
   table_full <- data.frame()
@@ -46,7 +43,7 @@ report.data.frame <- function(model, median = FALSE, centrality = TRUE, dispersi
 
   for (i in 1:ncol(model)) {
     col <- names(model)[i]
-    r <- report(model[[col]], median = median, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, levels_percentage = levels_percentage, n_entries = n_entries, missing_percentage = missing_percentage, ...)
+    r <- report(model[[col]], centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, levels_percentage = levels_percentage, n_entries = n_entries, missing_percentage = missing_percentage, ...)
 
     current_table <- table_short(r)
     current_table$Variable <- col
@@ -113,7 +110,7 @@ report.data.frame <- function(model, median = FALSE, centrality = TRUE, dispersi
 
 
 #' @export
-report.grouped_df <- function(model, median = FALSE, centrality = TRUE, dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = FALSE, n_entries = 3, missing_percentage = FALSE, ...) {
+report.grouped_df <- function(model, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = FALSE, n_entries = 3, missing_percentage = FALSE, ...) {
   groups <- .group_vars(model)
   ungrouped_x <- as.data.frame(model)
   xlist <- split(ungrouped_x, ungrouped_x[groups], sep = " - ")
@@ -133,7 +130,7 @@ report.grouped_df <- function(model, median = FALSE, centrality = TRUE, dispersi
   for (group in names(xlist)) {
     data <- xlist[[group]]
     data <- remove_if_possible(data, groups)
-    r <- report(data, median = median, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, levels_percentage = levels_percentage, n_entries = n_entries, missing_percentage = missing_percentage)
+    r <- report(data, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, levels_percentage = levels_percentage, n_entries = n_entries, missing_percentage = missing_percentage)
 
     # Get text
     current_text <- as.character(text_short(r))

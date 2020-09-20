@@ -18,8 +18,7 @@
 
 \method{report}{data.frame}(
   model,
-  median = FALSE,
-  centrality = TRUE,
+  centrality = "mean",
   dispersion = TRUE,
   range = TRUE,
   distribution = FALSE,
@@ -33,8 +32,7 @@
 
 \method{report}{numeric}(
   model,
-  median = FALSE,
-  centrality = TRUE,
+  centrality = "mean",
   dispersion = TRUE,
   range = TRUE,
   distribution = FALSE,
@@ -53,11 +51,9 @@
 
 \item{...}{Arguments passed to or from other methods.}
 
-\item{median}{Show \link{mean} and \link{sd} (default) or \link{median} and \link{mad}.}
+\item{centrality}{Character vector, indicating the index of centrality (either \code{"mean"} or \code{"median"}).}
 
-\item{centrality}{Show index of centrality (\link{mean} or \link{median}).}
-
-\item{dispersion}{Show index of dispersion (\link{sd} or \link{mad}).}
+\item{dispersion}{Show index of dispersion (\link{sd} if \code{centrality = "mean"}, or \link{mad} if \code{centrality = "median"}).}
 
 \item{range}{Show range.}
 
@@ -80,7 +76,7 @@ summary(model_table(x))
 summary(model_text(x))
 library(report)
 
-r <- report(iris, median = TRUE, dispersion = FALSE, distribution = TRUE, missing_percentage = TRUE)
+r <- report(iris, centrality = "median", dispersion = FALSE, distribution = TRUE, missing_percentage = TRUE)
 r
 summary(r)
 as.data.frame(r)
@@ -103,7 +99,7 @@ summary(model_table(x))
 summary(model_text(x))
 x <- rnorm(1000)
 report(x)
-report(x, median = TRUE, missing_percentage = TRUE, distribution = TRUE)
+report(x, centrality = "median", missing_percentage = TRUE, distribution = TRUE)
 model_table(x)
 model_text(x)
 summary(model_table(x))
