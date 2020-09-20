@@ -39,7 +39,7 @@ report_performance(model, performance = NULL, ...)
 
 \item{parameters}{A parameters table obtained via \code{parameters::model_parameters()}.}
 
-\item{...}{Arguments passed to or from other methods.}
+\item{...}{Arguments passed to other methods, in particular \code{\link[parameters:model_parameters]{model_parameters()}}.}
 
 \item{ci}{Confidence Interval (CI) level}
 
@@ -79,6 +79,11 @@ proportion of HDI, to use for the percentage in ROPE.}
 
 \item{performance}{A performance table obtained via \code{performance::model_performance()}.}
 }
+\value{
+A list with elements of class \code{report_text} (which are character
+vectors), containing a short and long version of the textual output of the
+model summary.
+}
 \description{
 Model textual description.
 }
@@ -107,7 +112,4 @@ report_performance(model)
 library(lme4)
 model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 report_performance(model)
-}
-\seealso{
-report
 }

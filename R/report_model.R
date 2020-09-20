@@ -3,7 +3,9 @@
 #' Model textual description.
 #'
 #' @param model Object.
-#' @param ... Arguments passed to or from other methods.
+#' @return A list with elements of class \code{report_text} (which are character
+#' vectors), containing a short and long version of the textual output of the
+#' model summary.
 #'
 #' @examples
 #' model <- lm(Sepal.Length ~ Species, data = iris)
@@ -12,8 +14,6 @@
 #' library(lme4)
 #' model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 #' report_model(model)
-#' @seealso report
-#'
 #' @export
 report_model <- function(model, ...) {
   UseMethod("report_model")
