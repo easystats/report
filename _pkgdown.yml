@@ -15,7 +15,7 @@ reference:
   contents:
   - report
   - report.aov
-  - report.lm
+  - report.default
   - report.lmerMod
   - report.stanreg
   - report.htest
