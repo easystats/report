@@ -12,6 +12,9 @@ cite_packages(session)
 \arguments{
 \item{session}{A \link[=sessionInfo]{sessionInfo} object.}
 }
+\value{
+A data frame of class \code{report_packages} with information on package name, version and citation.
+}
 \description{
 Citation table of loaded packages (\link{show_packages} includes version and name, and \link{cite_packages} includes only the citation). This is useful for including the package list in reference-like section at the end of your stats report.
 }

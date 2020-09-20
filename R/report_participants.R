@@ -2,7 +2,7 @@
 #'
 #' A helper function to help you format the participants data (age, sex, ...) in the participants section.
 #'
-#' @param data A dataframe.
+#' @param data A data frame.
 #' @param age The name of the column containing the age.
 #' @param sex The name of the column containing the sex. Note that classes should be some of c("Male", "M", "Female", "F").
 #' @param education The name of the column containing education information.
@@ -11,6 +11,7 @@
 #' @param spell_n Fully spell the sample size ("Three participants" instead of "3 participants").
 #' @inheritParams report.numeric
 #'
+#' @return A character vector with description of the "participants", based on the information provided in \code{data}.
 #'
 #' @examples
 #' library(report)

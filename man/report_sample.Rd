@@ -35,6 +35,9 @@ report_sample(
 
 \item{...}{Arguments passed to or from other methods.}
 }
+\value{
+A data frame of class \code{report_table1} with variable names and their related summary statistics.
+}
 \description{
 Create sample description table (Table 1).
 }

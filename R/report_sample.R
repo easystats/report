@@ -12,6 +12,8 @@
 #' @param digits Number of decimals.
 #' @inheritParams report.data.frame
 #'
+#' @return A data frame of class \code{report_table1} with variable names and their related summary statistics.
+#'
 #' @examples
 #' data(iris)
 #' report_sample(iris[, 1:4])

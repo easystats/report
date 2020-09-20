@@ -16,7 +16,7 @@ report_participants(
 )
 }
 \arguments{
-\item{data}{A dataframe.}
+\item{data}{A data frame.}
 
 \item{age}{The name of the column containing the age.}
 
@@ -31,6 +31,9 @@ report_participants(
 \item{spell_n}{Fully spell the sample size ("Three participants" instead of "3 participants").}
 
 \item{...}{Arguments passed to or from other methods.}
+}
+\value{
+A character vector with description of the "participants", based on the information provided in \code{data}.
 }
 \description{
 A helper function to help you format the participants data (age, sex, ...) in the participants section.

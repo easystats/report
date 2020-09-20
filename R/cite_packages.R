@@ -4,6 +4,8 @@
 #'
 #' @param session A \link[=sessionInfo]{sessionInfo} object.
 #'
+#' @return A data frame of class \code{report_packages} with information on package name, version and citation.
+#'
 #' @examples
 #' show_packages(sessionInfo())
 #' cite_packages(sessionInfo())
