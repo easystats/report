@@ -9,7 +9,7 @@
 `report`’s primary goal is to bridge the gap between R’s output and the
 formatted results contained in your manuscript. It automatically
 produces reports of models and dataframes according to **best practice**
-guidelines (*e.g.,* [APA](https://www.apastyle.org/)’s style guide),
+guidelines (*e.g.,* [APA](https://apastyle.apa.org/)’s style guide),
 ensuring **standardization** and **quality** in results reporting.
 
 ``` r
@@ -91,7 +91,7 @@ devtools::install_github("easystats/report")
 library("report")
 ```
 
-## Report all the things <a href=https://easystats.github.io/Psycho.jl/latest/><img src="man/figures/allthethings.jpg" height="100"></a>
+## Report all the things <a href=https://easystats.github.io/report/><img src="man/figures/allthethings.jpg" height="100"></a>
 
 ### General Workflow
 
