@@ -353,16 +353,16 @@ and long table of parameters and fit indices.</p>
 #&gt; C     |    10</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'><a href='model_text.html'>model_text</a></span>(<span class='kw'>x</span>))
 </div><div class='output co'>#&gt; 3 levels: A, n = 10; B, n = 10 and C, n = 10</div><div class='input'><span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>1000</span>)
 <span class='fu'><a href='report.html'>report</a></span>(<span class='kw'>x</span>)
-</div><div class='output co'>#&gt; Mean = 0.00, SD = 1.00, Median = 0.01, MAD = 1.00, range: [-2.94, 2.76], Skewness = 0.00, Kurtosis = -0.20, 0 missing</div><div class='input'><span class='fu'><a href='report.html'>report</a></span>(<span class='kw'>x</span>, centrality = <span class='st'>"median"</span>, missing_percentage = <span class='fl'>TRUE</span>, distribution = <span class='fl'>TRUE</span>)
-</div><div class='output co'>#&gt; Mean = 0.00, SD = 1.00, Median = 0.01, MAD = 1.00, range: [-2.94, 2.76], Skewness = 0.00, Kurtosis = -0.20, 0% missing</div><div class='input'><span class='fu'><a href='model_table.html'>model_table</a></span>(<span class='kw'>x</span>)
-</div><div class='output co'>#&gt; Mean |   SD | Median |  MAD |   Min |  Max | n_Obs | Skewness | Kurtosis | n_Missing
-#&gt; ------------------------------------------------------------------------------------
-#&gt; 0.00 | 1.00 |   0.01 | 1.00 | -2.94 | 2.76 |  1000 |     0.00 |    -0.20 |         0</div><div class='input'><span class='fu'><a href='model_text.html'>model_text</a></span>(<span class='kw'>x</span>)
-</div><div class='output co'>#&gt; Mean = 0.00, SD = 1.00, Median = 0.01, MAD = 1.00, range: [-2.94, 2.76], Skewness = 0.00, Kurtosis = -0.20, 0 missing</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'><a href='model_table.html'>model_table</a></span>(<span class='kw'>x</span>))
-</div><div class='output co'>#&gt; Mean |   SD |   Min |  Max | n_Obs | n_Missing
-#&gt; ----------------------------------------------
-#&gt; 0.00 | 1.00 | -2.94 | 2.76 |  1000 |         0</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'><a href='model_text.html'>model_text</a></span>(<span class='kw'>x</span>))
-</div><div class='output co'>#&gt; Mean = 0.00, SD = 1.00, range = [-2.94, 2.76], 0 missing</div></pre>
+</div><div class='output co'>#&gt; Mean = 4.34e-03, SD = 1.00, Median = 8.58e-03, MAD = 1.00, range: [-2.94, 2.76], Skewness = -1.69e-03, Kurtosis = -0.20, 0 missing</div><div class='input'><span class='fu'><a href='report.html'>report</a></span>(<span class='kw'>x</span>, centrality = <span class='st'>"median"</span>, missing_percentage = <span class='fl'>TRUE</span>, distribution = <span class='fl'>TRUE</span>)
+</div><div class='output co'>#&gt; Mean = 4.34e-03, SD = 1.00, Median = 8.58e-03, MAD = 1.00, range: [-2.94, 2.76], Skewness = -1.69e-03, Kurtosis = -0.20, 0% missing</div><div class='input'><span class='fu'><a href='model_table.html'>model_table</a></span>(<span class='kw'>x</span>)
+</div><div class='output co'>#&gt; Mean     |   SD |   Median |  MAD |   Min |  Max | n_Obs |  Skewness | Kurtosis | n_Missing
+#&gt; -------------------------------------------------------------------------------------------
+#&gt; 4.34e-03 | 1.00 | 8.58e-03 | 1.00 | -2.94 | 2.76 |  1000 | -1.69e-03 |    -0.20 |         0</div><div class='input'><span class='fu'><a href='model_text.html'>model_text</a></span>(<span class='kw'>x</span>)
+</div><div class='output co'>#&gt; Mean = 4.34e-03, SD = 1.00, Median = 8.58e-03, MAD = 1.00, range: [-2.94, 2.76], Skewness = -1.69e-03, Kurtosis = -0.20, 0 missing</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'><a href='model_table.html'>model_table</a></span>(<span class='kw'>x</span>))
+</div><div class='output co'>#&gt; Mean     |   SD |   Min |  Max | n_Obs | n_Missing
+#&gt; --------------------------------------------------
+#&gt; 4.34e-03 | 1.00 | -2.94 | 2.76 |  1000 |         0</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'><a href='model_text.html'>model_text</a></span>(<span class='kw'>x</span>))
+</div><div class='output co'>#&gt; Mean = 4.34e-03, SD = 1.00, range = [-2.94, 2.76], 0 missing</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
