@@ -12,7 +12,7 @@
 #' @importFrom parameters skewness kurtosis
 #'
 #' @export
-report.numeric <- function(model, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = FALSE, ...) {
+report.numeric <- function(model, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = FALSE, digits = 2, ...) {
   if (length(unique(model)) == 2) {
     if (is.null(names(model))) {
       name <- deparse(substitute(model))
@@ -45,15 +45,15 @@ report.numeric <- function(model, centrality = "mean", dispersion = TRUE, range 
   # Text --------------------------------------------------------------------
 
   # Centrality
-  text_mean <- paste0("Mean = ", insight::format_value(table_full$Mean[1]))
-  text_median <- paste0("Median = ", insight::format_value(table_full$Median[1]))
+  text_mean <- paste0("Mean = ", insight::format_value(table_full$Mean[1], digits = digits))
+  text_median <- paste0("Median = ", insight::format_value(table_full$Median[1], digits = digits))
 
   # Dispersion
-  text_sd <- insight::format_value(table_full$SD[1])
-  text_mad <- insight::format_value(table_full$MAD[1])
+  text_sd <- insight::format_value(table_full$SD[1], digits = digits)
+  text_mad <- insight::format_value(table_full$MAD[1], digits = digits)
 
   # Range
-  text_range <- paste0("[", insight::format_value(table_full$Min[1], protect_integers = TRUE), ", ", insight::format_value(table_full$Max[1], protect_integers = TRUE), "]")
+  text_range <- paste0("[", insight::format_value(table_full$Min[1], protect_integers = TRUE, digits = digits), ", ", insight::format_value(table_full$Max[1], protect_integers = TRUE), "]")
 
   # Distribution
   text_distribution <- paste0(
@@ -66,7 +66,7 @@ report.numeric <- function(model, centrality = "mean", dispersion = TRUE, range 
   # Missings
   if (!is.null(missing_percentage)) {
     if (missing_percentage == TRUE) {
-      text_missing <- paste0(", ", insight::format_value(table_full$percentage_Missing[1], protect_integers = TRUE), "% missing")
+      text_missing <- paste0(", ", insight::format_value(table_full$percentage_Missing[1], protect_integers = TRUE, digits = digits), "% missing")
     } else {
       text_missing <- paste0(", ", table_full$n_Missing[1], " missing")
     }

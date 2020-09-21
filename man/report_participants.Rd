@@ -12,6 +12,7 @@ report_participants(
   participants = NULL,
   group = NULL,
   spell_n = FALSE,
+  digits = 1,
   ...
 )
 }
@@ -29,6 +30,8 @@ report_participants(
 \item{group}{A character vector indicating the name(s) of the column(s) used for stratified description.}
 
 \item{spell_n}{Fully spell the sample size ("Three participants" instead of "3 participants").}
+
+\item{digits}{Number of significant digits.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

@@ -65,7 +65,7 @@
 #' )
 #' @importFrom stats aggregate
 #' @export
-report_participants <- function(data, age = NULL, sex = NULL, education = NULL, participants = NULL, group = NULL, spell_n = FALSE, ...) {
+report_participants <- function(data, age = NULL, sex = NULL, education = NULL, participants = NULL, group = NULL, spell_n = FALSE, digits = 1, ...) {
 
   # find age variable automatically
   if (is.null(age)) {
@@ -85,13 +85,13 @@ report_participants <- function(data, age = NULL, sex = NULL, education = NULL, 
   if (!is.null(group)) {
     text <- c()
     for (i in split(data, data[group])) {
-      current_text <- .report_participants(i, age = age, sex = sex, education = education, participants = participants, spell_n = spell_n)
+      current_text <- .report_participants(i, age = age, sex = sex, education = education, participants = participants, spell_n = spell_n, digits = digits)
       pre_text <- paste0("the '", paste0(names(i[group]), " - ", as.character(sapply(i[group], unique)), collapse = " and "), "' group: ")
       text <- c(text, paste0(pre_text, current_text))
     }
     text <- paste("For", format_text(text, sep = ", for ", last = " and for "))
   } else {
-    text <- .report_participants(data, age = age, sex = sex, education = education, participants = participants, spell_n = spell_n, ...)
+    text <- .report_participants(data, age = age, sex = sex, education = education, participants = participants, spell_n = spell_n, digits = digits, ...)
   }
   text
 }
@@ -107,7 +107,7 @@ report_participants <- function(data, age = NULL, sex = NULL, education = NULL, 
 #' @importFrom insight format_number format_value
 #' @importFrom tools toTitleCase
 #' @keywords internal
-.report_participants <- function(data, age = "Age", sex = "Sex", education = "Education", participants = NULL, spell_n = FALSE, ...) {
+.report_participants <- function(data, age = "Age", sex = "Sex", education = "Education", participants = NULL, spell_n = FALSE, digits = 1, ...) {
   # Sanity checks
   if (is.null(age) | !age %in% names(data)) {
     data$Age <- NA
@@ -144,7 +144,7 @@ report_participants <- function(data, age = NULL, sex = NULL, education = NULL, 
   if (all(is.na(data[[age]]))) {
     text_age <- ""
   } else {
-    text_age <- report(data[[age]], centrality = "mean", missing_percentage = NULL, ...)$texts$text_short
+    text_age <- report(data[[age]], centrality = "mean", missing_percentage = NULL, digits = digits, ...)$texts$text_short
     text_age <- sub("Mean =", "Mean age =", text_age, fixed = TRUE)
   }
 
@@ -153,7 +153,7 @@ report_participants <- function(data, age = NULL, sex = NULL, education = NULL, 
     ""
   } else {
     paste0(
-      insight::format_value(length(data[[sex]][tolower(data[[sex]]) %in% c("female", "f")]) / nrow(data) * 100),
+      insight::format_value(length(data[[sex]][tolower(data[[sex]]) %in% c("female", "f")]) / nrow(data) * 100, digits = digits),
       "% females"
     )
   }
@@ -162,10 +162,10 @@ report_participants <- function(data, age = NULL, sex = NULL, education = NULL, 
     text_education <- ""
   } else {
     if (is.numeric(data[[education]])) {
-      text_education <- report(data[[education]], centrality = "mean", missing_percentage = NULL, ...)$texts$text_short
+      text_education <- report(data[[education]], centrality = "mean", missing_percentage = NULL, digits = digits, ...)$texts$text_short
       text_education <- sub("Mean =", "Mean education =", text_education, fixed = TRUE)
     } else {
-      txt <- as.character(report(as.factor(data[[education]]), levels_percentage = TRUE, ...)$texts$text_short)
+      txt <- as.character(report(as.factor(data[[education]]), levels_percentage = TRUE, digits = digits, ...)$texts$text_short)
       txt <- strsplit(txt, ":", fixed = TRUE)[[1]][2]
       text_education <- paste0("Education:", txt)
     }

@@ -37,6 +37,7 @@
   range = TRUE,
   distribution = FALSE,
   missing_percentage = FALSE,
+  digits = 2,
   ...
 )
 }
@@ -58,6 +59,8 @@
 \item{range}{Show range.}
 
 \item{distribution}{Returns kurtosis and skewness in table.}
+
+\item{digits}{Number of significant digits.}
 }
 \value{
 A list-object of class \code{report}, which contains further list-objects
