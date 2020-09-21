@@ -168,4 +168,4 @@ paste(report_participants(data, spell_n = TRUE),
 
 If you like it, you can put a *star* on this repo, and cite the package as follows:
 
-- Makowski, D., Ben-Shachar, M. S., \& Lüdecke, D. (2019). (2020). *The report package for R: Ensuring the use of best practices for results reporting*. CRAN.
+- Makowski, D., Ben-Shachar, M. S., \& Lüdecke, D. (2020). *The report package for R: Ensuring the use of best practices for results reporting*. CRAN.

@@ -15,7 +15,6 @@ ensuring **standardization** and **quality** in results reporting.
 ``` r
 library(report)
 
-# Example
 model <- lm(Sepal.Length ~ Species, data = iris)
 report(model)
 ```
@@ -29,12 +28,12 @@ report(model)
     ## 119.26, p < .001, adj. R2 = 0.61). The model's intercept, corresponding to Sepal.Length = 0 and
     ## Species = setosa, is at 5.01 (SE = 0.07, 95% CI [4.86, 5.15], p < .001). Within this model:
     ## 
-    ##   - The effect of (Intercept) is positive and can be considered as very large and significant (beta =
+    ##   - The effect of (Intercept) is positive and can be considered as very large and significant (b =
     ## 5.01, SE = 0.07, 95% CI [4.86, 5.15], std. beta = -1.01, p < .001).
     ##   - The effect of Species [versicolor] is positive and can be considered as very large and
-    ## significant (beta = 0.93, SE = 0.10, 95% CI [0.73, 1.13], std. beta = 1.12, p < .001).
+    ## significant (b = 0.93, SE = 0.10, 95% CI [0.73, 1.13], std. beta = 1.12, p < .001).
     ##   - The effect of Species [virginica] is positive and can be considered as very large and significant
-    ## (beta = 1.58, SE = 0.10, 95% CI [1.38, 1.79], std. beta = 1.91, p < .001).
+    ## (b = 1.58, SE = 0.10, 95% CI [1.38, 1.79], std. beta = 1.91, p < .001).
 
 ## Documentation
 
@@ -105,13 +104,10 @@ and `table_short()`.
 
 [![workflow](man/figures/workflow.png)](https://easystats.github.io/report/)
 
-### Features
-
-The `report()` function works on a variety of models, as well as
-dataframes:
+The `report()` function works on a variety of models, as well as other
+objects such as dataframes:
 
 ``` r
-# Dataframe report
 report(iris)
 ```
 
@@ -127,7 +123,6 @@ These reports nicely work within the
 [*tidyverse*](https://github.com/tidyverse) workflow:
 
 ``` r
-# Correlation report
 cor.test(iris$Sepal.Length, iris$Petal.Length) %>% report()
 ```
 
@@ -137,7 +132,6 @@ You can also create tables with the `table_short()` and `table_long()`
 functions:
 
 ``` r
-# Table report for a linear model
 lm(Sepal.Length ~ Petal.Length + Species, data = iris) %>% report() %>% 
     table_short()
 ## Parameter            | Coefficient |             CI |      p | Coefficient (std.) |  Fit
@@ -151,8 +145,6 @@ lm(Sepal.Length ~ Petal.Length + Species, data = iris) %>% report() %>%
 ## R2 (adj.)            |             |                |        |                    | 0.83
 ```
 
-## Examples
-
 ### *t*-tests and correlations
 
 ``` r
@@ -163,9 +155,10 @@ t.test(mtcars$mpg ~ mtcars$am) %>% report()
     ## 0 = 17.15, mean in group 1 = 24.39) is significant (difference = -7.24, 95% CI [-11.28, -3.21],
     ## t(18.33) = -3.77, p < .01) and can be considered as very large (Cohen's d = -1.76).
 
-### Miscellaneous
+### Report participants details
 
-#### Report participants details
+This can be useful to complete the **Participants** paragraph of your
+manuscript.
 
 ``` r
 data <- data.frame(Age = c(22, 23, 54, 21), Sex = c("F", "F", 
@@ -180,5 +173,6 @@ paste(report_participants(data, spell_n = TRUE), "were recruited in the study by
 If you like it, you can put a *star* on this repo, and cite the package
 as follows:
 
-  - Makowski & Lüdecke (2019). *The report package for R: Ensuring the
-    use of best practices for results reporting*. CRAN. doi: .
+  - Makowski, D., Ben-Shachar, M. S., & Lüdecke, D. (2020). *The report
+    package for R: Ensuring the use of best practices for results
+    reporting*. CRAN.
