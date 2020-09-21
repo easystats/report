@@ -14,6 +14,6 @@ if (require("testthat") && require("insight") && require("httr")) {
     testthat::expect_equal(format_model(insight::download_model("stanreg_glm_1")), "Bayesian logistic model")
 
     model <- glm(vs ~ mpg, data = mtcars, family = "poisson")
-    testthat::expect_equal(format_model(model), "general linear model (poisson family with a log link)")
+    testthat::expect_equal(format_model(model), "poisson model")
   })
 }

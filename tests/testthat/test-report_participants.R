@@ -7,11 +7,11 @@ test_that("report_participants", {
 
   testthat::expect_equal(
     report_participants(data, age = "Age", sex = "Sex", participant = "Participant"),
-    "3 participants (Mean age = 28.00, SD = 23.58, range = [8, 54]; 66.67% females)"
+    "3 participants (Mean age = 28.0, SD = 23.6, range = [8, 54]; 66.7% females)"
   )
-  testthat::expect_equal(nchar(report_participants(data, participant = "Participant", spell_n = TRUE)), 82)
+  testthat::expect_equal(nchar(report_participants(data, participant = "Participant", spell_n = TRUE)), 79)
   testthat::expect_equal(
     report_participants(data, participant = "Participant", spell_n = TRUE),
-    "Three participants (Mean age = 28.00, SD = 23.58, range = [8, 54]; 66.67% females)"
+    "Three participants (Mean age = 28.0, SD = 23.6, range = [8, 54]; 66.7% females)"
   )
 })
