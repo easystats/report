@@ -11,15 +11,19 @@
 #'   model <- lme4::lmer(Sepal.Length ~ Sepal.Width + (1 | Species), data = iris)
 #'   format_model(model)
 #' }
-#' @importFrom insight model_info
+#' @importFrom insight model_info is_nullmodel
 #' @export
 format_model <- function(model) {
   info <- insight::model_info(model)
 
-  if (all(insight::find_parameters(model, flatten = FALSE) == "(Intercept)")) {
+  if (insight::is_nullmodel(model)) {
     type <- "constant (intercept-only) "
   } else {
     type <- ""
+  }
+
+  if ("Mclust" %in% class(model)) {
+    return("Gaussian finite mixture fitted by EM algorithm")
   }
 
   if (info$is_bayesian) {
