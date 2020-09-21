@@ -165,7 +165,7 @@ data <- data.frame(Age = c(22, 23, 54, 21), Sex = c("F", "F",
     "M", "M"))
 
 paste(report_participants(data, spell_n = TRUE), "were recruited in the study by means of torture and coercion.")
-## [1] "Four participants (Mean age = 30.00, SD = 16.02, range = [21, 54]; 50.00% females) were recruited in the study by means of torture and coercion."
+## [1] "Four participants (Mean age = 30.0, SD = 16.0, range = [21, 54]; 50.0% females) were recruited in the study by means of torture and coercion."
 ```
 
 ## Credits
