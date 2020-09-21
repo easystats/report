@@ -28,8 +28,9 @@ format_model <- function(model) {
 
   if (info$is_zero_inflated) {
     type <- paste0(type, "zero-inflated ")
+  } else if (info$is_hurdle) {
+    type <- paste0(type, "hurdle ")
   }
-  # TODO: hurdle?
 
   if (info$is_logit) {
     type <- paste0(type, "logistic ")
@@ -37,6 +38,12 @@ format_model <- function(model) {
     type <- paste0(type, "probit ")
   } else if (info$is_linear) {
     type <- paste0(type, "linear ")
+  } else if (info$is_poisson) {
+    type <- paste0(type, "poisson ")
+  } else if (info$is_negbin) {
+    type <- paste0(type, "negative-binomial ")
+  } else if (info$is_survival) {
+    type <- paste0(type, "survival ")
   } else {
     type <- paste0(type, "general linear ")
   }
