@@ -140,7 +140,7 @@ report_parameters <- function(model, parameters, prefix = "  - ", ...) {
 
 #' @importFrom insight format_rope format_value format_ci format_p
 #' @keywords internal
-.report_parameters_indices <- function(parameters, ci = 0.89, coefname = "beta") {
+.report_parameters_indices <- function(parameters, ci = 0.89, coefname = "b") {
   text <- ""
 
   if ("Coefficient" %in% names(parameters)) {
