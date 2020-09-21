@@ -169,7 +169,7 @@
     </tr>
     <tr>
       <th>interpretation</th>
-      <td><p><a href='https://easystats.github.io/effectsize/articles/interpret.html'>Interpret the standardized parameters</a> using a set of rules. Default corresponds to "funder2019" for linear models and "chen2010" for logistic models.</p></td>
+      <td><p><a href='https://easystats.github.io/effectsize/articles/interpret.html'>Interpret the standardized parameters</a> using a set of rules. Default corresponds to "cohen1988" for linear models and "chen2010" for logistic models.</p></td>
     </tr>
     <tr>
       <th>ci</th>
@@ -226,7 +226,7 @@ related content of the report-object.</p></div>
 #&gt; 
 #&gt;   - The effect of (Intercept) is positive and can be considered as significant (b = 2.50, 95% CI [1.20, 3.81], p &lt; .001).
 #&gt;   - The effect of Petal.Length is positive and can be considered as significant (b = 0.89, 95% CI [0.76, 1.01], p &lt; .001).</div><div class='input'><span class='fu'><a href='text_long.html'>text_long</a></span>(<span class='kw'>r</span>)
-</div><div class='output co'>#&gt; We fitted a linear mixed model (estimated using REML and nloptwrap optimizer) to predict Sepal.Length with Petal.Length (formula = Sepal.Length ~ Petal.Length). The model included Species as random effects (formula = ~1 | Species). Effect sizes were labelled following Funder's (2019) recommendations. The model's total explanatory power is substantial (conditional R2 = 0.97) and the part related to the fixed effects alone (marginal R2) is of 0.66. The model's intercept, corresponding to Sepal.Length = 0, Petal.Length = 0 and Species = setosa, is at 2.50 (SE = 0.67, 95% CI [1.20, 3.81], p &lt; .001). Within this model:
+</div><div class='output co'>#&gt; We fitted a linear mixed model (estimated using REML and nloptwrap optimizer) to predict Sepal.Length with Petal.Length (formula = Sepal.Length ~ Petal.Length). The model included Species as random effects (formula = ~1 | Species). Effect sizes were labelled following Cohen's (1988) recommendations. The model's total explanatory power is substantial (conditional R2 = 0.97) and the part related to the fixed effects alone (marginal R2) is of 0.66. The model's intercept, corresponding to Sepal.Length = 0, Petal.Length = 0 and Species = setosa, is at 2.50 (SE = 0.67, 95% CI [1.20, 3.81], p &lt; .001). Within this model:
 #&gt; 
 #&gt;   - The effect of (Intercept) is positive and can be considered as significant (b = 2.50, SE = 0.67, 95% CI [1.20, 3.81], p &lt; .001).
 #&gt;   - The effect of Petal.Length is positive and can be considered as significant (b = 0.89, SE = 0.06, 95% CI [0.76, 1.01], p &lt; .001).</div><div class='input'><span class='fu'><a href='text_long.html'>table_short</a></span>(<span class='kw'>r</span>)
