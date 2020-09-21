@@ -49,7 +49,7 @@ model_text.default <- function(model, ...) {
     if (insight::model_info(model)$is_binomial) {
       interpretation <- "chen2010"
     } else {
-      interpretation <- "funder2019"
+      interpretation <- "cohen1988"
     }
   }
 

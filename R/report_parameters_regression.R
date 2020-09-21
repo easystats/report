@@ -1,5 +1,5 @@
 #' @export
-report_parameters.default <- function(model, parameters = NULL, prefix = "  - ", ci = 0.95, interpretation = "funder2019", ...) {
+report_parameters.default <- function(model, parameters = NULL, prefix = "  - ", ci = 0.95, interpretation = "cohen1988", ...) {
   if (is.null(parameters)) {
     parameters <- parameters::model_parameters(model, ...)
   }
@@ -33,7 +33,7 @@ report_parameters.default <- function(model, parameters = NULL, prefix = "  - ",
 
 
 #' @keywords internal
-.report_parameters_regression <- function(parameters, ci = 0.95, interpretation = "funder2019", type = "d", prefix = "  - ", bayesian_diagnostic = FALSE) {
+.report_parameters_regression <- function(parameters, ci = 0.95, interpretation = "cohen1988", type = "d", prefix = "  - ", bayesian_diagnostic = FALSE) {
   text <- .report_parameters_combine(
     names = .report_parameters_names(parameters),
     direction = .report_parameters_direction(parameters),

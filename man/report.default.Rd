@@ -19,7 +19,7 @@
 \arguments{
 \item{model}{Model object.}
 
-\item{interpretation}{\href{https://easystats.github.io/effectsize/articles/interpret.html}{Interpret the standardized parameters} using a set of rules. Default corresponds to "funder2019" for linear models and "chen2010" for logistic models.}
+\item{interpretation}{\href{https://easystats.github.io/effectsize/articles/interpret.html}{Interpret the standardized parameters} using a set of rules. Default corresponds to "cohen1988" for linear models and "chen2010" for logistic models.}
 
 \item{ci}{Confidence Interval (CI) level. Default to 0.95 (95\%).}
 

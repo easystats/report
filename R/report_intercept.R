@@ -80,10 +80,22 @@ report_intercept.default <- function(model, parameters = NULL, ci = 0.95, ...) {
       data[col] <- as.character(data[col])
       text <- c(text, paste0(col, " = ", levels(data[[col]])[1]))
     } else if (is.factor(data[[col]])) {
-      text <- c(text, paste0(col, " = ", levels(data[[col]])[1]))
+      text <- c(text, paste0(col, " = ", levels(data[[col]])[.find_reflevel(data[[col]])]))
     } else {
       text <- c(text, paste0(col, " = [?]"))
     }
   }
   paste0(", corresponding to ", format_text(text), ",")
+}
+
+
+
+.find_reflevel <- function(f) {
+  tryCatch(
+    {
+      con <- contrasts(f)
+      unname(which(apply(con, 1, function(i) sum(i) == 0)))
+    },
+    error = function(e) { 1 }
+  )
 }
