@@ -42,6 +42,10 @@ format_model <- function(model) {
     type <- paste0(type, "poisson ")
   } else if (info$is_negbin) {
     type <- paste0(type, "negative-binomial ")
+  } else if (info$is_ordinal) {
+    type <- paste0(type, "ordinal ")
+  } else if (info$is_multinomial) {
+    type <- paste0(type, "multinomial ")
   } else if (info$is_survival) {
     type <- paste0(type, "survival ")
   } else {
