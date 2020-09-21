@@ -104,7 +104,6 @@
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://easystats.github.io/report">report</a></span>)
 
-<span class="co"># Example</span>
 <span class="kw">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="kw">Sepal.Length</span> <span class="op">~</span> <span class="kw">Species</span>, data = <span class="kw">iris</span>)
 <span class="fu"><a href="reference/report.html">report</a></span>(<span class="kw">model</span>)
 </pre></div>
@@ -117,12 +116,12 @@
 <span id="cb2-7"><a href="#cb2-7"></a><span class="co">## 119.26, p &lt; .001, adj. R2 = 0.61). The model's intercept, corresponding to Sepal.Length = 0 and</span></span>
 <span id="cb2-8"><a href="#cb2-8"></a><span class="co">## Species = setosa, is at 5.01 (SE = 0.07, 95% CI [4.86, 5.15], p &lt; .001). Within this model:</span></span>
 <span id="cb2-9"><a href="#cb2-9"></a><span class="co">## </span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co">##   - The effect of (Intercept) is positive and can be considered as very large and significant (beta =</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co">##   - The effect of (Intercept) is positive and can be considered as very large and significant (b =</span></span>
 <span id="cb2-11"><a href="#cb2-11"></a><span class="co">## 5.01, SE = 0.07, 95% CI [4.86, 5.15], std. beta = -1.01, p &lt; .001).</span></span>
 <span id="cb2-12"><a href="#cb2-12"></a><span class="co">##   - The effect of Species [versicolor] is positive and can be considered as very large and</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="co">## significant (beta = 0.93, SE = 0.10, 95% CI [0.73, 1.13], std. beta = 1.12, p &lt; .001).</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="co">## significant (b = 0.93, SE = 0.10, 95% CI [0.73, 1.13], std. beta = 1.12, p &lt; .001).</span></span>
 <span id="cb2-14"><a href="#cb2-14"></a><span class="co">##   - The effect of Species [virginica] is positive and can be considered as very large and significant</span></span>
-<span id="cb2-15"><a href="#cb2-15"></a><span class="co">## (beta = 1.58, SE = 0.10, 95% CI [1.38, 1.79], std. beta = 1.91, p &lt; .001).</span></span></code></pre></div>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="co">## (b = 1.58, SE = 0.10, 95% CI [1.38, 1.79], std. beta = 1.91, p &lt; .001).</span></span></code></pre></div>
 <div id="documentation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#documentation" class="anchor"></a>Documentation</h2>
@@ -167,13 +166,8 @@
 <a href="#general-workflow" class="anchor"></a>General Workflow</h3>
 <p>The <code>report</code> package works in a two step fashion. First, you create a <code>report</code> object with the <code><a href="reference/report.html">report()</a></code> function (which takes different arguments depending on the type of object you are reporting). Then, this report object can be displayed either textually, using <code><a href="reference/text_long.html">text_short()</a></code>, or as a table, using <code><a href="reference/text_long.html">table_short()</a></code>. Moreover, you can access a more detailed (but less digested) version of the report using <code><a href="reference/text_long.html">text_long()</a></code> and <code><a href="reference/text_long.html">table_short()</a></code>.</p>
 <p><a href="https://easystats.github.io/report/"><img src="reference/figures/workflow.png" alt="workflow"></a></p>
-</div>
-<div id="features" class="section level3">
-<h3 class="hasAnchor">
-<a href="#features" class="anchor"></a>Features</h3>
-<p>The <code><a href="reference/report.html">report()</a></code> function works on a variety of models, as well as dataframes:</p>
+<p>The <code><a href="reference/report.html">report()</a></code> function works on a variety of models, as well as other objects such as dataframes:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="co"># Dataframe report</span>
 <span class="fu"><a href="reference/report.html">report</a></span>(<span class="kw">iris</span>)
 </pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">## The data contains 150 observations of the following variables:</span></span>
@@ -185,13 +179,11 @@
 <span id="cb6-7"><a href="#cb6-7"></a><span class="co">##   - Species: 3 levels: setosa (n = 50, 33.33%); versicolor (n = 50, 33.33%) and virginica (n = 50, 33.33%)</span></span></code></pre></div>
 <p>These reports nicely work within the <a href="https://github.com/tidyverse"><em>tidyverse</em></a> workflow:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="co"># Correlation report</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span>(<span class="kw">iris</span><span class="op">$</span><span class="kw">Sepal.Length</span>, <span class="kw">iris</span><span class="op">$</span><span class="kw">Petal.Length</span>) <span class="op">%&gt;%</span> <span class="fu"><a href="reference/report.html">report</a></span>()
 </pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">## The Pearson's product-moment correlation between iris$Sepal.Length and iris$Petal.Length is positive, significant and very large (r = 0.87, 95% CI [0.83, 0.91], t(148) = 21.65, p &lt; .001).</span></span></code></pre></div>
 <p>You can also create tables with the <code><a href="reference/text_long.html">table_short()</a></code> and <code><a href="reference/text_long.html">table_long()</a></code> functions:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="co"># Table report for a linear model</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="kw">Sepal.Length</span> <span class="op">~</span> <span class="kw">Petal.Length</span> <span class="op">+</span> <span class="kw">Species</span>, data = <span class="kw">iris</span>) <span class="op">%&gt;%</span> <span class="fu"><a href="reference/report.html">report</a></span>() <span class="op">%&gt;%</span> 
     <span class="fu"><a href="reference/text_long.html">table_short</a></span>()
 <span class="co">## Parameter            | Coefficient |             CI |      p | Coefficient (std.) |  Fit</span>
@@ -205,10 +197,6 @@
 <span class="co">## R2 (adj.)            |             |                |        |                    | 0.83</span>
 </pre></div>
 </div>
-</div>
-<div id="examples" class="section level2">
-<h2 class="hasAnchor">
-<a href="#examples" class="anchor"></a>Examples</h2>
 <div id="t-tests-and-correlations" class="section level3">
 <h3 class="hasAnchor">
 <a href="#t-tests-and-correlations" class="anchor"></a><em>t</em>-tests and correlations</h3>
@@ -219,12 +207,10 @@
 <span id="cb11-2"><a href="#cb11-2"></a><span class="co">## 0 = 17.15, mean in group 1 = 24.39) is significant (difference = -7.24, 95% CI [-11.28, -3.21],</span></span>
 <span id="cb11-3"><a href="#cb11-3"></a><span class="co">## t(18.33) = -3.77, p &lt; .01) and can be considered as very large (Cohen's d = -1.76).</span></span></code></pre></div>
 </div>
-<div id="miscellaneous" class="section level3">
+<div id="report-participants-details" class="section level3">
 <h3 class="hasAnchor">
-<a href="#miscellaneous" class="anchor"></a>Miscellaneous</h3>
-<div id="report-participants-details" class="section level4">
-<h4 class="hasAnchor">
-<a href="#report-participants-details" class="anchor"></a>Report participants details</h4>
+<a href="#report-participants-details" class="anchor"></a>Report participants details</h3>
+<p>This can be useful to complete the <strong>Participants</strong> paragraph of your manuscript.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit">
 <span class="kw">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(Age = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">22</span>, <span class="fl">23</span>, <span class="fl">54</span>, <span class="fl">21</span>), Sex = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"F"</span>, <span class="st">"F"</span>, 
     <span class="st">"M"</span>, <span class="st">"M"</span>))
@@ -234,13 +220,12 @@
 </pre></div>
 </div>
 </div>
-</div>
 <div id="credits" class="section level2">
 <h2 class="hasAnchor">
 <a href="#credits" class="anchor"></a>Credits</h2>
 <p>If you like it, you can put a <em>star</em> on this repo, and cite the package as follows:</p>
 <ul>
-<li>Makowski &amp; Lüdecke (2019). <em>The report package for R: Ensuring the use of best practices for results reporting</em>. CRAN. doi: .</li>
+<li>Makowski, D., Ben-Shachar, M. S., &amp; Lüdecke, D. (2020). <em>The report package for R: Ensuring the use of best practices for results reporting</em>. CRAN.</li>
 </ul>
 </div>
 </div>
