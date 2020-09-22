@@ -131,7 +131,7 @@ model_table.brmsfit <- model_table.stanreg
 
   # Effect Size ----------------------------------------------------------------
   if (!is.null(standardize)) {
-    effsize <- effectsize::standardize_parameters(model, method = "refit", robust = FALSE, two_sd = FALSE, centrality = centrality, ...)
+    effsize <- effectsize::standardize_parameters(model, method = standardize, robust = FALSE, two_sd = FALSE, centrality = centrality, ...)
 
     # fix CI column names
     ci_columns <- grep("^CI_", colnames(effsize))
