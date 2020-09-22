@@ -5,6 +5,7 @@
 #' Create a report of a (general) linear model.
 #'
 #' @inheritParams parameters::model_parameters.default
+#' @inheritParams parameters::model_parameters.stanreg
 #' @param interpretation \href{https://easystats.github.io/effectsize/articles/interpret.html}{Interpret the standardized parameters} using a set of rules. Default corresponds to "cohen1988" for linear models and "chen2010" for logistic models.
 #' @param performance_metrics See \code{\link[performance:model_performance.lm]{model_performance}}.
 #' @param standardize_robust  Logical, if \code{TRUE}, robust standard errors are calculated (if possible), and confidence intervals and p-values are based on these robust standard errors.

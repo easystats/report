@@ -61,6 +61,9 @@ model_table.mixed <- model_table.lme
 # Model table for Bayesian models ----------------------
 
 
+#' @param verbose Toggle warnings.
+#' @inheritParams parameters::model_parameters.stanreg
+#' @inheritParams report
 #' @rdname model_table
 #' @export
 model_table.stanreg <- function(model, ci_method = "hdi", verbose = FALSE, ...) {

@@ -16,6 +16,11 @@ model_text(model, ...)
 \item{model}{A statistical model.}
 
 \item{...}{Arguments passed to other methods, in particular \code{\link[parameters:model_parameters]{model_parameters()}}.}
+
+\item{ci_method}{The type of index used for Credible Interval. Can be
+\code{"HDI"} (default, see \code{\link[bayestestR:hdi]{hdi}}), \code{"ETI"}
+(see \code{\link[bayestestR:eti]{eti}}) or \code{"SI"}
+(see \code{\link[bayestestR:si]{si}}).}
 }
 \value{
 A list with elements of class \code{report_text} (which are character

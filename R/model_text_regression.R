@@ -19,8 +19,10 @@ model_text.default <- function(model, ...) {
 
 # Bayesian models -------------------------------------
 
-#' @export
+#' @inheritParams parameters::model_parameters.stanreg
+#' @inheritParams report
 #' @rdname model_text
+#' @export
 model_text.stanreg <- function(model, ci_method = "hdi", ...) {
   .model_text_regression(model, ci_method = ci_method, ...)
 }
