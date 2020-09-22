@@ -66,7 +66,7 @@ report_model.default <- function(model, parameters = NULL, ci = NULL, ci_method 
   # Details
   if (info$is_bayesian | bootstrap == TRUE) {
     if (is.null(parameters)) {
-      parameters::model_parameters(model, ...)
+      parameters <- parameters::model_parameters(model, ...)
     }
     text_full <- paste0(text_full, .text_priors(parameters))
 
