@@ -149,7 +149,7 @@ report_performance.merMod <- function(model, performance = NULL, ...) {
   text <- ""
 
   # R2 Conditional
-  if ("R2_conditional" %in% names(performance)) {
+  if ("R2_conditional" %in% names(performance) && !is.na(performance$R2_conditional)) {
     text <- paste0(
       " The model's total explanatory power is ",
       effectsize::interpret_r2(performance$R2_conditional, rules = "cohen1988"),
@@ -162,14 +162,17 @@ report_performance.merMod <- function(model, performance = NULL, ...) {
   # R2 marginal
   if ("R2_marginal" %in% names(performance)) {
     if (text == "") {
-      text <- " The"
+      text <- " The model's explanatory power"
+      of <- ""
     } else {
-      text <- paste0(text, " and the")
+      text <- paste0(text, " and the part")
+      of <- "of "
     }
     text <- paste0(
       text,
-      " part related to the",
-      " fixed effects alone (marginal R2) is of ",
+      " related to the",
+      " fixed effects alone (marginal R2) is ",
+      of,
       insight::format_value(performance$R2_marginal),
       "."
     )

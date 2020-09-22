@@ -23,7 +23,7 @@ if (require("testthat") &&
   test_that("report-lmer-1", {
     r <- report(m1)
     expect_equal(nchar(r$texts$text_short), 566)
-    expect_equal(nchar(r$texts$text_long), 872)
+    expect_equal(nchar(r$texts$text_long), 871)
     expect_equal(nrow(r$tables$table_short), 5)
     expect_equal(nrow(r$tables$table_long), 9)
     expect_equal(r$tables$table_long$Coefficient, c(251.4051, 10.46729, NA, NA, NA, NA, NA, NA, NA), tolerance = 1e-3)
@@ -33,8 +33,8 @@ if (require("testthat") &&
 
   test_that("report-lmer-2", {
     r <- report(m2)
-    expect_equal(nchar(r$texts$text_short), 573)
-    expect_equal(nchar(r$texts$text_long), 936)
+    expect_equal(nchar(r$texts$text_short), 516)
+    expect_equal(nchar(r$texts$text_long), 878)
     expect_equal(nrow(r$tables$table_short), 4)
     expect_equal(nrow(r$tables$table_long), 7)
     expect_equal(r$tables$table_long$Coefficient, c(252.09404, 10.35368, NA, NA, NA, NA, NA), tolerance = 1e-3)
