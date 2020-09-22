@@ -90,10 +90,11 @@ report_intercept.default <- function(model, parameters = NULL, ci = 0.95, ...) {
 
 
 
+#' @importFrom stats contrasts
 .find_reflevel <- function(f) {
   tryCatch(
     {
-      con <- contrasts(f)
+      con <- stats::contrasts(f)
       unname(which(apply(con, 1, function(i) sum(i) == 0)))
     },
     error = function(e) { 1 }
