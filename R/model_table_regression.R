@@ -24,18 +24,7 @@ model_table.default <- function(model, ...) {
 
 #' @export
 model_table.lme <- function(model, standardize = NULL, ...) {
-  out <- tryCatch(
-    {
-      .model_table_regression(model, standardize = NULL, ...)
-    },
-    error = function(e) { NULL }
-  )
-
-  if (is.null(out)) {
-    warning("Models of class ", class(model)[1], " are not yet supported.", call. = FALSE)
-  }
-
-  out
+  model_table.default(model, standardize = NULL, ...)
 }
 
 
@@ -67,18 +56,7 @@ model_table.mixed <- model_table.lme
 #' @rdname model_table
 #' @export
 model_table.stanreg <- function(model, ci_method = "hdi", verbose = FALSE, ...) {
-  out <- tryCatch(
-    {
-      .model_table_regression(model, ci_method = ci_method, verbose = verbose, ...)
-    },
-    error = function(e) { NULL }
-  )
-
-  if (is.null(out)) {
-    warning("Models of class ", class(model)[1], " are not yet supported.", call. = FALSE)
-  }
-
-  out
+  model_table.default(model, ci_method = ci_method, verbose = verbose, ...)
 }
 
 
