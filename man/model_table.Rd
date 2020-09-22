@@ -10,7 +10,7 @@ model_table(model, ...)
 
 \method{model_table}{default}(model, ...)
 
-\method{model_table}{stanreg}(model, ci_method = "hdi", ...)
+\method{model_table}{stanreg}(model, ci_method = "hdi", verbose = FALSE, ...)
 }
 \arguments{
 \item{model}{A statistical model.}

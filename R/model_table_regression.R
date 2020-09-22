@@ -63,10 +63,10 @@ model_table.mixed <- model_table.lme
 
 #' @rdname model_table
 #' @export
-model_table.stanreg <- function(model, ci_method = "hdi", ...) {
+model_table.stanreg <- function(model, ci_method = "hdi", verbose = FALSE, ...) {
   out <- tryCatch(
     {
-      .model_table_regression(model, ci_method = ci_method, ...)
+      .model_table_regression(model, ci_method = ci_method, verbose = verbose, ...)
     },
     error = function(e) { NULL }
   )
@@ -95,7 +95,7 @@ model_table.brmsfit <- model_table.stanreg
 #' @importFrom effectsize standardize_parameters
 #' @importFrom performance model_performance
 #' @keywords internal
-.model_table_regression <- function(model, performance = NULL, ci = 0.95, ci_method = NULL, df_method = NULL, bootstrap = FALSE, iterations = 500, centrality = "median", dispersion = FALSE, test = c("pd", "rope"), rope_range = "default", rope_ci = 1, bf_prior = NULL, diagnostic = c("ESS", "Rhat"), standardize = "refit", ...) {
+.model_table_regression <- function(model, performance = NULL, ci = 0.95, ci_method = NULL, df_method = NULL, bootstrap = FALSE, iterations = 500, centrality = "median", dispersion = FALSE, test = c("pd", "rope"), rope_range = "default", rope_ci = 1, bf_prior = NULL, diagnostic = c("ESS", "Rhat"), standardize = "refit", verbose = FALSE, ...) {
 
   # Sanity checks --------------------------------------------------------------
   info <- insight::model_info(model)
@@ -120,9 +120,9 @@ model_table.brmsfit <- model_table.stanreg
 
   # Parameters -----------------------------------------------------------------
   if (bootstrap & !info$is_bayesian) {
-    parameters <- parameters::model_parameters(model, ci = ci, bootstrap = bootstrap, iterations = iterations, df_method = df_method, standardize = NULL, wb_component = FALSE)
+    parameters <- parameters::model_parameters(model, ci = ci, bootstrap = bootstrap, iterations = iterations, df_method = df_method, standardize = NULL, wb_component = FALSE, verbose = verbose)
   } else {
-    parameters <- parameters::model_parameters(model, ci = ci, bootstrap = bootstrap, iterations = iterations, df_method = df_method, ci_method = ci_method, centrality = centrality, dispersion = dispersion, test = test, rope_range = rope_range, rope_ci = rope_ci, bf_prior = bf_prior, diagnostic = diagnostic, standardize = NULL, wb_component = FALSE)
+    parameters <- parameters::model_parameters(model, ci = ci, bootstrap = bootstrap, iterations = iterations, df_method = df_method, ci_method = ci_method, centrality = centrality, dispersion = dispersion, test = test, rope_range = rope_range, rope_ci = rope_ci, bf_prior = bf_prior, diagnostic = diagnostic, standardize = NULL, wb_component = FALSE, verbose = verbose)
   }
 
   # save pretty names
