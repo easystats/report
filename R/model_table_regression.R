@@ -58,6 +58,35 @@ model_table.mixed <- model_table.lme
 
 
 
+# Model table for Bayesian models ----------------------
+
+
+#' @rdname model_table
+#' @export
+model_table.stanreg <- function(model, ci_method = "hdi", ...) {
+  out <- tryCatch(
+    {
+      .model_table_regression(model, ci_method = ci_method, ...)
+    },
+    error = function(e) { NULL }
+  )
+
+  if (is.null(out)) {
+    warning("Models of class ", class(model)[1], " are not yet supported.", call. = FALSE)
+  }
+
+  out
+}
+
+
+#' @export
+model_table.brmsfit <- model_table.stanreg
+
+
+
+
+
+
 
 # Workhorse ---------------------------
 

@@ -3,11 +3,14 @@
 \name{model_table}
 \alias{model_table}
 \alias{model_table.default}
+\alias{model_table.stanreg}
 \title{Table Summary}
 \usage{
 model_table(model, ...)
 
 \method{model_table}{default}(model, ...)
+
+\method{model_table}{stanreg}(model, ci_method = "hdi", ...)
 }
 \arguments{
 \item{model}{A statistical model.}

@@ -3,11 +3,14 @@
 \name{model_text}
 \alias{model_text}
 \alias{model_text.default}
+\alias{model_text.stanreg}
 \title{Text summary}
 \usage{
 model_text(model, ...)
 
 \method{model_text}{default}(model, ...)
+
+\method{model_text}{stanreg}(model, ci_method = "hdi", ...)
 }
 \arguments{
 \item{model}{A statistical model.}

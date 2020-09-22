@@ -289,3 +289,7 @@ report_performance.stanreg <- function(model, performance = NULL, ...) {
 
   as.model_text(text, text_full)
 }
+
+
+#' @export
+report_performance.brmsfit <- report_performance.stanreg

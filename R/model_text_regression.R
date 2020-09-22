@@ -17,6 +17,20 @@ model_text.default <- function(model, ...) {
 
 
 
+# Bayesian models -------------------------------------
+
+#' @export
+#' @rdname model_text
+model_text.stanreg <- function(model, ci_method = "hdi", ...) {
+  .model_text_regression(model, ci_method = ci_method, ...)
+}
+
+
+
+
+
+# Workhorse ---------------------------
+
 
 #' @importFrom stats complete.cases
 #' @importFrom insight is_nullmodel

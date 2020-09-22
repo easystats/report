@@ -174,6 +174,12 @@ report.stanreg <- function(model, interpretation = "default", ci = 0.89, standar
 }
 
 
+#' @export
+report.brmsfit <- report.stanreg
+
+
+
+
 # Internal ----------------------------------------------------------------
 
 
