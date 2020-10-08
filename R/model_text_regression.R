@@ -83,7 +83,7 @@ model_text.stanreg <- function(model, ci_method = "hdi", ...) {
   text_intercept <- report_intercept(model, parameters = parameters, ci = ci)
 
   # Params
-  text_params <- report_parameters(model, parameters = parameters, prefix = "  - ", ci = ci, interpretation = interpretation, ...)
+  text_params <- report_parameters(model, parameters = parameters, prefix = "  - ", ci = ci, interpretation = interpretation, intercept=FALSE, ...)
 
   # Combine text
   if (insight::is_nullmodel(model)) {

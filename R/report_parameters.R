@@ -140,7 +140,7 @@ report_parameters <- function(model, parameters, prefix = "  - ", ...) {
 
 #' @importFrom insight format_rope format_value format_ci format_p
 #' @keywords internal
-.report_parameters_indices <- function(parameters, ci = 0.89, coefname = "b") {
+.report_parameters_indices <- function(parameters, ci = 0.95, coefname = "beta") {
   text <- ""
 
   if ("Coefficient" %in% names(parameters)) {
@@ -229,7 +229,9 @@ report_parameters <- function(model, parameters, prefix = "  - ", ...) {
   if ("Std_Coefficient" %in% names(parameters)) {
     text <- paste0(
       .add_comma(text),
-      "std. beta = ",
+      "std. ",
+      coefname,
+      " = ",
       insight::format_value(parameters$Std_Coefficient)
     )
   }
