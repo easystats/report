@@ -102,11 +102,10 @@
 <p><strong><em>“From R to Manuscript”</em></strong></p>
 <p><code>report</code>’s primary goal is to bridge the gap between R’s output and the formatted results contained in your manuscript. It automatically produces reports of models and dataframes according to <strong>best practice</strong> guidelines (<em>e.g.,</em> <a href="https://apastyle.apa.org/">APA</a>’s style guide), ensuring <strong>standardization</strong> and <strong>quality</strong> in results reporting.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://easystats.github.io/report">report</a></span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/report/">report</a></span><span class="op">)</span>
 
-<span class="kw">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="kw">Sepal.Length</span> <span class="op">~</span> <span class="kw">Species</span>, data = <span class="kw">iris</span>)
-<span class="fu"><a href="reference/report.html">report</a></span>(<span class="kw">model</span>)
-</pre></div>
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span>
+<span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">## We fitted a linear model (estimated using OLS) to predict Sepal.Length with Species (formula =</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="co">## Sepal.Length ~ Species). Standardized parameters were obtained by fitting the model on a</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="co">## standardized version of the dataset. Effect sizes were labelled following Funder's (2019)</span></span>
@@ -150,12 +149,10 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Run the following:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)
-<span class="kw">devtools</span>::<span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"easystats/report"</span>)
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"easystats/report"</span><span class="op">)</span></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://easystats.github.io/report">"report"</a></span>)
-</pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://easystats.github.io/report/">"report"</a></span><span class="op">)</span></pre></div>
 </div>
 <div id="report-all-the-things-" class="section level2">
 <h2 class="hasAnchor">
@@ -168,8 +165,7 @@
 <p><a href="https://easystats.github.io/report/"><img src="reference/figures/workflow.png" alt="workflow"></a></p>
 <p>The <code><a href="reference/report.html">report()</a></code> function works on a variety of models, as well as other objects such as dataframes:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="reference/report.html">report</a></span>(<span class="kw">iris</span>)
-</pre></div>
+<span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">## The data contains 150 observations of the following variables:</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="co">## </span></span>
 <span id="cb6-3"><a href="#cb6-3"></a><span class="co">##   - Sepal.Length: Mean = 5.84, SD = 0.83, Median = 5.80, MAD = 1.04, range: [4.30, 7.90], Skewness = 0.31, Kurtosis = -0.57, 0 missing</span></span>
@@ -179,13 +175,12 @@
 <span id="cb6-7"><a href="#cb6-7"></a><span class="co">##   - Species: 3 levels: setosa (n = 50, 33.33%); versicolor (n = 50, 33.33%) and virginica (n = 50, 33.33%)</span></span></code></pre></div>
 <p>These reports nicely work within the <a href="https://github.com/tidyverse"><em>tidyverse</em></a> workflow:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span>(<span class="kw">iris</span><span class="op">$</span><span class="kw">Sepal.Length</span>, <span class="kw">iris</span><span class="op">$</span><span class="kw">Petal.Length</span>) <span class="op">%&gt;%</span> <span class="fu"><a href="reference/report.html">report</a></span>()
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Petal.Length</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">## The Pearson's product-moment correlation between iris$Sepal.Length and iris$Petal.Length is positive, significant and very large (r = 0.87, 95% CI [0.83, 0.91], t(148) = 21.65, p &lt; .001).</span></span></code></pre></div>
 <p>You can also create tables with the <code><a href="reference/text_long.html">table_short()</a></code> and <code><a href="reference/text_long.html">table_long()</a></code> functions:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(<span class="kw">Sepal.Length</span> <span class="op">~</span> <span class="kw">Petal.Length</span> <span class="op">+</span> <span class="kw">Species</span>, data = <span class="kw">iris</span>) <span class="op">%&gt;%</span> <span class="fu"><a href="reference/report.html">report</a></span>() <span class="op">%&gt;%</span> 
-    <span class="fu"><a href="reference/text_long.html">table_short</a></span>()
+<span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Length</span> <span class="op">+</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+    <span class="fu"><a href="reference/text_long.html">table_short</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">## Parameter            | Coefficient |             CI |      p | Coefficient (std.) |  Fit</span>
 <span class="co">## ----------------------------------------------------------------------------------------</span>
 <span class="co">## (Intercept)          |        3.68 | [ 3.47,  3.89] | &lt; .001 |               1.50 |     </span>
@@ -194,15 +189,13 @@
 <span class="co">## Species [virginica]  |       -2.12 | [-2.66, -1.58] | &lt; .001 |              -2.56 |     </span>
 <span class="co">##                      |             |                |        |                    |     </span>
 <span class="co">## R2                   |             |                |        |                    | 0.84</span>
-<span class="co">## R2 (adj.)            |             |                |        |                    | 0.83</span>
-</pre></div>
+<span class="co">## R2 (adj.)            |             |                |        |                    | 0.83</span></pre></div>
 </div>
 <div id="t-tests-and-correlations" class="section level3">
 <h3 class="hasAnchor">
 <a href="#t-tests-and-correlations" class="anchor"></a><em>t</em>-tests and correlations</h3>
 <div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span>(<span class="kw">mtcars</span><span class="op">$</span><span class="kw">mpg</span> <span class="op">~</span> <span class="kw">mtcars</span><span class="op">$</span><span class="kw">am</span>) <span class="op">%&gt;%</span> <span class="fu"><a href="reference/report.html">report</a></span>()
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">mtcars</span><span class="op">$</span><span class="va">am</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 <div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">## The Welch Two Sample t-test suggests that the difference of mtcars$mpg by mtcars$am (mean in group</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="co">## 0 = 17.15, mean in group 1 = 24.39) is significant (difference = -7.24, 95% CI [-11.28, -3.21],</span></span>
 <span id="cb11-3"><a href="#cb11-3"></a><span class="co">## t(18.33) = -3.77, p &lt; .01) and can be considered as very large (Cohen's d = -1.76).</span></span></code></pre></div>
@@ -212,12 +205,11 @@
 <a href="#report-participants-details" class="anchor"></a>Report participants details</h3>
 <p>This can be useful to complete the <strong>Participants</strong> paragraph of your manuscript.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit">
-<span class="kw">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(Age = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">22</span>, <span class="fl">23</span>, <span class="fl">54</span>, <span class="fl">21</span>), Sex = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"F"</span>, <span class="st">"F"</span>, 
-    <span class="st">"M"</span>, <span class="st">"M"</span>))
+<span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">22</span>, <span class="fl">23</span>, <span class="fl">54</span>, <span class="fl">21</span><span class="op">)</span>, Sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"F"</span>, 
+    <span class="st">"M"</span>, <span class="st">"M"</span><span class="op">)</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="fu"><a href="reference/report_participants.html">report_participants</a></span>(<span class="kw">data</span>, spell_n = <span class="fl">TRUE</span>), <span class="st">"were recruited in the study by means of torture and coercion."</span>)
-<span class="co">## [1] "Four participants (Mean age = 30.0, SD = 16.0, range = [21, 54]; 50.0% females) were recruited in the study by means of torture and coercion."</span>
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="reference/report_participants.html">report_participants</a></span><span class="op">(</span><span class="va">data</span>, spell_n <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="st">"were recruited in the study by means of torture and coercion."</span><span class="op">)</span>
+<span class="co">## [1] "Four participants (Mean age = 30.0, SD = 16.0, range = [21, 54]; 50.0% females) were recruited in the study by means of torture and coercion."</span></pre></div>
 </div>
 </div>
 <div id="credits" class="section level2">

@@ -146,7 +146,7 @@
     <p>Create reports of different objects. See the documentation for your object's class:</p>
     </div>
 
-    <pre class="usage"><span class='fu'>report</span>(<span class='kw'>model</span>, <span class='kw'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>report</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -199,20 +199,20 @@ can be accessed via several functions, such as:</p>
 related content of the report-object.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://easystats.github.io/report'>report</a></span>)
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://easystats.github.io/report/'>report</a></span><span class='op'>)</span>
 
-<span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Species</span>, data = <span class='kw'>iris</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>100</span>, ])
-<span class='kw'>r</span> <span class='op'>&lt;-</span> <span class='fu'>report</span>(<span class='kw'>model</span>)
+<span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>100</span>, <span class='op'>]</span><span class='op'>)</span>
+<span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'>report</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
 
 <span class='co'># Text</span>
-<span class='kw'>r</span>
-</div><div class='output co'>#&gt; The Welch Two Sample t-test suggests that the difference of Sepal.Length by Species (mean in group setosa = 5.01, mean in group versicolor = 5.94) is significant (difference = -0.93, 95% CI [-1.11, -0.75], t(86.54) = -10.52, p &lt; .001) and can be considered as very large (Cohen's d = -2.26).</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>r</span>)
+<span class='va'>r</span>
+</div><div class='output co'>#&gt; The Welch Two Sample t-test suggests that the difference of Sepal.Length by Species (mean in group setosa = 5.01, mean in group versicolor = 5.94) is significant (difference = -0.93, 95% CI [-1.11, -0.75], t(86.54) = -10.52, p &lt; .001) and can be considered as very large (Cohen's d = -2.26).</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; The Welch Two Sample t-test suggests that the difference of Sepal.Length by Species is significant (difference = -0.93, 95% CI [-1.11, -0.75], p &lt; .001, Cohen's d = -2.26)., The Welch Two Sample t-test suggests that the difference of Sepal.Length by Species is significant (difference = -0.93, 95% CI [-1.11, -0.75], p &lt; .001, Cohen's d = 0.95)., The Welch Two Sample t-test suggests that the difference of Sepal.Length by Species is significant (difference = -0.93, 95% CI [-1.11, -0.75], p &lt; .001, Cohen's d = -2.80). and The Welch Two Sample t-test suggests that the difference of Sepal.Length by Species is significant (difference = -0.93, 95% CI [-1.11, -0.75], p &lt; .001, Cohen's d = -1.72).</div><div class='input'>
 <span class='co'># Tables</span>
-<span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='kw'>r</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Parameter    |   Group | Mean_Group1 | Mean_Group2 | Difference |      t |    df |      p |         95% CI |                  Method |         Cohen's d |   NA |                NA |                NA
 #&gt; -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#&gt; Sepal.Length | Species |        5.01 |        5.94 |       0.93 | -10.52 | 86.54 | &lt; .001 | [-1.11, -0.75] | Welch Two Sample t-test | -2.26195008985566 | 0.95 | -2.79697052759621 | -1.71861295662386</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='kw'>r</span>)) <span class='co'># equivalent to as.table(r)</span>
+#&gt; Sepal.Length | Species |        5.01 |        5.94 |       0.93 | -10.52 | 86.54 | &lt; .001 | [-1.11, -0.75] | Welch Two Sample t-test | -2.26195008985566 | 0.95 | -2.79697052759621 | -1.71861295662386</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># equivalent to as.table(r)</span>
 </div><div class='output co'>#&gt;   Parameter            Group            Mean_Group1     Mean_Group2   
 #&gt;  Length:1           Length:1           Min.   :5.006   Min.   :5.936  
 #&gt;  Class :character   Class :character   1st Qu.:5.006   1st Qu.:5.936  
@@ -242,7 +242,7 @@ related content of the report-object.</p></div>
 #&gt;  3rd Qu.:-2.2619501    3rd Qu.:0.95          3rd Qu.:-2.7969705    3rd Qu.:-1.718613   
 #&gt;  Max.   :-2.2619501    Max.   :0.95          Max.   :-2.7969705    Max.   :-1.718613   </div><div class='input'>
 <span class='co'># List</span>
-<span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span>(<span class='kw'>r</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $Parameter
 #&gt; [1] "Sepal.Length"
 #&gt; 

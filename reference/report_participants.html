@@ -146,17 +146,17 @@
     <p>A helper function to help you format the participants data (age, sex, ...) in the participants section.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>report_participants</span>(
-  <span class='kw'>data</span>,
-  age = <span class='kw'>NULL</span>,
-  sex = <span class='kw'>NULL</span>,
-  education = <span class='kw'>NULL</span>,
-  participants = <span class='kw'>NULL</span>,
-  group = <span class='kw'>NULL</span>,
-  spell_n = <span class='fl'>FALSE</span>,
-  digits = <span class='fl'>1</span>,
-  <span class='kw'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>report_participants</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  age <span class='op'>=</span> <span class='cn'>NULL</span>,
+  sex <span class='op'>=</span> <span class='cn'>NULL</span>,
+  education <span class='op'>=</span> <span class='cn'>NULL</span>,
+  participants <span class='op'>=</span> <span class='cn'>NULL</span>,
+  group <span class='op'>=</span> <span class='cn'>NULL</span>,
+  spell_n <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  digits <span class='op'>=</span> <span class='fl'>1</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -204,55 +204,55 @@
     <p>A character vector with description of the "participants", based on the information provided in <code>data</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://easystats.github.io/report'>report</a></span>)
-<span class='kw'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
-  <span class='st'>"Age"</span> = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>22</span>, <span class='fl'>23</span>, <span class='fl'>54</span>, <span class='fl'>21</span>, <span class='fl'>8</span>, <span class='fl'>42</span>),
-  <span class='st'>"Sex"</span> = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"F"</span>, <span class='st'>"F"</span>, <span class='st'>"M"</span>, <span class='st'>"M"</span>, <span class='st'>"M"</span>, <span class='st'>"F"</span>)
-)
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://easystats.github.io/report/'>report</a></span><span class='op'>)</span>
+<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>
+  <span class='st'>"Age"</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>22</span>, <span class='fl'>23</span>, <span class='fl'>54</span>, <span class='fl'>21</span>, <span class='fl'>8</span>, <span class='fl'>42</span><span class='op'>)</span>,
+  <span class='st'>"Sex"</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"F"</span>, <span class='st'>"F"</span>, <span class='st'>"M"</span>, <span class='st'>"M"</span>, <span class='st'>"M"</span>, <span class='st'>"F"</span><span class='op'>)</span>
+<span class='op'>)</span>
 
-<span class='fu'>report_participants</span>(<span class='kw'>data</span>, age = <span class='st'>"Age"</span>, sex = <span class='st'>"Sex"</span>)
+<span class='fu'>report_participants</span><span class='op'>(</span><span class='va'>data</span>, age <span class='op'>=</span> <span class='st'>"Age"</span>, sex <span class='op'>=</span> <span class='st'>"Sex"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "6 participants (Mean age = 28.3, SD = 16.6, range = [8, 54]; 50.0% females)"</div><div class='input'>
 <span class='co'># Years of education (relative to high school graduation)</span>
-<span class='kw'>data</span><span class='op'>$</span><span class='kw'>Education</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>8</span>, <span class='op'>-</span><span class='fl'>3</span>, <span class='op'>-</span><span class='fl'>5</span>, <span class='fl'>3</span>, <span class='fl'>5</span>)
-<span class='fu'>report_participants</span>(<span class='kw'>data</span>, age = <span class='st'>"Age"</span>, sex = <span class='st'>"Sex"</span>, education = <span class='st'>"Education"</span>)
+<span class='va'>data</span><span class='op'>$</span><span class='va'>Education</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>8</span>, <span class='op'>-</span><span class='fl'>3</span>, <span class='op'>-</span><span class='fl'>5</span>, <span class='fl'>3</span>, <span class='fl'>5</span><span class='op'>)</span>
+<span class='fu'>report_participants</span><span class='op'>(</span><span class='va'>data</span>, age <span class='op'>=</span> <span class='st'>"Age"</span>, sex <span class='op'>=</span> <span class='st'>"Sex"</span>, education <span class='op'>=</span> <span class='st'>"Education"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "6 participants (Mean age = 28.3, SD = 16.6, range = [8, 54]; 50.0% females; Mean education = 1.3, SD = 4.9, range = [-5, 8])"</div><div class='input'>
 <span class='co'># Education as factor</span>
-<span class='kw'>data</span><span class='op'>$</span><span class='kw'>Education2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(
+<span class='va'>data</span><span class='op'>$</span><span class='va'>Education2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
   <span class='st'>"Bachelor"</span>, <span class='st'>"PhD"</span>, <span class='st'>"Highschool"</span>,
   <span class='st'>"Highschool"</span>, <span class='st'>"Bachelor"</span>, <span class='st'>"Bachelor"</span>
-)
-<span class='fu'>report_participants</span>(<span class='kw'>data</span>, age = <span class='st'>"Age"</span>, sex = <span class='st'>"Sex"</span>, education = <span class='st'>"Education2"</span>)
+<span class='op'>)</span>
+<span class='fu'>report_participants</span><span class='op'>(</span><span class='va'>data</span>, age <span class='op'>=</span> <span class='st'>"Age"</span>, sex <span class='op'>=</span> <span class='st'>"Sex"</span>, education <span class='op'>=</span> <span class='st'>"Education2"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "6 participants (Mean age = 28.3, SD = 16.6, range = [8, 54]; 50.0% females; Education: Bachelor, 50.00%; Highschool, 33.33% and PhD, 16.67%)"</div><div class='input'>
 
 <span class='co'># Repeated measures data</span>
-<span class='kw'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
-  <span class='st'>"Age"</span> = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>22</span>, <span class='fl'>22</span>, <span class='fl'>54</span>, <span class='fl'>54</span>, <span class='fl'>8</span>, <span class='fl'>8</span>),
-  <span class='st'>"Sex"</span> = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"F"</span>, <span class='st'>"F"</span>, <span class='st'>"M"</span>, <span class='st'>"M"</span>, <span class='st'>"F"</span>, <span class='st'>"F"</span>),
-  <span class='st'>"Participant"</span> = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"S1"</span>, <span class='st'>"S1"</span>, <span class='st'>"s2"</span>, <span class='st'>"s2"</span>, <span class='st'>"s3"</span>, <span class='st'>"s3"</span>)
-)
+<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>
+  <span class='st'>"Age"</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>22</span>, <span class='fl'>22</span>, <span class='fl'>54</span>, <span class='fl'>54</span>, <span class='fl'>8</span>, <span class='fl'>8</span><span class='op'>)</span>,
+  <span class='st'>"Sex"</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"F"</span>, <span class='st'>"F"</span>, <span class='st'>"M"</span>, <span class='st'>"M"</span>, <span class='st'>"F"</span>, <span class='st'>"F"</span><span class='op'>)</span>,
+  <span class='st'>"Participant"</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"S1"</span>, <span class='st'>"S1"</span>, <span class='st'>"s2"</span>, <span class='st'>"s2"</span>, <span class='st'>"s3"</span>, <span class='st'>"s3"</span><span class='op'>)</span>
+<span class='op'>)</span>
 
-<span class='fu'>report_participants</span>(<span class='kw'>data</span>, age = <span class='st'>"Age"</span>, sex = <span class='st'>"Sex"</span>, participants = <span class='st'>"Participant"</span>)
+<span class='fu'>report_participants</span><span class='op'>(</span><span class='va'>data</span>, age <span class='op'>=</span> <span class='st'>"Age"</span>, sex <span class='op'>=</span> <span class='st'>"Sex"</span>, participants <span class='op'>=</span> <span class='st'>"Participant"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "3 participants (Mean age = 28.0, SD = 23.6, range = [8, 54]; 66.7% females)"</div><div class='input'>
 <span class='co'># Grouped data</span>
-<span class='kw'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
-  <span class='st'>"Age"</span> = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>22</span>, <span class='fl'>22</span>, <span class='fl'>54</span>, <span class='fl'>54</span>, <span class='fl'>8</span>, <span class='fl'>8</span>, <span class='fl'>42</span>, <span class='fl'>42</span>),
-  <span class='st'>"Sex"</span> = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"F"</span>, <span class='st'>"F"</span>, <span class='st'>"M"</span>, <span class='st'>"M"</span>, <span class='st'>"F"</span>, <span class='st'>"F"</span>, <span class='st'>"M"</span>, <span class='st'>"M"</span>),
-  <span class='st'>"Participant"</span> = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"S1"</span>, <span class='st'>"S1"</span>, <span class='st'>"s2"</span>, <span class='st'>"s2"</span>, <span class='st'>"s3"</span>, <span class='st'>"s3"</span>, <span class='st'>"s4"</span>, <span class='st'>"s4"</span>),
-  <span class='st'>"Condition"</span> = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"A"</span>, <span class='st'>"A"</span>, <span class='st'>"A"</span>, <span class='st'>"A"</span>, <span class='st'>"B"</span>, <span class='st'>"B"</span>, <span class='st'>"B"</span>, <span class='st'>"B"</span>)
-)
+<span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>
+  <span class='st'>"Age"</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>22</span>, <span class='fl'>22</span>, <span class='fl'>54</span>, <span class='fl'>54</span>, <span class='fl'>8</span>, <span class='fl'>8</span>, <span class='fl'>42</span>, <span class='fl'>42</span><span class='op'>)</span>,
+  <span class='st'>"Sex"</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"F"</span>, <span class='st'>"F"</span>, <span class='st'>"M"</span>, <span class='st'>"M"</span>, <span class='st'>"F"</span>, <span class='st'>"F"</span>, <span class='st'>"M"</span>, <span class='st'>"M"</span><span class='op'>)</span>,
+  <span class='st'>"Participant"</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"S1"</span>, <span class='st'>"S1"</span>, <span class='st'>"s2"</span>, <span class='st'>"s2"</span>, <span class='st'>"s3"</span>, <span class='st'>"s3"</span>, <span class='st'>"s4"</span>, <span class='st'>"s4"</span><span class='op'>)</span>,
+  <span class='st'>"Condition"</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='st'>"A"</span>, <span class='st'>"A"</span>, <span class='st'>"A"</span>, <span class='st'>"B"</span>, <span class='st'>"B"</span>, <span class='st'>"B"</span>, <span class='st'>"B"</span><span class='op'>)</span>
+<span class='op'>)</span>
 
-<span class='fu'>report_participants</span>(<span class='kw'>data</span>,
-  age = <span class='st'>"Age"</span>,
-  sex = <span class='st'>"Sex"</span>,
-  participants = <span class='st'>"Participant"</span>,
-  group = <span class='st'>"Condition"</span>
-)
+<span class='fu'>report_participants</span><span class='op'>(</span><span class='va'>data</span>,
+  age <span class='op'>=</span> <span class='st'>"Age"</span>,
+  sex <span class='op'>=</span> <span class='st'>"Sex"</span>,
+  participants <span class='op'>=</span> <span class='st'>"Participant"</span>,
+  group <span class='op'>=</span> <span class='st'>"Condition"</span>
+<span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='warning'>Warning: Variable `data[[age]]` contains only two different values. Consider converting it to a factor.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Need at least 3 complete observations for type-2-skewness. Using 'type="1"' now.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Variable `data[[age]]` contains only two different values. Consider converting it to a factor.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Need at least 3 complete observations for type-2-skewness. Using 'type="1"' now.</span></div><div class='output co'>#&gt; [1] "For the 'Condition - A' group: 2 participants (Mean age = 38.0, SD = 22.6, range = [22, 54]; 50.0% females) and for the 'Condition - B' group: 2 participants (Mean age = 25.0, SD = 24.0, range = [8, 42]; 50.0% females)"</div><div class='input'>
 <span class='co'># Spell sample size</span>
-<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(
-  <span class='fu'>report_participants</span>(<span class='kw'>data</span>, participants = <span class='st'>"Participant"</span>, spell_n = <span class='fl'>TRUE</span>),
+<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span>
+  <span class='fu'>report_participants</span><span class='op'>(</span><span class='va'>data</span>, participants <span class='op'>=</span> <span class='st'>"Participant"</span>, spell_n <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>,
   <span class='st'>"were recruited in the study by means of torture and coercion."</span>
-)
+<span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "Four participants (Mean age = 31.5, SD = 20.5, range = [8, 54]; 50.0% females) were recruited in the study by means of torture and coercion."</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

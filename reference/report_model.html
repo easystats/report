@@ -146,31 +146,31 @@
     <p>Model textual description.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>report_intercept</span>(<span class='kw'>model</span>, <span class='kw'>parameters</span>, <span class='kw'>...</span>)
+    <pre class="usage"><span class='fu'>report_intercept</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>parameters</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>report_model</span>(<span class='kw'>model</span>, <span class='kw'>...</span>)
+<span class='fu'>report_model</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>report_model</span>(
-  <span class='kw'>model</span>,
-  parameters = <span class='kw'>NULL</span>,
-  ci = <span class='kw'>NULL</span>,
-  ci_method = <span class='kw'>NULL</span>,
-  standardize = <span class='st'>"refit"</span>,
-  standardize_robust = <span class='fl'>FALSE</span>,
-  interpretation = <span class='kw'>NULL</span>,
-  bootstrap = <span class='fl'>FALSE</span>,
-  iterations = <span class='fl'>500</span>,
-  test = <span class='kw'>NULL</span>,
-  rope_range = <span class='kw'>NULL</span>,
-  rope_ci = <span class='kw'>NULL</span>,
-  df_method = <span class='kw'>NULL</span>,
-  <span class='kw'>...</span>
-)
+<span class='fu'>report_model</span><span class='op'>(</span>
+  <span class='va'>model</span>,
+  parameters <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ci <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ci_method <span class='op'>=</span> <span class='cn'>NULL</span>,
+  standardize <span class='op'>=</span> <span class='st'>"refit"</span>,
+  standardize_robust <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  interpretation <span class='op'>=</span> <span class='cn'>NULL</span>,
+  bootstrap <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  iterations <span class='op'>=</span> <span class='fl'>500</span>,
+  test <span class='op'>=</span> <span class='cn'>NULL</span>,
+  rope_range <span class='op'>=</span> <span class='cn'>NULL</span>,
+  rope_ci <span class='op'>=</span> <span class='cn'>NULL</span>,
+  df_method <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
-<span class='fu'>report_parameters</span>(<span class='kw'>model</span>, <span class='kw'>parameters</span>, prefix = <span class='st'>"  - "</span>, <span class='kw'>...</span>)
+<span class='fu'>report_parameters</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>parameters</span>, prefix <span class='op'>=</span> <span class='st'>"  - "</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>report_performance</span>(<span class='kw'>model</span>, performance = <span class='kw'>NULL</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'>report_performance</span><span class='op'>(</span><span class='va'>model</span>, performance <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -181,11 +181,11 @@
     </tr>
     <tr>
       <th>parameters</th>
-      <td><p>A parameters table obtained via <code><a href='https://rdrr.io/pkg/parameters/man/model_parameters.html'>parameters::model_parameters()</a></code>.</p></td>
+      <td><p>A parameters table obtained via <code><a href='https://easystats.github.io/parameters/reference/model_parameters.html'>parameters::model_parameters()</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Arguments passed to other methods, in particular <code><a href='https://rdrr.io/pkg/parameters/man/model_parameters.html'>model_parameters()</a></code>.</p></td>
+      <td><p>Arguments passed to other methods, in particular <code><a href='https://easystats.github.io/parameters/reference/model_parameters.html'>model_parameters()</a></code>.</p></td>
     </tr>
     <tr>
       <th>ci</th>
@@ -194,13 +194,13 @@
     <tr>
       <th>ci_method</th>
       <td><p>The type of index used for Credible Interval. Can be
-<code>"HDI"</code> (default, see <code><a href='https://rdrr.io/pkg/bayestestR/man/hdi.html'>hdi</a></code>), <code>"ETI"</code>
-(see <code><a href='https://rdrr.io/pkg/bayestestR/man/eti.html'>eti</a></code>) or <code>"SI"</code>
-(see <code><a href='https://rdrr.io/pkg/bayestestR/man/si.html'>si</a></code>).</p></td>
+<code>"HDI"</code> (default, see <code><a href='https://easystats.github.io/bayestestR/reference/hdi.html'>hdi</a></code>), <code>"ETI"</code>
+(see <code><a href='https://easystats.github.io/bayestestR/reference/eti.html'>eti</a></code>) or <code>"SI"</code>
+(see <code><a href='https://easystats.github.io/bayestestR/reference/si.html'>si</a></code>).</p></td>
     </tr>
     <tr>
       <th>standardize</th>
-      <td><p>The method used for standardizing the parameters. Can be <code>"refit"</code>, <code>"posthoc"</code>, <code>"smart"</code>, <code>"basic"</code> or <code>NULL</code> (default) for no standardization. See 'Details' in <code><a href='https://rdrr.io/pkg/effectsize/man/standardize_parameters.html'>standardize_parameters</a></code>. Note that robust estimation (i.e. <code>robust=TRUE</code>) of standardized parameters only works when <code>standardize="refit"</code>.</p></td>
+      <td><p>The method used for standardizing the parameters. Can be <code>"refit"</code>, <code>"posthoc"</code>, <code>"smart"</code>, <code>"basic"</code> or <code>NULL</code> (default) for no standardization. See 'Details' in <code><a href='https://easystats.github.io/effectsize/reference/standardize_parameters.html'>standardize_parameters</a></code>. Note that robust estimation (i.e. <code>robust=TRUE</code>) of standardized parameters only works when <code>standardize="refit"</code>.</p></td>
     </tr>
     <tr>
       <th>standardize_robust</th>
@@ -212,7 +212,7 @@
     </tr>
     <tr>
       <th>bootstrap</th>
-      <td><p>Should estimates be based on bootstrapped model? If <code>TRUE</code>, then arguments of <a href='https://rdrr.io/pkg/parameters/man/model_parameters.stanreg.html'>Bayesian regressions</a> apply (see also <code><a href='https://rdrr.io/pkg/parameters/man/bootstrap_parameters.html'>bootstrap_parameters()</a></code>).</p></td>
+      <td><p>Should estimates be based on bootstrapped model? If <code>TRUE</code>, then arguments of <a href='https://easystats.github.io/parameters/reference/model_parameters.stanreg.html'>Bayesian regressions</a> apply (see also <code><a href='https://easystats.github.io/parameters/reference/bootstrap_parameters.html'>bootstrap_parameters()</a></code>).</p></td>
     </tr>
     <tr>
       <th>iterations</th>
@@ -225,7 +225,7 @@ list with one or more of these options: <code>"p_direction"</code> (or <code>"pd
 <code>"rope"</code>, <code>"p_map"</code>, <code>"equivalence_test"</code> (or <code>"equitest"</code>),
 <code>"bayesfactor"</code> (or <code>"bf"</code>) or <code>"all"</code> to compute all tests.
 For each "test", the corresponding <span class="pkg">bayestestR</span> function is called
-(e.g. <code><a href='https://rdrr.io/pkg/bayestestR/man/rope.html'>rope</a></code> or <code><a href='https://rdrr.io/pkg/bayestestR/man/p_direction.html'>p_direction</a></code>) and its results
+(e.g. <code><a href='https://easystats.github.io/bayestestR/reference/rope.html'>rope</a></code> or <code><a href='https://easystats.github.io/bayestestR/reference/p_direction.html'>p_direction</a></code>) and its results
 included in the summary output.</p></td>
     </tr>
     <tr>
@@ -241,7 +241,7 @@ proportion of HDI, to use for the percentage in ROPE.</p></td>
     </tr>
     <tr>
       <th>df_method</th>
-      <td><p>Method for computing degrees of freedom for p values, standard errors and confidence intervals (CI). May be <code>"wald"</code> (default, see <code><a href='https://rdrr.io/pkg/parameters/man/degrees_of_freedom.html'>degrees_of_freedom</a></code>), <code>"ml1"</code> (see <code><a href='https://rdrr.io/pkg/parameters/man/p_value_ml1.html'>dof_ml1</a></code>), <code>"betwithin"</code> (see <code><a href='https://rdrr.io/pkg/parameters/man/p_value_betwithin.html'>dof_betwithin</a></code>), <code>"satterthwaite"</code> (see <code><a href='https://rdrr.io/pkg/parameters/man/p_value_satterthwaite.html'>dof_satterthwaite</a></code>) or <code>"kenward"</code> (see <code><a href='https://rdrr.io/pkg/parameters/man/p_value_kenward.html'>dof_kenward</a></code>). Note that when <code>df_method</code> is not <code>"wald"</code>, robust standard errors etc. cannot be computed.</p></td>
+      <td><p>Method for computing degrees of freedom for p values, standard errors and confidence intervals (CI). May be <code>"wald"</code> (default, see <code><a href='https://easystats.github.io/parameters/reference/degrees_of_freedom.html'>degrees_of_freedom</a></code>), <code>"ml1"</code> (see <code><a href='https://easystats.github.io/parameters/reference/p_value_ml1.html'>dof_ml1</a></code>), <code>"betwithin"</code> (see <code><a href='https://easystats.github.io/parameters/reference/p_value_betwithin.html'>dof_betwithin</a></code>), <code>"satterthwaite"</code> (see <code><a href='https://easystats.github.io/parameters/reference/p_value_satterthwaite.html'>dof_satterthwaite</a></code>) or <code>"kenward"</code> (see <code><a href='https://easystats.github.io/parameters/reference/p_value_kenward.html'>dof_kenward</a></code>). Note that when <code>df_method</code> is not <code>"wald"</code>, robust standard errors etc. cannot be computed.</p></td>
     </tr>
     <tr>
       <th>prefix</th>
@@ -249,7 +249,7 @@ proportion of HDI, to use for the percentage in ROPE.</p></td>
     </tr>
     <tr>
       <th>performance</th>
-      <td><p>A performance table obtained via <code><a href='https://rdrr.io/pkg/performance/man/model_performance.html'>performance::model_performance()</a></code>.</p></td>
+      <td><p>A performance table obtained via <code><a href='https://easystats.github.io/performance/reference/model_performance.html'>performance::model_performance()</a></code>.</p></td>
     </tr>
     </table>
 
@@ -260,35 +260,35 @@ vectors), containing a short and long version of the textual output of the
 model summary.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Species</span>, data = <span class='kw'>iris</span>)
-<span class='fu'>report_intercept</span>(<span class='kw'>model</span>)
+    <pre class="examples"><div class='input'><span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
+<span class='fu'>report_intercept</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;  The model's intercept, corresponding to Sepal.Length = 0 and Species = setosa, is at 5.01 (SE = 0.07, 95% CI [4.86, 5.15], p &lt; .001).</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/lme4/lme4'>lme4</a></span>)
-<span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='kw'>lme4</span>::<span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Petal.Length</span> <span class='op'>+</span> (<span class='fl'>1</span> <span class='op'>|</span> <span class='kw'>Species</span>), data = <span class='kw'>iris</span>)
-<span class='fu'>report_intercept</span>(<span class='kw'>model</span>)
-</div><div class='output co'>#&gt;  The model's intercept, corresponding to Sepal.Length = 0, Petal.Length = 0 and Species = setosa, is at 2.50 (SE = 0.67, 95% CI [1.20, 3.81], p &lt; .001).</div><div class='input'><span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Species</span>, data = <span class='kw'>iris</span>)
-<span class='fu'>report_model</span>(<span class='kw'>model</span>)
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/lme4/lme4/'>lme4</a></span><span class='op'>)</span>
+<span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'>lme4</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>|</span> <span class='va'>Species</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
+<span class='fu'>report_intercept</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  The model's intercept, corresponding to Sepal.Length = 0, Petal.Length = 0 and Species = setosa, is at 2.50 (SE = 0.67, 95% CI [1.20, 3.81], p &lt; .001).</div><div class='input'><span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
+<span class='fu'>report_model</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; We fitted a linear model (estimated using OLS) to predict Sepal.Length with Species (formula = Sepal.Length ~ Species). Standardized parameters were obtained by fitting the model on a standardized version of the dataset.</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/lme4/lme4'>lme4</a></span>)
-<span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='kw'>lme4</span>::<span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Petal.Length</span> <span class='op'>+</span> (<span class='fl'>1</span> <span class='op'>|</span> <span class='kw'>Species</span>), data = <span class='kw'>iris</span>)
-<span class='fu'>report_model</span>(<span class='kw'>model</span>)
-</div><div class='output co'>#&gt; We fitted a linear mixed model (estimated using REML and nloptwrap optimizer) to predict Sepal.Length with Petal.Length (formula = Sepal.Length ~ Petal.Length). The model included Species as random effects (formula = ~1 | Species). Standardized parameters were obtained by fitting the model on a standardized version of the dataset.</div><div class='input'><span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Species</span>, data = <span class='kw'>iris</span>)
-<span class='fu'>report_parameters</span>(<span class='kw'>model</span>)
-</div><div class='output co'>#&gt;   - The effect of (Intercept) is positive and can be considered as significant (b = 5.01, SE = 0.07, 95% CI [4.86, 5.15], p &lt; .001).
-#&gt;   - The effect of Species [versicolor] is positive and can be considered as significant (b = 0.93, SE = 0.10, 95% CI [0.73, 1.13], p &lt; .001).
-#&gt;   - The effect of Species [virginica] is positive and can be considered as significant (b = 1.58, SE = 0.10, 95% CI [1.38, 1.79], p &lt; .001).</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/lme4/lme4'>lme4</a></span>)
-<span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='kw'>lme4</span>::<span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Petal.Length</span> <span class='op'>+</span> (<span class='fl'>1</span> <span class='op'>|</span> <span class='kw'>Species</span>), data = <span class='kw'>iris</span>)
-<span class='fu'>report_parameters</span>(<span class='kw'>model</span>)
-</div><div class='output co'>#&gt;   - The effect of (Intercept) is positive and can be considered as significant (b = 2.50, SE = 0.67, 95% CI [1.20, 3.81], p &lt; .001).
-#&gt;   - The effect of Petal.Length is positive and can be considered as significant (b = 0.89, SE = 0.06, 95% CI [0.76, 1.01], p &lt; .001).</div><div class='input'><span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Species</span>, data = <span class='kw'>iris</span>)
-<span class='fu'>report_performance</span>(<span class='kw'>model</span>)
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/lme4/lme4/'>lme4</a></span><span class='op'>)</span>
+<span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'>lme4</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>|</span> <span class='va'>Species</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
+<span class='fu'>report_model</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; We fitted a linear mixed model (estimated using REML and nloptwrap optimizer) to predict Sepal.Length with Petal.Length (formula = Sepal.Length ~ Petal.Length). The model included Species as random effects (formula = ~1 | Species). Standardized parameters were obtained by fitting the model on a standardized version of the dataset.</div><div class='input'><span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
+<span class='fu'>report_parameters</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   - The effect of (Intercept) is positive and can be considered as significant (beta = 5.01, SE = 0.07, 95% CI [4.86, 5.15], p &lt; .001).
+#&gt;   - The effect of Species [versicolor] is positive and can be considered as significant (beta = 0.93, SE = 0.10, 95% CI [0.73, 1.13], p &lt; .001).
+#&gt;   - The effect of Species [virginica] is positive and can be considered as significant (beta = 1.58, SE = 0.10, 95% CI [1.38, 1.79], p &lt; .001).</div><div class='input'>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/lme4/lme4/'>lme4</a></span><span class='op'>)</span>
+<span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'>lme4</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>|</span> <span class='va'>Species</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
+<span class='fu'>report_parameters</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   - The effect of (Intercept) is positive and can be considered as significant (beta = 2.50, SE = 0.67, 95% CI [1.20, 3.81], p &lt; .001).
+#&gt;   - The effect of Petal.Length is positive and can be considered as significant (beta = 0.89, SE = 0.06, 95% CI [0.76, 1.01], p &lt; .001).</div><div class='input'><span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
+<span class='fu'>report_performance</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; 
 #&gt; 
 #&gt; The model explains a significant and substantial proportion of variance (R2 = 0.62, F(2, 147) = 119.26, p &lt; .001, adj. R2 = 0.61).</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://github.com/lme4/lme4'>lme4</a></span>)
-<span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='kw'>lme4</span>::<span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Petal.Length</span> <span class='op'>+</span> (<span class='fl'>1</span> <span class='op'>|</span> <span class='kw'>Species</span>), data = <span class='kw'>iris</span>)
-<span class='fu'>report_performance</span>(<span class='kw'>model</span>)
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/lme4/lme4/'>lme4</a></span><span class='op'>)</span>
+<span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'>lme4</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>|</span> <span class='va'>Species</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
+<span class='fu'>report_performance</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;  The model's total explanatory power is substantial (conditional R2 = 0.97) and the part related to the fixed effects alone (marginal R2) is of 0.66.</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
