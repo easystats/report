@@ -90,7 +90,7 @@ model_text.stanreg <- function(model, ci_method = "hdi", ...) {
     text_short <- paste0(text_model$text_short, text_perf$text_short, text_intercept$text_short, "\n")
     text_long <- paste0(text_model$text_long, text_perf$text_long, text_intercept$text_long, "\n")
   } else {
-    text_short <- paste0(text_model$text_short, text_perf$text_short, text_intercept$text_short, " Within this model:\n\n", text_params$text_short)
+    text_short <- paste0(text_model$text_short, " ", text_perf$text_short, text_intercept$text_short, " Within this model:\n\n", text_params$text_short)
     text_long <- paste0(text_model$text_long, text_perf$text_long, text_intercept$text_long, " Within this model:\n\n", text_params$text_long)
   }
 
