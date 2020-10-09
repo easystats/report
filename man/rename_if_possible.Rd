@@ -4,7 +4,7 @@
 \alias{rename_if_possible}
 \alias{remove_if_possible}
 \alias{reorder_if_possible}
-\title{Safe data frame Modification}
+\title{Safe and convenient data frame utilities}
 \usage{
 rename_if_possible(x, pattern, replacement)
 
@@ -28,8 +28,13 @@ A modified data frame.
 Rename/remove a variable in a data frame if exists.
 }
 \examples{
+# Rename columns
 rename_if_possible(iris, "Sepal.Length", "length")
 rename_if_possible(iris, "FakeCol", "length")
+
+# Remove columns
 remove_if_possible(iris, "Sepal.Length")
+
+# Reorder columns
 reorder_if_possible(iris, c("Species", "Sepal.Length"))
 }
