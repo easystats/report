@@ -30,4 +30,5 @@ summary(r)
 # Data
 report_parameters(iris$Sepal.Length)
 report_parameters(as.character(round(iris$Sepal.Length, 1)))
+report_parameters(iris$Species)
 }

@@ -20,6 +20,7 @@
 #' # Data
 #' report_parameters(iris$Sepal.Length)
 #' report_parameters(as.character(round(iris$Sepal.Length, 1)))
+#' report_parameters(iris$Species)
 #' @export
 report_parameters <- function(x, table = NULL, ...) {
   UseMethod("report_parameters")

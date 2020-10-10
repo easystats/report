@@ -18,6 +18,8 @@
 #'
 #' # Data
 #' report_text(iris$Sepal.Length)
+#' report_text(as.character(round(iris$Sepal.Length, 1)))
+#' report_text(iris$Species)
 #' @export
 report_text <- function(x, table = NULL, ...) {
   UseMethod("report_text")

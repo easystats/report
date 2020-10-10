@@ -28,6 +28,7 @@ summary(r)
 # Data
 report_table(iris$Sepal.Length)
 report_table(as.character(round(iris$Sepal.Length, 1)))
+report_table(iris$Species)
 
 # Tests
 # report_table(t.test(mpg ~ am, data = mtcars))

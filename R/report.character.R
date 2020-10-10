@@ -92,9 +92,9 @@ report_text.character <- function(x, table = NULL, n_entries = 3, levels_percent
 
   text <- paste0(summary(params), collapse = "; ")
   if (nrow(entries) > 1) {
-    text <- paste0(name, ": ", nrow(entries), " entries; ", text)
+    text <- paste0(name, ": ", nrow(entries), " entries, such as ", text)
   } else {
-    text <- paste0(name, ": ", nrow(entries), " entry; ", text)
+    text <- paste0(name, ": ", nrow(entries), " entry, such as ", text)
   }
 
   if (nrow(entries) - n_entries == 1) {

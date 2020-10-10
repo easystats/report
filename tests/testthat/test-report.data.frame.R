@@ -26,3 +26,30 @@ test_that("report.character", {
   testthat::expect_equal(nrow(as.data.frame(r)), 1, tol = 0)
   testthat::expect_equal(as.data.frame(r)$percentage_Missing[1], 0, tol = 0)
 })
+
+
+context("report.factor")
+
+test_that("report.factor", {
+  r <- report(factor(rep(c("A", "B", "C"), 10)))
+  testthat::expect_equal(nrow(as.data.frame(r)), 3, tol = 0)
+  testthat::expect_null(as.data.frame(r)$Median)
+
+  r <- report(factor(rep(c("A", "B", "C", NA), 10)), levels_percentage = FALSE)
+  testthat::expect_equal(nrow(as.data.frame(r)), 4, tol = 0)
+})
+
+
+# test_that("report.data.frame", {
+#   r <- report(iris)
+#   testthat::expect_equal(nrow(as.data.frame(r)), 7, tol = 0)
+#   testthat::expect_null(as.table(r)$Median)
+#
+#   r <- report(iris, levels_percentage = FALSE, missing_percentage = TRUE, median = TRUE, range = FALSE, dispersion = FALSE)
+#   testthat::expect_equal(nrow(as.data.frame(r)), 7, tol = 0)
+#   testthat::expect_equal(mean(as.data.frame(r)$n_Obs), 107, tol = 0.01)
+#
+#   r <- report(dplyr::group_by_at(iris, "Species"))
+#   testthat::expect_equal(nrow(as.data.frame(r)), 12, tol = 0)
+#   testthat::expect_equal(mean(as.data.frame(r)$n_Obs), 50, tol = 0)
+# })
