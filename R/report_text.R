@@ -62,8 +62,8 @@ summary.report_text <- function(object, ...) {
 }
 
 #' @export
-print.report_text <- function(x, ...) {
-  x <- text_fullstop(as.character(x))  # Add full stop if missing
+print.report_text <- function(x, width=NULL, ...) {
+  x <- format_text(as.character(x), width=width, ...)
   cat(x)
 }
 
