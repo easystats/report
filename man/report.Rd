@@ -4,10 +4,10 @@
 \alias{report}
 \title{Automatic report of R objects}
 \usage{
-report(model, ...)
+report(x, ...)
 }
 \arguments{
-\item{model}{A statistical model. For data frame or character methods, a data frame or character respectively.}
+\item{x}{The R object that you want to report (see list of of supported objects above).}
 
 \item{...}{Arguments passed to or from other methods.}
 }
@@ -18,24 +18,30 @@ and long table of parameters and fit indices.
 }
 \description{
 Create reports of different objects. See the documentation for your object's class:
+\itemize{
+ \item{\link[=report.sessionInfo]{R environment and system} (\code{sessionInfo})}
+% \item{\link[=report.data.frame]{Dataframes and vectors}}
+% \item{\link[=report.htest]{Correlations and t-tests} (\code{htest})}
+% \item{\link[=report.aov]{ANOVAs}}
+% \item{\link[=report.default]{Regression models} (\code{glm, lm, ...})}
+% \item{\link[=report.lmerMod]{Mixed models} \code{(glmer, lmer, glmmTMB, ...)}}
+% \item{\link[=report.stanreg]{Bayesian models} \code{(stanreg, brms...)}}
+}
 }
 \details{
-\itemize{
- \item{\link[=report.data.frame]{Dataframes and vectors}}
- \item{\link[=report.htest]{Correlations and t-tests} (\code{htest})}
- \item{\link[=report.aov]{ANOVAs}}
- \item{\link[=report.default]{Regression models} (\code{glm, lm, ...})}
- \item{\link[=report.lmerMod]{Mixed models} \code{(glmer, lmer, glmmTMB, ...)}}
- \item{\link[=report.stanreg]{Bayesian models} \code{(stanreg, brms...)}}
- }
+\subsection{Organization}{
 
-
+\code{report_table} and \code{report_text} are the two distal representations
+of a report, and are the two provided in \code{report()}. However, intermediate
+steps are accessible (depending on the object) via specific functions (e.g.,
+\code{report_parameters}).
+}
 
 \subsection{Change output type}{
+
 The \code{report()} function generates a report-object that contain in itself
 different representations (e.g., text, tables, plots). These different representations
 can be accessed via several functions, such as:
-
 \itemize{
 \item \strong{\code{text_long()}}: Detailed text.
 \item \strong{\code{text_short()}}: Minimal text giving the minimal information.
@@ -49,21 +55,25 @@ Note that for some report objects, some of these representations might be identi
 \examples{
 library(report)
 
-model <- t.test(Sepal.Length ~ Species, data = iris[1:100, ])
-r <- report(model)
+model <- t.test(mpg ~ am, data = mtcars)
+# r <- report(model)
 
 # Text
-r
-summary(r)
+# r
+# summary(r)
 
 # Tables
-as.data.frame(r)
-summary(as.data.frame(r)) # equivalent to as.table(r)
+# as.data.frame(r)
+# summary(as.data.frame(r)) # equivalent to as.table(r)
 
 # List
-as.list(r)
+# as.list(r)
 }
 \seealso{
-\code{\link{table_short}} or \code{\link{text_short}} to access the
-related content of the report-object.
+Get more specific reports:
+\itemize{
+  \item \code{\link{report_table}}
+  \item \code{\link{report_parameters}}
+  \item \code{\link{report_text}}
+}
 }

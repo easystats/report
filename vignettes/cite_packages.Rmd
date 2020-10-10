@@ -43,7 +43,7 @@ Ideally, you should indeed cite all the packages that you used. However, it's of
 
 This should be done for the packages that were central to your specific study (*i.e.,* that got you the results that you reported) rather than data manipulation tools (*even though these are as much, if not *more*, important*).
 
-##### Example:
+##### Example
 
 > Statistics were done using R 3.5.0 (R Core Team, 2018), the *rstanarm* (*v2.13.1*; Gabry \& Goodrich, 2016) and the *report* (*v0.1.0*; Makowski \& Lüdecke, 2019) packages. The full reproducible code is available in **Supplementary Materials**.
 
@@ -51,7 +51,7 @@ This should be done for the packages that were central to your specific study (*
 
 Then, in *Supplementary Materials*, you can show all the packages and functions you used. To do it quickly, explicitly and in a reproducible fashion, we recommend writing the *Supplementary Materials* with [**R Markdown**](https://rmarkdown.rstudio.com/), which can generate *docs* and *pdf* files that you can submit along with your manuscript. Moreover, if you're using R, you can include (usually at the end) every used package's citation using the `cite_packages()` function from the [**report**](https://github.com/easystats/report) package.
 
-##### Example:
+##### Example
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
 library(report)
