@@ -3,7 +3,7 @@
 #' @importFrom parameters skewness kurtosis
 #'
 #' @export
-report.numeric <- function(x, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = FALSE, digits = 2, ...) {
+report.numeric <- function(x, n = TRUE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = FALSE, digits = 2, ...) {
 
   # Print warning if only two different vars
   if (length(unique(x)) <= 2) {
@@ -30,7 +30,7 @@ report.numeric <- function(x, centrality = "mean", dispersion = TRUE, range = TR
 
 
 #' @export
-report_table.numeric <- function(x, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = FALSE, digits = 2, ...) {
+report_table.numeric <- function(x, n = TRUE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = FALSE, digits = 2, ...) {
   table_full <- data.frame(
     Mean = mean(x, na.rm = TRUE),
     SD = stats::sd(x, na.rm = TRUE),
@@ -48,6 +48,9 @@ report_table.numeric <- function(x, centrality = "mean", dispersion = TRUE, rang
 
   # Summary table
   table <- table_full
+
+  # N observations
+  if (isFALSE(n)) table$n_Obs <- NULL
 
   # Centrality and dispersion
   if (!isFALSE(centrality) && !is.null(centrality)) {
@@ -101,10 +104,10 @@ report_table.numeric <- function(x, centrality = "mean", dispersion = TRUE, rang
 
 
 #' @export
-report_parameters.numeric <- function(x, table = NULL, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = FALSE, digits = 2, ...) {
+report_parameters.numeric <- function(x, table = NULL, n = TRUE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = FALSE, digits = 2, ...) {
   # Get table
   if (is.null(table)) {
-    table <- report_table(x, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, missing_percentage = missing_percentage, digits = digits, ...)
+    table <- report_table(x, n = n, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, missing_percentage = missing_percentage, digits = digits, ...)
   }
 
   # Compute text elements ---
@@ -153,6 +156,9 @@ report_parameters.numeric <- function(x, table = NULL, centrality = "mean", disp
   # Shorten ---
   text <- text_full
 
+  # N observations
+  if (isFALSE(n)) text[!names(text) %in% c("n_Obs")]
+
   # Centrality and dispersion
   if (!isFALSE(centrality) && !is.null(centrality)) {
     if (centrality == "median") {
@@ -192,26 +198,28 @@ report_parameters.numeric <- function(x, table = NULL, centrality = "mean", disp
 # report_text -------------------------------------------------------------
 
 #' @export
-report_text.numeric <- function(x, table = NULL, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = FALSE, digits = 2, ...) {
-  if (is.null(names(x))) {
+report_text.numeric <- function(x, table = NULL, n = TRUE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = FALSE, digits = 2, ...) {
+  if (!is.null(list(...)$varname)) {
+    name <- list(...)$varname
+  } else if (is.null(names(x))) {
     name <- deparse(substitute(x))
   } else {
-    name <- names(x)
+    name <- "Continuous variable"
   }
 
   # Get parameters
-  params <- report_parameters(x, table = table, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, missing_percentage = missing_percentage, digits = digits, ...)
+  params <- report_parameters(x, table = table, n = n, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, missing_percentage = missing_percentage, digits = digits, ...)
 
   text <- paste0(
     name,
     ": ",
-    paste0(params, collapse = ", ")
+    paste0(params[names(params) != "n_Obs"], collapse = ", ")
   )
 
   short <- paste0(
     name,
     ": ",
-    paste0(summary(params), collapse = ", ")
+    paste0(summary(params)[names(summary(params)) != "n_Obs"], collapse = ", ")
   )
 
   as.report_text(text, summary = short)

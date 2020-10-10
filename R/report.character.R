@@ -3,7 +3,6 @@
 #'
 #' @export
 report.character <- function(x, n_entries = 3, levels_percentage = FALSE, missing_percentage = FALSE, ...) {
-
   table <- report_table(x, n_entries = n_entries, levels_percentage = levels_percentage, missing_percentage = missing_percentage, ...)
   text <- report_text(x, n_entries = n_entries, levels_percentage = levels_percentage, missing_percentage = missing_percentage, ...)
 
@@ -69,7 +68,6 @@ report_parameters.character <- function(x, table = NULL, n_entries = 3, levels_p
   }
 
   as.report_parameters(text, summary = text[1:n_entries], ...)
-
 }
 
 
@@ -78,10 +76,12 @@ report_parameters.character <- function(x, table = NULL, n_entries = 3, levels_p
 
 #' @export
 report_text.character <- function(x, table = NULL, n_entries = 3, levels_percentage = FALSE, missing_percentage = FALSE, ...) {
-  if (is.null(names(x))) {
+  if (!is.null(list(...)$varname)) {
+    name <- list(...)$varname
+  } else if (is.null(names(x))) {
     name <- deparse(substitute(x))
   } else {
-    name <- names(x)
+    name <- "Character variable"
   }
 
   if (is.null(table)) {
@@ -90,7 +90,7 @@ report_text.character <- function(x, table = NULL, n_entries = 3, levels_percent
   entries <- attributes(table)$entries
   params <- report_parameters(x, table = table, n_entries = n_entries, levels_percentage = levels_percentage, missing_percentage = missing_percentage, ...)
 
-  text <- paste0(summary(params), collapse = "; ")
+  text <- paste0(summary(params), collapse = ", ")
   if (nrow(entries) > 1) {
     text <- paste0(name, ": ", nrow(entries), " entries, such as ", text)
   } else {

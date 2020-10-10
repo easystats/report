@@ -3,7 +3,6 @@
 #'
 #' @export
 report.factor <- function(x, levels_percentage = FALSE, ...) {
-
   table <- report_table(x, levels_percentage = levels_percentage, ...)
   text <- report_text(x, levels_percentage = levels_percentage, ...)
 
@@ -66,12 +65,12 @@ report_parameters.factor <- function(x, table = NULL, levels_percentage = FALSE,
     text_percentage_Obs, ")"
   )
 
-  if(isTRUE(levels_percentage)){
+  if (isTRUE(levels_percentage)) {
     text <- paste0(
       text_levels, " (",
       text_percentage_Obs, ")"
     )
-  } else{
+  } else {
     text <- paste0(
       text_levels, " (",
       text_n_Obs, ")"
@@ -79,7 +78,6 @@ report_parameters.factor <- function(x, table = NULL, levels_percentage = FALSE,
   }
 
   as.report_parameters(text_full, summary = text, ...)
-
 }
 
 
@@ -90,10 +88,12 @@ report_parameters.logical <- report_parameters.factor
 
 #' @export
 report_text.factor <- function(x, table = NULL, levels_percentage = FALSE, ...) {
-  if (is.null(names(x))) {
+  if (!is.null(list(...)$varname)) {
+    name <- list(...)$varname
+  } else if (is.null(names(x))) {
     name <- deparse(substitute(x))
   } else {
-    name <- names(x)
+    name <- "Factor"
   }
 
   if (is.null(table)) {
@@ -108,8 +108,8 @@ report_text.factor <- function(x, table = NULL, levels_percentage = FALSE, ...) 
     text_total_levels <- paste0(name, ": ", nrow(table_no_missing), " level, namely ")
   }
 
-  text_full <- paste0(text_total_levels, text_concatenate(params, sep = "; "))
-  text <- paste0(text_total_levels, text_concatenate(summary(params), sep = "; "))
+  text_full <- paste0(text_total_levels, text_concatenate(params, sep = ", "))
+  text <- paste0(text_total_levels, text_concatenate(summary(params), sep = ", "))
 
   as.report_text(text_full, summary = text)
 }

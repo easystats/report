@@ -23,6 +23,7 @@
 #'
 #' # Reorder columns
 #' data_reorder(iris, c("Species", "Sepal.Length"))
+#' data_reorder(iris, c("Species", "dupa"))
 #'
 #' # Add prefix / suffix
 #' data_addprefix(iris, "NEW_")
@@ -68,8 +69,9 @@ data_remove <- function(data, pattern) {
 
 #' @rdname data_rename
 #' @export
-data_reorder <- function(data, cols) {
+data_reorder <- function(data, cols, safe = TRUE) {
   remaining_columns <- setdiff(colnames(data), cols)
+  if (isTRUE(safe)) cols <- cols[cols %in% names(data)]
   data[, c(cols, remaining_columns)]
 }
 

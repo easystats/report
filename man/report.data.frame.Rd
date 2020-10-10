@@ -18,11 +18,13 @@
 
 \method{report}{data.frame}(
   x,
+  n = FALSE,
   centrality = "mean",
   dispersion = TRUE,
   range = TRUE,
   distribution = FALSE,
   levels_percentage = FALSE,
+  digits = 2,
   n_entries = 3,
   missing_percentage = FALSE,
   ...
@@ -32,6 +34,7 @@
 
 \method{report}{numeric}(
   x,
+  n = TRUE,
   centrality = "mean",
   dispersion = TRUE,
   range = TRUE,
@@ -51,6 +54,8 @@
 \item{missing_percentage}{Show missing by number (default) or percentage.}
 
 \item{...}{Arguments passed to or from other methods.}
+
+\item{n}{Include number of observations for each individual variable.}
 
 \item{centrality}{Character vector, indicating the index of centrality (either \code{"mean"} or \code{"median"}).}
 

@@ -12,7 +12,7 @@ data_rename(data, pattern, replacement, safe = TRUE)
 
 data_remove(data, pattern)
 
-data_reorder(data, cols)
+data_reorder(data, cols, safe = TRUE)
 
 data_addprefix(data, pattern)
 
@@ -47,6 +47,7 @@ data_remove(iris, "Sepal.Length")
 
 # Reorder columns
 data_reorder(iris, c("Species", "Sepal.Length"))
+data_reorder(iris, c("Species", "dupa"))
 
 # Add prefix / suffix
 data_addprefix(iris, "NEW_")

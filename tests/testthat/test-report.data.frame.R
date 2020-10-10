@@ -40,16 +40,16 @@ test_that("report.factor", {
 })
 
 
-# test_that("report.data.frame", {
-#   r <- report(iris)
-#   testthat::expect_equal(nrow(as.data.frame(r)), 7, tol = 0)
-#   testthat::expect_null(as.table(r)$Median)
-#
-#   r <- report(iris, levels_percentage = FALSE, missing_percentage = TRUE, median = TRUE, range = FALSE, dispersion = FALSE)
-#   testthat::expect_equal(nrow(as.data.frame(r)), 7, tol = 0)
-#   testthat::expect_equal(mean(as.data.frame(r)$n_Obs), 107, tol = 0.01)
-#
-#   r <- report(dplyr::group_by_at(iris, "Species"))
-#   testthat::expect_equal(nrow(as.data.frame(r)), 12, tol = 0)
-#   testthat::expect_equal(mean(as.data.frame(r)$n_Obs), 50, tol = 0)
-# })
+test_that("report.data.frame", {
+  r <- report(iris)
+  testthat::expect_equal(nrow(as.data.frame(r)), 7, tol = 0)
+  testthat::expect_equal(mean(as.data.frame(r)$Median, na.rm = TRUE), 3.6125)
+
+  r <- report(iris, levels_percentage = FALSE, missing_percentage = TRUE, median = TRUE, range = FALSE, dispersion = FALSE)
+  testthat::expect_equal(nrow(as.data.frame(r)), 7, tol = 0)
+  testthat::expect_equal(mean(as.data.frame(r)$n_Obs), 107, tol = 0.01)
+
+  r <- report(dplyr::group_by_at(iris, "Species"))
+  testthat::expect_equal(nrow(as.data.frame(r)), 12, tol = 0)
+  testthat::expect_equal(mean(as.data.frame(r)$n_Obs), 50, tol = 0)
+})

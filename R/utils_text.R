@@ -30,7 +30,6 @@
 #' cat(text_wrap(long_text, width = 50))
 #' @export
 format_text <- function(text, width = NULL, ...) {
-  text <- text_fullstop(text)
   text_wrap(text, width = width)
 }
 
