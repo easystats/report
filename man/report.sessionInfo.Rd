@@ -44,7 +44,7 @@ as.data.frame(r)
 summary(as.data.frame(r))
 
 # Convenience functions
-report_packages(include_R=FALSE)
-cite_packages()
+report_packages(include_R = FALSE)
+cite_packages(prefix = "> ")
 report_system()
 }
