@@ -9,9 +9,9 @@
 \usage{
 \method{report}{sessionInfo}(x, ...)
 
-report_packages(session = NULL, ...)
+report_packages(session = NULL, include_R = TRUE, ...)
 
-cite_packages(session = NULL, ...)
+cite_packages(session = NULL, include_R = TRUE, ...)
 
 report_system(session = NULL)
 }
@@ -21,6 +21,8 @@ report_system(session = NULL)
 \item{...}{Arguments passed to or from other methods.}
 
 \item{session}{A \link[=sessionInfo]{sessionInfo} object.}
+
+\item{include_R}{Include R in the citations.}
 }
 \value{
 \itemize{
@@ -42,7 +44,7 @@ as.data.frame(r)
 summary(as.data.frame(r))
 
 # Convenience functions
-report_packages()
+report_packages(include_R=FALSE)
 cite_packages()
 report_system()
 }

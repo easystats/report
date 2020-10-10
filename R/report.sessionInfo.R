@@ -3,6 +3,7 @@
 #' @inheritParams report
 #' @inheritParams as.report_parameters
 #' @param session A \link[=sessionInfo]{sessionInfo} object.
+#' @param include_R Include R in the citations.
 #'
 #' @return \itemize{
 #'   \item{For \code{report_packages}, a data frame of class with information on package name, version and citation.}
@@ -21,7 +22,7 @@
 #' summary(as.data.frame(r))
 #'
 #' # Convenience functions
-#' report_packages()
+#' report_packages(include_R=FALSE)
 #' cite_packages()
 #' report_system()
 #' @importFrom utils packageVersion sessionInfo
@@ -49,23 +50,23 @@ report.sessionInfo <- function(x, ...) {
 
 #' @rdname report.sessionInfo
 #' @export
-report_packages <- function(session = NULL, ...) {
+report_packages <- function(session = NULL, include_R=TRUE, ...) {
   if (is.null(session)) session <- sessionInfo()
-  report_parameters(session, ...)
+  report_parameters(session, include_R=include_R, ...)
 }
 
 
 
 #' @rdname report.sessionInfo
 #' @export
-cite_packages <- function(session = NULL, ...) {
+cite_packages <- function(session = NULL, include_R=TRUE, ...) {
   if (is.null(session)) session <- sessionInfo()
 
   # Do not recompute table if passed
   if (!is.null(list(...)$table)) {
     x <- list(...)$table
   } else {
-    x <- report_table(session)
+    x <- report_table(session, include_R=include_R)
   }
 
   x <- x$Reference[order(x$Reference)] # Extract the references
@@ -117,12 +118,19 @@ report_system <- function(session = NULL) {
 
 #' @importFrom utils citation
 #' @export
-report_table.sessionInfo <- function(x, ...) {
+report_table.sessionInfo <- function(x, include_R=TRUE, ...) {
   pkgs <- x$otherPkgs
 
-  citations <- c(clean_citation(utils::citation("base")))
-  versions <- c(paste0(x$R.version$major, ".", x$R.version$minor))
-  names <- c("R")
+  if(isTRUE(include_R)){
+    citations <- c(clean_citation(utils::citation("base")))
+    versions <- c(paste0(x$R.version$major, ".", x$R.version$minor))
+    names <- c("R")
+  } else{
+    citations <- c()
+    versions <- c()
+    names <- c()
+  }
+
 
   for (pkg_name in names(pkgs)) {
     citations <- c(citations, clean_citation(citation(pkg_name)))
@@ -151,14 +159,16 @@ report_table.sessionInfo <- function(x, ...) {
 
 
 #' @export
-report_parameters.sessionInfo <- function(x, table = NULL, ...) {
+report_parameters.sessionInfo <- function(x, table = NULL, include_R=TRUE, ...) {
 
   # Get table
   if (is.null(table)) {
-    x <- report_table(x, ...)
+    x <- report_table(x)
   } else {
     x <- table
   }
+
+  if(isFALSE(include_R)) x <- x[x$Package != "R", ]
 
   # Generate text
   x$text <- paste0(
@@ -194,8 +204,7 @@ report_parameters.sessionInfo <- function(x, table = NULL, ...) {
 #' @export
 report_text.sessionInfo <- function(x, table = NULL, ...) {
   sys <- report_system(x)
-  params <- report_parameters(x, table = table)
-  params <- params[names(params) != "R"]
+  params <- report_parameters(x, table = table, include_R=FALSE)
 
   text <- paste0(
     sys,
