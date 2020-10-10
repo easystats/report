@@ -17,7 +17,7 @@
 #' r
 #' summary(r)
 #' @export
-report_parameters <- function(x, table=NULL, prefix = "  - ", ...) {
+report_parameters <- function(x, table = NULL, prefix = "  - ", ...) {
   UseMethod("report_parameters")
 }
 
@@ -28,12 +28,12 @@ report_parameters <- function(x, table=NULL, prefix = "  - ", ...) {
 
 #' @rdname as.report
 #' @export
-as.report_parameters <- function(x, summary=NULL, prefix = "  - ", ...) {
+as.report_parameters <- function(x, summary = NULL, prefix = "  - ", ...) {
   class(x) <- unique(c("report_parameters", class(x)))
   attributes(x) <- c(attributes(x), list(...))
   attr(x, "prefix") <- prefix
 
-  if(!is.null(summary)) {
+  if (!is.null(summary)) {
     class(summary) <- unique(c("report_parameters", class(summary)))
     attr(summary, "prefix") <- prefix
     attr(x, "summary") <- summary
@@ -42,14 +42,14 @@ as.report_parameters <- function(x, summary=NULL, prefix = "  - ", ...) {
 }
 
 #' @export
-as.character.report_parameters <- function(x, prefix=NULL, ...) {
+as.character.report_parameters <- function(x, prefix = NULL, ...) {
   # Find prefix
-  if(is.null(prefix)) prefix <- attributes(x)$prefix
-  if(is.null(prefix)) prefix <- ""
+  if (is.null(prefix)) prefix <- attributes(x)$prefix
+  if (is.null(prefix)) prefix <- ""
 
   # Concatenate
   text <- paste0(prefix, x)
-  text <- paste0(text, collapse="\n")
+  text <- paste0(text, collapse = "\n")
   text
 }
 
@@ -69,29 +69,32 @@ print.report_parameters <- function(x, ...) {
 
 
 #' @export
-report_parameters.sessionInfo <- function(x, table=NULL, ...) {
+report_parameters.sessionInfo <- function(x, table = NULL, ...) {
 
   # Get table
-  if(is.null(table)){
+  if (is.null(table)) {
     x <- report_table(x, ...)
-  } else{
+  } else {
     x <- table
   }
 
   # Generate text
-  x$text <- paste0(x$Package,
-                   " (version ",
-                   x$Version,
-                   "; ",
-                   format_citation(x$Reference, authorsdate=TRUE, short=TRUE, intext=TRUE),
-                   ")")
-  x$summary <- paste0(x$Package,
-                   " (v",
-                   x$Version,
-                   ')')
+  x$text <- paste0(
+    x$Package,
+    " (version ",
+    x$Version,
+    "; ",
+    format_citation(x$Reference, authorsdate = TRUE, short = TRUE, intext = TRUE),
+    ")"
+  )
+  x$summary <- paste0(
+    x$Package,
+    " (v",
+    x$Version,
+    ")"
+  )
 
   x <- x[order(x$Reference), ]
 
-  as.report_parameters(x$text, summary=x$summary, ...)
+  as.report_parameters(x$text, summary = x$summary, ...)
 }
-

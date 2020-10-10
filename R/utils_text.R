@@ -26,12 +26,12 @@
 #' text_remove(c("one!", "two", "three!"), "!")
 #'
 #' # Wrap text
-#' long_text <- paste(rep("abc ", 100), collapse="")
-#' cat(text_wrap(long_text, width=50))
+#' long_text <- paste(rep("abc ", 100), collapse = "")
+#' cat(text_wrap(long_text, width = 50))
 #' @export
-format_text <- function(text, width=NULL, ...) {
+format_text <- function(text, width = NULL, ...) {
   text <- text_fullstop(text)
-  text_wrap(text, width=width)
+  text_wrap(text, width = width)
 }
 
 #' @rdname format_text
@@ -42,10 +42,10 @@ text_fullstop <- function(text) {
 }
 
 #' @keywords internal
-.text_lastchar <- function(text, n=1){
-  sapply(text, function(xx)
-    substr(xx, (nchar(xx)-n+1), nchar(xx))
-  )
+.text_lastchar <- function(text, n = 1) {
+  sapply(text, function(xx) {
+    substr(xx, (nchar(xx) - n + 1), nchar(xx))
+  })
 }
 
 
@@ -64,7 +64,7 @@ text_concatenate <- function(text, sep = ", ", last = " and ") {
 
 #' @rdname format_text
 #' @export
-text_remove <- function(text, pattern="", ...) {
+text_remove <- function(text, pattern = "", ...) {
   gsub(pattern, "", text, ...)
 }
 

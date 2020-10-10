@@ -24,15 +24,13 @@
 #' report_packages()
 #' report_system()
 #' cite_packages()
-#'
-#'
 #' @importFrom utils packageVersion sessionInfo
 #' @export
 report.sessionInfo <- function(x, ...) {
   table <- report_table(x, ...)
-  text <- report_text(x, table=table)
+  text <- report_text(x, table = table)
 
-  as.report(text, table=table, ...)
+  as.report(text, table = table, ...)
 }
 
 
@@ -64,13 +62,13 @@ cite_packages <- function(session = NULL, ...) {
   if (is.null(session)) session <- sessionInfo()
 
   # Do not recompute table if passed
-  if(!is.null(list(...)$table)){
+  if (!is.null(list(...)$table)) {
     x <- list(...)$table
-  } else{
+  } else {
     x <- report_table(session)
   }
 
-  x <- x$Reference[order(x$Reference)]  # Extract the references
+  x <- x$Reference[order(x$Reference)] # Extract the references
 
   as.report_parameters(x, ...)
 }
@@ -88,17 +86,21 @@ report_system <- function(session = NULL) {
     session <- sessionInfo()
   }
 
-  text <- paste0("The analysis was done using ",
-              session$R.version$version.string,
-              " on ",
-              session$running)
+  text <- paste0(
+    "The analysis was done using ",
+    session$R.version$version.string,
+    " on ",
+    session$running
+  )
 
-  short <- paste0("The analysis was done using ",
-                 session$R.version$major,
-                 session$R.version$minor,
-                 " on ",
-                 text_remove(session$running, " \\(build.*"))
+  short <- paste0(
+    "The analysis was done using ",
+    session$R.version$major,
+    ".",
+    session$R.version$minor,
+    " on ",
+    text_remove(session$running, " \\(build.*")
+  )
 
-  as.report_text(text, summary=short)
+  as.report_text(text, summary = short)
 }
-

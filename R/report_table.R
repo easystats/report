@@ -19,7 +19,6 @@
 #'
 #' # Tests
 #' # report_table(t.test(mpg ~ am, data = mtcars))
-#'
 #' @export
 report_table <- function(x, ...) {
   UseMethod("report_table")
@@ -35,12 +34,11 @@ as.report_table <- function(x, ...) {
 }
 
 #' @export
-as.report_table.default <- function(x, summary=NULL, ...) {
-
+as.report_table.default <- function(x, summary = NULL, ...) {
   class(x) <- unique(c("report_table", class(x)))
   attributes(x) <- c(attributes(x), list(...))
 
-  if(!is.null(summary)) {
+  if (!is.null(summary)) {
     class(summary) <- unique(c("report_table", class(summary)))
     attr(x, "summary") <- summary
   }
@@ -49,10 +47,10 @@ as.report_table.default <- function(x, summary=NULL, ...) {
 }
 
 #' @export
-as.report_table.report <- function(x, summary=NULL, ...) {
-  if(is.null(summary) | isFALSE(summary)){
+as.report_table.report <- function(x, summary = NULL, ...) {
+  if (is.null(summary) | isFALSE(summary)) {
     attributes(x)$table
-  } else if(isTRUE(summary)){
+  } else if (isTRUE(summary)) {
     summary(attributes(x)$table)
   }
 }
@@ -110,11 +108,5 @@ report_table.sessionInfo <- function(x, ...) {
 
   x <- data[order(data$Package), ]
   row.names(x) <- NULL
-  as.report_table(x, summary=x[c("Package", "Version")])
+  as.report_table(x, summary = x[c("Package", "Version")])
 }
-
-
-
-
-
-

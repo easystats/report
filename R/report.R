@@ -155,11 +155,11 @@ as.data.frame.report <- function(x, ...) {
 #' @return A report object or a \code{TRUE/FALSE} value.
 #'
 #' @export
-as.report <- function(text, table=NULL, plot=NULL, ...) {
+as.report <- function(text, table = NULL, plot = NULL, ...) {
   class(text) <- unique(c("report", class(text)))
   attributes(text) <- c(attributes(text), list(...))
 
-  if(!is.null(table)) {
+  if (!is.null(table)) {
     attr(text, "table") <- table
   }
 

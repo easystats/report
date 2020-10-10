@@ -15,7 +15,7 @@
 #' # Rename columns
 #' data_rename(iris, "Sepal.Length", "length")
 #' # data_rename(iris, "FakeCol", "length", safe=FALSE)  # This fails
-#' data_rename(iris, "FakeCol", "length")  # This doesn't
+#' data_rename(iris, "FakeCol", "length") # This doesn't
 #' data_rename(iris, c("Sepal.Length", "Sepal.Width"), c("length", "width"))
 #'
 #' # Remove columns
@@ -28,20 +28,20 @@
 #' data_addprefix(iris, "NEW_")
 #' data_addsuffix(iris, "_OLD")
 #' @export
-data_rename <- function(data, pattern, replacement, safe=TRUE) {
-  if(length(pattern) != length(replacement)){
+data_rename <- function(data, pattern, replacement, safe = TRUE) {
+  if (length(pattern) != length(replacement)) {
     stop("The 'replacement' names must be of the same length than the variable names.")
   }
 
-  for(i in 1:length(pattern)){
+  for (i in 1:length(pattern)) {
     data <- .data_rename(data, pattern[i], replacement[i], safe)
   }
   data
 }
 
 #' @keywords internal
-.data_rename <- function(data, pattern, replacement, safe=TRUE) {
-  if (isFALSE(safe) & !pattern %in% names(data)){
+.data_rename <- function(data, pattern, replacement, safe = TRUE) {
+  if (isFALSE(safe) & !pattern %in% names(data)) {
     stop(paste0("Variable '", pattern, "' is not in your dataframe :/"))
   }
   names(data) <- replace(names(data), names(data) == pattern, replacement)
