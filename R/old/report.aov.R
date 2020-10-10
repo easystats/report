@@ -14,7 +14,6 @@
 #' r <- report(model)
 #' r
 #' table_short(r)
-#'
 #' @export
 report.aov <- function(model, interpretation = "field2013", omega_squared = "partial", eta_squared = NULL, epsilon_squared = NULL, ...) {
   table_full <- parameters::model_parameters(model, omega_squared = omega_squared, eta_squared = eta_squared, epsilon_squared = epsilon_squared, ...)

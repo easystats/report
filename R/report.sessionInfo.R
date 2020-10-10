@@ -22,8 +22,8 @@
 #' summary(as.data.frame(r))
 #'
 #' # Convenience functions
-#' report_packages(include_R=FALSE)
-#' cite_packages()
+#' report_packages(include_R = FALSE)
+#' cite_packages(prefix = "> ")
 #' report_system()
 #' @importFrom utils packageVersion sessionInfo
 #' @export
@@ -50,23 +50,23 @@ report.sessionInfo <- function(x, ...) {
 
 #' @rdname report.sessionInfo
 #' @export
-report_packages <- function(session = NULL, include_R=TRUE, ...) {
+report_packages <- function(session = NULL, include_R = TRUE, ...) {
   if (is.null(session)) session <- sessionInfo()
-  report_parameters(session, include_R=include_R, ...)
+  report_parameters(session, include_R = include_R, ...)
 }
 
 
 
 #' @rdname report.sessionInfo
 #' @export
-cite_packages <- function(session = NULL, include_R=TRUE, ...) {
+cite_packages <- function(session = NULL, include_R = TRUE, ...) {
   if (is.null(session)) session <- sessionInfo()
 
   # Do not recompute table if passed
   if (!is.null(list(...)$table)) {
     x <- list(...)$table
   } else {
-    x <- report_table(session, include_R=include_R)
+    x <- report_table(session, include_R = include_R)
   }
 
   x <- x$Reference[order(x$Reference)] # Extract the references
@@ -118,14 +118,14 @@ report_system <- function(session = NULL) {
 
 #' @importFrom utils citation
 #' @export
-report_table.sessionInfo <- function(x, include_R=TRUE, ...) {
+report_table.sessionInfo <- function(x, include_R = TRUE, ...) {
   pkgs <- x$otherPkgs
 
-  if(isTRUE(include_R)){
+  if (isTRUE(include_R)) {
     citations <- c(clean_citation(utils::citation("base")))
     versions <- c(paste0(x$R.version$major, ".", x$R.version$minor))
     names <- c("R")
-  } else{
+  } else {
     citations <- c()
     versions <- c()
     names <- c()
@@ -159,7 +159,7 @@ report_table.sessionInfo <- function(x, include_R=TRUE, ...) {
 
 
 #' @export
-report_parameters.sessionInfo <- function(x, table = NULL, include_R=TRUE, ...) {
+report_parameters.sessionInfo <- function(x, table = NULL, include_R = TRUE, ...) {
 
   # Get table
   if (is.null(table)) {
@@ -168,7 +168,7 @@ report_parameters.sessionInfo <- function(x, table = NULL, include_R=TRUE, ...) 
     x <- table
   }
 
-  if(isFALSE(include_R)) x <- x[x$Package != "R", ]
+  if (isFALSE(include_R)) x <- x[x$Package != "R", ]
 
   # Generate text
   x$text <- paste0(
@@ -204,7 +204,7 @@ report_parameters.sessionInfo <- function(x, table = NULL, include_R=TRUE, ...) 
 #' @export
 report_text.sessionInfo <- function(x, table = NULL, ...) {
   sys <- report_system(x)
-  params <- report_parameters(x, table = table, include_R=FALSE)
+  params <- report_parameters(x, table = table, include_R = FALSE)
 
   text <- paste0(
     sys,

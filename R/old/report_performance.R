@@ -63,7 +63,9 @@ report_performance.default <- function(model, performance = NULL, ...) {
           insight::format_p(r2$p)
         )
       },
-      error = function(e) { NULL }
+      error = function(e) {
+        NULL
+      }
     )
 
     if (is.null(text_full)) {

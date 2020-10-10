@@ -5,7 +5,9 @@ model_table.default <- function(model, ...) {
     {
       .model_table_regression(model, ...)
     },
-    error = function(e) { NULL }
+    error = function(e) {
+      NULL
+    }
   )
 
   if (is.null(out)) {

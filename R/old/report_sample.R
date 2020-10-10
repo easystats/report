@@ -21,7 +21,7 @@
 #' report_sample(iris, group_by = "Species")
 #' @importFrom stats median sd mad
 #' @export
-report_sample <- function(data, group_by = NULL, centrality = "mean", select = NULL, exclude = NULL, weights = NULL, total=TRUE, digits = 2, ...) {
+report_sample <- function(data, group_by = NULL, centrality = "mean", select = NULL, exclude = NULL, weights = NULL, total = TRUE, digits = 2, ...) {
   variables <- colnames(data)
 
   # variables to keep
@@ -65,7 +65,7 @@ report_sample <- function(data, group_by = NULL, centrality = "mean", select = N
   }
 
   # Remove Total column if need be
-  if (isFALSE(total)){
+  if (isFALSE(total)) {
     out$Total <- NULL
   }
 
@@ -191,7 +191,7 @@ print.report_table1 <- function(x, ...) {
   weights <- stats::na.omit(weights)
   x <- stats::na.omit(x)
   xbar <- sum(weights * x) / sum(weights)
-  sum(weights * ((x - xbar) ^ 2)) / (sum(weights) - 1)
+  sum(weights * ((x - xbar)^2)) / (sum(weights) - 1)
 }
 
 
@@ -220,10 +220,11 @@ print.report_table1 <- function(x, ...) {
   weights <- weights[order]
   rw <- cumsum(weights) / sum(weights)
   md.values <- min(which(rw >= p))
-  if (rw[md.values] == p)
+  if (rw[md.values] == p) {
     mean(x[md.values:(md.values + 1)])
-  else
+  } else {
     x[md.values]
+  }
 }
 
 

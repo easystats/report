@@ -1,5 +1,4 @@
 if (require("testthat") && require("report")) {
-
   m <- lm(formula = Sepal.Length ~ Species * Petal.Width, data = iris)
 
   test_that("model_table-refit", {
@@ -39,5 +38,4 @@ if (require("testthat") && require("report")) {
       tolerance = 1e-3
     )
   })
-
 }

@@ -12,7 +12,7 @@
 #' @examples
 #' library(report)
 #'
-#' citation <- "Makowski, D., Ben-Shachar, M. S., Patil, I., & LÃ¼decke, D. (2020).
+#' citation <- "Makowski, D., Ben-Shachar, M. S., Patil, I., & LÃƒÂ¼decke, D. (2020).
 #' Methods and Algorithms for Correlation Analysis in R. Journal of Open Source
 #' Software, 5(51), 2306."
 #'
@@ -24,7 +24,6 @@
 #' clean_citation(citation())
 #' @export
 format_citation <- function(citation, authorsdate = FALSE, short = FALSE, intext = FALSE) {
-
   if (isTRUE(authorsdate)) {
     citation <- trimws(gsub(")..*", ")", citation)) # Remove everything after first parenthesis (hopefully, the date)
     citation <- gsub("[A-Z]\\., ", "", citation) # Remove last first names
@@ -61,7 +60,7 @@ cite_citation <- function(citation) {
 #' @rdname format_citation
 #' @export
 clean_citation <- function(citation) {
-  if("citation" %in% class(citation)){
+  if ("citation" %in% class(citation)) {
     citation <- format(citation)[2]
   }
   citation <- unlist(strsplit(citation, "\n"))

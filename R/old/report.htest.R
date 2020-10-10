@@ -14,7 +14,6 @@
 #' report(t.test(iris$Sepal.Width, iris$Sepal.Length, var.equal = TRUE))
 #' report(t.test(mtcars$mpg ~ mtcars$vs))
 #' report(t.test(iris$Sepal.Width, mu = 1))
-#'
 #' @importFrom insight format_ci
 #' @export
 report.htest <- function(model, interpretation = "funder2019", ...) {

@@ -97,6 +97,8 @@ report_intercept.default <- function(model, parameters = NULL, ci = 0.95, ...) {
       con <- stats::contrasts(f)
       unname(which(apply(con, 1, function(i) sum(i) == 0)))
     },
-    error = function(e) { 1 }
+    error = function(e) {
+      1
+    }
   )
 }

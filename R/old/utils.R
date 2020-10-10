@@ -1,4 +1,4 @@
-.safe_deparse <- function(string)  {
+.safe_deparse <- function(string) {
   if (is.null(string)) {
     return(NULL)
   }

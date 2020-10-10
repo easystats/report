@@ -44,7 +44,9 @@ report.default <- function(model, interpretation = "default", ci = 0.95, standar
         ...
       )
     },
-    error = function(e) { NULL }
+    error = function(e) {
+      NULL
+    }
   )
 
   if (is.null(out)) {
@@ -150,7 +152,9 @@ report.mixed <- report.lmerMod
 #'     data = iris, iter = 100, refresh = 0
 #'   )
 #'   report(model)
-#' }}
+#' }
+#' }
+#'
 #' @export
 report.stanreg <- function(model, interpretation = "default", ci = 0.89, standardize = "smart", standardize_robust = FALSE, centrality = "median", dispersion = FALSE, ci_method = "hdi", test = c("pd", "rope"), rope_range = "default", rope_ci = 1, bf_prior = NULL, diagnostic = c("ESS", "Rhat"), performance_metrics = "all", ...) {
   .report_regression(

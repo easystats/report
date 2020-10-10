@@ -1,5 +1,5 @@
 #' @export
-report_parameters.default <- function(model, parameters = NULL, prefix = "  - ", ci = 0.95, interpretation = "cohen1988", intercept=TRUE, ...) {
+report_parameters.default <- function(model, parameters = NULL, prefix = "  - ", ci = 0.95, interpretation = "cohen1988", intercept = TRUE, ...) {
   if (is.null(parameters)) {
     parameters <- parameters::model_parameters(model, ...)
   }
@@ -20,14 +20,14 @@ report_parameters.default <- function(model, parameters = NULL, prefix = "  - ",
   }
 
   # If empty
-  if(nrow(parameters) == 0){
-    if (insight::is_nullmodel(model)){
-      text_full <- text <- ""  # Should we write something else in case of null model?
+  if (nrow(parameters) == 0) {
+    if (insight::is_nullmodel(model)) {
+      text_full <- text <- "" # Should we write something else in case of null model?
     } else {
       text_full <- text <- ""
     }
 
-  # Generate the text
+    # Generate the text
   } else {
     text_full <- .report_parameters_regression(parameters, ci = ci, interpretation = interpretation, type = type, prefix = prefix, bayesian_diagnostic = TRUE)
     text <- .report_parameters_regression(parameters[names(parameters) %in% c("Parameter", "Coefficient", "Median", "Mean", "MAP", "CI_low", "CI_high", "p", "pd", "ROPE_Percentage", "BF", "Std_Coefficient", "Std_Median", "Std_Mean", "Std_MAP")], ci = ci, interpretation = interpretation, type = type, prefix = prefix, bayesian_diagnostic = FALSE)
