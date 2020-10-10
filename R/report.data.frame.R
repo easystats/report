@@ -9,7 +9,7 @@
 #' @param distribution Returns kurtosis and skewness in table.
 #' @param n_entries Number of different character entries to show. Can be "all".
 #' @param levels_percentage Show characters entries and factor levels by number (default) or percentage.
-#' @param missing_percentage Show missings by number (default) or percentage.
+#' @param missing_percentage Show missing by number (default) or percentage.
 #' @param digits Number of significant digits.
 #'
 #' @examples

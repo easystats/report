@@ -21,8 +21,10 @@
 #' format_citation(citation, authorsdate = TRUE, short = TRUE, intext = TRUE)
 #'
 #' cite_citation(citation)
+#' clean_citation(citation())
 #' @export
 format_citation <- function(citation, authorsdate = FALSE, short = FALSE, intext = FALSE) {
+
   if (isTRUE(authorsdate)) {
     citation <- trimws(gsub(")..*", ")", citation)) # Remove everything after first parenthesis (hopefully, the date)
     citation <- gsub("[A-Z]\\., ", "", citation) # Remove last first names
@@ -47,9 +49,28 @@ format_citation <- function(citation, authorsdate = FALSE, short = FALSE, intext
   citation
 }
 
+
 #' @rdname format_citation
 #' @export
 cite_citation <- function(citation) {
   citation <- format_citation(citation, authorsdate = TRUE, short = TRUE, intext = TRUE)
   paste0("(", citation, ")")
+}
+
+
+#' @rdname format_citation
+#' @export
+clean_citation <- function(citation) {
+  if("citation" %in% class(citation)){
+    citation <- format(citation)[2]
+  }
+  citation <- unlist(strsplit(citation, "\n"))
+  citation <- paste(citation, collapse = "SPLIT")
+  citation <- unlist(strsplit(citation, "SPLITSPLIT"))
+  i <- 1
+  while (grepl("To cite ", citation[i])) {
+    i <- i + 1
+  }
+  citation <- gsub("  ", " ", trimws(gsub("SPLIT", "", citation[i]), which = "both"))
+  as.character(citation)
 }

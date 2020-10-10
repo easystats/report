@@ -43,7 +43,7 @@
 
 \item{n_entries}{Number of different character entries to show. Can be "all".}
 
-\item{missing_percentage}{Show missings by number (default) or percentage.}
+\item{missing_percentage}{Show missing by number (default) or percentage.}
 
 \item{...}{Arguments passed to or from other methods.}
 
@@ -55,8 +55,10 @@ Create a report of a data frame.
 \examples{
 library(report)
 
-r <- report(iris, centrality = "median", dispersion = FALSE,
-            distribution = TRUE, missing_percentage = TRUE)
+r <- report(iris,
+  centrality = "median", dispersion = FALSE,
+  distribution = TRUE, missing_percentage = TRUE
+)
 r
 summary(r)
 as.data.frame(r)

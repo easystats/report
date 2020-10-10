@@ -3,11 +3,14 @@
 \name{format_citation}
 \alias{format_citation}
 \alias{cite_citation}
+\alias{clean_citation}
 \title{Citation formatting}
 \usage{
 format_citation(citation, authorsdate = FALSE, short = FALSE, intext = FALSE)
 
 cite_citation(citation)
+
+clean_citation(citation)
 }
 \arguments{
 \item{citation}{A character string of a citation.}
@@ -36,4 +39,5 @@ format_citation(citation, authorsdate = TRUE, short = TRUE)
 format_citation(citation, authorsdate = TRUE, short = TRUE, intext = TRUE)
 
 cite_citation(citation)
+clean_citation(citation())
 }

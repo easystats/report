@@ -43,6 +43,6 @@ summary(as.data.frame(r))
 
 # Convenience functions
 report_packages()
-report_system()
 cite_packages()
+report_system()
 }

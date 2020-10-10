@@ -22,8 +22,8 @@
 #'
 #' # Convenience functions
 #' report_packages()
-#' report_system()
 #' cite_packages()
+#' report_system()
 #' @importFrom utils packageVersion sessionInfo
 #' @export
 report.sessionInfo <- function(x, ...) {
@@ -88,10 +88,13 @@ report_system <- function(session = NULL) {
 
   version <- paste0(session$R.version$major, ".", session$R.version$minor)
   year <- paste0(session$R.version$year, "-", session$R.version$month, "-", session$R.version$day)
+  citation <- format_citation(clean_citation(citation()), authorsdate = TRUE, intext = TRUE)
 
   text <- paste0(
     "Analyses were conducted using the R Statistical language (version ",
     version,
+    "; ",
+    citation,
     ") on ",
     session$running
   )
@@ -99,6 +102,8 @@ report_system <- function(session = NULL) {
   short <- paste0(
     "The analysis was done using the R Statistical language (v",
     version,
+    "; ",
+    citation,
     ") on ",
     text_remove(session$running, " \\(build.*")
   )
@@ -110,27 +115,17 @@ report_system <- function(session = NULL) {
 
 # report_table ------------------------------------------------------------
 
-
+#' @importFrom utils citation
 #' @export
 report_table.sessionInfo <- function(x, ...) {
   pkgs <- x$otherPkgs
-  citations <- c()
-  versions <- c()
-  names <- c()
+
+  citations <- c(clean_citation(utils::citation("base")))
+  versions <- c(paste0(x$R.version$major, ".", x$R.version$minor))
+  names <- c("R")
+
   for (pkg_name in names(pkgs)) {
-    citation <- format(citation(pkg_name))[[2]]
-    citation <- unlist(strsplit(citation, "\n"))
-    citation <- paste(citation, collapse = "SPLIT")
-    citation <- unlist(strsplit(citation, "SPLITSPLIT"))
-
-    i <- 1
-    while (grepl("To cite ", citation[i])) {
-      i <- i + 1
-    }
-
-    citation <- gsub("  ", " ", trimws(gsub("SPLIT", "", citation[i]), which = "both"))
-
-    citations <- c(citations, citation)
+    citations <- c(citations, clean_citation(citation(pkg_name)))
     versions <- c(versions, as.character(packageVersion(pkg_name)))
     names <- c(names, pkg_name)
   }
@@ -183,7 +178,13 @@ report_parameters.sessionInfo <- function(x, table = NULL, ...) {
 
   x <- x[order(x$Reference), ]
 
-  as.report_parameters(x$text, summary = x$summary, ...)
+
+  params <- x$text
+  names(params) <- x$Package
+  short <- x$summary
+  names(short) <- x$Package
+
+  as.report_parameters(params, summary = short, ...)
 }
 
 
@@ -193,12 +194,13 @@ report_parameters.sessionInfo <- function(x, table = NULL, ...) {
 #' @export
 report_text.sessionInfo <- function(x, table = NULL, ...) {
   sys <- report_system(x)
-  pkg <- report_parameters(x, table = table)
+  params <- report_parameters(x, table = table)
+  params <- params[names(params) != "R"]
 
   text <- paste0(
     sys,
     ", using the packages ",
-    text_concatenate(pkg),
+    text_concatenate(params),
     ".\n\nReferences\n----------\n",
     as.character(cite_packages(x, table = table, ...))
   )
@@ -206,7 +208,7 @@ report_text.sessionInfo <- function(x, table = NULL, ...) {
   short <- paste0(
     summary(sys),
     ", using the packages ",
-    text_concatenate(summary(pkg)),
+    text_concatenate(summary(params)),
     "."
   )
 
