@@ -3,7 +3,6 @@
 #' Creates tables to describe different objects (see list of supported objects in \code{\link{report}}).
 #'
 #' @inheritParams report
-#' @param summary Add a summary as attribute (to be extracted via \code{summary()}).
 #'
 #' @return A \code{data.frame}.
 #'
@@ -29,17 +28,37 @@ report_table <- function(x, ...) {
 
 # METHODS -----------------------------------------------------------------
 
-#' @rdname report_table
+#' @rdname as.report
 #' @export
-as.report_table <- function(x, summary=NULL, ...) {
+as.report_table <- function(x, ...) {
+  UseMethod("as.report_table")
+}
+
+#' @export
+as.report_table.default <- function(x, summary=NULL, ...) {
+
   class(x) <- unique(c("report_table", class(x)))
   attributes(x) <- c(attributes(x), list(...))
+
   if(!is.null(summary)) {
     class(summary) <- unique(c("report_table", class(summary)))
     attr(x, "summary") <- summary
   }
+
   x
 }
+
+#' @export
+as.report_table.report <- function(x, summary=NULL, ...) {
+  if(is.null(summary) | isFALSE(summary)){
+    attributes(x)$table
+  } else if(isTRUE(summary)){
+    summary(attributes(x)$table)
+  }
+}
+
+
+
 
 
 #' @export

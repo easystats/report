@@ -1,5 +1,22 @@
 context("report.sessionInfo")
 
+
+test_that("report.sessionInfo - High level", {
+  x <- sessionInfo()
+  r <- report(x)
+
+  testthat::expect_true(is.character(r))
+  testthat::expect_true(is.character(summary(r)))
+  testthat::expect_true(as.report_text(r) == r)
+  testthat::expect_true(as.report_text(r, summary=TRUE) == summary(r))
+
+  testthat::expect_equal(ncol(as.data.frame(r)), 3)
+  testthat::expect_equal(ncol(as.report_table(r)), 3)
+  testthat::expect_equal(ncol(summary(as.data.frame(r))), 2)
+  testthat::expect_equal(ncol(as.report_table(r, summary=TRUE)), 2)
+})
+
+
 test_that("report.sessionInfo - Core", {
   x <- sessionInfo()
 

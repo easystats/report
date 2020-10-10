@@ -4,10 +4,12 @@
 \alias{report_text}
 \title{Report a textual description of an object}
 \usage{
-report_text(x, ...)
+report_text(x, table = NULL, ...)
 }
 \arguments{
 \item{x}{The R object that you want to report (see list of of supported objects above).}
+
+\item{table}{A table obtained via \code{report_table()}. If not provided, will run it.}
 
 \item{...}{Arguments passed to or from other methods.}
 }

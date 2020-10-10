@@ -4,7 +4,8 @@
 #'
 #' @inheritParams report
 #' @inheritParams report_table
-#' @param prefix The prefix to be displayed in front of each parameter.
+#' @inheritParams report_text
+#' @inheritParams as.report
 #'
 #' @return A \code{vector}.
 #'
@@ -16,7 +17,7 @@
 #' r
 #' summary(r)
 #' @export
-report_parameters <- function(x, prefix = "  - ", ...) {
+report_parameters <- function(x, table=NULL, prefix = "  - ", ...) {
   UseMethod("report_parameters")
 }
 
@@ -25,7 +26,7 @@ report_parameters <- function(x, prefix = "  - ", ...) {
 # METHODS -----------------------------------------------------------------
 
 
-#' @rdname report_parameters
+#' @rdname as.report
 #' @export
 as.report_parameters <- function(x, summary=NULL, prefix = "  - ", ...) {
   class(x) <- unique(c("report_parameters", class(x)))
@@ -68,8 +69,16 @@ print.report_parameters <- function(x, ...) {
 
 
 #' @export
-report_parameters.sessionInfo <- function(x, ...) {
-  x <- report_table(x, ...)
+report_parameters.sessionInfo <- function(x, table=NULL, ...) {
+
+  # Get table
+  if(is.null(table)){
+    x <- report_table(x, ...)
+  } else{
+    x <- table
+  }
+
+  # Generate text
   x$text <- paste0(x$Package,
                    " (version ",
                    x$Version,

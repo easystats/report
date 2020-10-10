@@ -49,7 +49,10 @@
 #'   \item \code{\link{report_parameters}}
 #'   \item \code{\link{report_text}}
 #' }
-#'
+#' Methods:
+#' \itemize{
+#'   \item \code{\link{as.report}}
+#' }
 #'
 #' @examples
 #' library(report)
@@ -81,20 +84,86 @@ report.default <- function(x, ...) {
 
 
 
+
+
+
+# Generic Methods --------------------------------------------------
+
+# print.report: defined in report_text.R
+
+#' @export
+as.data.frame.report <- function(x, ...) {
+  as.report_table(x, ...)
+}
+
+# @export
+# as.character.report <- function(x, ...) {
+#   x$texts$text_long
+# }
+
+# @export
+# summary.report <- function(object, ...) {
+#   object$texts$text_short
+# }
+
+
+
+# @export
+# as.table.report <- function(x, ...) {
+#   x$tables$table_short
+# }
+
+
+# Values ------------------------------------------------------------------
+
+
+# @export
+# as.list.report <- function(x, ...) {
+#   if (any(class(x) %in% c("parameters_model")) && "Parameter" %in% names(x)) {
+#     vals <- list()
+#
+#     for (param in x$Parameter) {
+#       vals[[param]] <- as.list(x[x$Parameter == param, ])
+#     }
+#   } else if ("values" %in% names(x)) {
+#     vals <- x$values
+#   } else if ("report" %in% class(x)) {
+#     vals <- as.list(x$tables$table_long, ...)
+#   } else {
+#     as.list(x, ...)
+#   }
+#   vals
+# }
+
+
+
+
+
+
 #' Create or test objects of class \link{report}.
 #'
 #' Allows to create or test whether an object is of the \code{report} class.
 #'
 #' @param x An arbitrary R object.
+#' @param text Text obtained via \code{report_text()}
+#' @param table Table obtained via \code{report_table()}
+#' @param plot Plot obtained via \code{report_plot()}. Not yet implemented.
+#' @param summary Add a summary as attribute (to be extracted via \code{summary()}).
+#' @param prefix The prefix to be displayed in front of each parameter.
 #' @param ... Args to be saved as attributes.
 #'
 #' @return A report object or a \code{TRUE/FALSE} value.
 #'
 #' @export
-as.report <- function(x, ...) {
-  class(x) <- unique(c("report", class(x)))
-  attributes(x) <- c(attributes(x), list(...))
-  x
+as.report <- function(text, table=NULL, plot=NULL, ...) {
+  class(text) <- unique(c("report", class(text)))
+  attributes(text) <- c(attributes(text), list(...))
+
+  if(!is.null(table)) {
+    attr(text, "table") <- table
+  }
+
+  text
 }
 
 
@@ -102,57 +171,3 @@ as.report <- function(x, ...) {
 #' @rdname as.report
 #' @export
 is.report <- function(x) inherits(x, "report")
-
-
-
-
-# Generic Methods --------------------------------------------------
-
-
-#' @export
-print.report <- function(x, width = NULL, ...) {
-  print(x$texts, width = NULL, ...)
-}
-
-
-#' @export
-as.character.report <- function(x, ...) {
-  x$texts$text_long
-}
-
-#' @export
-summary.report <- function(object, ...) {
-  object$texts$text_short
-}
-
-#' @export
-as.data.frame.report <- function(x, ...) {
-  x$tables$table_long
-}
-
-#' @export
-as.table.report <- function(x, ...) {
-  x$tables$table_short
-}
-
-
-# Values ------------------------------------------------------------------
-
-
-#' @export
-as.list.report <- function(x, ...) {
-  if (any(class(x) %in% c("parameters_model")) && "Parameter" %in% names(x)) {
-    vals <- list()
-
-    for (param in x$Parameter) {
-      vals[[param]] <- as.list(x[x$Parameter == param, ])
-    }
-  } else if ("values" %in% names(x)) {
-    vals <- x$values
-  } else if ("report" %in% class(x)) {
-    vals <- as.list(x$tables$table_long, ...)
-  } else {
-    as.list(x, ...)
-  }
-  vals
-}

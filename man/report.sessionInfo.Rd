@@ -33,12 +33,18 @@ Report R environment (packages, system, etc.)
 \examples{
 library(report)
 
+session <- sessionInfo()
+
+r <- report(session)
+r
+summary(r)
+as.data.frame(r)
+summary(as.data.frame(r))
+
+# Convenience functions
 report_packages()
 report_system()
 cite_packages()
-
-session <- sessionInfo()
-report(session)
 
 
 }

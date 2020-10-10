@@ -2,21 +2,18 @@
 % Please edit documentation in R/report_parameters.R
 \name{report_parameters}
 \alias{report_parameters}
-\alias{as.report_parameters}
 \title{Report the parameters of a model}
 \usage{
-report_parameters(x, prefix = "  - ", ...)
-
-as.report_parameters(x, summary = NULL, prefix = "  - ", ...)
+report_parameters(x, table = NULL, prefix = "  - ", ...)
 }
 \arguments{
 \item{x}{The R object that you want to report (see list of of supported objects above).}
 
+\item{table}{A table obtained via \code{report_table()}. If not provided, will run it.}
+
 \item{prefix}{The prefix to be displayed in front of each parameter.}
 
 \item{...}{Arguments passed to or from other methods.}
-
-\item{summary}{Add a summary as attribute (to be extracted via \code{summary()}).}
 }
 \value{
 A \code{vector}.

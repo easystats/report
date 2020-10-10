@@ -76,4 +76,8 @@ Get more specific reports:
   \item \code{\link{report_parameters}}
   \item \code{\link{report_text}}
 }
+Methods:
+\itemize{
+  \item \code{\link{as.report}}
+}
 }

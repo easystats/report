@@ -12,23 +12,29 @@
 #' @examples
 #' library(report)
 #'
+#' session <- sessionInfo()
+#'
+#' r <- report(session)
+#' r
+#' summary(r)
+#' as.data.frame(r)
+#' summary(as.data.frame(r))
+#'
+#' # Convenience functions
 #' report_packages()
 #' report_system()
 #' cite_packages()
-#'
-#' session <- sessionInfo()
-#' report(session)
 #'
 #'
 #' @importFrom utils packageVersion sessionInfo
 #' @export
 report.sessionInfo <- function(x, ...) {
-  report_packages(x, ...)
+  table <- report_table(x, ...)
+  text <- report_text(x, table=table)
+
+  as.report(text, table=table, ...)
 }
 
-
-
-# TODO: Add report.sessionInfo with table and all
 
 
 
@@ -57,7 +63,13 @@ report_packages <- function(session = NULL, ...) {
 cite_packages <- function(session = NULL, ...) {
   if (is.null(session)) session <- sessionInfo()
 
-  x <- report_table(session)
+  # Do not recompute table if passed
+  if(!is.null(list(...)$table)){
+    x <- list(...)$table
+  } else{
+    x <- report_table(session)
+  }
+
   x <- x$Reference[order(x$Reference)]  # Extract the references
 
   as.report_parameters(x, ...)
