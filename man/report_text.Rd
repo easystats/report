@@ -26,4 +26,7 @@ library(report)
 r <- report_text(sessionInfo())
 r
 summary(r)
+
+# Data
+report_text(iris$Sepal.Length)
 }

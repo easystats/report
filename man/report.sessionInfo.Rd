@@ -45,6 +45,4 @@ summary(as.data.frame(r))
 report_packages()
 report_system()
 cite_packages()
-
-
 }

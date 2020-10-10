@@ -52,6 +52,6 @@ text_concatenate(c("First", "Second", "Last"))
 text_remove(c("one!", "two", "three!"), "!")
 
 # Wrap text
-long_text <- paste(rep("abc ", 100), collapse="")
-cat(text_wrap(long_text, width=50))
+long_text <- paste(rep("abc ", 100), collapse = "")
+cat(text_wrap(long_text, width = 50))
 }

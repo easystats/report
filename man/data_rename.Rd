@@ -39,7 +39,7 @@ library(report)
 # Rename columns
 data_rename(iris, "Sepal.Length", "length")
 # data_rename(iris, "FakeCol", "length", safe=FALSE)  # This fails
-data_rename(iris, "FakeCol", "length")  # This doesn't
+data_rename(iris, "FakeCol", "length") # This doesn't
 data_rename(iris, c("Sepal.Length", "Sepal.Width"), c("length", "width"))
 
 # Remove columns

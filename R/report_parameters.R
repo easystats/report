@@ -16,8 +16,11 @@
 #' r <- report_parameters(sessionInfo())
 #' r
 #' summary(r)
+#'
+#' # Data
+#' report_parameters(iris$Sepal.Length)
 #' @export
-report_parameters <- function(x, table = NULL, prefix = "  - ", ...) {
+report_parameters <- function(x, table = NULL, ...) {
   UseMethod("report_parameters")
 }
 
@@ -62,39 +65,4 @@ summary.report_parameters <- function(object, ...) {
 #' @export
 print.report_parameters <- function(x, ...) {
   cat(as.character(x, ...))
-}
-
-# MISCELLANEOUS ------------------------------------------------------------
-
-
-
-#' @export
-report_parameters.sessionInfo <- function(x, table = NULL, ...) {
-
-  # Get table
-  if (is.null(table)) {
-    x <- report_table(x, ...)
-  } else {
-    x <- table
-  }
-
-  # Generate text
-  x$text <- paste0(
-    x$Package,
-    " (version ",
-    x$Version,
-    "; ",
-    format_citation(x$Reference, authorsdate = TRUE, short = TRUE, intext = TRUE),
-    ")"
-  )
-  x$summary <- paste0(
-    x$Package,
-    " (v",
-    x$Version,
-    ")"
-  )
-
-  x <- x[order(x$Reference), ]
-
-  as.report_parameters(x$text, summary = x$summary, ...)
 }

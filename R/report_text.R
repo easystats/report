@@ -15,6 +15,9 @@
 #' r <- report_text(sessionInfo())
 #' r
 #' summary(r)
+#'
+#' # Data
+#' report_text(iris$Sepal.Length)
 #' @export
 report_text <- function(x, table = NULL, ...) {
   UseMethod("report_text")
@@ -70,31 +73,3 @@ print.report_text <- function(x, width = NULL, ...) {
 
 #' @export
 print.report <- print.report_text
-
-
-# MISCELLANEOUS ------------------------------------------------------------
-
-
-
-#' @export
-report_text.sessionInfo <- function(x, table = NULL, ...) {
-  sys <- report_system(x)
-  pkg <- report_parameters(x, table = table)
-
-  text <- paste0(
-    sys,
-    ", using the packages ",
-    text_concatenate(pkg),
-    ".\n\nReferences\n----------\n",
-    as.character(cite_packages(x, table = table, ...))
-  )
-
-  short <- paste0(
-    summary(sys),
-    ", using the packages ",
-    text_concatenate(summary(pkg)),
-    "."
-  )
-
-  as.report_text(text, summary = short)
-}

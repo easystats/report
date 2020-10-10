@@ -15,7 +15,7 @@
 #' summary(r)
 #'
 #' # Data
-#' # report_table(iris)
+#' report_table(iris$Sepal.Length)
 #'
 #' # Tests
 #' # report_table(t.test(mpg ~ am, data = mtcars))
@@ -68,45 +68,4 @@ summary.report_table <- function(object, ...) {
 #' @export
 print.report_table <- function(x, ...) {
   cat(insight::format_table(x, ...))
-}
-
-
-# MISCELLANEOUS ------------------------------------------------------------
-
-
-
-#' @export
-report_table.sessionInfo <- function(x, ...) {
-  pkgs <- x$otherPkgs
-  citations <- c()
-  versions <- c()
-  names <- c()
-  for (pkg_name in names(pkgs)) {
-    citation <- format(citation(pkg_name))[[2]]
-    citation <- unlist(strsplit(citation, "\n"))
-    citation <- paste(citation, collapse = "SPLIT")
-    citation <- unlist(strsplit(citation, "SPLITSPLIT"))
-
-    i <- 1
-    while (grepl("To cite ", citation[i])) {
-      i <- i + 1
-    }
-
-    citation <- gsub("  ", " ", trimws(gsub("SPLIT", "", citation[i]), which = "both"))
-
-    citations <- c(citations, citation)
-    versions <- c(versions, as.character(packageVersion(pkg_name)))
-    names <- c(names, pkg_name)
-  }
-
-  data <- data.frame(
-    "Package" = names,
-    "Version" = versions,
-    "Reference" = citations,
-    stringsAsFactors = FALSE
-  )
-
-  x <- data[order(data$Package), ]
-  row.names(x) <- NULL
-  as.report_table(x, summary = x[c("Package", "Version")])
 }

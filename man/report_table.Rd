@@ -26,9 +26,8 @@ r
 summary(r)
 
 # Data
-# report_table(iris)
+report_table(iris$Sepal.Length)
 
 # Tests
 # report_table(t.test(mpg ~ am, data = mtcars))
-
 }

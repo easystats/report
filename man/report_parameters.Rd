@@ -4,14 +4,12 @@
 \alias{report_parameters}
 \title{Report the parameters of a model}
 \usage{
-report_parameters(x, table = NULL, prefix = "  - ", ...)
+report_parameters(x, table = NULL, ...)
 }
 \arguments{
 \item{x}{The R object that you want to report (see list of of supported objects above).}
 
 \item{table}{A table obtained via \code{report_table()}. If not provided, will run it.}
-
-\item{prefix}{The prefix to be displayed in front of each parameter.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
@@ -28,4 +26,7 @@ library(report)
 r <- report_parameters(sessionInfo())
 r
 summary(r)
+
+# Data
+report_parameters(iris$Sepal.Length)
 }

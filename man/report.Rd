@@ -20,7 +20,7 @@ and long table of parameters and fit indices.
 Create reports of different objects. See the documentation for your object's class:
 \itemize{
  \item{\link[=report.sessionInfo]{R environment and system} (\code{sessionInfo})}
-% \item{\link[=report.data.frame]{Dataframes and vectors}}
+ \item{\link[=report.data.frame]{Dataframes and vectors}}
 % \item{\link[=report.htest]{Correlations and t-tests} (\code{htest})}
 % \item{\link[=report.aov]{ANOVAs}}
 % \item{\link[=report.default]{Regression models} (\code{glm, lm, ...})}
