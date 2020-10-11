@@ -27,4 +27,8 @@ report_statistics(iris$Sepal.Length)
 report_statistics(as.character(round(iris$Sepal.Length, 1)))
 report_statistics(iris$Species)
 report_statistics(iris)
+
+# h-tests
+report_statistics(t.test(iris$Sepal.Width, iris$Sepal.Length))
+report_statistics(cor.test(iris$Sepal.Width, iris$Sepal.Length))
 }

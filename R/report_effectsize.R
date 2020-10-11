@@ -44,7 +44,11 @@ as.report_effectsize <- function(x, summary = NULL, prefix = "  - ", ...) {
   x
 }
 
-# summary.report_effectsize: defined in report_parameters
+
+#' @export
+summary.report_effectsize <- function(object, ...) {
+  attributes(object)$summary
+}
 
 #' @export
 print.report_effectsize <- function(x, ...) {

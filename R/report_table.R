@@ -21,7 +21,8 @@
 #' report_table(iris)
 #'
 #' # Tests
-#' # report_table(t.test(mpg ~ am, data = mtcars))
+#' report_table(t.test(mpg ~ am, data = mtcars))
+#' report_table(cor.test(iris$Sepal.Length, iris$Sepal.Width))
 #' @export
 report_table <- function(x, ...) {
   UseMethod("report_table")
@@ -74,5 +75,5 @@ summary.report_table <- function(object, ...) {
 
 #' @export
 print.report_table <- function(x, ...) {
-  cat(insight::format_table(x, ...))
+  cat(insight::format_table(parameters::parameters_table(x, ...), ...))
 }

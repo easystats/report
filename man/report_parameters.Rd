@@ -32,4 +32,8 @@ report_parameters(iris$Sepal.Length)
 report_parameters(as.character(round(iris$Sepal.Length, 1)))
 report_parameters(iris$Species)
 report_parameters(iris)
+
+# h-tests
+report_parameters(t.test(iris$Sepal.Width, iris$Sepal.Length))
+report_parameters(cor.test(iris$Sepal.Width, iris$Sepal.Length))
 }

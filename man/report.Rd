@@ -76,6 +76,8 @@ Aspects of reports:
   \item \code{\link{report_table}}
   \item \code{\link{report_parameters}}
   \item \code{\link{report_statistics}}
+  \item \code{\link{report_effectsize}}
+  \item \code{\link{report_model}}
   \item \code{\link{report_text}}
 }
 Methods:

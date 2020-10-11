@@ -22,6 +22,10 @@
 #' report_parameters(as.character(round(iris$Sepal.Length, 1)))
 #' report_parameters(iris$Species)
 #' report_parameters(iris)
+#'
+#' # h-tests
+#' report_parameters(t.test(iris$Sepal.Width, iris$Sepal.Length))
+#' report_parameters(cor.test(iris$Sepal.Width, iris$Sepal.Length))
 #' @export
 report_parameters <- function(x, table = NULL, ...) {
   UseMethod("report_parameters")
@@ -67,9 +71,6 @@ as.character.report_parameters <- function(x, prefix = NULL, ...) {
 summary.report_parameters <- function(object, ...) {
   attributes(object)$summary
 }
-
-#' @export
-summary.report_effectsize <- summary.report_parameters
 
 
 #' @export
