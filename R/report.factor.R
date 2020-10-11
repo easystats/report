@@ -116,3 +116,40 @@ report_text.factor <- function(x, table = NULL, levels_percentage = FALSE, ...) 
 
 #' @export
 report_text.logical <- report_text.factor
+
+
+
+# report_statistics -------------------------------------------------------
+
+
+#' @export
+report_statistics.factor <- function(x, table = NULL, levels_percentage = FALSE, ...) {
+
+  if (is.null(table)) {
+    table <- report_table(x, levels_percentage = levels_percentage, ...)
+  }
+
+  text_levels <- paste0(table$Level)
+  text_n_Obs <- paste0("n = ", table$n_Obs)
+  text_percentage_Obs <- paste0(insight::format_value(table$percentage_Obs), "%")
+
+  text_full <- paste0(
+    text_levels, ", ",
+    text_n_Obs, ", ",
+    text_percentage_Obs
+  )
+
+  if (isTRUE(levels_percentage)) {
+    text <- paste0(
+      text_levels, ", ",
+      text_percentage_Obs
+    )
+  } else {
+    text <- paste0(
+      text_levels, ", ",
+      text_n_Obs
+    )
+  }
+
+  as.report_statistics(paste0(text_full, collapse = "; "), summary = paste0(text, collapse = "; "))
+}

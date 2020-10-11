@@ -127,6 +127,7 @@ report_parameters.data.frame <- function(x, table = NULL, n = FALSE, centrality 
 
 #' @export
 report_text.data.frame <- function(x, table = NULL, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = FALSE, digits = 2, n_entries = 3, missing_percentage = FALSE, ...) {
+
   params <- report_parameters(x, n = n, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, levels_percentage = levels_percentage, digits = digits, n_entries = n_entries, missing_percentage = missing_percentage, ...)
 
   # Concatenate text
@@ -138,6 +139,24 @@ report_text.data.frame <- function(x, table = NULL, n = FALSE, centrality = "mea
 
 
 
+# report_statistics -------------------------------------------------------
+
+
+#' @export
+report_statistics.data.frame <- function(x, table = NULL, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = FALSE, digits = 2, n_entries = 3, missing_percentage = FALSE, ...) {
+
+  text_full <- c()
+  text <- c()
+
+  for (i in 1:ncol(x)) {
+    r <- report_statistics(x[[names(x)[i]]], n = n, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, levels_percentage = levels_percentage, digits = digits, n_entries = n_entries, missing_percentage = missing_percentage, varname = names(x)[i], ...)
+
+    text_full <- c(text_full, r)
+    text <- c(text, summary(r))
+  }
+
+  as.report_statistics(text_full, summary = text)
+}
 
 
 # Grouped dataframe -------------------------------------------------------
@@ -236,3 +255,25 @@ report_text.grouped_df <- function(x, table = NULL, n = FALSE, centrality = "mea
 
 #' @export
 report.grouped_df <- report.data.frame
+
+
+
+#' @export
+report_statistics.grouped_df <- function(x, table = NULL, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = FALSE, digits = 2, n_entries = 3, missing_percentage = FALSE, ...) {
+
+  out <- .report_grouped_dataframe(x)
+
+  text_full <- c()
+  text <- c()
+
+  for (group in names(out$dfs)) {
+    data <- out$dfs[[group]]
+
+    r <- report_statistics(data, n = n, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, levels_percentage = levels_percentage, digits = digits, n_entries = n_entries, missing_percentage = missing_percentage, ...)
+
+    text_full <- c(text_full, paste0(group, ", ", as.character(r)))
+    text <- c(text, paste0(group, ", ", as.character(summary(r))))
+  }
+
+  as.report_statistics(text_full, summary = text)
+}

@@ -62,9 +62,9 @@ report_parameters.character <- function(x, table = NULL, n_entries = 3, levels_p
   entries <- attributes(table)$entries
 
   if (levels_percentage == TRUE) {
-    text <- paste0(entries$Entry, ", ", insight::format_value(entries$percentage_Entry * 100), "%")
+    text <- paste0(entries$Entry, " (", insight::format_value(entries$percentage_Entry * 100), "%)")
   } else {
-    text <- paste0(entries$Entry, ", n = ", entries$n_Entry)
+    text <- paste0(entries$Entry, " (n = ", entries$n_Entry, ")")
   }
 
   as.report_parameters(text, summary = text[1:n_entries], ...)
@@ -90,7 +90,7 @@ report_text.character <- function(x, table = NULL, n_entries = 3, levels_percent
   entries <- attributes(table)$entries
   params <- report_parameters(x, table = table, n_entries = n_entries, levels_percentage = levels_percentage, missing_percentage = missing_percentage, ...)
 
-  text <- paste0(summary(params), collapse = ", ")
+  text <- paste0(summary(params), collapse = "; ")
   if (nrow(entries) > 1) {
     text <- paste0(name, ": ", nrow(entries), " entries, such as ", text)
   } else {
@@ -124,3 +124,26 @@ report_text.character <- function(x, table = NULL, n_entries = 3, levels_percent
 
   as.report_text(text_full, summary = text)
 }
+
+
+
+# report_statistics -------------------------------------------------------
+
+
+#' @export
+report_statistics.character <- function(x, table = NULL, n_entries = 3, levels_percentage = FALSE, missing_percentage = FALSE, ...) {
+
+  if (is.null(table)) {
+    table <- report_table(x, n_entries = n_entries, levels_percentage = levels_percentage, missing_percentage = missing_percentage, ...)
+  }
+  entries <- attributes(table)$entries
+
+  if (levels_percentage == TRUE) {
+    text <- paste0(entries$Entry, ", ", insight::format_value(entries$percentage_Entry * 100), "%")
+  } else {
+    text <- paste0(entries$Entry, ", n = ", entries$n_Entry)
+  }
+
+  as.report_statistics(paste0(text, collapse = "; "), summary = paste0(text[1:n_entries], collapse = "; "))
+}
+

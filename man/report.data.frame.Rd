@@ -34,7 +34,7 @@
 
 \method{report}{numeric}(
   x,
-  n = TRUE,
+  n = FALSE,
   centrality = "mean",
   dispersion = TRUE,
   range = TRUE,

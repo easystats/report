@@ -43,10 +43,10 @@ The \code{report()} function generates a report-object that contain in itself
 different representations (e.g., text, tables, plots). These different representations
 can be accessed via several functions, such as:
 \itemize{
-\item \strong{\code{text_long()}}: Detailed text.
-\item \strong{\code{text_short()}}: Minimal text giving the minimal information.
-\item \strong{\code{table_long()}}: Comprehensive table including most available indices.
-\item \strong{\code{table_short()}}: Minimal table.
+\item \strong{\code{as.report_text(r)}}: Detailed text.
+\item \strong{\code{as.report_text(r, summary=TRUE)}}: Minimal text giving the minimal information.
+\item \strong{\code{as.report_table(r)}}: Comprehensive table including most available indices.
+\item \strong{\code{as.report_table(r, summary=TRUE)}}: Minimal table.
 }
 
 Note that for some report objects, some of these representations might be identical.
@@ -70,10 +70,11 @@ model <- t.test(mpg ~ am, data = mtcars)
 # as.list(r)
 }
 \seealso{
-Get more specific reports:
+Specific reports:
 \itemize{
   \item \code{\link{report_table}}
   \item \code{\link{report_parameters}}
+  \item \code{\link{report_statistics}}
   \item \code{\link{report_text}}
 }
 Methods:

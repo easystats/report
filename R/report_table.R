@@ -27,6 +27,10 @@ report_table <- function(x, ...) {
   UseMethod("report_table")
 }
 
+#' @export
+report_table.default <- function(x, ...) {
+  stop(paste0("report_table() is not available for objects of class ", class(x)))
+}
 
 # METHODS -----------------------------------------------------------------
 

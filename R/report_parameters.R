@@ -28,6 +28,10 @@ report_parameters <- function(x, table = NULL, ...) {
 }
 
 
+#' @export
+report_parameters.default <- function(x, ...) {
+  stop(paste0("report_parameters() is not available for objects of class ", class(x)))
+}
 
 # METHODS -----------------------------------------------------------------
 
