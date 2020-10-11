@@ -7,12 +7,12 @@ if (require("testthat") && require("bayestestR") && require("logspline")) {
   BFmodels <- bayestestR::bayesfactor_models(mod1, mod2, mod3, denominator = mod0)
 
   testthat::test_that("models", {
-    testthat::expect_equal(nchar(text_short(report(BFmodels))), 183)
+    testthat::expect_equal(nchar(summary(report(BFmodels))), 179)
   })
 
   inc_bf <- bayestestR::bayesfactor_inclusion(BFmodels, prior_odds = c(1, 2, 3), match_models = TRUE)
 
   testthat::test_that("inclusion", {
-    testthat::expect_equal(nchar(text_short(report(inc_bf))), 302)
+    testthat::expect_equal(nchar(summary(report(inc_bf))), 297)
   })
 }

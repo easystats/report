@@ -22,7 +22,7 @@
 #' report_text(iris$Species)
 #' report_text(iris)
 #' @export
-report_text <- function(x, table = NULL, ...) {
+report_text <- function(x, table=NULL, ...) {
   UseMethod("report_text")
 }
 

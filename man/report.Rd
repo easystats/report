@@ -24,8 +24,9 @@ Create reports of different objects. See the documentation for your object's cla
 % \item{\link[=report.htest]{Correlations and t-tests} (\code{htest})}
 % \item{\link[=report.aov]{ANOVAs}}
 % \item{\link[=report.default]{Regression models} (\code{glm, lm, ...})}
-% \item{\link[=report.lmerMod]{Mixed models} \code{(glmer, lmer, glmmTMB, ...)}}
-% \item{\link[=report.stanreg]{Bayesian models} \code{(stanreg, brms...)}}
+% \item{\link[=report.lmerMod]{Mixed models} (\code{glmer, lmer, glmmTMB, ...})}
+% \item{\link[=report.stanreg]{Bayesian models} (\code{stanreg, brms...})}
+\item{\link[=report.bayesfactor_models]{Bayes factors} (from \code{bayestestR})}
 }
 }
 \details{

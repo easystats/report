@@ -109,8 +109,8 @@ report_text.factor <- function(x, table = NULL, levels_percentage = "auto", ...)
     text_total_levels <- paste0(name, ": ", nrow(table_no_missing), " level, namely ")
   }
 
-  text_full <- paste0(text_total_levels, text_concatenate(params, sep = ", "))
-  text <- paste0(text_total_levels, text_concatenate(summary(params), sep = ", "))
+  text_full <- paste0(text_total_levels, format_text(params, sep = ", ", ...))
+  text <- paste0(text_total_levels, format_text(summary(params), sep = ", ", ...))
 
   as.report_text(text_full, summary = text)
 }
