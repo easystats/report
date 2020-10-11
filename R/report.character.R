@@ -69,7 +69,7 @@ report_parameters.character <- function(x, table = NULL, n_entries = 3, levels_p
   entries <- attributes(table)$entries
 
   if (levels_percentage == TRUE) {
-    text <- paste0(entries$Entry, " (", insight::format_value(entries$percentage_Entry * 100), "%)")
+    text <- paste0(entries$Entry, " (", insight::format_value(entries$percentage_Entry, as_percent=TRUE), "%)")
   } else {
     text <- paste0(entries$Entry, " (n = ", entries$n_Entry, ")")
   }
@@ -148,7 +148,7 @@ report_statistics.character <- function(x, table = NULL, n_entries = 3, levels_p
   entries <- attributes(table)$entries
 
   if (levels_percentage == TRUE) {
-    text <- paste0(entries$Entry, ", ", insight::format_value(entries$percentage_Entry * 100), "%")
+    text <- paste0(entries$Entry, ", ", insight::format_value(entries$percentage_Entry, as_percent=TRUE), "%")
   } else {
     text <- paste0(entries$Entry, ", n = ", entries$n_Entry)
   }
