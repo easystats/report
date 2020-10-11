@@ -3,7 +3,6 @@
 #' Create a report of an h-test object (\code{t.test()}, \code{cor.test()}).
 #'
 #' @param x Object of class htest.
-#' @param interpretation Effect size interpretation set of rules (see \link[effectsize]{interpret_d} and \link[effectsize]{interpret_r}).
 #' @inheritParams report
 #' @inherit report return seealso
 #'

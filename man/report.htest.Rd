@@ -10,8 +10,6 @@
 \item{x}{Object of class htest.}
 
 \item{...}{Arguments passed to or from other methods.}
-
-\item{interpretation}{Effect size interpretation set of rules (see \link[effectsize]{interpret_d} and \link[effectsize]{interpret_r}).}
 }
 \value{
 A list-object of class \code{report}, which contains further list-objects
