@@ -1,6 +1,6 @@
 #' Report of h-tests (Correlation, t-test...)
 #'
-#' Create a report of an h-test object (\code{t.test(), \code{cor.test()}}).
+#' Create a report of an h-test object (\code{t.test()}, \code{cor.test()}).
 #'
 #' @param x Object of class htest.
 #' @param interpretation Effect size interpretation set of rules (see \link[effectsize]{interpret_d} and \link[effectsize]{interpret_r}).
@@ -28,7 +28,7 @@ report.htest <- function(x, ...) {
 
 
 #' @seealso report
-#' @importFrom effectsize effectsize
+#' @importFrom effectsize effectsize interpret_r interpret_d
 #' @importFrom parameters model_parameters
 #' @importFrom insight model_info
 #' @export
@@ -38,16 +38,34 @@ report_effectsize.htest <- function(x, ...) {
   if (insight::model_info(x)$is_ttest) {
     table <- effectsize::effectsize(x, ...)
     interpret <- effectsize::interpret_d(table$d, ...)
-    table$Size <- interpret
+    interpretation <- interpret
+    statistics <- paste0("d = ",
+                         insight::format_value(table$d),
+                         ", ",
+                         insight::format_ci(table$CI_low, table$CI_high, table$CI))
+    table <- data_rename(as.data.frame(table), c("CI_low", "CI_high"), c("d_CI_low", "d_CI_high"))
+    table <- data_reorder(table, c("d", "d_CI_low", "d_CI_high"))
   } else{
     table <- parameters::model_parameters(x, ...)[c("r", "CI_low", "CI_high")]
     interpret <- effectsize::interpret_r(table$r, ...)
-    table$Size <- interpret
+    interpretation <- interpret
+    statistics <- paste0("r = ",
+                         insight::format_value(table$r),
+                         ", ",
+                         insight::format_ci(table$CI_low, table$CI_high, table$CI))
+    table <- data_reorder(table, c("r", "CI_low", "CI_high"))
   }
-  rules <- attributes(interpret)$rules
+  rules <- .text_effectsize(attributes(interpret)$rule_name)
+  parameters <- paste0(interpretation, " (", statistics, ")")
+
 
   # Return output
-  as.report_effectsize(table, summary=table)
+  as.report_effectsize(parameters,
+                       summary=parameters,
+                       table=table[1:3, ],
+                       statistics=statistics,
+                       rules=rules,
+                       ci=unique(table$CI))
 }
 
 
@@ -56,7 +74,7 @@ report_effectsize.htest <- function(x, ...) {
 
 
 #' @seealso report
-#' @importFrom effectsize effectsize
+#' @importFrom effectsize effectsize interpret
 #' @importFrom parameters model_parameters
 #' @importFrom insight model_info
 #' @export

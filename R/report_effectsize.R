@@ -14,6 +14,7 @@
 #'
 #' # h-tests
 #' report_effectsize(t.test(iris$Sepal.Width, iris$Sepal.Length))
+#' report_effectsize(cor.test(iris$Sepal.Width, iris$Sepal.Length))
 #' @export
 report_effectsize <- function(x, ...) {
   UseMethod("report_effectsize")
@@ -43,12 +44,39 @@ as.report_effectsize <- function(x, summary = NULL, prefix = "  - ", ...) {
   x
 }
 
-
-#' @export
-summary.report_effectsize <- summary.report_parameters
-
+# summary.report_effectsize: defined in report_parameters
 
 #' @export
 print.report_effectsize <- function(x, ...) {
   cat(paste0(x, collapse = "\n"))
+}
+
+
+
+# Utilities ---------------------------------------------------------------
+
+
+
+#' @keywords internal
+.text_effectsize <- function(interpretation) {
+  # Effect size
+  if (!is.null(interpretation)) {
+    if (is.character(interpretation)) {
+      effsize_name <- ifelse(interpretation == "cohen1988", "Cohen's (1988)",
+                             ifelse(interpretation == "sawilowsky2009", "Savilowsky's (2009)",
+                                    ifelse(interpretation == "gignac2016", "Gignac's (2016)",
+                                           ifelse(interpretation == "funder2019", "Funder's (2019)",
+                                                  ifelse(interpretation == "chen2010", "Chen's (2010)", interpretation)
+                                           )
+                                    )
+                             )
+      )
+      text <- paste0(" Effect sizes were labelled following ", effsize_name, " recommendations.")
+    } else {
+      text <- paste0(" Effect sizes were labelled following a custom set of rules.")
+    }
+  } else {
+    text <- ""
+  }
+  text
 }

@@ -68,6 +68,9 @@ summary.report_parameters <- function(object, ...) {
   attributes(object)$summary
 }
 
+#' @export
+summary.report_effectsize <- summary.report_parameters
+
 
 #' @export
 print.report_parameters <- function(x, ...) {

@@ -41,9 +41,9 @@ report_model <- function(model, ...) {
           )
         )
       )
-      text <- paste0(" Effect sizes were labelled following ", effsize_name, " recommendations.")
+      text <- paste0("Effect sizes were labelled following ", effsize_name, " recommendations.")
     } else {
-      text <- paste0(" Effect sizes were labelled following a custom set of rules.")
+      text <- paste0("Effect sizes were labelled following a custom set of rules.")
     }
   } else {
     text <- ""
