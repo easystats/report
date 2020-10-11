@@ -86,5 +86,6 @@ Specific reports:
   \item \code{\link{report_system}}
   \item \code{\link{report_packages}}
   \item \code{\link{report_participants}}
+  \item \code{\link{report_sample}}
 }
 }
