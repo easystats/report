@@ -43,7 +43,7 @@
 #' with a short and long description of the model summary, as well as a short
 #' and long table of parameters and fit indices.
 #'
-#' @seealso Specific reports:
+#' @seealso Aspects of reports:
 #' \itemize{
 #'   \item \code{\link{report_table}}
 #'   \item \code{\link{report_parameters}}
@@ -53,6 +53,12 @@
 #' Methods:
 #' \itemize{
 #'   \item \code{\link{as.report}}
+#' }
+#' Specific reports:
+#' \itemize{
+#'   \item \code{\link{report_system}}
+#'   \item \code{\link{report_packages}}
+#'   \item \code{\link{report_participants}}
 #' }
 #'
 #' @examples

@@ -290,7 +290,7 @@ report_statistics.grouped_df <- function(x, table = NULL, n = FALSE, centrality 
 #' @keywords internal
 .report_dataframe_percentage <- function(x, percentage = "auto"){
 
-  if(percentage != "auto"){
+  if(is.null(percentage) || percentage != "auto"){
     return(percentage)
   }
 

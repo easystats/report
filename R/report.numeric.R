@@ -163,7 +163,7 @@ report_parameters.numeric <- function(x, table = NULL, n = FALSE, centrality = "
   text <- text_full
 
   # N observations
-  if (isFALSE(n)) text[!names(text) %in% c("n_Obs")]
+  if (isFALSE(n)) text <- text[!names(text) %in% c("n_Obs")]
 
   # Centrality and dispersion
   if (!isFALSE(centrality) && !is.null(centrality)) {
@@ -192,7 +192,7 @@ report_parameters.numeric <- function(x, table = NULL, n = FALSE, centrality = "
     text <- text[!names(text) %in% c("Skewness", "Kurtosis")]
   }
 
-  if (is.null(missing_percentage) | n_missing == 0) {
+  if (is.null(missing_percentage) || n_missing == 0) {
     text <- text[!names(text) %in% c("Missing")]
   }
 

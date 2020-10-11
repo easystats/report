@@ -70,7 +70,7 @@ model <- t.test(mpg ~ am, data = mtcars)
 # as.list(r)
 }
 \seealso{
-Specific reports:
+Aspects of reports:
 \itemize{
   \item \code{\link{report_table}}
   \item \code{\link{report_parameters}}
@@ -80,5 +80,11 @@ Specific reports:
 Methods:
 \itemize{
   \item \code{\link{as.report}}
+}
+Specific reports:
+\itemize{
+  \item \code{\link{report_system}}
+  \item \code{\link{report_packages}}
+  \item \code{\link{report_participants}}
 }
 }
