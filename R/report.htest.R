@@ -46,13 +46,13 @@ report_effectsize.htest <- function(x, ...) {
     table <- data_rename(as.data.frame(table), c("CI_low", "CI_high"), c("d_CI_low", "d_CI_high"))
     table <- data_reorder(table, c("d", "d_CI_low", "d_CI_high"))
   } else{
-    table <- parameters::model_parameters(x, ...)[c("r", "CI_low", "CI_high")]
+    table <- parameters::model_parameters(x, ...)
     interpret <- effectsize::interpret_r(table$r, ...)
     interpretation <- interpret
     statistics <- paste0("r = ",
                          insight::format_value(table$r),
                          ", ",
-                         insight::format_ci(table$CI_low, table$CI_high, table$CI))
+                         insight::format_ci(table$CI_low, table$CI_high, attributes(table)$ci))
     table <- data_reorder(table, c("r", "CI_low", "CI_high"))
   }
   rules <- .text_effectsize(attributes(interpret)$rule_name)

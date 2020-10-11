@@ -48,6 +48,9 @@ as.report_effectsize <- function(x, summary = NULL, prefix = "  - ", ...) {
 
 #' @export
 print.report_effectsize <- function(x, ...) {
+  if(!is.null(attributes(x)$rules)){
+    cat(attributes(x)$rules, "\n\n")
+  }
   cat(paste0(x, collapse = "\n"))
 }
 
@@ -71,9 +74,9 @@ print.report_effectsize <- function(x, ...) {
                                     )
                              )
       )
-      text <- paste0(" Effect sizes were labelled following ", effsize_name, " recommendations.")
+      text <- paste0("Effect sizes were labelled following ", effsize_name, " recommendations.")
     } else {
-      text <- paste0(" Effect sizes were labelled following a custom set of rules.")
+      text <- paste0("Effect sizes were labelled following a custom set of rules.")
     }
   } else {
     text <- ""
