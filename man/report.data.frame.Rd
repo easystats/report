@@ -11,8 +11,8 @@
 \method{report}{character}(
   x,
   n_entries = 3,
-  levels_percentage = FALSE,
-  missing_percentage = FALSE,
+  levels_percentage = "auto",
+  missing_percentage = "auto",
   ...
 )
 
@@ -23,14 +23,14 @@
   dispersion = TRUE,
   range = TRUE,
   distribution = FALSE,
-  levels_percentage = FALSE,
+  levels_percentage = "auto",
   digits = 2,
   n_entries = 3,
-  missing_percentage = FALSE,
+  missing_percentage = "auto",
   ...
 )
 
-\method{report}{factor}(x, levels_percentage = FALSE, ...)
+\method{report}{factor}(x, levels_percentage = "auto", ...)
 
 \method{report}{numeric}(
   x,
@@ -39,7 +39,7 @@
   dispersion = TRUE,
   range = TRUE,
   distribution = FALSE,
-  missing_percentage = FALSE,
+  missing_percentage = "auto",
   digits = 2,
   ...
 )
@@ -49,9 +49,9 @@
 
 \item{n_entries}{Number of different character entries to show. Can be "all".}
 
-\item{levels_percentage}{Show characters entries and factor levels by number (default) or percentage.}
+\item{levels_percentage}{Show characters entries and factor levels by number or percentage. If "auto", then will be set to number and percentage if the length if n observations larger than 100.}
 
-\item{missing_percentage}{Show missing by number (default) or percentage.}
+\item{missing_percentage}{Show missing by number (default) or percentage. If "auto", then will be set to number and percentage if the length if n observations larger than 100.}
 
 \item{...}{Arguments passed to or from other methods.}
 

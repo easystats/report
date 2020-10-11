@@ -2,7 +2,7 @@
 #' @importFrom parameters skewness kurtosis
 #'
 #' @export
-report.factor <- function(x, levels_percentage = FALSE, ...) {
+report.factor <- function(x, levels_percentage = "auto", ...) {
   table <- report_table(x, levels_percentage = levels_percentage, ...)
   text <- report_text(x, levels_percentage = levels_percentage, ...)
 
@@ -20,8 +20,9 @@ report.logical <- report.factor
 
 
 #' @export
-report_table.factor <- function(x, levels_percentage = FALSE, ...) {
-  model <- as.factor(x)
+report_table.factor <- function(x, levels_percentage = "auto", ...) {
+
+  levels_percentage <- .report_dataframe_percentage(x, levels_percentage)
 
   if (length(x[is.na(x)]) != 0) {
     x <- factor(ifelse(is.na(x), "missing", as.character(x)), levels = c(levels(x), "missing"))
@@ -49,7 +50,7 @@ report_table.logical <- report_table.factor
 
 
 #' @export
-report_parameters.factor <- function(x, table = NULL, levels_percentage = FALSE, ...) {
+report_parameters.factor <- function(x, table = NULL, levels_percentage = "auto", ...) {
   # Get table
   if (is.null(table)) {
     table <- report_table(x, levels_percentage = levels_percentage, ...)
@@ -87,7 +88,7 @@ report_parameters.logical <- report_parameters.factor
 # report_text -------------------------------------------------------------
 
 #' @export
-report_text.factor <- function(x, table = NULL, levels_percentage = FALSE, ...) {
+report_text.factor <- function(x, table = NULL, levels_percentage = "auto", ...) {
   if (!is.null(list(...)$varname)) {
     name <- list(...)$varname
   } else if (is.null(names(x))) {
@@ -123,7 +124,7 @@ report_text.logical <- report_text.factor
 
 
 #' @export
-report_statistics.factor <- function(x, table = NULL, levels_percentage = FALSE, ...) {
+report_statistics.factor <- function(x, table = NULL, levels_percentage = "auto", ...) {
 
   if (is.null(table)) {
     table <- report_table(x, levels_percentage = levels_percentage, ...)

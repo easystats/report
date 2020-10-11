@@ -9,8 +9,8 @@
 #' @param range Show range.
 #' @param distribution Returns kurtosis and skewness in table.
 #' @param n_entries Number of different character entries to show. Can be "all".
-#' @param levels_percentage Show characters entries and factor levels by number (default) or percentage.
-#' @param missing_percentage Show missing by number (default) or percentage.
+#' @param levels_percentage Show characters entries and factor levels by number or percentage. If "auto", then will be set to number and percentage if the length if n observations larger than 100.
+#' @param missing_percentage Show missing by number (default) or percentage. If "auto", then will be set to number and percentage if the length if n observations larger than 100.
 #' @param digits Number of significant digits.
 #'
 #' @examples
@@ -35,7 +35,7 @@
 #'   summary(as.data.frame(r))
 #' }
 #' @export
-report.data.frame <- function(x, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = FALSE, digits = 2, n_entries = 3, missing_percentage = FALSE, ...) {
+report.data.frame <- function(x, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = "auto", digits = 2, n_entries = 3, missing_percentage = "auto", ...) {
   table <- report_table(x, n = n, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, levels_percentage = levels_percentage, digits = digits, n_entries = n_entries, missing_percentage = missing_percentage, ...)
   text <- report_text(x, n = n, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, levels_percentage = levels_percentage, digits = digits, n_entries = n_entries, missing_percentage = missing_percentage, ...)
 
@@ -48,7 +48,7 @@ report.data.frame <- function(x, n = FALSE, centrality = "mean", dispersion = TR
 
 
 #' @export
-report_table.data.frame <- function(x, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = FALSE, digits = 2, n_entries = 3, missing_percentage = FALSE, ...) {
+report_table.data.frame <- function(x, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = "auto", digits = 2, n_entries = 3, missing_percentage = "auto", ...) {
   table_full <- data.frame()
   table <- data.frame()
 
@@ -107,7 +107,7 @@ report_table.data.frame <- function(x, n = FALSE, centrality = "mean", dispersio
 
 
 #' @export
-report_parameters.data.frame <- function(x, table = NULL, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = FALSE, digits = 2, n_entries = 3, missing_percentage = FALSE, ...) {
+report_parameters.data.frame <- function(x, table = NULL, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = "auto", digits = 2, n_entries = 3, missing_percentage = "auto", ...) {
   text_full <- c()
   text <- c()
 
@@ -126,7 +126,7 @@ report_parameters.data.frame <- function(x, table = NULL, n = FALSE, centrality 
 # report_text -------------------------------------------------------------
 
 #' @export
-report_text.data.frame <- function(x, table = NULL, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = FALSE, digits = 2, n_entries = 3, missing_percentage = FALSE, ...) {
+report_text.data.frame <- function(x, table = NULL, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = "auto", digits = 2, n_entries = 3, missing_percentage = "auto", ...) {
 
   params <- report_parameters(x, n = n, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, levels_percentage = levels_percentage, digits = digits, n_entries = n_entries, missing_percentage = missing_percentage, ...)
 
@@ -143,7 +143,7 @@ report_text.data.frame <- function(x, table = NULL, n = FALSE, centrality = "mea
 
 
 #' @export
-report_statistics.data.frame <- function(x, table = NULL, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = FALSE, digits = 2, n_entries = 3, missing_percentage = FALSE, ...) {
+report_statistics.data.frame <- function(x, table = NULL, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = "auto", digits = 2, n_entries = 3, missing_percentage = "auto", ...) {
 
   text_full <- c()
   text <- c()
@@ -185,7 +185,7 @@ report_statistics.data.frame <- function(x, table = NULL, n = FALSE, centrality 
 
 
 #' @export
-report_table.grouped_df <- function(x, table = NULL, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = FALSE, digits = 2, n_entries = 3, missing_percentage = FALSE, ...) {
+report_table.grouped_df <- function(x, table = NULL, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = "auto", digits = 2, n_entries = 3, missing_percentage = "auto", ...) {
   out <- .report_grouped_dataframe(x)
 
   table_full <- data.frame()
@@ -213,7 +213,7 @@ report_table.grouped_df <- function(x, table = NULL, n = FALSE, centrality = "me
 
 
 #' @export
-report_parameters.grouped_df <- function(x, table = NULL, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = FALSE, digits = 2, n_entries = 3, missing_percentage = FALSE, ...) {
+report_parameters.grouped_df <- function(x, table = NULL, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = "auto", digits = 2, n_entries = 3, missing_percentage = "auto", ...) {
   out <- .report_grouped_dataframe(x)
 
   params_full <- c()
@@ -233,7 +233,7 @@ report_parameters.grouped_df <- function(x, table = NULL, n = FALSE, centrality 
 
 
 #' @export
-report_text.grouped_df <- function(x, table = NULL, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = FALSE, digits = 2, n_entries = 3, missing_percentage = FALSE, ...) {
+report_text.grouped_df <- function(x, table = NULL, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = "auto", digits = 2, n_entries = 3, missing_percentage = "auto", ...) {
   out <- .report_grouped_dataframe(x)
 
   text_full <- c(out$intro)
@@ -259,7 +259,7 @@ report.grouped_df <- report.data.frame
 
 
 #' @export
-report_statistics.grouped_df <- function(x, table = NULL, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = FALSE, digits = 2, n_entries = 3, missing_percentage = FALSE, ...) {
+report_statistics.grouped_df <- function(x, table = NULL, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = "auto", digits = 2, n_entries = 3, missing_percentage = "auto", ...) {
 
   out <- .report_grouped_dataframe(x)
 
@@ -276,4 +276,34 @@ report_statistics.grouped_df <- function(x, table = NULL, n = FALSE, centrality 
   }
 
   as.report_statistics(text_full, summary = text)
+}
+
+
+
+
+
+
+
+
+# Utils -------------------------------------------------------------------
+
+#' @keywords internal
+.report_dataframe_percentage <- function(x, percentage = "auto"){
+
+  if(percentage != "auto"){
+    return(percentage)
+  }
+
+  if(any(c("data.frame", "grouped_df") %in% class(x))){
+    n <- nrow(x)
+  } else{
+    n <- length(x)
+  }
+
+  if(n >= 100){
+    percentage <- TRUE
+  } else{
+    percentage <- FALSE
+  }
+  percentage
 }
