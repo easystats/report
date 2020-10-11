@@ -47,7 +47,11 @@ as.report_effectsize <- function(x, summary = NULL, prefix = "  - ", ...) {
 
 #' @export
 summary.report_effectsize <- function(object, ...) {
-  attributes(object)$summary
+  if(is.null(attributes(object)$summary)){
+    object
+  } else{
+    attributes(object)$summary
+  }
 }
 
 #' @export

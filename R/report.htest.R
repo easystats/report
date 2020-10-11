@@ -16,7 +16,10 @@
 #' @importFrom insight format_ci
 #' @export
 report.htest <- function(x, ...) {
-  print("SOON")
+  table <- report_table(x, ...)
+  text <- report_text(x, table=table, ...)
+
+  as.report(text, table = table, ...)
 }
 
 
@@ -239,6 +242,17 @@ report_model.htest <- function(x, table=NULL, ...) {
 }
 
 
+# report_info ------------------------------------------------------------
+
+#' @export
+report_info.htest <- function(x, effectsize=NULL, ...) {
+  if (is.null(effectsize)) {
+    effectsize <- report_effectsize(x, ...)
+  }
+  as.report_info(attributes(effectsize)$rules)
+}
+
+
 
 # report_text ------------------------------------------------------------
 
@@ -250,6 +264,37 @@ report_text.htest <- function(x, table=NULL, ...) {
 
   model <- report_model(x, table=table, ...)
   params <- report_parameters(x, table=table, ...)
+  info <- report_info(x, effectsize=attributes(params)$effectsize, ...)
 
-  # as.report_text(..., summary=...)
+
+  if (insight::model_info(x)$is_correlation) {
+    text <- paste0(
+      "The ",
+      model,
+      " is ",
+      params
+    )
+    text_full <- paste0(
+      info,
+      "\n\n",
+      text
+    )
+
+  } else {
+    text_full <- paste0(
+      info,
+      "\n\nThe ",
+      model,
+      " suggests that the effect is ",
+      params
+    )
+    text <- paste0(
+      "The ",
+      model,
+      " suggests that the effect is ",
+      summary(params)
+    )
+  }
+
+  as.report_text(text_full, summary=text)
 }

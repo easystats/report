@@ -69,7 +69,11 @@ as.report_table.report <- function(x, summary = NULL, ...) {
 
 #' @export
 summary.report_table <- function(object, ...) {
-  attributes(object)$summary
+  if(is.null(attributes(object)$summary)){
+    object
+  } else{
+    attributes(object)$summary
+  }
 }
 
 

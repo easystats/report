@@ -21,6 +21,10 @@
 #' report_text(as.character(round(iris$Sepal.Length, 1)))
 #' report_text(iris$Species)
 #' report_text(iris)
+#'
+#' # h-tests
+#' report_text(t.test(iris$Sepal.Width, iris$Sepal.Length))
+#' report_text(cor.test(iris$Sepal.Width, iris$Sepal.Length))
 #' @export
 report_text <- function(x, table=NULL, ...) {
   UseMethod("report_text")
@@ -69,7 +73,11 @@ as.report_text.report <- function(x, summary = NULL, ...) {
 
 #' @export
 summary.report_text <- function(object, ...) {
-  attributes(object)$summary
+  if(is.null(attributes(object)$summary)){
+    object
+  } else{
+    attributes(object)$summary
+  }
 }
 
 #' @export

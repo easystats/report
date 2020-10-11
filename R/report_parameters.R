@@ -69,7 +69,11 @@ as.character.report_parameters <- function(x, prefix = NULL, ...) {
 
 #' @export
 summary.report_parameters <- function(object, ...) {
-  attributes(object)$summary
+  if(is.null(attributes(object)$summary)){
+    object
+  } else{
+    attributes(object)$summary
+  }
 }
 
 
