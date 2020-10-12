@@ -52,7 +52,7 @@ report_parameters <- function(model, parameters, prefix = "  - ", ...) {
   #     bf[bf < 1] <- 1 / bf[bf < 1]
   #
   #     paste0(
-  #       parameters::format_bf(bf, name = dir),
+  #       insight::format_bf(bf, name = dir),
   #       ", considered ",
   #       report::interpret_bf(ori_bf, include_value = FALSE, ...),
   #       " the effect"

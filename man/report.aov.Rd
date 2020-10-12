@@ -41,7 +41,6 @@ model <- aov(Sepal.Length ~ Species * Cat1, data = data)
 r <- report(model)
 r
 table_short(r)
-
 }
 \seealso{
 \code{\link{table_short}} or \code{\link{text_short}} to access the
