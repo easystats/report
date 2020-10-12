@@ -20,6 +20,7 @@ report.aov <- function(x, ...) {
 
 #' @export
 report.anova <- report.aov
+
 #' @export
 report.aovlist <- report.aov
 
@@ -77,5 +78,6 @@ report_effectsize.aov <- function(x, ...) {
 
 #' @export
 report_effectsize.anova <- report_effectsize.aov
+
 #' @export
 report_effectsize.aovlist <- report_effectsize.aov

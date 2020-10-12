@@ -14,6 +14,9 @@
 #' r <- report(model)
 #' r
 #' table_short(r)
+#' @importFrom insight format_value format_p
+#' @importFrom parameters model_parameters
+#' @importFrom effectsize interpret_p
 #' @export
 report.aov <- function(model, interpretation = "field2013", omega_squared = "partial", eta_squared = NULL, epsilon_squared = NULL, ...) {
   table_full <- parameters::model_parameters(model, omega_squared = omega_squared, eta_squared = eta_squared, epsilon_squared = epsilon_squared, ...)
@@ -54,7 +57,7 @@ report.aov <- function(model, interpretation = "field2013", omega_squared = "par
     ") = ",
     insight::format_value(parameters$`F`),
     ", ",
-    parameters::format_p(parameters$p)
+    insight::format_p(parameters$p)
   )
 
   # Effect size
@@ -99,6 +102,8 @@ report.aovlist <- report.aov
 # internals ---------------------------------------------------------------
 
 
+#' @importFrom effectsize interpret_omega_squared
+#' @importFrom insight format_value
 #' @keywords internal
 .format_aov_effsize <- function(parameters, interpretation = "field2013") {
   if ("Omega_Sq_partial" %in% names(parameters)) {
