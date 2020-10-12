@@ -20,7 +20,7 @@ report_system(session = NULL)
 
 \item{...}{Arguments passed to or from other methods.}
 
-\item{session}{A \link[=sessionInfo]{sessionInfo} object.}
+\item{session}{A \link[utils:sessionInfo]{sessionInfo} object.}
 
 \item{include_R}{Include R in the citations.}
 }

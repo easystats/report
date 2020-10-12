@@ -2,7 +2,7 @@
 #'
 #' @inheritParams report
 #' @inheritParams as.report_parameters
-#' @param session A \link[=sessionInfo]{sessionInfo} object.
+#' @param session A \link[utils:sessionInfo]{sessionInfo} object.
 #' @param include_R Include R in the citations.
 #'
 #' @return \itemize{
@@ -48,19 +48,21 @@ report.sessionInfo <- function(x, ...) {
 
 
 
+#' @importFrom utils sessionInfo
 #' @rdname report.sessionInfo
 #' @export
 report_packages <- function(session = NULL, include_R = TRUE, ...) {
-  if (is.null(session)) session <- sessionInfo()
+  if (is.null(session)) session <- utils::sessionInfo()
   report_parameters(session, include_R = include_R, ...)
 }
 
 
 
+#' @importFrom utils sessionInfo
 #' @rdname report.sessionInfo
 #' @export
 cite_packages <- function(session = NULL, include_R = TRUE, ...) {
-  if (is.null(session)) session <- sessionInfo()
+  if (is.null(session)) session <- utils::sessionInfo()
 
   # Do not recompute table if passed
   if (!is.null(list(...)$table)) {
@@ -80,16 +82,17 @@ cite_packages <- function(session = NULL, include_R = TRUE, ...) {
 # report_system --------------------------------------------------------------
 
 
+#' @importFrom utils sessionInfo citation
 #' @rdname report.sessionInfo
 #' @export
 report_system <- function(session = NULL) {
   if (is.null(session)) {
-    session <- sessionInfo()
+    session <- utils::sessionInfo()
   }
 
   version <- paste0(session$R.version$major, ".", session$R.version$minor)
   year <- paste0(session$R.version$year, "-", session$R.version$month, "-", session$R.version$day)
-  citation <- format_citation(clean_citation(citation()), authorsdate = TRUE, intext = TRUE)
+  citation <- format_citation(clean_citation(utils::citation()), authorsdate = TRUE, intext = TRUE)
 
   text <- paste0(
     "Analyses were conducted using the R Statistical language (version ",
@@ -116,7 +119,7 @@ report_system <- function(session = NULL) {
 
 # report_table ------------------------------------------------------------
 
-#' @importFrom utils citation
+#' @importFrom utils citation packageVersion
 #' @export
 report_table.sessionInfo <- function(x, include_R = TRUE, ...) {
   pkgs <- x$otherPkgs
@@ -133,8 +136,8 @@ report_table.sessionInfo <- function(x, include_R = TRUE, ...) {
 
 
   for (pkg_name in names(pkgs)) {
-    citations <- c(citations, clean_citation(citation(pkg_name)))
-    versions <- c(versions, as.character(packageVersion(pkg_name)))
+    citations <- c(citations, clean_citation(utils::citation(pkg_name)))
+    versions <- c(versions, as.character(utils::packageVersion(pkg_name)))
     names <- c(names, pkg_name)
   }
 
