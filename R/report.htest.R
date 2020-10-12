@@ -7,7 +7,7 @@
 #' @inherit report return seealso
 #'
 #' @examples
-#' report(cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman"))
+#' # report(cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman"))
 #' report(cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "pearson"))
 #' report(t.test(iris$Sepal.Width, iris$Sepal.Length))
 #' report(t.test(iris$Sepal.Width, iris$Sepal.Length, var.equal = TRUE))
@@ -147,6 +147,7 @@ report_parameters.htest <- function(x, table=NULL, ...) {
   }
 
   stats <- report_statistics(x, table=table, ...)
+  effsize <- report_effectsize(x, ...)
 
   # Correlations
   if (insight::model_info(x)$is_correlation) {
@@ -164,7 +165,6 @@ report_parameters.htest <- function(x, table=NULL, ...) {
 
   # t-tests
   } else{
-    effsize <- report_effectsize(x, ...)
     text_full <- paste0(
       effectsize::interpret_direction(attributes(stats)$estimate),
       ", ",
@@ -275,18 +275,19 @@ report_text.htest <- function(x, table=NULL, ...) {
       params
     )
     text_full <- paste0(
-      info,
+      text,
       "\n\n",
-      text
+      info
     )
 
   } else {
     text_full <- paste0(
-      info,
-      "\n\nThe ",
+      "The ",
       model,
       " suggests that the effect is ",
-      params
+      params,
+      "\n\n",
+      info
     )
     text <- paste0(
       "The ",

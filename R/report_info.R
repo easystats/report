@@ -16,7 +16,7 @@
 #' report_info(t.test(iris$Sepal.Width, iris$Sepal.Length))
 #' report_info(cor.test(iris$Sepal.Width, iris$Sepal.Length))
 #' @export
-report_info <- function(x, table = NULL, ...) {
+report_info <- function(x, ...) {
   UseMethod("report_info")
 }
 
