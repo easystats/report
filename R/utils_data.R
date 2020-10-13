@@ -3,7 +3,7 @@
 #' Safe and intuitive functions to manipulate dataframes.
 #'
 #' @param data Dataframe.
-#' @param pattern,replacement Character strings.
+#' @param pattern,replacement,starts_with,ends_with Character strings.
 #' @param cols Vector of column names.
 #' @param safe Do not throw error if for instance the variable to be renamed/removed doesn't exist.
 #'
@@ -17,6 +17,11 @@
 #' # data_rename(iris, "FakeCol", "length", safe=FALSE)  # This fails
 #' data_rename(iris, "FakeCol", "length") # This doesn't
 #' data_rename(iris, c("Sepal.Length", "Sepal.Width"), c("length", "width"))
+#'
+#' # Find columns names by pattern
+#' data_findcols(iris, starts_with="Sepal")
+#' data_findcols(iris, ends_with="Width")
+#' data_findcols(iris, pattern="\\.")
 #'
 #' # Remove columns
 #' data_remove(iris, "Sepal.Length")
@@ -51,7 +56,21 @@ data_rename <- function(data, pattern, replacement, safe = TRUE) {
 
 
 
-
+#' @rdname data_rename
+#' @export
+data_findcols <- function(data, pattern=NULL, starts_with=NULL, ends_with=NULL) {
+  n <- names(data)
+  if(!is.null(pattern)){
+    match <- n[grepl(pattern, n)]
+  }
+  if(!is.null(starts_with)){
+    match <- n[grepl(paste0(starts_with, ".*"), n)]
+  }
+  if(!is.null(ends_with)){
+    match <- n[grepl(paste0(".*", ends_with), n)]
+  }
+  match
+}
 
 
 #' @rdname data_rename

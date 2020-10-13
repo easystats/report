@@ -8,6 +8,8 @@
 }
 \arguments{
 \item{x}{Object of class \code{aov}, \code{anova} or \code{aovlist}.}
+
+\item{...}{Arguments passed to or from other methods.}
 }
 \value{
 A list-object of class \code{report}, which contains further list-objects
@@ -23,7 +25,7 @@ data$Cat1 <- rep(c("A", "B"), length.out = nrow(data))
 model <- aov(Sepal.Length ~ Species * Cat1, data = data)
 r <- report(model)
 r
-table_short(r)
+as.data.frame(r)
 }
 \seealso{
 Aspects of reports:

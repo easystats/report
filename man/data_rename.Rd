@@ -2,6 +2,7 @@
 % Please edit documentation in R/utils_data.R
 \name{data_rename}
 \alias{data_rename}
+\alias{data_findcols}
 \alias{data_remove}
 \alias{data_reorder}
 \alias{data_addprefix}
@@ -9,6 +10,8 @@
 \title{Convenient dataframe manipulation functionalities}
 \usage{
 data_rename(data, pattern, replacement, safe = TRUE)
+
+data_findcols(data, pattern = NULL, starts_with = NULL, ends_with = NULL)
 
 data_remove(data, pattern)
 
@@ -21,7 +24,7 @@ data_addsuffix(data, pattern)
 \arguments{
 \item{data}{Dataframe.}
 
-\item{pattern, replacement}{Character strings.}
+\item{pattern, replacement, starts_with, ends_with}{Character strings.}
 
 \item{safe}{Do not throw error if for instance the variable to be renamed/removed doesn't exist.}
 
@@ -41,6 +44,11 @@ data_rename(iris, "Sepal.Length", "length")
 # data_rename(iris, "FakeCol", "length", safe=FALSE)  # This fails
 data_rename(iris, "FakeCol", "length") # This doesn't
 data_rename(iris, c("Sepal.Length", "Sepal.Width"), c("length", "width"))
+
+# Find columns names by pattern
+data_findcols(iris, starts_with="Sepal")
+data_findcols(iris, ends_with="Width")
+data_findcols(iris, pattern="\\\\.")
 
 # Remove columns
 data_remove(iris, "Sepal.Length")

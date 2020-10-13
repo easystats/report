@@ -17,9 +17,7 @@
 #' report_effectsize(cor.test(iris$Sepal.Width, iris$Sepal.Length))
 #'
 #' # ANOVA
-#' data <- iris
-#' data$Cat1 <- rep(c("A", "B"), length.out = nrow(data))
-#' report_effectsize(aov(Sepal.Length ~ Species * Cat1, data = data))
+#' report_effectsize(aov(Sepal.Length ~ Species, data=iris))
 #' @export
 report_effectsize <- function(x, ...) {
   UseMethod("report_effectsize")
@@ -82,7 +80,9 @@ print.report_effectsize <- function(x, ...) {
                              ifelse(interpretation == "sawilowsky2009", "Savilowsky's (2009)",
                                     ifelse(interpretation == "gignac2016", "Gignac's (2016)",
                                            ifelse(interpretation == "funder2019", "Funder's (2019)",
-                                                  ifelse(interpretation == "chen2010", "Chen's (2010)", interpretation)
+                                                  ifelse(interpretation == "chen2010", "Chen's (2010)",
+                                                         ifelse(interpretation == "field2013", "Field's (2013)", interpretation)
+                                                  )
                                            )
                                     )
                              )

@@ -7,7 +7,7 @@
 #' @inherit report return seealso
 #'
 #' @examples
-#' # report(cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman"))
+#' report(cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman"))
 #' report(cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "pearson"))
 #' report(t.test(iris$Sepal.Width, iris$Sepal.Length))
 #' report(t.test(iris$Sepal.Width, iris$Sepal.Length, var.equal = TRUE))
@@ -38,6 +38,7 @@ report_effectsize.htest <- function(x, ...) {
 
   table <- effectsize::effectsize(x, ...)
   estimate <- names(table)[1]
+  ci <- table$CI
 
   # For t-tests, or correlations
   if (insight::model_info(x)$is_ttest) {
@@ -47,17 +48,26 @@ report_effectsize.htest <- function(x, ...) {
     main <- paste0("Cohen's d = ", insight::format_value(table[[estimate]]))
     statistics <- paste0(main,
                          ", ",
-                         insight::format_ci(table$CI_low, table$CI_high, table$CI))
+                         insight::format_ci(table$CI_low, table$CI_high, ci))
     table <- data_rename(as.data.frame(table), c("CI_low", "CI_high"), c("d_CI_low", "d_CI_high"))
-    table <- data_reorder(table, c("d", "d_CI_low", "d_CI_high"))
+    table <- table[c("d", "d_CI_low", "d_CI_high")]
   } else{
     interpret <- effectsize::interpret_r(table[[estimate]], ...)
     interpretation <- interpret
     main <- paste0(estimate, " = ", insight::format_value(table[[estimate]]))
-    statistics <- paste0(main,
-                         ", ",
-                         insight::format_ci(table$CI_low, table$CI_high, attributes(table)$ci))
-    table <- data_reorder(table, c("r", "CI_low", "CI_high"))
+
+    if("CI_low" %in% names(table)){
+      statistics <- paste0(main,
+                           ", ",
+                           insight::format_ci(table$CI_low, table$CI_high, ci))
+      table <- table[c(estimate, "CI_low", "CI_high")]
+
+      # For spearman & co.
+    } else{
+      statistics <- main
+      table <- table[c(estimate)]
+    }
+
   }
   rules <- .text_effectsize(attributes(interpret)$rule_name)
   parameters <- paste0(interpretation, " (", statistics, ")")
@@ -66,11 +76,11 @@ report_effectsize.htest <- function(x, ...) {
   # Return output
   as.report_effectsize(parameters,
                        summary=parameters,
-                       table=table[1:3],
+                       table=table,
                        interpretation=interpretation,
                        statistics=statistics,
                        rules=rules,
-                       ci=unique(table$CI),
+                       ci=ci,
                        main=main)
 }
 
@@ -84,14 +94,13 @@ report_effectsize.htest <- function(x, ...) {
 #' @importFrom insight model_info
 #' @export
 report_table.htest <- function(x, ...) {
-  effsize <- report_effectsize(x, ...)
-
 
   table_full <- parameters::model_parameters(x, ...)
 
   # If t-test, effect size
   if (insight::model_info(x)$is_ttest) {
-    table_full <- cbind(table_full, effsize)
+    effsize <- report_effectsize(x, ...)
+    table_full <- cbind(table_full, attributes(effsize)$table)
   }
 
   table <- data_remove(table_full, c("Parameter", "Group", "Mean_Group1", "Mean_Group2", "Method"))
@@ -275,19 +284,18 @@ report_text.htest <- function(x, table=NULL, ...) {
       params
     )
     text_full <- paste0(
-      text,
+      info,
       "\n\n",
-      info
+      text
     )
 
   } else {
     text_full <- paste0(
-      "The ",
+      info,
+      "\n\nThe ",
       model,
       " suggests that the effect is ",
-      params,
-      "\n\n",
-      info
+      params
     )
     text <- paste0(
       "The ",

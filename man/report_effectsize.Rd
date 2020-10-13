@@ -25,7 +25,5 @@ report_effectsize(t.test(iris$Sepal.Width, iris$Sepal.Length))
 report_effectsize(cor.test(iris$Sepal.Width, iris$Sepal.Length))
 
 # ANOVA
-data <- iris
-data$Cat1 <- rep(c("A", "B"), length.out = nrow(data))
-report_effectsize(aov(Sepal.Length ~ Species * Cat1, data = data))
+report_effectsize(aov(Sepal.Length ~ Species, data=iris))
 }

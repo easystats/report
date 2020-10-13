@@ -23,6 +23,9 @@
 #' # Tests
 #' report_table(t.test(mpg ~ am, data = mtcars))
 #' report_table(cor.test(iris$Sepal.Length, iris$Sepal.Width))
+#'
+#' # ANOVAs
+#' report_table(aov(Sepal.Length ~ Species, data=iris))
 #' @export
 report_table <- function(x, ...) {
   UseMethod("report_table")
