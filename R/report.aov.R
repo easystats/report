@@ -14,10 +14,7 @@
 #' r
 #' as.data.frame(r)
 #' @export
-report.aov <- function(x, ...) {
-  print("SOON")
-}
-
+report.aov <- report.htest
 
 #' @export
 report.anova <- report.aov
@@ -45,7 +42,7 @@ report_effectsize.aov <- function(x, ...) {
   interpret <- effectsize::interpret_eta_squared(table[[estimate]], ...)
   interpretation <- interpret
 
-  main <- paste0("Eta2 part. = ", insight::format_value(table[[estimate]]))
+  main <- paste0("Eta2 (partial) = ", insight::format_value(table[[estimate]]))
 
   ci <- table$CI
   statistics <- paste0(main,
@@ -96,7 +93,7 @@ report_table.aov <- function(x, ...) {
 
   table <- data_remove(table_full, data_findcols(table_full, ends_with=c("_CI_low|_CI_high")))
 
-  as.report_table(table_full, summary=table, ci=attributes(effsize)$ci)
+  as.report_table(table_full, summary=table, ci=attributes(effsize)$ci, effsize=effsize)
 }
 
 #' @export
@@ -116,9 +113,10 @@ report_table.aovlist <- report_table.aov
 
 #' @export
 report_statistics.aov <- function(x, table=NULL, ...) {
-  if (is.null(table)) {
+  if (is.null(table) | is.null(attributes(table)$effsize)) {
     table <- report_table(x, ...)
   }
+  effsize <- attributes(table)$effsize
 
   parameters <- table[table$Parameter != "Residuals", ]
   if ("Group" %in% names(parameters)) {
@@ -126,21 +124,15 @@ report_statistics.aov <- function(x, table=NULL, ...) {
   }
 
   # Get residuals' DoFs
-  if ("Residuals" %in% table_full$Parameter) {
-    DoF_residual <- table_full[table_full$Parameter == "Residuals", "df"]
+  if ("Residuals" %in% table$Parameter) {
+    DoF_residual <- table[table$Parameter == "Residuals", "df"]
   } else {
     DoF_residual <- NULL
   }
 
-  # Text parameters
-  text <- sapply(parameters$Parameter, .format_aov_varname, simplify = TRUE, USE.NAMES = FALSE)
-
   # DoFs
   text <- paste0(
-    text,
-    " is ",
-    effectsize::interpret_p(parameters$p),
-    " (F(",
+    "F(",
     insight::format_value(parameters$df, protect_integers = TRUE)
   )
 
@@ -159,7 +151,14 @@ report_statistics.aov <- function(x, table=NULL, ...) {
     insight::format_p(parameters$p)
   )
 
-  as.report_statistics(text, summary=text, estimate=table[[estimate]])
+  # Effectsize
+  text_full <- paste0(text, "; ", attributes(effsize)$statistics)
+  text <- paste0(text, ", ", attributes(effsize)$main)
+
+  as.report_statistics(text_full,
+                       summary=text,
+                       table=table,
+                       effsize=effsize)
 }
 
 #' @export
@@ -167,3 +166,141 @@ report_statistics.anova <- report_statistics.aov
 
 #' @export
 report_statistics.aovlist <- report_statistics.aov
+
+
+
+
+
+# report_parameters ------------------------------------------------------------
+
+
+
+#' @export
+report_parameters.aov <- function(x, table=NULL, ...) {
+
+  stats <- report_statistics(x, table=table, ...)
+  table <- attributes(stats)$table
+  effsize <- attributes(stats)$effsize
+
+  parameters <- table[table$Parameter != "Residuals", ]
+
+  # Text parameters
+  text <- sapply(parameters$Parameter, .format_aov_varnames, simplify = TRUE, USE.NAMES = FALSE)
+
+  # Significance
+  text <- paste0(
+    text,
+    " is ",
+    effectsize::interpret_p(parameters$p),
+    " and ",
+    attributes(effsize)$interpretation,
+    " ("
+  )
+
+  text_full <- paste0(text, stats, ")")
+  text <- paste0(text, summary(stats), ")")
+
+  as.report_parameters(text_full, summary=text, table=table, effectsize=effsize, ...)
+
+}
+
+#' @export
+report_parameters.anova <- report_parameters.aov
+
+#' @export
+report_parameters.aovlist <- report_parameters.aov
+
+
+# report_model ------------------------------------------------------------
+
+#' @export
+report_model.aov <- function(x, table=NULL, ...) {
+  if (is.null(table)) {
+    table <- report_table(x, ...)
+  }
+
+  if ("Group" %in% names(table)) {
+    text <- "repeated-measures ANOVA"
+  } else {
+    text <- "ANOVA"
+  }
+
+  text_full <- paste0(text,
+                      " (formula: ",
+                      format(insight::find_formula(x)$conditional),
+                      ")")
+
+  as.report_model(text_full, summary=text)
+}
+
+#' @export
+report_model.anova <- report_model.aov
+
+#' @export
+report_model.aovlist <- report_model.aov
+
+
+# report_info ------------------------------------------------------------
+
+#' @include report.htest.R
+#' @export
+report_info.aov <- report_info.htest
+
+#' @export
+report_info.anova <- report_info.aov
+
+#' @export
+report_info.aovlist <- report_info.aov
+
+
+
+# report_text ------------------------------------------------------------
+
+#' @export
+report_text.aov <- function(x, table=NULL, ...) {
+
+  params <- report_parameters(x, table=table, ...)
+  table <- attributes(params)$table
+  model <- report_model(x, table=table, ...)
+  info <- report_info(x, effectsize=attributes(params)$effectsize, ...)
+
+
+  text_full <- paste0(
+    info,
+    "\n\nThe ",
+    model,
+    " suggests that:\n",
+    params
+  )
+
+  text <- paste0(
+    "The ",
+    model,
+    " suggests that:\n",
+    summary(params)
+  )
+
+
+  as.report_text(text_full, summary=text)
+}
+
+#' @export
+report_text.anova <- report_text.aov
+
+#' @export
+report_text.aovlist <- report_text.aov
+
+# Utils -------------------------------------------------------------------
+
+
+
+#' @keywords internal
+.format_aov_varnames <- function(names) {
+  if (grepl(":", names)) {
+    varname <- format_text(unlist(strsplit(names, ":", fixed = TRUE)))
+    varname <- paste0("The interaction between ", varname)
+  } else {
+    varname <- paste0("The main effect of ", names)
+  }
+  varname
+}

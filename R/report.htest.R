@@ -96,16 +96,16 @@ report_effectsize.htest <- function(x, ...) {
 report_table.htest <- function(x, ...) {
 
   table_full <- parameters::model_parameters(x, ...)
+  effsize <- report_effectsize(x, ...)
 
   # If t-test, effect size
   if (insight::model_info(x)$is_ttest) {
-    effsize <- report_effectsize(x, ...)
     table_full <- cbind(table_full, attributes(effsize)$table)
   }
 
   table <- data_remove(table_full, c("Parameter", "Group", "Mean_Group1", "Mean_Group2", "Method"))
   # Return output
-  as.report_table(table_full, summary=table)
+  as.report_table(table_full, summary=table, effsize=effsize)
 }
 
 
@@ -115,9 +115,10 @@ report_table.htest <- function(x, ...) {
 
 #' @export
 report_statistics.htest <- function(x, table=NULL, ...) {
-  if (is.null(table)) {
+  if (is.null(table) | is.null(attributes(table)$effsize)) {
     table <- report_table(x, ...)
   }
+  effsize <- attributes(table)$effsize
 
   # Estimate
   candidates <- c("rho", "r", "tau", "Difference")
@@ -139,7 +140,19 @@ report_statistics.htest <- function(x, table=NULL, ...) {
   # p-value
   text <- paste0(text, ", ", insight::format_p(table$p, stars = FALSE, digits = "apa"))
 
-  as.report_statistics(text, summary=text, estimate=table[[estimate]])
+
+  if (insight::model_info(x)$is_ttest) {
+    text_full <- paste0(text, "; ", attributes(effsize)$statistics)
+    text <- paste0(text, ", ", attributes(effsize)$main)
+  } else{
+    text_full <- text
+  }
+
+  as.report_statistics(text_full,
+                       summary=text,
+                       estimate=table[[estimate]],
+                       table=table,
+                       effsize=effsize)
 }
 
 
@@ -151,12 +164,11 @@ report_statistics.htest <- function(x, table=NULL, ...) {
 
 #' @export
 report_parameters.htest <- function(x, table=NULL, ...) {
-  if (is.null(table)) {
-    table <- report_table(x, ...)
-  }
 
   stats <- report_statistics(x, table=table, ...)
-  effsize <- report_effectsize(x, ...)
+  table <- attributes(stats)$table
+  effsize <- attributes(stats)$effsize
+
 
   # Correlations
   if (insight::model_info(x)$is_correlation) {
@@ -178,10 +190,11 @@ report_parameters.htest <- function(x, table=NULL, ...) {
       effectsize::interpret_direction(attributes(stats)$estimate),
       ", ",
       effectsize::interpret_p(table$p, rules="default"),
+      " and ",
+      attributes(effsize)$interpretation,
       " (",
       stats,
-      ") and can be considered as ",
-      effsize
+      ")"
     )
     text_short <- paste0(
       effectsize::interpret_direction(attributes(stats)$estimate),
@@ -190,15 +203,12 @@ report_parameters.htest <- function(x, table=NULL, ...) {
       " and ",
       attributes(effsize)$interpretation,
       " (",
-      stats,
-      ", ",
-      attributes(effsize)$main,
+      summary(stats),
       ")"
     )
   }
 
-
-  as.report_parameters(text_full, summary=text_short, effectsize=effsize, ...)
+  as.report_parameters(text_full, summary=text_short, table=table, effectsize=effsize, ...)
 }
 
 # report_model ------------------------------------------------------------
@@ -267,12 +277,10 @@ report_info.htest <- function(x, effectsize=NULL, ...) {
 
 #' @export
 report_text.htest <- function(x, table=NULL, ...) {
-  if (is.null(table)) {
-    table <- report_table(x, ...)
-  }
 
-  model <- report_model(x, table=table, ...)
   params <- report_parameters(x, table=table, ...)
+  table <- attributes(params)$table
+  model <- report_model(x, table=table, ...)
   info <- report_info(x, effectsize=attributes(params)$effectsize, ...)
 
 

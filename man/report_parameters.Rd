@@ -36,4 +36,7 @@ report_parameters(iris)
 # h-tests
 report_parameters(t.test(iris$Sepal.Width, iris$Sepal.Length))
 report_parameters(cor.test(iris$Sepal.Width, iris$Sepal.Length))
+
+# ANOVA
+report_parameters(aov(Sepal.Length ~ Species, data=iris))
 }

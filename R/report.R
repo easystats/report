@@ -100,8 +100,8 @@ report.default <- function(x, ...) {
 
 # Generic Methods --------------------------------------------------
 
-# print.report: defined in report_text.R
 
+#' @include report_text.R
 #' @export
 as.data.frame.report <- function(x, ...) {
   as.report_table(x, ...)

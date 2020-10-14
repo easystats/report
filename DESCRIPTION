@@ -48,3 +48,27 @@ Suggests:
 	testthat
 RoxygenNote: 7.1.1
 Language: en-GB
+Collate: 
+    'format_citation.R'
+    'format_text.R'
+    'report_text.R'
+    'report.R'
+    'report.htest.R'
+    'report.aov.R'
+    'report.bayestestR.R'
+    'report.character.R'
+    'report.data.frame.R'
+    'report.factor.R'
+    'report.numeric.R'
+    'report.sessionInfo.R'
+    'report_effectsize.R'
+    'report_info.R'
+    'report_model.R'
+    'report_parameters.R'
+    'report_participants.R'
+    'report_sample.R'
+    'report_statistics.R'
+    'report_table.R'
+    'utils_data.R'
+    'utils_grouped_df.R'
+    'utils_text.R'
