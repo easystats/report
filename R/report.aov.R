@@ -85,10 +85,21 @@ report_effectsize.aovlist <- report_effectsize.aov
 report_table.aov <- function(x, ...) {
 
   effsize <- report_effectsize(x, ...)
+  effsize_table <- attributes(effsize)$table
   params <- parameters::model_parameters(x, ...)
 
-  table_full <- merge(params, attributes(effsize)$table, all = TRUE)
-  table_full <- table_full[order(params$Parameter, decreasing = TRUE), ]
+  if("Group" %in% names(params)){
+    effsize_table$Group <- "Within"
+    table_full <- merge(params, effsize_table, all = TRUE)
+    table_full <- table_full[order(
+      match(
+        paste(table_full$Group, table_full$Parameter),
+        paste(params$Group, params$Parameter))), ]
+  } else{
+    table_full <- merge(params, effsize_table, all = TRUE)
+    table_full <- table_full[order(
+      match(table_full$Parameter, params$Parameter)), ]
+  }
   row.names(table_full) <- NULL
 
   table <- data_remove(table_full, data_findcols(table_full, ends_with=c("_CI_low|_CI_high")))
@@ -225,10 +236,15 @@ report_model.aov <- function(x, table=NULL, ...) {
     text <- "ANOVA"
   }
 
-  text_full <- paste0(text,
-                      " (formula: ",
-                      format(insight::find_formula(x)$conditional),
-                      ")")
+  if("anova" %in% class(x)){
+    text_full <- text  # Because anova() does not save the formula.
+  } else{
+    text_full <- paste0(text,
+                        " (formula: ",
+                        format(insight::find_formula(x)$conditional),
+                        ")")
+  }
+
 
   as.report_model(text_full, summary=text)
 }
