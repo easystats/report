@@ -33,14 +33,14 @@ report.aovlist <- report.aov
 
 
 
-#' @importFrom effectsize effectsize interpret_eta_squared
+#' @importFrom effectsize effectsize interpret_eta_squared is_effectsize_name
 #' @importFrom parameters model_parameters
 #' @importFrom insight model_info
 #' @export
 report_effectsize.aov <- function(x, ...) {
 
   table <- effectsize::effectsize(x, ...)
-  estimate <- names(table)[2]
+  estimate <- names(table)[effectsize::is_effectsize_name(names(table))]
 
   interpret <- effectsize::interpret_eta_squared(table[[estimate]], ...)
   interpretation <- interpret
@@ -95,7 +95,7 @@ report_table.aov <- function(x, ...) {
   row.names(table_full) <- NULL
 
   table <- data_remove(table_full, data_findcols(table_full, ends_with=c("_CI_low|_CI_high")))
-  # Return output
+
   as.report_table(table_full, summary=table, ci=attributes(effsize)$ci)
 }
 
