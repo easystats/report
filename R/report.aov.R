@@ -45,7 +45,7 @@ report_effectsize.aov <- function(x, ...) {
   interpret <- effectsize::interpret_eta_squared(table[[estimate]], ...)
   interpretation <- interpret
 
-  main <- paste0("partial Eta2 = ", insight::format_value(table[[estimate]]))
+  main <- paste0("Eta2 part. = ", insight::format_value(table[[estimate]]))
 
   ci <- table$CI
   statistics <- paste0(main,
@@ -92,10 +92,11 @@ report_table.aov <- function(x, ...) {
 
   table_full <- merge(params, attributes(effsize)$table, all = TRUE)
   table_full <- table_full[order(params$Parameter, decreasing = TRUE), ]
+  row.names(table_full) <- NULL
 
-  table <- data_remove(table_full, c("Parameter", "Group", "Mean_Group1", "Mean_Group2", "Method"))
+  table <- data_remove(table_full, data_findcols(table_full, ends_with=c("_CI_low|_CI_high")))
   # Return output
-  as.report_table(table_full, summary=table)
+  as.report_table(table_full, summary=table, ci=attributes(effsize)$ci)
 }
 
 #' @export
@@ -103,3 +104,66 @@ report_table.anova <- report_table.aov
 
 #' @export
 report_table.aovlist <- report_table.aov
+
+
+
+
+
+
+# report_statistics ------------------------------------------------------------
+
+
+
+#' @export
+report_statistics.aov <- function(x, table=NULL, ...) {
+  if (is.null(table)) {
+    table <- report_table(x, ...)
+  }
+
+  parameters <- table[table$Parameter != "Residuals", ]
+  if ("Group" %in% names(parameters)) {
+    parameters <- parameters[parameters$Group == "Within", ]
+  }
+
+  # Get residuals' DoFs
+  if ("Residuals" %in% table_full$Parameter) {
+    DoF_residual <- table_full[table_full$Parameter == "Residuals", "df"]
+  } else {
+    DoF_residual <- NULL
+  }
+
+  # Text parameters
+  text <- sapply(parameters$Parameter, .format_aov_varname, simplify = TRUE, USE.NAMES = FALSE)
+
+  # DoFs
+  text <- paste0(
+    text,
+    " is ",
+    effectsize::interpret_p(parameters$p),
+    " (F(",
+    insight::format_value(parameters$df, protect_integers = TRUE)
+  )
+
+  if (!is.null(DoF_residual)) {
+    text <- paste0(text, ", ", insight::format_value(DoF_residual, protect_integers = TRUE))
+  } else if ("DoF_Residuals" %in% names(parameters)) {
+    text <- paste0(text, ", ", insight::format_value(parameters$DoF_Residuals, protect_integers = TRUE))
+  }
+
+  # Indices
+  text <- paste0(
+    text,
+    ") = ",
+    insight::format_value(parameters$`F`),
+    ", ",
+    insight::format_p(parameters$p)
+  )
+
+  as.report_statistics(text, summary=text, estimate=table[[estimate]])
+}
+
+#' @export
+report_statistics.anova <- report_statistics.aov
+
+#' @export
+report_statistics.aovlist <- report_statistics.aov
