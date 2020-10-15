@@ -16,7 +16,7 @@
 #' report_effectsize(t.test(iris$Sepal.Width, iris$Sepal.Length))
 #' report_effectsize(cor.test(iris$Sepal.Width, iris$Sepal.Length))
 #'
-#' # ANOVA
+#' # ANOVAs
 #' report_effectsize(aov(Sepal.Length ~ Species, data=iris))
 #'
 #' # GLMs

@@ -31,7 +31,7 @@ report.lm <- function(x, ...) {
 
 
 
-#' @importFrom effectsize effectsize interpret_r interpret_d
+#' @importFrom effectsize effectsize is_effectsize_name interpret_d
 #' @importFrom parameters model_parameters
 #' @importFrom insight model_info
 #' @export
@@ -39,6 +39,7 @@ report_effectsize.lm <- function(x, ...) {
   table <- effectsize::effectsize(x, ...)
   estimate <- names(table)[effectsize::is_effectsize_name(names(table))]
 
+  # TODO: finally solve this.
   # interpret <- effectsize::interpret_parameters(x, ...)
   interpret <- effectsize::interpret_d(table[[estimate]], ...)
   interpretation <- interpret
@@ -46,6 +47,8 @@ report_effectsize.lm <- function(x, ...) {
 
 
   ci <- table$CI
+  names(ci) <- paste0("ci_", estimate)
+
   statistics <- paste0(main,
                        ", ",
                        insight::format_ci(table$CI_low, table$CI_high, ci))
@@ -78,7 +81,23 @@ report_effectsize.lm <- function(x, ...) {
 #' @importFrom insight model_info
 #' @export
 report_table.lm <- function(x, ...) {
-  "Soon."
+
+  effsize <- report_effectsize(x, ...)
+  effsize_table <- attributes(effsize)$table
+  params <- parameters::model_parameters(x, ...)
+
+  # Long table
+  table_full <- merge(params, effsize_table, all = TRUE)
+  table_full <- table_full[order(
+    match(table_full$Parameter, params$Parameter)), ]
+  row.names(table_full) <- NULL
+
+  # Short table
+  table <- data_remove(table_full, data_findcols(table_full, ends_with=c("_CI_low|_CI_high")))
+
+  out <- as.report_table(table_full, summary=table, ci=attributes(params)$ci, effsize=effsize)
+  attr(out, paste0(names(attributes(effsize)$ci))) <- attributes(effsize)$ci
+  out
 }
 
 
