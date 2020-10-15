@@ -59,6 +59,7 @@ Collate:
     'report.character.R'
     'report.data.frame.R'
     'report.factor.R'
+    'report.lm.R'
     'report.numeric.R'
     'report.sessionInfo.R'
     'report_effectsize.R'

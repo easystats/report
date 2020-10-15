@@ -39,10 +39,32 @@ report_effectsize.aov <- function(x, ...) {
   table <- effectsize::effectsize(x, ...)
   estimate <- names(table)[effectsize::is_effectsize_name(names(table))]
 
-  interpret <- effectsize::interpret_eta_squared(table[[estimate]], ...)
-  interpretation <- interpret
+  if(estimate == "Eta2_partial"){
+    interpret <- effectsize::interpret_eta_squared(table[[estimate]], ...)
+    interpretation <- interpret
+    main <- paste0("Eta2 (partial) = ", insight::format_value(table[[estimate]]))
+  } else if(estimate == "Eta2"){
+    interpret <- effectsize::interpret_eta_squared(table[[estimate]], ...)
+    interpretation <- interpret
+    main <- paste0("Eta2 = ", insight::format_value(table[[estimate]]))
+  } else if(estimate == "Omega2_partial"){
+    interpret <- effectsize::interpret_omega_squared(table[[estimate]], ...)
+    interpretation <- interpret
+    main <- paste0("Omega2 (partial) = ", insight::format_value(table[[estimate]]))
+  } else if(estimate == "Omega2"){
+    interpret <- effectsize::interpret_omega_squared(table[[estimate]], ...)
+    interpretation <- interpret
+    main <- paste0("Epsilon2 = ", insight::format_value(table[[estimate]]))
+  } else if(estimate == "Epsilon2_partial"){
+    interpret <- effectsize::interpret_epsilon_squared(table[[estimate]], ...)
+    interpretation <- interpret
+    main <- paste0("Epsilon2 (partial) = ", insight::format_value(table[[estimate]]))
+  } else if(estimate == "Epsilon2"){
+    interpret <- effectsize::interpret_epsilon_squared(table[[estimate]], ...)
+    interpretation <- interpret
+    main <- paste0("Epsilon2 = ", insight::format_value(table[[estimate]]))
+  }
 
-  main <- paste0("Eta2 (partial) = ", insight::format_value(table[[estimate]]))
 
   ci <- table$CI
   statistics <- paste0(main,
