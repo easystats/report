@@ -46,6 +46,8 @@ Suggests:
 	rstanarm,
 	rmarkdown,
 	testthat
+Remotes: 
+	easystats/effectsize
 RoxygenNote: 7.1.1
 Language: en-GB
 Collate: 

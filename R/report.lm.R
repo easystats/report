@@ -36,7 +36,36 @@ report.lm <- function(x, ...) {
 #' @importFrom insight model_info
 #' @export
 report_effectsize.lm <- function(x, ...) {
-  "Soon."
+  table <- effectsize::effectsize(x, ...)
+  estimate <- names(table)[effectsize::is_effectsize_name(names(table))]
+
+  # interpret <- effectsize::interpret_parameters(x, ...)
+  interpret <- effectsize::interpret_d(table[[estimate]], ...)
+  interpretation <- interpret
+  main <- paste0("Std. beta = ", insight::format_value(table[[estimate]]))
+
+
+  ci <- table$CI
+  statistics <- paste0(main,
+                       ", ",
+                       insight::format_ci(table$CI_low, table$CI_high, ci))
+
+  table <- as.data.frame(table)[c("Parameter", estimate, "CI_low", "CI_high")]
+  names(table)[3:ncol(table)] <- c(paste0(estimate, "_CI_low"), paste0(estimate, "_CI_high"))
+
+  rules <- .text_effectsize(attributes(interpret)$rule_name)
+  parameters <- paste0(interpretation, " (", statistics, ")")
+
+
+  # Return output
+  as.report_effectsize(parameters,
+                       summary=parameters,
+                       table=table,
+                       interpretation=interpretation,
+                       statistics=statistics,
+                       rules=rules,
+                       ci=ci,
+                       main=main)
 }
 
 

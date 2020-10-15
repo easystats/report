@@ -18,6 +18,9 @@
 #'
 #' # ANOVA
 #' report_effectsize(aov(Sepal.Length ~ Species, data=iris))
+#'
+#' # GLMs
+#' report_effectsize(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 #' @export
 report_effectsize <- function(x, ...) {
   UseMethod("report_effectsize")
