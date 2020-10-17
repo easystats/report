@@ -39,4 +39,7 @@ report_parameters(cor.test(iris$Sepal.Width, iris$Sepal.Length))
 
 # ANOVA
 report_parameters(aov(Sepal.Length ~ Species, data=iris))
+
+# GLMs
+report_parameters(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 }

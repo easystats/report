@@ -29,6 +29,9 @@
 #'
 #' # ANOVA
 #' report_parameters(aov(Sepal.Length ~ Species, data=iris))
+#'
+#' # GLMs
+#' report_parameters(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 #' @export
 report_parameters <- function(x, table = NULL, ...) {
   UseMethod("report_parameters")
@@ -84,3 +87,6 @@ summary.report_parameters <- function(object, ...) {
 print.report_parameters <- function(x, ...) {
   cat(as.character(x, ...))
 }
+
+
+

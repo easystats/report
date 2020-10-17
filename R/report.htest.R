@@ -140,7 +140,7 @@ report_statistics.htest <- function(x, table=NULL, ...) {
   # p-value
   text <- paste0(text, ", ", insight::format_p(table$p, stars = FALSE, digits = "apa"))
 
-
+  # Effect size
   if (insight::model_info(x)$is_ttest) {
     text_full <- paste0(text, "; ", attributes(effsize)$statistics)
     text <- paste0(text, ", ", attributes(effsize)$main)
@@ -163,7 +163,7 @@ report_statistics.htest <- function(x, table=NULL, ...) {
 
 
 #' @export
-report_parameters.htest <- function(x, table=NULL, ...) {
+report_parameters.htest <- function(x, ...) {
 
   stats <- report_statistics(x, table=table, ...)
   table <- attributes(stats)$table

@@ -184,7 +184,7 @@ report_statistics.aov <- function(x, table=NULL, ...) {
     insight::format_p(parameters$p)
   )
 
-  # Effectsize
+  # Effect size
   text_full <- paste0(text, "; ", attributes(effsize)$statistics)
   text <- paste0(text, ", ", attributes(effsize)$main)
 
@@ -209,22 +209,22 @@ report_statistics.aovlist <- report_statistics.aov
 
 
 #' @export
-report_parameters.aov <- function(x, table=NULL, ...) {
+report_parameters.aov <- function(x, ...) {
 
-  stats <- report_statistics(x, table=table, ...)
+  stats <- report_statistics(x, ...)
   table <- attributes(stats)$table
   effsize <- attributes(stats)$effsize
 
-  parameters <- table[table$Parameter != "Residuals", ]
+  params <- table[table$Parameter != "Residuals", ]
 
   # Text parameters
-  text <- sapply(parameters$Parameter, .format_aov_varnames, simplify = TRUE, USE.NAMES = FALSE)
+  text <- sapply(params$Parameter, .format_parameters_regression, simplify = TRUE, USE.NAMES = FALSE)
 
   # Significance
   text <- paste0(
     text,
     " is ",
-    effectsize::interpret_p(parameters$p),
+    effectsize::interpret_p(params$p),
     " and ",
     attributes(effsize)$interpretation,
     " ("
@@ -328,17 +328,4 @@ report_text.anova <- report_text.aov
 #' @export
 report_text.aovlist <- report_text.aov
 
-# Utils -------------------------------------------------------------------
 
-
-
-#' @keywords internal
-.format_aov_varnames <- function(names) {
-  if (grepl(":", names)) {
-    varname <- format_text(unlist(strsplit(names, ":", fixed = TRUE)))
-    varname <- paste0("The interaction between ", varname)
-  } else {
-    varname <- paste0("The main effect of ", names)
-  }
-  varname
-}

@@ -13,8 +13,8 @@
 #' r <- report(model)
 #'
 #'
-#' model <- glm(vs ~ disp, data = mtcars, family = "binomial")
-#' r <- report(model)
+#' # model <- glm(vs ~ disp, data = mtcars, family = "binomial")
+#' # r <- report(model)
 #' @export
 report.lm <- function(x, ...) {
   table <- report_table(x, ...)
@@ -37,6 +37,7 @@ report.lm <- function(x, ...) {
 #' @export
 report_effectsize.lm <- function(x, ...) {
   table <- effectsize::effectsize(x, ...)
+  method <- .text_standardize(table)
   estimate <- names(table)[effectsize::is_effectsize_name(names(table))]
 
   # TODO: finally solve this.
@@ -56,6 +57,7 @@ report_effectsize.lm <- function(x, ...) {
   table <- as.data.frame(table)[c("Parameter", estimate, "CI_low", "CI_high")]
   names(table)[3:ncol(table)] <- c(paste0(estimate, "_CI_low"), paste0(estimate, "_CI_high"))
 
+
   rules <- .text_effectsize(attributes(interpret)$rule_name)
   parameters <- paste0(interpretation, " (", statistics, ")")
 
@@ -68,6 +70,7 @@ report_effectsize.lm <- function(x, ...) {
                        statistics=statistics,
                        rules=rules,
                        ci=ci,
+                       method=method,
                        main=main)
 }
 
@@ -92,6 +95,12 @@ report_table.lm <- function(x, ...) {
     match(table_full$Parameter, params$Parameter)), ]
   row.names(table_full) <- NULL
 
+  # Rename
+  # names(table_full) <- gsub("Coefficient", "beta", names(table_full))
+
+  # Remove cols
+  table_full <- data_remove(table_full, "SE")
+
   # Short table
   table <- data_remove(table_full, data_findcols(table_full, ends_with=c("_CI_low|_CI_high")))
 
@@ -107,7 +116,35 @@ report_table.lm <- function(x, ...) {
 
 #' @export
 report_statistics.lm <- function(x, table=NULL, ...) {
-  "Soon."
+  if (is.null(table) | is.null(attributes(table)$effsize)) {
+    table <- report_table(x, ...)
+  }
+  effsize <- attributes(table)$effsize
+
+  # Estimate
+  text <- paste0("beta = ", insight::format_value(table$Coefficient))
+
+  # CI
+  if (!is.null(table$CI_low)) {
+    text <- paste0(text, ", ", insight::format_ci(table$CI_low, table$CI_high, ci = attributes(table)$ci))
+  }
+
+  # Statistic
+  if ("t" %in% names(table)) {
+    text <- paste0(text, ", t(", insight::format_value(table$df, protect_integers = TRUE), ") = ", insight::format_value(table$t))
+  }
+
+  # p-value
+  text <- paste0(text, ", ", insight::format_p(table$p, stars = FALSE, digits = "apa"))
+
+  # Effect size
+  text_full <- paste0(text, "; ", attributes(effsize)$statistics)
+  text <- paste0(text, ", ", attributes(effsize)$main)
+
+  as.report_statistics(text_full,
+                       summary=text,
+                       table=table,
+                       effsize=effsize)
 }
 
 
@@ -118,8 +155,31 @@ report_statistics.lm <- function(x, table=NULL, ...) {
 
 
 #' @export
-report_parameters.lm <- function(x, table=NULL, ...) {
-  "Soon."
+report_parameters.lm <- function(x, ...) {
+
+  stats <- report_statistics(x, table=table, ...)
+  params <- attributes(stats)$table
+  effsize <- attributes(stats)$effsize
+
+  # Text parameters
+  text <- sapply(params$Parameter, .format_parameters_regression, simplify = TRUE, USE.NAMES = FALSE)
+
+  # Significance and effect size
+  text <- paste0(
+    text,
+    " is ",
+    effectsize::interpret_p(params$p),
+    "ly ",
+    effectsize::interpret_direction(params$Coefficient),
+    " and ",
+    attributes(effsize)$interpretation,
+    " ("
+  )
+
+  text_full <- paste0(text, stats, ")")
+  text <- paste0(text, summary(stats), ")")
+
+  as.report_parameters(text_full, summary=text, table=table, effectsize=effsize, ...)
 }
 
 # report_model ------------------------------------------------------------

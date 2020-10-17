@@ -26,8 +26,8 @@ model <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
 r <- report(model)
 
 
-model <- glm(vs ~ disp, data = mtcars, family = "binomial")
-r <- report(model)
+# model <- glm(vs ~ disp, data = mtcars, family = "binomial")
+# r <- report(model)
 }
 \seealso{
 Aspects of reports:

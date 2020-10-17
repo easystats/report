@@ -31,10 +31,13 @@ report_table(as.character(round(iris$Sepal.Length, 1)))
 report_table(iris$Species)
 report_table(iris)
 
-# Tests
+# h-tests
 report_table(t.test(mpg ~ am, data = mtcars))
 report_table(cor.test(iris$Sepal.Length, iris$Sepal.Width))
 
 # ANOVAs
 report_table(aov(Sepal.Length ~ Species, data=iris))
+
+# GLMs
+report_table(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 }

@@ -28,31 +28,6 @@ report_model <- function(model, ...) {
 
 
 #' @keywords internal
-.text_effsize <- function(interpretation) {
-  # Effect size
-  if (!is.null(interpretation)) {
-    if (is.character(interpretation)) {
-      effsize_name <- ifelse(interpretation == "cohen1988", "Cohen's (1988)",
-        ifelse(interpretation == "sawilowsky2009", "Savilowsky's (2009)",
-          ifelse(interpretation == "gignac2016", "Gignac's (2016)",
-            ifelse(interpretation == "funder2019", "Funder's (2019)",
-              ifelse(interpretation == "chen2010", "Chen's (2010)", interpretation)
-            )
-          )
-        )
-      )
-      text <- paste0("Effect sizes were labelled following ", effsize_name, " recommendations.")
-    } else {
-      text <- paste0("Effect sizes were labelled following a custom set of rules.")
-    }
-  } else {
-    text <- ""
-  }
-  text
-}
-
-
-#' @keywords internal
 .text_ci <- function(ci, ci_method, df_method = NULL) {
   text <- ""
   # Frequentist --------------------------------
@@ -122,37 +97,6 @@ report_model <- function(model, ...) {
   text
 }
 
-
-
-#' @keywords internal
-.text_standardize <- function(standardize, standardize_robust = FALSE) {
-  if (standardize == "refit") {
-    if (standardize_robust == TRUE) {
-      robust <- "(using the median and the MAD, a robust equivalent of the SD) "
-    } else {
-      robust <- ""
-    }
-    text <- paste0(" Standardized parameters were obtained by fitting the model on a standardized version ", robust, "of the dataset.")
-  } else if (standardize == "2sd") {
-    if (standardize_robust == TRUE) {
-      robust <- "MAD (a robust equivalent of the SD) "
-    } else {
-      robust <- "SD "
-    }
-    text <- paste0(" Standardized parameters were obtained by standardizing the data by 2 times the ", robust, " (see Gelman, 2008).")
-  } else if (standardize == "smart" | standardize == "classic") {
-    if (standardize_robust == TRUE) {
-      robust <- "median and the MAD (a robust equivalent of the SD) of the response variable."
-    } else {
-      robust <- "mean and the SD of the response variable."
-    }
-    text <- paste0(" Parameters were scaled by the ", robust)
-  } else {
-    text <- paste0(" Parameters were standardized using the ", standardize, " method.")
-  }
-
-  text
-}
 
 
 
