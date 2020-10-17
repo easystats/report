@@ -18,6 +18,9 @@
 #'
 #' # ANOVA
 #' report_model(aov(Sepal.Length ~ Species, data=iris))
+#'
+#' # GLMs
+#' report_model(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 #' @export
 report_model <- function(x, table = NULL, ...) {
   UseMethod("report_model")

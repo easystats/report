@@ -17,6 +17,7 @@ text_fullstop <- function(text) {
 #' @importFrom utils head tail
 #' @export
 text_concatenate <- function(text, sep = ", ", last = " and ") {
+  text <- text[text != ""]
   if (length(text) == 1) {
     text
   } else {
@@ -25,6 +26,10 @@ text_concatenate <- function(text, sep = ", ", last = " and ") {
     s
   }
 }
+
+
+
+
 
 #' @rdname format_text
 #' @export

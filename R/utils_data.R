@@ -61,7 +61,10 @@ data_rename <- function(data, pattern, replacement, safe = TRUE) {
 data_findcols <- function(data, pattern=NULL, starts_with=NULL, ends_with=NULL) {
   n <- names(data)
   if(!is.null(pattern)){
-    match <- n[grepl(pattern, n)]
+    match <- c()
+    for(i in c(pattern)){
+      match <- c(match, n[grepl(i, n)])
+    }
   }
   if(!is.null(starts_with)){
     match <- n[grepl(paste0(starts_with, ".*"), n)]

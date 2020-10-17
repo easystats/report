@@ -90,3 +90,16 @@ print.report_parameters <- function(x, ...) {
 
 
 
+# Utils -------------------------------------------------------------------
+
+
+#' @keywords internal
+.format_parameters_regression <- function(names) {
+  if (grepl(":", names)) {
+    varname <- format_text(unlist(strsplit(names, ":", fixed = TRUE)))
+    varname <- paste0("The interaction between ", varname)
+  } else {
+    varname <- paste0("The main effect of ", names)
+  }
+  varname
+}

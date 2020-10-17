@@ -28,4 +28,7 @@ report_model(cor.test(iris$Sepal.Width, iris$Sepal.Length))
 
 # ANOVA
 report_model(aov(Sepal.Length ~ Species, data=iris))
+
+# GLMs
+report_model(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 }

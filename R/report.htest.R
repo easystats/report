@@ -163,7 +163,7 @@ report_statistics.htest <- function(x, table=NULL, ...) {
 
 
 #' @export
-report_parameters.htest <- function(x, ...) {
+report_parameters.htest <- function(x, table=NULL, ...) {
 
   stats <- report_statistics(x, table=table, ...)
   table <- attributes(stats)$table

@@ -262,8 +262,8 @@ report_model.aov <- function(x, table=NULL, ...) {
     text_full <- text  # Because anova() does not save the formula.
   } else{
     text_full <- paste0(text,
-                        " (formula: ",
-                        format(insight::find_formula(x)$conditional),
+                        " (",
+                        format_formula(x),
                         ")")
   }
 
