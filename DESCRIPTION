@@ -46,7 +46,8 @@ Suggests:
 	rstanarm,
 	rmarkdown,
 	testthat
-Remotes: 
+Remotes:
+	easystats/insight
 	easystats/effectsize,
 	easystats/parameters
 RoxygenNote: 7.1.1
