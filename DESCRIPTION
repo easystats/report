@@ -47,7 +47,7 @@ Suggests:
 	rmarkdown,
 	testthat
 Remotes:
-	easystats/insight
+	easystats/insight,
 	easystats/effectsize,
 	easystats/parameters
 RoxygenNote: 7.1.1
