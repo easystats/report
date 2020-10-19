@@ -218,7 +218,7 @@ report_parameters.aov <- function(x, ...) {
   params <- table[table$Parameter != "Residuals", ]
 
   # Text parameters
-  text <- sapply(params$Parameter, .format_parameters_regression, simplify = TRUE, USE.NAMES = FALSE)
+  text <- sapply(params$Parameter, .format_parameters_aov, simplify = TRUE, USE.NAMES = FALSE)
 
   # Significance
   text <- paste0(
@@ -307,15 +307,15 @@ report_text.aov <- function(x, table=NULL, ...) {
     info,
     "\n\nThe ",
     model,
-    " suggests that:\n",
-    params
+    " suggests that:\n\n",
+    as.character(params, ...)
   )
 
   text <- paste0(
     "The ",
-    model,
-    " suggests that:\n",
-    summary(params)
+    summary(model),
+    " suggests that:\n\n",
+    as.character(summary(params), ...)
   )
 
 

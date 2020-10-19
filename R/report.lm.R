@@ -11,7 +11,7 @@
 #'
 #' model <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
 #' r <- report(model)
-#'
+#' r
 #'
 #' # model <- glm(vs ~ disp, data = mtcars, family = "binomial")
 #' # r <- report(model)
@@ -121,9 +121,9 @@ report_table.lm <- function(x, ...) {
 # report_statistics ------------------------------------------------------------
 
 #' @rdname report_statistics
-#' @param effectsize If \code{FALSE}, won't include effect-size related parameters (standardized coefficients, etc.)
+#' @param include_effectsize If \code{FALSE}, won't include effect-size related parameters (standardized coefficients, etc.)
 #' @export
-report_statistics.lm <- function(x, table=NULL, effectsize=TRUE, ...) {
+report_statistics.lm <- function(x, table=NULL, include_effectsize=TRUE, ...) {
   if (is.null(table)) {
     table <- report_table(x, ...)
   }
@@ -139,24 +139,23 @@ report_statistics.lm <- function(x, table=NULL, effectsize=TRUE, ...) {
 
   # CI
   if (!is.null(table$CI_low)) {
-    text <- text_concatenate(c(text, insight::format_ci(table$CI_low, table$CI_high, ci = attributes(table)$ci)), last=",")
+    text <- text_paste(text, insight::format_ci(table$CI_low, table$CI_high, ci = attributes(table)$ci))
   }
 
   # Statistic
   if ("t" %in% names(table)) {
-    df <- paste0("t(", insight::format_value(table$df, protect_integers = TRUE), ") = ", insight::format_value(table$t))
-    text <- text_concatenate(c(text, df), last=", ")
+    text <- text_paste(text, paste0("t(", insight::format_value(table$df, protect_integers = TRUE), ") = ", insight::format_value(table$t)))
   }
 
   # p-value
   if("p" %in% names(table)){
-    text <- text_concatenate(c(text, insight::format_p(table$p, stars = FALSE, digits = "apa")), last=", ")
+    text <- text_paste(text, insight::format_p(table$p, stars = FALSE, digits = "apa"))
   }
 
   # Effect size
-  if(effectsize && !is.null(effsize)){
-    text_full <- text_concatenate(c(text, attributes(effsize)$statistics), sep="; ", last="; ")
-    text <- text_concatenate(c(text, attributes(effsize)$main), last=", ")
+  if(include_effectsize && !is.null(effsize)){
+    text_full <- text_paste(text, attributes(effsize)$statistics, sep="; ")
+    text <- text_paste(text, attributes(effsize)$main)
   } else{
     text_full <- text
   }
@@ -173,16 +172,18 @@ report_statistics.lm <- function(x, table=NULL, effectsize=TRUE, ...) {
 # report_statistics ------------------------------------------------------------
 
 
-
+#' @inheritParams report_statistics
 #' @export
-report_parameters.lm <- function(x, ...) {
+report_parameters.lm <- function(x, table=NULL, include_effectsize=TRUE, ...) {
 
-  stats <- report_statistics(x, table=table, ...)
+  stats <- report_statistics(x, table=table, include_effectsize=include_effectsize, ...)
   params <- attributes(stats)$table
   effsize <- attributes(stats)$effsize
 
-  # Text parameters
-  text <- sapply(params$Parameter, .format_parameters_regression, simplify = TRUE, USE.NAMES = FALSE)
+  # Parameters' names
+  text <- sapply(attributes(params)$pretty_names[params$Parameter],
+                 .format_parameters_regression,
+                 simplify = TRUE, USE.NAMES = FALSE)
 
   # Significance and effect size
   text <- paste0(
@@ -190,16 +191,17 @@ report_parameters.lm <- function(x, ...) {
     " is ",
     effectsize::interpret_p(params$p),
     "ly ",
-    effectsize::interpret_direction(params$Coefficient),
-    " and ",
-    attributes(effsize)$interpretation,
-    " ("
-  )
+    effectsize::interpret_direction(params$Coefficient))
 
-  text_full <- paste0(text, stats, ")")
-  text <- paste0(text, summary(stats), ")")
+  # Effect size
+  # if(include_effectsize){
+  #   text <- paste0(text,  " and ", attributes(effsize)$interpretation)
+  # }
 
-  as.report_parameters(text_full, summary=text, table=table, effectsize=effsize, ...)
+  text_full <- paste0(text, " (", stats, ")")
+  text <- paste0(text, " (", summary(stats), ")")
+
+  as.report_parameters(text_full, summary=text, table=params, effectsize=effsize, ...)
 }
 
 
@@ -230,7 +232,7 @@ report_intercept.lm <- function(x, table=NULL, ...) {
     " is at ",
     insight::format_value(is_at),
     " (",
-    report_statistics(x, intercept, effectsize=FALSE),
+    report_statistics(x, intercept, include_effectsize=FALSE),
     ")."
   )
 
@@ -263,7 +265,6 @@ report_model.lm <- function(x, table=NULL, ...) {
 
   # Initial
   text <- paste0(
-    "We fitted a ",
     boostrapped,
     format_model(x)
   )
@@ -306,11 +307,21 @@ report_model.lm <- function(x, table=NULL, ...) {
 # report_info ------------------------------------------------------------
 
 #' @export
-report_info.lm <- function(x, effectsize=NULL, ...) {
+report_info.lm <- function(x, effectsize=NULL, include_effectsize=FALSE, ...) {
   if (is.null(effectsize)) {
     effectsize <- report_effectsize(x, ...)
   }
 
+  text <- ""
+
+  if (!is.null(effectsize)) {
+    text_effsize <- attributes(effectsize)$method
+    if(include_effectsize){
+      text_effsize <- paste0(text_effsize, attributes(effectsize)$rules)
+      text_effsize <- gsub(".Effect sizes ", " and ", text_effsize)
+    }
+    text <- paste0(text, text_effsize)
+  }
 
   # if (!is.null(ci_method)) {
   #   text_full <- paste0(
@@ -318,19 +329,14 @@ report_info.lm <- function(x, effectsize=NULL, ...) {
   #     .text_ci(ci, ci_method = ci_method, df_method = df_method)
   #   )
   # }
-  # if (!is.null(standardize) && !is_nullmodel) {
-  #   text_full <- paste0(
-  #     text_full,
-  #     .text_standardize(standardize, standardize_robust)
-  #   )
-  # }
+
   # if (!is.null(interpretation)) {
   #   text_full <- paste0(
   #     text_full,
   #     .text_effsize(interpretation)
   #   )
   # }
-  as.report_info(attributes(effectsize)$rules)
+  as.report_info(text)
 }
 
 
@@ -339,7 +345,35 @@ report_info.lm <- function(x, effectsize=NULL, ...) {
 
 #' @export
 report_text.lm <- function(x, table=NULL, ...) {
-  "Soon."
+  params <- report_parameters(x, table=table, ...)
+  table <- attributes(params)$table
+
+  info <- report_info(x, effectsize=attributes(params)$effectsize, ...)
+  model <- report_model(x, table=table, ...)
+  intercept <- report_intercept(x, table=table, ...)
+
+
+  text_full <- paste0(
+    info,
+    "\n\nWe fitted a ",
+    model,
+    " ",
+    intercept,
+    " Withing this model:\n\n",
+    as.character(params)
+  )
+
+  text <- paste0(
+    "We fitted a ",
+    summary(model),
+    " ",
+    summary(intercept),
+    " Withing this model:\n\n",
+    as.character(summary(params), ...)
+  )
+
+
+  as.report_text(text_full, summary=text)
 }
 
 

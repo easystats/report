@@ -78,4 +78,3 @@ Collate:
     'report_table.R'
     'utils_data.R'
     'utils_grouped_df.R'
-    'utils_text.R'

@@ -5,7 +5,7 @@
 \alias{report_statistics}
 \title{Report the statistics of a model}
 \usage{
-\method{report_statistics}{lm}(x, table = NULL, effectsize = TRUE, ...)
+\method{report_statistics}{lm}(x, table = NULL, include_effectsize = TRUE, ...)
 
 report_statistics(x, table = NULL, ...)
 }
@@ -14,7 +14,7 @@ report_statistics(x, table = NULL, ...)
 
 \item{table}{A table obtained via \code{report_table()}. If not provided, will run it.}
 
-\item{effectsize}{If \code{FALSE}, won't include effect-size related parameters (standardized coefficients, etc.)}
+\item{include_effectsize}{If \code{FALSE}, won't include effect-size related parameters (standardized coefficients, etc.)}
 
 \item{...}{Arguments passed to or from other methods.}
 }

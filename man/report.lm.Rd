@@ -24,7 +24,7 @@ library(report)
 
 model <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
 r <- report(model)
-
+r
 
 # model <- glm(vs ~ disp, data = mtcars, family = "binomial")
 # r <- report(model)

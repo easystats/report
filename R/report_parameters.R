@@ -94,12 +94,31 @@ print.report_parameters <- function(x, ...) {
 
 
 #' @keywords internal
-.format_parameters_regression <- function(names) {
-  if (grepl(":", names)) {
-    varname <- format_text(unlist(strsplit(names, ":", fixed = TRUE)))
-    varname <- paste0("The interaction between ", varname)
-  } else {
-    varname <- paste0("The main effect of ", names)
+.format_parameters_aov <- function(names) {
+  for(i in 1:length(names)){
+    if (grepl(":", names[i], fixed = TRUE)) {
+      names[i] <- format_text(unlist(strsplit(names[i], ":", fixed = TRUE)))
+      names[i] <- paste0("The interaction between ", names[i])
+    } else {
+      names[i] <- paste0("The main effect of ", names[i])
+    }
   }
-  varname
+  names
+}
+
+#' @keywords internal
+.format_parameters_regression <- function(names) {
+  for(i in 1:length(names)){
+    # Interaction
+    if (grepl(" * ", names[i], fixed=TRUE)) {
+      parts <- unlist(strsplit(names[i], " * ", fixed = TRUE))
+      basis <- paste0(head(parts, -1), collapse = " * ")
+      names[i] <- paste0("The interaction effect of ", tail(parts, 1), " on ", basis)
+
+    # No interaction
+    } else {
+      names[i] <- paste0("The effect of ", names[i])
+    }
+  }
+  names
 }
