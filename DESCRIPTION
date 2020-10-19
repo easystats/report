@@ -47,8 +47,8 @@ Suggests:
 	rmarkdown,
 	testthat
 Remotes: 
-	easystats/effectsize
-    easystats/parameters
+	easystats/effectsize,
+	easystats/parameters
 RoxygenNote: 7.1.1
 Language: en-GB
 Collate: 
