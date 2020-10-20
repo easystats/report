@@ -12,6 +12,9 @@
 #' model <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
 #' r <- report(model)
 #' r
+#' summary(r)
+#' as.data.frame(r)
+#' summary(as.data.frame(r))
 #'
 #' # model <- glm(vs ~ disp, data = mtcars, family = "binomial")
 #' # r <- report(model)
@@ -82,25 +85,34 @@ report_effectsize.lm <- function(x, ...) {
 
 #' @importFrom parameters model_parameters
 #' @importFrom insight model_info
+#' @include utils_combine_tables.R
 #' @export
-report_table.lm <- function(x, ...) {
+report_table.lm <- function(x, include_effectsize=TRUE, ...) {
 
-  effsize <- report_effectsize(x, ...)
-  effsize_table <- attributes(effsize)$table
   params <- parameters::model_parameters(x, ...)
 
-  # Long table
-  table_full <- merge(params, effsize_table, all = TRUE)
-  table_full <- table_full[order(
-    match(table_full$Parameter, params$Parameter)), ]
-  row.names(table_full) <- NULL
+  # Combine -----
+  # Add effectsize
+  if(include_effectsize){
+    effsize <- report_effectsize(x, ...)
+    params <- .combine_tables_effectsize(params, effsize)
+  } else{
+    effsize <- NULL
+  }
 
-  # Rename
-  # names(table_full) <- gsub("Coefficient", "beta", names(table_full))
+  # Add performance
+  performance <- performance::model_performance(x, ...)
+  table_full <- .combine_tables_performance(params, performance)
 
+  # Clean -----
   # Remove cols
   table_full <- data_remove(table_full, "SE")
 
+  # Rename some columns
+  # names(table_full) <- gsub("Coefficient", "beta", names(table_full))
+
+
+  # Prepare -----
   # Short table
   table <- data_remove(table_full, data_findcols(table_full, ends_with=c("_CI_low|_CI_high")))
 
