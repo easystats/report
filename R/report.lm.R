@@ -102,20 +102,19 @@ report_table.lm <- function(x, include_effectsize=TRUE, ...) {
 
   # Add performance
   performance <- performance::model_performance(x, ...)
-  table_full <- .combine_tables_performance(params, performance)
+  params <- .combine_tables_performance(params, performance)
+  params <- params[!params$Parameter %in% c("RMSE"), ]
 
   # Clean -----
-  # Remove cols
-  table_full <- data_remove(table_full, "SE")
-
   # Rename some columns
   # names(table_full) <- gsub("Coefficient", "beta", names(table_full))
 
+  # Shorten ----
+  table_full <- data_remove(params, "SE")
+  table <- data_remove(table_full, data_findcols(table_full, ends_with=c("_CI_low|_CI_high")))
+  table <- table[!table$Parameter %in% c("AIC", "BIC"), ]
 
   # Prepare -----
-  # Short table
-  table <- data_remove(table_full, data_findcols(table_full, ends_with=c("_CI_low|_CI_high")))
-
   out <- as.report_table(table_full,
                          summary=table,
                          effsize=effsize,
@@ -139,6 +138,7 @@ report_statistics.lm <- function(x, table=NULL, include_effectsize=TRUE, ...) {
   if (is.null(table)) {
     table <- report_table(x, ...)
   }
+  table <- .remove_performance(table)
   effsize <- attributes(table)$effsize
 
   # Estimate

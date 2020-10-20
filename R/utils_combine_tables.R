@@ -71,3 +71,14 @@
 
   table
 }
+
+
+
+#' @keywords internal
+.remove_performance <- function(table) {
+  if("Fit" %in% names(table)){
+    table <- table[is.na(table$Fit), ]
+    table <- table[!is.na(table$Parameter), ]
+  }
+  table
+}
