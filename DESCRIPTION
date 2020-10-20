@@ -66,6 +66,7 @@ Collate:
     'report.character.R'
     'report.data.frame.R'
     'report.factor.R'
+    'utils_combine_tables.R'
     'report.lm.R'
     'report.numeric.R'
     'report.sessionInfo.R'

@@ -9,10 +9,13 @@
 #' @examples
 #' data <- iris
 #' data$Cat1 <- rep(c("A", "B"), length.out = nrow(data))
+#'
 #' model <- aov(Sepal.Length ~ Species * Cat1, data = data)
 #' r <- report(model)
 #' r
+#' summary(r)
 #' as.data.frame(r)
+#' summary(as.data.frame(r))
 #' @export
 report.aov <- report.htest
 
