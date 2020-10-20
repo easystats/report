@@ -307,11 +307,12 @@ report_text.aov <- function(x, table=NULL, ...) {
 
 
   text_full <- paste0(
-    info,
-    "\n\nThe ",
+    "The ",
     model,
     " suggests that:\n\n",
-    as.character(params, ...)
+    as.character(params, ...),
+    "\n\n",
+    info
   )
 
   text <- paste0(

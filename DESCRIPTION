@@ -76,6 +76,7 @@ Collate:
     'report_model.R'
     'report_parameters.R'
     'report_participants.R'
+    'report_performance.R'
     'report_sample.R'
     'report_statistics.R'
     'report_table.R'

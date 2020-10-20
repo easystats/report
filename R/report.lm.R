@@ -118,6 +118,7 @@ report_table.lm <- function(x, include_effectsize=TRUE, ...) {
   out <- as.report_table(table_full,
                          summary=table,
                          effsize=effsize,
+                         performance=performance,
                          ...)
   attr(out, paste0(names(attributes(effsize)$ci))) <- attributes(effsize)$ci
   # Add attributes from params table
@@ -316,6 +317,28 @@ report_model.lm <- function(x, table=NULL, ...) {
 }
 
 
+
+
+
+# report_info ------------------------------------------------------------
+
+#' @export
+report_performance.lm <- function(x, table=NULL, ...) {
+  if (!is.null(table) | is.null(attributes(table)$performance)) {
+    table <- report_table(x, ...)
+  }
+  performance <- attributes(table)$performance
+
+
+  # Intercept-only
+  if (insight::is_nullmodel(x)) {
+    return(as.report_performance("", summary=""))
+  }
+
+  out <- .text_r2(x, insight::model_info(x), performance)
+  as.report_performance(out$text_full, summary=out$text)
+}
+
 # report_info ------------------------------------------------------------
 
 #' @export
@@ -362,25 +385,31 @@ report_text.lm <- function(x, table=NULL, ...) {
 
   info <- report_info(x, effectsize=attributes(params)$effectsize, ...)
   model <- report_model(x, table=table, ...)
+  perf <- report_performance(x, table=table, ...)
   intercept <- report_intercept(x, table=table, ...)
 
 
   text_full <- paste0(
-    info,
-    "\n\nWe fitted a ",
+    "We fitted a ",
     model,
     " ",
+    perf,
+    " ",
     intercept,
-    " Withing this model:\n\n",
-    as.character(params)
+    " Within this model:\n\n",
+    as.character(params),
+    "\n\n",
+    info
   )
 
   text <- paste0(
     "We fitted a ",
     summary(model),
     " ",
+    summary(perf),
+    " ",
     summary(intercept),
-    " Withing this model:\n\n",
+    " Within this model:\n\n",
     as.character(summary(params), ...)
   )
 

@@ -78,6 +78,8 @@ Aspects of reports:
   \item \code{\link{report_statistics}}
   \item \code{\link{report_effectsize}}
   \item \code{\link{report_model}}
+  \item \code{\link{report_performance}}
+  \item \code{\link{report_info}}
   \item \code{\link{report_text}}
 }
 Methods:
