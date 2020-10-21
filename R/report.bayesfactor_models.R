@@ -1,4 +1,4 @@
-#' Models' Bayes factor Report
+#' Report Models' Bayes Factor
 #'
 #' Create a report of Bayes factors for model comparison.
 #'
@@ -85,7 +85,8 @@ report_text.bayesfactor_models <- function(x, table=NULL, interpretation = "jeff
     "Compared to the ", model$Model[denominator], " model", model_ind[denominator], ", ",
     "we found ",
     paste0(
-      effectsize::interpret_bf(model$BF[summ_inds], rules = interpretation, include_value = TRUE),
+      effectsize::interpret_bf(model$BF[summ_inds], rules = interpretation, include_value = TRUE,
+                               protect_ratio = TRUE, exact = TRUE),
       " the ", model$Model[summ_inds], " model", model_ind[summ_inds],
       collapse = "; "
     ),
@@ -115,7 +116,8 @@ report_text.bayesfactor_models <- function(x, table=NULL, interpretation = "jeff
     "Compared to the ", model$Model[denominator], " model", model_ind[denominator], ", ",
     "we found ",
     paste0(
-      effectsize::interpret_bf(model$BF[-denominator], rules = interpretation, include_value = TRUE),
+      effectsize::interpret_bf(model$BF[-denominator], rules = interpretation, include_value = TRUE,
+                               protect_ratio = TRUE, exact = TRUE),
       " the ", model$Model[-denominator], " model", model_ind[-denominator],
       collapse = "; "
     ),
@@ -126,7 +128,7 @@ report_text.bayesfactor_models <- function(x, table=NULL, interpretation = "jeff
   #### table ####
   model$Model <- paste0(" [", seq_len(nrow(model)), "] ", model$Model)
   bf_table <- as.data.frame(model)
-  bf_table$BF <- insight::format_bf(model$BF, name = NULL, protect_ratio = TRUE)
+  bf_table$BF <- insight::format_bf(model$BF, name = NULL, protect_ratio = TRUE, exact = TRUE)
   colnames(bf_table) <- c("Model", "Bayes factor")
 
   table_footer <- matrix(rep("", 6), nrow = 3)
@@ -138,7 +140,7 @@ report_text.bayesfactor_models <- function(x, table=NULL, interpretation = "jeff
 
   #### table full ####
   bf_table_full <- head(bf_table, -1)
-  bf_table_full$BF2 <- c(insight::format_bf(model$BF / model$BF[max_den], name = NULL, protect_ratio = TRUE), "", "")
+  bf_table_full$BF2 <- c(insight::format_bf(model$BF / model$BF[max_den], name = NULL, protect_ratio = TRUE, exact = TRUE), "", "")
 
   colnames(bf_table_full) <- c(
     "Model",
@@ -230,10 +232,10 @@ report_text.bayesfactor_inclusion <- function(x, table=NULL, interpretation = "j
     "Bayesian model averaging (BMA) was used to obtain the average evidence ",
     "for each predictor. Since each model has a prior probability",
     # custom priors?
-    switch(!is.null(priorOdds) + 1, NULL, paste0(
+    if (is.null(priorOdds)) NULL else paste0(
       " (here we used subjective prior odds of ",
       paste0(priorOdds, collapse = ", "), ")"
-    )),
+    ),
     ", it is possible to sum the prior probability of all models that include ",
     "a predictor of interest (the prior inclusion probability), and of all ",
     "models that do not include that predictor (the prior exclusion probability). ",
@@ -242,16 +244,14 @@ report_text.bayesfactor_inclusion <- function(x, table=NULL, interpretation = "j
     "probability and the posterior exclusion probability. The change from ",
     "prior to posterior inclusion odds is the Inclusion Bayes factor. ",
     # matched models?
-    switch(!matched + 1, NULL,
-      paste0(
-        "For each predictor, averaging was done only across models that ",
-        "did not include any interactions with that predictor; ",
-        "additionally, for each interaction predictor, averaging was done ",
-        "only across models that contained the main effect from which the ",
-        "interaction predictor was comprised. This was done to prevent ",
-        "Inclusion Bayes factors from being contaminated with non-relevant ",
-        "evidence (see Mathot, 2017). "
-      )
+    if (!matched) NULL else paste0(
+      "For each predictor, averaging was done only across models that ",
+      "did not include any interactions with that predictor; ",
+      "additionally, for each interaction predictor, averaging was done ",
+      "only across models that contained the main effect from which the ",
+      "interaction predictor was comprised. This was done to prevent ",
+      "Inclusion Bayes factors from being contaminated with non-relevant ",
+      "evidence (see Mathot, 2017). "
     )
   )
   bf_text_full <- paste0(

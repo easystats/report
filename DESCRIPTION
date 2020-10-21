@@ -62,7 +62,7 @@ Collate:
     'report.R'
     'report.htest.R'
     'report.aov.R'
-    'report.bayestestR.R'
+    'report.bayesfactor_models.R'
     'report.character.R'
     'report.data.frame.R'
     'report.factor.R'
