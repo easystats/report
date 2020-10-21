@@ -199,7 +199,7 @@ report_statistics.lm <- function(x, table=NULL, include_effectsize=TRUE, ...) {
 
 #' @inheritParams report_statistics
 #' @export
-report_parameters.lm <- function(x, table=NULL, include_effectsize=TRUE, ...) {
+report_parameters.lm <- function(x, table=NULL, include_effectsize=TRUE, include_intercept=TRUE, ...) {
 
   stats <- report_statistics(x, table=table, include_effectsize=include_effectsize, ...)
   params <- attributes(stats)$table
@@ -223,12 +223,16 @@ report_parameters.lm <- function(x, table=NULL, include_effectsize=TRUE, ...) {
   #   text <- paste0(text,  " and ", attributes(effsize)$interpretation)
   # }
 
+  if(isFALSE(include_intercept)){
+    text <- text[!params$Parameter == "(Intercept)"]
+  }
+
   text_full <- paste0(text, " (", stats, ")")
   text <- paste0(text, " (", summary(stats), ")")
 
+
   as.report_parameters(text_full, summary=text, table=params, effectsize=effsize, ...)
 }
-
 
 
 # report_intercept ------------------------------------------------------------
@@ -394,7 +398,7 @@ report_info.lm <- function(x, effectsize=NULL, include_effectsize=FALSE, ...) {
 
 #' @export
 report_text.lm <- function(x, table=NULL, ...) {
-  params <- report_parameters(x, table=table, ...)
+  params <- report_parameters(x, table=table, include_intercept=FALSE, ...)
   table <- attributes(params)$table
 
   info <- report_info(x, effectsize=attributes(params)$effectsize, ...)

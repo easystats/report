@@ -32,6 +32,7 @@
 #'
 #' # GLMs
 #' report_parameters(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
+#' report_parameters(lm(Petal.Width ~ Species, data = iris), include_intercept=FALSE)
 #' report_parameters(glm(vs ~ disp, data = mtcars, family = "binomial"))
 #' @export
 report_parameters <- function(x, table = NULL, ...) {
@@ -92,7 +93,6 @@ print.report_parameters <- function(x, ...) {
 
 
 # Utils -------------------------------------------------------------------
-
 
 #' @keywords internal
 .format_parameters_aov <- function(names) {
