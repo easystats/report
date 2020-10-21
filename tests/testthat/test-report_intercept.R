@@ -33,17 +33,19 @@ if (require("testthat") && require("report")) {
   m3 <- lm(y ~ f, data = data3)
 
   testthat::test_that("reflevel", {
+
     testthat::expect_equal(
-      as.character(report_intercept(m1)$text_long),
-      " The model's intercept, corresponding to y = 0 and f = 3, is at 0.07 (SE = 0.31, 95% CI [-0.57, 0.71], p = 0.819)."
+      as.character(report_intercept(m1)),
+      "The model's intercept, corresponding to y = 0 and f = 3, is at 0.07 (95% CI [-0.57, 0.71], t(27) = 0.23, p = 0.819)."
     )
     testthat::expect_equal(
-      as.character(report_intercept(m2)$text_long),
-      " The model's intercept, corresponding to y = 0 and f = 3, is at 0.07 (SE = 0.31, 95% CI [-0.57, 0.71], p = 0.819)."
+      as.character(report_intercept(m2)),
+      "The model's intercept, corresponding to y = 0 and f = 3, is at 0.07 (95% CI [-0.57, 0.71], t(27) = 0.23, p = 0.819)."
     )
     testthat::expect_equal(
-      as.character(report_intercept(m3)$text_long),
-      " The model's intercept, corresponding to y = 0 and f = 1, is at 0.17 (SE = 0.31, 95% CI [-0.47, 0.81], p = 0.584)."
+      as.character(report_intercept(m3)),
+      "The model's intercept, corresponding to y = 0 and f = 1, is at 0.17 (95% CI [-0.47, 0.81], t(27) = 0.55, p = 0.584)."
     )
+
   })
 }
