@@ -29,8 +29,12 @@ summary(r)
 as.data.frame(r)
 summary(as.data.frame(r))
 
-# model <- glm(vs ~ disp, data = mtcars, family = "binomial")
-# r <- report(model)
+model <- glm(vs ~ disp, data = mtcars, family = "binomial")
+r <- report(model)
+r
+summary(r)
+as.data.frame(r)
+summary(as.data.frame(r))
 }
 \seealso{
 Aspects of reports:

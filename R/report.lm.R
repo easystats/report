@@ -16,8 +16,12 @@
 #' as.data.frame(r)
 #' summary(as.data.frame(r))
 #'
-#' # model <- glm(vs ~ disp, data = mtcars, family = "binomial")
-#' # r <- report(model)
+#' model <- glm(vs ~ disp, data = mtcars, family = "binomial")
+#' r <- report(model)
+#' r
+#' summary(r)
+#' as.data.frame(r)
+#' summary(as.data.frame(r))
 #' @export
 report.lm <- function(x, ...) {
   table <- report_table(x, ...)
@@ -34,7 +38,7 @@ report.lm <- function(x, ...) {
 
 
 
-#' @importFrom effectsize effectsize is_effectsize_name interpret_d
+#' @importFrom effectsize effectsize is_effectsize_name interpret_d interpret_oddsratio
 #' @importFrom parameters model_parameters
 #' @importFrom insight model_info
 #' @export
@@ -45,7 +49,12 @@ report_effectsize.lm <- function(x, ...) {
 
   # TODO: finally solve this.
   # interpret <- effectsize::interpret_parameters(x, ...)
-  interpret <- effectsize::interpret_d(table[[estimate]], ...)
+  if(insight::model_info(x)$is_logit){
+    interpret <- effectsize::interpret_oddsratio(table[[estimate]], log=TRUE, ...)
+  } else {
+    interpret <- effectsize::interpret_d(table[[estimate]], ...)
+  }
+
   interpretation <- interpret
   main <- paste0("Std. beta = ", insight::format_value(table[[estimate]]))
 
@@ -103,13 +112,16 @@ report_table.lm <- function(x, include_effectsize=TRUE, ...) {
   # Add performance
   performance <- performance::model_performance(x, ...)
   params <- .combine_tables_performance(params, performance)
-  params <- params[!params$Parameter %in% c("RMSE"), ]
+  params <- params[!tolower(params$Parameter) %in% c("rmse", "logloss", "score_log", "score_spherical", "pcp"), ]
 
   # Clean -----
   # Rename some columns
   # names(table_full) <- gsub("Coefficient", "beta", names(table_full))
 
   # Shorten ----
+  if(insight::model_info(x)$is_logit){
+    params <- data_remove(params, "df_error")
+  }
   table_full <- data_remove(params, "SE")
   table <- data_remove(table_full, data_findcols(table_full, ends_with=c("_CI_low|_CI_high")))
   table <- table[!table$Parameter %in% c("AIC", "BIC"), ]
@@ -218,6 +230,7 @@ report_parameters.lm <- function(x, table=NULL, include_effectsize=TRUE, ...) {
 }
 
 
+
 # report_intercept ------------------------------------------------------------
 
 #' @export
@@ -226,10 +239,10 @@ report_intercept.lm <- function(x, table=NULL, ...) {
     table <- report_table(x, ...)
   }
 
-  idx <- table$Parameter == "(Intercept)"
+  idx <- !is.na(table$Parameter) & table$Parameter == "(Intercept)"
   intercept <- table[idx, ]
 
-  estimate <- attributes(table)$coefficient_name
+  estimate <- .find_regression_estimate(table)
   is_at <- insight::format_value(intercept[[estimate]])
 
   intercept[[estimate]] <- NULL
@@ -253,6 +266,7 @@ report_intercept.lm <- function(x, table=NULL, ...) {
 
   as.report_intercept(text_full, summary=text, ...)
 }
+
 
 
 
@@ -422,10 +436,12 @@ report_text.lm <- function(x, table=NULL, ...) {
 
 #' @keywords internal
 .find_regression_estimate <- function(table, ...){
-  if(!is.null(attributes(table)$coefficient_name)){
+  candidates <- c("^Coefficient", "beta", "Median", "Mean", "MAP")
+  coefname <- attributes(table)$coefficient_name
+  if(!is.null(coefname) && coefname %in% names(table)){
     estimate <- attributes(table)$coefficient_name
   } else{
-    estimate <- data_findcols(table, c("^Coefficient", "beta", "Median", "Mean", "MAP"))[1]
+    estimate <- data_findcols(table, candidates)[1]
   }
   estimate
 }

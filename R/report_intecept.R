@@ -12,8 +12,9 @@
 #' @examples
 #' library(report)
 #'
-#' model <- lm(Sepal.Length ~ Species, data = iris)
-#' report_intercept(model)
+#' # GLMs
+#' report_intercept(lm(Sepal.Length ~ Species, data = iris))
+#' report_intercept(glm(vs ~ disp, data = mtcars, family = "binomial"))
 #'
 #' if(require("lme4")){
 #'   # model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)

@@ -14,6 +14,7 @@
 #'
 #' # GLMs
 #' report_performance(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
+#' report_performance(glm(vs ~ disp, data = mtcars, family = "binomial"))
 #' @export
 report_performance <- function(x, table = NULL, ...) {
   UseMethod("report_performance")

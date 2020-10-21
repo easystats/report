@@ -32,6 +32,7 @@
 #'
 #' # GLMs
 #' report_parameters(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
+#' report_parameters(glm(vs ~ disp, data = mtcars, family = "binomial"))
 #' @export
 report_parameters <- function(x, table = NULL, ...) {
   UseMethod("report_parameters")
@@ -114,6 +115,10 @@ print.report_parameters <- function(x, ...) {
       parts <- unlist(strsplit(names[i], " * ", fixed = TRUE))
       basis <- paste0(head(parts, -1), collapse = " * ")
       names[i] <- paste0("The interaction effect of ", tail(parts, 1), " on ", basis)
+
+    # Intercept
+    } else if(names[i] == "(Intercept)") {
+      names[i] <- paste0("The intercept")
 
     # No interaction
     } else {

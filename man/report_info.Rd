@@ -30,4 +30,5 @@ report_info(aov(Sepal.Length ~ Species, data=iris))
 # GLMs
 report_info(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 report_info(lm(Sepal.Length ~ Petal.Length * Species, data = iris), include_effectsize=TRUE)
+report_info(glm(vs ~ disp, data = mtcars, family = "binomial"))
 }

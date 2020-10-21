@@ -24,4 +24,5 @@ library(report)
 
 # GLMs
 report_performance(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
+report_performance(glm(vs ~ disp, data = mtcars, family = "binomial"))
 }

@@ -29,6 +29,7 @@
 #'
 #' # GLMs
 #' report_table(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
+#' report_table(glm(vs ~ disp, data = mtcars, family = "binomial"))
 #' @export
 report_table <- function(x, ...) {
   UseMethod("report_table")
