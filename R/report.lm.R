@@ -78,8 +78,16 @@ report_effectsize.lm <- function(x, ...) {
                        ", ",
                        insight::format_ci(table$CI_low, table$CI_high, ci))
 
-  table <- as.data.frame(table)[c("Parameter", estimate, "CI_low", "CI_high")]
-  names(table)[3:ncol(table)] <- c(paste0(estimate, "_CI_low"), paste0(estimate, "_CI_high"))
+  if ("Component" %in% colnames(table)) {
+    merge_by <- c("Parameter", "Component")
+    start_col <- 4
+  } else {
+    merge_by <- "Parameter"
+    start_col <- 3
+  }
+
+  table <- as.data.frame(table)[c(merge_by, estimate, "CI_low", "CI_high")]
+  names(table)[start_col:ncol(table)] <- c(paste0(estimate, "_CI_low"), paste0(estimate, "_CI_high"))
 
 
   rules <- .text_effectsize(attributes(interpret)$rule_name)

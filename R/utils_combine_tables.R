@@ -2,9 +2,9 @@
 .combine_tables_effectsize <- function(parameters, effsize) {
 
   effsize_table <- attributes(effsize)$table
-  table <- merge(parameters, effsize_table, all = TRUE)
-  table <- table[order(
-    match(table$Parameter, parameters$Parameter)), ]
+  table <- merge(parameters, effsize_table, sort = FALSE, all = TRUE)
+  # table <- table[order(
+  #   match(table$Parameter, parameters$Parameter)), ]
   row.names(table) <- NULL
 
   # Prepare output
