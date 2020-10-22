@@ -71,6 +71,8 @@ print.report_performance <- function(x, ...) {
 #' @keywords internal
 .text_r2 <- function(x, info, performance, ...){
 
+  text <- ""
+
   # R2 linear models ----
   if ("R2" %in% names(performance) && info$is_linear) {
     r2 <- attributes(performance)$r2

@@ -367,7 +367,7 @@ report_performance.lm <- function(x, table=NULL, ...) {
     return(as.report_performance("", summary=""))
   }
 
-  out <- .text_r2(x, insight::model_info(x), performance)
+  out <- .text_r2(x, info=insight::model_info(x), performance)
   as.report_performance(out$text_full, summary=out$text)
 }
 
