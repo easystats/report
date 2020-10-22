@@ -69,6 +69,7 @@ Collate:
     'utils_combine_tables.R'
     'report.lm.R'
     'report.glm.R'
+    'report.glmmTMB.R'
     'report.lme4.R'
     'report.numeric.R'
     'report.sessionInfo.R'
