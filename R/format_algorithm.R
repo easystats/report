@@ -10,7 +10,7 @@
 #' @importFrom insight find_algorithm
 #' @export
 format_algorithm <- function(x) {
-  algorithm <- insight::find_algorithm(x)
+  algorithm <- suppressWarnings(insight::find_algorithm(x))
 
   text <- ""
 
