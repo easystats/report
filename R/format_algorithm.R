@@ -52,7 +52,7 @@ format_algorithm <- function(x) {
 
   # Optimizer
   if (!is.null(algorithm$optimizer)) {
-    optimizer <- algorithm$optimizer
+    optimizer <- algorithm$optimizer[1]
 
     if (optimizer == "bobyqa") {
       optimizer <- "BOBYQA"
