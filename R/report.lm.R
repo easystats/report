@@ -9,6 +9,7 @@
 #' @examples
 #' library(report)
 #'
+#' # Linear models
 #' model <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
 #' r <- report(model)
 #' r
@@ -16,12 +17,23 @@
 #' as.data.frame(r)
 #' summary(as.data.frame(r))
 #'
+#' # Logistic models
 #' model <- glm(vs ~ disp, data = mtcars, family = "binomial")
 #' r <- report(model)
 #' r
 #' summary(r)
 #' as.data.frame(r)
 #' summary(as.data.frame(r))
+#'
+#' # Mixed models
+#' if(require("lme4")){
+#'   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
+#'   r <- report(model)
+#'   r
+#'   summary(r)
+#'   as.data.frame(r)
+#'   summary(as.data.frame(r))
+#' }
 #' @export
 report.lm <- function(x, ...) {
   table <- report_table(x, ...)
@@ -136,7 +148,7 @@ report_table.lm <- function(x, include_effectsize=TRUE, ...) {
                          ...)
   attr(out, paste0(names(attributes(effsize)$ci))) <- attributes(effsize)$ci
   # Add attributes from params table
-  for(att in c("ci", "coefficient_name", "pretty_names", "bootstrap", "iterations")){
+  for(att in c("ci", "coefficient_name", "pretty_names", "bootstrap", "iterations", "df_method")){
     attr(out, att) <- attributes(params)[[att]]
   }
 
@@ -226,11 +238,13 @@ report_parameters.lm <- function(x, table=NULL, include_effectsize=TRUE, include
   # }
 
   if(isFALSE(include_intercept)){
-    text <- text[!params$Parameter == "(Intercept)"]
+    idx <- !params$Parameter == "(Intercept)"
+  } else{
+    idx <- rep(TRUE, nrow(params))
   }
 
-  text_full <- paste0(text, " (", stats, ")")
-  text <- paste0(text, " (", summary(stats), ")")
+  text_full <- paste0(text[idx], " (", stats[idx], ")")
+  text <- paste0(text[idx], " (", summary(stats)[idx], ")")
 
 
   as.report_parameters(text_full, summary=text, table=params, effectsize=effsize, ...)
@@ -327,8 +341,8 @@ report_model.lm <- function(x, table=NULL, ...) {
   # Random
   if(info$is_mixed){
     random_text <- report_random(x)
-    text_full <- paste0(text_full, " ", as.character(random_text))
-    text <- paste0(text, " ", summary(random_text))
+    text_full <- paste0(text_full, ". ", as.character(random_text))
+    text <- paste0(text, ". ", summary(random_text))
   }
 
   as.report_model(text_full, summary=text, ...)
@@ -378,15 +392,23 @@ report_info.lm <- function(x, effectsize=NULL, include_effectsize=FALSE, paramet
     text <- paste0(text, text_effsize)
   }
 
-  # if(!is.null(parameters)){
-  #   if (!is.null(attributes(parameters)$ci_method)) {
+  if (is.null(parameters)) {
+    parameters <- report_parameters(x, ...)
+  }
+  if(inherits(parameters, "report_parameters")) {
+    att <- attributes(attributes(parameters)$table)
+  } else {
+  att <- attributes(parameters)
+  }
+
+  if("df_method" %in% names(att)){
+    text <- paste0(text, " ", .text_df(ci=att$ci, df_method = att$df_method))
+  }
+
+  # if (!is.null(att$ci_method)) {
+  #   .text_ci(ci, ci_method = ci_method, df_method = df_method)
   # }
-  # if (!is.null(ci_method)) {
-  #   text_full <- paste0(
-  #     text_full,
-  #     .text_ci(ci, ci_method = ci_method, df_method = df_method)
-  #   )
-  # }
+
 
   as.report_info(text)
 }
@@ -400,7 +422,7 @@ report_text.lm <- function(x, table=NULL, ...) {
   params <- report_parameters(x, table=table, include_intercept=FALSE, ...)
   table <- attributes(params)$table
 
-  info <- report_info(x, effectsize=attributes(params)$effectsize, parameters=params, ...)
+  info <- report_info(x, effectsize=attributes(params)$effectsize, parameters=attributes(params)$table, ...)
   model <- report_model(x, table=table, ...)
   perf <- report_performance(x, table=table, ...)
   intercept <- report_intercept(x, table=table, ...)

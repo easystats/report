@@ -23,6 +23,12 @@
 #' report_info(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 #' report_info(lm(Sepal.Length ~ Petal.Length * Species, data = iris), include_effectsize=TRUE)
 #' report_info(glm(vs ~ disp, data = mtcars, family = "binomial"))
+#'
+#' # Mixed models
+#' if(require("lme4")){
+#'   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
+#'   report_info(model)
+#' }
 #' @export
 report_info <- function(x, ...) {
   UseMethod("report_info")
@@ -68,24 +74,44 @@ print.report_info <- function(x, ...) {
 
 # Utils -------------------------------------------------------------------
 
+#' @keywords internal
+.text_df <- function(ci, df_method = NULL) {
+  if(is.null(df_method)){
+    return("")
+  }
+
+  text <- paste0(insight::format_value(ci * 100, protect_integers = TRUE),
+                 "% Confidence Intervals (CIs) and p-values were computed using ")
+
+  if (df_method == "wald"){
+    text <- paste0(text, "the Wald approximation")
+  } else if (df_method == "kenward"){
+    text <- paste0(text, "the Kenward-Roger approximation")
+  }
+  text
+}
 
 #' @keywords internal
-# .text_ci <- function(ci, ci_method, df_method = NULL) {
-#   text <- ""
+# .text_ci <- function(ci, ci_method=NULL, df_method = NULL) {
+#
 #   # Frequentist --------------------------------
 #
 #   if (!is.null(df_method) && df_method == "wald" && !is.null(ci_method) && ci_method == "wald") {
-#     return(paste0(" The ", insight::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) and p-values were computed using Wald approximation."))
+#     if(is.null(ci_method) || ci_method == "wald"){
+#       return(paste0("The ", insight::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) and p-values were computed using the Wald approximation."))
+#     }
 #   }
 #
 #
 #   # CI
-#   if (ci_method == "wald") {
-#     text <- paste0(" The ", insight::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) were computed using Wald approximation")
-#   } else if (ci_method == "boot") {
-#     text <- paste0(" The ", insight::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) were obtained through bootstrapping")
-#   } else {
-#     text <- paste0(" The ", insight::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) were obtained through ", ci_method)
+#   if (!is.null(ci_method)) {
+#     if (ci_method == "wald") {
+#       text <- paste0("The ", insight::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) were computed using the Wald approximation")
+#     } else if (ci_method == "boot") {
+#       text <- paste0("The ", insight::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) were obtained through bootstrapping")
+#     } else {
+#       text <- paste0("The ", insight::format_value(ci * 100, protect_integers = TRUE), "%", " Confidence Intervals (CIs) were obtained through ", ci_method)
+#     }
 #   }
 #
 #
@@ -98,15 +124,17 @@ print.report_info <- function(x, ...) {
 #
 #
 #   # Bayesian --------------------------------
-#   if (tolower(ci_method) == "hdi") {
-#     text <- paste0(" The ", insight::format_value(ci * 100, protect_integers = TRUE), "%", " Credible Intervals (CIs) were based on Highest Density Intervals (HDI)")
+#   if (!is.null(ci_method)) {
+#     if (tolower(ci_method) == "hdi") {
+#       text <- paste0(" The ", insight::format_value(ci * 100, protect_integers = TRUE), "%", " Credible Intervals (CIs) were based on Highest Density Intervals (HDI)")
+#     }
+#
+#     if (tolower(ci_method) %in% c("eti", "quantile", "ci")) {
+#       text <- paste0(" The ", insight::format_value(ci * 100, protect_integers = TRUE), "%", " Credible Intervals (CIs) are Equal-Tailed Intervals (ETI) computed using quantiles")
+#     }
 #   }
 #
-#   if (tolower(ci_method) %in% c("eti", "quantile", "ci")) {
-#     text <- paste0(" The ", insight::format_value(ci * 100, protect_integers = TRUE), "%", " Credible Intervals (CIs) are Equal-Tailed Intervals (ETI) computed using quantiles")
-#   }
-#
-#   paste0(text, ".")
+#   text
 # }
 
 

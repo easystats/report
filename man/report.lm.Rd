@@ -22,6 +22,7 @@ Create a report of a (general) linear model (i.e., a regression fitted using \co
 \examples{
 library(report)
 
+# Linear models
 model <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
 r <- report(model)
 r
@@ -29,12 +30,23 @@ summary(r)
 as.data.frame(r)
 summary(as.data.frame(r))
 
+# Logistic models
 model <- glm(vs ~ disp, data = mtcars, family = "binomial")
 r <- report(model)
 r
 summary(r)
 as.data.frame(r)
 summary(as.data.frame(r))
+
+# Mixed models
+if(require("lme4")){
+  model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
+  r <- report(model)
+  r
+  summary(r)
+  as.data.frame(r)
+  summary(as.data.frame(r))
+}
 }
 \seealso{
 Aspects of reports:

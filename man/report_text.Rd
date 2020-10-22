@@ -46,4 +46,11 @@ summary(r)
 r <- report_text(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 r
 summary(r)
+
+if(require("lme4")){
+  model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
+  r <- report_text(model)
+  r
+  summary(r)
+}
 }
