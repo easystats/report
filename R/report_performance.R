@@ -72,6 +72,7 @@ print.report_performance <- function(x, ...) {
 .text_r2 <- function(x, info, performance, ...){
 
   text <- ""
+  text_full <- ""
 
   # R2 linear models ----
   if ("R2" %in% names(performance) && info$is_linear) {
