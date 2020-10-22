@@ -4,9 +4,9 @@
 #' \itemize{
 #'  \item{\link[=report.sessionInfo]{R environment and system} (\code{sessionInfo})}
 #'  \item{\link[=report.data.frame]{Dataframes and vectors}}
-#' % \item{\link[=report.htest]{Correlations and t-tests} (\code{htest})}
-#' % \item{\link[=report.aov]{ANOVAs}}
-#' % \item{\link[=report.default]{Regression models} (\code{glm, lm, ...})}
+#'  \item{\link[=report.htest]{Correlations and t-tests} (\code{htest})}
+#'  \item{\link[=report.aov]{ANOVAs}}
+#'  \item{\link[=report.default]{Regression models} (\code{glm, lm, ...})}
 #' % \item{\link[=report.lmerMod]{Mixed models} (\code{glmer, lmer, glmmTMB, ...})}
 #' % \item{\link[=report.stanreg]{Bayesian models} (\code{stanreg, brms...})}
 #' \item{\link[=report.bayesfactor_models]{Bayes factors} (from \code{bayestestR})}

@@ -112,7 +112,9 @@ report_table.lm <- function(x, include_effectsize=TRUE, ...) {
   # Add performance
   performance <- performance::model_performance(x, ...)
   params <- .combine_tables_performance(params, performance)
-  params <- params[!tolower(params$Parameter) %in% c("rmse", "logloss", "score_log", "score_spherical", "pcp"), ]
+  params <- params[!tolower(params$Parameter) %in% c("rmse", # lm
+                                                     "logloss", "score_log", "score_spherical", "pcp", # glm
+                                                     "icc"), ] # lmer
 
   # Clean -----
   # Rename some columns
@@ -319,19 +321,17 @@ report_model.lm <- function(x, table=NULL, ...) {
   }
 
   # Formula
-  text_full <- paste0(text_full, to_predict_text, " (", format_formula(x), ").")
-  text <- paste0(text, to_predict_text, ".")
+  text_full <- paste0(text_full, to_predict_text, " (", format_formula(x), ")")
+  text <- paste0(text, to_predict_text)
 
   # Random
-  if (!is.null(insight::find_terms(x)$random)) {
-    text_random <- format_text(insight::find_terms(x)$random)
-    text_random <- paste0(" The model included ", text_random, " as random effects")
-    text_random_full <- paste0(text_random, " (", format_formula(x, "random"), ").")
-    text <- paste0(text, text_random, ".")
-    text_full <- paste0(text_full, text_random_full)
+  if(info$is_mixed){
+    random_text <- report_random(x)
+    text_full <- paste0(text_full, " ", as.character(random_text))
+    text <- paste0(text, " ", summary(random_text))
   }
 
-  as.report_intercept(text_full, summary=text, ...)
+  as.report_model(text_full, summary=text, ...)
 }
 
 
@@ -357,10 +357,12 @@ report_performance.lm <- function(x, table=NULL, ...) {
   as.report_performance(out$text_full, summary=out$text)
 }
 
+
+
 # report_info ------------------------------------------------------------
 
 #' @export
-report_info.lm <- function(x, effectsize=NULL, include_effectsize=FALSE, ...) {
+report_info.lm <- function(x, effectsize=NULL, include_effectsize=FALSE, parameters=NULL, ...) {
   if (is.null(effectsize)) {
     effectsize <- report_effectsize(x, ...)
   }
@@ -376,6 +378,9 @@ report_info.lm <- function(x, effectsize=NULL, include_effectsize=FALSE, ...) {
     text <- paste0(text, text_effsize)
   }
 
+  # if(!is.null(parameters)){
+  #   if (!is.null(attributes(parameters)$ci_method)) {
+  # }
   # if (!is.null(ci_method)) {
   #   text_full <- paste0(
   #     text_full,
@@ -383,12 +388,6 @@ report_info.lm <- function(x, effectsize=NULL, include_effectsize=FALSE, ...) {
   #   )
   # }
 
-  # if (!is.null(interpretation)) {
-  #   text_full <- paste0(
-  #     text_full,
-  #     .text_effsize(interpretation)
-  #   )
-  # }
   as.report_info(text)
 }
 
@@ -401,7 +400,7 @@ report_text.lm <- function(x, table=NULL, ...) {
   params <- report_parameters(x, table=table, include_intercept=FALSE, ...)
   table <- attributes(params)$table
 
-  info <- report_info(x, effectsize=attributes(params)$effectsize, ...)
+  info <- report_info(x, effectsize=attributes(params)$effectsize, parameters=params, ...)
   model <- report_model(x, table=table, ...)
   perf <- report_performance(x, table=table, ...)
   intercept <- report_intercept(x, table=table, ...)
@@ -410,9 +409,9 @@ report_text.lm <- function(x, table=NULL, ...) {
   text_full <- paste0(
     "We fitted a ",
     model,
-    " ",
+    ". ",
     perf,
-    " ",
+    ". ",
     intercept,
     " Within this model:\n\n",
     as.character(params),
@@ -423,9 +422,9 @@ report_text.lm <- function(x, table=NULL, ...) {
   text <- paste0(
     "We fitted a ",
     summary(model),
-    " ",
+    ". ",
     summary(perf),
-    " ",
+    ". ",
     summary(intercept),
     " Within this model:\n\n",
     as.character(summary(params), ...)

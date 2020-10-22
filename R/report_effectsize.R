@@ -22,6 +22,12 @@
 #' # GLMs
 #' report_effectsize(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 #' report_effectsize(glm(vs ~ disp, data = mtcars, family = "binomial"))
+#'
+#' # Mixed models
+#' if(require("lme4")){
+#'   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
+#'   report_effectsize(model)
+#' }
 #' @export
 report_effectsize <- function(x, ...) {
   UseMethod("report_effectsize")

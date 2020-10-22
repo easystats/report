@@ -2,7 +2,7 @@
 % Please edit documentation in R/report_text.R, R/report.R,
 %   R/report_effectsize.R, R/report_info.R, R/report_intecept.R,
 %   R/report_model.R, R/report_parameters.R, R/report_performance.R,
-%   R/report_statistics.R, R/report_table.R
+%   R/report_random.R, R/report_statistics.R, R/report_table.R
 \name{as.report_text}
 \alias{as.report_text}
 \alias{as.report}
@@ -13,6 +13,7 @@
 \alias{as.report_model}
 \alias{as.report_parameters}
 \alias{as.report_performance}
+\alias{as.report_random}
 \alias{as.report_statistics}
 \alias{as.report_table}
 \title{Create or test objects of class \link{report}.}
@@ -34,6 +35,8 @@ as.report_model(x, summary = NULL, ...)
 as.report_parameters(x, summary = NULL, prefix = "  - ", ...)
 
 as.report_performance(x, summary = NULL, ...)
+
+as.report_random(x, summary = NULL, ...)
 
 as.report_statistics(x, summary = NULL, prefix = "  - ", ...)
 

@@ -16,9 +16,10 @@
 #' report_intercept(lm(Sepal.Length ~ Species, data = iris))
 #' report_intercept(glm(vs ~ disp, data = mtcars, family = "binomial"))
 #'
+#' # Mixed models
 #' if(require("lme4")){
-#'   # model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
-#'   # report_intercept(model)
+#'   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
+#'   report_intercept(model)
 #' }
 #' @export
 report_intercept <- function(x, ...) {
@@ -37,7 +38,7 @@ report_intercept.default <- function(x, ...) {
 #' @rdname as.report
 #' @export
 as.report_intercept <- function(x, summary = NULL, ...) {
-  class(x) <- unique(c("report_info", class(x)))
+  class(x) <- unique(c("report_intercept", class(x)))
   attributes(x) <- c(attributes(x), list(...))
 
   if (!is.null(summary)) {
@@ -78,7 +79,7 @@ print.report_intercept <- function(x, ...) {
   }
 
   terms <- insight::find_variables(model)$conditional
-  data <- insight::get_data(model)[terms %in% names(insight::get_data(model))]
+  data <- insight::get_data(model)[terms[terms %in% names(insight::get_data(model))]]
   text <- c()
   for (col in names(data)) {
     if (is.numeric(data[[col]])) {

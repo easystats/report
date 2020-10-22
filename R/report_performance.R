@@ -15,6 +15,12 @@
 #' # GLMs
 #' report_performance(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 #' report_performance(glm(vs ~ disp, data = mtcars, family = "binomial"))
+#'
+#' # Mixed models
+#' if(require("lme4")){
+#'   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
+#'   report_performance(model)
+#' }
 #' @export
 report_performance <- function(x, table = NULL, ...) {
   UseMethod("report_performance")
@@ -66,7 +72,7 @@ print.report_performance <- function(x, ...) {
 .text_r2 <- function(x, info, performance, ...){
 
   # R2 linear models ----
-  if ("R2" %in% names(performance) || info$is_linear) {
+  if ("R2" %in% names(performance) && info$is_linear) {
     r2 <- attributes(performance)$r2
 
     text <- paste0(
@@ -107,16 +113,15 @@ print.report_performance <- function(x, ...) {
       text <- paste0(
         text, ", adj. R2 = ",
         insight::format_value(performance$R2_adjusted),
-        ")."
+        ")"
       )
       text_full <- paste0(
         text_full, ", adj. R2 = ",
         insight::format_value(performance$R2_adjusted),
-        ")."
+        ")"
       )
     } else {
-      text <- paste0(text, ".")
-      text_full <- paste0(text_full, ").")
+      text_full <- paste0(text_full, ")")
     }
   }
 
@@ -127,7 +132,7 @@ print.report_performance <- function(x, ...) {
       effectsize::interpret_r2(performance$R2_Tjur, rules = "cohen1988"),
       " (Tjur's R2 = ",
       insight::format_value(performance$R2_Tjur),
-      ")."
+      ")"
     )
   }
 
@@ -138,7 +143,7 @@ print.report_performance <- function(x, ...) {
       effectsize::interpret_r2(performance$R2_Nagelkerke, rules = "cohen1988"),
       " (Nagelkerke's R2 = ",
       insight::format_value(performance$R2_Nagelkerke),
-      ")."
+      ")"
     )
   }
 
@@ -149,7 +154,7 @@ print.report_performance <- function(x, ...) {
       effectsize::interpret_r2(performance$R2_CoxSnell, rules = "cohen1988"),
       " (R2_CoxSnell's R2 = ",
       insight::format_value(performance$R2_CoxSnell),
-      ")."
+      ")"
     )
   }
 
@@ -160,7 +165,36 @@ print.report_performance <- function(x, ...) {
       effectsize::interpret_r2(performance$R2_McFadden, rules = "cohen1988"),
       " (McFadden's R2 = ",
       insight::format_value(performance$R2_McFadden),
-      ")."
+      ")"
+    )
+  }
+
+  # R2 Conditional
+  if ("R2_conditional" %in% names(performance) && !is.na(performance$R2_conditional)) {
+    text <- paste0(
+      "The model's total explanatory power is ",
+      effectsize::interpret_r2(performance$R2_conditional, rules = "cohen1988"),
+      " (conditional R2 = ",
+      insight::format_value(performance$R2_conditional),
+      ")"
+    )
+  }
+
+  # R2 marginal
+  if ("R2_marginal" %in% names(performance)) {
+    if (text == "") {
+      text <- "The model's explanatory power"
+      of <- ""
+    } else {
+      text <- paste0(text, " and the part")
+      of <- "of "
+    }
+    text <- text_full <- paste0(
+      text,
+      " related to the",
+      " fixed effects alone (marginal R2) is ",
+      of,
+      insight::format_value(performance$R2_marginal)
     )
   }
 

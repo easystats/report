@@ -22,6 +22,12 @@
 #' # GLMs
 #' report_model(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 #' report_model(glm(vs ~ disp, data = mtcars, family = "binomial"))
+#'
+#' # Mixed models
+#' if(require("lme4")){
+#'   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
+#'   report_model(model)
+#' }
 #' @export
 report_model <- function(x, table = NULL, ...) {
   UseMethod("report_model")

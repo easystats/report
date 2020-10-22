@@ -25,4 +25,10 @@ library(report)
 # GLMs
 report_performance(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 report_performance(glm(vs ~ disp, data = mtcars, family = "binomial"))
+
+# Mixed models
+if(require("lme4")){
+  model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
+  report_performance(model)
+}
 }
