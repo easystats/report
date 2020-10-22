@@ -50,7 +50,7 @@ as.report_performance <- function(x, summary = NULL, ...) {
 
 #' @export
 summary.report_performance <- function(object, ...) {
-  if(is.null(attributes(object)$summary)){
+  if (is.null(attributes(object)$summary)) {
     object
   } else{
     attributes(object)$summary
