@@ -36,15 +36,15 @@ if (require("testthat") && require("report")) {
 
     testthat::expect_equal(
       as.character(report_intercept(m1)),
-      "The model's intercept, corresponding to y = 0 and f = 3, is at 0.07 (95% CI [-0.57, 0.71], t(27) = 0.23, p = 0.819)."
+      "The model's intercept, corresponding to f = 3, is at 0.07 (95% CI [-0.57, 0.71], t(27) = 0.23, p = 0.819)."
     )
     testthat::expect_equal(
       as.character(report_intercept(m2)),
-      "The model's intercept, corresponding to y = 0 and f = 3, is at 0.07 (95% CI [-0.57, 0.71], t(27) = 0.23, p = 0.819)."
+      "The model's intercept, corresponding to f = 3, is at 0.07 (95% CI [-0.57, 0.71], t(27) = 0.23, p = 0.819)."
     )
     testthat::expect_equal(
       as.character(report_intercept(m3)),
-      "The model's intercept, corresponding to y = 0 and f = 1, is at 0.17 (95% CI [-0.47, 0.81], t(27) = 0.55, p = 0.584)."
+      "The model's intercept, corresponding to f = 1, is at 0.17 (95% CI [-0.47, 0.81], t(27) = 0.55, p = 0.584)."
     )
 
   })
