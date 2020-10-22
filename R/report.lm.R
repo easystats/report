@@ -267,7 +267,11 @@ report_intercept.lm <- function(x, table = NULL, ...) {
     table <- report_table(x, ...)
   }
 
-  idx <- !is.na(table$Parameter) & table$Parameter == "(Intercept)"
+  if (insight::model_info(x)$is_zero_inflated && "Component" %in% colnames(table)) {
+    idx <- !is.na(table$Parameter) & table$Parameter == "(Intercept)" & table$Component == "conditional"
+  } else {
+    idx <- !is.na(table$Parameter) & table$Parameter == "(Intercept)"
+  }
   intercept <- table[idx, ]
 
   estimate <- .find_regression_estimate(table)
