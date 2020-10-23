@@ -1,27 +1,27 @@
 #' @include report.lm.R
 #' @export
-report.lmerMod <- report.lm
+report.merMod <- report.lm
 
 #' @export
-report_effectsize.lmerMod <- report_effectsize.lm
+report_effectsize.merMod <- report_effectsize.lm
 
 #' @export
-report_table.lmerMod <- report_table.lm
+report_table.merMod <- report_table.lm
 
 #' @export
-report_performance.lmerMod <- report_performance.lm
+report_performance.merMod <- report_performance.lm
 
 #' @export
-report_statistics.lmerMod <- report_statistics.lm
+report_statistics.merMod <- report_statistics.lm
 
 #' @export
-report_parameters.lmerMod <- report_parameters.lm
+report_parameters.merMod <- report_parameters.lm
 
 #' @export
-report_intercept.lmerMod <- report_intercept.lm
+report_intercept.merMod <- report_intercept.lm
 
 #' @export
-report_random.lmerMod <- function(x, ...) {
+report_random.merMod <- function(x, ...) {
   random_terms <- insight::find_terms(x)$random
   if (!is.null(random_terms)) {
     text <- format_text(random_terms)
@@ -35,10 +35,10 @@ report_random.lmerMod <- function(x, ...) {
 
 
 #' @export
-report_model.lmerMod <- report_model.lm
+report_model.merMod <- report_model.lm
 
 #' @export
-report_info.lmerMod <- report_info.lm
+report_info.merMod <- report_info.lm
 
 #' @export
-report_text.lmerMod <- report_text.lm
+report_text.merMod <- report_text.lm
