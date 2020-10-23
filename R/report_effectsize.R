@@ -135,7 +135,7 @@ print.report_effectsize <- function(x, ...) {
       text <- "SD "
     }
     text <- paste0("Standardized parameters were obtained by standardizing the data by 2 times the ", text, " (see Gelman, 2008).")
-  } else if (method == "smart" | method == "basic") {
+  } else if (method %in% c("smart", "basic", "posthoc")) {
     if (robust == TRUE) {
       text <- "median and the MAD (a median-based equivalent of the SD) of the response variable."
     } else {
@@ -143,7 +143,7 @@ print.report_effectsize <- function(x, ...) {
     }
     text <- paste0("Parameters were scaled by the ", text)
   } else {
-    text <- paste0("Parameters were standardized using the ", text, " method.")
+    text <- paste0("Parameters were standardized using the ", method, " method.")
   }
 
   text
