@@ -71,20 +71,17 @@ model <- t.test(mpg ~ am, data = mtcars)
 # as.list(r)
 }
 \seealso{
-Aspects of reports:
+Aspects of reports (especially for stats models):
 \itemize{
   \item \code{\link{report_table}}
   \item \code{\link{report_parameters}}
   \item \code{\link{report_statistics}}
   \item \code{\link{report_effectsize}}
   \item \code{\link{report_model}}
+  \item \code{\link{report_random}}
   \item \code{\link{report_performance}}
   \item \code{\link{report_info}}
   \item \code{\link{report_text}}
-}
-Methods:
-\itemize{
-  \item \code{\link{as.report}}
 }
 Specific reports:
 \itemize{
@@ -92,5 +89,9 @@ Specific reports:
   \item \code{\link{report_packages}}
   \item \code{\link{report_participants}}
   \item \code{\link{report_sample}}
+}
+Methods:
+\itemize{
+  \item \code{\link{as.report}}
 }
 }

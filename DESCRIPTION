@@ -74,6 +74,7 @@ Collate:
     'report.lme4.R'
     'report.numeric.R'
     'report.sessionInfo.R'
+    'report.stanreg.R'
     'report.survreg.R'
     'report.zeroinfl.R'
     'report_effectsize.R'

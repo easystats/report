@@ -28,6 +28,12 @@
 #'   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 #'   report_effectsize(model)
 #' }
+#'
+#' # Bayesian models
+#' if(require("rstanarm")){
+#'   model <- rstanarm::stan_lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris, refresh=0, iter=600)
+#'   report_effectsize(model, method="basic")
+#' }
 #' @export
 report_effectsize <- function(x, ...) {
   UseMethod("report_effectsize")
@@ -129,15 +135,15 @@ print.report_effectsize <- function(x, ...) {
       text <- "SD "
     }
     text <- paste0("Standardized parameters were obtained by standardizing the data by 2 times the ", text, " (see Gelman, 2008).")
-  } else if (method == "smart" | method == "classic") {
+  } else if (method == "smart" | method == "basic") {
     if (robust == TRUE) {
       text <- "median and the MAD (a median-based equivalent of the SD) of the response variable."
     } else {
       text <- "mean and the SD of the response variable."
     }
-    text <- paste0(" Parameters were scaled by the ", text)
+    text <- paste0("Parameters were scaled by the ", text)
   } else {
-    text <- paste0(" Parameters were standardized using the ", text, " method.")
+    text <- paste0("Parameters were standardized using the ", text, " method.")
   }
 
   text
