@@ -6,6 +6,8 @@
 #' @param include_effectsize Include effect size information.
 #' @param effectsize_method See documentation for \code{\link[effectsize:effectsize]{effectsize::effectsize()}}.
 #' @inheritParams report
+#' @inheritParams report.htest
+#'
 #' @inherit report return seealso
 #'
 #' @examples

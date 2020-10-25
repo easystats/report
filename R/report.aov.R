@@ -4,6 +4,7 @@
 #'
 #' @param x Object of class \code{aov}, \code{anova} or \code{aovlist}.
 #' @inheritParams report
+#' @inheritParams report.htest
 #' @inherit report return seealso
 #'
 #' @examples
@@ -32,7 +33,7 @@ report.aovlist <- report.aov
 # report_effectsize -------------------------------------------------------
 
 
-
+#' @rdname report.aov
 #' @importFrom effectsize effectsize interpret_eta_squared is_effectsize_name
 #' @importFrom parameters model_parameters
 #' @importFrom insight model_info
@@ -103,7 +104,7 @@ report_effectsize.aovlist <- report_effectsize.aov
 # report_table ------------------------------------------------------------
 
 
-
+#' @rdname report.aov
 #' @importFrom parameters model_parameters
 #' @importFrom insight model_info
 #' @export
@@ -146,7 +147,7 @@ report_table.aovlist <- report_table.aov
 # report_statistics ------------------------------------------------------------
 
 
-
+#' @rdname report.aov
 #' @export
 report_statistics.aov <- function(x, table=NULL, ...) {
   if (is.null(table) | is.null(attributes(table)$effsize)) {
@@ -210,7 +211,7 @@ report_statistics.aovlist <- report_statistics.aov
 # report_parameters ------------------------------------------------------------
 
 
-
+#' @rdname report.aov
 #' @export
 report_parameters.aov <- function(x, ...) {
 
@@ -249,6 +250,7 @@ report_parameters.aovlist <- report_parameters.aov
 
 # report_model ------------------------------------------------------------
 
+#' @rdname report.aov
 #' @export
 report_model.aov <- function(x, table=NULL, ...) {
   if (is.null(table)) {
@@ -283,6 +285,7 @@ report_model.aovlist <- report_model.aov
 
 # report_info ------------------------------------------------------------
 
+#' @rdname report.aov
 #' @include report.htest.R
 #' @export
 report_info.aov <- report_info.htest
@@ -297,6 +300,7 @@ report_info.aovlist <- report_info.aov
 
 # report_text ------------------------------------------------------------
 
+#' @rdname report.aov
 #' @export
 report_text.aov <- function(x, table=NULL, ...) {
 

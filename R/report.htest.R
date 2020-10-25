@@ -3,7 +3,10 @@
 #' Create a report of an h-test object (\code{t.test()}, \code{cor.test()}).
 #'
 #' @param x Object of class htest.
+#' @param table A table obtained via \code{report_table()} to avoid its re-computation.
+#' @param effectsize Effect size data obtained via \code{report_effectsize()} to avoid its re-computation.
 #' @inheritParams report
+#'
 #' @inherit report return seealso
 #'
 #' @examples
@@ -29,7 +32,7 @@ report.htest <- function(x, ...) {
 # report_effectsize -------------------------------------------------------
 
 
-
+#' @rdname report.htest
 #' @importFrom effectsize effectsize interpret_r interpret_d
 #' @importFrom parameters model_parameters
 #' @importFrom insight model_info
@@ -89,7 +92,7 @@ report_effectsize.htest <- function(x, ...) {
 # report_table ------------------------------------------------------------
 
 
-
+#' @rdname report.htest
 #' @importFrom parameters model_parameters
 #' @importFrom insight model_info
 #' @export
@@ -112,7 +115,7 @@ report_table.htest <- function(x, ...) {
 # report_statistics ------------------------------------------------------------
 
 
-
+#' @rdname report.htest
 #' @export
 report_statistics.htest <- function(x, table=NULL, ...) {
   if (is.null(table) | is.null(attributes(table)$effsize)) {
@@ -161,7 +164,7 @@ report_statistics.htest <- function(x, table=NULL, ...) {
 # report_statistics ------------------------------------------------------------
 
 
-
+#' @rdname report.htest
 #' @export
 report_parameters.htest <- function(x, table=NULL, ...) {
 
@@ -213,6 +216,7 @@ report_parameters.htest <- function(x, table=NULL, ...) {
 
 # report_model ------------------------------------------------------------
 
+#' @rdname report.htest
 #' @export
 report_model.htest <- function(x, table=NULL, ...) {
   if (is.null(table)) {
@@ -263,6 +267,7 @@ report_model.htest <- function(x, table=NULL, ...) {
 
 # report_info ------------------------------------------------------------
 
+#' @rdname report.htest
 #' @export
 report_info.htest <- function(x, effectsize=NULL, ...) {
   if (is.null(effectsize)) {
@@ -275,6 +280,7 @@ report_info.htest <- function(x, effectsize=NULL, ...) {
 
 # report_text ------------------------------------------------------------
 
+#' @rdname report.htest
 #' @export
 report_text.htest <- function(x, table=NULL, ...) {
 

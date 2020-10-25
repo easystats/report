@@ -19,10 +19,10 @@ and long table of parameters and fit indices.
 \description{
 Create reports of different objects. See the documentation for your object's class:
 \itemize{
- \item{\link[=report.sessionInfo]{R environment and system} (\code{sessionInfo})}
+ \item{\link[=report.sessionInfo]{R environment, system and packages} (\code{sessionInfo})}
  \item{\link[=report.data.frame]{Dataframes and vectors}}
  \item{\link[=report.htest]{Correlations and t-tests} (\code{htest})}
- \item{\link[=report.aov]{ANOVAs}}
+ \item{\link[=report.aov]{ANOVAs} (\code{aov, anova, aovlist, ...})}
  \item{\link[=report.lm]{Regression models} (\code{glm, lm, ...})}
 % \item{\link[=report.lmerMod]{Mixed models} (\code{glmer, lmer, glmmTMB, ...})}
 % \item{\link[=report.stanreg]{Bayesian models} (\code{stanreg, brms...})}
@@ -38,7 +38,7 @@ steps are accessible (depending on the object) via specific functions (e.g.,
 \code{report_parameters}).
 }
 
-\subsection{Change output type}{
+\subsection{Output}{
 
 The \code{report()} function generates a report-object that contain in itself
 different representations (e.g., text, tables, plots). These different representations
@@ -71,7 +71,7 @@ model <- t.test(mpg ~ am, data = mtcars)
 # as.list(r)
 }
 \seealso{
-Aspects of reports (especially for stats models):
+Specific components of reports (especially for stats models):
 \itemize{
   \item \code{\link{report_table}}
   \item \code{\link{report_parameters}}
@@ -83,7 +83,7 @@ Aspects of reports (especially for stats models):
   \item \code{\link{report_info}}
   \item \code{\link{report_text}}
 }
-Specific reports:
+Other types of reports:
 \itemize{
   \item \code{\link{report_system}}
   \item \code{\link{report_packages}}

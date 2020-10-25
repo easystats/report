@@ -2,14 +2,39 @@
 % Please edit documentation in R/report.aov.R
 \name{report.aov}
 \alias{report.aov}
+\alias{report_effectsize.aov}
+\alias{report_table.aov}
+\alias{report_statistics.aov}
+\alias{report_parameters.aov}
+\alias{report_model.aov}
+\alias{report_info.aov}
+\alias{report_text.aov}
 \title{ANOVAs Report}
 \usage{
 \method{report}{aov}(x, ...)
+
+\method{report_effectsize}{aov}(x, ...)
+
+\method{report_table}{aov}(x, ...)
+
+\method{report_statistics}{aov}(x, table = NULL, ...)
+
+\method{report_parameters}{aov}(x, ...)
+
+\method{report_model}{aov}(x, table = NULL, ...)
+
+\method{report_info}{aov}(x, effectsize = NULL, ...)
+
+\method{report_text}{aov}(x, table = NULL, ...)
 }
 \arguments{
 \item{x}{Object of class \code{aov}, \code{anova} or \code{aovlist}.}
 
 \item{...}{Arguments passed to or from other methods.}
+
+\item{table}{A table obtained via \code{report_table()} to avoid its re-computation.}
+
+\item{effectsize}{Effect size data obtained via \code{report_effectsize()} to avoid its re-computation.}
 }
 \value{
 A list-object of class \code{report}, which contains further list-objects
@@ -31,7 +56,7 @@ as.data.frame(r)
 summary(as.data.frame(r))
 }
 \seealso{
-Aspects of reports (especially for stats models):
+Specific components of reports (especially for stats models):
 \itemize{
   \item \code{\link{report_table}}
   \item \code{\link{report_parameters}}
@@ -43,7 +68,7 @@ Aspects of reports (especially for stats models):
   \item \code{\link{report_info}}
   \item \code{\link{report_text}}
 }
-Specific reports:
+Other types of reports:
 \itemize{
   \item \code{\link{report_system}}
   \item \code{\link{report_packages}}

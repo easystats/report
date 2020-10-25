@@ -2,14 +2,39 @@
 % Please edit documentation in R/report.htest.R
 \name{report.htest}
 \alias{report.htest}
+\alias{report_effectsize.htest}
+\alias{report_table.htest}
+\alias{report_statistics.htest}
+\alias{report_parameters.htest}
+\alias{report_model.htest}
+\alias{report_info.htest}
+\alias{report_text.htest}
 \title{Report of h-tests (Correlation, t-test...)}
 \usage{
 \method{report}{htest}(x, ...)
+
+\method{report_effectsize}{htest}(x, ...)
+
+\method{report_table}{htest}(x, ...)
+
+\method{report_statistics}{htest}(x, table = NULL, ...)
+
+\method{report_parameters}{htest}(x, table = NULL, ...)
+
+\method{report_model}{htest}(x, table = NULL, ...)
+
+\method{report_info}{htest}(x, effectsize = NULL, ...)
+
+\method{report_text}{htest}(x, table = NULL, ...)
 }
 \arguments{
 \item{x}{Object of class htest.}
 
 \item{...}{Arguments passed to or from other methods.}
+
+\item{table}{A table obtained via \code{report_table()} to avoid its re-computation.}
+
+\item{effectsize}{Effect size data obtained via \code{report_effectsize()} to avoid its re-computation.}
 }
 \value{
 A list-object of class \code{report}, which contains further list-objects
@@ -28,7 +53,7 @@ report(t.test(mtcars$mpg ~ mtcars$vs))
 report(t.test(iris$Sepal.Width, mu = 1))
 }
 \seealso{
-Aspects of reports (especially for stats models):
+Specific components of reports (especially for stats models):
 \itemize{
   \item \code{\link{report_table}}
   \item \code{\link{report_parameters}}
@@ -40,7 +65,7 @@ Aspects of reports (especially for stats models):
   \item \code{\link{report_info}}
   \item \code{\link{report_text}}
 }
-Specific reports:
+Other types of reports:
 \itemize{
   \item \code{\link{report_system}}
   \item \code{\link{report_packages}}

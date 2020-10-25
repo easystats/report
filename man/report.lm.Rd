@@ -53,7 +53,7 @@ if(require("lme4")){
 }
 }
 \seealso{
-Aspects of reports (especially for stats models):
+Specific components of reports (especially for stats models):
 \itemize{
   \item \code{\link{report_table}}
   \item \code{\link{report_parameters}}
@@ -65,7 +65,7 @@ Aspects of reports (especially for stats models):
   \item \code{\link{report_info}}
   \item \code{\link{report_text}}
 }
-Specific reports:
+Other types of reports:
 \itemize{
   \item \code{\link{report_system}}
   \item \code{\link{report_packages}}
