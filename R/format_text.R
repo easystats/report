@@ -71,7 +71,7 @@ text_concatenate <- function(text, sep = ", ", last = " and ") {
 #' @export
 text_paste <- function(text, text2=NULL, sep = ", ", ...) {
   if(!is.null(text2)){
-    paste0(text, ifelse(text == "", "", sep), text2)
+    paste0(text, ifelse(text == "" | text2 == "", "", sep), text2)
   }
 }
 

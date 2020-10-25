@@ -32,9 +32,9 @@
 
 \item{...}{Arguments passed to or from other methods.}
 
-\item{table}{A table obtained via \code{report_table()} to avoid its re-computation.}
+\item{table}{Provide the output of  \code{report_table()} to avoid its re-computation.}
 
-\item{effectsize}{Effect size data obtained via \code{report_effectsize()} to avoid its re-computation.}
+\item{effectsize}{Provide the output of \code{report_effectsize()} to avoid its re-computation.}
 }
 \value{
 A list-object of class \code{report}, which contains further list-objects

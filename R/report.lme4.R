@@ -20,6 +20,7 @@ report_parameters.merMod <- report_parameters.lm
 #' @export
 report_intercept.merMod <- report_intercept.lm
 
+#' @rdname report.lm
 #' @export
 report_random.merMod <- function(x, ...) {
   random_terms <- insight::find_terms(x)$random

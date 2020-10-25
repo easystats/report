@@ -21,6 +21,12 @@
 #'   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 #'   report_performance(model)
 #' }
+#'
+#' # Bayesian models
+#' if(require("rstanarm")){
+#'   model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh=0, iter=600)
+#'   report_performance(model)
+#' }
 #' @export
 report_performance <- function(x, table = NULL, ...) {
   UseMethod("report_performance")

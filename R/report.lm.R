@@ -3,8 +3,11 @@
 #' Create a report of a (general) linear model (i.e., a regression fitted using \code{lm()} or \code{glm()}.
 #'
 #' @param x Object of class \code{lm} or \code{glm}.
-#' @param include_effectsize Include effect size information.
+#' @param include_effectsize If \code{FALSE}, won't include effect-size related indices (standardized coefficients, etc.).
+#' @param include_diagnostic If \code{FALSE}, won't include diagnostic related indices for Bayesian models (ESS, Rhat).
+#' @param include_intercept If \code{FALSE}, won't include the intercept.
 #' @param effectsize_method See documentation for \code{\link[effectsize:effectsize]{effectsize::effectsize()}}.
+#' @param parameters Provide the output of \code{report_parameters()} to avoid its re-computation.
 #' @inheritParams report
 #' @inheritParams report.htest
 #'
@@ -55,7 +58,7 @@ report.lm <- function(x, include_effectsize = TRUE, effectsize_method="refit", .
 
 # report_effectsize -------------------------------------------------------
 
-
+#' @rdname report.lm
 #' @importFrom effectsize effectsize is_effectsize_name interpret_d interpret_oddsratio
 #' @importFrom parameters model_parameters
 #' @importFrom insight model_info
@@ -117,7 +120,7 @@ report_effectsize.lm <- function(x, effectsize_method="refit", ...) {
 # report_table ------------------------------------------------------------
 
 
-
+#' @rdname report.lm
 #' @importFrom parameters model_parameters
 #' @importFrom insight model_info
 #' @include utils_combine_tables.R
@@ -140,7 +143,8 @@ report_table.lm <- function(x, include_effectsize = TRUE, ...) {
   params <- .combine_tables_performance(params, performance)
   params <- params[!tolower(params$Parameter) %in% c("rmse", # lm
                                                      "logloss", "score_log", "score_spherical", "pcp", # glm
-                                                     "icc"), ] # lmer
+                                                     "icc",  # lmer
+                                                     "elpd_se", "looic_se"), ] # stanreg
 
   # Clean -----
   # Rename some columns
@@ -152,7 +156,8 @@ report_table.lm <- function(x, include_effectsize = TRUE, ...) {
   }
   table_full <- data_remove(params, "SE")
   table <- data_remove(table_full, data_findcols(table_full, ends_with = c("_CI_low|_CI_high")))
-  table <- table[!table$Parameter %in% c("AIC", "BIC"), ]
+  table <- table[!table$Parameter %in% c("AIC", "BIC",
+                                         "ELPD", "LOOIC", "WAIC"), ]
 
   # Prepare -----
   out <- as.report_table(table_full,
@@ -172,10 +177,9 @@ report_table.lm <- function(x, include_effectsize = TRUE, ...) {
 
 # report_statistics ------------------------------------------------------------
 
-#' @rdname report_statistics
-#' @param include_effectsize If \code{FALSE}, won't include effect-size related parameters (standardized coefficients, etc.)
+#' @rdname report.lm
 #' @export
-report_statistics.lm <- function(x, table = NULL, include_effectsize = TRUE,  ...) {
+report_statistics.lm <- function(x, table = NULL, include_effectsize = TRUE, include_diagnostic=TRUE, ...) {
   if (is.null(table)) {
     table <- report_table(x, ...)
   }
@@ -187,7 +191,9 @@ report_statistics.lm <- function(x, table = NULL, include_effectsize = TRUE,  ..
   if (is.na(estimate) | is.null(estimate) | !estimate %in% names(table)) {
     text <- ""
   } else if (estimate == "Coefficient") {
-    text <- paste0("beta = ", insight::format_value(table$Coefficient))
+    text <- paste0("beta = ", insight::format_value(table[[estimate]]))
+  } else{
+    text <- paste0(estimate, " = ", insight::format_value(table[[estimate]]))
   }
 
   # CI
@@ -205,12 +211,40 @@ report_statistics.lm <- function(x, table = NULL, include_effectsize = TRUE,  ..
     text <- text_paste(text, insight::format_p(table$p, stars = FALSE, digits = "apa"))
   }
 
+  # pd
+  if ("pd" %in% names(table)) {
+    text <- text_paste(text, insight::format_pd(table$pd, stars = FALSE))
+  }
+
+  # BF
+  if ("ROPE_Percentage" %in% names(table)) {
+    text <- text_paste(text, insight::format_rope(table$ROPE_Percentage))
+  }
+
+  # BF
+  if ("BF" %in% names(table)) {
+    text <- text_paste(text, insight::format_bf(table$BF, stars = FALSE))
+  }
+
   # Effect size
   if (include_effectsize && !is.null(effsize)) {
     text_full <- text_paste(text, attributes(effsize)$statistics, sep = "; ")
     text <- text_paste(text, attributes(effsize)$main)
   } else {
     text_full <- text
+  }
+
+  # Quality / Diagnostic
+  if (include_diagnostic) {
+    text_diagnostic <- ""
+    if ("Rhat" %in% names(table)) {
+      text_diagnostic <- paste0("Rhat = ", insight::format_value(table$Rhat))
+    }
+    text <- text_paste(text, text_diagnostic)
+    if ("ESS" %in% names(table)) {
+      text_diagnostic <- text_paste(text_diagnostic, paste0("ESS = ", insight::format_value(table$ESS)))
+    }
+    text_full <- text_paste(text_full, text_diagnostic, sep = "; ")
   }
 
   as.report_statistics(text_full,
@@ -224,7 +258,7 @@ report_statistics.lm <- function(x, table = NULL, include_effectsize = TRUE,  ..
 
 # report_statistics ------------------------------------------------------------
 
-
+#' @rdname report.lm
 #' @inheritParams report_statistics
 #' @export
 report_parameters.lm <- function(x, table = NULL, include_effectsize = TRUE, include_intercept = TRUE, ...) {
@@ -266,7 +300,7 @@ report_parameters.lm <- function(x, table = NULL, include_effectsize = TRUE, inc
 
 
 # report_intercept ------------------------------------------------------------
-
+#' @rdname report.lm
 #' @export
 report_intercept.lm <- function(x, table = NULL, ...) {
   if (is.null(table)) {
@@ -310,6 +344,7 @@ report_intercept.lm <- function(x, table = NULL, ...) {
 
 # report_model ------------------------------------------------------------
 
+#' @rdname report.lm
 #' @export
 report_model.lm <- function(x, table=NULL, ...) {
 
@@ -372,6 +407,7 @@ report_model.lm <- function(x, table=NULL, ...) {
 
 # report_info ------------------------------------------------------------
 
+#' @rdname report.lm
 #' @export
 report_performance.lm <- function(x, table=NULL, ...) {
   if (!is.null(table) | is.null(attributes(table)$performance)) {
@@ -393,6 +429,7 @@ report_performance.lm <- function(x, table=NULL, ...) {
 
 # report_info ------------------------------------------------------------
 
+#' @rdname report.lm
 #' @export
 report_info.lm <- function(x, effectsize=NULL, include_effectsize=FALSE, parameters=NULL, ...) {
   if (is.null(effectsize)) {
@@ -435,6 +472,7 @@ report_info.lm <- function(x, effectsize=NULL, include_effectsize=FALSE, paramet
 
 # report_text ------------------------------------------------------------
 
+#' @rdname report.lm
 #' @export
 report_text.lm <- function(x, table = NULL, ...) {
   params <- report_parameters(x, table = table, include_intercept = FALSE, ...)

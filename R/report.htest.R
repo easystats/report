@@ -3,8 +3,8 @@
 #' Create a report of an h-test object (\code{t.test()}, \code{cor.test()}).
 #'
 #' @param x Object of class htest.
-#' @param table A table obtained via \code{report_table()} to avoid its re-computation.
-#' @param effectsize Effect size data obtained via \code{report_effectsize()} to avoid its re-computation.
+#' @param table Provide the output of  \code{report_table()} to avoid its re-computation.
+#' @param effectsize Provide the output of \code{report_effectsize()} to avoid its re-computation.
 #' @inheritParams report
 #'
 #' @inherit report return seealso
