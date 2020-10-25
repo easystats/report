@@ -31,8 +31,8 @@
 #'
 #' # Bayesian models
 #' if(require("rstanarm")){
-#'   model <- rstanarm::stan_lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris, refresh=0, iter=600)
-#'   report_effectsize(model, method="basic")
+#'   model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh=0, iter=600)
+#'   report_effectsize(model, effectsize_method="basic")
 #' }
 #' @export
 report_effectsize <- function(x, ...) {

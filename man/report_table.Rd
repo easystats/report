@@ -47,4 +47,10 @@ if(require("lme4")){
   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
   report_table(model)
 }
+
+# Bayesian models
+if(require("rstanarm")){
+  model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh=0, iter=600)
+  report_table(model, effectsize_method="basic")
+}
 }

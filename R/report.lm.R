@@ -3,6 +3,8 @@
 #' Create a report of a (general) linear model (i.e., a regression fitted using \code{lm()} or \code{glm()}.
 #'
 #' @param x Object of class \code{lm} or \code{glm}.
+#' @param include_effectsize Include effect size information.
+#' @param effectsize_method See documentation for \code{\link[effectsize:effectsize]{effectsize::effectsize()}}.
 #' @inheritParams report
 #' @inherit report return seealso
 #'
@@ -35,9 +37,12 @@
 #'   summary(as.data.frame(r))
 #' }
 #' @export
-report.lm <- function(x, ...) {
-  table <- report_table(x, ...)
-  text <- report_text(x, table = table, ...)
+report.lm <- function(x, include_effectsize = TRUE, effectsize_method="refit", ...) {
+  table <- report_table(x,
+                        include_effectsize=include_effectsize,
+                        effectsize_method=effectsize_method, ...)
+  text <- report_text(x,
+                      table = table, ...)
 
   as.report(text, table = table, ...)
 }
@@ -49,13 +54,12 @@ report.lm <- function(x, ...) {
 # report_effectsize -------------------------------------------------------
 
 
-
 #' @importFrom effectsize effectsize is_effectsize_name interpret_d interpret_oddsratio
 #' @importFrom parameters model_parameters
 #' @importFrom insight model_info
 #' @export
-report_effectsize.lm <- function(x, ...) {
-  table <- effectsize::effectsize(x, ...)
+report_effectsize.lm <- function(x, effectsize_method="refit", ...) {
+  table <- effectsize::effectsize(x, method=effectsize_method, ...)
   method <- .text_standardize(table)
   estimate <- names(table)[effectsize::is_effectsize_name(names(table))]
 

@@ -4,10 +4,14 @@
 \alias{report.lm}
 \title{(General) Linear Models Report}
 \usage{
-\method{report}{lm}(x, ...)
+\method{report}{lm}(x, include_effectsize = TRUE, effectsize_method = "refit", ...)
 }
 \arguments{
 \item{x}{Object of class \code{lm} or \code{glm}.}
+
+\item{include_effectsize}{Include effect size information.}
+
+\item{effectsize_method}{See documentation for \code{\link[effectsize:effectsize]{effectsize::effectsize()}}.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
