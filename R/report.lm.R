@@ -263,6 +263,7 @@ report_statistics.lm <- function(x, table = NULL, include_effectsize = TRUE, inc
 #' @export
 report_parameters.lm <- function(x, table = NULL, include_effectsize = TRUE, include_intercept = TRUE, ...) {
 
+  # Get data
   stats <- report_statistics(x, table = table, include_effectsize = include_effectsize, ...)
   params <- attributes(stats)$table
   effsize <- attributes(stats)$effsize
@@ -271,6 +272,8 @@ report_parameters.lm <- function(x, table = NULL, include_effectsize = TRUE, inc
   text <- sapply(attributes(params)$pretty_names[params$Parameter],
                  .format_parameters_regression,
                  simplify = TRUE, USE.NAMES = FALSE)
+
+
 
   # Significance and effect size
   text <- paste0(
