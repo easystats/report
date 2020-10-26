@@ -9,6 +9,7 @@
 #' @inheritParams data_rename
 #' @param sep Separator.
 #' @param last Last separator.
+#' @param n The number of characters to find.
 #' @param ... Other arguments to be passed to or from other functions.
 #'
 #' @return A character string.
@@ -18,6 +19,9 @@
 #'
 #' # Add full stop if missing
 #' text_fullstop(c("something", "something else."))
+#'
+#' # Find last characters
+#' text_lastchar(c("ABC", "DEF"), n=2)
 #'
 #' # Smart concatenation
 #' text_concatenate(c("First", "Second", "Last"))
@@ -40,12 +44,14 @@ format_text <- function(text, sep = ", ", last = " and ", width = NULL, ...) {
 #' @rdname format_text
 #' @export
 text_fullstop <- function(text) {
-  text[!.text_lastchar(text) %in% c(".", ":", ",", ";", "!", "?")] <- paste0(text[.text_lastchar(text) != "."], ".")
+  text[!text_lastchar(text) %in% c(".", ":", ",", ";", "!", "?")] <- paste0(text[text_lastchar(text) != "."], ".")
   text
 }
 
-#' @keywords internal
-.text_lastchar <- function(text, n = 1) {
+
+#' @rdname format_text
+#' @export
+text_lastchar <- function(text, n = 1) {
   sapply(text, function(xx) {
     substr(xx, (nchar(xx) - n + 1), nchar(xx))
   })

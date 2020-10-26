@@ -3,6 +3,7 @@
 \name{format_text}
 \alias{format_text}
 \alias{text_fullstop}
+\alias{text_lastchar}
 \alias{text_concatenate}
 \alias{text_paste}
 \alias{text_remove}
@@ -12,6 +13,8 @@
 format_text(text, sep = ", ", last = " and ", width = NULL, ...)
 
 text_fullstop(text)
+
+text_lastchar(text, n = 1)
 
 text_concatenate(text, sep = ", ", last = " and ")
 
@@ -34,6 +37,8 @@ default width.}
 
 \item{...}{Other arguments to be passed to or from other functions.}
 
+\item{n}{The number of characters to find.}
+
 \item{pattern}{Character strings.}
 }
 \value{
@@ -47,6 +52,9 @@ library(report)
 
 # Add full stop if missing
 text_fullstop(c("something", "something else."))
+
+# Find last characters
+text_lastchar(c("ABC", "DEF"), n=2)
 
 # Smart concatenation
 text_concatenate(c("First", "Second", "Last"))
