@@ -269,11 +269,7 @@ report_parameters.lm <- function(x, table = NULL, include_effectsize = TRUE, inc
   effsize <- attributes(stats)$effsize
 
   # Parameters' names
-  text <- sapply(attributes(params)$pretty_names[params$Parameter],
-                 .format_parameters_regression,
-                 simplify = TRUE, USE.NAMES = FALSE)
-
-
+  text <- as.character(.parameters_starting_text(x, params))
 
   # Significance and effect size
   text <- paste0(
@@ -288,6 +284,7 @@ report_parameters.lm <- function(x, table = NULL, include_effectsize = TRUE, inc
   #   text <- paste0(text,  " and ", attributes(effsize)$interpretation)
   # }
 
+  # Include intercept
   if (isFALSE(include_intercept)) {
     idx <- !params$Parameter == "(Intercept)"
   } else{

@@ -1,6 +1,6 @@
 Package: report
 Type: Package
-Title: Automated Reporting of Statistical Models in R
+Title: Automated Reporting of Objects in R
 Version: 0.2.0
 Authors@R: c(
 	person("Dominique", 

@@ -139,3 +139,19 @@ print.report_parameters <- function(x, ...) {
   }
   names
 }
+
+#' @keywords internal
+.parameters_starting_text <- function(x, params) {
+
+  if("pretty_names" %in% attributes(params)){
+    pretty_name <- attributes(params)$pretty_names
+  } else{
+    pretty_name <- parameters::format_parameters(x)
+  }
+
+  text <- sapply(pretty_name[params$Parameter],
+                 .format_parameters_regression,
+                 simplify = TRUE, USE.NAMES = FALSE)
+
+  text
+}
