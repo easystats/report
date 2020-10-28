@@ -36,7 +36,7 @@ library(report)
 
 ***"From R to your manuscript"***
 
-`report`'s primary goal is to bridge the gap between R's output and the formatted results contained in your manuscript. It automatically produces reports of models and dataframes according to **best practice** guidelines (*e.g.,* [APA](https://apastyle.apa.org/)'s style guide), ensuring **standardization** and **quality** in results reporting.
+**report**'s primary goal is to bridge the gap between R's output and the formatted results contained in your manuscript. It automatically produces reports of models and dataframes according to **best practices** guidelines (*e.g.,* [APA](https://apastyle.apa.org/)'s style), ensuring **standardization** and **quality** in results reporting.
 
 
 
@@ -49,8 +49,7 @@ report(model)
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 lm(Sepal.Length ~ Species, data = iris) %>% 
   report() %>% 
-  text_long() %>% 
-  print(width = 100)
+  print(width = 110)
 ```
 
 
@@ -65,20 +64,10 @@ The package documentation can be found [**here**](https://easystats.github.io/re
 
 - [Get Started](https://easystats.github.io/report/articles/report.html)
 - [How to Cite Packages](https://easystats.github.io/report/articles/cite_packages.html)
-- [Supporting New Models](https://easystats.github.io/report/articles/supporting_new_models.html)
-
 
 ## Contribute
 
-***report* is a young package in need of affection**. You can easily be a part of the [developing](.github/CONTRIBUTING.md) community of this open-source software and improve science by doing the following:
-
-- Create or check existing <a href=https://github.com/easystats/report/issues><img src="man/figures/issue_bug.png" height="25"></a> issues to report, replicate, understand or solve some bugs.
-- Create or check existing <a href=https://github.com/easystats/report/issues><img src="man/figures/issue_featureidea.png" height="25"></a> issues to suggest or discuss a new feature.
-- Check existing <a href=https://github.com/easystats/report/issues><img src="man/figures/issue_help.png" height="25"></a> issues to see things that we'd like to implement, but where help is needed to do it.
-- Check existing <a href=https://github.com/easystats/report/issues><img src="man/figures/issue_opinion.png" height="25"></a> issues to give your opinion and participate in package's design discussions.
-
-Don't be shy, try to code and submit a pull request (See the [contributing guide](.github/CONTRIBUTING.md)). Even if it's not perfect, we will help you make it great!
-
+***report* is a young package in need of affection**. You can easily be a part of the [developing](.github/CONTRIBUTING.md) community of this open-source software and improve science! Don't be shy, try to code and submit a pull request (See the [contributing guide](.github/CONTRIBUTING.md)). Even if it's not perfect, we will help you make it great!
 
 
 ## Installation
@@ -87,13 +76,12 @@ Don't be shy, try to code and submit a pull request (See the [contributing guide
 Run the following:
 
 ```{r eval=FALSE, message=FALSE, warning=FALSE, eval=FALSE}
-install.packages("devtools")
-devtools::install_github("easystats/report")
+install.packages("remotes")
+remotes::install_github("easystats/report")  # You only need to do that once
 ```
-```{r message=FALSE, warning=FALSE, eval=FALSE}
-library("report")
+```{r message=FALSE, warning=FALSE}
+library("report")  # Load the package every time you start R
 ```
-
 
 
 

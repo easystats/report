@@ -8,44 +8,43 @@ authors:
 
 template:
   params:
-    bootswatch: flatly
+    bootswatch: cosmo
 
-reference:
-- title: "Create Generic Report Objects"
-  contents:
-  - report
-  - report.aov
-  - report.default
-  - report.lmerMod
-  - report.stanreg
-  - report.htest
-  - report.bayesfactor_models
-  - report.character
+# reference:
+# - title: "Create Generic Report Objects"
+#   contents:
+#   - report
+#   - report.aov
+#   - report.default
+#   - report.lmerMod
+#   - report.stanreg
+#   - report.htest
+#   - report.bayesfactor_models
+#   - report.character
 
-- title: "Create Specific Report Objects"
-  contents:
-  - report_intercept
-  - report_participants
-  - report_sample
+# - title: "Create Specific Report Objects"
+#   contents:
+#   - report_intercept
+#   - report_participants
+#   - report_sample
 
-- title: "Extract Tables and Summaries from Reports"
-  contents:
-  - model_table
-  - model_text
-  - text_short
+# - title: "Extract Tables and Summaries from Reports"
+#   contents:
+#   - model_table
+#   - model_text
+#   - text_short
 
-- title: "Utilities"
-  contents:
-  - as.report
-  - rename_if_possible
-  - show_packages
+# - title: "Utilities"
+#   contents:
+#   - as.report
+#   - rename_if_possible
+#   - show_packages
 
-- title: "String Formatting"
-  contents:
-  - format_algorithm
-  - format_model
-  - format_text
--
+# - title: "String Formatting"
+#   contents:
+#   - format_algorithm
+#   - format_model
+#   - format_text
 
 navbar:
   type: default
@@ -54,13 +53,11 @@ navbar:
     href: index.html
   - text: News
     href: news/index.html
-  - text: Reference
+  - text: Features
     href: reference/index.html
-  - text: Articles
+  - text: Get started
+    href: articles/report.html
+  - text: Examples
     menu:
-      - text: Overview of the report Package
-        href: articles/report.html
-      - text: How to Cite Packages
+      - text: 'Report and Cite Packages'
         href: articles/cite_packages.html
-      - text: Supporting New Models
-        href: articles/supporting_new_models.html
