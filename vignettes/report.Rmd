@@ -50,7 +50,7 @@ Great! The `report` package is installed, loaded .
 ## Examples
 
 
-The `report` package works in a two steps fashion. First, creating a `report` object with the `report()` function (which takes different arguments depending on the type of object you are reporting). Then, this report can be displayed either textually or as a table (by using `as.data.frame()`. Moreover, you can also access a more digest and compact version of the report using `summary()` on the report object.
+The `report` package works in a two step fashion. First, you create a `report` object with the `report()` function. Then, this report object can be displayed either textually (the default output) or as a table, using `as.data.frame()`. Moreover, you can also access a more digest and compact version of the report using `summary()` on the report object.
 
 **TO BE COMPLETED**.
 
