@@ -44,10 +44,10 @@
 #' # Bayesian models
 #' if(require("rstanarm")){
 #'   model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh=0, iter=600)
-#'   # report_parameters(model)
+#'   report_parameters(model)
 #' }
 #' @export
-report_parameters <- function(x, table = NULL, ...) {
+report_parameters <- function(x, ...) {
   UseMethod("report_parameters")
 }
 
@@ -144,14 +144,80 @@ print.report_parameters <- function(x, ...) {
 .parameters_starting_text <- function(x, params) {
 
   if("pretty_names" %in% attributes(params)){
-    pretty_name <- attributes(params)$pretty_names
+    pretty_name <- attributes(params)$pretty_names[params$Parameter]
   } else{
     pretty_name <- parameters::format_parameters(x)
   }
 
-  text <- sapply(pretty_name[params$Parameter],
+  text <- sapply(pretty_name,
                  .format_parameters_regression,
                  simplify = TRUE, USE.NAMES = FALSE)
 
   text
+}
+
+
+
+#' @importFrom effectsize interpret_rhat interpret_ess
+#' @keywords internal
+.parameters_diagnostic_bayesian <- function(diagnostic, only_when_insufficient=FALSE, ...) {
+
+  # Convergence
+  if ("Rhat" %in% names(diagnostic)) {
+    convergence <- effectsize::interpret_rhat(diagnostic$Rhat, ...)
+    text <- ifelse(convergence == "converged",
+                         paste0(
+                           "The estimation successfuly converged (Rhat = ",
+                           insight::format_value(diagnostic$Rhat, digits = 3),
+                           ")"
+                         ),
+                         paste0(
+                           "However, the estimation might not have successfuly converged (Rhat = ",
+                           insight::format_value(diagnostic$Rhat, digits = 3),
+                           ")"
+                         )
+    )
+
+    if ("ESS" %in% names(diagnostic)) {
+      stability <- effectsize::interpret_ess(diagnostic$ESS, ...)
+      text <- ifelse(stability == "sufficient" & convergence == "converged",
+                           paste0(
+                             text,
+                             " and the indices are reliable (ESS = ",
+                             insight::format_value(diagnostic$ESS, digits = 0),
+                             ")"
+                           ),
+                           ifelse(stability == "sufficient" & convergence != "converged",
+                                  paste0(
+                                    text,
+                                    " even though the indices appear as reliable (ESS = ",
+                                    insight::format_value(diagnostic$ESS, digits = 0),
+                                    ")"
+                                  ),
+                                  ifelse(stability != "sufficient" & convergence == "converged",
+                                         paste0(
+                                           text,
+                                           " but the indices are unreliable (ESS = ",
+                                           insight::format_value(diagnostic$ESS, digits = 0),
+                                           ")"
+                                         ),
+                                         paste0(
+                                           text,
+                                           " and the indices are unreliable (ESS = ",
+                                           insight::format_value(diagnostic$ESS, digits = 0),
+                                           ")"
+                                         )
+                                  )
+                           )
+      )
+    }
+  } else {
+    text <- ""
+  }
+
+  if (only_when_insufficient==FALSE) {
+    text
+  } else {
+    ifelse(convergence != "converged" | stability != "sufficient", text, "")
+  }
 }

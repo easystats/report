@@ -42,6 +42,14 @@
 #'   r
 #'   summary(r)
 #' }
+#'
+#' # Bayesian models
+#' if(require("rstanarm")){
+#'   model <- stan_glm(mpg ~ cyl + wt, data = mtcars, refresh=0, iter=600)
+#'   r <- report_text(model)
+#'   r
+#'   summary(r)
+#' }
 #' @export
 report_text <- function(x, table=NULL, ...) {
   UseMethod("report_text")

@@ -1,6 +1,31 @@
+#' Bayesian Models Report
+#'
+#' Create a report Bayesian models. The description of the parameters follows the
+#' Sequential Effect eXistence and sIgnificance Testing framework (see \link[bayestestR:sexit]{SEXIT documentation}).
+#'
+#' @inheritParams report.lm
+#' @inherit report return seealso
+#'
+#' @examples
+#' library(report)
+#'
+#' # Bayesian models
+#' if(require("rstanarm")){
+#'   model <- stan_glm(mpg ~ cyl + wt, data = mtcars, refresh=0, iter=600)
+#'   r <- report(model)
+#'   r
+#'   summary(r)
+#'   as.data.frame(r)
+#'   summary(as.data.frame(r))
+#' }
 #' @include report.lm.R
 #' @export
-report.stanreg <- report.lm
+report.stanreg <- function(x, ...) {
+  table <- report_table(x, include_effectsize=FALSE, ...)
+  text <- report_text(x, table = table, ...)
+
+  as.report(text, table = table, ...)
+}
 
 #' @export
 report_effectsize.stanreg <- report_effectsize.lm
@@ -15,7 +40,25 @@ report_performance.stanreg <- report_performance.lm
 report_statistics.stanreg <- report_statistics.lm
 
 #' @export
-report_parameters.stanreg <- function(x, include_intercept = TRUE, ...) {
+report_random.stanreg <- report_random.merMod
+
+#' @export
+report_model.stanreg <- report_model.lm
+
+#' @export
+report_text.stanreg <- report_text.lm
+
+
+# ==================== Specific to Bayes ===================================
+
+
+
+
+# report_parameters -------------------------------------------------------
+
+
+#' @export
+report_parameters.stanreg <- function(x, include_intercept = TRUE, include_diagnostic=TRUE, ...) {
 
   # Get data
   data <- bayestestR::sexit(x, ...)
@@ -44,21 +87,61 @@ report_parameters.stanreg <- function(x, include_intercept = TRUE, ...) {
   text <- att$sexit_textshort[idx]
   text_full <- att$sexit_textlong[idx]
 
+  # Diagnostic / Convergence
+  if (include_diagnostic){
+    diagnostic <- bayestestR::diagnostic_posterior(x, ...)
+    text <- text_paste(text, .parameters_diagnostic_bayesian(diagnostic, only_when_insufficient=TRUE)[idx], sep=". ")
+    text_full <- text_paste(text_full, .parameters_diagnostic_bayesian(diagnostic, only_when_insufficient=FALSE)[idx], sep=". ")
+    info <- paste(info, "Convergence and stability of the Bayesian sampling has been assessed using R-hat, which should be below 1.01 (Vehtari et al., 2019), and Effective Sample Size (ESS), which should be greater than 1000 (Burkner, 2017).")
+  }
 
-  as.report_parameters(text_full, summary = text, table = params, ...)
+  as.report_parameters(text_full, summary = text, parameters = data, info=info, ...)
 }
 
-#' @export
-report_intercept.stanreg <- report_intercept.lm
+
+# report_intercept --------------------------------------------------------
+
 
 #' @export
-report_random.stanreg <- report_random.merMod
+report_intercept.stanreg <- function(x, ...) {
+
+  posteriors <- insight::get_parameters(x)
+  if("(Intercept)" %in% names(posteriors)){
+    intercept <- posteriors[["(Intercept)"]]
+  } else{
+    return(as.report_intercept("", summary = "", ...))
+  }
+  data <- bayestestR::sexit(intercept, ...)
+
+  endtext <- paste0(" is at ",
+                    insight::format_value(data$Median) ,
+                    " (",
+                    insight::format_ci(data$CI_low, data$CI_high, ci = data$CI / 100),
+                    ").")
+
+  text <- paste0("The model's intercept", endtext)
+  text_full <- paste0(
+    "The model's intercept",
+    .find_intercept(x),
+    endtext
+  )
+
+  as.report_intercept(text_full, summary = text, ...)
+}
+
+
+
+# report_info -------------------------------------------------------------
+
 
 #' @export
-report_model.stanreg <- report_model.lm
+report_info.stanreg <- function(x, parameters=NULL, ...) {
+  if (is.null(parameters)) {
+    parameters <- report_parameters(x, ...)
+  }
 
-#' @export
-report_info.stanreg <- report_info.lm
+  text <- attributes(parameters)$info
 
-#' @export
-report_text.stanreg <- report_text.lm
+  as.report_info(text)
+}
+

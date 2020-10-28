@@ -8,8 +8,8 @@
 #'  \item{\link[=report.aov]{ANOVAs} (\code{aov, anova, aovlist, ...})}
 #'  \item{\link[=report.lm]{Regression models} (\code{glm, lm, ...})}
 #' % \item{\link[=report.lmerMod]{Mixed models} (\code{glmer, lmer, glmmTMB, ...})}
-#' % \item{\link[=report.stanreg]{Bayesian models} (\code{stanreg, brms...})}
-#' \item{\link[=report.bayesfactor_models]{Bayes factors} (from \code{bayestestR})}
+#'  \item{\link[=report.stanreg]{Bayesian models} (\code{stanreg, brms...})}
+#'  \item{\link[=report.bayesfactor_models]{Bayes factors} (from \code{bayestestR})}
 #' }
 #'
 #' @param x The R object that you want to report (see list of of supported objects above).
@@ -72,18 +72,15 @@
 #' library(report)
 #'
 #' model <- t.test(mpg ~ am, data = mtcars)
-#' # r <- report(model)
+#' r <- report(model)
 #'
 #' # Text
-#' # r
-#' # summary(r)
+#' r
+#' summary(r)
 #'
 #' # Tables
-#' # as.data.frame(r)
-#' # summary(as.data.frame(r)) # equivalent to as.table(r)
-#'
-#' # List
-#' # as.list(r)
+#' as.data.frame(r)
+#' summary(as.data.frame(r))
 #' @export
 report <- function(x, ...) {
   UseMethod("report")

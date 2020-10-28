@@ -1,6 +1,6 @@
 #' (General) Linear Models Report
 #'
-#' Create a report of a (general) linear model (i.e., a regression fitted using \code{lm()} or \code{glm()}.
+#' Create a report for (general) linear models.
 #'
 #' @param x Object of class \code{lm} or \code{glm}.
 #' @param include_effectsize If \code{FALSE}, won't include effect-size related indices (standardized coefficients, etc.).
@@ -165,7 +165,7 @@ report_table.lm <- function(x, include_effectsize = TRUE, ...) {
                          effsize = effsize,
                          performance = performance,
                          ...)
-  attr(out, paste0(names(attributes(effsize)$ci))) <- attributes(effsize)$ci
+  if(!is.null(effsize)) attr(out, paste0(names(attributes(effsize)$ci))) <- attributes(effsize)$ci
   # Add attributes from params table
   for (att in c("ci", "coefficient_name", "pretty_names", "bootstrap", "iterations", "df_method")) {
     attr(out, att) <- attributes(params)[[att]]
@@ -275,8 +275,8 @@ report_parameters.lm <- function(x, table = NULL, include_effectsize = TRUE, inc
   text <- paste0(
     text,
     " is ",
-    effectsize::interpret_p(params$p),
-    "ly ",
+    effectsize::interpret_p(params$p, rules=effectsize::rules(c(0.05), c("significantly", "non-significantly"))),
+    " ",
     effectsize::interpret_direction(params$Coefficient))
 
   # Effect size
@@ -322,7 +322,9 @@ report_intercept.lm <- function(x, table = NULL, ...) {
   text <- paste0(
     "The model's intercept is at ",
     insight::format_value(is_at),
-    "."
+    " (",
+    insight::format_ci(intercept$CI_low, intercept$CI_high, attributes(intercept)$ci),
+    ")."
   )
   text_full <- paste0(
     "The model's intercept",
@@ -370,12 +372,17 @@ report_model.lm <- function(x, table=NULL, ...) {
   )
 
   # Algorithm
-  text_full <- paste0(
-    text,
-    " (estimated using ",
-    format_algorithm(x),
-    ")"
-  )
+  algorithm <- format_algorithm(x)
+  if(algorithm != ""){
+    text_full <- paste0(
+      text,
+      " (estimated using ",
+      algorithm,
+      ")")
+  } else{
+    text_full <- text
+  }
+
 
   # To predict
   to_predict_text <- paste0(" to predict ", insight::find_response(x))
@@ -436,16 +443,7 @@ report_info.lm <- function(x, effectsize=NULL, include_effectsize=FALSE, paramet
     effectsize <- report_effectsize(x, ...)
   }
 
-  text <- ""
-
-  if (!is.null(effectsize)) {
-    text_effsize <- attributes(effectsize)$method
-    if (include_effectsize) {
-      text_effsize <- paste0(text_effsize, attributes(effectsize)$rules)
-      text_effsize <- gsub(".Effect sizes ", " and ", text_effsize)
-    }
-    text <- paste0(text, text_effsize)
-  }
+  text <- .info_effectsize(x, effectsize = effectsize, include_effectsize=include_effectsize)
 
   if (is.null(parameters)) {
     parameters <- report_parameters(x, ...)
@@ -457,7 +455,7 @@ report_info.lm <- function(x, effectsize=NULL, include_effectsize=FALSE, paramet
   }
 
   if ("df_method" %in% names(att)) {
-    text <- paste0(text, " ", .text_df(ci=att$ci, df_method = att$df_method))
+    text <- paste0(text, " ", .info_df(ci=att$ci, df_method = att$df_method))
   }
 
   # if (!is.null(att$ci_method)) {
@@ -478,7 +476,7 @@ report_text.lm <- function(x, table = NULL, ...) {
   params <- report_parameters(x, table = table, include_intercept = FALSE, ...)
   table <- attributes(params)$table
 
-  info <- report_info(x, effectsize = attributes(params)$effectsize, parameters = attributes(params)$table, ...)
+  info <- report_info(x, effectsize = attributes(params)$effectsize, parameters = params, ...)
   model <- report_model(x, table = table, ...)
   perf <- report_performance(x, table = table, ...)
   intercept <- report_intercept(x, table = table, ...)

@@ -79,7 +79,7 @@ with a short and long description of the model summary, as well as a short
 and long table of parameters and fit indices.
 }
 \description{
-Create a report of a (general) linear model (i.e., a regression fitted using \code{lm()} or \code{glm()}.
+Create a report for (general) linear models.
 }
 \examples{
 library(report)

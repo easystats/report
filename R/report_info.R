@@ -29,6 +29,12 @@
 #'   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 #'   report_info(model)
 #' }
+#'
+#' # Bayesian models
+#' if(require("rstanarm")){
+#'   model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh=0, iter=600)
+#'   report_info(model)
+#' }
 #' @export
 report_info <- function(x, ...) {
   UseMethod("report_info")
@@ -75,7 +81,7 @@ print.report_info <- function(x, ...) {
 # Utils -------------------------------------------------------------------
 
 #' @keywords internal
-.text_df <- function(ci, df_method = NULL) {
+.info_df <- function(ci, df_method = NULL) {
   if(is.null(df_method)){
     return("")
   }
@@ -90,6 +96,22 @@ print.report_info <- function(x, ...) {
   }
   text
 }
+
+#' @keywords internal
+.info_effectsize <- function(x, effectsize = NULL, include_effectsize=FALSE) {
+  text <- ""
+
+  if (!is.null(effectsize)) {
+    text <- attributes(effectsize)$method
+    if (include_effectsize) {
+      text <- paste0(text, attributes(effectsize)$rules)
+      text <- gsub(".Effect sizes ", " and ", text)
+    }
+  }
+
+  text
+}
+
 
 #' @keywords internal
 # .text_ci <- function(ci, ci_method=NULL, df_method = NULL) {

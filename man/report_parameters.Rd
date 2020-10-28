@@ -4,12 +4,10 @@
 \alias{report_parameters}
 \title{Report the parameters of a model}
 \usage{
-report_parameters(x, table = NULL, ...)
+report_parameters(x, ...)
 }
 \arguments{
 \item{x}{The R object that you want to report (see list of of supported objects above).}
-
-\item{table}{A table obtained via \code{report_table()}. If not provided, will run it.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
@@ -54,6 +52,6 @@ if(require("lme4")){
 # Bayesian models
 if(require("rstanarm")){
   model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh=0, iter=600)
-  # report_parameters(model)
+  report_parameters(model)
 }
 }
