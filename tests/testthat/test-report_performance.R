@@ -62,7 +62,7 @@ if (require("testthat") && require("report")) {
       x <- stan_glm(vs ~ disp, data = mtcars, family = "binomial", refresh=0, iter=1000, seed=333)
       testthat::expect_equal(
         as.character(report_performance(x)),
-        "The model's explanatory power is substantial (R2 = 0.54, 89% CI [0.34, 0.75])"
+        "The model's explanatory power is substantial (R2 = 0.54, 89% CI [0.33, 0.75])"
       )
       testthat::expect_equal(
         as.character(summary(report_performance(x))),
