@@ -1,15 +1,15 @@
 bibentry(
     bibtype="Article",
-	title="The report package for R: Ensuring the use of best practices for results reporting",
-	author="Makowski, Dominique and Lüdecke, Daniel",
+	title="Automated reporting as a practical tool to improve reproducibility and methodological best practices adoption",
+	author="Makowski, Dominique, Lüdecke, Daniel and Ben-Shachar, Mattan S.",
     journal="CRAN",
     doi="",
-	year="2019",
+	year="2020",
 	note="R package",
 	url="https://github.com/easystats/report",
 
 	textVersion =
-  	paste("Makowski, D. & Lüdecke, D. (2019). The report package for R: Ensuring the use of best practices for results reporting. CRAN.",
+  	paste("Makowski, D., Lüdecke, D., & Ben-Shachar, M.S. (2020). Automated reporting as a practical tool to improve reproducibility and methodological best practices adoption. CRAN.",
         "Available from https://github.com/easystats/report.",
 		"doi: .",
         sep=" "),

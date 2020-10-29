@@ -1,8 +1,4 @@
-#' Model Name Formatting
-#'
-#' @param model A statistical model.
-#' @inherit format_algorithm return
-#'
+#' @rdname format_formula
 #' @examples
 #' model <- lm(Sepal.Length ~ Species, data = iris)
 #' format_model(model)
@@ -13,16 +9,16 @@
 #' }
 #' @importFrom insight model_info is_nullmodel
 #' @export
-format_model <- function(model) {
-  info <- insight::model_info(model)
+format_model <- function(x) {
+  info <- insight::model_info(x)
 
-  if (insight::is_nullmodel(model)) {
+  if (insight::is_nullmodel(x)) {
     type <- "constant (intercept-only) "
   } else {
     type <- ""
   }
 
-  if ("Mclust" %in% class(model)) {
+  if ("Mclust" %in% class(x)) {
     return("Gaussian finite mixture fitted by EM algorithm")
   }
 

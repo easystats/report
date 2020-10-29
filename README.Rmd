@@ -18,7 +18,7 @@ editor_options:
 knitr::opts_chunk$set(
   collapse = TRUE,
   tidy.opts=list(width.cutoff=60),
-  tidy=TRUE,
+  tidy=FALSE,
   dpi=450,
   fig.path = "man/figures/"
 )
@@ -36,7 +36,13 @@ library(report)
 
 ***"From R to your manuscript"***
 
-`report`'s primary goal is to bridge the gap between R's output and the formatted results contained in your manuscript. It automatically produces reports of models and dataframes according to **best practice** guidelines (*e.g.,* [APA](https://apastyle.apa.org/)'s style guide), ensuring **standardization** and **quality** in results reporting.
+---
+
+:warning: **report** has been entirely rewritten *(again)*, and won't be compatible with your old code. We've changed it for the best, and with your help we'll continue improving it. You'll need the latest versions of the **easystats** packages (you can update them by running `easystats::install_easystats_latest()`). **Thanks for your support!** :warning:
+
+---
+
+**report**'s primary goal is to bridge the gap between R's output and the formatted results contained in your manuscript. It automatically produces reports of models and dataframes according to **best practices** guidelines (*e.g.,* [APA](https://apastyle.apa.org/)'s style), ensuring **standardization** and **quality** in results reporting.
 
 
 
@@ -49,8 +55,7 @@ report(model)
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 lm(Sepal.Length ~ Species, data = iris) %>% 
   report() %>% 
-  text_long() %>% 
-  print(width = 100)
+  print(width = 110)
 ```
 
 
@@ -65,20 +70,10 @@ The package documentation can be found [**here**](https://easystats.github.io/re
 
 - [Get Started](https://easystats.github.io/report/articles/report.html)
 - [How to Cite Packages](https://easystats.github.io/report/articles/cite_packages.html)
-- [Supporting New Models](https://easystats.github.io/report/articles/supporting_new_models.html)
-
 
 ## Contribute
 
-***report* is a young package in need of affection**. You can easily be a part of the [developing](.github/CONTRIBUTING.md) community of this open-source software and improve science by doing the following:
-
-- Create or check existing <a href=https://github.com/easystats/report/issues><img src="man/figures/issue_bug.png" height="25"></a> issues to report, replicate, understand or solve some bugs.
-- Create or check existing <a href=https://github.com/easystats/report/issues><img src="man/figures/issue_featureidea.png" height="25"></a> issues to suggest or discuss a new feature.
-- Check existing <a href=https://github.com/easystats/report/issues><img src="man/figures/issue_help.png" height="25"></a> issues to see things that we'd like to implement, but where help is needed to do it.
-- Check existing <a href=https://github.com/easystats/report/issues><img src="man/figures/issue_opinion.png" height="25"></a> issues to give your opinion and participate in package's design discussions.
-
-Don't be shy, try to code and submit a pull request (See the [contributing guide](.github/CONTRIBUTING.md)). Even if it's not perfect, we will help you make it great!
-
+***report* is a young package in need of affection**. You can easily be a part of the [developing](.github/CONTRIBUTING.md) community of this open-source software and improve science! Don't be shy, try to code and submit a pull request (See the [contributing guide](.github/CONTRIBUTING.md)). Even if it's not perfect, we will help you make it great!
 
 
 ## Installation
@@ -87,13 +82,12 @@ Don't be shy, try to code and submit a pull request (See the [contributing guide
 Run the following:
 
 ```{r eval=FALSE, message=FALSE, warning=FALSE, eval=FALSE}
-install.packages("devtools")
-devtools::install_github("easystats/report")
+install.packages("remotes")
+remotes::install_github("easystats/report")  # You only need to do that once
 ```
-```{r message=FALSE, warning=FALSE, eval=FALSE}
-library("report")
+```{r message=FALSE, warning=FALSE}
+library("report")  # Load the package every time you start R
 ```
-
 
 
 
@@ -102,7 +96,7 @@ library("report")
 
 ### General Workflow
 
-The `report` package works in a two step fashion. First, you create a `report` object with the `report()` function (which takes different arguments depending on the type of object you are reporting). Then, this report object can be displayed either textually, using `text_short()`, or as a table, using `table_short()`. Moreover, you can access a more detailed (but less digested) version of the report using `text_long()` and `table_short()`.
+The `report` package works in a two step fashion. First, you create a `report` object with the `report()` function. Then, this report object can be displayed either textually (the default output) or as a table, using `as.data.frame()`. Moreover, you can also access a more digest and compact version of the report using `summary()` on the report object.
 
 [![workflow](man/figures/workflow.png)](https://easystats.github.io/report/)
 
@@ -112,41 +106,140 @@ The `report()` function works on a variety of models, as well as other objects s
 report(iris)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-print(report(iris), width = 100)
+print(report(iris), width = 110)
 ```
 
 These reports nicely work within the [*tidyverse*](https://github.com/tidyverse) workflow:
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
-cor.test(iris$Sepal.Length, iris$Petal.Length) %>% 
-  report()
+library(dplyr)
+
+iris %>%
+  select(-starts_with("Sepal")) %>% 
+  group_by(Species) %>% 
+  report() %>% 
+  summary()
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-print(report(cor.test(iris$Sepal.Length, iris$Petal.Length)), width = 100)
-```
-
-You can also create tables with the `table_short()` and `table_long()` functions:
-
-
-```{r message=FALSE, warning=FALSE}
-lm(Sepal.Length ~ Petal.Length + Species, data = iris) %>% 
+iris %>%
+  select(-starts_with("Sepal")) %>% 
+  group_by(Species) %>% 
   report() %>% 
-  table_short()
+  summary() %>% 
+  print(width=110)
 ```
-
 
 
 ### *t*-tests and correlations
 
+Reports can be used to automatically format tests like *t*-tests or correlations.
+
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
-t.test(mtcars$mpg ~ mtcars$am) %>% 
+report(t.test(mtcars$mpg ~ mtcars$am))
+```
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+t.test(mtcars$mpg ~ mtcars$am) %>%
+  report() %>%
+  print(width = 110)
+```
+
+As mentioned, you can also create tables with the `as.data.frame()` functions, like for example with this correlation test:
+
+```{r message=FALSE, warning=FALSE}
+cor.test(iris$Sepal.Length, iris$Sepal.Width) %>% 
+  report() %>% 
+  as.data.frame()
+```
+
+
+
+### ANOVAs
+
+This works great with ANOVAs, as it includes **effect sizes** and their interpretation.
+
+```{r message=FALSE, warning=FALSE, eval=FALSE}
+aov(Sepal.Length ~ Species, data=iris) %>% 
   report()
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-t.test(mtcars$mpg ~ mtcars$am) %>% 
-  report() %>% 
-  text_long() %>% 
-  print(width = 100)
+aov(Sepal.Length ~ Species, data=iris) %>%
+  report() %>%
+  print(width = 110)
+```
+
+### General Linear Models (GLMs)
+
+Reports are also compatible with GLMs, such as this **logistic regression**:
+
+```{r message=FALSE, warning=FALSE, eval=FALSE}
+model <- glm(vs ~ mpg * drat, data=mtcars, family="binomial")
+
+report(model)
+```
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+glm(vs ~ mpg * drat, data=mtcars, family="binomial") %>%
+  report() %>%
+  print(width = 110)
+```
+
+### Mixed Models
+
+Mixed models (coming from example from the `lme4` package), which popularity and usage is exploding, can also be reported as it should:
+
+```{r message=FALSE, warning=FALSE, eval=FALSE}
+library(lme4)
+
+model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
+
+report(model)
+```
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(lme4)
+
+lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris) %>%
+  report() %>%
+  print(width = 110)
+```
+
+
+### Bayesian Models
+
+Bayesian models can also be reported using the new [**SEXIT**](https://easystats.github.io/bayestestR/reference/sexit.html) framework, that combines clarity, precision and usefulness.
+
+```{r message=FALSE, warning=FALSE, eval=FALSE}
+library(rstanarm)
+
+model <- stan_glm(mpg ~ qsec + wt, data = mtcars)
+
+report(model)
+```
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(rstanarm)
+
+model <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh=0, iter=1000) %>%
+  report() %>%
+  print(width = 110)
+```
+
+## Other types of reports
+
+### Specific parts
+
+One can, for complex reports, directly access the pieces of the reports:
+
+```{r message=FALSE, warning=FALSE, eval=FALSE}
+model <- lm(Sepal.Length ~ Species, data = iris)
+
+report_model(model)
+report_performance(model)
+report_statistics(model)
+```
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+model <- lm(Sepal.Length ~ Species, data = iris)
+
+print(report_model(model), width=110)
+print(report_performance(model), width=110)
+print(report_statistics(model), width=110)
 ```
 
 
@@ -154,17 +247,47 @@ t.test(mtcars$mpg ~ mtcars$am) %>%
 
 This can be useful to complete the **Participants** paragraph of your manuscript.
 
-```{r message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, eval=FALSE}
+data <- data.frame("Age" = c(22, 23, 54, 21),
+                   "Sex" = c("F", "F", "M", "M"))
+
+paste(
+  report_participants(data, spell_n = TRUE),
+  "were recruited in the study by means of torture and coercion."
+  )
+```
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 data <- data.frame("Age" = c(22, 23, 54, 21),
                    "Sex" = c("F", "F", "M", "M"))
 
 paste(report_participants(data, spell_n = TRUE),
-      "were recruited in the study by means of torture and coercion.")
+      "were recruited in the study by means of torture and coercion.") %>% 
+  print(width=110)
 ```
 
+
+### Report sample
+
+Report can also help you create sample description table (also referred to as **Table 1**).
+
+```{r message=FALSE, warning=FALSE}
+report_sample(iris, group_by = "Species")
+```
+
+### Report system and packages
+
+Finally, **report** includes some functions to help you write the data analysis paragraph about the tools used.
+
+```{r message=FALSE, warning=FALSE, eval=FALSE}
+report(sessionInfo())
+```
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+report(sessionInfo()) %>% 
+  print(width=110)
+```
 
 ## Credits
 
 If you like it, you can put a *star* on this repo, and cite the package as follows:
 
-- Makowski, D., Ben-Shachar, M. S., \& Lüdecke, D. (2020). *The report package for R: Ensuring the use of best practices for results reporting*. CRAN.
+- Makowski, D., Ben-Shachar, M. S., \& Lüdecke, D. (2020). *Automated reporting as a practical tool to improve reproducibility and methodological best practices adoption*. CRAN.

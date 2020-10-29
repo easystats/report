@@ -2,28 +2,70 @@
 % Please edit documentation in R/format_text.R
 \name{format_text}
 \alias{format_text}
-\title{Format text}
+\alias{text_fullstop}
+\alias{text_lastchar}
+\alias{text_concatenate}
+\alias{text_paste}
+\alias{text_remove}
+\alias{text_wrap}
+\title{Convenient text formatting functionalities}
 \usage{
-format_text(x, sep = ", ", last = " and ", width = NULL)
+format_text(text, sep = ", ", last = " and ", width = NULL, ...)
+
+text_fullstop(text)
+
+text_lastchar(text, n = 1)
+
+text_concatenate(text, sep = ", ", last = " and ")
+
+text_paste(text, text2 = NULL, sep = ", ", ...)
+
+text_remove(text, pattern = "", ...)
+
+text_wrap(text, width = NULL, ...)
 }
 \arguments{
-\item{x}{Character vector.}
+\item{text, text2}{A character string.}
 
 \item{sep}{Separator.}
 
 \item{last}{Last separator.}
 
-\item{width}{Positive integer giving the target column for wrapping lines in the output. Can be "auto".}
+\item{width}{Positive integer giving the target column width for wrapping
+lines in the output. Can be "auto", in which case it will select 90\% of the
+default width.}
+
+\item{...}{Other arguments to be passed to or from other functions.}
+
+\item{n}{The number of characters to find.}
+
+\item{pattern}{Character strings.}
 }
 \value{
-A formatted character vector.
+A character string.
 }
 \description{
-Format text
+Convenience functions to manipulate and format text.
 }
 \examples{
-format_text(c("A", "B", "C"))
+library(report)
 
-x <- paste(rep("a very long string", 50), collapse = " ")
-cat(format_text(x, width = 50))
+# Add full stop if missing
+text_fullstop(c("something", "something else."))
+
+# Find last characters
+text_lastchar(c("ABC", "DEF"), n=2)
+
+# Smart concatenation
+text_concatenate(c("First", "Second", "Last"))
+
+# Remove parts of string
+text_remove(c("one!", "two", "three!"), "!")
+
+# Wrap text
+long_text <- paste(rep("abc ", 100), collapse = "")
+cat(text_wrap(long_text, width = 50))
+
+# Paste with optional separator
+text_paste(c("A", "", "B"), c("42", "42", "42"))
 }

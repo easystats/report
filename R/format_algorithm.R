@@ -1,9 +1,4 @@
-#' Model Algorithm Formatting
-#'
-#' @param model A statistical model.
-#'
-#' @return A formatted character vector.
-#'
+#' @rdname format_formula
 #' @examples
 #' model <- lm(Sepal.Length ~ Species, data = iris)
 #' format_algorithm(model)
@@ -14,8 +9,8 @@
 #' }
 #' @importFrom insight find_algorithm
 #' @export
-format_algorithm <- function(model) {
-  algorithm <- insight::find_algorithm(model)
+format_algorithm <- function(x) {
+  algorithm <- suppressWarnings(insight::find_algorithm(x))
 
   text <- ""
 
@@ -57,7 +52,7 @@ format_algorithm <- function(model) {
 
   # Optimizer
   if (!is.null(algorithm$optimizer)) {
-    optimizer <- algorithm$optimizer
+    optimizer <- algorithm$optimizer[1]
 
     if (optimizer == "bobyqa") {
       optimizer <- "BOBYQA"

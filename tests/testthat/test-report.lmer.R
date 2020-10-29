@@ -1,44 +1,27 @@
-if (require("testthat") &&
-    require("report") &&
-    require("lme4")) {
+if (require("testthat") && require("report") && require("lme4")) {
 
-  data(sleepstudy)
+  df <- lme4::sleepstudy
   set.seed(123)
-  sleepstudy$mygrp <- sample(1:5, size = 180, replace = TRUE)
-  sleepstudy$mysubgrp <- NA
+  df$mygrp <- sample(1:5, size = 180, replace = TRUE)
+  df$mysubgrp <- NA
   for (i in 1:5) {
-    filter_group <- sleepstudy$mygrp == i
-    sleepstudy$mysubgrp[filter_group] <-
+    filter_group <- df$mygrp == i
+    df$mysubgrp[filter_group] <-
       sample(1:30, size = sum(filter_group), replace = TRUE)
   }
 
-  m1 <- lme4::lmer(Reaction ~ Days + (1 + Days | Subject),
-                   data = sleepstudy
-  )
-
-  m2 <- lme4::lmer(Reaction ~ Days + (1 | mygrp / mysubgrp) + (1 | Subject),
-                   data = sleepstudy
-  )
+  m1 <- lme4::lmer(Reaction ~ Days + (1 + Days | Subject), data = df)
+  m2 <- lme4::lmer(Reaction ~ Days + (1 | mygrp / mysubgrp) + (1 | Subject), data = df)
 
   test_that("report-lmer-1", {
     r <- report(m1)
-    expect_equal(nchar(r$texts$text_short), 566)
-    expect_equal(nchar(r$texts$text_long), 871)
-    expect_equal(nrow(r$tables$table_short), 5)
-    expect_equal(nrow(r$tables$table_long), 9)
-    expect_equal(r$tables$table_long$Coefficient, c(251.4051, 10.46729, NA, NA, NA, NA, NA, NA, NA), tolerance = 1e-3)
-    expect_equal(r$tables$table_long$Parameter, c("(Intercept)", "Days", NA, "AIC", "BIC", "R2 (conditional)",
-                                                  "R2 (marginal)", "ICC", "RMSE"))
+    expect_equal(as.data.frame(r)$Coefficient[1:3], c(251.4051, 10.46729, NA), tolerance = 1e-3)
+    expect_equal(as.data.frame(r)$Parameter[1:3], c("(Intercept)", "Days", NA))
   })
 
   test_that("report-lmer-2", {
     r <- report(m2)
-    expect_equal(nchar(r$texts$text_short), 516)
-    expect_equal(nchar(r$texts$text_long), 878)
-    expect_equal(nrow(r$tables$table_short), 4)
-    expect_equal(nrow(r$tables$table_long), 7)
-    expect_equal(r$tables$table_long$Coefficient, c(252.09404, 10.35368, NA, NA, NA, NA, NA), tolerance = 1e-3)
-    expect_equal(r$tables$table_long$Parameter, c("(Intercept)", "Days", NA, "AIC", "BIC", "R2 (marginal)", "RMSE"))
+    expect_equal(as.data.frame(r)$Coefficient[1:3], c(252.09404, 10.35368, NA), tolerance = 1e-3)
+    expect_equal(as.data.frame(r)$Parameter[1:3], c("(Intercept)", "Days", NA))
   })
-
 }

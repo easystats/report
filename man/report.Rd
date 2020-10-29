@@ -4,10 +4,10 @@
 \alias{report}
 \title{Automatic report of R objects}
 \usage{
-report(model, ...)
+report(x, ...)
 }
 \arguments{
-\item{model}{A statistical model. For data frame or character methods, a data frame or character respectively.}
+\item{x}{The R object that you want to report (see list of of supported objects above).}
 
 \item{...}{Arguments passed to or from other methods.}
 }
@@ -18,29 +18,36 @@ and long table of parameters and fit indices.
 }
 \description{
 Create reports of different objects. See the documentation for your object's class:
-}
-\details{
 \itemize{
+ \item{\link[=report.sessionInfo]{R environment, system and packages} (\code{sessionInfo})}
  \item{\link[=report.data.frame]{Dataframes and vectors}}
  \item{\link[=report.htest]{Correlations and t-tests} (\code{htest})}
- \item{\link[=report.aov]{ANOVAs}}
- \item{\link[=report.default]{Regression models} (\code{glm, lm, ...})}
- \item{\link[=report.lmerMod]{Mixed models} \code{(glmer, lmer, glmmTMB, ...)}}
- \item{\link[=report.stanreg]{Bayesian models} \code{(stanreg, brms...)}}
- }
+ \item{\link[=report.aov]{ANOVAs} (\code{aov, anova, aovlist, ...})}
+ \item{\link[=report.lm]{Regression models} (\code{glm, lm, ...})}
+% \item{\link[=report.lmerMod]{Mixed models} (\code{glmer, lmer, glmmTMB, ...})}
+ \item{\link[=report.stanreg]{Bayesian models} (\code{stanreg, brms...})}
+ \item{\link[=report.bayesfactor_models]{Bayes factors} (from \code{bayestestR})}
+}
+}
+\details{
+\subsection{Organization}{
 
+\code{report_table} and \code{report_text} are the two distal representations
+of a report, and are the two provided in \code{report()}. However, intermediate
+steps are accessible (depending on the object) via specific functions (e.g.,
+\code{report_parameters}).
+}
 
+\subsection{Output}{
 
-\subsection{Change output type}{
 The \code{report()} function generates a report-object that contain in itself
 different representations (e.g., text, tables, plots). These different representations
 can be accessed via several functions, such as:
-
 \itemize{
-\item \strong{\code{text_long()}}: Detailed text.
-\item \strong{\code{text_short()}}: Minimal text giving the minimal information.
-\item \strong{\code{table_long()}}: Comprehensive table including most available indices.
-\item \strong{\code{table_short()}}: Minimal table.
+\item \strong{\code{as.report_text(r)}}: Detailed text.
+\item \strong{\code{as.report_text(r, summary=TRUE)}}: Minimal text giving the minimal information.
+\item \strong{\code{as.report_table(r)}}: Comprehensive table including most available indices.
+\item \strong{\code{as.report_table(r, summary=TRUE)}}: Minimal table.
 }
 
 Note that for some report objects, some of these representations might be identical.
@@ -49,7 +56,7 @@ Note that for some report objects, some of these representations might be identi
 \examples{
 library(report)
 
-model <- t.test(Sepal.Length ~ Species, data = iris[1:100, ])
+model <- t.test(mpg ~ am, data = mtcars)
 r <- report(model)
 
 # Text
@@ -58,12 +65,30 @@ summary(r)
 
 # Tables
 as.data.frame(r)
-summary(as.data.frame(r)) # equivalent to as.table(r)
-
-# List
-as.list(r)
+summary(as.data.frame(r))
 }
 \seealso{
-\code{\link{table_short}} or \code{\link{text_short}} to access the
-related content of the report-object.
+Specific components of reports (especially for stats models):
+\itemize{
+  \item \code{\link{report_table}}
+  \item \code{\link{report_parameters}}
+  \item \code{\link{report_statistics}}
+  \item \code{\link{report_effectsize}}
+  \item \code{\link{report_model}}
+  \item \code{\link{report_random}}
+  \item \code{\link{report_performance}}
+  \item \code{\link{report_info}}
+  \item \code{\link{report_text}}
+}
+Other types of reports:
+\itemize{
+  \item \code{\link{report_system}}
+  \item \code{\link{report_packages}}
+  \item \code{\link{report_participants}}
+  \item \code{\link{report_sample}}
+}
+Methods:
+\itemize{
+  \item \code{\link{as.report}}
+}
 }

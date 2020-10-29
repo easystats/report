@@ -2,29 +2,39 @@
 % Please edit documentation in R/report.aov.R
 \name{report.aov}
 \alias{report.aov}
+\alias{report_effectsize.aov}
+\alias{report_table.aov}
+\alias{report_statistics.aov}
+\alias{report_parameters.aov}
+\alias{report_model.aov}
+\alias{report_info.aov}
+\alias{report_text.aov}
 \title{ANOVAs Report}
 \usage{
-\method{report}{aov}(
-  model,
-  interpretation = "field2013",
-  omega_squared = "partial",
-  eta_squared = NULL,
-  epsilon_squared = NULL,
-  ...
-)
+\method{report}{aov}(x, ...)
+
+\method{report_effectsize}{aov}(x, ...)
+
+\method{report_table}{aov}(x, ...)
+
+\method{report_statistics}{aov}(x, table = NULL, ...)
+
+\method{report_parameters}{aov}(x, ...)
+
+\method{report_model}{aov}(x, table = NULL, ...)
+
+\method{report_info}{aov}(x, effectsize = NULL, ...)
+
+\method{report_text}{aov}(x, table = NULL, ...)
 }
 \arguments{
-\item{model}{Object of class \code{aov}, \code{anova} or \code{aovlist}.}
-
-\item{interpretation}{Effect size interpretation set of rules (see \link[effectsize]{interpret_omega_squared}).}
-
-\item{omega_squared}{Compute omega squared as index of effect size. Can be \code{"partial"} (adjusted for effect size) or \code{"raw"}.}
-
-\item{eta_squared}{Compute eta squared as index of effect size. Can be \code{"partial"} (adjusted for effect size), \code{"raw"}  or \code{"adjusted"} (the latter option only for anova-tables from mixed models).}
-
-\item{epsilon_squared}{Compute epsilon squared as index of effect size. Can be \code{"partial"} (adjusted for effect size) or \code{"raw"}.}
+\item{x}{Object of class \code{aov}, \code{anova} or \code{aovlist}.}
 
 \item{...}{Arguments passed to or from other methods.}
+
+\item{table}{Provide the output of  \code{report_table()} to avoid its re-computation.}
+
+\item{effectsize}{Provide the output of \code{report_effectsize()} to avoid its re-computation.}
 }
 \value{
 A list-object of class \code{report}, which contains further list-objects
@@ -37,12 +47,36 @@ Create a report of an ANOVA.
 \examples{
 data <- iris
 data$Cat1 <- rep(c("A", "B"), length.out = nrow(data))
+
 model <- aov(Sepal.Length ~ Species * Cat1, data = data)
 r <- report(model)
 r
-table_short(r)
+summary(r)
+as.data.frame(r)
+summary(as.data.frame(r))
 }
 \seealso{
-\code{\link{table_short}} or \code{\link{text_short}} to access the
-related content of the report-object.
+Specific components of reports (especially for stats models):
+\itemize{
+  \item \code{\link{report_table}}
+  \item \code{\link{report_parameters}}
+  \item \code{\link{report_statistics}}
+  \item \code{\link{report_effectsize}}
+  \item \code{\link{report_model}}
+  \item \code{\link{report_random}}
+  \item \code{\link{report_performance}}
+  \item \code{\link{report_info}}
+  \item \code{\link{report_text}}
+}
+Other types of reports:
+\itemize{
+  \item \code{\link{report_system}}
+  \item \code{\link{report_packages}}
+  \item \code{\link{report_participants}}
+  \item \code{\link{report_sample}}
+}
+Methods:
+\itemize{
+  \item \code{\link{as.report}}
+}
 }

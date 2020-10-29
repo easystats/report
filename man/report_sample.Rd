@@ -39,10 +39,11 @@ report_sample(
 A data frame of class \code{report_table1} with variable names and their related summary statistics.
 }
 \description{
-Create sample description table (Table 1).
+Create sample description table (also referred to as "Table 1").
 }
 \examples{
-data(iris)
+library(report)
+
 report_sample(iris[, 1:4])
 report_sample(iris, select = c("Sepal.Length", "Petal.Length", "Species"))
 report_sample(iris, group_by = "Species")

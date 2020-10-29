@@ -34,117 +34,121 @@ if (!requireNamespace("dplyr", quietly = TRUE)) {
 
 ## Installation
 
-First, install R. Then, run the following in the console:
+First, install R and R studio. Then, copy and paste the following lines in the console:
 
 ```{r eval=FALSE, message=FALSE, warning=FALSE, eval=FALSE}
-install.packages("devtools")
-devtools::install_github("neuropsychology/report")
+install.packages("remotes")
+remotes::install_github("easystats/report")  # You only need to do that once
 ```
 ```{r message=FALSE, warning=FALSE}
-library("report")
+library("report")  # Load the package every time you start R
 ```
 
-
-## Functions
-
-
-The `report` package works in a two steps fashion. First, creating a `report` object with the `report()` function (which takes different arguments depending on the type of object you are reporting). Then, this report can be displayed either textually, using `text_short()`, or as a table, using `table_short()`. Moreover, you can also access a more detailed (but less digest) version of the report using `text_long()` and `table_long()`.
+Great! The `report` package is installed, loaded .
 
 
-## Supported Objects
-
-### Dataframes
-
-```{r message=FALSE, warning=FALSE, eval=FALSE}
-r <- report(iris)
-text_short(r)
-```
-```{r message=FALSE, warning=FALSE}
-r <- report(iris)
-print(text_short(r), width = 100)
-```
-```{r message=FALSE, warning=FALSE}
-table_short(r)
-```
+## Examples
 
 
-### Grouped Dataframes
+The `report` package works in a two step fashion. First, you create a `report` object with the `report()` function. Then, this report object can be displayed either textually (the default output) or as a table, using `as.data.frame()`. Moreover, you can also access a more digest and compact version of the report using `summary()` on the report object.
 
-```{r message=FALSE, warning=FALSE, eval=FALSE}
-library(dplyr)
-
-r <- iris %>% 
-  group_by(Species) %>% 
-  report(median = TRUE, range = FALSE)  # Display only the Median and MAD
-
-text_short(r)
-```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-library(dplyr)
-
-r <- iris %>% 
-  group_by(Species) %>% 
-  report(median = TRUE, range = FALSE)  # Display only the Median and MAD
-print(text_short(r), width=100)
-```
-```{r message=FALSE, warning=FALSE, eval=TRUE}
-table_long(r)
-```
+**TO BE COMPLETED**.
 
 
-### Correlations and t-tests
+<!-- ## Supported Objects -->
 
-```{r message=FALSE, warning=FALSE, eval=FALSE}
-report(cor.test(iris$Sepal.Length, iris$Petal.Length))
-```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-print(report(cor.test(iris$Sepal.Length, iris$Petal.Length)), width = 100)
-```
+<!-- ### Dataframes -->
 
-```{r message=FALSE, warning=FALSE, eval=FALSE}
-report(t.test(iris$Sepal.Length, iris$Petal.Length))
-```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-print(report(t.test(iris$Sepal.Length, iris$Petal.Length)), width = 100)
-```
-
-### Linear Models (LMs)
-
-```{r message=FALSE, warning=FALSE, eval=FALSE}
-model <- lm(Sepal.Length ~ Petal.Length + Species, data=iris)
-r <- report(model)
-
-text_short(r)
-```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-model <- lm(Sepal.Length ~ Petal.Length + Species, data = iris) 
-r <- report(model)
-
-print(text_short(r), width = 100)
-```
-
-```{r message=FALSE, warning=FALSE, eval=TRUE}
-table_short(r)
-```
+<!-- ```{r message=FALSE, warning=FALSE, eval=FALSE} -->
+<!-- r <- report(iris) -->
+<!-- text_short(r) -->
+<!-- ``` -->
+<!-- ```{r message=FALSE, warning=FALSE} -->
+<!-- r <- report(iris) -->
+<!-- print(text_short(r), width = 100) -->
+<!-- ``` -->
+<!-- ```{r message=FALSE, warning=FALSE} -->
+<!-- table_short(r) -->
+<!-- ``` -->
 
 
+<!-- ### Grouped Dataframes -->
+
+<!-- ```{r message=FALSE, warning=FALSE, eval=FALSE} -->
+<!-- library(dplyr) -->
+
+<!-- r <- iris %>%  -->
+<!--   group_by(Species) %>%  -->
+<!--   report(median = TRUE, range = FALSE)  # Display only the Median and MAD -->
+
+<!-- text_short(r) -->
+<!-- ``` -->
+<!-- ```{r echo=FALSE, message=FALSE, warning=FALSE} -->
+<!-- library(dplyr) -->
+
+<!-- r <- iris %>%  -->
+<!--   group_by(Species) %>%  -->
+<!--   report(median = TRUE, range = FALSE)  # Display only the Median and MAD -->
+<!-- print(text_short(r), width=100) -->
+<!-- ``` -->
+<!-- ```{r message=FALSE, warning=FALSE, eval=TRUE} -->
+<!-- table_long(r) -->
+<!-- ``` -->
 
 
-### General Linear Models (GLMs)
+<!-- ### Correlations and t-tests -->
 
-```{r message=FALSE, warning=FALSE, eval=FALSE}
-model <- glm(vs ~ mpg + cyl, data=mtcars, family="binomial")
-r <- report(model)
+<!-- ```{r message=FALSE, warning=FALSE, eval=FALSE} -->
+<!-- report(cor.test(iris$Sepal.Length, iris$Petal.Length)) -->
+<!-- ``` -->
+<!-- ```{r echo=FALSE, message=FALSE, warning=FALSE} -->
+<!-- print(report(cor.test(iris$Sepal.Length, iris$Petal.Length)), width = 100) -->
+<!-- ``` -->
 
-text_long(r)
-```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-model <- glm(vs ~ mpg + cyl, data = mtcars, family = "binomial")
-r <- report(model)
+<!-- ```{r message=FALSE, warning=FALSE, eval=FALSE} -->
+<!-- report(t.test(iris$Sepal.Length, iris$Petal.Length)) -->
+<!-- ``` -->
+<!-- ```{r echo=FALSE, message=FALSE, warning=FALSE} -->
+<!-- print(report(t.test(iris$Sepal.Length, iris$Petal.Length)), width = 100) -->
+<!-- ``` -->
 
-print(text_long(r), width = 100)
-```
+<!-- ### Linear Models (LMs) -->
 
-```{r message=FALSE, warning=FALSE, eval=TRUE}
-table_long(r)
-```
+<!-- ```{r message=FALSE, warning=FALSE, eval=FALSE} -->
+<!-- model <- lm(Sepal.Length ~ Petal.Length + Species, data=iris) -->
+<!-- r <- report(model) -->
+
+<!-- text_short(r) -->
+<!-- ``` -->
+<!-- ```{r echo=FALSE, message=FALSE, warning=FALSE} -->
+<!-- model <- lm(Sepal.Length ~ Petal.Length + Species, data = iris)  -->
+<!-- r <- report(model) -->
+
+<!-- print(text_short(r), width = 100) -->
+<!-- ``` -->
+
+<!-- ```{r message=FALSE, warning=FALSE, eval=TRUE} -->
+<!-- table_short(r) -->
+<!-- ``` -->
+
+
+
+
+<!-- ### General Linear Models (GLMs) -->
+
+<!-- ```{r message=FALSE, warning=FALSE, eval=FALSE} -->
+<!-- model <- glm(vs ~ mpg + cyl, data=mtcars, family="binomial") -->
+<!-- r <- report(model) -->
+
+<!-- text_long(r) -->
+<!-- ``` -->
+<!-- ```{r echo=FALSE, message=FALSE, warning=FALSE} -->
+<!-- model <- glm(vs ~ mpg + cyl, data = mtcars, family = "binomial") -->
+<!-- r <- report(model) -->
+
+<!-- print(text_long(r), width = 100) -->
+<!-- ``` -->
+
+<!-- ```{r message=FALSE, warning=FALSE, eval=TRUE} -->
+<!-- table_long(r) -->
+<!-- ``` -->

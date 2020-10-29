@@ -89,7 +89,7 @@ report_participants <- function(data, age = NULL, sex = NULL, education = NULL, 
       pre_text <- paste0("the '", paste0(names(i[group]), " - ", as.character(sapply(i[group], unique)), collapse = " and "), "' group: ")
       text <- c(text, paste0(pre_text, current_text))
     }
-    text <- paste("For", format_text(text, sep = ", for ", last = " and for "))
+    text <- paste("For", text_concatenate(text, sep = ", for ", last = " and for "))
   } else {
     text <- .report_participants(data, age = age, sex = sex, education = education, participants = participants, spell_n = spell_n, digits = digits, ...)
   }
@@ -144,7 +144,7 @@ report_participants <- function(data, age = NULL, sex = NULL, education = NULL, 
   if (all(is.na(data[[age]]))) {
     text_age <- ""
   } else {
-    text_age <- report(data[[age]], centrality = "mean", missing_percentage = NULL, digits = digits, ...)$texts$text_short
+    text_age <- summary(report_statistics(data[[age]], n=FALSE, centrality = "mean", missing_percentage = NULL, digits = digits, ...))
     text_age <- sub("Mean =", "Mean age =", text_age, fixed = TRUE)
   }
 
@@ -162,12 +162,11 @@ report_participants <- function(data, age = NULL, sex = NULL, education = NULL, 
     text_education <- ""
   } else {
     if (is.numeric(data[[education]])) {
-      text_education <- report(data[[education]], centrality = "mean", missing_percentage = NULL, digits = digits, ...)$texts$text_short
+      text_education <- summary(report_statistics(data[[education]], n=FALSE, centrality = "mean", missing_percentage = NULL, digits = digits, ...))
       text_education <- sub("Mean =", "Mean education =", text_education, fixed = TRUE)
     } else {
-      txt <- as.character(report(as.factor(data[[education]]), levels_percentage = TRUE, digits = digits, ...)$texts$text_short)
-      txt <- strsplit(txt, ":", fixed = TRUE)[[1]][2]
-      text_education <- paste0("Education:", txt)
+      txt <- summary(report_statistics(as.factor(data[[education]]), levels_percentage = TRUE, digits = digits, ...))
+      text_education <- paste0("Education: ", txt)
     }
   }
 

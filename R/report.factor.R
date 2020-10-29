@@ -1,74 +1,13 @@
 #' @rdname report.data.frame
-#' @inherit report return seealso
-#' @examples
-#' x <- factor(rep(c("A", "B", "C"), 10))
-#' report(x)
-#' model_table(x)
-#' model_text(x)
-#' summary(model_table(x))
-#' summary(model_text(x))
+#' @importFrom parameters skewness kurtosis
+#'
 #' @export
-report.factor <- function(model, levels_percentage = FALSE, ...) {
-  model <- as.factor(model)
+report.factor <- function(x, levels_percentage = "auto", ...) {
+  table <- report_table(x, levels_percentage = levels_percentage, ...)
+  text <- report_text(x, levels_percentage = levels_percentage, ...)
 
-  if (length(model[is.na(model)]) != 0) {
-    model <- factor(ifelse(is.na(model), "missing", as.character(model)), levels = c(levels(model), "missing"))
-  }
-
-  # Table -------------------------------------------------------------------
-  table_full <- as.data.frame(table(model))
-  names(table_full) <- c("Level", "n_Obs")
-  table_full$percentage_Obs <- table_full$n_Obs / length(model) * 100
-
-  table_no_missing <- table_full[table_full$Level != "missing", ]
-  # Text --------------------------------------------------------------------
-  if (nrow(table_full) > 1) {
-    text_total_levels <- paste0(nrow(table_no_missing), " levels: ")
-  } else {
-    text_total_levels <- paste0(nrow(table_no_missing), " level: ")
-  }
-
-  text_levels <- paste0(table_full$Level)
-  text_n_Obs <- paste0("n = ", table_full$n_Obs)
-  text_percentage_Obs <- paste0(insight::format_value(table_full$percentage_Obs), "%")
-
-
-  text_full <- paste0(
-    text_levels, " (",
-    text_n_Obs, ", ",
-    text_percentage_Obs, ")"
-  )
-  # Selection ---------------------------------------------------------------
-  table <- table_full
-  if (levels_percentage == TRUE) {
-    text <- paste0(text_levels, ", ", text_percentage_Obs)
-  } else {
-    table <- remove_if_possible(table, "percentage_Obs")
-    text <- paste0(text_levels, ", ", text_n_Obs)
-  }
-
-
-  text <- paste0(text_total_levels, format_text(text, sep = "; "))
-  text_full <- paste0(text_total_levels, format_text(text_full, sep = "; "))
-
-  values <- list()
-  for (level in table_full$Level) {
-    values[[level]] <- as.list(table_full[table_full$Level == level, ])
-  }
-
-
-  # Output
-  tables <- as.model_table(table, table_full)
-  texts <- as.model_text(text, text_full)
-
-  out <- list(
-    texts = texts,
-    tables = tables
-  )
-
-  as.report(out, ...)
+  as.report(text, table = table, ...)
 }
-
 
 
 #' @export
@@ -76,15 +15,142 @@ report.logical <- report.factor
 
 
 
+# report_table ------------------------------------------------------------
+
+
+
 #' @export
-model_table.factor <- function(model, levels_percentage = FALSE, ...) {
-  r <- report(model, levels_percentage = levels_percentage, ...)
-  r$tables
+report_table.factor <- function(x, levels_percentage = "auto", ...) {
+
+  levels_percentage <- .report_dataframe_percentage(x, levels_percentage)
+
+  if (length(x[is.na(x)]) != 0) {
+    x <- factor(ifelse(is.na(x), "missing", as.character(x)), levels = c(levels(x), "missing"))
+  }
+
+  # Table
+  table_full <- as.data.frame(table(x))
+  names(table_full) <- c("Level", "n_Obs")
+  table_full$percentage_Obs <- table_full$n_Obs / length(x) * 100
+
+  # Shorten
+  table <- table_full
+  if (levels_percentage == FALSE) {
+    table <- data_remove(table, "percentage_Obs")
+  }
+
+  as.report_table(table_full, summary = table)
+}
+
+#' @export
+report_table.logical <- report_table.factor
+
+# report_parameters -------------------------------------------------------
+
+
+
+#' @export
+report_parameters.factor <- function(x, table = NULL, levels_percentage = "auto", ...) {
+  # Get table
+  if (is.null(table)) {
+    table <- report_table(x, levels_percentage = levels_percentage, ...)
+  }
+
+  text_levels <- paste0(table$Level)
+  text_n_Obs <- paste0("n = ", table$n_Obs)
+  text_percentage_Obs <- paste0(insight::format_value(table$percentage_Obs), "%")
+
+  text_full <- paste0(
+    text_levels, " (",
+    text_n_Obs, ", ",
+    text_percentage_Obs, ")"
+  )
+
+  if (isTRUE(levels_percentage)) {
+    text <- paste0(
+      text_levels, " (",
+      text_percentage_Obs, ")"
+    )
+  } else {
+    text <- paste0(
+      text_levels, " (",
+      text_n_Obs, ")"
+    )
+  }
+
+  as.report_parameters(text_full, summary = text, ...)
 }
 
 
 #' @export
-model_text.factor <- function(model, levels_percentage = FALSE, ...) {
-  r <- report(model, levels_percentage = levels_percentage, ...)
-  r$texts
+report_parameters.logical <- report_parameters.factor
+
+# report_text -------------------------------------------------------------
+
+#' @export
+report_text.factor <- function(x, table = NULL, levels_percentage = "auto", ...) {
+  if (!is.null(list(...)$varname)) {
+    name <- list(...)$varname
+  } else if (is.null(names(x))) {
+    name <- deparse(substitute(x))
+  } else {
+    name <- "Factor"
+  }
+
+  if (is.null(table)) {
+    table <- report_table(x, levels_percentage = levels_percentage, ...)
+  }
+  table_no_missing <- table[table$Level != "missing", ]
+  params <- report_parameters(x, table = table, levels_percentage = levels_percentage, ...)
+
+  if (nrow(table) > 1) {
+    text_total_levels <- paste0(name, ": ", nrow(table_no_missing), " levels, namely ")
+  } else {
+    text_total_levels <- paste0(name, ": ", nrow(table_no_missing), " level, namely ")
+  }
+
+  text_full <- paste0(text_total_levels, format_text(params, sep = ", ", ...))
+  text <- paste0(text_total_levels, format_text(summary(params), sep = ", ", ...))
+
+  as.report_text(text_full, summary = text)
+}
+
+#' @export
+report_text.logical <- report_text.factor
+
+
+
+# report_statistics -------------------------------------------------------
+
+
+#' @export
+report_statistics.factor <- function(x, table = NULL, levels_percentage = "auto", ...) {
+
+  if (is.null(table)) {
+    table <- report_table(x, levels_percentage = levels_percentage, ...)
+  }
+
+  text_levels <- paste0(table$Level)
+  text_n_Obs <- paste0("n = ", table$n_Obs)
+  text_percentage_Obs <- paste0(insight::format_value(table$percentage_Obs), "%")
+
+  text_full <- paste0(
+    text_levels, ", ",
+    text_n_Obs, ", ",
+    text_percentage_Obs
+  )
+
+  if (isTRUE(levels_percentage)) {
+    text <- paste0(
+      text_levels, ", ",
+      text_percentage_Obs
+    )
+  } else {
+    text <- paste0(
+      text_levels, ", ",
+      text_n_Obs
+    )
+  }
+
+  as.report_statistics(paste0(text_full, collapse = "; "), summary = paste0(text, collapse = "; "))
 }

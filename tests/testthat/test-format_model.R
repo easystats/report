@@ -1,19 +1,27 @@
-if (require("testthat") && require("insight") && require("httr")) {
+if (require("testthat")) {
   test_that("format_model", {
-    testthat::expect_equal(format_model(insight::download_model("lm_1")), "linear model")
-    testthat::expect_equal(format_model(insight::download_model("glm_1")), "logistic model")
-    testthat::expect_equal(format_model(insight::download_model("glm_2")), "logistic model")
-    testthat::expect_equal(format_model(insight::download_model("glm_3")), "logistic model")
-    testthat::expect_equal(format_model(insight::download_model("glm_4")), "probit model")
-
-    testthat::expect_equal(format_model(insight::download_model("lmerMod_1")), "linear mixed model")
-    testthat::expect_equal(format_model(insight::download_model("merMod_1")), "logistic mixed model")
-    testthat::expect_equal(format_model(insight::download_model("merMod_2")), "logistic mixed model")
-
-    testthat::expect_equal(format_model(insight::download_model("stanreg_lm_1")), "Bayesian linear model")
-    testthat::expect_equal(format_model(insight::download_model("stanreg_glm_1")), "Bayesian logistic model")
-
-    model <- glm(vs ~ mpg, data = mtcars, family = "poisson")
-    testthat::expect_equal(format_model(model), "poisson model")
+    testthat::expect_equal(format_model(lm(Sepal.Length ~ Petal.Length * Species, data = iris)), "linear model")
+    testthat::expect_equal(format_model(glm(vs ~ disp, data = mtcars, family = "binomial")), "logistic model")
+    testthat::expect_equal(format_model(glm(vs ~ disp, data = mtcars, family = binomial(link="probit"))), "probit model")
+    testthat::expect_equal(format_model(glm(vs ~ mpg, data = mtcars, family = "poisson")), "poisson model")
   })
 }
+
+if (require("testthat") && require("lme4")) {
+  test_that("format_model", {
+    testthat::expect_equal(format_model(lme4::lmer(wt ~ cyl + (1|gear), data = mtcars)), "linear mixed model")
+    testthat::expect_equal(format_model(lme4::glmer(vs ~ cyl + (1|gear), data = mtcars, family="binomial")), "logistic mixed model")
+    testthat::expect_equal(format_model(lme4::glmer(vs ~ drat + cyl + (1|gear), data = mtcars, family="binomial")), "logistic mixed model")
+  })
+}
+
+
+if (require("testthat") && require("rstanarm")) {
+  test_that("format_model", {
+
+    testthat::expect_equal(format_model(suppressWarnings(rstanarm::stan_glm(mpg ~ wt, data = mtcars, refresh=0, iter=50))), "Bayesian linear model")
+    testthat::expect_equal(format_model(suppressWarnings(rstanarm::stan_glm(vs ~ wt, data = mtcars, family="binomial", refresh=0, iter=50))), "Bayesian logistic model")
+
+  })
+}
+

@@ -1,405 +1,223 @@
-#' @rdname report_model
-#' @param prefix Prefix character that appears in front of each line.
-#' @examples
-#' model <- lm(Sepal.Length ~ Species, data = iris)
-#' report_parameters(model)
+#' Report the parameters of a model
 #'
-#' library(lme4)
-#' model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
-#' report_parameters(model)
+#' Creates a list containing a description of the parameters of R objects (see list of supported objects in \code{\link{report}}).
+#'
+#' @inheritParams report
+#' @inheritParams report_table
+#' @inheritParams report_text
+#' @inheritParams as.report
+#'
+#' @return A \code{vector}.
+#'
+#' @examples
+#' library(report)
+#'
+#' # Miscellaneous
+#' r <- report_parameters(sessionInfo())
+#' r
+#' summary(r)
+#'
+#' # Data
+#' report_parameters(iris$Sepal.Length)
+#' report_parameters(as.character(round(iris$Sepal.Length, 1)))
+#' report_parameters(iris$Species)
+#' report_parameters(iris)
+#'
+#' # h-tests
+#' report_parameters(t.test(iris$Sepal.Width, iris$Sepal.Length))
+#' report_parameters(cor.test(iris$Sepal.Width, iris$Sepal.Length))
+#'
+#' # ANOVA
+#' report_parameters(aov(Sepal.Length ~ Species, data=iris))
+#'
+#' # GLMs
+#' report_parameters(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
+#' report_parameters(lm(Petal.Width ~ Species, data = iris), include_intercept=FALSE)
+#' report_parameters(glm(vs ~ disp, data = mtcars, family = "binomial"))
+#'
+#' # Mixed models
+#' if(require("lme4")){
+#'   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
+#'   report_parameters(model)
+#' }
+#'
+#' # Bayesian models
+#' if(require("rstanarm")){
+#'   model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh=0, iter=600)
+#'   report_parameters(model)
+#' }
 #' @export
-report_parameters <- function(model, parameters, prefix = "  - ", ...) {
+report_parameters <- function(x, ...) {
   UseMethod("report_parameters")
 }
 
 
+#' @export
+report_parameters.default <- function(x, ...) {
+  stop(paste0("report_parameters() is not available for objects of class ", class(x)))
+}
+
+# METHODS -----------------------------------------------------------------
+
+
+#' @rdname as.report
+#' @export
+as.report_parameters <- function(x, summary = NULL, prefix = "  - ", ...) {
+  class(x) <- unique(c("report_parameters", class(x)))
+  attributes(x) <- c(attributes(x), list(...))
+  attr(x, "prefix") <- prefix
+
+  if (!is.null(summary)) {
+    class(summary) <- unique(c("report_parameters", class(summary)))
+    attr(summary, "prefix") <- prefix
+    attr(x, "summary") <- summary
+  }
+  x
+}
+
+#' @export
+as.character.report_parameters <- function(x, prefix = NULL, ...) {
+  # Find prefix
+  if (is.null(prefix)) prefix <- attributes(x)$prefix
+  if (is.null(prefix)) prefix <- ""
+
+  # Concatenate
+  text <- paste0(prefix, x)
+  text <- paste0(text, collapse = "\n")
+  text
+}
+
+#' @export
+summary.report_parameters <- function(object, ...) {
+  if (is.null(attributes(object)$summary)) {
+    object
+  } else{
+    attributes(object)$summary
+  }
+}
+
+
+#' @export
+print.report_parameters <- function(x, ...) {
+  cat(as.character(x, ...))
+}
 
 
 
-
+# Utils -------------------------------------------------------------------
 
 #' @keywords internal
-.report_parameters_names <- function(parameters, parameter_column = "Parameter", label = "effect of ") {
-  names <- parameters[[parameter_column]]
-
-  # Regular effects
-  names[!grepl(" * ", names, fixed = TRUE)] <- paste0("The ", label, names[!grepl(" * ", names, fixed = TRUE)])
-
-  interactions <- names[grepl(" * ", names, fixed = TRUE)]
-  interactions <- unlist(lapply(strsplit(interactions, " * ", fixed = TRUE), function(x) {
-    new <- paste(head(x, -1), collapse = " * ")
-    new <- paste(tail(x, 1), "on", new)
-    new
-  }))
-  names[grepl(" * ", names, fixed = TRUE)] <- paste0("The interaction ", label, interactions)
+.format_parameters_aov <- function(names) {
+  for(i in 1:length(names)){
+    if (grepl(":", names[i], fixed = TRUE)) {
+      names[i] <- format_text(unlist(strsplit(names[i], ":", fixed = TRUE)))
+      names[i] <- paste0("The interaction between ", names[i])
+    } else {
+      names[i] <- paste0("The main effect of ", names[i])
+    }
+  }
   names
 }
 
-
-#' @importFrom insight format_pd
-#' @importFrom effectsize interpret_direction
 #' @keywords internal
-.report_parameters_direction <- function(parameters) {
-  estimate_name <- names(parameters)[names(parameters) %in% c("Coefficient", "Difference", "Median", "Mean", "MAP")][1]
+.format_parameters_regression <- function(names) {
+  for(i in 1:length(names)){
+    # Interaction
+    if (grepl(" * ", names[i], fixed=TRUE)) {
+      parts <- unlist(strsplit(names[i], " * ", fixed = TRUE))
+      basis <- paste0(head(parts, -1), collapse = " * ")
+      names[i] <- paste0("The interaction effect of ", tail(parts, 1), " on ", basis)
 
+    # Intercept
+    } else if(names[i] == "(Intercept)") {
+      names[i] <- paste0("The intercept")
 
-  # Bayes factor
-  # if ("BF" %in% names(parameters)) {
-  #   .add_bf <- function(bf, ...){
-  #     ori_bf <- bf
-  #     dir <- ifelse(log(bf) < 0,"BF01", "BF10")
-  #
-  #     bf[bf < 1] <- 1 / bf[bf < 1]
-  #
-  #     paste0(
-  #       insight::format_bf(bf, name = dir),
-  #       ", considered ",
-  #       report::interpret_bf(ori_bf, include_value = FALSE, ...),
-  #       " the effect"
-  #     )
-  #   }
-  #
-  #   text <- paste0(
-  #     .add_comma(text),
-  #     .add_bf(parameters$BF)
-  #   )
-  # }
-
-
-  # Probability of Direction
-  if (length(estimate_name) == 1) {
-    if ("pd" %in% names(parameters)) {
-      text <- paste0(
-        " has a probability of ",
-        insight::format_pd(parameters$pd, name = NULL),
-        " of being ",
-        effectsize::interpret_direction(parameters[[estimate_name]])
-      )
+    # No interaction
     } else {
-      text <- paste0(
-        " is ",
-        effectsize::interpret_direction(parameters[[estimate_name]])
-      )
+      names[i] <- paste0("The effect of ", names[i])
     }
-  } else {
-    text <- ""
   }
-
-  text
+  names
 }
 
-
-
-
-#' @importFrom effectsize interpret_d interpret_odds interpret_r
 #' @keywords internal
-.report_parameters_size <- function(parameters, interpretation = "cohen1988", type = "d") {
-  if (is.null(interpretation) || is.na(interpretation)) {
-    return("")
+.parameters_starting_text <- function(x, params) {
+
+  if("pretty_names" %in% attributes(params)){
+    pretty_name <- attributes(params)$pretty_names[params$Parameter]
+  } else{
+    pretty_name <- parameters::format_parameters(x)
   }
 
-  text <- ""
-
-  estimate_name <- names(parameters)[names(parameters) %in% c("Std_Coefficient", "Std_Difference", "Std_Median", "Std_Mean", "Std_MAP")][1]
-
-  if (!is.na(estimate_name)) {
-    if (type == "d") {
-      text <- effectsize::interpret_d(parameters[[estimate_name]], rules = interpretation)
-    } else if (type == "logodds") {
-      text <- effectsize::interpret_odds(parameters[[estimate_name]], rules = interpretation, log = TRUE)
-    } else if (type == "r") {
-      text <- effectsize::interpret_r(parameters[[estimate_name]], rules = interpretation)
-    }
-  } else {
-    text <- ""
-  }
+  text <- sapply(pretty_name,
+                 .format_parameters_regression,
+                 simplify = TRUE, USE.NAMES = FALSE)
 
   text
 }
-
-
-
-
-
-#' @importFrom effectsize interpret_p interpret_rope
-#' @keywords internal
-.report_parameters_significance <- function(parameters, rope_ci = 1) {
-  text <- ""
-
-  if ("p" %in% names(parameters)) {
-    text <- effectsize::interpret_p(parameters$p)
-  }
-
-  if ("ROPE_Percentage" %in% names(parameters) & !is.null(rope_ci)) {
-    text <- effectsize::interpret_rope(parameters$ROPE_Percentage, ci = rope_ci)
-  }
-  text
-}
-
-
-
-#' @importFrom insight format_rope format_value format_ci format_p
-#' @keywords internal
-.report_parameters_indices <- function(parameters, ci = 0.95, coefname = "beta") {
-  text <- ""
-
-  if ("Coefficient" %in% names(parameters)) {
-    text <- paste0(
-      text,
-      coefname,
-      " = ",
-      insight::format_value(parameters$Coefficient)
-    )
-  }
-
-  if ("Difference" %in% names(parameters)) {
-    text <- paste0(
-      text,
-      "Difference = ",
-      insight::format_value(parameters$Difference)
-    )
-  }
-
-  if ("SE" %in% names(parameters)) {
-    text <- paste0(
-      .add_comma(text),
-      "SE = ",
-      insight::format_value(parameters$SE)
-    )
-  }
-
-  if ("Median" %in% names(parameters)) {
-    text <- paste0(
-      text,
-      "median = ",
-      insight::format_value(parameters$Median)
-    )
-  }
-
-  if ("MAD" %in% names(parameters)) {
-    text <- paste0(
-      .add_comma(text),
-      "MAD = ",
-      insight::format_value(parameters$MAD)
-    )
-  }
-
-  if ("Mean" %in% names(parameters)) {
-    text <- paste0(
-      .add_comma(text),
-      "mean = ",
-      insight::format_value(parameters$Mean)
-    )
-  }
-
-  if ("SD" %in% names(parameters)) {
-    text <- paste0(
-      .add_comma(text),
-      "SD = ",
-      insight::format_value(parameters$SD)
-    )
-  }
-
-  if ("MAP" %in% names(parameters)) {
-    text <- paste0(
-      .add_comma(text),
-      "MAP = ",
-      insight::format_value(parameters$MAP)
-    )
-  }
-
-
-  # CI
-  if (all(c("CI_low", "CI_high") %in% names(parameters))) {
-    text <- paste0(
-      .add_comma(text),
-      insight::format_ci(parameters$CI_low, parameters$CI_high, ci = ci)
-    )
-  }
-
-  # ROPE
-  if ("ROPE_Percentage" %in% names(parameters)) {
-    text <- paste0(
-      .add_comma(text),
-      insight::format_rope(parameters$ROPE_Percentage)
-    )
-  }
-
-  # Standardized stuff
-  if ("Std_Coefficient" %in% names(parameters)) {
-    text <- paste0(
-      .add_comma(text),
-      "std. ",
-      coefname,
-      " = ",
-      insight::format_value(parameters$Std_Coefficient)
-    )
-  }
-
-  if ("Std_Difference" %in% names(parameters)) {
-    text <- paste0(
-      .add_comma(text),
-      "std. difference = ",
-      insight::format_value(parameters$Std_Difference)
-    )
-  }
-
-  if ("Std_SE" %in% names(parameters)) {
-    text <- paste0(
-      .add_comma(text),
-      "std. SE = ",
-      insight::format_value(parameters$Std_SE)
-    )
-  }
-
-  if ("Std_Median" %in% names(parameters)) {
-    text <- paste0(
-      .add_comma(text),
-      "std. median = ",
-      insight::format_value(parameters$Std_Median)
-    )
-  }
-
-  if ("Std_MAD" %in% names(parameters)) {
-    text <- paste0(
-      .add_comma(text),
-      "std. MAD = ",
-      insight::format_value(parameters$Std_MAD)
-    )
-  }
-
-  if ("Std_Mean" %in% names(parameters)) {
-    text <- paste0(
-      .add_comma(text),
-      "std. mean = ",
-      insight::format_value(parameters$Std_Mean)
-    )
-  }
-
-  if ("Std_SD" %in% names(parameters)) {
-    text <- paste0(
-      .add_comma(text),
-      "std. SD = ",
-      insight::format_value(parameters$Std_SD)
-    )
-  }
-
-  if ("Std_MAP" %in% names(parameters)) {
-    text <- paste0(
-      .add_comma(text),
-      "std. MAP = ",
-      insight::format_value(parameters$Std_MAP)
-    )
-  }
-
-  # ROPE
-  if ("p" %in% names(parameters)) {
-    text <- paste0(
-      .add_comma(text),
-      insight::format_p(parameters$p, digits = "apa")
-    )
-  }
-
-  text
-}
-
 
 
 
 #' @importFrom effectsize interpret_rhat interpret_ess
 #' @keywords internal
-.report_parameters_bayesian_diagnostic <- function(parameters, bayesian_diagnostic = TRUE) {
+.parameters_diagnostic_bayesian <- function(diagnostic, only_when_insufficient=FALSE, ...) {
+
   # Convergence
-  if ("Rhat" %in% names(parameters)) {
-    convergence <- effectsize::interpret_rhat(parameters$Rhat, rules = "vehtari2019")
-    diagnostic <- ifelse(convergence == "converged",
-      paste0(
-        " The algorithm successfuly converged (Rhat = ",
-        insight::format_value(parameters$Rhat, digits = 3),
-        ")"
-      ),
-      paste0(
-        " However, the algorithm might not have successfuly converged (Rhat = ",
-        insight::format_value(parameters$Rhat, digits = 3),
-        ")"
-      )
+  if ("Rhat" %in% names(diagnostic)) {
+    convergence <- effectsize::interpret_rhat(diagnostic$Rhat, ...)
+    text <- ifelse(convergence == "converged",
+                         paste0(
+                           "The estimation successfuly converged (Rhat = ",
+                           insight::format_value(diagnostic$Rhat, digits = 3),
+                           ")"
+                         ),
+                         paste0(
+                           "However, the estimation might not have successfuly converged (Rhat = ",
+                           insight::format_value(diagnostic$Rhat, digits = 3),
+                           ")"
+                         )
     )
 
-    if ("ESS" %in% names(parameters)) {
-      stability <- effectsize::interpret_ess(parameters$ESS, rules = "burkner2017")
-      diagnostic <- ifelse(stability == "sufficient" & convergence == "converged",
-        paste0(
-          diagnostic,
-          " and the estimates can be considered as stable (ESS = ",
-          insight::format_value(parameters$ESS, digits = 0),
-          ")."
-        ),
-        ifelse(stability == "sufficient" & convergence != "converged",
-          paste0(
-            diagnostic,
-            " even though the estimates can be considered as stable (ESS = ",
-            insight::format_value(parameters$ESS, digits = 0),
-            ")."
-          ),
-          ifelse(stability != "sufficient" & convergence == "converged",
-            paste0(
-              diagnostic,
-              " but the estimates cannot be considered as stable (ESS = ",
-              insight::format_value(parameters$ESS, digits = 0),
-              ")."
-            ),
-            paste0(
-              diagnostic,
-              " and the estimates cannot be considered as stable (ESS = ",
-              insight::format_value(parameters$ESS, digits = 0),
-              ")."
-            )
-          )
-        )
+    if ("ESS" %in% names(diagnostic)) {
+      stability <- effectsize::interpret_ess(diagnostic$ESS, ...)
+      text <- ifelse(stability == "sufficient" & convergence == "converged",
+                           paste0(
+                             text,
+                             " and the indices are reliable (ESS = ",
+                             insight::format_value(diagnostic$ESS, digits = 0),
+                             ")"
+                           ),
+                           ifelse(stability == "sufficient" & convergence != "converged",
+                                  paste0(
+                                    text,
+                                    " even though the indices appear as reliable (ESS = ",
+                                    insight::format_value(diagnostic$ESS, digits = 0),
+                                    ")"
+                                  ),
+                                  ifelse(stability != "sufficient" & convergence == "converged",
+                                         paste0(
+                                           text,
+                                           " but the indices are unreliable (ESS = ",
+                                           insight::format_value(diagnostic$ESS, digits = 0),
+                                           ")"
+                                         ),
+                                         paste0(
+                                           text,
+                                           " and the indices are unreliable (ESS = ",
+                                           insight::format_value(diagnostic$ESS, digits = 0),
+                                           ")"
+                                         )
+                                  )
+                           )
       )
-      convergence <- ifelse(stability != "sufficient",
-        "failed",
-        convergence
-      )
-    } else {
-      diagnostic <- paste0(diagnostic, ".")
     }
   } else {
-    diagnostic <- ""
+    text <- ""
   }
 
-  if (bayesian_diagnostic) {
-    diagnostic
+  if (only_when_insufficient==FALSE) {
+    text
   } else {
-    ifelse(parameters$convergence == "converged", diagnostic, "")
+    ifelse(convergence != "converged" | stability != "sufficient", text, "")
   }
-}
-
-
-
-
-
-#' @keywords internal
-.report_parameters_combine <- function(names = "", direction = "", size = "", significance = "", indices = "", bayesian_diagnostic = "") {
-  text <- paste0(names, direction)
-
-  text <- ifelse(significance != "" & size != "", paste0(text, " and can be considered as ", size, " and ", significance),
-    ifelse(significance != "" & size == "", paste0(text, " and can be considered as ", significance),
-      ifelse(significance == "" & size != "", paste0(text, " and can be considered as ", size), text)
-    )
-  )
-
-  text <- paste0(text, " (", indices, ").")
-  paste0(text, bayesian_diagnostic)
-}
-
-
-
-
-
-
-
-#' @keywords internal
-.add_comma <- function(text) {
-  ifelse(substring(text, nchar(text) - 1) != ", " & text != "", paste0(text, ", "), text)
 }

@@ -1,7 +1,7 @@
 Package: report
 Type: Package
-Title: Automated Reporting of Statistical Models in R
-Version: 0.1.0
+Title: Automated Reporting of Objects in R
+Version: 0.2.0
 Authors@R: c(
 	person("Dominique", 
 		"Makowski", 
@@ -28,14 +28,14 @@ Encoding: UTF-8
 LazyData: true
 VignetteBuilder: knitr
 Imports:
-	insight,
-	bayestestR,
-	parameters,
-	effectsize,
-	performance,
 	stats,
 	tools,
-	utils
+	utils,
+	insight (>= 0.10.1),
+	bayestestR (>= 0.7.5.1),
+	parameters (>= 0.8.6),
+	effectsize (>= 0.4.0),
+	performance (>= 0.5.0)
 Suggests:
 	BayesFactor,
 	dplyr,
@@ -46,5 +46,51 @@ Suggests:
 	rstanarm,
 	rmarkdown,
 	testthat
+Remotes:
+	easystats/insight,
+	easystats/bayestestR,
+	easystats/effectsize,
+	easystats/parameters,
+    easystats/performance
 RoxygenNote: 7.1.1
 Language: en-GB
+Collate: 
+    'format_algorithm.R'
+    'format_citation.R'
+    'format_formula.R'
+    'format_model.R'
+    'format_text.R'
+    'utils_combine_tables.R'
+    'report.lm.R'
+    'report.MixMod.R'
+    'report_text.R'
+    'report.R'
+    'report.htest.R'
+    'report.aov.R'
+    'report.bayesfactor_models.R'
+    'report.character.R'
+    'report.data.frame.R'
+    'report.factor.R'
+    'report.glm.R'
+    'report.glmmTMB.R'
+    'report.lme4.R'
+    'report.numeric.R'
+    'report.sessionInfo.R'
+    'report.stanreg.R'
+    'report.survreg.R'
+    'report.zeroinfl.R'
+    'report_effectsize.R'
+    'report_info.R'
+    'report_intecept.R'
+    'report_model.R'
+    'report_parameters.R'
+    'report_participants.R'
+    'report_performance.R'
+    'report_priors.R'
+    'report_random.R'
+    'report_sample.R'
+    'report_statistics.R'
+    'report_table.R'
+    'startup_message.R'
+    'utils_data.R'
+    'utils_grouped_df.R'

@@ -1,5 +1,5 @@
 ---
-title: "How to Cite Packages"
+title: "Report and Cite Packages"
 output: 
   github_document:
     toc: true
@@ -30,62 +30,61 @@ if (!requireNamespace("dplyr", quietly = TRUE)) {
 ```
 
 
-**Citing the packages, modules and softwares you used for your analysis is important**, both from a **reproducibility perspective** (statistical routines are often implemented in different ways by different packages, which could explain possible discrepancies in the results. Saying *"I did this using this function from that package version 1.2.3"* is a way of **protecting yourself** by being transparent about what you have found doing what you have done), but also for **acknowledging** the work and time that people spent creating tools for others (sometimes at the expense of their own research).
+**Citing the packages, modules and software** you used for your analysis is important to acknowledge the time and effort spent by people to create theses tools (sometimes on their free-time, or at the expense of their own research), but also for **reproducibility**. Indeed, statistical routines are often implemented in different ways by different packages, which can lead to possible discrepancies in the results. Saying *"I did this using this function from that package version 1.2.3"* is a way of **protecting yourself** by being transparent about what you have found doing what you have done.
 
-- **That's great, but how to *actually* cite them?**
-- **I used about 100 packages, should I cite them *all*?**
+> **That's great, but how to *actually* cite them?**
+
+> **I used about 100 packages, should I cite them *all*?**
+
+> **How should I report the system (the OS, the R version, etc.)?**
+
+All the answers below :)
 
 ## What should I cite?
 
 Ideally, you should indeed cite all the packages that you used. However, it's often not possible to cite them all in the manuscript body. Therefore, we would recommend the following:
 
-### **1. Cite the main/important packages in the manuscript**
+### 1. Cite the main/important packages in the manuscript
 
-This should be done for the packages that were central to your specific study (*i.e.,* that got you the results that you reported) rather than data manipulation tools (*even though these are as much, if not *more*, important*).
-
-##### Example:
+This should be done for the packages that were central to your specific study (*i.e.,* that got you the results that you reported) rather than data manipulation tools (*even though these are as much, if not *more*, important*). For example:
 
 > Statistics were done using R 3.5.0 (R Core Team, 2018), the *rstanarm* (*v2.13.1*; Gabry \& Goodrich, 2016) and the *report* (*v0.1.0*; Makowski \& Lüdecke, 2019) packages. The full reproducible code is available in **Supplementary Materials**.
 
-### **2. Present everything in Supplementary Materials**
+### 2. Present everything in Supplementary Materials
 
-Then, in *Supplementary Materials*, you can show all the packages and functions you used. To do it quickly, explicitly and in a reproducible fashion, we recommend writing the *Supplementary Materials* with [**R Markdown**](https://rmarkdown.rstudio.com/), which can generate *docs* and *pdf* files that you can submit along with your manuscript. Moreover, if you're using R, you can include (usually at the end) every used package's citation using the `cite_packages()` function from the [**report**](https://github.com/easystats/report) package.
+Then, in *Supplementary Materials*, you can show all the packages and functions you used. To do it quickly, explicitly and in a reproducible fashion, we recommend writing the *Supplementary Materials* with [**R Markdown**](https://rmarkdown.rstudio.com/), which can generate *docs* and *pdf* files that you can submit along with your manuscript. Moreover, if you're using R, you can include (usually at the end) every used package's citation using the `cite_packages()` function from the [**report**](https://github.com/easystats/report) package. For example:
 
-##### Example:
-
-```{r message=FALSE, warning=FALSE, eval=FALSE}
+```{r message=FALSE, warning=FALSE, results='asis'}
 library(report)
 library(dplyr)
-library(knitr)
 
-cite_packages(sessionInfo())
-```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-library(report)
-library(dplyr)
-library(knitr)
-
-knitr::kable(cite_packages(sessionInfo()))
+cite_packages()
 ```
 
 
-## How should I cite it?
+## Where 
 
-Finding the right citation information is sometimes complicated. In R, this process is made quite easy, you simply run `citation("packagename")`. For instance, `citation("dplyr")`:
+Finding the right citation information is sometimes complicated. In R, this process is made quite easy, you simply run `citation("packagename")`. For instance, `citation("bayestestR")`:
 
-    To cite ‘dplyr’ in publications use:
+    To cite bayestestR in publications use:
 
-      Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2018). dplyr: A Grammar of Data Manipulation. R package version
-      0.7.6. https://CRAN.R-project.org/package=dplyr
-
+      Makowski, D., Ben-Shachar, M., & Lüdecke, D. (2019). bayestestR:
+      Describing Effects and their Uncertainty, Existence and Significance
+      within the Bayesian Framework. Journal of Open Source Software,
+      4(40), 1541. doi:10.21105/joss.01541
+  
     A BibTeX entry for LaTeX users is
-
-      @Manual{,
-        title = {dplyr: A Grammar of Data Manipulation},
-        author = {Hadley Wickham and Romain François and Lionel Henry and Kirill Müller},
-        year = {2018},
-        note = {R package version 0.7.6},
-        url = {https://CRAN.R-project.org/package=dplyr},
+  
+      @Article{,
+        title = {bayestestR: Describing Effects and their Uncertainty, Existence and Significance within the Bayesian Framework.},
+        author = {Dominique Makowski and Mattan S. Ben-Shachar and Daniel Lüdecke},
+        journal = {Journal of Open Source Software},
+        doi = {10.21105/joss.01541},
+        year = {2019},
+        number = {40},
+        volume = {4},
+        pages = {1541},
+        url = {https://joss.theoj.org/papers/10.21105/joss.01541},
       }
 
-For other languages, such as Python or Julia, it might be a little trickier, but a quick search on google (or github) should provide you with all the necessary information (version, authors and date). **Keep in mind that it's better to have a slightly incomplete citation than no citation at all.**
+For other languages, such as Python or Julia, it might be a little trickier, but a quick search on Google (or github) should provide you with all the necessary information (version, authors and date). **Keep in mind that it's better to have a slightly incomplete citation than no citation at all.**
