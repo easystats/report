@@ -56,7 +56,7 @@ if(require("lme4")){
 
 # Bayesian models
 if(require("rstanarm")){
-  model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh=0, iter=600)
+  model <- stan_glm(mpg ~ cyl + wt, data = mtcars, refresh=0, iter=600)
   r <- report_text(model)
   r
   summary(r)

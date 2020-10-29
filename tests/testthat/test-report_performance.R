@@ -49,7 +49,7 @@ if (require("testthat") && require("report")) {
 
     # Bayesian
     if (require("rstanarm")){
-      x <- stan_glm(Sepal.Length ~ Species, data = iris, refresh=0, iter=600, seed=333)
+      x <- stan_glm(Sepal.Length ~ Species, data = iris, refresh=0, iter=1000, seed=333)
       testthat::expect_equal(
         as.character(report_performance(x)),
         "The model's explanatory power is substantial (R2 = 0.62, 89% CI [0.55, 0.68], adj. R2 = 0.60)"
@@ -59,7 +59,7 @@ if (require("testthat") && require("report")) {
         "The model's explanatory power is substantial (R2 = 0.62, adj. R2 = 0.60)"
       )
 
-      x <- stan_glm(vs ~ disp, data = mtcars, family = "binomial", refresh=0, iter=800, seed=333)
+      x <- stan_glm(vs ~ disp, data = mtcars, family = "binomial", refresh=0, iter=1000, seed=333)
       testthat::expect_equal(
         as.character(report_performance(x)),
         "The model's explanatory power is substantial (R2 = 0.54, 89% CI [0.34, 0.75])"
@@ -69,7 +69,7 @@ if (require("testthat") && require("report")) {
         "The model's explanatory power is substantial (R2 = 0.54)"
       )
 
-      x <- stan_lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris, refresh=0, iter=600, seed=333)
+      x <- stan_lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris, refresh=0, iter=1000, seed=333)
       testthat::expect_equal(
         as.character(report_performance(x)),
         "The model's explanatory power is substantial (R2 = 0.83, 89% CI [0.80, 0.86], adj. R2 = 0.83) and the part related to the fixed effects alone (marginal R2) is of 0.95 (89% CI [0.94, 0.97])"
