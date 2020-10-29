@@ -77,7 +77,7 @@ report_priors.stanreg <- function(x) {
     text <- paste0("set as ", format_text(values))
   }
 
-  text <- paste0(" Priors over parameters were ", text, " distributions.")
+  text <- paste0("Priors over parameters were ", text, " distributions")
   as.report_priors(text)
 }
 

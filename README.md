@@ -235,16 +235,17 @@ report(model)
 ```
 
     ## We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains of 1000 iterations and a
-    ## warmup of 500) to predict mpg with qsec and wt (formula: mpg ~ qsec + wt). The model's explanatory power is
-    ## substantial (R2 = 0.81, 89% CI [0.73, 0.88], adj. R2 = 0.78). The model's intercept, corresponding to qsec =
-    ## 0 and wt = 0, is at 19.65 (95% CI [9.34, 30.37]). Within this model:
+    ## warmup of 500) to predict mpg with qsec and wt (formula: mpg ~ qsec + wt). Priors over parameters were set as
+    ## normal (mean = 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The model's explanatory
+    ## power is substantial (R2 = 0.81, 89% CI [0.74, 0.89], adj. R2 = 0.78). The model's intercept, corresponding
+    ## to qsec = 0 and wt = 0, is at 19.95 (95% CI [8.95, 30.09]). Within this model:
     ## 
-    ##   - The effect of qsec (Median = 0.94, 95% CI [0.41, 1.49]) has a 99.95% probability of being positive (> 0),
-    ## 98.95% of being significant (> 0.30), and 0.15% of being large (> 1.81). The estimation successfuly converged
-    ## (Rhat = 1.004) and the indices are reliable (ESS = 1532)
-    ##   - The effect of wt (Median = -5.05, 95% CI [-5.95, -3.98]) has a 100.00% probability of being negative (< 0),
+    ##   - The effect of qsec (Median = 0.93, 95% CI [0.39, 1.46]) has a 100.00% probability of being positive (> 0),
+    ## 98.30% of being significant (> 0.30), and 0.10% of being large (> 1.81). The estimation successfuly converged
+    ## (Rhat = 1.000) and the indices are reliable (ESS = 2016)
+    ##   - The effect of wt (Median = -5.07, 95% CI [-6.04, -4.10]) has a 100.00% probability of being negative (< 0),
     ## 100.00% of being significant (< -0.30), and 100.00% of being large (< -1.81). The estimation successfuly
-    ## converged (Rhat = 1.000) and the indices are reliable (ESS = 2118)
+    ## converged (Rhat = 1.001) and the indices are reliable (ESS = 1916)
     ## 
     ## Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT) framework, we report the median of
     ## the posterior distribution and its 95% CI (Highest Density Interval), along the probability of direction
