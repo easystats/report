@@ -19,7 +19,7 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">report</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -96,23 +96,20 @@
   <a href="../news/index.html">News</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../reference/index.html">Features</a>
+</li>
+<li>
+  <a href="../articles/report.html">Get started</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
+    Examples
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/report.html">Overview of the report Package</a>
-    </li>
-    <li>
-      <a href="../articles/cite_packages.html">How to Cite Packages</a>
-    </li>
-    <li>
-      <a href="../articles/supporting_new_models.html">Supporting New Models</a>
+      <a href="../articles/cite_packages.html">Report and Cite Packages</a>
     </li>
   </ul>
 </li>
@@ -147,41 +144,47 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for aov</span>
-<span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span>
-  <span class='va'>model</span>,
-  interpretation <span class='op'>=</span> <span class='st'>"field2013"</span>,
-  omega_squared <span class='op'>=</span> <span class='st'>"partial"</span>,
-  eta_squared <span class='op'>=</span> <span class='cn'>NULL</span>,
-  epsilon_squared <span class='op'>=</span> <span class='cn'>NULL</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span></pre>
+<span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for aov</span>
+<span class='fu'><a href='report_effectsize.html'>report_effectsize</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for aov</span>
+<span class='fu'><a href='report_table.html'>report_table</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for aov</span>
+<span class='fu'><a href='report_statistics.html'>report_statistics</a></span><span class='op'>(</span><span class='va'>x</span>, table <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for aov</span>
+<span class='fu'><a href='report_parameters.html'>report_parameters</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for aov</span>
+<span class='fu'><a href='report_model.html'>report_model</a></span><span class='op'>(</span><span class='va'>x</span>, table <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for aov</span>
+<span class='fu'><a href='report_info.html'>report_info</a></span><span class='op'>(</span><span class='va'>x</span>, effectsize <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for aov</span>
+<span class='fu'><a href='report_text.html'>report_text</a></span><span class='op'>(</span><span class='va'>x</span>, table <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>model</th>
+      <th>x</th>
       <td><p>Object of class <code>aov</code>, <code>anova</code> or <code>aovlist</code>.</p></td>
-    </tr>
-    <tr>
-      <th>interpretation</th>
-      <td><p>Effect size interpretation set of rules (see <a href='https://easystats.github.io/effectsize/reference/interpret_omega_squared.html'>interpret_omega_squared</a>).</p></td>
-    </tr>
-    <tr>
-      <th>omega_squared</th>
-      <td><p>Compute omega squared as index of effect size. Can be <code>"partial"</code> (adjusted for effect size) or <code>"raw"</code>.</p></td>
-    </tr>
-    <tr>
-      <th>eta_squared</th>
-      <td><p>Compute eta squared as index of effect size. Can be <code>"partial"</code> (adjusted for effect size), <code>"raw"</code>  or <code>"adjusted"</code> (the latter option only for anova-tables from mixed models).</p></td>
-    </tr>
-    <tr>
-      <th>epsilon_squared</th>
-      <td><p>Compute epsilon squared as index of effect size. Can be <code>"partial"</code> (adjusted for effect size) or <code>"raw"</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
       <td><p>Arguments passed to or from other methods.</p></td>
+    </tr>
+    <tr>
+      <th>table</th>
+      <td><p>Provide the output of  <code><a href='report_table.html'>report_table()</a></code> to avoid its re-computation.</p></td>
+    </tr>
+    <tr>
+      <th>effectsize</th>
+      <td><p>Provide the output of <code><a href='report_effectsize.html'>report_effectsize()</a></code> to avoid its re-computation.</p></td>
     </tr>
     </table>
 
@@ -192,26 +195,57 @@ with a short and long description of the model summary, as well as a short
 and long table of parameters and fit indices.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='text_long.html'>table_short</a></code> or <code><a href='text_long.html'>text_short</a></code> to access the
-related content of the report-object.</p></div>
+    <div class='dont-index'><p>Specific components of reports (especially for stats models):</p><ul>
+<li><p><code><a href='report_table.html'>report_table</a></code></p></li>
+<li><p><code><a href='report_parameters.html'>report_parameters</a></code></p></li>
+<li><p><code><a href='report_statistics.html'>report_statistics</a></code></p></li>
+<li><p><code><a href='report_effectsize.html'>report_effectsize</a></code></p></li>
+<li><p><code><a href='report_model.html'>report_model</a></code></p></li>
+<li><p><code><a href='report_random.html'>report_random</a></code></p></li>
+<li><p><code><a href='report_performance.html'>report_performance</a></code></p></li>
+<li><p><code><a href='report_info.html'>report_info</a></code></p></li>
+<li><p><code><a href='report_text.html'>report_text</a></code></p></li>
+</ul><p>Other types of reports:</p><ul>
+<li><p><code><a href='report.sessionInfo.html'>report_system</a></code></p></li>
+<li><p><code><a href='report.sessionInfo.html'>report_packages</a></code></p></li>
+<li><p><code><a href='report_participants.html'>report_participants</a></code></p></li>
+<li><p><code><a href='report_sample.html'>report_sample</a></code></p></li>
+</ul><p>Methods:</p><ul>
+<li><p><code><a href='as.report_text.html'>as.report</a></code></p></li>
+</ul>
+</div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>data</span> <span class='op'>&lt;-</span> <span class='va'>iris</span>
 <span class='va'>data</span><span class='op'>$</span><span class='va'>Cat1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='st'>"B"</span><span class='op'>)</span>, length.out <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span><span class='op'>)</span>
+
 <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span> <span class='op'>*</span> <span class='va'>Cat1</span>, data <span class='op'>=</span> <span class='va'>data</span><span class='op'>)</span>
 <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
 <span class='va'>r</span>
+</div><div class='output co'>#&gt; The ANOVA (formula: Sepal.Length ~ Species * Cat1) suggests that:
+#&gt; 
+#&gt;   - The main effect of Species is significant and large (F(2, 144) = 118.43, p &lt; .001; Eta2 (partial) = 0.62, 90% CI [0.54, 0.68])
+#&gt;   - The main effect of Cat1 is not significant and very small (F(1, 144) = 6.25e-03, p = 0.937; Eta2 (partial) = 4.34e-05, 90% CI [0.00, 3.18e-03])
+#&gt;   - The interaction between Species and Cat1 is not significant and small (F(2, 144) = 0.98, p = 0.377; Eta2 (partial) = 0.01, 90% CI [0.00, 0.05])
+#&gt; 
+#&gt; Effect sizes were labelled following Field's (2013) recommendations.</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; The ANOVA suggests that:
 #&gt; 
-#&gt;   - The main effect of Species is significant (F(2, 144) = 118.43, p &lt; .001) and can be considered as large (partial omega squared = 0.61).
-#&gt;   - The main effect of Cat1 is not significant (F(1, 144) = 6.25e-03, p = 0.937) and can be considered as very small (partial omega squared = -6.67e-03).
-#&gt;   - The interaction between Species and Cat1 is not significant (F(2, 144) = 0.98, p = 0.377) and can be considered as very small (partial omega squared = -2.40e-04).</div><div class='input'><span class='fu'><a href='text_long.html'>table_short</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Parameter    | Sum_Squares |  df | Mean_Square |        F |      p | Omega_Sq (partial)
-#&gt; ---------------------------------------------------------------------------------------
-#&gt; Species      |       63.21 |   2 |       31.61 |   118.43 | &lt; .001 |               0.61
-#&gt; Cat1         |    1.67e-03 |   1 |    1.67e-03 | 6.25e-03 | 0.937  |          -6.67e-03
-#&gt; Species:Cat1 |        0.52 |   2 |        0.26 |     0.98 | 0.377  |          -2.40e-04
-#&gt; Residuals    |       38.43 | 144 |        0.27 |          |        |                   </div></pre>
+#&gt;   - The main effect of Species is significant and large (F(2, 144) = 118.43, p &lt; .001, Eta2 (partial) = 0.62)
+#&gt;   - The main effect of Cat1 is not significant and very small (F(1, 144) = 6.25e-03, p = 0.937, Eta2 (partial) = 4.34e-05)
+#&gt;   - The interaction between Species and Cat1 is not significant and small (F(2, 144) = 0.98, p = 0.377, Eta2 (partial) = 0.01)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Parameter    | Sum_Squares |  df | Mean_Square |        F |      p | Eta2 (partial) | Eta2 90% CI (partial)
+#&gt; -----------------------------------------------------------------------------------------------------------
+#&gt; Species      |       63.21 |   2 |       31.61 |   118.43 | &lt; .001 |           0.62 |          [0.54, 0.68]
+#&gt; Cat1         |    1.67e-03 |   1 |    1.67e-03 | 6.25e-03 | 0.937  |       4.34e-05 |          [0.00, 0.00]
+#&gt; Species:Cat1 |        0.52 |   2 |        0.26 |     0.98 | 0.377  |           0.01 |          [0.00, 0.05]
+#&gt; Residuals    |       38.43 | 144 |        0.27 |          |        |                |                      </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Parameter    | Sum_Squares |  df | Mean_Square |        F |      p | Eta2 (partial)
+#&gt; -----------------------------------------------------------------------------------
+#&gt; Species      |       63.21 |   2 |       31.61 |   118.43 | &lt; .001 |           0.62
+#&gt; Cat1         |    1.67e-03 |   1 |    1.67e-03 | 6.25e-03 | 0.937  |       4.34e-05
+#&gt; Species:Cat1 |        0.52 |   2 |        0.26 |     0.98 | 0.377  |           0.01
+#&gt; Residuals    |       38.43 | 144 |        0.27 |          |        |               </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -19,7 +19,7 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
@@ -47,7 +47,8 @@
 
 
 <meta property="og:title" content="Bayesian Models Report — report.stanreg" />
-<meta property="og:description" content="Create a report of Bayesian models." />
+<meta property="og:description" content="Create a report Bayesian models. The description of the parameters follows the
+Sequential Effect eXistence and sIgnificance Testing framework (see SEXIT documentation)." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">report</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -96,23 +97,20 @@
   <a href="../news/index.html">News</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../reference/index.html">Features</a>
+</li>
+<li>
+  <a href="../articles/report.html">Get started</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
+    Examples
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/report.html">Overview of the report Package</a>
-    </li>
-    <li>
-      <a href="../articles/cite_packages.html">How to Cite Packages</a>
-    </li>
-    <li>
-      <a href="../articles/supporting_new_models.html">Supporting New Models</a>
+      <a href="../articles/cite_packages.html">Report and Cite Packages</a>
     </li>
   </ul>
 </li>
@@ -138,107 +136,28 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Bayesian Models Report</h1>
-    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report_regression.R'><code>R/report_regression.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.stanreg.R'><code>R/report.stanreg.R</code></a></small>
     <div class="hidden name"><code>report.stanreg.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create a report of Bayesian models.</p>
+    <p>Create a report Bayesian models. The description of the parameters follows the
+Sequential Effect eXistence and sIgnificance Testing framework (see <a href='https://easystats.github.io/bayestestR/reference/sexit.html'>SEXIT documentation</a>).</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for stanreg</span>
-<span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span>
-  <span class='va'>model</span>,
-  interpretation <span class='op'>=</span> <span class='st'>"default"</span>,
-  ci <span class='op'>=</span> <span class='fl'>0.89</span>,
-  standardize <span class='op'>=</span> <span class='st'>"smart"</span>,
-  standardize_robust <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  centrality <span class='op'>=</span> <span class='st'>"median"</span>,
-  dispersion <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  ci_method <span class='op'>=</span> <span class='st'>"hdi"</span>,
-  test <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"pd"</span>, <span class='st'>"rope"</span><span class='op'>)</span>,
-  rope_range <span class='op'>=</span> <span class='st'>"default"</span>,
-  rope_ci <span class='op'>=</span> <span class='fl'>1</span>,
-  bf_prior <span class='op'>=</span> <span class='cn'>NULL</span>,
-  diagnostic <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ESS"</span>, <span class='st'>"Rhat"</span><span class='op'>)</span>,
-  performance_metrics <span class='op'>=</span> <span class='st'>"all"</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span></pre>
+<span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>model</th>
-      <td><p>Model object.</p></td>
-    </tr>
-    <tr>
-      <th>interpretation</th>
-      <td><p><a href='https://easystats.github.io/effectsize/articles/interpret.html'>Interpret the standardized parameters</a> using a set of rules. Default corresponds to "cohen1988" for linear models and "chen2010" for logistic models.</p></td>
-    </tr>
-    <tr>
-      <th>ci</th>
-      <td><p>Confidence Interval (CI) level. Default to 0.95 (95%).</p></td>
-    </tr>
-    <tr>
-      <th>standardize</th>
-      <td><p>The method used for standardizing the parameters. Can be <code>"refit"</code>, <code>"posthoc"</code>, <code>"smart"</code>, <code>"basic"</code> or <code>NULL</code> (default) for no standardization. See 'Details' in <code><a href='https://easystats.github.io/effectsize/reference/standardize_parameters.html'>standardize_parameters</a></code>. Note that robust estimation (i.e. <code>robust=TRUE</code>) of standardized parameters only works when <code>standardize="refit"</code>.</p></td>
-    </tr>
-    <tr>
-      <th>standardize_robust</th>
-      <td><p>Logical, if <code>TRUE</code>, robust standard errors are calculated (if possible), and confidence intervals and p-values are based on these robust standard errors.</p></td>
-    </tr>
-    <tr>
-      <th>centrality</th>
-      <td><p>The point-estimates (centrality indices) to compute.  Character (vector) or list with one or more of these options: <code>"median"</code>, <code>"mean"</code>, <code>"MAP"</code> or <code>"all"</code>.</p></td>
-    </tr>
-    <tr>
-      <th>dispersion</th>
-      <td><p>Logical, if <code>TRUE</code>, computes indices of dispersion related to the estimate(s) (<code>SD</code> and <code>MAD</code> for <code>mean</code> and <code>median</code>, respectively).</p></td>
-    </tr>
-    <tr>
-      <th>ci_method</th>
-      <td><p>The type of index used for Credible Interval. Can be
-<code>"HDI"</code> (default, see <code><a href='https://easystats.github.io/bayestestR/reference/hdi.html'>hdi</a></code>), <code>"ETI"</code>
-(see <code><a href='https://easystats.github.io/bayestestR/reference/eti.html'>eti</a></code>) or <code>"SI"</code>
-(see <code><a href='https://easystats.github.io/bayestestR/reference/si.html'>si</a></code>).</p></td>
-    </tr>
-    <tr>
-      <th>test</th>
-      <td><p>The indices of effect existence to compute. Character (vector) or
-list with one or more of these options: <code>"p_direction"</code> (or <code>"pd"</code>),
-<code>"rope"</code>, <code>"p_map"</code>, <code>"equivalence_test"</code> (or <code>"equitest"</code>),
-<code>"bayesfactor"</code> (or <code>"bf"</code>) or <code>"all"</code> to compute all tests.
-For each "test", the corresponding <span class="pkg">bayestestR</span> function is called
-(e.g. <code><a href='https://easystats.github.io/bayestestR/reference/rope.html'>rope</a></code> or <code><a href='https://easystats.github.io/bayestestR/reference/p_direction.html'>p_direction</a></code>) and its results
-included in the summary output.</p></td>
-    </tr>
-    <tr>
-      <th>rope_range</th>
-      <td><p>ROPE's lower and higher bounds. Should be a list of two
-values (e.g., <code><a href='https://rdrr.io/r/base/c.html'>c(-0.1, 0.1)</a></code>) or <code>"default"</code>. If <code>"default"</code>,
-the bounds are set to <code>x +- 0.1*SD(response)</code>.</p></td>
-    </tr>
-    <tr>
-      <th>rope_ci</th>
-      <td><p>The Credible Interval (CI) probability, corresponding to the
-proportion of HDI, to use for the percentage in ROPE.</p></td>
-    </tr>
-    <tr>
-      <th>bf_prior</th>
-      <td><p>Distribution representing a prior for the computation of Bayes factors / SI. Used if the input is a posterior, otherwise (in the case of models) ignored.</p></td>
-    </tr>
-    <tr>
-      <th>diagnostic</th>
-      <td><p>Diagnostic metrics to compute.  Character (vector) or list with one or more of these options: <code>"ESS"</code>, <code>"Rhat"</code>, <code>"MCSE"</code> or <code>"all"</code>.</p></td>
-    </tr>
-    <tr>
-      <th>performance_metrics</th>
-      <td><p>See <code><a href='https://easystats.github.io/performance/reference/model_performance.lm.html'>model_performance</a></code>.</p></td>
+      <th>x</th>
+      <td><p>Object of class <code>lm</code> or <code>glm</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Arguments passed to or from other methods. For instance, when <code>bootstrap = TRUE</code>, arguments like <code>ci_method</code> are passed down to <code><a href='https://easystats.github.io/bayestestR/reference/describe_posterior.html'>describe_posterior</a></code>.</p></td>
+      <td><p>Arguments passed to or from other methods.</p></td>
     </tr>
     </table>
 
@@ -249,39 +168,47 @@ with a short and long description of the model summary, as well as a short
 and long table of parameters and fit indices.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='text_long.html'>table_short</a></code> or <code><a href='text_long.html'>text_short</a></code> to access the
-related content of the report-object.</p></div>
+    <div class='dont-index'><p>Specific components of reports (especially for stats models):</p><ul>
+<li><p><code><a href='report_table.html'>report_table</a></code></p></li>
+<li><p><code><a href='report_parameters.html'>report_parameters</a></code></p></li>
+<li><p><code><a href='report_statistics.html'>report_statistics</a></code></p></li>
+<li><p><code><a href='report_effectsize.html'>report_effectsize</a></code></p></li>
+<li><p><code><a href='report_model.html'>report_model</a></code></p></li>
+<li><p><code><a href='report_random.html'>report_random</a></code></p></li>
+<li><p><code><a href='report_performance.html'>report_performance</a></code></p></li>
+<li><p><code><a href='report_info.html'>report_info</a></code></p></li>
+<li><p><code><a href='report_text.html'>report_text</a></code></p></li>
+</ul><p>Other types of reports:</p><ul>
+<li><p><code><a href='report.sessionInfo.html'>report_system</a></code></p></li>
+<li><p><code><a href='report.sessionInfo.html'>report_packages</a></code></p></li>
+<li><p><code><a href='report_participants.html'>report_participants</a></code></p></li>
+<li><p><code><a href='report_sample.html'>report_sample</a></code></p></li>
+</ul><p>Methods:</p><ul>
+<li><p><code><a href='as.report_text.html'>as.report</a></code></p></li>
+</ul>
+</div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://easystats.github.io/report/'>report</a></span><span class='op'>)</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://mc-stan.org/rstanarm/'>"rstanarm"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://mc-stan.org/rstanarm/reference/stan_glm.html'>stan_glm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>*</span> <span class='va'>Species</span>,
-    data <span class='op'>=</span> <span class='va'>iris</span>, iter <span class='op'>=</span> <span class='fl'>250</span>, refresh <span class='op'>=</span> <span class='fl'>0</span>
-  <span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://easystats.github.io/report/'>report</a></span><span class='op'>)</span>
+
+<span class='co'># Bayesian models</span>
+<span class='kw'>if</span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://mc-stan.org/rstanarm/'>"rstanarm"</a></span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://mc-stan.org/rstanarm/reference/stan_glm.html'>stan_glm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>qsec</span> <span class='op'>+</span> <span class='va'>wt</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, refresh<span class='op'>=</span><span class='fl'>0</span>, iter<span class='op'>=</span><span class='fl'>600</span><span class='op'>)</span>
   <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
-  <span class='fu'><a href='text_long.html'>text_short</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-  <span class='fu'><a href='text_long.html'>text_long</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-  <span class='fu'><a href='text_long.html'>table_short</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-  <span class='fu'><a href='text_long.html'>table_long</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-  <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://mc-stan.org/rstanarm/reference/stan_glmer.html'>stan_lmer</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>|</span> <span class='va'>Species</span><span class='op'>)</span>,
-    data <span class='op'>=</span> <span class='va'>iris</span>, iter <span class='op'>=</span> <span class='fl'>100</span>, refresh <span class='op'>=</span> <span class='fl'>0</span>
-  <span class='op'>)</span>
-  <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
-<span class='op'>}</span><span class='co'># }</span>
-</div><div class='output co'>#&gt; <span class='message'>Loading required package: rstanarm</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: Rcpp</span></div><div class='output co'>#&gt; <span class='message'>This is rstanarm version 2.21.1</span></div><div class='output co'>#&gt; <span class='message'>- See https://mc-stan.org/rstanarm/articles/priors for changes to default priors!</span></div><div class='output co'>#&gt; <span class='message'>- Default priors may change, so it's safest to specify priors, even if equivalent to the defaults.</span></div><div class='output co'>#&gt; <span class='message'>- For execution on a local, multicore CPU with excess RAM we recommend calling</span></div><div class='output co'>#&gt; <span class='message'>  options(mc.cores = parallel::detectCores())</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.</span>
-#&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
-#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#bulk-ess</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.</span>
-#&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
-#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#tail-ess</span></div><div class='output co'>#&gt; <span class='message'>Possible multicollinearity between Petal.Length:Speciesversicolor and Speciesversicolor (r = 0.84), Petal.Length:Speciesvirginica and Speciesvirginica (r = 0.79), Petal.Length:Speciesvirginica and Petal.Length:Speciesversicolor (r = 0.85). This might lead to inappropriate results. See 'Details' in '?rope'.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The largest R-hat is 1.11, indicating chains have not mixed.</span>
-#&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
-#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#r-hat</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.</span>
-#&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
-#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#bulk-ess</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.</span>
-#&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
-#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#tail-ess</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Markov chains did not converge! Do not analyze results!</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Models of class stanreg are not yet supported.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Models of class stanreg are not yet supported.</span></div><div class='output co'>#&gt; We fitted a Bayesian linear mixed model (estimated using MCMC sampling with 4 chains of 100 iterations and a warmup of 50) to predict Sepal.Length with Petal.Length (formula = Sepal.Length ~ Petal.Length). The model included Species as random effects (formula = ~1 | Species). Priors over parameters were set as normal (mean = 0.00, SD = 1.17) distributions. The Region of Practical Equivalence (ROPE) percentage was defined as the proportion of the posterior distribution within the [-0.08, 0.08] range. The 89% Credible Intervals (CIs) were based on Highest Density Intervals (HDI). Parameters were scaled by the mean and the SD of the response variable. Effect sizes were labelled following Cohen's (1988) recommendations.The model's explanatory power is substantial (R2's median = 0.83, 89% CI [0.80, 0.86], adj. R2 = 0.83). Within this model, the explanatory power related to the fixed effects alone (marginal R2's median) is of 0.95 (89% CI [0.94, 0.97]). The model's intercept, corresponding to Sepal.Length = 0, Petal.Length = 0 and Species = setosa, is at 2.65 (89% CI [2.05, 3.47], 0% in ROPE). Within this model:
-#&gt; 
-#&gt;   - The effect of Petal.Length has a probability of 100% of being positive and can be considered as significant (median = 0.87, 89% CI [0.74, 0.96], 0% in ROPE). However, the algorithm might not have successfuly converged (Rhat = 1.138) and the estimates cannot be considered as stable (ESS = 35).</div></pre>
+  <span class='va'>r</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: rstanarm</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: Rcpp</span></div><div class='output co'>#&gt; <span class='message'>This is rstanarm version 2.21.1</span></div><div class='output co'>#&gt; <span class='message'>- See https://mc-stan.org/rstanarm/articles/priors for changes to default priors!</span></div><div class='output co'>#&gt; <span class='message'>- Default priors may change, so it's safest to specify priors, even if equivalent to the defaults.</span></div><div class='output co'>#&gt; <span class='message'>- For execution on a local, multicore CPU with excess RAM we recommend calling</span></div><div class='output co'>#&gt; <span class='message'>  options(mc.cores = parallel::detectCores())</span></div><div class='output co'>#&gt; Parameter   | Median |         89% CI |   pd | % in ROPE |  Rhat |     ESS |                   Prior |  Fit
+#&gt; -----------------------------------------------------------------------------------------------------------
+#&gt; (Intercept) |  19.78 | [11.22, 28.93] | 100% |     0.08% | 0.998 | 1444.65 | Normal (20.09 +- 15.07) |     
+#&gt; qsec        |   0.93 | [ 0.48,  1.38] | 100% |    12.50% | 0.998 | 1607.22 |   Normal (0.00 +- 8.43) |     
+#&gt; wt          |  -5.02 | [-5.87, -4.27] | 100% |        0% | 1.001 | 1001.65 |  Normal (0.00 +- 15.40) |     
+#&gt;             |        |                |      |           |       |         |                         |     
+#&gt; R2          |        |                |      |           |       |         |                         | 0.81
+#&gt; R2 (adj.)   |        |                |      |           |       |         |                         | 0.78
+#&gt; Sigma       |        |                |      |           |       |         |                         | 2.65</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

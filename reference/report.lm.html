@@ -19,7 +19,7 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
@@ -47,7 +47,7 @@
 
 
 <meta property="og:title" content="(General) Linear Models Report — report.lm" />
-<meta property="og:description" content="Create a report of a (general) linear model." />
+<meta property="og:description" content="Create a report for (general) linear models." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">report</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -96,23 +96,20 @@
   <a href="../news/index.html">News</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../reference/index.html">Features</a>
+</li>
+<li>
+  <a href="../articles/report.html">Get started</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
+    Examples
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/report.html">Overview of the report Package</a>
-    </li>
-    <li>
-      <a href="../articles/cite_packages.html">How to Cite Packages</a>
-    </li>
-    <li>
-      <a href="../articles/supporting_new_models.html">Supporting New Models</a>
+      <a href="../articles/cite_packages.html">Report and Cite Packages</a>
     </li>
   </ul>
 </li>
@@ -138,65 +135,103 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>(General) Linear Models Report</h1>
-    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report_regression.R'><code>R/report_regression.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.lm.R'><code>R/report.lm.R</code></a>, <a href='https://github.com/easystats/report/blob/master/R/report.lme4.R'><code>R/report.lme4.R</code></a></small>
     <div class="hidden name"><code>report.lm.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create a report of a (general) linear model.</p>
+    <p>Create a report for (general) linear models.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for lm</span>
-<span class='fu'><a href='report.html'>report</a></span>(
-  <span class='kw'>model</span>,
-  interpretation = <span class='st'>"default"</span>,
-  ci = <span class='fl'>0.95</span>,
-  standardize = <span class='st'>"refit"</span>,
-  standardize_robust = <span class='fl'>FALSE</span>,
-  bootstrap = <span class='fl'>FALSE</span>,
-  iterations = <span class='fl'>500</span>,
-  performance_metrics = <span class='st'>"all"</span>,
-  <span class='kw'>...</span>
-)</pre>
+<span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>x</span>, include_effectsize <span class='op'>=</span> <span class='cn'>TRUE</span>, effectsize_method <span class='op'>=</span> <span class='st'>"refit"</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for lm</span>
+<span class='fu'><a href='report_effectsize.html'>report_effectsize</a></span><span class='op'>(</span><span class='va'>x</span>, effectsize_method <span class='op'>=</span> <span class='st'>"refit"</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for lm</span>
+<span class='fu'><a href='report_table.html'>report_table</a></span><span class='op'>(</span><span class='va'>x</span>, include_effectsize <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for lm</span>
+<span class='fu'><a href='report_statistics.html'>report_statistics</a></span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  table <span class='op'>=</span> <span class='cn'>NULL</span>,
+  include_effectsize <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  include_diagnostic <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='co'># S3 method for lm</span>
+<span class='fu'><a href='report_parameters.html'>report_parameters</a></span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  table <span class='op'>=</span> <span class='cn'>NULL</span>,
+  include_effectsize <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  include_intercept <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='co'># S3 method for lm</span>
+<span class='fu'><a href='report_intercept.html'>report_intercept</a></span><span class='op'>(</span><span class='va'>x</span>, table <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for lm</span>
+<span class='fu'><a href='report_model.html'>report_model</a></span><span class='op'>(</span><span class='va'>x</span>, table <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for lm</span>
+<span class='fu'><a href='report_performance.html'>report_performance</a></span><span class='op'>(</span><span class='va'>x</span>, table <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for lm</span>
+<span class='fu'><a href='report_info.html'>report_info</a></span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  effectsize <span class='op'>=</span> <span class='cn'>NULL</span>,
+  include_effectsize <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  parameters <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='co'># S3 method for lm</span>
+<span class='fu'><a href='report_text.html'>report_text</a></span><span class='op'>(</span><span class='va'>x</span>, table <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for merMod</span>
+<span class='fu'><a href='report_random.html'>report_random</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>model</th>
-      <td><p>Model object.</p></td>
+      <th>x</th>
+      <td><p>Object of class <code>lm</code> or <code>glm</code>.</p></td>
     </tr>
     <tr>
-      <th>interpretation</th>
-      <td><p><a href='https://easystats.github.io/effectsize/articles/interpret.html'>Interpret the standardized parameters</a> using a set of rules. Default corresponds to "funder2019" for linear models and "chen2010" for logistic models.</p></td>
+      <th>include_effectsize</th>
+      <td><p>If <code>FALSE</code>, won't include effect-size related indices (standardized coefficients, etc.).</p></td>
     </tr>
     <tr>
-      <th>ci</th>
-      <td><p>Confidence Interval (CI) level. Default to 0.95 (95%).</p></td>
-    </tr>
-    <tr>
-      <th>standardize</th>
-      <td><p>The method used for standardizing the parameters. Can be <code>"refit"</code>, <code>"posthoc"</code>, <code>"smart"</code>, <code>"basic"</code> or <code>NULL</code> (default) for no standardization. See 'Details' in <code><a href='https://rdrr.io/pkg/effectsize/man/standardize_parameters.html'>standardize_parameters</a></code>. Note that robust estimation (i.e. <code>robust=TRUE</code>) of standardized parameters only works when <code>standardize="refit"</code>.</p></td>
-    </tr>
-    <tr>
-      <th>standardize_robust</th>
-      <td><p>Logical, if <code>TRUE</code>, robust standard errors are calculated (if possible), and confidence intervals and p-values are based on these robust standard errors.</p></td>
-    </tr>
-    <tr>
-      <th>bootstrap</th>
-      <td><p>Should estimates be based on bootstrapped model? If <code>TRUE</code>, then arguments of <a href='https://rdrr.io/pkg/parameters/man/model_parameters.stanreg.html'>Bayesian regressions</a> apply (see also <code><a href='https://rdrr.io/pkg/parameters/man/bootstrap_parameters.html'>bootstrap_parameters()</a></code>).</p></td>
-    </tr>
-    <tr>
-      <th>iterations</th>
-      <td><p>The number of bootstrap replicates. This only apply in the case of bootstrapped frequentist models.</p></td>
-    </tr>
-    <tr>
-      <th>performance_metrics</th>
-      <td><p>See <code><a href='https://rdrr.io/pkg/performance/man/model_performance.lm.html'>model_performance</a></code>.</p></td>
+      <th>effectsize_method</th>
+      <td><p>See documentation for <code><a href='https://easystats.github.io/effectsize/reference/effectsize.html'>effectsize::effectsize()</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Arguments passed to or from other methods. For instance, when <code>bootstrap = TRUE</code>, arguments like <code>ci_method</code> are passed down to <code><a href='https://rdrr.io/pkg/bayestestR/man/describe_posterior.html'>describe_posterior</a></code>.</p></td>
+      <td><p>Arguments passed to or from other methods.</p></td>
+    </tr>
+    <tr>
+      <th>table</th>
+      <td><p>Provide the output of  <code><a href='report_table.html'>report_table()</a></code> to avoid its re-computation.</p></td>
+    </tr>
+    <tr>
+      <th>include_diagnostic</th>
+      <td><p>If <code>FALSE</code>, won't include diagnostic related indices for Bayesian models (ESS, Rhat).</p></td>
+    </tr>
+    <tr>
+      <th>include_intercept</th>
+      <td><p>If <code>FALSE</code>, won't include the intercept.</p></td>
+    </tr>
+    <tr>
+      <th>effectsize</th>
+      <td><p>Provide the output of <code><a href='report_effectsize.html'>report_effectsize()</a></code> to avoid its re-computation.</p></td>
+    </tr>
+    <tr>
+      <th>parameters</th>
+      <td><p>Provide the output of <code><a href='report_parameters.html'>report_parameters()</a></code> to avoid its re-computation.</p></td>
     </tr>
     </table>
 
@@ -207,89 +242,122 @@ with a short and long description of the model summary, as well as a short
 and long table of parameters and fit indices.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='text_long.html'>table_short</a></code> or <code><a href='text_long.html'>text_short</a></code> to access the
-related content of the report-object.</p></div>
+    <div class='dont-index'><p>Specific components of reports (especially for stats models):</p><ul>
+<li><p><code><a href='report_table.html'>report_table</a></code></p></li>
+<li><p><code><a href='report_parameters.html'>report_parameters</a></code></p></li>
+<li><p><code><a href='report_statistics.html'>report_statistics</a></code></p></li>
+<li><p><code><a href='report_effectsize.html'>report_effectsize</a></code></p></li>
+<li><p><code><a href='report_model.html'>report_model</a></code></p></li>
+<li><p><code><a href='report_random.html'>report_random</a></code></p></li>
+<li><p><code><a href='report_performance.html'>report_performance</a></code></p></li>
+<li><p><code><a href='report_info.html'>report_info</a></code></p></li>
+<li><p><code><a href='report_text.html'>report_text</a></code></p></li>
+</ul><p>Other types of reports:</p><ul>
+<li><p><code><a href='report.sessionInfo.html'>report_system</a></code></p></li>
+<li><p><code><a href='report.sessionInfo.html'>report_packages</a></code></p></li>
+<li><p><code><a href='report_participants.html'>report_participants</a></code></p></li>
+<li><p><code><a href='report_sample.html'>report_sample</a></code></p></li>
+</ul><p>Methods:</p><ul>
+<li><p><code><a href='as.report_text.html'>as.report</a></code></p></li>
+</ul>
+</div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://easystats.github.io/report'>report</a></span>)
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://easystats.github.io/report/'>report</a></span><span class='op'>)</span>
 
-<span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>Sepal.Length</span> <span class='op'>~</span> <span class='kw'>Petal.Length</span> <span class='op'>*</span> <span class='kw'>Species</span>, data = <span class='kw'>iris</span>)
-<span class='kw'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span>(<span class='kw'>model</span>)
-<span class='fu'><a href='text_long.html'>text_short</a></span>(<span class='kw'>r</span>)
-</div><div class='output co'>#&gt; We fitted a linear model to predict Sepal.Length with Petal.Length and Species.The model's explanatory power is substantial (R2 = 0.84, adj. R2 = 0.83). The model's intercept is at 4.21. Within this model:
+<span class='co'># Linear models</span>
+<span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>*</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
+<span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+<span class='va'>r</span>
+</div><div class='output co'>#&gt; We fitted a linear model (estimated using OLS) to predict Sepal.Length with Petal.Length and Species (formula: Sepal.Length ~ Petal.Length * Species). The model explains a significant and substantial proportion of variance (R2 = 0.84, F(5, 144) = 151.71, p &lt; .001, adj. R2 = 0.83). The model's intercept, corresponding to Petal.Length = 0 and Species = setosa, is at 4.21 (95% CI [3.41, 5.02], t(144) = 10.34, p &lt; .001). Within this model:
 #&gt; 
-#&gt;   - The effect of (Intercept) is positive and can be considered as medium and significant (beta = 4.21, 95% CI [3.41, 5.02], std. beta = 0.49, p &lt; .001).
-#&gt;   - The effect of Petal.Length is positive and can be considered as very large and not significant (beta = 0.54, 95% CI [0.00, 1.09], std. beta = 1.16, p = 0.052).
-#&gt;   - The effect of Species [versicolor] is negative and can be considered as very large and significant (beta = -1.81, 95% CI [-2.99, -0.62], std. beta = -0.88, p &lt; .01).
-#&gt;   - The effect of Species [virginica] is negative and can be considered as very large and significant (beta = -3.15, 95% CI [-4.41, -1.90], std. beta = -1.75, p &lt; .001).
-#&gt;   - The interaction effect of Species [versicolor] on Petal.Length is positive and can be considered as medium and not significant (beta = 0.29, 95% CI [-0.30, 0.87], std. beta = 0.61, p = 0.334).
-#&gt;   - The interaction effect of Species [virginica] on Petal.Length is positive and can be considered as very large and not significant (beta = 0.45, 95% CI [-0.12, 1.03], std. beta = 0.97, p = 0.120).</div><div class='input'><span class='fu'><a href='text_long.html'>text_long</a></span>(<span class='kw'>r</span>)
-</div><div class='output co'>#&gt; We fitted a linear model (estimated using OLS) to predict Sepal.Length with Petal.Length and Species (formula = Sepal.Length ~ Petal.Length * Species). Standardized parameters were obtained by fitting the model on a standardized version of the dataset. Effect sizes were labelled following Funder's (2019) recommendations.
+#&gt;   - The effect of Petal.Length is non-significantly positive (beta = 0.54, 95% CI [-4.76e-03, 1.09], t(144) = 1.96, p = 0.052; Std. beta = 1.16, 95% CI [-0.01, 2.32])
+#&gt;   - The effect of Species [versicolor] is significantly negative (beta = -1.81, 95% CI [-2.99, -0.62], t(144) = -3.02, p &lt; .01; Std. beta = -0.88, 95% CI [-2.41, 0.65])
+#&gt;   - The effect of Species [virginica] is significantly negative (beta = -3.15, 95% CI [-4.41, -1.90], t(144) = -4.97, p &lt; .001; Std. beta = -1.75, 95% CI [-3.32, -0.18])
+#&gt;   - The interaction effect of Species [versicolor] on Petal.Length is non-significantly positive (beta = 0.29, 95% CI [-0.30, 0.87], t(144) = 0.97, p = 0.334; Std. beta = 0.61, 95% CI [-0.63, 1.85])
+#&gt;   - The interaction effect of Species [virginica] on Petal.Length is non-significantly positive (beta = 0.45, 95% CI [-0.12, 1.03], t(144) = 1.56, p = 0.120; Std. beta = 0.97, 95% CI [-0.26, 2.19])
 #&gt; 
-#&gt; The model explains a significant and substantial proportion of variance (R2 = 0.84, F(5, 144) = 151.71, p &lt; .001, adj. R2 = 0.83). The model's intercept, corresponding to Sepal.Length = 0, Petal.Length = 0 and Species = setosa, is at 4.21 (SE = 0.41, 95% CI [3.41, 5.02], p &lt; .001). Within this model:
+#&gt; Standardized parameters were obtained by fitting the model on a standardized version of the dataset.</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; We fitted a linear model to predict Sepal.Length with Petal.Length and Species. The model's explanatory power is substantial (R2 = 0.84, adj. R2 = 0.83). The model's intercept is at 4.21 (95% CI [3.41, 5.02]). Within this model:
 #&gt; 
-#&gt;   - The effect of (Intercept) is positive and can be considered as medium and significant (beta = 4.21, SE = 0.41, 95% CI [3.41, 5.02], std. beta = 0.49, p &lt; .001).
-#&gt;   - The effect of Petal.Length is positive and can be considered as very large and not significant (beta = 0.54, SE = 0.28, 95% CI [0.00, 1.09], std. beta = 1.16, p = 0.052).
-#&gt;   - The effect of Species [versicolor] is negative and can be considered as very large and significant (beta = -1.81, SE = 0.60, 95% CI [-2.99, -0.62], std. beta = -0.88, p &lt; .01).
-#&gt;   - The effect of Species [virginica] is negative and can be considered as very large and significant (beta = -3.15, SE = 0.63, 95% CI [-4.41, -1.90], std. beta = -1.75, p &lt; .001).
-#&gt;   - The interaction effect of Species [versicolor] on Petal.Length is positive and can be considered as medium and not significant (beta = 0.29, SE = 0.30, 95% CI [-0.30, 0.87], std. beta = 0.61, p = 0.334).
-#&gt;   - The interaction effect of Species [virginica] on Petal.Length is positive and can be considered as very large and not significant (beta = 0.45, SE = 0.29, 95% CI [-0.12, 1.03], std. beta = 0.97, p = 0.120).</div><div class='input'><span class='fu'><a href='text_long.html'>table_short</a></span>(<span class='kw'>r</span>)
-</div><div class='output co'>#&gt; Parameter                           | Coefficient |             CI |      p | Coefficient (std.) |  Fit
-#&gt; -------------------------------------------------------------------------------------------------------
-#&gt; (Intercept)                         |        4.21 | [ 3.41,  5.02] | &lt; .001 |               0.49 |     
-#&gt; Petal.Length                        |        0.54 | [ 0.00,  1.09] | 0.052  |               1.16 |     
-#&gt; Species [versicolor]                |       -1.81 | [-2.99, -0.62] | 0.003  |              -0.88 |     
-#&gt; Species [virginica]                 |       -3.15 | [-4.41, -1.90] | &lt; .001 |              -1.75 |     
-#&gt; Petal.Length * Species [versicolor] |        0.29 | [-0.30,  0.87] | 0.334  |               0.61 |     
-#&gt; Petal.Length * Species [virginica]  |        0.45 | [-0.12,  1.03] | 0.120  |               0.97 |     
-#&gt;                                     |             |                |        |                    |     
-#&gt; R2                                  |             |                |        |                    | 0.84
-#&gt; R2 (adj.)                           |             |                |        |                    | 0.83</div><div class='input'><span class='fu'><a href='text_long.html'>table_long</a></span>(<span class='kw'>r</span>)
-</div><div class='output co'>#&gt; Parameter                           | Coefficient |   SE |             CI |     t |  df |      p | Coefficient (std.) |    Fit
-#&gt; ------------------------------------------------------------------------------------------------------------------------------
-#&gt; (Intercept)                         |        4.21 | 0.41 | [ 3.41,  5.02] | 10.34 | 144 | &lt; .001 |               0.49 |       
-#&gt; Petal.Length                        |        0.54 | 0.28 | [ 0.00,  1.09] |  1.96 | 144 | 0.052  |               1.16 |       
-#&gt; Species [versicolor]                |       -1.81 | 0.60 | [-2.99, -0.62] | -3.02 | 144 | 0.003  |              -0.88 |       
-#&gt; Species [virginica]                 |       -3.15 | 0.63 | [-4.41, -1.90] | -4.97 | 144 | &lt; .001 |              -1.75 |       
-#&gt; Petal.Length * Species [versicolor] |        0.29 | 0.30 | [-0.30,  0.87] |  0.97 | 144 | 0.334  |               0.61 |       
-#&gt; Petal.Length * Species [virginica]  |        0.45 | 0.29 | [-0.12,  1.03] |  1.56 | 144 | 0.120  |               0.97 |       
-#&gt;                                     |             |      |                |       |     |        |                    |       
-#&gt; AIC                                 |             |      |                |       |     |        |                    | 106.77
-#&gt; BIC                                 |             |      |                |       |     |        |                    | 127.84
-#&gt; R2                                  |             |      |                |       |     |        |                    |   0.84
-#&gt; R2 (adj.)                           |             |      |                |       |     |        |                    |   0.83
-#&gt; RMSE                                |             |      |                |       |     |        |                    |   0.33</div><div class='input'>
-
-<span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span>(<span class='kw'>vs</span> <span class='op'>~</span> <span class='kw'>disp</span>, data = <span class='kw'>mtcars</span>, family = <span class='st'>"binomial"</span>)
-<span class='kw'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span>(<span class='kw'>model</span>)
-</div><div class='output co'>#&gt; <span class='message'>Waiting for profiling to be done...</span></div><div class='output co'>#&gt; <span class='message'>Waiting for profiling to be done...</span></div><div class='input'><span class='fu'><a href='text_long.html'>text_short</a></span>(<span class='kw'>r</span>)
-</div><div class='output co'>#&gt; We fitted a logistic model to predict vs with disp.The model's explanatory power is substantial (Tjur's R2 = 0.53). The model's intercept is at 4.14. Within this model:
+#&gt;   - The effect of Petal.Length is non-significantly positive (beta = 0.54, 95% CI [-4.76e-03, 1.09], t(144) = 1.96, p = 0.052, Std. beta = 1.16)
+#&gt;   - The effect of Species [versicolor] is significantly negative (beta = -1.81, 95% CI [-2.99, -0.62], t(144) = -3.02, p &lt; .01, Std. beta = -0.88)
+#&gt;   - The effect of Species [virginica] is significantly negative (beta = -3.15, 95% CI [-4.41, -1.90], t(144) = -4.97, p &lt; .001, Std. beta = -1.75)
+#&gt;   - The interaction effect of Species [versicolor] on Petal.Length is non-significantly positive (beta = 0.29, 95% CI [-0.30, 0.87], t(144) = 0.97, p = 0.334, Std. beta = 0.61)
+#&gt;   - The interaction effect of Species [virginica] on Petal.Length is non-significantly positive (beta = 0.45, 95% CI [-0.12, 1.03], t(144) = 1.56, p = 0.120, Std. beta = 0.97)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Parameter                           | Coefficient |         95% CI |     t |  df |      p | Std. Coef. | Std. Coef. 95% CI |    Fit
+#&gt; -----------------------------------------------------------------------------------------------------------------------------------
+#&gt; (Intercept)                         |        4.21 | [ 3.41,  5.02] | 10.34 | 144 | &lt; .001 |       0.49 |    [-1.03,  2.01] |       
+#&gt; Petal.Length                        |        0.54 | [ 0.00,  1.09] |  1.96 | 144 | 0.052  |       1.16 |    [-0.01,  2.32] |       
+#&gt; Species [versicolor]                |       -1.81 | [-2.99, -0.62] | -3.02 | 144 | 0.003  |      -0.88 |    [-2.41,  0.65] |       
+#&gt; Species [virginica]                 |       -3.15 | [-4.41, -1.90] | -4.97 | 144 | &lt; .001 |      -1.75 |    [-3.32, -0.18] |       
+#&gt; Petal.Length * Species [versicolor] |        0.29 | [-0.30,  0.87] |  0.97 | 144 | 0.334  |       0.61 |    [-0.63,  1.85] |       
+#&gt; Petal.Length * Species [virginica]  |        0.45 | [-0.12,  1.03] |  1.56 | 144 | 0.120  |       0.97 |    [-0.26,  2.19] |       
+#&gt;                                     |             |                |       |     |        |            |                   |       
+#&gt; AIC                                 |             |                |       |     |        |            |                   | 106.77
+#&gt; BIC                                 |             |                |       |     |        |            |                   | 127.84
+#&gt; R2                                  |             |                |       |     |        |            |                   |   0.84
+#&gt; R2 (adj.)                           |             |                |       |     |        |            |                   |   0.83
+#&gt; Sigma                               |             |                |       |     |        |            |                   |   0.34</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Parameter                           | Coefficient |         95% CI |     t |  df |      p | Std. Coef. |  Fit
+#&gt; -------------------------------------------------------------------------------------------------------------
+#&gt; (Intercept)                         |        4.21 | [ 3.41,  5.02] | 10.34 | 144 | &lt; .001 |       0.49 |     
+#&gt; Petal.Length                        |        0.54 | [ 0.00,  1.09] |  1.96 | 144 | 0.052  |       1.16 |     
+#&gt; Species [versicolor]                |       -1.81 | [-2.99, -0.62] | -3.02 | 144 | 0.003  |      -0.88 |     
+#&gt; Species [virginica]                 |       -3.15 | [-4.41, -1.90] | -4.97 | 144 | &lt; .001 |      -1.75 |     
+#&gt; Petal.Length * Species [versicolor] |        0.29 | [-0.30,  0.87] |  0.97 | 144 | 0.334  |       0.61 |     
+#&gt; Petal.Length * Species [virginica]  |        0.45 | [-0.12,  1.03] |  1.56 | 144 | 0.120  |       0.97 |     
+#&gt;                                     |             |                |       |     |        |            |     
+#&gt; R2                                  |             |                |       |     |        |            | 0.84
+#&gt; R2 (adj.)                           |             |                |       |     |        |            | 0.83
+#&gt; Sigma                               |             |                |       |     |        |            | 0.34</div><div class='input'>
+<span class='co'># Logistic models</span>
+<span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='va'>vs</span> <span class='op'>~</span> <span class='va'>disp</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, family <span class='op'>=</span> <span class='st'>"binomial"</span><span class='op'>)</span>
+<span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+<span class='va'>r</span>
+</div><div class='output co'>#&gt; We fitted a logistic model (estimated using ML) to predict vs with disp (formula: vs ~ disp). The model's explanatory power is substantial (Tjur's R2 = 0.53). The model's intercept, corresponding to disp = 0, is at 4.14 (95% CI [1.81, 7.44], p &lt; .01). Within this model:
 #&gt; 
-#&gt;   - The effect of (Intercept) is positive and can be considered as small and significant (beta = 4.14, 95% CI [1.41, 6.86], std. beta = -0.85, p &lt; .01).
-#&gt;   - The effect of disp is negative and can be considered as large and significant (beta = -0.02, 95% CI [-0.04, -0.01], std. beta = -2.68, p &lt; .01).</div><div class='input'><span class='fu'><a href='text_long.html'>text_long</a></span>(<span class='kw'>r</span>)
-</div><div class='output co'>#&gt; We fitted a logistic model (estimated using ML) to predict vs with disp (formula = vs ~ disp). Standardized parameters were obtained by fitting the model on a standardized version of the dataset. Effect sizes were labelled following Chen's (2010) recommendations.The model's explanatory power is substantial (Tjur's R2 = 0.53). The model's intercept, corresponding to vs = 0 and disp = 0, is at 4.14 (SE = 1.39, 95% CI [1.81, 7.44], p &lt; .01). Within this model:
+#&gt;   - The effect of disp is significantly negative (beta = -0.02, 95% CI [-0.04, -0.01], p &lt; .01; Std. beta = -2.68, 95% CI [-4.90, -1.27])
 #&gt; 
-#&gt;   - The effect of (Intercept) is positive and can be considered as small and significant (beta = 4.14, SE = 1.39, 95% CI [1.41, 6.86], std. beta = -0.85, p &lt; .01).
-#&gt;   - The effect of disp is negative and can be considered as large and significant (beta = -0.02, SE = 0.01, 95% CI [-0.04, -0.01], std. beta = -2.68, p &lt; .01).</div><div class='input'><span class='fu'><a href='text_long.html'>table_short</a></span>(<span class='kw'>r</span>)
-</div><div class='output co'>#&gt; Parameter   | Coefficient |             CI |     p | Coefficient (std.) |  Fit
+#&gt; Standardized parameters were obtained by fitting the model on a standardized version of the dataset.</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; We fitted a logistic model to predict vs with disp. The model's explanatory power is substantial (Tjur's R2 = 0.53). The model's intercept is at 4.14 (95% CI [1.81, 7.44]). Within this model:
+#&gt; 
+#&gt;   - The effect of disp is significantly negative (beta = -0.02, 95% CI [-0.04, -0.01], p &lt; .01, Std. beta = -2.68)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Parameter   | Coefficient |         95% CI |     z |     p | Std. Coef. | Std. Coef. 95% CI |   Fit
+#&gt; ---------------------------------------------------------------------------------------------------
+#&gt; (Intercept) |        4.14 | [ 1.81,  7.44] |  2.98 | 0.003 |      -0.85 |    [-2.42,  0.27] |      
+#&gt; disp        |       -0.02 | [-0.04, -0.01] | -3.03 | 0.002 |      -2.68 |    [-4.90, -1.27] |      
+#&gt;             |             |                |       |       |            |                   |      
+#&gt; AIC         |             |                |       |       |            |                   | 26.70
+#&gt; BIC         |             |                |       |       |            |                   | 29.63
+#&gt; Tjur's R2   |             |                |       |       |            |                   |  0.53
+#&gt; Sigma       |             |                |       |       |            |                   |  0.87
+#&gt; Log_loss    |             |                |       |       |            |                   |  0.35</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Parameter   | Coefficient |         95% CI |     z |     p | Std. Coef. |  Fit
 #&gt; ------------------------------------------------------------------------------
-#&gt; (Intercept) |        4.14 | [ 1.41,  6.86] | 0.003 |              -0.85 |     
-#&gt; disp        |       -0.02 | [-0.04, -0.01] | 0.002 |              -2.68 |     
-#&gt;             |             |                |       |                    |     
-#&gt; Tjur's R2   |             |                |       |                    | 0.53</div><div class='input'><span class='fu'><a href='text_long.html'>table_long</a></span>(<span class='kw'>r</span>)
-</div><div class='output co'>#&gt; Parameter       | Coefficient |   SE |             CI |     z |  df |     p | Coefficient (std.) |    Fit
-#&gt; ---------------------------------------------------------------------------------------------------------
-#&gt; (Intercept)     |        4.14 | 1.39 | [ 1.41,  6.86] |  2.98 | Inf | 0.003 |              -0.85 |       
-#&gt; disp            |       -0.02 | 0.01 | [-0.04, -0.01] | -3.03 | Inf | 0.002 |              -2.68 |       
-#&gt;                 |             |      |                |       |     |       |                    |       
-#&gt; AIC             |             |      |                |       |     |       |                    |  26.70
-#&gt; BIC             |             |      |                |       |     |       |                    |  29.63
-#&gt; Tjur's R2       |             |      |                |       |     |       |                    |   0.53
-#&gt; RMSE            |             |      |                |       |     |       |                    |   0.84
-#&gt; LOGLOSS         |             |      |                |       |     |       |                    |   0.35
-#&gt; SCORE_LOG       |             |      |                |       |     |       |                    | -11.07
-#&gt; SCORE_SPHERICAL |             |      |                |       |     |       |                    |   0.10
-#&gt; PCP             |             |      |                |       |     |       |                    |   0.77</div></pre>
+#&gt; (Intercept) |        4.14 | [ 1.81,  7.44] |  2.98 | 0.003 |      -0.85 |     
+#&gt; disp        |       -0.02 | [-0.04, -0.01] | -3.03 | 0.002 |      -2.68 |     
+#&gt;             |             |                |       |       |            |     
+#&gt; Tjur's R2   |             |                |       |       |            | 0.53
+#&gt; Sigma       |             |                |       |       |            | 0.87
+#&gt; Log_loss    |             |                |       |       |            | 0.35</div><div class='input'>
+<span class='co'># Mixed models</span>
+<span class='kw'>if</span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://github.com/lme4/lme4/'>"lme4"</a></span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'>lme4</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>|</span> <span class='va'>Species</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
+  <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+  <span class='va'>r</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; Parameter        | Coefficient |       95% CI |     t |  df |      p | Std. Coef. |  Fit
+#&gt; ----------------------------------------------------------------------------------------
+#&gt; (Intercept)      |        2.50 | [1.20, 3.81] |  3.75 | 146 | &lt; .001 |  -1.46e-13 |     
+#&gt; Petal.Length     |        0.89 | [0.76, 1.01] | 13.93 | 146 | &lt; .001 |       1.89 |     
+#&gt;                  |             |              |       |     |        |            |     
+#&gt; R2 (conditional) |             |              |       |     |        |            | 0.97
+#&gt; R2 (marginal)    |             |              |       |     |        |            | 0.66
+#&gt; Sigma            |             |              |       |     |        |            | 0.34</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

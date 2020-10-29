@@ -19,7 +19,7 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
@@ -47,7 +47,17 @@
 
 
 <meta property="og:title" content="Automatic report of R objects — report" />
-<meta property="og:description" content="Create reports of different objects. See the documentation for your object's class:" />
+<meta property="og:description" content="Create reports of different objects. See the documentation for your object's class:
+R environment, system and packages (sessionInfo)
+Dataframes and vectors
+Correlations and t-tests (htest)
+ANOVAs (aov, anova, aovlist, ...)
+Regression models (glm, lm, ...)
+
+Bayesian models (stanreg, brms...)
+Bayes factors (from bayestestR)
+
+" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,7 +90,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">report</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -96,23 +106,20 @@
   <a href="../news/index.html">News</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../reference/index.html">Features</a>
+</li>
+<li>
+  <a href="../articles/report.html">Get started</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
+    Examples
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/report.html">Overview of the report Package</a>
-    </li>
-    <li>
-      <a href="../articles/cite_packages.html">How to Cite Packages</a>
-    </li>
-    <li>
-      <a href="../articles/supporting_new_models.html">Supporting New Models</a>
+      <a href="../articles/cite_packages.html">Report and Cite Packages</a>
     </li>
   </ul>
 </li>
@@ -143,17 +150,27 @@
     </div>
 
     <div class="ref-description">
-    <p>Create reports of different objects. See the documentation for your object's class:</p>
+    <p>Create reports of different objects. See the documentation for your object's class:</p><ul>
+<li><p><a href='report.sessionInfo.html'>R environment, system and packages</a> (<code>sessionInfo</code>)</p></li>
+<li><p><a href='report.character.html'>Dataframes and vectors</a></p></li>
+<li><p><a href='report.htest.html'>Correlations and t-tests</a> (<code>htest</code>)</p></li>
+<li><p><a href='report.aov.html'>ANOVAs</a> (<code>aov, anova, aovlist, ...</code>)</p></li>
+<li><p><a href='report.lm.html'>Regression models</a> (<code>glm, lm, ...</code>)
+<!-- % \item{\link[=report.lmerMod]{Mixed models} (\code{glmer, lmer, glmmTMB, ...})} --></p></li>
+<li><p><a href='report.stanreg.html'>Bayesian models</a> (<code>stanreg, brms...</code>)</p></li>
+<li><p><a href='report.bayesfactor_models.html'>Bayes factors</a> (from <code>bayestestR</code>)</p></li>
+</ul>
+
     </div>
 
-    <pre class="usage"><span class='fu'>report</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>report</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>model</th>
-      <td><p>A statistical model. For data frame or character methods, a data frame or character respectively.</p></td>
+      <th>x</th>
+      <td><p>The R object that you want to report (see list of of supported objects above).</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -169,120 +186,70 @@ and long table of parameters and fit indices.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     
-<ul>
-<li><p><a href='report.character.html'>Dataframes and vectors</a></p></li>
-<li><p><a href='model_text.htest.html'>Correlations and t-tests</a> (<code>htest</code>)</p></li>
-<li><p><a href='report.aov.html'>ANOVAs</a></p></li>
-<li><p><a href='report.default.html'>Regression models</a> (<code>glm, lm, ...</code>)</p></li>
-<li><p><a href='report.lmerMod.html'>Mixed models</a> <code>(glmer, lmer, glmmTMB, ...)</code></p></li>
-<li><p><a href='report.stanreg.html'>Bayesian models</a> <code>(stanreg, brms...)</code></p></li>
-</ul>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Organization</h3>
 
 
+<p><code>report_table</code> and <code>report_text</code> are the two distal representations
+of a report, and are the two provided in <code>report()</code>. However, intermediate
+steps are accessible (depending on the object) via specific functions (e.g.,
+<code>report_parameters</code>).</p>
 
-<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Change output type</h3>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Output</h3>
+
+
 <p>The <code>report()</code> function generates a report-object that contain in itself
 different representations (e.g., text, tables, plots). These different representations
-can be accessed via several functions, such as:</p>
-<ul>
-<li><p><strong><code><a href='text_long.html'>text_long()</a></code></strong>: Detailed text.</p></li>
-<li><p><strong><code><a href='text_long.html'>text_short()</a></code></strong>: Minimal text giving the minimal information.</p></li>
-<li><p><strong><code><a href='text_long.html'>table_long()</a></code></strong>: Comprehensive table including most available indices.</p></li>
-<li><p><strong><code><a href='text_long.html'>table_short()</a></code></strong>: Minimal table.</p></li>
+can be accessed via several functions, such as:</p><ul>
+<li><p><strong><code><a href='as.report_text.html'>as.report_text(r)</a></code></strong>: Detailed text.</p></li>
+<li><p><strong><code><a href='as.report_text.html'>as.report_text(r, summary=TRUE)</a></code></strong>: Minimal text giving the minimal information.</p></li>
+<li><p><strong><code><a href='as.report_text.html'>as.report_table(r)</a></code></strong>: Comprehensive table including most available indices.</p></li>
+<li><p><strong><code><a href='as.report_text.html'>as.report_table(r, summary=TRUE)</a></code></strong>: Minimal table.</p></li>
 </ul>
 
 <p>Note that for some report objects, some of these representations might be identical.</p>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='text_long.html'>table_short</a></code> or <code><a href='text_long.html'>text_short</a></code> to access the
-related content of the report-object.</p></div>
+    <div class='dont-index'><p>Specific components of reports (especially for stats models):</p><ul>
+<li><p><code><a href='report_table.html'>report_table</a></code></p></li>
+<li><p><code><a href='report_parameters.html'>report_parameters</a></code></p></li>
+<li><p><code><a href='report_statistics.html'>report_statistics</a></code></p></li>
+<li><p><code><a href='report_effectsize.html'>report_effectsize</a></code></p></li>
+<li><p><code><a href='report_model.html'>report_model</a></code></p></li>
+<li><p><code><a href='report_random.html'>report_random</a></code></p></li>
+<li><p><code><a href='report_performance.html'>report_performance</a></code></p></li>
+<li><p><code><a href='report_info.html'>report_info</a></code></p></li>
+<li><p><code><a href='report_text.html'>report_text</a></code></p></li>
+</ul><p>Other types of reports:</p><ul>
+<li><p><code><a href='report.sessionInfo.html'>report_system</a></code></p></li>
+<li><p><code><a href='report.sessionInfo.html'>report_packages</a></code></p></li>
+<li><p><code><a href='report_participants.html'>report_participants</a></code></p></li>
+<li><p><code><a href='report_sample.html'>report_sample</a></code></p></li>
+</ul><p>Methods:</p><ul>
+<li><p><code><a href='as.report_text.html'>as.report</a></code></p></li>
+</ul>
+</div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://easystats.github.io/report/'>report</a></span><span class='op'>)</span>
 
-<span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>100</span>, <span class='op'>]</span><span class='op'>)</span>
+<span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>am</span>, data <span class='op'>=</span> <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'>report</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
 
 <span class='co'># Text</span>
 <span class='va'>r</span>
-</div><div class='output co'>#&gt; The Welch Two Sample t-test suggests that the difference of Sepal.Length by Species (mean in group setosa = 5.01, mean in group versicolor = 5.94) is significant (difference = -0.93, 95% CI [-1.11, -0.75], t(86.54) = -10.52, p &lt; .001) and can be considered as very large (Cohen's d = -2.26).</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; The Welch Two Sample t-test suggests that the difference of Sepal.Length by Species is significant (difference = -0.93, 95% CI [-1.11, -0.75], p &lt; .001, Cohen's d = -2.26)., The Welch Two Sample t-test suggests that the difference of Sepal.Length by Species is significant (difference = -0.93, 95% CI [-1.11, -0.75], p &lt; .001, Cohen's d = 0.95)., The Welch Two Sample t-test suggests that the difference of Sepal.Length by Species is significant (difference = -0.93, 95% CI [-1.11, -0.75], p &lt; .001, Cohen's d = -2.80). and The Welch Two Sample t-test suggests that the difference of Sepal.Length by Species is significant (difference = -0.93, 95% CI [-1.11, -0.75], p &lt; .001, Cohen's d = -1.72).</div><div class='input'>
+</div><div class='output co'>#&gt; Effect sizes were labelled following Cohen's (1988) recommendations.
+#&gt; 
+#&gt; The Welch Two Sample t-test testing the difference of mpg by am (mean in group 0 = 17.15, mean in group 1 = 24.39) suggests that the effect is positive, significant and large (difference = 7.24, 95% CI [-11.28, -3.21], t(18.33) = -3.77, p &lt; .01; Cohen's d = -1.76, 95% CI [-2.82, -0.67])</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; The Welch Two Sample t-test testing the difference of mpg by am (mean in group 0 = 17.15, mean in group 1 = 24.39) suggests that the effect is positive, significant and large (difference = 7.24, 95% CI [-11.28, -3.21], t(18.33) = -3.77, p &lt; .01, Cohen's d = -1.76)</div><div class='input'>
 <span class='co'># Tables</span>
 <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Parameter    |   Group | Mean_Group1 | Mean_Group2 | Difference |      t |    df |      p |         95% CI |                  Method |         Cohen's d |   NA |                NA |                NA
-#&gt; -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#&gt; Sepal.Length | Species |        5.01 |        5.94 |       0.93 | -10.52 | 86.54 | &lt; .001 | [-1.11, -0.75] | Welch Two Sample t-test | -2.26195008985566 | 0.95 | -2.79697052759621 | -1.71861295662386</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># equivalent to as.table(r)</span>
-</div><div class='output co'>#&gt;   Parameter            Group            Mean_Group1     Mean_Group2   
-#&gt;  Length:1           Length:1           Min.   :5.006   Min.   :5.936  
-#&gt;  Class :character   Class :character   1st Qu.:5.006   1st Qu.:5.936  
-#&gt;  Mode  :character   Mode  :character   Median :5.006   Median :5.936  
-#&gt;                                        Mean   :5.006   Mean   :5.936  
-#&gt;                                        3rd Qu.:5.006   3rd Qu.:5.936  
-#&gt;                                        Max.   :5.006   Max.   :5.936  
-#&gt;    Difference         t                df              p            
-#&gt;  Min.   :0.93   Min.   :-10.52   Min.   :86.54   Min.   :3.747e-17  
-#&gt;  1st Qu.:0.93   1st Qu.:-10.52   1st Qu.:86.54   1st Qu.:3.747e-17  
-#&gt;  Median :0.93   Median :-10.52   Median :86.54   Median :3.747e-17  
-#&gt;  Mean   :0.93   Mean   :-10.52   Mean   :86.54   Mean   :3.747e-17  
-#&gt;  3rd Qu.:0.93   3rd Qu.:-10.52   3rd Qu.:86.54   3rd Qu.:3.747e-17  
-#&gt;  Max.   :0.93   Max.   :-10.52   Max.   :86.54   Max.   :3.747e-17  
-#&gt;      CI_low          CI_high           Method         
-#&gt;  Min.   :-1.106   Min.   :-0.7543   Length:1          
-#&gt;  1st Qu.:-1.106   1st Qu.:-0.7543   Class :character  
-#&gt;  Median :-1.106   Median :-0.7543   Mode  :character  
-#&gt;  Mean   :-1.106   Mean   :-0.7543                     
-#&gt;  3rd Qu.:-1.106   3rd Qu.:-0.7543                     
-#&gt;  Max.   :-1.106   Max.   :-0.7543                     
-#&gt;       Cohens_d.d           Cohens_d.CI         Cohens_d.CI_low       Cohens_d.CI_high  
-#&gt;  Min.   :-2.2619501    Min.   :0.95          Min.   :-2.7969705    Min.   :-1.718613   
-#&gt;  1st Qu.:-2.2619501    1st Qu.:0.95          1st Qu.:-2.7969705    1st Qu.:-1.718613   
-#&gt;  Median :-2.2619501    Median :0.95          Median :-2.7969705    Median :-1.718613   
-#&gt;  Mean   :-2.2619501    Mean   :0.95          Mean   :-2.7969705    Mean   :-1.718613   
-#&gt;  3rd Qu.:-2.2619501    3rd Qu.:0.95          3rd Qu.:-2.7969705    3rd Qu.:-1.718613   
-#&gt;  Max.   :-2.2619501    Max.   :0.95          Max.   :-2.7969705    Max.   :-1.718613   </div><div class='input'>
-<span class='co'># List</span>
-<span class='fu'><a href='https://rdrr.io/r/base/list.html'>as.list</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $Parameter
-#&gt; [1] "Sepal.Length"
-#&gt; 
-#&gt; $Group
-#&gt; [1] "Species"
-#&gt; 
-#&gt; $Mean_Group1
-#&gt; [1] 5.006
-#&gt; 
-#&gt; $Mean_Group2
-#&gt; [1] 5.936
-#&gt; 
-#&gt; $Difference
-#&gt; [1] 0.93
-#&gt; 
-#&gt; $t
-#&gt; [1] -10.52099
-#&gt; 
-#&gt; $df
-#&gt; [1] 86.538
-#&gt; 
-#&gt; $p
-#&gt; [1] 3.746743e-17
-#&gt; 
-#&gt; $CI_low
-#&gt; [1] -1.105707
-#&gt; 
-#&gt; $CI_high
-#&gt; [1] -0.7542926
-#&gt; 
-#&gt; $Method
-#&gt; [1] "Welch Two Sample t-test"
-#&gt; 
-#&gt; $Cohens_d
-#&gt;     d |      1e+02% CI
-#&gt; ----------------------
-#&gt; -2.26 | [-2.80, -1.72]
-#&gt; 
-#&gt; attr(,"ci")
-#&gt; [1] 0.95</div></pre>
+</div><div class='output co'>#&gt; Parameter | Group | Mean_Group1 | Mean_Group2 | Difference | t(18.33) |     p |              CI |                  Method |     d |           d CI
+#&gt; --------------------------------------------------------------------------------------------------------------------------------------------------
+#&gt; mpg       |    am |       17.15 |       24.39 |       7.24 |    -3.77 | 0.001 | [-11.28, -3.21] | Welch Two Sample t-test | -1.76 | [-2.82, -0.67]</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Difference | t(18.33) |     p |              CI |     d |           d CI
+#&gt; ------------------------------------------------------------------------
+#&gt; 7.24       |    -3.77 | 0.001 | [-11.28, -3.21] | -1.76 | [-2.82, -0.67]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

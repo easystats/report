@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Format text — format_text • report</title>
+<title>Convenient text formatting functionalities — format_text • report</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -19,7 +19,7 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Format text — format_text" />
-<meta property="og:description" content="Format text" />
+<meta property="og:title" content="Convenient text formatting functionalities — format_text" />
+<meta property="og:description" content="Convenience functions to manipulate and format text." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">report</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -96,23 +96,20 @@
   <a href="../news/index.html">News</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../reference/index.html">Features</a>
+</li>
+<li>
+  <a href="../articles/report.html">Get started</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
+    Examples
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/report.html">Overview of the report Package</a>
-    </li>
-    <li>
-      <a href="../articles/cite_packages.html">How to Cite Packages</a>
-    </li>
-    <li>
-      <a href="../articles/supporting_new_models.html">Supporting New Models</a>
+      <a href="../articles/cite_packages.html">Report and Cite Packages</a>
     </li>
   </ul>
 </li>
@@ -137,23 +134,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Format text</h1>
+    <h1>Convenient text formatting functionalities</h1>
     <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/format_text.R'><code>R/format_text.R</code></a></small>
     <div class="hidden name"><code>format_text.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Format text</p>
+    <p>Convenience functions to manipulate and format text.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>format_text</span><span class='op'>(</span><span class='va'>x</span>, sep <span class='op'>=</span> <span class='st'>", "</span>, last <span class='op'>=</span> <span class='st'>" and "</span>, width <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>format_text</span><span class='op'>(</span><span class='va'>text</span>, sep <span class='op'>=</span> <span class='st'>", "</span>, last <span class='op'>=</span> <span class='st'>" and "</span>, width <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='fu'>text_fullstop</span><span class='op'>(</span><span class='va'>text</span><span class='op'>)</span>
+
+<span class='fu'>text_lastchar</span><span class='op'>(</span><span class='va'>text</span>, n <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+
+<span class='fu'>text_concatenate</span><span class='op'>(</span><span class='va'>text</span>, sep <span class='op'>=</span> <span class='st'>", "</span>, last <span class='op'>=</span> <span class='st'>" and "</span><span class='op'>)</span>
+
+<span class='fu'>text_paste</span><span class='op'>(</span><span class='va'>text</span>, text2 <span class='op'>=</span> <span class='cn'>NULL</span>, sep <span class='op'>=</span> <span class='st'>", "</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='fu'>text_remove</span><span class='op'>(</span><span class='va'>text</span>, pattern <span class='op'>=</span> <span class='st'>""</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='fu'>text_wrap</span><span class='op'>(</span><span class='va'>text</span>, width <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Character vector.</p></td>
+      <th>text, text2</th>
+      <td><p>A character string.</p></td>
     </tr>
     <tr>
       <th>sep</th>
@@ -165,39 +174,59 @@
     </tr>
     <tr>
       <th>width</th>
-      <td><p>Positive integer giving the target column for wrapping lines in the output. Can be "auto".</p></td>
+      <td><p>Positive integer giving the target column width for wrapping
+lines in the output. Can be "auto", in which case it will select 90% of the
+default width.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Other arguments to be passed to or from other functions.</p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p>The number of characters to find.</p></td>
+    </tr>
+    <tr>
+      <th>pattern</th>
+      <td><p>Character strings.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A formatted character vector.</p>
+    <p>A character string.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>format_text</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='st'>"B"</span>, <span class='st'>"C"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "A, B and C"</div><div class='input'>
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"a very long string"</span>, <span class='fl'>50</span><span class='op'>)</span>, collapse <span class='op'>=</span> <span class='st'>" "</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='fu'>format_text</span><span class='op'>(</span><span class='va'>x</span>, width <span class='op'>=</span> <span class='fl'>50</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; a very long string a very long string a very long
-#&gt; string a very long string a very long string a
-#&gt; very long string a very long string a very long
-#&gt; string a very long string a very long string a
-#&gt; very long string a very long string a very long
-#&gt; string a very long string a very long string a
-#&gt; very long string a very long string a very long
-#&gt; string a very long string a very long string a
-#&gt; very long string a very long string a very long
-#&gt; string a very long string a very long string a
-#&gt; very long string a very long string a very long
-#&gt; string a very long string a very long string a
-#&gt; very long string a very long string a very long
-#&gt; string a very long string a very long string a
-#&gt; very long string a very long string a very long
-#&gt; string a very long string a very long string a
-#&gt; very long string a very long string a very long
-#&gt; string a very long string a very long string a
-#&gt; very long string a very long string a very long
-#&gt; string a very long string a very long string</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://easystats.github.io/report/'>report</a></span><span class='op'>)</span>
+
+<span class='co'># Add full stop if missing</span>
+<span class='fu'>text_fullstop</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"something"</span>, <span class='st'>"something else."</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "something."      "something else."</div><div class='input'>
+<span class='co'># Find last characters</span>
+<span class='fu'>text_lastchar</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ABC"</span>, <span class='st'>"DEF"</span><span class='op'>)</span>, n<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  ABC  DEF 
+#&gt; "BC" "EF" </div><div class='input'>
+<span class='co'># Smart concatenation</span>
+<span class='fu'>text_concatenate</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"First"</span>, <span class='st'>"Second"</span>, <span class='st'>"Last"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "First, Second and Last"</div><div class='input'>
+<span class='co'># Remove parts of string</span>
+<span class='fu'>text_remove</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"one!"</span>, <span class='st'>"two"</span>, <span class='st'>"three!"</span><span class='op'>)</span>, <span class='st'>"!"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "one"   "two"   "three"</div><div class='input'>
+<span class='co'># Wrap text</span>
+<span class='va'>long_text</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"abc "</span>, <span class='fl'>100</span><span class='op'>)</span>, collapse <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='fu'>text_wrap</span><span class='op'>(</span><span class='va'>long_text</span>, width <span class='op'>=</span> <span class='fl'>50</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  abc abc abc abc abc abc abc abc abc abc abc abc
+#&gt; abc abc abc abc abc abc abc abc abc abc abc abc
+#&gt; abc abc abc abc abc abc abc abc abc abc abc abc
+#&gt; abc abc abc abc abc abc abc abc abc abc abc abc
+#&gt; abc abc abc abc abc abc abc abc abc abc abc abc
+#&gt; abc abc abc abc abc abc abc abc abc abc abc abc
+#&gt; abc abc abc abc abc abc abc abc abc abc abc abc
+#&gt; abc abc abc abc abc abc abc abc abc abc abc abc
+#&gt; abc abc abc abc</div><div class='input'>
+<span class='co'># Paste with optional separator</span>
+<span class='fu'>text_paste</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='st'>""</span>, <span class='st'>"B"</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"42"</span>, <span class='st'>"42"</span>, <span class='st'>"42"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "A, 42" "42"    "B, 42"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

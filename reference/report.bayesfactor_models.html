@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Models' Bayes factor Report — report.bayesfactor_models • report</title>
+<title>Report Models' Bayes Factor — report.bayesfactor_models • report</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -19,7 +19,7 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Models' Bayes factor Report — report.bayesfactor_models" />
+<meta property="og:title" content="Report Models' Bayes Factor — report.bayesfactor_models" />
 <meta property="og:description" content="Create a report of Bayes factors for model comparison." />
 <meta property="og:image" content="/logo.png" />
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">report</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -96,23 +96,20 @@
   <a href="../news/index.html">News</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../reference/index.html">Features</a>
+</li>
+<li>
+  <a href="../articles/report.html">Get started</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
+    Examples
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/report.html">Overview of the report Package</a>
-    </li>
-    <li>
-      <a href="../articles/cite_packages.html">How to Cite Packages</a>
-    </li>
-    <li>
-      <a href="../articles/supporting_new_models.html">Supporting New Models</a>
+      <a href="../articles/cite_packages.html">Report and Cite Packages</a>
     </li>
   </ul>
 </li>
@@ -137,8 +134,8 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Models' Bayes factor Report</h1>
-    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.bayestestR.R'><code>R/report.bayestestR.R</code></a></small>
+    <h1>Report Models' Bayes Factor</h1>
+    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.bayesfactor_models.R'><code>R/report.bayesfactor_models.R</code></a></small>
     <div class="hidden name"><code>report.bayesfactor_models.Rd</code></div>
     </div>
 
@@ -147,16 +144,16 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for bayesfactor_models</span>
-<span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>model</span>, interpretation <span class='op'>=</span> <span class='st'>"jeffreys1961"</span>, <span class='va'>...</span><span class='op'>)</span>
+<span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>x</span>, interpretation <span class='op'>=</span> <span class='st'>"jeffreys1961"</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for bayesfactor_inclusion</span>
-<span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>model</span>, interpretation <span class='op'>=</span> <span class='st'>"jeffreys1961"</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+<span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>x</span>, interpretation <span class='op'>=</span> <span class='st'>"jeffreys1961"</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>model</th>
+      <th>x</th>
       <td><p>Object of class <code>bayesfactor_inclusion</code>.</p></td>
     </tr>
     <tr>
@@ -176,8 +173,25 @@ with a short and long description of the model summary, as well as a short
 and long table of parameters and fit indices.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='text_long.html'>table_short</a></code> or <code><a href='text_long.html'>text_short</a></code> to access the
-related content of the report-object.</p></div>
+    <div class='dont-index'><p>Specific components of reports (especially for stats models):</p><ul>
+<li><p><code><a href='report_table.html'>report_table</a></code></p></li>
+<li><p><code><a href='report_parameters.html'>report_parameters</a></code></p></li>
+<li><p><code><a href='report_statistics.html'>report_statistics</a></code></p></li>
+<li><p><code><a href='report_effectsize.html'>report_effectsize</a></code></p></li>
+<li><p><code><a href='report_model.html'>report_model</a></code></p></li>
+<li><p><code><a href='report_random.html'>report_random</a></code></p></li>
+<li><p><code><a href='report_performance.html'>report_performance</a></code></p></li>
+<li><p><code><a href='report_info.html'>report_info</a></code></p></li>
+<li><p><code><a href='report_text.html'>report_text</a></code></p></li>
+</ul><p>Other types of reports:</p><ul>
+<li><p><code><a href='report.sessionInfo.html'>report_system</a></code></p></li>
+<li><p><code><a href='report.sessionInfo.html'>report_packages</a></code></p></li>
+<li><p><code><a href='report_participants.html'>report_participants</a></code></p></li>
+<li><p><code><a href='report_sample.html'>report_sample</a></code></p></li>
+</ul><p>Methods:</p><ul>
+<li><p><code><a href='as.report_text.html'>as.report</a></code></p></li>
+</ul>
+</div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://easystats.github.io/report/'>report</a></span><span class='op'>)</span>
@@ -193,16 +207,17 @@ related content of the report-object.</p></div>
 
   <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>BFmodels</span><span class='op'>)</span>
   <span class='va'>r</span>
-  <span class='fu'><a href='text_long.html'>table_short</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
 
   <span class='co'># Bayes factor - inclusion</span>
   <span class='va'>inc_bf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://easystats.github.io/bayestestR/reference/bayesfactor_inclusion.html'>bayesfactor_inclusion</a></span><span class='op'>(</span><span class='va'>BFmodels</span>, prior_odds <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span><span class='op'>)</span>, match_models <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
   <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>inc_bf</span><span class='op'>)</span>
   <span class='va'>r</span>
-  <span class='fu'><a href='text_long.html'>table_short</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; <span class='message'>Loading required package: bayestestR</span></div><div class='output co'>#&gt; Terms                                | Pr(prior) | Pr(posterior) | Inclusion BF
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: bayestestR</span></div><div class='output co'>#&gt; <span class='message'>Note: The default CI width (currently `ci=0.89`) might change in future versions (see https://github.com/easystats/bayestestR/issues/250).</span>
+#&gt; <span class='message'>To prevent any issues, please set it explicitly when using bayestestR functions, via the 'ci' argument.</span></div><div class='output co'>#&gt; Terms                                | Pr(prior) | Pr(posterior) | Inclusion BF
 #&gt; -------------------------------------------------------------------------------
 #&gt; Species                              |      0.43 |          0.95 |       &gt; 1000
 #&gt; Petal.Length                         |      0.29 |          0.95 |       &gt; 1000

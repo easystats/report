@@ -19,7 +19,7 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">report</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -95,23 +95,20 @@
   <a href="../news/index.html">News</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../reference/index.html">Features</a>
+</li>
+<li>
+  <a href="../articles/report.html">Get started</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
+    Examples
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/report.html">Overview of the report Package</a>
-    </li>
-    <li>
-      <a href="../articles/cite_packages.html">How to Cite Packages</a>
-    </li>
-    <li>
-      <a href="../articles/supporting_new_models.html">Supporting New Models</a>
+      <a href="../articles/cite_packages.html">Report and Cite Packages</a>
     </li>
   </ul>
 </li>
@@ -150,7 +147,7 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-create-generic-report-objects" class="hasAnchor"><a href="#section-create-generic-report-objects" class="anchor"></a>Create Generic Report Objects</h2>
+          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -162,27 +159,75 @@
       <tr>
         
         <td>
+          <p><code><a href="as.report.html">as.report_text()</a></code> <code><a href="as.report.html">as.report()</a></code> <code><a href="as.report.html">is.report()</a></code> <code><a href="as.report.html">as.report_effectsize()</a></code> <code><a href="as.report.html">as.report_info()</a></code> <code><a href="as.report.html">as.report_intercept()</a></code> <code><a href="as.report.html">as.report_model()</a></code> <code><a href="as.report.html">as.report_parameters()</a></code> <code><a href="as.report.html">as.report_performance()</a></code> <code><a href="as.report.html">as.report_priors()</a></code> <code><a href="as.report.html">as.report_random()</a></code> <code><a href="as.report.html">as.report_statistics()</a></code> <code><a href="as.report.html">as.report_table()</a></code> </p>
+        </td>
+        <td><p>Create or test objects of class report.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="data_rename.html">data_rename()</a></code> <code><a href="data_rename.html">data_findcols()</a></code> <code><a href="data_rename.html">data_remove()</a></code> <code><a href="data_rename.html">data_reorder()</a></code> <code><a href="data_rename.html">data_addprefix()</a></code> <code><a href="data_rename.html">data_addsuffix()</a></code> </p>
+        </td>
+        <td><p>Convenient dataframe manipulation functionalities</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="format_citation.html">format_citation()</a></code> <code><a href="format_citation.html">cite_citation()</a></code> <code><a href="format_citation.html">clean_citation()</a></code> </p>
+        </td>
+        <td><p>Citation formatting</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="format_formula.html">format_algorithm()</a></code> <code><a href="format_formula.html">format_formula()</a></code> <code><a href="format_formula.html">format_model()</a></code> </p>
+        </td>
+        <td><p>Convenient formatting of text components</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="format_text.html">format_text()</a></code> <code><a href="format_text.html">text_fullstop()</a></code> <code><a href="format_text.html">text_lastchar()</a></code> <code><a href="format_text.html">text_concatenate()</a></code> <code><a href="format_text.html">text_paste()</a></code> <code><a href="format_text.html">text_remove()</a></code> <code><a href="format_text.html">text_wrap()</a></code> </p>
+        </td>
+        <td><p>Convenient text formatting functionalities</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="report.html">report()</a></code> </p>
         </td>
         <td><p>Automatic report of R objects</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="report.aov.html">report(<i>&lt;aov&gt;</i>)</a></code> </p>
+          <p><code><a href="report.aov.html">report(<i>&lt;aov&gt;</i>)</a></code> <code><a href="report.aov.html">report_effectsize(<i>&lt;aov&gt;</i>)</a></code> <code><a href="report.aov.html">report_table(<i>&lt;aov&gt;</i>)</a></code> <code><a href="report.aov.html">report_statistics(<i>&lt;aov&gt;</i>)</a></code> <code><a href="report.aov.html">report_parameters(<i>&lt;aov&gt;</i>)</a></code> <code><a href="report.aov.html">report_model(<i>&lt;aov&gt;</i>)</a></code> <code><a href="report.aov.html">report_info(<i>&lt;aov&gt;</i>)</a></code> <code><a href="report.aov.html">report_text(<i>&lt;aov&gt;</i>)</a></code> </p>
         </td>
         <td><p>ANOVAs Report</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="report.default.html">report(<i>&lt;default&gt;</i>)</a></code> </p>
+          <p><code><a href="report.bayesfactor_models.html">report(<i>&lt;bayesfactor_models&gt;</i>)</a></code> <code><a href="report.bayesfactor_models.html">report(<i>&lt;bayesfactor_inclusion&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Report Models' Bayes Factor</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="report.data.frame.html">report(<i>&lt;character&gt;</i>)</a></code> <code><a href="report.data.frame.html">report(<i>&lt;data.frame&gt;</i>)</a></code> <code><a href="report.data.frame.html">report(<i>&lt;factor&gt;</i>)</a></code> <code><a href="report.data.frame.html">report(<i>&lt;numeric&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Data frame Report</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="report.htest.html">report(<i>&lt;htest&gt;</i>)</a></code> <code><a href="report.htest.html">report_effectsize(<i>&lt;htest&gt;</i>)</a></code> <code><a href="report.htest.html">report_table(<i>&lt;htest&gt;</i>)</a></code> <code><a href="report.htest.html">report_statistics(<i>&lt;htest&gt;</i>)</a></code> <code><a href="report.htest.html">report_parameters(<i>&lt;htest&gt;</i>)</a></code> <code><a href="report.htest.html">report_model(<i>&lt;htest&gt;</i>)</a></code> <code><a href="report.htest.html">report_info(<i>&lt;htest&gt;</i>)</a></code> <code><a href="report.htest.html">report_text(<i>&lt;htest&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Report of h-tests (Correlation, t-test...)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="report.lm.html">report(<i>&lt;lm&gt;</i>)</a></code> <code><a href="report.lm.html">report_effectsize(<i>&lt;lm&gt;</i>)</a></code> <code><a href="report.lm.html">report_table(<i>&lt;lm&gt;</i>)</a></code> <code><a href="report.lm.html">report_statistics(<i>&lt;lm&gt;</i>)</a></code> <code><a href="report.lm.html">report_parameters(<i>&lt;lm&gt;</i>)</a></code> <code><a href="report.lm.html">report_intercept(<i>&lt;lm&gt;</i>)</a></code> <code><a href="report.lm.html">report_model(<i>&lt;lm&gt;</i>)</a></code> <code><a href="report.lm.html">report_performance(<i>&lt;lm&gt;</i>)</a></code> <code><a href="report.lm.html">report_info(<i>&lt;lm&gt;</i>)</a></code> <code><a href="report.lm.html">report_text(<i>&lt;lm&gt;</i>)</a></code> <code><a href="report.lm.html">report_random(<i>&lt;merMod&gt;</i>)</a></code> </p>
         </td>
         <td><p>(General) Linear Models Report</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="report.lmerMod.html">report(<i>&lt;lmerMod&gt;</i>)</a></code> </p>
+          <p><code><a href="report.sessionInfo.html">report(<i>&lt;sessionInfo&gt;</i>)</a></code> <code><a href="report.sessionInfo.html">report_packages()</a></code> <code><a href="report.sessionInfo.html">cite_packages()</a></code> <code><a href="report.sessionInfo.html">report_system()</a></code> </p>
         </td>
-        <td><p>Mixed Models Report</p></td>
+        <td><p>Report R environment (packages, system, etc.)</p></td>
       </tr><tr>
         
         <td>
@@ -192,40 +237,33 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="report.htest.html">model_text(<i>&lt;htest&gt;</i>)</a></code> <code><a href="report.htest.html">report(<i>&lt;htest&gt;</i>)</a></code> </p>
+          <p><code><a href="report_effectsize.html">report_effectsize()</a></code> </p>
         </td>
-        <td><p>h-test (Correlation, t-test...) Report</p></td>
+        <td><p>Report the effect size(s) of a model or a test</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="report.bayesfactor_models.html">report(<i>&lt;bayesfactor_models&gt;</i>)</a></code> <code><a href="report.bayesfactor_models.html">report(<i>&lt;bayesfactor_inclusion&gt;</i>)</a></code> </p>
+          <p><code><a href="report_info.html">report_info()</a></code> </p>
         </td>
-        <td><p>Models' Bayes factor Report</p></td>
+        <td><p>Report additional information</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="report.data.frame.html">report(<i>&lt;character&gt;</i>)</a></code> <code><a href="report.data.frame.html">report(<i>&lt;data.frame&gt;</i>)</a></code> <code><a href="report.data.frame.html">report(<i>&lt;factor&gt;</i>)</a></code> <code><a href="report.data.frame.html">report(<i>&lt;numeric&gt;</i>)</a></code> </p>
+          <p><code><a href="report_intercept.html">report_intercept()</a></code> </p>
         </td>
-        <td><p>Data frame Report</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-create-specific-report-objects" class="hasAnchor"><a href="#section-create-specific-report-objects" class="anchor"></a>Create Specific Report Objects</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
+        <td><p>Report intercept</p></td>
+      </tr><tr>
         
         <td>
-          <p><code><a href="report_model.html">report_intercept()</a></code> <code><a href="report_model.html">report_model()</a></code> <code><a href="report_model.html">report_parameters()</a></code> <code><a href="report_model.html">report_performance()</a></code> </p>
+          <p><code><a href="report_model.html">report_model()</a></code> </p>
         </td>
-        <td><p>Model description</p></td>
+        <td><p>Report the model type</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="report_parameters.html">report_parameters()</a></code> </p>
+        </td>
+        <td><p>Report the parameters of a model</p></td>
       </tr><tr>
         
         <td>
@@ -235,102 +273,45 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="report_performance.html">report_performance()</a></code> </p>
+        </td>
+        <td><p>Report the model's performance</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="report_priors.html">report_priors()</a></code> </p>
+        </td>
+        <td><p>Report priors of Bayesian models</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="report_random.html">report_random()</a></code> </p>
+        </td>
+        <td><p>Report random effects and factors</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="report_sample.html">report_sample()</a></code> </p>
         </td>
         <td><p>Sample Description</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-extract-tables-and-summaries-from-reports" class="hasAnchor"><a href="#section-extract-tables-and-summaries-from-reports" class="anchor"></a>Extract Tables and Summaries from Reports</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="model_table.html">model_table()</a></code> </p>
-        </td>
-        <td><p>Table Summary</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="model_text.html">model_text()</a></code> </p>
+          <p><code><a href="report_statistics.html">report_statistics()</a></code> </p>
         </td>
-        <td><p>Text summary</p></td>
+        <td><p>Report the statistics of a model</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="text_long.html">text_long()</a></code> <code><a href="text_long.html">text_short()</a></code> <code><a href="text_long.html">table_long()</a></code> <code><a href="text_long.html">table_short()</a></code> </p>
+          <p><code><a href="report_table.html">report_table()</a></code> </p>
         </td>
-        <td><p>Modify report output.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-utilities" class="hasAnchor"><a href="#section-utilities" class="anchor"></a>Utilities</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="as.report.html">as.report()</a></code> <code><a href="as.report.html">is.report()</a></code> </p>
-        </td>
-        <td><p>Create or test objects of class report.</p></td>
+        <td><p>Report a descriptive table</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="rename_if_possible.html">rename_if_possible()</a></code> <code><a href="rename_if_possible.html">remove_if_possible()</a></code> <code><a href="rename_if_possible.html">reorder_if_possible()</a></code> </p>
+          <p><code><a href="report_text.html">report_text()</a></code> </p>
         </td>
-        <td><p>Safe and convenient data frame utilities</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="show_packages.html">show_packages()</a></code> <code><a href="show_packages.html">cite_packages()</a></code> </p>
-        </td>
-        <td><p>Cite Loaded Packages</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-string-formatting" class="hasAnchor"><a href="#section-string-formatting" class="anchor"></a>String Formatting</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="format_algorithm.html">format_algorithm()</a></code> </p>
-        </td>
-        <td><p>Model Algorithm Formatting</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="format_model.html">format_model()</a></code> </p>
-        </td>
-        <td><p>Model Name Formatting</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="format_text.html">format_text()</a></code> </p>
-        </td>
-        <td><p>Format text</p></td>
+        <td><p>Report a textual description of an object</p></td>
       </tr>
     </tbody>
     </table>
