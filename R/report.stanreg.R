@@ -11,7 +11,7 @@
 #'
 #' # Bayesian models
 #' if(require("rstanarm")){
-#'   model <- stan_glm(mpg ~ cyl + wt, data = mtcars, refresh=0, iter=600)
+#'   model <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh=0, iter=600)
 #'   r <- report(model)
 #'   r
 #'   summary(r)
@@ -52,6 +52,34 @@ report_text.stanreg <- report_text.lm
 # ==================== Specific to Bayes ===================================
 
 
+# report_priors -----------------------------------------------------------
+
+#' @export
+report_priors.stanreg <- function(x) {
+  params <- bayestestR::describe_prior(x)
+  params <- params[params$Parameter != "(Intercept)", ]
+
+  # Return empty if no priors info
+  if (!"Prior_Distribution" %in% names(params) | nrow(params) == 0) {
+    return("")
+  }
+
+  values <- ifelse(params$Prior_Distribution == "normal",
+                   paste0("mean = ", insight::format_value(params$Prior_Location), ", SD = ", insight::format_value(params$Prior_Scale)),
+                   paste0("location = ", insight::format_value(params$Prior_Location), ", scale = ", insight::format_value(params$Prior_Scale))
+  )
+
+  values <- paste0(params$Prior_Distribution, " (", values, ")")
+
+  if (length(unique(values)) == 1 & nrow(params) > 1) {
+    text <- paste0("all set as ", values[1])
+  } else {
+    text <- paste0("set as ", format_text(values))
+  }
+
+  text <- paste0(" Priors over parameters were ", text, " distributions.")
+  as.report_priors(text)
+}
 
 
 # report_parameters -------------------------------------------------------

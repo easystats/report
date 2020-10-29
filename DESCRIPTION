@@ -86,6 +86,7 @@ Collate:
     'report_parameters.R'
     'report_participants.R'
     'report_performance.R'
+    'report_priors.R'
     'report_random.R'
     'report_sample.R'
     'report_statistics.R'

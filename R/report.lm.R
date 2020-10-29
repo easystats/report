@@ -405,6 +405,14 @@ report_model.lm <- function(x, table=NULL, ...) {
     text <- paste0(text, ". ", summary(random_text))
   }
 
+  # Bayesian
+  if(info$is_bayesian){
+    priors_text <- report_priors(x)
+    text_full <- paste0(text_full, ". ", as.character(priors_text))
+    text <- paste0(text, ". ", summary(priors_text))
+  }
+
+
   as.report_model(text_full, summary = text, ...)
 }
 
