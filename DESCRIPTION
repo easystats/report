@@ -50,7 +50,7 @@ Remotes:
 	easystats/insight,
 	easystats/bayestestR,
 	easystats/effectsize,
-	easystats/parameters
+	easystats/parameters,
     easystats/performance
 RoxygenNote: 7.1.1
 Language: en-GB
