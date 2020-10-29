@@ -15,8 +15,15 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install rmarkdown
         run: Rscript -e 'install.packages("rmarkdown")'
-      - name: Install dplyr
+      - name: Install dependencies
         run: Rscript -e 'install.packages("dplyr")'
+      - name: Install dependencies
+        run: |
+          install.packages("remotes")
+          install.packages("devtools")
+          # To get links for homepage
+          # remotes::install_cran("devtools")
+          remotes::install_deps(dependencies = TRUE)
       - name: Render README
         run: Rscript -e 'rmarkdown::render("README.Rmd")'
       - name: Commit results
