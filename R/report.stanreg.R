@@ -55,7 +55,7 @@ report_text.stanreg <- report_text.lm
 # report_priors -----------------------------------------------------------
 
 #' @export
-report_priors.stanreg <- function(x) {
+report_priors.stanreg <- function(x, ...) {
   params <- bayestestR::describe_prior(x)
   params <- params[params$Parameter != "(Intercept)", ]
 
