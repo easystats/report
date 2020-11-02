@@ -31,7 +31,7 @@ Imports:
 	stats,
 	tools,
 	utils,
-	insight (>= 0.10.1),
+	insight (>= 0.10),
 	bayestestR (>= 0.7.5.1),
 	parameters (>= 0.8.6),
 	effectsize (>= 0.4.0),
