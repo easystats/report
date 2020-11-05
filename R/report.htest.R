@@ -138,6 +138,8 @@ report_statistics.htest <- function(x, table=NULL, ...) {
     text <- paste0(text, ", t(", insight::format_value(table$df, protect_integers = TRUE), ") = ", insight::format_value(table$t))
   } else if ("S" %in% names(table)) {
     text <- paste0(text, ", S = ", insight::format_value(table$S))
+  } else if ("z" %in% names(table)) {
+    text <- paste0(text, ", z = ", insight::format_value(table$z))
   }
 
   # p-value
