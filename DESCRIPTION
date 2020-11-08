@@ -73,6 +73,7 @@ Collate:
     'report.factor.R'
     'report.glm.R'
     'report.glmmTMB.R'
+    'report.lme.R'
     'report.lme4.R'
     'report.numeric.R'
     'report.sessionInfo.R'
