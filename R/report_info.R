@@ -64,7 +64,7 @@ as.report_info <- function(x, summary = NULL, ...) {
 
 #' @export
 summary.report_info <- function(object, ...) {
-  if(is.null(attributes(object)$summary)){
+  if (is.null(attributes(object)$summary)) {
     object
   } else{
     attributes(object)$summary
@@ -82,17 +82,17 @@ print.report_info <- function(x, ...) {
 
 #' @keywords internal
 .info_df <- function(ci, df_method = NULL) {
-  if(is.null(df_method)){
+  if (is.null(df_method)) {
     return("")
   }
 
   text <- paste0(insight::format_value(ci * 100, protect_integers = TRUE),
                  "% Confidence Intervals (CIs) and p-values were computed using ")
 
-  if (df_method == "wald"){
-    text <- paste0(text, "the Wald approximation")
-  } else if (df_method == "kenward"){
-    text <- paste0(text, "the Kenward-Roger approximation")
+  if (df_method == "wald") {
+    text <- paste0(text, "the Wald approximation.")
+  } else if (df_method == "kenward") {
+    text <- paste0(text, "the Kenward-Roger approximation.")
   }
   text
 }
