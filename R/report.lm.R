@@ -64,7 +64,7 @@ report.lm <- function(x, include_effectsize = TRUE, effectsize_method="refit", .
 #' @importFrom insight model_info
 #' @export
 report_effectsize.lm <- function(x, effectsize_method="refit", ...) {
-  table <- effectsize::effectsize(x, method=effectsize_method, ...)
+  table <- suppressWarnings(effectsize::effectsize(x, method = effectsize_method, ...))
   method <- .text_standardize(table)
   estimate <- names(table)[effectsize::is_effectsize_name(names(table))]
 
@@ -165,7 +165,7 @@ report_table.lm <- function(x, include_effectsize = TRUE, ...) {
                          effsize = effsize,
                          performance = performance,
                          ...)
-  if(!is.null(effsize)) attr(out, paste0(names(attributes(effsize)$ci))) <- attributes(effsize)$ci
+  if (!is.null(effsize)) attr(out, paste0(names(attributes(effsize)$ci))) <- attributes(effsize)$ci
   # Add attributes from params table
   for (att in c("ci", "coefficient_name", "pretty_names", "bootstrap", "iterations", "df_method")) {
     attr(out, att) <- attributes(params)[[att]]
