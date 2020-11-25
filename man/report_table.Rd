@@ -53,4 +53,14 @@ if(require("rstanarm")){
   model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh=0, iter=600)
   report_table(model, effectsize_method="basic")
 }
+
+# Structural Equation Models (SEM)
+if (require("lavaan")) {
+  structure <- " ind60 =~ x1 + x2 + x3
+                 dem60 =~ y1 + y2 + y3
+                 dem60 ~ ind60 "
+  model <- lavaan::sem(structure, data = PoliticalDemocracy)
+  report_table(model)
+}
+
 }

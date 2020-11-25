@@ -42,6 +42,8 @@
   perf_names[perf_names == "R2_marginal"] <- "R2 (marginal)"
 
 
+
+
   # add performance
   perf_vertical <- data.frame(
     "Parameter" = perf_names,
@@ -53,7 +55,7 @@
   perf_vertical <- perf_vertical[!is.na(perf_vertical$Fit), ]
 
   # Name parameter column
-  name_parameter <- names(parameters)[names(parameters) %in% c("Parameter", "Link")][1]
+  name_parameter <- names(parameters)[names(parameters) %in% c("Parameter", "Link", "To")][1]
   names(perf_vertical)[1] <- name_parameter
 
   # Merge

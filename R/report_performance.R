@@ -27,6 +27,15 @@
 #'   model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh=0, iter=600)
 #'   report_performance(model)
 #' }
+#'
+#' # Structural Equation Models (SEM)
+#' if (require("lavaan")) {
+#'   structure <- " ind60 =~ x1 + x2 + x3
+#'                  dem60 =~ y1 + y2 + y3
+#'                  dem60 ~ ind60 "
+#'   model <- lavaan::sem(structure, data = PoliticalDemocracy)
+#'   report_performance(model)
+#' }
 #' @export
 report_performance <- function(x, table = NULL, ...) {
   UseMethod("report_performance")
@@ -227,4 +236,42 @@ print.report_performance <- function(x, ...) {
 
   list(text_full=text_full, text=text)
 
+}
+
+
+#' @keywords internal
+.text_performance_lavaan <- function(perf_table, ...){
+  perf_table$Text <- paste0(
+    perf_table$Name,
+    " (",
+    substring(insight::format_value(perf_table$Value), 2),
+    ifelse(perf_table$Value > perf_table$Threshold, " > ", " < "),
+    substring(insight::format_value(perf_table$Threshold), 2),
+    ")"
+  )
+
+  # Satisfactory
+  if(length(perf_table[perf_table$Interpretation == "satisfactory", "Text"]) >= 1){
+    text_satisfactory <- paste0(
+      "The ",
+      report::format_text(perf_table[perf_table$Interpretation == "satisfactory", "Text"]),
+      ifelse(length(perf_table[perf_table$Interpretation == "satisfactory", "Text"]) > 1, " suggest", " suggests"),
+      " a satisfactory fit.")
+  } else{
+    text_satisfactory <- ""
+  }
+
+  # Poor
+  if(length(perf_table[perf_table$Interpretation == "poor", "Text"]) >= 1){
+    text_poor <- paste0(
+      "The ",
+      report::format_text(perf_table[perf_table$Interpretation == "poor", "Text"]),
+      ifelse(length(perf_table[perf_table$Interpretation == "poor", "Text"]) > 1, " suggest", " suggests"),
+      " a poor fit.")
+  } else{
+    text_poor <- ""
+  }
+
+  text <- text_paste(text_satisfactory, text_poor, sep = " ")
+  text
 }

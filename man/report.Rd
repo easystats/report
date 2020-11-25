@@ -27,6 +27,7 @@ Create reports of different objects. See the documentation for your object's cla
 % \item{\link[=report.lmerMod]{Mixed models} (\code{glmer, lmer, glmmTMB, ...})}
  \item{\link[=report.stanreg]{Bayesian models} (\code{stanreg, brms...})}
  \item{\link[=report.bayesfactor_models]{Bayes factors} (from \code{bayestestR})}
+ % \item{\link[=report.lavaan]{Structural Equation Models (SEM)} (from \code{lavaan})}
 }
 }
 \details{

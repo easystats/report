@@ -41,6 +41,7 @@ Suggests:
 	dplyr,
 	httr,
 	knitr,
+	lavaan,
 	lme4,
 	logspline,
 	rstanarm,
@@ -73,6 +74,7 @@ Collate:
     'report.factor.R'
     'report.glm.R'
     'report.glmmTMB.R'
+    'report.lavaan.R'
     'report.lme.R'
     'report.lme4.R'
     'report.numeric.R'

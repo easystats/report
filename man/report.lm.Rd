@@ -12,7 +12,7 @@
 \alias{report_info.lm}
 \alias{report_text.lm}
 \alias{report_random.merMod}
-\title{(General) Linear Models Report}
+\title{Reports of (General) Linear Models}
 \usage{
 \method{report}{lm}(x, include_effectsize = TRUE, effectsize_method = "refit", ...)
 

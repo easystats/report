@@ -1,4 +1,4 @@
-#' Bayesian Models Report
+#' Reports of Bayesian Models
 #'
 #' Create a report Bayesian models. The description of the parameters follows the
 #' Sequential Effect eXistence and sIgnificance Testing framework (see \link[bayestestR:sexit]{SEXIT documentation}).

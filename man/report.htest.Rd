@@ -9,7 +9,7 @@
 \alias{report_model.htest}
 \alias{report_info.htest}
 \alias{report_text.htest}
-\title{Report of h-tests (Correlation, t-test...)}
+\title{Reports of h-tests (Correlation, t-test...)}
 \usage{
 \method{report}{htest}(x, ...)
 

@@ -1,4 +1,4 @@
-#' Data frame Report
+#' Reports of Data
 #'
 #' Create a report of a data frame.
 #'

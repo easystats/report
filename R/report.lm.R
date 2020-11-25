@@ -1,4 +1,4 @@
-#' (General) Linear Models Report
+#' Reports of (General) Linear Models
 #'
 #' Create a report for (general) linear models.
 #'

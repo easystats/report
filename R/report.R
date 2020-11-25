@@ -10,6 +10,7 @@
 #' % \item{\link[=report.lmerMod]{Mixed models} (\code{glmer, lmer, glmmTMB, ...})}
 #'  \item{\link[=report.stanreg]{Bayesian models} (\code{stanreg, brms...})}
 #'  \item{\link[=report.bayesfactor_models]{Bayes factors} (from \code{bayestestR})}
+#'  % \item{\link[=report.lavaan]{Structural Equation Models (SEM)} (from \code{lavaan})}
 #' }
 #'
 #' @param x The R object that you want to report (see list of of supported objects above).

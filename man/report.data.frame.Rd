@@ -6,7 +6,7 @@
 \alias{report.data.frame}
 \alias{report.factor}
 \alias{report.numeric}
-\title{Data frame Report}
+\title{Reports of Data}
 \usage{
 \method{report}{character}(
   x,

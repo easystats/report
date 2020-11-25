@@ -1,4 +1,4 @@
-#' Report of h-tests (Correlation, t-test...)
+#' Reports of h-tests (Correlation, t-test...)
 #'
 #' Create a report of an h-test object (\code{t.test()}, \code{cor.test()}).
 #'
