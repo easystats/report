@@ -224,7 +224,7 @@
     </tr>
     <tr>
       <th>distribution</th>
-      <td><p>Returns kurtosis and skewness in table.</p></td>
+      <td><p>Show <code><a href='https://easystats.github.io/parameters/reference/skewness.html'>kurtosis</a></code> and <code><a href='https://easystats.github.io/parameters/reference/skewness.html'>skewness</a></code>.</p></td>
     </tr>
     <tr>
       <th>digits</th>
@@ -242,21 +242,21 @@
 <span class='op'>)</span>
 <span class='va'>r</span>
 </div><div class='output co'>#&gt; The data contains 150 observations of the following variables:
-#&gt;   - Sepal.Length: n = 150, Mean = 5.84, SD = 0.83, Median = 5.80, MAD = 1.04, range: [4.30, 7.90], Skewness = 0.31, Kurtosis = -0.57, 0% missing
-#&gt;   - Sepal.Width: n = 150, Mean = 3.06, SD = 0.44, Median = 3.00, MAD = 0.44, range: [2, 4.40], Skewness = 0.32, Kurtosis = 0.18, 0% missing
+#&gt;   - Sepal.Length: n = 150, Mean = 5.84, SD = 0.83, Median = 5.80, MAD = 1.04, range: [4.30, 7.90], Skewness = 0.31, Kurtosis = -0.55, 0% missing
+#&gt;   - Sepal.Width: n = 150, Mean = 3.06, SD = 0.44, Median = 3.00, MAD = 0.44, range: [2, 4.40], Skewness = 0.32, Kurtosis = 0.23, 0% missing
 #&gt;   - Petal.Length: n = 150, Mean = 3.76, SD = 1.77, Median = 4.35, MAD = 1.85, range: [1, 6.90], Skewness = -0.27, Kurtosis = -1.40, 0% missing
 #&gt;   - Petal.Width: n = 150, Mean = 1.20, SD = 0.76, Median = 1.30, MAD = 1.04, range: [0.10, 2.50], Skewness = -0.10, Kurtosis = -1.34, 0% missing
 #&gt;   - Species: 3 levels, namely setosa (n = 50, 33.33%), versicolor (n = 50, 33.33%) and virginica (n = 50, 33.33%)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; The data contains 150 observations of the following variables:
-#&gt;   - Sepal.Length: Median = 5.80, range: [4.30, 7.90], Skewness = 0.31, Kurtosis = -0.57
-#&gt;   - Sepal.Width: Median = 3.00, range: [2, 4.40], Skewness = 0.32, Kurtosis = 0.18
+#&gt;   - Sepal.Length: Median = 5.80, range: [4.30, 7.90], Skewness = 0.31, Kurtosis = -0.55
+#&gt;   - Sepal.Width: Median = 3.00, range: [2, 4.40], Skewness = 0.32, Kurtosis = 0.23
 #&gt;   - Petal.Length: Median = 4.35, range: [1, 6.90], Skewness = -0.27, Kurtosis = -1.40
 #&gt;   - Petal.Width: Median = 1.30, range: [0.10, 2.50], Skewness = -0.10, Kurtosis = -1.34
 #&gt;   - Species: 3 levels, namely setosa (n = 50), versicolor (n = 50) and virginica (n = 50)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Variable     |      Level | n_Obs | percentage_Obs | Mean |   SD | Median |  MAD |  Min |  Max | Skewness | Kurtosis | percentage_Missing
 #&gt; -----------------------------------------------------------------------------------------------------------------------------------------
-#&gt; Sepal.Length |            |   150 |                | 5.84 | 0.83 |   5.80 | 1.04 | 4.30 | 7.90 |     0.31 |    -0.57 |               0.00
-#&gt; Sepal.Width  |            |   150 |                | 3.06 | 0.44 |   3.00 | 0.44 | 2.00 | 4.40 |     0.32 |     0.18 |               0.00
+#&gt; Sepal.Length |            |   150 |                | 5.84 | 0.83 |   5.80 | 1.04 | 4.30 | 7.90 |     0.31 |    -0.55 |               0.00
+#&gt; Sepal.Width  |            |   150 |                | 3.06 | 0.44 |   3.00 | 0.44 | 2.00 | 4.40 |     0.32 |     0.23 |               0.00
 #&gt; Petal.Length |            |   150 |                | 3.76 | 1.77 |   4.35 | 1.85 | 1.00 | 6.90 |    -0.27 |    -1.40 |               0.00
 #&gt; Petal.Width  |            |   150 |                | 1.20 | 0.76 |   1.30 | 1.04 | 0.10 | 2.50 |    -0.10 |    -1.34 |               0.00
 #&gt; Species      |     setosa |    50 |          33.33 |      |      |        |      |      |      |          |          |                   
@@ -264,8 +264,8 @@
 #&gt; Species      |  virginica |    50 |          33.33 |      |      |        |      |      |      |          |          |                   </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Variable     |      Level | n_Obs | percentage_Obs | Median |  Min |  Max | Skewness | Kurtosis | percentage_Missing
 #&gt; --------------------------------------------------------------------------------------------------------------------
-#&gt; Sepal.Length |            |       |                |   5.80 | 4.30 | 7.90 |     0.31 |    -0.57 |               0.00
-#&gt; Sepal.Width  |            |       |                |   3.00 | 2.00 | 4.40 |     0.32 |     0.18 |               0.00
+#&gt; Sepal.Length |            |       |                |   5.80 | 4.30 | 7.90 |     0.31 |    -0.55 |               0.00
+#&gt; Sepal.Width  |            |       |                |   3.00 | 2.00 | 4.40 |     0.32 |     0.23 |               0.00
 #&gt; Petal.Length |            |       |                |   4.35 | 1.00 | 6.90 |    -0.27 |    -1.40 |               0.00
 #&gt; Petal.Width  |            |       |                |   1.30 | 0.10 | 2.50 |    -0.10 |    -1.34 |               0.00
 #&gt; Species      |     setosa |    50 |          33.33 |        |      |      |          |          |                   
