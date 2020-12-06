@@ -7,7 +7,7 @@
 #' @param centrality Character vector, indicating the index of centrality (either \code{"mean"} or \code{"median"}).
 #' @param dispersion Show index of dispersion (\link{sd} if \code{centrality = "mean"}, or \link{mad} if \code{centrality = "median"}).
 #' @param range Show range.
-#' @param distribution Returns kurtosis and skewness in table.
+#' @param distribution Show \code{\link[parameters:kurtosis]{kurtosis}} and \code{\link[parameters:skewness]{skewness}}.
 #' @param n_entries Number of different character entries to show. Can be "all".
 #' @param levels_percentage Show characters entries and factor levels by number or percentage. If "auto", then will be set to number and percentage if the length if n observations larger than 100.
 #' @param missing_percentage Show missing by number (default) or percentage. If "auto", then will be set to number and percentage if the length if n observations larger than 100.

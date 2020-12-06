@@ -15,6 +15,7 @@
 #' report(t.test(iris$Sepal.Width, iris$Sepal.Length))
 #' report(t.test(iris$Sepal.Width, iris$Sepal.Length, var.equal = TRUE))
 #' report(t.test(mtcars$mpg ~ mtcars$vs))
+#' report(t.test(mtcars$mpg, mtcars$vs, paired=TRUE))
 #' report(t.test(iris$Sepal.Width, mu = 1))
 #' @importFrom insight format_ci
 #' @export
@@ -119,7 +120,7 @@ report_table.htest <- function(x, ...) {
 #' @export
 report_statistics.htest <- function(x, table=NULL, ...) {
   if (is.null(table) | is.null(attributes(table)$effsize)) {
-    table <- report_table(x, ...)
+    table <- report_table(x)
   }
   effsize <- attributes(table)$effsize
 

@@ -42,8 +42,8 @@ report_table.numeric <- function(x, n = FALSE, centrality = "mean", dispersion =
     Min = min(x, na.rm = TRUE),
     Max = max(x, na.rm = TRUE),
     n_Obs = length(x),
-    Skewness = as.numeric(parameters::skewness(x)),
-    Kurtosis = as.numeric(parameters::kurtosis(x, type = 1)),
+    Skewness = as.numeric(parameters::skewness(x, ...)),
+    Kurtosis = as.numeric(parameters::kurtosis(x, ...)),
     n_Missing = sum(is.na(x))
   )
 
