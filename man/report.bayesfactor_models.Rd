@@ -5,9 +5,21 @@
 \alias{report.bayesfactor_inclusion}
 \title{Report Models' Bayes Factor}
 \usage{
-\method{report}{bayesfactor_models}(x, interpretation = "jeffreys1961", ...)
+\method{report}{bayesfactor_models}(
+  x,
+  interpretation = "jeffreys1961",
+  exact = TRUE,
+  protect_ratio = TRUE,
+  ...
+)
 
-\method{report}{bayesfactor_inclusion}(x, interpretation = "jeffreys1961", ...)
+\method{report}{bayesfactor_inclusion}(
+  x,
+  interpretation = "jeffreys1961",
+  exact = TRUE,
+  protect_ratio = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{Object of class \code{bayesfactor_inclusion}.}
