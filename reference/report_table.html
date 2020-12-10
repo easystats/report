@@ -229,20 +229,62 @@
 #&gt; Residuals |       38.96 | 147 |        0.27 |        |        |      |             </div><div class='input'>
 <span class='co'># GLMs</span>
 <span class='fu'>report_table</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>*</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='error'>Error in x$Parameter[x$Parameter == names(att$pretty_names[match_pretty_names])] &lt;- att$pretty_names[match_pretty_names]: NAs are not allowed in subscripted assignments</span></div><div class='input'><span class='fu'>report_table</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='va'>vs</span> <span class='op'>~</span> <span class='va'>disp</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, family <span class='op'>=</span> <span class='st'>"binomial"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='error'>Error in x$Parameter[x$Parameter == names(att$pretty_names[match_pretty_names])] &lt;- att$pretty_names[match_pretty_names]: NAs are not allowed in subscripted assignments</span></div><div class='input'>
+</div><div class='output co'>#&gt; Parameter                           | Coefficient |         95% CI |     t |  df |      p | Std. Coef. | Std. Coef. 95% CI |    Fit
+#&gt; -----------------------------------------------------------------------------------------------------------------------------------
+#&gt; (Intercept)                         |        4.21 | [ 3.41,  5.02] | 10.34 | 144 | &lt; .001 |       0.49 |    [-1.03,  2.01] |       
+#&gt; Petal.Length                        |        0.54 | [ 0.00,  1.09] |  1.96 | 144 | 0.052  |       1.16 |    [-0.01,  2.32] |       
+#&gt; Species [versicolor]                |       -1.81 | [-2.99, -0.62] | -3.02 | 144 | 0.003  |      -0.88 |    [-2.41,  0.65] |       
+#&gt; Species [virginica]                 |       -3.15 | [-4.41, -1.90] | -4.97 | 144 | &lt; .001 |      -1.75 |    [-3.32, -0.18] |       
+#&gt; Petal.Length * Species [versicolor] |        0.29 | [-0.30,  0.87] |  0.97 | 144 | 0.334  |       0.61 |    [-0.63,  1.85] |       
+#&gt; Petal.Length * Species [virginica]  |        0.45 | [-0.12,  1.03] |  1.56 | 144 | 0.120  |       0.97 |    [-0.26,  2.19] |       
+#&gt;                                     |             |                |       |     |        |            |                   |       
+#&gt; AIC                                 |             |                |       |     |        |            |                   | 106.77
+#&gt; BIC                                 |             |                |       |     |        |            |                   | 127.84
+#&gt; R2                                  |             |                |       |     |        |            |                   |   0.84
+#&gt; R2 (adj.)                           |             |                |       |     |        |            |                   |   0.83
+#&gt; Sigma                               |             |                |       |     |        |            |                   |   0.34</div><div class='input'><span class='fu'>report_table</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='va'>vs</span> <span class='op'>~</span> <span class='va'>disp</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, family <span class='op'>=</span> <span class='st'>"binomial"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Parameter   | Coefficient |         95% CI |     z |     p | Std. Coef. | Std. Coef. 95% CI |   Fit
+#&gt; ---------------------------------------------------------------------------------------------------
+#&gt; (Intercept) |        4.14 | [ 1.81,  7.44] |  2.98 | 0.003 |      -0.85 |    [-2.42,  0.27] |      
+#&gt; disp        |       -0.02 | [-0.04, -0.01] | -3.03 | 0.002 |      -2.68 |    [-4.90, -1.27] |      
+#&gt;             |             |                |       |       |            |                   |      
+#&gt; AIC         |             |                |       |       |            |                   | 26.70
+#&gt; BIC         |             |                |       |       |            |                   | 29.63
+#&gt; Tjur's R2   |             |                |       |       |            |                   |  0.53
+#&gt; Sigma       |             |                |       |       |            |                   |  0.87
+#&gt; Log_loss    |             |                |       |       |            |                   |  0.35</div><div class='input'>
 <span class='co'># Mixed models</span>
 <span class='kw'>if</span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://github.com/lme4/lme4/'>"lme4"</a></span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
   <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'>lme4</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>|</span> <span class='va'>Species</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
   <span class='fu'>report_table</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='error'>Error in x$Parameter[x$Parameter == names(att$pretty_names[match_pretty_names])] &lt;- att$pretty_names[match_pretty_names]: NAs are not allowed in subscripted assignments</span></div><div class='input'>
+</div><div class='output co'>#&gt; Parameter        | Coefficient |       95% CI |     t |  df |      p | Std. Coef. | Std. Coef. 95% CI |    Fit
+#&gt; --------------------------------------------------------------------------------------------------------------
+#&gt; (Intercept)      |        2.50 | [1.20, 3.81] |  3.75 | 146 | &lt; .001 |  -1.46e-13 |     [-1.47, 1.47] |       
+#&gt; Petal.Length     |        0.89 | [0.76, 1.01] | 13.93 | 146 | &lt; .001 |       1.89 |     [ 1.63, 2.16] |       
+#&gt;                  |             |              |       |     |        |            |                   |       
+#&gt; AIC              |             |              |       |     |        |            |                   | 127.79
+#&gt; BIC              |             |              |       |     |        |            |                   | 139.84
+#&gt; R2 (conditional) |             |              |       |     |        |            |                   |   0.97
+#&gt; R2 (marginal)    |             |              |       |     |        |            |                   |   0.66
+#&gt; Sigma            |             |              |       |     |        |            |                   |   0.34</div><div class='input'>
 <span class='co'># Bayesian models</span>
 <span class='kw'>if</span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://mc-stan.org/rstanarm/'>"rstanarm"</a></span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
   <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://mc-stan.org/rstanarm/reference/stan_glm.html'>stan_glm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span>, refresh<span class='op'>=</span><span class='fl'>0</span>, iter<span class='op'>=</span><span class='fl'>600</span><span class='op'>)</span>
   <span class='fu'>report_table</span><span class='op'>(</span><span class='va'>model</span>, effectsize_method<span class='op'>=</span><span class='st'>"basic"</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='error'>Error in x$Parameter[x$Parameter == names(att$pretty_names[match_pretty_names])] &lt;- att$pretty_names[match_pretty_names]: NAs are not allowed in subscripted assignments</span></div><div class='input'>
+</div><div class='output co'>#&gt; Parameter         | Median |       89% CI |   pd | % in ROPE |  Rhat |     ESS |                 Prior | Std. Median | Std_Median 95% CI |     Fit
+#&gt; --------------------------------------------------------------------------------------------------------------------------------------------------
+#&gt; (Intercept)       |   5.01 | [4.91, 5.13] | 100% |        0% | 1.001 | 1110.45 | Normal (5.84 +- 2.07) |        0.00 |      [0.00, 0.00] |        
+#&gt; Speciesversicolor |   0.93 | [0.77, 1.09] | 100% |        0% | 0.999 | 1094.69 | Normal (0.00 +- 4.38) |        0.53 |      [0.41, 0.63] |        
+#&gt; Speciesvirginica  |   1.58 | [1.43, 1.74] | 100% |        0% | 0.999 | 1284.64 | Normal (0.00 +- 4.38) |        0.90 |      [0.79, 1.01] |        
+#&gt;                   |        |              |      |           |       |         |                       |             |                   |        
+#&gt; ELPD              |        |              |      |           |       |         |                       |             |                   | -115.51
+#&gt; LOOIC             |        |              |      |           |       |         |                       |             |                   |  231.02
+#&gt; WAIC              |        |              |      |           |       |         |                       |             |                   |  230.99
+#&gt; R2                |        |              |      |           |       |         |                       |             |                   |    0.61
+#&gt; R2 (adj.)         |        |              |      |           |       |         |                       |             |                   |    0.60
+#&gt; Sigma             |        |              |      |           |       |         |                       |             |                   |    0.52</div><div class='input'>
 <span class='co'># Structural Equation Models (SEM)</span>
 <span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='http://lavaan.org'>"lavaan"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='va'>structure</span> <span class='op'>&lt;-</span> <span class='st'>" ind60 =~ x1 + x2 + x3
@@ -251,7 +293,39 @@
   <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'>lavaan</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lavaan/man/sem.html'>sem</a></span><span class='op'>(</span><span class='va'>structure</span>, data <span class='op'>=</span> <span class='va'>PoliticalDemocracy</span><span class='op'>)</span>
   <span class='fu'>report_table</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: longer object length is not a multiple of shorter object length</span></div><div class='output co'>#&gt; <span class='error'>Error in x$Parameter[x$Parameter == names(att$pretty_names[match_pretty_names])] &lt;- att$pretty_names[match_pretty_names]: NAs are not allowed in subscripted assignments</span></div><div class='input'>
+</div><div class='output co'>#&gt; Parameter     | Coefficient |       95% CI |      p |       Type |     Fit
+#&gt; --------------------------------------------------------------------------
+#&gt; ind60 =~ x1   |        1.00 | [1.00, 1.00] | &lt; .001 |    Loading |        
+#&gt; ind60 =~ x2   |        2.18 | [1.91, 2.45] | &lt; .001 |    Loading |        
+#&gt; ind60 =~ x3   |        1.82 | [1.52, 2.12] | &lt; .001 |    Loading |        
+#&gt; dem60 =~ y1   |        1.00 | [1.00, 1.00] | &lt; .001 |    Loading |        
+#&gt; dem60 =~ y2   |        1.04 | [0.66, 1.43] | &lt; .001 |    Loading |        
+#&gt; dem60 =~ y3   |        0.98 | [0.65, 1.30] | &lt; .001 |    Loading |        
+#&gt; dem60 ~ ind60 |        1.37 | [0.53, 2.21] | 0.001  | Regression |        
+#&gt;               |             |              |        |            |        
+#&gt; Chi2          |             |              |        |            |    7.98
+#&gt; Chi2_df       |             |              |        |            |    8.00
+#&gt; p_Chi2        |             |              |        |            |    0.44
+#&gt; p_Baseline    |             |              |        |            |    0.00
+#&gt; GFI           |             |              |        |            |    0.97
+#&gt; AGFI          |             |              |        |            |    0.91
+#&gt; NFI           |             |              |        |            |    0.97
+#&gt; NNFI          |             |              |        |            |    1.00
+#&gt; CFI           |             |              |        |            |    1.00
+#&gt; RMSEA         |             |              |        |            |    0.00
+#&gt; RMSEA_CI_low  |             |              |        |            |    0.00
+#&gt; RMSEA_CI_high |             |              |        |            |    0.14
+#&gt; p_RMSEA       |             |              |        |            |    0.57
+#&gt; RMR           |             |              |        |            |    0.10
+#&gt; SRMR          |             |              |        |            |    0.03
+#&gt; RFI           |             |              |        |            |    0.95
+#&gt; PNFI          |             |              |        |            |    0.52
+#&gt; IFI           |             |              |        |            |    1.00
+#&gt; RNI           |             |              |        |            |    1.00
+#&gt; Loglikelihood |             |              |        |            | -778.27
+#&gt; AIC           |             |              |        |            | 1582.54
+#&gt; BIC           |             |              |        |            | 1612.67
+#&gt; BIC (adj.)    |             |              |        |            | 1571.69</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
