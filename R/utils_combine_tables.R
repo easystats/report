@@ -67,7 +67,7 @@
 
   # Add pretty names
   pretty_names <- table$Parameter
-  pretty_names[is.na(pretty_names)] <- ""
+  # pretty_names <- pretty_names[!is.na(pretty_names)]
   names(pretty_names) <- pretty_names
   attr(table, "pretty_names") <- pretty_names
 

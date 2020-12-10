@@ -171,6 +171,9 @@ report_table.lm <- function(x, include_effectsize = TRUE, ...) {
     attr(out, att) <- attributes(params)[[att]]
   }
 
+  ## TODO  remove after insight > 0.11.1 on CRAN
+  attr(out, "pretty_names") <- NULL
+
   out
 }
 
