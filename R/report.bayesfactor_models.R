@@ -34,8 +34,8 @@
 #' @importFrom stats setNames
 #' @importFrom insight format_bf
 #' @export
-report.bayesfactor_models <- function(x, interpretation = "jeffreys1961", ...) {
-  out <- .report.bayesfactor_models(x, interpretation=interpretation, ...)
+report.bayesfactor_models <- function(x, interpretation = "jeffreys1961", exact = TRUE, protect_ratio = TRUE, ...) {
+  out <- .report.bayesfactor_models(x, interpretation=interpretation, exact = exact, protect_ratio = protect_ratio, ...)
   as.report(text = as.report_text(out$text_full, summary = out$text_short),
             table = as.report_table(out$table_full,summary = out$table_short),
             rules = out$rules,
@@ -45,8 +45,8 @@ report.bayesfactor_models <- function(x, interpretation = "jeffreys1961", ...) {
 
 
 #' @export
-report_table.bayesfactor_models <- function(x, interpretation = "jeffreys1961", ...) {
-  out <- .report.bayesfactor_models(x, interpretation=interpretation, ...)
+report_table.bayesfactor_models <- function(x, interpretation = "jeffreys1961", exact = TRUE, protect_ratio = TRUE, ...) {
+  out <- .report.bayesfactor_models(x, interpretation=interpretation, exact = exact, protect_ratio = protect_ratio, ...)
   as.report_table(out$table_full,
                   summary = out$table_short,
                   rules = out$rules,
@@ -55,8 +55,8 @@ report_table.bayesfactor_models <- function(x, interpretation = "jeffreys1961", 
 }
 
 #' @export
-report_text.bayesfactor_models <- function(x, table=NULL, interpretation = "jeffreys1961", ...) {
-  out <- .report.bayesfactor_models(x, interpretation=interpretation, ...)
+report_text.bayesfactor_models <- function(x, table=NULL, interpretation = "jeffreys1961", exact = TRUE, protect_ratio = TRUE, ...) {
+  out <- .report.bayesfactor_models(x, interpretation=interpretation, exact = exact, protect_ratio = protect_ratio, ...)
   as.report_text(out$text_full,
                   summary = out$text_short,
                   rules = out$rules,
@@ -67,7 +67,7 @@ report_text.bayesfactor_models <- function(x, table=NULL, interpretation = "jeff
 
 
 #' @keywords internal
-.report.bayesfactor_models <- function(model, interpretation = "jeffreys1961", ...) {
+.report.bayesfactor_models <- function(model, interpretation = "jeffreys1961", exact = TRUE, protect_ratio = TRUE, ...) {
   model$Model[model$Model == "1"] <- "(Intercept only)"
   denominator <- attr(model, "denominator")
   BF_method <- attr(model, "BF_method")
@@ -86,7 +86,7 @@ report_text.bayesfactor_models <- function(x, table=NULL, interpretation = "jeff
     "we found ",
     paste0(
       effectsize::interpret_bf(model$BF[summ_inds], rules = interpretation, include_value = TRUE,
-                               protect_ratio = TRUE, exact = TRUE),
+                               exact = exact, protect_ratio = protect_ratio),
       " the ", model$Model[summ_inds], " model", model_ind[summ_inds],
       collapse = "; "
     ),
@@ -117,7 +117,7 @@ report_text.bayesfactor_models <- function(x, table=NULL, interpretation = "jeff
     "we found ",
     paste0(
       effectsize::interpret_bf(model$BF[-denominator], rules = interpretation, include_value = TRUE,
-                               protect_ratio = TRUE, exact = TRUE),
+                               exact = exact, protect_ratio = protect_ratio),
       " the ", model$Model[-denominator], " model", model_ind[-denominator],
       collapse = "; "
     ),
@@ -128,26 +128,25 @@ report_text.bayesfactor_models <- function(x, table=NULL, interpretation = "jeff
   #### table ####
   model$Model <- paste0(" [", seq_len(nrow(model)), "] ", model$Model)
   bf_table <- as.data.frame(model)
-  bf_table$BF <- insight::format_bf(model$BF, name = NULL, protect_ratio = TRUE, exact = TRUE)
+  bf_table$BF <- insight::format_bf(model$BF, name = NULL, exact = exact, protect_ratio = protect_ratio)
   colnames(bf_table) <- c("Model", "Bayes factor")
 
-  table_footer <- matrix(rep("", 6), nrow = 3)
-  table_footer[2, 1] <- paste0("Bayes Factor Type: ", BF_method)
-  table_footer[3, 1] <- paste0("Against denominator - model ", denominator)
-  colnames(table_footer) <- colnames(bf_table)
-  bf_table <- rbind(bf_table, table_footer)
+  footer <- list(
+    paste0("\nBayes Factor Type: ", BF_method),
+    paste0("\nAgainst denominator: Model ", denominator)
+  )
+  attr(bf_table, "table_footer") <- footer
 
 
   #### table full ####
-  bf_table_full <- head(bf_table, -1)
-  bf_table_full$BF2 <- c(insight::format_bf(model$BF / model$BF[max_den], name = NULL, protect_ratio = TRUE, exact = TRUE), "", "")
+  bf_table_full <- bf_table
+  bf_table_full$BF2 <- insight::format_bf(model$BF / model$BF[max_den], name = NULL, exact = exact, protect_ratio = protect_ratio)
 
   colnames(bf_table_full) <- c(
     "Model",
-    paste0("BF (against model ", denominator, ")"),
-    paste0("BF (against best model ", max_den, ")")
+    paste0("BF against model ", denominator, ""),
+    paste0("BF against model ", max_den, " (best model)")
   )
-
 
   # Output
   out <- list(
@@ -177,8 +176,8 @@ report_text.bayesfactor_models <- function(x, table=NULL, interpretation = "jeff
 #' @importFrom insight format_value
 #' @importFrom stats setNames
 #' @export
-report.bayesfactor_inclusion <- function(x, interpretation = "jeffreys1961", ...) {
-  out <- .report.bayesfactor_inclusion(x, interpretation=interpretation, ...)
+report.bayesfactor_inclusion <- function(x, interpretation = "jeffreys1961", exact = TRUE, protect_ratio = TRUE, ...) {
+  out <- .report.bayesfactor_inclusion(x, interpretation=interpretation, exact = exact, protect_ratio = protect_ratio, ...)
   as.report(text = as.report_text(out$text_full, summary = out$text_short),
             table = as.report_table(out$table_full,summary = out$table_short),
             interpretation = out$interpretation,
@@ -188,8 +187,8 @@ report.bayesfactor_inclusion <- function(x, interpretation = "jeffreys1961", ...
 
 
 #' @export
-report_table.bayesfactor_inclusion <- function(x, interpretation = "jeffreys1961", ...) {
-  out <- .report.bayesfactor_inclusion(x, interpretation=interpretation, ...)
+report_table.bayesfactor_inclusion <- function(x, interpretation = "jeffreys1961", exact = TRUE, protect_ratio = TRUE, ...) {
+  out <- .report.bayesfactor_inclusion(x, interpretation=interpretation, exact = exact, protect_ratio = protect_ratio, ...)
   as.report_table(out$table_full,
                   summary = out$table_short,
                   interpretation = out$interpretation,
@@ -198,8 +197,8 @@ report_table.bayesfactor_inclusion <- function(x, interpretation = "jeffreys1961
 }
 
 #' @export
-report_text.bayesfactor_inclusion <- function(x, table=NULL, interpretation = "jeffreys1961", ...) {
-  out <- .report.bayesfactor_inclusion(x, interpretation=interpretation, ...)
+report_text.bayesfactor_inclusion <- function(x, table=NULL, interpretation = "jeffreys1961", exact = TRUE, protect_ratio = TRUE, ...) {
+  out <- .report.bayesfactor_inclusion(x, interpretation=interpretation, exact = exact, protect_ratio = protect_ratio, ...)
   as.report_text(out$text_full,
                  summary = out$text_short,
                  interpretation = out$interpretation,
@@ -209,13 +208,14 @@ report_text.bayesfactor_inclusion <- function(x, table=NULL, interpretation = "j
 
 
 #' @keywords internal
-.report.bayesfactor_inclusion <- function(model, interpretation = "jeffreys1961", ...) {
+.report.bayesfactor_inclusion <- function(model, interpretation = "jeffreys1961", exact = TRUE, protect_ratio = TRUE, ...) {
   matched <- attr(model, "matched")
   priorOdds <- attr(model, "priorOdds")
 
   #### text ####
   bf_results <- data.frame(Term = rownames(model), stringsAsFactors = FALSE)
-  bf_results$evidence <- effectsize::interpret_bf(model$BF, rules = interpretation, include_value = TRUE)
+  bf_results$evidence <- effectsize::interpret_bf(model$BF, rules = interpretation, include_value = TRUE,
+                                                  exact = exact, protect_ratio = protect_ratio)
   bf_results$postprob <- paste0(round(model$p_posterior * 100, ...), "%")
 
   bf_text <- paste0(
@@ -274,25 +274,18 @@ report_text.bayesfactor_inclusion <- function(x, table=NULL, interpretation = "j
   colnames(bf_table) <- c("Pr(prior)", "Pr(posterior)", "Inclusion BF")
   bf_table <- cbind(Terms = rownames(bf_table), bf_table)
   rownames(bf_table) <- NULL
-  bf_table$`Inclusion BF` <- insight::format_bf(bf_table$`Inclusion BF`, name = NULL, protect_ratio = TRUE)
+  bf_table$`Inclusion BF` <- insight::format_bf(bf_table$`Inclusion BF`, name = NULL, exact = exact, protect_ratio = protect_ratio)
   bf_table[, 2:3] <- insight::format_value(bf_table[, 2:3], ...)
 
   # make table footer
-  table_footer <- matrix(rep("", 12), nrow = 3)
-  table_footer[2:3, 1] <- c(
-    ifelse(matched,
-      "Across matched models only,",
-      "Across all models,"
-    ),
+  footer <- list(
+    sprintf("\nAcross %s", ifelse(matched,"matched models only.","all models.")),
     ifelse(is.null(priorOdds),
-      "assuming unifor prior odds.",
-      paste0("with custom prior odds of [", paste0(priorOdds, collapse = ", "), "].")
+           "\nAssuming unifor prior odds.",
+           paste0("\nWith custom prior odds of [", paste0(priorOdds, collapse = ", "), "].")
     )
   )
-  # pad with empty cells:
-  colnames(table_footer) <- colnames(bf_table)
-
-  bf_table <- rbind(bf_table, table_footer)
+  attr(bf_table, "table_footer") <- footer
 
 
   #### table full ####
