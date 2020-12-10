@@ -107,6 +107,11 @@ summary.report_table <- function(object, ...) {
 
 
 #' @export
+format.report_table <- function(x, ...) {
+  insight::parameters_table(x, ...)
+}
+
+#' @export
 print.report_table <- function(x, ...) {
-  cat(insight::format_table(parameters::parameters_table(x, ...), ...))
+  cat(insight::format_table(format(x, ...), ...))
 }
