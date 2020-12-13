@@ -26,6 +26,12 @@
 
 \item{interpretation}{Effect size interpretation set of rules (see \link[effectsize]{interpret_bf}).}
 
+\item{exact}{Should very large or very small values be reported with a
+scientific format (e.g., 4.24e5), or as truncated values (as "> 1000" and
+"< 1/1000").}
+
+\item{protect_ratio}{Should values smaller than 1 be represented as ratios?}
+
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{

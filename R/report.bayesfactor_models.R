@@ -5,6 +5,7 @@
 #' @param x Object of class \code{bayesfactor_inclusion}.
 #' @param interpretation Effect size interpretation set of rules (see \link[effectsize]{interpret_bf}).
 #' @inheritParams report
+#' @inheritParams effectsize::interpret_bf
 #' @inherit report return seealso
 #'
 #' @examples
