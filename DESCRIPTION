@@ -49,7 +49,6 @@ Suggests:
 	testthat
 Remotes:
 	easystats/insight,
-	easystats/bayestestR,
 	easystats/effectsize,
 	easystats/parameters,
     easystats/performance
