@@ -12,7 +12,7 @@
 #' @examples
 #' library(report)
 #'
-#' citation <- "Makowski, D., Ben-Shachar, M. S., Patil, I., & LÃƒÂ¼decke, D. (2020).
+#' citation <- "Makowski, D., Ben-Shachar, M. S., Patil, I., & Ludecke, D. (2020).
 #' Methods and Algorithms for Correlation Analysis in R. Journal of Open Source
 #' Software, 5(51), 2306."
 #'

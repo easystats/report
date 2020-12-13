@@ -20,12 +20,12 @@ knitr::opts_chunk$set(
   tidy.opts=list(width.cutoff=60),
   tidy=FALSE,
   dpi=450,
-  fig.path = "man/figures/"
+  fig.path = "man/figures/",
+  comment = "#"
 )
 options(knitr.kable.NA = '',
         digits = 4,
         width=60)
-
 library(dplyr)
 library(report)
 ```
@@ -33,6 +33,7 @@ library(report)
 
 [![CRAN](http://www.r-pkg.org/badges/version/report)](https://cran.r-project.org/package=report)
 [![downloads](http://cranlogs.r-pkg.org/badges/report)](https://cran.r-project.org/package=report)
+![Tests](https://github.com/easystats/report/workflows/R-check/badge.svg)
 
 ***"From R to your manuscript"***
 

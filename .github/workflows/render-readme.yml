@@ -15,11 +15,8 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@master
       - name: Install dependencies
         run: Rscript -e 'install.packages(c("rmarkdown", "dplyr", "remotes"))'
-      - name: Install dependencies
+      - name: Install remote dependencies
         run: |
-          # install.packages("devtools")
-          # To get links for homepage
-          # remotes::install_cran("devtools")
           remotes::install_deps(dependencies = TRUE)
       - name: Render README
         run: Rscript -e 'rmarkdown::render("README.Rmd")'
