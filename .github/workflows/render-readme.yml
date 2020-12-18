@@ -1,7 +1,9 @@
 on:
   push:
-    paths:
-      - README.Rmd
+    branches:
+      - master
+    #paths:
+    #  - README.Rmd
 
 name: Render README
 
