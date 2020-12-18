@@ -21,6 +21,8 @@ jobs:
         run: Rscript -e 'remotes::install_github("easystats/insight")'
       - name: Install dependencies
         run: Rscript -e 'remotes::install_deps(dependencies=TRUE)'
+      - name: Install report
+        run: Rscript -e 'remotes::install_github("easystats/report")'
       - name: Render README
         run: Rscript -e 'rmarkdown::render("README.Rmd")'
       - name: Commit results
