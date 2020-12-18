@@ -7,16 +7,16 @@
 
 ***“From R to your manuscript”***
 
-------------------------------------------------------------------------
+-----
 
 :warning: **report** has been entirely rewritten *(again)*, and won’t be
 compatible with your old code. We’ve changed it for the best, and with
 your help we’ll continue improving it. You’ll need the latest versions
 of the **easystats** packages (you can update them by running
-`easystats::install_easystats_latest()`). **Thanks for your support!**
+`easystats::install_easystats_latest()`). **Thanks for your support\!**
 :warning:
 
-------------------------------------------------------------------------
+-----
 
 **report**’s primary goal is to bridge the gap between R’s output and
 the formatted results contained in your manuscript. It automatically
@@ -54,19 +54,19 @@ The package documentation can be found
 [**here**](https://easystats.github.io/report/). Check-out these
 tutorials:
 
--   [Get
+  - [Get
     Started](https://easystats.github.io/report/articles/report.html)
--   [How to Cite
+  - [How to Cite
     Packages](https://easystats.github.io/report/articles/cite_packages.html)
 
 ## Contribute
 
 ***report* is a young package in need of affection**. You can easily be
 a part of the [developing](.github/CONTRIBUTING.md) community of this
-open-source software and improve science! Don’t be shy, try to code and
+open-source software and improve science\! Don’t be shy, try to code and
 submit a pull request (See the [contributing
 guide](.github/CONTRIBUTING.md)). Even if it’s not perfect, we will help
-you make it great!
+you make it great\!
 
 ## Installation
 
@@ -251,14 +251,14 @@ report(model)
     # warmup of 500) to predict mpg with qsec and wt (formula: mpg ~ qsec + wt). Priors over parameters were set as
     # normal (mean = 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The model's explanatory
     # power is substantial (R2 = 0.81, 89% CI [0.73, 0.88], adj. R2 = 0.78). The model's intercept, corresponding
-    # to qsec = 0 and wt = 0, is at 19.60 (95% CI [7.80, 30.25]). Within this model:
+    # to qsec = 0 and wt = 0, is at 19.70 (95% CI [8.52, 30.29]). Within this model:
     # 
-    #   - The effect of qsec (Median = 0.93, 95% CI [0.38, 1.51]) has a 99.90% probability of being positive (> 0),
-    # 98.35% of being significant (> 0.30), and 0.25% of being large (> 1.81). The estimation successfuly converged
-    # (Rhat = 1.000) and the indices are reliable (ESS = 1913)
-    #   - The effect of wt (Median = -5.05, 95% CI [-6.19, -4.08]) has a 100.00% probability of being negative (< 0),
+    #   - The effect of qsec (Median = 0.93, 95% CI [0.39, 1.47]) has a 99.90% probability of being positive (> 0),
+    # 98.55% of being significant (> 0.30), and 0.05% of being large (> 1.81). The estimation successfuly converged
+    # (Rhat = 1.000) and the indices are reliable (ESS = 2287)
+    #   - The effect of wt (Median = -5.07, 95% CI [-5.98, -3.97]) has a 100.00% probability of being negative (< 0),
     # 100.00% of being significant (< -0.30), and 100.00% of being large (< -1.81). The estimation successfuly
-    # converged (Rhat = 1.000) and the indices are reliable (ESS = 2121)
+    # converged (Rhat = 1.000) and the indices are reliable (ESS = 1845)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT) framework, we report the median of
     # the posterior distribution and its 95% CI (Highest Density Interval), along the probability of direction
@@ -312,9 +312,9 @@ to as **Table 1**).
 
 ``` r
 report_sample(iris, group_by = "Species")
-# # Descriptive Statistics
+# [34m# Descriptive Statistics
 # 
-# Variable               | setosa (n=50) | versicolor (n=50) | virginica (n=50) |       Total
+# [39mVariable               | setosa (n=50) | versicolor (n=50) | virginica (n=50) |       Total
 # -------------------------------------------------------------------------------------------
 # Mean Sepal.Length (SD) |   5.01 (0.35) |       5.94 (0.52) |      6.59 (0.64) | 5.84 (0.83)
 # Mean Sepal.Width (SD)  |   3.43 (0.38) |       2.77 (0.31) |      2.97 (0.32) | 3.06 (0.44)
@@ -331,10 +331,10 @@ analysis paragraph about the tools used.
 report(sessionInfo())
 ```
 
-    # Analyses were conducted using the R Statistical language (version 4.0.1; R Core Team, 2020) on Windows 10 x64
-    # (build 18363), using the packages Rcpp (version 1.0.5; Dirk Eddelbuettel and Romain Francois, 2011), Matrix
-    # (version 1.2.18; Douglas Bates and Martin Maechler, 2019), lme4 (version 1.1.23; Douglas Bates et al., 2015),
-    # rstanarm (version 2.21.1; Goodrich B et al., 2020), dplyr (version 1.0.0; Hadley Wickham et al., 2020) and
+    # Analyses were conducted using the R Statistical language (version 4.0.3; R Core Team, 2020) on macOS Catalina
+    # 10.15.7, using the packages Rcpp (version 1.0.5; Dirk Eddelbuettel and Romain Francois, 2011), Matrix
+    # (version 1.2.18; Douglas Bates and Martin Maechler, 2019), lme4 (version 1.1.26; Douglas Bates et al., 2015),
+    # rstanarm (version 2.21.1; Goodrich B et al., 2020), dplyr (version 1.0.2; Hadley Wickham et al., 2020) and
     # report (version 0.2.0; Makowski et al., 2020).
     # 
     # References
@@ -348,7 +348,7 @@ report(sessionInfo())
     #   - Goodrich B, Gabry J, Ali I & Brilleman S. (2020). rstanarm: Bayesian applied regression modeling via Stan.
     # R package version 2.21.1 https://mc-stan.org/rstanarm.
     #   - Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2020). dplyr: A Grammar of Data
-    # Manipulation. R package version 1.0.0. https://CRAN.R-project.org/package=dplyr
+    # Manipulation. R package version 1.0.2. https://CRAN.R-project.org/package=dplyr
     #   - Makowski, D., Lüdecke, D., & Ben-Shachar, M.S. (2020). Automated reporting as a practical tool to improve
     # reproducibility and methodological best practices adoption. CRAN. Available from
     # https://github.com/easystats/report. doi: .
@@ -360,6 +360,6 @@ report(sessionInfo())
 If you like it, you can put a *star* on this repo, and cite the package
 as follows:
 
--   Makowski, D., Ben-Shachar, M. S., & Lüdecke, D. (2020). *Automated
+  - Makowski, D., Ben-Shachar, M. S., & Lüdecke, D. (2020). *Automated
     reporting as a practical tool to improve reproducibility and
     methodological best practices adoption*. CRAN.
