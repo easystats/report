@@ -18,7 +18,7 @@ jobs:
       - name: Install dependencies
         run: Rscript -e 'install.packages(c("rmarkdown", "dplyr", "remotes"))'
       - name: Install remote dependencies
-        run: Rscript -e 'remotes::install_deps()'
+        run: Rscript -e 'remotes::install_deps(dependencies=c("Depends", "Imports", "LinkingTo", "Suggests", "Enhances"))'
       - name: Render README
         run: Rscript -e 'rmarkdown::render("README.Rmd")'
       - name: Commit results
