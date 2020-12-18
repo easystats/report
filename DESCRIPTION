@@ -50,8 +50,7 @@ Suggests:
 Remotes:
 	easystats/insight,
 	easystats/effectsize,
-	easystats/parameters,
-    easystats/performance
+	easystats/parameters
 RoxygenNote: 7.1.1
 Language: en-GB
 Collate: 
