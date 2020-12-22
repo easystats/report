@@ -2,7 +2,7 @@
 % Please edit documentation in R/report.R
 \name{report}
 \alias{report}
-\title{Automatic report of R objects}
+\title{Automatic reporting of R objects}
 \usage{
 report(x, ...)
 }
@@ -24,10 +24,11 @@ Create reports of different objects. See the documentation for your object's cla
  \item{\link[=report.htest]{Correlations and t-tests} (\code{htest})}
  \item{\link[=report.aov]{ANOVAs} (\code{aov, anova, aovlist, ...})}
  \item{\link[=report.lm]{Regression models} (\code{glm, lm, ...})}
-% \item{\link[=report.lmerMod]{Mixed models} (\code{glmer, lmer, glmmTMB, ...})}
+ \item{\link[=report.lm]{Mixed models} (\code{glmer, lmer, glmmTMB, ...})}
  \item{\link[=report.stanreg]{Bayesian models} (\code{stanreg, brms...})}
  \item{\link[=report.bayesfactor_models]{Bayes factors} (from \code{bayestestR})}
- % \item{\link[=report.lavaan]{Structural Equation Models (SEM)} (from \code{lavaan})}
+ \item{\link[=report.lavaan]{Structural Equation Models (SEM)} (from \code{lavaan})}
+ \item{\link[=report.compare_performance]{Model comparison} (from \code{\link[performance:compare_performance]{performance}})}
 }
 }
 \details{

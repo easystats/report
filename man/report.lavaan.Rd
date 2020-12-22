@@ -33,7 +33,11 @@ if (require("lavaan")) {
                  dem60 =~ y1 + y2 + y3
                  dem60 ~ ind60 "
   model <- lavaan::sem(structure, data = PoliticalDemocracy)
-  report(model)
+  r <- report(model)
+  r
+
+  report_table(model)
+  report_performance(model)
 }
 }
 \seealso{

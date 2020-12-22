@@ -1,6 +1,6 @@
-#' Reports of Data
+#' Reporting Datasets and Dataframes
 #'
-#' Create a report of a data frame.
+#' Create reports for data frames.
 #'
 #' @inheritParams report
 #' @param n Include number of observations for each individual variable.

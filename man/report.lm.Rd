@@ -12,7 +12,7 @@
 \alias{report_info.lm}
 \alias{report_text.lm}
 \alias{report_random.merMod}
-\title{Reports of (General) Linear Models}
+\title{Reporting (General) Linear Models}
 \usage{
 \method{report}{lm}(x, include_effectsize = TRUE, effectsize_method = "refit", ...)
 
@@ -79,7 +79,7 @@ with a short and long description of the model summary, as well as a short
 and long table of parameters and fit indices.
 }
 \description{
-Create a report for (general) linear models.
+Create reports for (general) linear models.
 }
 \examples{
 library(report)

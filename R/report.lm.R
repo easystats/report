@@ -1,6 +1,6 @@
-#' Reports of (General) Linear Models
+#' Reporting (General) Linear Models
 #'
-#' Create a report for (general) linear models.
+#' Create reports for (general) linear models.
 #'
 #' @param x Object of class \code{lm} or \code{glm}.
 #' @param include_effectsize If \code{FALSE}, won't include effect-size related indices (standardized coefficients, etc.).

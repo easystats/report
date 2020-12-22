@@ -3,7 +3,7 @@
 \name{report.bayesfactor_models}
 \alias{report.bayesfactor_models}
 \alias{report.bayesfactor_inclusion}
-\title{Report Models' Bayes Factor}
+\title{Reporting Models' Bayes Factor}
 \usage{
 \method{report}{bayesfactor_models}(
   x,
@@ -40,7 +40,7 @@ with a short and long description of the model summary, as well as a short
 and long table of parameters and fit indices.
 }
 \description{
-Create a report of Bayes factors for model comparison.
+Create reports of Bayes factors for model comparison.
 }
 \examples{
 library(report)

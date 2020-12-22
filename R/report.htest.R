@@ -1,6 +1,6 @@
-#' Reports of h-tests (Correlation, t-test...)
+#' Reporting h-tests (Correlation, t-test...)
 #'
-#' Create a report of an h-test object (\code{t.test()}, \code{cor.test()}).
+#' Create reports for h-test objects (\code{t.test()}, \code{cor.test()}).
 #'
 #' @param x Object of class htest.
 #' @param table Provide the output of  \code{report_table()} to avoid its re-computation.

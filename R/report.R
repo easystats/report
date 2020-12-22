@@ -1,4 +1,4 @@
-#' Automatic report of R objects
+#' Automatic reporting of R objects
 #'
 #' Create reports of different objects. See the documentation for your object's class:
 #' \itemize{
@@ -7,10 +7,11 @@
 #'  \item{\link[=report.htest]{Correlations and t-tests} (\code{htest})}
 #'  \item{\link[=report.aov]{ANOVAs} (\code{aov, anova, aovlist, ...})}
 #'  \item{\link[=report.lm]{Regression models} (\code{glm, lm, ...})}
-#' % \item{\link[=report.lmerMod]{Mixed models} (\code{glmer, lmer, glmmTMB, ...})}
+#'  \item{\link[=report.lm]{Mixed models} (\code{glmer, lmer, glmmTMB, ...})}
 #'  \item{\link[=report.stanreg]{Bayesian models} (\code{stanreg, brms...})}
 #'  \item{\link[=report.bayesfactor_models]{Bayes factors} (from \code{bayestestR})}
-#'  % \item{\link[=report.lavaan]{Structural Equation Models (SEM)} (from \code{lavaan})}
+#'  \item{\link[=report.lavaan]{Structural Equation Models (SEM)} (from \code{lavaan})}
+#'  \item{\link[=report.compare_performance]{Model comparison} (from \code{\link[performance:compare_performance]{performance}})}
 #' }
 #'
 #' @param x The R object that you want to report (see list of of supported objects above).
@@ -52,6 +53,7 @@
 #'   \item \code{\link{report_statistics}}
 #'   \item \code{\link{report_effectsize}}
 #'   \item \code{\link{report_model}}
+#'   \item \code{\link{report_priors}}
 #'   \item \code{\link{report_random}}
 #'   \item \code{\link{report_performance}}
 #'   \item \code{\link{report_info}}
@@ -63,6 +65,7 @@
 #'   \item \code{\link{report_packages}}
 #'   \item \code{\link{report_participants}}
 #'   \item \code{\link{report_sample}}
+#'   \item \code{\link{report_date}}
 #' }
 #' Methods:
 #' \itemize{

@@ -1,6 +1,6 @@
-#' Report Models' Bayes Factor
+#' Reporting Models' Bayes Factor
 #'
-#' Create a report of Bayes factors for model comparison.
+#' Create reports of Bayes factors for model comparison.
 #'
 #' @param x Object of class \code{bayesfactor_inclusion}.
 #' @param interpretation Effect size interpretation set of rules (see \link[effectsize]{interpret_bf}).

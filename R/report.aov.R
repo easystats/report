@@ -1,6 +1,6 @@
-#' ANOVAs Report
+#' Reporting ANOVAs
 #'
-#' Create a report of an ANOVA.
+#' Create reports for ANOVA models.
 #'
 #' @param x Object of class \code{aov}, \code{anova} or \code{aovlist}.
 #' @inheritParams report

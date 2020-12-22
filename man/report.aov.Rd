@@ -9,7 +9,7 @@
 \alias{report_model.aov}
 \alias{report_info.aov}
 \alias{report_text.aov}
-\title{ANOVAs Report}
+\title{Reporting ANOVAs}
 \usage{
 \method{report}{aov}(x, ...)
 
@@ -42,7 +42,7 @@ with a short and long description of the model summary, as well as a short
 and long table of parameters and fit indices.
 }
 \description{
-Create a report of an ANOVA.
+Create reports for ANOVA models.
 }
 \examples{
 data <- iris

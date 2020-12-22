@@ -1,6 +1,6 @@
 #' Miscellaneous reports
 #'
-#'  Why? Because we can.
+#' Other convenient or totally useless reports.
 #'
 #' @inheritParams report
 #'

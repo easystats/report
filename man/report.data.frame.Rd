@@ -6,7 +6,7 @@
 \alias{report.data.frame}
 \alias{report.factor}
 \alias{report.numeric}
-\title{Reports of Data}
+\title{Reporting Datasets and Dataframes}
 \usage{
 \method{report}{character}(
   x,
@@ -68,7 +68,7 @@
 \item{digits}{Number of significant digits.}
 }
 \description{
-Create a report of a data frame.
+Create reports for data frames.
 }
 \examples{
 library(report)

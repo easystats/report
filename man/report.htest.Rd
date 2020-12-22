@@ -9,7 +9,7 @@
 \alias{report_model.htest}
 \alias{report_info.htest}
 \alias{report_text.htest}
-\title{Reports of h-tests (Correlation, t-test...)}
+\title{Reporting h-tests (Correlation, t-test...)}
 \usage{
 \method{report}{htest}(x, ...)
 
@@ -42,7 +42,7 @@ with a short and long description of the model summary, as well as a short
 and long table of parameters and fit indices.
 }
 \description{
-Create a report of an h-test object (\code{t.test()}, \code{cor.test()}).
+Create reports for h-test objects (\code{t.test()}, \code{cor.test()}).
 }
 \examples{
 report(cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman"))

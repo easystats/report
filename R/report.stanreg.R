@@ -1,6 +1,6 @@
-#' Reports of Bayesian Models
+#' Reporting Bayesian Models
 #'
-#' Create a report Bayesian models. The description of the parameters follows the
+#' Create reports for Bayesian models. The description of the parameters follows the
 #' Sequential Effect eXistence and sIgnificance Testing framework (see \link[bayestestR:sexit]{SEXIT documentation}).
 #'
 #' @inheritParams report.lm
@@ -11,7 +11,7 @@
 #'
 #' # Bayesian models
 #' if(require("rstanarm")){
-#'   model <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh=0, iter=600)
+#'   model <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh=0, iter=300)
 #'   r <- report(model)
 #'   r
 #'   summary(r)

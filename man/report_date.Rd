@@ -18,7 +18,7 @@ with a short and long description of the model summary, as well as a short
 and long table of parameters and fit indices.
 }
 \description{
-Why? Because we can.
+Other convenient or totally useless reports.
 }
 \examples{
 library(report)

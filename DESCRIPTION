@@ -66,6 +66,7 @@ Collate:
     'report.aov.R'
     'report.bayesfactor_models.R'
     'report.character.R'
+    'report.compare_performance.R'
     'report.data.frame.R'
     'report.default.R'
     'report.factor.R'
