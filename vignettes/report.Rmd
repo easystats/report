@@ -11,7 +11,7 @@ output:
     fig_height: 6
 tags: [r, report]
 vignette: >
-   %\VignetteIndexEntry{Get Started}
+  %\VignetteIndexEntry{Get Started}
   \usepackage[utf8]{inputenc}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
@@ -22,8 +22,7 @@ editor_options:
 knitr::opts_chunk$set(
   collapse = TRUE,
   tidy.opts = list(width.cutoff = 60),
-  tidy = TRUE,
-  fig.path = "README-"
+  tidy = TRUE
 )
 options(knitr.kable.NA = '',
         digits = 4,

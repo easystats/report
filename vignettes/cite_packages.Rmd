@@ -20,8 +20,7 @@ editor_options:
 knitr::opts_chunk$set(
   collapse = TRUE,
   tidy.opts = list(width.cutoff = 60),
-  tidy = TRUE,
-  fig.path = "README-"
+  tidy = TRUE
 )
 options(knitr.kable.NA = '', digits = 4)
 if (!requireNamespace("dplyr", quietly = TRUE)) {

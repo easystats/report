@@ -9,7 +9,7 @@ output:
     toc: true
     fig_width: 10.08
     fig_height: 6
-tags: [r, report]
+tags: [r, report, support new models]
 vignette: >
   %\VignetteIndexEntry{Supporting New Models}
   \usepackage[utf8]{inputenc}
@@ -22,8 +22,7 @@ editor_options:
 knitr::opts_chunk$set(
   collapse = TRUE,
   tidy.opts = list(width.cutoff = 60),
-  tidy = TRUE,
-  fig.path = "README-"
+  tidy = TRUE
 )
 options(knitr.kable.NA = '', digits = 4)
 if (!requireNamespace("dplyr", quietly = TRUE)) {
