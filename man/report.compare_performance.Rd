@@ -3,16 +3,30 @@
 \name{report.compare_performance}
 \alias{report.compare_performance}
 \alias{report_table.compare_performance}
+\alias{report_statistics.compare_performance}
+\alias{report_parameters.compare_performance}
+\alias{report_performance.compare_performance}
+\alias{report_text.compare_performance}
 \title{Reporting models comparison}
 \usage{
 \method{report}{compare_performance}(x, ...)
 
 \method{report_table}{compare_performance}(x, ...)
+
+\method{report_statistics}{compare_performance}(x, table = NULL, ...)
+
+\method{report_parameters}{compare_performance}(x, table = NULL, ...)
+
+\method{report_performance}{compare_performance}(x, table = NULL, ...)
+
+\method{report_text}{compare_performance}(x, ...)
 }
 \arguments{
 \item{x}{Object of class \code{NEW OBJECT}.}
 
 \item{...}{Arguments passed to or from other methods.}
+
+\item{table}{Provide the output of  \code{report_table()} to avoid its re-computation.}
 }
 \value{
 A list-object of class \code{report}, which contains further list-objects
@@ -36,6 +50,11 @@ if(require("performance")){
   # summary(r)
   # as.data.frame(r)
   # summary(as.data.frame(r))
+
+  # Specific reports
+  report_table(x)
+  report_statistics(x)
+  report_parameters(x)
 }
 
 }
@@ -47,6 +66,7 @@ Specific components of reports (especially for stats models):
   \item \code{\link{report_statistics}}
   \item \code{\link{report_effectsize}}
   \item \code{\link{report_model}}
+  \item \code{\link{report_priors}}
   \item \code{\link{report_random}}
   \item \code{\link{report_performance}}
   \item \code{\link{report_info}}
@@ -58,6 +78,7 @@ Other types of reports:
   \item \code{\link{report_packages}}
   \item \code{\link{report_participants}}
   \item \code{\link{report_sample}}
+  \item \code{\link{report_date}}
 }
 Methods:
 \itemize{

@@ -25,7 +25,7 @@ library(report)
 
 # Bayesian models
 if(require("rstanarm")){
-  model <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh=0, iter=600)
+  model <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh=0, iter=300)
   r <- report(model)
   r
   summary(r)
@@ -41,6 +41,7 @@ Specific components of reports (especially for stats models):
   \item \code{\link{report_statistics}}
   \item \code{\link{report_effectsize}}
   \item \code{\link{report_model}}
+  \item \code{\link{report_priors}}
   \item \code{\link{report_random}}
   \item \code{\link{report_performance}}
   \item \code{\link{report_info}}
@@ -52,6 +53,7 @@ Other types of reports:
   \item \code{\link{report_packages}}
   \item \code{\link{report_participants}}
   \item \code{\link{report_sample}}
+  \item \code{\link{report_date}}
 }
 Methods:
 \itemize{

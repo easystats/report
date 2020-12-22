@@ -20,7 +20,11 @@
 #'   model <- lavaan::sem(structure, data = PoliticalDemocracy)
 #'   r <- report(model)
 #'   r
+#'   # summary(r)
+#'   # as.data.frame(r)
+#'   # summary(as.data.frame(r))
 #'
+#'   # Specific reports
 #'   report_table(model)
 #'   report_performance(model)
 #' }
