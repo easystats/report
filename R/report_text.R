@@ -56,10 +56,6 @@ report_text <- function(x, table=NULL, ...) {
 }
 
 
-#' @export
-report_text.default <- function(x, ...) {
-  stop(paste0("report_text() is not available for objects of class ", class(x)))
-}
 
 
 # METHODS -----------------------------------------------------------------

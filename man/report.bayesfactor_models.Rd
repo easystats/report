@@ -90,4 +90,8 @@ Methods:
 \itemize{
   \item \code{\link{as.report}}
 }
+Template file for supporting new models:
+\itemize{
+  \item \code{\link{report.default}}
+}
 }

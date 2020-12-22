@@ -33,11 +33,6 @@ report_intercept <- function(x, ...) {
 }
 
 
-#' @export
-report_intercept.default <- function(x, ...) {
-  stop(paste0("report_intercept() is not available for objects of class ", class(x)))
-}
-
 # METHODS -----------------------------------------------------------------
 
 

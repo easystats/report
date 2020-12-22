@@ -33,10 +33,6 @@ report_random <- function(x, ...) {
 }
 
 
-#' @export
-report_random.default <- function(x, ...) {
-  stop(paste0("report_random() is not available for objects of class ", class(x)))
-}
 
 # METHODS -----------------------------------------------------------------
 

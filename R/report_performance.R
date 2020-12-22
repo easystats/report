@@ -42,10 +42,6 @@ report_performance <- function(x, table = NULL, ...) {
 }
 
 
-#' @export
-report_performance.default <- function(x, ...) {
-  stop(paste0("report_performance() is not available for objects of class ", class(x)))
-}
 
 # METHODS -----------------------------------------------------------------
 

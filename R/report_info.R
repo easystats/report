@@ -41,10 +41,6 @@ report_info <- function(x, ...) {
 }
 
 
-#' @export
-report_info.default <- function(x, ...) {
-  stop(paste0("report_info() is not available for objects of class ", class(x)))
-}
 
 # METHODS -----------------------------------------------------------------
 

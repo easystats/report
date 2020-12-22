@@ -63,7 +63,7 @@
 
 \item{range}{Show range.}
 
-\item{distribution}{Show \code{\link[parameters:kurtosis]{kurtosis}} and \code{\link[parameters:skewness]{skewness}}.}
+\item{distribution}{Show \code{\link[parameters:skewness]{kurtosis}} and \code{\link[parameters:skewness]{skewness}}.}
 
 \item{digits}{Number of significant digits.}
 }

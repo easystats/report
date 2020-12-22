@@ -40,11 +40,6 @@ report_effectsize <- function(x, ...) {
 }
 
 
-#' @export
-report_effectsize.default <- function(x, ...) {
-  stop(paste0("report_effectsize() is not available for objects of class ", class(x)))
-}
-
 # METHODS -----------------------------------------------------------------
 
 

@@ -68,6 +68,10 @@
 #' \itemize{
 #'   \item \code{\link{as.report}}
 #' }
+#' Template file for supporting new models:
+#' \itemize{
+#'   \item \code{\link{report.default}}
+#' }
 #'
 #' @examples
 #' library(report)
@@ -86,15 +90,6 @@
 report <- function(x, ...) {
   UseMethod("report")
 }
-
-
-
-#' @export
-report.default <- function(x, ...) {
-  stop("The input you provided is not supported yet by report :(")
-}
-
-
 
 
 

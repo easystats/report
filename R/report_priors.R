@@ -25,10 +25,6 @@ report_priors <- function(x, ...) {
 }
 
 
-#' @export
-report_priors.default <- function(x, ...) {
-  stop(paste0("report_priors() is not available for objects of class ", class(x)))
-}
 
 # METHODS -----------------------------------------------------------------
 

@@ -16,8 +16,10 @@
 #'
 #' model <- lavaan::cfa(structure, data = HolzingerSwineford1939)
 #' r <- report(model)
-#' to_fulltext(r)
-#' to_table(r)
+#' r
+#' summary(r)
+#' as.data.frame(r)
+#' summary(as.data.frame(r))
 #' @export
 report.lavaan <- function(model, effsize = "funder2019", ci = 0.95, standardize = TRUE, performance_metrics = "all", ...) {
 

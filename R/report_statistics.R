@@ -46,10 +46,6 @@ report_statistics <- function(x, table = NULL, ...) {
 }
 
 
-#' @export
-report_statistics.default <- function(x, ...) {
-  stop(paste0("report_statistics() is not available for objects of class ", class(x)))
-}
 
 # METHODS -----------------------------------------------------------------
 

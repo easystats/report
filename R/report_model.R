@@ -40,10 +40,6 @@ report_model <- function(x, table = NULL, ...) {
 }
 
 
-#' @export
-report_model.default <- function(x, ...) {
-  stop(paste0("report_model() is not available for objects of class ", class(x)))
-}
 
 # METHODS -----------------------------------------------------------------
 

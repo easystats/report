@@ -1,0 +1,41 @@
+---
+title: "Supporting New Models"
+output: 
+  github_document:
+    toc: true
+    fig_width: 10.08
+    fig_height: 6
+  rmarkdown::html_vignette:
+    toc: true
+    fig_width: 10.08
+    fig_height: 6
+tags: [r, report]
+vignette: >
+  %\VignetteIndexEntry{Supporting New Models}
+  \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  tidy.opts = list(width.cutoff = 60),
+  tidy = TRUE,
+  fig.path = "README-"
+)
+options(knitr.kable.NA = '', digits = 4)
+if (!requireNamespace("dplyr", quietly = TRUE)) {
+  knitr::opts_chunk$set(eval = FALSE)
+}
+```
+
+
+## 1. Open an Issue on GitHub
+
+After checking that it doesn't exist already, you should open an issue on [https://github.com/easystats/report/issues](https://github.com/easystats/report/issues), and saying what would you like to see, and how you can eventually help out.
+
+## 2. Use template file
+
+Copy and paste the [**template file**](https://github.com/easystats/report/tree/master/R/report.default.R), and replace the functions.
