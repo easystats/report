@@ -19,7 +19,7 @@
 
 \method{report_performance}{compare_performance}(x, table = NULL, ...)
 
-\method{report_text}{compare_performance}(x, ...)
+\method{report_text}{compare_performance}(x, table = NULL, ...)
 }
 \arguments{
 \item{x}{Object of class \code{NEW OBJECT}.}
@@ -47,14 +47,15 @@ if(require("performance")){
   x <- performance::compare_performance(m1, m2, m3)
   r <- report(x)
   r
-  # summary(r)
-  # as.data.frame(r)
-  # summary(as.data.frame(r))
+  summary(r)
+  as.data.frame(r)
+  summary(as.data.frame(r))
 
   # Specific reports
   report_table(x)
   report_statistics(x)
   report_parameters(x)
+  report_performance(x)
 }
 
 }
