@@ -3,6 +3,7 @@ pkgdown: 1.6.1.9000
 pkgdown_sha: 6094ac3dd80a1f3f1d4e2f47d0ed4716d51362b0
 articles:
   cite_packages: cite_packages.html
+  new_models: new_models.html
   report: report.html
-last_built: 2020-12-18T09:56Z
+last_built: 2020-12-22T12:48Z
 

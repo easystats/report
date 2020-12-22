@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Reports of Bayesian Models — report.stanreg • report</title>
+<title>Reporting Bayesian Models — report.stanreg • report</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Reports of Bayesian Models — report.stanreg" />
-<meta property="og:description" content="Create a report Bayesian models. The description of the parameters follows the
+<meta property="og:title" content="Reporting Bayesian Models — report.stanreg" />
+<meta property="og:description" content="Create reports for Bayesian models. The description of the parameters follows the
 Sequential Effect eXistence and sIgnificance Testing framework (see SEXIT documentation)." />
 <meta property="og:image" content="/logo.png" />
 
@@ -135,13 +135,13 @@ Sequential Effect eXistence and sIgnificance Testing framework (see SEXIT docume
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Reports of Bayesian Models</h1>
+    <h1>Reporting Bayesian Models</h1>
     <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.stanreg.R'><code>R/report.stanreg.R</code></a></small>
     <div class="hidden name"><code>report.stanreg.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create a report Bayesian models. The description of the parameters follows the
+    <p>Create reports for Bayesian models. The description of the parameters follows the
 Sequential Effect eXistence and sIgnificance Testing framework (see <a href='https://easystats.github.io/bayestestR/reference/sexit.html'>SEXIT documentation</a>).</p>
     </div>
 
@@ -174,6 +174,7 @@ and long table of parameters and fit indices.</p>
 <li><p><code><a href='report_statistics.html'>report_statistics</a></code></p></li>
 <li><p><code><a href='report_effectsize.html'>report_effectsize</a></code></p></li>
 <li><p><code><a href='report_model.html'>report_model</a></code></p></li>
+<li><p><code><a href='report_priors.html'>report_priors</a></code></p></li>
 <li><p><code><a href='report_random.html'>report_random</a></code></p></li>
 <li><p><code><a href='report_performance.html'>report_performance</a></code></p></li>
 <li><p><code><a href='report_info.html'>report_info</a></code></p></li>
@@ -183,8 +184,11 @@ and long table of parameters and fit indices.</p>
 <li><p><code><a href='report.sessionInfo.html'>report_packages</a></code></p></li>
 <li><p><code><a href='report_participants.html'>report_participants</a></code></p></li>
 <li><p><code><a href='report_sample.html'>report_sample</a></code></p></li>
+<li><p><code><a href='report_date.html'>report_date</a></code></p></li>
 </ul><p>Methods:</p><ul>
 <li><p><code><a href='as.report_text.html'>as.report</a></code></p></li>
+</ul><p>Template file for supporting new models:</p><ul>
+<li><p><code><a href='report.default.html'>report.default</a></code></p></li>
 </ul>
 </div>
 
@@ -193,22 +197,29 @@ and long table of parameters and fit indices.</p>
 
 <span class='co'># Bayesian models</span>
 <span class='kw'>if</span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://mc-stan.org/rstanarm/'>"rstanarm"</a></span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
-  <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://mc-stan.org/rstanarm/reference/stan_glm.html'>stan_glm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>qsec</span> <span class='op'>+</span> <span class='va'>wt</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, refresh<span class='op'>=</span><span class='fl'>0</span>, iter<span class='op'>=</span><span class='fl'>600</span><span class='op'>)</span>
+  <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://mc-stan.org/rstanarm/reference/stan_glm.html'>stan_glm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>qsec</span> <span class='op'>+</span> <span class='va'>wt</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, refresh<span class='op'>=</span><span class='fl'>0</span>, iter<span class='op'>=</span><span class='fl'>300</span><span class='op'>)</span>
   <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
   <span class='va'>r</span>
   <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
   <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
   <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; <span class='message'>Loading required package: rstanarm</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: Rcpp</span></div><div class='output co'>#&gt; <span class='message'>This is rstanarm version 2.21.1</span></div><div class='output co'>#&gt; <span class='message'>- See https://mc-stan.org/rstanarm/articles/priors for changes to default priors!</span></div><div class='output co'>#&gt; <span class='message'>- Default priors may change, so it's safest to specify priors, even if equivalent to the defaults.</span></div><div class='output co'>#&gt; <span class='message'>- For execution on a local, multicore CPU with excess RAM we recommend calling</span></div><div class='output co'>#&gt; <span class='message'>  options(mc.cores = parallel::detectCores())</span></div><div class='output co'>#&gt; Parameter   | Median |         89% CI |   pd | % in ROPE |  Rhat |     ESS |                   Prior |  Fit
-#&gt; -----------------------------------------------------------------------------------------------------------
-#&gt; (Intercept) |  19.78 | [11.22, 28.93] | 100% |     0.08% | 0.998 | 1444.65 | Normal (20.09 +- 15.07) |     
-#&gt; qsec        |   0.93 | [ 0.48,  1.38] | 100% |    12.50% | 0.998 | 1607.22 |   Normal (0.00 +- 8.43) |     
-#&gt; wt          |  -5.02 | [-5.87, -4.27] | 100% |        0% | 1.001 | 1001.65 |  Normal (0.00 +- 15.40) |     
-#&gt;             |        |                |      |           |       |         |                         |     
-#&gt; R2          |        |                |      |           |       |         |                         | 0.81
-#&gt; R2 (adj.)   |        |                |      |           |       |         |                         | 0.78
-#&gt; Sigma       |        |                |      |           |       |         |                         | 2.65</div></pre>
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: rstanarm</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: Rcpp</span></div><div class='output co'>#&gt; <span class='message'>This is rstanarm version 2.21.1</span></div><div class='output co'>#&gt; <span class='message'>- See https://mc-stan.org/rstanarm/articles/priors for changes to default priors!</span></div><div class='output co'>#&gt; <span class='message'>- Default priors may change, so it's safest to specify priors, even if equivalent to the defaults.</span></div><div class='output co'>#&gt; <span class='message'>- For execution on a local, multicore CPU with excess RAM we recommend calling</span></div><div class='output co'>#&gt; <span class='message'>  options(mc.cores = parallel::detectCores())</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘rstanarm’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:performance’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    pp_check</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.</span>
+#&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
+#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#bulk-ess</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.</span>
+#&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
+#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#tail-ess</span></div><div class='output co'>#&gt; Parameter   | Median |         89% CI |     pd | % in ROPE |  Rhat |    ESS |                   Prior |  Fit
+#&gt; ------------------------------------------------------------------------------------------------------------
+#&gt; (Intercept) |  19.55 | [11.24, 28.37] |   100% |        0% | 0.995 | 823.72 | Normal (20.09 +- 15.07) |     
+#&gt; qsec        |   0.93 | [ 0.49,  1.37] | 99.83% |    10.50% | 0.994 | 908.11 |   Normal (0.00 +- 8.43) |     
+#&gt; wt          |  -5.05 | [-5.77, -4.25] |   100% |        0% | 1.004 | 786.92 |  Normal (0.00 +- 15.40) |     
+#&gt;             |        |                |        |           |       |        |                         |     
+#&gt; R2          |        |                |        |           |       |        |                         | 0.81
+#&gt; R2 (adj.)   |        |                |        |           |       |        |                         | 0.78
+#&gt; Sigma       |        |                |        |           |       |        |                         | 2.64</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

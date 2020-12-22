@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Reporting h-tests (Correlation, t-test...) — report.htest • report</title>
+<title>Reporting models comparison — report.compare_performance • report</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Reporting h-tests (Correlation, t-test...) — report.htest" />
-<meta property="og:description" content="Create reports for h-test objects (t.test(), cor.test())." />
+<meta property="og:title" content="Reporting models comparison — report.compare_performance" />
+<meta property="og:description" content="Create reports for model comparison as obtained by the performance::compare_performance() function in the performance package." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -134,45 +134,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Reporting h-tests (Correlation, t-test...)</h1>
-    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.htest.R'><code>R/report.htest.R</code></a></small>
-    <div class="hidden name"><code>report.htest.Rd</code></div>
+    <h1>Reporting models comparison</h1>
+    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.compare_performance.R'><code>R/report.compare_performance.R</code></a></small>
+    <div class="hidden name"><code>report.compare_performance.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create reports for h-test objects (<code><a href='https://rdrr.io/r/stats/t.test.html'>t.test()</a></code>, <code><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test()</a></code>).</p>
+    <p>Create reports for model comparison as obtained by the <code><a href='https://easystats.github.io/performance/reference/compare_performance.html'>performance::compare_performance()</a></code> function in the <code>performance</code> package.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for htest</span>
+    <pre class="usage"><span class='co'># S3 method for compare_performance</span>
 <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='co'># S3 method for htest</span>
-<span class='fu'><a href='report_effectsize.html'>report_effectsize</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
-
-<span class='co'># S3 method for htest</span>
+<span class='co'># S3 method for compare_performance</span>
 <span class='fu'><a href='report_table.html'>report_table</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='co'># S3 method for htest</span>
+<span class='co'># S3 method for compare_performance</span>
 <span class='fu'><a href='report_statistics.html'>report_statistics</a></span><span class='op'>(</span><span class='va'>x</span>, table <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='co'># S3 method for htest</span>
+<span class='co'># S3 method for compare_performance</span>
 <span class='fu'><a href='report_parameters.html'>report_parameters</a></span><span class='op'>(</span><span class='va'>x</span>, table <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='co'># S3 method for htest</span>
-<span class='fu'><a href='report_model.html'>report_model</a></span><span class='op'>(</span><span class='va'>x</span>, table <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span>
+<span class='co'># S3 method for compare_performance</span>
+<span class='fu'><a href='report_performance.html'>report_performance</a></span><span class='op'>(</span><span class='va'>x</span>, table <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='co'># S3 method for htest</span>
-<span class='fu'><a href='report_info.html'>report_info</a></span><span class='op'>(</span><span class='va'>x</span>, effectsize <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span>
-
-<span class='co'># S3 method for htest</span>
-<span class='fu'><a href='report_text.html'>report_text</a></span><span class='op'>(</span><span class='va'>x</span>, table <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+<span class='co'># S3 method for compare_performance</span>
+<span class='fu'><a href='report_text.html'>report_text</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>Object of class htest.</p></td>
+      <td><p>Object of class <code>NEW OBJECT</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -181,10 +175,6 @@
     <tr>
       <th>table</th>
       <td><p>Provide the output of  <code><a href='report_table.html'>report_table()</a></code> to avoid its re-computation.</p></td>
-    </tr>
-    <tr>
-      <th>effectsize</th>
-      <td><p>Provide the output of <code><a href='report_effectsize.html'>report_effectsize()</a></code> to avoid its re-computation.</p></td>
     </tr>
     </table>
 
@@ -220,28 +210,29 @@ and long table of parameters and fit indices.</p>
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span>, method <span class='op'>=</span> <span class='st'>"spearman"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Cannot compute exact p-value with ties</span></div><div class='output co'>#&gt; Effect sizes were labelled following Funder's (2019) recommendations.
-#&gt; 
-#&gt; The Spearman's rank correlation rho between iris$Sepal.Width and iris$Sepal.Length is negative, significant and small (rho = -0.17, S = 6.56e+05, p &lt; .05)</div><div class='input'><span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span>, method <span class='op'>=</span> <span class='st'>"pearson"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Effect sizes were labelled following Funder's (2019) recommendations.
-#&gt; 
-#&gt; The Pearson's product-moment correlation between iris$Sepal.Width and iris$Sepal.Length is negative, not significant and small (r = -0.12, 95% CI [-0.27, 0.04], t(148) = -1.44, p = 0.152)</div><div class='input'><span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Effect sizes were labelled following Cohen's (1988) recommendations.
-#&gt; 
-#&gt; The Welch Two Sample t-test testing the difference between iris$Sepal.Width and iris$Sepal.Length (mean of x = 3.06, mean of y = 5.84) suggests that the effect is negative, significant and large (difference = -2.79, 95% CI [-2.94, -2.64], t(225.68) = -36.46, p &lt; .001; Cohen's d = -4.85, 95% CI [-5.37, -4.33])</div><div class='input'><span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span>, var.equal <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Effect sizes were labelled following Cohen's (1988) recommendations.
-#&gt; 
-#&gt; The Two Sample t-test testing the difference between iris$Sepal.Width and iris$Sepal.Length (mean of x = 3.06, mean of y = 5.84) suggests that the effect is negative, significant and large (difference = -2.79, 95% CI [-2.94, -2.64], t(298) = -36.46, p &lt; .001; Cohen's d = -4.22, 95% CI [-4.63, -3.82])</div><div class='input'><span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>mtcars</span><span class='op'>$</span><span class='va'>vs</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Effect sizes were labelled following Cohen's (1988) recommendations.
-#&gt; 
-#&gt; The Welch Two Sample t-test testing the difference of mtcars$mpg by mtcars$vs (mean in group 0 = 16.62, mean in group 1 = 24.56) suggests that the effect is positive, significant and large (difference = 7.94, 95% CI [-11.46, -4.42], t(22.72) = -4.67, p &lt; .001; Cohen's d = -1.96, 95% CI [-2.94, -0.95])</div><div class='input'><span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>mpg</span>, <span class='va'>mtcars</span><span class='op'>$</span><span class='va'>vs</span>, paired<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Effect sizes were labelled following Cohen's (1988) recommendations.
-#&gt; 
-#&gt; The Paired t-test testing the difference between mtcars$mpg and mtcars$vs (mean of the differences = 19.65) suggests that the effect is NA, significant and large (difference = , 95% CI [17.60, 21.71], t(31) = 19.49, p &lt; .001; Cohen's d = 3.50, 95% CI [2.56, 4.43])</div><div class='input'><span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, mu <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Effect sizes were labelled following Cohen's (1988) recommendations.
-#&gt; 
-#&gt; The One Sample t-test testing the difference between iris$Sepal.Width (mean = 3.06) and mu = 1 suggests that the effect is positive, significant and large (difference = 2.06, 95% CI [2.99, 3.13], t(149) = 57.81, p &lt; .001; Cohen's d = 4.74, 95% CI [4.17, 5.29])</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://easystats.github.io/report/'>report</a></span><span class='op'>)</span>
+
+<span class='va'>m1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>*</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
+<span class='va'>m2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>+</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
+<span class='va'>m3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
+
+<span class='kw'>if</span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://easystats.github.io/performance/'>"performance"</a></span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>performance</span><span class='fu'>::</span><span class='fu'><a href='https://easystats.github.io/performance/reference/compare_performance.html'>compare_performance</a></span><span class='op'>(</span><span class='va'>m1</span>, <span class='va'>m2</span>, <span class='va'>m3</span><span class='op'>)</span>
+  <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+  <span class='va'>r</span>
+  <span class='co'># summary(r)</span>
+  <span class='co'># as.data.frame(r)</span>
+  <span class='co'># summary(as.data.frame(r))</span>
+
+  <span class='co'># Specific reports</span>
+  <span class='fu'><a href='report_table.html'>report_table</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+  <span class='fu'><a href='report_statistics.html'>report_statistics</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+  <span class='fu'><a href='report_parameters.html'>report_parameters</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: performance</span></div><div class='output co'>#&gt;   - m1 (R2 = 0.84, adj. R2 = 0.83, AIC = 106.77, BIC = 127.84, RMSE = 0.33, Sigma = 0.34)
+#&gt;   - m2 (R2 = 0.84, adj. R2 = 0.83, AIC = 106.23, BIC = 121.29, RMSE = 0.33, Sigma = 0.34)
+#&gt;   - m3 (R2 = 0.76, adj. R2 = 0.76, AIC = 160.04, BIC = 169.07, RMSE = 0.40, Sigma = 0.41)</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

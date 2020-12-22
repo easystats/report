@@ -179,6 +179,7 @@ and long table of parameters and fit indices.</p>
 <li><p><code><a href='report_statistics.html'>report_statistics</a></code></p></li>
 <li><p><code><a href='report_effectsize.html'>report_effectsize</a></code></p></li>
 <li><p><code><a href='report_model.html'>report_model</a></code></p></li>
+<li><p><code><a href='report_priors.html'>report_priors</a></code></p></li>
 <li><p><code><a href='report_random.html'>report_random</a></code></p></li>
 <li><p><code><a href='report_performance.html'>report_performance</a></code></p></li>
 <li><p><code><a href='report_info.html'>report_info</a></code></p></li>
@@ -188,8 +189,11 @@ and long table of parameters and fit indices.</p>
 <li><p><code><a href='report.sessionInfo.html'>report_packages</a></code></p></li>
 <li><p><code><a href='report_participants.html'>report_participants</a></code></p></li>
 <li><p><code><a href='report_sample.html'>report_sample</a></code></p></li>
+<li><p><code><a href='report_date.html'>report_date</a></code></p></li>
 </ul><p>Methods:</p><ul>
 <li><p><code><a href='as.report_text.html'>as.report</a></code></p></li>
+</ul><p>Template file for supporting new models:</p><ul>
+<li><p><code><a href='report.default.html'>report.default</a></code></p></li>
 </ul>
 </div>
 
@@ -202,9 +206,17 @@ and long table of parameters and fit indices.</p>
                  dem60 =~ y1 + y2 + y3
                  dem60 ~ ind60 "</span>
   <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'>lavaan</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lavaan/man/sem.html'>sem</a></span><span class='op'>(</span><span class='va'>structure</span>, data <span class='op'>=</span> <span class='va'>PoliticalDemocracy</span><span class='op'>)</span>
-  <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+  <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+  <span class='va'>r</span>
+  <span class='co'># summary(r)</span>
+  <span class='co'># as.data.frame(r)</span>
+  <span class='co'># summary(as.data.frame(r))</span>
+
+  <span class='co'># Specific reports</span>
+  <span class='fu'><a href='report_table.html'>report_table</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
+  <span class='fu'><a href='report_performance.html'>report_performance</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; <span class='message'>Loading required package: lavaan</span></div><div class='output co'>#&gt; <span class='message'>This is lavaan 0.6-7</span></div><div class='output co'>#&gt; <span class='message'>lavaan is BETA software! Please report any bugs.</span></div><div class='output co'>#&gt; [1] "Support for lavaan not implemented yet :("</div></pre>
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: lavaan</span></div><div class='output co'>#&gt; <span class='message'>This is lavaan 0.6-7</span></div><div class='output co'>#&gt; <span class='message'>lavaan is BETA software! Please report any bugs.</span></div><div class='output co'>#&gt; [1] "Support for lavaan not fully implemented yet :("</div><div class='output co'>#&gt; The model is not significantly different from a baseline model (Chi2(8) = 7.98, p = 0.435). The GFI (.97 &gt; .95), AGFI (.91 &gt; .90), NFI (.97 &gt; .90), NNFI (.00 &gt; .90), CFI (.00 &gt; .90), RMSEA (.00 &lt; .05), SRMR (.03 &lt; .08), RFI (.95 &gt; .90), IFI (.00 &gt; .90) and PNFI (.52 &gt; .50) suggest a satisfactory fit.</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

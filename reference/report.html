@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Automatic report of R objects — report • report</title>
+<title>Automatic reporting of R objects — report • report</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,17 +46,18 @@
 
 
 
-<meta property="og:title" content="Automatic report of R objects — report" />
+<meta property="og:title" content="Automatic reporting of R objects — report" />
 <meta property="og:description" content="Create reports of different objects. See the documentation for your object's class:
 R environment, system and packages (sessionInfo)
 Dataframes and vectors
 Correlations and t-tests (htest)
 ANOVAs (aov, anova, aovlist, ...)
 Regression models (glm, lm, ...)
-
+Mixed models (glmer, lmer, glmmTMB, ...)
 Bayesian models (stanreg, brms...)
 Bayes factors (from bayestestR)
- 
+Structural Equation Models (SEM) (from lavaan)
+Model comparison (from performance)
 
 " />
 <meta property="og:image" content="/logo.png" />
@@ -145,7 +146,7 @@ Bayes factors (from bayestestR)
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Automatic report of R objects</h1>
+    <h1>Automatic reporting of R objects</h1>
     <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.R'><code>R/report.R</code></a></small>
     <div class="hidden name"><code>report.Rd</code></div>
     </div>
@@ -156,11 +157,12 @@ Bayes factors (from bayestestR)
 <li><p><a href='report.character.html'>Dataframes and vectors</a></p></li>
 <li><p><a href='report.htest.html'>Correlations and t-tests</a> (<code>htest</code>)</p></li>
 <li><p><a href='report.aov.html'>ANOVAs</a> (<code>aov, anova, aovlist, ...</code>)</p></li>
-<li><p><a href='report.lm.html'>Regression models</a> (<code>glm, lm, ...</code>)
-<!-- % \item{\link[=report.lmerMod]{Mixed models} (\code{glmer, lmer, glmmTMB, ...})} --></p></li>
+<li><p><a href='report.lm.html'>Regression models</a> (<code>glm, lm, ...</code>)</p></li>
+<li><p><a href='report.lm.html'>Mixed models</a> (<code>glmer, lmer, glmmTMB, ...</code>)</p></li>
 <li><p><a href='report.stanreg.html'>Bayesian models</a> (<code>stanreg, brms...</code>)</p></li>
-<li><p><a href='report.bayesfactor_models.html'>Bayes factors</a> (from <code>bayestestR</code>)
- <!-- % \item{\link[=report.lavaan]{Structural Equation Models (SEM)} (from \code{lavaan})} --></p></li>
+<li><p><a href='report.bayesfactor_models.html'>Bayes factors</a> (from <code>bayestestR</code>)</p></li>
+<li><p><a href='report.lavaan.html'>Structural Equation Models (SEM)</a> (from <code>lavaan</code>)</p></li>
+<li><p><a href='report.compare_performance.html'>Model comparison</a> (from <code><a href='https://easystats.github.io/performance/reference/compare_performance.html'>performance</a></code>)</p></li>
 </ul>
 
     </div>
@@ -218,6 +220,7 @@ can be accessed via several functions, such as:</p><ul>
 <li><p><code><a href='report_statistics.html'>report_statistics</a></code></p></li>
 <li><p><code><a href='report_effectsize.html'>report_effectsize</a></code></p></li>
 <li><p><code><a href='report_model.html'>report_model</a></code></p></li>
+<li><p><code><a href='report_priors.html'>report_priors</a></code></p></li>
 <li><p><code><a href='report_random.html'>report_random</a></code></p></li>
 <li><p><code><a href='report_performance.html'>report_performance</a></code></p></li>
 <li><p><code><a href='report_info.html'>report_info</a></code></p></li>
@@ -227,8 +230,11 @@ can be accessed via several functions, such as:</p><ul>
 <li><p><code><a href='report.sessionInfo.html'>report_packages</a></code></p></li>
 <li><p><code><a href='report_participants.html'>report_participants</a></code></p></li>
 <li><p><code><a href='report_sample.html'>report_sample</a></code></p></li>
+<li><p><code><a href='report_date.html'>report_date</a></code></p></li>
 </ul><p>Methods:</p><ul>
 <li><p><code><a href='as.report_text.html'>as.report</a></code></p></li>
+</ul><p>Template file for supporting new models:</p><ul>
+<li><p><code><a href='report.default.html'>report.default</a></code></p></li>
 </ul>
 </div>
 
