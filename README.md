@@ -250,15 +250,15 @@ report(model)
     # We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains of 1000 iterations and a
     # warmup of 500) to predict mpg with qsec and wt (formula: mpg ~ qsec + wt). Priors over parameters were set as
     # normal (mean = 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The model's explanatory
-    # power is substantial (R2 = 0.81, 89% CI [0.74, 0.88], adj. R2 = 0.78). The model's intercept, corresponding
-    # to qsec = 0 and wt = 0, is at 19.86 (95% CI [8.97, 31.00]). Within this model:
+    # power is substantial (R2 = 0.81, 89% CI [0.73, 0.88], adj. R2 = 0.78). The model's intercept, corresponding
+    # to qsec = 0 and wt = 0, is at 19.60 (95% CI [9.00, 30.40]). Within this model:
     # 
-    #   - The effect of qsec (Median = 0.93, 95% CI [0.40, 1.48]) has a 99.85% probability of being positive (> 0),
-    # 98.75% of being significant (> 0.30), and 0.05% of being large (> 1.81). The estimation successfuly converged
-    # (Rhat = 1.001) and the indices are reliable (ESS = 1906)
-    #   - The effect of wt (Median = -5.06, 95% CI [-6.04, -4.09]) has a 100.00% probability of being negative (< 0),
+    #   - The effect of qsec (Median = 0.92, 95% CI [0.37, 1.45]) has a 99.95% probability of being positive (> 0),
+    # 98.35% of being significant (> 0.30), and 0.05% of being large (> 1.81). The estimation successfuly converged
+    # (Rhat = 1.000) and the indices are reliable (ESS = 1984)
+    #   - The effect of wt (Median = -5.03, 95% CI [-6.11, -4.04]) has a 100.00% probability of being negative (< 0),
     # 100.00% of being significant (< -0.30), and 100.00% of being large (< -1.81). The estimation successfuly
-    # converged (Rhat = 1.002) and the indices are reliable (ESS = 2315)
+    # converged (Rhat = 0.998) and the indices are reliable (ESS = 1873)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT) framework, we report the median of
     # the posterior distribution and its 95% CI (Highest Density Interval), along the probability of direction
