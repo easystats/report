@@ -246,8 +246,32 @@ and long table of parameters and fit indices.</p>
 #&gt;   - The effect of Species [virginica] is significantly negative (beta = -3.15, 95% CI [-4.41, -1.90], t(144) = -4.97, p &lt; .001, Std. beta = -1.75)
 #&gt;   - The interaction effect of Species [versicolor] on Petal.Length is non-significantly positive (beta = 0.29, 95% CI [-0.30, 0.87], t(144) = 0.97, p = 0.334, Std. beta = 0.61)
 #&gt;   - The interaction effect of Species [virginica] on Petal.Length is non-significantly positive (beta = 0.45, 95% CI [-0.12, 1.03], t(144) = 1.56, p = 0.120, Std. beta = 0.97)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in cat(insight::format_table(format(x, ...), ...)): argument 1 (type 'list') cannot be handled by 'cat'</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in cat(insight::format_table(format(x, ...), ...)): argument 1 (type 'list') cannot be handled by 'cat'</span></div><div class='input'>
+</div><div class='output co'>#&gt; Parameter                           | Coefficient |         95% CI | t(144) |      p | Std. Coef. | Std. Coef. 95% CI |    Fit
+#&gt; ------------------------------------------------------------------------------------------------------------------------------
+#&gt; (Intercept)                         |        4.21 | [ 3.41,  5.02] |  10.34 | &lt; .001 |       0.49 |    [-1.03,  2.01] |       
+#&gt; Petal.Length                        |        0.54 | [ 0.00,  1.09] |   1.96 | 0.052  |       1.16 |    [-0.01,  2.32] |       
+#&gt; Species [versicolor]                |       -1.81 | [-2.99, -0.62] |  -3.02 | 0.003  |      -0.88 |    [-2.41,  0.65] |       
+#&gt; Species [virginica]                 |       -3.15 | [-4.41, -1.90] |  -4.97 | &lt; .001 |      -1.75 |    [-3.32, -0.18] |       
+#&gt; Petal.Length * Species [versicolor] |        0.29 | [-0.30,  0.87] |   0.97 | 0.334  |       0.61 |    [-0.63,  1.85] |       
+#&gt; Petal.Length * Species [virginica]  |        0.45 | [-0.12,  1.03] |   1.56 | 0.120  |       0.97 |    [-0.26,  2.19] |       
+#&gt;                                     |             |                |        |        |            |                   |       
+#&gt; AIC                                 |             |                |        |        |            |                   | 106.77
+#&gt; BIC                                 |             |                |        |        |            |                   | 127.84
+#&gt; R2                                  |             |                |        |        |            |                   |   0.84
+#&gt; R2 (adj.)                           |             |                |        |        |            |                   |   0.83
+#&gt; Sigma                               |             |                |        |        |            |                   |   0.34</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Parameter                           | Coefficient |         95% CI | t(144) |      p | Std. Coef. |  Fit
+#&gt; --------------------------------------------------------------------------------------------------------
+#&gt; (Intercept)                         |        4.21 | [ 3.41,  5.02] |  10.34 | &lt; .001 |       0.49 |     
+#&gt; Petal.Length                        |        0.54 | [ 0.00,  1.09] |   1.96 | 0.052  |       1.16 |     
+#&gt; Species [versicolor]                |       -1.81 | [-2.99, -0.62] |  -3.02 | 0.003  |      -0.88 |     
+#&gt; Species [virginica]                 |       -3.15 | [-4.41, -1.90] |  -4.97 | &lt; .001 |      -1.75 |     
+#&gt; Petal.Length * Species [versicolor] |        0.29 | [-0.30,  0.87] |   0.97 | 0.334  |       0.61 |     
+#&gt; Petal.Length * Species [virginica]  |        0.45 | [-0.12,  1.03] |   1.56 | 0.120  |       0.97 |     
+#&gt;                                     |             |                |        |        |            |     
+#&gt; R2                                  |             |                |        |        |            | 0.84
+#&gt; R2 (adj.)                           |             |                |        |        |            | 0.83
+#&gt; Sigma                               |             |                |        |        |            | 0.34</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

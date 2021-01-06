@@ -238,8 +238,18 @@ and long table of parameters and fit indices.</p>
 #&gt;   - The main effect of Species is significant and large (F(2, 144) = 118.43, p &lt; .001, Eta2 (partial) = 0.62)
 #&gt;   - The main effect of Cat1 is not significant and very small (F(1, 144) = 6.25e-03, p = 0.937, Eta2 (partial) = 4.34e-05)
 #&gt;   - The interaction between Species and Cat1 is not significant and small (F(2, 144) = 0.98, p = 0.377, Eta2 (partial) = 0.01)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in cat(insight::format_table(format(x, ...), ...)): argument 1 (type 'list') cannot be handled by 'cat'</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in cat(insight::format_table(format(x, ...), ...)): argument 1 (type 'list') cannot be handled by 'cat'</span></div></pre>
+</div><div class='output co'>#&gt; Parameter    | Sum_Squares |  df | Mean_Square |        F |      p | Eta2 (partial) | Eta2_partial 90% CI
+#&gt; ---------------------------------------------------------------------------------------------------------
+#&gt; Species      |       63.21 |   2 |       31.61 |   118.43 | &lt; .001 |           0.62 |        [0.54, 0.68]
+#&gt; Cat1         |    1.67e-03 |   1 |    1.67e-03 | 6.25e-03 | 0.937  |       4.34e-05 |        [0.00, 0.00]
+#&gt; Species:Cat1 |        0.52 |   2 |        0.26 |     0.98 | 0.377  |           0.01 |        [0.00, 0.05]
+#&gt; Residuals    |       38.43 | 144 |        0.27 |          |        |                |                    </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Parameter    | Sum_Squares |  df | Mean_Square |        F |      p | Eta2 (partial)
+#&gt; -----------------------------------------------------------------------------------
+#&gt; Species      |       63.21 |   2 |       31.61 |   118.43 | &lt; .001 |           0.62
+#&gt; Cat1         |    1.67e-03 |   1 |    1.67e-03 | 6.25e-03 | 0.937  |       4.34e-05
+#&gt; Species:Cat1 |        0.52 |   2 |        0.26 |     0.98 | 0.377  |           0.01
+#&gt; Residuals    |       38.43 | 144 |        0.27 |          |        |               </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

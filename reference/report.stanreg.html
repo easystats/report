@@ -211,7 +211,15 @@ and long table of parameters and fit indices.</p>
 #&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
 #&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#bulk-ess</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.</span>
 #&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
-#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#tail-ess</span></div><div class='output co'>#&gt; <span class='error'>Error in pd * 100: non-numeric argument to binary operator</span></div></pre>
+#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#tail-ess</span></div><div class='output co'>#&gt; Parameter   | Median |         89% CI |     pd | % in ROPE |  Rhat |    ESS |                   Prior |  Fit
+#&gt; ------------------------------------------------------------------------------------------------------------
+#&gt; (Intercept) |  19.55 | [11.24, 28.37] |   100% |        0% | 0.995 | 823.72 | Normal (20.09 +- 15.07) |     
+#&gt; qsec        |   0.93 | [ 0.49,  1.37] | 99.83% |    10.50% | 0.994 | 908.11 |   Normal (0.00 +- 8.43) |     
+#&gt; wt          |  -5.05 | [-5.77, -4.25] |   100% |        0% | 1.004 | 786.92 |  Normal (0.00 +- 15.40) |     
+#&gt;             |        |                |        |           |       |        |                         |     
+#&gt; R2          |        |                |        |           |       |        |                         | 0.81
+#&gt; R2 (adj.)   |        |                |        |           |       |        |                         | 0.78
+#&gt; Sigma       |        |                |        |           |       |        |                         | 2.64</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
