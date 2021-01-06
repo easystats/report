@@ -21,7 +21,7 @@
 #' @export
 report.htest <- function(x, ...) {
   table <- report_table(x, ...)
-  text <- report_text(x, table=table, ...)
+  text <- report_text(x, table = table, ...)
 
   as.report(text, table = table, ...)
 }
@@ -54,13 +54,13 @@ report_effectsize.htest <- function(x, ...) {
                          ", ",
                          insight::format_ci(table$CI_low, table$CI_high, ci))
     table <- data_rename(as.data.frame(table), c("CI_low", "CI_high"), c("d_CI_low", "d_CI_high"))
-    table <- table[c("d", "d_CI_low", "d_CI_high")]
+    table <- table[c("Cohens_d", "d_CI_low", "d_CI_high")]
   } else{
     interpret <- effectsize::interpret_r(table[[estimate]], ...)
     interpretation <- interpret
     main <- paste0(estimate, " = ", insight::format_value(table[[estimate]]))
 
-    if("CI_low" %in% names(table)){
+    if ("CI_low" %in% names(table)) {
       statistics <- paste0(main,
                            ", ",
                            insight::format_ci(table$CI_low, table$CI_high, ci))
@@ -79,13 +79,13 @@ report_effectsize.htest <- function(x, ...) {
 
   # Return output
   as.report_effectsize(parameters,
-                       summary=parameters,
-                       table=table,
-                       interpretation=interpretation,
-                       statistics=statistics,
-                       rules=rules,
-                       ci=ci,
-                       main=main)
+                       summary = parameters,
+                       table = table,
+                       interpretation = interpretation,
+                       statistics = statistics,
+                       rules = rules,
+                       ci = ci,
+                       main = main)
 }
 
 
@@ -109,7 +109,7 @@ report_table.htest <- function(x, ...) {
 
   table <- data_remove(table_full, c("Parameter", "Group", "Mean_Group1", "Mean_Group2", "Method"))
   # Return output
-  as.report_table(table_full, summary=table, effsize=effsize)
+  as.report_table(table_full, summary = table, effsize = effsize)
 }
 
 
@@ -155,10 +155,10 @@ report_statistics.htest <- function(x, table=NULL, ...) {
   }
 
   as.report_statistics(text_full,
-                       summary=text,
-                       estimate=table[[estimate]],
-                       table=table,
-                       effsize=effsize)
+                       summary = text,
+                       estimate = table[[estimate]],
+                       table = table,
+                       effsize = effsize)
 }
 
 
