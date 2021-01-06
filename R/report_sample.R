@@ -166,11 +166,11 @@ report_sample <- function(data, group_by = NULL, centrality = "mean", select = N
 # print-method --------------------------------------------
 
 
-#' @importFrom insight print_colour format_table
+#' @importFrom insight print_colour export_table
 #' @export
 print.report_table1 <- function(x, ...) {
   insight::print_colour("# Descriptive Statistics\n\n", "blue")
-  cat(insight::format_table(x))
+  cat(insight::export_table(x))
 }
 
 

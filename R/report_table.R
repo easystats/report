@@ -82,7 +82,7 @@ as.report_table.default <- function(x, summary = NULL, ...) {
 
 #' @export
 as.report_table.report <- function(x, summary = NULL, ...) {
-  if (is.null(summary) | isFALSE(summary)) {
+  if (is.null(summary) || isFALSE(summary)) {
     attributes(x)$table
   } else if (isTRUE(summary)) {
     summary(attributes(x)$table)
@@ -95,20 +95,22 @@ as.report_table.report <- function(x, summary = NULL, ...) {
 
 #' @export
 summary.report_table <- function(object, ...) {
-  if(is.null(attributes(object)$summary)){
+  if (is.null(attributes(object)$summary)) {
     object
-  } else{
+  } else {
     attributes(object)$summary
   }
 }
 
 
+#' @importFrom insight format_table
 #' @export
 format.report_table <- function(x, ...) {
-  insight::parameters_table(x, ...)
+  insight::format_table(x, ...)
 }
 
+#' @importFrom insight export_table
 #' @export
 print.report_table <- function(x, ...) {
-  cat(insight::format_table(format(x, ...), ...))
+  cat(insight::export_table(format(x, ...), ...))
 }
