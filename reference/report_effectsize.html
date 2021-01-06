@@ -167,9 +167,7 @@
 
 <span class='co'># h-tests</span>
 <span class='fu'>report_effectsize</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Effect sizes were labelled following Cohen's (1988) recommendations. 
-#&gt; 
-#&gt; large (Cohen's d = -4.85, 95% CI [-5.37, -4.33])</div><div class='input'><span class='fu'>report_effectsize</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in `[.data.frame`(table, c("Cohens_d", "d_CI_low", "d_CI_high")): undefined columns selected</span></div><div class='input'><span class='fu'>report_effectsize</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Effect sizes were labelled following Funder's (2019) recommendations. 
 #&gt; 
 #&gt; small (r = -0.12, 95% CI [-0.27, 0.04])</div><div class='input'>
