@@ -5,7 +5,6 @@
 \alias{report_table.compare_performance}
 \alias{report_statistics.compare_performance}
 \alias{report_parameters.compare_performance}
-\alias{report_performance.compare_performance}
 \alias{report_text.compare_performance}
 \title{Reporting models comparison}
 \usage{
@@ -16,8 +15,6 @@
 \method{report_statistics}{compare_performance}(x, table = NULL, ...)
 
 \method{report_parameters}{compare_performance}(x, table = NULL, ...)
-
-\method{report_performance}{compare_performance}(x, table = NULL, ...)
 
 \method{report_text}{compare_performance}(x, table = NULL, ...)
 }

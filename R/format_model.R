@@ -10,6 +10,11 @@
 #' @importFrom insight model_info is_nullmodel
 #' @export
 format_model <- function(x) {
+  UseMethod("format_model")
+}
+
+#' @export
+format_model.default <- function(x) {
   info <- insight::model_info(x)
 
   if (insight::is_nullmodel(x)) {
@@ -69,5 +74,28 @@ format_model <- function(x) {
     )
   }
 
+  type
+}
+
+
+#' @export
+format_model.character <- function(x) {
+  if(x == "lm"){
+    type <- "linear model"
+  } else if(x == "glm"){
+    type <- "general linear model"
+  } else if(x == "glm"){
+    type <- "general linear model"
+  } else if(x == "lmer"){
+    type <- "linear mixed model"
+  } else if(x == "glmer"){
+    type <- "general linear mixed model"
+  } else if(x == "gam"){
+    type <- "general additive model"
+  } else if(x == "gamm"){
+    type <- "general additive mixed model"
+  } else{
+    "model"
+  }
   type
 }
