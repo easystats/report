@@ -53,6 +53,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -168,23 +170,23 @@
 <span class='co'># Miscellaneous</span>
 <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'>report_parameters</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/sessionInfo.html'>sessionInfo</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>r</span>
-</div><div class='output co'>#&gt;   - Rcpp (version 1.0.5; Dirk Eddelbuettel and Romain Francois, 2011)
+</div><div class='output co'>#&gt;   - Rcpp (version 1.0.6; Dirk Eddelbuettel and Romain Francois, 2011)
 #&gt;   - Matrix (version 1.2.18; Douglas Bates and Martin Maechler, 2019)
 #&gt;   - lme4 (version 1.1.26; Douglas Bates et al., 2015)
 #&gt;   - rstanarm (version 2.21.1; Goodrich B et al., 2020)
-#&gt;   - dplyr (version 1.0.2; Hadley Wickham et al., 2020)
-#&gt;   - performance (version 0.6.1; Lüdecke et al., 2020)
-#&gt;   - bayestestR (version 0.8.0; Makowski et al., 2019)
+#&gt;   - dplyr (version 1.0.3; Hadley Wickham et al., 2021)
+#&gt;   - performance (version 0.6.1.1; Lüdecke et al., 2020)
+#&gt;   - bayestestR (version 0.8.1; Makowski et al., 2019)
 #&gt;   - report (version 0.2.0; Makowski et al., 2020)
 #&gt;   - R (version 4.0.3; R Core Team, 2020)
 #&gt;   - lavaan (version 0.6.7; Yves Rosseel, 2012)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   - Rcpp (v1.0.5)
+</div><div class='output co'>#&gt;   - Rcpp (v1.0.6)
 #&gt;   - Matrix (v1.2.18)
 #&gt;   - lme4 (v1.1.26)
 #&gt;   - rstanarm (v2.21.1)
-#&gt;   - dplyr (v1.0.2)
-#&gt;   - performance (v0.6.1)
-#&gt;   - bayestestR (v0.8.0)
+#&gt;   - dplyr (v1.0.3)
+#&gt;   - performance (v0.6.1.1)
+#&gt;   - bayestestR (v0.8.1)
 #&gt;   - report (v0.2.0)
 #&gt;   - R (v4.0.3)
 #&gt;   - lavaan (v0.6.7)</div><div class='input'>
@@ -244,7 +246,7 @@
 #&gt;   - Species: 3 levels, namely setosa (n = 50, 33.33%), versicolor (n = 50, 33.33%) and virginica (n = 50, 33.33%)</div><div class='input'>
 <span class='co'># h-tests</span>
 <span class='fu'>report_parameters</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in `[.data.frame`(table, c("Cohens_d", "d_CI_low", "d_CI_high")): undefined columns selected</span></div><div class='input'><span class='fu'>report_parameters</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   - negative, significant and large (difference = -2.79, 95% CI [-2.94, -2.64], t(225.68) = -36.46, p &lt; .001; Cohen's d = -4.21, 95% CI [-4.66, -3.76])</div><div class='input'><span class='fu'>report_parameters</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;   - negative, not significant and small (r = -0.12, 95% CI [-0.27, 0.04], t(148) = -1.44, p = 0.152)</div><div class='input'>
 <span class='co'># ANOVA</span>
 <span class='fu'>report_parameters</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span>, data<span class='op'>=</span><span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span>
