@@ -31,9 +31,9 @@ Imports:
 	stats,
 	tools,
 	utils,
-	insight (>= 0.10.1),
-	bayestestR (>= 0.7.5.1),
-	parameters (>= 0.8.6),
+	insight (>= 0.11.0),
+	bayestestR (>= 0.8.0),
+	parameters (>= 0.11.0),
 	effectsize (>= 0.4.0),
 	performance (>= 0.5.0)
 Suggests:
@@ -48,7 +48,9 @@ Suggests:
 	rmarkdown,
 	testthat
 Remotes:
-	easystats/insight
+    easystats/bayestestR
+    easystats/effectsize
+    easystats/performance
 RoxygenNote: 7.1.1
 Language: en-GB
 Collate: 
