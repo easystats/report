@@ -52,7 +52,6 @@ if(require("performance")){
   report_table(x)
   report_statistics(x)
   report_parameters(x)
-  report_performance(x)
 }
 
 }

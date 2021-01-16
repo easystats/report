@@ -48,8 +48,8 @@ Suggests:
 	rmarkdown,
 	testthat
 Remotes:
-    easystats/bayestestR
-    easystats/effectsize
+    easystats/bayestestR,
+    easystats/effectsize,
     easystats/performance
 RoxygenNote: 7.1.1
 Language: en-GB
