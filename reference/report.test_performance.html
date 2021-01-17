@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Miscellaneous reports — report_date • report</title>
+<title>Reporting models comparison — report.test_performance • report</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Miscellaneous reports — report_date" />
-<meta property="og:description" content="Other convenient or totally useless reports." />
+<meta property="og:title" content="Reporting models comparison — report.test_performance" />
+<meta property="og:description" content="Create reports for model comparison as obtained by the performance::compare_performance() function in the performance package." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -136,25 +136,44 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Miscellaneous reports</h1>
-    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report_misc.R'><code>R/report_misc.R</code></a></small>
-    <div class="hidden name"><code>report_date.Rd</code></div>
+    <h1>Reporting models comparison</h1>
+    <small class="dont-index">Source: <a href='https://github.com/easystats/report/blob/master/R/report.test_performance.R'><code>R/report.test_performance.R</code></a></small>
+    <div class="hidden name"><code>report.test_performance.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Other convenient or totally useless reports.</p>
+    <p>Create reports for model comparison as obtained by the <code><a href='https://easystats.github.io/performance/reference/compare_performance.html'>performance::compare_performance()</a></code> function in the <code>performance</code> package.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>report_date</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span>
+    <pre class="usage"><span class='co'># S3 method for test_performance</span>
+<span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>report_story</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span></pre>
+<span class='co'># S3 method for test_performance</span>
+<span class='fu'><a href='report_table.html'>report_table</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for test_performance</span>
+<span class='fu'><a href='report_statistics.html'>report_statistics</a></span><span class='op'>(</span><span class='va'>x</span>, table <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for test_performance</span>
+<span class='fu'><a href='report_parameters.html'>report_parameters</a></span><span class='op'>(</span><span class='va'>x</span>, table <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for test_performance</span>
+<span class='fu'><a href='report_text.html'>report_text</a></span><span class='op'>(</span><span class='va'>x</span>, table <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>x</th>
+      <td><p>Object of class <code>NEW OBJECT</code>.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>Arguments passed to or from other methods.</p></td>
+    </tr>
+    <tr>
+      <th>table</th>
+      <td><p>Provide the output of  <code><a href='report_table.html'>report_table()</a></code> to avoid its re-computation.</p></td>
     </tr>
     </table>
 
@@ -181,7 +200,7 @@ and long table of parameters and fit indices.</p>
 <li><p><code><a href='report.sessionInfo.html'>report_packages</a></code></p></li>
 <li><p><code><a href='report_participants.html'>report_participants</a></code></p></li>
 <li><p><code><a href='report_sample.html'>report_sample</a></code></p></li>
-<li><p><code>report_date</code></p></li>
+<li><p><code><a href='report_date.html'>report_date</a></code></p></li>
 </ul><p>Methods:</p><ul>
 <li><p><code><a href='as.report_text.html'>as.report</a></code></p></li>
 </ul><p>Template file for supporting new models:</p><ul>
@@ -192,9 +211,26 @@ and long table of parameters and fit indices.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://easystats.github.io/report/'>report</a></span><span class='op'>)</span>
 
-<span class='fu'>report_date</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; It's Sunday, January  17 of the year 2021, at  2pm 04 and 48 seconds</div><div class='input'><span class='fu'>report_story</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Did you ever hear the tragedy of Darth Plagueis The Wise? I thought not. It's not a story the Jedi would tell you. It's a Sith legend. Darth Plagueis was a Dark Lord of the Sith, so powerful and so wise he could use the Force to influence the midichlorians to create life... He had such a knowledge of the dark side that he could even keep the ones he cared about from dying. The dark side of the Force is a pathway to many abilities some consider to be unnatural. He became so powerful... the only thing he was afraid of was losing his power, which eventually, of course, he did. Unfortunately, he taught his apprentice everything he knew, then his apprentice killed him in his sleep. Ironic. He could save others from death, but not himself.</div><div class='input'>
+<span class='va'>m1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>*</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
+<span class='va'>m2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>+</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
+<span class='va'>m3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
+
+<span class='kw'>if</span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://easystats.github.io/performance/'>"performance"</a></span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>performance</span><span class='fu'>::</span><span class='fu'><a href='https://easystats.github.io/performance/reference/test_performance.html'>test_performance</a></span><span class='op'>(</span><span class='va'>m1</span>, <span class='va'>m2</span>, <span class='va'>m3</span><span class='op'>)</span>
+  <span class='co'># r &lt;- report(x)</span>
+  <span class='co'># r</span>
+  <span class='co'># summary(r)</span>
+  <span class='co'># as.data.frame(r)</span>
+  <span class='co'># summary(as.data.frame(r))</span>
+
+  <span class='co'># Specific reports</span>
+  <span class='fu'><a href='report_table.html'>report_table</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+  <span class='fu'><a href='report_statistics.html'>report_statistics</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+  <span class='fu'><a href='report_parameters.html'>report_parameters</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt;   - lm (BF = 26.52)
+#&gt;   - lm (BF &lt; 0.001)
+#&gt;   - lm (BF = 26.52)</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
