@@ -104,7 +104,7 @@ report_performance.lavaan <- function(x, table=NULL, ...) {
                    ") = ",
                    insight::format_value(performance$Chi2),
                    ", ",
-                   parameters::format_p(performance$p_Chi2), ").")
+                   insight::format_p(performance$p_Chi2), ").")
   }
 
   perf_table <- effectsize::interpret(performance)

@@ -40,24 +40,34 @@ report.htest <- function(x, ...) {
 #' @export
 report_effectsize.htest <- function(x, ...) {
 
-  table <- effectsize::effectsize(x, ...)
+  table <- effectsize::effectsize(x, verbose = FALSE, ...)
   estimate <- names(table)[1]
   ci <- table$CI
 
-  # For t-tests, or correlations
+  # For t-tests ----------------
   if (insight::model_info(x)$is_ttest) {
 
-    interpret <- effectsize::interpret_d(table[[estimate]], ...)
-    interpretation <- interpret
-    main <- paste0("Cohen's d = ", insight::format_value(table[[estimate]]))
+    interpretation <- effectsize::interpret_d(table[[estimate]], ...)
+    rules <- .text_effectsize(attributes(interpretation)$rule_name)
+    if(estimate %in% c("d", "Cohens_d")) {
+      main <- paste0("Cohen's d = ", insight::format_value(table[[estimate]]))
+    } else {
+      main <- paste0(estimate, " = ", insight::format_value(table[[estimate]]))
+    }
+
     statistics <- paste0(main,
                          ", ",
                          insight::format_ci(table$CI_low, table$CI_high, ci))
-    table <- data_rename(as.data.frame(table), c("CI_low", "CI_high"), c("d_CI_low", "d_CI_high"))
-    table <- table[c("Cohens_d", "d_CI_low", "d_CI_high")]
-  } else{
-    interpret <- effectsize::interpret_r(table[[estimate]], ...)
-    interpretation <- interpret
+
+    table <- data_rename(as.data.frame(table), c("CI_low", "CI_high"), paste0(estimate, c("_CI_low", "_CI_high")))
+    table <- table[c(estimate, paste0(estimate, c("_CI_low", "_CI_high")))]
+
+  # For correlations ---------------
+  } else if (insight::model_info(x)$is_correlation) {
+
+    # Pearson
+    interpretation <- effectsize::interpret_r(table[[estimate]], ...)
+    rules <- .text_effectsize(attributes(interpretation)$rule_name)
     main <- paste0(estimate, " = ", insight::format_value(table[[estimate]]))
 
     if ("CI_low" %in% names(table)) {
@@ -66,14 +76,17 @@ report_effectsize.htest <- function(x, ...) {
                            insight::format_ci(table$CI_low, table$CI_high, ci))
       table <- table[c(estimate, "CI_low", "CI_high")]
 
-      # For spearman & co.
+      # For Spearman and co.
     } else{
       statistics <- main
       table <- table[c(estimate)]
     }
 
+  # TODO: Chi square test
+  } else {
+    stop("This type of test is not supported yet. Please open an issue on https://github.com/easystats/report/issues")
   }
-  rules <- .text_effectsize(attributes(interpret)$rule_name)
+
   parameters <- paste0(interpretation, " (", statistics, ")")
 
 

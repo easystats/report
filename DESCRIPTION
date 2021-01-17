@@ -46,13 +46,14 @@ Suggests:
 	logspline,
 	rstanarm,
 	rmarkdown,
+	spelling,
 	testthat
 Remotes:
     easystats/bayestestR,
     easystats/effectsize,
     easystats/performance
 RoxygenNote: 7.1.1
-Language: en-GB
+Language: en-US
 Collate: 
     'format_algorithm.R'
     'format_citation.R'
