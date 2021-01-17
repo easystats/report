@@ -68,12 +68,21 @@ as.report_table <- function(x, ...) {
 }
 
 #' @export
-as.report_table.default <- function(x, summary = NULL, ...) {
-  class(x) <- unique(c("report_table", class(x)))
+as.report_table.default <- function(x, summary = NULL, as_is = FALSE, ...) {
+  if(as_is) {
+    class(x) <- unique(c(class(x)[1], "report_table", tail(class(x), -1)))
+  } else {
+    class(x) <- unique(c("report_table", class(x)))
+  }
+
   attributes(x) <- c(attributes(x), list(...))
 
   if (!is.null(summary)) {
-    class(summary) <- unique(c("report_table", class(summary)))
+    if(as_is) {
+      class(summary) <- unique(c(class(summary)[1], "report_table", tail(class(summary), -1)))
+    } else {
+      class(summary) <- unique(c("report_table", class(summary)))
+    }
     attr(x, "summary") <- summary
   }
 
