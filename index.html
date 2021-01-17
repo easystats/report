@@ -198,15 +198,15 @@
 <span id="cb10-2"><a href="#cb10-2"></a><span class="co"># </span></span>
 <span id="cb10-3"><a href="#cb10-3"></a><span class="co"># The Welch Two Sample t-test testing the difference of mtcars$mpg by mtcars$am (mean in group 0 = 17.15, mean</span></span>
 <span id="cb10-4"><a href="#cb10-4"></a><span class="co"># in group 1 = 24.39) suggests that the effect is positive, significant and large (difference = 7.24, 95% CI</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="co"># [-11.28, -3.21], t(18.33) = -3.77, p &lt; .01; Cohen's d = -1.76, 95% CI [-2.82, -0.67])</span></span></code></pre></div>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co"># [-11.28, -3.21], t(18.33) = -3.77, p &lt; .01; Cohen's d = -1.41, 95% CI [-2.17, -0.51])</span></span></code></pre></div>
 <p>As mentioned, you can also create tables with the <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code> functions, like for example with this correlation test:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co"># Parameter1        |       Parameter2 |     r | t(148) |     p |        95% CI |  Method</span>
-<span class="co"># ---------------------------------------------------------------------------------------</span>
-<span class="co"># iris$Sepal.Length | iris$Sepal.Width | -0.12 |  -1.44 | 0.152 | [-0.27, 0.04] | Pearson</span></code></pre></div>
+<span class="co"># Parameter1        |       Parameter2 |     r | t(148) |     p |        95% CI |                               Method</span>
+<span class="co"># --------------------------------------------------------------------------------------------------------------------</span>
+<span class="co"># iris$Sepal.Length | iris$Sepal.Width | -0.12 |  -1.44 | 0.152 | [-0.27, 0.04] | Pearson's product-moment correlation</span></code></pre></div>
 </div>
 <div id="anovas" class="section level3">
 <h3 class="hasAnchor">
@@ -280,14 +280,14 @@
 <span id="cb19-2"><a href="#cb19-2"></a><span class="co"># warmup of 500) to predict mpg with qsec and wt (formula: mpg ~ qsec + wt). Priors over parameters were set as</span></span>
 <span id="cb19-3"><a href="#cb19-3"></a><span class="co"># normal (mean = 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The model's explanatory</span></span>
 <span id="cb19-4"><a href="#cb19-4"></a><span class="co"># power is substantial (R2 = 0.81, 89% CI [0.73, 0.88], adj. R2 = 0.78). The model's intercept, corresponding</span></span>
-<span id="cb19-5"><a href="#cb19-5"></a><span class="co"># to qsec = 0 and wt = 0, is at 19.75 (95% CI [9.23, 30.54]). Within this model:</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="co"># to qsec = 0 and wt = 0, is at 19.84 (95% CI [9.33, 30.52]). Within this model:</span></span>
 <span id="cb19-6"><a href="#cb19-6"></a><span class="co"># </span></span>
-<span id="cb19-7"><a href="#cb19-7"></a><span class="co">#   - The effect of qsec (Median = 0.93, 95% CI [0.36, 1.45]) has a 100.00% probability of being positive (&gt; 0),</span></span>
-<span id="cb19-8"><a href="#cb19-8"></a><span class="co"># 99.15% of being significant (&gt; 0.30), and 0.40% of being large (&gt; 1.81). The estimation successfuly converged</span></span>
-<span id="cb19-9"><a href="#cb19-9"></a><span class="co"># (Rhat = 1.001) and the indices are reliable (ESS = 1980)</span></span>
-<span id="cb19-10"><a href="#cb19-10"></a><span class="co">#   - The effect of wt (Median = -5.03, 95% CI [-6.14, -4.09]) has a 100.00% probability of being negative (&lt; 0),</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a><span class="co">#   - The effect of qsec (Median = 0.93, 95% CI [0.41, 1.48]) has a 100.00% probability of being positive (&gt; 0),</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a><span class="co"># 98.85% of being significant (&gt; 0.30), and 0.15% of being large (&gt; 1.81). The estimation successfuly converged</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a><span class="co"># (Rhat = 1.000) and the indices are reliable (ESS = 1914)</span></span>
+<span id="cb19-10"><a href="#cb19-10"></a><span class="co">#   - The effect of wt (Median = -5.05, 95% CI [-5.92, -4.07]) has a 100.00% probability of being negative (&lt; 0),</span></span>
 <span id="cb19-11"><a href="#cb19-11"></a><span class="co"># 100.00% of being significant (&lt; -0.30), and 100.00% of being large (&lt; -1.81). The estimation successfuly</span></span>
-<span id="cb19-12"><a href="#cb19-12"></a><span class="co"># converged (Rhat = 1.000) and the indices are reliable (ESS = 2218)</span></span>
+<span id="cb19-12"><a href="#cb19-12"></a><span class="co"># converged (Rhat = 0.999) and the indices are reliable (ESS = 2142)</span></span>
 <span id="cb19-13"><a href="#cb19-13"></a><span class="co"># </span></span>
 <span id="cb19-14"><a href="#cb19-14"></a><span class="co"># Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT) framework, we report the median of</span></span>
 <span id="cb19-15"><a href="#cb19-15"></a><span class="co"># the posterior distribution and its 95% CI (Highest Density Interval), along the probability of direction</span></span>
@@ -353,23 +353,23 @@
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb26"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># Analyses were conducted using the R Statistical language (version 4.0.3; R Core Team, 2020) on macOS Catalina</span></span>
-<span id="cb26-2"><a href="#cb26-2"></a><span class="co"># 10.15.7, using the packages Rcpp (version 1.0.5; Dirk Eddelbuettel and Romain Francois, 2011), Matrix</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="co"># 10.15.7, using the packages Rcpp (version 1.0.6; Dirk Eddelbuettel and Romain Francois, 2011), Matrix</span></span>
 <span id="cb26-3"><a href="#cb26-3"></a><span class="co"># (version 1.2.18; Douglas Bates and Martin Maechler, 2019), lme4 (version 1.1.26; Douglas Bates et al., 2015),</span></span>
-<span id="cb26-4"><a href="#cb26-4"></a><span class="co"># rstanarm (version 2.21.1; Goodrich B et al., 2020), dplyr (version 1.0.2; Hadley Wickham et al., 2020) and</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="co"># rstanarm (version 2.21.1; Goodrich B et al., 2020), dplyr (version 1.0.3; Hadley Wickham et al., 2021) and</span></span>
 <span id="cb26-5"><a href="#cb26-5"></a><span class="co"># report (version 0.2.0; Makowski et al., 2020).</span></span>
 <span id="cb26-6"><a href="#cb26-6"></a><span class="co"># </span></span>
 <span id="cb26-7"><a href="#cb26-7"></a><span class="co"># References</span></span>
 <span id="cb26-8"><a href="#cb26-8"></a><span class="co"># ----------</span></span>
 <span id="cb26-9"><a href="#cb26-9"></a><span class="co">#   - Dirk Eddelbuettel and Romain Francois (2011). Rcpp: Seamless R and C++ Integration. Journal of Statistical</span></span>
-<span id="cb26-10"><a href="#cb26-10"></a><span class="co"># Software, 40(8), 1-18. URL http://www.jstatsoft.org/v40/i08/.</span></span>
+<span id="cb26-10"><a href="#cb26-10"></a><span class="co"># Software, 40(8), 1-18. URL https://www.jstatsoft.org/v40/i08/.</span></span>
 <span id="cb26-11"><a href="#cb26-11"></a><span class="co">#   - Douglas Bates and Martin Maechler (2019). Matrix: Sparse and Dense Matrix Classes and Methods. R package</span></span>
 <span id="cb26-12"><a href="#cb26-12"></a><span class="co"># version 1.2-18. https://CRAN.R-project.org/package=Matrix</span></span>
 <span id="cb26-13"><a href="#cb26-13"></a><span class="co">#   - Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015). Fitting Linear Mixed-Effects Models Using</span></span>
 <span id="cb26-14"><a href="#cb26-14"></a><span class="co"># lme4. Journal of Statistical Software, 67(1), 1-48. doi:10.18637/jss.v067.i01.</span></span>
 <span id="cb26-15"><a href="#cb26-15"></a><span class="co">#   - Goodrich B, Gabry J, Ali I &amp; Brilleman S. (2020). rstanarm: Bayesian applied regression modeling via Stan.</span></span>
 <span id="cb26-16"><a href="#cb26-16"></a><span class="co"># R package version 2.21.1 https://mc-stan.org/rstanarm.</span></span>
-<span id="cb26-17"><a href="#cb26-17"></a><span class="co">#   - Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2020). dplyr: A Grammar of Data</span></span>
-<span id="cb26-18"><a href="#cb26-18"></a><span class="co"># Manipulation. R package version 1.0.2. https://CRAN.R-project.org/package=dplyr</span></span>
+<span id="cb26-17"><a href="#cb26-17"></a><span class="co">#   - Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2021). dplyr: A Grammar of Data</span></span>
+<span id="cb26-18"><a href="#cb26-18"></a><span class="co"># Manipulation. R package version 1.0.3. https://CRAN.R-project.org/package=dplyr</span></span>
 <span id="cb26-19"><a href="#cb26-19"></a><span class="co">#   - Makowski, D., Lüdecke, D., &amp; Ben-Shachar, M.S. (2020). Automated reporting as a practical tool to improve</span></span>
 <span id="cb26-20"><a href="#cb26-20"></a><span class="co"># reproducibility and methodological best practices adoption. CRAN. Available from</span></span>
 <span id="cb26-21"><a href="#cb26-21"></a><span class="co"># https://github.com/easystats/report. doi: .</span></span>

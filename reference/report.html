@@ -245,15 +245,21 @@ can be accessed via several functions, such as:</p><ul>
 
 <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>am</span>, data <span class='op'>=</span> <span class='va'>mtcars</span><span class='op'>)</span>
 <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'>report</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Unable to retrieve data from htest object. Using t_to_d() approximation.</span></div><div class='output co'>#&gt; <span class='error'>Error in `[.data.frame`(table, c("Cohens_d", "d_CI_low", "d_CI_high")): undefined columns selected</span></div><div class='input'>
+
 <span class='co'># Text</span>
 <span class='va'>r</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'r' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'r' not found</span></div><div class='input'>
+</div><div class='output co'>#&gt; Effect sizes were labelled following Cohen's (1988) recommendations.
+#&gt; 
+#&gt; The Welch Two Sample t-test testing the difference of mpg by am (mean in group 0 = 17.15, mean in group 1 = 24.39) suggests that the effect is positive, significant and large (difference = 7.24, 95% CI [-11.28, -3.21], t(18.33) = -3.77, p &lt; .01; Cohen's d = -1.76, 95% CI [-2.82, -0.67])</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; The Welch Two Sample t-test testing the difference of mpg by am (mean in group 0 = 17.15, mean in group 1 = 24.39) suggests that the effect is positive, significant and large (difference = 7.24, 95% CI [-11.28, -3.21], t(18.33) = -3.77, p &lt; .01, Cohen's d = -1.76)</div><div class='input'>
 <span class='co'># Tables</span>
 <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in as.data.frame(r): object 'r' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in h(simpleError(msg, call)): error in evaluating the argument 'object' in selecting a method for function 'summary': object 'r' not found</span></div></pre>
+</div><div class='output co'>#&gt; Parameter | Group | Mean_Group1 | Mean_Group2 | Difference |              CI | t(18.33) |     p |                  Method |     d |           d CI
+#&gt; --------------------------------------------------------------------------------------------------------------------------------------------------
+#&gt; mpg       |    am |       17.15 |       24.39 |       7.24 | [-11.28, -3.21] |    -3.77 | 0.001 | Welch Two Sample t-test | -1.76 | [-2.82, -0.67]</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Difference |              CI | t(18.33) |     p |     d |           d CI
+#&gt; ------------------------------------------------------------------------
+#&gt; 7.24       | [-11.28, -3.21] |    -3.77 | 0.001 | -1.76 | [-2.82, -0.67]</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
