@@ -271,8 +271,11 @@ paste(report_participants(data, spell_n = TRUE),
 
 Report can also help you create sample description table (also referred to as **Table 1**).
 
-```{r message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, include=FALSE}
 report_sample(iris, group_by = "Species")
+```
+```{r message=FALSE, warning=FALSE, echo=FALSE}
+knitr::kable(report_sample(iris, group_by = "Species"))
 ```
 
 ### Report system and packages
