@@ -87,3 +87,11 @@ Finding the right citation information is sometimes complicated. In R, this proc
       }
 
 For other languages, such as Python or Julia, it might be a little trickier, but a quick search on Google (or github) should provide you with all the necessary information (version, authors and date). **Keep in mind that it's better to have a slightly incomplete citation than no citation at all.**
+
+## cite_easystats()
+
+If you want to cite the **easystats** ecosystem, you can use the [`cite_eaststats()`](https://easystats.github.io/easystats/reference/cite_eaststats.html) function:
+
+```{r message=FALSE, warning=FALSE, results='asis'}
+cite_easystats()
+```

@@ -55,6 +55,7 @@ Remotes:
 RoxygenNote: 7.1.1
 Language: en-US
 Collate: 
+    'cite_easystats.R'
     'format_algorithm.R'
     'format_citation.R'
     'format_formula.R'
