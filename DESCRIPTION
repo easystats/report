@@ -37,6 +37,7 @@ Imports:
 	effectsize (>= 0.4.0),
 	performance (>= 0.5.0)
 Suggests:
+    brms,
 	BayesFactor,
 	dplyr,
 	httr,
@@ -69,6 +70,9 @@ Collate:
     'report.htest.R'
     'report.aov.R'
     'report.bayesfactor_models.R'
+    'report.lme4.R'
+    'report.stanreg.R'
+    'report.brmsfit.R'
     'report.character.R'
     'report.compare_performance.R'
     'report.data.frame.R'
@@ -78,10 +82,8 @@ Collate:
     'report.glmmTMB.R'
     'report.lavaan.R'
     'report.lme.R'
-    'report.lme4.R'
     'report.numeric.R'
     'report.sessionInfo.R'
-    'report.stanreg.R'
     'report.survreg.R'
     'report.test_performance.R'
     'report.zeroinfl.R'
