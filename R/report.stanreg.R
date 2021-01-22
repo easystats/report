@@ -18,7 +18,7 @@
 #'   as.data.frame(r)
 #'   summary(as.data.frame(r))
 #' }
-#' @include report.lm.R
+#' @include report.lm.R report.lme4.R
 #' @export
 report.stanreg <- function(x, ...) {
   table <- report_table(x, include_effectsize=FALSE, ...)
