@@ -17,7 +17,12 @@ Authors@R: c(
 		"Ben-Shachar", 
 		role = c("aut"), 
 		email = "matanshm@post.bgu.ac.il", 
-		comment = c(ORCID = "0000-0002-4287-4801"))
+		comment = c(ORCID = "0000-0002-4287-4801")),
+	person("Rudolf", 
+		"Siegel", 
+		role = c("ctb"), 
+		email = "mutlusun@users.noreply.github.com", 
+		comment = c(ORCID = "0000-0002-6021-804X"))
 	)
 Maintainer: Dominique Makowski <dom.makowski@gmail.com>
 URL: https://easystats.github.io/report/
