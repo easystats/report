@@ -37,26 +37,30 @@ report.lavaan <- function(model, effsize = "funder2019", ci = 0.95, standardize 
   table_full <- .add_performance_table(parameters, performance)
   table <- .add_performance_table(
     parameters[names(parameters) %in% c("Link", "Coefficient", "Median", "Mean", "MAP", "CI_low", "CI_high", "p", "pd", "ROPE_Percentage", "BF", "Std_Coefficient", "Std_Median", "Std_Mean", "Std_MAP", "Type")],
-    performance[names(performance) %in% c("Chisq", "GFI", "AGFI", "NFI", "NNFI", "CFI", "RMSEA", "SRMR", 'RFI', 'PNFI', "IFI", "RNI", "AIC", "BIC", "BIC (adj.)")]
+    performance[names(performance) %in% c("Chisq", "GFI", "AGFI", "NFI", "NNFI", "CFI", "RMSEA", "SRMR", "RFI", "PNFI", "IFI", "RNI", "AIC", "BIC", "BIC (adj.)")]
   )
 
 
   # Params
   params <- parameters
-  if (standardize){
+  if (standardize) {
     params$Std_Coefficient <- params$Coefficient
   }
 
-  text <- paste0(text_model(model)$text,
-                 " ",
-                 text_performance(model, performance = performance),
-                 "\n\n",
-                 text_parameters(model, parameters = params[names(params)[!names(params) %in% c("SE")]]))
-  text_full <- paste0(text_model(model)$text_full,
-                      " ",
-                      text_performance(model, performance = performance),
-                      "\n\n",
-                      text_parameters(model, parameters = params))
+  text <- paste0(
+    text_model(model)$text,
+    " ",
+    text_performance(model, performance = performance),
+    "\n\n",
+    text_parameters(model, parameters = params[names(params)[!names(params) %in% c("SE")]])
+  )
+  text_full <- paste0(
+    text_model(model)$text_full,
+    " ",
+    text_performance(model, performance = performance),
+    "\n\n",
+    text_parameters(model, parameters = params)
+  )
 
   out <- list(
     text = text,
@@ -67,5 +71,4 @@ report.lavaan <- function(model, effsize = "funder2019", ci = 0.95, standardize 
   )
 
   as.report(out)
-
 }

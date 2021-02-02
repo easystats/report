@@ -17,14 +17,14 @@
 #' report_intercept(glm(vs ~ disp, data = mtcars, family = "binomial"))
 #'
 #' # Mixed models
-#' if(require("lme4")){
+#' if (require("lme4")) {
 #'   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 #'   report_intercept(model)
 #' }
 #'
 #' # Bayesian models
-#' if(require("rstanarm")){
-#'   model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh=0, iter=600)
+#' if (require("rstanarm")) {
+#'   model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600)
 #'   report_intercept(model)
 #' }
 #' @export
@@ -51,9 +51,9 @@ as.report_intercept <- function(x, summary = NULL, ...) {
 
 #' @export
 summary.report_intercept <- function(object, ...) {
-  if(is.null(attributes(object)$summary)){
+  if (is.null(attributes(object)$summary)) {
     object
-  } else{
+  } else {
     attributes(object)$summary
   }
 }
@@ -111,4 +111,3 @@ print.report_intercept <- function(x, ...) {
     }
   )
 }
-

@@ -15,7 +15,7 @@
 #' report(t.test(iris$Sepal.Width, iris$Sepal.Length))
 #' report(t.test(iris$Sepal.Width, iris$Sepal.Length, var.equal = TRUE))
 #' report(t.test(mtcars$mpg ~ mtcars$vs))
-#' report(t.test(mtcars$mpg, mtcars$vs, paired=TRUE))
+#' report(t.test(mtcars$mpg, mtcars$vs, paired = TRUE))
 #' report(t.test(iris$Sepal.Width, mu = 1))
 #' @importFrom insight format_ci
 #' @export
@@ -39,30 +39,30 @@ report.htest <- function(x, ...) {
 #' @importFrom insight model_info
 #' @export
 report_effectsize.htest <- function(x, ...) {
-
   table <- effectsize::effectsize(x, verbose = FALSE, ...)
   estimate <- names(table)[1]
   ci <- table$CI
 
   # For t-tests ----------------
   if (insight::model_info(x)$is_ttest) {
-
     interpretation <- effectsize::interpret_d(table[[estimate]], ...)
     rules <- .text_effectsize(attributes(interpretation)$rule_name)
-    if(estimate %in% c("d", "Cohens_d")) {
+    if (estimate %in% c("d", "Cohens_d")) {
       main <- paste0("Cohen's d = ", insight::format_value(table[[estimate]]))
     } else {
       main <- paste0(estimate, " = ", insight::format_value(table[[estimate]]))
     }
 
-    statistics <- paste0(main,
-                         ", ",
-                         insight::format_ci(table$CI_low, table$CI_high, ci))
+    statistics <- paste0(
+      main,
+      ", ",
+      insight::format_ci(table$CI_low, table$CI_high, ci)
+    )
 
     table <- data_rename(as.data.frame(table), c("CI_low", "CI_high"), paste0(estimate, c("_CI_low", "_CI_high")))
     table <- table[c(estimate, paste0(estimate, c("_CI_low", "_CI_high")))]
 
-  # For correlations ---------------
+    # For correlations ---------------
   } else if (insight::model_info(x)$is_correlation) {
 
     # Pearson
@@ -71,18 +71,20 @@ report_effectsize.htest <- function(x, ...) {
     main <- paste0(estimate, " = ", insight::format_value(table[[estimate]]))
 
     if ("CI_low" %in% names(table)) {
-      statistics <- paste0(main,
-                           ", ",
-                           insight::format_ci(table$CI_low, table$CI_high, ci))
+      statistics <- paste0(
+        main,
+        ", ",
+        insight::format_ci(table$CI_low, table$CI_high, ci)
+      )
       table <- table[c(estimate, "CI_low", "CI_high")]
 
       # For Spearman and co.
-    } else{
+    } else {
       statistics <- main
       table <- table[c(estimate)]
     }
 
-  # TODO: Chi square test
+    # TODO: Chi square test
   } else {
     stop("This type of test is not supported yet. Please open an issue on https://github.com/easystats/report/issues")
   }
@@ -92,13 +94,14 @@ report_effectsize.htest <- function(x, ...) {
 
   # Return output
   as.report_effectsize(parameters,
-                       summary = parameters,
-                       table = table,
-                       interpretation = interpretation,
-                       statistics = statistics,
-                       rules = rules,
-                       ci = ci,
-                       main = main)
+    summary = parameters,
+    table = table,
+    interpretation = interpretation,
+    statistics = statistics,
+    rules = rules,
+    ci = ci,
+    main = main
+  )
 }
 
 
@@ -111,7 +114,6 @@ report_effectsize.htest <- function(x, ...) {
 #' @importFrom insight model_info
 #' @export
 report_table.htest <- function(x, ...) {
-
   table_full <- parameters::model_parameters(x, ...)
   effsize <- report_effectsize(x, ...)
 
@@ -131,7 +133,7 @@ report_table.htest <- function(x, ...) {
 
 #' @rdname report.htest
 #' @export
-report_statistics.htest <- function(x, table=NULL, ...) {
+report_statistics.htest <- function(x, table = NULL, ...) {
   if (is.null(table) | is.null(attributes(table)$effsize)) {
     table <- report_table(x)
   }
@@ -163,15 +165,16 @@ report_statistics.htest <- function(x, table=NULL, ...) {
   if (insight::model_info(x)$is_ttest) {
     text_full <- paste0(text, "; ", attributes(effsize)$statistics)
     text <- paste0(text, ", ", attributes(effsize)$main)
-  } else{
+  } else {
     text_full <- text
   }
 
   as.report_statistics(text_full,
-                       summary = text,
-                       estimate = table[[estimate]],
-                       table = table,
-                       effsize = effsize)
+    summary = text,
+    estimate = table[[estimate]],
+    table = table,
+    effsize = effsize
+  )
 }
 
 
@@ -182,9 +185,8 @@ report_statistics.htest <- function(x, table=NULL, ...) {
 
 #' @rdname report.htest
 #' @export
-report_parameters.htest <- function(x, table=NULL, ...) {
-
-  stats <- report_statistics(x, table=table, ...)
+report_parameters.htest <- function(x, table = NULL, ...) {
+  stats <- report_statistics(x, table = table, ...)
   table <- attributes(stats)$table
   effsize <- attributes(stats)$effsize
 
@@ -194,7 +196,7 @@ report_parameters.htest <- function(x, table=NULL, ...) {
     text_full <- paste0(
       effectsize::interpret_direction(attributes(stats)$estimate),
       ", ",
-      effectsize::interpret_p(table$p, rules="default"),
+      effectsize::interpret_p(table$p, rules = "default"),
       " and ",
       effectsize::interpret_r(attributes(stats)$estimate, ...),
       " (",
@@ -203,12 +205,12 @@ report_parameters.htest <- function(x, table=NULL, ...) {
     )
     text_short <- text_full
 
-  # t-tests
-  } else{
+    # t-tests
+  } else {
     text_full <- paste0(
       effectsize::interpret_direction(attributes(stats)$estimate),
       ", ",
-      effectsize::interpret_p(table$p, rules="default"),
+      effectsize::interpret_p(table$p, rules = "default"),
       " and ",
       attributes(effsize)$interpretation,
       " (",
@@ -218,7 +220,7 @@ report_parameters.htest <- function(x, table=NULL, ...) {
     text_short <- paste0(
       effectsize::interpret_direction(attributes(stats)$estimate),
       ", ",
-      effectsize::interpret_p(table$p, rules="default"),
+      effectsize::interpret_p(table$p, rules = "default"),
       " and ",
       attributes(effsize)$interpretation,
       " (",
@@ -227,14 +229,14 @@ report_parameters.htest <- function(x, table=NULL, ...) {
     )
   }
 
-  as.report_parameters(text_full, summary=text_short, table=table, effectsize=effsize, ...)
+  as.report_parameters(text_full, summary = text_short, table = table, effectsize = effsize, ...)
 }
 
 # report_model ------------------------------------------------------------
 
 #' @rdname report.htest
 #' @export
-report_model.htest <- function(x, table=NULL, ...) {
+report_model.htest <- function(x, table = NULL, ...) {
   if (is.null(table)) {
     table <- report_table(x, ...)
   }
@@ -245,7 +247,7 @@ report_model.htest <- function(x, table=NULL, ...) {
       " between ",
       x$data.name
     )
-  } else{
+  } else {
 
     # If against mu
     if (names(x$null.value) == "mean") {
@@ -262,8 +264,8 @@ report_model.htest <- function(x, table=NULL, ...) {
     } else {
       table$Difference <- x$estimate[1] - x$estimate[2]
       means <- paste0(names(x$estimate), " = ",
-                      insight::format_value(x$estimate),
-                      collapse = ", "
+        insight::format_value(x$estimate),
+        collapse = ", "
       )
       vars_full <- paste0(x$data.name, " (", means, ")")
       vars <- paste0(x$data.name)
@@ -277,7 +279,7 @@ report_model.htest <- function(x, table=NULL, ...) {
     )
   }
 
-  as.report_model(text, summary=text)
+  as.report_model(text, summary = text)
 }
 
 
@@ -285,7 +287,7 @@ report_model.htest <- function(x, table=NULL, ...) {
 
 #' @rdname report.htest
 #' @export
-report_info.htest <- function(x, effectsize=NULL, ...) {
+report_info.htest <- function(x, effectsize = NULL, ...) {
   if (is.null(effectsize)) {
     effectsize <- report_effectsize(x, ...)
   }
@@ -298,12 +300,11 @@ report_info.htest <- function(x, effectsize=NULL, ...) {
 
 #' @rdname report.htest
 #' @export
-report_text.htest <- function(x, table=NULL, ...) {
-
-  params <- report_parameters(x, table=table, ...)
+report_text.htest <- function(x, table = NULL, ...) {
+  params <- report_parameters(x, table = table, ...)
   table <- attributes(params)$table
-  model <- report_model(x, table=table, ...)
-  info <- report_info(x, effectsize=attributes(params)$effectsize, ...)
+  model <- report_model(x, table = table, ...)
+  info <- report_info(x, effectsize = attributes(params)$effectsize, ...)
 
 
   if (insight::model_info(x)$is_correlation) {
@@ -318,7 +319,6 @@ report_text.htest <- function(x, table=NULL, ...) {
       "\n\n",
       text
     )
-
   } else {
     text_full <- paste0(
       info,
@@ -335,5 +335,5 @@ report_text.htest <- function(x, table=NULL, ...) {
     )
   }
 
-  as.report_text(text_full, summary=text)
+  as.report_text(text_full, summary = text)
 }

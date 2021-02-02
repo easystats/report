@@ -17,14 +17,14 @@
 #' report_performance(glm(vs ~ disp, data = mtcars, family = "binomial"))
 #'
 #' # Mixed models
-#' if(require("lme4")){
+#' if (require("lme4")) {
 #'   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 #'   report_performance(model)
 #' }
 #'
 #' # Bayesian models
-#' if(require("rstanarm")){
-#'   model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh=0, iter=600)
+#' if (require("rstanarm")) {
+#'   model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600)
 #'   report_performance(model)
 #' }
 #'
@@ -63,7 +63,7 @@ as.report_performance <- function(x, summary = NULL, ...) {
 summary.report_performance <- function(object, ...) {
   if (is.null(attributes(object)$summary)) {
     object
-  } else{
+  } else {
     attributes(object)$summary
   }
 }
@@ -80,8 +80,7 @@ print.report_performance <- function(x, ...) {
 
 
 #' @keywords internal
-.text_r2 <- function(x, info, performance, ...){
-
+.text_r2 <- function(x, info, performance, ...) {
   text <- ""
   text_full <- ""
 
@@ -97,33 +96,37 @@ print.report_performance <- function(x, ...) {
     )
 
     # Frequentist
-    if(all(c("p", "df", "df_residual") %in% names(r2))){
+    if (all(c("p", "df", "df_residual") %in% names(r2))) {
       text_full <- paste0(
-            "The model explains a ",
-            effectsize::interpret_p(r2$p),
-            " and ",
-            effectsize::interpret_r2(performance$R2, ...),
-            " proportion of variance (R2 = ",
-            insight::format_value(performance$R2),
-            ", F(",
-            insight::format_value(r2$df, protect_integers = TRUE),
-            ", ",
-            insight::format_value(r2$df_residual, protect_integers = TRUE),
-            ") = ",
-            insight::format_value(r2$`F`),
-            ", ",
-            insight::format_p(r2$p)
-          )
-    } else{
+        "The model explains a ",
+        effectsize::interpret_p(r2$p),
+        " and ",
+        effectsize::interpret_r2(performance$R2, ...),
+        " proportion of variance (R2 = ",
+        insight::format_value(performance$R2),
+        ", F(",
+        insight::format_value(r2$df, protect_integers = TRUE),
+        ", ",
+        insight::format_value(r2$df_residual, protect_integers = TRUE),
+        ") = ",
+        insight::format_value(r2$`F`),
+        ", ",
+        insight::format_p(r2$p)
+      )
+    } else {
       text_full <- text
     }
 
     if ("CI" %in% names(r2)) {
-      text_full <- paste0(text_full,
-                          ", ",
-                          insight::format_ci(r2$CI$R2_Bayes$CI_low,
-                                             r2$CI$R2_Bayes$CI_high,
-                                             r2$CI$R2_Bayes$CI / 100))
+      text_full <- paste0(
+        text_full,
+        ", ",
+        insight::format_ci(
+          r2$CI$R2_Bayes$CI_low,
+          r2$CI$R2_Bayes$CI_high,
+          r2$CI$R2_Bayes$CI / 100
+        )
+      )
     }
 
 
@@ -139,8 +142,8 @@ print.report_performance <- function(x, ...) {
         ")"
       )
     } else {
-      if(text_lastchar(text_full) != ")") text_full <- paste0(text_full, ")")
-      if(text_lastchar(text) != ")") text <- paste0(text, ")")
+      if (text_lastchar(text_full) != ")") text_full <- paste0(text_full, ")")
+      if (text_lastchar(text) != ")") text <- paste0(text, ")")
     }
   }
 
@@ -213,30 +216,34 @@ print.report_performance <- function(x, ...) {
     text_r2marginal <- paste0(
       " related to the fixed effects alone (marginal R2) is ",
       of,
-      insight::format_value(performance$R2_marginal))
+      insight::format_value(performance$R2_marginal)
+    )
     text <- paste0(text, text_r2marginal)
 
-    if(!is.null(attributes(performance)$r2_bayes$CI$R2_Bayes_marginal)){
+    if (!is.null(attributes(performance)$r2_bayes$CI$R2_Bayes_marginal)) {
       r2 <- attributes(performance)$r2_bayes$CI$R2_Bayes_marginal
-      text_full <- paste0(text_full,
-                          text_r2marginal,
-                          " (",
-                          insight::format_ci(r2$CI_low,
-                                             r2$CI_high,
-                                             r2$CI / 100),
-                          ")")
-    } else{
+      text_full <- paste0(
+        text_full,
+        text_r2marginal,
+        " (",
+        insight::format_ci(
+          r2$CI_low,
+          r2$CI_high,
+          r2$CI / 100
+        ),
+        ")"
+      )
+    } else {
       text_full <- paste0(text_full, text_r2marginal)
     }
   }
 
-  list(text_full=text_full, text=text)
-
+  list(text_full = text_full, text = text)
 }
 
 
 #' @keywords internal
-.text_performance_lavaan <- function(perf_table, ...){
+.text_performance_lavaan <- function(perf_table, ...) {
   perf_table$Text <- paste0(
     perf_table$Name,
     " (",
@@ -247,24 +254,26 @@ print.report_performance <- function(x, ...) {
   )
 
   # Satisfactory
-  if(length(perf_table[perf_table$Interpretation == "satisfactory", "Text"]) >= 1){
+  if (length(perf_table[perf_table$Interpretation == "satisfactory", "Text"]) >= 1) {
     text_satisfactory <- paste0(
       "The ",
       report::format_text(perf_table[perf_table$Interpretation == "satisfactory", "Text"]),
       ifelse(length(perf_table[perf_table$Interpretation == "satisfactory", "Text"]) > 1, " suggest", " suggests"),
-      " a satisfactory fit.")
-  } else{
+      " a satisfactory fit."
+    )
+  } else {
     text_satisfactory <- ""
   }
 
   # Poor
-  if(length(perf_table[perf_table$Interpretation == "poor", "Text"]) >= 1){
+  if (length(perf_table[perf_table$Interpretation == "poor", "Text"]) >= 1) {
     text_poor <- paste0(
       "The ",
       report::format_text(perf_table[perf_table$Interpretation == "poor", "Text"]),
       ifelse(length(perf_table[perf_table$Interpretation == "poor", "Text"]) > 1, " suggest", " suggests"),
-      " a poor fit.")
-  } else{
+      " a poor fit."
+    )
+  } else {
     text_poor <- ""
   }
 

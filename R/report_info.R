@@ -17,22 +17,22 @@
 #' report_info(cor.test(iris$Sepal.Width, iris$Sepal.Length))
 #'
 #' # ANOVAs
-#' report_info(aov(Sepal.Length ~ Species, data=iris))
+#' report_info(aov(Sepal.Length ~ Species, data = iris))
 #'
 #' # GLMs
 #' report_info(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
-#' report_info(lm(Sepal.Length ~ Petal.Length * Species, data = iris), include_effectsize=TRUE)
+#' report_info(lm(Sepal.Length ~ Petal.Length * Species, data = iris), include_effectsize = TRUE)
 #' report_info(glm(vs ~ disp, data = mtcars, family = "binomial"))
 #'
 #' # Mixed models
-#' if(require("lme4")){
+#' if (require("lme4")) {
 #'   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 #'   report_info(model)
 #' }
 #'
 #' # Bayesian models
-#' if(require("rstanarm")){
-#'   model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh=0, iter=600)
+#' if (require("rstanarm")) {
+#'   model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600)
 #'   report_info(model)
 #' }
 #' @export
@@ -62,7 +62,7 @@ as.report_info <- function(x, summary = NULL, ...) {
 summary.report_info <- function(object, ...) {
   if (is.null(attributes(object)$summary)) {
     object
-  } else{
+  } else {
     attributes(object)$summary
   }
 }
@@ -82,8 +82,10 @@ print.report_info <- function(x, ...) {
     return("")
   }
 
-  text <- paste0(insight::format_value(ci * 100, protect_integers = TRUE),
-                 "% Confidence Intervals (CIs) and p-values were computed using ")
+  text <- paste0(
+    insight::format_value(ci * 100, protect_integers = TRUE),
+    "% Confidence Intervals (CIs) and p-values were computed using "
+  )
 
   if (df_method == "wald") {
     text <- paste0(text, "the Wald approximation.")
@@ -94,7 +96,7 @@ print.report_info <- function(x, ...) {
 }
 
 #' @keywords internal
-.info_effectsize <- function(x, effectsize = NULL, include_effectsize=FALSE) {
+.info_effectsize <- function(x, effectsize = NULL, include_effectsize = FALSE) {
   text <- ""
 
   if (!is.null(effectsize)) {

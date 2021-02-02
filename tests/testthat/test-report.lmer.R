@@ -1,5 +1,4 @@
 if (require("testthat") && require("report") && require("lme4")) {
-
   df <- lme4::sleepstudy
   set.seed(123)
   df$mygrp <- sample(1:5, size = 180, replace = TRUE)

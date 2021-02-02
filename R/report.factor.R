@@ -21,7 +21,6 @@ report.logical <- report.factor
 
 #' @export
 report_table.factor <- function(x, levels_percentage = "auto", ...) {
-
   levels_percentage <- .report_dataframe_percentage(x, levels_percentage)
 
   if (length(x[is.na(x)]) != 0) {
@@ -125,7 +124,6 @@ report_text.logical <- report_text.factor
 
 #' @export
 report_statistics.factor <- function(x, table = NULL, levels_percentage = "auto", ...) {
-
   if (is.null(table)) {
     table <- report_table(x, levels_percentage = levels_percentage, ...)
   }

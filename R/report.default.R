@@ -17,7 +17,6 @@
 #' summary(r)
 #' as.data.frame(r)
 #' summary(as.data.frame(r))
-#'
 #' @export
 report.default <- function(x, ...) {
   # You can remove the following line once the functions below are implemented
@@ -33,7 +32,7 @@ report.default <- function(x, ...) {
 
 #' @rdname report.default
 #' @export
-report_effectsize.default <- function(x, ...){
+report_effectsize.default <- function(x, ...) {
   # Delete the whole function if it's NOT applicable to your model / object.
   # Don't forget to edit the documentation name above ('rdname report.NEWCLASS')
   # You can remove the following line and fill it with some (working) code :)

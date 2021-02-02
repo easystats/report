@@ -16,7 +16,7 @@
 #' }
 #' @importFrom insight find_algorithm
 #' @export
-format_formula <- function(x, what="conditional") {
+format_formula <- function(x, what = "conditional") {
   f <- .safe_deparse(insight::find_formula(x)[[what]])
   paste0("formula: ", paste0(f, collapse = " + "))
 }

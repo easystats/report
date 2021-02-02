@@ -13,7 +13,7 @@
 #' library(report)
 #'
 #' # Mixed models
-#' if(require("lme4")){
+#' if (require("lme4")) {
 #'   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 #'   r <- report_random(model)
 #'   r
@@ -21,8 +21,8 @@
 #' }
 #'
 #' # Bayesian models
-#' if(require("rstanarm")){
-#'   model <- stan_lmer(mpg ~ disp + (1 | cyl), data = mtcars, refresh=0, iter=1000)
+#' if (require("rstanarm")) {
+#'   model <- stan_lmer(mpg ~ disp + (1 | cyl), data = mtcars, refresh = 0, iter = 1000)
 #'   r <- report_random(model)
 #'   r
 #'   summary(r)
@@ -52,9 +52,9 @@ as.report_random <- function(x, summary = NULL, ...) {
 
 #' @export
 summary.report_random <- function(object, ...) {
-  if(is.null(attributes(object)$summary)){
+  if (is.null(attributes(object)$summary)) {
     object
-  } else{
+  } else {
     attributes(object)$summary
   }
 }
@@ -63,5 +63,3 @@ summary.report_random <- function(object, ...) {
 print.report_random <- function(x, ...) {
   cat(paste0(x, collapse = "\n"))
 }
-
-
