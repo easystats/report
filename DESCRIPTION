@@ -32,12 +32,33 @@ Description: Bridge the gap between R’s output and the formatted
 License: GPL-3
 URL: https://easystats.github.io/report/
 BugReports: https://github.com/easystats/report/issues
-VignetteBuilder: 
-    knitr
+Imports:
+    bayestestR (>= 0.8.2),
+    effectsize (>= 0.4.3),
+    insight (>= 0.12.0),
+    parameters (>= 0.11.0),
+    performance (>= 0.6.0),
+    stats,
+    tools,
+    utils
+Suggests:
+    BayesFactor,
+    dplyr,
+    httr,
+    knitr,
+    lavaan,
+    lme4,
+    logspline,
+    rmarkdown,
+    rstanarm,
+    spelling,
+    testthat
 Remotes: 
     easystats/bayestestR,
     easystats/effectsize,
     easystats/performance
+VignetteBuilder: 
+    knitr    
 Encoding: UTF-8
 Language: en-US
 LazyData: true
@@ -90,24 +111,3 @@ Collate:
     'utils_data.R'
     'utils_error_message.R'
     'utils_grouped_df.R'
-Imports:
-    bayestestR (>= 0.8.0),
-    effectsize (>= 0.4.0),
-    insight (>= 0.11.0),
-    parameters (>= 0.11.0),
-    performance (>= 0.5.0),
-    stats,
-    tools,
-    utils
-Suggests:
-    BayesFactor,
-    dplyr,
-    httr,
-    knitr,
-    lavaan,
-    lme4,
-    logspline,
-    rmarkdown,
-    rstanarm,
-    spelling,
-    testthat
