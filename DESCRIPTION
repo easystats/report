@@ -33,11 +33,11 @@ License: GPL-3
 URL: https://easystats.github.io/report/
 BugReports: https://github.com/easystats/report/issues
 Imports:
-    bayestestR (>= 0.8.2),
-    effectsize (>= 0.4.3),
-    insight (>= 0.12.0),
-    parameters (>= 0.11.0),
-    performance (>= 0.6.0),
+    bayestestR (>= 0.8.2.1),
+    effectsize (>= 0.4.3.1),
+    insight (>= 0.12.0.1),
+    parameters (>= 0.11.0.1),
+    performance (>= 0.6.1.1),
     stats,
     tools,
     utils
@@ -54,6 +54,8 @@ Suggests:
     spelling,
     testthat
 Remotes: 
+    easystats/insight,
+    easystats/parameters,
     easystats/bayestestR,
     easystats/effectsize,
     easystats/performance
