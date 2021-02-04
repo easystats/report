@@ -31,7 +31,6 @@ report.numeric <- function(x, n = FALSE, centrality = "mean", dispersion = TRUE,
 
 #' @export
 report_table.numeric <- function(x, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = "auto", digits = 2, ...) {
-
   missing_percentage <- .report_dataframe_percentage(x, missing_percentage)
 
   table_full <- data.frame(
@@ -108,7 +107,6 @@ report_table.numeric <- function(x, n = FALSE, centrality = "mean", dispersion =
 
 #' @export
 report_parameters.numeric <- function(x, table = NULL, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = "auto", digits = 2, ...) {
-
   missing_percentage <- .report_dataframe_percentage(x, missing_percentage)
 
   # Get table

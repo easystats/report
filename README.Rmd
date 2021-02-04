@@ -17,15 +17,17 @@ editor_options:
 ```{r, message=FALSE, warning=FALSE, echo = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  tidy.opts=list(width.cutoff=60),
-  tidy=FALSE,
-  dpi=450,
+  tidy.opts = list(width.cutoff = 60),
+  tidy = FALSE,
+  dpi = 450,
   fig.path = "man/figures/",
   comment = "#"
 )
-options(knitr.kable.NA = '',
-        digits = 4,
-        width=60)
+options(
+  knitr.kable.NA = "",
+  digits = 4,
+  width = 60
+)
 library(dplyr)
 library(report)
 ```
@@ -50,12 +52,12 @@ library(report)
 ```{r eval=FALSE, message=FALSE, warning=FALSE}
 library(report)
 
-model <- lm(Sepal.Length ~ Species, data=iris)
+model <- lm(Sepal.Length ~ Species, data = iris)
 report(model)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-lm(Sepal.Length ~ Species, data = iris) %>% 
-  report() %>% 
+lm(Sepal.Length ~ Species, data = iris) %>%
+  report() %>%
   print(width = 110)
 ```
 
@@ -84,10 +86,10 @@ Run the following:
 
 ```{r eval=FALSE, message=FALSE, warning=FALSE, eval=FALSE}
 install.packages("remotes")
-remotes::install_github("easystats/report")  # You only need to do that once
+remotes::install_github("easystats/report") # You only need to do that once
 ```
 ```{r message=FALSE, warning=FALSE}
-library("report")  # Load the package every time you start R
+library("report") # Load the package every time you start R
 ```
 
 
@@ -116,18 +118,18 @@ These reports nicely work within the [*tidyverse*](https://github.com/tidyverse)
 library(dplyr)
 
 iris %>%
-  select(-starts_with("Sepal")) %>% 
-  group_by(Species) %>% 
-  report() %>% 
+  select(-starts_with("Sepal")) %>%
+  group_by(Species) %>%
+  report() %>%
   summary()
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 iris %>%
-  select(-starts_with("Sepal")) %>% 
-  group_by(Species) %>% 
-  report() %>% 
-  summary() %>% 
-  print(width=110)
+  select(-starts_with("Sepal")) %>%
+  group_by(Species) %>%
+  report() %>%
+  summary() %>%
+  print(width = 110)
 ```
 
 
@@ -147,8 +149,8 @@ t.test(mtcars$mpg ~ mtcars$am) %>%
 As mentioned, you can also create tables with the `as.data.frame()` functions, like for example with this correlation test:
 
 ```{r message=FALSE, warning=FALSE}
-cor.test(iris$Sepal.Length, iris$Sepal.Width) %>% 
-  report() %>% 
+cor.test(iris$Sepal.Length, iris$Sepal.Width) %>%
+  report() %>%
   as.data.frame()
 ```
 
@@ -159,11 +161,11 @@ cor.test(iris$Sepal.Length, iris$Sepal.Width) %>%
 This works great with ANOVAs, as it includes **effect sizes** and their interpretation.
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
-aov(Sepal.Length ~ Species, data=iris) %>% 
+aov(Sepal.Length ~ Species, data = iris) %>%
   report()
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-aov(Sepal.Length ~ Species, data=iris) %>%
+aov(Sepal.Length ~ Species, data = iris) %>%
   report() %>%
   print(width = 110)
 ```
@@ -173,12 +175,12 @@ aov(Sepal.Length ~ Species, data=iris) %>%
 Reports are also compatible with GLMs, such as this **logistic regression**:
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
-model <- glm(vs ~ mpg * drat, data=mtcars, family="binomial")
+model <- glm(vs ~ mpg * drat, data = mtcars, family = "binomial")
 
 report(model)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-glm(vs ~ mpg * drat, data=mtcars, family="binomial") %>%
+glm(vs ~ mpg * drat, data = mtcars, family = "binomial") %>%
   report() %>%
   print(width = 110)
 ```
@@ -217,7 +219,7 @@ report(model)
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(rstanarm)
 
-model <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh=0, iter=1000) %>%
+model <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 1000) %>%
   report() %>%
   print(width = 110)
 ```
@@ -238,9 +240,9 @@ report_statistics(model)
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 model <- lm(Sepal.Length ~ Species, data = iris)
 
-print(report_model(model), width=110)
-print(report_performance(model), width=110)
-print(report_statistics(model), width=110)
+print(report_model(model), width = 110)
+print(report_performance(model), width = 110)
+print(report_statistics(model), width = 110)
 ```
 
 
@@ -249,21 +251,27 @@ print(report_statistics(model), width=110)
 This can be useful to complete the **Participants** paragraph of your manuscript.
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
-data <- data.frame("Age" = c(22, 23, 54, 21),
-                   "Sex" = c("F", "F", "M", "M"))
+data <- data.frame(
+  "Age" = c(22, 23, 54, 21),
+  "Sex" = c("F", "F", "M", "M")
+)
 
 paste(
   report_participants(data, spell_n = TRUE),
   "were recruited in the study by means of torture and coercion."
-  )
+)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-data <- data.frame("Age" = c(22, 23, 54, 21),
-                   "Sex" = c("F", "F", "M", "M"))
+data <- data.frame(
+  "Age" = c(22, 23, 54, 21),
+  "Sex" = c("F", "F", "M", "M")
+)
 
-paste(report_participants(data, spell_n = TRUE),
-      "were recruited in the study by means of torture and coercion.") %>% 
-  print(width=110)
+paste(
+  report_participants(data, spell_n = TRUE),
+  "were recruited in the study by means of torture and coercion."
+) %>%
+  print(width = 110)
 ```
 
 
@@ -286,8 +294,8 @@ Finally, **report** includes some functions to help you write the data analysis 
 report(sessionInfo())
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-report(sessionInfo()) %>% 
-  print(width=110)
+report(sessionInfo()) %>%
+  print(width = 110)
 ```
 
 ## Credits

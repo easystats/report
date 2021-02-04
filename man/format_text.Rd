@@ -54,7 +54,7 @@ library(report)
 text_fullstop(c("something", "something else."))
 
 # Find last characters
-text_lastchar(c("ABC", "DEF"), n=2)
+text_lastchar(c("ABC", "DEF"), n = 2)
 
 # Smart concatenation
 text_concatenate(c("First", "Second", "Last"))

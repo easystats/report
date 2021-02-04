@@ -80,21 +80,21 @@ format_model.default <- function(x) {
 
 #' @export
 format_model.character <- function(x) {
-  if(x == "lm"){
+  if (x == "lm") {
     type <- "linear model"
-  } else if(x == "glm"){
+  } else if (x == "glm") {
     type <- "general linear model"
-  } else if(x == "glm"){
+  } else if (x == "glm") {
     type <- "general linear model"
-  } else if(x == "lmer"){
+  } else if (x == "lmer") {
     type <- "linear mixed model"
-  } else if(x == "glmer"){
+  } else if (x == "glmer") {
     type <- "general linear mixed model"
-  } else if(x == "gam"){
+  } else if (x == "gam") {
     type <- "general additive model"
-  } else if(x == "gamm"){
+  } else if (x == "gamm") {
     type <- "general additive mixed model"
-  } else{
+  } else {
     "model"
   }
   type

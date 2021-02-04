@@ -62,7 +62,6 @@ r
 summary(r)
 as.data.frame(r)
 summary(as.data.frame(r))
-
 }
 \seealso{
 Specific components of reports (especially for stats models):

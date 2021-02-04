@@ -38,7 +38,7 @@ report_text(t.test(iris$Sepal.Width, iris$Sepal.Length))
 report_text(cor.test(iris$Sepal.Width, iris$Sepal.Length))
 
 # ANOVA
-r <- report_text(aov(Sepal.Length ~ Species, data=iris))
+r <- report_text(aov(Sepal.Length ~ Species, data = iris))
 r
 summary(r)
 
@@ -47,7 +47,7 @@ r <- report_text(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 r
 summary(r)
 
-if(require("lme4")){
+if (require("lme4")) {
   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
   r <- report_text(model)
   r
@@ -55,8 +55,8 @@ if(require("lme4")){
 }
 
 # Bayesian models
-if(require("rstanarm")){
-  model <- stan_glm(mpg ~ cyl + wt, data = mtcars, refresh=0, iter=600)
+if (require("rstanarm")) {
+  model <- stan_glm(mpg ~ cyl + wt, data = mtcars, refresh = 0, iter = 600)
   r <- report_text(model)
   r
   summary(r)

@@ -7,7 +7,7 @@
 #' summary(cite_easystats())
 #' as.data.frame(cite_easystats())
 #' @export
-cite_easystats <- function(){
+cite_easystats <- function() {
   intro <- "Thanks for crediting us :) You can cite the 'easystats' ecosystem as follows:"
 
   # TODO: How to deal with your umlaut Daniel :( ?
@@ -97,7 +97,7 @@ cite_easystats <- function(){
   }
   "
 
-  out <- list(intro=intro, intext=intext, refs=refs, table=table, bib=bib)
+  out <- list(intro = intro, intext = intext, refs = refs, table = table, bib = bib)
 
   class(out) <- c("cite_easystats", class(out))
   out
@@ -114,7 +114,7 @@ as.report_table.cite_easystats <- as.data.frame.cite_easystats
 
 
 #' @export
-summary.cite_easystats <- function(object, ...){
+summary.cite_easystats <- function(object, ...) {
   cat(object$intext)
   insight::print_colour("\n\nReferences\n----------\n\n", "blue")
   cat(paste0(paste("-", object$refs), collapse = "\n"))
@@ -122,7 +122,7 @@ summary.cite_easystats <- function(object, ...){
 
 
 #' @export
-print.cite_easystats <- function(x, ...){
+print.cite_easystats <- function(x, ...) {
   insight::print_colour(x$intro, "blue")
   cat("\n\n")
   cat(x$intext)

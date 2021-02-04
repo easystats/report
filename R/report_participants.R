@@ -144,7 +144,7 @@ report_participants <- function(data, age = NULL, sex = NULL, education = NULL, 
   if (all(is.na(data[[age]]))) {
     text_age <- ""
   } else {
-    text_age <- summary(report_statistics(data[[age]], n=FALSE, centrality = "mean", missing_percentage = NULL, digits = digits, ...))
+    text_age <- summary(report_statistics(data[[age]], n = FALSE, centrality = "mean", missing_percentage = NULL, digits = digits, ...))
     text_age <- sub("Mean =", "Mean age =", text_age, fixed = TRUE)
   }
 
@@ -162,7 +162,7 @@ report_participants <- function(data, age = NULL, sex = NULL, education = NULL, 
     text_education <- ""
   } else {
     if (is.numeric(data[[education]])) {
-      text_education <- summary(report_statistics(data[[education]], n=FALSE, centrality = "mean", missing_percentage = NULL, digits = digits, ...))
+      text_education <- summary(report_statistics(data[[education]], n = FALSE, centrality = "mean", missing_percentage = NULL, digits = digits, ...))
       text_education <- sub("Mean =", "Mean education =", text_education, fixed = TRUE)
     } else {
       txt <- summary(report_statistics(as.factor(data[[education]]), levels_percentage = TRUE, digits = digits, ...))

@@ -19,7 +19,6 @@ report.character <- function(x, n_entries = 3, levels_percentage = "auto", missi
 
 #' @export
 report_table.character <- function(x, n_entries = 3, levels_percentage = "auto", missing_percentage = "auto", ...) {
-
   levels_percentage <- .report_dataframe_percentage(x, levels_percentage)
   missing_percentage <- .report_dataframe_percentage(x, missing_percentage)
 
@@ -59,7 +58,6 @@ report_table.character <- function(x, n_entries = 3, levels_percentage = "auto",
 
 #' @export
 report_parameters.character <- function(x, table = NULL, n_entries = 3, levels_percentage = "auto", missing_percentage = "auto", ...) {
-
   levels_percentage <- .report_dataframe_percentage(x, levels_percentage)
 
   # Get table
@@ -69,7 +67,7 @@ report_parameters.character <- function(x, table = NULL, n_entries = 3, levels_p
   entries <- attributes(table)$entries
 
   if (levels_percentage == TRUE) {
-    text <- paste0(entries$Entry, " (", insight::format_value(entries$percentage_Entry, as_percent=TRUE), "%)")
+    text <- paste0(entries$Entry, " (", insight::format_value(entries$percentage_Entry, as_percent = TRUE), "%)")
   } else {
     text <- paste0(entries$Entry, " (n = ", entries$n_Entry, ")")
   }
@@ -139,7 +137,6 @@ report_text.character <- function(x, table = NULL, n_entries = 3, levels_percent
 
 #' @export
 report_statistics.character <- function(x, table = NULL, n_entries = 3, levels_percentage = "auto", missing_percentage = "auto", ...) {
-
   levels_percentage <- .report_dataframe_percentage(x, levels_percentage)
 
   if (is.null(table)) {
@@ -148,11 +145,10 @@ report_statistics.character <- function(x, table = NULL, n_entries = 3, levels_p
   entries <- attributes(table)$entries
 
   if (levels_percentage == TRUE) {
-    text <- paste0(entries$Entry, ", ", insight::format_value(entries$percentage_Entry, as_percent=TRUE), "%")
+    text <- paste0(entries$Entry, ", ", insight::format_value(entries$percentage_Entry, as_percent = TRUE), "%")
   } else {
     text <- paste0(entries$Entry, ", n = ", entries$n_Entry)
   }
 
   as.report_statistics(paste0(text, collapse = "; "), summary = paste0(text[1:n_entries], collapse = "; "))
 }
-

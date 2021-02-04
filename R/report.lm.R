@@ -33,7 +33,7 @@
 #' summary(as.data.frame(r))
 #'
 #' # Mixed models
-#' if(require("lme4")){
+#' if (require("lme4")) {
 #'   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 #'   r <- report(model)
 #'   r
@@ -42,12 +42,14 @@
 #'   summary(as.data.frame(r))
 #' }
 #' @export
-report.lm <- function(x, include_effectsize = TRUE, effectsize_method="refit", ...) {
+report.lm <- function(x, include_effectsize = TRUE, effectsize_method = "refit", ...) {
   table <- report_table(x,
-                        include_effectsize=include_effectsize,
-                        effectsize_method=effectsize_method, ...)
+    include_effectsize = include_effectsize,
+    effectsize_method = effectsize_method, ...
+  )
   text <- report_text(x,
-                      table = table, ...)
+    table = table, ...
+  )
 
   as.report(text, table = table, ...)
 }
@@ -63,7 +65,7 @@ report.lm <- function(x, include_effectsize = TRUE, effectsize_method="refit", .
 #' @importFrom parameters model_parameters
 #' @importFrom insight model_info
 #' @export
-report_effectsize.lm <- function(x, effectsize_method="refit", ...) {
+report_effectsize.lm <- function(x, effectsize_method = "refit", ...) {
   table <- suppressWarnings(effectsize::effectsize(x, method = effectsize_method, ...))
   method <- .text_standardize(table)
   estimate <- names(table)[effectsize::is_effectsize_name(names(table))]
@@ -83,9 +85,11 @@ report_effectsize.lm <- function(x, effectsize_method="refit", ...) {
   ci <- table$CI
   names(ci) <- paste0("ci_", estimate)
 
-  statistics <- paste0(main,
-                       ", ",
-                       insight::format_ci(table$CI_low, table$CI_high, ci))
+  statistics <- paste0(
+    main,
+    ", ",
+    insight::format_ci(table$CI_low, table$CI_high, ci)
+  )
 
   if ("Component" %in% colnames(table)) {
     merge_by <- c("Parameter", "Component")
@@ -105,14 +109,15 @@ report_effectsize.lm <- function(x, effectsize_method="refit", ...) {
 
   # Return output
   as.report_effectsize(parameters,
-                       summary = parameters,
-                       table = table,
-                       interpretation = interpretation,
-                       statistics = statistics,
-                       rules = rules,
-                       ci = ci,
-                       method = method,
-                       main = main)
+    summary = parameters,
+    table = table,
+    interpretation = interpretation,
+    statistics = statistics,
+    rules = rules,
+    ci = ci,
+    method = method,
+    main = main
+  )
 }
 
 
@@ -126,7 +131,6 @@ report_effectsize.lm <- function(x, effectsize_method="refit", ...) {
 #' @include utils_combine_tables.R
 #' @export
 report_table.lm <- function(x, include_effectsize = TRUE, ...) {
-
   params <- parameters::model_parameters(x, ...)
 
   # Combine -----
@@ -134,17 +138,19 @@ report_table.lm <- function(x, include_effectsize = TRUE, ...) {
   if (include_effectsize) {
     effsize <- report_effectsize(x, ...)
     params <- .combine_tables_effectsize(params, effsize)
-  } else{
+  } else {
     effsize <- NULL
   }
 
   # Add performance
   performance <- performance::model_performance(x, ...)
   params <- .combine_tables_performance(params, performance)
-  params <- params[!tolower(params$Parameter) %in% c("rmse", # lm
-                                                     "logloss", "score_log", "score_spherical", "pcp", # glm
-                                                     "icc",  # lmer
-                                                     "elpd_se", "looic_se"), ] # stanreg
+  params <- params[!tolower(params$Parameter) %in% c(
+    "rmse", # lm
+    "logloss", "score_log", "score_spherical", "pcp", # glm
+    "icc", # lmer
+    "elpd_se", "looic_se"
+  ), ] # stanreg
 
   # Clean -----
   # Rename some columns
@@ -156,15 +162,18 @@ report_table.lm <- function(x, include_effectsize = TRUE, ...) {
   }
   table_full <- data_remove(params, "SE")
   table <- data_remove(table_full, data_findcols(table_full, ends_with = c("_CI_low|_CI_high")))
-  table <- table[!table$Parameter %in% c("AIC", "BIC",
-                                         "ELPD", "LOOIC", "WAIC"), ]
+  table <- table[!table$Parameter %in% c(
+    "AIC", "BIC",
+    "ELPD", "LOOIC", "WAIC"
+  ), ]
 
   # Prepare -----
   out <- as.report_table(table_full,
-                         summary = table,
-                         effsize = effsize,
-                         performance = performance,
-                         ...)
+    summary = table,
+    effsize = effsize,
+    performance = performance,
+    ...
+  )
   if (!is.null(effsize)) attr(out, paste0(names(attributes(effsize)$ci))) <- attributes(effsize)$ci
   # Add attributes from params table
   for (att in c("ci", "coefficient_name", "pretty_names", "bootstrap", "iterations", "df_method")) {
@@ -182,7 +191,7 @@ report_table.lm <- function(x, include_effectsize = TRUE, ...) {
 
 #' @rdname report.lm
 #' @export
-report_statistics.lm <- function(x, table = NULL, include_effectsize = TRUE, include_diagnostic=TRUE, ...) {
+report_statistics.lm <- function(x, table = NULL, include_effectsize = TRUE, include_diagnostic = TRUE, ...) {
   if (is.null(table)) {
     table <- report_table(x, ...)
   }
@@ -195,7 +204,7 @@ report_statistics.lm <- function(x, table = NULL, include_effectsize = TRUE, inc
     text <- ""
   } else if (estimate == "Coefficient") {
     text <- paste0("beta = ", insight::format_value(table[[estimate]]))
-  } else{
+  } else {
     text <- paste0(estimate, " = ", insight::format_value(table[[estimate]]))
   }
 
@@ -251,9 +260,10 @@ report_statistics.lm <- function(x, table = NULL, include_effectsize = TRUE, inc
   }
 
   as.report_statistics(text_full,
-                       summary = text,
-                       table = table,
-                       effsize = effsize)
+    summary = text,
+    table = table,
+    effsize = effsize
+  )
 }
 
 
@@ -278,9 +288,10 @@ report_parameters.lm <- function(x, table = NULL, include_effectsize = TRUE, inc
   text <- paste0(
     text,
     " is ",
-    effectsize::interpret_p(params$p, rules=effectsize::rules(c(0.05), c("significantly", "non-significantly"))),
+    effectsize::interpret_p(params$p, rules = effectsize::rules(c(0.05), c("significantly", "non-significantly"))),
     " ",
-    effectsize::interpret_direction(params$Coefficient))
+    effectsize::interpret_direction(params$Coefficient)
+  )
 
   # Effect size
   # if(include_effectsize){
@@ -290,7 +301,7 @@ report_parameters.lm <- function(x, table = NULL, include_effectsize = TRUE, inc
   # Include intercept
   if (isFALSE(include_intercept)) {
     idx <- !params$Parameter == "(Intercept)"
-  } else{
+  } else {
     idx <- rep(TRUE, nrow(params))
   }
 
@@ -351,8 +362,7 @@ report_intercept.lm <- function(x, table = NULL, ...) {
 
 #' @rdname report.lm
 #' @export
-report_model.lm <- function(x, table=NULL, ...) {
-
+report_model.lm <- function(x, table = NULL, ...) {
   if (is.null(table)) {
     table <- report_table(x, ...)
   }
@@ -376,13 +386,14 @@ report_model.lm <- function(x, table=NULL, ...) {
 
   # Algorithm
   algorithm <- format_algorithm(x)
-  if(algorithm != ""){
+  if (algorithm != "") {
     text_full <- paste0(
       text,
       " (estimated using ",
       algorithm,
-      ")")
-  } else{
+      ")"
+    )
+  } else {
     text_full <- text
   }
 
@@ -409,7 +420,7 @@ report_model.lm <- function(x, table=NULL, ...) {
   }
 
   # Bayesian
-  if(info$is_bayesian){
+  if (info$is_bayesian) {
     priors_text <- report_priors(x)
     text_full <- paste0(text_full, ". ", as.character(priors_text))
     text <- paste0(text, ". ", summary(priors_text))
@@ -427,7 +438,7 @@ report_model.lm <- function(x, table=NULL, ...) {
 
 #' @rdname report.lm
 #' @export
-report_performance.lm <- function(x, table=NULL, ...) {
+report_performance.lm <- function(x, table = NULL, ...) {
   if (!is.null(table) | is.null(attributes(table)$performance)) {
     table <- report_table(x, ...)
   }
@@ -449,12 +460,12 @@ report_performance.lm <- function(x, table=NULL, ...) {
 
 #' @rdname report.lm
 #' @export
-report_info.lm <- function(x, effectsize=NULL, include_effectsize=FALSE, parameters=NULL, ...) {
+report_info.lm <- function(x, effectsize = NULL, include_effectsize = FALSE, parameters = NULL, ...) {
   if (is.null(effectsize)) {
     effectsize <- report_effectsize(x, ...)
   }
 
-  text <- .info_effectsize(x, effectsize = effectsize, include_effectsize=include_effectsize)
+  text <- .info_effectsize(x, effectsize = effectsize, include_effectsize = include_effectsize)
 
   if (is.null(parameters)) {
     parameters <- report_parameters(x, ...)
@@ -462,11 +473,11 @@ report_info.lm <- function(x, effectsize=NULL, include_effectsize=FALSE, paramet
   if (inherits(parameters, "report_parameters")) {
     att <- attributes(attributes(parameters)$table)
   } else {
-  att <- attributes(parameters)
+    att <- attributes(parameters)
   }
 
   if ("df_method" %in% names(att)) {
-    text <- paste0(text, " ", .info_df(ci=att$ci, df_method = att$df_method))
+    text <- paste0(text, " ", .info_df(ci = att$ci, df_method = att$df_method))
   }
 
   # if (!is.null(att$ci_method)) {
@@ -530,9 +541,8 @@ report_text.lm <- function(x, table = NULL, ...) {
   coefname <- attributes(table)$coefficient_name
   if (!is.null(coefname) && coefname %in% names(table)) {
     estimate <- attributes(table)$coefficient_name
-  } else{
+  } else {
     estimate <- data_findcols(table, candidates)[1]
   }
   estimate
 }
-

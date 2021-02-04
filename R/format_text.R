@@ -21,7 +21,7 @@
 #' text_fullstop(c("something", "something else."))
 #'
 #' # Find last characters
-#' text_lastchar(c("ABC", "DEF"), n=2)
+#' text_lastchar(c("ABC", "DEF"), n = 2)
 #'
 #' # Smart concatenation
 #' text_concatenate(c("First", "Second", "Last"))
@@ -37,7 +37,7 @@
 #' text_paste(c("A", "", "B"), c("42", "42", "42"))
 #' @export
 format_text <- function(text, sep = ", ", last = " and ", width = NULL, ...) {
-  text_wrap(text_concatenate(text, sep=sep, last=last), width = width)
+  text_wrap(text_concatenate(text, sep = sep, last = last), width = width)
 }
 
 
@@ -75,8 +75,8 @@ text_concatenate <- function(text, sep = ", ", last = " and ") {
 
 #' @rdname format_text
 #' @export
-text_paste <- function(text, text2=NULL, sep = ", ", ...) {
-  if(!is.null(text2)){
+text_paste <- function(text, text2 = NULL, sep = ", ", ...) {
+  if (!is.null(text2)) {
     paste0(text, ifelse(text == "" | text2 == "", "", sep), text2)
   }
 }
