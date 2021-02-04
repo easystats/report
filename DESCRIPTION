@@ -38,9 +38,9 @@ License: GPL-3
 URL: https://easystats.github.io/report/
 BugReports: https://github.com/easystats/report/issues
 Imports:
+    insight (>= 0.12.0.1),
     bayestestR (>= 0.8.2.1),
     effectsize (>= 0.4.3.1),
-    insight (>= 0.12.0.1),
     parameters (>= 0.11.0.1),
     performance (>= 0.6.1.1),
     stats,
@@ -66,7 +66,7 @@ Remotes:
     easystats/effectsize,
     easystats/performance
 VignetteBuilder: 
-    knitr    
+    knitr
 Encoding: UTF-8
 Language: en-US
 LazyData: true
