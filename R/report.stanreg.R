@@ -10,8 +10,8 @@
 #' library(report)
 #'
 #' # Bayesian models
-#' if (require("rstanarm")) {
-#'   model <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300)
+#' if(require("rstanarm")){
+#'   model <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh=0, iter=300, chains=2, seed=333)
 #'   r <- report(model)
 #'   r
 #'   summary(r)
