@@ -21,8 +21,8 @@ Reports priors of Bayesian models (see list of supported objects in \code{\link{
 library(report)
 
 # Bayesian models
-if(require("rstanarm")){
-  model <- stan_glm(mpg ~ disp, data = mtcars, refresh=0, iter=1000)
+if (require("rstanarm")) {
+  model <- stan_glm(mpg ~ disp, data = mtcars, refresh = 0, iter = 1000)
   r <- report_priors(model)
   r
   summary(r)

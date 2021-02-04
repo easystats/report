@@ -19,9 +19,9 @@
 #' data_rename(iris, c("Sepal.Length", "Sepal.Width"), c("length", "width"))
 #'
 #' # Find columns names by pattern
-#' data_findcols(iris, starts_with="Sepal")
-#' data_findcols(iris, ends_with="Width")
-#' data_findcols(iris, pattern="\\.")
+#' data_findcols(iris, starts_with = "Sepal")
+#' data_findcols(iris, ends_with = "Width")
+#' data_findcols(iris, pattern = "\\.")
 #'
 #' # Remove columns
 #' data_remove(iris, "Sepal.Length")

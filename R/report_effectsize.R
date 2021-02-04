@@ -17,22 +17,22 @@
 #' report_effectsize(cor.test(iris$Sepal.Width, iris$Sepal.Length))
 #'
 #' # ANOVAs
-#' report_effectsize(aov(Sepal.Length ~ Species, data=iris))
+#' report_effectsize(aov(Sepal.Length ~ Species, data = iris))
 #'
 #' # GLMs
 #' report_effectsize(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 #' report_effectsize(glm(vs ~ disp, data = mtcars, family = "binomial"))
 #'
 #' # Mixed models
-#' if(require("lme4")){
+#' if (require("lme4")) {
 #'   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 #'   report_effectsize(model)
 #' }
 #'
 #' # Bayesian models
-#' if(require("rstanarm")){
-#'   model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh=0, iter=600)
-#'   report_effectsize(model, effectsize_method="basic")
+#' if (require("rstanarm")) {
+#'   model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600)
+#'   report_effectsize(model, effectsize_method = "basic")
 #' }
 #' @export
 report_effectsize <- function(x, ...) {
@@ -61,16 +61,16 @@ as.report_effectsize <- function(x, summary = NULL, prefix = "  - ", ...) {
 
 #' @export
 summary.report_effectsize <- function(object, ...) {
-  if(is.null(attributes(object)$summary)){
+  if (is.null(attributes(object)$summary)) {
     object
-  } else{
+  } else {
     attributes(object)$summary
   }
 }
 
 #' @export
 print.report_effectsize <- function(x, ...) {
-  if(!is.null(attributes(x)$rules)){
+  if (!is.null(attributes(x)$rules)) {
     cat(attributes(x)$rules, "\n\n")
   }
   cat(paste0(x, collapse = "\n"))
@@ -88,15 +88,15 @@ print.report_effectsize <- function(x, ...) {
   if (!is.null(interpretation)) {
     if (is.character(interpretation)) {
       effsize_name <- ifelse(interpretation == "cohen1988", "Cohen's (1988)",
-                             ifelse(interpretation == "sawilowsky2009", "Savilowsky's (2009)",
-                                    ifelse(interpretation == "gignac2016", "Gignac's (2016)",
-                                           ifelse(interpretation == "funder2019", "Funder's (2019)",
-                                                  ifelse(interpretation == "chen2010", "Chen's (2010)",
-                                                         ifelse(interpretation == "field2013", "Field's (2013)", interpretation)
-                                                  )
-                                           )
-                                    )
-                             )
+        ifelse(interpretation == "sawilowsky2009", "Savilowsky's (2009)",
+          ifelse(interpretation == "gignac2016", "Gignac's (2016)",
+            ifelse(interpretation == "funder2019", "Funder's (2019)",
+              ifelse(interpretation == "chen2010", "Chen's (2010)",
+                ifelse(interpretation == "field2013", "Field's (2013)", interpretation)
+              )
+            )
+          )
+        )
       )
       text <- paste0("Effect sizes were labelled following ", effsize_name, " recommendations.")
     } else {
@@ -111,7 +111,6 @@ print.report_effectsize <- function(x, ...) {
 
 #' @keywords internal
 .text_standardize <- function(x, ...) {
-
   method <- attributes(x)$std_method
   robust <- attributes(x)$robust
   two_sd <- attributes(x)$two_sd
@@ -143,4 +142,3 @@ print.report_effectsize <- function(x, ...) {
 
   text
 }
-

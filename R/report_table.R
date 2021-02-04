@@ -25,22 +25,22 @@
 #' report_table(cor.test(iris$Sepal.Length, iris$Sepal.Width))
 #'
 #' # ANOVAs
-#' report_table(aov(Sepal.Length ~ Species, data=iris))
+#' report_table(aov(Sepal.Length ~ Species, data = iris))
 #'
 #' # GLMs
 #' report_table(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 #' report_table(glm(vs ~ disp, data = mtcars, family = "binomial"))
 #'
 #' # Mixed models
-#' if(require("lme4")){
+#' if (require("lme4")) {
 #'   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 #'   report_table(model)
 #' }
 #'
 #' # Bayesian models
-#' if(require("rstanarm")){
-#'   model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh=0, iter=600)
-#'   report_table(model, effectsize_method="basic")
+#' if (require("rstanarm")) {
+#'   model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600)
+#'   report_table(model, effectsize_method = "basic")
 #' }
 #'
 #' # Structural Equation Models (SEM)
@@ -51,7 +51,6 @@
 #'   model <- lavaan::sem(structure, data = PoliticalDemocracy)
 #'   report_table(model)
 #' }
-#'
 #' @export
 report_table <- function(x, ...) {
   UseMethod("report_table")
@@ -69,7 +68,7 @@ as.report_table <- function(x, ...) {
 
 #' @export
 as.report_table.default <- function(x, summary = NULL, as_is = FALSE, ...) {
-  if(as_is) {
+  if (as_is) {
     class(x) <- unique(c(class(x)[1], "report_table", tail(class(x), -1)))
   } else {
     class(x) <- unique(c("report_table", class(x)))
@@ -78,7 +77,7 @@ as.report_table.default <- function(x, summary = NULL, as_is = FALSE, ...) {
   attributes(x) <- c(attributes(x), list(...))
 
   if (!is.null(summary)) {
-    if(as_is) {
+    if (as_is) {
       class(summary) <- unique(c(class(summary)[1], "report_table", tail(class(summary), -1)))
     } else {
       class(summary) <- unique(c("report_table", class(summary)))

@@ -27,7 +27,7 @@
 #' report_text(cor.test(iris$Sepal.Width, iris$Sepal.Length))
 #'
 #' # ANOVA
-#' r <- report_text(aov(Sepal.Length ~ Species, data=iris))
+#' r <- report_text(aov(Sepal.Length ~ Species, data = iris))
 #' r
 #' summary(r)
 #'
@@ -36,7 +36,7 @@
 #' r
 #' summary(r)
 #'
-#' if(require("lme4")){
+#' if (require("lme4")) {
 #'   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 #'   r <- report_text(model)
 #'   r
@@ -44,14 +44,14 @@
 #' }
 #'
 #' # Bayesian models
-#' if(require("rstanarm")){
-#'   model <- stan_glm(mpg ~ cyl + wt, data = mtcars, refresh=0, iter=600)
+#' if (require("rstanarm")) {
+#'   model <- stan_glm(mpg ~ cyl + wt, data = mtcars, refresh = 0, iter = 600)
 #'   r <- report_text(model)
 #'   r
 #'   summary(r)
 #' }
 #' @export
-report_text <- function(x, table=NULL, ...) {
+report_text <- function(x, table = NULL, ...) {
   UseMethod("report_text")
 }
 
@@ -94,9 +94,9 @@ as.report_text.report <- function(x, summary = NULL, ...) {
 
 #' @export
 summary.report_text <- function(object, ...) {
-  if(is.null(attributes(object)$summary)){
+  if (is.null(attributes(object)$summary)) {
     object
-  } else{
+  } else {
     attributes(object)$summary
   }
 }

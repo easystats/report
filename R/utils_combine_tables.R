@@ -1,6 +1,5 @@
 #' @keywords internal
 .combine_tables_effectsize <- function(parameters, effsize) {
-
   effsize_table <- attributes(effsize)$table
   table <- merge(parameters, effsize_table, sort = FALSE, all = TRUE)
   # table <- table[order(
@@ -78,7 +77,7 @@
 
 #' @keywords internal
 .remove_performance <- function(table) {
-  if("Fit" %in% names(table)){
+  if ("Fit" %in% names(table)) {
     table <- table[is.na(table$Fit), ]
     table <- table[!is.na(table$Parameter), ]
   }

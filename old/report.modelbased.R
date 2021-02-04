@@ -13,7 +13,7 @@
 #' library(report)
 #'
 #' data <- iris
-#' data$Group <- ifelse(data$Sepal.Width > 3, "A","B")
+#' data$Group <- ifelse(data$Sepal.Width > 3, "A", "B")
 #'
 #' model <- lm(Petal.Width ~ Species * Group, data = data)
 #' report(estimate_contrasts(model))
