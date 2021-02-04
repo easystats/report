@@ -21,7 +21,7 @@ Reports random effects of mixed models (see list of supported objects in \code{\
 library(report)
 
 # Mixed models
-if(require("lme4")){
+if (require("lme4")) {
   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
   r <- report_random(model)
   r
@@ -29,8 +29,8 @@ if(require("lme4")){
 }
 
 # Bayesian models
-if(require("rstanarm")){
-  model <- stan_lmer(mpg ~ disp + (1 | cyl), data = mtcars, refresh=0, iter=1000)
+if (require("rstanarm")) {
+  model <- stan_lmer(mpg ~ disp + (1 | cyl), data = mtcars, refresh = 0, iter = 1000)
   r <- report_random(model)
   r
   summary(r)

@@ -25,21 +25,21 @@ report_effectsize(t.test(iris$Sepal.Width, iris$Sepal.Length))
 report_effectsize(cor.test(iris$Sepal.Width, iris$Sepal.Length))
 
 # ANOVAs
-report_effectsize(aov(Sepal.Length ~ Species, data=iris))
+report_effectsize(aov(Sepal.Length ~ Species, data = iris))
 
 # GLMs
 report_effectsize(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 report_effectsize(glm(vs ~ disp, data = mtcars, family = "binomial"))
 
 # Mixed models
-if(require("lme4")){
+if (require("lme4")) {
   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
   report_effectsize(model)
 }
 
 # Bayesian models
-if(require("rstanarm")){
-  model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh=0, iter=600)
-  report_effectsize(model, effectsize_method="basic")
+if (require("rstanarm")) {
+  model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600)
+  report_effectsize(model, effectsize_method = "basic")
 }
 }

@@ -17,21 +17,21 @@
 #' report_model(cor.test(iris$Sepal.Width, iris$Sepal.Length))
 #'
 #' # ANOVA
-#' report_model(aov(Sepal.Length ~ Species, data=iris))
+#' report_model(aov(Sepal.Length ~ Species, data = iris))
 #'
 #' # GLMs
 #' report_model(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 #' report_model(glm(vs ~ disp, data = mtcars, family = "binomial"))
 #'
 #' # Mixed models
-#' if(require("lme4")){
+#' if (require("lme4")) {
 #'   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 #'   report_model(model)
 #' }
 #'
 #' # Bayesian models
-#' if(require("rstanarm")){
-#'   model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh=0, iter=600)
+#' if (require("rstanarm")) {
+#'   model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600)
 #'   report_model(model)
 #' }
 #' @export
@@ -59,9 +59,9 @@ as.report_model <- function(x, summary = NULL, ...) {
 
 #' @export
 summary.report_model <- function(object, ...) {
-  if(is.null(attributes(object)$summary)){
+  if (is.null(attributes(object)$summary)) {
     object
-  } else{
+  } else {
     attributes(object)$summary
   }
 }

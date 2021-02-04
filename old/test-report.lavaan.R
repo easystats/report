@@ -9,5 +9,5 @@ context("report.lavaan")
 #
 #   model <- lavaan::cfa(structure, data = HolzingerSwineford1939)
 #   r <- report(model)
-#   testthat::expect_equal(c(nrow(to_table(r)), ncol(to_table(r))), c(27, 7))
+#   expect_equal(c(nrow(to_table(r)), ncol(to_table(r))), c(27, 7))
 # })

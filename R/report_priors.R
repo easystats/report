@@ -13,8 +13,8 @@
 #' library(report)
 #'
 #' # Bayesian models
-#' if(require("rstanarm")){
-#'   model <- stan_glm(mpg ~ disp, data = mtcars, refresh=0, iter=1000)
+#' if (require("rstanarm")) {
+#'   model <- stan_glm(mpg ~ disp, data = mtcars, refresh = 0, iter = 1000)
 #'   r <- report_priors(model)
 #'   r
 #'   summary(r)
@@ -44,9 +44,9 @@ as.report_priors <- function(x, summary = NULL, ...) {
 
 #' @export
 summary.report_priors <- function(object, ...) {
-  if(is.null(attributes(object)$summary)){
+  if (is.null(attributes(object)$summary)) {
     object
-  } else{
+  } else {
     attributes(object)$summary
   }
 }
@@ -55,5 +55,3 @@ summary.report_priors <- function(object, ...) {
 print.report_priors <- function(x, ...) {
   cat(paste0(x, collapse = "\n"))
 }
-
-

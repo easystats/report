@@ -127,7 +127,6 @@ report_parameters.data.frame <- function(x, table = NULL, n = FALSE, centrality 
 
 #' @export
 report_text.data.frame <- function(x, table = NULL, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = "auto", digits = 2, n_entries = 3, missing_percentage = "auto", ...) {
-
   params <- report_parameters(x, n = n, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, levels_percentage = levels_percentage, digits = digits, n_entries = n_entries, missing_percentage = missing_percentage, ...)
 
   # Concatenate text
@@ -144,7 +143,6 @@ report_text.data.frame <- function(x, table = NULL, n = FALSE, centrality = "mea
 
 #' @export
 report_statistics.data.frame <- function(x, table = NULL, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = "auto", digits = 2, n_entries = 3, missing_percentage = "auto", ...) {
-
   text_full <- c()
   text <- c()
 
@@ -260,7 +258,6 @@ report.grouped_df <- report.data.frame
 
 #' @export
 report_statistics.grouped_df <- function(x, table = NULL, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, levels_percentage = "auto", digits = 2, n_entries = 3, missing_percentage = "auto", ...) {
-
   out <- .report_grouped_dataframe(x)
 
   text_full <- c()
@@ -288,21 +285,20 @@ report_statistics.grouped_df <- function(x, table = NULL, n = FALSE, centrality 
 # Utils -------------------------------------------------------------------
 
 #' @keywords internal
-.report_dataframe_percentage <- function(x, percentage = "auto"){
-
-  if(is.null(percentage) || percentage != "auto"){
+.report_dataframe_percentage <- function(x, percentage = "auto") {
+  if (is.null(percentage) || percentage != "auto") {
     return(percentage)
   }
 
-  if(any(c("data.frame", "grouped_df") %in% class(x))){
+  if (any(c("data.frame", "grouped_df") %in% class(x))) {
     n <- nrow(x)
-  } else{
+  } else {
     n <- length(x)
   }
 
-  if(n >= 100){
+  if (n >= 100) {
     percentage <- TRUE
-  } else{
+  } else {
     percentage <- FALSE
   }
   percentage

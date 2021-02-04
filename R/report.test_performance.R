@@ -15,7 +15,7 @@
 #' m2 <- lm(Sepal.Length ~ Petal.Length + Species, data = iris)
 #' m3 <- lm(Sepal.Length ~ Petal.Length, data = iris)
 #'
-#' if(require("performance")){
+#' if (require("performance")) {
 #'   x <- performance::test_performance(m1, m2, m3)
 #'   # r <- report(x)
 #'   # r
@@ -28,7 +28,6 @@
 #'   report_statistics(x)
 #'   report_parameters(x)
 #' }
-#'
 #' @export
 report.test_performance <- function(x, ...) {
   table <- report_table(x, table = table, ...)
@@ -55,27 +54,30 @@ report_statistics.test_performance <- function(x, table = NULL, ...) {
   }
 
   text <- text_short <- ""
-  if("BF" %in% names(table)){
-    val <-
-    text <- text_paste(text, insight::format_bf(na.omit(table$BF)))
+  if ("BF" %in% names(table)) {
+    val <- text <- text_paste(text, insight::format_bf(na.omit(table$BF)))
   }
 
-  if("Omega2" %in% names(table)){
+  if ("Omega2" %in% names(table)) {
     val <- na.omit(table$Omega2)
-    text2 <- paste0("Omega2 = ",
-                    insight::format_value(na.omit(table$Omega2)),
-                    ", ",
-                    insight::format_p(na.omit(table$p_Omega2)))
-    text <- text_paste(text, text2, sep="; ")
+    text2 <- paste0(
+      "Omega2 = ",
+      insight::format_value(na.omit(table$Omega2)),
+      ", ",
+      insight::format_p(na.omit(table$p_Omega2))
+    )
+    text <- text_paste(text, text2, sep = "; ")
   }
 
-  if("LR" %in% names(table)){
+  if ("LR" %in% names(table)) {
     val <- na.omit(table$LR)
-    text2 <- paste0("LR = ",
-                    insight::format_value(na.omit(table$LR)),
-                    ", ",
-                    insight::format_p(na.omit(table$p_LR)))
-    text <- text_paste(text, text2, sep="; ")
+    text2 <- paste0(
+      "LR = ",
+      insight::format_value(na.omit(table$LR)),
+      ", ",
+      insight::format_p(na.omit(table$p_LR))
+    )
+    text <- text_paste(text, text2, sep = "; ")
   }
 
   as.report_statistics(text, summary = text_short, table = table)
@@ -151,8 +153,7 @@ report_parameters.test_performance <- report_parameters.compare_performance
 
 #' @rdname report.test_performance
 #' @export
-report_text.test_performance <- function(x, table=NULL, ...) {
-
+report_text.test_performance <- function(x, table = NULL, ...) {
   stats <- report_statistics(x, table = table)
   table <- attributes(stats)$table
 
@@ -162,11 +163,13 @@ report_text.test_performance <- function(x, table=NULL, ...) {
   text_short <- text_concatenate(paste0(models, " (", summary(stats), ")"))
 
   # Add intro sentence
-  text_start <- paste0("We compared ",
-                      insight::format_number(nrow(table)),
-                      " ",
-                      ifelse(length(unique(table$Type)) == 1, format_model(unique(table$Type)), "model"),
-                      "s")
+  text_start <- paste0(
+    "We compared ",
+    insight::format_number(nrow(table)),
+    " ",
+    ifelse(length(unique(table$Type)) == 1, format_model(unique(table$Type)), "model"),
+    "s"
+  )
   text <- paste0(text_start, "; ", text, ".")
   text_short <- paste0(text_start, "; ", text_short, ".")
 

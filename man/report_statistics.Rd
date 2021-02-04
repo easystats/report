@@ -33,21 +33,21 @@ report_statistics(t.test(iris$Sepal.Width, iris$Sepal.Length))
 report_statistics(cor.test(iris$Sepal.Width, iris$Sepal.Length))
 
 # ANOVA
-report_statistics(aov(Sepal.Length ~ Species, data=iris))
+report_statistics(aov(Sepal.Length ~ Species, data = iris))
 
 # GLMs
 report_statistics(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 report_statistics(glm(vs ~ disp, data = mtcars, family = "binomial"))
 
 # Mixed models
-if(require("lme4")){
+if (require("lme4")) {
   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
   report_statistics(model)
 }
 
 # Bayesian models
-if(require("rstanarm")){
-  model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh=0, iter=600)
+if (require("rstanarm")) {
+  model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600)
   report_statistics(model)
 }
 }

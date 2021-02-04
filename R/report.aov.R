@@ -39,31 +39,30 @@ report.aovlist <- report.aov
 #' @importFrom insight model_info
 #' @export
 report_effectsize.aov <- function(x, ...) {
-
   table <- effectsize::effectsize(x, ...)
   estimate <- names(table)[effectsize::is_effectsize_name(names(table))]
 
-  if(estimate == "Eta2_partial"){
+  if (estimate == "Eta2_partial") {
     interpret <- effectsize::interpret_eta_squared(table[[estimate]], ...)
     interpretation <- interpret
     main <- paste0("Eta2 (partial) = ", insight::format_value(table[[estimate]]))
-  } else if(estimate == "Eta2"){
+  } else if (estimate == "Eta2") {
     interpret <- effectsize::interpret_eta_squared(table[[estimate]], ...)
     interpretation <- interpret
     main <- paste0("Eta2 = ", insight::format_value(table[[estimate]]))
-  } else if(estimate == "Omega2_partial"){
+  } else if (estimate == "Omega2_partial") {
     interpret <- effectsize::interpret_omega_squared(table[[estimate]], ...)
     interpretation <- interpret
     main <- paste0("Omega2 (partial) = ", insight::format_value(table[[estimate]]))
-  } else if(estimate == "Omega2"){
+  } else if (estimate == "Omega2") {
     interpret <- effectsize::interpret_omega_squared(table[[estimate]], ...)
     interpretation <- interpret
     main <- paste0("Epsilon2 = ", insight::format_value(table[[estimate]]))
-  } else if(estimate == "Epsilon2_partial"){
+  } else if (estimate == "Epsilon2_partial") {
     interpret <- effectsize::interpret_epsilon_squared(table[[estimate]], ...)
     interpretation <- interpret
     main <- paste0("Epsilon2 (partial) = ", insight::format_value(table[[estimate]]))
-  } else if(estimate == "Epsilon2"){
+  } else if (estimate == "Epsilon2") {
     interpret <- effectsize::interpret_epsilon_squared(table[[estimate]], ...)
     interpretation <- interpret
     main <- paste0("Epsilon2 = ", insight::format_value(table[[estimate]]))
@@ -71,9 +70,11 @@ report_effectsize.aov <- function(x, ...) {
 
 
   ci <- table$CI
-  statistics <- paste0(main,
-                       ", ",
-                       insight::format_ci(table$CI_low, table$CI_high, ci))
+  statistics <- paste0(
+    main,
+    ", ",
+    insight::format_ci(table$CI_low, table$CI_high, ci)
+  )
 
   table <- as.data.frame(table)[c("Parameter", estimate, "CI_low", "CI_high")]
   names(table)[3:ncol(table)] <- c(paste0(estimate, "_CI_low"), paste0(estimate, "_CI_high"))
@@ -84,13 +85,14 @@ report_effectsize.aov <- function(x, ...) {
 
   # Return output
   as.report_effectsize(parameters,
-                       summary=parameters,
-                       table=table,
-                       interpretation=interpretation,
-                       statistics=statistics,
-                       rules=rules,
-                       ci=ci,
-                       main=main)
+    summary = parameters,
+    table = table,
+    interpretation = interpretation,
+    statistics = statistics,
+    rules = rules,
+    ci = ci,
+    main = main
+  )
 }
 
 #' @export
@@ -109,28 +111,30 @@ report_effectsize.aovlist <- report_effectsize.aov
 #' @importFrom insight model_info
 #' @export
 report_table.aov <- function(x, ...) {
-
   effsize <- report_effectsize(x, ...)
   effsize_table <- attributes(effsize)$table
   params <- parameters::model_parameters(x, ...)
 
-  if("Group" %in% names(params)){
+  if ("Group" %in% names(params)) {
     effsize_table$Group <- "Within"
     table_full <- merge(params, effsize_table, all = TRUE)
     table_full <- table_full[order(
       match(
         paste(table_full$Group, table_full$Parameter),
-        paste(params$Group, params$Parameter))), ]
-  } else{
+        paste(params$Group, params$Parameter)
+      )
+    ), ]
+  } else {
     table_full <- merge(params, effsize_table, all = TRUE)
     table_full <- table_full[order(
-      match(table_full$Parameter, params$Parameter)), ]
+      match(table_full$Parameter, params$Parameter)
+    ), ]
   }
   row.names(table_full) <- NULL
 
-  table <- data_remove(table_full, data_findcols(table_full, ends_with=c("_CI_low|_CI_high")))
+  table <- data_remove(table_full, data_findcols(table_full, ends_with = c("_CI_low|_CI_high")))
 
-  as.report_table(table_full, summary=table, ci=attributes(effsize)$ci, effsize=effsize)
+  as.report_table(table_full, summary = table, ci = attributes(effsize)$ci, effsize = effsize)
 }
 
 #' @export
@@ -149,7 +153,7 @@ report_table.aovlist <- report_table.aov
 
 #' @rdname report.aov
 #' @export
-report_statistics.aov <- function(x, table=NULL, ...) {
+report_statistics.aov <- function(x, table = NULL, ...) {
   if (is.null(table) | is.null(attributes(table)$effsize)) {
     table <- report_table(x, ...)
   }
@@ -193,9 +197,10 @@ report_statistics.aov <- function(x, table=NULL, ...) {
   text <- paste0(text, ", ", attributes(effsize)$main)
 
   as.report_statistics(text_full,
-                       summary=text,
-                       table=table,
-                       effsize=effsize)
+    summary = text,
+    table = table,
+    effsize = effsize
+  )
 }
 
 #' @export
@@ -214,7 +219,6 @@ report_statistics.aovlist <- report_statistics.aov
 #' @rdname report.aov
 #' @export
 report_parameters.aov <- function(x, ...) {
-
   stats <- report_statistics(x, ...)
   table <- attributes(stats)$table
   effsize <- attributes(stats)$effsize
@@ -237,8 +241,7 @@ report_parameters.aov <- function(x, ...) {
   text_full <- paste0(text, stats, ")")
   text <- paste0(text, summary(stats), ")")
 
-  as.report_parameters(text_full, summary=text, table=table, effectsize=effsize, ...)
-
+  as.report_parameters(text_full, summary = text, table = table, effectsize = effsize, ...)
 }
 
 #' @export
@@ -252,7 +255,7 @@ report_parameters.aovlist <- report_parameters.aov
 
 #' @rdname report.aov
 #' @export
-report_model.aov <- function(x, table=NULL, ...) {
+report_model.aov <- function(x, table = NULL, ...) {
   if (is.null(table)) {
     table <- report_table(x, ...)
   }
@@ -263,17 +266,19 @@ report_model.aov <- function(x, table=NULL, ...) {
     text <- "ANOVA"
   }
 
-  if("anova" %in% class(x)){
-    text_full <- text  # Because anova() does not save the formula.
-  } else{
-    text_full <- paste0(text,
-                        " (",
-                        format_formula(x),
-                        ")")
+  if ("anova" %in% class(x)) {
+    text_full <- text # Because anova() does not save the formula.
+  } else {
+    text_full <- paste0(
+      text,
+      " (",
+      format_formula(x),
+      ")"
+    )
   }
 
 
-  as.report_model(text_full, summary=text)
+  as.report_model(text_full, summary = text)
 }
 
 #' @export
@@ -302,12 +307,11 @@ report_info.aovlist <- report_info.aov
 
 #' @rdname report.aov
 #' @export
-report_text.aov <- function(x, table=NULL, ...) {
-
-  params <- report_parameters(x, table=table, ...)
+report_text.aov <- function(x, table = NULL, ...) {
+  params <- report_parameters(x, table = table, ...)
   table <- attributes(params)$table
-  model <- report_model(x, table=table, ...)
-  info <- report_info(x, effectsize=attributes(params)$effectsize, ...)
+  model <- report_model(x, table = table, ...)
+  info <- report_info(x, effectsize = attributes(params)$effectsize, ...)
 
 
   text_full <- paste0(
@@ -327,7 +331,7 @@ report_text.aov <- function(x, table=NULL, ...) {
   )
 
 
-  as.report_text(text_full, summary=text)
+  as.report_text(text_full, summary = text)
 }
 
 #' @export
@@ -335,5 +339,3 @@ report_text.anova <- report_text.aov
 
 #' @export
 report_text.aovlist <- report_text.aov
-
-

@@ -21,7 +21,7 @@
 #' @include report.lm.R
 #' @export
 report.stanreg <- function(x, ...) {
-  table <- report_table(x, include_effectsize=FALSE, ...)
+  table <- report_table(x, include_effectsize = FALSE, ...)
   text <- report_text(x, table = table, ...)
 
   as.report(text, table = table, ...)
@@ -65,8 +65,8 @@ report_priors.stanreg <- function(x, ...) {
   }
 
   values <- ifelse(params$Prior_Distribution == "normal",
-                   paste0("mean = ", insight::format_value(params$Prior_Location), ", SD = ", insight::format_value(params$Prior_Scale)),
-                   paste0("location = ", insight::format_value(params$Prior_Location), ", scale = ", insight::format_value(params$Prior_Scale))
+    paste0("mean = ", insight::format_value(params$Prior_Location), ", SD = ", insight::format_value(params$Prior_Scale)),
+    paste0("location = ", insight::format_value(params$Prior_Location), ", scale = ", insight::format_value(params$Prior_Scale))
   )
 
   values <- paste0(params$Prior_Distribution, " (", values, ")")
@@ -86,7 +86,7 @@ report_priors.stanreg <- function(x, ...) {
 
 
 #' @export
-report_parameters.stanreg <- function(x, include_intercept = TRUE, include_diagnostic=TRUE, ...) {
+report_parameters.stanreg <- function(x, include_intercept = TRUE, include_diagnostic = TRUE, ...) {
 
   # Get data
   data <- bayestestR::sexit(x, ...)
@@ -100,7 +100,7 @@ report_parameters.stanreg <- function(x, include_intercept = TRUE, include_diagn
   text <- .parameters_starting_text(x, params)
 
   # Replace parameters names
-  for(i in 1:length(text)){
+  for (i in 1:length(text)) {
     att$sexit_textlong[i] <- gsub(names(text)[i], text[i], att$sexit_textlong[i], fixed = TRUE)
     att$sexit_textshort[i] <- gsub(names(text)[i], text[i], att$sexit_textshort[i], fixed = TRUE)
   }
@@ -108,7 +108,7 @@ report_parameters.stanreg <- function(x, include_intercept = TRUE, include_diagn
   # Include intercept
   if (isFALSE(include_intercept)) {
     idx <- !params$Parameter == "(Intercept)"
-  } else{
+  } else {
     idx <- rep(TRUE, nrow(params))
   }
 
@@ -116,14 +116,14 @@ report_parameters.stanreg <- function(x, include_intercept = TRUE, include_diagn
   text_full <- att$sexit_textlong[idx]
 
   # Diagnostic / Convergence
-  if (include_diagnostic){
+  if (include_diagnostic) {
     diagnostic <- bayestestR::diagnostic_posterior(x, ...)
-    text <- text_paste(text, .parameters_diagnostic_bayesian(diagnostic, only_when_insufficient=TRUE)[idx], sep=". ")
-    text_full <- text_paste(text_full, .parameters_diagnostic_bayesian(diagnostic, only_when_insufficient=FALSE)[idx], sep=". ")
+    text <- text_paste(text, .parameters_diagnostic_bayesian(diagnostic, only_when_insufficient = TRUE)[idx], sep = ". ")
+    text_full <- text_paste(text_full, .parameters_diagnostic_bayesian(diagnostic, only_when_insufficient = FALSE)[idx], sep = ". ")
     info <- paste(info, "Convergence and stability of the Bayesian sampling has been assessed using R-hat, which should be below 1.01 (Vehtari et al., 2019), and Effective Sample Size (ESS), which should be greater than 1000 (Burkner, 2017).")
   }
 
-  as.report_parameters(text_full, summary = text, parameters = data, info=info, ...)
+  as.report_parameters(text_full, summary = text, parameters = data, info = info, ...)
 }
 
 
@@ -132,20 +132,21 @@ report_parameters.stanreg <- function(x, include_intercept = TRUE, include_diagn
 
 #' @export
 report_intercept.stanreg <- function(x, ...) {
-
   posteriors <- insight::get_parameters(x)
-  if("(Intercept)" %in% names(posteriors)){
+  if ("(Intercept)" %in% names(posteriors)) {
     intercept <- posteriors[["(Intercept)"]]
-  } else{
+  } else {
     return(as.report_intercept("", summary = "", ...))
   }
   data <- bayestestR::sexit(intercept, ...)
 
-  endtext <- paste0(" is at ",
-                    insight::format_value(data$Median) ,
-                    " (",
-                    insight::format_ci(data$CI_low, data$CI_high, ci = data$CI / 100),
-                    ").")
+  endtext <- paste0(
+    " is at ",
+    insight::format_value(data$Median),
+    " (",
+    insight::format_ci(data$CI_low, data$CI_high, ci = data$CI),
+    ")."
+  )
 
   text <- paste0("The model's intercept", endtext)
   text_full <- paste0(
@@ -163,7 +164,7 @@ report_intercept.stanreg <- function(x, ...) {
 
 
 #' @export
-report_info.stanreg <- function(x, parameters=NULL, ...) {
+report_info.stanreg <- function(x, parameters = NULL, ...) {
   if (is.null(parameters)) {
     parameters <- report_parameters(x, ...)
   }
@@ -172,4 +173,3 @@ report_info.stanreg <- function(x, parameters=NULL, ...) {
 
   as.report_info(text)
 }
-

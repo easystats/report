@@ -31,7 +31,7 @@ report_random.merMod <- function(x, ...) {
     text_full <- paste0(text, " (", format_formula(x, "random"), ")")
   }
 
-  as.report_random(text_full, summary=text, ...)
+  as.report_random(text_full, summary = text, ...)
 }
 
 

@@ -40,7 +40,7 @@ m1 <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
 m2 <- lm(Sepal.Length ~ Petal.Length + Species, data = iris)
 m3 <- lm(Sepal.Length ~ Petal.Length, data = iris)
 
-if(require("performance")){
+if (require("performance")) {
   x <- performance::test_performance(m1, m2, m3)
   # r <- report(x)
   # r
@@ -53,7 +53,6 @@ if(require("performance")){
   report_statistics(x)
   report_parameters(x)
 }
-
 }
 \seealso{
 Specific components of reports (especially for stats models):
