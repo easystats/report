@@ -28,7 +28,7 @@ reporting.
 ``` r
 library(report)
 
-model <- lm(Sepal.Length ~ Species, data=iris)
+model <- lm(Sepal.Length ~ Species, data = iris)
 report(model)
 ```
 
@@ -74,11 +74,11 @@ Run the following:
 
 ``` r
 install.packages("remotes")
-remotes::install_github("easystats/report")  # You only need to do that once
+remotes::install_github("easystats/report") # You only need to do that once
 ```
 
 ``` r
-library("report")  # Load the package every time you start R
+library("report") # Load the package every time you start R
 ```
 
 ## Report all the things <a href=https://easystats.github.io/report/><img src="man/figures/allthethings.jpg" height="100"></a>
@@ -119,9 +119,9 @@ These reports nicely work within the
 library(dplyr)
 
 iris %>%
-  select(-starts_with("Sepal")) %>% 
-  group_by(Species) %>% 
-  report() %>% 
+  select(-starts_with("Sepal")) %>%
+  group_by(Species) %>%
+  report() %>%
   summary()
 ```
 
@@ -158,12 +158,12 @@ As mentioned, you can also create tables with the `as.data.frame()`
 functions, like for example with this correlation test:
 
 ``` r
-cor.test(iris$Sepal.Length, iris$Sepal.Width) %>% 
-  report() %>% 
+cor.test(iris$Sepal.Length, iris$Sepal.Width) %>%
+  report() %>%
   as.data.frame()
-# Parameter1        |       Parameter2 |     r | t(148) |     p |        95% CI |                               Method
+# Parameter1        |       Parameter2 |     r |        95% CI | t(148) |     p |                               Method
 # --------------------------------------------------------------------------------------------------------------------
-# iris$Sepal.Length | iris$Sepal.Width | -0.12 |  -1.44 | 0.152 | [-0.27, 0.04] | Pearson's product-moment correlation
+# iris$Sepal.Length | iris$Sepal.Width | -0.12 | [-0.27, 0.04] |  -1.44 | 0.152 | Pearson's product-moment correlation
 ```
 
 ### ANOVAs
@@ -172,7 +172,7 @@ This works great with ANOVAs, as it includes **effect sizes** and their
 interpretation.
 
 ``` r
-aov(Sepal.Length ~ Species, data=iris) %>% 
+aov(Sepal.Length ~ Species, data = iris) %>%
   report()
 ```
 
@@ -189,7 +189,7 @@ Reports are also compatible with GLMs, such as this **logistic
 regression**:
 
 ``` r
-model <- glm(vs ~ mpg * drat, data=mtcars, family="binomial")
+model <- glm(vs ~ mpg * drat, data = mtcars, family = "binomial")
 
 report(model)
 ```
@@ -250,15 +250,15 @@ report(model)
     # We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains of 1000 iterations and a
     # warmup of 500) to predict mpg with qsec and wt (formula: mpg ~ qsec + wt). Priors over parameters were set as
     # normal (mean = 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The model's explanatory
-    # power is substantial (R2 = 0.81, 89% CI [0.73, 0.89], adj. R2 = 0.78). The model's intercept, corresponding
-    # to qsec = 0 and wt = 0, is at 19.74 (95% CI [9.72, 30.29]). Within this model:
+    # power is substantial (R2 = 0.81, 89% CI [0.73, 0.88], adj. R2 = 0.78). The model's intercept, corresponding
+    # to qsec = 0 and wt = 0, is at 19.87 (95% CI [9.27, 30.28]). Within this model:
     # 
-    #   - The effect of qsec (Median = 0.93, 95% CI [0.38, 1.42]) has a 100.00% probability of being positive (> 0),
-    # 99.15% of being significant (> 0.30), and 0.15% of being large (> 1.81). The estimation successfuly converged
-    # (Rhat = 1.001) and the indices are reliable (ESS = 1883)
-    #   - The effect of wt (Median = -5.02, 95% CI [-6.09, -4.08]) has a 100.00% probability of being negative (< 0),
-    # 100.00% of being significant (< -0.30), and 100.00% of being large (< -1.81). The estimation successfuly
-    # converged (Rhat = 1.000) and the indices are reliable (ESS = 2128)
+    #   - The effect of qsec (Median = 0.92, 0.95% CI [0.40, 1.48]) has a 99.80% probability of being positive (> 0),
+    # 99.00% of being significant (> 0.30), and 0.15% of being large (> 1.81). The estimation successfuly converged
+    # (Rhat = 1.000) and the indices are reliable (ESS = 1682)
+    #   - The effect of wt (Median = -5.03, 0.95% CI [-6.00, -4.12]) has a 100.00% probability of being negative (<
+    # 0), 100.00% of being significant (< -0.30), and 100.00% of being large (< -1.81). The estimation successfuly
+    # converged (Rhat = 0.999) and the indices are reliable (ESS = 2111)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT) framework, we report the median of
     # the posterior distribution and its 95% CI (Highest Density Interval), along the probability of direction
@@ -294,13 +294,15 @@ This can be useful to complete the **Participants** paragraph of your
 manuscript.
 
 ``` r
-data <- data.frame("Age" = c(22, 23, 54, 21),
-                   "Sex" = c("F", "F", "M", "M"))
+data <- data.frame(
+  "Age" = c(22, 23, 54, 21),
+  "Sex" = c("F", "F", "M", "M")
+)
 
 paste(
   report_participants(data, spell_n = TRUE),
   "were recruited in the study by means of torture and coercion."
-  )
+)
 ```
 
     # [1] "Four participants (Mean age = 30.0, SD = 16.0, range: [21, 54]; 50.0% females) were recruited in the study by means of torture and coercion."
@@ -329,7 +331,7 @@ report(sessionInfo())
     # Analyses were conducted using the R Statistical language (version 4.0.3; R Core Team, 2020) on macOS Catalina
     # 10.15.7, using the packages Rcpp (version 1.0.6; Dirk Eddelbuettel and Romain Francois, 2011), Matrix
     # (version 1.2.18; Douglas Bates and Martin Maechler, 2019), lme4 (version 1.1.26; Douglas Bates et al., 2015),
-    # rstanarm (version 2.21.1; Goodrich B et al., 2020), dplyr (version 1.0.3; Hadley Wickham et al., 2021) and
+    # rstanarm (version 2.21.1; Goodrich B et al., 2020), dplyr (version 1.0.4; Hadley Wickham et al., 2021) and
     # report (version 0.2.0; Makowski et al., 2020).
     # 
     # References
@@ -343,7 +345,7 @@ report(sessionInfo())
     #   - Goodrich B, Gabry J, Ali I & Brilleman S. (2020). rstanarm: Bayesian applied regression modeling via Stan.
     # R package version 2.21.1 https://mc-stan.org/rstanarm.
     #   - Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2021). dplyr: A Grammar of Data
-    # Manipulation. R package version 1.0.3. https://CRAN.R-project.org/package=dplyr
+    # Manipulation. R package version 1.0.4. https://CRAN.R-project.org/package=dplyr
     #   - Makowski, D., Lüdecke, D., & Ben-Shachar, M.S. (2020). Automated reporting as a practical tool to improve
     # reproducibility and methodological best practices adoption. CRAN. Available from
     # https://github.com/easystats/report. doi: .
