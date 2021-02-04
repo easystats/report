@@ -124,7 +124,7 @@ print.report_performance <- function(x, ...) {
         insight::format_ci(
           r2$CI$R2_Bayes$CI_low,
           r2$CI$R2_Bayes$CI_high,
-          r2$CI$R2_Bayes$CI / 100
+          r2$CI$R2_Bayes$CI
         )
       )
     }
@@ -229,7 +229,7 @@ print.report_performance <- function(x, ...) {
         insight::format_ci(
           r2$CI_low,
           r2$CI_high,
-          r2$CI / 100
+          r2$CI
         ),
         ")"
       )

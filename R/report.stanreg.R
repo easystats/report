@@ -144,7 +144,7 @@ report_intercept.stanreg <- function(x, ...) {
     " is at ",
     insight::format_value(data$Median),
     " (",
-    insight::format_ci(data$CI_low, data$CI_high, ci = data$CI / 100),
+    insight::format_ci(data$CI_low, data$CI_high, ci = data$CI),
     ")."
   )
 

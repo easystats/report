@@ -7,7 +7,7 @@ if (require("testthat")) {
     r <- report(cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman"))
     expect_equal(as.report_table(r)$rho, -0.166, tol = 0.01)
     r <- report(cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "kendall"))
-    expect_equal(as.report_table(r)$tau, -0.076, tol = 0.01)
+    expect_equal(as.report_table(r)$tau, -0.077, tol = 0.01)
 
     # t-tests
     r <- report(t.test(iris$Sepal.Width, iris$Sepal.Length, var.equal = TRUE))

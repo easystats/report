@@ -36,22 +36,22 @@ report_table(t.test(mpg ~ am, data = mtcars))
 report_table(cor.test(iris$Sepal.Length, iris$Sepal.Width))
 
 # ANOVAs
-report_table(aov(Sepal.Length ~ Species, data=iris))
+report_table(aov(Sepal.Length ~ Species, data = iris))
 
 # GLMs
 report_table(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 report_table(glm(vs ~ disp, data = mtcars, family = "binomial"))
 
 # Mixed models
-if(require("lme4")){
+if (require("lme4")) {
   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
   report_table(model)
 }
 
 # Bayesian models
-if(require("rstanarm")){
-  model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh=0, iter=600)
-  report_table(model, effectsize_method="basic")
+if (require("rstanarm")) {
+  model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600)
+  report_table(model, effectsize_method = "basic")
 }
 
 # Structural Equation Models (SEM)
@@ -62,5 +62,4 @@ if (require("lavaan")) {
   model <- lavaan::sem(structure, data = PoliticalDemocracy)
   report_table(model)
 }
-
 }
