@@ -18,7 +18,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Automated Reporting of Objects in R">
-<meta property="og:description" content="Bridge the gap between R’s output and the formatted results contained in your manuscript. This package converts statistical models and data frames into textual reports suited for publication, ensuring standardization and quality in results reporting.">
+<meta property="og:description" content="Bridge the gap between R’s output and the formatted
+    results contained in your manuscript. This package converts
+    statistical models and data frames into textual reports suited for
+    publication, ensuring standardization and quality in results
+    reporting.">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -98,7 +102,7 @@
 
 <p><strong><em>“From R to your manuscript”</em></strong></p>
 <hr>
-<p><span class="emoji" data-emoji="warning">⚠️</span> <strong>report</strong> has been entirely rewritten <em>(again)</em>, and won’t be compatible with your old code. We’ve changed it for the best, and with your help we’ll continue improving it. You’ll need the latest versions of the <strong>easystats</strong> packages (you can update them by running <code>easystats::install_easystats_latest()</code>). <strong>Thanks for your support!</strong> <span class="emoji" data-emoji="warning">⚠️</span></p>
+<p>:warning: <strong>report</strong> has been entirely rewritten <em>(again)</em>, and won’t be compatible with your old code. We’ve changed it for the best, and with your help we’ll continue improving it. You’ll need the latest versions of the <strong>easystats</strong> packages (you can update them by running <code>easystats::install_easystats_latest()</code>). <strong>Thanks for your support!</strong> :warning:</p>
 <hr>
 <p><strong>report</strong>’s primary goal is to bridge the gap between R’s output and the formatted results contained in your manuscript. It automatically produces reports of models and dataframes according to <strong>best practices</strong> guidelines (<em>e.g.,</em> <a href="https://apastyle.apa.org/">APA</a>’s style), ensuring <strong>standardization</strong> and <strong>quality</strong> in results reporting.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -279,15 +283,15 @@
 <div class="sourceCode" id="cb19"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains of 1000 iterations and a</span></span>
 <span id="cb19-2"><a href="#cb19-2"></a><span class="co"># warmup of 500) to predict mpg with qsec and wt (formula: mpg ~ qsec + wt). Priors over parameters were set as</span></span>
 <span id="cb19-3"><a href="#cb19-3"></a><span class="co"># normal (mean = 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The model's explanatory</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a><span class="co"># power is substantial (R2 = 0.81, 89% CI [0.72, 0.88], adj. R2 = 0.78). The model's intercept, corresponding</span></span>
-<span id="cb19-5"><a href="#cb19-5"></a><span class="co"># to qsec = 0 and wt = 0, is at 19.67 (95% CI [8.68, 31.47]). Within this model:</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="co"># power is substantial (R2 = 0.81, 89% CI [0.73, 0.89], adj. R2 = 0.78). The model's intercept, corresponding</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="co"># to qsec = 0 and wt = 0, is at 19.74 (95% CI [9.72, 30.29]). Within this model:</span></span>
 <span id="cb19-6"><a href="#cb19-6"></a><span class="co"># </span></span>
-<span id="cb19-7"><a href="#cb19-7"></a><span class="co">#   - The effect of qsec (Median = 0.93, 95% CI [0.32, 1.46]) has a 99.75% probability of being positive (&gt; 0),</span></span>
-<span id="cb19-8"><a href="#cb19-8"></a><span class="co"># 98.25% of being significant (&gt; 0.30), and 0.30% of being large (&gt; 1.81). The estimation successfuly converged</span></span>
-<span id="cb19-9"><a href="#cb19-9"></a><span class="co"># (Rhat = 1.000) and the indices are reliable (ESS = 1644)</span></span>
-<span id="cb19-10"><a href="#cb19-10"></a><span class="co">#   - The effect of wt (Median = -5.07, 95% CI [-6.06, -3.99]) has a 100.00% probability of being negative (&lt; 0),</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a><span class="co">#   - The effect of qsec (Median = 0.93, 95% CI [0.38, 1.42]) has a 100.00% probability of being positive (&gt; 0),</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a><span class="co"># 99.15% of being significant (&gt; 0.30), and 0.15% of being large (&gt; 1.81). The estimation successfuly converged</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a><span class="co"># (Rhat = 1.001) and the indices are reliable (ESS = 1883)</span></span>
+<span id="cb19-10"><a href="#cb19-10"></a><span class="co">#   - The effect of wt (Median = -5.02, 95% CI [-6.09, -4.08]) has a 100.00% probability of being negative (&lt; 0),</span></span>
 <span id="cb19-11"><a href="#cb19-11"></a><span class="co"># 100.00% of being significant (&lt; -0.30), and 100.00% of being large (&lt; -1.81). The estimation successfuly</span></span>
-<span id="cb19-12"><a href="#cb19-12"></a><span class="co"># converged (Rhat = 1.000) and the indices are reliable (ESS = 2231)</span></span>
+<span id="cb19-12"><a href="#cb19-12"></a><span class="co"># converged (Rhat = 1.000) and the indices are reliable (ESS = 2128)</span></span>
 <span id="cb19-13"><a href="#cb19-13"></a><span class="co"># </span></span>
 <span id="cb19-14"><a href="#cb19-14"></a><span class="co"># Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT) framework, we report the median of</span></span>
 <span id="cb19-15"><a href="#cb19-15"></a><span class="co"># the posterior distribution and its 95% CI (Highest Density Interval), along the probability of direction</span></span>
@@ -454,6 +458,7 @@
 <a href="https://github.com/strengejacke">Daniel Lüdecke</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-8895-3206" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>
 <a href="https://github.com/mattansb">Mattan S. Ben-Shachar</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-4287-4801" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
 
