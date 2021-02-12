@@ -11,6 +11,7 @@
 #' library(report)
 #'
 #' # Bayesian models
+#' \dontrun{
 #' if(require("brms")){
 #'   model <- brm(mpg ~ qsec + wt, data = mtcars, refresh=0, iter=300)
 #'   r <- report(model)
@@ -18,6 +19,7 @@
 #'   summary(r)
 #'   as.data.frame(r)
 #'   summary(as.data.frame(r))
+#' }
 #' }
 #' @include report.lm.R report.stanreg.R report.lme4.R
 #' @export
@@ -62,7 +64,7 @@ report_priors.brmsfit <- function(x, ...) {
   params <- params[params$Parameter != "(Intercept)", ]
 
   # Return empty if no priors info
-  if (!"Prior_Distribution" %in% names(params) | 
+  if (!"Prior_Distribution" %in% names(params) |
         nrow(params) == 0 |
         all(is.na(params$Prior_Scale))) {
     return("")

@@ -25,6 +25,7 @@ follows the Sequential Effect eXistence and sIgnificance Testing framework
 library(report)
 
 # Bayesian models
+\dontrun{
 if(require("brms")){
   model <- brm(mpg ~ qsec + wt, data = mtcars, refresh=0, iter=300)
   r <- report(model)
@@ -32,6 +33,7 @@ if(require("brms")){
   summary(r)
   as.data.frame(r)
   summary(as.data.frame(r))
+}
 }
 }
 \seealso{
