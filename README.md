@@ -251,14 +251,14 @@ report(model)
     # warmup of 500) to predict mpg with qsec and wt (formula: mpg ~ qsec + wt). Priors over parameters were set as
     # normal (mean = 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The model's explanatory
     # power is substantial (R2 = 0.81, 89% CI [0.73, 0.88], adj. R2 = 0.78). The model's intercept, corresponding
-    # to qsec = 0 and wt = 0, is at 19.87 (95% CI [9.27, 30.28]). Within this model:
+    # to qsec = 0 and wt = 0, is at 19.73 (95% CI [9.47, 31.30]). Within this model:
     # 
-    #   - The effect of qsec (Median = 0.92, 0.95% CI [0.40, 1.48]) has a 99.80% probability of being positive (> 0),
-    # 99.00% of being significant (> 0.30), and 0.15% of being large (> 1.81). The estimation successfuly converged
-    # (Rhat = 1.000) and the indices are reliable (ESS = 1682)
-    #   - The effect of wt (Median = -5.03, 0.95% CI [-6.00, -4.12]) has a 100.00% probability of being negative (<
+    #   - The effect of qsec (Median = 0.92, 0.95% CI [0.43, 1.52]) has a 99.80% probability of being positive (> 0),
+    # 98.25% of being significant (> 0.30), and 0.10% of being large (> 1.81). The estimation successfuly converged
+    # (Rhat = 1.000) and the indices are reliable (ESS = 1830)
+    #   - The effect of wt (Median = -5.05, 0.95% CI [-5.98, -4.05]) has a 100.00% probability of being negative (<
     # 0), 100.00% of being significant (< -0.30), and 100.00% of being large (< -1.81). The estimation successfuly
-    # converged (Rhat = 0.999) and the indices are reliable (ESS = 2111)
+    # converged (Rhat = 1.000) and the indices are reliable (ESS = 2000)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT) framework, we report the median of
     # the posterior distribution and its 95% CI (Highest Density Interval), along the probability of direction
