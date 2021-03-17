@@ -162,7 +162,7 @@ print.report_parameters <- function(x, ...) {
     convergence <- effectsize::interpret_rhat(diagnostic$Rhat, ...)
     text <- ifelse(convergence == "converged",
       paste0(
-        "The estimation successfuly converged (Rhat = ",
+        "The estimation successfully converged (Rhat = ",
         insight::format_value(diagnostic$Rhat, digits = 3),
         ")"
       ),
