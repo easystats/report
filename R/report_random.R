@@ -28,8 +28,8 @@
 #'   summary(r)
 #' }
 #' \dontrun{
-#' if(require("brms")){
-#'   model <- brm(mpg ~ disp + (1 | cyl), data = mtcars, refresh=0, iter=1000)
+#' if (require("brms")) {
+#'   model <- brm(mpg ~ disp + (1 | cyl), data = mtcars, refresh = 0, iter = 1000)
 #'   r <- report_random(model)
 #'   r
 #'   summary(r)
