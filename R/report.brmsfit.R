@@ -12,8 +12,8 @@
 #'
 #' # Bayesian models
 #' \dontrun{
-#' if(require("brms")){
-#'   model <- brm(mpg ~ qsec + wt, data = mtcars, refresh=0, iter=300)
+#' if (require("brms")) {
+#'   model <- brm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300)
 #'   r <- report(model)
 #'   r
 #'   summary(r)
@@ -24,7 +24,7 @@
 #' @include report.lm.R report.stanreg.R report.lme4.R
 #' @export
 report.brmsfit <- function(x, ...) {
-  table <- report_table(x, include_effectsize=FALSE, ...)
+  table <- report_table(x, include_effectsize = FALSE, ...)
   text <- report_text(x, table = table, ...)
 
   as.report(text, table = table, ...)
@@ -65,14 +65,14 @@ report_priors.brmsfit <- function(x, ...) {
 
   # Return empty if no priors info
   if (!"Prior_Distribution" %in% names(params) |
-        nrow(params) == 0 |
-        all(is.na(params$Prior_Scale))) {
+    nrow(params) == 0 |
+    all(is.na(params$Prior_Scale))) {
     return("")
   }
 
   values <- ifelse(params$Prior_Distribution == "normal",
-                   paste0("mean = ", insight::format_value(params$Prior_Location), ", SD = ", insight::format_value(params$Prior_Scale)),
-                   paste0("location = ", insight::format_value(params$Prior_Location), ", scale = ", insight::format_value(params$Prior_Scale))
+    paste0("mean = ", insight::format_value(params$Prior_Location), ", SD = ", insight::format_value(params$Prior_Scale)),
+    paste0("location = ", insight::format_value(params$Prior_Location), ", scale = ", insight::format_value(params$Prior_Scale))
   )
 
   values <- paste0(params$Prior_Distribution, " (", values, ")")
