@@ -6,7 +6,8 @@
 #' @param include_R Include R in the citations.
 #'
 #' @return \itemize{
-#'   \item{For \code{report_packages}, a data frame of class with information on package name, version and citation.}
+#'   \item{For \code{report_packages}, a data frame of class with information on
+#'   package name, version and citation.}
 #' }
 #'
 #'

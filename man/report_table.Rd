@@ -15,7 +15,8 @@ report_table(x, ...)
 A \code{data.frame}.
 }
 \description{
-Creates tables to describe different objects (see list of supported objects in \code{\link{report}}).
+Creates tables to describe different objects (see list of supported objects
+in \code{\link{report}}).
 }
 \examples{
 library(report)

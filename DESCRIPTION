@@ -70,7 +70,7 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.1.9001
 Collate: 
     'cite_easystats.R'
     'format_algorithm.R'
