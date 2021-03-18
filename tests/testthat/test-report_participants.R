@@ -14,4 +14,14 @@ test_that("report_participants", {
     report_participants(data, participant = "Participant", spell_n = TRUE),
     "Three participants (Mean age = 28.0, SD = 23.6, range: [8, 54]; 66.7% females)"
   )
+
+  data2 <- data.frame(
+    "Age" = c(22, 22, 54, 54, 8, 8),
+    "Sex" = c("F", "F", "M", "O", "F", "O")
+    )
+
+  expect_equal(
+    report_participants(data2),
+    "6 participants (Mean age = 28.0, SD = 21.1, range: [8, 54]; 50.0% females)"
+  )
 })
