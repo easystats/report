@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -74,7 +76,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/easystats/report/">
+  <a href="https://github.com/easystats/report/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -95,7 +97,7 @@
       <h1 data-toc-skip>Report and Cite Packages</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/easystats/report/blob/master/vignettes/cite_packages.Rmd"><code>vignettes/cite_packages.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/easystats/report/blob/master/vignettes/cite_packages.Rmd" class="external-link"><code>vignettes/cite_packages.Rmd</code></a></small>
       <div class="hidden name"><code>cite_packages.Rmd</code></div>
 
     </div>
@@ -128,24 +130,24 @@
 <div id="present-everything-in-supplementary-materials" class="section level3">
 <h3 class="hasAnchor">
 <a href="#present-everything-in-supplementary-materials" class="anchor"></a>2. Present everything in Supplementary Materials</h3>
-<p>Then, in <em>Supplementary Materials</em>, you can show all the packages and functions you used. To do it quickly, explicitly and in a reproducible fashion, we recommend writing the <em>Supplementary Materials</em> with <a href="https://rmarkdown.rstudio.com/"><strong>R Markdown</strong></a>, which can generate <em>docs</em> and <em>pdf</em> files that you can submit along with your manuscript. Moreover, if you’re using R, you can include (usually at the end) every used package’s citation using the <code><a href="../reference/report.sessionInfo.html">cite_packages()</a></code> function from the <a href="https://github.com/easystats/report"><strong>report</strong></a> package. For example:</p>
+<p>Then, in <em>Supplementary Materials</em>, you can show all the packages and functions you used. To do it quickly, explicitly and in a reproducible fashion, we recommend writing the <em>Supplementary Materials</em> with <a href="https://rmarkdown.rstudio.com/" class="external-link"><strong>R Markdown</strong></a>, which can generate <em>docs</em> and <em>pdf</em> files that you can submit along with your manuscript. Moreover, if you’re using R, you can include (usually at the end) every used package’s citation using the <code><a href="../reference/report.sessionInfo.html">cite_packages()</a></code> function from the <a href="https://github.com/easystats/report" class="external-link"><strong>report</strong></a> package. For example:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/report/">report</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/report/" class="external-link">report</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/report.sessionInfo.html">cite_packages</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <ul>
-<li>Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2021). dplyr: A Grammar of Data Manipulation. R package version 1.0.4. <a href="https://CRAN.R-project.org/package=dplyr" class="uri">https://CRAN.R-project.org/package=dplyr</a>
+<li>Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2021). dplyr: A Grammar of Data Manipulation. R package version 1.0.5. <a href="https://CRAN.R-project.org/package=dplyr" class="external-link uri">https://CRAN.R-project.org/package=dplyr</a>
 </li>
-<li>Makowski, D., Lüdecke, D., &amp; Ben-Shachar, M.S. (2020). Automated reporting as a practical tool to improve reproducibility and methodological best practices adoption. CRAN. Available from <a href="https://github.com/easystats/report" class="uri">https://github.com/easystats/report</a>. doi: .</li>
-<li>R Core Team (2020). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>.</li>
+<li>Makowski, D., Lüdecke, D., &amp; Ben-Shachar, M.S. (2020). Automated reporting as a practical tool to improve reproducibility and methodological best practices adoption. CRAN. Available from <a href="https://github.com/easystats/report" class="external-link uri">https://github.com/easystats/report</a>. doi: .</li>
+<li>R Core Team (2021). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL <a href="https://www.R-project.org/" class="external-link uri">https://www.R-project.org/</a>.</li>
 </ul>
 </div>
 </div>
 <div id="where" class="section level2">
 <h2 class="hasAnchor">
 <a href="#where" class="anchor"></a>Where</h2>
-<p>Finding the right citation information is sometimes complicated. In R, this process is made quite easy, you simply run <code><a href="https://rdrr.io/r/utils/citation.html">citation("packagename")</a></code>. For instance, <code><a href="https://rdrr.io/r/utils/citation.html">citation("bayestestR")</a></code>:</p>
+<p>Finding the right citation information is sometimes complicated. In R, this process is made quite easy, you simply run <code><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation("packagename")</a></code>. For instance, <code><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation("bayestestR")</a></code>:</p>
 <pre><code>To cite bayestestR in publications use:
 
   Makowski, D., Ben-Shachar, M., &amp; Lüdecke, D. (2019). bayestestR:
@@ -171,7 +173,7 @@ A BibTeX entry for LaTeX users is
 <div id="cite_easystats" class="section level2">
 <h2 class="hasAnchor">
 <a href="#cite_easystats" class="anchor"></a>cite_easystats()</h2>
-<p>If you want to cite the <strong>easystats</strong> ecosystem, you can use the <a href="https://easystats.github.io/easystats/reference/cite_eaststats.html"><code>cite_eaststats()</code></a> function:</p>
+<p>If you want to cite the <strong>easystats</strong> ecosystem, you can use the <a href="https://easystats.github.io/easystats/reference/cite_eaststats.html" class="external-link"><code>cite_eaststats()</code></a> function:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/cite_easystats.html">cite_easystats</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>Thanks for crediting us :) You can cite the ‘easystats’ ecosystem as follows:</p>
@@ -191,11 +193,11 @@ A BibTeX entry for LaTeX users is
 <div id="bibtex-entries" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bibtex-entries" class="anchor"></a>Bibtex entries:</h2>
-<p><span class="citation">@article</span>{ludecke2019insight, journal = {Journal of Open Source Software}, doi = {10.21105/joss.01412}, issn = {2475-9066}, number = {38}, publisher = {The Open Journal}, title = {insight: A Unified Interface to Access Information from Model Objects in R}, url = {<a href="http://dx.doi.org/10.21105/joss.01412" class="uri">http://dx.doi.org/10.21105/joss.01412</a>}, volume = {4}, author = {L{"u}decke, Daniel and Waggoner, Philip and Makowski, Dominique}, pages = {1412}, date = {2019-06-25}, year = {2019}, month = {6}, day = {25} }</p>
-<p><span class="citation">@article</span>{makowski2019bayestestr, title = {{bayestestR}: {Describing} {Effects} and their {Uncertainty}, {Existence} and {Significance} within the {Bayesian} {Framework}}, volume = {4}, issn = {2475-9066}, shorttitle = {{bayestestR}}, url = {<a href="https://joss.theoj.org/papers/10.21105/joss.01541" class="uri">https://joss.theoj.org/papers/10.21105/joss.01541</a>}, doi = {10.21105/joss.01541}, number = {40}, urldate = {2019-08-13}, journal = {Journal of Open Source Software}, author = {Makowski, Dominique and Ben-Shachar, Mattan S. and L{"u}decke, Daniel}, month = aug, year = {2019}, pages = {1541} }</p>
+<p><span class="citation">@article</span>{ludecke2019insight, journal = {Journal of Open Source Software}, doi = {10.21105/joss.01412}, issn = {2475-9066}, number = {38}, publisher = {The Open Journal}, title = {insight: A Unified Interface to Access Information from Model Objects in R}, url = {<a href="http://dx.doi.org/10.21105/joss.01412" class="external-link uri">http://dx.doi.org/10.21105/joss.01412</a>}, volume = {4}, author = {L{"u}decke, Daniel and Waggoner, Philip and Makowski, Dominique}, pages = {1412}, date = {2019-06-25}, year = {2019}, month = {6}, day = {25} }</p>
+<p><span class="citation">@article</span>{makowski2019bayestestr, title = {{bayestestR}: {Describing} {Effects} and their {Uncertainty}, {Existence} and {Significance} within the {Bayesian} {Framework}}, volume = {4}, issn = {2475-9066}, shorttitle = {{bayestestR}}, url = {<a href="https://joss.theoj.org/papers/10.21105/joss.01541" class="external-link uri">https://joss.theoj.org/papers/10.21105/joss.01541</a>}, doi = {10.21105/joss.01541}, number = {40}, urldate = {2019-08-13}, journal = {Journal of Open Source Software}, author = {Makowski, Dominique and Ben-Shachar, Mattan S. and L{"u}decke, Daniel}, month = aug, year = {2019}, pages = {1541} }</p>
 <p><span class="citation">@article</span>{makowski2020correlation, doi={10.21105/joss.02306}, title={Methods and Algorithms for Correlation Analysis in R}, author={Makowski, Dominique and Ben-Shachar, Mattan S. and Patil, Indrajeet and L{"u}decke, Daniel}, journal={Journal of Open Source Software}, volume={5}, number={51}, pages={2306}, year={2020} }</p>
 <p><span class="citation">@article</span>{ludecke20202parameters, title = {parameters: Extracting, Computing and Exploring the Parameters of Statistical Models using {R}.}, volume = {5}, doi = {10.21105/joss.02445}, number = {53}, journal = {Journal of Open Source Software}, author = {Daniel L{"u}decke and Mattan S. Ben-Shachar and Indrajeet Patil and Dominique Makowski}, year = {2020}, pages = {2445}, }</p>
-<p><span class="citation">@article</span>{benchashar2020effectsize, title = {{e}ffectsize: Estimation of Effect Size Indices and Standardized Parameters}, author = {Mattan S. Ben-Shachar and Daniel L{"u}decke and Dominique Makowski}, year = {2020}, journal = {Journal of Open Source Software}, volume = {5}, number = {56}, pages = {2815}, publisher = {The Open Journal}, doi = {10.21105/joss.02815}, url = {<a href="https://doi.org/10.21105/joss.02815" class="uri">https://doi.org/10.21105/joss.02815</a>}, }</p>
+<p><span class="citation">@article</span>{benchashar2020effectsize, title = {{e}ffectsize: Estimation of Effect Size Indices and Standardized Parameters}, author = {Mattan S. Ben-Shachar and Daniel L{"u}decke and Dominique Makowski}, year = {2020}, journal = {Journal of Open Source Software}, volume = {5}, number = {56}, pages = {2815}, publisher = {The Open Journal}, doi = {10.21105/joss.02815}, url = {<a href="https://doi.org/10.21105/joss.02815" class="external-link uri">https://doi.org/10.21105/joss.02815</a>}, }</p>
 </div>
   </div>
 
@@ -210,11 +212,13 @@ A BibTeX entry for LaTeX users is
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://dominiquemakowski.github.io/">Dominique Makowski</a>, <a href="https://github.com/strengejacke">Daniel Lüdecke</a>, <a href="https://github.com/mattansb">Mattan S. Ben-Shachar</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://dominiquemakowski.github.io/" class="external-link external-link">Dominique Makowski</a>, <a href="https://github.com/strengejacke" class="external-link external-link">Daniel Lüdecke</a>, <a href="https://github.com/mattansb" class="external-link external-link">Mattan S. Ben-Shachar</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
@@ -222,6 +226,8 @@ A BibTeX entry for LaTeX users is
 
   
 
+
+  
 
   </body>
 </html>

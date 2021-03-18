@@ -30,6 +30,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -102,13 +104,13 @@
 
 <p><strong><em>“From R to your manuscript”</em></strong></p>
 <hr>
-<p>:warning: <strong>report</strong> has been entirely rewritten <em>(again)</em>, and won’t be compatible with your old code. We’ve changed it for the best, and with your help we’ll continue improving it. You’ll need the latest versions of the <strong>easystats</strong> packages (you can update them by running <code>easystats::install_easystats_latest()</code>). <strong>Thanks for your support!</strong> :warning:</p>
+<p><span class="emoji" data-emoji="warning">⚠️</span> <strong>report</strong> has been entirely rewritten <em>(again)</em>, and won’t be compatible with your old code. We’ve changed it for the best, and with your help we’ll continue improving it. You’ll need the latest versions of the <strong>easystats</strong> packages (you can update them by running <code>easystats::install_easystats_latest()</code>). <strong>Thanks for your support!</strong> <span class="emoji" data-emoji="warning">⚠️</span></p>
 <hr>
-<p><strong>report</strong>’s primary goal is to bridge the gap between R’s output and the formatted results contained in your manuscript. It automatically produces reports of models and dataframes according to <strong>best practices</strong> guidelines (<em>e.g.,</em> <a href="https://apastyle.apa.org/">APA</a>’s style), ensuring <strong>standardization</strong> and <strong>quality</strong> in results reporting.</p>
+<p><strong>report</strong>’s primary goal is to bridge the gap between R’s output and the formatted results contained in your manuscript. It automatically produces reports of models and dataframes according to <strong>best practices</strong> guidelines (<em>e.g.,</em> <a href="https://apastyle.apa.org/" class="external-link">APA</a>’s style), ensuring <strong>standardization</strong> and <strong>quality</strong> in results reporting.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/report/">report</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/report/" class="external-link">report</a></span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data<span class="op">=</span><span class="va">iris</span><span class="op">)</span>
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span>
 <span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># We fitted a linear model (estimated using OLS) to predict Sepal.Length with Species (formula: Sepal.Length ~</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="co"># Species). The model explains a significant and substantial proportion of variance (R2 = 0.62, F(2, 147) =</span></span>
@@ -124,11 +126,11 @@
 <div id="documentation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#documentation" class="anchor"></a>Documentation</h2>
-<p><a href="https://easystats.github.io/report/"><img src="https://img.shields.io/badge/documentation-report-orange.svg?colorB=E91E63" alt="Documentation"></a> <a href="https://easystats.github.io/blog/posts/"><img src="https://img.shields.io/badge/blog-easystats-orange.svg?colorB=FF9800" alt="Blog"></a> <a href="https://easystats.github.io/report/reference/index.html"><img src="https://img.shields.io/badge/features-report-orange.svg?colorB=2196F3" alt="Features"></a></p>
-<p>The package documentation can be found <a href="https://easystats.github.io/report/"><strong>here</strong></a>. Check-out these tutorials:</p>
+<p><a href="https://easystats.github.io/report/" class="external-link"><img src="https://img.shields.io/badge/documentation-report-orange.svg?colorB=E91E63" alt="Documentation"></a> <a href="https://easystats.github.io/blog/posts/" class="external-link"><img src="https://img.shields.io/badge/blog-easystats-orange.svg?colorB=FF9800" alt="Blog"></a> <a href="https://easystats.github.io/report/reference/index.html" class="external-link"><img src="https://img.shields.io/badge/features-report-orange.svg?colorB=2196F3" alt="Features"></a></p>
+<p>The package documentation can be found <a href="https://easystats.github.io/report/" class="external-link"><strong>here</strong></a>. Check-out these tutorials:</p>
 <ul>
-<li><a href="https://easystats.github.io/report/articles/report.html">Get Started</a></li>
-<li><a href="https://easystats.github.io/report/articles/cite_packages.html">How to Cite Packages</a></li>
+<li><a href="https://easystats.github.io/report/articles/report.html" class="external-link">Get Started</a></li>
+<li><a href="https://easystats.github.io/report/articles/cite_packages.html" class="external-link">How to Cite Packages</a></li>
 </ul>
 </div>
 <div id="contribute" class="section level2">
@@ -141,20 +143,20 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Run the following:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"easystats/report"</span><span class="op">)</span>  <span class="co"># You only need to do that once</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"easystats/report"</span><span class="op">)</span> <span class="co"># You only need to do that once</span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://easystats.github.io/report/">"report"</a></span><span class="op">)</span>  <span class="co"># Load the package every time you start R</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://easystats.github.io/report/" class="external-link">"report"</a></span><span class="op">)</span> <span class="co"># Load the package every time you start R</span></code></pre></div>
 </div>
 <div id="report-all-the-things-" class="section level2">
 <h2 class="hasAnchor">
-<a href="#report-all-the-things-" class="anchor"></a>Report all the things <a href="https://easystats.github.io/report/"><img src="reference/figures/allthethings.jpg" height="100"></a>
+<a href="#report-all-the-things-" class="anchor"></a>Report all the things <a href="https://easystats.github.io/report/" class="external-link"><img src="reference/figures/allthethings.jpg" height="100"></a>
 </h2>
 <div id="general-workflow" class="section level3">
 <h3 class="hasAnchor">
 <a href="#general-workflow" class="anchor"></a>General Workflow</h3>
-<p>The <code>report</code> package works in a two step fashion. First, you create a <code>report</code> object with the <code><a href="reference/report.html">report()</a></code> function. Then, this report object can be displayed either textually (the default output) or as a table, using <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code>. Moreover, you can also access a more digest and compact version of the report using <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> on the report object.</p>
-<p><a href="https://easystats.github.io/report/"><img src="reference/figures/workflow.png" alt="workflow"></a></p>
+<p>The <code>report</code> package works in a two step fashion. First, you create a <code>report</code> object with the <code><a href="reference/report.html">report()</a></code> function. Then, this report object can be displayed either textually (the default output) or as a table, using <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code>. Moreover, you can also access a more digest and compact version of the report using <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> on the report object.</p>
+<p><a href="https://easystats.github.io/report/" class="external-link"><img src="reference/figures/workflow.png" alt="workflow"></a></p>
 <p>The <code><a href="reference/report.html">report()</a></code> function works on a variety of models, as well as other objects such as dataframes:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></code></pre></div>
@@ -169,15 +171,15 @@
 <span id="cb6-9"><a href="#cb6-9"></a><span class="co"># -0.10, Kurtosis = -1.34, 0% missing</span></span>
 <span id="cb6-10"><a href="#cb6-10"></a><span class="co">#   - Species: 3 levels, namely setosa (n = 50, 33.33%), versicolor (n = 50, 33.33%) and virginica (n = 50,</span></span>
 <span id="cb6-11"><a href="#cb6-11"></a><span class="co"># 33.33%)</span></span></code></pre></div>
-<p>These reports nicely work within the <a href="https://github.com/tidyverse"><em>tidyverse</em></a> workflow:</p>
+<p>These reports nicely work within the <a href="https://github.com/tidyverse" class="external-link"><em>tidyverse</em></a> workflow:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
 
 <span class="va">iris</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"Sepal"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"Sepal"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># The data contains 150 observations, grouped by Species, of the following variables:</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="co"># </span></span>
 <span id="cb8-3"><a href="#cb8-3"></a><span class="co"># - setosa (n = 50):</span></span>
@@ -197,27 +199,27 @@
 <a href="#t-tests-and-correlations" class="anchor"></a><em>t</em>-tests and correlations</h3>
 <p>Reports can be used to automatically format tests like <em>t</em>-tests or correlations.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">mtcars</span><span class="op">$</span><span class="va">am</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">mtcars</span><span class="op">$</span><span class="va">am</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Effect sizes were labelled following Cohen's (1988) recommendations.</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a><span class="co"># </span></span>
 <span id="cb10-3"><a href="#cb10-3"></a><span class="co"># The Welch Two Sample t-test testing the difference of mtcars$mpg by mtcars$am (mean in group 0 = 17.15, mean</span></span>
 <span id="cb10-4"><a href="#cb10-4"></a><span class="co"># in group 1 = 24.39) suggests that the effect is positive, significant and large (difference = 7.24, 95% CI</span></span>
 <span id="cb10-5"><a href="#cb10-5"></a><span class="co"># [-11.28, -3.21], t(18.33) = -3.77, p &lt; .01; Cohen's d = -1.41, 95% CI [-2.17, -0.51])</span></span></code></pre></div>
-<p>As mentioned, you can also create tables with the <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code> functions, like for example with this correlation test:</p>
+<p>As mentioned, you can also create tables with the <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> functions, like for example with this correlation test:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co"># Parameter1        |       Parameter2 |     r | t(148) |     p |        95% CI |                               Method</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co"># Parameter1        |       Parameter2 |     r |        95% CI | t(148) |     p |                               Method</span>
 <span class="co"># --------------------------------------------------------------------------------------------------------------------</span>
-<span class="co"># iris$Sepal.Length | iris$Sepal.Width | -0.12 |  -1.44 | 0.152 | [-0.27, 0.04] | Pearson's product-moment correlation</span></code></pre></div>
+<span class="co"># iris$Sepal.Length | iris$Sepal.Width | -0.12 | [-0.27, 0.04] |  -1.44 | 0.152 | Pearson's product-moment correlation</span></code></pre></div>
 </div>
 <div id="anovas" class="section level3">
 <h3 class="hasAnchor">
 <a href="#anovas" class="anchor"></a>ANOVAs</h3>
 <p>This works great with ANOVAs, as it includes <strong>effect sizes</strong> and their interpretation.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data<span class="op">=</span><span class="va">iris</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/aov.html" class="external-link">aov</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># The ANOVA (formula: Sepal.Length ~ Species) suggests that:</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a><span class="co"># </span></span>
@@ -231,7 +233,7 @@
 <a href="#general-linear-models-glms" class="anchor"></a>General Linear Models (GLMs)</h3>
 <p>Reports are also compatible with GLMs, such as this <strong>logistic regression</strong>:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">vs</span> <span class="op">~</span> <span class="va">mpg</span> <span class="op">*</span> <span class="va">drat</span>, data<span class="op">=</span><span class="va">mtcars</span>, family<span class="op">=</span><span class="st">"binomial"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">vs</span> <span class="op">~</span> <span class="va">mpg</span> <span class="op">*</span> <span class="va">drat</span>, data <span class="op">=</span> <span class="va">mtcars</span>, family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span>
 
 <span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb15"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># We fitted a logistic model (estimated using ML) to predict vs with mpg and drat (formula: vs ~ mpg * drat).</span></span>
@@ -253,9 +255,9 @@
 <a href="#mixed-models" class="anchor"></a>Mixed Models</h3>
 <p>Mixed models (coming from example from the <code>lme4</code> package), which popularity and usage is exploding, can also be reported as it should:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lme4/lme4/">lme4</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lme4/lme4/" class="external-link">lme4</a></span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Length</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">Species</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span>
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Length</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">Species</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span>
 
 <span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># We fitted a linear mixed model (estimated using REML and nloptwrap optimizer) to predict Sepal.Length with</span></span>
@@ -273,25 +275,25 @@
 <div id="bayesian-models" class="section level3">
 <h3 class="hasAnchor">
 <a href="#bayesian-models" class="anchor"></a>Bayesian Models</h3>
-<p>Bayesian models can also be reported using the new <a href="https://easystats.github.io/bayestestR/reference/sexit.html"><strong>SEXIT</strong></a> framework, that combines clarity, precision and usefulness.</p>
+<p>Bayesian models can also be reported using the new <a href="https://easystats.github.io/bayestestR/reference/sexit.html" class="external-link"><strong>SEXIT</strong></a> framework, that combines clarity, precision and usefulness.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mc-stan.org/rstanarm/">rstanarm</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://mc-stan.org/rstanarm/" class="external-link">rstanarm</a></span><span class="op">)</span>
 
-<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html">stan_glm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">qsec</span> <span class="op">+</span> <span class="va">wt</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html" class="external-link">stan_glm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">qsec</span> <span class="op">+</span> <span class="va">wt</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
 
 <span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb19"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains of 1000 iterations and a</span></span>
 <span id="cb19-2"><a href="#cb19-2"></a><span class="co"># warmup of 500) to predict mpg with qsec and wt (formula: mpg ~ qsec + wt). Priors over parameters were set as</span></span>
 <span id="cb19-3"><a href="#cb19-3"></a><span class="co"># normal (mean = 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The model's explanatory</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a><span class="co"># power is substantial (R2 = 0.81, 89% CI [0.73, 0.89], adj. R2 = 0.78). The model's intercept, corresponding</span></span>
-<span id="cb19-5"><a href="#cb19-5"></a><span class="co"># to qsec = 0 and wt = 0, is at 19.74 (95% CI [9.72, 30.29]). Within this model:</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="co"># power is substantial (R2 = 0.81, 89% CI [0.73, 0.88], adj. R2 = 0.78). The model's intercept, corresponding</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="co"># to qsec = 0 and wt = 0, is at 20.12 (95% CI [9.33, 29.86]). Within this model:</span></span>
 <span id="cb19-6"><a href="#cb19-6"></a><span class="co"># </span></span>
-<span id="cb19-7"><a href="#cb19-7"></a><span class="co">#   - The effect of qsec (Median = 0.93, 95% CI [0.38, 1.42]) has a 100.00% probability of being positive (&gt; 0),</span></span>
-<span id="cb19-8"><a href="#cb19-8"></a><span class="co"># 99.15% of being significant (&gt; 0.30), and 0.15% of being large (&gt; 1.81). The estimation successfuly converged</span></span>
-<span id="cb19-9"><a href="#cb19-9"></a><span class="co"># (Rhat = 1.001) and the indices are reliable (ESS = 1883)</span></span>
-<span id="cb19-10"><a href="#cb19-10"></a><span class="co">#   - The effect of wt (Median = -5.02, 95% CI [-6.09, -4.08]) has a 100.00% probability of being negative (&lt; 0),</span></span>
-<span id="cb19-11"><a href="#cb19-11"></a><span class="co"># 100.00% of being significant (&lt; -0.30), and 100.00% of being large (&lt; -1.81). The estimation successfuly</span></span>
-<span id="cb19-12"><a href="#cb19-12"></a><span class="co"># converged (Rhat = 1.000) and the indices are reliable (ESS = 2128)</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a><span class="co">#   - The effect of qsec (Median = 0.91, 95% CI [0.43, 1.46]) has a 99.95% probability of being positive (&gt; 0),</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a><span class="co"># 98.45% of being significant (&gt; 0.30), and 0.15% of being large (&gt; 1.81). The estimation successfully</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a><span class="co"># converged (Rhat = 1.001) and the indices are reliable (ESS = 2139)</span></span>
+<span id="cb19-10"><a href="#cb19-10"></a><span class="co">#   - The effect of wt (Median = -5.05, 95% CI [-5.91, -3.98]) has a 100.00% probability of being negative (&lt; 0),</span></span>
+<span id="cb19-11"><a href="#cb19-11"></a><span class="co"># 100.00% of being significant (&lt; -0.30), and 100.00% of being large (&lt; -1.81). The estimation successfully</span></span>
+<span id="cb19-12"><a href="#cb19-12"></a><span class="co"># converged (Rhat = 1.001) and the indices are reliable (ESS = 1826)</span></span>
 <span id="cb19-13"><a href="#cb19-13"></a><span class="co"># </span></span>
 <span id="cb19-14"><a href="#cb19-14"></a><span class="co"># Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT) framework, we report the median of</span></span>
 <span id="cb19-15"><a href="#cb19-15"></a><span class="co"># the posterior distribution and its 95% CI (Highest Density Interval), along the probability of direction</span></span>
@@ -310,7 +312,7 @@
 <a href="#specific-parts" class="anchor"></a>Specific parts</h3>
 <p>One can, for complex reports, directly access the pieces of the reports:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span>
 
 <span class="fu"><a href="reference/report_model.html">report_model</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
 <span class="fu"><a href="reference/report_performance.html">report_performance</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
@@ -326,13 +328,15 @@
 <a href="#report-participants-details" class="anchor"></a>Report participants details</h3>
 <p>This can be useful to complete the <strong>Participants</strong> paragraph of your manuscript.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="st">"Age"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">22</span>, <span class="fl">23</span>, <span class="fl">54</span>, <span class="fl">21</span><span class="op">)</span>,
-                   <span class="st">"Sex"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"M"</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
+  <span class="st">"Age"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">22</span>, <span class="fl">23</span>, <span class="fl">54</span>, <span class="fl">21</span><span class="op">)</span>,
+  <span class="st">"Sex"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"M"</span><span class="op">)</span>
+<span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span>
+<span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span>
   <span class="fu"><a href="reference/report_participants.html">report_participants</a></span><span class="op">(</span><span class="va">data</span>, spell_n <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
   <span class="st">"were recruited in the study by means of torture and coercion."</span>
-  <span class="op">)</span></code></pre></div>
+<span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb23"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># [1] "Four participants (Mean age = 30.0, SD = 16.0, range: [21, 54]; 50.0% females) were recruited in the study by means of torture and coercion."</span></span></code></pre></div>
 </div>
 <div id="report-sample" class="section level3">
@@ -384,29 +388,29 @@
 <a href="#report-system-and-packages" class="anchor"></a>Report system and packages</h3>
 <p>Finally, <strong>report</strong> includes some functions to help you write the data analysis paragraph about the tools used.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb25"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># Analyses were conducted using the R Statistical language (version 4.0.3; R Core Team, 2020) on macOS Catalina</span></span>
+<code class="sourceCode R"><span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># Analyses were conducted using the R Statistical language (version 4.0.4; R Core Team, 2021) on macOS Catalina</span></span>
 <span id="cb25-2"><a href="#cb25-2"></a><span class="co"># 10.15.7, using the packages Rcpp (version 1.0.6; Dirk Eddelbuettel and Romain Francois, 2011), Matrix</span></span>
-<span id="cb25-3"><a href="#cb25-3"></a><span class="co"># (version 1.2.18; Douglas Bates and Martin Maechler, 2019), lme4 (version 1.1.26; Douglas Bates et al., 2015),</span></span>
-<span id="cb25-4"><a href="#cb25-4"></a><span class="co"># rstanarm (version 2.21.1; Goodrich B et al., 2020), dplyr (version 1.0.3; Hadley Wickham et al., 2021) and</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a><span class="co"># (version 1.3.2; Douglas Bates and Martin Maechler, 2021), lme4 (version 1.1.26; Douglas Bates et al., 2015),</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a><span class="co"># rstanarm (version 2.21.1; Goodrich B et al., 2020), dplyr (version 1.0.5; Hadley Wickham et al., 2021) and</span></span>
 <span id="cb25-5"><a href="#cb25-5"></a><span class="co"># report (version 0.2.0; Makowski et al., 2020).</span></span>
 <span id="cb25-6"><a href="#cb25-6"></a><span class="co"># </span></span>
 <span id="cb25-7"><a href="#cb25-7"></a><span class="co"># References</span></span>
 <span id="cb25-8"><a href="#cb25-8"></a><span class="co"># ----------</span></span>
 <span id="cb25-9"><a href="#cb25-9"></a><span class="co">#   - Dirk Eddelbuettel and Romain Francois (2011). Rcpp: Seamless R and C++ Integration. Journal of Statistical</span></span>
 <span id="cb25-10"><a href="#cb25-10"></a><span class="co"># Software, 40(8), 1-18. URL https://www.jstatsoft.org/v40/i08/.</span></span>
-<span id="cb25-11"><a href="#cb25-11"></a><span class="co">#   - Douglas Bates and Martin Maechler (2019). Matrix: Sparse and Dense Matrix Classes and Methods. R package</span></span>
-<span id="cb25-12"><a href="#cb25-12"></a><span class="co"># version 1.2-18. https://CRAN.R-project.org/package=Matrix</span></span>
+<span id="cb25-11"><a href="#cb25-11"></a><span class="co">#   - Douglas Bates and Martin Maechler (2021). Matrix: Sparse and Dense Matrix Classes and Methods. R package</span></span>
+<span id="cb25-12"><a href="#cb25-12"></a><span class="co"># version 1.3-2. https://CRAN.R-project.org/package=Matrix</span></span>
 <span id="cb25-13"><a href="#cb25-13"></a><span class="co">#   - Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015). Fitting Linear Mixed-Effects Models Using</span></span>
 <span id="cb25-14"><a href="#cb25-14"></a><span class="co"># lme4. Journal of Statistical Software, 67(1), 1-48. doi:10.18637/jss.v067.i01.</span></span>
 <span id="cb25-15"><a href="#cb25-15"></a><span class="co">#   - Goodrich B, Gabry J, Ali I &amp; Brilleman S. (2020). rstanarm: Bayesian applied regression modeling via Stan.</span></span>
 <span id="cb25-16"><a href="#cb25-16"></a><span class="co"># R package version 2.21.1 https://mc-stan.org/rstanarm.</span></span>
 <span id="cb25-17"><a href="#cb25-17"></a><span class="co">#   - Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2021). dplyr: A Grammar of Data</span></span>
-<span id="cb25-18"><a href="#cb25-18"></a><span class="co"># Manipulation. R package version 1.0.3. https://CRAN.R-project.org/package=dplyr</span></span>
+<span id="cb25-18"><a href="#cb25-18"></a><span class="co"># Manipulation. R package version 1.0.5. https://CRAN.R-project.org/package=dplyr</span></span>
 <span id="cb25-19"><a href="#cb25-19"></a><span class="co">#   - Makowski, D., Lüdecke, D., &amp; Ben-Shachar, M.S. (2020). Automated reporting as a practical tool to improve</span></span>
 <span id="cb25-20"><a href="#cb25-20"></a><span class="co"># reproducibility and methodological best practices adoption. CRAN. Available from</span></span>
 <span id="cb25-21"><a href="#cb25-21"></a><span class="co"># https://github.com/easystats/report. doi: .</span></span>
-<span id="cb25-22"><a href="#cb25-22"></a><span class="co">#   - R Core Team (2020). R: A language and environment for statistical computing. R Foundation for Statistical</span></span>
+<span id="cb25-22"><a href="#cb25-22"></a><span class="co">#   - R Core Team (2021). R: A language and environment for statistical computing. R Foundation for Statistical</span></span>
 <span id="cb25-23"><a href="#cb25-23"></a><span class="co"># Computing, Vienna, Austria. URL https://www.R-project.org/.</span></span></code></pre></div>
 </div>
 </div>
@@ -423,7 +427,7 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
 <li>Browse source code at <br><a href="https://github.com/easystats/report/">https://​github.com/​easystats/​report/​</a>
 </li>
@@ -431,26 +435,30 @@
 </li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 </ul>
 </div>
+
 <div class="citation">
-<h2>Citation</h2>
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
 <li><a href="authors.html">Citing report</a></li>
 </ul>
 </div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>
 <a href="https://dominiquemakowski.github.io/">Dominique Makowski</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-5375-9967" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
@@ -458,27 +466,30 @@
 <a href="https://github.com/strengejacke">Daniel Lüdecke</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-8895-3206" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>
 <a href="https://github.com/mattansb">Mattan S. Ben-Shachar</a> <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-4287-4801" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="authors.html">More on authors...</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://cran.r-project.org/package=report"><img src="http://www.r-pkg.org/badges/version/report" alt="CRAN"></a></li>
-<li><a href="https://cran.r-project.org/package=report"><img src="http://cranlogs.r-pkg.org/badges/report" alt="downloads"></a></li>
+<li><a href="https://cran.r-project.org/package=report" class="external-link"><img src="http://www.r-pkg.org/badges/version/report" alt="CRAN"></a></li>
+<li><a href="https://cran.r-project.org/package=report" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/report" alt="downloads"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://dominiquemakowski.github.io/">Dominique Makowski</a>, <a href="https://github.com/strengejacke">Daniel Lüdecke</a>, <a href="https://github.com/mattansb">Mattan S. Ben-Shachar</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://dominiquemakowski.github.io/" class="external-link">Dominique Makowski</a>, <a href="https://github.com/strengejacke" class="external-link">Daniel Lüdecke</a>, <a href="https://github.com/mattansb" class="external-link">Mattan S. Ben-Shachar</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
@@ -486,6 +497,8 @@
 
   
 
+
+  
 
   </body>
 </html>
