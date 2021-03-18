@@ -2,9 +2,26 @@
 #' @importFrom parameters skewness kurtosis
 #'
 #' @export
-report.character <- function(x, n_entries = 3, levels_percentage = "auto", missing_percentage = "auto", ...) {
-  table <- report_table(x, n_entries = n_entries, levels_percentage = levels_percentage, missing_percentage = missing_percentage, ...)
-  text <- report_text(x, n_entries = n_entries, levels_percentage = levels_percentage, missing_percentage = missing_percentage, ...)
+report.character <- function(x,
+                             n_entries = 3,
+                             levels_percentage = "auto",
+                             missing_percentage = "auto",
+                             ...) {
+  table <- report_table(
+    x,
+    n_entries = n_entries,
+    levels_percentage = levels_percentage,
+    missing_percentage = missing_percentage,
+    ...
+  )
+
+  text <- report_text(
+    x,
+    n_entries = n_entries,
+    levels_percentage = levels_percentage,
+    missing_percentage = missing_percentage,
+    ...
+  )
 
   as.report(text, table = table, ...)
 }
@@ -57,12 +74,23 @@ report_table.character <- function(x, n_entries = 3, levels_percentage = "auto",
 
 
 #' @export
-report_parameters.character <- function(x, table = NULL, n_entries = 3, levels_percentage = "auto", missing_percentage = "auto", ...) {
+report_parameters.character <- function(x,
+                                        table = NULL,
+                                        n_entries = 3,
+                                        levels_percentage = "auto",
+                                        missing_percentage = "auto",
+                                        ...) {
   levels_percentage <- .report_dataframe_percentage(x, levels_percentage)
 
   # Get table
   if (is.null(table)) {
-    table <- report_table(x, n_entries = n_entries, levels_percentage = levels_percentage, missing_percentage = missing_percentage, ...)
+    table <- report_table(
+      x,
+      n_entries = n_entries,
+      levels_percentage = levels_percentage,
+      missing_percentage = missing_percentage,
+      ...
+    )
   }
   entries <- attributes(table)$entries
 
@@ -80,7 +108,12 @@ report_parameters.character <- function(x, table = NULL, n_entries = 3, levels_p
 # report_text -------------------------------------------------------------
 
 #' @export
-report_text.character <- function(x, table = NULL, n_entries = 3, levels_percentage = "auto", missing_percentage = "auto", ...) {
+report_text.character <- function(x,
+                                  table = NULL,
+                                  n_entries = 3,
+                                  levels_percentage = "auto",
+                                  missing_percentage = "auto",
+                                  ...) {
   if (!is.null(list(...)$varname)) {
     name <- list(...)$varname
   } else if (is.null(names(x))) {
@@ -90,10 +123,23 @@ report_text.character <- function(x, table = NULL, n_entries = 3, levels_percent
   }
 
   if (is.null(table)) {
-    table <- report_table(x, n_entries = n_entries, levels_percentage = levels_percentage, missing_percentage = missing_percentage, ...)
+    table <- report_table(
+      x,
+      n_entries = n_entries,
+      levels_percentage = levels_percentage,
+      missing_percentage = missing_percentage,
+      ...
+    )
   }
   entries <- attributes(table)$entries
-  params <- report_parameters(x, table = table, n_entries = n_entries, levels_percentage = levels_percentage, missing_percentage = missing_percentage, ...)
+  params <- report_parameters(
+    x,
+    table = table,
+    n_entries = n_entries,
+    levels_percentage = levels_percentage,
+    missing_percentage = missing_percentage,
+    ...
+  )
 
   text <- paste0(summary(params), collapse = "; ")
   if (nrow(entries) > 1) {
@@ -136,11 +182,22 @@ report_text.character <- function(x, table = NULL, n_entries = 3, levels_percent
 
 
 #' @export
-report_statistics.character <- function(x, table = NULL, n_entries = 3, levels_percentage = "auto", missing_percentage = "auto", ...) {
+report_statistics.character <- function(x,
+                                        table = NULL,
+                                        n_entries = 3,
+                                        levels_percentage = "auto",
+                                        missing_percentage = "auto",
+                                        ...) {
   levels_percentage <- .report_dataframe_percentage(x, levels_percentage)
 
   if (is.null(table)) {
-    table <- report_table(x, n_entries = n_entries, levels_percentage = levels_percentage, missing_percentage = missing_percentage, ...)
+    table <- report_table(
+      x,
+      n_entries = n_entries,
+      levels_percentage = levels_percentage,
+      missing_percentage = missing_percentage,
+      ...
+    )
   }
   entries <- attributes(table)$entries
 

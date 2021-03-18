@@ -1,6 +1,8 @@
 #' Reporting models comparison
 #'
-#' Create reports for model comparison as obtained by the \code{\link[performance:compare_performance]{performance::compare_performance()}} function in the \code{performance} package.
+#' Create reports for model comparison as obtained by the
+#' \code{\link[performance:compare_performance]{performance::compare_performance()}}
+#' function in the \code{performance} package.
 #'
 #' @param x Object of class \code{NEW OBJECT}.
 #' @inheritParams report
