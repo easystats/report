@@ -15,7 +15,8 @@ report_effectsize(x, ...)
 An object of class \code{report_effectsize}.
 }
 \description{
-Computes, interpret and formats the effect sizes of a variety of models and statistical tests (see list of supported objects in \code{\link{report}}).
+Computes, interpret and formats the effect sizes of a variety of models and
+statistical tests (see list of supported objects in \code{\link{report}}).
 }
 \examples{
 library(report)

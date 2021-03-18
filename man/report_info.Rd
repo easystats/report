@@ -15,7 +15,8 @@ report_info(x, ...)
 A \code{character} string.
 }
 \description{
-Reports additional information relevant to the report (see list of supported objects in \code{\link{report}}).
+Reports additional information relevant to the report (see list of supported
+objects in \code{\link{report}}).
 }
 \examples{
 library(report)

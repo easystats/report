@@ -1,6 +1,7 @@
 #' Report the effect size(s) of a model or a test
 #'
-#' Computes, interpret and formats the effect sizes of a variety of models and statistical tests (see list of supported objects in \code{\link{report}}).
+#' Computes, interpret and formats the effect sizes of a variety of models and
+#' statistical tests (see list of supported objects in \code{\link{report}}).
 #'
 #' @inheritParams report
 #' @inheritParams report_table

@@ -17,9 +17,13 @@ cite_easystats <- function() {
 
   # References
   ref_insight <- "Ludecke, D., Waggoner, P. D., & Makowski, D. (2019). insight: A Unified Interface to Access Information from Model Objects in R. Journal of Open Source Software, 4, 1412. doi: 10.21105/joss.01412"
+
   ref_bayestestR <- "Makowski, D., Ben-Shachar, M.S., & Ludecke, D. (2019). bayestestR: Describing Effects and their Uncertainty, Existence and Significance within the Bayesian Framework. Journal of Open Source Software, 4(40), 1541. 10.21105/joss.01541"
+
   ref_parameters <- "Ludecke, D., Ben-Shachar, M.S., Patil, I., Makowski, D. (2020). parameters: Extracting, Computing and Exploring the Parameters of Statistical Models using R. Journal of Open Source Software, 5(53), 2445. doi: 10.21105/joss.02445"
+
   ref_effectsize <- "Ben-Shachar, M.S., Ludecke, D., Makowski, D. (2020). effectsize: Estimation of Effect Size Indices and Standardized Parameters. Journal of Open Source Software, 5(56), 2815. doi: 10.21105/joss.02815"
+
   ref_correlation <- "Makowski, D., Ben-Shachar, M.S., Patil, I., & Ludecke, D. (2019). Methods and Algorithms for Correlation Analysis in R. Journal of Open Source Software, 5(51), 2306. 10.21105/joss.02306"
 
   refs <- c(ref_insight, ref_bayestestR, ref_parameters, ref_effectsize, ref_correlation)

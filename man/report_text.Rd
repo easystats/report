@@ -9,7 +9,8 @@ report_text(x, table = NULL, ...)
 \arguments{
 \item{x}{The R object that you want to report (see list of of supported objects above).}
 
-\item{table}{A table obtained via \code{report_table()}. If not provided, will run it.}
+\item{table}{A table obtained via \code{report_table()}. If not provided,
+will run it.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
@@ -17,7 +18,8 @@ report_text(x, table = NULL, ...)
 A \code{character} string.
 }
 \description{
-Creates text containing a description of the parameters of R objects (see list of supported objects in \code{\link{report}}).
+Creates text containing a description of the parameters of R objects (see
+list of supported objects in \code{\link{report}}).
 }
 \examples{
 library(report)
