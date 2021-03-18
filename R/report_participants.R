@@ -1,18 +1,22 @@
 #' Reporting the participant data
 #'
-#' A helper function to help you format the participants data (age, sex, ...) in the participants section.
+#' A helper function to help you format the participants data (age, sex, ...) in
+#' the participants section.
 #'
 #' @param data A data frame.
-#' @param age The name of the column containing the age.
-#' @param sex The name of the column containing the sex. Note that classes
-#'   should be one of `c("Male", "M", "Female", "F")`.
+#' @param age The name of the column containing the age of the participant.
+#' @param sex The name of the column containing the sex of the participant. The
+#'   classes should be one of \code{c("Male", "M", "Female", "F")}. Note that
+#'   you can specify other characters here as well (e.g., \code{"Other"}), but
+#'   the function will report only percentage of females, regardless of whether
+#'   any category other than "Male" is present in the data.
 #' @param education The name of the column containing education information.
 #' @param participants The name of the participants' identifier column (for
 #'   instance in the case of repeated measures).
 #' @param group A character vector indicating the name(s) of the column(s) used
 #'   for stratified description.
-#' @param spell_n Fully spell the sample size ("Three participants" instead of
-#'   "3 participants").
+#' @param spell_n Fully spell the sample size (\code{"Three participants"}
+#'   instead of \code{"3 participants"}).
 #' @inheritParams report.numeric
 #'
 #' @return A character vector with description of the "participants", based on
@@ -220,9 +224,16 @@ report_participants <- function(data,
           ...
         )
       )
+
       text_education <- sub("Mean =", "Mean education =", text_education, fixed = TRUE)
     } else {
-      txt <- summary(report_statistics(as.factor(data[[education]]), levels_percentage = TRUE, digits = digits, ...))
+      txt <- summary(report_statistics(
+        as.factor(data[[education]]),
+        levels_percentage = TRUE,
+        digits = digits,
+        ...
+      ))
+
       text_education <- paste0("Education: ", txt)
     }
   }
