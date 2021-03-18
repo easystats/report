@@ -284,15 +284,15 @@
 <div class="sourceCode" id="cb19"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains of 1000 iterations and a</span></span>
 <span id="cb19-2"><a href="#cb19-2"></a><span class="co"># warmup of 500) to predict mpg with qsec and wt (formula: mpg ~ qsec + wt). Priors over parameters were set as</span></span>
 <span id="cb19-3"><a href="#cb19-3"></a><span class="co"># normal (mean = 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The model's explanatory</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a><span class="co"># power is substantial (R2 = 0.81, 89% CI [0.74, 0.89], adj. R2 = 0.78). The model's intercept, corresponding</span></span>
-<span id="cb19-5"><a href="#cb19-5"></a><span class="co"># to qsec = 0 and wt = 0, is at 19.62 (95% CI [9.39, 30.64]). Within this model:</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="co"># power is substantial (R2 = 0.81, 89% CI [0.73, 0.88], adj. R2 = 0.78). The model's intercept, corresponding</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="co"># to qsec = 0 and wt = 0, is at 19.49 (95% CI [8.84, 30.28]). Within this model:</span></span>
 <span id="cb19-6"><a href="#cb19-6"></a><span class="co"># </span></span>
-<span id="cb19-7"><a href="#cb19-7"></a><span class="co">#   - The effect of qsec (Median = 0.93, 95% CI [0.43, 1.47]) has a 100.00% probability of being positive (&gt; 0),</span></span>
-<span id="cb19-8"><a href="#cb19-8"></a><span class="co"># 99.00% of being significant (&gt; 0.30), and 0.10% of being large (&gt; 1.81). The estimation successfully</span></span>
-<span id="cb19-9"><a href="#cb19-9"></a><span class="co"># converged (Rhat = 0.999) and the indices are reliable (ESS = 1997)</span></span>
-<span id="cb19-10"><a href="#cb19-10"></a><span class="co">#   - The effect of wt (Median = -5.04, 95% CI [-6.06, -3.97]) has a 100.00% probability of being negative (&lt; 0),</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a><span class="co">#   - The effect of qsec (Median = 0.94, 95% CI [0.39, 1.46]) has a 100.00% probability of being positive (&gt; 0),</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a><span class="co"># 99.10% of being significant (&gt; 0.30), and 0.15% of being large (&gt; 1.81). The estimation successfully</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a><span class="co"># converged (Rhat = 1.000) and the indices are reliable (ESS = 2223)</span></span>
+<span id="cb19-10"><a href="#cb19-10"></a><span class="co">#   - The effect of wt (Median = -5.04, 95% CI [-6.09, -4.06]) has a 100.00% probability of being negative (&lt; 0),</span></span>
 <span id="cb19-11"><a href="#cb19-11"></a><span class="co"># 100.00% of being significant (&lt; -0.30), and 100.00% of being large (&lt; -1.81). The estimation successfully</span></span>
-<span id="cb19-12"><a href="#cb19-12"></a><span class="co"># converged (Rhat = 1.000) and the indices are reliable (ESS = 2031)</span></span>
+<span id="cb19-12"><a href="#cb19-12"></a><span class="co"># converged (Rhat = 1.000) and the indices are reliable (ESS = 2159)</span></span>
 <span id="cb19-13"><a href="#cb19-13"></a><span class="co"># </span></span>
 <span id="cb19-14"><a href="#cb19-14"></a><span class="co"># Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT) framework, we report the median of</span></span>
 <span id="cb19-15"><a href="#cb19-15"></a><span class="co"># the posterior distribution and its 95% CI (Highest Density Interval), along the probability of direction</span></span>

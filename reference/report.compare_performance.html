@@ -47,7 +47,9 @@
 
 
 <meta property="og:title" content="Reporting models comparison — report.compare_performance" />
-<meta property="og:description" content="Create reports for model comparison as obtained by the performance::compare_performance() function in the performance package." />
+<meta property="og:description" content="Create reports for model comparison as obtained by the
+performance::compare_performance()
+function in the performance package." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -148,7 +150,9 @@
     </div>
 
     <div class="ref-description">
-    <p>Create reports for model comparison as obtained by the <code><a href='https://easystats.github.io/performance/reference/compare_performance.html'>performance::compare_performance()</a></code> function in the <code>performance</code> package.</p>
+    <p>Create reports for model comparison as obtained by the
+<code><a href='https://easystats.github.io/performance/reference/compare_performance.html'>performance::compare_performance()</a></code>
+function in the <code>performance</code> package.</p>
     </div>
 
     <pre class="usage"><span class='co'># S3 method for compare_performance</span>
@@ -221,7 +225,7 @@ and long table of parameters and fit indices.</p>
 <span class='va'>m2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>+</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
 <span class='va'>m3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
 
-<span class='kw'>if</span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://easystats.github.io/performance/'>"performance"</a></span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://easystats.github.io/performance/'>"performance"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>performance</span><span class='fu'>::</span><span class='fu'><a href='https://easystats.github.io/performance/reference/compare_performance.html'>compare_performance</a></span><span class='op'>(</span><span class='va'>m1</span>, <span class='va'>m2</span>, <span class='va'>m3</span><span class='op'>)</span>
   <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
   <span class='va'>r</span>
@@ -236,8 +240,7 @@ and long table of parameters and fit indices.</p>
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; <span class='message'>Loading required package: performance</span></div><div class='output co'>#&gt;   - lm (R2 = 0.84, adj. R2 = 0.83, AIC = 106.77, BIC = 127.84, RMSE = 0.33, Sigma = 0.34)
 #&gt;   - lm (R2 = 0.84, adj. R2 = 0.83, AIC = 106.23, BIC = 121.29, RMSE = 0.33, Sigma = 0.34)
-#&gt;   - lm (R2 = 0.76, adj. R2 = 0.76, AIC = 160.04, BIC = 169.07, RMSE = 0.40, Sigma = 0.41)</div><div class='input'>
-</div></pre>
+#&gt;   - lm (R2 = 0.76, adj. R2 = 0.76, AIC = 160.04, BIC = 169.07, RMSE = 0.40, Sigma = 0.41)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
