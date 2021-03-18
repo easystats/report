@@ -1,10 +1,10 @@
 if (require("testthat") && require("stanreg")) {
   model <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300)
 
-  testthat::test_that("model", {
+  test_that("model", {
     r <- report(model)
-    testthat::expect_is(summary(r), "character")
-    testthat::expect_is(as.data.frame(r), "data.frame")
+    expect_is(summary(r), "character")
+    expect_is(as.data.frame(r), "data.frame")
 
     expect_equal(
       as.data.frame(r)$Parameter,
