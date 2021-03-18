@@ -9,6 +9,9 @@ if (require("testthat")) {
     r <- report(cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "kendall"))
     expect_equal(as.report_table(r)$tau, -0.077, tolerance = 0.01)
 
+    set.seed(123)
+    expect_snapshot(report(cor.test(iris$Sepal.Width, iris$Sepal.Length)))
+
     # t-tests
     r <- report(t.test(iris$Sepal.Width, iris$Sepal.Length, var.equal = TRUE))
     expect_equal(as.report_table(r, summary = TRUE)$Difference, -2.786, tolerance = 0.01)
@@ -19,6 +22,9 @@ if (require("testthat")) {
     r <- report(t.test(iris$Sepal.Width, mu = 1))
     expect_equal(as.report_table(r, summary = TRUE)$Difference, 2.057, tolerance = 0.01)
   })
+
+  set.seed(123)
+  expect_snapshot(report(t.test(iris$Sepal.Width, mu = 1)))
 
   test_that("report.htest - manual inspection", {
     # Correlations
