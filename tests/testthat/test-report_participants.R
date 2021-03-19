@@ -24,4 +24,16 @@ test_that("report_participants", {
     report_participants(data2),
     "6 participants (Mean age = 28.0, SD = 21.1, range: [8, 54]; 50.0% females)"
   )
+
+  # TO DO : discuss if this is the correct approach to report in case of missing values
+
+  data3 <- data.frame(
+    "Age" = c(22, 22, 54, 54, 8, 8),
+    "Sex" = c("F", "F", NA, NA, NA, NA)
+  )
+
+  expect_equal(
+    report_participants(data3),
+    "6 participants (Mean age = 28.0, SD = 21.1, range: [8, 54]; 33.3% females)"
+  )
 })
