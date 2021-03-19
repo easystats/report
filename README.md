@@ -7,16 +7,16 @@
 
 ***“From R to your manuscript”***
 
------
+------------------------------------------------------------------------
 
 :warning: **report** has been entirely rewritten *(again)*, and won’t be
 compatible with your old code. We’ve changed it for the best, and with
 your help we’ll continue improving it. You’ll need the latest versions
 of the **easystats** packages (you can update them by running
-`easystats::install_easystats_latest()`). **Thanks for your support\!**
+`easystats::install_easystats_latest()`). **Thanks for your support!**
 :warning:
 
------
+------------------------------------------------------------------------
 
 **report**’s primary goal is to bridge the gap between R’s output and
 the formatted results contained in your manuscript. It automatically
@@ -54,19 +54,19 @@ The package documentation can be found
 [**here**](https://easystats.github.io/report/). Check-out these
 tutorials:
 
-  - [Get
+-   [Get
     Started](https://easystats.github.io/report/articles/report.html)
-  - [How to Cite
+-   [How to Cite
     Packages](https://easystats.github.io/report/articles/cite_packages.html)
 
 ## Contribute
 
 ***report* is a young package in need of affection**. You can easily be
 a part of the [developing](.github/CONTRIBUTING.md) community of this
-open-source software and improve science\! Don’t be shy, try to code and
+open-source software and improve science! Don’t be shy, try to code and
 submit a pull request (See the [contributing
 guide](.github/CONTRIBUTING.md)). Even if it’s not perfect, we will help
-you make it great\!
+you make it great!
 
 ## Installation
 
@@ -251,14 +251,14 @@ report(model)
     # warmup of 500) to predict mpg with qsec and wt (formula: mpg ~ qsec + wt). Priors over parameters were set as
     # normal (mean = 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The model's explanatory
     # power is substantial (R2 = 0.81, 89% CI [0.73, 0.88], adj. R2 = 0.78). The model's intercept, corresponding
-    # to qsec = 0 and wt = 0, is at 19.71 (95% CI [8.57, 30.44]). Within this model:
+    # to qsec = 0 and wt = 0, is at 19.79 (95% CI [9.96, 30.45]). Within this model:
     # 
-    #   - The effect of qsec (Median = 0.92, 95% CI [0.40, 1.48]) has a 99.95% probability of being positive (> 0),
-    # 98.95% of being significant (> 0.30), and 0.05% of being large (> 1.81). The estimation successfully
-    # converged (Rhat = 0.999) and the indices are reliable (ESS = 2247)
-    #   - The effect of wt (Median = -5.04, 95% CI [-6.00, -4.05]) has a 100.00% probability of being negative (< 0),
-    # 100.00% of being significant (< -0.30), and 100.00% of being large (< -1.81). The estimation successfully
-    # converged (Rhat = 1.003) and the indices are reliable (ESS = 2299)
+    #   - The effect of qsec (Median = 0.92, 0.95% CI [0.42, 1.47]) has a 100.00% probability of being positive (>
+    # 0), 99.30% of being significant (> 0.30), and 0.10% of being large (> 1.81). The estimation successfully
+    # converged (Rhat = 1.001) and the indices are reliable (ESS = 2016)
+    #   - The effect of wt (Median = -5.04, 0.95% CI [-5.98, -4.06]) has a 100.00% probability of being negative (<
+    # 0), 100.00% of being significant (< -0.30), and 100.00% of being large (< -1.81). The estimation successfully
+    # converged (Rhat = 1.000) and the indices are reliable (ESS = 2130)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT) framework, we report the median of
     # the posterior distribution and its 95% CI (Highest Density Interval), along the probability of direction
@@ -313,7 +313,7 @@ Report can also help you create sample description table (also referred
 to as **Table 1**).
 
 | Variable               | setosa (n=50) | versicolor (n=50) | virginica (n=50) | Total       |
-| :--------------------- | :------------ | :---------------- | :--------------- | :---------- |
+|:-----------------------|:--------------|:------------------|:-----------------|:------------|
 | Mean Sepal.Length (SD) | 5.01 (0.35)   | 5.94 (0.52)       | 6.59 (0.64)      | 5.84 (0.83) |
 | Mean Sepal.Width (SD)  | 3.43 (0.38)   | 2.77 (0.31)       | 2.97 (0.32)      | 3.06 (0.44) |
 | Mean Petal.Length (SD) | 1.46 (0.17)   | 4.26 (0.47)       | 5.55 (0.55)      | 3.76 (1.77) |
@@ -328,8 +328,8 @@ analysis paragraph about the tools used.
 report(sessionInfo())
 ```
 
-    # Analyses were conducted using the R Statistical language (version 4.0.4; R Core Team, 2021) on macOS Catalina
-    # 10.15.7, using the packages Rcpp (version 1.0.6; Dirk Eddelbuettel and Romain Francois, 2011), Matrix
+    # Analyses were conducted using the R Statistical language (version 4.0.4; R Core Team, 2021) on macOS Mojave
+    # 10.14.6, using the packages Rcpp (version 1.0.6; Dirk Eddelbuettel and Romain Francois, 2011), Matrix
     # (version 1.3.2; Douglas Bates and Martin Maechler, 2021), lme4 (version 1.1.26; Douglas Bates et al., 2015),
     # rstanarm (version 2.21.1; Goodrich B et al., 2020), dplyr (version 1.0.5; Hadley Wickham et al., 2021) and
     # report (version 0.2.0; Makowski et al., 2020).
@@ -346,8 +346,8 @@ report(sessionInfo())
     # R package version 2.21.1 https://mc-stan.org/rstanarm.
     #   - Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2021). dplyr: A Grammar of Data
     # Manipulation. R package version 1.0.5. https://CRAN.R-project.org/package=dplyr
-    #   - Makowski, D., Lüdecke, D., & Ben-Shachar, M.S. (2020). Automated reporting as a practical tool to improve
-    # reproducibility and methodological best practices adoption. CRAN. Available from
+    #   - Makowski, D., Lüdecke, D., Patil, I. & Ben-Shachar, M.S. (2020). Automated reporting as a practical tool to
+    # improve reproducibility and methodological best practices adoption. CRAN. Available from
     # https://github.com/easystats/report. doi: .
     #   - R Core Team (2021). R: A language and environment for statistical computing. R Foundation for Statistical
     # Computing, Vienna, Austria. URL https://www.R-project.org/.
@@ -357,6 +357,6 @@ report(sessionInfo())
 If you like it, you can put a *star* on this repo, and cite the package
 as follows:
 
-  - Makowski, D., Ben-Shachar, M. S., & Lüdecke, D. (2020). *Automated
-    reporting as a practical tool to improve reproducibility and
-    methodological best practices adoption*. CRAN.
+-   Makowski, D., Ben-Shachar, M. S., Patil, I., & Lüdecke, D. (2020).
+    *Automated reporting as a practical tool to improve reproducibility
+    and methodological best practices adoption*. CRAN.
