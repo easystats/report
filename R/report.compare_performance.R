@@ -1,6 +1,8 @@
 #' Reporting models comparison
 #'
-#' Create reports for model comparison as obtained by the \code{\link[performance:compare_performance]{performance::compare_performance()}} function in the \code{performance} package.
+#' Create reports for model comparison as obtained by the
+#' \code{\link[performance:compare_performance]{performance::compare_performance()}}
+#' function in the \code{performance} package.
 #'
 #' @param x Object of class \code{NEW OBJECT}.
 #' @inheritParams report
@@ -15,7 +17,7 @@
 #' m2 <- lm(Sepal.Length ~ Petal.Length + Species, data = iris)
 #' m3 <- lm(Sepal.Length ~ Petal.Length, data = iris)
 #'
-#' if(require("performance")){
+#' if (require("performance")) {
 #'   x <- performance::compare_performance(m1, m2, m3)
 #'   r <- report(x)
 #'   r
@@ -28,7 +30,6 @@
 #'   report_statistics(x)
 #'   report_parameters(x)
 #' }
-#'
 #' @export
 report.compare_performance <- function(x, ...) {
   table <- report_table(x, table = table, ...)
@@ -57,30 +58,30 @@ report_statistics.compare_performance <- function(x, table = NULL, ...) {
   }
 
   text <- text_short <- ""
-  if("R2" %in% names(table)){
+  if ("R2" %in% names(table)) {
     text <- text_paste(text, paste0("R2 = ", insight::format_value(table$R2)))
-    if("R2_adjusted" %in% names(table)){
+    if ("R2_adjusted" %in% names(table)) {
       text <- text_paste(text, paste0("adj. R2 = ", insight::format_value(table$R2_adjusted)))
       text_short <- text_paste(text_short, paste0("adj. R2 = ", insight::format_value(table$R2_adjusted)))
-    } else{
+    } else {
       text_short <- text_paste(text, paste0("R2 = ", insight::format_value(table$R2)))
     }
   }
-  if("AIC" %in% names(table)){
+  if ("AIC" %in% names(table)) {
     text <- text_paste(text, paste0("AIC = ", insight::format_value(table$AIC)))
   }
-  if("BIC" %in% names(table)){
+  if ("BIC" %in% names(table)) {
     text <- text_paste(text, paste0("BIC = ", insight::format_value(table$BIC)))
     text_short <- text_paste(text_short, paste0("BIC = ", insight::format_value(table$BIC)))
   }
-  if("WAIC" %in% names(table)){
+  if ("WAIC" %in% names(table)) {
     text <- text_paste(text, paste0("WAIC = ", insight::format_value(table$WAIC)))
     text_short <- text_paste(text_short, paste0("WAIC = ", insight::format_value(table$WAIC)))
   }
-  if("RMSE" %in% names(table)){
+  if ("RMSE" %in% names(table)) {
     text <- text_paste(text, paste0("RMSE = ", insight::format_value(table$RMSE)))
   }
-  if("Sigma" %in% names(table)){
+  if ("Sigma" %in% names(table)) {
     text <- text_paste(text, paste0("Sigma = ", insight::format_value(table$Sigma)))
   }
 
@@ -165,8 +166,7 @@ report_parameters.compare_performance <- function(x, table = NULL, ...) {
 
 #' @rdname report.compare_performance
 #' @export
-report_text.compare_performance <- function(x, table=NULL, ...) {
-
+report_text.compare_performance <- function(x, table = NULL, ...) {
   stats <- report_statistics(x, table = table)
   table <- attributes(stats)$table
 
@@ -176,11 +176,13 @@ report_text.compare_performance <- function(x, table=NULL, ...) {
   text_short <- text_concatenate(paste0(models, " (", summary(stats), ")"))
 
   # Add intro sentence
-  text_start <- paste0("We compared ",
-                      insight::format_number(nrow(table)),
-                      " ",
-                      ifelse(length(unique(table$Type)) == 1, format_model(unique(table$Type)), "model"),
-                      "s")
+  text_start <- paste0(
+    "We compared ",
+    insight::format_number(nrow(table)),
+    " ",
+    ifelse(length(unique(table$Type)) == 1, format_model(unique(table$Type)), "model"),
+    "s"
+  )
   text <- paste0(text_start, "; ", text, ".")
   text_short <- paste0(text_start, "; ", text_short, ".")
 

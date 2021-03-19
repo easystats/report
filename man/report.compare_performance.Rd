@@ -31,7 +31,9 @@ with a short and long description of the model summary, as well as a short
 and long table of parameters and fit indices.
 }
 \description{
-Create reports for model comparison as obtained by the \code{\link[performance:compare_performance]{performance::compare_performance()}} function in the \code{performance} package.
+Create reports for model comparison as obtained by the
+\code{\link[performance:compare_performance]{performance::compare_performance()}}
+function in the \code{performance} package.
 }
 \examples{
 library(report)
@@ -40,7 +42,7 @@ m1 <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
 m2 <- lm(Sepal.Length ~ Petal.Length + Species, data = iris)
 m3 <- lm(Sepal.Length ~ Petal.Length, data = iris)
 
-if(require("performance")){
+if (require("performance")) {
   x <- performance::compare_performance(m1, m2, m3)
   r <- report(x)
   r
@@ -53,7 +55,6 @@ if(require("performance")){
   report_statistics(x)
   report_parameters(x)
 }
-
 }
 \seealso{
 Specific components of reports (especially for stats models):

@@ -17,15 +17,16 @@ with a short and long description of the model summary, as well as a short
 and long table of parameters and fit indices.
 }
 \description{
-Create reports for Bayesian models. The description of the parameters follows the
-Sequential Effect eXistence and sIgnificance Testing framework (see \link[bayestestR:sexit]{SEXIT documentation}).
+Create reports for Bayesian models. The description of the parameters follows
+the Sequential Effect eXistence and sIgnificance Testing framework (see
+\link[bayestestR:sexit]{SEXIT documentation}).
 }
 \examples{
 library(report)
 
 # Bayesian models
-if(require("rstanarm")){
-  model <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh=0, iter=300, chains=2, seed=333)
+if (require("rstanarm")) {
+  model <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300, chains = 2, seed = 333)
   r <- report(model)
   r
   summary(r)

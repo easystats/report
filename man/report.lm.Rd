@@ -57,15 +57,18 @@
 \arguments{
 \item{x}{Object of class \code{lm} or \code{glm}.}
 
-\item{include_effectsize}{If \code{FALSE}, won't include effect-size related indices (standardized coefficients, etc.).}
+\item{include_effectsize}{If \code{FALSE}, won't include effect-size related
+indices (standardized coefficients, etc.).}
 
-\item{effectsize_method}{See documentation for \code{\link[effectsize:effectsize]{effectsize::effectsize()}}.}
+\item{effectsize_method}{See documentation for
+\code{\link[effectsize:effectsize]{effectsize::effectsize()}}.}
 
 \item{...}{Arguments passed to or from other methods.}
 
 \item{table}{Provide the output of  \code{report_table()} to avoid its re-computation.}
 
-\item{include_diagnostic}{If \code{FALSE}, won't include diagnostic related indices for Bayesian models (ESS, Rhat).}
+\item{include_diagnostic}{If \code{FALSE}, won't include diagnostic related
+indices for Bayesian models (ESS, Rhat).}
 
 \item{include_intercept}{If \code{FALSE}, won't include the intercept.}
 

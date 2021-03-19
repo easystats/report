@@ -3,7 +3,16 @@
 #' @importFrom parameters skewness kurtosis
 #'
 #' @export
-report.numeric <- function(x, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = "auto", digits = 2, ...) {
+report.numeric <- function(x,
+                           n = FALSE,
+                           centrality = "mean",
+                           dispersion = TRUE,
+                           range = TRUE,
+                           distribution = FALSE,
+                           missing_percentage = "auto",
+                           digits = 2,
+                           ...) {
+
 
   # Print warning if only two different vars
   if (length(unique(x)) <= 2) {
@@ -15,8 +24,28 @@ report.numeric <- function(x, n = FALSE, centrality = "mean", dispersion = TRUE,
     warning(paste0("Variable `", name, "` contains only ", length(unique(x)), "different values. Consider converting it to a factor."))
   }
 
-  table <- report_table(x, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, missing_percentage = missing_percentage, digits = digits, ...)
-  text <- report_text(x, table = table, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, missing_percentage = missing_percentage, digits = digits, ...)
+  table <- report_table(
+    x,
+    centrality = centrality,
+    dispersion = dispersion,
+    range = range,
+    distribution = distribution,
+    missing_percentage = missing_percentage,
+    digits = digits,
+    ...
+  )
+
+  text <- report_text(
+    x,
+    table = table,
+    centrality = centrality,
+    dispersion = dispersion,
+    range = range,
+    distribution = distribution,
+    missing_percentage = missing_percentage,
+    digits = digits,
+    ...
+  )
 
   as.report(text, table = table, ...)
 }
@@ -27,10 +56,16 @@ report.numeric <- function(x, n = FALSE, centrality = "mean", dispersion = TRUE,
 
 # report_table ------------------------------------------------------------
 
-
-
 #' @export
-report_table.numeric <- function(x, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = "auto", digits = 2, ...) {
+report_table.numeric <- function(x,
+                                 n = FALSE,
+                                 centrality = "mean",
+                                 dispersion = TRUE,
+                                 range = TRUE,
+                                 distribution = FALSE,
+                                 missing_percentage = "auto",
+                                 digits = 2,
+                                 ...) {
   missing_percentage <- .report_dataframe_percentage(x, missing_percentage)
 
   table_full <- data.frame(
@@ -106,12 +141,31 @@ report_table.numeric <- function(x, n = FALSE, centrality = "mean", dispersion =
 
 
 #' @export
-report_parameters.numeric <- function(x, table = NULL, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = "auto", digits = 2, ...) {
+report_parameters.numeric <- function(x,
+                                      table = NULL,
+                                      n = FALSE,
+                                      centrality = "mean",
+                                      dispersion = TRUE,
+                                      range = TRUE,
+                                      distribution = FALSE,
+                                      missing_percentage = "auto",
+                                      digits = 2,
+                                      ...) {
   missing_percentage <- .report_dataframe_percentage(x, missing_percentage)
 
   # Get table
   if (is.null(table)) {
-    table <- report_table(x, n = n, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, missing_percentage = missing_percentage, digits = digits, ...)
+    table <- report_table(
+      x,
+      n = n,
+      centrality = centrality,
+      dispersion = dispersion,
+      range = range,
+      distribution = distribution,
+      missing_percentage = missing_percentage,
+      digits = digits,
+      ...
+    )
   }
 
   # Compute text elements ---
@@ -202,7 +256,16 @@ report_parameters.numeric <- function(x, table = NULL, n = FALSE, centrality = "
 # report_text -------------------------------------------------------------
 
 #' @export
-report_text.numeric <- function(x, table = NULL, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = "auto", digits = 2, ...) {
+report_text.numeric <- function(x,
+                                table = NULL,
+                                n = FALSE,
+                                centrality = "mean",
+                                dispersion = TRUE,
+                                range = TRUE,
+                                distribution = FALSE,
+                                missing_percentage = "auto",
+                                digits = 2,
+                                ...) {
   if (!is.null(list(...)$varname)) {
     name <- list(...)$varname
   } else if (is.null(names(x))) {
@@ -212,7 +275,18 @@ report_text.numeric <- function(x, table = NULL, n = FALSE, centrality = "mean",
   }
 
   # Get parameters
-  params <- report_parameters(x, table = table, n = n, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, missing_percentage = missing_percentage, digits = digits, ...)
+  params <- report_parameters(
+    x,
+    table = table,
+    n = n,
+    centrality = centrality,
+    dispersion = dispersion,
+    range = range,
+    distribution = distribution,
+    missing_percentage = missing_percentage,
+    digits = digits,
+    ...
+  )
 
   text <- paste0(
     name,
@@ -238,10 +312,31 @@ report_text.numeric <- function(x, table = NULL, n = FALSE, centrality = "mean",
 
 
 #' @export
-report_statistics.numeric <- function(x, table = NULL, n = FALSE, centrality = "mean", dispersion = TRUE, range = TRUE, distribution = FALSE, missing_percentage = "auto", digits = 2, ...) {
+report_statistics.numeric <- function(x,
+                                      table = NULL,
+                                      n = FALSE,
+                                      centrality = "mean",
+                                      dispersion = TRUE,
+                                      range = TRUE,
+                                      distribution = FALSE,
+                                      missing_percentage = "auto",
+                                      digits = 2,
+                                      ...) {
+
 
   # Get parameters
-  params <- report_parameters(x, table = table, n = n, centrality = centrality, dispersion = dispersion, range = range, distribution = distribution, missing_percentage = missing_percentage, digits = digits, ...)
+  params <- report_parameters(
+    x,
+    table = table,
+    n = n,
+    centrality = centrality,
+    dispersion = dispersion,
+    range = range,
+    distribution = distribution,
+    missing_percentage = missing_percentage,
+    digits = digits,
+    ...
+  )
 
   text <- paste0(params, collapse = ", ")
   short <- paste0(summary(params), collapse = ", ")

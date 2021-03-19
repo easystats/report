@@ -1,10 +1,12 @@
 #' Report a textual description of an object
 #'
-#' Creates text containing a description of the parameters of R objects (see list of supported objects in \code{\link{report}}).
+#' Creates text containing a description of the parameters of R objects (see
+#' list of supported objects in \code{\link{report}}).
 #'
 #' @inheritParams report
 #' @inheritParams report_table
-#' @param table A table obtained via \code{report_table()}. If not provided, will run it.
+#' @param table A table obtained via \code{report_table()}. If not provided,
+#'   will run it.
 #'
 #' @return A \code{character} string.
 #'

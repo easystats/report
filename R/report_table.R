@@ -1,6 +1,7 @@
 #' Report a descriptive table
 #'
-#' Creates tables to describe different objects (see list of supported objects in \code{\link{report}}).
+#' Creates tables to describe different objects (see list of supported objects
+#' in \code{\link{report}}).
 #'
 #' @inheritParams report
 #'

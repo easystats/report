@@ -2,47 +2,46 @@ Type: Package
 Package: report
 Title: Automated Reporting of Objects in R
 Version: 0.2.0
-Authors@R: c(
-	person("Dominique", 
-		"Makowski", 
-		email = "dom.makowski@gmail.com",
-		role = c("aut", "cre"), 
-		comment = c(ORCID = "0000-0001-5375-9967", Twitter = "@Dom_Makowski")),
-	person("Daniel", 
-		"Lüdecke", 
-		role = c("aut"), 
-		email = "d.luedecke@uke.de", 
-		comment = c(ORCID = "0000-0002-8895-3206")),
-	person("Mattan S.", 
-		"Ben-Shachar", 
-		role = c("aut"), 
-		email = "matanshm@post.bgu.ac.il", 
-		comment = c(ORCID = "0000-0002-4287-4801")),
-	person(given = "Indrajeet",
-		family = "Patil",
-		role = "ctb",
-		email = "patilindrajeet.science@gmail.com",
-		comment = c(ORCID = "0000-0003-1995-6531", Twitter = "@patilindrajeets")),
-	person("Rudolf", 
-		"Siegel", 
-		role = c("ctb"), 
-		email = "mutlusun@users.noreply.github.com", 
-		comment = c(ORCID = "0000-0002-6021-804X")))
+Authors@R: 
+    c(person(given = "Dominique",
+             family = "Makowski",
+             role = c("aut", "cre"),
+             email = "dom.makowski@gmail.com",
+             comment = c(ORCID = "0000-0001-5375-9967", Twitter = "@Dom_Makowski")),
+      person(given = "Daniel",
+             family = "Lüdecke",
+             role = "aut",
+             email = "d.luedecke@uke.de",
+             comment = c(ORCID = "0000-0002-8895-3206")),
+      person(given = "Mattan S.",
+             family = "Ben-Shachar",
+             role = "aut",
+             email = "matanshm@post.bgu.ac.il",
+             comment = c(ORCID = "0000-0002-4287-4801")),
+      person(given = "Indrajeet",
+             family = "Patil",
+             role = "ctb",
+             email = "patilindrajeet.science@gmail.com",
+             comment = c(ORCID = "0000-0003-1995-6531", Twitter = "@patilindrajeets")),
+      person(given = "Rudolf",
+             family = "Siegel",
+             role = "ctb",
+             email = "mutlusun@users.noreply.github.com",
+             comment = c(ORCID = "0000-0002-6021-804X")))
 Maintainer: Dominique Makowski <dom.makowski@gmail.com>
-Description: Bridge the gap between R’s output and the formatted
-    results contained in your manuscript. This package converts
-    statistical models and data frames into textual reports suited for
-    publication, ensuring standardization and quality in results
-    reporting.
+Description: Bridge the gap between R’s output and the formatted results
+    contained in your manuscript. This package converts statistical models
+    and data frames into textual reports suited for publication, ensuring
+    standardization and quality in results reporting.
 License: GPL-3
 URL: https://easystats.github.io/report/
 BugReports: https://github.com/easystats/report/issues
 Imports:
-    insight (>= 0.12.0.1),
-    bayestestR (>= 0.8.2.1),
-    effectsize (>= 0.4.3.1),
-    parameters (>= 0.11.0.1),
-    performance (>= 0.6.1.1),
+    bayestestR (>= 0.8.3.1),
+    effectsize (>= 0.4.4),
+    insight (>= 0.13.1.1),
+    parameters (>= 0.12.0.1),
+    performance (>= 0.7.0.1),
     stats,
     tools,
     utils
@@ -59,19 +58,19 @@ Suggests:
     rstanarm,
     spelling,
     testthat
-Remotes: 
-    easystats/insight,
-    easystats/bayestestR,
-    easystats/parameters,
-    easystats/effectsize,
-    easystats/performance
 VignetteBuilder: 
     knitr
+Remotes: 
+    easystats/bayestestR,
+    easystats/effectsize,
+    easystats/insight,
+    easystats/parameters,
+    easystats/performance
+Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 LazyData: true
-RoxygenNote: 7.1.1
-Config/testthat/edition: 3
+RoxygenNote: 7.1.1.9001
 Collate: 
     'cite_easystats.R'
     'format_algorithm.R'

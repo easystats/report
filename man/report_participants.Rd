@@ -21,22 +21,27 @@ report_participants(
 
 \item{age}{The name of the column containing the age.}
 
-\item{sex}{The name of the column containing the sex. Note that classes should be some of c("Male", "M", "Female", "F").}
+\item{sex}{The name of the column containing the sex. Note that classes
+should be one of `c("Male", "M", "Female", "F")`.}
 
 \item{education}{The name of the column containing education information.}
 
-\item{participants}{The name of the participants' identifier column (for instance in the case of repeated measures).}
+\item{participants}{The name of the participants' identifier column (for
+instance in the case of repeated measures).}
 
-\item{group}{A character vector indicating the name(s) of the column(s) used for stratified description.}
+\item{group}{A character vector indicating the name(s) of the column(s) used
+for stratified description.}
 
-\item{spell_n}{Fully spell the sample size ("Three participants" instead of "3 participants").}
+\item{spell_n}{Fully spell the sample size ("Three participants" instead of
+"3 participants").}
 
 \item{digits}{Number of significant digits.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{
-A character vector with description of the "participants", based on the information provided in \code{data}.
+A character vector with description of the "participants", based on
+  the information provided in \code{data}.
 }
 \description{
 A helper function to help you format the participants data (age, sex, ...) in the participants section.

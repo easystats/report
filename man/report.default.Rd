@@ -50,7 +50,10 @@ with a short and long description of the model summary, as well as a short
 and long table of parameters and fit indices.
 }
 \description{
-\href{URL}{Template file} to add report support for new objects. Check-out the vignette on \href{https://easystats.github.io/report/articles/new_models.html}{Supporting New Models}.
+\href{URL}{Template file} to add report support for new objects. Check-out
+the vignette on
+\href{https://easystats.github.io/report/articles/new_models.html}{Supporting
+New Models}.
 }
 \examples{
 library(report)

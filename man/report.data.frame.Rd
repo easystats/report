@@ -49,15 +49,20 @@
 
 \item{n_entries}{Number of different character entries to show. Can be "all".}
 
-\item{levels_percentage}{Show characters entries and factor levels by number or percentage. If "auto", then will be set to number and percentage if the length if n observations larger than 100.}
+\item{levels_percentage}{Show characters entries and factor levels by number
+or percentage. If "auto", then will be set to number and percentage if the
+length if n observations larger than 100.}
 
-\item{missing_percentage}{Show missing by number (default) or percentage. If "auto", then will be set to number and percentage if the length if n observations larger than 100.}
+\item{missing_percentage}{Show missing by number (default) or percentage. If
+"auto", then will be set to number and percentage if the length if n
+observations larger than 100.}
 
 \item{...}{Arguments passed to or from other methods.}
 
 \item{n}{Include number of observations for each individual variable.}
 
-\item{centrality}{Character vector, indicating the index of centrality (either \code{"mean"} or \code{"median"}).}
+\item{centrality}{Character vector, indicating the index of centrality
+(either \code{"mean"} or \code{"median"}).}
 
 \item{dispersion}{Show index of dispersion (\link{sd} if \code{centrality = "mean"}, or \link{mad} if \code{centrality = "median"}).}
 
