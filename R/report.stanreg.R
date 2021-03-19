@@ -1,7 +1,8 @@
 #' Reporting Bayesian Models
 #'
-#' Create reports for Bayesian models. The description of the parameters follows the
-#' Sequential Effect eXistence and sIgnificance Testing framework (see \link[bayestestR:sexit]{SEXIT documentation}).
+#' Create reports for Bayesian models. The description of the parameters follows
+#' the Sequential Effect eXistence and sIgnificance Testing framework (see
+#' \link[bayestestR:sexit]{SEXIT documentation}).
 #'
 #' @inheritParams report.lm
 #' @inherit report return seealso
@@ -86,7 +87,11 @@ report_priors.stanreg <- function(x, ...) {
 
 
 #' @export
-report_parameters.stanreg <- function(x, include_intercept = TRUE, include_diagnostic = TRUE, ...) {
+report_parameters.stanreg <-  function(x,
+           include_intercept = TRUE,
+           include_diagnostic = TRUE,
+           ...) {
+
 
   # Get data
   data <- bayestestR::sexit(x, ...)

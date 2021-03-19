@@ -1,6 +1,9 @@
 #' Template to add report support for new objects
 #'
-#' \href{URL}{Template file} to add report support for new objects. Check-out the vignette on \href{https://easystats.github.io/report/articles/new_models.html}{Supporting New Models}.
+#' \href{URL}{Template file} to add report support for new objects. Check-out
+#' the vignette on
+#' \href{https://easystats.github.io/report/articles/new_models.html}{Supporting
+#' New Models}.
 #'
 #' @param x Object of class \code{NEW OBJECT}.
 #' @inheritParams report

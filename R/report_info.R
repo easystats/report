@@ -1,6 +1,7 @@
 #' Report additional information
 #'
-#' Reports additional information relevant to the report (see list of supported objects in \code{\link{report}}).
+#' Reports additional information relevant to the report (see list of supported
+#' objects in \code{\link{report}}).
 #'
 #' @inheritParams report
 #' @inheritParams report_table

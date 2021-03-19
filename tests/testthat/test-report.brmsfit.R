@@ -1,12 +1,12 @@
 # if (require("testthat") && require("brms")) {
 #
-#   testthat::test_that("report.brms", {
+#   test_that("report.brms", {
 #
 #     model <- brm(mpg ~ qsec + wt, data = mtcars, refresh=0, iter=300, seed = 333)
 #     r <- report(model)
 #
-#     testthat::expect_is(summary(r), "character")
-#     testthat::expect_is(as.data.frame(r), "data.frame")
+#     expect_is(summary(r), "character")
+#     expect_is(as.data.frame(r), "data.frame")
 #
 #     expect_equal(
 #       as.data.frame(r)$Parameter,

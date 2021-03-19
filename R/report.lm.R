@@ -3,10 +3,13 @@
 #' Create reports for (general) linear models.
 #'
 #' @param x Object of class \code{lm} or \code{glm}.
-#' @param include_effectsize If \code{FALSE}, won't include effect-size related indices (standardized coefficients, etc.).
-#' @param include_diagnostic If \code{FALSE}, won't include diagnostic related indices for Bayesian models (ESS, Rhat).
+#' @param include_effectsize If \code{FALSE}, won't include effect-size related
+#'   indices (standardized coefficients, etc.).
+#' @param include_diagnostic If \code{FALSE}, won't include diagnostic related
+#'   indices for Bayesian models (ESS, Rhat).
 #' @param include_intercept If \code{FALSE}, won't include the intercept.
-#' @param effectsize_method See documentation for \code{\link[effectsize:effectsize]{effectsize::effectsize()}}.
+#' @param effectsize_method See documentation for
+#'   \code{\link[effectsize:effectsize]{effectsize::effectsize()}}.
 #' @param parameters Provide the output of \code{report_parameters()} to avoid its re-computation.
 #' @inheritParams report
 #' @inheritParams report.htest
@@ -149,8 +152,8 @@ report_table.lm <- function(x, include_effectsize = TRUE, ...) {
     "rmse", # lm
     "logloss", "score_log", "score_spherical", "pcp", # glm
     "icc", # lmer
-    "elpd_se", "looic_se"
-  ), ] # stanreg
+    "elpd_se", "looic_se" # stanreg
+  ), ]
 
   # Clean -----
   # Rename some columns
@@ -162,10 +165,7 @@ report_table.lm <- function(x, include_effectsize = TRUE, ...) {
   }
   table_full <- data_remove(params, "SE")
   table <- data_remove(table_full, data_findcols(table_full, ends_with = c("_CI_low|_CI_high")))
-  table <- table[!table$Parameter %in% c(
-    "AIC", "BIC",
-    "ELPD", "LOOIC", "WAIC"
-  ), ]
+  table <- table[!table$Parameter %in% c("AIC", "BIC", "ELPD", "LOOIC", "WAIC"), ]
 
   # Prepare -----
   out <- as.report_table(table_full,
@@ -191,7 +191,11 @@ report_table.lm <- function(x, include_effectsize = TRUE, ...) {
 
 #' @rdname report.lm
 #' @export
-report_statistics.lm <- function(x, table = NULL, include_effectsize = TRUE, include_diagnostic = TRUE, ...) {
+report_statistics.lm <- function(x,
+                                 table = NULL,
+                                 include_effectsize = TRUE,
+                                 include_diagnostic = TRUE,
+                                 ...) {
   if (is.null(table)) {
     table <- report_table(x, ...)
   }
@@ -274,7 +278,12 @@ report_statistics.lm <- function(x, table = NULL, include_effectsize = TRUE, inc
 #' @rdname report.lm
 #' @inheritParams report_statistics
 #' @export
-report_parameters.lm <- function(x, table = NULL, include_effectsize = TRUE, include_intercept = TRUE, ...) {
+report_parameters.lm <- function(x,
+                                 table = NULL,
+                                 include_effectsize = TRUE,
+                                 include_intercept = TRUE,
+                                 ...) {
+
 
   # Get data
   stats <- report_statistics(x, table = table, include_effectsize = include_effectsize, ...)
@@ -460,7 +469,11 @@ report_performance.lm <- function(x, table = NULL, ...) {
 
 #' @rdname report.lm
 #' @export
-report_info.lm <- function(x, effectsize = NULL, include_effectsize = FALSE, parameters = NULL, ...) {
+report_info.lm <- function(x,
+                           effectsize = NULL,
+                           include_effectsize = FALSE,
+                           parameters = NULL,
+                           ...) {
   if (is.null(effectsize)) {
     effectsize <- report_effectsize(x, ...)
   }
