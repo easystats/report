@@ -1,10 +1,6 @@
 ---
 title: "Report and Cite Packages"
 output: 
-  github_document:
-    toc: true
-    fig_width: 10.08
-    fig_height: 6
   rmarkdown::html_vignette:
     toc: true
     fig_width: 10.08
@@ -19,17 +15,28 @@ editor_options:
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  message = FALSE,
+  warning = FALSE,
   tidy.opts = list(width.cutoff = 60),
   tidy = TRUE
 )
+
 options(knitr.kable.NA = '', digits = 4)
+
 if (!requireNamespace("dplyr", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
 }
 ```
 
+**Citing the packages, modules and software** you used for your analysis is
+important to acknowledge the time and effort spent by people who create theses
+tools (sometimes in their free-time, or at the expense of their own research),
+but also for **reproducibility**. Indeed, statistical routines are often
+implemented in different ways by different packages, which can lead to possible
+discrepancies in the results. Explicitly mentionining that *"I did this using this function from that package version 1.2.3"* is a way of **protecting yourself** by being transparent about what you have found doing what you have
+done.
 
-**Citing the packages, modules and software** you used for your analysis is important to acknowledge the time and effort spent by people to create theses tools (sometimes on their free-time, or at the expense of their own research), but also for **reproducibility**. Indeed, statistical routines are often implemented in different ways by different packages, which can lead to possible discrepancies in the results. Saying *"I did this using this function from that package version 1.2.3"* is a way of **protecting yourself** by being transparent about what you have found doing what you have done.
+But, understandably, you must have a lot of questions- 
 
 > **That's great, but how to *actually* cite them?**
 
@@ -37,33 +44,45 @@ if (!requireNamespace("dplyr", quietly = TRUE)) {
 
 > **How should I report the system (the OS, the R version, etc.)?**
 
-All the answers below :)
+We attempt to answer these questions below :)
 
 ## What should I cite?
 
-Ideally, you should indeed cite all the packages that you used. However, it's often not possible to cite them all in the manuscript body. Therefore, we would recommend the following:
+Ideally, you should indeed cite all the packages that you used. However, it's
+often not possible to cite them all in the manuscript body. Therefore, we would
+recommend the following guidelines:
 
 ### 1. Cite the main/important packages in the manuscript
 
-This should be done for the packages that were central to your specific study (*i.e.,* that got you the results that you reported) rather than data manipulation tools (*even though these are as much, if not *more*, important*). For example:
+This should be done for the packages that were central to your specific study
+(*i.e.,* that got you the results that you reported) rather than data
+manipulation tools (even though these are as much, if not *more*, important).
+For example:
 
-> Statistics were done using R 3.5.0 (R Core Team, 2018), the *rstanarm* (*v2.13.1*; Gabry \& Goodrich, 2016) and the *report* (*v0.1.0*; Makowski \& Lüdecke, 2019) packages. The full reproducible code is available in **Supplementary Materials**.
+> Statistical analysis were carried out using R 3.5.0 (R Core Team, 2018), the
+*rstanarm* (*v2.13.1*; Gabry \& Goodrich, 2016) and the *report* (*v0.2.0*;
+Makowski, Patil, \& Lüdecke, 2019) packages. The full reproducible code is available in **Supplementary Materials**.
 
 ### 2. Present everything in Supplementary Materials
 
-Then, in *Supplementary Materials*, you can show all the packages and functions you used. To do it quickly, explicitly and in a reproducible fashion, we recommend writing the *Supplementary Materials* with [**R Markdown**](https://rmarkdown.rstudio.com/), which can generate *docs* and *pdf* files that you can submit along with your manuscript. Moreover, if you're using R, you can include (usually at the end) every used package's citation using the `cite_packages()` function from the [**report**](https://github.com/easystats/report) package. For example:
+Then, in *Supplementary Materials*, you can show all the packages and functions
+you used. To do it quickly, explicitly and in a reproducible fashion, we
+recommend writing the *Supplementary Materials* with [**R Markdown**](https://rmarkdown.rstudio.com/), which can generate *docs* and *pdf*
+files that you can submit along with your manuscript. Moreover, if you're using
+R, you can include (usually at the end) every used package's citation using the
+`cite_packages()` function from the
+[**report**](https://github.com/easystats/report) package. For example:
 
-```{r message=FALSE, warning=FALSE, results='asis'}
+```{r, results='asis'}
 library(report)
 library(dplyr)
 
 cite_packages()
 ```
 
-
 ## Where 
 
-Finding the right citation information is sometimes complicated. In R, this process is made quite easy, you simply run `citation("packagename")`. For instance, `citation("bayestestR")`:
+Finding the right citation information is sometimes complicated. In `R`, this process is made quite easy, you simply run `citation("packagename")`. For instance, `citation("bayestestR")`:
 
     To cite bayestestR in publications use:
 
@@ -86,12 +105,16 @@ Finding the right citation information is sometimes complicated. In R, this proc
         url = {https://joss.theoj.org/papers/10.21105/joss.01541},
       }
 
-For other languages, such as Python or Julia, it might be a little trickier, but a quick search on Google (or github) should provide you with all the necessary information (version, authors and date). **Keep in mind that it's better to have a slightly incomplete citation than no citation at all.**
+For other languages, such as `Python` or `Julia`, it might be a little trickier,
+but a quick search on Google (or github) should provide you with all the
+necessary information (version, authors and date). 
+
+**Keep in mind that it's better to have a slightly incomplete citation than no citation at all.**
 
 ## cite_easystats()
 
 If you want to cite the **easystats** ecosystem, you can use the [`cite_eaststats()`](https://easystats.github.io/easystats/reference/cite_eaststats.html) function:
 
-```{r message=FALSE, warning=FALSE, results='asis'}
+```{r results='asis'}
 cite_easystats()
 ```

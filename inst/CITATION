@@ -1,8 +1,8 @@
 bibentry(bibtype = "Article",
          title = "Automated reporting as a practical tool to improve reproducibility and methodological best practices adoption",
-         author = "Makowski, Dominique, Lüdecke, Daniel, Patil, Indrajeet, and Ben-Shachar, Mattan S.",
+         author=c(person("Dominique", "Makowski"), person("Mattan S.", "Ben-Shachar"), person("Indrajeet", "Patil"), person("Daniel", "Lüdecke")),
          year = 2020,
          journal = "CRAN",
          url = "https://github.com/easystats/report",
-         	textVersion = paste("Makowski, D., Lüdecke, D., Patil, I. & Ben-Shachar, M.S. (2020). Automated reporting as a practical tool to improve reproducibility and methodological best practices adoption. CRAN.", "Available from https://github.com/easystats/report.", "doi: .",  sep=" "),
+         	textVersion = paste("Makowski, D., Ben-Shachar, M.S., Patil, I. & Lüdecke, D. (2020). Automated reporting as a practical tool to improve reproducibility and methodological best practices adoption. CRAN.", "Available from https://github.com/easystats/report.", "doi: .",  sep=" "),
           mheader = "To cite in publications use:")
