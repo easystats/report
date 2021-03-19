@@ -104,7 +104,8 @@
 
     
     
-<p><strong>Citing the packages, modules and software</strong> you used for your analysis is important to acknowledge the time and effort spent by people to create theses tools (sometimes on their free-time, or at the expense of their own research), but also for <strong>reproducibility</strong>. Indeed, statistical routines are often implemented in different ways by different packages, which can lead to possible discrepancies in the results. Saying <em>“I did this using this function from that package version 1.2.3”</em> is a way of <strong>protecting yourself</strong> by being transparent about what you have found doing what you have done.</p>
+<p><strong>Citing the packages, modules and software</strong> you used for your analysis is important to acknowledge the time and effort spent by people who create theses tools (sometimes in their free-time, or at the expense of their own research), but also for <strong>reproducibility</strong>. Indeed, statistical routines are often implemented in different ways by different packages, which can lead to possible discrepancies in the results. Explicitly mentionining that <em>“I did this using this function from that package version 1.2.3”</em> is a way of <strong>protecting yourself</strong> by being transparent about what you have found doing what you have done.</p>
+<p>But, understandably, you must have a lot of questions-</p>
 <blockquote>
 <p><strong>That’s great, but how to <em>actually</em> cite them?</strong></p>
 </blockquote>
@@ -114,17 +115,17 @@
 <blockquote>
 <p><strong>How should I report the system (the OS, the R version, etc.)?</strong></p>
 </blockquote>
-<p>All the answers below :)</p>
+<p>We attempt to answer these questions below :)</p>
 <div id="what-should-i-cite" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-should-i-cite" class="anchor"></a>What should I cite?</h2>
-<p>Ideally, you should indeed cite all the packages that you used. However, it’s often not possible to cite them all in the manuscript body. Therefore, we would recommend the following:</p>
+<p>Ideally, you should indeed cite all the packages that you used. However, it’s often not possible to cite them all in the manuscript body. Therefore, we would recommend the following guidelines:</p>
 <div id="cite-the-mainimportant-packages-in-the-manuscript" class="section level3">
 <h3 class="hasAnchor">
 <a href="#cite-the-mainimportant-packages-in-the-manuscript" class="anchor"></a>1. Cite the main/important packages in the manuscript</h3>
-<p>This should be done for the packages that were central to your specific study (<em>i.e.,</em> that got you the results that you reported) rather than data manipulation tools (<em>even though these are as much, if not </em>more<em>, important</em>). For example:</p>
+<p>This should be done for the packages that were central to your specific study (<em>i.e.,</em> that got you the results that you reported) rather than data manipulation tools (even though these are as much, if not <em>more</em>, important). For example:</p>
 <blockquote>
-<p>Statistics were done using R 3.5.0 (R Core Team, 2018), the <em>rstanarm</em> (<em>v2.13.1</em>; Gabry &amp; Goodrich, 2016) and the <em>report</em> (<em>v0.1.0</em>; Makowski &amp; Lüdecke, 2019) packages. The full reproducible code is available in <strong>Supplementary Materials</strong>.</p>
+<p>Statistical analysis were carried out using R 3.5.0 (R Core Team, 2018), the <em>rstanarm</em> (<em>v2.13.1</em>; Gabry &amp; Goodrich, 2016) and the <em>report</em> (<em>v0.2.0</em>; Makowski, Patil, &amp; Lüdecke, 2019) packages. The full reproducible code is available in <strong>Supplementary Materials</strong>.</p>
 </blockquote>
 </div>
 <div id="present-everything-in-supplementary-materials" class="section level3">
@@ -139,7 +140,7 @@
 <ul>
 <li>Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2021). dplyr: A Grammar of Data Manipulation. R package version 1.0.5. <a href="https://CRAN.R-project.org/package=dplyr" class="external-link uri">https://CRAN.R-project.org/package=dplyr</a>
 </li>
-<li>Makowski, D., Lüdecke, D., Patil, I. &amp; Ben-Shachar, M.S. (2020). Automated reporting as a practical tool to improve reproducibility and methodological best practices adoption. CRAN. Available from <a href="https://github.com/easystats/report" class="external-link uri">https://github.com/easystats/report</a>. doi: .</li>
+<li>Makowski, D., Ben-Shachar, M.S., Patil, I. &amp; Lüdecke, D. (2020). Automated reporting as a practical tool to improve reproducibility and methodological best practices adoption. CRAN. Available from <a href="https://github.com/easystats/report" class="external-link uri">https://github.com/easystats/report</a>. doi: .</li>
 <li>R Core Team (2021). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL <a href="https://www.R-project.org/" class="external-link uri">https://www.R-project.org/</a>.</li>
 </ul>
 </div>
@@ -147,7 +148,7 @@
 <div id="where" class="section level2">
 <h2 class="hasAnchor">
 <a href="#where" class="anchor"></a>Where</h2>
-<p>Finding the right citation information is sometimes complicated. In R, this process is made quite easy, you simply run <code><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation("packagename")</a></code>. For instance, <code><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation("bayestestR")</a></code>:</p>
+<p>Finding the right citation information is sometimes complicated. In <code>R</code>, this process is made quite easy, you simply run <code><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation("packagename")</a></code>. For instance, <code><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation("bayestestR")</a></code>:</p>
 <pre><code>To cite bayestestR in publications use:
 
   Makowski, D., Ben-Shachar, M., &amp; Lüdecke, D. (2019). bayestestR:
@@ -168,7 +169,8 @@ A BibTeX entry for LaTeX users is
     pages = {1541},
     url = {https://joss.theoj.org/papers/10.21105/joss.01541},
   }</code></pre>
-<p>For other languages, such as Python or Julia, it might be a little trickier, but a quick search on Google (or github) should provide you with all the necessary information (version, authors and date). <strong>Keep in mind that it’s better to have a slightly incomplete citation than no citation at all.</strong></p>
+<p>For other languages, such as <code>Python</code> or <code>Julia</code>, it might be a little trickier, but a quick search on Google (or github) should provide you with all the necessary information (version, authors and date).</p>
+<p><strong>Keep in mind that it’s better to have a slightly incomplete citation than no citation at all.</strong></p>
 </div>
 <div id="cite_easystats" class="section level2">
 <h2 class="hasAnchor">

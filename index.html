@@ -284,15 +284,15 @@
 <div class="sourceCode" id="cb19"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains of 1000 iterations and a</span></span>
 <span id="cb19-2"><a href="#cb19-2"></a><span class="co"># warmup of 500) to predict mpg with qsec and wt (formula: mpg ~ qsec + wt). Priors over parameters were set as</span></span>
 <span id="cb19-3"><a href="#cb19-3"></a><span class="co"># normal (mean = 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The model's explanatory</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a><span class="co"># power is substantial (R2 = 0.81, 89% CI [0.73, 0.89], adj. R2 = 0.79). The model's intercept, corresponding</span></span>
-<span id="cb19-5"><a href="#cb19-5"></a><span class="co"># to qsec = 0 and wt = 0, is at 19.38 (95% CI [8.03, 29.19]). Within this model:</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="co"># power is substantial (R2 = 0.81, 89% CI [0.72, 0.88], adj. R2 = 0.78). The model's intercept, corresponding</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="co"># to qsec = 0 and wt = 0, is at 19.47 (95% CI [9.30, 30.78]). Within this model:</span></span>
 <span id="cb19-6"><a href="#cb19-6"></a><span class="co"># </span></span>
-<span id="cb19-7"><a href="#cb19-7"></a><span class="co">#   - The effect of qsec (Median = 0.95, 0.95% CI [0.40, 1.47]) has a 99.95% probability of being positive (&gt; 0),</span></span>
-<span id="cb19-8"><a href="#cb19-8"></a><span class="co"># 99.15% of being significant (&gt; 0.30), and 0.20% of being large (&gt; 1.81). The estimation successfully</span></span>
-<span id="cb19-9"><a href="#cb19-9"></a><span class="co"># converged (Rhat = 0.999) and the indices are reliable (ESS = 1867)</span></span>
-<span id="cb19-10"><a href="#cb19-10"></a><span class="co">#   - The effect of wt (Median = -5.04, 0.95% CI [-5.97, -4.08]) has a 100.00% probability of being negative (&lt;</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a><span class="co">#   - The effect of qsec (Median = 0.94, 0.95% CI [0.40, 1.50]) has a 100.00% probability of being positive (&gt;</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a><span class="co"># 0), 98.70% of being significant (&gt; 0.30), and 0.20% of being large (&gt; 1.81). The estimation successfully</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a><span class="co"># converged (Rhat = 1.001) and the indices are reliable (ESS = 2138)</span></span>
+<span id="cb19-10"><a href="#cb19-10"></a><span class="co">#   - The effect of wt (Median = -5.01, 0.95% CI [-6.01, -4.08]) has a 100.00% probability of being negative (&lt;</span></span>
 <span id="cb19-11"><a href="#cb19-11"></a><span class="co"># 0), 100.00% of being significant (&lt; -0.30), and 100.00% of being large (&lt; -1.81). The estimation successfully</span></span>
-<span id="cb19-12"><a href="#cb19-12"></a><span class="co"># converged (Rhat = 1.000) and the indices are reliable (ESS = 2224)</span></span>
+<span id="cb19-12"><a href="#cb19-12"></a><span class="co"># converged (Rhat = 0.999) and the indices are reliable (ESS = 1964)</span></span>
 <span id="cb19-13"><a href="#cb19-13"></a><span class="co"># </span></span>
 <span id="cb19-14"><a href="#cb19-14"></a><span class="co"># Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT) framework, we report the median of</span></span>
 <span id="cb19-15"><a href="#cb19-15"></a><span class="co"># the posterior distribution and its 95% CI (Highest Density Interval), along the probability of direction</span></span>
@@ -406,7 +406,7 @@
 <span id="cb25-16"><a href="#cb25-16"></a><span class="co"># R package version 2.21.1 https://mc-stan.org/rstanarm.</span></span>
 <span id="cb25-17"><a href="#cb25-17"></a><span class="co">#   - Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2021). dplyr: A Grammar of Data</span></span>
 <span id="cb25-18"><a href="#cb25-18"></a><span class="co"># Manipulation. R package version 1.0.5. https://CRAN.R-project.org/package=dplyr</span></span>
-<span id="cb25-19"><a href="#cb25-19"></a><span class="co">#   - Makowski, D., Lüdecke, D., Patil, I. &amp; Ben-Shachar, M.S. (2020). Automated reporting as a practical tool to</span></span>
+<span id="cb25-19"><a href="#cb25-19"></a><span class="co">#   - Makowski, D., Ben-Shachar, M.S., Patil, I. &amp; Lüdecke, D. (2020). Automated reporting as a practical tool to</span></span>
 <span id="cb25-20"><a href="#cb25-20"></a><span class="co"># improve reproducibility and methodological best practices adoption. CRAN. Available from</span></span>
 <span id="cb25-21"><a href="#cb25-21"></a><span class="co"># https://github.com/easystats/report. doi: .</span></span>
 <span id="cb25-22"><a href="#cb25-22"></a><span class="co">#   - R Core Team (2021). R: A language and environment for statistical computing. R Foundation for Statistical</span></span>
@@ -421,21 +421,22 @@
 <span id="cb26-2"><a href="#cb26-2"></a></span>
 <span id="cb26-3"><a href="#cb26-3"></a>To cite <span class="cf">in</span> publications use<span class="op">:</span></span>
 <span id="cb26-4"><a href="#cb26-4"></a></span>
-<span id="cb26-5"><a href="#cb26-5"></a><span class="st">  </span>Makowski, D., Lüdecke, D., Patil, I. <span class="op">&amp;</span><span class="st"> </span>Ben<span class="op">-</span>Shachar,</span>
-<span id="cb26-6"><a href="#cb26-6"></a>  <span class="kw">M.S.</span> (<span class="dv">2020</span>). Automated reporting as a practical</span>
-<span id="cb26-7"><a href="#cb26-7"></a>  tool to improve reproducibility and methodological</span>
-<span id="cb26-8"><a href="#cb26-8"></a>  best practices adoption. CRAN. Available from</span>
-<span id="cb26-9"><a href="#cb26-9"></a>  https<span class="op">:</span><span class="er">//</span>github.com<span class="op">/</span>easystats<span class="op">/</span>report. doi<span class="op">:</span><span class="st"> </span>.</span>
-<span id="cb26-10"><a href="#cb26-10"></a></span>
-<span id="cb26-11"><a href="#cb26-11"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
-<span id="cb26-12"><a href="#cb26-12"></a></span>
-<span id="cb26-13"><a href="#cb26-13"></a>  <span class="op">@</span>Article{,</span>
-<span id="cb26-14"><a href="#cb26-14"></a>    title =<span class="st"> </span>{Automated reporting as a practical tool to improve reproducibility and methodological best practices adoption},</span>
-<span id="cb26-15"><a href="#cb26-15"></a>    author =<span class="st"> </span>{{Makowski} and {Dominique} and {Lüdecke} and Daniel Patil and {Indrajeet} and {Ben<span class="op">-</span>Shachar} and Mattan S.},</span>
-<span id="cb26-16"><a href="#cb26-16"></a>    year =<span class="st"> </span>{<span class="dv">2020</span>},</span>
-<span id="cb26-17"><a href="#cb26-17"></a>    journal =<span class="st"> </span>{CRAN},</span>
-<span id="cb26-18"><a href="#cb26-18"></a>    url =<span class="st"> </span>{https<span class="op">:</span><span class="er">//</span>github.com<span class="op">/</span>easystats<span class="op">/</span>report},</span>
-<span id="cb26-19"><a href="#cb26-19"></a>  }</span></code></pre></div>
+<span id="cb26-5"><a href="#cb26-5"></a><span class="st">  </span>Makowski, D., Ben<span class="op">-</span>Shachar, M.S., Patil, I. <span class="op">&amp;</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a><span class="st">  </span>Lüdecke, <span class="kw">D.</span> (<span class="dv">2020</span>). Automated reporting as a</span>
+<span id="cb26-7"><a href="#cb26-7"></a>  practical tool to improve reproducibility and</span>
+<span id="cb26-8"><a href="#cb26-8"></a>  methodological best practices adoption. CRAN.</span>
+<span id="cb26-9"><a href="#cb26-9"></a>  Available from https<span class="op">:</span><span class="er">//</span>github.com<span class="op">/</span>easystats<span class="op">/</span>report.</span>
+<span id="cb26-10"><a href="#cb26-10"></a>  doi<span class="op">:</span><span class="st"> </span>.</span>
+<span id="cb26-11"><a href="#cb26-11"></a></span>
+<span id="cb26-12"><a href="#cb26-12"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
+<span id="cb26-13"><a href="#cb26-13"></a></span>
+<span id="cb26-14"><a href="#cb26-14"></a>  <span class="op">@</span>Article{,</span>
+<span id="cb26-15"><a href="#cb26-15"></a>    title =<span class="st"> </span>{Automated reporting as a practical tool to improve reproducibility and methodological best practices adoption},</span>
+<span id="cb26-16"><a href="#cb26-16"></a>    author =<span class="st"> </span>{Dominique Makowski and Mattan S. Ben<span class="op">-</span>Shachar and Indrajeet Patil and Daniel Lüdecke},</span>
+<span id="cb26-17"><a href="#cb26-17"></a>    year =<span class="st"> </span>{<span class="dv">2020</span>},</span>
+<span id="cb26-18"><a href="#cb26-18"></a>    journal =<span class="st"> </span>{CRAN},</span>
+<span id="cb26-19"><a href="#cb26-19"></a>    url =<span class="st"> </span>{https<span class="op">:</span><span class="er">//</span>github.com<span class="op">/</span>easystats<span class="op">/</span>report},</span>
+<span id="cb26-20"><a href="#cb26-20"></a>  }</span></code></pre></div>
 </div>
 </div>
   </div>
