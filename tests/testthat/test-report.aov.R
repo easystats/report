@@ -1,10 +1,11 @@
-context("report.aov")
-
 test_that("report.aov", {
   model <- anova(lm(Sepal.Width ~ Species, data = iris))
   r1 <- report(model)
   expect_equal(c(ncol(as.report_table(r1, summary = TRUE)), nrow(as.report_table(r1, summary = TRUE))), c(7, 2))
   expect_equal(as.report_table(r1, summary = TRUE)$Mean_Square[1], 5.6724, tolerance = 0.01)
+
+  set.seed(123)
+  expect_snapshot(report(model))
 
   model <- aov(Sepal.Width ~ Species, data = iris)
   r2 <- report(model)
