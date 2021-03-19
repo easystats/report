@@ -1,10 +1,6 @@
 ---
 title: "Get Started"
 output: 
-  github_document:
-    toc: true
-    fig_width: 10.08
-    fig_height: 6
   rmarkdown::html_vignette:
     toc: true
     fig_width: 10.08
@@ -21,37 +17,46 @@ editor_options:
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  warning = FALSE,
+  message = FALSE,
   tidy.opts = list(width.cutoff = 60),
   tidy = TRUE
 )
-options(knitr.kable.NA = '',
-        digits = 4,
-        width = 60)
+
+options(
+  knitr.kable.NA = "",
+  digits = 4,
+  width = 60
+)
+
 if (!requireNamespace("dplyr", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
 }
 ```
 
-
 ## Installation
 
-First, install R and R studio. Then, copy and paste the following lines in the console:
+First, install R and R studio. Then, copy and paste the following lines in the
+console:
 
-```{r eval=FALSE, message=FALSE, warning=FALSE, eval=FALSE}
+```{r eval=FALSE, message=FALSE, warning=FALSE}
 install.packages("remotes")
-remotes::install_github("easystats/report")  # You only need to do that once
+remotes::install_github("easystats/report") # You only need to do that once
 ```
+
 ```{r message=FALSE, warning=FALSE}
-library("report")  # Load the package every time you start R
+library("report") # Load the package every time you start R
 ```
 
-Great! The `report` package is installed, loaded .
-
+Great! The `report` package is now installed and loaded in your session.
 
 ## Examples
 
-
-The `report` package works in a two step fashion. First, you create a `report` object with the `report()` function. Then, this report object can be displayed either textually (the default output) or as a table, using `as.data.frame()`. Moreover, you can also access a more digest and compact version of the report using `summary()` on the report object.
+The `report` package works in a two step fashion. First, you create a `report`
+object with the `report()` function. Then, this report object can be displayed
+either textually (the default output) or as a table, using `as.data.frame()`.
+Moreover, you can also access a more compact version of the report using
+`summary()` on the report object.
 
 **TO BE COMPLETED**.
 

@@ -250,15 +250,15 @@ report(model)
     # We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains of 1000 iterations and a
     # warmup of 500) to predict mpg with qsec and wt (formula: mpg ~ qsec + wt). Priors over parameters were set as
     # normal (mean = 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The model's explanatory
-    # power is substantial (R2 = 0.81, 89% CI [0.73, 0.89], adj. R2 = 0.79). The model's intercept, corresponding
-    # to qsec = 0 and wt = 0, is at 19.38 (95% CI [8.03, 29.19]). Within this model:
+    # power is substantial (R2 = 0.81, 89% CI [0.72, 0.88], adj. R2 = 0.78). The model's intercept, corresponding
+    # to qsec = 0 and wt = 0, is at 19.47 (95% CI [9.30, 30.78]). Within this model:
     # 
-    #   - The effect of qsec (Median = 0.95, 0.95% CI [0.40, 1.47]) has a 99.95% probability of being positive (> 0),
-    # 99.15% of being significant (> 0.30), and 0.20% of being large (> 1.81). The estimation successfully
-    # converged (Rhat = 0.999) and the indices are reliable (ESS = 1867)
-    #   - The effect of wt (Median = -5.04, 0.95% CI [-5.97, -4.08]) has a 100.00% probability of being negative (<
+    #   - The effect of qsec (Median = 0.94, 0.95% CI [0.40, 1.50]) has a 100.00% probability of being positive (>
+    # 0), 98.70% of being significant (> 0.30), and 0.20% of being large (> 1.81). The estimation successfully
+    # converged (Rhat = 1.001) and the indices are reliable (ESS = 2138)
+    #   - The effect of wt (Median = -5.01, 0.95% CI [-6.01, -4.08]) has a 100.00% probability of being negative (<
     # 0), 100.00% of being significant (< -0.30), and 100.00% of being large (< -1.81). The estimation successfully
-    # converged (Rhat = 1.000) and the indices are reliable (ESS = 2224)
+    # converged (Rhat = 0.999) and the indices are reliable (ESS = 1964)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT) framework, we report the median of
     # the posterior distribution and its 95% CI (Highest Density Interval), along the probability of direction
@@ -346,7 +346,7 @@ report(sessionInfo())
     # R package version 2.21.1 https://mc-stan.org/rstanarm.
     #   - Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2021). dplyr: A Grammar of Data
     # Manipulation. R package version 1.0.5. https://CRAN.R-project.org/package=dplyr
-    #   - Makowski, D., Lüdecke, D., Patil, I. & Ben-Shachar, M.S. (2020). Automated reporting as a practical tool to
+    #   - Makowski, D., Ben-Shachar, M.S., Patil, I. & Lüdecke, D. (2020). Automated reporting as a practical tool to
     # improve reproducibility and methodological best practices adoption. CRAN. Available from
     # https://github.com/easystats/report. doi: .
     #   - R Core Team (2021). R: A language and environment for statistical computing. R Foundation for Statistical
@@ -362,17 +362,18 @@ citation("report")
 
 To cite in publications use:
 
-  Makowski, D., Lüdecke, D., Patil, I. & Ben-Shachar,
-  M.S. (2020). Automated reporting as a practical
-  tool to improve reproducibility and methodological
-  best practices adoption. CRAN. Available from
-  https://github.com/easystats/report. doi: .
+  Makowski, D., Ben-Shachar, M.S., Patil, I. &
+  Lüdecke, D. (2020). Automated reporting as a
+  practical tool to improve reproducibility and
+  methodological best practices adoption. CRAN.
+  Available from https://github.com/easystats/report.
+  doi: .
 
 A BibTeX entry for LaTeX users is
 
   @Article{,
     title = {Automated reporting as a practical tool to improve reproducibility and methodological best practices adoption},
-    author = {{Makowski} and {Dominique} and {Lüdecke} and Daniel Patil and {Indrajeet} and {Ben-Shachar} and Mattan S.},
+    author = {Dominique Makowski and Mattan S. Ben-Shachar and Indrajeet Patil and Daniel Lüdecke},
     year = {2020},
     journal = {CRAN},
     url = {https://github.com/easystats/report},
