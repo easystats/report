@@ -307,4 +307,6 @@ report(sessionInfo()) %>%
 
 If you like it, you can put a *star* on this repo, and cite the package as follows:
 
-- Makowski, D., Ben-Shachar, M. S., Patil, I., \& Lüdecke, D. (2020). *Automated reporting as a practical tool to improve reproducibility and methodological best practices adoption*. CRAN.
+```{r, citation, comment=""}
+citation("report")
+```
