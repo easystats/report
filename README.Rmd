@@ -164,6 +164,7 @@ This works great with ANOVAs, as it includes **effect sizes** and their interpre
 aov(Sepal.Length ~ Species, data = iris) %>%
   report()
 ```
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 aov(Sepal.Length ~ Species, data = iris) %>%
   report() %>%
@@ -179,6 +180,7 @@ model <- glm(vs ~ mpg * drat, data = mtcars, family = "binomial")
 
 report(model)
 ```
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 glm(vs ~ mpg * drat, data = mtcars, family = "binomial") %>%
   report() %>%
@@ -196,6 +198,7 @@ model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 
 report(model)
 ```
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(lme4)
 
@@ -282,6 +285,7 @@ Report can also help you create sample description table (also referred to as **
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 report_sample(iris, group_by = "Species")
 ```
+
 ```{r message=FALSE, warning=FALSE, echo=FALSE}
 knitr::kable(report_sample(iris, group_by = "Species"))
 ```
@@ -293,6 +297,7 @@ Finally, **report** includes some functions to help you write the data analysis 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
 report(sessionInfo())
 ```
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 report(sessionInfo()) %>%
   print(width = 110)
@@ -302,4 +307,4 @@ report(sessionInfo()) %>%
 
 If you like it, you can put a *star* on this repo, and cite the package as follows:
 
-- Makowski, D., Ben-Shachar, M. S., \& Lüdecke, D. (2020). *Automated reporting as a practical tool to improve reproducibility and methodological best practices adoption*. CRAN.
+- Makowski, D., Ben-Shachar, M. S., Patil, I., \& Lüdecke, D. (2020). *Automated reporting as a practical tool to improve reproducibility and methodological best practices adoption*. CRAN.

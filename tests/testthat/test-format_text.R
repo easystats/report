@@ -1,5 +1,3 @@
-context("format_text")
-
 test_that("format_text", {
   expect_equal(text_concatenate(c("A", "B", "C")), "A, B and C", tolerance = 0)
 

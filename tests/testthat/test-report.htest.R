@@ -9,8 +9,15 @@ if (require("testthat")) {
     r <- report(cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "kendall"))
     expect_equal(as.report_table(r)$tau, -0.077, tolerance = 0.01)
 
+    # snapshot tests with a different dataset
     set.seed(123)
-    expect_snapshot(report(cor.test(iris$Sepal.Width, iris$Sepal.Length)))
+    expect_snapshot(report(cor.test(mtcars$wt, mtcars$mpg)))
+
+    set.seed(123)
+    expect_snapshot(report(cor.test(mtcars$wt, mtcars$mpg, method = "spearman")))
+
+    set.seed(123)
+    expect_snapshot(report(cor.test(mtcars$wt, mtcars$mpg, method = "kendall")))
 
     # t-tests
     r <- report(t.test(iris$Sepal.Width, iris$Sepal.Length, var.equal = TRUE))
@@ -21,10 +28,13 @@ if (require("testthat")) {
     expect_equal(as.report_table(r, summary = TRUE)$Difference, 7.9404, tolerance = 0.01)
     r <- report(t.test(iris$Sepal.Width, mu = 1))
     expect_equal(as.report_table(r, summary = TRUE)$Difference, 2.057, tolerance = 0.01)
-  })
 
-  set.seed(123)
-  expect_snapshot(report(t.test(iris$Sepal.Width, mu = 1)))
+    set.seed(123)
+    expect_snapshot(report(t.test(iris$Sepal.Width, mu = 1)))
+
+    set.seed(123)
+    expect_snapshot(report(t.test(formula = wt ~ am, data = mtcars)))
+  })
 
   test_that("report.htest - manual inspection", {
     # Correlations
