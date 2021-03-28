@@ -37,11 +37,11 @@ License: GPL-3
 URL: https://easystats.github.io/report/
 BugReports: https://github.com/easystats/report/issues
 Imports:
-    bayestestR (>= 0.8.3.1),
+    bayestestR (>= 0.8.2),
     effectsize (>= 0.4.4),
-    insight (>= 0.13.1.1),
-    parameters (>= 0.12.0.1),
-    performance (>= 0.7.0.1),
+    insight (>= 0.13.0),
+    parameters (>= 0.12.0),
+    performance (>= 0.7.0),
     stats,
     tools,
     utils
@@ -60,12 +60,6 @@ Suggests:
     testthat
 VignetteBuilder: 
     knitr
-Remotes: 
-    easystats/bayestestR,
-    easystats/effectsize,
-    easystats/insight,
-    easystats/parameters,
-    easystats/performance
 Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
