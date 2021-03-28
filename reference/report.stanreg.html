@@ -68,6 +68,9 @@ SEXIT documentation)." />
 
 
 
+<!-- dependencies from examples -->
+
+
   
 
   
@@ -196,7 +199,7 @@ and long table of parameters and fit indices.</p>
 <li><p><code><a href='report_sample.html'>report_sample</a></code></p></li>
 <li><p><code><a href='report_date.html'>report_date</a></code></p></li>
 </ul><p>Methods:</p><ul>
-<li><p><code><a href='as.report_text.html'>as.report</a></code></p></li>
+<li><p><code><a href='as.report.html'>as.report</a></code></p></li>
 </ul><p>Template file for supporting new models:</p><ul>
 <li><p><code><a href='report.default.html'>report.default</a></code></p></li>
 </ul>
@@ -221,11 +224,11 @@ and long table of parameters and fit indices.</p>
 #&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
 #&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#bulk-ess</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.</span>
 #&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
-#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#tail-ess</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Note that the default rope range for linear models might change in future versions (see https://github.com/easystats/bayestestR/issues/364).Please set it explicitly to preserve current results.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Note that the default rope range for linear models might change in future versions (see https://github.com/easystats/bayestestR/issues/364).Please set it explicitly to preserve current results.</span></div><div class='output co'>#&gt; Parameter   | Median |         89% CI |   pd | % in ROPE |  Rhat |    ESS |                   Prior |  Fit
+#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#tail-ess</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Note that the default rope range for binomial models might change in future versions (see https://github.com/easystats/bayestestR/issues/364).Please set it explicitly to preserve current results.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Note that the default rope range for binomial models might change in future versions (see https://github.com/easystats/bayestestR/issues/364).Please set it explicitly to preserve current results.</span></div><div class='output co'>#&gt; Parameter   | Median |         89% CI |   pd | % in ROPE |  Rhat |    ESS |                   Prior |  Fit
 #&gt; ----------------------------------------------------------------------------------------------------------
-#&gt; (Intercept) |  19.60 | [11.64, 30.05] | 100% |        0% | 0.997 | 151.00 | Normal (20.09 +- 15.07) |     
-#&gt; qsec        |   0.94 | [ 0.44,  1.36] | 100% |    13.67% | 0.996 | 173.00 |   Normal (0.00 +- 8.43) |     
-#&gt; wt          |  -4.98 | [-5.73, -4.25] | 100% |        0% | 0.998 | 156.00 |  Normal (0.00 +- 15.40) |     
+#&gt; (Intercept) |  19.60 | [11.64, 30.05] | 100% |        0% | 0.997 | 150.57 | Normal (20.09 +- 15.07) |     
+#&gt; qsec        |   0.94 | [ 0.44,  1.36] | 100% |    13.67% | 0.996 | 172.72 |   Normal (0.00 +- 8.43) |     
+#&gt; wt          |  -4.98 | [-5.73, -4.25] | 100% |        0% | 0.998 | 155.80 |  Normal (0.00 +- 15.40) |     
 #&gt;             |        |                |      |           |       |        |                         |     
 #&gt; R2          |        |                |      |           |       |        |                         | 0.80
 #&gt; R2 (adj.)   |        |                |      |           |       |        |                         | 0.78
@@ -245,7 +248,7 @@ and long table of parameters and fit indices.</p>
 </div>
 
 <div class="pkgdown">
-  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p></p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
