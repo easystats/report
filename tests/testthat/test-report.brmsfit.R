@@ -1,4 +1,6 @@
-if (require("testthat") && require("brms")) {
+.runThisTest <- Sys.getenv("RunAllreportTests") == "yes"
+
+if (.runThisTest && require("testthat") && require("brms")) {
   test_that("report.brms", {
     # too strict; exact values will change depending on the platform
     # so worth checking only locally
