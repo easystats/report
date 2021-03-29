@@ -7,16 +7,16 @@
 
 ***“From R to your manuscript”***
 
-------------------------------------------------------------------------
+-----
 
 :warning: **report** has been entirely rewritten *(again)*, and won’t be
 compatible with your old code. We’ve changed it for the best, and with
 your help we’ll continue improving it. You’ll need the latest versions
 of the **easystats** packages (you can update them by running
-`easystats::install_easystats_latest()`). **Thanks for your support!**
+`easystats::install_easystats_latest()`). **Thanks for your support\!**
 :warning:
 
-------------------------------------------------------------------------
+-----
 
 **report**’s primary goal is to bridge the gap between R’s output and
 the formatted results contained in your manuscript. It automatically
@@ -37,10 +37,10 @@ report(model)
     # 119.26, p < .001, adj. R2 = 0.61). The model's intercept, corresponding to Species = setosa, is at 5.01 (95%
     # CI [4.86, 5.15], t(147) = 68.76, p < .001). Within this model:
     # 
-    #   - The effect of Species [versicolor] is significantly positive (beta = 0.93, 95% CI [0.73, 1.13], t(147) =
-    # 9.03, p < .001; Std. beta = 1.12, 95% CI [0.88, 1.37])
-    #   - The effect of Species [virginica] is significantly positive (beta = 1.58, 95% CI [1.38, 1.79], t(147) =
-    # 15.37, p < .001; Std. beta = 1.91, 95% CI [1.66, 2.16])
+    #   - The effect of Species [versicolor] is significantly positive (beta = 0.93, 95% CI [0.73, 1.13], t() = 9.03,
+    # p < .001; Std. beta = 1.12, 95% CI [0.88, 1.37])
+    #   - The effect of Species [virginica] is significantly positive (beta = 1.58, 95% CI [1.38, 1.79], t() = 15.37,
+    # p < .001; Std. beta = 1.91, 95% CI [1.66, 2.16])
     # 
     # Standardized parameters were obtained by fitting the model on a standardized version of the dataset.
 
@@ -54,19 +54,20 @@ The package documentation can be found
 [**here**](https://easystats.github.io/report/). Check-out these
 tutorials:
 
--   [Get
+  - [Get
     Started](https://easystats.github.io/report/articles/report.html)
--   [How to Cite
+  - [How to Cite
     Packages](https://easystats.github.io/report/articles/cite_packages.html)
 
 ## Contribute
 
 ***report* is a young package in need of affection**. You can easily be
-a part of the [developing](.github/CONTRIBUTING.md) community of this
-open-source software and improve science! Don’t be shy, try to code and
-submit a pull request (See the [contributing
-guide](.github/CONTRIBUTING.md)). Even if it’s not perfect, we will help
-you make it great!
+a part of the
+[developing](https://github.com/easystats/report/blob/master/.github/CONTRIBUTING.md)
+community of this open-source software and improve science\! Don’t be
+shy, try to code and submit a pull request (See the [contributing
+guide](https://github.com/easystats/report/blob/master/.github/CONTRIBUTING.md)).
+Even if it’s not perfect, we will help you make it great\!
 
 ## Installation
 
@@ -250,15 +251,15 @@ report(model)
     # We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains of 1000 iterations and a
     # warmup of 500) to predict mpg with qsec and wt (formula: mpg ~ qsec + wt). Priors over parameters were set as
     # normal (mean = 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The model's explanatory
-    # power is substantial (R2 = 0.81, 89% CI [0.72, 0.88], adj. R2 = 0.78). The model's intercept, corresponding
-    # to qsec = 0 and wt = 0, is at 19.47 (95% CI [9.30, 30.78]). Within this model:
+    # power is substantial (R2 = 0.81, 89% CI [0.73, 0.88], adj. R2 = 0.78). The model's intercept, corresponding
+    # to qsec = 0 and wt = 0, is at 19.55 (95% CI [9.00, 31.17]). Within this model:
     # 
-    #   - The effect of qsec (Median = 0.94, 0.95% CI [0.40, 1.50]) has a 100.00% probability of being positive (>
-    # 0), 98.70% of being significant (> 0.30), and 0.20% of being large (> 1.81). The estimation successfully
-    # converged (Rhat = 1.001) and the indices are reliable (ESS = 2138)
-    #   - The effect of wt (Median = -5.01, 0.95% CI [-6.01, -4.08]) has a 100.00% probability of being negative (<
-    # 0), 100.00% of being significant (< -0.30), and 100.00% of being large (< -1.81). The estimation successfully
-    # converged (Rhat = 0.999) and the indices are reliable (ESS = 1964)
+    #   - The effect of qsec (Median = 0.93, 95% CI [0.37, 1.46]) has a 100.00% probability of being positive (> 0),
+    # 98.75% of being significant (> 0.30), and 0.15% of being large (> 1.81). The estimation successfully
+    # converged (Rhat = 1.001) and the indices are reliable (ESS = 1735)
+    #   - The effect of wt (Median = -5.03, 95% CI [-5.95, -3.98]) has a 100.00% probability of being negative (< 0),
+    # 100.00% of being significant (< -0.30), and 100.00% of being large (< -1.81). The estimation successfully
+    # converged (Rhat = 1.000) and the indices are reliable (ESS = 1786)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT) framework, we report the median of
     # the posterior distribution and its 95% CI (Highest Density Interval), along the probability of direction
@@ -285,8 +286,8 @@ report_statistics(model)
     # linear model (estimated using OLS) to predict Sepal.Length with Species (formula: Sepal.Length ~ Species)
     # The model explains a significant and substantial proportion of variance (R2 = 0.62, F(2, 147) = 119.26, p < .001, adj. R2 = 0.61)
     # beta = 5.01, 95% CI [4.86, 5.15], t(147) = 68.76, p < .001; Std. beta = -1.01, 95% CI [-1.18, -0.84]
-    # beta = 0.93, 95% CI [0.73, 1.13], t(147) = 9.03, p < .001; Std. beta = 1.12, 95% CI [0.88, 1.37]
-    # beta = 1.58, 95% CI [1.38, 1.79], t(147) = 15.37, p < .001; Std. beta = 1.91, 95% CI [1.66, 2.16]
+    # beta = 0.93, 95% CI [0.73, 1.13], t() = 9.03, p < .001; Std. beta = 1.12, 95% CI [0.88, 1.37]
+    # beta = 1.58, 95% CI [1.38, 1.79], t() = 15.37, p < .001; Std. beta = 1.91, 95% CI [1.66, 2.16]
 
 ### Report participants details
 
@@ -313,7 +314,7 @@ Report can also help you create sample description table (also referred
 to as **Table 1**).
 
 | Variable               | setosa (n=50) | versicolor (n=50) | virginica (n=50) | Total       |
-|:-----------------------|:--------------|:------------------|:-----------------|:------------|
+| :--------------------- | :------------ | :---------------- | :--------------- | :---------- |
 | Mean Sepal.Length (SD) | 5.01 (0.35)   | 5.94 (0.52)       | 6.59 (0.64)      | 5.84 (0.83) |
 | Mean Sepal.Width (SD)  | 3.43 (0.38)   | 2.77 (0.31)       | 2.97 (0.32)      | 3.06 (0.44) |
 | Mean Petal.Length (SD) | 1.46 (0.17)   | 4.26 (0.47)       | 5.55 (0.55)      | 3.76 (1.77) |
@@ -328,8 +329,8 @@ analysis paragraph about the tools used.
 report(sessionInfo())
 ```
 
-    # Analyses were conducted using the R Statistical language (version 4.0.4; R Core Team, 2021) on macOS Mojave
-    # 10.14.6, using the packages Rcpp (version 1.0.6; Dirk Eddelbuettel and Romain Francois, 2011), Matrix
+    # Analyses were conducted using the R Statistical language (version 4.0.4; R Core Team, 2021) on Windows 10 x64
+    # (build 19042), using the packages Rcpp (version 1.0.6; Dirk Eddelbuettel and Romain Francois, 2011), Matrix
     # (version 1.3.2; Douglas Bates and Martin Maechler, 2021), lme4 (version 1.1.26; Douglas Bates et al., 2015),
     # rstanarm (version 2.21.1; Goodrich B et al., 2020), dplyr (version 1.0.5; Hadley Wickham et al., 2021) and
     # report (version 0.2.0; Makowski et al., 2020).

@@ -76,7 +76,7 @@ The package documentation can be found [**here**](https://easystats.github.io/re
 
 ## Contribute
 
-***report* is a young package in need of affection**. You can easily be a part of the [developing](.github/CONTRIBUTING.md) community of this open-source software and improve science! Don't be shy, try to code and submit a pull request (See the [contributing guide](.github/CONTRIBUTING.md)). Even if it's not perfect, we will help you make it great!
+***report* is a young package in need of affection**. You can easily be a part of the [developing](https://github.com/easystats/report/blob/master/.github/CONTRIBUTING.md) community of this open-source software and improve science! Don't be shy, try to code and submit a pull request (See the [contributing guide](https://github.com/easystats/report/blob/master/.github/CONTRIBUTING.md)). Even if it's not perfect, we will help you make it great!
 
 
 ## Installation
