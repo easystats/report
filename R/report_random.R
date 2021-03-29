@@ -1,6 +1,7 @@
 #' Report random effects and factors
 #'
-#' Reports random effects of mixed models (see list of supported objects in \code{\link{report}}).
+#' Reports random effects of mixed models (see list of supported objects in
+#' \code{\link{report}}).
 #'
 #' @inheritParams report
 #' @inheritParams report_table

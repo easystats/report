@@ -62,8 +62,8 @@ if (require("dplyr")) {
   test_that("report.data.frame - with NAs", {
     # deliberately introduce NAs
     df <- mtcars
-    df[1,2] <- NA
-    df[1,6] <- NA
+    df[1, 2] <- NA
+    df[1, 6] <- NA
 
     expect_snapshot(report(dplyr::group_by_at(df, "cyl")))
   })

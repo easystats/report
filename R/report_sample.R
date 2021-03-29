@@ -3,16 +3,25 @@
 #' Create sample description table (also referred to as "Table 1").
 #'
 #' @param data A data frame for which descriptive statistics should be created.
-#' @param group_by Character vector, indicating the column for possible grouping of the descriptive table.
-#' @param centrality Character, indicates the statistics that should be calculated for numeric variables. May be \code{"mean"} (for mean and standard deviation) or \code{"median"} (for median and median absolute deviation) as summary.
-#' @param select Character vector, with column names that should be included in the descriptive table.
-#' @param exclude Character vector, with column names that should be excluded from the descriptive table.
-#' @param weights Character vector, indicating the name of a potential weight-variable. Reported descriptive statistics will be weighted by \code{weight}.
+#' @param group_by Character vector, indicating the column for possible grouping
+#'   of the descriptive table.
+#' @param centrality Character, indicates the statistics that should be
+#'   calculated for numeric variables. May be \code{"mean"} (for mean and
+#'   standard deviation) or \code{"median"} (for median and median absolute
+#'   deviation) as summary.
+#' @param select Character vector, with column names that should be included in
+#'   the descriptive table.
+#' @param exclude Character vector, with column names that should be excluded
+#'   from the descriptive table.
+#' @param weights Character vector, indicating the name of a potential
+#'   weight-variable. Reported descriptive statistics will be weighted by
+#'   \code{weight}.
 #' @param total Add a \code{Total} column.
 #' @param digits Number of decimals.
 #' @inheritParams report.data.frame
 #'
-#' @return A data frame of class \code{report_table1} with variable names and their related summary statistics.
+#' @return A data frame of class \code{report_table1} with variable names and
+#'   their related summary statistics.
 #'
 #' @examples
 #' library(report)
@@ -22,7 +31,15 @@
 #' report_sample(iris, group_by = "Species")
 #' @importFrom stats median sd mad
 #' @export
-report_sample <- function(data, group_by = NULL, centrality = "mean", select = NULL, exclude = NULL, weights = NULL, total = TRUE, digits = 2, ...) {
+report_sample <- function(data,
+                          group_by = NULL,
+                          centrality = "mean",
+                          select = NULL,
+                          exclude = NULL,
+                          weights = NULL,
+                          total = TRUE,
+                          digits = 2,
+                          ...) {
   variables <- colnames(data)
 
   # variables to keep
@@ -91,8 +108,15 @@ report_sample <- function(data, group_by = NULL, centrality = "mean", select = N
     w <- NULL
     columns <- colnames(x)
   }
+
   do.call(rbind, lapply(columns, function(cn) {
-    .table1_row(x[[cn]], column = cn, centrality = centrality, weights = w, digits = digits)
+    .table1_row(
+      x[[cn]],
+      column = cn,
+      centrality = centrality,
+      weights = w,
+      digits = digits
+    )
   }))
 }
 
@@ -110,7 +134,12 @@ report_sample <- function(data, group_by = NULL, centrality = "mean", select = N
 
 
 
-.table1_row.numeric <- function(x, column, centrality = "mean", weights = NULL, digits = 1, ...) {
+.table1_row.numeric <- function(x,
+                                column,
+                                centrality = "mean",
+                                weights = NULL,
+                                digits = 1,
+                                ...) {
   .summary <- if (centrality == "mean") {
     sprintf("%.*f (%.*f)", digits, .weighted_mean(x, weights), digits, .weighted_sd(x, weights))
   } else {
@@ -161,8 +190,6 @@ report_sample <- function(data, group_by = NULL, centrality = "mean", select = N
 
 
 
-
-
 # print-method --------------------------------------------
 
 
@@ -172,10 +199,6 @@ print.report_table1 <- function(x, ...) {
   insight::print_colour("# Descriptive Statistics\n\n", "blue")
   cat(insight::export_table(x))
 }
-
-
-
-
 
 
 

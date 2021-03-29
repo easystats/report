@@ -1,6 +1,7 @@
 #' Report the parameters of a model
 #'
-#' Creates a list containing a description of the parameters of R objects (see list of supported objects in \code{\link{report}}).
+#' Creates a list containing a description of the parameters of R objects (see
+#' list of supported objects in \code{\link{report}}).
 #'
 #' @inheritParams report
 #' @inheritParams report_table

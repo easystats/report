@@ -15,7 +15,8 @@ report_random(x, ...)
 A \code{character} string.
 }
 \description{
-Reports random effects of mixed models (see list of supported objects in \code{\link{report}}).
+Reports random effects of mixed models (see list of supported objects in
+\code{\link{report}}).
 }
 \examples{
 library(report)

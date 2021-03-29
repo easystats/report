@@ -39,14 +39,7 @@ report.sessionInfo <- function(x, ...) {
 
 
 
-
-
-
-
-
 # Aliases -----------------------------------------------------------------
-
-
 
 
 #' @importFrom utils sessionInfo
@@ -156,11 +149,7 @@ report_table.sessionInfo <- function(x, include_R = TRUE, ...) {
 
 
 
-
 # report_parameters -------------------------------------------------------
-
-
-
 
 #' @export
 report_parameters.sessionInfo <- function(x, table = NULL, include_R = TRUE, ...) {

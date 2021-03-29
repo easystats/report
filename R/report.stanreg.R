@@ -87,10 +87,10 @@ report_priors.stanreg <- function(x, ...) {
 
 
 #' @export
-report_parameters.stanreg <-  function(x,
-           include_intercept = TRUE,
-           include_diagnostic = TRUE,
-           ...) {
+report_parameters.stanreg <- function(x,
+                                      include_intercept = TRUE,
+                                      include_diagnostic = TRUE,
+                                      ...) {
 
 
   # Get data

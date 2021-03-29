@@ -1,6 +1,10 @@
-#' Report the model's performance
+#' Report the model's quality and fit indices
 #'
-#' Reports the type of different R objects (see list of supported objects in \code{\link{report}}).
+#' Investigating the fit of statistical models to data often involves selecting
+#' the best fitting model amongst many competing models. This function helps
+#' report indices of model fit for various models.  Reports the type of
+#' different R objects . For a list of supported objects, see
+#' \code{\link{report}}).
 #'
 #' @inheritParams report
 #' @inheritParams report_table
@@ -55,6 +59,7 @@ as.report_performance <- function(x, summary = NULL, ...) {
   if (!is.null(summary)) {
     attr(x, "summary") <- summary
   }
+
   x
 }
 

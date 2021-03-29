@@ -1,11 +1,13 @@
 #' Citation formatting
 #'
-#' Convenience functions to manipulate and format citations. Only works with APA formatted citations, for now.
+#' Convenience functions to manipulate and format citations. Only works with APA
+#' formatted citations, for now.
 #'
 #' @param citation A character string of a citation.
 #' @param authorsdate Only show authors and date (remove title, journal, etc.).
 #' @param short If more than one authors, replace by \code{et al.}
-#' @param intext Remove brackets around the date (so that it can be placed inside larger parentheses).
+#' @param intext Remove brackets around the date (so that it can be placed
+#'   inside larger parentheses).
 #'
 #' @return A character string.
 #'
@@ -23,7 +25,10 @@
 #' cite_citation(citation)
 #' clean_citation(citation())
 #' @export
-format_citation <- function(citation, authorsdate = FALSE, short = FALSE, intext = FALSE) {
+format_citation <- function(citation,
+                            authorsdate = FALSE,
+                            short = FALSE,
+                            intext = FALSE) {
   if (isTRUE(authorsdate)) {
     citation <- trimws(gsub(")..*", ")", citation)) # Remove everything after first parenthesis (hopefully, the date)
     citation <- gsub("[A-Z]\\., ", "", citation) # Remove last first names

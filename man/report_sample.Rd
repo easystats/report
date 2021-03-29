@@ -19,15 +19,23 @@ report_sample(
 \arguments{
 \item{data}{A data frame for which descriptive statistics should be created.}
 
-\item{group_by}{Character vector, indicating the column for possible grouping of the descriptive table.}
+\item{group_by}{Character vector, indicating the column for possible grouping
+of the descriptive table.}
 
-\item{centrality}{Character, indicates the statistics that should be calculated for numeric variables. May be \code{"mean"} (for mean and standard deviation) or \code{"median"} (for median and median absolute deviation) as summary.}
+\item{centrality}{Character, indicates the statistics that should be
+calculated for numeric variables. May be \code{"mean"} (for mean and
+standard deviation) or \code{"median"} (for median and median absolute
+deviation) as summary.}
 
-\item{select}{Character vector, with column names that should be included in the descriptive table.}
+\item{select}{Character vector, with column names that should be included in
+the descriptive table.}
 
-\item{exclude}{Character vector, with column names that should be excluded from the descriptive table.}
+\item{exclude}{Character vector, with column names that should be excluded
+from the descriptive table.}
 
-\item{weights}{Character vector, indicating the name of a potential weight-variable. Reported descriptive statistics will be weighted by \code{weight}.}
+\item{weights}{Character vector, indicating the name of a potential
+weight-variable. Reported descriptive statistics will be weighted by
+\code{weight}.}
 
 \item{total}{Add a \code{Total} column.}
 
@@ -36,7 +44,8 @@ report_sample(
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{
-A data frame of class \code{report_table1} with variable names and their related summary statistics.
+A data frame of class \code{report_table1} with variable names and
+  their related summary statistics.
 }
 \description{
 Create sample description table (also referred to as "Table 1").
