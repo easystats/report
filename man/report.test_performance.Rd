@@ -31,7 +31,9 @@ with a short and long description of the model summary, as well as a short
 and long table of parameters and fit indices.
 }
 \description{
-Create reports for model comparison as obtained by the \code{\link[performance:compare_performance]{performance::compare_performance()}} function in the \code{performance} package.
+Create reports for model comparison as obtained by the
+\code{\link[performance:compare_performance]{performance::compare_performance()}}
+function in the \code{performance} package.
 }
 \examples{
 library(report)

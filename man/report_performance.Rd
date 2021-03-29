@@ -2,7 +2,7 @@
 % Please edit documentation in R/report_performance.R
 \name{report_performance}
 \alias{report_performance}
-\title{Report the model's performance}
+\title{Report the model's quality and fit indices}
 \usage{
 report_performance(x, table = NULL, ...)
 }
@@ -18,7 +18,11 @@ will run it.}
 A \code{character} string.
 }
 \description{
-Reports the type of different R objects (see list of supported objects in \code{\link{report}}).
+Investigating the fit of statistical models to data often involves selecting
+the best fitting model amongst many competing models. This function helps
+report indices of model fit for various models.  Reports the type of
+different R objects . For a list of supported objects, see
+\code{\link{report}}).
 }
 \examples{
 library(report)

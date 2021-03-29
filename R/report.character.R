@@ -35,7 +35,11 @@ report.character <- function(x,
 
 
 #' @export
-report_table.character <- function(x, n_entries = 3, levels_percentage = "auto", missing_percentage = "auto", ...) {
+report_table.character <- function(x,
+                                   n_entries = 3,
+                                   levels_percentage = "auto",
+                                   missing_percentage = "auto",
+                                   ...) {
   levels_percentage <- .report_dataframe_percentage(x, levels_percentage)
   missing_percentage <- .report_dataframe_percentage(x, missing_percentage)
 

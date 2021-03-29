@@ -15,7 +15,8 @@ report_priors(x, ...)
 A \code{character} string.
 }
 \description{
-Reports priors of Bayesian models (see list of supported objects in \code{\link{report}}).
+Reports priors of Bayesian models (see list of supported objects in
+\code{\link{report}}).
 }
 \examples{
 library(report)

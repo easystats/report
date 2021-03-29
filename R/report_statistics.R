@@ -1,6 +1,8 @@
 #' Report the statistics of a model
 #'
-#' Creates a list containing a description of the parameters' values of R objects (see list of supported objects in \code{\link{report}}). Useful to insert in parentheses in plots or reports.
+#' Creates a list containing a description of the parameters' values of R
+#' objects (see list of supported objects in \code{\link{report}}). Useful to
+#' insert in parentheses in plots or reports.
 #'
 #' @inheritParams report
 #' @inheritParams report_table

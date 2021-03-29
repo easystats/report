@@ -1,6 +1,7 @@
 #' Report priors of Bayesian models
 #'
-#' Reports priors of Bayesian models (see list of supported objects in \code{\link{report}}).
+#' Reports priors of Bayesian models (see list of supported objects in
+#' \code{\link{report}}).
 #'
 #' @inheritParams report
 #' @inheritParams report_table

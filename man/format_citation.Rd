@@ -19,13 +19,15 @@ clean_citation(citation)
 
 \item{short}{If more than one authors, replace by \code{et al.}}
 
-\item{intext}{Remove brackets around the date (so that it can be placed inside larger parentheses).}
+\item{intext}{Remove brackets around the date (so that it can be placed
+inside larger parentheses).}
 }
 \value{
 A character string.
 }
 \description{
-Convenience functions to manipulate and format citations. Only works with APA formatted citations, for now.
+Convenience functions to manipulate and format citations. Only works with APA
+formatted citations, for now.
 }
 \examples{
 library(report)

@@ -15,7 +15,8 @@ report_parameters(x, ...)
 A \code{vector}.
 }
 \description{
-Creates a list containing a description of the parameters of R objects (see list of supported objects in \code{\link{report}}).
+Creates a list containing a description of the parameters of R objects (see
+list of supported objects in \code{\link{report}}).
 }
 \examples{
 library(report)
