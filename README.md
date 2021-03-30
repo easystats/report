@@ -7,16 +7,16 @@
 
 ***“From R to your manuscript”***
 
------
+------------------------------------------------------------------------
 
 :warning: **report** has been entirely rewritten *(again)*, and won’t be
 compatible with your old code. We’ve changed it for the best, and with
 your help we’ll continue improving it. You’ll need the latest versions
 of the **easystats** packages (you can update them by running
-`easystats::install_easystats_latest()`). **Thanks for your support\!**
+`easystats::install_easystats_latest()`). **Thanks for your support!**
 :warning:
 
------
+------------------------------------------------------------------------
 
 **report**’s primary goal is to bridge the gap between R’s output and
 the formatted results contained in your manuscript. It automatically
@@ -33,14 +33,14 @@ report(model)
 ```
 
     # We fitted a linear model (estimated using OLS) to predict Sepal.Length with Species (formula: Sepal.Length ~
-    # Species). The model explains a significant and substantial proportion of variance (R2 = 0.62, F(2, 147) =
-    # 119.26, p < .001, adj. R2 = 0.61). The model's intercept, corresponding to Species = setosa, is at 5.01 (95%
-    # CI [4.86, 5.15], t(147) = 68.76, p < .001). Within this model:
+    # Species). The model explains a statistically significant and substantial proportion of variance (R2 = 0.62,
+    # F(2, 147) = 119.26, p < .001, adj. R2 = 0.61). The model's intercept, corresponding to Species = setosa, is
+    # at 5.01 (95% CI [4.86, 5.15], t(147) = 68.76, p < .001). Within this model:
     # 
-    #   - The effect of Species [versicolor] is significantly positive (beta = 0.93, 95% CI [0.73, 1.13], t(147) =
-    # 9.03, p < .001; Std. beta = 1.12, 95% CI [0.88, 1.37])
-    #   - The effect of Species [virginica] is significantly positive (beta = 1.58, 95% CI [1.38, 1.79], t(147) =
-    # 15.37, p < .001; Std. beta = 1.91, 95% CI [1.66, 2.16])
+    #   - The effect of Species [versicolor] is statistically significant and positive (beta = 0.93, 95% CI [0.73,
+    # 1.13], t(147) = 9.03, p < .001; Std. beta = 1.12, 95% CI [0.88, 1.37])
+    #   - The effect of Species [virginica] is statistically significant and positive (beta = 1.58, 95% CI [1.38,
+    # 1.79], t(147) = 15.37, p < .001; Std. beta = 1.91, 95% CI [1.66, 2.16])
     # 
     # Standardized parameters were obtained by fitting the model on a standardized version of the dataset.
 
@@ -54,9 +54,9 @@ The package documentation can be found
 [**here**](https://easystats.github.io/report/). Check-out these
 tutorials:
 
-  - [Get
+-   [Get
     Started](https://easystats.github.io/report/articles/report.html)
-  - [How to Cite
+-   [How to Cite
     Packages](https://easystats.github.io/report/articles/cite_packages.html)
 
 ## Contribute
@@ -64,10 +64,10 @@ tutorials:
 ***report* is a young package in need of affection**. You can easily be
 a part of the
 [developing](https://github.com/easystats/report/blob/master/.github/CONTRIBUTING.md)
-community of this open-source software and improve science\! Don’t be
+community of this open-source software and improve science! Don’t be
 shy, try to code and submit a pull request (See the [contributing
 guide](https://github.com/easystats/report/blob/master/.github/CONTRIBUTING.md)).
-Even if it’s not perfect, we will help you make it great\!
+Even if it’s not perfect, we will help you make it great!
 
 ## Installation
 
@@ -152,8 +152,8 @@ report(t.test(mtcars$mpg ~ mtcars$am))
     # Effect sizes were labelled following Cohen's (1988) recommendations.
     # 
     # The Welch Two Sample t-test testing the difference of mtcars$mpg by mtcars$am (mean in group 0 = 17.15, mean
-    # in group 1 = 24.39) suggests that the effect is positive, significant and large (difference = 7.24, 95% CI
-    # [-11.28, -3.21], t(18.33) = -3.77, p < .01; Cohen's d = -1.41, 95% CI [-2.17, -0.51])
+    # in group 1 = 24.39) suggests that the effect is positive, statistically significant and large (difference =
+    # 7.24, 95% CI [-11.28, -3.21], t(18.33) = -3.77, p < .01; Cohen's d = -1.41, 95% CI [-2.17, -0.51])
 
 As mentioned, you can also create tables with the `as.data.frame()`
 functions, like for example with this correlation test:
@@ -179,8 +179,8 @@ aov(Sepal.Length ~ Species, data = iris) %>%
 
     # The ANOVA (formula: Sepal.Length ~ Species) suggests that:
     # 
-    #   - The main effect of Species is significant and large (F(2, 147) = 119.26, p < .001; Eta2 = 0.62, 90% CI
-    # [0.54, 0.68])
+    #   - The main effect of Species is statistically significant and large (F(2, 147) = 119.26, p < .001; Eta2 =
+    # 0.62, 90% CI [0.54, 0.68])
     # 
     # Effect sizes were labelled following Field's (2013) recommendations.
 
@@ -199,12 +199,12 @@ report(model)
     # The model's explanatory power is substantial (Tjur's R2 = 0.51). The model's intercept, corresponding to mpg
     # = 0 and drat = 0, is at -33.43 (95% CI [-77.90, 3.25], p = 0.083). Within this model:
     # 
-    #   - The effect of mpg is non-significantly positive (beta = 1.79, 95% CI [-0.10, 4.05], p = 0.066; Std. beta =
-    # 3.63, 95% CI [1.36, 7.50])
-    #   - The effect of drat is non-significantly positive (beta = 5.96, 95% CI [-3.75, 16.26], p = 0.205; Std. beta
-    # = -0.36, 95% CI [-1.96, 0.98])
-    #   - The interaction effect of drat on mpg is non-significantly negative (beta = -0.33, 95% CI [-0.83, 0.15], p
-    # = 0.141; Std. beta = -1.07, 95% CI [-2.66, 0.48])
+    #   - The effect of mpg is statistically non-significant and positive (beta = 1.79, 95% CI [-0.10, 4.05], p =
+    # 0.066; Std. beta = 3.63, 95% CI [1.36, 7.50])
+    #   - The effect of drat is statistically non-significant and positive (beta = 5.96, 95% CI [-3.75, 16.26], p =
+    # 0.205; Std. beta = -0.36, 95% CI [-1.96, 0.98])
+    #   - The interaction effect of drat on mpg is statistically non-significant and negative (beta = -0.33, 95% CI
+    # [-0.83, 0.15], p = 0.141; Std. beta = -1.07, 95% CI [-2.66, 0.48])
     # 
     #  Standardized parameters were obtained by fitting the model on a standardized version of the dataset. 95%
     # Confidence Intervals (CIs) and p-values were computed using
@@ -228,8 +228,8 @@ report(model)
     # to the fixed effects alone (marginal R2) is of 0.66. The model's intercept, corresponding to Petal.Length =
     # 0, is at 2.50 (95% CI [1.20, 3.81], t(146) = 3.75, p < .001). Within this model:
     # 
-    #   - The effect of Petal.Length is significantly positive (beta = 0.89, 95% CI [0.76, 1.01], t(146) = 13.93, p <
-    # .001; Std. beta = 1.89, 95% CI [1.63, 2.16])
+    #   - The effect of Petal.Length is statistically significant and positive (beta = 0.89, 95% CI [0.76, 1.01],
+    # t(146) = 13.93, p < .001; Std. beta = 1.89, 95% CI [1.63, 2.16])
     # 
     # Standardized parameters were obtained by fitting the model on a standardized version of the dataset. 95%
     # Confidence Intervals (CIs) and p-values were computed using the Wald approximation.
@@ -251,15 +251,15 @@ report(model)
     # We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains of 1000 iterations and a
     # warmup of 500) to predict mpg with qsec and wt (formula: mpg ~ qsec + wt). Priors over parameters were set as
     # normal (mean = 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The model's explanatory
-    # power is substantial (R2 = 0.81, 89% CI [0.73, 0.88], adj. R2 = 0.78). The model's intercept, corresponding
-    # to qsec = 0 and wt = 0, is at 19.61 (95% CI [8.95, 29.53]). Within this model:
+    # power is substantial (R2 = 0.81, 89% CI [0.74, 0.88], adj. R2 = 0.78). The model's intercept, corresponding
+    # to qsec = 0 and wt = 0, is at 19.79 (95% CI [9.55, 30.92]). Within this model:
     # 
-    #   - The effect of qsec (Median = 0.93, 95% CI [0.40, 1.44]) has a 99.95% probability of being positive (> 0),
-    # 98.95% of being significant (> 0.30), and 0.15% of being large (> 1.81). The estimation successfully
-    # converged (Rhat = 0.999) and the indices are reliable (ESS = 1922)
-    #   - The effect of wt (Median = -5.05, 95% CI [-5.98, -4.06]) has a 100.00% probability of being negative (< 0),
+    #   - The effect of qsec (Median = 0.92, 95% CI [0.41, 1.50]) has a 100.00% probability of being positive (> 0),
+    # 98.70% of being significant (> 0.30), and 0.15% of being large (> 1.81). The estimation successfully
+    # converged (Rhat = 0.999) and the indices are reliable (ESS = 1730)
+    #   - The effect of wt (Median = -5.04, 95% CI [-6.03, -4.03]) has a 100.00% probability of being negative (< 0),
     # 100.00% of being significant (< -0.30), and 100.00% of being large (< -1.81). The estimation successfully
-    # converged (Rhat = 1.002) and the indices are reliable (ESS = 2146)
+    # converged (Rhat = 1.000) and the indices are reliable (ESS = 1393)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT) framework, we report the median of
     # the posterior distribution and its 95% CI (Highest Density Interval), along the probability of direction
@@ -284,7 +284,7 @@ report_statistics(model)
 ```
 
     # linear model (estimated using OLS) to predict Sepal.Length with Species (formula: Sepal.Length ~ Species)
-    # The model explains a significant and substantial proportion of variance (R2 = 0.62, F(2, 147) = 119.26, p < .001, adj. R2 = 0.61)
+    # The model explains a statistically significant and substantial proportion of variance (R2 = 0.62, F(2, 147) = 119.26, p < .001, adj. R2 = 0.61)
     # beta = 5.01, 95% CI [4.86, 5.15], t(147) = 68.76, p < .001; Std. beta = -1.01, 95% CI [-1.18, -0.84]
     # beta = 0.93, 95% CI [0.73, 1.13], t(147) = 9.03, p < .001; Std. beta = 1.12, 95% CI [0.88, 1.37]
     # beta = 1.58, 95% CI [1.38, 1.79], t(147) = 15.37, p < .001; Std. beta = 1.91, 95% CI [1.66, 2.16]
@@ -314,7 +314,7 @@ Report can also help you create sample description table (also referred
 to as **Table 1**).
 
 | Variable               | setosa (n=50) | versicolor (n=50) | virginica (n=50) | Total       |
-| :--------------------- | :------------ | :---------------- | :--------------- | :---------- |
+|:-----------------------|:--------------|:------------------|:-----------------|:------------|
 | Mean Sepal.Length (SD) | 5.01 (0.35)   | 5.94 (0.52)       | 6.59 (0.64)      | 5.84 (0.83) |
 | Mean Sepal.Width (SD)  | 3.43 (0.38)   | 2.77 (0.31)       | 2.97 (0.32)      | 3.06 (0.44) |
 | Mean Petal.Length (SD) | 1.46 (0.17)   | 4.26 (0.47)       | 5.55 (0.55)      | 3.76 (1.77) |
@@ -329,8 +329,8 @@ analysis paragraph about the tools used.
 report(sessionInfo())
 ```
 
-    # Analyses were conducted using the R Statistical language (version 4.0.4; R Core Team, 2021) on Windows 10 x64
-    # (build 19042), using the packages Rcpp (version 1.0.6; Dirk Eddelbuettel and Romain Francois, 2011), Matrix
+    # Analyses were conducted using the R Statistical language (version 4.0.4; R Core Team, 2021) on macOS Mojave
+    # 10.14.6, using the packages Rcpp (version 1.0.6; Dirk Eddelbuettel and Romain Francois, 2011), Matrix
     # (version 1.3.2; Douglas Bates and Martin Maechler, 2021), lme4 (version 1.1.26; Douglas Bates et al., 2015),
     # rstanarm (version 2.21.1; Goodrich B et al., 2020), dplyr (version 1.0.5; Hadley Wickham et al., 2021) and
     # report (version 0.2.0; Makowski et al., 2020).
