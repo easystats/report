@@ -11,9 +11,9 @@ if (require("lavaan")) {
     expect_snapshot(report(model))
   })
 
-  test_that("model-lavaan detailed table", {
-  expect_snapshot(report_table(model))
-  })
+  # test_that("model-lavaan detailed table", {
+  # expect_snapshot(report_table(model))
+  # })
 
   test_that("model-lavaan detailed performance", {
     expect_snapshot(report_performance(model))
