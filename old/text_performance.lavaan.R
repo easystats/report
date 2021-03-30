@@ -7,9 +7,9 @@ text_performance.lavaan <- function(model, performance, ...) {
 
   # Chisq
   if (all(c("Chisq_p", "Chisq", "Chisq_df") %in% names(performance))) {
-    sig <- "significantly"
+    sig <- "significant"
     if (performance$Chisq_p > .05) {
-      sig <- "not significantly"
+      sig <- "not significant"
     }
     text <- paste0(
       text,

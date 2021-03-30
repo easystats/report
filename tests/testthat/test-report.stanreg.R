@@ -4,8 +4,8 @@ if (require("testthat") && require("rstanarm")) {
 
   test_that("model-stanreg", {
     r <- report(model)
-    expect_is(summary(r), "character")
-    expect_is(as.data.frame(r), "data.frame")
+    expect_s3_class(summary(r), "character")
+    expect_s3_class(as.data.frame(r), "data.frame")
 
     expect_equal(
       as.data.frame(r)$Parameter,

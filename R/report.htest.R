@@ -195,7 +195,7 @@ report_parameters.htest <- function(x, table = NULL, ...) {
   if (insight::model_info(x)$is_correlation) {
     text_full <- paste0(
       effectsize::interpret_direction(attributes(stats)$estimate),
-      ", ",
+      ", statistically ",
       effectsize::interpret_p(table$p, rules = "default"),
       " and ",
       effectsize::interpret_r(attributes(stats)$estimate, ...),
@@ -209,7 +209,7 @@ report_parameters.htest <- function(x, table = NULL, ...) {
   } else {
     text_full <- paste0(
       effectsize::interpret_direction(attributes(stats)$estimate),
-      ", ",
+      ", statistically ",
       effectsize::interpret_p(table$p, rules = "default"),
       " and ",
       attributes(effsize)$interpretation,
@@ -219,7 +219,7 @@ report_parameters.htest <- function(x, table = NULL, ...) {
     )
     text_short <- paste0(
       effectsize::interpret_direction(attributes(stats)$estimate),
-      ", ",
+      ", statistically ",
       effectsize::interpret_p(table$p, rules = "default"),
       " and ",
       attributes(effsize)$interpretation,

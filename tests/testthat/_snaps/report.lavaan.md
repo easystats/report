@@ -1,0 +1,53 @@
+# model-lavaan detailed report
+
+    Code
+      report(model)
+    Output
+      [1] "Support for lavaan not fully implemented yet :("
+
+# model-lavaan detailed table
+
+    Code
+      report_table(model)
+    Output
+      Parameter     | Coefficient |       95% CI |      p |  Component |     Fit
+      --------------------------------------------------------------------------
+      ind60 =~ x1   |        1.00 | [1.00, 1.00] | < .001 |    Loading |        
+      ind60 =~ x2   |        2.18 | [1.91, 2.45] | < .001 |    Loading |        
+      ind60 =~ x3   |        1.82 | [1.52, 2.12] | < .001 |    Loading |        
+      dem60 =~ y1   |        1.00 | [1.00, 1.00] | < .001 |    Loading |        
+      dem60 =~ y2   |        1.04 | [0.66, 1.43] | < .001 |    Loading |        
+      dem60 =~ y3   |        0.98 | [0.65, 1.30] | < .001 |    Loading |        
+      dem60 ~ ind60 |        1.37 | [0.53, 2.21] | 0.001  | Regression |        
+                    |             |              |        |            |        
+      Chi2          |             |              |        |            |    7.98
+      Chi2_df       |             |              |        |            |    8.00
+      p_Chi2        |             |              |        |            |    0.44
+      p_Baseline    |             |              |        |            |    0.00
+      GFI           |             |              |        |            |    0.97
+      AGFI          |             |              |        |            |    0.91
+      NFI           |             |              |        |            |    0.97
+      NNFI          |             |              |        |            |    1.00
+      CFI           |             |              |        |            |    1.00
+      RMSEA         |             |              |        |            |    0.00
+      RMSEA_CI_low  |             |              |        |            |    0.00
+      RMSEA_CI_high |             |              |        |            |    0.14
+      p_RMSEA       |             |              |        |            |    0.57
+      RMR           |             |              |        |            |    0.10
+      SRMR          |             |              |        |            |    0.03
+      RFI           |             |              |        |            |    0.95
+      PNFI          |             |              |        |            |    0.52
+      IFI           |             |              |        |            |    1.00
+      RNI           |             |              |        |            |    1.00
+      Loglikelihood |             |              |        |            | -778.27
+      AIC           |             |              |        |            | 1582.54
+      BIC           |             |              |        |            | 1612.67
+      BIC (adj.)    |             |              |        |            | 1571.69
+
+# model-lavaan detailed performance
+
+    Code
+      report_performance(model)
+    Output
+      The model is not significantly different from a baseline model (Chi2(8) = 7.98, p = 0.435). The GFI (.97 > .95), AGFI (.91 > .90), NFI (.97 > .90), NNFI (.00 > .90), CFI (.00 > .90), RMSEA (.00 < .05), SRMR (.03 < .08), RFI (.95 > .90), IFI (.00 > .90) and PNFI (.52 > .50) suggest a satisfactory fit.
+

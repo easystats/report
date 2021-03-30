@@ -231,7 +231,7 @@ report_parameters.aov <- function(x, ...) {
   # Significance
   text <- paste0(
     text,
-    " is ",
+    " is statistically ",
     effectsize::interpret_p(params$p),
     " and ",
     attributes(effsize)$interpretation,

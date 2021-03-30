@@ -1,4 +1,4 @@
-context("report.lm")
+
 
 # test_that("report.lm", {
 #   r <- report(insight::download_model("lm_0"))
@@ -33,7 +33,6 @@ context("report.lm")
 # })
 
 
-context("report.glm")
 
 # test_that("report.glm", {
 #   r <- report(insight::download_model("glm_1"))

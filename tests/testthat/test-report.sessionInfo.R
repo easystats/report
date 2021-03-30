@@ -1,5 +1,3 @@
-context("report.sessionInfo")
-
 
 test_that("report.sessionInfo - High level", {
   x <- sessionInfo()

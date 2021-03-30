@@ -103,7 +103,7 @@ print.report_performance <- function(x, ...) {
     # Frequentist
     if (all(c("p", "df", "df_residual") %in% names(r2))) {
       text_full <- paste0(
-        "The model explains a ",
+        "The model explains a statistically ",
         effectsize::interpret_p(r2$p),
         " and ",
         effectsize::interpret_r2(performance$R2, ...),
