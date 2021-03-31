@@ -216,10 +216,10 @@ will run it.</p></td>
 <span class='fu'>report_text</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Effect sizes were labelled following Cohen's (1988) recommendations.
 #&gt; 
-#&gt; The Welch Two Sample t-test testing the difference between iris$Sepal.Width and iris$Sepal.Length (mean of x = 3.06, mean of y = 5.84) suggests that the effect is negative, significant and large (difference = -2.79, 95% CI [-2.94, -2.64], t(225.68) = -36.46, p &lt; .001; Cohen's d = -4.21, 95% CI [-4.66, -3.76])</div><div class='input'><span class='fu'>report_text</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>)</span><span class='op'>)</span>
+#&gt; The Welch Two Sample t-test testing the difference between iris$Sepal.Width and iris$Sepal.Length (mean of x = 3.06, mean of y = 5.84) suggests that the effect is negative, statistically significant and large (difference = -2.79, 95% CI [-2.94, -2.64], t(225.68) = -36.46, p &lt; .001; Cohen's d = -4.21, 95% CI [-4.66, -3.76])</div><div class='input'><span class='fu'>report_text</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Effect sizes were labelled following Funder's (2019) recommendations.
 #&gt; 
-#&gt; The Pearson's product-moment correlation between iris$Sepal.Width and iris$Sepal.Length is negative, not significant and small (r = -0.12, 95% CI [-0.27, 0.04], t(148) = -1.44, p = 0.152)</div><div class='input'>
+#&gt; The Pearson's product-moment correlation between iris$Sepal.Width and iris$Sepal.Length is negative, statistically not significant and small (r = -0.12, 95% CI [-0.27, 0.04], t(148) = -1.44, p = 0.152)</div><div class='input'>
 <span class='co'># ANOVA</span>
 <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'>report_text</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>For one-way between subjects designs, partial eta squared is equvilant to eta squared.</span>
@@ -227,31 +227,31 @@ will run it.</p></td>
 #&gt; <span class='message'>Returning eta squared.</span></div><div class='input'><span class='va'>r</span>
 </div><div class='output co'>#&gt; The ANOVA (formula: Sepal.Length ~ Species) suggests that:
 #&gt; 
-#&gt;   - The main effect of Species is significant and large (F(2, 147) = 119.26, p &lt; .001; Eta2 = 0.62, 90% CI [0.54, 0.68])
+#&gt;   - The main effect of Species is statistically significant and large (F(2, 147) = 119.26, p &lt; .001; Eta2 = 0.62, 90% CI [0.54, 0.68])
 #&gt; 
 #&gt; Effect sizes were labelled following Field's (2013) recommendations.</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; The ANOVA suggests that:
 #&gt; 
-#&gt;   - The main effect of Species is significant and large (F(2, 147) = 119.26, p &lt; .001, Eta2 = 0.62)</div><div class='input'>
+#&gt;   - The main effect of Species is statistically significant and large (F(2, 147) = 119.26, p &lt; .001, Eta2 = 0.62)</div><div class='input'>
 <span class='co'># GLMs</span>
 <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'>report_text</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>*</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>r</span>
-</div><div class='output co'>#&gt; We fitted a linear model (estimated using OLS) to predict Sepal.Length with Petal.Length and Species (formula: Sepal.Length ~ Petal.Length * Species). The model explains a significant and substantial proportion of variance (R2 = 0.84, F(5, 144) = 151.71, p &lt; .001, adj. R2 = 0.83). The model's intercept, corresponding to Petal.Length = 0 and Species = setosa, is at 4.21 (95% CI [3.41, 5.02], t(144) = 10.34, p &lt; .001). Within this model:
+</div><div class='output co'>#&gt; We fitted a linear model (estimated using OLS) to predict Sepal.Length with Petal.Length and Species (formula: Sepal.Length ~ Petal.Length * Species). The model explains a statistically significant and substantial proportion of variance (R2 = 0.84, F(5, 144) = 151.71, p &lt; .001, adj. R2 = 0.83). The model's intercept, corresponding to Petal.Length = 0 and Species = setosa, is at 4.21 (95% CI [3.41, 5.02], t(144) = 10.34, p &lt; .001). Within this model:
 #&gt; 
-#&gt;   - The effect of Petal.Length is non-significantly positive (beta = 0.54, 95% CI [-4.76e-03, 1.09], t(144) = 1.96, p = 0.052; Std. beta = 1.16, 95% CI [-0.01, 2.32])
-#&gt;   - The effect of Species [versicolor] is significantly negative (beta = -1.81, 95% CI [-2.99, -0.62], t(144) = -3.02, p &lt; .01; Std. beta = -0.88, 95% CI [-2.41, 0.65])
-#&gt;   - The effect of Species [virginica] is significantly negative (beta = -3.15, 95% CI [-4.41, -1.90], t(144) = -4.97, p &lt; .001; Std. beta = -1.75, 95% CI [-3.32, -0.18])
-#&gt;   - The interaction effect of Species [versicolor] on Petal.Length is non-significantly positive (beta = 0.29, 95% CI [-0.30, 0.87], t(144) = 0.97, p = 0.334; Std. beta = 0.61, 95% CI [-0.63, 1.85])
-#&gt;   - The interaction effect of Species [virginica] on Petal.Length is non-significantly positive (beta = 0.45, 95% CI [-0.12, 1.03], t(144) = 1.56, p = 0.120; Std. beta = 0.97, 95% CI [-0.26, 2.19])
+#&gt;   - The effect of Petal.Length is statistically non-significant and positive (beta = 0.54, 95% CI [-4.76e-03, 1.09], t(144) = 1.96, p = 0.052; Std. beta = 1.16, 95% CI [-0.01, 2.32])
+#&gt;   - The effect of Species [versicolor] is statistically significant and negative (beta = -1.81, 95% CI [-2.99, -0.62], t(144) = -3.02, p &lt; .01; Std. beta = -0.88, 95% CI [-2.41, 0.65])
+#&gt;   - The effect of Species [virginica] is statistically significant and negative (beta = -3.15, 95% CI [-4.41, -1.90], t(144) = -4.97, p &lt; .001; Std. beta = -1.75, 95% CI [-3.32, -0.18])
+#&gt;   - The interaction effect of Species [versicolor] on Petal.Length is statistically non-significant and positive (beta = 0.29, 95% CI [-0.30, 0.87], t(144) = 0.97, p = 0.334; Std. beta = 0.61, 95% CI [-0.63, 1.85])
+#&gt;   - The interaction effect of Species [virginica] on Petal.Length is statistically non-significant and positive (beta = 0.45, 95% CI [-0.12, 1.03], t(144) = 1.56, p = 0.120; Std. beta = 0.97, 95% CI [-0.26, 2.19])
 #&gt; 
 #&gt; Standardized parameters were obtained by fitting the model on a standardized version of the dataset.</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; We fitted a linear model to predict Sepal.Length with Petal.Length and Species. The model's explanatory power is substantial (R2 = 0.84, adj. R2 = 0.83). The model's intercept is at 4.21 (95% CI [3.41, 5.02]). Within this model:
 #&gt; 
-#&gt;   - The effect of Petal.Length is non-significantly positive (beta = 0.54, 95% CI [-4.76e-03, 1.09], t(144) = 1.96, p = 0.052, Std. beta = 1.16)
-#&gt;   - The effect of Species [versicolor] is significantly negative (beta = -1.81, 95% CI [-2.99, -0.62], t(144) = -3.02, p &lt; .01, Std. beta = -0.88)
-#&gt;   - The effect of Species [virginica] is significantly negative (beta = -3.15, 95% CI [-4.41, -1.90], t(144) = -4.97, p &lt; .001, Std. beta = -1.75)
-#&gt;   - The interaction effect of Species [versicolor] on Petal.Length is non-significantly positive (beta = 0.29, 95% CI [-0.30, 0.87], t(144) = 0.97, p = 0.334, Std. beta = 0.61)
-#&gt;   - The interaction effect of Species [virginica] on Petal.Length is non-significantly positive (beta = 0.45, 95% CI [-0.12, 1.03], t(144) = 1.56, p = 0.120, Std. beta = 0.97)</div><div class='input'>
+#&gt;   - The effect of Petal.Length is statistically non-significant and positive (beta = 0.54, 95% CI [-4.76e-03, 1.09], t(144) = 1.96, p = 0.052, Std. beta = 1.16)
+#&gt;   - The effect of Species [versicolor] is statistically significant and negative (beta = -1.81, 95% CI [-2.99, -0.62], t(144) = -3.02, p &lt; .01, Std. beta = -0.88)
+#&gt;   - The effect of Species [virginica] is statistically significant and negative (beta = -3.15, 95% CI [-4.41, -1.90], t(144) = -4.97, p &lt; .001, Std. beta = -1.75)
+#&gt;   - The interaction effect of Species [versicolor] on Petal.Length is statistically non-significant and positive (beta = 0.29, 95% CI [-0.30, 0.87], t(144) = 0.97, p = 0.334, Std. beta = 0.61)
+#&gt;   - The interaction effect of Species [virginica] on Petal.Length is statistically non-significant and positive (beta = 0.45, 95% CI [-0.12, 1.03], t(144) = 1.56, p = 0.120, Std. beta = 0.97)</div><div class='input'>
 <span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://github.com/lme4/lme4/'>"lme4"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'>lme4</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>|</span> <span class='va'>Species</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
   <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'>report_text</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
@@ -260,7 +260,7 @@ will run it.</p></td>
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; We fitted a linear mixed model to predict Sepal.Length with Petal.Length. The model included Species as random effect. The model's total explanatory power is substantial (conditional R2 = 0.97) and the part related to the fixed effects alone (marginal R2) is of 0.66. The model's intercept is at 2.50 (95% CI [1.20, 3.81]). Within this model:
 #&gt; 
-#&gt;   - The effect of Petal.Length is significantly positive (beta = 0.89, 95% CI [0.76, 1.01], t(146) = 13.93, p &lt; .001, Std. beta = 1.89)</div><div class='input'>
+#&gt;   - The effect of Petal.Length is statistically significant and positive (beta = 0.89, 95% CI [0.76, 1.01], t(146) = 13.93, p &lt; .001, Std. beta = 1.89)</div><div class='input'>
 <span class='co'># Bayesian models</span>
 <span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://mc-stan.org/rstanarm/'>"rstanarm"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://mc-stan.org/rstanarm/reference/stan_glm.html'>stan_glm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>cyl</span> <span class='op'>+</span> <span class='va'>wt</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, refresh <span class='op'>=</span> <span class='fl'>0</span>, iter <span class='op'>=</span> <span class='fl'>600</span><span class='op'>)</span>
