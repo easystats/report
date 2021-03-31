@@ -1,4 +1,4 @@
-context("report.merMod")
+
 
 # test_that("report.merMod", {
 #   library(lme4)

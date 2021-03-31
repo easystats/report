@@ -296,9 +296,9 @@ report_parameters.lm <- function(x,
   # Significance and effect size
   text <- paste0(
     text,
-    " is ",
-    effectsize::interpret_p(params$p, rules = effectsize::rules(c(0.05), c("significantly", "non-significantly"))),
-    " ",
+    " is statistically ",
+    effectsize::interpret_p(params$p, rules = effectsize::rules(c(0.05), c("significant", "non-significant"))),
+    " and ",
     effectsize::interpret_direction(params$Coefficient)
   )
 

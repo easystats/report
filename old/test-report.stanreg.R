@@ -1,4 +1,4 @@
-context("report.stanreg_lm")
+
 
 # test_that("report.stanreg_lm", {
 #   library(rstanarm)
@@ -28,7 +28,6 @@ context("report.stanreg_lm")
 # })
 
 
-context("report.stanreg_glm")
 
 # test_that("report.stanreg_glm", {
 #   r <- report(insight::download_model("stanreg_glm_1"), effsize = "cohen1988", standardize = "smart")
@@ -41,7 +40,6 @@ context("report.stanreg_glm")
 # })
 
 
-context("report.stanreg_lmer")
 
 # test_that("report.stanreg_lmer", {
 #   r <- report(insight::download_model("stanreg_lmerMod_1"), effsize = "cohen1988", standardize = "smart")

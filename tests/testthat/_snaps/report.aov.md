@@ -8,7 +8,7 @@
     Output
       The ANOVA suggests that:
       
-        - The main effect of Species is significant and large (F(2, 147) = 49.16, p < .001; Eta2 = 0.40, 90% CI [0.30, 0.48])
+        - The main effect of Species is statistically significant and large (F(2, 147) = 49.16, p < .001; Eta2 = 0.40, 90% CI [0.30, 0.48])
       
       Effect sizes were labelled following Field's (2013) recommendations.
 

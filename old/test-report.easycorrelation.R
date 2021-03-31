@@ -1,5 +1,4 @@
-# context("report.easycorrelation")
-#
+
 # test_that("report.easycorrelation", {
 #   library(BayesFactor)
 #

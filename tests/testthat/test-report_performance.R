@@ -6,7 +6,7 @@ if (require("testthat") && require("report")) {
     x <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
     expect_equal(
       as.character(report_performance(x)),
-      "The model explains a significant and substantial proportion of variance (R2 = 0.84, F(5, 144) = 151.71, p < .001, adj. R2 = 0.83)"
+      "The model explains a statistically significant and substantial proportion of variance (R2 = 0.84, F(5, 144) = 151.71, p < .001, adj. R2 = 0.83)"
     )
     expect_equal(
       as.character(summary(report_performance(x))),

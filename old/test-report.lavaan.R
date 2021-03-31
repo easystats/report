@@ -1,4 +1,4 @@
-context("report.lavaan")
+
 
 # test_that("report.lavaan", {
 #   library(lavaan)

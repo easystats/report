@@ -8,8 +8,8 @@ if (require("testthat") && require("bayestestR")) {
 
   test_that("models", {
     r <- report(BFmodels)
-    expect_is(summary(r), "character")
-    expect_is(as.data.frame(r), "data.frame")
+    expect_s3_class(summary(r), "character")
+    expect_s3_class(as.data.frame(r), "data.frame")
 
     expect_output(print(r), "BIC approximation")
     expect_output(print(r), "\\(Intercept only\\) model \\(the least supported model\\)")
@@ -26,8 +26,8 @@ if (require("testthat") && require("bayestestR")) {
   test_that("inclusion", {
     inc_bf <- bayestestR::bayesfactor_inclusion(BFmodels, prior_odds = c(1, 2, 3), match_models = TRUE)
     r <- report(inc_bf)
-    expect_is(summary(r), "character")
-    expect_is(as.data.frame(r), "data.frame")
+    expect_s3_class(summary(r), "character")
+    expect_s3_class(as.data.frame(r), "data.frame")
 
     expect_output(print(r), "Since each model has a prior probability")
     expect_output(print(r), "subjective prior odds")
@@ -36,8 +36,8 @@ if (require("testthat") && require("bayestestR")) {
 
     inc_bf <- bayestestR::bayesfactor_inclusion(BFmodels)
     r <- report(inc_bf)
-    expect_is(summary(r), "character")
-    expect_is(as.data.frame(r), "data.frame")
+    expect_s3_class(summary(r), "character")
+    expect_s3_class(as.data.frame(r), "data.frame")
 
     expect_false(grepl("subjective prior odds", r, fixed = TRUE))
     expect_false(grepl("averaging was done only", r, fixed = TRUE))
