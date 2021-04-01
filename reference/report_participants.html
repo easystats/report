@@ -47,7 +47,8 @@
 
 
 <meta property="og:title" content="Reporting the participant data — report_participants" />
-<meta property="og:description" content="A helper function to help you format the participants data (age, sex, ...) in the participants section." />
+<meta property="og:description" content="A helper function to help you format the participants data (age, sex, ...) in
+the participants section." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -151,7 +152,8 @@
     </div>
 
     <div class="ref-description">
-    <p>A helper function to help you format the participants data (age, sex, ...) in the participants section.</p>
+    <p>A helper function to help you format the participants data (age, sex, ...) in
+the participants section.</p>
     </div>
 
     <pre class="usage"><span class='fu'>report_participants</span><span class='op'>(</span>
@@ -175,12 +177,15 @@
     </tr>
     <tr>
       <th>age</th>
-      <td><p>The name of the column containing the age.</p></td>
+      <td><p>The name of the column containing the age of the participant.</p></td>
     </tr>
     <tr>
       <th>sex</th>
-      <td><p>The name of the column containing the sex. Note that classes
-should be one of `c("Male", "M", "Female", "F")`.</p></td>
+      <td><p>The name of the column containing the sex of the participant. The
+classes should be one of <code><a href='https://rdrr.io/r/base/c.html'>c("Male", "M", "Female", "F")</a></code>. Note that
+you can specify other characters here as well (e.g., <code>"Other"</code>), but
+the function will report only percentage of females, regardless of whether
+any category other than "Male" is present in the data.</p></td>
     </tr>
     <tr>
       <th>education</th>
@@ -198,8 +203,8 @@ for stratified description.</p></td>
     </tr>
     <tr>
       <th>spell_n</th>
-      <td><p>Fully spell the sample size ("Three participants" instead of
-"3 participants").</p></td>
+      <td><p>Fully spell the sample size (<code>"Three participants"</code>
+instead of <code>"3 participants"</code>).</p></td>
     </tr>
     <tr>
       <th>digits</th>
