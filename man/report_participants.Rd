@@ -19,10 +19,13 @@ report_participants(
 \arguments{
 \item{data}{A data frame.}
 
-\item{age}{The name of the column containing the age.}
+\item{age}{The name of the column containing the age of the participant.}
 
-\item{sex}{The name of the column containing the sex. Note that classes
-should be one of `c("Male", "M", "Female", "F")`.}
+\item{sex}{The name of the column containing the sex of the participant. The
+classes should be one of \code{c("Male", "M", "Female", "F")}. Note that
+you can specify other characters here as well (e.g., \code{"Other"}), but
+the function will report only percentage of females, regardless of whether
+any category other than "Male" is present in the data.}
 
 \item{education}{The name of the column containing education information.}
 
@@ -32,8 +35,8 @@ instance in the case of repeated measures).}
 \item{group}{A character vector indicating the name(s) of the column(s) used
 for stratified description.}
 
-\item{spell_n}{Fully spell the sample size ("Three participants" instead of
-"3 participants").}
+\item{spell_n}{Fully spell the sample size (\code{"Three participants"}
+instead of \code{"3 participants"}).}
 
 \item{digits}{Number of significant digits.}
 
@@ -44,7 +47,8 @@ A character vector with description of the "participants", based on
   the information provided in \code{data}.
 }
 \description{
-A helper function to help you format the participants data (age, sex, ...) in the participants section.
+A helper function to help you format the participants data (age, sex, ...) in
+the participants section.
 }
 \examples{
 library(report)
