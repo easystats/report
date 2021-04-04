@@ -189,7 +189,7 @@ list of supported objects in <code><a href='report.html'>report</a></code>).</p>
 #&gt;   - performance (version 0.7.0; Lüdecke et al., 2020)
 #&gt;   - bayestestR (version 0.8.2; Makowski et al., 2019)
 #&gt;   - report (version 0.2.0; Makowski et al., 2020)
-#&gt;   - R (version 4.0.4; R Core Team, 2021)
+#&gt;   - R (version 4.0.5; R Core Team, 2021)
 #&gt;   - lavaan (version 0.6.8; Yves Rosseel, 2012)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;   - Rcpp (v1.0.6)
 #&gt;   - Matrix (v1.3.2)
@@ -199,7 +199,7 @@ list of supported objects in <code><a href='report.html'>report</a></code>).</p>
 #&gt;   - performance (v0.7.0)
 #&gt;   - bayestestR (v0.8.2)
 #&gt;   - report (v0.2.0)
-#&gt;   - R (v4.0.4)
+#&gt;   - R (v4.0.5)
 #&gt;   - lavaan (v0.6.8)</div><div class='input'>
 <span class='co'># Data</span>
 <span class='fu'>report_parameters</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>)</span>
@@ -261,7 +261,7 @@ list of supported objects in <code><a href='report.html'>report</a></code>).</p>
 </div><div class='output co'>#&gt;   - negative, statistically not significant and small (r = -0.12, 95% CI [-0.27, 0.04], t(148) = -1.44, p = 0.152)</div><div class='input'>
 <span class='co'># ANOVA</span>
 <span class='fu'>report_parameters</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>For one-way between subjects designs, partial eta squared is equvilant to eta squared.</span>
+</div><div class='output co'>#&gt; <span class='message'>For one-way between subjects designs, partial eta squared is equivalent to eta squared.</span>
 #&gt; <span class='message'>Returning eta squared.</span></div><div class='output co'>#&gt;   - The main effect of Species is statistically significant and large (F(2, 147) = 119.26, p &lt; .001; Eta2 = 0.62, 90% CI [0.54, 0.68])</div><div class='input'>
 <span class='co'># GLMs</span>
 <span class='fu'>report_parameters</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>*</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span>

@@ -201,7 +201,7 @@ will run it.</p></td>
 </div><div class='output co'>#&gt; r = -0.12, 95% CI [-0.27, 0.04], t(148) = -1.44, p = 0.152</div><div class='input'>
 <span class='co'># ANOVA</span>
 <span class='fu'>report_statistics</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>For one-way between subjects designs, partial eta squared is equvilant to eta squared.</span>
+</div><div class='output co'>#&gt; <span class='message'>For one-way between subjects designs, partial eta squared is equivalent to eta squared.</span>
 #&gt; <span class='message'>Returning eta squared.</span></div><div class='output co'>#&gt; F(2, 147) = 119.26, p &lt; .001; Eta2 = 0.62, 90% CI [0.54, 0.68]</div><div class='input'>
 <span class='co'># GLMs</span>
 <span class='fu'>report_statistics</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>*</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span>
