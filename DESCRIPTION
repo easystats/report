@@ -58,6 +58,8 @@ Suggests:
     rstanarm,
     spelling,
     testthat
+Remotes:
+    easystats/effectsize
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3
