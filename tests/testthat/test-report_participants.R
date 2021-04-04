@@ -18,7 +18,7 @@ test_that("report_participants", {
   data2 <- data.frame(
     "Age" = c(22, 22, 54, 54, 8, 8),
     "Sex" = c("F", "F", "M", "O", "F", "O")
-    )
+  )
 
   expect_equal(
     report_participants(data2),

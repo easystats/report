@@ -47,3 +47,12 @@
       
       The Welch Two Sample t-test testing the difference of wt by am (mean in group 0 = 3.77, mean in group 1 = 2.41) suggests that the effect is negative, statistically significant and large (difference = -1.36, 95% CI [0.85, 1.86], t(29.23) = 5.49, p < .001; Cohen's d = 2.03, 95% CI [1.13, 2.91])
 
+---
+
+    Code
+      report(t.test(Pair(extra.1, extra.2) ~ 1, data = sleep2))
+    Output
+      Effect sizes were labelled following Cohen's (1988) recommendations.
+      
+      The Paired t-test testing the difference between Pair(extra.1, extra.2) (mean of the differences = -1.58) suggests that the effect is negative, statistically significant and large (difference = -1.58, 95% CI [-2.46, -0.70], t(9) = -4.06, p < .01; Cohen's d = -1.35, 95% CI [-2.23, -0.44])
+
