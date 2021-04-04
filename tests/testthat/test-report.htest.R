@@ -40,8 +40,10 @@ test_that("report.htest", {
   set.seed(123)
   expect_snapshot(report(t.test(formula = wt ~ am, data = mtcars)))
 
-  # two-sample paired
-  sleep2 <- reshape(sleep, direction = "wide", idvar = "ID", timevar = "group")
-  set.seed(123)
-  expect_snapshot(report(t.test(Pair(extra.1, extra.2) ~ 1, data = sleep2)))
+  if (getRversion() > "4.0") {
+    # two-sample paired
+    sleep2 <- reshape(sleep, direction = "wide", idvar = "ID", timevar = "group")
+    set.seed(123)
+    expect_snapshot(report(t.test(Pair(extra.1, extra.2) ~ 1, data = sleep2)))
+  }
 })
