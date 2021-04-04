@@ -59,7 +59,7 @@ Suggests:
     spelling,
     testthat
 Remotes:
-    easystats/report
+    easystats/effectsize
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3
