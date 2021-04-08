@@ -65,14 +65,16 @@ indices (standardized coefficients, etc.).}
 
 \item{...}{Arguments passed to or from other methods.}
 
-\item{table}{Provide the output of  \code{report_table()} to avoid its re-computation.}
+\item{table}{Provide the output of  \code{report_table()} to avoid its
+re-computation.}
 
 \item{include_diagnostic}{If \code{FALSE}, won't include diagnostic related
 indices for Bayesian models (ESS, Rhat).}
 
 \item{include_intercept}{If \code{FALSE}, won't include the intercept.}
 
-\item{effectsize}{Provide the output of \code{report_effectsize()} to avoid its re-computation.}
+\item{effectsize}{Provide the output of \code{report_effectsize()} to avoid
+its re-computation.}
 
 \item{parameters}{Provide the output of \code{report_parameters()} to avoid its re-computation.}
 }

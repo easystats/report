@@ -9,7 +9,7 @@
 \alias{report_model.htest}
 \alias{report_info.htest}
 \alias{report_text.htest}
-\title{Reporting h-tests (Correlation, t-test...)}
+\title{Reporting \code{htest} objects (Correlation, t-test...)}
 \usage{
 \method{report}{htest}(x, ...)
 
@@ -28,13 +28,15 @@
 \method{report_text}{htest}(x, table = NULL, ...)
 }
 \arguments{
-\item{x}{Object of class htest.}
+\item{x}{Object of class \code{htest}.}
 
 \item{...}{Arguments passed to or from other methods.}
 
-\item{table}{Provide the output of  \code{report_table()} to avoid its re-computation.}
+\item{table}{Provide the output of  \code{report_table()} to avoid its
+re-computation.}
 
-\item{effectsize}{Provide the output of \code{report_effectsize()} to avoid its re-computation.}
+\item{effectsize}{Provide the output of \code{report_effectsize()} to avoid
+its re-computation.}
 }
 \value{
 A list-object of class \code{report}, which contains further list-objects
@@ -42,7 +44,8 @@ with a short and long description of the model summary, as well as a short
 and long table of parameters and fit indices.
 }
 \description{
-Create reports for h-test objects (\code{t.test()}, \code{cor.test()}).
+Create reports for \code{htest} objects (\code{t.test()}, \code{cor.test()},
+etc.).
 }
 \examples{
 report(cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman"))

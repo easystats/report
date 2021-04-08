@@ -2,9 +2,6 @@
 
     Code
       report(model)
-    Warning <simpleWarning>
-      Note that the default rope range for linear models might change in future versions (see https://github.com/easystats/bayestestR/issues/364).Please set it explicitly to preserve current results.
-      Note that the default rope range for linear models might change in future versions (see https://github.com/easystats/bayestestR/issues/364).Please set it explicitly to preserve current results.
     Output
       We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains of 300 iterations and a warmup of 150) to predict mpg with qsec and wt (formula: mpg ~ qsec + wt). Priors over parameters were set as normal (mean = 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The model's explanatory power is substantial (R2 = 0.81, 89% CI [0.73, 0.89], adj. R2 = 0.79). The model's intercept, corresponding to qsec = 0 and wt = 0, is at 19.71 (95% CI [9.25, 30.23]). Within this model:
       

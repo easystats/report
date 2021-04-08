@@ -1,10 +1,13 @@
-#' Reporting h-tests (Correlation, t-test...)
+#' Reporting \code{htest} objects (Correlation, t-test...)
 #'
-#' Create reports for h-test objects (\code{t.test()}, \code{cor.test()}).
+#' Create reports for \code{htest} objects (\code{t.test()}, \code{cor.test()},
+#' etc.).
 #'
-#' @param x Object of class htest.
-#' @param table Provide the output of  \code{report_table()} to avoid its re-computation.
-#' @param effectsize Provide the output of \code{report_effectsize()} to avoid its re-computation.
+#' @param x Object of class \code{htest}.
+#' @param table Provide the output of  \code{report_table()} to avoid its
+#'   re-computation.
+#' @param effectsize Provide the output of \code{report_effectsize()} to avoid
+#'   its re-computation.
 #' @inheritParams report
 #'
 #' @inherit report return seealso
@@ -28,8 +31,6 @@ report.htest <- function(x, ...) {
 
 
 
-
-
 # report_effectsize -------------------------------------------------------
 
 
@@ -44,9 +45,11 @@ report_effectsize.htest <- function(x, ...) {
   ci <- table$CI
 
   # For t-tests ----------------
+
   if (insight::model_info(x)$is_ttest) {
     interpretation <- effectsize::interpret_d(table[[estimate]], ...)
     rules <- .text_effectsize(attributes(interpretation)$rule_name)
+
     if (estimate %in% c("d", "Cohens_d")) {
       main <- paste0("Cohen's d = ", insight::format_value(table[[estimate]]))
     } else {
@@ -59,7 +62,12 @@ report_effectsize.htest <- function(x, ...) {
       insight::format_ci(table$CI_low, table$CI_high, ci)
     )
 
-    table <- data_rename(as.data.frame(table), c("CI_low", "CI_high"), paste0(estimate, c("_CI_low", "_CI_high")))
+    table <- data_rename(
+      as.data.frame(table),
+      c("CI_low", "CI_high"),
+      paste0(estimate, c("_CI_low", "_CI_high"))
+    )
+
     table <- table[c(estimate, paste0(estimate, c("_CI_low", "_CI_high")))]
 
     # For correlations ---------------
@@ -76,6 +84,7 @@ report_effectsize.htest <- function(x, ...) {
         ", ",
         insight::format_ci(table$CI_low, table$CI_high, ci)
       )
+
       table <- table[c(estimate, "CI_low", "CI_high")]
 
       # For Spearman and co.
@@ -84,13 +93,12 @@ report_effectsize.htest <- function(x, ...) {
       table <- table[c(estimate)]
     }
 
-    # TODO: Chi square test
+    # TO DO: Chi-squared test -------------
   } else {
-    stop("This type of test is not supported yet. Please open an issue on https://github.com/easystats/report/issues")
+    stop("This test is not yet supported. Please open an issue: https://github.com/easystats/report/issues")
   }
 
   parameters <- paste0(interpretation, " (", statistics, ")")
-
 
   # Return output
   as.report_effectsize(parameters,
@@ -123,6 +131,7 @@ report_table.htest <- function(x, ...) {
   }
 
   table <- data_remove(table_full, c("Parameter", "Group", "Mean_Group1", "Mean_Group2", "Method"))
+
   # Return output
   as.report_table(table_full, summary = table, effsize = effsize)
 }
@@ -134,9 +143,10 @@ report_table.htest <- function(x, ...) {
 #' @rdname report.htest
 #' @export
 report_statistics.htest <- function(x, table = NULL, ...) {
-  if (is.null(table) | is.null(attributes(table)$effsize)) {
+  if (is.null(table) || is.null(attributes(table)$effsize)) {
     table <- report_table(x)
   }
+
   effsize <- attributes(table)$effsize
 
   # Estimate
@@ -151,11 +161,19 @@ report_statistics.htest <- function(x, table = NULL, ...) {
 
   # Statistic
   if ("t" %in% names(table)) {
-    text <- paste0(text, ", t(", insight::format_value(table$df, protect_integers = TRUE), ") = ", insight::format_value(table$t))
+    text <- paste0(
+      text,
+      ", t(",
+      insight::format_value(table$df, protect_integers = TRUE),
+      ") = ",
+      insight::format_value(table$t)
+    )
   } else if ("S" %in% names(table)) {
     text <- paste0(text, ", S = ", insight::format_value(table$S))
   } else if ("z" %in% names(table)) {
     text <- paste0(text, ", z = ", insight::format_value(table$z))
+  } else if ("Chi2" %in% names(table)) {
+    text <- paste0(text, ", Chi2 = ", insight::format_value(table$Chi2))
   }
 
   # p-value
@@ -197,12 +215,13 @@ report_parameters.htest <- function(x, table = NULL, ...) {
       effectsize::interpret_direction(attributes(stats)$estimate),
       ", statistically ",
       effectsize::interpret_p(table$p, rules = "default"),
-      " and ",
+      ", and ",
       effectsize::interpret_r(attributes(stats)$estimate, ...),
       " (",
       stats,
       ")"
     )
+
     text_short <- text_full
 
     # t-tests
@@ -211,17 +230,18 @@ report_parameters.htest <- function(x, table = NULL, ...) {
       effectsize::interpret_direction(attributes(stats)$estimate),
       ", statistically ",
       effectsize::interpret_p(table$p, rules = "default"),
-      " and ",
+      ", and ",
       attributes(effsize)$interpretation,
       " (",
       stats,
       ")"
     )
+
     text_short <- paste0(
       effectsize::interpret_direction(attributes(stats)$estimate),
       ", statistically ",
       effectsize::interpret_p(table$p, rules = "default"),
-      " and ",
+      ", and ",
       attributes(effsize)$interpretation,
       " (",
       summary(stats),
@@ -229,7 +249,13 @@ report_parameters.htest <- function(x, table = NULL, ...) {
     )
   }
 
-  as.report_parameters(text_full, summary = text_short, table = table, effectsize = effsize, ...)
+  as.report_parameters(
+    text_full,
+    summary = text_short,
+    table = table,
+    effectsize = effsize,
+    ...
+  )
 }
 
 # report_model ------------------------------------------------------------
@@ -291,9 +317,9 @@ report_info.htest <- function(x, effectsize = NULL, ...) {
   if (is.null(effectsize)) {
     effectsize <- report_effectsize(x, ...)
   }
+
   as.report_info(attributes(effectsize)$rules)
 }
-
 
 
 # report_text ------------------------------------------------------------
@@ -314,6 +340,7 @@ report_text.htest <- function(x, table = NULL, ...) {
       " is ",
       params
     )
+
     text_full <- paste0(
       info,
       "\n\n",
@@ -327,6 +354,7 @@ report_text.htest <- function(x, table = NULL, ...) {
       " suggests that the effect is ",
       params
     )
+
     text <- paste0(
       "The ",
       model,
