@@ -45,7 +45,8 @@
 )
 }
 \arguments{
-\item{x}{The R object that you want to report (see list of of supported objects above).}
+\item{x}{The R object that you want to report (see list of of supported
+objects above).}
 
 \item{n_entries}{Number of different character entries to show. Can be "all".}
 

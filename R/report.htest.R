@@ -93,7 +93,7 @@ report_effectsize.htest <- function(x, ...) {
       table <- table[c(estimate)]
     }
 
-    # TO DO: Chi-squared test -------------
+    # TODO: Chi-squared test -------------
   } else {
     stop("This test is not yet supported. Please open an issue: https://github.com/easystats/report/issues")
   }

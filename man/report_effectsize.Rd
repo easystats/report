@@ -7,7 +7,8 @@
 report_effectsize(x, ...)
 }
 \arguments{
-\item{x}{The R object that you want to report (see list of of supported objects above).}
+\item{x}{The R object that you want to report (see list of of supported
+objects above).}
 
 \item{...}{Arguments passed to or from other methods.}
 }

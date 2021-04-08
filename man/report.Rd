@@ -7,17 +7,19 @@
 report(x, ...)
 }
 \arguments{
-\item{x}{The R object that you want to report (see list of of supported objects above).}
+\item{x}{The R object that you want to report (see list of of supported
+objects above).}
 
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{
-A list-object of class \code{report}, which contains further list-objects
-with a short and long description of the model summary, as well as a short
-and long table of parameters and fit indices.
+A list-object of class \code{report}, which contains further
+  list-objects with a short and long description of the model summary, as
+  well as a short and long table of parameters and fit indices.
 }
 \description{
-Create reports of different objects. See the documentation for your object's class:
+Create reports of different objects. See the documentation for your object's
+class:
 \itemize{
  \item{\link[=report.sessionInfo]{R environment, system and packages} (\code{sessionInfo})}
  \item{\link[=report.data.frame]{Dataframes and vectors}}
@@ -33,26 +35,32 @@ Create reports of different objects. See the documentation for your object's cla
 }
 \details{
 \subsection{Organization}{
-
 \code{report_table} and \code{report_text} are the two distal representations
-of a report, and are the two provided in \code{report()}. However, intermediate
-steps are accessible (depending on the object) via specific functions (e.g.,
-\code{report_parameters}).
+of a report, and are the two provided in \code{report()}. However,
+intermediate steps are accessible (depending on the object) via specific
+functions (e.g., \code{report_parameters}).
 }
 
 \subsection{Output}{
 
 The \code{report()} function generates a report-object that contain in itself
-different representations (e.g., text, tables, plots). These different representations
-can be accessed via several functions, such as:
+different representations (e.g., text, tables, plots). These different
+representations can be accessed via several functions, such as:
+
 \itemize{
 \item \strong{\code{as.report_text(r)}}: Detailed text.
-\item \strong{\code{as.report_text(r, summary=TRUE)}}: Minimal text giving the minimal information.
-\item \strong{\code{as.report_table(r)}}: Comprehensive table including most available indices.
+
+\item \strong{\code{as.report_text(r, summary=TRUE)}}: Minimal text giving
+the minimal information.
+
+\item \strong{\code{as.report_table(r)}}: Comprehensive table including most
+available indices.
+
 \item \strong{\code{as.report_table(r, summary=TRUE)}}: Minimal table.
 }
 
-Note that for some report objects, some of these representations might be identical.
+Note that for some report objects, some of these representations might be
+identical.
 }
 }
 \examples{

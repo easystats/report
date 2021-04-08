@@ -27,9 +27,9 @@
 re-computation.}
 }
 \value{
-A list-object of class \code{report}, which contains further list-objects
-with a short and long description of the model summary, as well as a short
-and long table of parameters and fit indices.
+A list-object of class \code{report}, which contains further
+  list-objects with a short and long description of the model summary, as
+  well as a short and long table of parameters and fit indices.
 }
 \description{
 Create reports for model comparison as obtained by the

@@ -7,7 +7,8 @@
 report_performance(x, table = NULL, ...)
 }
 \arguments{
-\item{x}{The R object that you want to report (see list of of supported objects above).}
+\item{x}{The R object that you want to report (see list of of supported
+objects above).}
 
 \item{table}{A table obtained via \code{report_table()}. If not provided,
 will run it.}
