@@ -191,7 +191,11 @@ report_text.bayesfactor_models <- function(x,
 
   #### table full ####
   bf_table_full <- bf_table
-  bf_table_full$BF2 <- insight::format_bf(model$BF / model$BF[max_den], name = NULL, exact = exact, protect_ratio = protect_ratio)
+  bf_table_full$BF2 <- insight::format_bf(model$BF / model$BF[max_den],
+    name = NULL,
+    exact = exact,
+    protect_ratio = protect_ratio
+  )
 
   colnames(bf_table_full) <- c(
     "Model",
@@ -213,14 +217,7 @@ report_text.bayesfactor_models <- function(x,
 
 
 
-
-
-
-
 # bayesfactor_inclusion ---------------------------------------------------
-
-
-
 
 #' @rdname report.bayesfactor_models
 #' @importFrom effectsize interpret_bf

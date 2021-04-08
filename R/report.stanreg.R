@@ -65,9 +65,20 @@ report_priors.stanreg <- function(x, ...) {
     return("")
   }
 
-  values <- ifelse(params$Prior_Distribution == "normal",
-    paste0("mean = ", insight::format_value(params$Prior_Location), ", SD = ", insight::format_value(params$Prior_Scale)),
-    paste0("location = ", insight::format_value(params$Prior_Location), ", scale = ", insight::format_value(params$Prior_Scale))
+  values <- ifelse(
+    params$Prior_Distribution == "normal",
+    paste0(
+      "mean = ",
+      insight::format_value(params$Prior_Location),
+      ", SD = ",
+      insight::format_value(params$Prior_Scale)
+    ),
+    paste0(
+      "location = ",
+      insight::format_value(params$Prior_Location),
+      ", scale = ",
+      insight::format_value(params$Prior_Scale)
+    )
   )
 
   values <- paste0(params$Prior_Distribution, " (", values, ")")
@@ -91,7 +102,6 @@ report_parameters.stanreg <- function(x,
                                       include_intercept = TRUE,
                                       include_diagnostic = TRUE,
                                       ...) {
-
 
   # Get data
   data <- bayestestR::sexit(x, ...)

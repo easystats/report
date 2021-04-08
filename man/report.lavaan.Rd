@@ -14,12 +14,13 @@
 
 \item{...}{Arguments passed to or from other methods.}
 
-\item{table}{Provide the output of  \code{report_table()} to avoid its re-computation.}
+\item{table}{Provide the output of  \code{report_table()} to avoid its
+re-computation.}
 }
 \value{
-A list-object of class \code{report}, which contains further list-objects
-with a short and long description of the model summary, as well as a short
-and long table of parameters and fit indices.
+A list-object of class \code{report}, which contains further
+  list-objects with a short and long description of the model summary, as
+  well as a short and long table of parameters and fit indices.
 }
 \description{
 Create a report for \code{lavaan} objects.

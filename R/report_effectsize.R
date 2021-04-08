@@ -56,6 +56,7 @@ as.report_effectsize <- function(x, summary = NULL, prefix = "  - ", ...) {
     attr(summary, "prefix") <- prefix
     attr(x, "summary") <- summary
   }
+
   x
 }
 
@@ -74,6 +75,7 @@ print.report_effectsize <- function(x, ...) {
   if (!is.null(attributes(x)$rules)) {
     cat(attributes(x)$rules, "\n\n")
   }
+
   cat(paste0(x, collapse = "\n"))
 }
 

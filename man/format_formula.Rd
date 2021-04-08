@@ -14,7 +14,8 @@ format_formula(x, what = "conditional")
 format_model(x)
 }
 \arguments{
-\item{x}{The R object that you want to report (see list of of supported objects above).}
+\item{x}{The R object that you want to report (see list of of supported
+objects above).}
 
 \item{what}{The name of the item returned by \code{insight::find_formula}.}
 }
