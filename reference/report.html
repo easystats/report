@@ -47,7 +47,8 @@
 
 
 <meta property="og:title" content="Automatic reporting of R objects — report" />
-<meta property="og:description" content="Create reports of different objects. See the documentation for your object's class:
+<meta property="og:description" content="Create reports of different objects. See the documentation for your object's
+class:
 R environment, system and packages (sessionInfo)
 Dataframes and vectors
 Correlations and t-tests (htest)
@@ -163,7 +164,8 @@ Model comparison (from performance)
     </div>
 
     <div class="ref-description">
-    <p>Create reports of different objects. See the documentation for your object's class:</p><ul>
+    <p>Create reports of different objects. See the documentation for your object's
+class:</p><ul>
 <li><p><a href='report.sessionInfo.html'>R environment, system and packages</a> (<code>sessionInfo</code>)</p></li>
 <li><p><a href='report.data.frame.html'>Dataframes and vectors</a></p></li>
 <li><p><a href='report.htest.html'>Correlations and t-tests</a> (<code>htest</code>)</p></li>
@@ -185,7 +187,8 @@ Model comparison (from performance)
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>The R object that you want to report (see list of of supported objects above).</p></td>
+      <td><p>The R object that you want to report (see list of of supported
+objects above).</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -195,33 +198,35 @@ Model comparison (from performance)
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list-object of class <code>report</code>, which contains further list-objects
-with a short and long description of the model summary, as well as a short
-and long table of parameters and fit indices.</p>
+    <p>A list-object of class <code>report</code>, which contains further
+  list-objects with a short and long description of the model summary, as
+  well as a short and long table of parameters and fit indices.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     
 <h3 class='hasAnchor' id='organization'><a class='anchor' href='#organization'></a>Organization</h3>
-
-
 <p><code>report_table</code> and <code>report_text</code> are the two distal representations
-of a report, and are the two provided in <code>report()</code>. However, intermediate
-steps are accessible (depending on the object) via specific functions (e.g.,
-<code>report_parameters</code>).</p>
+of a report, and are the two provided in <code>report()</code>. However,
+intermediate steps are accessible (depending on the object) via specific
+functions (e.g., <code>report_parameters</code>).</p>
 
 <h3 class='hasAnchor' id='output'><a class='anchor' href='#output'></a>Output</h3>
 
 
 <p>The <code>report()</code> function generates a report-object that contain in itself
-different representations (e.g., text, tables, plots). These different representations
-can be accessed via several functions, such as:</p><ul>
+different representations (e.g., text, tables, plots). These different
+representations can be accessed via several functions, such as:</p>
+<ul>
 <li><p><strong><code><a href='as.report.html'>as.report_text(r)</a></code></strong>: Detailed text.</p></li>
-<li><p><strong><code><a href='as.report.html'>as.report_text(r, summary=TRUE)</a></code></strong>: Minimal text giving the minimal information.</p></li>
-<li><p><strong><code><a href='as.report.html'>as.report_table(r)</a></code></strong>: Comprehensive table including most available indices.</p></li>
+<li><p><strong><code><a href='as.report.html'>as.report_text(r, summary=TRUE)</a></code></strong>: Minimal text giving
+the minimal information.</p></li>
+<li><p><strong><code><a href='as.report.html'>as.report_table(r)</a></code></strong>: Comprehensive table including most
+available indices.</p></li>
 <li><p><strong><code><a href='as.report.html'>as.report_table(r, summary=TRUE)</a></code></strong>: Minimal table.</p></li>
 </ul>
 
-<p>Note that for some report objects, some of these representations might be identical.</p>
+<p>Note that for some report objects, some of these representations might be
+identical.</p>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -259,8 +264,8 @@ can be accessed via several functions, such as:</p><ul>
 <span class='va'>r</span>
 </div><div class='output co'>#&gt; Effect sizes were labelled following Cohen's (1988) recommendations.
 #&gt; 
-#&gt; The Welch Two Sample t-test testing the difference of mpg by am (mean in group 0 = 17.15, mean in group 1 = 24.39) suggests that the effect is positive, statistically significant and large (difference = 7.24, 95% CI [-11.28, -3.21], t(18.33) = -3.77, p &lt; .01; Cohen's d = -1.76, 95% CI [-2.82, -0.67])</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; The Welch Two Sample t-test testing the difference of mpg by am (mean in group 0 = 17.15, mean in group 1 = 24.39) suggests that the effect is positive, statistically significant and large (difference = 7.24, 95% CI [-11.28, -3.21], t(18.33) = -3.77, p &lt; .01, Cohen's d = -1.76)</div><div class='input'>
+#&gt; The Welch Two Sample t-test testing the difference of mpg by am (mean in group 0 = 17.15, mean in group 1 = 24.39) suggests that the effect is positive, statistically significant, and large (difference = 7.24, 95% CI [-11.28, -3.21], t(18.33) = -3.77, p &lt; .01; Cohen's d = -1.76, 95% CI [-2.82, -0.67])</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; The Welch Two Sample t-test testing the difference of mpg by am (mean in group 0 = 17.15, mean in group 1 = 24.39) suggests that the effect is positive, statistically significant, and large (difference = 7.24, 95% CI [-11.28, -3.21], t(18.33) = -3.77, p &lt; .01, Cohen's d = -1.76)</div><div class='input'>
 <span class='co'># Tables</span>
 <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Parameter | Group | Mean_Group1 | Mean_Group2 | Difference |          95% CI | t(18.33) |     p |                  Method |     d |          d  CI
