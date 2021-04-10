@@ -66,5 +66,9 @@ if (require("dplyr")) {
     df[1, 6] <- NA
 
     expect_snapshot(report(dplyr::group_by_at(df, "cyl")))
+
+    # dataframes with list columns
+    set.seed(123)
+    expect_snapshot(report(dplyr::starwars))
   })
 }

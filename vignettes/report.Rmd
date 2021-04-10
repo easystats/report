@@ -127,3 +127,12 @@ model <- glm(vs ~ mpg + cyl, data = mtcars, family = "binomial")
 report(model)
 ```
 
+### Linear Mixed-Effects Models (`merMod`)
+
+```{r}
+library(lme4)
+
+model <- lmer(Reaction ~ Days + (Days | Subject), data = sleepstudy)
+
+report(model)
+```

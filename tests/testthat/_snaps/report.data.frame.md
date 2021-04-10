@@ -73,3 +73,21 @@
         - gear: n = 14, Mean = 3.29, SD = 0.73, Median = 3.00, MAD = 0.00, range: [3, 5], Skewness = 2.29, Kurtosis = 3.79, 0 missing
         - carb: n = 14, Mean = 3.50, SD = 1.56, Median = 3.50, MAD = 0.74, range: [2, 8], Skewness = 1.86, Kurtosis = 5.14, 0 missing
 
+---
+
+    Code
+      report(dplyr::starwars)
+    Output
+      The data contains 87 observations of the following variables:
+        - name: 87 entries, such as Ackbar (n = 1); Adi Gallia (n = 1); Anakin Skywalker (n = 1) and 84 others (0 missing)
+        - height: n = 87, Mean = 174.36, SD = 34.77, Median = , MAD = 19.27, range: [66, 264], Skewness = -1.06, Kurtosis = 2.10, 6 missing
+        - mass: n = 87, Mean = 97.31, SD = 169.46, Median = , MAD = 16.31, range: [15, 1358], Skewness = 7.34, Kurtosis = 55.42, 28 missing
+        - hair_color: 12 entries, such as none (n = 37); brown (n = 18); black (n = 13) and 9 others (5 missing)
+        - skin_color: 31 entries, such as fair (n = 17); light (n = 11); dark (n = 6) and 28 others (0 missing)
+        - eye_color: 15 entries, such as brown (n = 21); blue (n = 19); yellow (n = 11) and 12 others (0 missing)
+        - birth_year: n = 87, Mean = 87.57, SD = 154.69, Median = , MAD = 29.65, range: [8, 896], Skewness = 4.45, Kurtosis = 20.59, 44 missing
+        - sex: 4 entries, such as male (n = 60); female (n = 16); none (n = 6) and 1 other (4 missing)
+        - gender: 2 entries, such as masculine (n = 66); feminine (n = 17); NA (4 missing)
+        - homeworld: 48 entries, such as Naboo (n = 11); Tatooine (n = 10); Alderaan (n = 3) and 45 others (10 missing)
+        - species: 37 entries, such as Human (n = 35); Droid (n = 6); Gungan (n = 3) and 34 others (4 missing)
+

@@ -51,6 +51,10 @@ report.data.frame <- function(x,
                               n_entries = 3,
                               missing_percentage = "auto",
                               ...) {
+
+  # remove list columns
+  x <- x[, sapply(x, class) != "list"]
+
   table <-
     report_table(
       x,
