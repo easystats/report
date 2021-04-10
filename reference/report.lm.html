@@ -370,14 +370,16 @@ its re-computation.</p></td>
   <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
   <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; Parameter        | Coefficient |       95% CI | t(146) |      p | Std. Coef. |  Fit
-#&gt; -----------------------------------------------------------------------------------
-#&gt; (Intercept)      |        2.50 | [1.20, 3.81] |   3.75 | &lt; .001 |  -1.46e-13 |     
-#&gt; Petal.Length     |        0.89 | [0.76, 1.01] |  13.93 | &lt; .001 |       1.89 |     
-#&gt;                  |             |              |        |        |            |     
-#&gt; R2 (conditional) |             |              |        |        |            | 0.97
-#&gt; R2 (marginal)    |             |              |        |        |            | 0.66
-#&gt; Sigma            |             |              |        |        |            | 0.34</div></pre>
+</div><div class='output co'>#&gt; Parameter        | Coefficient |       95% CI | t(146) |      p | Effects |    Group | Std. Coef. |  Fit
+#&gt; --------------------------------------------------------------------------------------------------------
+#&gt; (Intercept)      |        2.50 | [1.20, 3.81] |   3.75 | &lt; .001 |   fixed |          |  -1.46e-13 |     
+#&gt; Petal.Length     |        0.89 | [0.76, 1.01] |  13.93 | &lt; .001 |   fixed |          |       1.89 |     
+#&gt;                  |        1.08 |              |        |        |  random |  Species |            |     
+#&gt;                  |        0.58 |              |        |        |  random | Residual |            |     
+#&gt;                  |             |              |        |        |         |          |            |     
+#&gt; R2 (conditional) |             |              |        |        |         |          |            | 0.97
+#&gt; R2 (marginal)    |             |              |        |        |         |          |            | 0.66
+#&gt; Sigma            |             |              |        |        |         |          |            | 0.34</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

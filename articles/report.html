@@ -104,9 +104,9 @@
 
     
     
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div id="installation" class="section level1">
+<h1 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h1>
 <p>First, install R and R studio. Then, copy and paste the following lines in the console:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
@@ -115,83 +115,126 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://easystats.github.io/report/" class="external-link">"report"</a></span><span class="op">)</span> <span class="co"># Load the package every time you start R</span></code></pre></div>
 <p>Great! The <code>report</code> package is now installed and loaded in your session.</p>
 </div>
-<div id="examples" class="section level2">
+<div id="supported-objects" class="section level1">
+<h1 class="hasAnchor">
+<a href="#supported-objects" class="anchor"></a>Supported Objects</h1>
+<p>The <code>report</code> package works in a two step fashion: - First, you create a <code>report</code> object with the <code><a href="../reference/report.html">report()</a></code> function. - Second, this report object can be displayed either textually (the default output) or as a table, using <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code>. Moreover, you can also access a more compact version of the report using <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> on the report object.</p>
+<div id="dataframes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#examples" class="anchor"></a>Examples</h2>
-<p>The <code>report</code> package works in a two step fashion. First, you create a <code>report</code> object with the <code><a href="../reference/report.html">report()</a></code> function. Then, this report object can be displayed either textually (the default output) or as a table, using <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code>. Moreover, you can also access a more compact version of the report using <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> on the report object.</p>
-<p><strong>TO BE COMPLETED</strong>.</p>
-<!-- ## Supported Objects -->
-<!-- ### Dataframes -->
-<!-- ```{r message=FALSE, warning=FALSE, eval=FALSE} -->
-<!-- r <- report(iris) -->
-<!-- text_short(r) -->
-<!-- ``` -->
-<!-- ```{r message=FALSE, warning=FALSE} -->
-<!-- r <- report(iris) -->
-<!-- print(text_short(r), width = 100) -->
-<!-- ``` -->
-<!-- ```{r message=FALSE, warning=FALSE} -->
-<!-- table_short(r) -->
-<!-- ``` -->
-<!-- ### Grouped Dataframes -->
-<!-- ```{r message=FALSE, warning=FALSE, eval=FALSE} -->
-<!-- library(dplyr) -->
-<!-- r <- iris %>%  -->
-<!--   group_by(Species) %>%  -->
-<!--   report(median = TRUE, range = FALSE)  # Display only the Median and MAD -->
-<!-- text_short(r) -->
-<!-- ``` -->
-<!-- ```{r echo=FALSE, message=FALSE, warning=FALSE} -->
-<!-- library(dplyr) -->
-<!-- r <- iris %>%  -->
-<!--   group_by(Species) %>%  -->
-<!--   report(median = TRUE, range = FALSE)  # Display only the Median and MAD -->
-<!-- print(text_short(r), width=100) -->
-<!-- ``` -->
-<!-- ```{r message=FALSE, warning=FALSE, eval=TRUE} -->
-<!-- table_long(r) -->
-<!-- ``` -->
-<!-- ### Correlations and t-tests -->
-<!-- ```{r message=FALSE, warning=FALSE, eval=FALSE} -->
-<!-- report(cor.test(iris$Sepal.Length, iris$Petal.Length)) -->
-<!-- ``` -->
-<!-- ```{r echo=FALSE, message=FALSE, warning=FALSE} -->
-<!-- print(report(cor.test(iris$Sepal.Length, iris$Petal.Length)), width = 100) -->
-<!-- ``` -->
-<!-- ```{r message=FALSE, warning=FALSE, eval=FALSE} -->
-<!-- report(t.test(iris$Sepal.Length, iris$Petal.Length)) -->
-<!-- ``` -->
-<!-- ```{r echo=FALSE, message=FALSE, warning=FALSE} -->
-<!-- print(report(t.test(iris$Sepal.Length, iris$Petal.Length)), width = 100) -->
-<!-- ``` -->
-<!-- ### Linear Models (LMs) -->
-<!-- ```{r message=FALSE, warning=FALSE, eval=FALSE} -->
-<!-- model <- lm(Sepal.Length ~ Petal.Length + Species, data=iris) -->
-<!-- r <- report(model) -->
-<!-- text_short(r) -->
-<!-- ``` -->
-<!-- ```{r echo=FALSE, message=FALSE, warning=FALSE} -->
-<!-- model <- lm(Sepal.Length ~ Petal.Length + Species, data = iris)  -->
-<!-- r <- report(model) -->
-<!-- print(text_short(r), width = 100) -->
-<!-- ``` -->
-<!-- ```{r message=FALSE, warning=FALSE, eval=TRUE} -->
-<!-- table_short(r) -->
-<!-- ``` -->
-<!-- ### General Linear Models (GLMs) -->
-<!-- ```{r message=FALSE, warning=FALSE, eval=FALSE} -->
-<!-- model <- glm(vs ~ mpg + cyl, data=mtcars, family="binomial") -->
-<!-- r <- report(model) -->
-<!-- text_long(r) -->
-<!-- ``` -->
-<!-- ```{r echo=FALSE, message=FALSE, warning=FALSE} -->
-<!-- model <- glm(vs ~ mpg + cyl, data = mtcars, family = "binomial") -->
-<!-- r <- report(model) -->
-<!-- print(text_long(r), width = 100) -->
-<!-- ``` -->
-<!-- ```{r message=FALSE, warning=FALSE, eval=TRUE} -->
-<!-- table_long(r) -->
-<!-- ``` -->
+<a href="#dataframes" class="anchor"></a>Dataframes</h2>
+<p>If an entire dataframe is supplied, <code>report</code> will provide descriptive statistics for all columns:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span>
+<span class="co"># The data contains 150 observations of the following variables:</span>
+<span class="co">#   - Sepal.Length: n = 150, Mean = 5.84, SD = 0.83, Median = 5.80, MAD = 1.04, range: [4.30, 7.90], Skewness = 0.31, Kurtosis = -0.55, 0% missing</span>
+<span class="co">#   - Sepal.Width: n = 150, Mean = 3.06, SD = 0.44, Median = 3.00, MAD = 0.44, range: [2, 4.40], Skewness = 0.32, Kurtosis = 0.23, 0% missing</span>
+<span class="co">#   - Petal.Length: n = 150, Mean = 3.76, SD = 1.77, Median = 4.35, MAD = 1.85, range: [1, 6.90], Skewness = -0.27, Kurtosis = -1.40, 0% missing</span>
+<span class="co">#   - Petal.Width: n = 150, Mean = 1.20, SD = 0.76, Median = 1.30, MAD = 1.04, range: [0.10, 2.50], Skewness = -0.10, Kurtosis = -1.34, 0% missing</span>
+<span class="co">#   - Species: 3 levels, namely setosa (n = 50, 33.33%), versicolor (n = 50, 33.33%) and virginica (n = 50, 33.33%)</span></code></pre></div>
+</div>
+<div id="grouped-dataframes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#grouped-dataframes" class="anchor"></a>Grouped Dataframes</h2>
+<p>The dataframe can also be a <em>grouped</em> dataframe (from <code>dplyr</code>), in which case <code>report</code> would return a separate report for each level of the grouping variable. Additionally, instead of textual summary, <code>report</code> also allows one to return a tabular summary using the <code><a href="../reference/report_table.html">report_table()</a></code> function:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
+
+<span class="va">iris</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/report_table.html">report_table</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co"># Group      |     Variable | n_Obs | Mean |   SD | Median |  MAD |  Min |  Max | Skewness | Kurtosis | n_Missing</span>
+<span class="co"># ---------------------------------------------------------------------------------------------------------------</span>
+<span class="co"># setosa     | Sepal.Length |    50 | 5.01 | 0.35 |   5.00 | 0.30 | 4.30 | 5.80 |     0.12 |    -0.25 |         0</span>
+<span class="co"># setosa     |  Sepal.Width |    50 | 3.43 | 0.38 |   3.40 | 0.37 | 2.30 | 4.40 |     0.04 |     0.95 |         0</span>
+<span class="co"># setosa     | Petal.Length |    50 | 1.46 | 0.17 |   1.50 | 0.15 | 1.00 | 1.90 |     0.11 |     1.02 |         0</span>
+<span class="co"># setosa     |  Petal.Width |    50 | 0.25 | 0.11 |   0.20 | 0.00 | 0.10 | 0.60 |     1.25 |     1.72 |         0</span>
+<span class="co"># versicolor | Sepal.Length |    50 | 5.94 | 0.52 |   5.90 | 0.52 | 4.90 | 7.00 |     0.11 |    -0.53 |         0</span>
+<span class="co"># versicolor |  Sepal.Width |    50 | 2.77 | 0.31 |   2.80 | 0.30 | 2.00 | 3.40 |    -0.36 |    -0.37 |         0</span>
+<span class="co"># versicolor | Petal.Length |    50 | 4.26 | 0.47 |   4.35 | 0.52 | 3.00 | 5.10 |    -0.61 |     0.05 |         0</span>
+<span class="co"># versicolor |  Petal.Width |    50 | 1.33 | 0.20 |   1.30 | 0.22 | 1.00 | 1.80 |    -0.03 |    -0.41 |         0</span>
+<span class="co"># virginica  | Sepal.Length |    50 | 6.59 | 0.64 |   6.50 | 0.59 | 4.90 | 7.90 |     0.12 |     0.03 |         0</span>
+<span class="co"># virginica  |  Sepal.Width |    50 | 2.97 | 0.32 |   3.00 | 0.30 | 2.20 | 3.80 |     0.37 |     0.71 |         0</span>
+<span class="co"># virginica  | Petal.Length |    50 | 5.55 | 0.55 |   5.55 | 0.67 | 4.50 | 6.90 |     0.55 |    -0.15 |         0</span>
+<span class="co"># virginica  |  Petal.Width |    50 | 2.03 | 0.27 |   2.00 | 0.30 | 1.40 | 2.50 |    -0.13 |    -0.60 |         0</span></code></pre></div>
+</div>
+<div id="correlations-and-t-tests" class="section level2">
+<h2 class="hasAnchor">
+<a href="#correlations-and-t-tests" class="anchor"></a>Correlations and t-tests</h2>
+<p><code>report</code> can also be used to provide automated summaries for statistical model objects from correlation, t-tests, etc.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">wt</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span><span class="op">)</span><span class="op">)</span>
+<span class="co"># Effect sizes were labelled following Funder's (2019) recommendations.</span>
+<span class="co"># </span>
+<span class="co"># The Pearson's product-moment correlation between mtcars$wt and mtcars$mpg is negative, statistically significant, and very large (r = -0.87, 95% CI [-0.93, -0.74], t(30) = -9.56, p &lt; .001)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">wt</span> <span class="op">~</span> <span class="va">am</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span>
+<span class="co"># Effect sizes were labelled following Cohen's (1988) recommendations.</span>
+<span class="co"># </span>
+<span class="co"># The Welch Two Sample t-test testing the difference of wt by am (mean in group 0 = 3.77, mean in group 1 = 2.41) suggests that the effect is negative, statistically significant, and large (difference = -1.36, 95% CI [0.85, 1.86], t(29.23) = 5.49, p &lt; .001; Cohen's d = 2.03, 95% CI [1.13, 2.91])</span></code></pre></div>
+</div>
+<div id="regression-models" class="section level2">
+<h2 class="hasAnchor">
+<a href="#regression-models" class="anchor"></a>Regression models</h2>
+<div id="linear-regression-lm" class="section level3">
+<h3 class="hasAnchor">
+<a href="#linear-regression-lm" class="anchor"></a>Linear regression (<code>lm</code>)</h3>
+<p>We will start out simple: a simple linear regression</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">wt</span> <span class="op">~</span> <span class="va">am</span> <span class="op">+</span> <span class="va">mpg</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
+
+<span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
+<span class="co"># We fitted a linear model (estimated using OLS) to predict wt with am and mpg (formula: wt ~ am + mpg). The model explains a statistically significant and substantial proportion of variance (R2 = 0.80, F(2, 29) = 57.66, p &lt; .001, adj. R2 = 0.79). The model's intercept, corresponding to am = 0 and mpg = 0, is at 5.74 (95% CI [5.11, 6.36], t(29) = 18.64, p &lt; .001). Within this model:</span>
+<span class="co"># </span>
+<span class="co">#   - The effect of am is statistically significant and negative (beta = -0.53, 95% CI [-0.94, -0.11], t(29) = -2.58, p &lt; .05; Std. beta = -0.27, 95% CI [-0.48, -0.06])</span>
+<span class="co">#   - The effect of mpg is statistically significant and negative (beta = -0.11, 95% CI [-0.15, -0.08], t(29) = -6.79, p &lt; .001; Std. beta = -0.71, 95% CI [-0.92, -0.49])</span>
+<span class="co"># </span>
+<span class="co"># Standardized parameters were obtained by fitting the model on a standardized version of the dataset.</span></code></pre></div>
+</div>
+<div id="anova-aov" class="section level3">
+<h3 class="hasAnchor">
+<a href="#anova-aov" class="anchor"></a>anova (<code>aov</code>)</h3>
+<p>And its close cousin ANOVA is also covered by <code>report</code>:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html" class="external-link">aov</a></span><span class="op">(</span><span class="va">wt</span> <span class="op">~</span> <span class="va">am</span> <span class="op">+</span> <span class="va">mpg</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
+
+<span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
+<span class="co"># The ANOVA (formula: wt ~ am + mpg) suggests that:</span>
+<span class="co"># </span>
+<span class="co">#   - The main effect of am is statistically significant and large (F(1, 29) = 69.21, p &lt; .001; Eta2 (partial) = 0.70, 90% CI [0.54, 0.80])</span>
+<span class="co">#   - The main effect of mpg is statistically significant and large (F(1, 29) = 46.12, p &lt; .001; Eta2 (partial) = 0.61, 90% CI [0.42, 0.73])</span>
+<span class="co"># </span>
+<span class="co"># Effect sizes were labelled following Field's (2013) recommendations.</span></code></pre></div>
+</div>
+<div id="general-linear-models-glms-glm" class="section level3">
+<h3 class="hasAnchor">
+<a href="#general-linear-models-glms-glm" class="anchor"></a>General Linear Models (GLMs) (<code>glm</code>)</h3>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">vs</span> <span class="op">~</span> <span class="va">mpg</span> <span class="op">+</span> <span class="va">cyl</span>, data <span class="op">=</span> <span class="va">mtcars</span>, family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span>
+
+<span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
+<span class="co"># We fitted a logistic model (estimated using ML) to predict vs with mpg and cyl (formula: vs ~ mpg + cyl). The model's explanatory power is substantial (Tjur's R2 = 0.67). The model's intercept, corresponding to mpg = 0 and cyl = 0, is at 15.97 (95% CI [-2.71, 44.69], p = 0.147). Within this model:</span>
+<span class="co"># </span>
+<span class="co">#   - The effect of mpg is statistically non-significant and negative (beta = -0.16, 95% CI [-0.71, 0.34], p = 0.496; Std. beta = -0.98, 95% CI [-4.28, 2.03])</span>
+<span class="co">#   - The effect of cyl is statistically significant and negative (beta = -2.15, 95% CI [-5.19, -0.54], p &lt; .05; Std. beta = -3.84, 95% CI [-9.26, -0.97])</span>
+<span class="co"># </span>
+<span class="co"># Standardized parameters were obtained by fitting the model on a standardized version of the dataset. 95% Confidence Intervals (CIs) and p-values were computed using</span></code></pre></div>
+</div>
+<div id="linear-mixed-effects-models-mermod" class="section level3">
+<h3 class="hasAnchor">
+<a href="#linear-mixed-effects-models-mermod" class="anchor"></a>Linear Mixed-Effects Models (<code>merMod</code>)</h3>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lme4/lme4/" class="external-link">lme4</a></span><span class="op">)</span>
+
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Reaction</span> <span class="op">~</span> <span class="va">Days</span> <span class="op">+</span> <span class="op">(</span><span class="va">Days</span> <span class="op">|</span> <span class="va">Subject</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">sleepstudy</span><span class="op">)</span>
+
+<span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>
+<span class="co"># We fitted a linear mixed model (estimated using REML and nloptwrap optimizer) to predict Reaction with Days (formula: Reaction ~ Days). The model included Days and Subject as random effects (formula: ~Days | Subject). The model's total explanatory power is substantial (conditional R2 = 0.80) and the part related to the fixed effects alone (marginal R2) is of 0.28. The model's intercept, corresponding to Days = 0, is at 251.41 (95% CI [238.03, 264.78], t(174) = 36.84, p &lt; .001). Within this model:</span>
+<span class="co"># </span>
+<span class="co">#   - The effect of Days is statistically significant and positive (beta = 10.47, 95% CI [7.44, 13.50], t(174) = 6.77, p &lt; .001; Std. beta = 0.54, 95% CI [0.38, 0.69])</span>
+<span class="co"># </span>
+<span class="co"># Standardized parameters were obtained by fitting the model on a standardized version of the dataset. 95% Confidence Intervals (CIs) and p-values were computed using the Wald approximation.</span></code></pre></div>
+</div>
+</div>
 </div>
   </div>
 
