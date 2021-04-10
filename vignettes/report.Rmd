@@ -19,8 +19,10 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   warning = FALSE,
   message = FALSE,
+  out.width = "100%",
   tidy.opts = list(width.cutoff = 60),
-  tidy = TRUE
+  tidy = TRUE,
+  comment = "#"
 )
 
 options(
@@ -34,127 +36,94 @@ if (!requireNamespace("dplyr", quietly = TRUE)) {
 }
 ```
 
-## Installation
+# Installation
 
 First, install R and R studio. Then, copy and paste the following lines in the
 console:
 
-```{r eval=FALSE, message=FALSE, warning=FALSE}
+```{r eval=FALSE}
 install.packages("remotes")
 remotes::install_github("easystats/report") # You only need to do that once
 ```
 
-```{r message=FALSE, warning=FALSE}
+```{r}
 library("report") # Load the package every time you start R
 ```
 
 Great! The `report` package is now installed and loaded in your session.
 
-## Examples
+# Supported Objects
 
-The `report` package works in a two step fashion. First, you create a `report`
-object with the `report()` function. Then, this report object can be displayed
-either textually (the default output) or as a table, using `as.data.frame()`.
-Moreover, you can also access a more compact version of the report using
-`summary()` on the report object.
+The `report` package works in a two step fashion:
+- First, you create a `report` object with the `report()` function.
+- Second, this report object can be displayed either textually (the default
+output) or as a table, using `as.data.frame()`. Moreover, you can also access a
+more compact version of the report using `summary()` on the report object.
 
-**TO BE COMPLETED**.
+## Dataframes
 
+If an entire dataframe is supplied, `report` will provide descriptive statistics
+for all columns:
 
-<!-- ## Supported Objects -->
+```{r}
+report(iris)
+```
 
-<!-- ### Dataframes -->
+## Grouped Dataframes
 
-<!-- ```{r message=FALSE, warning=FALSE, eval=FALSE} -->
-<!-- r <- report(iris) -->
-<!-- text_short(r) -->
-<!-- ``` -->
-<!-- ```{r message=FALSE, warning=FALSE} -->
-<!-- r <- report(iris) -->
-<!-- print(text_short(r), width = 100) -->
-<!-- ``` -->
-<!-- ```{r message=FALSE, warning=FALSE} -->
-<!-- table_short(r) -->
-<!-- ``` -->
+The dataframe can also be a *grouped* dataframe (from `dplyr`), in which case
+`report` would return a separate report for each level of the grouping variable.
+Additionally, instead of textual summary, `report` also allows one to return a
+tabular summary using the `report_table()` function:
 
+```{r}
+library(dplyr)
 
-<!-- ### Grouped Dataframes -->
+iris %>%
+  group_by(Species) %>%
+  report_table()
+```
 
-<!-- ```{r message=FALSE, warning=FALSE, eval=FALSE} -->
-<!-- library(dplyr) -->
+## Correlations and t-tests
 
-<!-- r <- iris %>%  -->
-<!--   group_by(Species) %>%  -->
-<!--   report(median = TRUE, range = FALSE)  # Display only the Median and MAD -->
+`report` can also be used to provide automated summaries for statistical model
+objects from correlation, t-tests, etc.
 
-<!-- text_short(r) -->
-<!-- ``` -->
-<!-- ```{r echo=FALSE, message=FALSE, warning=FALSE} -->
-<!-- library(dplyr) -->
+```{r}
+report(cor.test(mtcars$wt, mtcars$mpg))
+```
 
-<!-- r <- iris %>%  -->
-<!--   group_by(Species) %>%  -->
-<!--   report(median = TRUE, range = FALSE)  # Display only the Median and MAD -->
-<!-- print(text_short(r), width=100) -->
-<!-- ``` -->
-<!-- ```{r message=FALSE, warning=FALSE, eval=TRUE} -->
-<!-- table_long(r) -->
-<!-- ``` -->
+```{r}
+report(t.test(formula = wt ~ am, data = mtcars))
+```
 
+## Regression models
 
-<!-- ### Correlations and t-tests -->
+### Linear regression (`lm`)
 
-<!-- ```{r message=FALSE, warning=FALSE, eval=FALSE} -->
-<!-- report(cor.test(iris$Sepal.Length, iris$Petal.Length)) -->
-<!-- ``` -->
-<!-- ```{r echo=FALSE, message=FALSE, warning=FALSE} -->
-<!-- print(report(cor.test(iris$Sepal.Length, iris$Petal.Length)), width = 100) -->
-<!-- ``` -->
+We will start out simple: a simple linear regression
 
-<!-- ```{r message=FALSE, warning=FALSE, eval=FALSE} -->
-<!-- report(t.test(iris$Sepal.Length, iris$Petal.Length)) -->
-<!-- ``` -->
-<!-- ```{r echo=FALSE, message=FALSE, warning=FALSE} -->
-<!-- print(report(t.test(iris$Sepal.Length, iris$Petal.Length)), width = 100) -->
-<!-- ``` -->
+```{r}
+model <- lm(wt ~ am + mpg, data = mtcars)
 
-<!-- ### Linear Models (LMs) -->
+report(model)
+```
 
-<!-- ```{r message=FALSE, warning=FALSE, eval=FALSE} -->
-<!-- model <- lm(Sepal.Length ~ Petal.Length + Species, data=iris) -->
-<!-- r <- report(model) -->
+### anova (`aov`)
 
-<!-- text_short(r) -->
-<!-- ``` -->
-<!-- ```{r echo=FALSE, message=FALSE, warning=FALSE} -->
-<!-- model <- lm(Sepal.Length ~ Petal.Length + Species, data = iris)  -->
-<!-- r <- report(model) -->
+And its close cousin ANOVA is also covered by `report`:
 
-<!-- print(text_short(r), width = 100) -->
-<!-- ``` -->
+```{r}
+model <- aov(wt ~ am + mpg, data = mtcars)
 
-<!-- ```{r message=FALSE, warning=FALSE, eval=TRUE} -->
-<!-- table_short(r) -->
-<!-- ``` -->
+report(model)
+```
 
+### General Linear Models (GLMs) (`glm`)
 
+```{r}
+model <- glm(vs ~ mpg + cyl, data = mtcars, family = "binomial")
 
+report(model)
+```
 
-<!-- ### General Linear Models (GLMs) -->
-
-<!-- ```{r message=FALSE, warning=FALSE, eval=FALSE} -->
-<!-- model <- glm(vs ~ mpg + cyl, data=mtcars, family="binomial") -->
-<!-- r <- report(model) -->
-
-<!-- text_long(r) -->
-<!-- ``` -->
-<!-- ```{r echo=FALSE, message=FALSE, warning=FALSE} -->
-<!-- model <- glm(vs ~ mpg + cyl, data = mtcars, family = "binomial") -->
-<!-- r <- report(model) -->
-
-<!-- print(text_long(r), width = 100) -->
-<!-- ``` -->
-
-<!-- ```{r message=FALSE, warning=FALSE, eval=TRUE} -->
-<!-- table_long(r) -->
-<!-- ``` -->

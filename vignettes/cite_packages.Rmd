@@ -18,7 +18,8 @@ knitr::opts_chunk$set(
   message = FALSE,
   warning = FALSE,
   tidy.opts = list(width.cutoff = 60),
-  tidy = TRUE
+  tidy = TRUE,
+  comment = "#"
 )
 
 options(knitr.kable.NA = '', digits = 4)
@@ -33,7 +34,7 @@ important to acknowledge the time and effort spent by people who create theses
 tools (sometimes in their free-time, or at the expense of their own research),
 but also for **reproducibility**. Indeed, statistical routines are often
 implemented in different ways by different packages, which can lead to possible
-discrepancies in the results. Explicitly mentionining that *"I did this using this function from that package version 1.2.3"* is a way of **protecting yourself** by being transparent about what you have found doing what you have
+discrepancies in the results. Explicitly mentioning that *"I did this using this function from that package version 1.2.3"* is a way of **protecting yourself** by being transparent about what you have found doing what you have
 done.
 
 But, understandably, you must have a lot of questions- 
