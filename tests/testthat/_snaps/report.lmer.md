@@ -1,4 +1,4 @@
-# report-lmer-1
+# report-lmer
 
     Code
       report(m1)
@@ -9,7 +9,7 @@
       
       Standardized parameters were obtained by fitting the model on a standardized version of the dataset. 95% Confidence Intervals (CIs) and p-values were computed using the Wald approximation.
 
-# report-lmer-2
+---
 
     Code
       report(m2)

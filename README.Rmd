@@ -23,11 +23,13 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/",
   comment = "#"
 )
+
 options(
   knitr.kable.NA = "",
   digits = 4,
-  width = 60
+  width = 110
 )
+
 library(dplyr)
 library(report)
 ```
@@ -47,20 +49,12 @@ library(report)
 
 **report**'s primary goal is to bridge the gap between R's output and the formatted results contained in your manuscript. It automatically produces reports of models and dataframes according to **best practices** guidelines (*e.g.,* [APA](https://apastyle.apa.org/)'s style), ensuring **standardization** and **quality** in results reporting.
 
-
-
-```{r eval=FALSE, message=FALSE, warning=FALSE}
+```{r}
 library(report)
 
 model <- lm(Sepal.Length ~ Species, data = iris)
 report(model)
 ```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-lm(Sepal.Length ~ Species, data = iris) %>%
-  report() %>%
-  print(width = 110)
-```
-
 
 ## Documentation
 
@@ -78,21 +72,21 @@ The package documentation can be found [**here**](https://easystats.github.io/re
 
 ***report* is a young package in need of affection**. You can easily be a part of the [developing](https://github.com/easystats/report/blob/master/.github/CONTRIBUTING.md) community of this open-source software and improve science! Don't be shy, try to code and submit a pull request (See the [contributing guide](https://github.com/easystats/report/blob/master/.github/CONTRIBUTING.md)). Even if it's not perfect, we will help you make it great!
 
-
 ## Installation
 
+Until the package is available on `CRAN`, you need to download the package from
+`GitHub`:
 
-Run the following:
-
-```{r eval=FALSE, message=FALSE, warning=FALSE, eval=FALSE}
+```{r eval=FALSE}
 install.packages("remotes")
 remotes::install_github("easystats/report") # You only need to do that once
 ```
-```{r message=FALSE, warning=FALSE}
-library("report") # Load the package every time you start R
+
+Load the package every time you start R
+
+```{r}
+library("report")
 ```
-
-
 
 
 ## Report all the things <a href=https://easystats.github.io/report/><img src="man/figures/allthethings.jpg" height="100"></a>
@@ -105,10 +99,10 @@ The `report` package works in a two step fashion. First, you create a `report` o
 
 The `report()` function works on a variety of models, as well as other objects such as dataframes:
 
-```{r message=FALSE, warning=FALSE, eval=FALSE}
+```{r, eval=FALSE}
 report(iris)
 ```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=FALSE}
 print(report(iris), width = 110)
 ```
 
@@ -123,7 +117,7 @@ iris %>%
   report() %>%
   summary()
 ```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=FALSE}
 iris %>%
   select(-starts_with("Sepal")) %>%
   group_by(Species) %>%
@@ -140,7 +134,7 @@ Reports can be used to automatically format tests like *t*-tests or correlations
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
 report(t.test(mtcars$mpg ~ mtcars$am))
 ```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=FALSE}
 t.test(mtcars$mpg ~ mtcars$am) %>%
   report() %>%
   print(width = 110)
@@ -165,7 +159,7 @@ aov(Sepal.Length ~ Species, data = iris) %>%
   report()
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=FALSE}
 aov(Sepal.Length ~ Species, data = iris) %>%
   report() %>%
   print(width = 110)
@@ -181,7 +175,7 @@ model <- glm(vs ~ mpg * drat, data = mtcars, family = "binomial")
 report(model)
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=FALSE}
 glm(vs ~ mpg * drat, data = mtcars, family = "binomial") %>%
   report() %>%
   print(width = 110)
@@ -199,7 +193,7 @@ model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 report(model)
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=FALSE}
 library(lme4)
 
 lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris) %>%
@@ -219,7 +213,7 @@ model <- stan_glm(mpg ~ qsec + wt, data = mtcars)
 
 report(model)
 ```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=FALSE}
 library(rstanarm)
 
 model <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 1000) %>%
@@ -240,7 +234,7 @@ report_model(model)
 report_performance(model)
 report_statistics(model)
 ```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=FALSE}
 model <- lm(Sepal.Length ~ Species, data = iris)
 
 print(report_model(model), width = 110)
@@ -264,7 +258,7 @@ paste(
   "were recruited in the study by means of torture and coercion."
 )
 ```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=FALSE}
 data <- data.frame(
   "Age" = c(22, 23, 54, 21),
   "Sex" = c("F", "F", "M", "M")
@@ -282,11 +276,11 @@ paste(
 
 Report can also help you create sample description table (also referred to as **Table 1**).
 
-```{r message=FALSE, warning=FALSE, include=FALSE}
+```{r, include=FALSE}
 report_sample(iris, group_by = "Species")
 ```
 
-```{r message=FALSE, warning=FALSE, echo=FALSE}
+```{r, echo=FALSE}
 knitr::kable(report_sample(iris, group_by = "Species"))
 ```
 
@@ -294,11 +288,11 @@ knitr::kable(report_sample(iris, group_by = "Species"))
 
 Finally, **report** includes some functions to help you write the data analysis paragraph about the tools used.
 
-```{r message=FALSE, warning=FALSE, eval=FALSE}
+```{r, eval=FALSE}
 report(sessionInfo())
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=FALSE}
 report(sessionInfo()) %>%
   print(width = 110)
 ```
