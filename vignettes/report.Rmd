@@ -8,8 +8,8 @@ output:
 tags: [r, report]
 vignette: >
   %\VignetteIndexEntry{Get Started}
-  \usepackage[utf8]{inputenc}
   %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 editor_options: 
   chunk_output_type: console
 ---

@@ -24,14 +24,16 @@ the Sequential Effect eXistence and sIgnificance Testing framework (see
 \examples{
 library(report)
 
+\donttest{
 # Bayesian models
 if (require("rstanarm")) {
-  model <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 200, chains = 2)
+  model <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0)
   r <- report(model)
   r
   summary(r)
   as.data.frame(r)
   summary(as.data.frame(r))
+}
 }
 }
 \seealso{

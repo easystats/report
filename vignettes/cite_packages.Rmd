@@ -8,8 +8,8 @@ output:
 tags: [r, report]
 vignette: >
   %\VignetteIndexEntry{Report and Cite Packages}
-  \usepackage[utf8]{inputenc}
   %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 editor_options: 
   chunk_output_type: console
 ---
@@ -89,7 +89,7 @@ Finding the right citation information is sometimes complicated. In `R`, this pr
 
     To cite bayestestR in publications use:
 
-      Makowski, D., Ben-Shachar, M., & Lüdecke, D. (2019). bayestestR:
+      Makowski, D., Ben-Shachar, M., \& Lüdecke, D. (2019). bayestestR:
       Describing Effects and their Uncertainty, Existence and Significance
       within the Bayesian Framework. Journal of Open Source Software,
       4(40), 1541. doi:10.21105/joss.01541
