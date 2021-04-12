@@ -269,6 +269,7 @@ objects above).</p></td>
 #&gt; Tjur's R2   |             |                |       |       |            |                   |  0.53
 #&gt; Sigma       |             |                |       |       |            |                   |  0.87
 #&gt; Log_loss    |             |                |       |       |            |                   |  0.35</div><div class='input'>
+<span class='co'># \donttest{</span>
 <span class='co'># Mixed models</span>
 <span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://github.com/lme4/lme4/'>"lme4"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'>lme4</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>|</span> <span class='va'>Species</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
@@ -291,18 +292,18 @@ objects above).</p></td>
   <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://mc-stan.org/rstanarm/reference/stan_glm.html'>stan_glm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span>, refresh <span class='op'>=</span> <span class='fl'>0</span>, iter <span class='op'>=</span> <span class='fl'>600</span><span class='op'>)</span>
   <span class='fu'>report_table</span><span class='op'>(</span><span class='va'>model</span>, effectsize_method <span class='op'>=</span> <span class='st'>"basic"</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; Parameter         | Median |       89% CI |   pd | % in ROPE |  Rhat |    ESS |                 Prior | Std. Median | Std_Median 95% CI |     Fit
-#&gt; -------------------------------------------------------------------------------------------------------------------------------------------------
-#&gt; (Intercept)       |   5.00 | [4.89, 5.11] | 100% |        0% | 1.001 | 881.00 | Normal (5.84 +- 2.07) |        0.00 |      [0.00, 0.00] |        
-#&gt; Speciesversicolor |   0.93 | [0.77, 1.09] | 100% |        0% | 1.000 | 799.00 | Normal (0.00 +- 4.38) |        0.53 |      [0.43, 0.65] |        
-#&gt; Speciesvirginica  |   1.58 | [1.42, 1.75] | 100% |        0% | 1.003 | 777.00 | Normal (0.00 +- 4.38) |        0.90 |      [0.79, 1.02] |        
-#&gt;                   |        |              |      |           |       |        |                       |             |                   |        
-#&gt; ELPD              |        |              |      |           |       |        |                       |             |                   | -115.72
-#&gt; LOOIC             |        |              |      |           |       |        |                       |             |                   |  231.44
-#&gt; WAIC              |        |              |      |           |       |        |                       |             |                   |  231.41
-#&gt; R2                |        |              |      |           |       |        |                       |             |                   |    0.61
-#&gt; R2 (adj.)         |        |              |      |           |       |        |                       |             |                   |    0.60
-#&gt; Sigma             |        |              |      |           |       |        |                       |             |                   |    0.52</div><div class='input'>
+</div><div class='output co'>#&gt; Parameter         | Median |       89% CI |   pd | % in ROPE |  Rhat |     ESS |                 Prior | Std. Median | Std_Median 95% CI |     Fit
+#&gt; --------------------------------------------------------------------------------------------------------------------------------------------------
+#&gt; (Intercept)       |   5.00 | [4.89, 5.13] | 100% |        0% | 1.001 | 1084.00 | Normal (5.84 +- 2.07) |        0.00 |      [0.00, 0.00] |        
+#&gt; Speciesversicolor |   0.93 | [0.77, 1.12] | 100% |        0% | 1.002 | 1049.00 | Normal (0.00 +- 4.38) |        0.53 |      [0.40, 0.65] |        
+#&gt; Speciesvirginica  |   1.59 | [1.44, 1.75] | 100% |        0% | 1.002 | 1073.00 | Normal (0.00 +- 4.38) |        0.91 |      [0.78, 1.00] |        
+#&gt;                   |        |              |      |           |       |         |                       |             |                   |        
+#&gt; ELPD              |        |              |      |           |       |         |                       |             |                   | -115.90
+#&gt; LOOIC             |        |              |      |           |       |         |                       |             |                   |  231.81
+#&gt; WAIC              |        |              |      |           |       |         |                       |             |                   |  231.77
+#&gt; R2                |        |              |      |           |       |         |                       |             |                   |    0.61
+#&gt; R2 (adj.)         |        |              |      |           |       |         |                       |             |                   |    0.60
+#&gt; Sigma             |        |              |      |           |       |         |                       |             |                   |    0.52</div><div class='input'>
 <span class='co'># Structural Equation Models (SEM)</span>
 <span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://lavaan.ugent.be'>"lavaan"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='va'>structure</span> <span class='op'>&lt;-</span> <span class='st'>" ind60 =~ x1 + x2 + x3
@@ -343,7 +344,8 @@ objects above).</p></td>
 #&gt; Loglikelihood |             |              |       |        |            | -778.27
 #&gt; AIC           |             |              |       |        |            | 1582.54
 #&gt; BIC           |             |              |       |        |            | 1612.67
-#&gt; BIC (adj.)    |             |              |       |        |            | 1571.69</div></pre>
+#&gt; BIC (adj.)    |             |              |       |        |            | 1571.69</div><div class='input'><span class='co'># }</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
