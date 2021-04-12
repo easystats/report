@@ -35,4 +35,4 @@ and saying what would you like to see, and how you can eventually help out (e.g.
 
 ## 2. Use template file
 
-Copy and paste the [**template file**](https://github.com/easystats/report/tree/master/R/report.default.R), and replace the function with the one you would like to see supported.
+Copy and paste the [**template file**](https://github.com/easystats/report/blob/master/R/report.default.R), and replace the function with the one you would like to see supported.

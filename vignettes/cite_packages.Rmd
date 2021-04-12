@@ -116,7 +116,7 @@ necessary information (version, authors and date).
 
 ## cite_easystats()
 
-If you want to cite the **easystats** ecosystem, you can use the [`cite_eaststats()`](https://easystats.github.io/easystats/reference/cite_eaststats.html) function:
+If you want to cite the **easystats** ecosystem, you can use the [`cite_eaststats()`](https://easystats.github.io/report/reference/cite_easystats.html) function:
 
 ```{r results='asis'}
 cite_easystats()
