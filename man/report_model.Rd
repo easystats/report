@@ -35,6 +35,7 @@ report_model(aov(Sepal.Length ~ Species, data = iris))
 report_model(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 report_model(glm(vs ~ disp, data = mtcars, family = "binomial"))
 
+\donttest{
 # Mixed models
 if (require("lme4")) {
   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
@@ -45,5 +46,6 @@ if (require("lme4")) {
 if (require("rstanarm")) {
   model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600)
   report_model(model)
+}
 }
 }
