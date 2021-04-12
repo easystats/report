@@ -7,7 +7,9 @@ output:
     fig_height: 6
 tags: [r, report]
 vignette: >
+  %\VignetteIndexEntry{Report and Cite Packages}
   \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
   chunk_output_type: console
 ---
