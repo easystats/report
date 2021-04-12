@@ -43,7 +43,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">report</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -102,9 +102,6 @@
 </h1></div>
 
 <p><strong><em>“From R to your manuscript”</em></strong></p>
-<hr>
-<p><span class="emoji" data-emoji="warning">⚠️</span> <strong>report</strong> has been entirely rewritten <em>(again)</em>, and won’t be compatible with your old code. We’ve changed it for the best, and with your help we’ll continue improving it. You’ll need the latest versions of the <strong>easystats</strong> packages (you can update them by running <code>easystats::install_easystats_latest()</code>). <strong>Thanks for your support!</strong> <span class="emoji" data-emoji="warning">⚠️</span></p>
-<hr>
 <p><strong>report</strong>’s primary goal is to bridge the gap between R’s output and the formatted results contained in your manuscript. It automatically produces reports of models and dataframes according to <strong>best practices</strong> guidelines (<em>e.g.,</em> <a href="https://apastyle.apa.org/" class="external-link">APA</a>’s style), ensuring <strong>standardization</strong> and <strong>quality</strong> in results reporting.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/report/" class="external-link">report</a></span><span class="op">)</span>
@@ -290,14 +287,14 @@
 <span id="cb18-8"><a href="#cb18-8"></a><span class="co"># warmup of 500) to predict mpg with qsec and wt (formula: mpg ~ qsec + wt). Priors over parameters were set as</span></span>
 <span id="cb18-9"><a href="#cb18-9"></a><span class="co"># normal (mean = 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The model's explanatory</span></span>
 <span id="cb18-10"><a href="#cb18-10"></a><span class="co"># power is substantial (R2 = 0.81, 89% CI [0.73, 0.88], adj. R2 = 0.78). The model's intercept, corresponding</span></span>
-<span id="cb18-11"><a href="#cb18-11"></a><span class="co"># to qsec = 0 and wt = 0, is at 19.64 (95% CI [8.44, 30.81]). Within this model:</span></span>
+<span id="cb18-11"><a href="#cb18-11"></a><span class="co"># to qsec = 0 and wt = 0, is at 19.88 (95% CI [9.23, 29.36]). Within this model:</span></span>
 <span id="cb18-12"><a href="#cb18-12"></a><span class="co"># </span></span>
-<span id="cb18-13"><a href="#cb18-13"></a><span class="co">#   - The effect of qsec (Median = 0.93, 95% CI [0.35, 1.50]) has a 99.90% probability of being positive (&gt; 0),</span></span>
-<span id="cb18-14"><a href="#cb18-14"></a><span class="co"># 98.15% of being significant (&gt; 0.30), and 0.30% of being large (&gt; 1.81). The estimation successfully</span></span>
-<span id="cb18-15"><a href="#cb18-15"></a><span class="co"># converged (Rhat = 1.001) and the indices are reliable (ESS = 2011)</span></span>
-<span id="cb18-16"><a href="#cb18-16"></a><span class="co">#   - The effect of wt (Median = -5.01, 95% CI [-6.03, -4.11]) has a 100.00% probability of being negative (&lt; 0),</span></span>
+<span id="cb18-13"><a href="#cb18-13"></a><span class="co">#   - The effect of qsec (Median = 0.92, 95% CI [0.43, 1.48]) has a 99.95% probability of being positive (&gt; 0),</span></span>
+<span id="cb18-14"><a href="#cb18-14"></a><span class="co"># 99.20% of being significant (&gt; 0.30), and 0.00% of being large (&gt; 1.81). The estimation successfully</span></span>
+<span id="cb18-15"><a href="#cb18-15"></a><span class="co"># converged (Rhat = 0.999) and the indices are reliable (ESS = 2631)</span></span>
+<span id="cb18-16"><a href="#cb18-16"></a><span class="co">#   - The effect of wt (Median = -5.05, 95% CI [-6.09, -4.07]) has a 100.00% probability of being negative (&lt; 0),</span></span>
 <span id="cb18-17"><a href="#cb18-17"></a><span class="co"># 100.00% of being significant (&lt; -0.30), and 100.00% of being large (&lt; -1.81). The estimation successfully</span></span>
-<span id="cb18-18"><a href="#cb18-18"></a><span class="co"># converged (Rhat = 0.998) and the indices are reliable (ESS = 1983)</span></span>
+<span id="cb18-18"><a href="#cb18-18"></a><span class="co"># converged (Rhat = 0.999) and the indices are reliable (ESS = 2585)</span></span>
 <span id="cb18-19"><a href="#cb18-19"></a><span class="co"># </span></span>
 <span id="cb18-20"><a href="#cb18-20"></a><span class="co"># Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT) framework, we report the median of</span></span>
 <span id="cb18-21"><a href="#cb18-21"></a><span class="co"># the posterior distribution and its 95% CI (Highest Density Interval), along the probability of direction</span></span>
@@ -393,11 +390,11 @@
 <p>Finally, <strong>report</strong> includes some functions to help you write the data analysis paragraph about the tools used.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># Analyses were conducted using the R Statistical language (version 4.0.5; R Core Team, 2021) on macOS Mojave</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a><span class="co"># 10.14.6, using the packages Rcpp (version 1.0.6; Dirk Eddelbuettel and Romain Francois, 2011), Matrix</span></span>
+<div class="sourceCode" id="cb24"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># Analyses were conducted using the R Statistical language (version 4.0.4; R Core Team, 2021) on Windows 10 x64</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="co"># (build 19042), using the packages Rcpp (version 1.0.6; Dirk Eddelbuettel and Romain Francois, 2011), Matrix</span></span>
 <span id="cb24-3"><a href="#cb24-3"></a><span class="co"># (version 1.3.2; Douglas Bates and Martin Maechler, 2021), lme4 (version 1.1.26; Douglas Bates et al., 2015),</span></span>
 <span id="cb24-4"><a href="#cb24-4"></a><span class="co"># rstanarm (version 2.21.1; Goodrich B et al., 2020), dplyr (version 1.0.5; Hadley Wickham et al., 2021) and</span></span>
-<span id="cb24-5"><a href="#cb24-5"></a><span class="co"># report (version 0.2.0; Makowski et al., 2020).</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a><span class="co"># report (version 0.3.0; Makowski et al., 2020).</span></span>
 <span id="cb24-6"><a href="#cb24-6"></a><span class="co"># </span></span>
 <span id="cb24-7"><a href="#cb24-7"></a><span class="co"># References</span></span>
 <span id="cb24-8"><a href="#cb24-8"></a><span class="co"># ----------</span></span>
