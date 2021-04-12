@@ -214,6 +214,7 @@ will run it.</p></td>
 #&gt; beta = 0.45, 95% CI [-0.12, 1.03], t(144) = 1.56, p = 0.120; Std. beta = 0.97, 95% CI [-0.26, 2.19]</div><div class='input'><span class='fu'>report_statistics</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='va'>vs</span> <span class='op'>~</span> <span class='va'>disp</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, family <span class='op'>=</span> <span class='st'>"binomial"</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; beta = 4.14, 95% CI [1.81, 7.44], p &lt; .01; Std. beta = -0.85, 95% CI [-2.42, 0.27]
 #&gt; beta = -0.02, 95% CI [-0.04, -0.01], p &lt; .01; Std. beta = -2.68, 95% CI [-4.90, -1.27]</div><div class='input'>
+<span class='co'># \donttest{</span>
 <span class='co'># Mixed models</span>
 <span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://github.com/lme4/lme4/'>"lme4"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'>lme4</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>|</span> <span class='va'>Species</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
@@ -228,7 +229,8 @@ will run it.</p></td>
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; Median = 5.01, 89% CI [4.90, 5.13], pd = 100%, 0% in ROPE; Std. beta = -1.01, 95% CI [-1.19, -0.84]; Rhat = 1.00, ESS = 1026.55
 #&gt; Median = 0.93, 89% CI [0.75, 1.08], pd = 100%, 0% in ROPE; Std. beta = 1.12, 95% CI [0.88, 1.39]; Rhat = 1.00, ESS = 1097.47
-#&gt; Median = 1.58, 89% CI [1.42, 1.75], pd = 100%, 0% in ROPE; Std. beta = 1.91, 95% CI [1.67, 2.17]; Rhat = 1.00, ESS = 974.79</div></pre>
+#&gt; Median = 1.58, 89% CI [1.42, 1.75], pd = 100%, 0% in ROPE; Std. beta = 1.91, 95% CI [1.67, 2.17]; Rhat = 1.00, ESS = 974.79</div><div class='input'><span class='co'># }</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
