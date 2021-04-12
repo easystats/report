@@ -27,6 +27,7 @@
 #' as.data.frame(r)
 #' summary(as.data.frame(r))
 #'
+#' \donttest{
 #' # Logistic models
 #' model <- glm(vs ~ disp, data = mtcars, family = "binomial")
 #' r <- report(model)
@@ -43,6 +44,7 @@
 #'   summary(r)
 #'   as.data.frame(r)
 #'   summary(as.data.frame(r))
+#' }
 #' }
 #' @export
 report.lm <- function(x, include_effectsize = TRUE, effectsize_method = "refit", ...) {

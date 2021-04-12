@@ -97,6 +97,7 @@ summary(r)
 as.data.frame(r)
 summary(as.data.frame(r))
 
+\donttest{
 # Logistic models
 model <- glm(vs ~ disp, data = mtcars, family = "binomial")
 r <- report(model)
@@ -113,6 +114,7 @@ if (require("lme4")) {
   summary(r)
   as.data.frame(r)
   summary(as.data.frame(r))
+}
 }
 }
 \seealso{

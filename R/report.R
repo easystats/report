@@ -3,7 +3,7 @@
 #' Create reports of different objects. See the documentation for your object's
 #' class:
 #' \itemize{
-#'  \item{\link[=report.sessionInfo]{R environment, system and packages} (\code{sessionInfo})}
+#'  \item{\link[=report.sessionInfo]{System and packages} (\code{sessionInfo})}
 #'  \item{\link[=report.data.frame]{Dataframes and vectors}}
 #'  \item{\link[=report.htest]{Correlations and t-tests} (\code{htest})}
 #'  \item{\link[=report.aov]{ANOVAs} (\code{aov, anova, aovlist, ...})}
