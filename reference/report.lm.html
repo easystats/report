@@ -331,6 +331,7 @@ its re-computation.</p></td>
 #&gt; R2                                  |             |                |        |        |            | 0.84
 #&gt; R2 (adj.)                           |             |                |        |        |            | 0.83
 #&gt; Sigma                               |             |                |        |        |            | 0.34</div><div class='input'>
+<span class='co'># \donttest{</span>
 <span class='co'># Logistic models</span>
 <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='va'>vs</span> <span class='op'>~</span> <span class='va'>disp</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, family <span class='op'>=</span> <span class='st'>"binomial"</span><span class='op'>)</span>
 <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
@@ -379,7 +380,8 @@ its re-computation.</p></td>
 #&gt;                  |             |              |        |        |         |          |            |     
 #&gt; R2 (conditional) |             |              |        |        |         |          |            | 0.97
 #&gt; R2 (marginal)    |             |              |        |        |         |          |            | 0.66
-#&gt; Sigma            |             |              |        |        |         |          |            | 0.34</div></pre>
+#&gt; Sigma            |             |              |        |        |         |          |            | 0.34</div><div class='input'><span class='co'># }</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
