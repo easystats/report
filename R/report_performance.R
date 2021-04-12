@@ -26,6 +26,7 @@
 #'   report_performance(model)
 #' }
 #'
+#' \donttest{
 #' # Bayesian models
 #' if (require("rstanarm")) {
 #'   model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600)
@@ -39,6 +40,7 @@
 #'                  dem60 ~ ind60 "
 #'   model <- lavaan::sem(structure, data = PoliticalDemocracy)
 #'   report_performance(model)
+#' }
 #' }
 #' @export
 report_performance <- function(x, table = NULL, ...) {

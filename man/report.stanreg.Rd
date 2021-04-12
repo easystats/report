@@ -26,7 +26,7 @@ library(report)
 
 # Bayesian models
 if (require("rstanarm")) {
-  model <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300)
+  model <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 200, chains = 2)
   r <- report(model)
   r
   summary(r)
