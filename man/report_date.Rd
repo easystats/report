@@ -24,6 +24,7 @@ Other convenient or totally useless reports.
 library(report)
 
 report_date()
+summary(report_date())
 report_story()
 }
 \seealso{

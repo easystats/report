@@ -12,6 +12,7 @@
 #' @examples
 #' library(report)
 #'
+#' \donttest{
 #' # Structural Equation Models (SEM)
 #' if (require("lavaan")) {
 #'   structure <- " ind60 =~ x1 + x2 + x3
@@ -27,6 +28,7 @@
 #'   # Specific reports
 #'   report_table(model)
 #'   report_performance(model)
+#' }
 #' }
 #' @export
 report.lavaan <- function(x, ...) {

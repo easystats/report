@@ -10,11 +10,12 @@
 #' library(report)
 #'
 #' report_date()
+#' summary(report_date())
 #' report_story()
 #' @export
 report_date <- function(...) {
   date <- Sys.time()
-  text <- format(date, "It's %A, %B  %d of the year %Y, at %l%P %M and %S seconds")
+  text <- format(date, "It's %A, %B %d of the year %Y, at %l%P %M and %S seconds")
   text_short <- format(date, "%d/%m/%y - %H:%M:%S")
   as.report_text(text, summary = text_short)
 }
