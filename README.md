@@ -7,17 +7,6 @@
 
 ***“From R to your manuscript”***
 
-------------------------------------------------------------------------
-
-:warning: **report** has been entirely rewritten *(again)*, and won’t be
-compatible with your old code. We’ve changed it for the best, and with
-your help we’ll continue improving it. You’ll need the latest versions
-of the **easystats** packages (you can update them by running
-`easystats::install_easystats_latest()`). **Thanks for your support!**
-:warning:
-
-------------------------------------------------------------------------
-
 **report**’s primary goal is to bridge the gap between R’s output and
 the formatted results contained in your manuscript. It automatically
 produces reports of models and dataframes according to **best
@@ -258,14 +247,14 @@ report(model)
     # warmup of 500) to predict mpg with qsec and wt (formula: mpg ~ qsec + wt). Priors over parameters were set as
     # normal (mean = 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The model's explanatory
     # power is substantial (R2 = 0.81, 89% CI [0.73, 0.88], adj. R2 = 0.78). The model's intercept, corresponding
-    # to qsec = 0 and wt = 0, is at 19.64 (95% CI [8.44, 30.81]). Within this model:
+    # to qsec = 0 and wt = 0, is at 19.88 (95% CI [9.23, 29.36]). Within this model:
     # 
-    #   - The effect of qsec (Median = 0.93, 95% CI [0.35, 1.50]) has a 99.90% probability of being positive (> 0),
-    # 98.15% of being significant (> 0.30), and 0.30% of being large (> 1.81). The estimation successfully
-    # converged (Rhat = 1.001) and the indices are reliable (ESS = 2011)
-    #   - The effect of wt (Median = -5.01, 95% CI [-6.03, -4.11]) has a 100.00% probability of being negative (< 0),
+    #   - The effect of qsec (Median = 0.92, 95% CI [0.43, 1.48]) has a 99.95% probability of being positive (> 0),
+    # 99.20% of being significant (> 0.30), and 0.00% of being large (> 1.81). The estimation successfully
+    # converged (Rhat = 0.999) and the indices are reliable (ESS = 2631)
+    #   - The effect of wt (Median = -5.05, 95% CI [-6.09, -4.07]) has a 100.00% probability of being negative (< 0),
     # 100.00% of being significant (< -0.30), and 100.00% of being large (< -1.81). The estimation successfully
-    # converged (Rhat = 0.998) and the indices are reliable (ESS = 1983)
+    # converged (Rhat = 0.999) and the indices are reliable (ESS = 2585)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT) framework, we report the median of
     # the posterior distribution and its 95% CI (Highest Density Interval), along the probability of direction
@@ -335,11 +324,11 @@ analysis paragraph about the tools used.
 report(sessionInfo())
 ```
 
-    # Analyses were conducted using the R Statistical language (version 4.0.5; R Core Team, 2021) on macOS Mojave
-    # 10.14.6, using the packages Rcpp (version 1.0.6; Dirk Eddelbuettel and Romain Francois, 2011), Matrix
+    # Analyses were conducted using the R Statistical language (version 4.0.4; R Core Team, 2021) on Windows 10 x64
+    # (build 19042), using the packages Rcpp (version 1.0.6; Dirk Eddelbuettel and Romain Francois, 2011), Matrix
     # (version 1.3.2; Douglas Bates and Martin Maechler, 2021), lme4 (version 1.1.26; Douglas Bates et al., 2015),
     # rstanarm (version 2.21.1; Goodrich B et al., 2020), dplyr (version 1.0.5; Hadley Wickham et al., 2021) and
-    # report (version 0.2.0; Makowski et al., 2020).
+    # report (version 0.3.0; Makowski et al., 2020).
     # 
     # References
     # ----------

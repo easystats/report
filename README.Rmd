@@ -41,12 +41,6 @@ library(report)
 
 ***"From R to your manuscript"***
 
----
-
-:warning: **report** has been entirely rewritten *(again)*, and won't be compatible with your old code. We've changed it for the best, and with your help we'll continue improving it. You'll need the latest versions of the **easystats** packages (you can update them by running `easystats::install_easystats_latest()`). **Thanks for your support!** :warning:
-
----
-
 **report**'s primary goal is to bridge the gap between R's output and the formatted results contained in your manuscript. It automatically produces reports of models and dataframes according to **best practices** guidelines (*e.g.,* [APA](https://apastyle.apa.org/)'s style), ensuring **standardization** and **quality** in results reporting.
 
 ```{r}
