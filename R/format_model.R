@@ -7,6 +7,7 @@
 #'   model <- lme4::lmer(Sepal.Length ~ Sepal.Width + (1 | Species), data = iris)
 #'   format_model(model)
 #' }
+#' @return A character string.
 #' @importFrom insight model_info is_nullmodel
 #' @export
 format_model <- function(x) {

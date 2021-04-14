@@ -6,6 +6,9 @@
 \usage{
 cite_easystats()
 }
+\value{
+An object of class \code{cite_easystats} that can be printed, summarised (using \code{summary()}), or transformed into a table (using \code{as.data.frame()}).
+}
 \description{
 A convenient function for those who wish to cite the easystats packages.
 }
@@ -13,4 +16,5 @@ A convenient function for those who wish to cite the easystats packages.
 cite_easystats()
 summary(cite_easystats())
 as.data.frame(cite_easystats())
+
 }

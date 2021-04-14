@@ -6,6 +6,9 @@
 #' cite_easystats()
 #' summary(cite_easystats())
 #' as.data.frame(cite_easystats())
+#'
+#' @return An object of class \code{cite_easystats} that can be printed, summarised (using \code{summary()}), or transformed into a table (using \code{as.data.frame()}).
+#'
 #' @export
 cite_easystats <- function() {
   intro <- "Thanks for crediting us :) You can cite the 'easystats' ecosystem as follows:"

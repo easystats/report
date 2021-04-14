@@ -21,6 +21,10 @@ objects above).}
 }
 \value{
 A character string.
+
+A character string.
+
+A character string.
 }
 \description{
 Convenient formatting of text components

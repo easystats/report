@@ -7,6 +7,7 @@
 #'   model <- lme4::lmer(Sepal.Length ~ Sepal.Width + (1 | Species), data = iris)
 #'   format_algorithm(model)
 #' }
+#' @return A character string.
 #' @importFrom insight find_algorithm
 #' @export
 format_algorithm <- function(x) {
