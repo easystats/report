@@ -34,6 +34,7 @@
 #' @importFrom effectsize interpret_bf
 #' @importFrom stats setNames
 #' @importFrom insight format_bf
+#' @return An object of class \code{\link{report}}.
 #' @export
 report.bayesfactor_models <- function(x,
                                       interpretation = "jeffreys1961",

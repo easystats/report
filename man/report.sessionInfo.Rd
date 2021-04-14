@@ -30,6 +30,8 @@ objects above).}
   \item{For \code{report_packages}, a data frame of class with information on
   package name, version and citation.}
 }
+
+An object of class \code{\link{report}}.
 }
 \description{
 Report R environment (packages, system, etc.)

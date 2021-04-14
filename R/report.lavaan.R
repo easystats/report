@@ -30,6 +30,7 @@
 #'   report_performance(model)
 #' }
 #' }
+#' @return An object of class \code{\link{report}}.
 #' @export
 report.lavaan <- function(x, ...) {
   print("Support for lavaan not fully implemented yet :(")

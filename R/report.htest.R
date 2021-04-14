@@ -21,6 +21,7 @@
 #' report(t.test(mtcars$mpg, mtcars$vs, paired = TRUE))
 #' report(t.test(iris$Sepal.Width, mu = 1))
 #' @importFrom insight format_ci
+#' @return An object of class \code{\link{report}}.
 #' @export
 report.htest <- function(x, ...) {
   table <- report_table(x, ...)

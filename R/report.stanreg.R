@@ -21,6 +21,7 @@
 #'   summary(as.data.frame(r))
 #' }
 #' }
+#' @return An object of class \code{\link{report}}.
 #' @include report.lm.R report.lme4.R
 #' @export
 report.stanreg <- function(x, ...) {

@@ -32,6 +32,9 @@ class:
  \item{\link[=report.lavaan]{Structural Equation Models (SEM)} (from \code{lavaan})}
  \item{\link[=report.compare_performance]{Model comparison} (from \code{\link[performance:compare_performance]{performance}})}
 }
+Most of the time, the object created by the \code{report()} function can be
+further transformed, for instance summarized (using \code{summary()}), or
+converted to a table (using \code{as.data.frame()}).
 }
 \details{
 \subsection{Organization}{

@@ -19,6 +19,7 @@
 #' summary(r)
 #' as.data.frame(r)
 #' summary(as.data.frame(r))
+#' @return An object of class \code{\link{report}}.
 #' @export
 report.default <- function(x, ...) {
   # You can remove the following line once the functions below are implemented

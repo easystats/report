@@ -30,6 +30,7 @@
 #'   report_statistics(x)
 #'   report_parameters(x)
 #' }
+#' @return An object of class \code{\link{report}}.
 #' @export
 report.compare_performance <- function(x, ...) {
   table <- report_table(x, table = table, ...)

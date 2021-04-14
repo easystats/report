@@ -39,9 +39,7 @@ re-computation.}
 its re-computation.}
 }
 \value{
-A list-object of class \code{report}, which contains further
-  list-objects with a short and long description of the model summary, as
-  well as a short and long table of parameters and fit indices.
+An object of class \code{\link{report}}.
 }
 \description{
 Create reports for ANOVA models.

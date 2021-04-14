@@ -27,6 +27,7 @@
 #' cite_packages(prefix = "> ")
 #' report_system()
 #' @importFrom utils packageVersion sessionInfo
+#' @return An object of class \code{\link{report}}.
 #' @export
 report.sessionInfo <- function(x, ...) {
   table <- report_table(x, ...)

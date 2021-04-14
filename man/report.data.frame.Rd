@@ -73,6 +73,9 @@ observations larger than 100.}
 
 \item{digits}{Number of significant digits.}
 }
+\value{
+An object of class \code{\link{report}}.
+}
 \description{
 Create reports for data frames.
 }

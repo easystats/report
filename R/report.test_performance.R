@@ -29,6 +29,7 @@
 #' report_table(x)
 #' report_statistics(x)
 #' report_parameters(x)
+#' @return An object of class \code{\link{report}}.
 #' @export
 report.test_performance <- function(x, ...) {
   table <- report_table(x, table = table, ...)

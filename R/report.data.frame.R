@@ -39,6 +39,7 @@
 #'   as.data.frame(r)
 #'   summary(as.data.frame(r))
 #' }
+#' @return An object of class \code{\link{report}}.
 #' @export
 report.data.frame <- function(x,
                               n = FALSE,

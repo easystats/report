@@ -11,7 +11,7 @@
 #' library(report)
 #'
 #' # Bayesian models
-#' \dontrun{
+#' \donttest{
 #' if (require("brms")) {
 #'   model <- brm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300)
 #'   r <- report(model)
@@ -21,6 +21,7 @@
 #'   summary(as.data.frame(r))
 #' }
 #' }
+#' @return An object of class \code{\link{report}}.
 #' @include report.lm.R report.stanreg.R report.lme4.R
 #' @export
 report.brmsfit <- function(x, ...) {
