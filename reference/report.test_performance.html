@@ -224,24 +224,39 @@ re-computation.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://easystats.github.io/report/'>report</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://easystats.github.io/performance/'>performance</a></span><span class='op'>)</span>
 
 <span class='va'>m1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>*</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
 <span class='va'>m2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>+</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
 <span class='va'>m3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
 
-<span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://easystats.github.io/performance/'>"performance"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>performance</span><span class='fu'>::</span><span class='fu'><a href='https://easystats.github.io/performance/reference/test_performance.html'>test_performance</a></span><span class='op'>(</span><span class='va'>m1</span>, <span class='va'>m2</span>, <span class='va'>m3</span><span class='op'>)</span>
-  <span class='co'># r &lt;- report(x)</span>
-  <span class='co'># r</span>
-  <span class='co'># summary(r)</span>
-  <span class='co'># as.data.frame(r)</span>
-  <span class='co'># summary(as.data.frame(r))</span>
-
-  <span class='co'># Specific reports</span>
-  <span class='fu'><a href='report_table.html'>report_table</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-  <span class='fu'><a href='report_statistics.html'>report_statistics</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-  <span class='fu'><a href='report_parameters.html'>report_parameters</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-<span class='op'>}</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>performance</span><span class='fu'>::</span><span class='fu'><a href='https://easystats.github.io/performance/reference/test_performance.html'>test_performance</a></span><span class='op'>(</span><span class='va'>m1</span>, <span class='va'>m2</span>, <span class='va'>m3</span><span class='op'>)</span>
+<span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+<span class='va'>r</span>
+</div><div class='output co'>#&gt; We compared three models; lm (BF = 26.52), lm (BF &lt; 0.001) and lm (BF = 26.52).</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; We compared three models; lm (), lm () and lm ().</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Name | Model |      BF
+#&gt; ----------------------
+#&gt; m1   |    lm |        
+#&gt; m2   |    lm |   26.52
+#&gt; m3   |    lm | &lt; 0.001
+#&gt; Models were detected as nested and are compared in sequential order.</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Name | Model |      BF
+#&gt; ----------------------
+#&gt; m1   |    lm |        
+#&gt; m2   |    lm |   26.52
+#&gt; m3   |    lm | &lt; 0.001
+#&gt; Models were detected as nested and are compared in sequential order.</div><div class='input'>
+<span class='co'># Specific reports</span>
+<span class='fu'><a href='report_table.html'>report_table</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Name | Model |      BF
+#&gt; ----------------------
+#&gt; m1   |    lm |        
+#&gt; m2   |    lm |   26.52
+#&gt; m3   |    lm | &lt; 0.001
+#&gt; Models were detected as nested and are compared in sequential order.</div><div class='input'><span class='fu'><a href='report_statistics.html'>report_statistics</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; BF = 26.52
+#&gt; BF &lt; 0.001</div><div class='input'><span class='fu'><a href='report_parameters.html'>report_parameters</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;   - lm (BF = 26.52)
 #&gt;   - lm (BF &lt; 0.001)
 #&gt;   - lm (BF = 26.52)</div></pre>
