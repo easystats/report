@@ -176,9 +176,7 @@ the Sequential Effect eXistence and sIgnificance Testing framework (see
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list-object of class <code>report</code>, which contains further
-  list-objects with a short and long description of the model summary, as
-  well as a short and long table of parameters and fit indices.</p>
+    <p>An object of class <code><a href='report.html'>report</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Specific components of reports (especially for stats models):</p><ul>
@@ -218,14 +216,16 @@ the Sequential Effect eXistence and sIgnificance Testing framework (see
   <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
   <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; <span class='message'>Loading required package: rstanarm</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: Rcpp</span></div><div class='output co'>#&gt; <span class='message'>This is rstanarm version 2.21.1</span></div><div class='output co'>#&gt; <span class='message'>- See https://mc-stan.org/rstanarm/articles/priors for changes to default priors!</span></div><div class='output co'>#&gt; <span class='message'>- Default priors may change, so it's safest to specify priors, even if equivalent to the defaults.</span></div><div class='output co'>#&gt; <span class='message'>- For execution on a local, multicore CPU with excess RAM we recommend calling</span></div><div class='output co'>#&gt; <span class='message'>  options(mc.cores = parallel::detectCores())</span></div><div class='output co'>#&gt; <span class='message'></span>
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: rstanarm</span></div><div class='output co'>#&gt; <span class='message'>This is rstanarm version 2.21.1</span></div><div class='output co'>#&gt; <span class='message'>- See https://mc-stan.org/rstanarm/articles/priors for changes to default priors!</span></div><div class='output co'>#&gt; <span class='message'>- Default priors may change, so it's safest to specify priors, even if equivalent to the defaults.</span></div><div class='output co'>#&gt; <span class='message'>- For execution on a local, multicore CPU with excess RAM we recommend calling</span></div><div class='output co'>#&gt; <span class='message'>  options(mc.cores = parallel::detectCores())</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: ‘rstanarm’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:performance’:</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    pp_check</span></div><div class='output co'>#&gt; Parameter   | Median |         89% CI |     pd | % in ROPE |  Rhat |     ESS |                   Prior |  Fit
+#&gt; <span class='message'>    pp_check</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:brms’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    dirichlet, exponential, get_y, lasso, ngrps</span></div><div class='output co'>#&gt; Parameter   | Median |         89% CI |     pd | % in ROPE |  Rhat |     ESS |                   Prior |  Fit
 #&gt; -------------------------------------------------------------------------------------------------------------
-#&gt; (Intercept) |  19.68 | [11.76, 28.89] | 99.92% |     0.03% | 1.001 | 4243.00 | Normal (20.09 +- 15.07) |     
-#&gt; qsec        |   0.93 | [ 0.51,  1.37] | 99.92% |    11.28% | 1.001 | 4267.00 |   Normal (0.00 +- 8.43) |     
-#&gt; wt          |  -5.05 | [-5.77, -4.21] |   100% |        0% | 1.000 | 4633.00 |  Normal (0.00 +- 15.40) |     
+#&gt; (Intercept) |  19.59 | [10.78, 28.24] | 99.90% |     0.03% | 1.000 | 4070.00 | Normal (20.09 +- 15.07) |     
+#&gt; qsec        |   0.93 | [ 0.50,  1.38] | 99.95% |    12.07% | 1.000 | 4005.00 |   Normal (0.00 +- 8.43) |     
+#&gt; wt          |  -5.03 | [-5.87, -4.24] |   100% |        0% | 1.000 | 4479.00 |  Normal (0.00 +- 15.40) |     
 #&gt;             |        |                |        |           |       |         |                         |     
 #&gt; R2          |        |                |        |           |       |         |                         | 0.81
 #&gt; R2 (adj.)   |        |                |        |           |       |         |                         | 0.78
