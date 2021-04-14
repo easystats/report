@@ -23,7 +23,7 @@ follows the Sequential Effect eXistence and sIgnificance Testing framework
 library(report)
 
 # Bayesian models
-\donttest{
+\dontrun{
 if (require("brms")) {
   model <- brm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300)
   r <- report(model)

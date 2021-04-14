@@ -20,7 +20,7 @@
 #' @param digits Number of decimals.
 #' @inheritParams report.data.frame
 #'
-#' @return A data frame of class \code{report_table1} with variable names and
+#' @return A data frame of class \code{report_sample} with variable names and
 #'   their related summary statistics.
 #'
 #' @examples
@@ -88,7 +88,7 @@ report_sample <- function(data,
   }
 
 
-  class(out) <- c("report_table1", class(out))
+  class(out) <- c("report_sample", class(out))
   out
 }
 
@@ -110,7 +110,7 @@ report_sample <- function(data,
   }
 
   do.call(rbind, lapply(columns, function(cn) {
-    .table1_row(
+    .report_sample_row(
       x[[cn]],
       column = cn,
       centrality = centrality,
@@ -128,13 +128,13 @@ report_sample <- function(data,
 # create a "table row", i.e. a summary from a variable ------------------------
 
 
-.table1_row <- function(x, digits = 1, ...) {
-  UseMethod(".table1_row")
+.report_sample_row <- function(x, digits = 1, ...) {
+  UseMethod(".report_sample_row")
 }
 
 
 
-.table1_row.numeric <- function(x,
+.report_sample_row.numeric <- function(x,
                                 column,
                                 centrality = "mean",
                                 weights = NULL,
@@ -162,7 +162,7 @@ report_sample <- function(data,
 
 
 #' @importFrom stats na.omit xtabs
-.table1_row.factor <- function(x, column, weights = NULL, digits = 1, ...) {
+.report_sample_row.factor <- function(x, column, weights = NULL, digits = 1, ...) {
   if (!is.null(weights)) {
     x[is.na(weights)] <- NA
     weights[is.na(x)] <- NA
@@ -186,7 +186,7 @@ report_sample <- function(data,
 }
 
 
-.table1_row.character <- .table1_row.factor
+.report_sample_row.character <- .report_sample_row.factor
 
 
 
@@ -195,7 +195,7 @@ report_sample <- function(data,
 
 #' @importFrom insight print_colour export_table
 #' @export
-print.report_table1 <- function(x, ...) {
+print.report_sample <- function(x, ...) {
   insight::print_colour("# Descriptive Statistics\n\n", "blue")
   cat(insight::export_table(x))
 }

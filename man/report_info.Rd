@@ -13,7 +13,7 @@ objects above).}
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{
-A \code{character} string.
+An object of class \code{\link{report_info}}.
 }
 \description{
 Reports additional information relevant to the report (see list of supported

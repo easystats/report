@@ -9,7 +9,7 @@
 #' @inheritParams report_text
 #' @inheritParams as.report
 #'
-#' @return A \code{vector}.
+#' @return An object of class \code{\link{report_statistics}}.
 #'
 #' @examples
 #' library(report)

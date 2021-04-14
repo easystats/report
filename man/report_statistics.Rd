@@ -16,7 +16,7 @@ will run it.}
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{
-A \code{vector}.
+An object of class \code{\link{report_statistics}}.
 }
 \description{
 Creates a list containing a description of the parameters' values of R

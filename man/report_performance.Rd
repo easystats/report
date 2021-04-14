@@ -16,7 +16,7 @@ will run it.}
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{
-A \code{character} string.
+An object of class \code{\link{report_performance}}.
 }
 \description{
 Investigating the fit of statistical models to data often involves selecting

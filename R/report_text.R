@@ -8,7 +8,7 @@
 #' @param table A table obtained via \code{report_table()}. If not provided,
 #'   will run it.
 #'
-#' @return A \code{character} string.
+#' @return An object of class \code{\link{report_text}}.
 #'
 #' @examples
 #' library(report)

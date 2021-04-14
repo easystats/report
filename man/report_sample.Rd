@@ -44,7 +44,7 @@ weight-variable. Reported descriptive statistics will be weighted by
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{
-A data frame of class \code{report_table1} with variable names and
+A data frame of class \code{report_sample} with variable names and
   their related summary statistics.
 }
 \description{

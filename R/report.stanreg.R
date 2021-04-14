@@ -13,7 +13,7 @@
 #' \donttest{
 #' # Bayesian models
 #' if (require("rstanarm")) {
-#'   model <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0)
+#'   model <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 500)
 #'   r <- report(model)
 #'   r
 #'   summary(r)

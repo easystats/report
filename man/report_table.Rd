@@ -13,7 +13,7 @@ objects above).}
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{
-A \code{data.frame}.
+An object of class \code{\link{report_table}}.
 }
 \description{
 Creates tables to describe different objects (see list of supported objects

@@ -8,7 +8,7 @@
 #' @inheritParams report_text
 #' @inheritParams as.report
 #'
-#' @return A \code{character} string.
+#' @return An object of class \code{\link{report_random}}.
 #'
 #' @examples
 #' library(report)
@@ -30,7 +30,7 @@
 #'   summary(r)
 #' }
 #' }
-#' \donttest{
+#' \dontrun{
 #' if (require("brms")) {
 #'   model <- brm(mpg ~ disp + (1 | cyl), data = mtcars, refresh = 0, iter = 1000)
 #'   r <- report_random(model)

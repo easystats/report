@@ -36,24 +36,23 @@ function in the \code{performance} package.
 }
 \examples{
 library(report)
+library(performance)
 
 m1 <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)
 m2 <- lm(Sepal.Length ~ Petal.Length + Species, data = iris)
 m3 <- lm(Sepal.Length ~ Petal.Length, data = iris)
 
-if (require("performance")) {
-  x <- performance::compare_performance(m1, m2, m3)
-  r <- report(x)
-  r
-  summary(r)
-  as.data.frame(r)
-  summary(as.data.frame(r))
+x <- performance::compare_performance(m1, m2, m3)
+r <- report(x)
+r
+summary(r)
+as.data.frame(r)
+summary(as.data.frame(r))
 
-  # Specific reports
-  report_table(x)
-  report_statistics(x)
-  report_parameters(x)
-}
+# Specific reports
+report_table(x)
+report_statistics(x)
+report_parameters(x)
 }
 \seealso{
 Specific components of reports (especially for stats models):

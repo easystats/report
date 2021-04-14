@@ -8,7 +8,7 @@
 #' @inheritParams report_text
 #' @inheritParams as.report
 #'
-#' @return An object of class \code{report_effectsize}.
+#' @return An object of class \code{\link{report_effectsize}}.
 #'
 #' @examples
 #' library(report)

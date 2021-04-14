@@ -7,7 +7,7 @@
 #' @inheritParams report_text
 #' @inheritParams as.report
 #'
-#' @return A \code{character} string.
+#' @return An object of class \code{\link{report_intercept}}.
 #'
 #' @examples
 #' library(report)

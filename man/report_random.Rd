@@ -13,7 +13,7 @@ objects above).}
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{
-A \code{character} string.
+An object of class \code{\link{report_random}}.
 }
 \description{
 Reports random effects of mixed models (see list of supported objects in
@@ -39,7 +39,7 @@ if (require("rstanarm")) {
   summary(r)
 }
 }
-\donttest{
+\dontrun{
 if (require("brms")) {
   model <- brm(mpg ~ disp + (1 | cyl), data = mtcars, refresh = 0, iter = 1000)
   r <- report_random(model)

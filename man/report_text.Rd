@@ -16,7 +16,7 @@ will run it.}
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{
-A \code{character} string.
+An object of class \code{\link{report_text}}.
 }
 \description{
 Creates text containing a description of the parameters of R objects (see

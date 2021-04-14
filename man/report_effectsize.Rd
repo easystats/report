@@ -13,7 +13,7 @@ objects above).}
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{
-An object of class \code{report_effectsize}.
+An object of class \code{\link{report_effectsize}}.
 }
 \description{
 Computes, interpret and formats the effect sizes of a variety of models and

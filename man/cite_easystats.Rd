@@ -7,7 +7,7 @@
 cite_easystats()
 }
 \value{
-An object of class \code{cite_easystats} that can be printed, summarised (using \code{summary()}), or transformed into a table (using \code{as.data.frame()}).
+An object of class \code{cite_easystats} that can be printed, summarized (using \code{summary()}), or transformed into a table (using \code{as.data.frame()}).
 }
 \description{
 A convenient function for those who wish to cite the easystats packages.

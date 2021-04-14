@@ -5,7 +5,7 @@
 #'
 #' @inheritParams report
 #'
-#' @return A \code{data.frame}.
+#' @return An object of class \code{\link{report_table}}.
 #'
 #' @examples
 #' library(report)

@@ -13,9 +13,7 @@ report_story(...)
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{
-A list-object of class \code{report}, which contains further
-  list-objects with a short and long description of the model summary, as
-  well as a short and long table of parameters and fit indices.
+Objects of class \code{\link{report_text}}.
 }
 \description{
 Other convenient or totally useless reports.
@@ -26,6 +24,7 @@ library(report)
 report_date()
 summary(report_date())
 report_story()
+
 }
 \seealso{
 Specific components of reports (especially for stats models):
