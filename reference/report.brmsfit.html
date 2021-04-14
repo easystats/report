@@ -207,7 +207,7 @@ follows the Sequential Effect eXistence and sIgnificance Testing framework
     <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://easystats.github.io/report/'>report</a></span><span class='op'>)</span>
 
 <span class='co'># Bayesian models</span>
-<span class='co'># \donttest{</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://github.com/paul-buerkner/brms'>"brms"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/brms/man/brm.html'>brm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>qsec</span> <span class='op'>+</span> <span class='va'>wt</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, refresh <span class='op'>=</span> <span class='fl'>0</span>, iter <span class='op'>=</span> <span class='fl'>300</span><span class='op'>)</span>
   <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
@@ -216,26 +216,7 @@ follows the Sequential Effect eXistence and sIgnificance Testing framework
   <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
   <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; <span class='message'>Loading required package: brms</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: Rcpp</span></div><div class='output co'>#&gt; <span class='message'>Loading 'brms' package (version 2.15.0). Useful instructions</span>
-#&gt; <span class='message'>can be found by typing help('brms'). A more detailed introduction</span>
-#&gt; <span class='message'>to the package is available through vignette('brms_overview').</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘brms’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:lme4’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    ngrps</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:stats’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    ar</span></div><div class='output co'>#&gt; <span class='message'>Compiling Stan program...</span></div><div class='output co'>#&gt; <span class='message'>Start sampling</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.</span>
-#&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
-#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#bulk-ess</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.</span>
-#&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
-#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#tail-ess</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Can't extract 'deviance' residuals. Returning response residuals.</span></div><div class='output co'>#&gt; <span class='message'>Start sampling</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Can't extract 'deviance' residuals. Returning response residuals.</span></div><div class='output co'>#&gt; Parameter   | Median |         89% CI |     pd | % in ROPE |  Rhat |    ESS |  Fit
-#&gt; ----------------------------------------------------------------------------------
-#&gt; (Intercept) |  19.83 | [12.64, 29.58] | 99.67% |     0.17% | 1.006 | 588.00 |     
-#&gt; qsec        |   0.93 | [ 0.44,  1.31] |   100% |    10.67% | 1.005 | 588.00 |     
-#&gt; wt          |  -5.03 | [-5.73, -4.20] |   100% |        0% | 0.999 | 630.00 |     
-#&gt;             |        |                |        |           |       |        |     
-#&gt; R2          |        |                |        |           |       |        | 0.82
-#&gt; R2 (adj.)   |        |                |        |           |       |        | 0.78
-#&gt; Sigma       |        |                |        |           |       |        | 2.77</div><div class='input'><span class='co'># }</span>
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

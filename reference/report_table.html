@@ -174,7 +174,7 @@ objects above).</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>data.frame</code>.</p>
+    <p>An object of class <code>report_table</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://easystats.github.io/report/'>report</a></span><span class='op'>)</span>
@@ -185,7 +185,6 @@ objects above).</p></td>
 </div><div class='output co'>#&gt; Package     | Version |                                                                                                                                                                                                                                                Reference
 #&gt; --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #&gt; bayestestR  |   0.9.0 |               Makowski, D., Ben-Shachar, M., &amp; Lüdecke, D. (2019). bayestestR: Describing Effects and their Uncertainty, Existence and Significance within the Bayesian Framework. Journal of Open Source Software, 4(40), 1541. doi:10.21105/joss.01541
-#&gt; brms        |  2.15.0 |                                                                                     Paul-Christian Bürkner (2017). brms: An R Package for Bayesian Multilevel Models Using Stan. Journal of Statistical Software, 80(1), 1-28. doi:10.18637/jss.v080.i01
 #&gt; dplyr       |   1.0.5 |                                                                         Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2021). dplyr: A Grammar of Data Manipulation. R package version 1.0.5. https://CRAN.R-project.org/package=dplyr
 #&gt; lavaan      |   0.6.8 |                                                                                        Yves Rosseel (2012). lavaan: An R Package for Structural Equation Modeling. Journal of Statistical Software, 48(2), 1-36. URL https://www.jstatsoft.org/v48/i02/.
 #&gt; lme4        |  1.1.26 |                                                                Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015). Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical Software, 67(1), 1-48. doi:10.18637/jss.v067.i01.
@@ -198,7 +197,6 @@ objects above).</p></td>
 </div><div class='output co'>#&gt; Package     | Version
 #&gt; ---------------------
 #&gt; bayestestR  |   0.9.0
-#&gt; brms        |  2.15.0
 #&gt; dplyr       |   1.0.5
 #&gt; lavaan      |   0.6.8
 #&gt; lme4        |  1.1.26
@@ -296,14 +294,14 @@ objects above).</p></td>
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; Parameter         | Median |       89% CI |   pd | % in ROPE |  Rhat |     ESS |                 Prior | Std. Median | Std_Median 95% CI |     Fit
 #&gt; --------------------------------------------------------------------------------------------------------------------------------------------------
-#&gt; (Intercept)       |   5.01 | [4.91, 5.13] | 100% |        0% | 0.998 |  992.00 | Normal (5.84 +- 2.07) |        0.00 |      [0.00, 0.00] |        
-#&gt; Speciesversicolor |   0.93 | [0.78, 1.10] | 100% |        0% | 0.999 | 1171.00 | Normal (0.00 +- 4.38) |        0.53 |      [0.43, 0.65] |        
-#&gt; Speciesvirginica  |   1.58 | [1.42, 1.75] | 100% |        0% | 0.999 | 1015.00 | Normal (0.00 +- 4.38) |        0.90 |      [0.79, 1.01] |        
+#&gt; (Intercept)       |   5.00 | [4.89, 5.12] | 100% |        0% | 1.001 | 1038.00 | Normal (5.84 +- 2.07) |        0.00 |      [0.00, 0.00] |        
+#&gt; Speciesversicolor |   0.93 | [0.76, 1.08] | 100% |        0% | 1.001 |  816.00 | Normal (0.00 +- 4.38) |        0.53 |      [0.42, 0.64] |        
+#&gt; Speciesvirginica  |   1.58 | [1.42, 1.73] | 100% |        0% | 0.999 |  944.00 | Normal (0.00 +- 4.38) |        0.90 |      [0.79, 1.01] |        
 #&gt;                   |        |              |      |           |       |         |                       |             |                   |        
 #&gt; ELPD              |        |              |      |           |       |         |                       |             |                   | -115.86
 #&gt; LOOIC             |        |              |      |           |       |         |                       |             |                   |  231.71
-#&gt; WAIC              |        |              |      |           |       |         |                       |             |                   |  231.69
-#&gt; R2                |        |              |      |           |       |         |                       |             |                   |    0.61
+#&gt; WAIC              |        |              |      |           |       |         |                       |             |                   |  231.67
+#&gt; R2                |        |              |      |           |       |         |                       |             |                   |    0.62
 #&gt; R2 (adj.)         |        |              |      |           |       |         |                       |             |                   |    0.60
 #&gt; Sigma             |        |              |      |           |       |         |                       |             |                   |    0.52</div><div class='input'>
 <span class='co'># Structural Equation Models (SEM)</span>

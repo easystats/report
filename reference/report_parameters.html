@@ -190,7 +190,6 @@ objects above).</p></td>
 #&gt;   - performance (version 0.7.1; Lüdecke et al., 2021)
 #&gt;   - bayestestR (version 0.9.0; Makowski et al., 2019)
 #&gt;   - report (version 0.3.0; Makowski et al., 2020)
-#&gt;   - brms (version 2.15.0; Paul-Christian Bürkner, 2017)
 #&gt;   - R (version 4.0.5; R Core Team, 2021)
 #&gt;   - lavaan (version 0.6.8; Yves Rosseel, 2012)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;   - Rcpp (v1.0.6)
@@ -201,7 +200,6 @@ objects above).</p></td>
 #&gt;   - performance (v0.7.1)
 #&gt;   - bayestestR (v0.9.0)
 #&gt;   - report (v0.3.0)
-#&gt;   - brms (v2.15.0)
 #&gt;   - R (v4.0.5)
 #&gt;   - lavaan (v0.6.8)</div><div class='input'>
 <span class='co'># Data</span>
@@ -291,9 +289,9 @@ objects above).</p></td>
   <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://mc-stan.org/rstanarm/reference/stan_glm.html'>stan_glm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span>, refresh <span class='op'>=</span> <span class='fl'>0</span>, iter <span class='op'>=</span> <span class='fl'>600</span><span class='op'>)</span>
   <span class='fu'>report_parameters</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt;   - The intercept (Median = 5.01, 95% CI [4.86, 5.14]) has a 100.00% probability of being positive (&gt; 0), 100.00% of being significant (&gt; 0.04), and 100.00% of being large (&gt; 0.25). The estimation successfully converged (Rhat = 1.000) but the indices are unreliable (ESS = 889)
-#&gt;   - The effect of Species [versicolor] (Median = 0.94, 95% CI [0.73, 1.14]) has a 100.00% probability of being positive (&gt; 0), 100.00% of being significant (&gt; 0.04), and 100.00% of being large (&gt; 0.25). The estimation successfully converged (Rhat = 0.999) but the indices are unreliable (ESS = 979)
-#&gt;   - The effect of Species [virginica] (Median = 1.59, 95% CI [1.40, 1.80]) has a 100.00% probability of being positive (&gt; 0), 100.00% of being significant (&gt; 0.04), and 100.00% of being large (&gt; 0.25). The estimation successfully converged (Rhat = 1.000) but the indices are unreliable (ESS = 914)</div><div class='input'><span class='co'># }</span>
+</div><div class='output co'>#&gt;   - The intercept (Median = 5.00, 95% CI [4.85, 5.14]) has a 100.00% probability of being positive (&gt; 0), 100.00% of being significant (&gt; 0.04), and 100.00% of being large (&gt; 0.25). The estimation successfully converged (Rhat = 1.008) but the indices are unreliable (ESS = 826)
+#&gt;   - The effect of Species [versicolor] (Median = 0.93, 95% CI [0.72, 1.15]) has a 100.00% probability of being positive (&gt; 0), 100.00% of being significant (&gt; 0.04), and 100.00% of being large (&gt; 0.25). The estimation successfully converged (Rhat = 1.004) but the indices are unreliable (ESS = 775)
+#&gt;   - The effect of Species [virginica] (Median = 1.58, 95% CI [1.37, 1.79]) has a 100.00% probability of being positive (&gt; 0), 100.00% of being significant (&gt; 0.04), and 100.00% of being large (&gt; 0.25). The estimation successfully converged (Rhat = 1.005) but the indices are unreliable (ESS = 842)</div><div class='input'><span class='co'># }</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
