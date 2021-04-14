@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
   comment = "#"
 )
 
-options(knitr.kable.NA = '', digits = 4)
+old_options <- options(knitr.kable.NA = '', digits = 4)
 
 if (!requireNamespace("dplyr", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
@@ -120,4 +120,9 @@ If you want to cite the **easystats** ecosystem, you can use the [`cite_eaststat
 
 ```{r results='asis'}
 cite_easystats()
+```
+
+
+```{r, echo = FALSE}
+options(old_options)  # Restore options
 ```

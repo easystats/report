@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
   comment = "#"
 )
 
-options(
+old_options <- options(
   knitr.kable.NA = "",
   digits = 4,
   width = 60
@@ -135,4 +135,10 @@ library(lme4)
 model <- lmer(Reaction ~ Days + (Days | Subject), data = sleepstudy)
 
 report(model)
+```
+
+
+
+```{r, echo = FALSE}
+options(old_options)  # Restore options
 ```

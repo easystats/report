@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
   tidy.opts = list(width.cutoff = 60),
   tidy = TRUE
 )
-options(knitr.kable.NA = '', digits = 4)
+old_options <- options(knitr.kable.NA = '', digits = 4)
 if (!requireNamespace("dplyr", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
 }
@@ -36,3 +36,8 @@ and saying what would you like to see, and how you can eventually help out (e.g.
 ## 2. Use template file
 
 Copy and paste the [**template file**](https://github.com/easystats/report/blob/master/R/report.default.R), and replace the function with the one you would like to see supported.
+
+
+```{r, echo = FALSE}
+options(old_options)  # Restore options
+```
