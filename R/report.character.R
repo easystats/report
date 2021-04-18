@@ -99,7 +99,7 @@ report_parameters.character <- function(x,
   entries <- attributes(table)$entries
 
   if (levels_percentage == TRUE) {
-    text <- paste0(entries$Entry, " (", insight::format_value(entries$percentage_Entry, as_percent = TRUE), "%)")
+    text <- paste0(entries$Entry, " (", insight::format_value(entries$percentage_Entry, as_percent = TRUE), ")")
   } else {
     text <- paste0(entries$Entry, " (n = ", entries$n_Entry, ")")
   }
