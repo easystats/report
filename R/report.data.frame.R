@@ -246,8 +246,8 @@ report_text.data.frame <- function(x,
   )
 
   # Concatenate text
-  text_full <- paste0("The data contains ", nrow(x), " observations of the following variables:\n", as.character(params))
-  text <- paste0("The data contains ", nrow(x), " observations of the following variables:\n", as.character(summary(params)))
+  text_full <- paste0("The data contains ", nrow(x), " observations of the following ", ncol(x), " variables:\n", as.character(params))
+  text <- paste0("The data contains ", nrow(x), " observations of the following ", ncol(x), " variables:\n", as.character(summary(params)))
 
   as.report_text(text_full, summary = text)
 }
@@ -311,7 +311,9 @@ report_statistics.data.frame <- function(x,
     nrow(ungrouped_x),
     " observations, grouped by ",
     groups,
-    ", of the following variables:"
+    ", of the following ",
+    ncol(ungrouped_x),
+    " variables:"
   )
 
   for (group in names(dfs)) {
