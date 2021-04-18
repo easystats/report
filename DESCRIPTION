@@ -99,7 +99,7 @@ Collate:
     'report.zeroinfl.R'
     'report_effectsize.R'
     'report_info.R'
-    'report_intecept.R'
+    'report_intercept.R'
     'report_misc.R'
     'report_model.R'
     'report_parameters.R'

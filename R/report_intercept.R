@@ -88,8 +88,7 @@ print.report_intercept <- function(x, ...) {
     if (is.numeric(data[[col]])) {
       text <- c(text, paste0(col, " = 0"))
     } else if (is.character(data[[col]])) {
-      data[col] <- as.character(data[col])
-      text <- c(text, paste0(col, " = ", levels(data[[col]])[1]))
+      text <- c(text, paste0(col, " = ", levels(as.factor(data[[col]]))[1]))
     } else if (is.factor(data[[col]])) {
       text <- c(text, paste0(col, " = ", levels(data[[col]])[.find_reference_level(data[[col]])]))
     } else {
