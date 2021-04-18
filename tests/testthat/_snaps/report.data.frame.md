@@ -10,7 +10,7 @@
     Code
       r
     Output
-      The data contains 150 observations, grouped by Species, of the following variables:
+      The data contains 150 observations, grouped by Species, of the following 5 variables:
       
       - setosa (n = 50):
         - Sepal.Length: n = 50, Mean = 5.01, SD = 0.35, Median = 5.00, MAD = 0.30, range: [4.30, 5.80], Skewness = 0.12, Kurtosis = -0.25, 0 missing
@@ -35,7 +35,7 @@
     Code
       report(dplyr::group_by_at(df, "cyl"))
     Output
-      The data contains 32 observations, grouped by cyl, of the following variables:
+      The data contains 32 observations, grouped by cyl, of the following 11 variables:
       
       - 4 (n = 11):
         - mpg: n = 11, Mean = 26.66, SD = 4.51, Median = 26.00, MAD = 6.52, range: [21.40, 33.90], Skewness = 0.35, Kurtosis = -1.43, 0 missing
@@ -78,7 +78,7 @@
     Code
       report(dplyr::starwars)
     Output
-      The data contains 87 observations of the following variables:
+      The data contains 87 observations of the following 11 variables:
         - name: 87 entries, such as Ackbar (n = 1); Adi Gallia (n = 1); Anakin Skywalker (n = 1) and 84 others (0 missing)
         - height: n = 87, Mean = 174.36, SD = 34.77, Median = , MAD = 19.27, range: [66, 264], Skewness = -1.06, Kurtosis = 2.10, 6 missing
         - mass: n = 87, Mean = 97.31, SD = 169.46, Median = , MAD = 16.31, range: [15, 1358], Skewness = 7.34, Kurtosis = 55.42, 28 missing
