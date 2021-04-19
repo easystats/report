@@ -54,8 +54,14 @@ Even if it’s not perfect, we will help you make it great!
 
 ## Installation
 
-Until the package is available on `CRAN`, you need to download the
-package from `GitHub`:
+The package is available on `CRAN` and can be downloaded by running-
+
+``` r
+install.packages("report")
+```
+
+If you would instead like to experiment with the development version,
+you can download it from `GitHub`:
 
 ``` r
 install.packages("remotes")
@@ -87,7 +93,7 @@ objects such as dataframes:
 report(iris)
 ```
 
-    # The data contains 150 observations of the following variables:
+    # The data contains 150 observations of the following 5 variables:
     #   - Sepal.Length: n = 150, Mean = 5.84, SD = 0.83, Median = 5.80, MAD = 1.04, range: [4.30, 7.90], Skewness =
     # 0.31, Kurtosis = -0.55, 0% missing
     #   - Sepal.Width: n = 150, Mean = 3.06, SD = 0.44, Median = 3.00, MAD = 0.44, range: [2, 4.40], Skewness = 0.32,
@@ -112,7 +118,7 @@ iris %>%
   summary()
 ```
 
-    # The data contains 150 observations, grouped by Species, of the following variables:
+    # The data contains 150 observations, grouped by Species, of the following 3 variables:
     # 
     # - setosa (n = 50):
     #   - Petal.Length: Mean = 1.46, SD = 0.17, range: [1, 1.90]
@@ -246,15 +252,15 @@ report(model)
     # We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains of 1000 iterations and a
     # warmup of 500) to predict mpg with qsec and wt (formula: mpg ~ qsec + wt). Priors over parameters were set as
     # normal (mean = 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The model's explanatory
-    # power is substantial (R2 = 0.81, 89% CI [0.73, 0.88], adj. R2 = 0.78). The model's intercept, corresponding
-    # to qsec = 0 and wt = 0, is at 19.88 (95% CI [9.23, 29.36]). Within this model:
+    # power is substantial (R2 = 0.81, 89% CI [0.74, 0.88], adj. R2 = 0.78). The model's intercept, corresponding
+    # to qsec = 0 and wt = 0, is at 19.76 (95% CI [8.71, 30.68]). Within this model:
     # 
-    #   - The effect of qsec (Median = 0.92, 95% CI [0.43, 1.48]) has a 99.95% probability of being positive (> 0),
-    # 99.20% of being significant (> 0.30), and 0.00% of being large (> 1.81). The estimation successfully
-    # converged (Rhat = 0.999) and the indices are reliable (ESS = 2631)
-    #   - The effect of wt (Median = -5.05, 95% CI [-6.09, -4.07]) has a 100.00% probability of being negative (< 0),
+    #   - The effect of qsec (Median = 0.92, 95% CI [0.36, 1.48]) has a 99.85% probability of being positive (> 0),
+    # 98.50% of being significant (> 0.30), and 0.05% of being large (> 1.81). The estimation successfully
+    # converged (Rhat = 1.000) and the indices are reliable (ESS = 2282)
+    #   - The effect of wt (Median = -5.04, 95% CI [-5.96, -4.07]) has a 100.00% probability of being negative (< 0),
     # 100.00% of being significant (< -0.30), and 100.00% of being large (< -1.81). The estimation successfully
-    # converged (Rhat = 0.999) and the indices are reliable (ESS = 2585)
+    # converged (Rhat = 0.999) and the indices are reliable (ESS = 2188)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT) framework, we report the median of
     # the posterior distribution and its 95% CI (Highest Density Interval), along the probability of direction
@@ -324,8 +330,8 @@ analysis paragraph about the tools used.
 report(sessionInfo())
 ```
 
-    # Analyses were conducted using the R Statistical language (version 4.0.4; R Core Team, 2021) on Windows 10 x64
-    # (build 19042), using the packages Rcpp (version 1.0.6; Dirk Eddelbuettel and Romain Francois, 2011), Matrix
+    # Analyses were conducted using the R Statistical language (version 4.0.5; R Core Team, 2021) on macOS Mojave
+    # 10.14.6, using the packages Rcpp (version 1.0.6; Dirk Eddelbuettel and Romain Francois, 2011), Matrix
     # (version 1.3.2; Douglas Bates and Martin Maechler, 2021), lme4 (version 1.1.26; Douglas Bates et al., 2015),
     # rstanarm (version 2.21.1; Goodrich B et al., 2020), dplyr (version 1.0.5; Hadley Wickham et al., 2021) and
     # report (version 0.3.0; Makowski et al., 2020).
@@ -342,8 +348,8 @@ report(sessionInfo())
     # R package version 2.21.1 https://mc-stan.org/rstanarm.
     #   - Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2021). dplyr: A Grammar of Data
     # Manipulation. R package version 1.0.5. https://CRAN.R-project.org/package=dplyr
-    #   - Makowski, D., Ben-Shachar, M.S., Patil, I. & Lüdecke, D. (2020). Automated reporting as a practical tool to
-    # improve reproducibility and methodological best practices adoption. CRAN. Available from
+    #   - Makowski, D., Ben-Shachar, M.S., Patil, I. & Lüdecke, D. (2020). Automated Results Reporting as a Practical
+    # Tool to Improve Reproducibility and Methodological Best Practices Adoption. CRAN. Available from
     # https://github.com/easystats/report. doi: .
     #   - R Core Team (2021). R: A language and environment for statistical computing. R Foundation for Statistical
     # Computing, Vienna, Austria. URL https://www.R-project.org/.
@@ -358,16 +364,16 @@ citation("report")
 
 To cite in publications use:
 
-  Makowski, D., Ben-Shachar, M.S., Patil, I. & Lüdecke, D. (2020). Automated reporting as a
-  practical tool to improve reproducibility and methodological best practices adoption. CRAN.
+  Makowski, D., Ben-Shachar, M.S., Patil, I. & Lüdecke, D. (2020). Automated Results Reporting as
+  a Practical Tool to Improve Reproducibility and Methodological Best Practices Adoption. CRAN.
   Available from https://github.com/easystats/report. doi: .
 
 A BibTeX entry for LaTeX users is
 
   @Article{,
-    title = {Automated reporting as a practical tool to improve reproducibility and methodological best practices adoption},
+    title = {Automated Results Reporting as a Practical Tool to Improve Reproducibility and Methodological Best Practices Adoption},
     author = {Dominique Makowski and Mattan S. Ben-Shachar and Indrajeet Patil and Daniel Lüdecke},
-    year = {2020},
+    year = {2021},
     journal = {CRAN},
     url = {https://github.com/easystats/report},
   }

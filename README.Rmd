@@ -68,8 +68,14 @@ The package documentation can be found [**here**](https://easystats.github.io/re
 
 ## Installation
 
-Until the package is available on `CRAN`, you need to download the package from
-`GitHub`:
+The package is available on `CRAN` and can be downloaded by running-
+
+```{r eval=FALSE}
+install.packages("report")
+```
+
+If you would instead like to experiment with the development version, you can
+download it from `GitHub`:
 
 ```{r eval=FALSE}
 install.packages("remotes")

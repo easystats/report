@@ -20,7 +20,6 @@
 #'   r
 #'   summary(r)
 #' }
-#'
 #' \donttest{
 #' # Bayesian models
 #' if (require("rstanarm")) {

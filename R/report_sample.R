@@ -135,11 +135,11 @@ report_sample <- function(data,
 
 
 .report_sample_row.numeric <- function(x,
-                                column,
-                                centrality = "mean",
-                                weights = NULL,
-                                digits = 1,
-                                ...) {
+                                       column,
+                                       centrality = "mean",
+                                       weights = NULL,
+                                       digits = 1,
+                                       ...) {
   .summary <- if (centrality == "mean") {
     sprintf("%.*f (%.*f)", digits, .weighted_mean(x, weights), digits, .weighted_sd(x, weights))
   } else {

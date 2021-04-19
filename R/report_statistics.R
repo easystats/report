@@ -30,7 +30,6 @@
 #' # GLMs
 #' report_statistics(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 #' report_statistics(glm(vs ~ disp, data = mtcars, family = "binomial"))
-#'
 #' \donttest{
 #' # Mixed models
 #' if (require("lme4")) {

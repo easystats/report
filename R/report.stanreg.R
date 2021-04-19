@@ -9,7 +9,6 @@
 #'
 #' @examples
 #' library(report)
-#'
 #' \donttest{
 #' # Bayesian models
 #' if (require("rstanarm")) {
