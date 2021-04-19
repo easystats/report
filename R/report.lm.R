@@ -26,7 +26,6 @@
 #' summary(r)
 #' as.data.frame(r)
 #' summary(as.data.frame(r))
-#'
 #' \donttest{
 #' # Logistic models
 #' model <- glm(vs ~ disp, data = mtcars, family = "binomial")

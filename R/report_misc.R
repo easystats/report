@@ -12,7 +12,6 @@
 #' report_date()
 #' summary(report_date())
 #' report_story()
-#'
 #' @return Objects of class \code{\link{report_text}}.
 #' @export
 report_date <- function(...) {

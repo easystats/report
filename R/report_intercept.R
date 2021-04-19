@@ -15,7 +15,6 @@
 #' # GLMs
 #' report_intercept(lm(Sepal.Length ~ Species, data = iris))
 #' report_intercept(glm(vs ~ disp, data = mtcars, family = "binomial"))
-#'
 #' \donttest{
 #' # Mixed models
 #' if (require("lme4")) {

@@ -25,7 +25,6 @@
 #'   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 #'   report_performance(model)
 #' }
-#'
 #' \donttest{
 #' # Bayesian models
 #' if (require("rstanarm")) {

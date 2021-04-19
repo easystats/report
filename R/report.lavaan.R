@@ -11,7 +11,6 @@
 #'
 #' @examples
 #' library(report)
-#'
 #' \donttest{
 #' # Structural Equation Models (SEM)
 #' if (require("lavaan")) {
