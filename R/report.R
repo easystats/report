@@ -109,6 +109,10 @@ report <- function(x, ...) {
 # Generic Methods --------------------------------------------------
 
 
+#' @export
+print.report <- print.report_text
+
+
 #' @include report_text.R
 #' @export
 as.data.frame.report <- function(x, ...) {
@@ -116,21 +120,7 @@ as.data.frame.report <- function(x, ...) {
 }
 
 # @export
-# as.character.report <- function(x, ...) {
-#   x$texts$text_long
-# }
-
-# @export
-# summary.report <- function(object, ...) {
-#   object$texts$text_short
-# }
-
-
-
-# @export
-# as.table.report <- function(x, ...) {
-#   x$tables$table_short
-# }
+# as.table.report <- as.data.frame.report
 
 
 # Values ------------------------------------------------------------------

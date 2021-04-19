@@ -111,6 +111,3 @@ print.report_text <- function(x, width = NULL, ...) {
   cat(x)
 }
 
-
-#' @export
-print.report <- print.report_text
