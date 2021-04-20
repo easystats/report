@@ -70,7 +70,7 @@ The package documentation can be found [**here**](https://easystats.github.io/re
 
 ## Installation
 
-The package is available on `CRAN` and can be downloaded by running-
+The package is available on `CRAN` and can be downloaded by running:
 
 ```{r eval=FALSE}
 install.packages("report")

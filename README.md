@@ -54,7 +54,7 @@ Even if it’s not perfect, we will help you make it great!
 
 ## Installation
 
-The package is available on `CRAN` and can be downloaded by running-
+The package is available on `CRAN` and can be downloaded by running:
 
 ``` r
 install.packages("report")
@@ -257,16 +257,16 @@ report(model)
     # 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The
     # model's explanatory power is substantial (R2 = 0.81, 89% CI [0.73, 0.88], adj.
     # R2 = 0.78). The model's intercept, corresponding to qsec = 0 and wt = 0, is at
-    # 19.40 (95% CI [9.08, 29.80]). Within this model:
+    # 19.84 (95% CI [8.66, 30.85]). Within this model:
     # 
-    #   - The effect of qsec (Median = 0.94, 95% CI [0.40, 1.46]) has a 100.00%
-    # probability of being positive (> 0), 99.35% of being significant (> 0.30), and
+    #   - The effect of qsec (Median = 0.92, 95% CI [0.37, 1.50]) has a 99.90%
+    # probability of being positive (> 0), 98.70% of being significant (> 0.30), and
     # 0.20% of being large (> 1.81). The estimation successfully converged (Rhat =
-    # 0.999) and the indices are reliable (ESS = 2420)
-    #   - The effect of wt (Median = -5.02, 95% CI [-6.05, -4.09]) has a 100.00%
+    # 0.999) and the indices are reliable (ESS = 2653)
+    #   - The effect of wt (Median = -5.04, 95% CI [-6.06, -4.13]) has a 100.00%
     # probability of being negative (< 0), 100.00% of being significant (< -0.30),
     # and 100.00% of being large (< -1.81). The estimation successfully converged
-    # (Rhat = 0.999) and the indices are reliable (ESS = 2180)
+    # (Rhat = 0.999) and the indices are reliable (ESS = 1864)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
     # framework, we report the median of the posterior distribution and its 95% CI
@@ -338,13 +338,13 @@ analysis paragraph about the tools used.
 report(sessionInfo())
 ```
 
-    # Analyses were conducted using the R Statistical language (version 4.0.5; R Core
-    # Team, 2021) on macOS Mojave 10.14.6, using the packages Rcpp (version 1.0.6;
-    # Dirk Eddelbuettel and Romain Francois, 2011), Matrix (version 1.3.2; Douglas
-    # Bates and Martin Maechler, 2021), lme4 (version 1.1.26; Douglas Bates et al.,
-    # 2015), rstanarm (version 2.21.1; Goodrich B et al., 2020), dplyr (version
-    # 1.0.5; Hadley Wickham et al., 2021) and report (version 0.3.0; Makowski et al.,
-    # 2020).
+    # Analyses were conducted using the R Statistical language (version 4.0.4; R Core
+    # Team, 2021) on Windows 10 x64 (build 19042), using the packages Rcpp (version
+    # 1.0.6; Dirk Eddelbuettel and Romain Francois, 2011), Matrix (version 1.3.2;
+    # Douglas Bates and Martin Maechler, 2021), lme4 (version 1.1.26; Douglas Bates
+    # et al., 2015), rstanarm (version 2.21.1; Goodrich B et al., 2020), dplyr
+    # (version 1.0.5; Hadley Wickham et al., 2021) and report (version 0.3.0;
+    # Makowski et al., 2020).
     # 
     # References
     # ----------
