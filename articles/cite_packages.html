@@ -118,11 +118,11 @@
 <p>We attempt to answer these questions below :)</p>
 <div id="what-should-i-cite" class="section level2">
 <h2 class="hasAnchor">
-<a href="#what-should-i-cite" class="anchor"></a>What should I cite?</h2>
+<a href="#what-should-i-cite" class="anchor" aria-hidden="true"></a>What should I cite?</h2>
 <p>Ideally, you should indeed cite all the packages that you used. However, it’s often not possible to cite them all in the manuscript body. Therefore, we would recommend the following guidelines:</p>
 <div id="cite-the-mainimportant-packages-in-the-manuscript" class="section level3">
 <h3 class="hasAnchor">
-<a href="#cite-the-mainimportant-packages-in-the-manuscript" class="anchor"></a>1. Cite the main/important packages in the manuscript</h3>
+<a href="#cite-the-mainimportant-packages-in-the-manuscript" class="anchor" aria-hidden="true"></a>1. Cite the main/important packages in the manuscript</h3>
 <p>This should be done for the packages that were central to your specific study (<em>i.e.,</em> that got you the results that you reported) rather than data manipulation tools (even though these are as much, if not <em>more</em>, important). For example:</p>
 <blockquote>
 <p>Statistical analysis were carried out using R 3.5.0 (R Core Team, 2018), the <em>rstanarm</em> (<em>v2.13.1</em>; Gabry &amp; Goodrich, 2016) and the <em>report</em> (<em>v0.2.0</em>; Makowski, Patil, &amp; Lüdecke, 2019) packages. The full reproducible code is available in <strong>Supplementary Materials</strong>.</p>
@@ -130,7 +130,7 @@
 </div>
 <div id="present-everything-in-supplementary-materials" class="section level3">
 <h3 class="hasAnchor">
-<a href="#present-everything-in-supplementary-materials" class="anchor"></a>2. Present everything in Supplementary Materials</h3>
+<a href="#present-everything-in-supplementary-materials" class="anchor" aria-hidden="true"></a>2. Present everything in Supplementary Materials</h3>
 <p>Then, in <em>Supplementary Materials</em>, you can show all the packages and functions you used. To do it quickly, explicitly and in a reproducible fashion, we recommend writing the <em>Supplementary Materials</em> with <a href="https://rmarkdown.rstudio.com/" class="external-link"><strong>R Markdown</strong></a>, which can generate <em>docs</em> and <em>pdf</em> files that you can submit along with your manuscript. Moreover, if you’re using R, you can include (usually at the end) every used package’s citation using the <code><a href="../reference/report.sessionInfo.html">cite_packages()</a></code> function from the <a href="https://github.com/easystats/report" class="external-link"><strong>report</strong></a> package. For example:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/report/" class="external-link">report</a></span><span class="op">)</span>
@@ -147,7 +147,7 @@
 </div>
 <div id="where" class="section level2">
 <h2 class="hasAnchor">
-<a href="#where" class="anchor"></a>Where</h2>
+<a href="#where" class="anchor" aria-hidden="true"></a>Where</h2>
 <p>Finding the right citation information is sometimes complicated. In <code>R</code>, this process is made quite easy, you simply run <code><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation("packagename")</a></code>. For instance, <code><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation("bayestestR")</a></code>:</p>
 <pre><code>To cite bayestestR in publications use:
 
@@ -174,7 +174,7 @@ A BibTeX entry for LaTeX users is
 </div>
 <div id="cite_easystats" class="section level2">
 <h2 class="hasAnchor">
-<a href="#cite_easystats" class="anchor"></a>cite_easystats()</h2>
+<a href="#cite_easystats" class="anchor" aria-hidden="true"></a>cite_easystats()</h2>
 <p>If you want to cite the <strong>easystats</strong> ecosystem, you can use the <a href="https://easystats.github.io/report/reference/cite_easystats.html" class="external-link"><code>cite_eaststats()</code></a> function:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/cite_easystats.html">cite_easystats</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -183,7 +183,7 @@ A BibTeX entry for LaTeX users is
 </div>
 <div id="references" class="section level2">
 <h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
+<a href="#references" class="anchor" aria-hidden="true"></a>References</h2>
 <ul>
 <li>Ludecke, D., Waggoner, P. D., &amp; Makowski, D. (2019). insight: A Unified Interface to Access Information from Model Objects in R. Journal of Open Source Software, 4, 1412. doi: 10.21105/joss.01412</li>
 <li>Makowski, D., Ben-Shachar, M.S., &amp; Ludecke, D. (2019). bayestestR: Describing Effects and their Uncertainty, Existence and Significance within the Bayesian Framework. Journal of Open Source Software, 4(40), 1541. 10.21105/joss.01541</li>
@@ -194,7 +194,7 @@ A BibTeX entry for LaTeX users is
 </div>
 <div id="bibtex-entries" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bibtex-entries" class="anchor"></a>Bibtex entries:</h2>
+<a href="#bibtex-entries" class="anchor" aria-hidden="true"></a>Bibtex entries:</h2>
 <p><span class="citation">@article</span>{ludecke2019insight, journal = {Journal of Open Source Software}, doi = {10.21105/joss.01412}, issn = {2475-9066}, number = {38}, publisher = {The Open Journal}, title = {insight: A Unified Interface to Access Information from Model Objects in R}, url = {<a href="http://dx.doi.org/10.21105/joss.01412" class="external-link uri">http://dx.doi.org/10.21105/joss.01412</a>}, volume = {4}, author = {L{"u}decke, Daniel and Waggoner, Philip and Makowski, Dominique}, pages = {1412}, date = {2019-06-25}, year = {2019}, month = {6}, day = {25} }</p>
 <p><span class="citation">@article</span>{makowski2019bayestestr, title = {{bayestestR}: {Describing} {Effects} and their {Uncertainty}, {Existence} and {Significance} within the {Bayesian} {Framework}}, volume = {4}, issn = {2475-9066}, shorttitle = {{bayestestR}}, url = {<a href="https://joss.theoj.org/papers/10.21105/joss.01541" class="external-link uri">https://joss.theoj.org/papers/10.21105/joss.01541</a>}, doi = {10.21105/joss.01541}, number = {40}, urldate = {2019-08-13}, journal = {Journal of Open Source Software}, author = {Makowski, Dominique and Ben-Shachar, Mattan S. and L{"u}decke, Daniel}, month = aug, year = {2019}, pages = {1541} }</p>
 <p><span class="citation">@article</span>{makowski2020correlation, doi={10.21105/joss.02306}, title={Methods and Algorithms for Correlation Analysis in R}, author={Makowski, Dominique and Ben-Shachar, Mattan S. and Patil, Indrajeet and L{"u}decke, Daniel}, journal={Journal of Open Source Software}, volume={5}, number={51}, pages={2306}, year={2020} }</p>

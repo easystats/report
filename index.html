@@ -99,7 +99,7 @@
   <div class="contents col-md-9">
 <div id="report-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#report-" class="anchor"></a>report <img src="reference/figures/logo.png" align="right" height="139">
+<a href="#report-" class="anchor" aria-hidden="true"></a>report <img src="reference/figures/logo.png" align="right" height="139">
 </h1></div>
 
 <p><strong><em>“From R to your manuscript”</em></strong></p>
@@ -117,7 +117,7 @@
 <span class="co"># Standardized parameters were obtained by fitting the model on a standardized version of the dataset.</span></code></pre></div>
 <div id="documentation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#documentation" class="anchor"></a>Documentation</h2>
+<a href="#documentation" class="anchor" aria-hidden="true"></a>Documentation</h2>
 <p><a href="https://easystats.github.io/report/" class="external-link"><img src="https://img.shields.io/badge/documentation-report-orange.svg?colorB=E91E63" alt="Documentation"></a> <a href="https://easystats.github.io/blog/posts/" class="external-link"><img src="https://img.shields.io/badge/blog-easystats-orange.svg?colorB=FF9800" alt="Blog"></a> <a href="https://easystats.github.io/report/reference/index.html" class="external-link"><img src="https://img.shields.io/badge/features-report-orange.svg?colorB=2196F3" alt="Features"></a></p>
 <p>The package documentation can be found <a href="https://easystats.github.io/report/" class="external-link"><strong>here</strong></a>. Check-out these tutorials:</p>
 <ul>
@@ -127,12 +127,12 @@
 </div>
 <div id="contribute" class="section level2">
 <h2 class="hasAnchor">
-<a href="#contribute" class="anchor"></a>Contribute</h2>
+<a href="#contribute" class="anchor" aria-hidden="true"></a>Contribute</h2>
 <p><strong><em>report</em> is a young package in need of affection</strong>. You can easily be a part of the <a href="https://github.com/easystats/report/blob/master/.github/CONTRIBUTING.md" class="external-link">developing</a> community of this open-source software and improve science! Don’t be shy, try to code and submit a pull request (See the <a href="https://github.com/easystats/report/blob/master/.github/CONTRIBUTING.md" class="external-link">contributing guide</a>). Even if it’s not perfect, we will help you make it great!</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
 <p>The package is available on <code>CRAN</code> and can be downloaded by running:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"report"</span><span class="op">)</span></code></pre></div>
@@ -146,11 +146,11 @@
 </div>
 <div id="report-all-the-things-" class="section level2">
 <h2 class="hasAnchor">
-<a href="#report-all-the-things-" class="anchor"></a>Report all the things <a href="https://easystats.github.io/report/" class="external-link"><img src="reference/figures/allthethings.jpg" height="100"></a>
+<a href="#report-all-the-things-" class="anchor" aria-hidden="true"></a>Report all the things <a href="https://easystats.github.io/report/" class="external-link"><img src="reference/figures/allthethings.jpg" height="100"></a>
 </h2>
 <div id="general-workflow" class="section level3">
 <h3 class="hasAnchor">
-<a href="#general-workflow" class="anchor"></a>General Workflow</h3>
+<a href="#general-workflow" class="anchor" aria-hidden="true"></a>General Workflow</h3>
 <p>The <code>report</code> package works in a two step fashion. First, you create a <code>report</code> object with the <code><a href="reference/report.html">report()</a></code> function. Then, this report object can be displayed either textually (the default output) or as a table, using <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code>. Moreover, you can also access a more digest and compact version of the report using <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> on the report object.</p>
 <p><a href="https://easystats.github.io/report/" class="external-link"><img src="reference/figures/workflow.png" alt="workflow"></a></p>
 <p>The <code><a href="reference/report.html">report()</a></code> function works on a variety of models, as well as other objects such as dataframes:</p>
@@ -193,7 +193,7 @@
 </div>
 <div id="t-tests-and-correlations" class="section level3">
 <h3 class="hasAnchor">
-<a href="#t-tests-and-correlations" class="anchor"></a><em>t</em>-tests and correlations</h3>
+<a href="#t-tests-and-correlations" class="anchor" aria-hidden="true"></a><em>t</em>-tests and correlations</h3>
 <p>Reports can be used to automatically format tests like <em>t</em>-tests or correlations.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">mtcars</span><span class="op">$</span><span class="va">am</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -215,7 +215,7 @@
 </div>
 <div id="anovas" class="section level3">
 <h3 class="hasAnchor">
-<a href="#anovas" class="anchor"></a>ANOVAs</h3>
+<a href="#anovas" class="anchor" aria-hidden="true"></a>ANOVAs</h3>
 <p>This works great with ANOVAs, as it includes <strong>effect sizes</strong> and their interpretation.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/aov.html" class="external-link">aov</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span> <span class="op">%&gt;%</span>
@@ -229,7 +229,7 @@
 </div>
 <div id="general-linear-models-glms" class="section level3">
 <h3 class="hasAnchor">
-<a href="#general-linear-models-glms" class="anchor"></a>General Linear Models (GLMs)</h3>
+<a href="#general-linear-models-glms" class="anchor" aria-hidden="true"></a>General Linear Models (GLMs)</h3>
 <p>Reports are also compatible with GLMs, such as this <strong>logistic regression</strong>:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">vs</span> <span class="op">~</span> <span class="va">mpg</span> <span class="op">*</span> <span class="va">drat</span>, data <span class="op">=</span> <span class="va">mtcars</span>, family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span>
@@ -255,7 +255,7 @@
 </div>
 <div id="mixed-models" class="section level3">
 <h3 class="hasAnchor">
-<a href="#mixed-models" class="anchor"></a>Mixed Models</h3>
+<a href="#mixed-models" class="anchor" aria-hidden="true"></a>Mixed Models</h3>
 <p>Mixed models (coming from example from the <code>lme4</code> package), which popularity and usage is exploding, can also be reported as it should:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lme4/lme4/" class="external-link">lme4</a></span><span class="op">)</span>
@@ -281,7 +281,7 @@
 </div>
 <div id="bayesian-models" class="section level3">
 <h3 class="hasAnchor">
-<a href="#bayesian-models" class="anchor"></a>Bayesian Models</h3>
+<a href="#bayesian-models" class="anchor" aria-hidden="true"></a>Bayesian Models</h3>
 <p>Bayesian models can also be reported using the new <a href="https://easystats.github.io/bayestestR/reference/sexit.html" class="external-link"><strong>SEXIT</strong></a> framework, that combines clarity, precision and usefulness.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://mc-stan.org/rstanarm/" class="external-link">rstanarm</a></span><span class="op">)</span>
@@ -319,10 +319,10 @@
 </div>
 <div id="other-types-of-reports" class="section level2">
 <h2 class="hasAnchor">
-<a href="#other-types-of-reports" class="anchor"></a>Other types of reports</h2>
+<a href="#other-types-of-reports" class="anchor" aria-hidden="true"></a>Other types of reports</h2>
 <div id="specific-parts" class="section level3">
 <h3 class="hasAnchor">
-<a href="#specific-parts" class="anchor"></a>Specific parts</h3>
+<a href="#specific-parts" class="anchor" aria-hidden="true"></a>Specific parts</h3>
 <p>One can, for complex reports, directly access the pieces of the reports:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span>
@@ -338,7 +338,7 @@
 </div>
 <div id="report-participants-details" class="section level3">
 <h3 class="hasAnchor">
-<a href="#report-participants-details" class="anchor"></a>Report participants details</h3>
+<a href="#report-participants-details" class="anchor" aria-hidden="true"></a>Report participants details</h3>
 <p>This can be useful to complete the <strong>Participants</strong> paragraph of your manuscript.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
@@ -354,7 +354,7 @@
 </div>
 <div id="report-sample" class="section level3">
 <h3 class="hasAnchor">
-<a href="#report-sample" class="anchor"></a>Report sample</h3>
+<a href="#report-sample" class="anchor" aria-hidden="true"></a>Report sample</h3>
 <p>Report can also help you create sample description table (also referred to as <strong>Table 1</strong>).</p>
 <table class="table">
 <thead><tr class="header">
@@ -398,7 +398,7 @@
 </div>
 <div id="report-system-and-packages" class="section level3">
 <h3 class="hasAnchor">
-<a href="#report-system-and-packages" class="anchor"></a>Report system and packages</h3>
+<a href="#report-system-and-packages" class="anchor" aria-hidden="true"></a>Report system and packages</h3>
 <p>Finally, <strong>report</strong> includes some functions to help you write the data analysis paragraph about the tools used.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -438,7 +438,7 @@
 </div>
 <div id="credits" class="section level2">
 <h2 class="hasAnchor">
-<a href="#credits" class="anchor"></a>Credits</h2>
+<a href="#credits" class="anchor" aria-hidden="true"></a>Credits</h2>
 <p>If you like it, you can put a <em>star</em> on this repo, and cite the package as follows:</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">citation</span>(<span class="st">"report"</span>)</span>
 <span id="cb26-2"><a href="#cb26-2"></a></span>

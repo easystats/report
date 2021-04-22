@@ -106,7 +106,7 @@
     
 <div id="installation" class="section level1">
 <h1 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h1>
+<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h1>
 <p>First, install R and R studio. Then, copy and paste the following lines in the console:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
@@ -117,11 +117,11 @@
 </div>
 <div id="supported-objects" class="section level1">
 <h1 class="hasAnchor">
-<a href="#supported-objects" class="anchor"></a>Supported Objects</h1>
+<a href="#supported-objects" class="anchor" aria-hidden="true"></a>Supported Objects</h1>
 <p>The <code>report</code> package works in a two step fashion: - First, you create a <code>report</code> object with the <code><a href="../reference/report.html">report()</a></code> function. - Second, this report object can be displayed either textually (the default output) or as a table, using <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code>. Moreover, you can also access a more compact version of the report using <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> on the report object.</p>
 <div id="dataframes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#dataframes" class="anchor"></a>Dataframes</h2>
+<a href="#dataframes" class="anchor" aria-hidden="true"></a>Dataframes</h2>
 <p>If an entire dataframe is supplied, <code>report</code> will provide descriptive statistics for all columns:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span>
@@ -134,7 +134,7 @@
 </div>
 <div id="grouped-dataframes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#grouped-dataframes" class="anchor"></a>Grouped Dataframes</h2>
+<a href="#grouped-dataframes" class="anchor" aria-hidden="true"></a>Grouped Dataframes</h2>
 <p>The dataframe can also be a <em>grouped</em> dataframe (from <code>dplyr</code>), in which case <code>report</code> would return a separate report for each level of the grouping variable. Additionally, instead of textual summary, <code>report</code> also allows one to return a tabular summary using the <code><a href="../reference/report_table.html">report_table()</a></code> function:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
@@ -144,10 +144,6 @@
   <span class="fu"><a href="../reference/report_table.html">report_table</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co"># Group      |     Variable | n_Obs | Mean |   SD | Median |  MAD |  Min |  Max | Skewness | Kurtosis | n_Missing</span>
 <span class="co"># ---------------------------------------------------------------------------------------------------------------</span>
-<span class="co"># setosa     | Sepal.Length |    50 | 5.01 | 0.35 |   5.00 | 0.30 | 4.30 | 5.80 |     0.12 |    -0.25 |         0</span>
-<span class="co"># setosa     |  Sepal.Width |    50 | 3.43 | 0.38 |   3.40 | 0.37 | 2.30 | 4.40 |     0.04 |     0.95 |         0</span>
-<span class="co"># setosa     | Petal.Length |    50 | 1.46 | 0.17 |   1.50 | 0.15 | 1.00 | 1.90 |     0.11 |     1.02 |         0</span>
-<span class="co"># setosa     |  Petal.Width |    50 | 0.25 | 0.11 |   0.20 | 0.00 | 0.10 | 0.60 |     1.25 |     1.72 |         0</span>
 <span class="co"># versicolor | Sepal.Length |    50 | 5.94 | 0.52 |   5.90 | 0.52 | 4.90 | 7.00 |     0.11 |    -0.53 |         0</span>
 <span class="co"># versicolor |  Sepal.Width |    50 | 2.77 | 0.31 |   2.80 | 0.30 | 2.00 | 3.40 |    -0.36 |    -0.37 |         0</span>
 <span class="co"># versicolor | Petal.Length |    50 | 4.26 | 0.47 |   4.35 | 0.52 | 3.00 | 5.10 |    -0.61 |     0.05 |         0</span>
@@ -159,7 +155,7 @@
 </div>
 <div id="correlations-and-t-tests" class="section level2">
 <h2 class="hasAnchor">
-<a href="#correlations-and-t-tests" class="anchor"></a>Correlations and t-tests</h2>
+<a href="#correlations-and-t-tests" class="anchor" aria-hidden="true"></a>Correlations and t-tests</h2>
 <p><code>report</code> can also be used to provide automated summaries for statistical model objects from correlation, t-tests, etc.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">wt</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span><span class="op">)</span><span class="op">)</span>
@@ -174,10 +170,10 @@
 </div>
 <div id="regression-models" class="section level2">
 <h2 class="hasAnchor">
-<a href="#regression-models" class="anchor"></a>Regression models</h2>
+<a href="#regression-models" class="anchor" aria-hidden="true"></a>Regression models</h2>
 <div id="linear-regression-lm" class="section level3">
 <h3 class="hasAnchor">
-<a href="#linear-regression-lm" class="anchor"></a>Linear regression (<code>lm</code>)</h3>
+<a href="#linear-regression-lm" class="anchor" aria-hidden="true"></a>Linear regression (<code>lm</code>)</h3>
 <p>We will start out simple: a simple linear regression</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">wt</span> <span class="op">~</span> <span class="va">am</span> <span class="op">+</span> <span class="va">mpg</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
@@ -192,7 +188,7 @@
 </div>
 <div id="anova-aov" class="section level3">
 <h3 class="hasAnchor">
-<a href="#anova-aov" class="anchor"></a>anova (<code>aov</code>)</h3>
+<a href="#anova-aov" class="anchor" aria-hidden="true"></a>anova (<code>aov</code>)</h3>
 <p>And its close cousin ANOVA is also covered by <code>report</code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html" class="external-link">aov</a></span><span class="op">(</span><span class="va">wt</span> <span class="op">~</span> <span class="va">am</span> <span class="op">+</span> <span class="va">mpg</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
@@ -207,7 +203,7 @@
 </div>
 <div id="general-linear-models-glms-glm" class="section level3">
 <h3 class="hasAnchor">
-<a href="#general-linear-models-glms-glm" class="anchor"></a>General Linear Models (GLMs) (<code>glm</code>)</h3>
+<a href="#general-linear-models-glms-glm" class="anchor" aria-hidden="true"></a>General Linear Models (GLMs) (<code>glm</code>)</h3>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">vs</span> <span class="op">~</span> <span class="va">mpg</span> <span class="op">+</span> <span class="va">cyl</span>, data <span class="op">=</span> <span class="va">mtcars</span>, family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span>
 
@@ -221,7 +217,7 @@
 </div>
 <div id="linear-mixed-effects-models-mermod" class="section level3">
 <h3 class="hasAnchor">
-<a href="#linear-mixed-effects-models-mermod" class="anchor"></a>Linear Mixed-Effects Models (<code>merMod</code>)</h3>
+<a href="#linear-mixed-effects-models-mermod" class="anchor" aria-hidden="true"></a>Linear Mixed-Effects Models (<code>merMod</code>)</h3>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lme4/lme4/" class="external-link">lme4</a></span><span class="op">)</span>
 
