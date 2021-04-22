@@ -360,10 +360,12 @@ report_table.grouped_df <- function(x,
     )
 
     current_table_full$Group <- group
-    table_full <- rbind(table_full, current_table_full)
+    # table_full <- rbind(table_full, current_table_full)
+    table_full <- merge(table_full, current_table_full, all = TRUE, sort = FALSE)
     current_table <- summary(current_table_full)
     current_table$Group <- group
-    table <- rbind(table, current_table)
+    # table <- rbind(table, current_table)
+    table <- merge(table, current_table, all = TRUE, sort = FALSE)
   }
 
   table <- data_reorder(table, "Group")
