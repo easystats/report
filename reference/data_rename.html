@@ -196,7 +196,7 @@
 
 <span class='co'># Rename columns</span>
 <span class='fu'>data_rename</span><span class='op'>(</span><span class='va'>iris</span>, <span class='st'>"Sepal.Length"</span>, <span class='st'>"length"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;     length Sepal.Width Petal.Length Petal.Width    Species
+</div><div class='co'>#&gt;     length Sepal.Width Petal.Length Petal.Width    Species
 #&gt; 1      5.1         3.5          1.4         0.2     setosa
 #&gt; 2      4.9         3.0          1.4         0.2     setosa
 #&gt; 3      4.7         3.2          1.3         0.2     setosa
@@ -348,7 +348,7 @@
 #&gt; 149    6.2         3.4          5.4         2.3  virginica
 #&gt; 150    5.9         3.0          5.1         1.8  virginica</div><div class='input'><span class='co'># data_rename(iris, "FakeCol", "length", safe=FALSE)  # This fails</span>
 <span class='fu'>data_rename</span><span class='op'>(</span><span class='va'>iris</span>, <span class='st'>"FakeCol"</span>, <span class='st'>"length"</span><span class='op'>)</span> <span class='co'># This doesn't</span>
-</div><div class='output co'>#&gt;     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+</div><div class='co'>#&gt;     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
 #&gt; 1            5.1         3.5          1.4         0.2     setosa
 #&gt; 2            4.9         3.0          1.4         0.2     setosa
 #&gt; 3            4.7         3.2          1.3         0.2     setosa
@@ -499,7 +499,7 @@
 #&gt; 148          6.5         3.0          5.2         2.0  virginica
 #&gt; 149          6.2         3.4          5.4         2.3  virginica
 #&gt; 150          5.9         3.0          5.1         1.8  virginica</div><div class='input'><span class='fu'>data_rename</span><span class='op'>(</span><span class='va'>iris</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Sepal.Length"</span>, <span class='st'>"Sepal.Width"</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"length"</span>, <span class='st'>"width"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;     length width Petal.Length Petal.Width    Species
+</div><div class='co'>#&gt;     length width Petal.Length Petal.Width    Species
 #&gt; 1      5.1   3.5          1.4         0.2     setosa
 #&gt; 2      4.9   3.0          1.4         0.2     setosa
 #&gt; 3      4.7   3.2          1.3         0.2     setosa
@@ -652,12 +652,12 @@
 #&gt; 150    5.9   3.0          5.1         1.8  virginica</div><div class='input'>
 <span class='co'># Find columns names by pattern</span>
 <span class='fu'>data_findcols</span><span class='op'>(</span><span class='va'>iris</span>, starts_with <span class='op'>=</span> <span class='st'>"Sepal"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "Sepal.Length" "Sepal.Width" </div><div class='input'><span class='fu'>data_findcols</span><span class='op'>(</span><span class='va'>iris</span>, ends_with <span class='op'>=</span> <span class='st'>"Width"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "Sepal.Width" "Petal.Width"</div><div class='input'><span class='fu'>data_findcols</span><span class='op'>(</span><span class='va'>iris</span>, pattern <span class='op'>=</span> <span class='st'>"\\."</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "Sepal.Length" "Sepal.Width"  "Petal.Length" "Petal.Width" </div><div class='input'>
+</div><div class='co'>#&gt; [1] "Sepal.Length" "Sepal.Width" </div><div class='input'><span class='fu'>data_findcols</span><span class='op'>(</span><span class='va'>iris</span>, ends_with <span class='op'>=</span> <span class='st'>"Width"</span><span class='op'>)</span>
+</div><div class='co'>#&gt; [1] "Sepal.Width" "Petal.Width"</div><div class='input'><span class='fu'>data_findcols</span><span class='op'>(</span><span class='va'>iris</span>, pattern <span class='op'>=</span> <span class='st'>"\\."</span><span class='op'>)</span>
+</div><div class='co'>#&gt; [1] "Sepal.Length" "Sepal.Width"  "Petal.Length" "Petal.Width" </div><div class='input'>
 <span class='co'># Remove columns</span>
 <span class='fu'>data_remove</span><span class='op'>(</span><span class='va'>iris</span>, <span class='st'>"Sepal.Length"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;     Sepal.Width Petal.Length Petal.Width    Species
+</div><div class='co'>#&gt;     Sepal.Width Petal.Length Petal.Width    Species
 #&gt; 1           3.5          1.4         0.2     setosa
 #&gt; 2           3.0          1.4         0.2     setosa
 #&gt; 3           3.2          1.3         0.2     setosa
@@ -810,7 +810,7 @@
 #&gt; 150         3.0          5.1         1.8  virginica</div><div class='input'>
 <span class='co'># Reorder columns</span>
 <span class='fu'>data_reorder</span><span class='op'>(</span><span class='va'>iris</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Species"</span>, <span class='st'>"Sepal.Length"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;        Species Sepal.Length Sepal.Width Petal.Length Petal.Width
+</div><div class='co'>#&gt;        Species Sepal.Length Sepal.Width Petal.Length Petal.Width
 #&gt; 1       setosa          5.1         3.5          1.4         0.2
 #&gt; 2       setosa          4.9         3.0          1.4         0.2
 #&gt; 3       setosa          4.7         3.2          1.3         0.2
@@ -961,7 +961,7 @@
 #&gt; 148  virginica          6.5         3.0          5.2         2.0
 #&gt; 149  virginica          6.2         3.4          5.4         2.3
 #&gt; 150  virginica          5.9         3.0          5.1         1.8</div><div class='input'><span class='fu'>data_reorder</span><span class='op'>(</span><span class='va'>iris</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Species"</span>, <span class='st'>"dupa"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;        Species Sepal.Length Sepal.Width Petal.Length Petal.Width
+</div><div class='co'>#&gt;        Species Sepal.Length Sepal.Width Petal.Length Petal.Width
 #&gt; 1       setosa          5.1         3.5          1.4         0.2
 #&gt; 2       setosa          4.9         3.0          1.4         0.2
 #&gt; 3       setosa          4.7         3.2          1.3         0.2
@@ -1114,7 +1114,7 @@
 #&gt; 150  virginica          5.9         3.0          5.1         1.8</div><div class='input'>
 <span class='co'># Add prefix / suffix</span>
 <span class='fu'>data_addprefix</span><span class='op'>(</span><span class='va'>iris</span>, <span class='st'>"NEW_"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;     NEW_Sepal.Length NEW_Sepal.Width NEW_Petal.Length NEW_Petal.Width
+</div><div class='co'>#&gt;     NEW_Sepal.Length NEW_Sepal.Width NEW_Petal.Length NEW_Petal.Width
 #&gt; 1                5.1             3.5              1.4             0.2
 #&gt; 2                4.9             3.0              1.4             0.2
 #&gt; 3                4.7             3.2              1.3             0.2
@@ -1416,7 +1416,7 @@
 #&gt; 148   virginica
 #&gt; 149   virginica
 #&gt; 150   virginica</div><div class='input'><span class='fu'>data_addsuffix</span><span class='op'>(</span><span class='va'>iris</span>, <span class='st'>"_OLD"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;     Sepal.Length_OLD Sepal.Width_OLD Petal.Length_OLD Petal.Width_OLD
+</div><div class='co'>#&gt;     Sepal.Length_OLD Sepal.Width_OLD Petal.Length_OLD Petal.Width_OLD
 #&gt; 1                5.1             3.5              1.4             0.2
 #&gt; 2                4.9             3.0              1.4             0.2
 #&gt; 3                4.7             3.2              1.3             0.2

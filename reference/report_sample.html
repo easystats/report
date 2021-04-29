@@ -224,31 +224,31 @@ weight-variable. Reported descriptive statistics will be weighted by
     <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://easystats.github.io/report/'>report</a></span><span class='op'>)</span>
 
 <span class='fu'>report_sample</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #0000BB;'># Descriptive Statistics
-#&gt; 
-#&gt; </span><span>Variable               |     Summary
+</div><div class='co'>#&gt; <span style='color: #0000BB;'># Descriptive Statistics</span>
+<span style='color: #0000BB;'>#&gt; </span>
+<span style='color: #0000BB;'>#&gt; </span><span>Variable               |     Summary</span>
 #&gt; ------------------------------------
 #&gt; Mean Sepal.Length (SD) | 5.84 (0.83)
 #&gt; Mean Sepal.Width (SD)  | 3.06 (0.44)
 #&gt; Mean Petal.Length (SD) | 3.76 (1.77)
 #&gt; Mean Petal.Width (SD)  | 1.20 (0.76)</div><div class='input'><span class='fu'>report_sample</span><span class='op'>(</span><span class='va'>iris</span>, select <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Sepal.Length"</span>, <span class='st'>"Petal.Length"</span>, <span class='st'>"Species"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #0000BB;'># Descriptive Statistics
-#&gt; 
-#&gt; </span><span>Variable                |     Summary
+</div><div class='co'>#&gt; <span style='color: #0000BB;'># Descriptive Statistics</span>
+<span style='color: #0000BB;'>#&gt; </span>
+<span style='color: #0000BB;'>#&gt; </span><span>Variable                |     Summary</span>
 #&gt; -------------------------------------
 #&gt; Mean Sepal.Length (SD)  | 5.84 (0.83)
 #&gt; Mean Petal.Length (SD)  | 3.76 (1.77)
 #&gt; Species [setosa], %     |        33.3
 #&gt; Species [versicolor], % |        33.3
 #&gt; Species [virginica], %  |        33.3</div><div class='input'><span class='fu'>report_sample</span><span class='op'>(</span><span class='va'>iris</span>, group_by <span class='op'>=</span> <span class='st'>"Species"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #0000BB;'># Descriptive Statistics
-#&gt; 
-#&gt; </span><span>Variable               | setosa (n=50) | versicolor (n=50) | virginica (n=50) |       Total
+</div><div class='co'>#&gt; <span style='color: #0000BB;'># Descriptive Statistics</span>
+<span style='color: #0000BB;'>#&gt; </span>
+<span style='color: #0000BB;'>#&gt; </span><span>Variable               | setosa (n=50) | versicolor (n=50) | virginica (n=50) |       Total</span>
 #&gt; -------------------------------------------------------------------------------------------
 #&gt; Mean Sepal.Length (SD) |   5.01 (0.35) |       5.94 (0.52) |      6.59 (0.64) | 5.84 (0.83)
 #&gt; Mean Sepal.Width (SD)  |   3.43 (0.38) |       2.77 (0.31) |      2.97 (0.32) | 3.06 (0.44)
 #&gt; Mean Petal.Length (SD) |   1.46 (0.17) |       4.26 (0.47) |      5.55 (0.55) | 3.76 (1.77)
-#&gt; Mean Petal.Width (SD)  |   0.25 (0.11) |       1.33 (0.20) |      2.03 (0.27) | 1.20 (0.76)</div></span></pre>
+#&gt; Mean Petal.Width (SD)  |   0.25 (0.11) |       1.33 (0.20) |      2.03 (0.27) | 1.20 (0.76)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

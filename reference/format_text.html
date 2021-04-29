@@ -212,21 +212,21 @@ default width.</p></td>
 
 <span class='co'># Add full stop if missing</span>
 <span class='fu'>text_fullstop</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"something"</span>, <span class='st'>"something else."</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "something."      "something else."</div><div class='input'>
+</div><div class='co'>#&gt; [1] "something."      "something else."</div><div class='input'>
 <span class='co'># Find last characters</span>
 <span class='fu'>text_lastchar</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ABC"</span>, <span class='st'>"DEF"</span><span class='op'>)</span>, n <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;  ABC  DEF 
+</div><div class='co'>#&gt;  ABC  DEF 
 #&gt; "BC" "EF" </div><div class='input'>
 <span class='co'># Smart concatenation</span>
 <span class='fu'>text_concatenate</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"First"</span>, <span class='st'>"Second"</span>, <span class='st'>"Last"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "First, Second and Last"</div><div class='input'>
+</div><div class='co'>#&gt; [1] "First, Second and Last"</div><div class='input'>
 <span class='co'># Remove parts of string</span>
 <span class='fu'>text_remove</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"one!"</span>, <span class='st'>"two"</span>, <span class='st'>"three!"</span><span class='op'>)</span>, <span class='st'>"!"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "one"   "two"   "three"</div><div class='input'>
+</div><div class='co'>#&gt; [1] "one"   "two"   "three"</div><div class='input'>
 <span class='co'># Wrap text</span>
 <span class='va'>long_text</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"abc "</span>, <span class='fl'>100</span><span class='op'>)</span>, collapse <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='fu'>text_wrap</span><span class='op'>(</span><span class='va'>long_text</span>, width <span class='op'>=</span> <span class='fl'>50</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;  abc abc abc abc abc abc abc abc abc abc abc abc
+</div><div class='co'>#&gt;  abc abc abc abc abc abc abc abc abc abc abc abc
 #&gt; abc abc abc abc abc abc abc abc abc abc abc abc
 #&gt; abc abc abc abc abc abc abc abc abc abc abc abc
 #&gt; abc abc abc abc abc abc abc abc abc abc abc abc
@@ -237,7 +237,7 @@ default width.</p></td>
 #&gt; abc abc abc abc</div><div class='input'>
 <span class='co'># Paste with optional separator</span>
 <span class='fu'>text_paste</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='st'>""</span>, <span class='st'>"B"</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"42"</span>, <span class='st'>"42"</span>, <span class='st'>"42"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "A, 42" "42"    "B, 42"</div></pre>
+</div><div class='co'>#&gt; [1] "A, 42" "42"    "B, 42"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

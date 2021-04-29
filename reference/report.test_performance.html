@@ -231,15 +231,15 @@ re-computation.</p></td>
 <span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>performance</span><span class='fu'>::</span><span class='fu'><a href='https://easystats.github.io/performance/reference/test_performance.html'>test_performance</a></span><span class='op'>(</span><span class='va'>m1</span>, <span class='va'>m2</span>, <span class='va'>m3</span><span class='op'>)</span>
 <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 <span class='va'>r</span>
-</div><div class='output co'>#&gt; We compared three models; lm (BF = 26.52), lm (BF &lt; 0.001) and lm (BF = 26.52).</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; We compared three models; lm (), lm () and lm ().</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Name | Model |      BF
+</div><div class='co'>#&gt; We compared three models; lm (BF = 26.52), lm (BF &lt; 0.001) and lm (BF = 26.52).</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
+</div><div class='co'>#&gt; We compared three models; lm (), lm () and lm ().</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
+</div><div class='co'>#&gt; Name | Model |      BF
 #&gt; ----------------------
 #&gt; m1   |    lm |        
 #&gt; m2   |    lm |   26.52
 #&gt; m3   |    lm | &lt; 0.001
 #&gt; Models were detected as nested and are compared in sequential order.</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Name | Model |      BF
+</div><div class='co'>#&gt; Name | Model |      BF
 #&gt; ----------------------
 #&gt; m1   |    lm |        
 #&gt; m2   |    lm |   26.52
@@ -247,15 +247,15 @@ re-computation.</p></td>
 #&gt; Models were detected as nested and are compared in sequential order.</div><div class='input'>
 <span class='co'># Specific reports</span>
 <span class='fu'><a href='report_table.html'>report_table</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Name | Model |      BF
+</div><div class='co'>#&gt; Name | Model |      BF
 #&gt; ----------------------
 #&gt; m1   |    lm |        
 #&gt; m2   |    lm |   26.52
 #&gt; m3   |    lm | &lt; 0.001
 #&gt; Models were detected as nested and are compared in sequential order.</div><div class='input'><span class='fu'><a href='report_statistics.html'>report_statistics</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; BF = 26.52
+</div><div class='co'>#&gt; BF = 26.52
 #&gt; BF &lt; 0.001</div><div class='input'><span class='fu'><a href='report_parameters.html'>report_parameters</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   - lm (BF = 26.52)
+</div><div class='co'>#&gt;   - lm (BF = 26.52)
 #&gt;   - lm (BF &lt; 0.001)
 #&gt;   - lm (BF = 26.52)</div></pre>
   </div>

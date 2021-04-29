@@ -261,19 +261,19 @@ observations larger than 100.</p></td>
   distribution <span class='op'>=</span> <span class='cn'>TRUE</span>, missing_percentage <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span>
 <span class='va'>r</span>
-</div><div class='output co'>#&gt; The data contains 150 observations of the following 5 variables:
+</div><div class='co'>#&gt; The data contains 150 observations of the following 5 variables:
 #&gt;   - Sepal.Length: n = 150, Mean = 5.84, SD = 0.83, Median = 5.80, MAD = 1.04, range: [4.30, 7.90], Skewness = 0.31, Kurtosis = -0.55, 0% missing
 #&gt;   - Sepal.Width: n = 150, Mean = 3.06, SD = 0.44, Median = 3.00, MAD = 0.44, range: [2, 4.40], Skewness = 0.32, Kurtosis = 0.23, 0% missing
 #&gt;   - Petal.Length: n = 150, Mean = 3.76, SD = 1.77, Median = 4.35, MAD = 1.85, range: [1, 6.90], Skewness = -0.27, Kurtosis = -1.40, 0% missing
 #&gt;   - Petal.Width: n = 150, Mean = 1.20, SD = 0.76, Median = 1.30, MAD = 1.04, range: [0.10, 2.50], Skewness = -0.10, Kurtosis = -1.34, 0% missing
 #&gt;   - Species: 3 levels, namely setosa (n = 50, 33.33%), versicolor (n = 50, 33.33%) and virginica (n = 50, 33.33%)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; The data contains 150 observations of the following 5 variables:
+</div><div class='co'>#&gt; The data contains 150 observations of the following 5 variables:
 #&gt;   - Sepal.Length: Median = 5.80, range: [4.30, 7.90], Skewness = 0.31, Kurtosis = -0.55
 #&gt;   - Sepal.Width: Median = 3.00, range: [2, 4.40], Skewness = 0.32, Kurtosis = 0.23
 #&gt;   - Petal.Length: Median = 4.35, range: [1, 6.90], Skewness = -0.27, Kurtosis = -1.40
 #&gt;   - Petal.Width: Median = 1.30, range: [0.10, 2.50], Skewness = -0.10, Kurtosis = -1.34
 #&gt;   - Species: 3 levels, namely setosa (n = 50), versicolor (n = 50) and virginica (n = 50)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Variable     |      Level | n_Obs | percentage_Obs | Mean |   SD | Median |  MAD |  Min |  Max | Skewness | Kurtosis | percentage_Missing
+</div><div class='co'>#&gt; Variable     |      Level | n_Obs | percentage_Obs | Mean |   SD | Median |  MAD |  Min |  Max | Skewness | Kurtosis | percentage_Missing
 #&gt; -----------------------------------------------------------------------------------------------------------------------------------------
 #&gt; Sepal.Length |            |   150 |                | 5.84 | 0.83 |   5.80 | 1.04 | 4.30 | 7.90 |     0.31 |    -0.55 |               0.00
 #&gt; Sepal.Width  |            |   150 |                | 3.06 | 0.44 |   3.00 | 0.44 | 2.00 | 4.40 |     0.32 |     0.23 |               0.00
@@ -282,7 +282,7 @@ observations larger than 100.</p></td>
 #&gt; Species      |     setosa |    50 |          33.33 |      |      |        |      |      |      |          |          |                   
 #&gt; Species      | versicolor |    50 |          33.33 |      |      |        |      |      |      |          |          |                   
 #&gt; Species      |  virginica |    50 |          33.33 |      |      |        |      |      |      |          |          |                   </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Variable     |      Level | n_Obs | percentage_Obs | Median |  Min |  Max | Skewness | Kurtosis | percentage_Missing
+</div><div class='co'>#&gt; Variable     |      Level | n_Obs | percentage_Obs | Median |  Min |  Max | Skewness | Kurtosis | percentage_Missing
 #&gt; --------------------------------------------------------------------------------------------------------------------
 #&gt; Sepal.Length |            |       |                |   5.80 | 4.30 | 7.90 |     0.31 |    -0.55 |               0.00
 #&gt; Sepal.Width  |            |       |                |   3.00 | 2.00 | 4.40 |     0.32 |     0.23 |               0.00
@@ -292,20 +292,20 @@ observations larger than 100.</p></td>
 #&gt; Species      | versicolor |    50 |          33.33 |        |      |      |          |          |                   
 #&gt; Species      |  virginica |    50 |          33.33 |        |      |      |          |          |                   </div><div class='input'>
 <span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://dplyr.tidyverse.org'>"dplyr"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='va'>iris</span> <span class='op'>%&gt;%</span>
-    <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>Species</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='va'>iris</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
+    <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>Species</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span>
     <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='op'>)</span>
   <span class='va'>r</span>
   <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
   <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
   <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; <span class='message'>Loading required package: dplyr</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘dplyr’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='output co'>#&gt; Group      |     Variable | Mean |   SD |  Min |  Max | n_Missing
+</div><div class='co'>#&gt; Loading required package: dplyr</div><div class='co'>#&gt; 
+#&gt; Attaching package: ‘dplyr’</div><div class='co'>#&gt; The following objects are masked from ‘package:stats’:
+#&gt; 
+#&gt;     filter, lag</div><div class='co'>#&gt; The following objects are masked from ‘package:base’:
+#&gt; 
+#&gt;     intersect, setdiff, setequal, union</div><div class='co'>#&gt; Group      |     Variable | Mean |   SD |  Min |  Max | n_Missing
 #&gt; -----------------------------------------------------------------
 #&gt; versicolor | Sepal.Length | 5.94 | 0.52 | 4.90 | 7.00 |         0
 #&gt; versicolor |  Sepal.Width | 2.77 | 0.31 | 2.00 | 3.40 |         0

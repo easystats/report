@@ -287,7 +287,7 @@ its re-computation.</p></td>
 <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>*</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
 <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
 <span class='va'>r</span>
-</div><div class='output co'>#&gt; We fitted a linear model (estimated using OLS) to predict Sepal.Length with Petal.Length and Species (formula: Sepal.Length ~ Petal.Length * Species). The model explains a statistically significant and substantial proportion of variance (R2 = 0.84, F(5, 144) = 151.71, p &lt; .001, adj. R2 = 0.83). The model's intercept, corresponding to Petal.Length = 0 and Species = setosa, is at 4.21 (95% CI [3.41, 5.02], t(144) = 10.34, p &lt; .001). Within this model:
+</div><div class='co'>#&gt; We fitted a linear model (estimated using OLS) to predict Sepal.Length with Petal.Length and Species (formula: Sepal.Length ~ Petal.Length * Species). The model explains a statistically significant and substantial proportion of variance (R2 = 0.84, F(5, 144) = 151.71, p &lt; .001, adj. R2 = 0.83). The model's intercept, corresponding to Petal.Length = 0 and Species = setosa, is at 4.21 (95% CI [3.41, 5.02], t(144) = 10.34, p &lt; .001). Within this model:
 #&gt; 
 #&gt;   - The effect of Petal.Length is statistically non-significant and positive (beta = 0.54, 95% CI [-4.76e-03, 1.09], t(144) = 1.96, p = 0.052; Std. beta = 1.16, 95% CI [-0.01, 2.32])
 #&gt;   - The effect of Species [versicolor] is statistically significant and negative (beta = -1.81, 95% CI [-2.99, -0.62], t(144) = -3.02, p &lt; .01; Std. beta = -0.88, 95% CI [-2.41, 0.65])
@@ -296,14 +296,14 @@ its re-computation.</p></td>
 #&gt;   - The interaction effect of Species [virginica] on Petal.Length is statistically non-significant and positive (beta = 0.45, 95% CI [-0.12, 1.03], t(144) = 1.56, p = 0.120; Std. beta = 0.97, 95% CI [-0.26, 2.19])
 #&gt; 
 #&gt; Standardized parameters were obtained by fitting the model on a standardized version of the dataset.</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; We fitted a linear model to predict Sepal.Length with Petal.Length and Species. The model's explanatory power is substantial (R2 = 0.84, adj. R2 = 0.83). The model's intercept is at 4.21 (95% CI [3.41, 5.02]). Within this model:
+</div><div class='co'>#&gt; We fitted a linear model to predict Sepal.Length with Petal.Length and Species. The model's explanatory power is substantial (R2 = 0.84, adj. R2 = 0.83). The model's intercept is at 4.21 (95% CI [3.41, 5.02]). Within this model:
 #&gt; 
 #&gt;   - The effect of Petal.Length is statistically non-significant and positive (beta = 0.54, 95% CI [-4.76e-03, 1.09], t(144) = 1.96, p = 0.052, Std. beta = 1.16)
 #&gt;   - The effect of Species [versicolor] is statistically significant and negative (beta = -1.81, 95% CI [-2.99, -0.62], t(144) = -3.02, p &lt; .01, Std. beta = -0.88)
 #&gt;   - The effect of Species [virginica] is statistically significant and negative (beta = -3.15, 95% CI [-4.41, -1.90], t(144) = -4.97, p &lt; .001, Std. beta = -1.75)
 #&gt;   - The interaction effect of Species [versicolor] on Petal.Length is statistically non-significant and positive (beta = 0.29, 95% CI [-0.30, 0.87], t(144) = 0.97, p = 0.334, Std. beta = 0.61)
 #&gt;   - The interaction effect of Species [virginica] on Petal.Length is statistically non-significant and positive (beta = 0.45, 95% CI [-0.12, 1.03], t(144) = 1.56, p = 0.120, Std. beta = 0.97)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Parameter                           | Coefficient |         95% CI | t(144) |      p | Std. Coef. | Std. Coef. 95% CI |    Fit
+</div><div class='co'>#&gt; Parameter                           | Coefficient |         95% CI | t(144) |      p | Std. Coef. | Std. Coef. 95% CI |    Fit
 #&gt; ------------------------------------------------------------------------------------------------------------------------------
 #&gt; (Intercept)                         |        4.21 | [ 3.41,  5.02] |  10.34 | &lt; .001 |       0.49 |    [-1.03,  2.01] |       
 #&gt; Petal.Length                        |        0.54 | [ 0.00,  1.09] |   1.96 | 0.052  |       1.16 |    [-0.01,  2.32] |       
@@ -317,7 +317,7 @@ its re-computation.</p></td>
 #&gt; R2                                  |             |                |        |        |            |                   |   0.84
 #&gt; R2 (adj.)                           |             |                |        |        |            |                   |   0.83
 #&gt; Sigma                               |             |                |        |        |            |                   |   0.34</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Parameter                           | Coefficient |         95% CI | t(144) |      p | Std. Coef. |  Fit
+</div><div class='co'>#&gt; Parameter                           | Coefficient |         95% CI | t(144) |      p | Std. Coef. |  Fit
 #&gt; --------------------------------------------------------------------------------------------------------
 #&gt; (Intercept)                         |        4.21 | [ 3.41,  5.02] |  10.34 | &lt; .001 |       0.49 |     
 #&gt; Petal.Length                        |        0.54 | [ 0.00,  1.09] |   1.96 | 0.052  |       1.16 |     
@@ -334,15 +334,15 @@ its re-computation.</p></td>
 <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='va'>vs</span> <span class='op'>~</span> <span class='va'>disp</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, family <span class='op'>=</span> <span class='st'>"binomial"</span><span class='op'>)</span>
 <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
 <span class='va'>r</span>
-</div><div class='output co'>#&gt; We fitted a logistic model (estimated using ML) to predict vs with disp (formula: vs ~ disp). The model's explanatory power is substantial (Tjur's R2 = 0.53). The model's intercept, corresponding to disp = 0, is at 4.14 (95% CI [1.81, 7.44], p &lt; .01). Within this model:
+</div><div class='co'>#&gt; We fitted a logistic model (estimated using ML) to predict vs with disp (formula: vs ~ disp). The model's explanatory power is substantial (Tjur's R2 = 0.53). The model's intercept, corresponding to disp = 0, is at 4.14 (95% CI [1.81, 7.44], p &lt; .01). Within this model:
 #&gt; 
 #&gt;   - The effect of disp is statistically significant and negative (beta = -0.02, 95% CI [-0.04, -0.01], p &lt; .01; Std. beta = -2.68, 95% CI [-4.90, -1.27])
 #&gt; 
 #&gt; Standardized parameters were obtained by fitting the model on a standardized version of the dataset. 95% Confidence Intervals (CIs) and p-values were computed using </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; We fitted a logistic model to predict vs with disp. The model's explanatory power is substantial (Tjur's R2 = 0.53). The model's intercept is at 4.14 (95% CI [1.81, 7.44]). Within this model:
+</div><div class='co'>#&gt; We fitted a logistic model to predict vs with disp. The model's explanatory power is substantial (Tjur's R2 = 0.53). The model's intercept is at 4.14 (95% CI [1.81, 7.44]). Within this model:
 #&gt; 
 #&gt;   - The effect of disp is statistically significant and negative (beta = -0.02, 95% CI [-0.04, -0.01], p &lt; .01, Std. beta = -2.68)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Parameter   | Coefficient |         95% CI |     z |     p | Std. Coef. | Std. Coef. 95% CI |   Fit
+</div><div class='co'>#&gt; Parameter   | Coefficient |         95% CI |     z |     p | Std. Coef. | Std. Coef. 95% CI |   Fit
 #&gt; ---------------------------------------------------------------------------------------------------
 #&gt; (Intercept) |        4.14 | [ 1.81,  7.44] |  2.98 | 0.003 |      -0.85 |    [-2.42,  0.27] |      
 #&gt; disp        |       -0.02 | [-0.04, -0.01] | -3.03 | 0.002 |      -2.68 |    [-4.90, -1.27] |      
@@ -352,7 +352,7 @@ its re-computation.</p></td>
 #&gt; Tjur's R2   |             |                |       |       |            |                   |  0.53
 #&gt; Sigma       |             |                |       |       |            |                   |  0.87
 #&gt; Log_loss    |             |                |       |       |            |                   |  0.35</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Parameter   | Coefficient |         95% CI |     z |     p | Std. Coef. |  Fit
+</div><div class='co'>#&gt; Parameter   | Coefficient |         95% CI |     z |     p | Std. Coef. |  Fit
 #&gt; ------------------------------------------------------------------------------
 #&gt; (Intercept) |        4.14 | [ 1.81,  7.44] |  2.98 | 0.003 |      -0.85 |     
 #&gt; disp        |       -0.02 | [-0.04, -0.01] | -3.03 | 0.002 |      -2.68 |     
@@ -369,7 +369,7 @@ its re-computation.</p></td>
   <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
   <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; Parameter        | Coefficient |       95% CI | t(146) |      p | Effects |    Group | Std. Coef. |  Fit
+</div><div class='co'>#&gt; Parameter        | Coefficient |       95% CI | t(146) |      p | Effects |    Group | Std. Coef. |  Fit
 #&gt; --------------------------------------------------------------------------------------------------------
 #&gt; (Intercept)      |        2.50 | [1.20, 3.81] |   3.75 | &lt; .001 |   fixed |          |  -1.46e-13 |     
 #&gt; Petal.Length     |        0.89 | [0.76, 1.01] |  13.93 | &lt; .001 |   fixed |          |       1.89 |     
