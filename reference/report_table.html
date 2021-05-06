@@ -177,175 +177,190 @@ objects above).</p></td>
     <p>An object of class <code>report_table</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://easystats.github.io/report/'>report</a></span><span class='op'>)</span>
-
-<span class='co'># Miscellaneous</span>
-<span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'>report_table</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/sessionInfo.html'>sessionInfo</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>r</span>
-</div><div class='co'>#&gt; Package     |    Version |                                                                                                                                                                                                                                                Reference
-#&gt; -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-#&gt; bayestestR  |      0.9.0 |               Makowski, D., Ben-Shachar, M., &amp; Lüdecke, D. (2019). bayestestR: Describing Effects and their Uncertainty, Existence and Significance within the Bayesian Framework. Journal of Open Source Software, 4(40), 1541. doi:10.21105/joss.01541
-#&gt; dplyr       |      1.0.5 |                                                                         Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2021). dplyr: A Grammar of Data Manipulation. R package version 1.0.5. https://CRAN.R-project.org/package=dplyr
-#&gt; lavaan      |      0.6.8 |                                                                                        Yves Rosseel (2012). lavaan: An R Package for Structural Equation Modeling. Journal of Statistical Software, 48(2), 1-36. URL https://www.jstatsoft.org/v48/i02/.
-#&gt; lme4        |     1.1.26 |                                                                Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015). Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical Software, 67(1), 1-48. doi:10.18637/jss.v067.i01.
-#&gt; Matrix      |      1.3.2 |                                                                                        Douglas Bates and Martin Maechler (2021). Matrix: Sparse and Dense Matrix Classes and Methods. R package version 1.3-2. https://CRAN.R-project.org/package=Matrix
-#&gt; performance |      0.7.1 |                                                                            Lüdecke et al., (2021). Assessment, Testing and Comparison of Statistical Models using R. Journal of Open Source Software, 6(59), 3112. https://doi.org/10.31234/osf.io/vtq8f
-#&gt; R           |      4.0.5 |                                                                                    R Core Team (2021). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.
-#&gt; Rcpp        |      1.0.6 |                                                                                Dirk Eddelbuettel and Romain Francois (2011). Rcpp: Seamless R and C++ Integration. Journal of Statistical Software, 40(8), 1-18. URL https://www.jstatsoft.org/v40/i08/.
-#&gt; report      | 0.3.0.9000 | Makowski, D., Ben-Shachar, M.S., Patil, I. &amp; Lüdecke, D. (2020). Automated Results Reporting as a Practical Tool to Improve Reproducibility and Methodological Best Practices Adoption. CRAN. Available from https://github.com/easystats/report. doi: .
-#&gt; rstanarm    |     2.21.1 |                                                                                        Goodrich B, Gabry J, Ali I &amp; Brilleman S. (2020). rstanarm: Bayesian applied regression modeling via Stan. R package version 2.21.1 https://mc-stan.org/rstanarm.</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='co'>#&gt; Package     |    Version
-#&gt; ------------------------
-#&gt; bayestestR  |      0.9.0
-#&gt; dplyr       |      1.0.5
-#&gt; lavaan      |      0.6.8
-#&gt; lme4        |     1.1.26
-#&gt; Matrix      |      1.3.2
-#&gt; performance |      0.7.1
-#&gt; R           |      4.0.5
-#&gt; Rcpp        |      1.0.6
-#&gt; report      | 0.3.0.9000
-#&gt; rstanarm    |     2.21.1</div><div class='input'>
-<span class='co'># Data</span>
-<span class='fu'>report_table</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>)</span>
-</div><div class='co'>#&gt; Mean |   SD | Median |  MAD |  Min |  Max | n_Obs | Skewness | Kurtosis | percentage_Missing
-#&gt; --------------------------------------------------------------------------------------------
-#&gt; 5.84 | 0.83 |   5.80 | 1.04 | 4.30 | 7.90 |   150 |     0.31 |    -0.55 |               0.00</div><div class='input'><span class='fu'>report_table</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='co'>#&gt; n_Entries | n_Obs | n_Missing | percentage_Missing
-#&gt; --------------------------------------------------
-#&gt; 35.00     |   150 |         0 |               0.00</div><div class='input'><span class='fu'>report_table</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Species</span><span class='op'>)</span>
-</div><div class='co'>#&gt; Level      | n_Obs | percentage_Obs
-#&gt; -----------------------------------
-#&gt; setosa     |    50 |          33.33
-#&gt; versicolor |    50 |          33.33
-#&gt; virginica  |    50 |          33.33</div><div class='input'><span class='fu'>report_table</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>
-</div><div class='co'>#&gt; Variable     |      Level | n_Obs | percentage_Obs | Mean |   SD | Median |  MAD |  Min |  Max | Skewness | Kurtosis | percentage_Missing
-#&gt; -----------------------------------------------------------------------------------------------------------------------------------------
-#&gt; Sepal.Length |            |   150 |                | 5.84 | 0.83 |   5.80 | 1.04 | 4.30 | 7.90 |     0.31 |    -0.55 |               0.00
-#&gt; Sepal.Width  |            |   150 |                | 3.06 | 0.44 |   3.00 | 0.44 | 2.00 | 4.40 |     0.32 |     0.23 |               0.00
-#&gt; Petal.Length |            |   150 |                | 3.76 | 1.77 |   4.35 | 1.85 | 1.00 | 6.90 |    -0.27 |    -1.40 |               0.00
-#&gt; Petal.Width  |            |   150 |                | 1.20 | 0.76 |   1.30 | 1.04 | 0.10 | 2.50 |    -0.10 |    -1.34 |               0.00
-#&gt; Species      |     setosa |    50 |          33.33 |      |      |        |      |      |      |          |          |                   
-#&gt; Species      | versicolor |    50 |          33.33 |      |      |        |      |      |      |          |          |                   
-#&gt; Species      |  virginica |    50 |          33.33 |      |      |        |      |      |      |          |          |                   </div><div class='input'>
-<span class='co'># h-tests</span>
-<span class='fu'>report_table</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>am</span>, data <span class='op'>=</span> <span class='va'>mtcars</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='co'>#&gt; Parameter | Group | Mean_Group1 | Mean_Group2 | Difference |          95% CI | t(18.33) |     p |                  Method |     d |          d  CI
-#&gt; --------------------------------------------------------------------------------------------------------------------------------------------------
-#&gt; mpg       |    am |       17.15 |       24.39 |       7.24 | [-11.28, -3.21] |    -3.77 | 0.001 | Welch Two Sample t-test | -1.76 | [-2.82, -0.67]</div><div class='input'><span class='fu'>report_table</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='co'>#&gt; Parameter1        |       Parameter2 |     r |        95% CI | t(148) |     p |                               Method
-#&gt; --------------------------------------------------------------------------------------------------------------------
-#&gt; iris$Sepal.Length | iris$Sepal.Width | -0.12 | [-0.27, 0.04] |  -1.44 | 0.152 | Pearson's product-moment correlation</div><div class='input'>
-<span class='co'># ANOVAs</span>
-<span class='fu'>report_table</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='co'>#&gt; For one-way between subjects designs, partial eta squared is equivalent to eta squared.
-#&gt; Returning eta squared.</div><div class='co'>#&gt; Parameter | Sum_Squares |  df | Mean_Square |      F |      p | Eta2 |  Eta2 90% CI
-#&gt; -----------------------------------------------------------------------------------
-#&gt; Species   |       63.21 |   2 |       31.61 | 119.26 | &lt; .001 | 0.62 | [0.54, 0.68]
-#&gt; Residuals |       38.96 | 147 |        0.27 |        |        |      |             </div><div class='input'>
-<span class='co'># GLMs</span>
-<span class='fu'>report_table</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>*</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='co'>#&gt; Parameter                           | Coefficient |         95% CI | t(144) |      p | Std. Coef. | Std. Coef. 95% CI |    Fit
-#&gt; ------------------------------------------------------------------------------------------------------------------------------
-#&gt; (Intercept)                         |        4.21 | [ 3.41,  5.02] |  10.34 | &lt; .001 |       0.49 |    [-1.03,  2.01] |       
-#&gt; Petal.Length                        |        0.54 | [ 0.00,  1.09] |   1.96 | 0.052  |       1.16 |    [-0.01,  2.32] |       
-#&gt; Species [versicolor]                |       -1.81 | [-2.99, -0.62] |  -3.02 | 0.003  |      -0.88 |    [-2.41,  0.65] |       
-#&gt; Species [virginica]                 |       -3.15 | [-4.41, -1.90] |  -4.97 | &lt; .001 |      -1.75 |    [-3.32, -0.18] |       
-#&gt; Petal.Length * Species [versicolor] |        0.29 | [-0.30,  0.87] |   0.97 | 0.334  |       0.61 |    [-0.63,  1.85] |       
-#&gt; Petal.Length * Species [virginica]  |        0.45 | [-0.12,  1.03] |   1.56 | 0.120  |       0.97 |    [-0.26,  2.19] |       
-#&gt;                                     |             |                |        |        |            |                   |       
-#&gt; AIC                                 |             |                |        |        |            |                   | 106.77
-#&gt; BIC                                 |             |                |        |        |            |                   | 127.84
-#&gt; R2                                  |             |                |        |        |            |                   |   0.84
-#&gt; R2 (adj.)                           |             |                |        |        |            |                   |   0.83
-#&gt; Sigma                               |             |                |        |        |            |                   |   0.34</div><div class='input'><span class='fu'>report_table</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='va'>vs</span> <span class='op'>~</span> <span class='va'>disp</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, family <span class='op'>=</span> <span class='st'>"binomial"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='co'>#&gt; Parameter   | Coefficient |         95% CI |     z |     p | Std. Coef. | Std. Coef. 95% CI |   Fit
-#&gt; ---------------------------------------------------------------------------------------------------
-#&gt; (Intercept) |        4.14 | [ 1.81,  7.44] |  2.98 | 0.003 |      -0.85 |    [-2.42,  0.27] |      
-#&gt; disp        |       -0.02 | [-0.04, -0.01] | -3.03 | 0.002 |      -2.68 |    [-4.90, -1.27] |      
-#&gt;             |             |                |       |       |            |                   |      
-#&gt; AIC         |             |                |       |       |            |                   | 26.70
-#&gt; BIC         |             |                |       |       |            |                   | 29.63
-#&gt; Tjur's R2   |             |                |       |       |            |                   |  0.53
-#&gt; Sigma       |             |                |       |       |            |                   |  0.87
-#&gt; Log_loss    |             |                |       |       |            |                   |  0.35</div><div class='input'>
-<span class='co'># \donttest{</span>
-<span class='co'># Mixed models</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://github.com/lme4/lme4/'>"lme4"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'>lme4</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>|</span> <span class='va'>Species</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>
-  <span class='fu'>report_table</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='co'>#&gt; Parameter        | Coefficient |       95% CI | t(146) |      p | Effects |    Group | Std. Coef. | Std. Coef. 95% CI |    Fit
-#&gt; ------------------------------------------------------------------------------------------------------------------------------
-#&gt; (Intercept)      |        2.50 | [1.20, 3.81] |   3.75 | &lt; .001 |   fixed |          |  -1.46e-13 |     [-1.47, 1.47] |       
-#&gt; Petal.Length     |        0.89 | [0.76, 1.01] |  13.93 | &lt; .001 |   fixed |          |       1.89 |     [ 1.63, 2.16] |       
-#&gt;                  |        1.08 |              |        |        |  random |  Species |            |                   |       
-#&gt;                  |        0.58 |              |        |        |  random | Residual |            |                   |       
-#&gt;                  |             |              |        |        |         |          |            |                   |       
-#&gt; AIC              |             |              |        |        |         |          |            |                   | 127.79
-#&gt; BIC              |             |              |        |        |         |          |            |                   | 139.84
-#&gt; R2 (conditional) |             |              |        |        |         |          |            |                   |   0.97
-#&gt; R2 (marginal)    |             |              |        |        |         |          |            |                   |   0.66
-#&gt; Sigma            |             |              |        |        |         |          |            |                   |   0.34</div><div class='input'>
-<span class='co'># Bayesian models</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://mc-stan.org/rstanarm/'>"rstanarm"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://mc-stan.org/rstanarm/reference/stan_glm.html'>stan_glm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span>, refresh <span class='op'>=</span> <span class='fl'>0</span>, iter <span class='op'>=</span> <span class='fl'>600</span><span class='op'>)</span>
-  <span class='fu'>report_table</span><span class='op'>(</span><span class='va'>model</span>, effectsize_method <span class='op'>=</span> <span class='st'>"basic"</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='co'>#&gt; Parameter         | Median |       89% CI |   pd | % in ROPE |  Rhat |     ESS |                 Prior | Std. Median | Std_Median 95% CI |     Fit
-#&gt; --------------------------------------------------------------------------------------------------------------------------------------------------
-#&gt; (Intercept)       |   5.00 | [4.89, 5.12] | 100% |        0% | 1.001 | 1038.00 | Normal (5.84 +- 2.07) |        0.00 |      [0.00, 0.00] |        
-#&gt; Speciesversicolor |   0.93 | [0.76, 1.08] | 100% |        0% | 1.001 |  816.00 | Normal (0.00 +- 4.38) |        0.53 |      [0.42, 0.64] |        
-#&gt; Speciesvirginica  |   1.58 | [1.42, 1.73] | 100% |        0% | 0.999 |  944.00 | Normal (0.00 +- 4.38) |        0.90 |      [0.79, 1.01] |        
-#&gt;                   |        |              |      |           |       |         |                       |             |                   |        
-#&gt; ELPD              |        |              |      |           |       |         |                       |             |                   | -115.86
-#&gt; LOOIC             |        |              |      |           |       |         |                       |             |                   |  231.71
-#&gt; WAIC              |        |              |      |           |       |         |                       |             |                   |  231.67
-#&gt; R2                |        |              |      |           |       |         |                       |             |                   |    0.62
-#&gt; R2 (adj.)         |        |              |      |           |       |         |                       |             |                   |    0.60
-#&gt; Sigma             |        |              |      |           |       |         |                       |             |                   |    0.52</div><div class='input'>
-<span class='co'># Structural Equation Models (SEM)</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://lavaan.ugent.be'>"lavaan"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>structure</span> <span class='op'>&lt;-</span> <span class='st'>" ind60 =~ x1 + x2 + x3
-                 dem60 =~ y1 + y2 + y3
-                 dem60 ~ ind60 "</span>
-  <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'>lavaan</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lavaan/man/sem.html'>sem</a></span><span class='op'>(</span><span class='va'>structure</span>, data <span class='op'>=</span> <span class='va'>PoliticalDemocracy</span><span class='op'>)</span>
-  <span class='fu'>report_table</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='co'>#&gt; Parameter     | Coefficient |       95% CI |     z |      p |  Component |     Fit
-#&gt; ----------------------------------------------------------------------------------
-#&gt; ind60 =~ x1   |        1.00 | [1.00, 1.00] |       | &lt; .001 |    Loading |        
-#&gt; ind60 =~ x2   |        2.18 | [1.91, 2.45] | 15.59 | &lt; .001 |    Loading |        
-#&gt; ind60 =~ x3   |        1.82 | [1.52, 2.12] | 11.96 | &lt; .001 |    Loading |        
-#&gt; dem60 =~ y1   |        1.00 | [1.00, 1.00] |       | &lt; .001 |    Loading |        
-#&gt; dem60 =~ y2   |        1.04 | [0.66, 1.43] |  5.33 | &lt; .001 |    Loading |        
-#&gt; dem60 =~ y3   |        0.98 | [0.65, 1.30] |  5.89 | &lt; .001 |    Loading |        
-#&gt; dem60 ~ ind60 |        1.37 | [0.53, 2.21] |  3.20 | 0.001  | Regression |        
-#&gt;               |             |              |       |        |            |        
-#&gt; Chi2          |             |              |       |        |            |    7.98
-#&gt; Chi2_df       |             |              |       |        |            |    8.00
-#&gt; p_Chi2        |             |              |       |        |            |    0.44
-#&gt; p_Baseline    |             |              |       |        |            |    0.00
-#&gt; GFI           |             |              |       |        |            |    0.97
-#&gt; AGFI          |             |              |       |        |            |    0.91
-#&gt; NFI           |             |              |       |        |            |    0.97
-#&gt; NNFI          |             |              |       |        |            |    1.00
-#&gt; CFI           |             |              |       |        |            |    1.00
-#&gt; RMSEA         |             |              |       |        |            |    0.00
-#&gt; RMSEA_CI_low  |             |              |       |        |            |    0.00
-#&gt; RMSEA_CI_high |             |              |       |        |            |    0.14
-#&gt; p_RMSEA       |             |              |       |        |            |    0.57
-#&gt; RMR           |             |              |       |        |            |    0.10
-#&gt; SRMR          |             |              |       |        |            |    0.03
-#&gt; RFI           |             |              |       |        |            |    0.95
-#&gt; PNFI          |             |              |       |        |            |    0.52
-#&gt; IFI           |             |              |       |        |            |    1.00
-#&gt; RNI           |             |              |       |        |            |    1.00
-#&gt; Loglikelihood |             |              |       |        |            | -778.27
-#&gt; AIC           |             |              |       |        |            | 1582.54
-#&gt; BIC           |             |              |       |        |            | 1612.67
-#&gt; BIC (adj.)    |             |              |       |        |            | 1571.69</div><div class='input'><span class='co'># }</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://easystats.github.io/report/'>report</a></span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Miscellaneous</span></span>
+<span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'>report_table</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/sessionInfo.html'>sessionInfo</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>r</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Package     |    Version |                                                                                                                                                                                                                                                Reference</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> bayestestR  |      0.9.0 |               Makowski, D., Ben-Shachar, M., &amp; Lüdecke, D. (2019). bayestestR: Describing Effects and their Uncertainty, Existence and Significance within the Bayesian Framework. Journal of Open Source Software, 4(40), 1541. doi:10.21105/joss.01541</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> dplyr       |      1.0.6 |                                                                         Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2021). dplyr: A Grammar of Data Manipulation. R package version 1.0.6. https://CRAN.R-project.org/package=dplyr</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> lavaan      |      0.6.8 |                                                                                        Yves Rosseel (2012). lavaan: An R Package for Structural Equation Modeling. Journal of Statistical Software, 48(2), 1-36. URL https://www.jstatsoft.org/v48/i02/.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> lme4        |     1.1.26 |                                                                Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015). Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical Software, 67(1), 1-48. doi:10.18637/jss.v067.i01.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Matrix      |      1.3.2 |                                                                                        Douglas Bates and Martin Maechler (2021). Matrix: Sparse and Dense Matrix Classes and Methods. R package version 1.3-2. https://CRAN.R-project.org/package=Matrix</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> performance |      0.7.1 |                                                                            Lüdecke et al., (2021). Assessment, Testing and Comparison of Statistical Models using R. Journal of Open Source Software, 6(59), 3112. https://doi.org/10.31234/osf.io/vtq8f</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> R           |      4.0.5 |                                                                                    R Core Team (2021). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Rcpp        |      1.0.6 |                                                                                Dirk Eddelbuettel and Romain Francois (2011). Rcpp: Seamless R and C++ Integration. Journal of Statistical Software, 40(8), 1-18. URL https://www.jstatsoft.org/v40/i08/.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> report      | 0.3.0.9000 | Makowski, D., Ben-Shachar, M.S., Patil, I. &amp; Lüdecke, D. (2020). Automated Results Reporting as a Practical Tool to Improve Reproducibility and Methodological Best Practices Adoption. CRAN. Available from https://github.com/easystats/report. doi: .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> rstanarm    |     2.21.1 |                                                                                        Goodrich B, Gabry J, Ali I &amp; Brilleman S. (2020). rstanarm: Bayesian applied regression modeling via Stan. R package version 2.21.1 https://mc-stan.org/rstanarm.</span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Package     |    Version</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ------------------------</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> bayestestR  |      0.9.0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> dplyr       |      1.0.6</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> lavaan      |      0.6.8</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> lme4        |     1.1.26</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Matrix      |      1.3.2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> performance |      0.7.1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> R           |      4.0.5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Rcpp        |      1.0.6</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> report      | 0.3.0.9000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> rstanarm    |     2.21.1</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Data</span></span>
+<span class='r-in'><span class='fu'>report_table</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Mean |   SD | Median |  MAD |  Min |  Max | n_Obs | Skewness | Kurtosis | percentage_Missing</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> --------------------------------------------------------------------------------------------</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5.84 | 0.83 |   5.80 | 1.04 | 4.30 | 7.90 |   150 |     0.31 |    -0.55 |               0.00</span>
+<span class='r-in'><span class='fu'>report_table</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> n_Entries | n_Obs | n_Missing | percentage_Missing</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> --------------------------------------------------</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 35.00     |   150 |         0 |               0.00</span>
+<span class='r-in'><span class='fu'>report_table</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Species</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Level      | n_Obs | percentage_Obs</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -----------------------------------</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> setosa     |    50 |          33.33</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> versicolor |    50 |          33.33</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> virginica  |    50 |          33.33</span>
+<span class='r-in'><span class='fu'>report_table</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Variable     |      Level | n_Obs | percentage_Obs | Mean |   SD | Median |  MAD |  Min |  Max | Skewness | Kurtosis | percentage_Missing</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -----------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Sepal.Length |            |   150 |                | 5.84 | 0.83 |   5.80 | 1.04 | 4.30 | 7.90 |     0.31 |    -0.55 |               0.00</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Sepal.Width  |            |   150 |                | 3.06 | 0.44 |   3.00 | 0.44 | 2.00 | 4.40 |     0.32 |     0.23 |               0.00</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Petal.Length |            |   150 |                | 3.76 | 1.77 |   4.35 | 1.85 | 1.00 | 6.90 |    -0.27 |    -1.40 |               0.00</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Petal.Width  |            |   150 |                | 1.20 | 0.76 |   1.30 | 1.04 | 0.10 | 2.50 |    -0.10 |    -1.34 |               0.00</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Species      |     setosa |    50 |          33.33 |      |      |        |      |      |      |          |          |                   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Species      | versicolor |    50 |          33.33 |      |      |        |      |      |      |          |          |                   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Species      |  virginica |    50 |          33.33 |      |      |        |      |      |      |          |          |                   </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># h-tests</span></span>
+<span class='r-in'><span class='fu'>report_table</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>am</span>, data <span class='op'>=</span> <span class='va'>mtcars</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Parameter | Group | Mean_Group1 | Mean_Group2 | Difference |          95% CI | t(18.33) |     p |                  Method |     d |          d  CI</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> --------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mpg       |    am |       17.15 |       24.39 |       7.24 | [-11.28, -3.21] |    -3.77 | 0.001 | Welch Two Sample t-test | -1.76 | [-2.82, -0.67]</span>
+<span class='r-in'><span class='fu'>report_table</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Parameter1        |       Parameter2 |     r |        95% CI | t(148) |     p |                               Method</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> --------------------------------------------------------------------------------------------------------------------</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> iris$Sepal.Length | iris$Sepal.Width | -0.12 | [-0.27, 0.04] |  -1.44 | 0.152 | Pearson's product-moment correlation</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># ANOVAs</span></span>
+<span class='r-in'><span class='fu'>report_table</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> For one-way between subjects designs, partial eta squared is equivalent to eta squared.</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Returning eta squared.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Parameter | Sum_Squares |  df | Mean_Square |      F |      p | Eta2 |  Eta2 90% CI</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -----------------------------------------------------------------------------------</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Species   |       63.21 |   2 |       31.61 | 119.26 | &lt; .001 | 0.62 | [0.54, 0.68]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Residuals |       38.96 | 147 |        0.27 |        |        |      |             </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># GLMs</span></span>
+<span class='r-in'><span class='fu'>report_table</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>*</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Parameter                           | Coefficient |         95% CI | t(144) |      p | Std. Coef. | Std. Coef. 95% CI |    Fit</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ------------------------------------------------------------------------------------------------------------------------------</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (Intercept)                         |        4.21 | [ 3.41,  5.02] |  10.34 | &lt; .001 |       0.49 |    [-1.03,  2.01] |       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Petal.Length                        |        0.54 | [ 0.00,  1.09] |   1.96 | 0.052  |       1.16 |    [-0.01,  2.32] |       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Species [versicolor]                |       -1.81 | [-2.99, -0.62] |  -3.02 | 0.003  |      -0.88 |    [-2.41,  0.65] |       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Species [virginica]                 |       -3.15 | [-4.41, -1.90] |  -4.97 | &lt; .001 |      -1.75 |    [-3.32, -0.18] |       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Petal.Length * Species [versicolor] |        0.29 | [-0.30,  0.87] |   0.97 | 0.334  |       0.61 |    [-0.63,  1.85] |       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Petal.Length * Species [virginica]  |        0.45 | [-0.12,  1.03] |   1.56 | 0.120  |       0.97 |    [-0.26,  2.19] |       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                     |             |                |        |        |            |                   |       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> AIC                                 |             |                |        |        |            |                   | 106.77</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> BIC                                 |             |                |        |        |            |                   | 127.84</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> R2                                  |             |                |        |        |            |                   |   0.84</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> R2 (adj.)                           |             |                |        |        |            |                   |   0.83</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Sigma                               |             |                |        |        |            |                   |   0.34</span>
+<span class='r-in'><span class='fu'>report_table</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='va'>vs</span> <span class='op'>~</span> <span class='va'>disp</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, family <span class='op'>=</span> <span class='st'>"binomial"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Parameter   | Coefficient |         95% CI |     z |     p | Std. Coef. | Std. Coef. 95% CI |   Fit</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ---------------------------------------------------------------------------------------------------</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (Intercept) |        4.14 | [ 1.81,  7.44] |  2.98 | 0.003 |      -0.85 |    [-2.42,  0.27] |      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> disp        |       -0.02 | [-0.04, -0.01] | -3.03 | 0.002 |      -2.68 |    [-4.90, -1.27] |      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>             |             |                |       |       |            |                   |      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> AIC         |             |                |       |       |            |                   | 26.70</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> BIC         |             |                |       |       |            |                   | 29.63</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Tjur's R2   |             |                |       |       |            |                   |  0.53</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Sigma       |             |                |       |       |            |                   |  0.87</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Log_loss    |             |                |       |       |            |                   |  0.35</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># \donttest{</span></span>
+<span class='r-in'><span class='co'># Mixed models</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://github.com/lme4/lme4/'>"lme4"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'>lme4</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>|</span> <span class='va'>Species</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='fu'>report_table</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Parameter        | Coefficient |       95% CI | t(146) |      p | Effects |    Group | Std. Coef. | Std. Coef. 95% CI |    Fit</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ------------------------------------------------------------------------------------------------------------------------------</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (Intercept)      |        2.50 | [1.20, 3.81] |   3.75 | &lt; .001 |   fixed |          |  -1.46e-13 |     [-1.47, 1.47] |       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Petal.Length     |        0.89 | [0.76, 1.01] |  13.93 | &lt; .001 |   fixed |          |       1.89 |     [ 1.63, 2.16] |       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                  |        1.08 |              |        |        |  random |  Species |            |                   |       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                  |        0.58 |              |        |        |  random | Residual |            |                   |       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                  |             |              |        |        |         |          |            |                   |       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> AIC              |             |              |        |        |         |          |            |                   | 127.79</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> BIC              |             |              |        |        |         |          |            |                   | 139.84</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> R2 (conditional) |             |              |        |        |         |          |            |                   |   0.97</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> R2 (marginal)    |             |              |        |        |         |          |            |                   |   0.66</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Sigma            |             |              |        |        |         |          |            |                   |   0.34</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Bayesian models</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://mc-stan.org/rstanarm/'>"rstanarm"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://mc-stan.org/rstanarm/reference/stan_glm.html'>stan_glm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span>, refresh <span class='op'>=</span> <span class='fl'>0</span>, iter <span class='op'>=</span> <span class='fl'>600</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='fu'>report_table</span><span class='op'>(</span><span class='va'>model</span>, effectsize_method <span class='op'>=</span> <span class='st'>"basic"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Parameter         | Median |       89% CI |   pd | % in ROPE |  Rhat |     ESS |                 Prior | Std. Median | Std_Median 95% CI |     Fit</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> --------------------------------------------------------------------------------------------------------------------------------------------------</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (Intercept)       |   5.00 | [4.89, 5.12] | 100% |        0% | 1.001 | 1038.00 | Normal (5.84 +- 2.07) |        0.00 |      [0.00, 0.00] |        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Speciesversicolor |   0.93 | [0.76, 1.08] | 100% |        0% | 1.001 |  816.00 | Normal (0.00 +- 4.38) |        0.53 |      [0.42, 0.64] |        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Speciesvirginica  |   1.58 | [1.42, 1.73] | 100% |        0% | 0.999 |  944.00 | Normal (0.00 +- 4.38) |        0.90 |      [0.79, 1.01] |        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                   |        |              |      |           |       |         |                       |             |                   |        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ELPD              |        |              |      |           |       |         |                       |             |                   | -115.86</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> LOOIC             |        |              |      |           |       |         |                       |             |                   |  231.71</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> WAIC              |        |              |      |           |       |         |                       |             |                   |  231.67</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> R2                |        |              |      |           |       |         |                       |             |                   |    0.62</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> R2 (adj.)         |        |              |      |           |       |         |                       |             |                   |    0.60</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Sigma             |        |              |      |           |       |         |                       |             |                   |    0.52</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Structural Equation Models (SEM)</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://lavaan.ugent.be'>"lavaan"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='va'>structure</span> <span class='op'>&lt;-</span> <span class='st'>" ind60 =~ x1 + x2 + x3</span>
+<span class='r-in'>                 dem60 =~ y1 + y2 + y3</span>
+<span class='r-in'>                 dem60 ~ ind60 "</span></span>
+<span class='r-in'>  <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'>lavaan</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lavaan/man/sem.html'>sem</a></span><span class='op'>(</span><span class='va'>structure</span>, data <span class='op'>=</span> <span class='va'>PoliticalDemocracy</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='fu'>report_table</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Parameter     | Coefficient |       95% CI |     z |      p |  Component |     Fit</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ----------------------------------------------------------------------------------</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ind60 =~ x1   |        1.00 | [1.00, 1.00] |       | &lt; .001 |    Loading |        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ind60 =~ x2   |        2.18 | [1.91, 2.45] | 15.59 | &lt; .001 |    Loading |        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ind60 =~ x3   |        1.82 | [1.52, 2.12] | 11.96 | &lt; .001 |    Loading |        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> dem60 =~ y1   |        1.00 | [1.00, 1.00] |       | &lt; .001 |    Loading |        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> dem60 =~ y2   |        1.04 | [0.66, 1.43] |  5.33 | &lt; .001 |    Loading |        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> dem60 =~ y3   |        0.98 | [0.65, 1.30] |  5.89 | &lt; .001 |    Loading |        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> dem60 ~ ind60 |        1.37 | [0.53, 2.21] |  3.20 | 0.001  | Regression |        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>               |             |              |       |        |            |        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chi2          |             |              |       |        |            |    7.98</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Chi2_df       |             |              |       |        |            |    8.00</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> p_Chi2        |             |              |       |        |            |    0.44</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> p_Baseline    |             |              |       |        |            |    0.00</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> GFI           |             |              |       |        |            |    0.97</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> AGFI          |             |              |       |        |            |    0.91</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> NFI           |             |              |       |        |            |    0.97</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> NNFI          |             |              |       |        |            |    1.00</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> CFI           |             |              |       |        |            |    1.00</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> RMSEA         |             |              |       |        |            |    0.00</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> RMSEA_CI_low  |             |              |       |        |            |    0.00</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> RMSEA_CI_high |             |              |       |        |            |    0.14</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> p_RMSEA       |             |              |       |        |            |    0.57</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> RMR           |             |              |       |        |            |    0.10</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> SRMR          |             |              |       |        |            |    0.03</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> RFI           |             |              |       |        |            |    0.95</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> PNFI          |             |              |       |        |            |    0.52</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> IFI           |             |              |       |        |            |    1.00</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> RNI           |             |              |       |        |            |    1.00</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Loglikelihood |             |              |       |        |            | -778.27</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> AIC           |             |              |       |        |            | 1582.54</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> BIC           |             |              |       |        |            | 1612.67</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> BIC (adj.)    |             |              |       |        |            | 1571.69</span>
+<span class='r-in'><span class='co'># }</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

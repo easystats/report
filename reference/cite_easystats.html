@@ -162,110 +162,113 @@
     <p>An object of class <code>cite_easystats</code> that can be printed, summarized (using <code><a href='https://rdrr.io/r/base/summary.html'>summary()</a></code>), or transformed into a table (using <code><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame()</a></code>).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>cite_easystats</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='co'>#&gt; <span style='color: #0000BB;'>Thanks for crediting us :) You can cite the 'easystats' ecosystem as follows:</span>
-#&gt; 
-#&gt; Data analysis was carried out using the 'easystats' collection of packagaes (Ludecke, Waggoner, &amp; Makowski, 2019; Makowski, Ben-Shachar, &amp; Ludecke, 2019; Makowski, Ben-Shachar, Patil, &amp; Ludecke, 2020; Ludecke, Ben-Shachar, Patil, &amp; Makowski, 2020; Ben-Shachar, Ludecke, &amp; Makowski, 2020).<span style='color: #0000BB;'></span>
-<span style='color: #0000BB;'>#&gt; </span>
-<span style='color: #0000BB;'>#&gt; References</span>
-<span style='color: #0000BB;'>#&gt; ----------</span>
-<span style='color: #0000BB;'>#&gt; </span>
-<span style='color: #0000BB;'>#&gt; </span><span>- Ludecke, D., Waggoner, P. D., &amp; Makowski, D. (2019). insight: A Unified Interface to Access Information from Model Objects in R. Journal of Open Source Software, 4, 1412. doi: 10.21105/joss.01412</span>
-#&gt; - Makowski, D., Ben-Shachar, M.S., &amp; Ludecke, D. (2019). bayestestR: Describing Effects and their Uncertainty, Existence and Significance within the Bayesian Framework. Journal of Open Source Software, 4(40), 1541. 10.21105/joss.01541
-#&gt; - Ludecke, D., Ben-Shachar, M.S., Patil, I., Makowski, D. (2020). parameters: Extracting, Computing and Exploring the Parameters of Statistical Models using R. Journal of Open Source Software, 5(53), 2445. doi: 10.21105/joss.02445
-#&gt; - Ben-Shachar, M.S., Ludecke, D., Makowski, D. (2020). effectsize: Estimation of Effect Size Indices and Standardized Parameters. Journal of Open Source Software, 5(56), 2815. doi: 10.21105/joss.02815
-#&gt; - Makowski, D., Ben-Shachar, M.S., Patil, I., &amp; Ludecke, D. (2019). Methods and Algorithms for Correlation Analysis in R. Journal of Open Source Software, 5(51), 2306. 10.21105/joss.02306<span style='color: #0000BB;'></span>
-<span style='color: #0000BB;'>#&gt; </span>
-<span style='color: #0000BB;'>#&gt; Bibtex entries:</span>
-<span style='color: #0000BB;'>#&gt; ---------------</span>
-<span style='color: #0000BB;'>#&gt; </span>
-<span style='color: #0000BB;'>#&gt; </span>
-#&gt;   @article{ludecke2019insight,
-#&gt;     journal = {Journal of Open Source Software},
-#&gt;     doi = {10.21105/joss.01412},
-#&gt;     issn = {2475-9066},
-#&gt;     number = {38},
-#&gt;     publisher = {The Open Journal},
-#&gt;     title = {insight: A Unified Interface to Access Information from Model Objects in R},
-#&gt;     url = {http://dx.doi.org/10.21105/joss.01412},
-#&gt;     volume = {4},
-#&gt;     author = {L{"u}decke, Daniel and Waggoner, Philip and Makowski, Dominique},
-#&gt;     pages = {1412},
-#&gt;     date = {2019-06-25},
-#&gt;     year = {2019},
-#&gt;     month = {6},
-#&gt;     day = {25}
-#&gt;   }
-#&gt; 
-#&gt; 
-#&gt;   @article{makowski2019bayestestr,
-#&gt;       title = {{bayestestR}: {Describing} {Effects} and their {Uncertainty}, {Existence} and {Significance} within the {Bayesian} {Framework}},
-#&gt;       volume = {4},
-#&gt;       issn = {2475-9066},
-#&gt;       shorttitle = {{bayestestR}},
-#&gt;       url = {https://joss.theoj.org/papers/10.21105/joss.01541},
-#&gt;       doi = {10.21105/joss.01541},
-#&gt;       number = {40},
-#&gt;       urldate = {2019-08-13},
-#&gt;       journal = {Journal of Open Source Software},
-#&gt;       author = {Makowski, Dominique and Ben-Shachar, Mattan S. and L{"u}decke, Daniel},
-#&gt;       month = aug,
-#&gt;       year = {2019},
-#&gt;       pages = {1541}
-#&gt;   }
-#&gt; 
-#&gt;   @article{makowski2020correlation,
-#&gt;     doi={10.21105/joss.02306},
-#&gt;     title={Methods and Algorithms for Correlation Analysis in R},
-#&gt;     author={Makowski, Dominique and Ben-Shachar, Mattan S. and Patil, Indrajeet and L{"u}decke, Daniel},
-#&gt;     journal={Journal of Open Source Software},
-#&gt;     volume={5},
-#&gt;     number={51},
-#&gt;     pages={2306},
-#&gt;     year={2020}
-#&gt;   }
-#&gt; 
-#&gt;   @article{ludecke20202parameters,
-#&gt;     title = {parameters: Extracting, Computing and Exploring the Parameters of Statistical Models using {R}.},
-#&gt;     volume = {5},
-#&gt;     doi = {10.21105/joss.02445},
-#&gt;     number = {53},
-#&gt;     journal = {Journal of Open Source Software},
-#&gt;     author = {Daniel L{"u}decke and Mattan S. Ben-Shachar and Indrajeet Patil and Dominique Makowski},
-#&gt;     year = {2020},
-#&gt;     pages = {2445},
-#&gt;   }
-#&gt; 
-#&gt;   @article{benchashar2020effectsize,
-#&gt;     title = {{e}ffectsize: Estimation of Effect Size Indices and Standardized Parameters},
-#&gt;     author = {Mattan S. Ben-Shachar and Daniel L{"u}decke and Dominique Makowski},
-#&gt;     year = {2020},
-#&gt;     journal = {Journal of Open Source Software},
-#&gt;     volume = {5},
-#&gt;     number = {56},
-#&gt;     pages = {2815},
-#&gt;     publisher = {The Open Journal},
-#&gt;     doi = {10.21105/joss.02815},
-#&gt;     url = {https://doi.org/10.21105/joss.02815},
-#&gt;   }
-#&gt;   </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'>cite_easystats</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='co'>#&gt; Data analysis was carried out using the 'easystats' collection of packagaes (Ludecke, Waggoner, &amp; Makowski, 2019; Makowski, Ben-Shachar, &amp; Ludecke, 2019; Makowski, Ben-Shachar, Patil, &amp; Ludecke, 2020; Ludecke, Ben-Shachar, Patil, &amp; Makowski, 2020; Ben-Shachar, Ludecke, &amp; Makowski, 2020).<span style='color: #0000BB;'></span>
-<span style='color: #0000BB;'>#&gt; </span>
-<span style='color: #0000BB;'>#&gt; References</span>
-<span style='color: #0000BB;'>#&gt; ----------</span>
-<span style='color: #0000BB;'>#&gt; </span>
-<span style='color: #0000BB;'>#&gt; </span><span>- Ludecke, D., Waggoner, P. D., &amp; Makowski, D. (2019). insight: A Unified Interface to Access Information from Model Objects in R. Journal of Open Source Software, 4, 1412. doi: 10.21105/joss.01412</span>
-#&gt; - Makowski, D., Ben-Shachar, M.S., &amp; Ludecke, D. (2019). bayestestR: Describing Effects and their Uncertainty, Existence and Significance within the Bayesian Framework. Journal of Open Source Software, 4(40), 1541. 10.21105/joss.01541
-#&gt; - Ludecke, D., Ben-Shachar, M.S., Patil, I., Makowski, D. (2020). parameters: Extracting, Computing and Exploring the Parameters of Statistical Models using R. Journal of Open Source Software, 5(53), 2445. doi: 10.21105/joss.02445
-#&gt; - Ben-Shachar, M.S., Ludecke, D., Makowski, D. (2020). effectsize: Estimation of Effect Size Indices and Standardized Parameters. Journal of Open Source Software, 5(56), 2815. doi: 10.21105/joss.02815
-#&gt; - Makowski, D., Ben-Shachar, M.S., Patil, I., &amp; Ludecke, D. (2019). Methods and Algorithms for Correlation Analysis in R. Journal of Open Source Software, 5(51), 2306. 10.21105/joss.02306</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='fu'>cite_easystats</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='co'>#&gt;                                                                                                                                                                                                                                  Reference
-#&gt; 1                                      Ludecke, D., Waggoner, P. D., &amp; Makowski, D. (2019). insight: A Unified Interface to Access Information from Model Objects in R. Journal of Open Source Software, 4, 1412. doi: 10.21105/joss.01412
-#&gt; 2 Makowski, D., Ben-Shachar, M.S., &amp; Ludecke, D. (2019). bayestestR: Describing Effects and their Uncertainty, Existence and Significance within the Bayesian Framework. Journal of Open Source Software, 4(40), 1541. 10.21105/joss.01541
-#&gt; 3     Ludecke, D., Ben-Shachar, M.S., Patil, I., Makowski, D. (2020). parameters: Extracting, Computing and Exploring the Parameters of Statistical Models using R. Journal of Open Source Software, 5(53), 2445. doi: 10.21105/joss.02445
-#&gt; 4                                   Ben-Shachar, M.S., Ludecke, D., Makowski, D. (2020). effectsize: Estimation of Effect Size Indices and Standardized Parameters. Journal of Open Source Software, 5(56), 2815. doi: 10.21105/joss.02815
-#&gt; 5                                                Makowski, D., Ben-Shachar, M.S., Patil, I., &amp; Ludecke, D. (2019). Methods and Algorithms for Correlation Analysis in R. Journal of Open Source Software, 5(51), 2306. 10.21105/joss.02306</div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'>cite_easystats</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>Thanks for crediting us :) You can cite the 'easystats' ecosystem as follows:</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Data analysis was carried out using the 'easystats' collection of packagaes (Ludecke, Waggoner, &amp; Makowski, 2019; Makowski, Ben-Shachar, &amp; Ludecke, 2019; Makowski, Ben-Shachar, Patil, &amp; Ludecke, 2020; Ludecke, Ben-Shachar, Patil, &amp; Makowski, 2020; Ben-Shachar, Ludecke, &amp; Makowski, 2020).<span style='color: #0000BB;'></span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'></span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>References</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>----------</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'></span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'></span><span>- Ludecke, D., Waggoner, P. D., &amp; Makowski, D. (2019). insight: A Unified Interface to Access Information from Model Objects in R. Journal of Open Source Software, 4, 1412. doi: 10.21105/joss.01412</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - Makowski, D., Ben-Shachar, M.S., &amp; Ludecke, D. (2019). bayestestR: Describing Effects and their Uncertainty, Existence and Significance within the Bayesian Framework. Journal of Open Source Software, 4(40), 1541. 10.21105/joss.01541</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - Ludecke, D., Ben-Shachar, M.S., Patil, I., Makowski, D. (2020). parameters: Extracting, Computing and Exploring the Parameters of Statistical Models using R. Journal of Open Source Software, 5(53), 2445. doi: 10.21105/joss.02445</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - Ben-Shachar, M.S., Ludecke, D., Makowski, D. (2020). effectsize: Estimation of Effect Size Indices and Standardized Parameters. Journal of Open Source Software, 5(56), 2815. doi: 10.21105/joss.02815</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - Makowski, D., Ben-Shachar, M.S., Patil, I., &amp; Ludecke, D. (2019). Methods and Algorithms for Correlation Analysis in R. Journal of Open Source Software, 5(51), 2306. 10.21105/joss.02306<span style='color: #0000BB;'></span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'></span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>Bibtex entries:</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>---------------</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'></span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'></span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   @article{ludecke2019insight,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     journal = {Journal of Open Source Software},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     doi = {10.21105/joss.01412},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     issn = {2475-9066},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     number = {38},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     publisher = {The Open Journal},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     title = {insight: A Unified Interface to Access Information from Model Objects in R},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     url = {http://dx.doi.org/10.21105/joss.01412},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     volume = {4},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     author = {L{"u}decke, Daniel and Waggoner, Philip and Makowski, Dominique},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     pages = {1412},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     date = {2019-06-25},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     year = {2019},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     month = {6},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     day = {25}</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   }</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   @article{makowski2019bayestestr,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       title = {{bayestestR}: {Describing} {Effects} and their {Uncertainty}, {Existence} and {Significance} within the {Bayesian} {Framework}},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       volume = {4},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       issn = {2475-9066},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       shorttitle = {{bayestestR}},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       url = {https://joss.theoj.org/papers/10.21105/joss.01541},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       doi = {10.21105/joss.01541},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       number = {40},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       urldate = {2019-08-13},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       journal = {Journal of Open Source Software},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       author = {Makowski, Dominique and Ben-Shachar, Mattan S. and L{"u}decke, Daniel},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       month = aug,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       year = {2019},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       pages = {1541}</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   }</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   @article{makowski2020correlation,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     doi={10.21105/joss.02306},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     title={Methods and Algorithms for Correlation Analysis in R},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     author={Makowski, Dominique and Ben-Shachar, Mattan S. and Patil, Indrajeet and L{"u}decke, Daniel},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     journal={Journal of Open Source Software},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     volume={5},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     number={51},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     pages={2306},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     year={2020}</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   }</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   @article{ludecke20202parameters,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     title = {parameters: Extracting, Computing and Exploring the Parameters of Statistical Models using {R}.},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     volume = {5},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     doi = {10.21105/joss.02445},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     number = {53},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     journal = {Journal of Open Source Software},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     author = {Daniel L{"u}decke and Mattan S. Ben-Shachar and Indrajeet Patil and Dominique Makowski},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     year = {2020},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     pages = {2445},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   }</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   @article{benchashar2020effectsize,</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     title = {{e}ffectsize: Estimation of Effect Size Indices and Standardized Parameters},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     author = {Mattan S. Ben-Shachar and Daniel L{"u}decke and Dominique Makowski},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     year = {2020},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     journal = {Journal of Open Source Software},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     volume = {5},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     number = {56},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     pages = {2815},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     publisher = {The Open Journal},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     doi = {10.21105/joss.02815},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     url = {https://doi.org/10.21105/joss.02815},</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   }</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   </span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'>cite_easystats</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Data analysis was carried out using the 'easystats' collection of packagaes (Ludecke, Waggoner, &amp; Makowski, 2019; Makowski, Ben-Shachar, &amp; Ludecke, 2019; Makowski, Ben-Shachar, Patil, &amp; Ludecke, 2020; Ludecke, Ben-Shachar, Patil, &amp; Makowski, 2020; Ben-Shachar, Ludecke, &amp; Makowski, 2020).<span style='color: #0000BB;'></span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'></span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>References</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'>----------</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'></span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #0000BB;'></span><span>- Ludecke, D., Waggoner, P. D., &amp; Makowski, D. (2019). insight: A Unified Interface to Access Information from Model Objects in R. Journal of Open Source Software, 4, 1412. doi: 10.21105/joss.01412</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - Makowski, D., Ben-Shachar, M.S., &amp; Ludecke, D. (2019). bayestestR: Describing Effects and their Uncertainty, Existence and Significance within the Bayesian Framework. Journal of Open Source Software, 4(40), 1541. 10.21105/joss.01541</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - Ludecke, D., Ben-Shachar, M.S., Patil, I., Makowski, D. (2020). parameters: Extracting, Computing and Exploring the Parameters of Statistical Models using R. Journal of Open Source Software, 5(53), 2445. doi: 10.21105/joss.02445</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - Ben-Shachar, M.S., Ludecke, D., Makowski, D. (2020). effectsize: Estimation of Effect Size Indices and Standardized Parameters. Journal of Open Source Software, 5(56), 2815. doi: 10.21105/joss.02815</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - Makowski, D., Ben-Shachar, M.S., Patil, I., &amp; Ludecke, D. (2019). Methods and Algorithms for Correlation Analysis in R. Journal of Open Source Software, 5(51), 2306. 10.21105/joss.02306</span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='fu'>cite_easystats</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                                                                                                                                                                                                  Reference</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1                                      Ludecke, D., Waggoner, P. D., &amp; Makowski, D. (2019). insight: A Unified Interface to Access Information from Model Objects in R. Journal of Open Source Software, 4, 1412. doi: 10.21105/joss.01412</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 Makowski, D., Ben-Shachar, M.S., &amp; Ludecke, D. (2019). bayestestR: Describing Effects and their Uncertainty, Existence and Significance within the Bayesian Framework. Journal of Open Source Software, 4(40), 1541. 10.21105/joss.01541</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3     Ludecke, D., Ben-Shachar, M.S., Patil, I., Makowski, D. (2020). parameters: Extracting, Computing and Exploring the Parameters of Statistical Models using R. Journal of Open Source Software, 5(53), 2445. doi: 10.21105/joss.02445</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4                                   Ben-Shachar, M.S., Ludecke, D., Makowski, D. (2020). effectsize: Estimation of Effect Size Indices and Standardized Parameters. Journal of Open Source Software, 5(56), 2815. doi: 10.21105/joss.02815</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5                                                Makowski, D., Ben-Shachar, M.S., Patil, I., &amp; Ludecke, D. (2019). Methods and Algorithms for Correlation Analysis in R. Journal of Open Source Software, 5(51), 2306. 10.21105/joss.02306</span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

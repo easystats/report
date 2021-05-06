@@ -204,31 +204,41 @@ the Sequential Effect eXistence and sIgnificance Testing framework (see
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://easystats.github.io/report/'>report</a></span><span class='op'>)</span>
-
-<span class='co'># \donttest{</span>
-<span class='co'># Bayesian models</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://mc-stan.org/rstanarm/'>"rstanarm"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://mc-stan.org/rstanarm/reference/stan_glm.html'>stan_glm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>qsec</span> <span class='op'>+</span> <span class='va'>wt</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, refresh <span class='op'>=</span> <span class='fl'>0</span>, iter <span class='op'>=</span> <span class='fl'>500</span><span class='op'>)</span>
-  <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
-  <span class='va'>r</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='co'>#&gt; Loading required package: rstanarm</div><div class='co'>#&gt; Loading required package: Rcpp</div><div class='co'>#&gt; This is rstanarm version 2.21.1</div><div class='co'>#&gt; - See https://mc-stan.org/rstanarm/articles/priors for changes to default priors!</div><div class='co'>#&gt; - Default priors may change, so it's safest to specify priors, even if equivalent to the defaults.</div><div class='co'>#&gt; - For execution on a local, multicore CPU with excess RAM we recommend calling</div><div class='co'>#&gt;   options(mc.cores = parallel::detectCores())</div><div class='co'>#&gt; 
-#&gt; Attaching package: ‘rstanarm’</div><div class='co'>#&gt; The following object is masked from ‘package:performance’:
-#&gt; 
-#&gt;     pp_check</div><div class='co'>#&gt; Parameter   | Median |         89% CI |     pd | % in ROPE |  Rhat |     ESS |                   Prior |  Fit
-#&gt; -------------------------------------------------------------------------------------------------------------
-#&gt; (Intercept) |  19.90 | [11.21, 28.33] |   100% |        0% | 0.998 |  922.00 | Normal (20.09 +- 15.07) |     
-#&gt; qsec        |   0.93 | [ 0.51,  1.38] | 99.90% |    12.10% | 0.998 | 1052.00 |   Normal (0.00 +- 8.43) |     
-#&gt; wt          |  -5.05 | [-5.83, -4.23] |   100% |        0% | 1.001 |  926.00 |  Normal (0.00 +- 15.40) |     
-#&gt;             |        |                |        |           |       |         |                         |     
-#&gt; R2          |        |                |        |           |       |         |                         | 0.81
-#&gt; R2 (adj.)   |        |                |        |           |       |         |                         | 0.77
-#&gt; Sigma       |        |                |        |           |       |         |                         | 2.67</div><div class='input'><span class='co'># }</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://easystats.github.io/report/'>report</a></span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># \donttest{</span></span>
+<span class='r-in'><span class='co'># Bayesian models</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://mc-stan.org/rstanarm/'>"rstanarm"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://mc-stan.org/rstanarm/reference/stan_glm.html'>stan_glm</a></span><span class='op'>(</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>qsec</span> <span class='op'>+</span> <span class='va'>wt</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, refresh <span class='op'>=</span> <span class='fl'>0</span>, iter <span class='op'>=</span> <span class='fl'>500</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='va'>r</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Loading required package: rstanarm</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Loading required package: Rcpp</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> This is rstanarm version 2.21.1</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> - See https://mc-stan.org/rstanarm/articles/priors for changes to default priors!</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> - Default priors may change, so it's safest to specify priors, even if equivalent to the defaults.</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> - For execution on a local, multicore CPU with excess RAM we recommend calling</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>   options(mc.cores = parallel::detectCores())</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Attaching package: ‘rstanarm’</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> The following object is masked from ‘package:performance’:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>     pp_check</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Parameter   | Median |         89% CI |     pd | % in ROPE |  Rhat |     ESS |                   Prior |  Fit</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -------------------------------------------------------------------------------------------------------------</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (Intercept) |  19.90 | [11.21, 28.33] |   100% |        0% | 0.998 |  922.00 | Normal (20.09 +- 15.07) |     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> qsec        |   0.93 | [ 0.51,  1.38] | 99.90% |    12.10% | 0.998 | 1052.00 |   Normal (0.00 +- 8.43) |     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> wt          |  -5.05 | [-5.83, -4.23] |   100% |        0% | 1.001 |  926.00 |  Normal (0.00 +- 15.40) |     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>             |        |                |        |           |       |         |                         |     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> R2          |        |                |        |           |       |         |                         | 0.81</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> R2 (adj.)   |        |                |        |           |       |         |                         | 0.77</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Sigma       |        |                |        |           |       |         |                         | 2.67</span>
+<span class='r-in'><span class='co'># }</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

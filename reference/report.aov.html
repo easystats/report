@@ -231,36 +231,40 @@ its re-computation.</p></td>
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>data</span> <span class='op'>&lt;-</span> <span class='va'>iris</span>
-<span class='va'>data</span><span class='op'>$</span><span class='va'>Cat1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='st'>"B"</span><span class='op'>)</span>, length.out <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span> <span class='op'>*</span> <span class='va'>Cat1</span>, data <span class='op'>=</span> <span class='va'>data</span><span class='op'>)</span>
-<span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span>
-<span class='va'>r</span>
-</div><div class='co'>#&gt; The ANOVA (formula: Sepal.Length ~ Species * Cat1) suggests that:
-#&gt; 
-#&gt;   - The main effect of Species is statistically significant and large (F(2, 144) = 118.43, p &lt; .001; Eta2 (partial) = 0.62, 90% CI [0.54, 0.68])
-#&gt;   - The main effect of Cat1 is statistically not significant and very small (F(1, 144) = 6.25e-03, p = 0.937; Eta2 (partial) = 4.34e-05, 90% CI [0.00, 3.18e-03])
-#&gt;   - The interaction between Species and Cat1 is statistically not significant and small (F(2, 144) = 0.98, p = 0.377; Eta2 (partial) = 0.01, 90% CI [0.00, 0.05])
-#&gt; 
-#&gt; Effect sizes were labelled following Field's (2013) recommendations.</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='co'>#&gt; The ANOVA suggests that:
-#&gt; 
-#&gt;   - The main effect of Species is statistically significant and large (F(2, 144) = 118.43, p &lt; .001, Eta2 (partial) = 0.62)
-#&gt;   - The main effect of Cat1 is statistically not significant and very small (F(1, 144) = 6.25e-03, p = 0.937, Eta2 (partial) = 4.34e-05)
-#&gt;   - The interaction between Species and Cat1 is statistically not significant and small (F(2, 144) = 0.98, p = 0.377, Eta2 (partial) = 0.01)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span>
-</div><div class='co'>#&gt; Parameter    | Sum_Squares |  df | Mean_Square |        F |      p | Eta2 (partial) | Eta2_partial 90% CI
-#&gt; ---------------------------------------------------------------------------------------------------------
-#&gt; Species      |       63.21 |   2 |       31.61 |   118.43 | &lt; .001 |           0.62 |        [0.54, 0.68]
-#&gt; Cat1         |    1.67e-03 |   1 |    1.67e-03 | 6.25e-03 | 0.937  |       4.34e-05 |        [0.00, 0.00]
-#&gt; Species:Cat1 |        0.52 |   2 |        0.26 |     0.98 | 0.377  |           0.01 |        [0.00, 0.05]
-#&gt; Residuals    |       38.43 | 144 |        0.27 |          |        |                |                    </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='co'>#&gt; Parameter    | Sum_Squares |  df | Mean_Square |        F |      p | Eta2 (partial)
-#&gt; -----------------------------------------------------------------------------------
-#&gt; Species      |       63.21 |   2 |       31.61 |   118.43 | &lt; .001 |           0.62
-#&gt; Cat1         |    1.67e-03 |   1 |    1.67e-03 | 6.25e-03 | 0.937  |       4.34e-05
-#&gt; Species:Cat1 |        0.52 |   2 |        0.26 |     0.98 | 0.377  |           0.01
-#&gt; Residuals    |       38.43 | 144 |        0.27 |          |        |               </div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>data</span> <span class='op'>&lt;-</span> <span class='va'>iris</span></span>
+<span class='r-in'><span class='va'>data</span><span class='op'>$</span><span class='va'>Cat1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='st'>"B"</span><span class='op'>)</span>, length.out <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>data</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span> <span class='op'>*</span> <span class='va'>Cat1</span>, data <span class='op'>=</span> <span class='va'>data</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>r</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> The ANOVA (formula: Sepal.Length ~ Species * Cat1) suggests that:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - The main effect of Species is statistically significant and large (F(2, 144) = 118.43, p &lt; .001; Eta2 (partial) = 0.62, 90% CI [0.54, 0.68])</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - The main effect of Cat1 is statistically not significant and very small (F(1, 144) = 6.25e-03, p = 0.937; Eta2 (partial) = 4.34e-05, 90% CI [0.00, 3.18e-03])</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - The interaction between Species and Cat1 is statistically not significant and small (F(2, 144) = 0.98, p = 0.377; Eta2 (partial) = 0.01, 90% CI [0.00, 0.05])</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Field's (2013) recommendations.</span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> The ANOVA suggests that:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - The main effect of Species is statistically significant and large (F(2, 144) = 118.43, p &lt; .001, Eta2 (partial) = 0.62)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - The main effect of Cat1 is statistically not significant and very small (F(1, 144) = 6.25e-03, p = 0.937, Eta2 (partial) = 4.34e-05)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - The interaction between Species and Cat1 is statistically not significant and small (F(2, 144) = 0.98, p = 0.377, Eta2 (partial) = 0.01)</span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Parameter    | Sum_Squares |  df | Mean_Square |        F |      p | Eta2 (partial) | Eta2_partial 90% CI</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ---------------------------------------------------------------------------------------------------------</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Species      |       63.21 |   2 |       31.61 |   118.43 | &lt; .001 |           0.62 |        [0.54, 0.68]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Cat1         |    1.67e-03 |   1 |    1.67e-03 | 6.25e-03 | 0.937  |       4.34e-05 |        [0.00, 0.00]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Species:Cat1 |        0.52 |   2 |        0.26 |     0.98 | 0.377  |           0.01 |        [0.00, 0.05]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Residuals    |       38.43 | 144 |        0.27 |          |        |                |                    </span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Parameter    | Sum_Squares |  df | Mean_Square |        F |      p | Eta2 (partial)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -----------------------------------------------------------------------------------</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Species      |       63.21 |   2 |       31.61 |   118.43 | &lt; .001 |           0.62</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Cat1         |    1.67e-03 |   1 |    1.67e-03 | 6.25e-03 | 0.937  |       4.34e-05</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Species:Cat1 |        0.52 |   2 |        0.26 |     0.98 | 0.377  |           0.01</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Residuals    |       38.43 | 144 |        0.27 |          |        |               </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
