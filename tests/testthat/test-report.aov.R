@@ -10,8 +10,8 @@ test_that("report.aov", {
   expect_equal(as.report_table(r2, summary = TRUE)$Mean_Square[1], 5.6724, tolerance = 0.01)
 
   r3 <- report(model)
-  expect_equal(c(ncol(as.report_table(r3, summary = TRUE)), nrow(as.report_table(r3, summary = TRUE))), c(8, 3))
-  expect_equal(sum(as.report_table(r3, summary = TRUE)$Mean_Square), 20.04901, tolerance = 0.01)
+  expect_equal(c(ncol(as.report_table(r3, summary = TRUE)), nrow(as.report_table(r3, summary = TRUE))), c(7, 2))
+  expect_equal(sum(as.report_table(r3, summary = TRUE)$Mean_Square), 5.787854, tolerance = 0.01)
 
   data <- iris
   data$Cat1 <- rep(c("X", "X", "Y"), length.out = nrow(data))

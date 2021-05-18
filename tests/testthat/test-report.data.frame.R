@@ -53,7 +53,7 @@ if (require("dplyr")) {
     expect_equal(mean(as.data.frame(r)$n_Obs), 107, tolerance = 0.01)
 
     r <- report(dplyr::group_by_at(iris, "Species"))
-    expect_equal(nrow(as.data.frame(r)), 12, tolerance = 0)
+    expect_equal(nrow(as.data.frame(r)), 8, tolerance = 0)
     expect_equal(mean(as.data.frame(r)$n_Obs), 50, tolerance = 0)
 
     expect_snapshot(r)

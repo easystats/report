@@ -62,7 +62,10 @@ Suggests:
 VignetteBuilder: 
     knitr
 Remotes:
-    easystats/bayestestR
+    easystats/insight,
+    easystats/bayestestR,
+    easystats/parameters,
+    easystats/effectsize
 Encoding: UTF-8
 Language: en-US
 RoxygenNote: 7.1.1.9001
