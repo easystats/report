@@ -115,8 +115,8 @@ report_text.bayesfactor_models <- function(x,
   model$Model[model$Model == "1"] <- "(Intercept only)"
   denominator <- attr(model, "denominator")
   BF_method <- attr(model, "BF_method")
-  max_den <- which.max(model$BF)
-  min_den <- which.min(model$BF)
+  max_den <- which.max(exp(model$log_BF))
+  min_den <- which.min(exp(model$log_BF))
 
   #### text ####
   model_ind <- rep("", nrow(model))
@@ -129,7 +129,7 @@ report_text.bayesfactor_models <- function(x,
     "Compared to the ", model$Model[denominator], " model", model_ind[denominator], ", ",
     "we found ",
     paste0(
-      effectsize::interpret_bf(model$BF[summ_inds],
+      effectsize::interpret_bf(exp(model$log_BF)[summ_inds],
         rules = interpretation, include_value = TRUE,
         exact = exact, protect_ratio = protect_ratio
       ),
@@ -162,7 +162,7 @@ report_text.bayesfactor_models <- function(x,
     "Compared to the ", model$Model[denominator], " model", model_ind[denominator], ", ",
     "we found ",
     paste0(
-      effectsize::interpret_bf(model$BF[-denominator],
+      effectsize::interpret_bf(exp(model$log_BF)[-denominator],
         rules = interpretation, include_value = TRUE,
         exact = exact, protect_ratio = protect_ratio
       ),
@@ -176,7 +176,7 @@ report_text.bayesfactor_models <- function(x,
   #### table ####
   model$Model <- paste0(" [", seq_len(nrow(model)), "] ", model$Model)
   bf_table <- as.data.frame(model)
-  bf_table$BF <- insight::format_bf(model$BF,
+  bf_table$BF <- insight::format_bf(exp(model$log_BF),
     name = NULL,
     exact = exact,
     protect_ratio = protect_ratio
@@ -192,7 +192,7 @@ report_text.bayesfactor_models <- function(x,
 
   #### table full ####
   bf_table_full <- bf_table
-  bf_table_full$BF2 <- insight::format_bf(model$BF / model$BF[max_den],
+  bf_table_full$BF2 <- insight::format_bf(exp(model$log_BF) / exp(model$log_BF)[max_den],
     name = NULL,
     exact = exact,
     protect_ratio = protect_ratio
@@ -304,7 +304,7 @@ report_text.bayesfactor_inclusion <- function(x,
 
   #### text ####
   bf_results <- data.frame(Term = rownames(model), stringsAsFactors = FALSE)
-  bf_results$evidence <- effectsize::interpret_bf(model$BF,
+  bf_results$evidence <- effectsize::interpret_bf(exp(model$log_BF),
     rules = interpretation, include_value = TRUE,
     exact = exact, protect_ratio = protect_ratio
   )
