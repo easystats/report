@@ -67,8 +67,6 @@ etc.)." />
 
 
 
-<!-- dependencies from examples -->
-
 
   
 
@@ -156,7 +154,7 @@ etc.)." />
 etc.).</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for htest</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='co'># S3 method for htest</span>
 <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for htest</span>
@@ -178,7 +176,7 @@ etc.).</p>
 <span class='fu'><a href='report_info.html'>report_info</a></span><span class='op'>(</span><span class='va'>x</span>, effectsize <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S3 method for htest</span>
-<span class='fu'><a href='report_text.html'>report_text</a></span><span class='op'>(</span><span class='va'>x</span>, table <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+<span class='fu'><a href='report_text.html'>report_text</a></span><span class='op'>(</span><span class='va'>x</span>, table <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -233,7 +231,7 @@ its re-computation.</p></td>
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span>, method <span class='op'>=</span> <span class='st'>"spearman"</span><span class='op'>)</span><span class='op'>)</span></span>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span>, method <span class='op'>=</span> <span class='st'>"spearman"</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>Cannot compute exact p-value with ties</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Funder's (2019) recommendations.</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
@@ -253,7 +251,7 @@ its re-computation.</p></td>
 <span class='r-in'><span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>mtcars</span><span class='op'>$</span><span class='va'>vs</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Cohen's (1988) recommendations.</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> The Welch Two Sample t-test testing the difference of mtcars$mpg by mtcars$vs (mean in group 0 = 16.62, mean in group 1 = 24.56) suggests that the effect is positive, statistically significant, and large (difference = 7.94, 95% CI [-11.46, -4.42], t(22.72) = -4.67, p &lt; .001; Cohen's d = -1.70, 95% CI [-2.50, -0.80])</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> The Welch Two Sample t-test testing the difference of mtcars$mpg by mtcars$vs (mean in group 0 = 16.62, mean in group 1 = 24.56) suggests that the effect is positive, statistically significant, and large (difference = 7.94, 95% CI [-11.46, -4.42], t(22.72) = -4.67, p &lt; .001; Cohen's d = -1.70, 95% CI [-2.55, -0.82])</span>
 <span class='r-in'><span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>mpg</span>, <span class='va'>mtcars</span><span class='op'>$</span><span class='va'>vs</span>, paired <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Cohen's (1988) recommendations.</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
@@ -262,7 +260,7 @@ its re-computation.</p></td>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Cohen's (1988) recommendations.</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> The One Sample t-test testing the difference between iris$Sepal.Width (mean = 3.06) and mu = 1 suggests that the effect is positive, statistically significant, and large (difference = 2.06, 95% CI [2.99, 3.13], t(149) = 57.81, p &lt; .001; Cohen's d = 4.72, 95% CI [4.17, 5.29])</span>
-</pre>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

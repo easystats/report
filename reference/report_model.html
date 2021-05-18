@@ -66,8 +66,6 @@
 
 
 
-<!-- dependencies from examples -->
-
 
   
 
@@ -154,7 +152,7 @@
     <p>Reports the type of different R objects (see list of supported objects in <code><a href='report.html'>report</a></code>).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>report_model</span><span class='op'>(</span><span class='va'>x</span>, table <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>report_model</span><span class='op'>(</span><span class='va'>x</span>, table <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -180,7 +178,7 @@ will run it.</p></td>
     <p>A <code>character</code> string.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://easystats.github.io/report/'>report</a></span><span class='op'>)</span></span>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://easystats.github.io/report/'>report</a></span><span class='op'>)</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># h-tests</span></span>
 <span class='r-in'><span class='fu'>report_model</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>)</span><span class='op'>)</span></span>
@@ -215,7 +213,7 @@ will run it.</p></td>
 <span class='r-in'><span class='op'>}</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Bayesian linear model (estimated using MCMC sampling with 4 chains of 600 iterations and a warmup of 300) to predict Sepal.Length with Species (formula: Sepal.Length ~ Species). Priors over parameters were all set as normal (mean = 0.00, SD = 4.38) distributions</span>
 <span class='r-in'><span class='co'># }</span></span>
-</pre>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -68,8 +68,6 @@ SEXIT documentation)." />
 
 
 
-<!-- dependencies from examples -->
-
 
   
 
@@ -158,8 +156,8 @@ the Sequential Effect eXistence and sIgnificance Testing framework (see
 <a href='https://easystats.github.io/bayestestR/reference/sexit.html'>SEXIT documentation</a>).</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for stanreg</span>
-<span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='co'># S3 method for stanreg</span>
+<span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -204,7 +202,7 @@ the Sequential Effect eXistence and sIgnificance Testing framework (see
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://easystats.github.io/report/'>report</a></span><span class='op'>)</span></span>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://easystats.github.io/report/'>report</a></span><span class='op'>)</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># \donttest{</span></span>
 <span class='r-in'><span class='co'># Bayesian models</span></span>
@@ -228,17 +226,17 @@ the Sequential Effect eXistence and sIgnificance Testing framework (see
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> The following object is masked from ‘package:performance’:</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span>     pp_check</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Parameter   | Median |         89% CI |     pd | % in ROPE |  Rhat |     ESS |                   Prior |  Fit</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> -------------------------------------------------------------------------------------------------------------</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> (Intercept) |  19.90 | [11.21, 28.33] |   100% |        0% | 0.998 |  922.00 | Normal (20.09 +- 15.07) |     </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> qsec        |   0.93 | [ 0.51,  1.38] | 99.90% |    12.10% | 0.998 | 1052.00 |   Normal (0.00 +- 8.43) |     </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> wt          |  -5.05 | [-5.83, -4.23] |   100% |        0% | 1.001 |  926.00 |  Normal (0.00 +- 15.40) |     </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>             |        |                |        |           |       |         |                         |     </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> R2          |        |                |        |           |       |         |                         | 0.81</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> R2 (adj.)   |        |                |        |           |       |         |                         | 0.77</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Sigma       |        |                |        |           |       |         |                         | 2.67</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Parameter   |  Mean |   SD |         89% CI |     pd | % in ROPE |  Rhat |     ESS |                   Prior |  Fit</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -------------------------------------------------------------------------------------------------------------------</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (Intercept) | 19.77 | 5.52 | [11.21, 28.33] |   100% |        0% | 0.998 |  922.00 | Normal (20.09 +- 15.07) |     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> qsec        |  0.93 | 0.28 | [ 0.51,  1.38] | 99.90% |    12.10% | 0.998 | 1052.00 |   Normal (0.00 +- 8.43) |     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> wt          | -5.06 | 0.52 | [-5.83, -4.23] |   100% |        0% | 1.001 |  926.00 |  Normal (0.00 +- 15.40) |     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>             |       |      |                |        |           |       |         |                         |     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> R2          |       |      |                |        |           |       |         |                         | 0.81</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> R2 (adj.)   |       |      |                |        |           |       |         |                         | 0.77</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Sigma       |       |      |                |        |           |       |         |                         | 2.67</span>
 <span class='r-in'><span class='co'># }</span></span>
-</pre>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

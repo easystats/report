@@ -66,8 +66,6 @@
 
 
 
-<!-- dependencies from examples -->
-
 
   
 
@@ -154,7 +152,7 @@
     <p>Create reports of Bayes factors for model comparison.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for bayesfactor_models</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='co'># S3 method for bayesfactor_models</span>
 <span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span>
   <span class='va'>x</span>,
   interpretation <span class='op'>=</span> <span class='st'>"jeffreys1961"</span>,
@@ -170,7 +168,7 @@
   exact <span class='op'>=</span> <span class='cn'>TRUE</span>,
   protect_ratio <span class='op'>=</span> <span class='cn'>TRUE</span>,
   <span class='va'>...</span>
-<span class='op'>)</span></pre>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -229,7 +227,7 @@ scientific format (e.g., 4.24e5), or as truncated values (as "&gt; 1000" and
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://easystats.github.io/report/'>report</a></span><span class='op'>)</span></span>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://easystats.github.io/report/'>report</a></span><span class='op'>)</span></span>
 <span class='r-in'></span>
 <span class='r-in'><span class='va'>mo0</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='fl'>1</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span></span>
 <span class='r-in'><span class='va'>mo1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span></span>
@@ -254,13 +252,13 @@ scientific format (e.g., 4.24e5), or as truncated values (as "&gt; 1000" and
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Loading required package: bayestestR</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Terms                | Pr(prior) | Pr(posterior) | Inclusion BF</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> ---------------------------------------------------------------</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Species              |      0.43 |          0.95 |     3.90e+55</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Petal.Length         |      0.29 |          0.95 |     6.89e+26</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Petal.Length:Species |      0.43 |          0.05 |      1/26.52</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Species              |      0.43 |          0.95 |       128.00</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Petal.Length         |      0.29 |          0.95 |        61.80</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Petal.Length:Species |      0.43 |          0.05 |  1/-3.05e-01</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Across matched models only.</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> With custom prior odds of [1, 2, 3].</span>
-</pre>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
