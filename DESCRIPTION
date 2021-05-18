@@ -39,10 +39,10 @@ URL: https://easystats.github.io/report/
 BugReports: https://github.com/easystats/report/issues
 Imports:
     bayestestR (>= 0.9.0),
-    effectsize (>= 0.4.4),
-    insight (>= 0.13.2),
+    effectsize (>= 0.4.4-1),
+    insight (>= 0.14.0),
     parameters (>= 0.13.0),
-    performance (>= 0.7.1),
+    performance (>= 0.7.2),
     stats,
     tools,
     utils
@@ -61,10 +61,15 @@ Suggests:
     testthat
 VignetteBuilder: 
     knitr
-Config/testthat/edition: 3
+Remotes:
+    easystats/insight,
+    easystats/bayestestR,
+    easystats/parameters,
+    easystats/effectsize
 Encoding: UTF-8
 Language: en-US
 RoxygenNote: 7.1.1.9001
+Config/testthat/edition: 3
 Collate: 
     'cite_easystats.R'
     'format_algorithm.R'
