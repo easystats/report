@@ -4,17 +4,11 @@ test_that("report.aov", {
   expect_equal(c(ncol(as.report_table(r1, summary = TRUE)), nrow(as.report_table(r1, summary = TRUE))), c(7, 2))
   expect_equal(as.report_table(r1, summary = TRUE)$Mean_Square[1], 5.6724, tolerance = 0.01)
 
-  set.seed(123)
-  expect_snapshot(suppressWarnings(report(model)))
-
   model <- aov(Sepal.Width ~ Species, data = iris)
   r2 <- report(model)
   expect_equal(c(ncol(as.report_table(r2, summary = TRUE)), nrow(as.report_table(r2, summary = TRUE))), c(7, 2))
   expect_equal(as.report_table(r2, summary = TRUE)$Mean_Square[1], 5.6724, tolerance = 0.01)
 
-  model <- aov(wt ~ cyl + Error(gear), data = mtcars)
-  set.seed(123)
-  expect_snapshot(suppressWarnings(report(model)))
   r3 <- report(model)
   expect_equal(c(ncol(as.report_table(r3, summary = TRUE)), nrow(as.report_table(r3, summary = TRUE))), c(8, 3))
   expect_equal(sum(as.report_table(r3, summary = TRUE)$Mean_Square), 20.04901, tolerance = 0.01)
@@ -32,4 +26,15 @@ test_that("report.aov", {
   r5 <- report(model)
   expect_equal(c(ncol(as.report_table(r5, summary = TRUE)), nrow(as.report_table(r5, summary = TRUE))), c(8, 5))
   expect_equal(as.report_table(r5, summary = TRUE)$Mean_Square[1], 0.00167, tolerance = 0.01)
+
+  # snapshot tests -----
+
+  set.seed(123)
+  expect_snapshot(suppressWarnings(report(anova(lm(Sepal.Width ~ Species, data = iris)))))
+
+  set.seed(123)
+  expect_snapshot(suppressWarnings(report(anova(lm(wt ~ as.factor(am) * as.factor(cyl), data = mtcars)))))
+
+  set.seed(123)
+  expect_snapshot(suppressWarnings(report(aov(wt ~ cyl + Error(gear), data = mtcars))))
 })

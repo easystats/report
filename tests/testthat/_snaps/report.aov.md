@@ -1,7 +1,7 @@
 # report.aov
 
     Code
-      suppressWarnings(report(model))
+      suppressWarnings(report(anova(lm(Sepal.Width ~ Species, data = iris))))
     Message <simpleMessage>
       For one-way between subjects designs, partial eta squared is equivalent to eta squared.
       Returning eta squared.
@@ -15,7 +15,20 @@
 ---
 
     Code
-      suppressWarnings(report(model))
+      suppressWarnings(report(anova(lm(wt ~ as.factor(am) * as.factor(cyl), data = mtcars))))
+    Output
+      The ANOVA suggests that:
+      
+        - The main effect of as.factor(am) is statistically significant and large (F(1, 26) = 45.39, p < .001; Eta2 (partial) = 0.64, 90% CI [0.43, 0.75])
+        - The main effect of as.factor(cyl) is statistically significant and large (F(2, 26) = 11.53, p < .001; Eta2 (partial) = 0.47, 90% CI [0.21, 0.63])
+        - The interaction between as.factor(am) and as.factor(cyl) is statistically not significant and very small (F(2, 26) = 0.11, p = 0.899; Eta2 (partial) = 8.13e-03, 90% CI [0.00, 0.05])
+      
+      Effect sizes were labelled following Field's (2013) recommendations.
+
+---
+
+    Code
+      suppressWarnings(report(aov(wt ~ cyl + Error(gear), data = mtcars)))
     Output
       The repeated-measures ANOVA (formula: wt ~ cyl + Error(gear)) suggests that:
       
