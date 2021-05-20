@@ -21,7 +21,6 @@ the Sequential Effect eXistence and sIgnificance Testing framework (see
 }
 \examples{
 library(report)
-
 \donttest{
 # Bayesian models
 if (require("rstanarm")) {

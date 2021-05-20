@@ -3,7 +3,8 @@
 #' Create reports of Bayes factors for model comparison.
 #'
 #' @param x Object of class \code{bayesfactor_inclusion}.
-#' @param interpretation Effect size interpretation set of rules (see \link[effectsize]{interpret_bf}).
+#' @param interpretation Effect size interpretation set of rules (see
+#'   \link[effectsize]{interpret_bf}).
 #' @inheritParams report
 #' @inheritParams effectsize::interpret_bf
 #' @inherit report return seealso
@@ -48,6 +49,7 @@ report.bayesfactor_models <- function(x,
     protect_ratio = protect_ratio,
     ...
   )
+
   as.report(
     text = as.report_text(out$text_full, summary = out$text_short),
     table = as.report_table(out$table_full, summary = out$table_short),
@@ -237,6 +239,7 @@ report.bayesfactor_inclusion <- function(x,
     protect_ratio = protect_ratio,
     ...
   )
+
   as.report(
     text = as.report_text(out$text_full, summary = out$text_short),
     table = as.report_table(out$table_full, summary = out$table_short),
@@ -354,6 +357,7 @@ report_text.bayesfactor_inclusion <- function(x,
       )
     }
   )
+
   bf_text_full <- paste0(
     bf_explain,
     paste0(

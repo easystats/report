@@ -115,7 +115,6 @@ Collate:
     'report_sample.R'
     'report_statistics.R'
     'report_table.R'
-    'startup_message.R'
     'utils_data.R'
     'utils_error_message.R'
     'utils_grouped_df.R'

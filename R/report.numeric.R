@@ -52,8 +52,6 @@ report.numeric <- function(x,
 
 
 
-
-
 # report_table ------------------------------------------------------------
 
 #' @export
@@ -137,8 +135,6 @@ report_table.numeric <- function(x,
 
 
 # report_parameters -------------------------------------------------------
-
-
 
 #' @export
 report_parameters.numeric <- function(x,
@@ -304,10 +300,6 @@ report_text.numeric <- function(x,
 }
 
 
-
-
-
-
 # report_statistics -------------------------------------------------------
 
 
@@ -322,7 +314,6 @@ report_statistics.numeric <- function(x,
                                       missing_percentage = "auto",
                                       digits = 2,
                                       ...) {
-
 
   # Get parameters
   params <- report_parameters(

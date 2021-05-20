@@ -31,9 +31,7 @@ report.htest <- function(x, ...) {
 }
 
 
-
 # report_effectsize -------------------------------------------------------
-
 
 #' @rdname report.htest
 #' @importFrom effectsize effectsize interpret_r interpret_d
@@ -195,8 +193,6 @@ report_statistics.htest <- function(x, table = NULL, ...) {
     effsize = effsize
   )
 }
-
-
 
 
 # report_statistics ------------------------------------------------------------

@@ -24,7 +24,6 @@ library(report)
 report_date()
 summary(report_date())
 report_story()
-
 }
 \seealso{
 Specific components of reports (especially for stats models):
