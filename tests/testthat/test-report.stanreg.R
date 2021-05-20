@@ -3,7 +3,7 @@ if (require("testthat") && require("rstanarm")) {
   model <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300)
 
   test_that("model-stanreg", {
-    r <- report(model, centrality = "median")
+    r <- report(model, centrality = "mean")
     expect_s3_class(summary(r), "character")
     expect_s3_class(as.data.frame(r), "data.frame")
 
