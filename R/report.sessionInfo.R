@@ -38,8 +38,6 @@ report.sessionInfo <- function(x, ...) {
 
 
 
-
-
 # Aliases -----------------------------------------------------------------
 
 
@@ -50,7 +48,6 @@ report_packages <- function(session = NULL, include_R = TRUE, ...) {
   if (is.null(session)) session <- utils::sessionInfo()
   report_parameters(session, include_R = include_R, ...)
 }
-
 
 
 #' @importFrom utils sessionInfo
@@ -70,7 +67,6 @@ cite_packages <- function(session = NULL, include_R = TRUE, ...) {
 
   as.report_parameters(x, ...)
 }
-
 
 
 
@@ -173,12 +169,8 @@ report_parameters.sessionInfo <- function(x, table = NULL, include_R = TRUE, ...
     format_citation(x$Reference, authorsdate = TRUE, short = TRUE, intext = TRUE),
     ")"
   )
-  x$summary <- paste0(
-    x$Package,
-    " (v",
-    x$Version,
-    ")"
-  )
+
+  x$summary <- paste0(x$Package, " (v", x$Version, ")")
 
   x <- x[order(x$Reference), ]
 

@@ -1,6 +1,7 @@
 #' Report intercept
 #'
-#' Reports intercept of regression models (see list of supported objects in \code{\link{report}}).
+#' Reports intercept of regression models (see list of supported objects in
+#' \code{\link{report}}).
 #'
 #' @inheritParams report
 #' @inheritParams report_table
@@ -67,8 +68,6 @@ print.report_intercept <- function(x, ...) {
 
 
 # Utils -------------------------------------------------------------------
-
-
 
 
 #' @importFrom insight is_nullmodel get_data find_variables

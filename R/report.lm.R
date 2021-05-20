@@ -10,7 +10,8 @@
 #' @param include_intercept If \code{FALSE}, won't include the intercept.
 #' @param effectsize_method See documentation for
 #'   \code{\link[effectsize:effectsize]{effectsize::effectsize()}}.
-#' @param parameters Provide the output of \code{report_parameters()} to avoid its re-computation.
+#' @param parameters Provide the output of \code{report_parameters()} to avoid
+#'   its re-computation.
 #' @inheritParams report
 #' @inheritParams report.htest
 #'
@@ -58,8 +59,6 @@ report.lm <- function(x, include_effectsize = TRUE, effectsize_method = "refit",
 
   as.report(text, table = table, ...)
 }
-
-
 
 
 
@@ -182,9 +181,6 @@ report_table.lm <- function(x, include_effectsize = TRUE, ...) {
     attr(out, att) <- attributes(params)[[att]]
   }
 
-  ## TODO  remove after insight > 0.11.1 on CRAN
-  attr(out, "pretty_names") <- NULL
-
   out
 }
 
@@ -274,7 +270,6 @@ report_statistics.lm <- function(x,
 
 
 
-
 # report_statistics ------------------------------------------------------------
 
 #' @rdname report.lm
@@ -285,7 +280,6 @@ report_parameters.lm <- function(x,
                                  include_effectsize = TRUE,
                                  include_intercept = TRUE,
                                  ...) {
-
 
   # Get data
   stats <- report_statistics(x, table = table, include_effectsize = include_effectsize, ...)
@@ -320,7 +314,13 @@ report_parameters.lm <- function(x,
   text <- paste0(text[idx], " (", summary(stats)[idx], ")")
 
 
-  as.report_parameters(text_full, summary = text, table = params, effectsize = effsize, ...)
+  as.report_parameters(
+    text_full,
+    summary = text,
+    table = params,
+    effectsize = effsize,
+    ...
+  )
 }
 
 
@@ -365,8 +365,6 @@ report_intercept.lm <- function(x, table = NULL, ...) {
 
   as.report_intercept(text_full, summary = text, ...)
 }
-
-
 
 
 # report_model ------------------------------------------------------------
@@ -440,9 +438,6 @@ report_model.lm <- function(x, table = NULL, ...) {
 
   as.report_model(text_full, summary = text, ...)
 }
-
-
-
 
 
 # report_info ------------------------------------------------------------

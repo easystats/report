@@ -16,5 +16,4 @@ A convenient function for those who wish to cite the easystats packages.
 cite_easystats()
 summary(cite_easystats())
 as.data.frame(cite_easystats())
-
 }

@@ -24,7 +24,8 @@
 \arguments{
 \item{x}{Object of class \code{bayesfactor_inclusion}.}
 
-\item{interpretation}{Effect size interpretation set of rules (see \link[effectsize]{interpret_bf}).}
+\item{interpretation}{Effect size interpretation set of rules (see
+\link[effectsize]{interpret_bf}).}
 
 \item{exact}{Should very large or very small values be reported with a
 scientific format (e.g., 4.24e5), or as truncated values (as "> 1000" and
