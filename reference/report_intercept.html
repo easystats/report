@@ -47,7 +47,8 @@
 
 
 <meta property="og:title" content="Report intercept — report_intercept" />
-<meta property="og:description" content="Reports intercept of regression models (see list of supported objects in report)." />
+<meta property="og:description" content="Reports intercept of regression models (see list of supported objects in
+report)." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -149,7 +150,8 @@
     </div>
 
     <div class="ref-description">
-    <p>Reports intercept of regression models (see list of supported objects in <code><a href='report.html'>report</a></code>).</p>
+    <p>Reports intercept of regression models (see list of supported objects in
+<code><a href='report.html'>report</a></code>).</p>
     </div>
 
     <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>report_intercept</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></code></pre></div>
@@ -180,7 +182,6 @@ objects above).</p></td>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> The model's intercept, corresponding to Species = setosa, is at 5.01 (95% CI [4.86, 5.15], t(147) = 68.76, p &lt; .001).</span>
 <span class='r-in'><span class='fu'>report_intercept</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='va'>vs</span> <span class='op'>~</span> <span class='va'>disp</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, family <span class='op'>=</span> <span class='st'>"binomial"</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> The model's intercept, corresponding to disp = 0, is at 4.14 (95% CI [1.81, 7.44], p &lt; .01).</span>
-<span class='r-in'></span>
 <span class='r-in'><span class='co'># \donttest{</span></span>
 <span class='r-in'><span class='co'># Mixed models</span></span>
 <span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://github.com/lme4/lme4/'>"lme4"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
