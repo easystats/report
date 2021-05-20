@@ -37,8 +37,6 @@ report.lavaan <- function(x, ...) {
 
 
 
-
-
 #' @export
 report_table.lavaan <- function(x, ...) {
   parameters <- parameters::model_parameters(x, ...)
@@ -78,10 +76,6 @@ report_table.lavaan <- function(x, ...) {
 
   out
 }
-
-
-
-
 
 
 

@@ -35,10 +35,14 @@ test_that("report.htest", {
   # one-sample
   set.seed(123)
   expect_snapshot(report(t.test(iris$Sepal.Width, mu = 1)))
+  expect_snapshot(report(t.test(iris$Sepal.Width, mu = -1, alternative = "l")))
+  expect_snapshot(report(t.test(iris$Sepal.Width, mu = 5, alternative = "g")))
 
   # two-sample unpaired
   set.seed(123)
   expect_snapshot(report(t.test(formula = wt ~ am, data = mtcars)))
+  expect_snapshot(report(t.test(formula = wt ~ am, data = mtcars, alternative = "l")))
+  expect_snapshot(report(t.test(formula = wt ~ am, data = mtcars, alternative = "g")))
 
   if (getRversion() > "4.0") {
     # two-sample paired

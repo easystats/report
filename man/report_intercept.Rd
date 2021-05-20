@@ -16,7 +16,8 @@ objects above).}
 An object of class \code{\link{report_intercept}}.
 }
 \description{
-Reports intercept of regression models (see list of supported objects in \code{\link{report}}).
+Reports intercept of regression models (see list of supported objects in
+\code{\link{report}}).
 }
 \examples{
 library(report)
@@ -24,7 +25,6 @@ library(report)
 # GLMs
 report_intercept(lm(Sepal.Length ~ Species, data = iris))
 report_intercept(glm(vs ~ disp, data = mtcars, family = "binomial"))
-
 \donttest{
 # Mixed models
 if (require("lme4")) {

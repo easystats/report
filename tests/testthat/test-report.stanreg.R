@@ -15,8 +15,11 @@ if (require("testthat") && require("rstanarm")) {
       )
     )
     expect_equal(
-      as.data.frame(r)$Median,
-      c(19.906865, 0.930295, -5.119548, rep(NA, 7)),
+      as.data.frame(r)$Mean,
+      c(
+        19.6150397292409, 0.937896549338215, -5.04660975597389, NA,
+        NA, NA, NA, NA, NA, NA
+      ),
       tolerance = 1e-1
     )
     expect_equal(

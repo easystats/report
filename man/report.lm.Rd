@@ -76,7 +76,8 @@ indices for Bayesian models (ESS, Rhat).}
 \item{effectsize}{Provide the output of \code{report_effectsize()} to avoid
 its re-computation.}
 
-\item{parameters}{Provide the output of \code{report_parameters()} to avoid its re-computation.}
+\item{parameters}{Provide the output of \code{report_parameters()} to avoid
+its re-computation.}
 }
 \value{
 An object of class \code{\link{report}}.
@@ -94,7 +95,6 @@ r
 summary(r)
 as.data.frame(r)
 summary(as.data.frame(r))
-
 \donttest{
 # Logistic models
 model <- glm(vs ~ disp, data = mtcars, family = "binomial")
