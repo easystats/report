@@ -118,6 +118,7 @@ report_table.aov <- function(x, ...) {
 
   if ("Group" %in% names(params)) {
     effsize_table$Group <- "Within"
+    params <- subset(params, Group == "Within")
     table_full <- merge(params, effsize_table, all = TRUE)
     table_full <- table_full[order(
       match(
