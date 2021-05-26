@@ -24,8 +24,8 @@ test_that("report.aov", {
 
   model <- aov(Sepal.Length ~ Species * Cat1 + Error(Cat2), data = data)
   r5 <- report(model)
-  expect_equal(c(ncol(as.report_table(r5, summary = TRUE)), nrow(as.report_table(r5, summary = TRUE))), c(8, 5))
-  expect_equal(as.report_table(r5, summary = TRUE)$Mean_Square[1], 0.00167, tolerance = 0.01)
+  expect_equal(c(ncol(as.report_table(r5, summary = TRUE)), nrow(as.report_table(r5, summary = TRUE))), c(8, 4))
+  expect_equal(as.report_table(r5, summary = TRUE)$Mean_Square[1], 31.60607, tolerance = 0.01)
 
   # snapshot tests -----
 
