@@ -32,7 +32,6 @@
     Output
       The repeated-measures ANOVA (formula: wt ~ cyl + Error(gear)) suggests that:
       
-        - The main effect of cyl is statistically NA and large (F(1, 29) = 27.94, p < .001; Eta2 (partial) = 0.49, 90% CI [0.27, 0.64])
         - The main effect of cyl is statistically significant and large (F(1, 29) = 27.94, p < .001; Eta2 (partial) = 0.49, 90% CI [0.27, 0.64])
       
       Effect sizes were labelled following Field's (2013) recommendations.
