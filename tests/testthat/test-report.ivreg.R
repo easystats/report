@@ -1,14 +1,13 @@
-if (require("testthat") && require("report") && require("AER")) {
+if (require("testthat") && require("report") && require("ivreg")) {
   test_that("report-survreg", {
-    data("CigarettesSW", package = "AER")
+    data("CigaretteDemand", package = "ivreg")
+
 
     # model
     set.seed(123)
     ivr <-
-      AER::ivreg(
-        formula = log(packs) ~ income | population,
-        data = CigarettesSW
-      )
+      ivreg(log(packs) ~ log(rprice) + log(rincome) | salestax + log(rincome),
+            data = CigaretteDemand)
 
     expect_snapshot(report(ivr))
   })
