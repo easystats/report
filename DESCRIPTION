@@ -58,6 +58,7 @@ Suggests:
     rmarkdown,
     rstanarm,
     spelling,
+    survival,
     testthat
 VignetteBuilder: 
     knitr
