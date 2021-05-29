@@ -6,9 +6,10 @@
       Formula contains log- or sqrt-terms. See help("standardize") for how such terms are standardized.
       Formula contains log- or sqrt-terms. See help("standardize") for how such terms are standardized.
     Output
-      We fitted a linear model to predict packs with income and population (formula: log(packs) ~ income). The model's explanatory power is weak (R2 = 0.11, adj. R2 = 0.10). The model's intercept, corresponding to income = 0, is at 4.71 (95% CI [4.65, 4.77], t(94) = 150.96, p < .001). Within this model:
+      We fitted a linear model to predict packs with rprice, rincome and salestax (formula: log(packs) ~ log(rprice) + log(rincome)). The model's explanatory power is substantial (R2 = 0.42, adj. R2 = 0.39). The model's intercept, corresponding to rprice = 0 and rincome = 0, is at 9.43 (95% CI [6.77, 12.09], t(45) = 6.94, p < .001). Within this model:
       
-        - The effect of income is statistically significant and negative (beta = -4.76e-10, 95% CI [-8.78e-10, -7.36e-11], t(94) = -2.32, p < .05; Std. beta = -0.08, 95% CI [-0.14, -0.01])
+        - The effect of rprice [log] is statistically significant and negative (beta = -1.14, 95% CI [-1.85, -0.44], t(45) = -3.18, p < .01; Std. beta = -0.53, 95% CI [-0.85, -0.21])
+        - The effect of rincome [log] is statistically non-significant and positive (beta = 0.21, 95% CI [-0.31, 0.74], t(45) = 0.80, p = 0.429; Std. beta = 0.12, 95% CI [-0.14, 0.38])
       
       Standardized parameters were obtained by fitting the model on a standardized version of the dataset.
 
