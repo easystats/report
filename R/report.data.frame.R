@@ -54,7 +54,7 @@ report.data.frame <- function(x,
                               ...) {
 
   # remove list columns
-  x <- x[, sapply(x, class) != "list"]
+  x <- x[, sapply(x, Negate(inherits), what = "list")]
 
   table <-
     report_table(
