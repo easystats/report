@@ -96,6 +96,7 @@ Collate:
     'report.factor.R'
     'report.glm.R'
     'report.glmmTMB.R'
+    'report.ivreg.R'
     'report.lavaan.R'
     'report.lme.R'
     'report.numeric.R'
