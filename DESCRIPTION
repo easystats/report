@@ -47,11 +47,11 @@ Imports:
     tools,
     utils
 Suggests:
-    AER,
     BayesFactor,
     brms,
     dplyr,
     httr,
+    ivreg,
     knitr,
     lavaan,
     lme4,
