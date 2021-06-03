@@ -179,11 +179,11 @@ objects above).</p></td>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># h-tests</span></span>
 <span class='r-in'><span class='fu'>report_effectsize</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Cohen's (1988) recommendations. </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Cohen's (1988) recommendations (interpret with caution). </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> large (Cohen's d = -4.21, 95% CI [-4.66, -3.76])</span>
 <span class='r-in'><span class='fu'>report_effectsize</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Funder's (2019) recommendations. </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Funder's (2019) recommendations (interpret with caution). </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> small (r = -0.12, 95% CI [-0.27, 0.04])</span>
 <span class='r-in'></span>
@@ -191,13 +191,13 @@ objects above).</p></td>
 <span class='r-in'><span class='fu'>report_effectsize</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> For one-way between subjects designs, partial eta squared is equivalent to eta squared.</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Returning eta squared.</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Field's (2013) recommendations. </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Field's (2013) recommendations (interpret with caution). </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> large (Eta2 = 0.62, 90% CI [0.54, 0.68])</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># GLMs</span></span>
 <span class='r-in'><span class='fu'>report_effectsize</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>*</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Cohen's (1988) recommendations. </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Cohen's (1988) recommendations (interpret with caution). </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> small (Std. beta = 0.49, 95% CI [-1.03, 2.01])</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> large (Std. beta = 1.16, 95% CI [-0.01, 2.32])</span>
@@ -206,7 +206,7 @@ objects above).</p></td>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> medium (Std. beta = 0.61, 95% CI [-0.63, 1.85])</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> large (Std. beta = 0.97, 95% CI [-0.26, 2.19])</span>
 <span class='r-in'><span class='fu'>report_effectsize</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='va'>vs</span> <span class='op'>~</span> <span class='va'>disp</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, family <span class='op'>=</span> <span class='st'>"binomial"</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Chen's (2010) recommendations. </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Chen's (2010) recommendations (interpret with caution). </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> small (Std. beta = -0.85, 95% CI [-2.42, 0.27])</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> large (Std. beta = -2.68, 95% CI [-4.90, -1.27])</span>
@@ -216,7 +216,7 @@ objects above).</p></td>
 <span class='r-in'>  <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'>lme4</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>|</span> <span class='va'>Species</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span></span>
 <span class='r-in'>  <span class='fu'>report_effectsize</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span></span>
 <span class='r-in'><span class='op'>}</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Cohen's (1988) recommendations. </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Cohen's (1988) recommendations (interpret with caution). </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> very small (Std. beta = -1.46e-13, 95% CI [-1.47, 1.47])</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> large (Std. beta = 1.89, 95% CI [1.63, 2.16])</span>
@@ -226,7 +226,7 @@ objects above).</p></td>
 <span class='r-in'>  <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://mc-stan.org/rstanarm/reference/stan_glm.html'>stan_glm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span>, refresh <span class='op'>=</span> <span class='fl'>0</span>, iter <span class='op'>=</span> <span class='fl'>600</span><span class='op'>)</span></span>
 <span class='r-in'>  <span class='fu'>report_effectsize</span><span class='op'>(</span><span class='va'>model</span>, effectsize_method <span class='op'>=</span> <span class='st'>"basic"</span><span class='op'>)</span></span>
 <span class='r-in'><span class='op'>}</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Cohen's (1988) recommendations. </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Cohen's (1988) recommendations (interpret with caution). </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> very small (Std. beta = 0.00, 95% CI [0.00, 0.00])</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> medium (Std. beta = 0.53, 95% CI [0.43, 0.64])</span>
