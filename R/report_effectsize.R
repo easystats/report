@@ -102,7 +102,7 @@ print.report_effectsize <- function(x, ...) {
           )
         )
       )
-      text <- paste0("Effect sizes were labelled following ", effsize_name, " recommendations (interpret with caution).")
+      text <- paste0("Effect sizes were labelled following ", effsize_name, " recommendations.")
     } else {
       text <- paste0("Effect sizes were labelled following a custom set of rules.")
     }
