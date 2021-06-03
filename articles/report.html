@@ -159,12 +159,12 @@
 <p><code>report</code> can also be used to provide automated summaries for statistical model objects from correlation, t-tests, etc.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">wt</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span><span class="op">)</span><span class="op">)</span>
-<span class="co"># Effect sizes were labelled following Funder's (2019) recommendations (interpret with caution).</span>
+<span class="co"># Effect sizes were labelled following Funder's (2019) recommendations.</span>
 <span class="co"># </span>
 <span class="co"># The Pearson's product-moment correlation between mtcars$wt and mtcars$mpg is negative, statistically significant, and very large (r = -0.87, 95% CI [-0.93, -0.74], t(30) = -9.56, p &lt; .001)</span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">wt</span> <span class="op">~</span> <span class="va">am</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span>
-<span class="co"># Effect sizes were labelled following Cohen's (1988) recommendations (interpret with caution).</span>
+<span class="co"># Effect sizes were labelled following Cohen's (1988) recommendations.</span>
 <span class="co"># </span>
 <span class="co"># The Welch Two Sample t-test testing the difference of wt by am (mean in group 0 = 3.77, mean in group 1 = 2.41) suggests that the effect is negative, statistically significant, and large (difference = -1.36, 95% CI [0.85, 1.86], t(29.23) = 5.49, p &lt; .001; Cohen's d = 2.03, 95% CI [1.13, 2.91])</span></code></pre></div>
 </div>
@@ -199,7 +199,7 @@
 <span class="co">#   - The main effect of am is statistically significant and large (F(1, 29) = 69.21, p &lt; .001; Eta2 (partial) = 0.70, 90% CI [0.54, 0.80])</span>
 <span class="co">#   - The main effect of mpg is statistically significant and large (F(1, 29) = 46.12, p &lt; .001; Eta2 (partial) = 0.61, 90% CI [0.42, 0.73])</span>
 <span class="co"># </span>
-<span class="co"># Effect sizes were labelled following Field's (2013) recommendations (interpret with caution).</span></code></pre></div>
+<span class="co"># Effect sizes were labelled following Field's (2013) recommendations.</span></code></pre></div>
 </div>
 <div id="general-linear-models-glms-glm" class="section level3">
 <h3 class="hasAnchor">

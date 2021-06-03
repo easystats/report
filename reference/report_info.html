@@ -179,22 +179,22 @@ objects above).</p></td>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># h-tests</span></span>
 <span class='r-in'><span class='fu'>report_info</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Cohen's (1988) recommendations (interpret with caution).</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Cohen's (1988) recommendations.</span>
 <span class='r-in'><span class='fu'>report_info</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Funder's (2019) recommendations (interpret with caution).</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Funder's (2019) recommendations.</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># ANOVAs</span></span>
 <span class='r-in'><span class='fu'>report_info</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> For one-way between subjects designs, partial eta squared is equivalent to eta squared.</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Returning eta squared.</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Field's (2013) recommendations (interpret with caution).</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Field's (2013) recommendations.</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># \donttest{</span></span>
 <span class='r-in'><span class='co'># GLMs</span></span>
 <span class='r-in'><span class='fu'>report_info</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>*</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Standardized parameters were obtained by fitting the model on a standardized version of the dataset.</span>
 <span class='r-in'><span class='fu'>report_info</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>*</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span>, include_effectsize <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Standardized parameters were obtained by fitting the model on a standardized version of the dataset and were labelled following Cohen's (1988) recommendations (interpret with caution).</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Standardized parameters were obtained by fitting the model on a standardized version of the dataset and were labelled following Cohen's (1988) recommendations.</span>
 <span class='r-in'><span class='fu'>report_info</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='va'>vs</span> <span class='op'>~</span> <span class='va'>disp</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, family <span class='op'>=</span> <span class='st'>"binomial"</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Standardized parameters were obtained by fitting the model on a standardized version of the dataset. 95% Confidence Intervals (CIs) and p-values were computed using </span>
 <span class='r-in'></span>
