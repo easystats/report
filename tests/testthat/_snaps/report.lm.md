@@ -20,8 +20,8 @@
         - The effect of am [1] is statistically significant and negative (beta = -0.89, 95% CI [-1.67, -0.11], t(26) = -2.36, p < .05; Std. beta = -0.91, 95% CI [-1.71, -0.12])
         - The effect of cyl [6] is statistically non-significant and positive (beta = 0.45, 95% CI [-0.43, 1.33], t(26) = 1.06, p = 0.298; Std. beta = 0.46, 95% CI [-0.43, 1.36])
         - The effect of cyl [8] is statistically significant and positive (beta = 1.17, 95% CI [0.43, 1.91], t(26) = 3.23, p < .01; Std. beta = 1.19, 95% CI [0.44, 1.95])
-        - The interaction effect of as.cyl6 on am [1] is statistically non-significant and positive (beta = 0.26, 95% CI [-0.92, 1.43], t(26) = 0.45, p = 0.654; Std. beta = 0.26, 95% CI [-0.94, 1.47])
-        - The interaction effect of as.cyl8 on am [1] is statistically non-significant and positive (beta = 0.16, 95% CI [-1.02, 1.33], t(26) = 0.28, p = 0.783; Std. beta = 0.16, 95% CI [-1.04, 1.36])
+        - The interaction effect of as cyl6 on am [1] is statistically non-significant and positive (beta = 0.26, 95% CI [-0.92, 1.43], t(26) = 0.45, p = 0.654; Std. beta = 0.26, 95% CI [-0.94, 1.47])
+        - The interaction effect of as cyl8 on am [1] is statistically non-significant and positive (beta = 0.16, 95% CI [-1.02, 1.33], t(26) = 0.28, p = 0.783; Std. beta = 0.16, 95% CI [-1.04, 1.36])
       
       Standardized parameters were obtained by fitting the model on a standardized version of the dataset.
 
