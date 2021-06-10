@@ -147,8 +147,8 @@ report(t.test(mtcars$mpg ~ mtcars$am))
     # The Welch Two Sample t-test testing the difference of mtcars$mpg by mtcars$am
     # (mean in group 0 = 17.15, mean in group 1 = 24.39) suggests that the effect is
     # positive, statistically significant, and large (difference = 7.24, 95% CI
-    # [-11.28, -3.21], t(18.33) = -3.77, p < .01; Cohen's d = -1.41, 95% CI [-2.17,
-    # -0.51])
+    # [-11.28, -3.21], t(18.33) = -3.77, p < .01; Cohen's d = -1.41, 95% CI [-2.26,
+    # -0.53])
 
 As mentioned, you can also create tables with the `as.data.frame()`
 functions, like for example with this correlation test:
@@ -157,9 +157,9 @@ functions, like for example with this correlation test:
 cor.test(iris$Sepal.Length, iris$Sepal.Width) %>%
   report() %>%
   as.data.frame()
-# Parameter1        |       Parameter2 |     r |        95% CI | t(148) |     p |                               Method
-# --------------------------------------------------------------------------------------------------------------------
-# iris$Sepal.Length | iris$Sepal.Width | -0.12 | [-0.27, 0.04] |  -1.44 | 0.152 | Pearson's product-moment correlation
+# Parameter1        |       Parameter2 |     r |        95% CI | t(148) |     p |                               Method | Alternative
+# ----------------------------------------------------------------------------------------------------------------------------------
+# iris$Sepal.Length | iris$Sepal.Width | -0.12 | [-0.27, 0.04] |  -1.44 | 0.152 | Pearson's product-moment correlation |   two.sided
 ```
 
 ### ANOVAs
@@ -229,7 +229,7 @@ report(model)
     # The model's intercept, corresponding to Petal.Length = 0, is at 2.50 (95% CI
     # [1.20, 3.81], t(146) = 3.75, p < .001). Within this model:
     # 
-    #   - The effect of Petal.Length is statistically significant and positive (beta =
+    #   - The effect of Petal Length is statistically significant and positive (beta =
     # 0.89, 95% CI [0.76, 1.01], t(146) = 13.93, p < .001; Std. beta = 1.89, 95% CI
     # [1.63, 2.16])
     # 
@@ -255,18 +255,18 @@ report(model)
     # of 1000 iterations and a warmup of 500) to predict mpg with qsec and wt
     # (formula: mpg ~ qsec + wt). Priors over parameters were set as normal (mean =
     # 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The
-    # model's explanatory power is substantial (R2 = 0.81, 89% CI [0.73, 0.88], adj.
+    # model's explanatory power is substantial (R2 = 0.81, 89% CI [0.73, 0.89], adj.
     # R2 = 0.78). The model's intercept, corresponding to qsec = 0 and wt = 0, is at
-    # 19.84 (95% CI [8.66, 30.85]). Within this model:
+    # 19.75 (95% CI [9.48, 31.23]). Within this model:
     # 
-    #   - The effect of qsec (Median = 0.92, 95% CI [0.37, 1.50]) has a 99.90%
-    # probability of being positive (> 0), 98.70% of being significant (> 0.30), and
-    # 0.20% of being large (> 1.81). The estimation successfully converged (Rhat =
-    # 0.999) and the indices are reliable (ESS = 2653)
-    #   - The effect of wt (Median = -5.04, 95% CI [-6.06, -4.13]) has a 100.00%
+    #   - The effect of qsec (Median = 0.92, 95% CI [0.37, 1.48]) has a 99.95%
+    # probability of being positive (> 0), 98.45% of being significant (> 0.30), and
+    # 0.25% of being large (> 1.81). The estimation successfully converged (Rhat =
+    # 1.000) and the indices are reliable (ESS = 2067)
+    #   - The effect of wt (Median = -5.03, 95% CI [-6.02, -3.93]) has a 100.00%
     # probability of being negative (< 0), 100.00% of being significant (< -0.30),
     # and 100.00% of being large (< -1.81). The estimation successfully converged
-    # (Rhat = 0.999) and the indices are reliable (ESS = 1864)
+    # (Rhat = 1.001) and the indices are reliable (ESS = 1692)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
     # framework, we report the median of the posterior distribution and its 95% CI
@@ -338,13 +338,13 @@ analysis paragraph about the tools used.
 report(sessionInfo())
 ```
 
-    # Analyses were conducted using the R Statistical language (version 4.0.4; R Core
-    # Team, 2021) on Windows 10 x64 (build 19042), using the packages Rcpp (version
-    # 1.0.6; Dirk Eddelbuettel and Romain Francois, 2011), Matrix (version 1.3.2;
-    # Douglas Bates and Martin Maechler, 2021), lme4 (version 1.1.26; Douglas Bates
-    # et al., 2015), rstanarm (version 2.21.1; Goodrich B et al., 2020), dplyr
-    # (version 1.0.5; Hadley Wickham et al., 2021) and report (version 0.3.0;
-    # Makowski et al., 2020).
+    # Analyses were conducted using the R Statistical language (version 4.1.0; R Core
+    # Team, 2021) on macOS Mojave 10.14.6, using the packages Rcpp (version 1.0.6;
+    # Dirk Eddelbuettel and Romain Francois, 2011), Matrix (version 1.3.3; Douglas
+    # Bates and Martin Maechler, 2021), lme4 (version 1.1.27; Douglas Bates et al.,
+    # 2015), rstanarm (version 2.21.1; Goodrich B et al., 2020), dplyr (version
+    # 1.0.6; Hadley Wickham et al., 2021) and report (version 0.3.5; Makowski et al.,
+    # 2020).
     # 
     # References
     # ----------
@@ -352,7 +352,7 @@ report(sessionInfo())
     # Integration. Journal of Statistical Software, 40(8), 1-18. URL
     # https://www.jstatsoft.org/v40/i08/.
     #   - Douglas Bates and Martin Maechler (2021). Matrix: Sparse and Dense Matrix
-    # Classes and Methods. R package version 1.3-2.
+    # Classes and Methods. R package version 1.3-3.
     # https://CRAN.R-project.org/package=Matrix
     #   - Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015). Fitting
     # Linear Mixed-Effects Models Using lme4. Journal of Statistical Software, 67(1),
@@ -361,7 +361,7 @@ report(sessionInfo())
     # regression modeling via Stan. R package version 2.21.1
     # https://mc-stan.org/rstanarm.
     #   - Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2021).
-    # dplyr: A Grammar of Data Manipulation. R package version 1.0.5.
+    # dplyr: A Grammar of Data Manipulation. R package version 1.0.6.
     # https://CRAN.R-project.org/package=dplyr
     #   - Makowski, D., Ben-Shachar, M.S., Patil, I. & Lüdecke, D. (2020). Automated
     # Results Reporting as a Practical Tool to Improve Reproducibility and

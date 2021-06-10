@@ -24,6 +24,7 @@ objects (see list of supported objects in \code{\link{report}}). Useful to
 insert in parentheses in plots or reports.
 }
 \examples{
+\donttest{
 library(report)
 
 # Data
@@ -42,7 +43,7 @@ report_statistics(aov(Sepal.Length ~ Species, data = iris))
 # GLMs
 report_statistics(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 report_statistics(glm(vs ~ disp, data = mtcars, family = "binomial"))
-\donttest{
+
 # Mixed models
 if (require("lme4")) {
   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)

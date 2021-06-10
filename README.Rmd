@@ -150,8 +150,6 @@ cor.test(iris$Sepal.Length, iris$Sepal.Width) %>%
   as.data.frame()
 ```
 
-
-
 ### ANOVAs
 
 This works great with ANOVAs, as it includes **effect sizes** and their interpretation.
@@ -272,7 +270,6 @@ paste(
 ) %>%
   print(width = 80)
 ```
-
 
 ### Report sample
 

@@ -35,6 +35,7 @@ Create reports for model comparison as obtained by the
 function in the \code{performance} package.
 }
 \examples{
+\donttest{
 library(report)
 library(performance)
 
@@ -53,6 +54,7 @@ summary(as.data.frame(r))
 report_table(x)
 report_statistics(x)
 report_parameters(x)
+}
 }
 \seealso{
 Specific components of reports (especially for stats models):

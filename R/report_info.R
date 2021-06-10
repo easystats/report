@@ -19,7 +19,6 @@
 #'
 #' # ANOVAs
 #' report_info(aov(Sepal.Length ~ Species, data = iris))
-#'
 #' \donttest{
 #' # GLMs
 #' report_info(lm(Sepal.Length ~ Petal.Length * Species, data = iris))

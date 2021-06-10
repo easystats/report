@@ -18,6 +18,7 @@
 #' @inherit report return seealso
 #'
 #' @examples
+#' \donttest{
 #' library(report)
 #'
 #' # Linear models
@@ -27,7 +28,7 @@
 #' summary(r)
 #' as.data.frame(r)
 #' summary(as.data.frame(r))
-#' \donttest{
+#'
 #' # Logistic models
 #' model <- glm(vs ~ disp, data = mtcars, family = "binomial")
 #' r <- report(model)
@@ -48,6 +49,7 @@
 #' }
 #' @return An object of class \code{\link{report}}.
 #' @export
+
 report.lm <- function(x, include_effectsize = TRUE, effectsize_method = "refit", ...) {
   table <- report_table(x,
     include_effectsize = include_effectsize,
@@ -69,6 +71,7 @@ report.lm <- function(x, include_effectsize = TRUE, effectsize_method = "refit",
 #' @importFrom parameters model_parameters
 #' @importFrom insight model_info
 #' @export
+
 report_effectsize.lm <- function(x, effectsize_method = "refit", ...) {
   table <- suppressWarnings(effectsize::effectsize(x, method = effectsize_method, ...))
   method <- .text_standardize(table)
@@ -251,13 +254,17 @@ report_statistics.lm <- function(x,
   # Quality / Diagnostic
   if (include_diagnostic) {
     text_diagnostic <- ""
+
     if ("Rhat" %in% names(table)) {
       text_diagnostic <- paste0("Rhat = ", insight::format_value(table$Rhat))
     }
+
     text <- text_paste(text, text_diagnostic)
+
     if ("ESS" %in% names(table)) {
       text_diagnostic <- text_paste(text_diagnostic, paste0("ESS = ", insight::format_value(table$ESS)))
     }
+
     text_full <- text_paste(text_full, text_diagnostic, sep = "; ")
   }
 

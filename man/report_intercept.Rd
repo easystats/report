@@ -20,12 +20,13 @@ Reports intercept of regression models (see list of supported objects in
 \code{\link{report}}).
 }
 \examples{
+\donttest{
 library(report)
 
 # GLMs
 report_intercept(lm(Sepal.Length ~ Species, data = iris))
 report_intercept(glm(vs ~ disp, data = mtcars, family = "binomial"))
-\donttest{
+
 # Mixed models
 if (require("lme4")) {
   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)

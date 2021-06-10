@@ -86,6 +86,7 @@ An object of class \code{\link{report}}.
 Create reports for (general) linear models.
 }
 \examples{
+\donttest{
 library(report)
 
 # Linear models
@@ -95,7 +96,7 @@ r
 summary(r)
 as.data.frame(r)
 summary(as.data.frame(r))
-\donttest{
+
 # Logistic models
 model <- glm(vs ~ disp, data = mtcars, family = "binomial")
 r <- report(model)

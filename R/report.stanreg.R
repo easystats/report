@@ -135,8 +135,11 @@ report_parameters.stanreg <- function(x,
   # Diagnostic / Convergence
   if (include_diagnostic) {
     diagnostic <- bayestestR::diagnostic_posterior(x, ...)
+
     text <- text_paste(text, .parameters_diagnostic_bayesian(diagnostic, only_when_insufficient = TRUE)[idx], sep = ". ")
+
     text_full <- text_paste(text_full, .parameters_diagnostic_bayesian(diagnostic, only_when_insufficient = FALSE)[idx], sep = ". ")
+
     info <- paste(info, "Convergence and stability of the Bayesian sampling has been assessed using R-hat, which should be below 1.01 (Vehtari et al., 2019), and Effective Sample Size (ESS), which should be greater than 1000 (Burkner, 2017).")
   }
 
@@ -150,11 +153,13 @@ report_parameters.stanreg <- function(x,
 #' @export
 report_intercept.stanreg <- function(x, ...) {
   posteriors <- insight::get_parameters(x)
+
   if ("(Intercept)" %in% names(posteriors)) {
     intercept <- posteriors[["(Intercept)"]]
   } else {
     return(as.report_intercept("", summary = "", ...))
   }
+
   data <- bayestestR::sexit(intercept, ...)
 
   endtext <- paste0(
@@ -176,9 +181,7 @@ report_intercept.stanreg <- function(x, ...) {
 }
 
 
-
 # report_info -------------------------------------------------------------
-
 
 #' @export
 report_info.stanreg <- function(x, parameters = NULL, ...) {
