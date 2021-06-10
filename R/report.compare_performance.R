@@ -11,6 +11,7 @@
 #' @inherit report return seealso
 #'
 #' @examples
+#' \donttest{
 #' library(report)
 #' library(performance)
 #'
@@ -29,8 +30,10 @@
 #' report_table(x)
 #' report_statistics(x)
 #' report_parameters(x)
+#' }
 #' @return An object of class \code{\link{report}}.
 #' @export
+
 report.compare_performance <- function(x, ...) {
   table <- report_table(x, table = table, ...)
   text <- report_text(x, ...)
@@ -52,12 +55,14 @@ report_table.compare_performance <- function(x, ...) {
 
 #' @rdname report.compare_performance
 #' @export
+
 report_statistics.compare_performance <- function(x, table = NULL, ...) {
   if (is.null(table)) {
     table <- report_table(x, ...)
   }
 
   text <- text_short <- ""
+
   if ("R2" %in% names(table)) {
     text <- text_paste(text, paste0("R2 = ", insight::format_value(table$R2)))
     if ("R2_adjusted" %in% names(table)) {
@@ -67,20 +72,25 @@ report_statistics.compare_performance <- function(x, table = NULL, ...) {
       text_short <- text_paste(text, paste0("R2 = ", insight::format_value(table$R2)))
     }
   }
+
   if ("AIC" %in% names(table)) {
     text <- text_paste(text, paste0("AIC = ", insight::format_value(table$AIC)))
   }
+
   if ("BIC" %in% names(table)) {
     text <- text_paste(text, paste0("BIC = ", insight::format_value(table$BIC)))
     text_short <- text_paste(text_short, paste0("BIC = ", insight::format_value(table$BIC)))
   }
+
   if ("WAIC" %in% names(table)) {
     text <- text_paste(text, paste0("WAIC = ", insight::format_value(table$WAIC)))
     text_short <- text_paste(text_short, paste0("WAIC = ", insight::format_value(table$WAIC)))
   }
+
   if ("RMSE" %in% names(table)) {
     text <- text_paste(text, paste0("RMSE = ", insight::format_value(table$RMSE)))
   }
+
   if ("Sigma" %in% names(table)) {
     text <- text_paste(text, paste0("Sigma = ", insight::format_value(table$Sigma)))
   }
@@ -166,6 +176,7 @@ report_parameters.compare_performance <- function(x, table = NULL, ...) {
 
 #' @rdname report.compare_performance
 #' @export
+
 report_text.compare_performance <- function(x, table = NULL, ...) {
   stats <- report_statistics(x, table = table)
   table <- attributes(stats)$table

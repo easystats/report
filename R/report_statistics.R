@@ -12,6 +12,7 @@
 #' @return An object of class \code{\link{report_statistics}}.
 #'
 #' @examples
+#' \donttest{
 #' library(report)
 #'
 #' # Data
@@ -30,7 +31,7 @@
 #' # GLMs
 #' report_statistics(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 #' report_statistics(glm(vs ~ disp, data = mtcars, family = "binomial"))
-#' \donttest{
+#'
 #' # Mixed models
 #' if (require("lme4")) {
 #'   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
@@ -44,14 +45,13 @@
 #' }
 #' }
 #' @export
+
 report_statistics <- function(x, table = NULL, ...) {
   UseMethod("report_statistics")
 }
 
 
-
 # METHODS -----------------------------------------------------------------
-
 
 #' @rdname as.report
 #' @export
@@ -68,10 +68,8 @@ as.report_statistics <- function(x, summary = NULL, prefix = "  - ", ...) {
   x
 }
 
-
 #' @export
 summary.report_statistics <- summary.report_parameters
-
 
 #' @export
 print.report_statistics <- function(x, ...) {

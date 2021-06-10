@@ -7,7 +7,8 @@ if (require("testthat") && require("report") && require("ivreg")) {
     set.seed(123)
     ivr <-
       ivreg(log(packs) ~ log(rprice) + log(rincome) | salestax + log(rincome),
-            data = CigaretteDemand)
+        data = CigaretteDemand
+      )
 
     expect_snapshot(report(ivr))
   })

@@ -26,6 +26,7 @@ different R objects . For a list of supported objects, see
 \code{\link{report}}).
 }
 \examples{
+\donttest{
 library(report)
 
 # GLMs
@@ -37,7 +38,7 @@ if (require("lme4")) {
   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
   report_performance(model)
 }
-\donttest{
+
 # Bayesian models
 if (require("rstanarm")) {
   model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600)

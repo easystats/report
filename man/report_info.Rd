@@ -28,7 +28,6 @@ report_info(cor.test(iris$Sepal.Width, iris$Sepal.Length))
 
 # ANOVAs
 report_info(aov(Sepal.Length ~ Species, data = iris))
-
 \donttest{
 # GLMs
 report_info(lm(Sepal.Length ~ Petal.Length * Species, data = iris))

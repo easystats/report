@@ -72,8 +72,18 @@ report_priors.brmsfit <- function(x, ...) {
   }
 
   values <- ifelse(params$Prior_Distribution == "normal",
-    paste0("mean = ", insight::format_value(params$Prior_Location), ", SD = ", insight::format_value(params$Prior_Scale)),
-    paste0("location = ", insight::format_value(params$Prior_Location), ", scale = ", insight::format_value(params$Prior_Scale))
+    paste0(
+      "mean = ",
+      insight::format_value(params$Prior_Location),
+      ", SD = ",
+      insight::format_value(params$Prior_Scale)
+    ),
+    paste0(
+      "location = ",
+      insight::format_value(params$Prior_Location),
+      ", scale = ",
+      insight::format_value(params$Prior_Scale)
+    )
   )
 
   values <- paste0(params$Prior_Distribution, " (", values, ")")
@@ -91,22 +101,15 @@ report_priors.brmsfit <- function(x, ...) {
 
 # report_parameters -------------------------------------------------------
 
-
 #' @export
 report_parameters.brmsfit <- report_parameters.stanreg
 
-
-
 # report_intercept --------------------------------------------------------
-
 
 #' @export
 report_intercept.brmsfit <- report_intercept.stanreg
 
-
-
 # report_info -------------------------------------------------------------
-
 
 #' @export
 report_info.brmsfit <- report_info.stanreg

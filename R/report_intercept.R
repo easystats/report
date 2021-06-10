@@ -11,12 +11,13 @@
 #' @return An object of class \code{\link{report_intercept}}.
 #'
 #' @examples
+#' \donttest{
 #' library(report)
 #'
 #' # GLMs
 #' report_intercept(lm(Sepal.Length ~ Species, data = iris))
 #' report_intercept(glm(vs ~ disp, data = mtcars, family = "binomial"))
-#' \donttest{
+#'
 #' # Mixed models
 #' if (require("lme4")) {
 #'   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
@@ -30,13 +31,13 @@
 #' }
 #' }
 #' @export
+
 report_intercept <- function(x, ...) {
   UseMethod("report_intercept")
 }
 
 
 # METHODS -----------------------------------------------------------------
-
 
 #' @rdname as.report
 #' @export
@@ -66,9 +67,7 @@ print.report_intercept <- function(x, ...) {
 }
 
 
-
 # Utils -------------------------------------------------------------------
-
 
 #' @importFrom insight is_nullmodel get_data find_variables
 #' @keywords internal

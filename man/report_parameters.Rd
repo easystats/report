@@ -20,6 +20,7 @@ Creates a list containing a description of the parameters of R objects (see
 list of supported objects in \code{\link{report}}).
 }
 \examples{
+\donttest{
 library(report)
 
 # Miscellaneous
@@ -44,7 +45,7 @@ report_parameters(aov(Sepal.Length ~ Species, data = iris))
 report_parameters(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 report_parameters(lm(Petal.Width ~ Species, data = iris), include_intercept = FALSE)
 report_parameters(glm(vs ~ disp, data = mtcars, family = "binomial"))
-\donttest{
+
 # Mixed models
 if (require("lme4")) {
   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
