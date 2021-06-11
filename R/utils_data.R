@@ -87,12 +87,6 @@ data_remove <- function(data, pattern) {
 }
 
 
-
-
-
-
-
-
 #' @rdname data_rename
 #' @export
 data_reorder <- function(data, cols, safe = TRUE) {

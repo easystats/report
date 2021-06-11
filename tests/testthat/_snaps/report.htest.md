@@ -92,3 +92,70 @@
       
       The Paired t-test testing the difference between Pair(extra.1, extra.2) (mean of the differences = -1.58) suggests that the effect is negative, statistically significant, and large (difference = -1.58, 95% CI [-2.46, -0.70], t(9) = -4.06, p < .01; Cohen's d = -1.35, 95% CI [-2.23, -0.44])
 
+---
+
+    Code
+      report(wilcox.test(x, y, paired = TRUE, data = mtcars))
+    Output
+      Effect sizes were labelled following Funder's (2019) recommendations.
+      
+      The Wilcoxon signed rank exact test testing the difference in ranks between x and y suggests that the effect is positive, statistically significant, and very large (W = 40.00, p < .05; r (rank biserial) = 0.78, 95% CI [0.30, 0.94])
+
+---
+
+    Code
+      report(wilcox.test(x, y, paired = TRUE, data = mtcars, alternative = "l"))
+    Output
+      Effect sizes were labelled following Funder's (2019) recommendations.
+      
+      The Wilcoxon signed rank exact test testing the difference in ranks between x and y suggests that the effect is positive, statistically not significant, and very large (W = 40.00, p = 0.986; r (rank biserial) = 0.78, 95% CI [0.30, 0.94])
+
+---
+
+    Code
+      report(wilcox.test(x, y, paired = TRUE, data = mtcars, alternative = "g"))
+    Output
+      Effect sizes were labelled following Funder's (2019) recommendations.
+      
+      The Wilcoxon signed rank exact test testing the difference in ranks between x and y suggests that the effect is positive, statistically significant, and very large (W = 40.00, p < .05; r (rank biserial) = 0.78, 95% CI [0.30, 0.94])
+
+---
+
+    Code
+      report(wilcox.test(mtcars$am, mtcars$wt))
+    Warning <simpleWarning>
+      cannot compute exact p-value with ties
+    Output
+      Effect sizes were labelled following Funder's (2019) recommendations.
+      
+      The Wilcoxon rank sum test with continuity correction testing the difference in ranks between mtcars$am and mtcars$wt suggests that the effect is negative, statistically significant, and very large (W = 0.00, p < .001; r (rank biserial) = -1.00, 95% CI [-1.00, -1.00])
+
+---
+
+    Code
+      report(wilcox.test(mtcars$am, mtcars$wt, alternative = "l"))
+    Warning <simpleWarning>
+      cannot compute exact p-value with ties
+    Output
+      Effect sizes were labelled following Funder's (2019) recommendations.
+      
+      The Wilcoxon rank sum test with continuity correction testing the difference in ranks between mtcars$am and mtcars$wt suggests that the effect is negative, statistically significant, and very large (W = 0.00, p < .001; r (rank biserial) = -1.00, 95% CI [-1.00, -1.00])
+
+---
+
+    Code
+      report(wilcox.test(mtcars$am, mtcars$mpg, exact = FALSE, correct = FALSE))
+    Output
+      Effect sizes were labelled following Funder's (2019) recommendations.
+      
+      The Wilcoxon rank sum test testing the difference in ranks between mtcars$am and mtcars$mpg suggests that the effect is negative, statistically significant, and very large (W = 0.00, p < .001; r (rank biserial) = -1.00, 95% CI [-1.00, -1.00])
+
+---
+
+    Code
+      report(wilcox.test(depression$change, mu = 1))
+    Output
+      Effect sizes were labelled following Funder's (2019) recommendations.
+      
+      The Wilcoxon signed rank exact test testing the difference in rank for depression$change and true location of 0 suggests that the effect is negative, statistically significant, and very large (W = 0.00, p < .01; r (rank biserial) = -1.00, 95% CI [-1.00, -1.00])
+
