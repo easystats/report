@@ -74,8 +74,8 @@ report_table.numeric <- function(x,
     Min = min(x, na.rm = TRUE),
     Max = max(x, na.rm = TRUE),
     n_Obs = length(x),
-    Skewness = as.numeric(parameters::skewness(x, ...)),
-    Kurtosis = as.numeric(parameters::kurtosis(x, ...)),
+    Skewness = as.numeric(parameters::skewness(x, verbose = FALSE, ...)),
+    Kurtosis = as.numeric(parameters::kurtosis(x, verbose = FALSE, ...)),
     n_Missing = sum(is.na(x))
   )
 

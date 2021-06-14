@@ -147,7 +147,7 @@ report(t.test(mtcars$mpg ~ mtcars$am))
     # The Welch Two Sample t-test testing the difference of mtcars$mpg by mtcars$am
     # (mean in group 0 = 17.15, mean in group 1 = 24.39) suggests that the effect is
     # positive, statistically significant, and large (difference = 7.24, 95% CI
-    # [-11.28, -3.21], t(18.33) = -3.77, p < .01; Cohen's d = -1.41, 95% CI [-2.26,
+    # [-11.28, -3.21], t(18.33) = -3.77, p = 0.001; Cohen's d = -1.41, 95% CI [-2.26,
     # -0.53])
 
 As mentioned, you can also create tables with the `as.data.frame()`
@@ -257,16 +257,16 @@ report(model)
     # 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The
     # model's explanatory power is substantial (R2 = 0.81, 89% CI [0.73, 0.89], adj.
     # R2 = 0.78). The model's intercept, corresponding to qsec = 0 and wt = 0, is at
-    # 19.75 (95% CI [9.48, 31.23]). Within this model:
+    # 19.43 (95% CI [9.20, 30.91]). Within this model:
     # 
-    #   - The effect of qsec (Median = 0.92, 95% CI [0.37, 1.48]) has a 99.95%
-    # probability of being positive (> 0), 98.45% of being significant (> 0.30), and
-    # 0.25% of being large (> 1.81). The estimation successfully converged (Rhat =
-    # 1.000) and the indices are reliable (ESS = 2067)
-    #   - The effect of wt (Median = -5.03, 95% CI [-6.02, -3.93]) has a 100.00%
+    #   - The effect of qsec (Median = 0.94, 95% CI [0.42, 1.50]) has a 100.00%
+    # probability of being positive (> 0), 99.10% of being significant (> 0.30), and
+    # 0.10% of being large (> 1.81). The estimation successfully converged (Rhat =
+    # 1.001) and the indices are reliable (ESS = 2126)
+    #   - The effect of wt (Median = -5.04, 95% CI [-6.04, -3.92]) has a 100.00%
     # probability of being negative (< 0), 100.00% of being significant (< -0.30),
     # and 100.00% of being large (< -1.81). The estimation successfully converged
-    # (Rhat = 1.001) and the indices are reliable (ESS = 1692)
+    # (Rhat = 1.000) and the indices are reliable (ESS = 1985)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
     # framework, we report the median of the posterior distribution and its 95% CI
