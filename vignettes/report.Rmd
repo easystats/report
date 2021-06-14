@@ -14,20 +14,17 @@ editor_options:
   chunk_output_type: console
 ---
 
-```{r, echo = FALSE}
+```{r, echo=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   warning = FALSE,
   message = FALSE,
   out.width = "100%",
-  tidy.opts = list(width.cutoff = 60),
-  tidy = TRUE,
   comment = "#"
 )
 
-old_options <- options(
+options(
   knitr.kable.NA = "",
-  digits = 4,
   width = 60
 )
 
@@ -84,7 +81,7 @@ iris %>%
   report_table()
 ```
 
-## Correlations and t-tests
+## Correlations, t-test, and Wilcox test
 
 `report` can also be used to provide automated summaries for statistical model
 objects from correlation, t-tests, etc.
@@ -95,6 +92,10 @@ report(cor.test(mtcars$wt, mtcars$mpg))
 
 ```{r}
 report(t.test(formula = wt ~ am, data = mtcars))
+```
+
+```{r, eval=FALSE}
+report(wilcox.test(formula = wt ~ am, data = mtcars))
 ```
 
 ## Regression models
@@ -135,10 +136,4 @@ library(lme4)
 model <- lmer(Reaction ~ Days + (Days | Subject), data = sleepstudy)
 
 report(model)
-```
-
-
-
-```{r, echo = FALSE}
-options(old_options)  # Restore options
 ```
