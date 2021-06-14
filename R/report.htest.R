@@ -224,7 +224,7 @@ report_statistics.htest <- function(x, table = NULL, ...) {
 
   # Effect size
   if (insight::model_info(x)$is_ttest ||
-      (insight::model_info(x)$is_ranktest && !insight::model_info(x)$is_correlation)) {
+    (insight::model_info(x)$is_ranktest && !insight::model_info(x)$is_correlation)) {
     text_full <- paste0(text, "; ", attributes(effsize)$statistics)
     text <- paste0(text, ", ", attributes(effsize)$main)
   } else {
@@ -343,13 +343,13 @@ report_model.htest <- function(x, table = NULL, ...) {
   if (insight::model_info(x)$is_ranktest && !insight::model_info(x)$is_correlation) {
     # two-sample
     if ("Parameter1" %in% names(table)) {
-    vars_full <- paste0(table$Parameter1[[1]], " and ", table$Parameter2[[1]])
+      vars_full <- paste0(table$Parameter1[[1]], " and ", table$Parameter2[[1]])
 
-    text <- paste0(
-      trimws(x$method),
-      " testing the difference in ranks between ",
-      vars_full
-    )
+      text <- paste0(
+        trimws(x$method),
+        " testing the difference in ranks between ",
+        vars_full
+      )
     } else {
       # one-sample
       vars_full <- paste0(table$Parameter[[1]])
@@ -361,8 +361,6 @@ report_model.htest <- function(x, table = NULL, ...) {
         " and true location of 0"
       )
     }
-
-
   }
 
   as.report_model(text, summary = text)
