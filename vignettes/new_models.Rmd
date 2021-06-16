@@ -14,16 +14,10 @@ editor_options:
   chunk_output_type: console
 ---
 
-```{r, echo = FALSE}
+```{r, echo=FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  tidy.opts = list(width.cutoff = 60),
-  tidy = TRUE
+  collapse = TRUE
 )
-old_options <- options(knitr.kable.NA = '', digits = 4)
-if (!requireNamespace("dplyr", quietly = TRUE)) {
-  knitr::opts_chunk$set(eval = FALSE)
-}
 ```
 
 ## 1. Open an Issue on GitHub
@@ -36,8 +30,3 @@ and saying what would you like to see, and how you can eventually help out (e.g.
 ## 2. Use template file
 
 Copy and paste the [**template file**](https://github.com/easystats/report/blob/master/R/report.default.R), and replace the function with the one you would like to see supported.
-
-
-```{r, echo = FALSE}
-options(old_options)  # Restore options
-```

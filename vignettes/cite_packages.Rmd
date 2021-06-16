@@ -19,12 +19,13 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   message = FALSE,
   warning = FALSE,
-  tidy.opts = list(width.cutoff = 60),
-  tidy = TRUE,
   comment = "#"
 )
 
-old_options <- options(knitr.kable.NA = '', digits = 4)
+options(
+  knitr.kable.NA = '', 
+  width = 60
+)
 
 if (!requireNamespace("dplyr", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
@@ -62,7 +63,7 @@ This should be done for the packages that were central to your specific study
 manipulation tools (even though these are as much, if not *more*, important).
 For example:
 
-> Statistical analysis were carried out using R 3.5.0 (R Core Team, 2018), the
+> Statistical analysis were carried out using R 4.1.0 (R Core Team, 2021), the
 *rstanarm* (*v2.13.1*; Gabry \& Goodrich, 2016) and the *report* (*v0.2.0*;
 Makowski, Patil, \& Lüdecke, 2019) packages. The full reproducible code is available in **Supplementary Materials**.
 
@@ -120,9 +121,4 @@ If you want to cite the **easystats** ecosystem, you can use the [`cite_eaststat
 
 ```{r results='asis'}
 cite_easystats()
-```
-
-
-```{r, echo = FALSE}
-options(old_options)  # Restore options
 ```

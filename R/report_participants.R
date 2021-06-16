@@ -134,11 +134,6 @@ report_participants <- function(data,
 
 
 
-
-
-
-
-
 #' @importFrom stats aggregate
 #' @importFrom insight format_number format_value
 #' @importFrom tools toTitleCase

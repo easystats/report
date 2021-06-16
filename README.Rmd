@@ -1,24 +1,12 @@
 ---
-output: 
-  github_document:
-    toc: false
-    fig_width: 10.08
-    fig_height: 6
-tags: [r, reports]
-vignette: >
-  \usepackage[utf8]{inputenc}
-  %\VignetteEngine{knitr::rmarkdown}
-editor_options: 
-  chunk_output_type: console
+output: github_document
 ---
 
 # report <img src='man/figures/logo.png' align="right" height="139" />
 
-```{r, message=FALSE, warning=FALSE, echo = FALSE}
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  tidy.opts = list(width.cutoff = 60),
-  tidy = FALSE,
   dpi = 450,
   fig.path = "man/figures/",
   comment = "#",
@@ -214,6 +202,7 @@ model <- stan_glm(mpg ~ qsec + wt, data = mtcars)
 report(model)
 ```
 ```{r echo=FALSE}
+options(mc.cores = parallel::detectCores())
 library(rstanarm)
 
 model <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 1000) %>%
