@@ -52,7 +52,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
+    <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -202,7 +202,7 @@
 <span id="cb10-3"><a href="#cb10-3"></a><span class="co"># The Welch Two Sample t-test testing the difference of mtcars$mpg by mtcars$am</span></span>
 <span id="cb10-4"><a href="#cb10-4"></a><span class="co"># (mean in group 0 = 17.15, mean in group 1 = 24.39) suggests that the effect is</span></span>
 <span id="cb10-5"><a href="#cb10-5"></a><span class="co"># positive, statistically significant, and large (difference = 7.24, 95% CI</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="co"># [-11.28, -3.21], t(18.33) = -3.77, p &lt; .01; Cohen's d = -1.41, 95% CI [-2.26,</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co"># [-11.28, -3.21], t(18.33) = -3.77, p = 0.001; Cohen's d = -1.41, 95% CI [-2.26,</span></span>
 <span id="cb10-7"><a href="#cb10-7"></a><span class="co"># -0.53])</span></span></code></pre></div>
 <p>As mentioned, you can also create tables with the <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> functions, like for example with this correlation test:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -295,16 +295,16 @@
 <span id="cb19-4"><a href="#cb19-4"></a><span class="co"># 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The</span></span>
 <span id="cb19-5"><a href="#cb19-5"></a><span class="co"># model's explanatory power is substantial (R2 = 0.81, 89% CI [0.73, 0.89], adj.</span></span>
 <span id="cb19-6"><a href="#cb19-6"></a><span class="co"># R2 = 0.78). The model's intercept, corresponding to qsec = 0 and wt = 0, is at</span></span>
-<span id="cb19-7"><a href="#cb19-7"></a><span class="co"># 19.75 (95% CI [9.48, 31.23]). Within this model:</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a><span class="co"># 19.43 (95% CI [9.20, 30.91]). Within this model:</span></span>
 <span id="cb19-8"><a href="#cb19-8"></a><span class="co"># </span></span>
-<span id="cb19-9"><a href="#cb19-9"></a><span class="co">#   - The effect of qsec (Median = 0.92, 95% CI [0.37, 1.48]) has a 99.95%</span></span>
-<span id="cb19-10"><a href="#cb19-10"></a><span class="co"># probability of being positive (&gt; 0), 98.45% of being significant (&gt; 0.30), and</span></span>
-<span id="cb19-11"><a href="#cb19-11"></a><span class="co"># 0.25% of being large (&gt; 1.81). The estimation successfully converged (Rhat =</span></span>
-<span id="cb19-12"><a href="#cb19-12"></a><span class="co"># 1.000) and the indices are reliable (ESS = 2067)</span></span>
-<span id="cb19-13"><a href="#cb19-13"></a><span class="co">#   - The effect of wt (Median = -5.03, 95% CI [-6.02, -3.93]) has a 100.00%</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a><span class="co">#   - The effect of qsec (Median = 0.94, 95% CI [0.42, 1.50]) has a 100.00%</span></span>
+<span id="cb19-10"><a href="#cb19-10"></a><span class="co"># probability of being positive (&gt; 0), 99.10% of being significant (&gt; 0.30), and</span></span>
+<span id="cb19-11"><a href="#cb19-11"></a><span class="co"># 0.10% of being large (&gt; 1.81). The estimation successfully converged (Rhat =</span></span>
+<span id="cb19-12"><a href="#cb19-12"></a><span class="co"># 1.001) and the indices are reliable (ESS = 2126)</span></span>
+<span id="cb19-13"><a href="#cb19-13"></a><span class="co">#   - The effect of wt (Median = -5.04, 95% CI [-6.04, -3.92]) has a 100.00%</span></span>
 <span id="cb19-14"><a href="#cb19-14"></a><span class="co"># probability of being negative (&lt; 0), 100.00% of being significant (&lt; -0.30),</span></span>
 <span id="cb19-15"><a href="#cb19-15"></a><span class="co"># and 100.00% of being large (&lt; -1.81). The estimation successfully converged</span></span>
-<span id="cb19-16"><a href="#cb19-16"></a><span class="co"># (Rhat = 1.001) and the indices are reliable (ESS = 1692)</span></span>
+<span id="cb19-16"><a href="#cb19-16"></a><span class="co"># (Rhat = 1.000) and the indices are reliable (ESS = 1985)</span></span>
 <span id="cb19-17"><a href="#cb19-17"></a><span class="co"># </span></span>
 <span id="cb19-18"><a href="#cb19-18"></a><span class="co"># Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)</span></span>
 <span id="cb19-19"><a href="#cb19-19"></a><span class="co"># framework, we report the median of the posterior distribution and its 95% CI</span></span>

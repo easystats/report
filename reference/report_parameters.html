@@ -97,7 +97,7 @@ list of supported objects in report)." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
+    <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -185,7 +185,7 @@ objects above).</p></td>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   - lme4 (version 1.1.27; Douglas Bates et al., 2015)</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   - rstanarm (version 2.21.1; Goodrich B et al., 2020)</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   - dplyr (version 1.0.6; Hadley Wickham et al., 2021)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   - performance (version 0.7.2; Lüdecke et al., 2021)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - performance (version 0.7.2.1; Lüdecke et al., 2021)</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   - bayestestR (version 0.10.5; Makowski et al., 2019)</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   - report (version 0.3.5; Makowski et al., 2020)</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   - R (version 4.1.0; R Core Team, 2021)</span>
@@ -196,7 +196,7 @@ objects above).</p></td>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   - lme4 (v1.1.27)</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   - rstanarm (v2.21.1)</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   - dplyr (v1.0.6)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   - performance (v0.7.2)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - performance (v0.7.2.1)</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   - bayestestR (v0.10.5)</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   - report (v0.3.5)</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   - R (v4.1.0)</span>
@@ -276,7 +276,7 @@ objects above).</p></td>
 <span class='r-in'><span class='fu'>report_parameters</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>*</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   - The intercept is statistically significant and positive (beta = 4.21, 95% CI [3.41, 5.02], t(144) = 10.34, p &lt; .001; Std. beta = 0.49, 95% CI [-1.03, 2.01])</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   - The effect of Petal Length is statistically non-significant and positive (beta = 0.54, 95% CI [-4.76e-03, 1.09], t(144) = 1.96, p = 0.052; Std. beta = 1.16, 95% CI [-0.01, 2.32])</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   - The effect of Species [versicolor] is statistically significant and negative (beta = -1.81, 95% CI [-2.99, -0.62], t(144) = -3.02, p &lt; .01; Std. beta = -0.88, 95% CI [-2.41, 0.65])</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - The effect of Species [versicolor] is statistically significant and negative (beta = -1.81, 95% CI [-2.99, -0.62], t(144) = -3.02, p = 0.003; Std. beta = -0.88, 95% CI [-2.41, 0.65])</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   - The effect of Species [virginica] is statistically significant and negative (beta = -3.15, 95% CI [-4.41, -1.90], t(144) = -4.97, p &lt; .001; Std. beta = -1.75, 95% CI [-3.32, -0.18])</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   - The interaction effect of Species [versicolor] on Petal Length is statistically non-significant and positive (beta = 0.29, 95% CI [-0.30, 0.87], t(144) = 0.97, p = 0.334; Std. beta = 0.61, 95% CI [-0.63, 1.85])</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   - The interaction effect of Species [virginica] on Petal Length is statistically non-significant and positive (beta = 0.45, 95% CI [-0.12, 1.03], t(144) = 1.56, p = 0.120; Std. beta = 0.97, 95% CI [-0.26, 2.19])</span>
@@ -284,8 +284,8 @@ objects above).</p></td>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   - The effect of Species [versicolor] is statistically significant and positive (beta = 1.08, 95% CI [1.00, 1.16], t(147) = 26.39, p &lt; .001; Std. beta = 1.42, 95% CI [1.31, 1.52])</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   - The effect of Species [virginica] is statistically significant and positive (beta = 1.78, 95% CI [1.70, 1.86], t(147) = 43.49, p &lt; .001; Std. beta = 2.34, 95% CI [2.23, 2.44])</span>
 <span class='r-in'><span class='fu'>report_parameters</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/glm.html'>glm</a></span><span class='op'>(</span><span class='va'>vs</span> <span class='op'>~</span> <span class='va'>disp</span>, data <span class='op'>=</span> <span class='va'>mtcars</span>, family <span class='op'>=</span> <span class='st'>"binomial"</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   - The intercept is statistically significant and positive (beta = 4.14, 95% CI [1.81, 7.44], p &lt; .01; Std. beta = -0.85, 95% CI [-2.42, 0.27])</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   - The effect of disp is statistically significant and negative (beta = -0.02, 95% CI [-0.04, -0.01], p &lt; .01; Std. beta = -2.68, 95% CI [-4.90, -1.27])</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - The intercept is statistically significant and positive (beta = 4.14, 95% CI [1.81, 7.44], p = 0.003; Std. beta = -0.85, 95% CI [-2.42, 0.27])</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   - The effect of disp is statistically significant and negative (beta = -0.02, 95% CI [-0.04, -0.01], p = 0.002; Std. beta = -2.68, 95% CI [-4.90, -1.27])</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># Mixed models</span></span>
 <span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://github.com/lme4/lme4/'>"lme4"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
