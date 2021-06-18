@@ -114,13 +114,11 @@ summary.report_table <- function(object, ...) {
 }
 
 
-#' @importFrom insight format_table
 #' @export
 format.report_table <- function(x, ...) {
   insight::format_table(x, ...)
 }
 
-#' @importFrom insight export_table
 #' @export
 print.report_table <- function(x, ...) {
   cat(insight::export_table(format(x, ...), ...))

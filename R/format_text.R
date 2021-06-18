@@ -59,15 +59,14 @@ text_lastchar <- function(text, n = 1) {
 
 
 #' @rdname format_text
-#' @importFrom utils head tail
 #' @export
 text_concatenate <- function(text, sep = ", ", last = " and ") {
   text <- text[text != ""]
   if (length(text) == 1) {
     text
   } else {
-    s <- paste0(head(text, -1), collapse = sep)
-    s <- paste0(c(s, tail(text, 1)), collapse = last)
+    s <- paste0(utils::head(text, -1), collapse = sep)
+    s <- paste0(c(s, utils::tail(text, 1)), collapse = last)
     s
   }
 }

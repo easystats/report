@@ -32,9 +32,6 @@
 #'   r
 #'   as.data.frame(r)
 #' }
-#' @importFrom effectsize interpret_bf
-#' @importFrom stats setNames
-#' @importFrom insight format_bf
 #' @return An object of class \code{\link{report}}.
 #' @export
 report.bayesfactor_models <- function(x,
@@ -223,9 +220,6 @@ report_text.bayesfactor_models <- function(x,
 # bayesfactor_inclusion ---------------------------------------------------
 
 #' @rdname report.bayesfactor_models
-#' @importFrom effectsize interpret_bf
-#' @importFrom insight format_value
-#' @importFrom stats setNames
 #' @export
 report.bayesfactor_inclusion <- function(x,
                                          interpretation = "jeffreys1961",

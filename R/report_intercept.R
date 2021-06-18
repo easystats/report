@@ -69,7 +69,6 @@ print.report_intercept <- function(x, ...) {
 
 # Utils -------------------------------------------------------------------
 
-#' @importFrom insight is_nullmodel get_data find_variables
 #' @keywords internal
 .find_intercept <- function(model) {
 
@@ -97,7 +96,6 @@ print.report_intercept <- function(x, ...) {
 
 
 
-#' @importFrom stats contrasts
 .find_reference_level <- function(f) {
   tryCatch(
     {

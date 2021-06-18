@@ -72,7 +72,6 @@
 #'   report_participants(data, participants = "Participant", spell_n = TRUE),
 #'   "were recruited in the study by means of torture and coercion."
 #' )
-#' @importFrom stats aggregate
 #' @export
 report_participants <- function(data,
                                 age = NULL,
@@ -134,9 +133,6 @@ report_participants <- function(data,
 
 
 
-#' @importFrom stats aggregate
-#' @importFrom insight format_number format_value
-#' @importFrom tools toTitleCase
 #' @keywords internal
 .report_participants <- function(data,
                                  age = "Age",

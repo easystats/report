@@ -43,6 +43,7 @@ Imports:
     insight (>= 0.14.1.1),
     parameters (>= 0.14.0.1),
     performance (>= 0.7.2),
+    datawizard,
     stats,
     tools,
     utils

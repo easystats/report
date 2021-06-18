@@ -67,9 +67,6 @@ report.lm <- function(x, include_effectsize = TRUE, effectsize_method = "refit",
 # report_effectsize -------------------------------------------------------
 
 #' @rdname report.lm
-#' @importFrom effectsize effectsize is_effectsize_name interpret_d interpret_oddsratio
-#' @importFrom parameters model_parameters
-#' @importFrom insight model_info
 #' @export
 
 report_effectsize.lm <- function(x, effectsize_method = "refit", ...) {
@@ -133,8 +130,6 @@ report_effectsize.lm <- function(x, effectsize_method = "refit", ...) {
 
 
 #' @rdname report.lm
-#' @importFrom parameters model_parameters
-#' @importFrom insight model_info
 #' @include utils_combine_tables.R
 #' @export
 report_table.lm <- function(x, include_effectsize = TRUE, ...) {

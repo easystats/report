@@ -156,7 +156,6 @@ print.report_parameters <- function(x, ...) {
 
 
 
-#' @importFrom effectsize interpret_rhat interpret_ess
 #' @keywords internal
 .parameters_diagnostic_bayesian <- function(diagnostic, only_when_insufficient = FALSE, ...) {
 

@@ -1,7 +1,4 @@
 #' @rdname report.data.frame
-#' @importFrom stats mad sd median
-#' @importFrom parameters skewness kurtosis
-#'
 #' @export
 report.numeric <- function(x,
                            n = FALSE,
@@ -74,8 +71,8 @@ report_table.numeric <- function(x,
     Min = min(x, na.rm = TRUE),
     Max = max(x, na.rm = TRUE),
     n_Obs = length(x),
-    Skewness = as.numeric(parameters::skewness(x, verbose = FALSE, ...)),
-    Kurtosis = as.numeric(parameters::kurtosis(x, verbose = FALSE, ...)),
+    Skewness = as.numeric(datawizard::skewness(x, verbose = FALSE, ...)),
+    Kurtosis = as.numeric(datawizard::kurtosis(x, verbose = FALSE, ...)),
     n_Missing = sum(is.na(x))
   )
 

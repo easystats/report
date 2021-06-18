@@ -32,9 +32,6 @@ report.aovlist <- report.aov
 
 
 #' @rdname report.aov
-#' @importFrom effectsize effectsize interpret_eta_squared is_effectsize_name
-#' @importFrom parameters model_parameters
-#' @importFrom insight model_info
 #' @export
 report_effectsize.aov <- function(x, ...) {
   table <- effectsize::effectsize(x, ...)
@@ -102,8 +99,6 @@ report_effectsize.aovlist <- report_effectsize.aov
 # report_table ------------------------------------------------------------
 
 #' @rdname report.aov
-#' @importFrom parameters model_parameters
-#' @importFrom insight model_info
 #' @export
 report_table.aov <- function(x, ...) {
   effsize <- report_effectsize(x, ...)

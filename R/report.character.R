@@ -1,6 +1,4 @@
 #' @rdname report.data.frame
-#' @importFrom parameters skewness kurtosis
-#'
 #' @export
 report.character <- function(x,
                              n_entries = 3,

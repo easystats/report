@@ -29,7 +29,6 @@
 #' report_sample(iris[, 1:4])
 #' report_sample(iris, select = c("Sepal.Length", "Petal.Length", "Species"))
 #' report_sample(iris, group_by = "Species")
-#' @importFrom stats median sd mad
 #' @export
 report_sample <- function(data,
                           group_by = NULL,
@@ -161,7 +160,6 @@ report_sample <- function(data,
 
 
 
-#' @importFrom stats na.omit xtabs
 .report_sample_row.factor <- function(x, column, weights = NULL, digits = 1, ...) {
   if (!is.null(weights)) {
     x[is.na(weights)] <- NA
@@ -193,7 +191,6 @@ report_sample <- function(data,
 # print-method --------------------------------------------
 
 
-#' @importFrom insight print_colour export_table
 #' @export
 print.report_sample <- function(x, ...) {
   insight::print_colour("# Descriptive Statistics\n\n", "blue")
@@ -205,7 +202,6 @@ print.report_sample <- function(x, ...) {
 # helper for weighted stuff --------------------------
 
 
-#' @importFrom stats var na.omit
 .weighted_variance <- function(x, weights = NULL) {
   if (is.null(weights)) {
     return(stats::var(x, na.rm = TRUE))
@@ -220,7 +216,6 @@ print.report_sample <- function(x, ...) {
 
 
 
-#' @importFrom stats sd
 .weighted_sd <- function(x, weights = NULL) {
   if (is.null(weights)) {
     return(stats::sd(x, na.rm = TRUE))
@@ -230,7 +225,6 @@ print.report_sample <- function(x, ...) {
 
 
 
-#' @importFrom stats median
 .weighted_median <- function(x, weights = NULL, p = 0.5) {
   if (is.null(weights)) {
     return(stats::median(x, na.rm = TRUE))
@@ -253,7 +247,6 @@ print.report_sample <- function(x, ...) {
 
 
 
-#' @importFrom stats weighted.mean
 .weighted_mean <- function(x, weights = NULL) {
   if (is.null(weights)) {
     return(mean(x, na.rm = TRUE))

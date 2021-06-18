@@ -14,7 +14,6 @@
 #'   format_formula(model)
 #'   format_formula(model, "random")
 #' }
-#' @importFrom insight find_algorithm
 #' @export
 format_formula <- function(x, what = "conditional") {
   f <- .safe_deparse(insight::find_formula(x)[[what]])

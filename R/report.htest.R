@@ -20,7 +20,6 @@
 #' report(t.test(mtcars$mpg ~ mtcars$vs))
 #' report(t.test(mtcars$mpg, mtcars$vs, paired = TRUE))
 #' report(t.test(iris$Sepal.Width, mu = 1))
-#' @importFrom insight format_ci
 #' @return An object of class \code{\link{report}}.
 #' @export
 report.htest <- function(x, ...) {
@@ -34,9 +33,6 @@ report.htest <- function(x, ...) {
 # report_effectsize -------------------------------------------------------
 
 #' @rdname report.htest
-#' @importFrom effectsize effectsize interpret_r interpret_d
-#' @importFrom parameters model_parameters
-#' @importFrom insight model_info
 #' @export
 report_effectsize.htest <- function(x, ...) {
   table <- effectsize::effectsize(x, verbose = FALSE, ...)
@@ -149,8 +145,6 @@ report_effectsize.htest <- function(x, ...) {
 
 
 #' @rdname report.htest
-#' @importFrom parameters model_parameters
-#' @importFrom insight model_info
 #' @export
 report_table.htest <- function(x, ...) {
   table_full <- parameters::model_parameters(x, ...)

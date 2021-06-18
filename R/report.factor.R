@@ -1,6 +1,4 @@
 #' @rdname report.data.frame
-#' @importFrom parameters skewness kurtosis
-#'
 #' @export
 report.factor <- function(x, levels_percentage = "auto", ...) {
   table <- report_table(x, levels_percentage = levels_percentage, ...)

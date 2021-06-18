@@ -8,7 +8,6 @@
 #'   format_algorithm(model)
 #' }
 #' @return A character string.
-#' @importFrom insight find_algorithm
 #' @export
 format_algorithm <- function(x) {
   algorithm <- suppressWarnings(insight::find_algorithm(x))
