@@ -17,7 +17,7 @@ clean_citation(citation)
 
 \item{authorsdate}{Only show authors and date (remove title, journal, etc.).}
 
-\item{short}{If more than one authors, replace by \code{et al.}}
+\item{short}{If more than one authors, replace by \verb{et al.}}
 
 \item{intext}{Remove brackets around the date (so that it can be placed
 inside larger parentheses).}

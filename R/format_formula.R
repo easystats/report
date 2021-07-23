@@ -1,7 +1,7 @@
 #' Convenient formatting of text components
 #'
 #' @inheritParams report
-#' @param what The name of the item returned by \code{insight::find_formula}.
+#' @param what The name of the item returned by `insight::find_formula`.
 #'
 #' @return A character string.
 #'

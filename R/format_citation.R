@@ -5,7 +5,7 @@
 #'
 #' @param citation A character string of a citation.
 #' @param authorsdate Only show authors and date (remove title, journal, etc.).
-#' @param short If more than one authors, replace by \code{et al.}
+#' @param short If more than one authors, replace by `et al.`
 #' @param intext Remove brackets around the date (so that it can be placed
 #'   inside larger parentheses).
 #'

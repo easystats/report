@@ -6,8 +6,8 @@
 #' @param data A data frame.
 #' @param age The name of the column containing the age of the participant.
 #' @param sex The name of the column containing the sex of the participant. The
-#'   classes should be one of \code{c("Male", "M", "Female", "F")}. Note that
-#'   you can specify other characters here as well (e.g., \code{"Other"}), but
+#'   classes should be one of `c("Male", "M", "Female", "F")`. Note that
+#'   you can specify other characters here as well (e.g., `"Other"`), but
 #'   the function will report only percentage of females, regardless of whether
 #'   any category other than "Male" is present in the data.
 #' @param education The name of the column containing education information.
@@ -15,12 +15,12 @@
 #'   instance in the case of repeated measures).
 #' @param group A character vector indicating the name(s) of the column(s) used
 #'   for stratified description.
-#' @param spell_n Fully spell the sample size (\code{"Three participants"}
-#'   instead of \code{"3 participants"}).
+#' @param spell_n Fully spell the sample size (`"Three participants"`
+#'   instead of `"3 participants"`).
 #' @inheritParams report.numeric
 #'
 #' @return A character vector with description of the "participants", based on
-#'   the information provided in \code{data}.
+#'   the information provided in `data`.
 #'
 #' @examples
 #' library(report)
@@ -160,8 +160,8 @@ report_participants <- function(data,
   if (!is.null(participants)) {
     data <- data.frame(
       "Age" = stats::aggregate(data[[age]], by = list(data[[participants]]), FUN = mean)[[2]],
-      "Sex" = stats::aggregate(data[[sex]], by = list(data[[participants]]), FUN = head, n = 1)[[2]],
-      "Education" = stats::aggregate(data[[education]], by = list(data[[participants]]), FUN = head, n = 1)[[2]]
+      "Sex" = stats::aggregate(data[[sex]], by = list(data[[participants]]), FUN = utils::head, n = 1)[[2]],
+      "Education" = stats::aggregate(data[[education]], by = list(data[[participants]]), FUN = utils::head, n = 1)[[2]]
     )
     age <- "Age"
     sex <- "Sex"

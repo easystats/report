@@ -13,11 +13,11 @@ objects above).}
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{
-An object of class \code{\link{report_effectsize}}.
+An object of class \code{\link[=report_effectsize]{report_effectsize()}}.
 }
 \description{
 Computes, interpret and formats the effect sizes of a variety of models and
-statistical tests (see list of supported objects in \code{\link{report}}).
+statistical tests (see list of supported objects in \code{\link[=report]{report()}}).
 }
 \examples{
 library(report)

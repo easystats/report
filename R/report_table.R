@@ -1,11 +1,11 @@
 #' Report a descriptive table
 #'
 #' Creates tables to describe different objects (see list of supported objects
-#' in \code{\link{report}}).
+#' in [report()]).
 #'
 #' @inheritParams report
 #'
-#' @return An object of class \code{\link{report_table}}.
+#' @return An object of class [report_table()].
 #'
 #' @examples
 #' \donttest{
@@ -72,7 +72,7 @@ as.report_table <- function(x, ...) {
 #' @export
 as.report_table.default <- function(x, summary = NULL, as_is = FALSE, ...) {
   if (as_is) {
-    class(x) <- unique(c(class(x)[1], "report_table", tail(class(x), -1)))
+    class(x) <- unique(c(class(x)[1], "report_table", utils::tail(class(x), -1)))
   } else {
     class(x) <- unique(c("report_table", class(x)))
   }
@@ -81,7 +81,7 @@ as.report_table.default <- function(x, summary = NULL, as_is = FALSE, ...) {
 
   if (!is.null(summary)) {
     if (as_is) {
-      class(summary) <- unique(c(class(summary)[1], "report_table", tail(class(summary), -1)))
+      class(summary) <- unique(c(class(summary)[1], "report_table", utils::tail(class(summary), -1)))
     } else {
       class(summary) <- unique(c("report_table", class(summary)))
     }

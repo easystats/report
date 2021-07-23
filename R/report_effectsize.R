@@ -1,14 +1,14 @@
 #' Report the effect size(s) of a model or a test
 #'
 #' Computes, interpret and formats the effect sizes of a variety of models and
-#' statistical tests (see list of supported objects in \code{\link{report}}).
+#' statistical tests (see list of supported objects in [report()]).
 #'
 #' @inheritParams report
 #' @inheritParams report_table
 #' @inheritParams report_text
 #' @inheritParams as.report
 #'
-#' @return An object of class \code{\link{report_effectsize}}.
+#' @return An object of class [report_effectsize()].
 #'
 #' @examples
 #' library(report)

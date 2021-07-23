@@ -12,7 +12,7 @@ test_that("report.htest-t-test", {
 
   set.seed(123)
   r <- report(t.test(mtcars$mpg ~ mtcars$vs))
-  expect_equal(as.report_table(r, summary = TRUE)$Difference, 7.9404, tolerance = 0.01)
+  expect_equal(as.report_table(r, summary = TRUE)$Difference, -7.9404, tolerance = 0.01)
 
   set.seed(123)
   r <- report(t.test(iris$Sepal.Width, mu = 1))

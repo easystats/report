@@ -16,14 +16,14 @@ will run it.}
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{
-An object of class \code{\link{report_performance}}.
+An object of class \code{\link[=report_performance]{report_performance()}}.
 }
 \description{
 Investigating the fit of statistical models to data often involves selecting
 the best fitting model amongst many competing models. This function helps
 report indices of model fit for various models.  Reports the type of
 different R objects . For a list of supported objects, see
-\code{\link{report}}).
+\code{\link[=report]{report()}}).
 }
 \examples{
 \donttest{

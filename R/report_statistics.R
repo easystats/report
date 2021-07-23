@@ -1,7 +1,7 @@
 #' Report the statistics of a model
 #'
 #' Creates a list containing a description of the parameters' values of R
-#' objects (see list of supported objects in \code{\link{report}}). Useful to
+#' objects (see list of supported objects in [report()]). Useful to
 #' insert in parentheses in plots or reports.
 #'
 #' @inheritParams report
@@ -9,7 +9,7 @@
 #' @inheritParams report_text
 #' @inheritParams as.report
 #'
-#' @return An object of class \code{\link{report_statistics}}.
+#' @return An object of class [report_statistics()].
 #'
 #' @examples
 #' \donttest{

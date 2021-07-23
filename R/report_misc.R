@@ -12,7 +12,7 @@
 #' report_date()
 #' summary(report_date())
 #' report_story()
-#' @return Objects of class \code{\link{report_text}}.
+#' @return Objects of class [report_text()].
 #' @export
 report_date <- function(...) {
   date <- Sys.time()

@@ -44,7 +44,7 @@ instead of \code{"3 participants"}).}
 }
 \value{
 A character vector with description of the "participants", based on
-  the information provided in \code{data}.
+the information provided in \code{data}.
 }
 \description{
 A helper function to help you format the participants data (age, sex, ...) in

@@ -6,7 +6,7 @@
 #' cite_easystats()
 #' summary(cite_easystats())
 #' as.data.frame(cite_easystats())
-#' @return An object of class \code{cite_easystats} that can be printed, summarized (using \code{summary()}), or transformed into a table (using \code{as.data.frame()}).
+#' @return An object of class `cite_easystats` that can be printed, summarized (using `summary()`), or transformed into a table (using `as.data.frame()`).
 #'
 #' @export
 cite_easystats <- function() {

@@ -1,8 +1,8 @@
 #' Reports of Structural Equation Models (SEM)
 #'
-#' Create a report for \code{lavaan} objects.
+#' Create a report for `lavaan` objects.
 #'
-#' @param x Object of class \code{lavaan}.
+#' @param x Object of class `lavaan`.
 #' @inheritParams report
 #' @inheritParams report.htest
 #' @inheritParams report.lm
@@ -29,7 +29,7 @@
 #'   report_performance(model)
 #' }
 #' }
-#' @return An object of class \code{\link{report}}.
+#' @return An object of class [report()].
 #' @export
 report.lavaan <- function(x, ...) {
   print("Support for lavaan not fully implemented yet :(")

@@ -13,11 +13,11 @@ objects above).}
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{
-An object of class \code{\link{report_priors}}.
+An object of class \code{\link[=report_priors]{report_priors()}}.
 }
 \description{
 Reports priors of Bayesian models (see list of supported objects in
-\code{\link{report}}).
+\code{\link[=report]{report()}}).
 }
 \examples{
 library(report)
