@@ -32,7 +32,7 @@
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
-      The Welch Two Sample t-test testing the difference of wt by am (mean in group 0 = 3.77, mean in group 1 = 2.41) suggests that the effect is negative, statistically significant, and large (difference = -1.36, 95% CI [0.85, 1.86], t(29.23) = 5.49, p < .001; Cohen's d = 2.03, 95% CI [1.13, 2.91])
+      The Welch Two Sample t-test testing the difference of wt by am (mean in group 0 = 3.77, mean in group 1 = 2.41) suggests that the effect is positive, statistically significant, and large (difference = 1.36, 95% CI [0.85, 1.86], t(29.23) = 5.49, p < .001; Cohen's d = 2.03, 95% CI [1.13, 2.91])
 
 ---
 
@@ -41,7 +41,7 @@
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
-      The Welch Two Sample t-test testing the difference of wt by am (mean in group 0 = 3.77, mean in group 1 = 2.41) suggests that the effect is negative, statistically not significant, and large (difference = -1.36, 95% CI [-Inf, 1.78], t(29.23) = 5.49, p > .999; Cohen's d = 2.03, 95% CI [1.13, 2.91])
+      The Welch Two Sample t-test testing the difference of wt by am (mean in group 0 = 3.77, mean in group 1 = 2.41) suggests that the effect is positive, statistically not significant, and large (difference = 1.36, 95% CI [-Inf, 1.78], t(29.23) = 5.49, p > .999; Cohen's d = 2.03, 95% CI [1.13, 2.91])
 
 ---
 
@@ -50,7 +50,7 @@
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
-      The Welch Two Sample t-test testing the difference of wt by am (mean in group 0 = 3.77, mean in group 1 = 2.41) suggests that the effect is negative, statistically significant, and large (difference = -1.36, 95% CI [0.94, Inf], t(29.23) = 5.49, p < .001; Cohen's d = 2.03, 95% CI [1.13, 2.91])
+      The Welch Two Sample t-test testing the difference of wt by am (mean in group 0 = 3.77, mean in group 1 = 2.41) suggests that the effect is positive, statistically significant, and large (difference = 1.36, 95% CI [0.94, Inf], t(29.23) = 5.49, p < .001; Cohen's d = 2.03, 95% CI [1.13, 2.91])
 
 ---
 
