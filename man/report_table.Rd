@@ -13,11 +13,11 @@ objects above).}
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{
-An object of class \code{\link{report_table}}.
+An object of class \code{\link[=report_table]{report_table()}}.
 }
 \description{
 Creates tables to describe different objects (see list of supported objects
-in \code{\link{report}}).
+in \code{\link[=report]{report()}}).
 }
 \examples{
 \donttest{

@@ -123,3 +123,4 @@ Collate:
     'utils_data.R'
     'utils_error_message.R'
     'utils_grouped_df.R'
+Roxygen: list(markdown = TRUE)

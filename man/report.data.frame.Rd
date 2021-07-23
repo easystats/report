@@ -69,12 +69,12 @@ observations larger than 100.}
 
 \item{range}{Show range.}
 
-\item{distribution}{Show \code{\link[parameters:skewness]{kurtosis}} and \code{\link[parameters:skewness]{skewness}}.}
+\item{distribution}{Show \code{\link[parameters:reexports]{kurtosis()}} and \code{\link[parameters:reexports]{parameters::skewness()}}.}
 
 \item{digits}{Number of significant digits.}
 }
 \value{
-An object of class \code{\link{report}}.
+An object of class \code{\link[=report]{report()}}.
 }
 \description{
 Create reports for data frames.

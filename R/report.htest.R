@@ -1,12 +1,12 @@
-#' Reporting \code{htest} objects (Correlation, t-test...)
+#' Reporting `htest` objects (Correlation, t-test...)
 #'
-#' Create reports for \code{htest} objects (\code{t.test()}, \code{cor.test()},
+#' Create reports for `htest` objects (`t.test()`, `cor.test()`,
 #' etc.).
 #'
-#' @param x Object of class \code{htest}.
-#' @param table Provide the output of  \code{report_table()} to avoid its
+#' @param x Object of class `htest`.
+#' @param table Provide the output of  `report_table()` to avoid its
 #'   re-computation.
-#' @param effectsize Provide the output of \code{report_effectsize()} to avoid
+#' @param effectsize Provide the output of `report_effectsize()` to avoid
 #'   its re-computation.
 #' @inheritParams report
 #'
@@ -20,7 +20,7 @@
 #' report(t.test(mtcars$mpg ~ mtcars$vs))
 #' report(t.test(mtcars$mpg, mtcars$vs, paired = TRUE))
 #' report(t.test(iris$Sepal.Width, mu = 1))
-#' @return An object of class \code{\link{report}}.
+#' @return An object of class [report()].
 #' @export
 report.htest <- function(x, ...) {
   table <- report_table(x, ...)

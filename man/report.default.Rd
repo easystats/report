@@ -40,17 +40,16 @@
 \method{report_text}{default}(x, ...)
 }
 \arguments{
-\item{x}{Object of class \code{NEW OBJECT}.}
+\item{x}{Object of class \verb{NEW OBJECT}.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{
-An object of class \code{\link{report}}.
+An object of class \code{\link[=report]{report()}}.
 }
 \description{
 Template file to add report support for new objects. Check-out the vignette on
-\href{https://easystats.github.io/report/articles/new_models.html}{Supporting
-New Models}.
+\href{https://easystats.github.io/report/articles/new_models.html}{Supporting New Models}.
 }
 \examples{
 library(report)
@@ -66,31 +65,31 @@ summary(as.data.frame(r))
 \seealso{
 Specific components of reports (especially for stats models):
 \itemize{
-  \item \code{\link{report_table}}
-  \item \code{\link{report_parameters}}
-  \item \code{\link{report_statistics}}
-  \item \code{\link{report_effectsize}}
-  \item \code{\link{report_model}}
-  \item \code{\link{report_priors}}
-  \item \code{\link{report_random}}
-  \item \code{\link{report_performance}}
-  \item \code{\link{report_info}}
-  \item \code{\link{report_text}}
+\item \code{\link[=report_table]{report_table()}}
+\item \code{\link[=report_parameters]{report_parameters()}}
+\item \code{\link[=report_statistics]{report_statistics()}}
+\item \code{\link[=report_effectsize]{report_effectsize()}}
+\item \code{\link[=report_model]{report_model()}}
+\item \code{\link[=report_priors]{report_priors()}}
+\item \code{\link[=report_random]{report_random()}}
+\item \code{\link[=report_performance]{report_performance()}}
+\item \code{\link[=report_info]{report_info()}}
+\item \code{\link[=report_text]{report_text()}}
 }
 Other types of reports:
 \itemize{
-  \item \code{\link{report_system}}
-  \item \code{\link{report_packages}}
-  \item \code{\link{report_participants}}
-  \item \code{\link{report_sample}}
-  \item \code{\link{report_date}}
+\item \code{\link[=report_system]{report_system()}}
+\item \code{\link[=report_packages]{report_packages()}}
+\item \code{\link[=report_participants]{report_participants()}}
+\item \code{\link[=report_sample]{report_sample()}}
+\item \code{\link[=report_date]{report_date()}}
 }
 Methods:
 \itemize{
-  \item \code{\link{as.report}}
+\item \code{\link[=as.report]{as.report()}}
 }
 Template file for supporting new models:
 \itemize{
-  \item \code{\link{report.default}}
+\item \code{\link[=report.default]{report.default()}}
 }
 }

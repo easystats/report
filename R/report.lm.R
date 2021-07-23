@@ -2,15 +2,15 @@
 #'
 #' Create reports for (general) linear models.
 #'
-#' @param x Object of class \code{lm} or \code{glm}.
-#' @param include_effectsize If \code{FALSE}, won't include effect-size related
+#' @param x Object of class `lm` or `glm`.
+#' @param include_effectsize If `FALSE`, won't include effect-size related
 #'   indices (standardized coefficients, etc.).
-#' @param include_diagnostic If \code{FALSE}, won't include diagnostic related
+#' @param include_diagnostic If `FALSE`, won't include diagnostic related
 #'   indices for Bayesian models (ESS, Rhat).
-#' @param include_intercept If \code{FALSE}, won't include the intercept.
+#' @param include_intercept If `FALSE`, won't include the intercept.
 #' @param effectsize_method See documentation for
-#'   \code{\link[effectsize:effectsize]{effectsize::effectsize()}}.
-#' @param parameters Provide the output of \code{report_parameters()} to avoid
+#'   [effectsize::effectsize()].
+#' @param parameters Provide the output of `report_parameters()` to avoid
 #'   its re-computation.
 #' @inheritParams report
 #' @inheritParams report.htest
@@ -47,7 +47,7 @@
 #'   summary(as.data.frame(r))
 #' }
 #' }
-#' @return An object of class \code{\link{report}}.
+#' @return An object of class [report()].
 #' @export
 
 report.lm <- function(x, include_effectsize = TRUE, effectsize_method = "refit", ...) {

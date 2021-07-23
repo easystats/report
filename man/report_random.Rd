@@ -13,11 +13,11 @@ objects above).}
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{
-An object of class \code{\link{report_random}}.
+An object of class \code{\link[=report_random]{report_random()}}.
 }
 \description{
 Reports random effects of mixed models (see list of supported objects in
-\code{\link{report}}).
+\code{\link[=report]{report()}}).
 }
 \examples{
 library(report)

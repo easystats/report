@@ -1,10 +1,10 @@
 #' Reporting models comparison
 #'
 #' Create reports for model comparison as obtained by the
-#' \code{\link[performance:compare_performance]{performance::compare_performance()}}
-#' function in the \code{performance} package.
+#' [performance::compare_performance()]
+#' function in the `performance` package.
 #'
-#' @param x Object of class \code{NEW OBJECT}.
+#' @param x Object of class `NEW OBJECT`.
 #' @inheritParams report
 #' @inheritParams report.lm
 #'
@@ -31,7 +31,7 @@
 #' report_statistics(x)
 #' report_parameters(x)
 #' }
-#' @return An object of class \code{\link{report}}.
+#' @return An object of class [report()].
 #' @export
 report.test_performance <- function(x, ...) {
   table <- report_table(x, table = table, ...)
@@ -59,27 +59,27 @@ report_statistics.test_performance <- function(x, table = NULL, ...) {
 
   text <- text_short <- ""
   if ("BF" %in% names(table)) {
-    val <- text <- text_paste(text, insight::format_bf(na.omit(table$BF)))
+    val <- text <- text_paste(text, insight::format_bf(stats::na.omit(table$BF)))
   }
 
   if ("Omega2" %in% names(table)) {
-    val <- na.omit(table$Omega2)
+    val <- stats::na.omit(table$Omega2)
     text2 <- paste0(
       "Omega2 = ",
-      insight::format_value(na.omit(table$Omega2)),
+      insight::format_value(stats::na.omit(table$Omega2)),
       ", ",
-      insight::format_p(na.omit(table$p_Omega2))
+      insight::format_p(stats::na.omit(table$p_Omega2))
     )
     text <- text_paste(text, text2, sep = "; ")
   }
 
   if ("LR" %in% names(table)) {
-    val <- na.omit(table$LR)
+    val <- stats::na.omit(table$LR)
     text2 <- paste0(
       "LR = ",
-      insight::format_value(na.omit(table$LR)),
+      insight::format_value(stats::na.omit(table$LR)),
       ", ",
-      insight::format_p(na.omit(table$p_LR))
+      insight::format_p(stats::na.omit(table$p_LR))
     )
     text <- text_paste(text, text2, sep = "; ")
   }

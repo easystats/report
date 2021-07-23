@@ -1,10 +1,10 @@
 #' Template to add report support for new objects
 #'
 #' Template file to add report support for new objects. Check-out the vignette on
-#' \href{https://easystats.github.io/report/articles/new_models.html}{Supporting
-#' New Models}.
+#' [Supporting
+#' New Models](https://easystats.github.io/report/articles/new_models.html).
 #'
-#' @param x Object of class \code{NEW OBJECT}.
+#' @param x Object of class `NEW OBJECT`.
 #' @inheritParams report
 #'
 #' @inherit report return seealso
@@ -19,7 +19,7 @@
 #' summary(r)
 #' as.data.frame(r)
 #' summary(as.data.frame(r))
-#' @return An object of class \code{\link{report}}.
+#' @return An object of class [report()].
 #' @export
 report.default <- function(x, ...) {
   # You can remove the following line once the functions below are implemented

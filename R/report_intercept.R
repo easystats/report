@@ -1,14 +1,14 @@
 #' Report intercept
 #'
 #' Reports intercept of regression models (see list of supported objects in
-#' \code{\link{report}}).
+#' [report()]).
 #'
 #' @inheritParams report
 #' @inheritParams report_table
 #' @inheritParams report_text
 #' @inheritParams as.report
 #'
-#' @return An object of class \code{\link{report_intercept}}.
+#' @return An object of class [report_intercept()].
 #'
 #' @examples
 #' \donttest{

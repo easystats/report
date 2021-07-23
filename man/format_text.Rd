@@ -32,7 +32,7 @@ text_wrap(text, width = NULL, ...)
 \item{last}{Last separator.}
 
 \item{width}{Positive integer giving the target column width for wrapping
-lines in the output. Can be "auto", in which case it will select 90\% of the
+lines in the output. Can be "auto", in which case it will select 90\\% of the
 default width.}
 
 \item{...}{Other arguments to be passed to or from other functions.}

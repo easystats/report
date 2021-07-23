@@ -1,10 +1,10 @@
 #' Reporting models comparison
 #'
 #' Create reports for model comparison as obtained by the
-#' \code{\link[performance:compare_performance]{performance::compare_performance()}}
-#' function in the \code{performance} package.
+#' [performance::compare_performance()]
+#' function in the `performance` package.
 #'
-#' @param x Object of class \code{NEW OBJECT}.
+#' @param x Object of class `NEW OBJECT`.
 #' @inheritParams report
 #' @inheritParams report.lm
 #'
@@ -31,7 +31,7 @@
 #' report_statistics(x)
 #' report_parameters(x)
 #' }
-#' @return An object of class \code{\link{report}}.
+#' @return An object of class [report()].
 #' @export
 
 report.compare_performance <- function(x, ...) {

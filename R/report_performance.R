@@ -4,14 +4,14 @@
 #' the best fitting model amongst many competing models. This function helps
 #' report indices of model fit for various models.  Reports the type of
 #' different R objects . For a list of supported objects, see
-#' \code{\link{report}}).
+#' [report()]).
 #'
 #' @inheritParams report
 #' @inheritParams report_table
 #' @inheritParams report_text
 #' @inheritParams as.report
 #'
-#' @return An object of class \code{\link{report_performance}}.
+#' @return An object of class [report_performance()].
 #'
 #' @examples
 #' \donttest{

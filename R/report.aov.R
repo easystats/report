@@ -2,7 +2,7 @@
 #'
 #' Create reports for ANOVA models.
 #'
-#' @param x Object of class \code{aov}, \code{anova} or \code{aovlist}.
+#' @param x Object of class `aov`, `anova` or `aovlist`.
 #' @inheritParams report
 #' @inheritParams report.htest
 #' @inherit report return seealso
@@ -17,7 +17,7 @@
 #' summary(r)
 #' as.data.frame(r)
 #' summary(as.data.frame(r))
-#' @return An object of class \code{\link{report}}.
+#' @return An object of class [report()].
 #' @export
 report.aov <- report.htest
 

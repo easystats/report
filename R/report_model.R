@@ -1,13 +1,13 @@
 #' Report the model type
 #'
-#' Reports the type of different R objects (see list of supported objects in \code{\link{report}}).
+#' Reports the type of different R objects (see list of supported objects in [report()]).
 #'
 #' @inheritParams report
 #' @inheritParams report_table
 #' @inheritParams report_text
 #' @inheritParams as.report
 #'
-#' @return A \code{character} string.
+#' @return A `character` string.
 #'
 #' @examples
 #' \donttest{

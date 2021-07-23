@@ -1,14 +1,14 @@
 #' Report priors of Bayesian models
 #'
 #' Reports priors of Bayesian models (see list of supported objects in
-#' \code{\link{report}}).
+#' [report()]).
 #'
 #' @inheritParams report
 #' @inheritParams report_table
 #' @inheritParams report_text
 #' @inheritParams as.report
 #'
-#' @return An object of class \code{\link{report_priors}}.
+#' @return An object of class [report_priors()].
 #'
 #' @examples
 #' library(report)

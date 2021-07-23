@@ -2,7 +2,7 @@
 #'
 #' Create reports for Bayesian models. The description of the parameters
 #' follows the Sequential Effect eXistence and sIgnificance Testing framework
-#' (see \link[bayestestR:sexit]{SEXIT documentation}).
+#' (see [SEXIT documentation][bayestestR::sexit]).
 #'
 #' @inheritParams report.lm
 #' @inherit report return seealso
@@ -21,7 +21,7 @@
 #'   summary(as.data.frame(r))
 #' }
 #' }
-#' @return An object of class \code{\link{report}}.
+#' @return An object of class [report()].
 #' @include report.lm.R report.stanreg.R report.lme4.R
 #' @export
 report.brmsfit <- function(x, ...) {

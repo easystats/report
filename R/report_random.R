@@ -1,14 +1,14 @@
 #' Report random effects and factors
 #'
 #' Reports random effects of mixed models (see list of supported objects in
-#' \code{\link{report}}).
+#' [report()]).
 #'
 #' @inheritParams report
 #' @inheritParams report_table
 #' @inheritParams report_text
 #' @inheritParams as.report
 #'
-#' @return An object of class \code{\link{report_random}}.
+#' @return An object of class [report_random()].
 #'
 #' @examples
 #' library(report)

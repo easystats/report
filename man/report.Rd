@@ -14,23 +14,23 @@ objects above).}
 }
 \value{
 A list-object of class \code{report}, which contains further
-  list-objects with a short and long description of the model summary, as
-  well as a short and long table of parameters and fit indices.
+list-objects with a short and long description of the model summary, as
+well as a short and long table of parameters and fit indices.
 }
 \description{
 Create reports of different objects. See the documentation for your object's
 class:
 \itemize{
- \item{\link[=report.sessionInfo]{System and packages} (\code{sessionInfo})}
- \item{\link[=report.data.frame]{Dataframes and vectors}}
- \item{\link[=report.htest]{Correlations and t-tests} (\code{htest})}
- \item{\link[=report.aov]{ANOVAs} (\code{aov, anova, aovlist, ...})}
- \item{\link[=report.lm]{Regression models} (\code{glm, lm, ...})}
- \item{\link[=report.lm]{Mixed models} (\code{glmer, lmer, glmmTMB, ...})}
- \item{\link[=report.stanreg]{Bayesian models} (\code{stanreg, brms...})}
- \item{\link[=report.bayesfactor_models]{Bayes factors} (from \code{bayestestR})}
- \item{\link[=report.lavaan]{Structural Equation Models (SEM)} (from \code{lavaan})}
- \item{\link[=report.compare_performance]{Model comparison} (from \code{\link[performance:compare_performance]{performance}})}
+\item{\link[=report.sessionInfo]{System and packages} (\code{sessionInfo})}
+\item{\link[=report.data.frame]{Dataframes and vectors}}
+\item{\link[=report.htest]{Correlations and t-tests} (\code{htest})}
+\item{\link[=report.aov]{ANOVAs} (\verb{aov, anova, aovlist, ...})}
+\item{\link[=report.lm]{Regression models} (\verb{glm, lm, ...})}
+\item{\link[=report.lm]{Mixed models} (\verb{glmer, lmer, glmmTMB, ...})}
+\item{\link[=report.stanreg]{Bayesian models} (\verb{stanreg, brms...})}
+\item{\link[=report.bayesfactor_models]{Bayes factors} (from \code{bayestestR})}
+\item{\link[=report.lavaan]{Structural Equation Models (SEM)} (from \code{lavaan})}
+\item{\link[=report.compare_performance]{Model comparison} (from \code{\link[performance:compare_performance]{performance()}})}
 }
 Most of the time, the object created by the \code{report()} function can be
 further transformed, for instance summarized (using \code{summary()}), or
@@ -83,31 +83,31 @@ summary(as.data.frame(r))
 \seealso{
 Specific components of reports (especially for stats models):
 \itemize{
-  \item \code{\link{report_table}}
-  \item \code{\link{report_parameters}}
-  \item \code{\link{report_statistics}}
-  \item \code{\link{report_effectsize}}
-  \item \code{\link{report_model}}
-  \item \code{\link{report_priors}}
-  \item \code{\link{report_random}}
-  \item \code{\link{report_performance}}
-  \item \code{\link{report_info}}
-  \item \code{\link{report_text}}
+\item \code{\link[=report_table]{report_table()}}
+\item \code{\link[=report_parameters]{report_parameters()}}
+\item \code{\link[=report_statistics]{report_statistics()}}
+\item \code{\link[=report_effectsize]{report_effectsize()}}
+\item \code{\link[=report_model]{report_model()}}
+\item \code{\link[=report_priors]{report_priors()}}
+\item \code{\link[=report_random]{report_random()}}
+\item \code{\link[=report_performance]{report_performance()}}
+\item \code{\link[=report_info]{report_info()}}
+\item \code{\link[=report_text]{report_text()}}
 }
 Other types of reports:
 \itemize{
-  \item \code{\link{report_system}}
-  \item \code{\link{report_packages}}
-  \item \code{\link{report_participants}}
-  \item \code{\link{report_sample}}
-  \item \code{\link{report_date}}
+\item \code{\link[=report_system]{report_system()}}
+\item \code{\link[=report_packages]{report_packages()}}
+\item \code{\link[=report_participants]{report_participants()}}
+\item \code{\link[=report_sample]{report_sample()}}
+\item \code{\link[=report_date]{report_date()}}
 }
 Methods:
 \itemize{
-  \item \code{\link{as.report}}
+\item \code{\link[=as.report]{as.report()}}
 }
 Template file for supporting new models:
 \itemize{
-  \item \code{\link{report.default}}
+\item \code{\link[=report.default]{report.default()}}
 }
 }

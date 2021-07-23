@@ -3,20 +3,20 @@
 #' Create reports of different objects. See the documentation for your object's
 #' class:
 #' \itemize{
-#'  \item{\link[=report.sessionInfo]{System and packages} (\code{sessionInfo})}
-#'  \item{\link[=report.data.frame]{Dataframes and vectors}}
-#'  \item{\link[=report.htest]{Correlations and t-tests} (\code{htest})}
-#'  \item{\link[=report.aov]{ANOVAs} (\code{aov, anova, aovlist, ...})}
-#'  \item{\link[=report.lm]{Regression models} (\code{glm, lm, ...})}
-#'  \item{\link[=report.lm]{Mixed models} (\code{glmer, lmer, glmmTMB, ...})}
-#'  \item{\link[=report.stanreg]{Bayesian models} (\code{stanreg, brms...})}
-#'  \item{\link[=report.bayesfactor_models]{Bayes factors} (from \code{bayestestR})}
-#'  \item{\link[=report.lavaan]{Structural Equation Models (SEM)} (from \code{lavaan})}
-#'  \item{\link[=report.compare_performance]{Model comparison} (from \code{\link[performance:compare_performance]{performance}})}
+#'  \item{[System and packages][report.sessionInfo] (`sessionInfo`)}
+#'  \item{[Dataframes and vectors][report.data.frame]}
+#'  \item{[Correlations and t-tests][report.htest] (`htest`)}
+#'  \item{[ANOVAs][report.aov] (`aov, anova, aovlist, ...`)}
+#'  \item{[Regression models][report.lm] (`glm, lm, ...`)}
+#'  \item{[Mixed models][report.lm] (`glmer, lmer, glmmTMB, ...`)}
+#'  \item{[Bayesian models][report.stanreg] (`stanreg, brms...`)}
+#'  \item{[Bayes factors][report.bayesfactor_models] (from `bayestestR`)}
+#'  \item{[Structural Equation Models (SEM)][report.lavaan] (from `lavaan`)}
+#'  \item{[Model comparison][report.compare_performance] (from [`performance()`][performance::compare_performance])}
 #' }
-#' Most of the time, the object created by the \code{report()} function can be
-#' further transformed, for instance summarized (using \code{summary()}), or
-#' converted to a table (using \code{as.data.frame()}).
+#' Most of the time, the object created by the `report()` function can be
+#' further transformed, for instance summarized (using `summary()`), or
+#' converted to a table (using `as.data.frame()`).
 #'
 #' @param x The R object that you want to report (see list of of supported
 #'   objects above).
@@ -25,66 +25,66 @@
 #' @details
 #'
 #' \subsection{Organization}{
-#' \code{report_table} and \code{report_text} are the two distal representations
-#' of a report, and are the two provided in \code{report()}. However,
+#' `report_table` and `report_text` are the two distal representations
+#' of a report, and are the two provided in `report()`. However,
 #' intermediate steps are accessible (depending on the object) via specific
-#' functions (e.g., \code{report_parameters}).
+#' functions (e.g., `report_parameters`).
 #' }
 #'
 #' \subsection{Output}{
 #'
-#' The \code{report()} function generates a report-object that contain in itself
+#' The `report()` function generates a report-object that contain in itself
 #' different representations (e.g., text, tables, plots). These different
 #' representations can be accessed via several functions, such as:
 #'
 #' \itemize{
-#' \item \strong{\code{as.report_text(r)}}: Detailed text.
+#' \item **`as.report_text(r)`**: Detailed text.
 #'
-#' \item \strong{\code{as.report_text(r, summary=TRUE)}}: Minimal text giving
+#' \item **`as.report_text(r, summary=TRUE)`**: Minimal text giving
 #' the minimal information.
 #'
-#' \item \strong{\code{as.report_table(r)}}: Comprehensive table including most
+#' \item **`as.report_table(r)`**: Comprehensive table including most
 #' available indices.
 #'
-#' \item \strong{\code{as.report_table(r, summary=TRUE)}}: Minimal table.
+#' \item **`as.report_table(r, summary=TRUE)`**: Minimal table.
 #' }
 #'
 #' Note that for some report objects, some of these representations might be
 #' identical.
 #' }
 #'
-#' @return A list-object of class \code{report}, which contains further
+#' @return A list-object of class `report`, which contains further
 #'   list-objects with a short and long description of the model summary, as
 #'   well as a short and long table of parameters and fit indices.
 #'
 #' @seealso Specific components of reports (especially for stats models):
 #' \itemize{
-#'   \item \code{\link{report_table}}
-#'   \item \code{\link{report_parameters}}
-#'   \item \code{\link{report_statistics}}
-#'   \item \code{\link{report_effectsize}}
-#'   \item \code{\link{report_model}}
-#'   \item \code{\link{report_priors}}
-#'   \item \code{\link{report_random}}
-#'   \item \code{\link{report_performance}}
-#'   \item \code{\link{report_info}}
-#'   \item \code{\link{report_text}}
+#'   \item [report_table()]
+#'   \item [report_parameters()]
+#'   \item [report_statistics()]
+#'   \item [report_effectsize()]
+#'   \item [report_model()]
+#'   \item [report_priors()]
+#'   \item [report_random()]
+#'   \item [report_performance()]
+#'   \item [report_info()]
+#'   \item [report_text()]
 #' }
 #' Other types of reports:
 #' \itemize{
-#'   \item \code{\link{report_system}}
-#'   \item \code{\link{report_packages}}
-#'   \item \code{\link{report_participants}}
-#'   \item \code{\link{report_sample}}
-#'   \item \code{\link{report_date}}
+#'   \item [report_system()]
+#'   \item [report_packages()]
+#'   \item [report_participants()]
+#'   \item [report_sample()]
+#'   \item [report_date()]
 #' }
 #' Methods:
 #' \itemize{
-#'   \item \code{\link{as.report}}
+#'   \item [as.report()]
 #' }
 #' Template file for supporting new models:
 #' \itemize{
-#'   \item \code{\link{report.default}}
+#'   \item [report.default()]
 #' }
 #'
 #' @examples
@@ -149,19 +149,19 @@ as.data.frame.report <- function(x, ...) {
 
 
 
-#' Create or test objects of class \link{report}.
+#' Create or test objects of class [report].
 #'
-#' Allows to create or test whether an object is of the \code{report} class.
+#' Allows to create or test whether an object is of the `report` class.
 #'
 #' @param x An arbitrary R object.
-#' @param text Text obtained via \code{report_text()}
-#' @param table Table obtained via \code{report_table()}
-#' @param plot Plot obtained via \code{report_plot()}. Not yet implemented.
-#' @param summary Add a summary as attribute (to be extracted via \code{summary()}).
+#' @param text Text obtained via `report_text()`
+#' @param table Table obtained via `report_table()`
+#' @param plot Plot obtained via `report_plot()`. Not yet implemented.
+#' @param summary Add a summary as attribute (to be extracted via `summary()`).
 #' @param prefix The prefix to be displayed in front of each parameter.
 #' @param ... Args to be saved as attributes.
 #'
-#' @return A report object or a \code{TRUE/FALSE} value.
+#' @return A report object or a `TRUE/FALSE` value.
 #'
 #' @export
 as.report <- function(text, table = NULL, plot = NULL, ...) {

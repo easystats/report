@@ -5,10 +5,10 @@
 #' @inheritParams report
 #' @param n Include number of observations for each individual variable.
 #' @param centrality Character vector, indicating the index of centrality
-#'   (either \code{"mean"} or \code{"median"}).
-#' @param dispersion Show index of dispersion (\link{sd} if \code{centrality = "mean"}, or \link{mad} if \code{centrality = "median"}).
+#'   (either `"mean"` or `"median"`).
+#' @param dispersion Show index of dispersion ([sd] if `centrality = "mean"`, or [mad] if `centrality = "median"`).
 #' @param range Show range.
-#' @param distribution Show \code{\link[parameters:skewness]{kurtosis}} and \code{\link[parameters:skewness]{skewness}}.
+#' @param distribution Show [`kurtosis()`][parameters::skewness] and [parameters::skewness()].
 #' @param n_entries Number of different character entries to show. Can be "all".
 #' @param levels_percentage Show characters entries and factor levels by number
 #'   or percentage. If "auto", then will be set to number and percentage if the
@@ -39,7 +39,7 @@
 #'   as.data.frame(r)
 #'   summary(as.data.frame(r))
 #' }
-#' @return An object of class \code{\link{report}}.
+#' @return An object of class [report()].
 #' @export
 report.data.frame <- function(x,
                               n = FALSE,

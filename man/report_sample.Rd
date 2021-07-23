@@ -45,7 +45,7 @@ weight-variable. Reported descriptive statistics will be weighted by
 }
 \value{
 A data frame of class \code{report_sample} with variable names and
-  their related summary statistics.
+their related summary statistics.
 }
 \description{
 Create sample description table (also referred to as "Table 1").
