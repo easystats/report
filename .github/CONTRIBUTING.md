@@ -16,7 +16,7 @@ You can look around the **issue section** to find some features / ideas / bugs t
 
 - **"I'm not sure if my suggestion or idea is worthwile"**
 
-Enough with the impostor syndrom! All suggestions and opinions are good, and even if it's just a thought or so, it's always good to receive feedback.
+Enough with the impostor syndrome! All suggestions and opinions are good, and even if it's just a thought or so, it's always good to receive feedback.
 
 - **"Why should I waste my time with this? Do I get any credit?"**
 
