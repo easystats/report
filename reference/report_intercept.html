@@ -48,7 +48,7 @@
 
 <meta property="og:title" content="Report intercept — report_intercept" />
 <meta property="og:description" content="Reports intercept of regression models (see list of supported objects in
-report)." />
+report())." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -150,7 +150,7 @@ report)." />
 
     <div class="ref-description">
     <p>Reports intercept of regression models (see list of supported objects in
-<code><a href='report.html'>report</a></code>).</p>
+<code><a href='report.html'>report()</a></code>).</p>
     </div>
 
     <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>report_intercept</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></code></pre></div>
@@ -171,7 +171,7 @@ objects above).</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class <code>report_intercept</code>.</p>
+    <p>An object of class <code>report_intercept()</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'># \donttest{</span></span>
@@ -188,7 +188,7 @@ objects above).</p></td>
 <span class='r-in'>  <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'>lme4</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>|</span> <span class='va'>Species</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span></span>
 <span class='r-in'>  <span class='fu'>report_intercept</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span></span>
 <span class='r-in'><span class='op'>}</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> The model's intercept, corresponding to Petal.Length = 0, is at 2.50 (95% CI [1.20, 3.81], t(146) = 3.75, p &lt; .001).</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> The model's intercept, corresponding to Petal.Length = 0, is at 2.50 (95% CI [1.19, 3.82], t(146) = 3.75, p &lt; .001).</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># Bayesian models</span></span>
 <span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://mc-stan.org/rstanarm/'>"rstanarm"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>

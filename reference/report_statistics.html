@@ -48,7 +48,7 @@
 
 <meta property="og:title" content="Report the statistics of a model — report_statistics" />
 <meta property="og:description" content="Creates a list containing a description of the parameters' values of R
-objects (see list of supported objects in report). Useful to
+objects (see list of supported objects in report()). Useful to
 insert in parentheses in plots or reports." />
 <meta property="og:image" content="/logo.png" />
 
@@ -151,7 +151,7 @@ insert in parentheses in plots or reports." />
 
     <div class="ref-description">
     <p>Creates a list containing a description of the parameters' values of R
-objects (see list of supported objects in <code><a href='report.html'>report</a></code>). Useful to
+objects (see list of supported objects in <code><a href='report.html'>report()</a></code>). Useful to
 insert in parentheses in plots or reports.</p>
     </div>
 
@@ -178,7 +178,7 @@ will run it.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class <code>report_statistics</code>.</p>
+    <p>An object of class <code>report_statistics()</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'># \donttest{</span></span>
@@ -227,7 +227,7 @@ will run it.</p></td>
 <span class='r-in'>  <span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'>lme4</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/lme4/man/lmer.html'>lmer</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Petal.Length</span> <span class='op'>+</span> <span class='op'>(</span><span class='fl'>1</span> <span class='op'>|</span> <span class='va'>Species</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span></span>
 <span class='r-in'>  <span class='fu'>report_statistics</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span></span>
 <span class='r-in'><span class='op'>}</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> beta = 2.50, 95% CI [1.20, 3.81], t(146) = 3.75, p &lt; .001; Std. beta = -1.46e-13, 95% CI [-1.47, 1.47]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> beta = 2.50, 95% CI [1.19, 3.82], t(146) = 3.75, p &lt; .001; Std. beta = -1.46e-13, 95% CI [-1.49, 1.49]</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> beta = 0.89, 95% CI [0.76, 1.01], t(146) = 13.93, p &lt; .001; Std. beta = 1.89, 95% CI [1.63, 2.16]</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># Bayesian models</span></span>

@@ -202,30 +202,30 @@ its re-computation.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class <code><a href='report.html'>report</a></code>.</p>
+    <p>An object of class <code><a href='report.html'>report()</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Specific components of reports (especially for stats models):</p><ul>
-<li><p><code><a href='report_table.html'>report_table</a></code></p></li>
-<li><p><code><a href='report_parameters.html'>report_parameters</a></code></p></li>
-<li><p><code><a href='report_statistics.html'>report_statistics</a></code></p></li>
-<li><p><code><a href='report_effectsize.html'>report_effectsize</a></code></p></li>
-<li><p><code><a href='report_model.html'>report_model</a></code></p></li>
-<li><p><code><a href='report_priors.html'>report_priors</a></code></p></li>
-<li><p><code><a href='report_random.html'>report_random</a></code></p></li>
-<li><p><code><a href='report_performance.html'>report_performance</a></code></p></li>
-<li><p><code><a href='report_info.html'>report_info</a></code></p></li>
-<li><p><code><a href='report_text.html'>report_text</a></code></p></li>
+<li><p><code><a href='report_table.html'>report_table()</a></code></p></li>
+<li><p><code><a href='report_parameters.html'>report_parameters()</a></code></p></li>
+<li><p><code><a href='report_statistics.html'>report_statistics()</a></code></p></li>
+<li><p><code><a href='report_effectsize.html'>report_effectsize()</a></code></p></li>
+<li><p><code><a href='report_model.html'>report_model()</a></code></p></li>
+<li><p><code><a href='report_priors.html'>report_priors()</a></code></p></li>
+<li><p><code><a href='report_random.html'>report_random()</a></code></p></li>
+<li><p><code><a href='report_performance.html'>report_performance()</a></code></p></li>
+<li><p><code><a href='report_info.html'>report_info()</a></code></p></li>
+<li><p><code><a href='report_text.html'>report_text()</a></code></p></li>
 </ul><p>Other types of reports:</p><ul>
-<li><p><code><a href='report.sessionInfo.html'>report_system</a></code></p></li>
-<li><p><code><a href='report.sessionInfo.html'>report_packages</a></code></p></li>
-<li><p><code><a href='report_participants.html'>report_participants</a></code></p></li>
-<li><p><code><a href='report_sample.html'>report_sample</a></code></p></li>
-<li><p><code><a href='report_date.html'>report_date</a></code></p></li>
+<li><p><code><a href='report.sessionInfo.html'>report_system()</a></code></p></li>
+<li><p><code><a href='report.sessionInfo.html'>report_packages()</a></code></p></li>
+<li><p><code><a href='report_participants.html'>report_participants()</a></code></p></li>
+<li><p><code><a href='report_sample.html'>report_sample()</a></code></p></li>
+<li><p><code><a href='report_date.html'>report_date()</a></code></p></li>
 </ul><p>Methods:</p><ul>
-<li><p><code><a href='as.report.html'>as.report</a></code></p></li>
+<li><p><code><a href='as.report.html'>as.report()</a></code></p></li>
 </ul><p>Template file for supporting new models:</p><ul>
-<li><p><code><a href='report.default.html'>report.default</a></code></p></li>
+<li><p><code><a href='report.default.html'>report.default()</a></code></p></li>
 </ul>
 </div>
 
@@ -250,7 +250,7 @@ its re-computation.</p></td>
 <span class='r-in'><span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>mtcars</span><span class='op'>$</span><span class='va'>vs</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Cohen's (1988) recommendations.</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> The Welch Two Sample t-test testing the difference of mtcars$mpg by mtcars$vs (mean in group 0 = 16.62, mean in group 1 = 24.56) suggests that the effect is positive, statistically significant, and large (difference = 7.94, 95% CI [-11.46, -4.42], t(22.72) = -4.67, p &lt; .001; Cohen's d = -1.70, 95% CI [-2.55, -0.82])</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> The Welch Two Sample t-test testing the difference of mtcars$mpg by mtcars$vs (mean in group 0 = 16.62, mean in group 1 = 24.56) suggests that the effect is negative, statistically significant, and large (difference = -7.94, 95% CI [-11.46, -4.42], t(22.72) = -4.67, p &lt; .001; Cohen's d = -1.70, 95% CI [-2.55, -0.82])</span>
 <span class='r-in'><span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>mpg</span>, <span class='va'>mtcars</span><span class='op'>$</span><span class='va'>vs</span>, paired <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Cohen's (1988) recommendations.</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>

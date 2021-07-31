@@ -58,7 +58,7 @@ Mixed models (glmer, lmer, glmmTMB, ...)
 Bayesian models (stanreg, brms...)
 Bayes factors (from bayestestR)
 Structural Equation Models (SEM) (from lavaan)
-Model comparison (from performance)
+Model comparison (from performance())
 Most of the time, the object created by the report() function can be
 further transformed, for instance summarized (using summary()), or
 converted to a table (using as.data.frame())." />
@@ -173,7 +173,7 @@ class:</p><ul>
 <li><p><a href='report.stanreg.html'>Bayesian models</a> (<code>stanreg, brms...</code>)</p></li>
 <li><p><a href='report.bayesfactor_models.html'>Bayes factors</a> (from <code>bayestestR</code>)</p></li>
 <li><p><a href='report.lavaan.html'>Structural Equation Models (SEM)</a> (from <code>lavaan</code>)</p></li>
-<li><p><a href='report.compare_performance.html'>Model comparison</a> (from <code><a href='https://easystats.github.io/performance/reference/compare_performance.html'>performance</a></code>)</p></li>
+<li><p><a href='report.compare_performance.html'>Model comparison</a> (from <code><a href='https://easystats.github.io/performance/reference/compare_performance.html'>performance()</a></code>)</p></li>
 </ul><p>Most of the time, the object created by the <code>report()</code> function can be
 further transformed, for instance summarized (using <code><a href='https://rdrr.io/r/base/summary.html'>summary()</a></code>), or
 converted to a table (using <code><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame()</a></code>).</p>
@@ -198,8 +198,8 @@ objects above).</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A list-object of class <code>report</code>, which contains further
-  list-objects with a short and long description of the model summary, as
-  well as a short and long table of parameters and fit indices.</p>
+list-objects with a short and long description of the model summary, as
+well as a short and long table of parameters and fit indices.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     
@@ -230,26 +230,26 @@ identical.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Specific components of reports (especially for stats models):</p><ul>
-<li><p><code><a href='report_table.html'>report_table</a></code></p></li>
-<li><p><code><a href='report_parameters.html'>report_parameters</a></code></p></li>
-<li><p><code><a href='report_statistics.html'>report_statistics</a></code></p></li>
-<li><p><code><a href='report_effectsize.html'>report_effectsize</a></code></p></li>
-<li><p><code><a href='report_model.html'>report_model</a></code></p></li>
-<li><p><code><a href='report_priors.html'>report_priors</a></code></p></li>
-<li><p><code><a href='report_random.html'>report_random</a></code></p></li>
-<li><p><code><a href='report_performance.html'>report_performance</a></code></p></li>
-<li><p><code><a href='report_info.html'>report_info</a></code></p></li>
-<li><p><code><a href='report_text.html'>report_text</a></code></p></li>
+<li><p><code><a href='report_table.html'>report_table()</a></code></p></li>
+<li><p><code><a href='report_parameters.html'>report_parameters()</a></code></p></li>
+<li><p><code><a href='report_statistics.html'>report_statistics()</a></code></p></li>
+<li><p><code><a href='report_effectsize.html'>report_effectsize()</a></code></p></li>
+<li><p><code><a href='report_model.html'>report_model()</a></code></p></li>
+<li><p><code><a href='report_priors.html'>report_priors()</a></code></p></li>
+<li><p><code><a href='report_random.html'>report_random()</a></code></p></li>
+<li><p><code><a href='report_performance.html'>report_performance()</a></code></p></li>
+<li><p><code><a href='report_info.html'>report_info()</a></code></p></li>
+<li><p><code><a href='report_text.html'>report_text()</a></code></p></li>
 </ul><p>Other types of reports:</p><ul>
-<li><p><code><a href='report.sessionInfo.html'>report_system</a></code></p></li>
-<li><p><code><a href='report.sessionInfo.html'>report_packages</a></code></p></li>
-<li><p><code><a href='report_participants.html'>report_participants</a></code></p></li>
-<li><p><code><a href='report_sample.html'>report_sample</a></code></p></li>
-<li><p><code><a href='report_date.html'>report_date</a></code></p></li>
+<li><p><code><a href='report.sessionInfo.html'>report_system()</a></code></p></li>
+<li><p><code><a href='report.sessionInfo.html'>report_packages()</a></code></p></li>
+<li><p><code><a href='report_participants.html'>report_participants()</a></code></p></li>
+<li><p><code><a href='report_sample.html'>report_sample()</a></code></p></li>
+<li><p><code><a href='report_date.html'>report_date()</a></code></p></li>
 </ul><p>Methods:</p><ul>
-<li><p><code><a href='as.report.html'>as.report</a></code></p></li>
+<li><p><code><a href='as.report.html'>as.report()</a></code></p></li>
 </ul><p>Template file for supporting new models:</p><ul>
-<li><p><code><a href='report.default.html'>report.default</a></code></p></li>
+<li><p><code><a href='report.default.html'>report.default()</a></code></p></li>
 </ul>
 </div>
 
@@ -263,19 +263,19 @@ identical.</p>
 <span class='r-in'><span class='va'>r</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Cohen's (1988) recommendations.</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> The Welch Two Sample t-test testing the difference of mpg by am (mean in group 0 = 17.15, mean in group 1 = 24.39) suggests that the effect is positive, statistically significant, and large (difference = 7.24, 95% CI [-11.28, -3.21], t(18.33) = -3.77, p = 0.001; Cohen's d = -1.76, 95% CI [-2.82, -0.67])</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> The Welch Two Sample t-test testing the difference of mpg by am (mean in group 0 = 17.15, mean in group 1 = 24.39) suggests that the effect is negative, statistically significant, and large (difference = -7.24, 95% CI [-11.28, -3.21], t(18.33) = -3.77, p = 0.001; Cohen's d = -1.76, 95% CI [-2.82, -0.67])</span>
 <span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> The Welch Two Sample t-test testing the difference of mpg by am (mean in group 0 = 17.15, mean in group 1 = 24.39) suggests that the effect is positive, statistically significant, and large (difference = 7.24, 95% CI [-11.28, -3.21], t(18.33) = -3.77, p = 0.001, Cohen's d = -1.76)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> The Welch Two Sample t-test testing the difference of mpg by am (mean in group 0 = 17.15, mean in group 1 = 24.39) suggests that the effect is negative, statistically significant, and large (difference = -7.24, 95% CI [-11.28, -3.21], t(18.33) = -3.77, p = 0.001, Cohen's d = -1.76)</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># Tables</span></span>
 <span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Parameter | Group | Mean_Group1 | Mean_Group2 | Difference |          95% CI | t(18.33) |     p |                  Method | Alternative |     d |          d  CI</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> ----------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> mpg       |    am |       17.15 |       24.39 |       7.24 | [-11.28, -3.21] |    -3.77 | 0.001 | Welch Two Sample t-test |   two.sided | -1.76 | [-2.82, -0.67]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> mpg       |    am |       17.15 |       24.39 |      -7.24 | [-11.28, -3.21] |    -3.77 | 0.001 | Welch Two Sample t-test |   two.sided | -1.76 | [-2.82, -0.67]</span>
 <span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>r</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Difference |          95% CI | t(18.33) |     p | Alternative |     d |          d  CI</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> --------------------------------------------------------------------------------------</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> 7.24       | [-11.28, -3.21] |    -3.77 | 0.001 |   two.sided | -1.76 | [-2.82, -0.67]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> -7.24      | [-11.28, -3.21] |    -3.77 | 0.001 |   two.sided | -1.76 | [-2.82, -0.67]</span>
 </code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
