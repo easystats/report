@@ -74,11 +74,16 @@ report_sample <- function(data,
     # generate data for total column, but make sure to remove missings
     total_data <- data[!is.na(data[[group_by]]), unique(c(variables, group_by))]
     # bind all together, including total column
-    cbind(
+    final <- cbind(
       variable,
       summaries,
       Total = .generate_descriptive_table(total_data[setdiff(variables, group_by)], centrality, weights, digits)[["Summary"]]
     )
+    # add N to column name
+    colnames(final)[ncol(final)] <- sprintf("%s (n=%g)",
+                                            colnames(final)[ncol(final)],
+                                            sum(as.vector(table(data[[group_by]]))))
+    final
   } else {
     .generate_descriptive_table(data[variables], centrality, weights, digits)
   }
