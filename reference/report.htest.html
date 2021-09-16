@@ -89,7 +89,7 @@ etc.)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">report</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5.1</span>
       </span>
     </div>
 
@@ -232,13 +232,13 @@ its re-computation.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span>, method <span class='op'>=</span> <span class='st'>"spearman"</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>Cannot compute exact p-value with ties</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Funder's (2019) recommendations.</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> The Spearman's rank correlation rho between iris$Sepal.Width and iris$Sepal.Length is negative, statistically significant, and small (rho = -0.17, S = 6.56e+05, p = 0.041)</span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>This 'htest' method is not (yet?) supported.</span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> Returning 'parameters::model_parameters(model)'.</span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in abs(r)</span> non-numeric argument to mathematical function</span>
 <span class='r-in'><span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span>, method <span class='op'>=</span> <span class='st'>"pearson"</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Funder's (2019) recommendations.</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> The Pearson's product-moment correlation between iris$Sepal.Width and iris$Sepal.Length is negative, statistically not significant, and small (r = -0.12, 95% CI [-0.27, 0.04], t(148) = -1.44, p = 0.152)</span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>This 'htest' method is not (yet?) supported.</span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> Returning 'parameters::model_parameters(model)'.</span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in abs(r)</span> non-numeric argument to mathematical function</span>
 <span class='r-in'><span class='fu'><a href='report.html'>report</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Cohen's (1988) recommendations.</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> </span>

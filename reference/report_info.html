@@ -89,7 +89,7 @@ objects in report())." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">report</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.5.1</span>
       </span>
     </div>
 
@@ -180,7 +180,9 @@ objects above).</p></td>
 <span class='r-in'><span class='fu'>report_info</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Cohen's (1988) recommendations.</span>
 <span class='r-in'><span class='fu'>report_info</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Effect sizes were labelled following Funder's (2019) recommendations.</span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>This 'htest' method is not (yet?) supported.</span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> Returning 'parameters::model_parameters(model)'.</span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in abs(r)</span> non-numeric argument to mathematical function</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># ANOVAs</span></span>
 <span class='r-in'><span class='fu'>report_info</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span></span>
