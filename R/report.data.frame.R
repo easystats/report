@@ -8,7 +8,7 @@
 #'   (either `"mean"` or `"median"`).
 #' @param dispersion Show index of dispersion ([sd] if `centrality = "mean"`, or [mad] if `centrality = "median"`).
 #' @param range Show range.
-#' @param distribution Show [`kurtosis()`][parameters::skewness] and [parameters::skewness()].
+#' @param distribution Show kurtosis and skewness.
 #' @param n_entries Number of different character entries to show. Can be "all".
 #' @param levels_percentage Show characters entries and factor levels by number
 #'   or percentage. If "auto", then will be set to number and percentage if the

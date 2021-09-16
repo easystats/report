@@ -39,9 +39,9 @@ URL: https://easystats.github.io/report/
 BugReports: https://github.com/easystats/report/issues
 Imports:
     bayestestR (>= 0.10.5),
-    effectsize (>= 0.4.5-1),
-    insight (>= 0.14.1.1),
-    parameters (>= 0.14.0.1),
+    effectsize (>= 0.4.5),
+    insight (>= 0.14.1),
+    parameters (>= 0.14.0),
     performance (>= 0.7.2),
     datawizard,
     stats,

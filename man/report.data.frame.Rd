@@ -69,7 +69,7 @@ observations larger than 100.}
 
 \item{range}{Show range.}
 
-\item{distribution}{Show \code{\link[parameters:reexports]{kurtosis()}} and \code{\link[parameters:reexports]{parameters::skewness()}}.}
+\item{distribution}{Show kurtosis and skewness.}
 
 \item{digits}{Number of significant digits.}
 }
