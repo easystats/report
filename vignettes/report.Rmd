@@ -87,10 +87,6 @@ iris %>%
 objects from correlation, t-tests, etc.
 
 ```{r}
-report(cor.test(mtcars$wt, mtcars$mpg))
-```
-
-```{r}
 report(t.test(formula = wt ~ am, data = mtcars))
 ```
 
