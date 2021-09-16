@@ -15,7 +15,6 @@
 #'
 #' # h-tests
 #' report_model(t.test(iris$Sepal.Width, iris$Sepal.Length))
-#' report_model(cor.test(iris$Sepal.Width, iris$Sepal.Length))
 #'
 #' # ANOVA
 #' report_model(aov(Sepal.Length ~ Species, data = iris))

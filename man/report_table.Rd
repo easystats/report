@@ -36,7 +36,6 @@ report_table(iris)
 
 # h-tests
 report_table(t.test(mpg ~ am, data = mtcars))
-report_table(cor.test(iris$Sepal.Length, iris$Sepal.Width))
 
 # ANOVAs
 report_table(aov(Sepal.Length ~ Species, data = iris))

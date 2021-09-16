@@ -26,7 +26,6 @@
 #'
 #' # h-tests
 #' report_text(t.test(iris$Sepal.Width, iris$Sepal.Length))
-#' report_text(cor.test(iris$Sepal.Width, iris$Sepal.Length))
 #'
 #' # ANOVA
 #' r <- report_text(aov(Sepal.Length ~ Species, data = iris))
