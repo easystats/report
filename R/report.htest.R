@@ -13,8 +13,6 @@
 #' @inherit report return seealso
 #'
 #' @examples
-#' report(cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman"))
-#' report(cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "pearson"))
 #' report(t.test(iris$Sepal.Width, iris$Sepal.Length))
 #' report(t.test(iris$Sepal.Width, iris$Sepal.Length, var.equal = TRUE))
 #' report(t.test(mtcars$mpg ~ mtcars$vs))

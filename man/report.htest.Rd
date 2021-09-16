@@ -46,8 +46,6 @@ Create reports for \code{htest} objects (\code{t.test()}, \code{cor.test()},
 etc.).
 }
 \examples{
-report(cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman"))
-report(cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "pearson"))
 report(t.test(iris$Sepal.Width, iris$Sepal.Length))
 report(t.test(iris$Sepal.Width, iris$Sepal.Length, var.equal = TRUE))
 report(t.test(mtcars$mpg ~ mtcars$vs))
