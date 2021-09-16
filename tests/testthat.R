@@ -44,6 +44,6 @@ if (.Platform$OS.type == "unix" && is_dev_version) {
   Sys.setenv("RunAllreportStanTests" = "no")
 }
 
-if (!osx && !solaris) {
+if (!osx && !solaris && is_dev_version) {
   test_check("report")
 }

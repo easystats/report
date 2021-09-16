@@ -62,8 +62,6 @@ Suggests:
     spelling,
     survival,
     testthat
-Remotes:
-    easystats/performance
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
