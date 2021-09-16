@@ -263,10 +263,6 @@ objects above).</p></td>
 <span class='r-in'><span class='co'># h-tests</span></span>
 <span class='r-in'><span class='fu'>report_parameters</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>   - negative, statistically significant, and large (difference = -2.79, 95% CI [-2.94, -2.64], t(225.68) = -36.46, p &lt; .001; Cohen's d = -4.21, 95% CI [-4.66, -3.76])</span>
-<span class='r-in'><span class='fu'>report_parameters</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>This 'htest' method is not (yet?) supported.</span>
-<span class='r-wrn co'><span class='r-pr'>#&gt;</span> Returning 'parameters::model_parameters(model)'.</span>
-<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in abs(r)</span> non-numeric argument to mathematical function</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># ANOVA</span></span>
 <span class='r-in'><span class='fu'>report_parameters</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span></span>

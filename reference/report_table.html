@@ -237,10 +237,6 @@ objects above).</p></td>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Parameter | Group | Mean_Group1 | Mean_Group2 | Difference |          95% CI | t(18.33) |     p |                  Method | Alternative |     d |          d  CI</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> ----------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> mpg       |    am |       17.15 |       24.39 |      -7.24 | [-11.28, -3.21] |    -3.77 | 0.001 | Welch Two Sample t-test |   two.sided | -1.76 | [-2.82, -0.67]</span>
-<span class='r-in'><span class='fu'>report_table</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span>, <span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Width</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>This 'htest' method is not (yet?) supported.</span>
-<span class='r-wrn co'><span class='r-pr'>#&gt;</span> Returning 'parameters::model_parameters(model)'.</span>
-<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error in abs(r)</span> non-numeric argument to mathematical function</span>
 <span class='r-in'></span>
 <span class='r-in'><span class='co'># ANOVAs</span></span>
 <span class='r-in'><span class='fu'>report_table</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span><span class='op'>(</span><span class='va'>Sepal.Length</span> <span class='op'>~</span> <span class='va'>Species</span>, data <span class='op'>=</span> <span class='va'>iris</span><span class='op'>)</span><span class='op'>)</span></span>
