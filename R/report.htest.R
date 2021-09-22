@@ -40,7 +40,7 @@ report_effectsize.htest <- function(x, ...) {
   # For t-tests ----------------
 
   if (insight::model_info(x)$is_ttest) {
-    interpretation <- effectsize::interpret_cohens_d(table[[estimate]], ...)
+    interpretation <- effectsize::interpret_d(table[[estimate]], ...)
     rules <- .text_effectsize(attributes(interpretation)$rule_name)
 
     if (estimate %in% c("d", "Cohens_d")) {
