@@ -79,7 +79,7 @@ report_effectsize.lm <- function(x, effectsize_method = "refit", ...) {
   if (insight::model_info(x)$is_logit) {
     interpret <- effectsize::interpret_oddsratio(table[[estimate]], log = TRUE, ...)
   } else {
-    interpret <- effectsize::interpret_d(table[[estimate]], ...)
+    interpret <- effectsize::interpret_cohens_d(table[[estimate]], ...)
   }
 
   interpretation <- interpret
