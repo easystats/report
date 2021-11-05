@@ -65,7 +65,8 @@ observations larger than 100.}
 \item{centrality}{Character vector, indicating the index of centrality
 (either \code{"mean"} or \code{"median"}).}
 
-\item{dispersion}{Show index of dispersion (\link{sd} if \code{centrality = "mean"}, or \link{mad} if \code{centrality = "median"}).}
+\item{dispersion}{Show index of dispersion (\link{sd} if \code{centrality = "mean"}, or
+\link{mad} if \code{centrality = "median"}).}
 
 \item{range}{Show range.}
 
@@ -93,7 +94,7 @@ summary(as.data.frame(r))
 
 if (require("dplyr")) {
   r <- iris \%>\%
-    dplyr::group_by(Species) \%>\%
+    group_by(Species) \%>\%
     report()
   r
   summary(r)

@@ -8,8 +8,8 @@ output:
 tags: [r, report]
 vignette: >
   %\VignetteIndexEntry{Get Started}
-  %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
   chunk_output_type: console
 ---
@@ -31,6 +31,8 @@ options(
 if (!requireNamespace("dplyr", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
 }
+
+library(dplyr)
 ```
 
 # Installation
@@ -68,14 +70,12 @@ report(iris)
 
 ## Grouped Dataframes
 
-The dataframe can also be a *grouped* dataframe (from `dplyr`), in which case
+The dataframe can also be a *grouped* dataframe (from `{dplyr}` package), in which case
 `report` would return a separate report for each level of the grouping variable.
 Additionally, instead of textual summary, `report` also allows one to return a
 tabular summary using the `report_table()` function:
 
 ```{r}
-library(dplyr)
-
 iris %>%
   group_by(Species) %>%
   report_table()

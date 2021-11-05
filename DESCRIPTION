@@ -38,12 +38,12 @@ License: GPL-3 | file LICENSE
 URL: https://easystats.github.io/report/
 BugReports: https://github.com/easystats/report/issues
 Imports:
-    bayestestR (>= 0.10.5),
-    effectsize (>= 0.5.0),
-    insight (>= 0.14.1),
-    parameters (>= 0.14.0),
-    performance (>= 0.7.2),
-    datawizard,
+    bayestestR (>= 0.11.5),
+    effectsize (>= 0.5.0.1),
+    insight (>= 0.14.5),
+    parameters (>= 0.15.0),
+    performance (>= 0.8.0),
+    datawizard (>= 0.2.1),
     stats,
     tools,
     utils
@@ -66,7 +66,7 @@ VignetteBuilder:
     knitr
 Encoding: UTF-8
 Language: en-US
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Config/testthat/edition: 3
 Collate: 
     'cite_easystats.R'
@@ -125,4 +125,3 @@ Remotes:
   easystats/parameters,
   easystats/effectsize,
   easystats/see
-  

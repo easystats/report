@@ -33,7 +33,7 @@
 # report.data.frame - with NAs
 
     Code
-      report(dplyr::group_by_at(df, "cyl"))
+      report(group_by_at(df, "cyl"))
     Output
       The data contains 32 observations, grouped by cyl, of the following 11 variables:
       
@@ -76,7 +76,7 @@
 ---
 
     Code
-      report(dplyr::starwars)
+      report(starwars)
     Output
       The data contains 87 observations of the following 11 variables:
         - name: 87 entries, such as Ackbar (n = 1); Adi Gallia (n = 1); Anakin Skywalker (n = 1) and 84 others (0 missing)

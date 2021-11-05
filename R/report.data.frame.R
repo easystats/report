@@ -6,7 +6,8 @@
 #' @param n Include number of observations for each individual variable.
 #' @param centrality Character vector, indicating the index of centrality
 #'   (either `"mean"` or `"median"`).
-#' @param dispersion Show index of dispersion ([sd] if `centrality = "mean"`, or [mad] if `centrality = "median"`).
+#' @param dispersion Show index of dispersion ([sd] if `centrality = "mean"`, or
+#'   [mad] if `centrality = "median"`).
 #' @param range Show range.
 #' @param distribution Show kurtosis and skewness.
 #' @param n_entries Number of different character entries to show. Can be "all".
@@ -32,7 +33,7 @@
 #'
 #' if (require("dplyr")) {
 #'   r <- iris %>%
-#'     dplyr::group_by(Species) %>%
+#'     group_by(Species) %>%
 #'     report()
 #'   r
 #'   summary(r)

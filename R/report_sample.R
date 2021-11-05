@@ -80,9 +80,11 @@ report_sample <- function(data,
       Total = .generate_descriptive_table(total_data[setdiff(variables, group_by)], centrality, weights, digits)[["Summary"]]
     )
     # add N to column name
-    colnames(final)[ncol(final)] <- sprintf("%s (n=%g)",
-                                            colnames(final)[ncol(final)],
-                                            sum(as.vector(table(data[[group_by]]))))
+    colnames(final)[ncol(final)] <- sprintf(
+      "%s (n=%g)",
+      colnames(final)[ncol(final)],
+      sum(as.vector(table(data[[group_by]])))
+    )
     final
   } else {
     .generate_descriptive_table(data[variables], centrality, weights, digits)

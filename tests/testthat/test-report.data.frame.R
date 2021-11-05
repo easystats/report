@@ -4,7 +4,13 @@ test_that("report.numeric", {
   expect_equal(as.data.frame(r)$Mean, 0.5, tolerance = 0)
   expect_null(as.report_table(r, summary = TRUE)$Median)
 
-  r <- report(seq(0, 1, length.out = 100), centrality = "median", range = FALSE, dispersion = FALSE, missing_percentage = TRUE)
+  r <- report(
+    seq(0, 1, length.out = 100),
+    centrality = "median",
+    range = FALSE,
+    dispersion = FALSE,
+    missing_percentage = TRUE
+  )
   expect_equal(as.data.frame(r)$Median, 0.5, tolerance = 0)
   expect_equal(as.data.frame(r)$percentage_Missing, 0, tolerance = 0)
   expect_null(summary(as.data.frame(r))$Mean)
@@ -52,7 +58,7 @@ if (require("dplyr")) {
     expect_equal(nrow(as.data.frame(r)), 7, tolerance = 0)
     expect_equal(mean(as.data.frame(r)$n_Obs), 107, tolerance = 0.01)
 
-    r <- report(dplyr::group_by_at(iris, "Species"))
+    r <- report(group_by_at(iris, "Species"))
     expect_equal(nrow(as.data.frame(r)), 8, tolerance = 0)
     expect_equal(mean(as.data.frame(r)$n_Obs), 50, tolerance = 0)
 
@@ -65,10 +71,10 @@ if (require("dplyr")) {
     df[1, 2] <- NA
     df[1, 6] <- NA
 
-    expect_snapshot(report(dplyr::group_by_at(df, "cyl")))
+    expect_snapshot(report(group_by_at(df, "cyl")))
 
     # dataframes with list columns
     set.seed(123)
-    expect_snapshot(report(dplyr::starwars))
+    expect_snapshot(report(starwars))
   })
 }
