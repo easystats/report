@@ -55,7 +55,15 @@ report.data.frame <- function(x,
                               ...) {
 
   # remove list columns
-  x <- x[, sapply(x, Negate(inherits), what = "list")]
+  if (.has_groups(x) && !inherits(x, "tbl_df")) {
+    x <- .groups_set(
+      x[, sapply(x, Negate(inherits), what = "list")],
+      groups = .group_vars(x),
+      drop = .groups_drop(x)
+    )
+  } else {
+    x <- x[, sapply(x, Negate(inherits), what = "list")]
+  }
 
   table <-
     report_table(
