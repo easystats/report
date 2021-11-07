@@ -4,6 +4,7 @@
 [![CRAN](http://www.r-pkg.org/badges/version/report)](https://cran.r-project.org/package=report)
 [![downloads](http://cranlogs.r-pkg.org/badges/report)](https://cran.r-project.org/package=report)
 ![Tests](https://github.com/easystats/report/workflows/R-check/badge.svg)
+[![status](https://tinyverse.netlify.com/badge/modelbased)](https://CRAN.R-project.org/package=modelbased)
 
 ***“From R to your manuscript”***
 
@@ -24,7 +25,7 @@ report(model)
 #   - The effect of Species [versicolor] is statistically significant and positive (beta = 0.93, 95% CI [0.73, 1.13], t(147) = 9.03, p < .001; Std. beta = 1.12, 95% CI [0.88, 1.37])
 #   - The effect of Species [virginica] is statistically significant and positive (beta = 1.58, 95% CI [1.38, 1.79], t(147) = 15.37, p < .001; Std. beta = 1.91, 95% CI [1.66, 2.16])
 # 
-# Standardized parameters were obtained by fitting the model on a standardized version of the dataset.
+# Standardized parameters were obtained by fitting the model on a standardized version of the dataset. 95% Confidence Intervals (CIs) and p-values were computed using the Wald approximation.
 ```
 
 ## Documentation
@@ -109,8 +110,7 @@ These reports nicely work within the
 [*tidyverse*](https://github.com/tidyverse) workflow:
 
 ``` r
-library(dplyr)
-
+# using {dplyr} package
 iris %>%
   select(-starts_with("Sepal")) %>%
   group_by(Species) %>%
@@ -146,7 +146,7 @@ report(t.test(mtcars$mpg ~ mtcars$am))
     # 
     # The Welch Two Sample t-test testing the difference of mtcars$mpg by mtcars$am
     # (mean in group 0 = 17.15, mean in group 1 = 24.39) suggests that the effect is
-    # positive, statistically significant, and large (difference = 7.24, 95% CI
+    # negative, statistically significant, and large (difference = -7.24, 95% CI
     # [-11.28, -3.21], t(18.33) = -3.77, p = 0.001; Cohen's d = -1.41, 95% CI [-2.26,
     # -0.53])
 
@@ -157,9 +157,7 @@ functions, like for example with this correlation test:
 cor.test(iris$Sepal.Length, iris$Sepal.Width) %>%
   report() %>%
   as.data.frame()
-# Parameter1        |       Parameter2 |     r |        95% CI | t(148) |     p |                               Method | Alternative
-# ----------------------------------------------------------------------------------------------------------------------------------
-# iris$Sepal.Length | iris$Sepal.Width | -0.12 | [-0.27, 0.04] |  -1.44 | 0.152 | Pearson's product-moment correlation |   two.sided
+# Error in abs(r): non-numeric argument to mathematical function
 ```
 
 ### ANOVAs
@@ -175,7 +173,7 @@ aov(Sepal.Length ~ Species, data = iris) %>%
     # The ANOVA (formula: Sepal.Length ~ Species) suggests that:
     # 
     #   - The main effect of Species is statistically significant and large (F(2, 147)
-    # = 119.26, p < .001; Eta2 = 0.62, 90% CI [0.54, 0.68])
+    # = 119.26, p < .001; Eta2 = 0.62, 95% CI [0.54, 1.00])
     # 
     # Effect sizes were labelled following Field's (2013) recommendations.
 
@@ -227,15 +225,15 @@ report(model)
     # Species). The model's total explanatory power is substantial (conditional R2 =
     # 0.97) and the part related to the fixed effects alone (marginal R2) is of 0.66.
     # The model's intercept, corresponding to Petal.Length = 0, is at 2.50 (95% CI
-    # [1.20, 3.81], t(146) = 3.75, p < .001). Within this model:
+    # [1.19, 3.82], t(146) = 3.75, p < .001). Within this model:
     # 
     #   - The effect of Petal Length is statistically significant and positive (beta =
     # 0.89, 95% CI [0.76, 1.01], t(146) = 13.93, p < .001; Std. beta = 1.89, 95% CI
     # [1.63, 2.16])
     # 
-    # Standardized parameters were obtained by fitting the model on a standardized
+    #  Standardized parameters were obtained by fitting the model on a standardized
     # version of the dataset. 95% Confidence Intervals (CIs) and p-values were
-    # computed using the Wald approximation.
+    # computed using
 
 ### Bayesian Models
 
@@ -255,18 +253,18 @@ report(model)
     # of 1000 iterations and a warmup of 500) to predict mpg with qsec and wt
     # (formula: mpg ~ qsec + wt). Priors over parameters were set as normal (mean =
     # 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The
-    # model's explanatory power is substantial (R2 = 0.81, 89% CI [0.73, 0.89], adj.
+    # model's explanatory power is substantial (R2 = 0.81, 95% CI [0.69, 0.89], adj.
     # R2 = 0.78). The model's intercept, corresponding to qsec = 0 and wt = 0, is at
-    # 19.43 (95% CI [9.20, 30.91]). Within this model:
+    # 19.51 (95% CI [9.11, 30.28]). Within this model:
     # 
-    #   - The effect of qsec (Median = 0.94, 95% CI [0.42, 1.50]) has a 100.00%
-    # probability of being positive (> 0), 99.10% of being significant (> 0.30), and
+    #   - The effect of qsec (Median = 0.94, 95% CI [0.41, 1.49]) has a 100.00%
+    # probability of being positive (> 0), 98.70% of being significant (> 0.30), and
     # 0.10% of being large (> 1.81). The estimation successfully converged (Rhat =
-    # 1.001) and the indices are reliable (ESS = 2126)
-    #   - The effect of wt (Median = -5.04, 95% CI [-6.04, -3.92]) has a 100.00%
+    # 1.003) and the indices are reliable (ESS = 1945)
+    #   - The effect of wt (Median = -5.05, 95% CI [-6.02, -4.04]) has a 100.00%
     # probability of being negative (< 0), 100.00% of being significant (< -0.30),
     # and 100.00% of being large (< -1.81). The estimation successfully converged
-    # (Rhat = 1.000) and the indices are reliable (ESS = 1985)
+    # (Rhat = 1.000) and the indices are reliable (ESS = 2138)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
     # framework, we report the median of the posterior distribution and its 95% CI
@@ -322,12 +320,12 @@ paste(
 Report can also help you create sample description table (also referred
 to as **Table 1**).
 
-| Variable               | setosa (n=50) | versicolor (n=50) | virginica (n=50) | Total       |
-|:-----------------------|:--------------|:------------------|:-----------------|:------------|
-| Mean Sepal.Length (SD) | 5.01 (0.35)   | 5.94 (0.52)       | 6.59 (0.64)      | 5.84 (0.83) |
-| Mean Sepal.Width (SD)  | 3.43 (0.38)   | 2.77 (0.31)       | 2.97 (0.32)      | 3.06 (0.44) |
-| Mean Petal.Length (SD) | 1.46 (0.17)   | 4.26 (0.47)       | 5.55 (0.55)      | 3.76 (1.77) |
-| Mean Petal.Width (SD)  | 0.25 (0.11)   | 1.33 (0.20)       | 2.03 (0.27)      | 1.20 (0.76) |
+| Variable               | setosa (n=50) | versicolor (n=50) | virginica (n=50) | Total (n=150) |
+|:-----------------------|:--------------|:------------------|:-----------------|:--------------|
+| Mean Sepal.Length (SD) | 5.01 (0.35)   | 5.94 (0.52)       | 6.59 (0.64)      | 5.84 (0.83)   |
+| Mean Sepal.Width (SD)  | 3.43 (0.38)   | 2.77 (0.31)       | 2.97 (0.32)      | 3.06 (0.44)   |
+| Mean Petal.Length (SD) | 1.46 (0.17)   | 4.26 (0.47)       | 5.55 (0.55)      | 3.76 (1.77)   |
+| Mean Petal.Width (SD)  | 0.25 (0.11)   | 1.33 (0.20)       | 2.03 (0.27)      | 1.20 (0.76)   |
 
 ### Report system and packages
 
@@ -338,13 +336,13 @@ analysis paragraph about the tools used.
 report(sessionInfo())
 ```
 
-    # Analyses were conducted using the R Statistical language (version 4.1.0; R Core
-    # Team, 2021) on macOS Mojave 10.14.6, using the packages Rcpp (version 1.0.6;
-    # Dirk Eddelbuettel and Romain Francois, 2011), Matrix (version 1.3.3; Douglas
-    # Bates and Martin Maechler, 2021), lme4 (version 1.1.27; Douglas Bates et al.,
-    # 2015), rstanarm (version 2.21.1; Goodrich B et al., 2020), dplyr (version
-    # 1.0.6; Hadley Wickham et al., 2021) and report (version 0.3.5; Makowski et al.,
-    # 2020).
+    # Analyses were conducted using the R Statistical language (version 4.1.2; R Core
+    # Team, 2021) on Windows 10 x64 (build 19043), using the packages Rcpp (version
+    # 1.0.7; Dirk Eddelbuettel and Romain Francois, 2011), Matrix (version 1.3.4;
+    # Douglas Bates and Martin Maechler, 2021), lme4 (version 1.1.27.1; Douglas Bates
+    # et al., 2015), rstanarm (version 2.21.1; Goodrich B et al., 2020), dplyr
+    # (version 1.0.7; Hadley Wickham et al., 2021) and report (version 0.4.0.1;
+    # Makowski et al., 2020).
     # 
     # References
     # ----------
@@ -352,7 +350,7 @@ report(sessionInfo())
     # Integration. Journal of Statistical Software, 40(8), 1-18. URL
     # https://www.jstatsoft.org/v40/i08/.
     #   - Douglas Bates and Martin Maechler (2021). Matrix: Sparse and Dense Matrix
-    # Classes and Methods. R package version 1.3-3.
+    # Classes and Methods. R package version 1.3-4.
     # https://CRAN.R-project.org/package=Matrix
     #   - Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015). Fitting
     # Linear Mixed-Effects Models Using lme4. Journal of Statistical Software, 67(1),
@@ -361,7 +359,7 @@ report(sessionInfo())
     # regression modeling via Stan. R package version 2.21.1
     # https://mc-stan.org/rstanarm.
     #   - Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2021).
-    # dplyr: A Grammar of Data Manipulation. R package version 1.0.6.
+    # dplyr: A Grammar of Data Manipulation. R package version 1.0.7.
     # https://CRAN.R-project.org/package=dplyr
     #   - Makowski, D., Ben-Shachar, M.S., Patil, I. & Lüdecke, D. (2020). Automated
     # Results Reporting as a Practical Tool to Improve Reproducibility and

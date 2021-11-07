@@ -28,6 +28,7 @@ library(report)
 [![CRAN](http://www.r-pkg.org/badges/version/report)](https://cran.r-project.org/package=report)
 [![downloads](http://cranlogs.r-pkg.org/badges/report)](https://cran.r-project.org/package=report)
 ![Tests](https://github.com/easystats/report/workflows/R-check/badge.svg)
+[![status](https://tinyverse.netlify.com/badge/modelbased)](https://CRAN.R-project.org/package=modelbased)
 
 ***"From R to your manuscript"***
 
@@ -134,7 +135,7 @@ t.test(mtcars$mpg ~ mtcars$am) %>%
 
 As mentioned, you can also create tables with the `as.data.frame()` functions, like for example with this correlation test:
 
-```{r}
+```{r, error=TRUE}
 cor.test(iris$Sepal.Length, iris$Sepal.Width) %>%
   report() %>%
   as.data.frame()
