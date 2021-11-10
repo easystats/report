@@ -20,7 +20,7 @@ options(
   width = 80
 )
 
-library(dplyr)
+library(poorman)
 library(report)
 ```
 
@@ -100,7 +100,6 @@ print(report(iris), width = 80)
 These reports nicely work within the [*tidyverse*](https://github.com/tidyverse) workflow:
 
 ```{r, eval=FALSE}
-# using {dplyr} package
 iris %>%
   select(-starts_with("Sepal")) %>%
   group_by(Species) %>%
@@ -109,7 +108,6 @@ iris %>%
 ```
 
 ```{r echo=FALSE}
-# using {dplyr} package
 iris %>%
   select(-starts_with("Sepal")) %>%
   group_by(Species) %>%

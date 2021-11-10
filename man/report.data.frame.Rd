@@ -92,7 +92,8 @@ summary(r)
 as.data.frame(r)
 summary(as.data.frame(r))
 
-if (require("dplyr")) {
+# grouped analysis using `{dplyr}` package
+if (require("poorman")) {
   r <- iris \%>\%
     group_by(Species) \%>\%
     report()

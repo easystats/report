@@ -51,21 +51,25 @@
   `[` <- `[.data.frame`
   x <- .ungroup(x)
   unknown <- setdiff(groups, colnames(x))
+
   if (length(unknown) > 0L) {
     stop(insight::format_message(
       sprintf("`groups` missing from `x`: %s.", paste0(groups, collapse = ", "))
     ))
   }
+
   unique_groups <- unique(x[, groups, drop = FALSE])
   is_factor <- do.call(c, lapply(unique_groups, function(x) is.factor(x)))
   n_comb <- nrow(unique_groups)
   rows <- rep(list(NA), n_comb)
+
   for (i in seq_len(n_comb)) {
     rows[[i]] <- which(
       interaction(x[, groups, drop = TRUE]) %in%
         interaction(unique_groups[i, groups])
     )
   }
+
   if (!isTRUE(drop) && any(is_factor)) {
     na_lvls <- do.call(
       expand.grid,
@@ -80,12 +84,15 @@
       rows[[length(rows) + 1]] <- integer(0)
     }
   }
+
   unique_groups[[".rows"]] <- rows
   unique_groups <- unique_groups[do.call(
     order,
     lapply(groups, function(x) unique_groups[, x])
   ), , drop = FALSE]
+
   rownames(unique_groups) <- NULL
+
   structure(unique_groups, .drop = drop)
 }
 

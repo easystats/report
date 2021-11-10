@@ -8,8 +8,8 @@ output:
 tags: [r, report]
 vignette: >
   %\VignetteIndexEntry{Report and Cite Packages}
-  %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
   chunk_output_type: console
 ---
@@ -27,7 +27,7 @@ options(
   width = 60
 )
 
-if (!requireNamespace("dplyr", quietly = TRUE)) {
+if (!requireNamespace("poorman", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
 }
 ```
@@ -79,7 +79,7 @@ R, you can include (usually at the end) every used package's citation using the
 
 ```{r, results='asis'}
 library(report)
-library(dplyr)
+library(poorman)
 
 cite_packages()
 ```
