@@ -104,10 +104,10 @@ objects above).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> R           |    4.1.2 |                                                                                    R Core Team (2021). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Rcpp        |    1.0.7 |                                                                                Dirk Eddelbuettel and Romain Francois (2011). Rcpp: Seamless R and C++ Integration. Journal of Statistical Software, 40(8), 1-18. URL https://www.jstatsoft.org/v40/i08/.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> bayestestR  |   0.11.5 |               Makowski, D., Ben-Shachar, M., &amp; Lüdecke, D. (2019). bayestestR: Describing Effects and their Uncertainty, Existence and Significance within the Bayesian Framework. Journal of Open Source Software, 4(40), 1541. doi:10.21105/joss.01541</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dplyr       |    1.0.7 |                                                                         Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2021). dplyr: A Grammar of Data Manipulation. R package version 1.0.7. https://CRAN.R-project.org/package=dplyr</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> lavaan      |    0.6.9 |                                                                                        Yves Rosseel (2012). lavaan: An R Package for Structural Equation Modeling. Journal of Statistical Software, 48(2), 1-36. URL https://www.jstatsoft.org/v48/i02/.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> lme4        | 1.1.27.1 |                                                                Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015). Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical Software, 67(1), 1-48. doi:10.18637/jss.v067.i01.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> performance |  0.8.0.1 |                                                        Lüdecke et al., (2021). performance: An R Package for Assessment, Comparison and Testing of Statistical Models. Journal of Open Source Software, 6(60), 3139. https://doi.org/10.21105/joss.03139</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> poorman     |    0.2.5 |                                                                                                 Nathan Eastwood (2021). poorman: A Poor Man's Dependency Free Recreation of 'dplyr'. R package version 0.2.5. https://CRAN.R-project.org/package=poorman</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> report      |  0.4.0.1 | Makowski, D., Ben-Shachar, M.S., Patil, I. &amp; Lüdecke, D. (2020). Automated Results Reporting as a Practical Tool to Improve Reproducibility and Methodological Best Practices Adoption. CRAN. Available from https://github.com/easystats/report. doi: .</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> rstanarm    |   2.21.1 |                                                                                        Goodrich B, Gabry J, Ali I &amp; Brilleman S. (2020). rstanarm: Bayesian applied regression modeling via Stan. R package version 2.21.1 https://mc-stan.org/rstanarm.</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
@@ -117,10 +117,10 @@ objects above).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> R           |    4.1.2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Rcpp        |    1.0.7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> bayestestR  |   0.11.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dplyr       |    1.0.7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> lavaan      |    0.6.9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> lme4        | 1.1.27.1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> performance |  0.8.0.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> poorman     |    0.2.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> report      |  0.4.0.1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> rstanarm    |   2.21.1</span>
 <span class="r-in"></span>
@@ -218,14 +218,14 @@ objects above).</p></dd>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Parameter         | Median |       95% CI |   pd | % in ROPE |  Rhat |    ESS |                 Prior | Std. Median | Std_Median 95% CI |     Fit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> -------------------------------------------------------------------------------------------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)       |   5.01 | [4.87, 5.15] | 100% |        0% | 0.999 | 959.00 | Normal (5.84 +- 2.07) |        0.00 |      [0.00, 0.00] |        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Speciesversicolor |   0.93 | [0.71, 1.13] | 100% |        0% | 0.999 | 980.00 | Normal (0.00 +- 4.38) |        0.53 |      [0.41, 0.64] |        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Speciesvirginica  |   1.58 | [1.37, 1.78] | 100% |        0% | 0.999 | 949.00 | Normal (0.00 +- 4.38) |        0.90 |      [0.78, 1.02] |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)       |   5.01 | [4.85, 5.15] | 100% |        0% | 1.001 | 773.00 | Normal (5.84 +- 2.07) |        0.00 |      [0.00, 0.00] |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Speciesversicolor |   0.93 | [0.72, 1.13] | 100% |        0% | 1.001 | 852.00 | Normal (0.00 +- 4.38) |        0.53 |      [0.41, 0.65] |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Speciesvirginica  |   1.58 | [1.37, 1.81] | 100% |        0% | 1.003 | 740.00 | Normal (0.00 +- 4.38) |        0.90 |      [0.78, 1.04] |        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   |        |              |      |           |       |        |                       |             |                   |        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ELPD              |        |              |      |           |       |        |                       |             |                   | -115.90</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> LOOIC             |        |              |      |           |       |        |                       |             |                   |  231.79</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> WAIC              |        |              |      |           |       |        |                       |             |                   |  231.77</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R2                |        |              |      |           |       |        |                       |             |                   |    0.61</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ELPD              |        |              |      |           |       |        |                       |             |                   | -116.18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> LOOIC             |        |              |      |           |       |        |                       |             |                   |  232.37</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> WAIC              |        |              |      |           |       |        |                       |             |                   |  232.33</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2                |        |              |      |           |       |        |                       |             |                   |    0.62</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> R2 (adj.)         |        |              |      |           |       |        |                       |             |                   |    0.61</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Sigma             |        |              |      |           |       |        |                       |             |                   |    0.52</span>
 <span class="r-in"></span>
