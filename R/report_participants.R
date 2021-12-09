@@ -7,9 +7,13 @@
 #' @param age The name of the column containing the age of the participant.
 #' @param sex The name of the column containing the sex of the participant. The
 #'   classes should be one of `c("Male", "M", "Female", "F")`. Note that
-#'   you can specify other characters here as well (e.g., `"Other"`), but
-#'   the function will report only percentage of females, regardless of whether
-#'   any category other than "Male" is present in the data.
+#'   you can specify other characters here as well (e.g., `"Intersex"`), but
+#'   the function will group all individuals in those groups as `"Other"`.
+#' @param gender The name of the column containing the gender of the
+#'   The classes should be one of `c("Man", "M", "Woman", "F", "Non-Binary",
+#'   "N")`. Note that you can specify other characters here as well
+#'   (e.g., `"Gender Fluid"`), but the function will group all individuals in
+#'   those groups as `"Non-Binary"`.
 #' @param education The name of the column containing education information.
 #' @param participants The name of the participants' identifier column (for
 #'   instance in the case of repeated measures).
@@ -26,36 +30,40 @@
 #' library(report)
 #' data <- data.frame(
 #'   "Age" = c(22, 23, 54, 21, 8, 42),
-#'   "Sex" = c("F", "F", "M", "M", "M", "F")
+#'   "Sex" = c("Intersex", "F", "M", "M", "M", "F"),
+#'   "Gender" = c("N", "W", "W", "M", "M", "M")
 #' )
 #'
 #' report_participants(data, age = "Age", sex = "Sex")
 #'
 #' # Years of education (relative to high school graduation)
 #' data$Education <- c(0, 8, -3, -5, 3, 5)
-#' report_participants(data, age = "Age", sex = "Sex", education = "Education")
+#' report_participants(data, age = "Age", sex = "Sex", gender = "Gender",
+#' education = "Education")
 #'
 #' # Education as factor
 #' data$Education2 <- c(
 #'   "Bachelor", "PhD", "Highschool",
 #'   "Highschool", "Bachelor", "Bachelor"
 #' )
-#' report_participants(data, age = "Age", sex = "Sex", education = "Education2")
+#' report_participants(data, age = "Age", sex = "Sex", gender = "Gender", education = "Education2")
 #'
 #'
 #' # Repeated measures data
 #' data <- data.frame(
 #'   "Age" = c(22, 22, 54, 54, 8, 8),
-#'   "Sex" = c("F", "F", "M", "M", "F", "F"),
+#'   "Sex" = c("I", "F", "M", "M", "F", "F"),
+#'   "Gender" = c("N", "W", "W", "M", "M", "M"),
 #'   "Participant" = c("S1", "S1", "s2", "s2", "s3", "s3")
 #' )
 #'
-#' report_participants(data, age = "Age", sex = "Sex", participants = "Participant")
+#' report_participants(data, age = "Age", sex = "Sex", gender = "Gender", participants = "Participant")
 #'
 #' # Grouped data
 #' data <- data.frame(
 #'   "Age" = c(22, 22, 54, 54, 8, 8, 42, 42),
-#'   "Sex" = c("F", "F", "M", "M", "F", "F", "M", "M"),
+#'   "Sex" = c("I", "I", "M", "M", "F", "F", "F", "F"),
+#'   "Gender" = c("N", "N", "W", "M", "M", "M", "Non-Binary", "Non-Binary"),
 #'   "Participant" = c("S1", "S1", "s2", "s2", "s3", "s3", "s4", "s4"),
 #'   "Condition" = c("A", "A", "A", "A", "B", "B", "B", "B")
 #' )
@@ -63,6 +71,7 @@
 #' report_participants(data,
 #'   age = "Age",
 #'   sex = "Sex",
+#'   gender = "Gender",
 #'   participants = "Participant",
 #'   group = "Condition"
 #' )
@@ -76,6 +85,7 @@
 report_participants <- function(data,
                                 age = NULL,
                                 sex = NULL,
+                                gender = NULL,
                                 education = NULL,
                                 participants = NULL,
                                 group = NULL,
@@ -91,6 +101,11 @@ report_participants <- function(data,
   # find sex variable automatically
   if (is.null(sex)) {
     sex <- .find_sex_in_data(data)
+  }
+
+  # find gender variable automatically
+  if (is.null(gender)) {
+    gender <- .find_gender_in_data(data)
   }
 
   # find education variable automatically
@@ -121,6 +136,7 @@ report_participants <- function(data,
       data,
       age = age,
       sex = sex,
+      gender = gender,
       education = education,
       participants = participants,
       spell_n = spell_n,
@@ -137,6 +153,7 @@ report_participants <- function(data,
 .report_participants <- function(data,
                                  age = "Age",
                                  sex = "Sex",
+                                 gender = "Gender",
                                  education = "Education",
                                  participants = NULL,
                                  spell_n = FALSE,
@@ -151,6 +168,10 @@ report_participants <- function(data,
     data$Sex <- NA
     sex <- "Sex"
   }
+  if (is.null(gender) | !gender %in% names(data)) {
+    data$Gender <- NA
+    gender <- "Gender"
+  }
   if (is.null(education) | !education %in% names(data)) {
     data$Education <- NA
     education <- "Education"
@@ -161,10 +182,12 @@ report_participants <- function(data,
     data <- data.frame(
       "Age" = stats::aggregate(data[[age]], by = list(data[[participants]]), FUN = mean)[[2]],
       "Sex" = stats::aggregate(data[[sex]], by = list(data[[participants]]), FUN = utils::head, n = 1)[[2]],
+      "Gender" = stats::aggregate(data[[gender]], by = list(data[[participants]]), FUN = utils::head, n = 1)[[2]],
       "Education" = stats::aggregate(data[[education]], by = list(data[[participants]]), FUN = utils::head, n = 1)[[2]]
     )
     age <- "Age"
     sex <- "Sex"
+    gender <-"Gender"
     education <- "Education"
   }
 
@@ -196,8 +219,27 @@ report_participants <- function(data,
     ""
   } else {
     paste0(
+      "Sex: ",
       insight::format_value(length(data[[sex]][tolower(data[[sex]]) %in% c("female", "f")]) / nrow(data) * 100, digits = digits),
-      "% females"
+      "% females, ",
+      insight::format_value(length(data[[sex]][tolower(data[[sex]]) %in% c("male", "m")]) / nrow(data) * 100, digits = digits),
+      "% males, ",
+      insight::format_value(100 - length(data[[sex]][tolower(data[[sex]]) %in% c("male", "m", "female", "f")]) / nrow(data) * 100, digits = digits),
+      "% other"
+      )
+  }
+
+  text_gender <- if (all(is.na(data[[gender]]))) {
+    ""
+  } else {
+    paste0(
+      "Gender: ",
+      insight::format_value(length(data[[gender]][tolower(data[[gender]]) %in% c("woman", "w", "f", "female")]) / nrow(data) * 100, digits = digits),
+      "% women, ",
+      insight::format_value(length(data[[gender]][tolower(data[[gender]]) %in% c("man", "m")]) / nrow(data) * 100, digits = digits),
+      "% men, ",
+      insight::format_value(100 - length(data[[gender]][tolower(data[[gender]]) %in% c("woman", "w", "man", "m")]) / nrow(data) * 100),
+      "% non-binary."
     )
   }
 
@@ -235,7 +277,8 @@ report_participants <- function(data,
     " participants (",
     ifelse(text_age == "", "", text_age),
     ifelse(text_sex == "", "", paste0(ifelse(text_age == "", "", "; "), text_sex)),
-    ifelse(text_education == "", "", paste0(ifelse(text_age == "" & text_sex == "", "", "; "), text_education)),
+    ifelse(text_gender == "", "", paste0(ifelse(text_age == "" & text_sex=="", "", "; "), text_gender)),
+    ifelse(text_education == "", "", paste0(ifelse(text_age == "" & text_sex == "" & text_gender== "","", "; "), text_education)),
     ")"
   )
 }
@@ -267,7 +310,14 @@ report_participants <- function(data,
     grep("^Sex", colnames(data), value = TRUE)[1]
   } else if (any(grepl("^sex", colnames(data)))) {
     grep("^sex", colnames(data), value = TRUE)[1]
-  } else if ("Gender" %in% colnames(data)) {
+  } else {
+    ""
+  }
+}
+
+#' @keywords internal
+.find_gender_in_data <-function(data) {
+  if ("Gender" %in% colnames(data)) {
     "Gender"
   } else if ("gender" %in% colnames(data)) {
     "gender"
