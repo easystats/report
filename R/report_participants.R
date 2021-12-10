@@ -206,7 +206,7 @@ report_participants <- function(data,
         data[[age]],
         n = FALSE,
         centrality = "mean",
-        missing_percentage = NULL,
+        missing_percentage = TRUE,
         digits = digits,
         ...
       )
@@ -217,7 +217,7 @@ report_participants <- function(data,
 
   text_sex <- if (all(is.na(data[[sex]]))) {
     ""
-  } else {
+  } else if (insight::format_value(length(data[[sex]][tolower(data[[sex]]) %in% c("")]) / nrow(data) * 100) == "0.00") {
     paste0(
       "Sex: ",
       insight::format_value(length(data[[sex]][tolower(data[[sex]]) %in% c("female", "f")]) / nrow(data) * 100, digits = digits),
@@ -226,20 +226,46 @@ report_participants <- function(data,
       "% males, ",
       insight::format_value(100 - length(data[[sex]][tolower(data[[sex]]) %in% c("male", "m", "female", "f")]) / nrow(data) * 100, digits = digits),
       "% other"
+    )
+  }
+  else {
+    paste0(
+      "Sex: ",
+      insight::format_value(length(data[[sex]][tolower(data[[sex]]) %in% c("female", "f")]) / nrow(data) * 100, digits = digits),
+      "% females, ",
+      insight::format_value(length(data[[sex]][tolower(data[[sex]]) %in% c("male", "m")]) / nrow(data) * 100, digits = digits),
+      "% males, ",
+      insight::format_value(100 - length(data[[sex]][tolower(data[[sex]]) %in% c("male", "m", "female", "f")]) / nrow(data) * 100, digits = digits),
+      "% other, ",
+      insight::format_value(length(data[[sex]][tolower(data[[sex]]) %in% c(NA)]) / nrow(data) * 100),
+      "% missing"
       )
   }
 
   text_gender <- if (all(is.na(data[[gender]]))) {
     ""
-  } else {
+  } else if (insight::format_value(length(data[[gender]][tolower(data[[gender]]) %in% c("")]) / nrow(data) * 100) == "0.00") {
     paste0(
       "Gender: ",
-      insight::format_value(length(data[[gender]][tolower(data[[gender]]) %in% c("woman", "w", "f", "female")]) / nrow(data) * 100, digits = digits),
+      insight::format_value(length(data[[gender]][tolower(data[[gender]]) %in% c("woman", "w")]) / nrow(data) * 100, digits = digits),
       "% women, ",
       insight::format_value(length(data[[gender]][tolower(data[[gender]]) %in% c("man", "m")]) / nrow(data) * 100, digits = digits),
       "% men, ",
       insight::format_value(100 - length(data[[gender]][tolower(data[[gender]]) %in% c("woman", "w", "man", "m")]) / nrow(data) * 100),
-      "% non-binary."
+      "% non-binary"
+    )
+    }
+  else {
+    paste0(
+      "Gender: ",
+      insight::format_value(length(data[[gender]][tolower(data[[gender]]) %in% c("woman", "w")]) / nrow(data) * 100, digits = digits),
+      "% women, ",
+      insight::format_value(length(data[[gender]][tolower(data[[gender]]) %in% c("man", "m")]) / nrow(data) * 100, digits = digits),
+      "% men, ",
+      insight::format_value(100 - length(data[[gender]][tolower(data[[gender]]) %in% c("woman", "w", "man", "m")]) / nrow(data) * 100),
+      "% non-binary, ",
+      insight::format_value(length(data[[sex]][tolower(data[[sex]]) %in% c(NA)]) / nrow(data) * 100),
+      "% missing"
     )
   }
 
