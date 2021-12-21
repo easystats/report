@@ -63,7 +63,7 @@ navbar:
     href: http://twitter.com/easystats4u
     aria-label: Twitter
   - icon: fa-github
-    href: https://github.com/easystats/bayestestR/
+    href: https://github.com/easystats/report/
     aria-label: GitHub
   left:
   - icon: fa-home fa-lg
