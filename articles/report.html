@@ -43,7 +43,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
   <a class="nav-link" href="../index.html">
@@ -90,6 +90,9 @@
     
   </div>
 </nav><div class="container template-article">
+
+
+
 <script src="report_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <main id="main"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Get Started</h1>
@@ -109,9 +112,9 @@
 <pre><code><span class="co">## The following objects are masked from 'package:stats':</span>
 <span class="co">## </span>
 <span class="co">##     filter, lag</span></code></pre>
-<div class="section level1">
-<h1 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h1>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>First, install R and R studio. Then, copy and paste the following lines in the console:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
@@ -120,13 +123,13 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://easystats.github.io/report/" class="external-link">"report"</a></span><span class="op">)</span> <span class="co"># Load the package every time you start R</span></code></pre></div>
 <p>Great! The <code>report</code> package is now installed and loaded in your session.</p>
 </div>
-<div class="section level1">
-<h1 id="supported-objects">Supported Objects<a class="anchor" aria-label="anchor" href="#supported-objects"></a>
-</h1>
-<p>The <code>report</code> package works in a two step fashion: - First, you create a <code>report</code> object with the <code><a href="../reference/report.html">report()</a></code> function. - Second, this report object can be displayed either textually (the default output) or as a table, using <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code>. Moreover, you can also access a more compact version of the report using <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> on the report object.</p>
 <div class="section level2">
-<h2 id="dataframes">Dataframes<a class="anchor" aria-label="anchor" href="#dataframes"></a>
+<h2 id="supported-objects">Supported Objects<a class="anchor" aria-label="anchor" href="#supported-objects"></a>
 </h2>
+<p>The <code>report</code> package works in a two step fashion: - First, you create a <code>report</code> object with the <code><a href="../reference/report.html">report()</a></code> function. - Second, this report object can be displayed either textually (the default output) or as a table, using <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code>. Moreover, you can also access a more compact version of the report using <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> on the report object.</p>
+<div class="section level3">
+<h3 id="dataframes">Dataframes<a class="anchor" aria-label="anchor" href="#dataframes"></a>
+</h3>
 <p>If an entire dataframe is supplied, <code>report</code> will provide descriptive statistics for all columns:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span>
@@ -137,9 +140,9 @@
 <span class="co">#   - Petal.Width: n = 150, Mean = 1.20, SD = 0.76, Median = 1.30, MAD = 1.04, range: [0.10, 2.50], Skewness = -0.10, Kurtosis = -1.34, 0% missing</span>
 <span class="co">#   - Species: 3 levels, namely setosa (n = 50, 33.33%), versicolor (n = 50, 33.33%) and virginica (n = 50, 33.33%)</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="grouped-dataframes">Grouped Dataframes<a class="anchor" aria-label="anchor" href="#grouped-dataframes"></a>
-</h2>
+<div class="section level3">
+<h3 id="grouped-dataframes">Grouped Dataframes<a class="anchor" aria-label="anchor" href="#grouped-dataframes"></a>
+</h3>
 <p>The dataframe can also be a <em>grouped</em> dataframe (from <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a> package), in which case <code>report</code> would return a separate report for each level of the grouping variable. Additionally, instead of textual summary, <code>report</code> also allows one to return a tabular summary using the <code><a href="../reference/report_table.html">report_table()</a></code> function:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">iris</span> <span class="op"><a href="https://nathaneastwood.github.io/poorman/reference/pipe.html" class="external-link">%&gt;%</a></span>
@@ -156,9 +159,9 @@
 <span class="co"># virginica  | Petal.Length |    50 | 5.55 | 0.55 |   5.55 | 0.67 | 4.50 | 6.90 |     0.55 |    -0.15 |         0</span>
 <span class="co"># virginica  |  Petal.Width |    50 | 2.03 | 0.27 |   2.00 | 0.30 | 1.40 | 2.50 |    -0.13 |    -0.60 |         0</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="correlations-t-test-and-wilcox-test">Correlations, t-test, and Wilcox test<a class="anchor" aria-label="anchor" href="#correlations-t-test-and-wilcox-test"></a>
-</h2>
+<div class="section level3">
+<h3 id="correlations-t-test-and-wilcox-test">Correlations, t-test, and Wilcox test<a class="anchor" aria-label="anchor" href="#correlations-t-test-and-wilcox-test"></a>
+</h3>
 <p><code>report</code> can also be used to provide automated summaries for statistical model objects from correlation, t-tests, etc.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">wt</span> <span class="op">~</span> <span class="va">am</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span>
@@ -171,12 +174,12 @@
 
 <span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="regression-models">Regression models<a class="anchor" aria-label="anchor" href="#regression-models"></a>
-</h2>
 <div class="section level3">
-<h3 id="linear-regression-lm">Linear regression (<code>lm</code>)<a class="anchor" aria-label="anchor" href="#linear-regression-lm"></a>
+<h3 id="regression-models">Regression models<a class="anchor" aria-label="anchor" href="#regression-models"></a>
 </h3>
+<div class="section level4">
+<h4 id="linear-regression-lm">Linear regression (<code>lm</code>)<a class="anchor" aria-label="anchor" href="#linear-regression-lm"></a>
+</h4>
 <p>We will start out simple: a simple linear regression</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">wt</span> <span class="op">~</span> <span class="va">am</span> <span class="op">+</span> <span class="va">mpg</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
@@ -189,9 +192,9 @@
 <span class="co"># </span>
 <span class="co"># Standardized parameters were obtained by fitting the model on a standardized version of the dataset. 95% Confidence Intervals (CIs) and p-values were computed using the Wald approximation.</span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="anova-aov">anova (<code>aov</code>)<a class="anchor" aria-label="anchor" href="#anova-aov"></a>
-</h3>
+<div class="section level4">
+<h4 id="anova-aov">anova (<code>aov</code>)<a class="anchor" aria-label="anchor" href="#anova-aov"></a>
+</h4>
 <p>And its close cousin ANOVA is also covered by <code>report</code>:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html" class="external-link">aov</a></span><span class="op">(</span><span class="va">wt</span> <span class="op">~</span> <span class="va">am</span> <span class="op">+</span> <span class="va">mpg</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
@@ -204,9 +207,9 @@
 <span class="co"># </span>
 <span class="co"># Effect sizes were labelled following Field's (2013) recommendations.</span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="general-linear-models-glms-glm">General Linear Models (GLMs) (<code>glm</code>)<a class="anchor" aria-label="anchor" href="#general-linear-models-glms-glm"></a>
-</h3>
+<div class="section level4">
+<h4 id="general-linear-models-glms-glm">General Linear Models (GLMs) (<code>glm</code>)<a class="anchor" aria-label="anchor" href="#general-linear-models-glms-glm"></a>
+</h4>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">vs</span> <span class="op">~</span> <span class="va">mpg</span> <span class="op">+</span> <span class="va">cyl</span>, data <span class="op">=</span> <span class="va">mtcars</span>, family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span>
 
@@ -218,9 +221,9 @@
 <span class="co"># </span>
 <span class="co"># Standardized parameters were obtained by fitting the model on a standardized version of the dataset. 95% Confidence Intervals (CIs) and p-values were computed using</span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="linear-mixed-effects-models-mermod">Linear Mixed-Effects Models (<code>merMod</code>)<a class="anchor" aria-label="anchor" href="#linear-mixed-effects-models-mermod"></a>
-</h3>
+<div class="section level4">
+<h4 id="linear-mixed-effects-models-mermod">Linear Mixed-Effects Models (<code>merMod</code>)<a class="anchor" aria-label="anchor" href="#linear-mixed-effects-models-mermod"></a>
+</h4>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lme4/lme4/" class="external-link">lme4</a></span><span class="op">)</span>
 
