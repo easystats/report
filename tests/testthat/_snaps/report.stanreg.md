@@ -3,7 +3,7 @@
     Code
       report(model)
     Output
-      We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains of 300 iterations and a warmup of 150) to predict mpg with qsec and wt (formula: mpg ~ qsec + wt). Priors over parameters were set as normal (mean = 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The model's explanatory power is substantial (R2 = 0.81, 89% CI [0.73, 0.89], adj. R2 = 0.79). The model's intercept, corresponding to qsec = 0 and wt = 0, is at 19.71 (95% CI [9.25, 30.23]). Within this model:
+      We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains of 300 iterations and a warmup of 150) to predict mpg with qsec and wt (formula: mpg ~ qsec + wt). Priors over parameters were set as normal (mean = 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The model's explanatory power is substantial (R2 = 0.81, 95% CI [0.70, 0.90], adj. R2 = 0.80). The model's intercept, corresponding to qsec = 0 and wt = 0, is at 19.71 (95% CI [9.25, 30.23]). Within this model:
       
         - The effect of qsec (Median = 0.92, 95% CI [0.40, 1.47]) has a 99.83% probability of being positive (> 0), 99.00% of being significant (> 0.30), and 0.33% of being large (> 1.81). The estimation successfully converged (Rhat = 0.999) but the indices are unreliable (ESS = 451)
         - The effect of wt (Median = -5.06, 95% CI [-6.02, -4.16]) has a 100.00% probability of being negative (< 0), 100.00% of being significant (< -0.30), and 100.00% of being large (< -1.81). However, the estimation might not have successfuly converged (Rhat = 1.013) and the indices are unreliable (ESS = 478)

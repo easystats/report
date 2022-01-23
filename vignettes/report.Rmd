@@ -28,11 +28,11 @@ options(
   width = 60
 )
 
-if (!requireNamespace("poorman", quietly = TRUE)) {
+if (!requireNamespace("dplyr", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
 }
 
-library(poorman)
+library(dplyr)
 ```
 
 # Installation

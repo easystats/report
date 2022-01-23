@@ -14,7 +14,7 @@
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
-      The One Sample t-test testing the difference between iris$Sepal.Width (mean = 3.06) and mu = -1 suggests that the effect is positive, statistically not significant, and large (difference = 4.06, 95% CI [-Inf, 3.12], t(149) = 114.01, p > .999; Cohen's d = 9.31, 95% CI [8.25, 10.40])
+      The One Sample t-test testing the difference between iris$Sepal.Width (mean = 3.06) and mu = -1 suggests that the effect is positive, statistically not significant, and large (difference = 4.06, 95% CI [-Inf, 3.12], t(149) = 114.01, p > .999; Cohen's d = 9.31, 95% CI [-Inf, 10.22])
 
 ---
 
@@ -23,7 +23,7 @@
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
-      The One Sample t-test testing the difference between iris$Sepal.Width (mean = 3.06) and mu = 5 suggests that the effect is negative, statistically not significant, and large (difference = -1.94, 95% CI [3.00, Inf], t(149) = -54.59, p > .999; Cohen's d = -4.46, 95% CI [-5.80, -3.93])
+      The One Sample t-test testing the difference between iris$Sepal.Width (mean = 3.06) and mu = 5 suggests that the effect is negative, statistically not significant, and large (difference = -1.94, 95% CI [3.00, Inf], t(149) = -54.59, p > .999; Cohen's d = -4.46, 95% CI [-4.91, Inf])
 
 ---
 
@@ -41,7 +41,7 @@
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
-      The Welch Two Sample t-test testing the difference of wt by am (mean in group 0 = 3.77, mean in group 1 = 2.41) suggests that the effect is positive, statistically not significant, and large (difference = 1.36, 95% CI [-Inf, 1.78], t(29.23) = 5.49, p > .999; Cohen's d = 2.03, 95% CI [1.13, 2.91])
+      The Welch Two Sample t-test testing the difference of wt by am (mean in group 0 = 3.77, mean in group 1 = 2.41) suggests that the effect is positive, statistically not significant, and large (difference = 1.36, 95% CI [-Inf, 1.78], t(29.23) = 5.49, p > .999; Cohen's d = 2.03, 95% CI [-Inf, 2.77])
 
 ---
 
@@ -50,7 +50,7 @@
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
-      The Welch Two Sample t-test testing the difference of wt by am (mean in group 0 = 3.77, mean in group 1 = 2.41) suggests that the effect is positive, statistically significant, and large (difference = 1.36, 95% CI [0.94, Inf], t(29.23) = 5.49, p < .001; Cohen's d = 2.03, 95% CI [1.13, 2.91])
+      The Welch Two Sample t-test testing the difference of wt by am (mean in group 0 = 3.77, mean in group 1 = 2.41) suggests that the effect is positive, statistically significant, and large (difference = 1.36, 95% CI [0.94, Inf], t(29.23) = 5.49, p < .001; Cohen's d = 2.03, 95% CI [1.27, Inf])
 
 ---
 
@@ -68,7 +68,7 @@
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
-      The Paired t-test testing the difference between x and y (mean of the differences = 0.43) suggests that the effect is positive, statistically not significant, and large (difference = 0.43, 95% CI [-Inf, 0.70], t(8) = 3.04, p = 0.992; Cohen's d = 1.07, 95% CI [0.19, 1.92])
+      The Paired t-test testing the difference between x and y (mean of the differences = 0.43) suggests that the effect is positive, statistically not significant, and large (difference = 0.43, 95% CI [-Inf, 0.70], t(8) = 3.04, p = 0.992; Cohen's d = 1.07, 95% CI [-Inf, 1.77])
 
 ---
 
@@ -77,7 +77,7 @@
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
-      The Paired t-test testing the difference between x and y (mean of the differences = 0.43) suggests that the effect is positive, statistically significant, and large (difference = 0.43, 95% CI [0.17, Inf], t(8) = 3.04, p = 0.008; Cohen's d = 1.07, 95% CI [0.19, 1.92])
+      The Paired t-test testing the difference between x and y (mean of the differences = 0.43) suggests that the effect is positive, statistically significant, and large (difference = 0.43, 95% CI [0.17, Inf], t(8) = 3.04, p = 0.008; Cohen's d = 1.07, 95% CI [0.32, Inf])
 
 ---
 

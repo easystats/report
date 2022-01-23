@@ -27,7 +27,7 @@ options(
   width = 60
 )
 
-if (!requireNamespace("poorman", quietly = TRUE)) {
+if (!requireNamespace("dplyr", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
 }
 ```
@@ -79,7 +79,7 @@ R, you can include (usually at the end) every used package's citation using the
 
 ```{r, results='asis'}
 library(report)
-library(poorman)
+library(dplyr)
 
 cite_packages()
 ```

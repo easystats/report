@@ -41,7 +41,7 @@ test_that("report.factor", {
   expect_equal(nrow(as.data.frame(r)), 4, tolerance = 0)
 })
 
-if (require("poorman")) {
+if (require("dplyr")) {
   test_that("report.data.frame", {
     r <- report(iris)
     expect_equal(nrow(as.data.frame(r)), 7, tolerance = 0)

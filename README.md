@@ -254,16 +254,16 @@ report(model)
     # 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The
     # model's explanatory power is substantial (R2 = 0.81, 95% CI [0.69, 0.89], adj.
     # R2 = 0.79). The model's intercept, corresponding to qsec = 0 and wt = 0, is at
-    # 19.83 (95% CI [8.58, 30.19]). Within this model:
+    # 19.50 (95% CI [9.31, 30.34]). Within this model:
     # 
-    #   - The effect of qsec (Median = 0.92, 95% CI [0.40, 1.49]) has a 100.00%
+    #   - The effect of qsec (Median = 0.94, 95% CI [0.42, 1.47]) has a 100.00%
     # probability of being positive (> 0), 98.80% of being significant (> 0.30), and
-    # 0.10% of being large (> 1.81). The estimation successfully converged (Rhat =
-    # 1.003) and the indices are reliable (ESS = 1470)
-    #   - The effect of wt (Median = -5.03, 95% CI [-6.06, -4.18]) has a 100.00%
+    # 0.15% of being large (> 1.81). The estimation successfully converged (Rhat =
+    # 1.000) and the indices are reliable (ESS = 1991)
+    #   - The effect of wt (Median = -5.03, 95% CI [-6.03, -4.10]) has a 100.00%
     # probability of being negative (< 0), 100.00% of being significant (< -0.30),
     # and 100.00% of being large (< -1.81). The estimation successfully converged
-    # (Rhat = 1.001) and the indices are reliable (ESS = 1562)
+    # (Rhat = 1.000) and the indices are reliable (ESS = 2341)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
     # framework, we report the median of the posterior distribution and its 95% CI
@@ -312,7 +312,7 @@ paste(
 )
 ```
 
-    # [1] "Four participants (Mean age = 30.0, SD = 16.0, range: [21, 54]; 50.0% females) were recruited in the study by means of torture and coercion."
+    # [1] "Four participants (Mean age = 30.0, SD = 16.0, range: [21, 54]; Sex: 50.0% females, 50.0% males, 0.0% other) were recruited in the study by means of torture and coercion."
 
 ### Report sample
 
@@ -336,18 +336,18 @@ report(sessionInfo())
 ```
 
     # Analyses were conducted using the R Statistical language (version 4.1.2; R Core
-    # Team, 2021) on Windows 10 x64 (build 19043), using the packages Rcpp (version
-    # 1.0.7; Dirk Eddelbuettel and Romain Francois, 2011), Matrix (version 1.3.4;
+    # Team, 2021) on Windows 10 x64 (build 19044), using the packages Rcpp (version
+    # 1.0.8; Dirk Eddelbuettel and Romain Francois, 2011), Matrix (version 1.3.4;
     # Douglas Bates and Martin Maechler, 2021), lme4 (version 1.1.27.1; Douglas Bates
-    # et al., 2015), rstanarm (version 2.21.1; Goodrich B et al., 2020), report
-    # (version 0.4.0.1; Makowski et al., 2020) and poorman (version 0.2.5; Nathan
-    # Eastwood, 2021).
+    # et al., 2015), rstanarm (version 2.21.1; Goodrich B et al., 2020), dplyr
+    # (version 1.0.7; Hadley Wickham et al., 2021) and report (version 0.4.0.1;
+    # Makowski et al., 2020).
     # 
     # References
     # ----------
     #   - Dirk Eddelbuettel and Romain Francois (2011). Rcpp: Seamless R and C++
-    # Integration. Journal of Statistical Software, 40(8), 1-18. URL
-    # https://www.jstatsoft.org/v40/i08/.
+    # Integration. Journal of Statistical Software, 40(8), 1-18,
+    # <doi:10.18637/jss.v040.i08>.
     #   - Douglas Bates and Martin Maechler (2021). Matrix: Sparse and Dense Matrix
     # Classes and Methods. R package version 1.3-4.
     # https://CRAN.R-project.org/package=Matrix
@@ -357,12 +357,13 @@ report(sessionInfo())
     #   - Goodrich B, Gabry J, Ali I & Brilleman S. (2020). rstanarm: Bayesian applied
     # regression modeling via Stan. R package version 2.21.1
     # https://mc-stan.org/rstanarm.
+    #   - Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2021).
+    # dplyr: A Grammar of Data Manipulation. R package version 1.0.7.
+    # https://CRAN.R-project.org/package=dplyr
     #   - Makowski, D., Ben-Shachar, M.S., Patil, I. & Lüdecke, D. (2020). Automated
     # Results Reporting as a Practical Tool to Improve Reproducibility and
     # Methodological Best Practices Adoption. CRAN. Available from
     # https://github.com/easystats/report. doi: .
-    #   - Nathan Eastwood (2021). poorman: A Poor Man's Dependency Free Recreation of
-    # 'dplyr'. R package version 0.2.5. https://CRAN.R-project.org/package=poorman
     #   - R Core Team (2021). R: A language and environment for statistical computing.
     # R Foundation for Statistical Computing, Vienna, Austria. URL
     # https://www.R-project.org/.
