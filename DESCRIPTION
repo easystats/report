@@ -79,8 +79,6 @@ Collate:
     'format_citation.R'
     'format_formula.R'
     'format_model.R'
-    'format_text.R'
-    'reexports.R'
     'utils_combine_tables.R'
     'report.lm.R'
     'report.MixMod.R'

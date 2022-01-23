@@ -67,8 +67,10 @@ report_participants(data, age = "Age", sex = "Sex")
 
 # Years of education (relative to high school graduation)
 data$Education <- c(0, 8, -3, -5, 3, 5)
-report_participants(data, age = "Age", sex = "Sex", gender = "Gender",
-education = "Education")
+report_participants(data,
+  age = "Age", sex = "Sex", gender = "Gender",
+  education = "Education"
+)
 
 # Education as factor
 data$Education2 <- c(

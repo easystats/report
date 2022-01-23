@@ -87,6 +87,8 @@
 #'   \item [report.default()]
 #' }
 #'
+#' @import datawizard
+#'
 #' @examples
 #' library(report)
 #'
