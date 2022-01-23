@@ -8,6 +8,7 @@ report_participants(
   data,
   age = NULL,
   sex = NULL,
+  gender = NULL,
   education = NULL,
   participants = NULL,
   group = NULL,
@@ -23,9 +24,13 @@ report_participants(
 
 \item{sex}{The name of the column containing the sex of the participant. The
 classes should be one of \code{c("Male", "M", "Female", "F")}. Note that
-you can specify other characters here as well (e.g., \code{"Other"}), but
-the function will report only percentage of females, regardless of whether
-any category other than "Male" is present in the data.}
+you can specify other characters here as well (e.g., \code{"Intersex"}), but
+the function will group all individuals in those groups as \code{"Other"}.}
+
+\item{gender}{The name of the column containing the gender of the
+The classes should be one of \code{c("Man", "M", "Woman", "F", "Non-Binary", "N")}. Note that you can specify other characters here as well
+(e.g., \code{"Gender Fluid"}), but the function will group all individuals in
+those groups as \code{"Non-Binary"}.}
 
 \item{education}{The name of the column containing education information.}
 
@@ -54,36 +59,42 @@ the participants section.
 library(report)
 data <- data.frame(
   "Age" = c(22, 23, 54, 21, 8, 42),
-  "Sex" = c("F", "F", "M", "M", "M", "F")
+  "Sex" = c("Intersex", "F", "M", "M", "M", "F"),
+  "Gender" = c("N", "W", "W", "M", "M", "M")
 )
 
 report_participants(data, age = "Age", sex = "Sex")
 
 # Years of education (relative to high school graduation)
 data$Education <- c(0, 8, -3, -5, 3, 5)
-report_participants(data, age = "Age", sex = "Sex", education = "Education")
+report_participants(data,
+  age = "Age", sex = "Sex", gender = "Gender",
+  education = "Education"
+)
 
 # Education as factor
 data$Education2 <- c(
   "Bachelor", "PhD", "Highschool",
   "Highschool", "Bachelor", "Bachelor"
 )
-report_participants(data, age = "Age", sex = "Sex", education = "Education2")
+report_participants(data, age = "Age", sex = "Sex", gender = "Gender", education = "Education2")
 
 
 # Repeated measures data
 data <- data.frame(
   "Age" = c(22, 22, 54, 54, 8, 8),
-  "Sex" = c("F", "F", "M", "M", "F", "F"),
+  "Sex" = c("I", "F", "M", "M", "F", "F"),
+  "Gender" = c("N", "W", "W", "M", "M", "M"),
   "Participant" = c("S1", "S1", "s2", "s2", "s3", "s3")
 )
 
-report_participants(data, age = "Age", sex = "Sex", participants = "Participant")
+report_participants(data, age = "Age", sex = "Sex", gender = "Gender", participants = "Participant")
 
 # Grouped data
 data <- data.frame(
   "Age" = c(22, 22, 54, 54, 8, 8, 42, 42),
-  "Sex" = c("F", "F", "M", "M", "F", "F", "M", "M"),
+  "Sex" = c("I", "I", "M", "M", "F", "F", "F", "F"),
+  "Gender" = c("N", "N", "W", "M", "M", "M", "Non-Binary", "Non-Binary"),
   "Participant" = c("S1", "S1", "s2", "s2", "s3", "s3", "s4", "s4"),
   "Condition" = c("A", "A", "A", "A", "B", "B", "B", "B")
 )
@@ -91,6 +102,7 @@ data <- data.frame(
 report_participants(data,
   age = "Age",
   sex = "Sex",
+  gender = "Gender",
   participants = "Participant",
   group = "Condition"
 )

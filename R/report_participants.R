@@ -38,8 +38,10 @@
 #'
 #' # Years of education (relative to high school graduation)
 #' data$Education <- c(0, 8, -3, -5, 3, 5)
-#' report_participants(data, age = "Age", sex = "Sex", gender = "Gender",
-#' education = "Education")
+#' report_participants(data,
+#'   age = "Age", sex = "Sex", gender = "Gender",
+#'   education = "Education"
+#' )
 #'
 #' # Education as factor
 #' data$Education2 <- c(
@@ -187,7 +189,7 @@ report_participants <- function(data,
     )
     age <- "Age"
     sex <- "Sex"
-    gender <-"Gender"
+    gender <- "Gender"
     education <- "Education"
   }
 
@@ -227,8 +229,7 @@ report_participants <- function(data,
       insight::format_value(100 - length(data[[sex]][tolower(data[[sex]]) %in% c("male", "m", "female", "f")]) / nrow(data) * 100, digits = digits),
       "% other"
     )
-  }
-  else {
+  } else {
     paste0(
       "Sex: ",
       insight::format_value(length(data[[sex]][tolower(data[[sex]]) %in% c("female", "f")]) / nrow(data) * 100, digits = digits),
@@ -239,7 +240,7 @@ report_participants <- function(data,
       "% other, ",
       insight::format_value(length(data[[sex]][tolower(data[[sex]]) %in% c(NA)]) / nrow(data) * 100),
       "% missing"
-      )
+    )
   }
 
   text_gender <- if (all(is.na(data[[gender]]))) {
@@ -254,8 +255,7 @@ report_participants <- function(data,
       insight::format_value(100 - length(data[[gender]][tolower(data[[gender]]) %in% c("woman", "w", "man", "m")]) / nrow(data) * 100),
       "% non-binary"
     )
-    }
-  else {
+  } else {
     paste0(
       "Gender: ",
       insight::format_value(length(data[[gender]][tolower(data[[gender]]) %in% c("woman", "w")]) / nrow(data) * 100, digits = digits),
@@ -303,8 +303,8 @@ report_participants <- function(data,
     " participants (",
     ifelse(text_age == "", "", text_age),
     ifelse(text_sex == "", "", paste0(ifelse(text_age == "", "", "; "), text_sex)),
-    ifelse(text_gender == "", "", paste0(ifelse(text_age == "" & text_sex=="", "", "; "), text_gender)),
-    ifelse(text_education == "", "", paste0(ifelse(text_age == "" & text_sex == "" & text_gender== "","", "; "), text_education)),
+    ifelse(text_gender == "", "", paste0(ifelse(text_age == "" & text_sex == "", "", "; "), text_gender)),
+    ifelse(text_education == "", "", paste0(ifelse(text_age == "" & text_sex == "" & text_gender == "", "", "; "), text_education)),
     ")"
   )
 }
@@ -342,7 +342,7 @@ report_participants <- function(data,
 }
 
 #' @keywords internal
-.find_gender_in_data <-function(data) {
+.find_gender_in_data <- function(data) {
   if ("Gender" %in% colnames(data)) {
     "Gender"
   } else if ("gender" %in% colnames(data)) {

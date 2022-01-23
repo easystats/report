@@ -15,5 +15,5 @@
         - The effect of rx is statistically non-significant and positive (beta = 320.10, 95% CI [-194.11, 834.32], p = 0.222; Std. beta = 163.22, 95% CI [-98.98, 425.42])
         - The effect of Log(scale) is statistically significant and positive (beta = 5.82, 95% CI [5.35, 6.29], p < .001; Std. beta = 5.82, 95% CI [5.35, 6.29])
       
-      Standardized parameters were obtained by fitting the model on a standardized version of the dataset.
+      Standardized parameters were obtained by fitting the model on a standardized version of the dataset. 95% Confidence Intervals (CIs) and p-values were computed using the Wald approximation.
 

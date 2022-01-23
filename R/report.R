@@ -87,6 +87,10 @@
 #'   \item [report.default()]
 #' }
 #'
+#' @import datawizard
+#' @import effectsize
+#' @import insight
+#'
 #' @examples
 #' library(report)
 #'

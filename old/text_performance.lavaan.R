@@ -32,7 +32,7 @@ text_performance.lavaan <- function(model, performance, ...) {
       data.frame(
         Name = "GFI",
         Value = performance$GFI,
-        Interpretation = interpret_gfi(performance$GFI),
+        Interpretation = effectsize::interpret_gfi(performance$GFI),
         Threshold = 0.95
       )
     )
@@ -45,7 +45,7 @@ text_performance.lavaan <- function(model, performance, ...) {
       data.frame(
         Name = "AGFI",
         Value = performance$AGFI,
-        Interpretation = interpret_agfi(performance$AGFI),
+        Interpretation = effectsize::interpret_agfi(performance$AGFI),
         Threshold = 0.90
       )
     )
@@ -58,7 +58,7 @@ text_performance.lavaan <- function(model, performance, ...) {
       data.frame(
         Name = "NFI",
         Value = performance$NFI,
-        Interpretation = interpret_nfi(performance$NFI, rules = "byrne1994"),
+        Interpretation = effectsize::interpret_nfi(performance$NFI, rules = "byrne1994"),
         Threshold = 0.90
       )
     )
@@ -71,7 +71,7 @@ text_performance.lavaan <- function(model, performance, ...) {
       data.frame(
         Name = "NNFI",
         Value = performance$NNFI,
-        Interpretation = interpret_nnfi(performance$NNFI, rules = "byrne1994"),
+        Interpretation = effectsize::interpret_nnfi(performance$NNFI, rules = "byrne1994"),
         Threshold = 0.90
       )
     )
@@ -84,7 +84,7 @@ text_performance.lavaan <- function(model, performance, ...) {
       data.frame(
         Name = "CFI",
         Value = performance$CFI,
-        Interpretation = interpret_cfi(performance$CFI),
+        Interpretation = effectsize::interpret_cfi(performance$CFI),
         Threshold = 0.90
       )
     )
@@ -97,7 +97,7 @@ text_performance.lavaan <- function(model, performance, ...) {
       data.frame(
         Name = "RMSEA",
         Value = performance$RMSEA,
-        Interpretation = interpret_rmsea(performance$RMSEA),
+        Interpretation = effectsize::interpret_rmsea(performance$RMSEA),
         Threshold = 0.05
       )
     )
@@ -110,7 +110,7 @@ text_performance.lavaan <- function(model, performance, ...) {
       data.frame(
         Name = "SRMR",
         Value = performance$SRMR,
-        Interpretation = interpret_srmr(performance$SRMR),
+        Interpretation = effectsize::interpret_srmr(performance$SRMR),
         Threshold = 0.08
       )
     )
@@ -123,7 +123,7 @@ text_performance.lavaan <- function(model, performance, ...) {
       data.frame(
         Name = "RFI",
         Value = performance$RFI,
-        Interpretation = interpret_rfi(performance$RFI),
+        Interpretation = effectsize::interpret_rfi(performance$RFI),
         Threshold = 0.90
       )
     )
@@ -136,7 +136,7 @@ text_performance.lavaan <- function(model, performance, ...) {
       data.frame(
         Name = "IFI",
         Value = performance$IFI,
-        Interpretation = interpret_ifi(performance$IFI),
+        Interpretation = effectsize::interpret_ifi(performance$IFI),
         Threshold = 0.90
       )
     )
@@ -149,7 +149,7 @@ text_performance.lavaan <- function(model, performance, ...) {
       data.frame(
         Name = "PNFI",
         Value = performance$PNFI,
-        Interpretation = interpret_pnfi(performance$PNFI),
+        Interpretation = effectsize::interpret_pnfi(performance$PNFI),
         Threshold = 0.50
       )
     )

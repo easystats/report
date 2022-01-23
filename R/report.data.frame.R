@@ -32,7 +32,7 @@
 #' summary(as.data.frame(r))
 #'
 #' # grouped analysis using `{dplyr}` package
-#' if (require("poorman")) {
+#' if (require("dplyr")) {
 #'   r <- iris %>%
 #'     group_by(Species) %>%
 #'     report()
