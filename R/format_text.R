@@ -6,7 +6,7 @@
 #' @param width Positive integer giving the target column width for wrapping
 #' lines in the output. Can be "auto", in which case it will select 90\% of the
 #' default width.
-#' @inheritParams data_rename
+#' @inheritParams datawizard::data_rename
 #' @param sep Separator.
 #' @param last Last separator.
 #' @param n The number of characters to find.

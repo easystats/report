@@ -73,10 +73,15 @@
   if (!isTRUE(drop) && any(is_factor)) {
     na_lvls <- do.call(
       expand.grid,
-      lapply(unique_groups,
-             function(x) if (is.factor(x)) {
-               levels(x)[!(levels(x) %in% x)]
-             } else NA
+      lapply(
+        unique_groups,
+        function(x) {
+          if (is.factor(x)) {
+            levels(x)[!(levels(x) %in% x)]
+          } else {
+            NA
+          }
+        }
       )
     )
     unique_groups <- rbind(unique_groups, na_lvls)

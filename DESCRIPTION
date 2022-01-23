@@ -80,6 +80,7 @@ Collate:
     'format_formula.R'
     'format_model.R'
     'format_text.R'
+    'reexports.R'
     'utils_combine_tables.R'
     'report.lm.R'
     'report.MixMod.R'
@@ -119,7 +120,6 @@ Collate:
     'report_sample.R'
     'report_statistics.R'
     'report_table.R'
-    'utils_data.R'
     'utils_error_message.R'
     'utils_grouped_df.R'
 Roxygen: list(markdown = TRUE)
