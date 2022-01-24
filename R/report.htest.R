@@ -37,7 +37,6 @@ report_effectsize.htest <- function(x, ...) {
   # For t-tests ----------------
 
   if (insight::model_info(x)$is_ttest) {
-
     table <- effectsize::cohens_d(x, ...)
     ci <- attributes(table)$ci
     estimate <- names(table)[1]
