@@ -13,11 +13,11 @@ test_that("report.htest-correlation", {
 
   # snapshot tests with a different dataset
   set.seed(123)
-  expect_snapshot(report(cor.test(mtcars$wt, mtcars$mpg)))
+  expect_snapshot(variant = .Platform$OS.type, report(cor.test(mtcars$wt, mtcars$mpg)))
 
   set.seed(123)
-  expect_snapshot(report(cor.test(mtcars$wt, mtcars$mpg, method = "spearman")))
+  expect_snapshot(variant = .Platform$OS.type, report(cor.test(mtcars$wt, mtcars$mpg, method = "spearman")))
 
   set.seed(123)
-  expect_snapshot(report(cor.test(mtcars$wt, mtcars$mpg, method = "kendall")))
+  expect_snapshot(variant = .Platform$OS.type, report(cor.test(mtcars$wt, mtcars$mpg, method = "kendall")))
 })

@@ -16,8 +16,8 @@ if (require("testthat") && require("report") && require("lme4")) {
     set.seed(123)
     m2 <- lme4::lmer(Reaction ~ Days + (1 | mygrp / mysubgrp) + (1 | Subject), data = df)
 
-    expect_snapshot(report(m1))
+    expect_snapshot(variant = .Platform$OS.type, report(m1))
 
-    expect_snapshot(report(m2))
+    expect_snapshot(variant = .Platform$OS.type, report(m2))
   })
 }
