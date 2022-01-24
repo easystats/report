@@ -147,10 +147,6 @@ as.data.frame.report <- function(x, ...) {
 # }
 
 
-
-
-
-
 #' Create or test objects of class [report].
 #'
 #' Allows to create or test whether an object is of the `report` class.

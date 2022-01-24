@@ -1,8 +1,8 @@
 Version: 1.0
 
-RestoreWorkspace: Default
-SaveWorkspace: Default
-AlwaysSaveHistory: Default
+RestoreWorkspace: No
+SaveWorkspace: No
+AlwaysSaveHistory: No
 
 EnableCodeIndexing: Yes
 UseSpacesForTab: Yes
@@ -20,3 +20,6 @@ PackageInstallArgs: --no-multiarch --with-keep.source
 PackageBuildArgs: --compact-vignettes=both
 PackageCheckArgs: --as-cran --run-donttest
 PackageRoxygenize: rd,collate,namespace
+
+QuitChildProcessesOnExit: Yes
+DisableExecuteRprofile: Yes

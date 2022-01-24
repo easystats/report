@@ -1,6 +1,7 @@
 #' Report the model type
 #'
-#' Reports the type of different R objects (see list of supported objects in [report()]).
+#' Reports the type of different R objects (see list of supported objects in
+#' [report()]).
 #'
 #' @inheritParams report
 #' @inheritParams report_table

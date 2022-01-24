@@ -19,7 +19,8 @@ will run it.}
 A \code{character} string.
 }
 \description{
-Reports the type of different R objects (see list of supported objects in \code{\link[=report]{report()}}).
+Reports the type of different R objects (see list of supported objects in
+\code{\link[=report]{report()}}).
 }
 \examples{
 \donttest{

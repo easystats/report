@@ -97,6 +97,7 @@ report_text.factor <- function(x, table = NULL, levels_percentage = "auto", ...)
   if (is.null(table)) {
     table <- report_table(x, levels_percentage = levels_percentage, ...)
   }
+
   table_no_missing <- table[table$Level != "missing", ]
   params <- report_parameters(x, table = table, levels_percentage = levels_percentage, ...)
 
