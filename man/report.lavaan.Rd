@@ -26,21 +26,23 @@ Create a report for \code{lavaan} objects.
 \examples{
 library(report)
 \donttest{
-# Structural Equation Models (SEM)
-if (require("lavaan")) {
-  structure <- " ind60 =~ x1 + x2 + x3
+if ((packageVersion("effectsize") >= "0.6.0.1")) {
+  # Structural Equation Models (SEM)
+  if (require("lavaan")) {
+    structure <- " ind60 =~ x1 + x2 + x3
                  dem60 =~ y1 + y2 + y3
                  dem60 ~ ind60 "
-  model <- lavaan::sem(structure, data = PoliticalDemocracy)
-  r <- report(model)
-  r
-  # summary(r)
-  # as.data.frame(r)
-  # summary(as.data.frame(r))
+    model <- lavaan::sem(structure, data = PoliticalDemocracy)
+    r <- report(model)
+    r
+    # summary(r)
+    # as.data.frame(r)
+    # summary(as.data.frame(r))
 
-  # Specific reports
-  report_table(model)
-  report_performance(model)
+    # Specific reports
+    report_table(model)
+    report_performance(model)
+  }
 }
 }
 }
