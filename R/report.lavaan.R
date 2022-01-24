@@ -12,7 +12,7 @@
 #' @examples
 #' library(report)
 #' \donttest{
-#' if ((packageVersion("effectsize") >= "0.6.0.1")) {
+#' if (FALSE) {
 #'   # Structural Equation Models (SEM)
 #'   if (require("lavaan")) {
 #'     structure <- " ind60 =~ x1 + x2 + x3
