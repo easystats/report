@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,31 +66,34 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.3.6" id="report-036">report 0.3.6<a class="anchor" aria-label="anchor" href="#report-036"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.5.0" id="report-050">report 0.5.0<a class="anchor" aria-label="anchor" href="#report-050"></a></h2>
 <p>BREAKING CHANGES</p>
-<ul><li>The following functions have now been removed from <code>report</code> and now live in <a href="https://easystats.github.io/datawizard/reference/index.html" class="external-link"><code>datawizard</code></a> package:</li>
+<ul><li>The following functions have been removed from <a href="https://easystats.github.io/report/" class="external-link">report</a> and now live in <a href="https://easystats.github.io/datawizard/reference/index.html" class="external-link"><code>{datawizard}</code></a> package:</li>
 </ul><p>Data wrangling helpers:</p>
-<ul><li><code>data_addprefix()</code></li>
-<li><code>data_addsuffix()</code></li>
-<li><code>data_findcols()</code></li>
-<li><code>data_remove()</code></li>
-<li><code>data_rename()</code></li>
-<li><code>data_reorder()</code></li>
+<ul><li><p><code>data_addprefix()</code></p></li>
+<li><p><code>data_addsuffix()</code></p></li>
+<li><p><code>data_findcols()</code></p></li>
+<li><p><code>data_remove()</code></p></li>
+<li><p><code>data_rename()</code></p></li>
+<li><p><code>data_reorder()</code></p></li>
 </ul><p>Text formatting helpers:</p>
-<ul><li><code>format_text()</code></li>
-<li><code>text_fullstop()</code></li>
-<li><code>text_lastchar()</code></li>
-<li><code>text_concatenate()</code></li>
-<li><code>text_paste()</code></li>
-<li><code>text_remove()</code></li>
-<li><code>text_wrap()</code></li>
+<ul><li><p><code>format_text()</code></p></li>
+<li><p><code>text_fullstop()</code></p></li>
+<li><p><code>text_lastchar()</code></p></li>
+<li><p><code>text_concatenate()</code></p></li>
+<li><p><code>text_paste()</code></p></li>
+<li><p><code>text_remove()</code></p></li>
+<li><p><code>text_wrap()</code></p></li>
 </ul><p>MAJOR CHANGES</p>
-<ul><li>Separated sex and gender into different searches/columns</li>
-<li>Sex is reported % female, % male, % other, % missing if any cases are missing</li>
-<li>Gender is reported % Women, % Men, % Non-Binary, % missing if any cases are missing</li>
-<li>Age reports % missing if any cases are missing</li>
-<li>Tests have been updated to reflect these changes</li>
-<li>Tests for missing cases have also been updated to test numbers for <code>NA</code>, and strings for <code>""</code> as <code>""</code> is not NA.</li>
+<ul><li><p>Reporting participant’s sex/gender information has improved (thanks to <a href="https://github.com/drfeinberg" class="external-link">@drfeinberg</a>, <a href="https://github.com/easystats/report/issues/212" class="external-link">#212</a>)</p></li>
+<li><p>Separated sex and gender into different searches/columns</p></li>
+<li><p>Sex is reported % female, % male, % other, % missing if any cases are missing</p></li>
+<li><p>Gender is reported % Women, % Men, % Non-Binary, % missing if any cases are missing</p></li>
+<li><p>Age reports % missing if any cases are missing.</p></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.4.0" id="report-040">report 0.4.0<a class="anchor" aria-label="anchor" href="#report-040"></a></h2><p class="text-muted">CRAN release: 2021-09-30</p>
+<ul><li>Maintenance release.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.5" id="report-035">report 0.3.5<a class="anchor" aria-label="anchor" href="#report-035"></a></h2><p class="text-muted">CRAN release: 2021-06-10</p>
