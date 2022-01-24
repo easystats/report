@@ -1,7 +1,7 @@
 Type: Package
 Package: report
 Title: Automated Reporting of Results and Statistical Models
-Version: 0.4.0.1
+Version: 0.5.0
 Authors@R: 
     c(person(given = "Dominique",
              family = "Makowski",
@@ -121,10 +121,3 @@ Collate:
     'utils_error_message.R'
     'utils_grouped_df.R'
 Roxygen: list(markdown = TRUE)
-Remotes: 
-  easystats/insight, 
-  easystats/datawizard, 
-  easystats/performance,
-  easystats/parameters,
-  easystats/effectsize,
-  easystats/see
