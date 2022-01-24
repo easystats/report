@@ -31,6 +31,6 @@ if (require("testthat") && require("rstanarm")) {
 
   test_that("model-stanreg detailed", {
     skip_on_ci()
-    expect_snapshot(report(model))
+    expect_snapshot(variant = .Platform$OS.type, report(model))
   })
 }

@@ -10,6 +10,6 @@ if (require("testthat") && require("report") && require("survival")) {
         dist = "logistic"
       )
 
-    expect_snapshot(report(mod_survreg))
+    expect_snapshot(variant = .Platform$OS.type, report(mod_survreg))
   })
 }

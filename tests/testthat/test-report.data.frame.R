@@ -35,7 +35,7 @@ test_that("report.factor", {
   r <- report(factor(rep(c("A", "B", "C"), 10)))
   expect_equal(nrow(as.data.frame(r)), 3, tolerance = 0)
   expect_null(as.data.frame(r)$Median)
-  expect_snapshot(r)
+  expect_snapshot(variant = .Platform$OS.type, r)
 
   r <- report(factor(rep(c("A", "B", "C", NA), 10)), levels_percentage = FALSE)
   expect_equal(nrow(as.data.frame(r)), 4, tolerance = 0)
@@ -62,7 +62,7 @@ if (require("dplyr")) {
     expect_equal(nrow(as.data.frame(r)), 8, tolerance = 0)
     expect_equal(mean(as.data.frame(r)$n_Obs), 50, tolerance = 0)
 
-    expect_snapshot(r)
+    expect_snapshot(variant = .Platform$OS.type, r)
   })
 
   test_that("report.data.frame - with NAs", {
@@ -71,10 +71,10 @@ if (require("dplyr")) {
     df[1, 2] <- NA
     df[1, 6] <- NA
 
-    expect_snapshot(report(group_by_at(df, "cyl")))
+    expect_snapshot(variant = .Platform$OS.type, report(group_by_at(df, "cyl")))
 
     # dataframes with list columns
     set.seed(123)
-    expect_snapshot(report(starwars))
+    expect_snapshot(variant = .Platform$OS.type, report(starwars))
   })
 }

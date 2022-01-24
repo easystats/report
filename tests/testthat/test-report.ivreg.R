@@ -10,6 +10,6 @@ if (require("testthat") && require("report") && require("ivreg")) {
         data = CigaretteDemand
       )
 
-    expect_snapshot(report(ivr))
+    expect_snapshot(variant = .Platform$OS.type, report(ivr))
   })
 }
