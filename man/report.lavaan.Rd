@@ -27,7 +27,7 @@ Create a report for \code{lavaan} objects.
 library(report)
 \donttest{
 # Structural Equation Models (SEM)
-if (require("lavaan") && packageVersion("effectsize") >= "0.6.0.1") {
+if (require("lavaan") && FALSE) {
   structure <- " ind60 =~ x1 + x2 + x3
                  dem60 =~ y1 + y2 + y3
                  dem60 ~ ind60 "
