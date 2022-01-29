@@ -49,16 +49,12 @@ functions (e.g., \code{report_parameters}).
 The \code{report()} function generates a report-object that contain in itself
 different representations (e.g., text, tables, plots). These different
 representations can be accessed via several functions, such as:
-
 \itemize{
 \item \strong{\code{as.report_text(r)}}: Detailed text.
-
 \item \strong{\code{as.report_text(r, summary=TRUE)}}: Minimal text giving
 the minimal information.
-
 \item \strong{\code{as.report_table(r)}}: Comprehensive table including most
 available indices.
-
 \item \strong{\code{as.report_table(r, summary=TRUE)}}: Minimal table.
 }
 
@@ -67,6 +63,7 @@ identical.
 }
 }
 \examples{
+
 library(report)
 
 model <- t.test(mpg ~ am, data = mtcars)
@@ -79,6 +76,7 @@ summary(r)
 # Tables
 as.data.frame(r)
 summary(as.data.frame(r))
+
 }
 \seealso{
 Specific components of reports (especially for stats models):
@@ -94,6 +92,7 @@ Specific components of reports (especially for stats models):
 \item \code{\link[=report_info]{report_info()}}
 \item \code{\link[=report_text]{report_text()}}
 }
+
 Other types of reports:
 \itemize{
 \item \code{\link[=report_system]{report_system()}}
@@ -102,10 +101,12 @@ Other types of reports:
 \item \code{\link[=report_sample]{report_sample()}}
 \item \code{\link[=report_date]{report_date()}}
 }
+
 Methods:
 \itemize{
 \item \code{\link[=as.report]{as.report()}}
 }
+
 Template file for supporting new models:
 \itemize{
 \item \code{\link[=report.default]{report.default()}}

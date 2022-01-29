@@ -26,10 +26,8 @@ objects above).}
 \item{include_R}{Include R in the citations.}
 }
 \value{
-\itemize{
-\item{For \code{report_packages}, a data frame of class with information on
-package name, version and citation.}
-}
+For \code{report_packages}, a data frame of class with information on package
+name, version and citation.
 
 An object of class \code{\link[=report]{report()}}.
 }
@@ -37,6 +35,7 @@ An object of class \code{\link[=report]{report()}}.
 Report R environment (packages, system, etc.)
 }
 \examples{
+
 library(report)
 
 session <- sessionInfo()
@@ -51,4 +50,5 @@ summary(as.data.frame(r))
 report_packages(include_R = FALSE)
 cite_packages(prefix = "> ")
 report_system()
+
 }

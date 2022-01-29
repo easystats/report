@@ -5,13 +5,13 @@
 #' @param session A [sessionInfo][utils::sessionInfo] object.
 #' @param include_R Include R in the citations.
 #'
-#' @return \itemize{
-#'   \item{For `report_packages`, a data frame of class with information on
-#'   package name, version and citation.}
-#' }
+#' @return
 #'
+#'  For `report_packages`, a data frame of class with information on package
+#'  name, version and citation.
 #'
 #' @examples
+#'
 #' library(report)
 #'
 #' session <- sessionInfo()
@@ -26,6 +26,7 @@
 #' report_packages(include_R = FALSE)
 #' cite_packages(prefix = "> ")
 #' report_system()
+#'
 #' @return An object of class [report()].
 #' @export
 report.sessionInfo <- function(x, ...) {

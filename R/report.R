@@ -37,17 +37,15 @@
 #' different representations (e.g., text, tables, plots). These different
 #' representations can be accessed via several functions, such as:
 #'
-#' \itemize{
-#' \item **`as.report_text(r)`**: Detailed text.
+#' - **`as.report_text(r)`**: Detailed text.
 #'
-#' \item **`as.report_text(r, summary=TRUE)`**: Minimal text giving
+#' - **`as.report_text(r, summary=TRUE)`**: Minimal text giving
 #' the minimal information.
 #'
-#' \item **`as.report_table(r)`**: Comprehensive table including most
+#' - **`as.report_table(r)`**: Comprehensive table including most
 #' available indices.
 #'
-#' \item **`as.report_table(r, summary=TRUE)`**: Minimal table.
-#' }
+#' - **`as.report_table(r, summary=TRUE)`**: Minimal table.
 #'
 #' Note that for some report objects, some of these representations might be
 #' identical.
@@ -58,38 +56,35 @@
 #'   well as a short and long table of parameters and fit indices.
 #'
 #' @seealso Specific components of reports (especially for stats models):
-#' \itemize{
-#'   \item [report_table()]
-#'   \item [report_parameters()]
-#'   \item [report_statistics()]
-#'   \item [report_effectsize()]
-#'   \item [report_model()]
-#'   \item [report_priors()]
-#'   \item [report_random()]
-#'   \item [report_performance()]
-#'   \item [report_info()]
-#'   \item [report_text()]
-#' }
+#'   - [report_table()]
+#'   - [report_parameters()]
+#'   - [report_statistics()]
+#'   - [report_effectsize()]
+#'   - [report_model()]
+#'   - [report_priors()]
+#'   - [report_random()]
+#'   - [report_performance()]
+#'   - [report_info()]
+#'   - [report_text()]
+#'
 #' Other types of reports:
-#' \itemize{
-#'   \item [report_system()]
-#'   \item [report_packages()]
-#'   \item [report_participants()]
-#'   \item [report_sample()]
-#'   \item [report_date()]
-#' }
+#'   - [report_system()]
+#'   - [report_packages()]
+#'   - [report_participants()]
+#'   - [report_sample()]
+#'   - [report_date()]
+#'
 #' Methods:
-#' \itemize{
-#'   \item [as.report()]
-#' }
+#'   - [as.report()]
+#'
 #' Template file for supporting new models:
-#' \itemize{
-#'   \item [report.default()]
-#' }
+#'
+#'   - [report.default()]
 #'
 #' @import datawizard
 #'
 #' @examples
+#'
 #' library(report)
 #'
 #' model <- t.test(mpg ~ am, data = mtcars)
@@ -102,6 +97,7 @@
 #' # Tables
 #' as.data.frame(r)
 #' summary(as.data.frame(r))
+#'
 #' @export
 report <- function(x, ...) {
   UseMethod("report")
@@ -109,7 +105,6 @@ report <- function(x, ...) {
 
 
 # Generic Methods --------------------------------------------------
-
 
 #' @export
 print.report <- print.report_text
@@ -126,7 +121,6 @@ as.data.frame.report <- function(x, ...) {
 
 
 # Values ------------------------------------------------------------------
-
 
 # @export
 # as.list.report <- function(x, ...) {

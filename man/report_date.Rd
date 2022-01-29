@@ -39,6 +39,7 @@ Specific components of reports (especially for stats models):
 \item \code{\link[=report_info]{report_info()}}
 \item \code{\link[=report_text]{report_text()}}
 }
+
 Other types of reports:
 \itemize{
 \item \code{\link[=report_system]{report_system()}}
@@ -47,10 +48,12 @@ Other types of reports:
 \item \code{\link[=report_sample]{report_sample()}}
 \item \code{\link[=report_date]{report_date()}}
 }
+
 Methods:
 \itemize{
 \item \code{\link[=as.report]{as.report()}}
 }
+
 Template file for supporting new models:
 \itemize{
 \item \code{\link[=report.default]{report.default()}}
