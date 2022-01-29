@@ -135,14 +135,11 @@ the Sequential Effect eXistence and sIgnificance Testing framework (see
 <span class="r-msg co"><span class="r-pr">#&gt;</span> - Default priors may change, so it's safest to specify priors, even if equivalent to the defaults.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> - For execution on a local, multicore CPU with excess RAM we recommend calling</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   options(mc.cores = parallel::detectCores())</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> Running the chains for more iterations may help. See</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#bulk-ess</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Parameter   | Median |         95% CI |     pd | % in ROPE |  Rhat |     ESS |                   Prior |  Fit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> -------------------------------------------------------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) |  19.59 | [10.63, 31.30] | 99.90% |        0% | 1.002 |  843.00 | Normal (20.09 +- 15.07) |     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> qsec        |   0.94 | [ 0.35,  1.41] |   100% |    11.15% | 1.002 |  829.00 |   Normal (0.00 +- 8.43) |     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> wt          |  -5.07 | [-5.87, -4.04] |   100% |        0% | 0.999 | 1161.00 |  Normal (0.00 +- 15.40) |     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) |  19.53 | [ 9.54, 29.62] | 99.90% |        0% | 1.000 | 1126.00 | Normal (20.09 +- 15.07) |     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> qsec        |   0.94 | [ 0.42,  1.47] | 99.90% |     8.73% | 0.998 | 1275.00 |   Normal (0.00 +- 8.43) |     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> wt          |  -5.04 | [-6.06, -4.04] |   100% |        0% | 1.003 |  927.00 |  Normal (0.00 +- 15.40) |     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             |        |                |        |           |       |         |                         |     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> R2          |        |                |        |           |       |         |                         | 0.81</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> R2 (adj.)   |        |                |        |           |       |         |                         | 0.79</span>

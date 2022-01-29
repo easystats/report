@@ -147,8 +147,7 @@ functions (e.g., <code>report_parameters</code>).</p>
 
 <p>The <code>report()</code> function generates a report-object that contain in itself
 different representations (e.g., text, tables, plots). These different
-representations can be accessed via several functions, such as:</p>
-<ul><li><p><strong><code>as.report_text(r)</code></strong>: Detailed text.</p></li>
+representations can be accessed via several functions, such as:</p><ul><li><p><strong><code>as.report_text(r)</code></strong>: Detailed text.</p></li>
 <li><p><strong><code>as.report_text(r, summary=TRUE)</code></strong>: Minimal text giving
 the minimal information.</p></li>
 <li><p><strong><code>as.report_table(r)</code></strong>: Comprehensive table including most
@@ -183,7 +182,8 @@ identical.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/report/" class="external-link">report</a></span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
+<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/report/" class="external-link">report</a></span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">am</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">report</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
@@ -206,6 +206,7 @@ identical.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Difference |          95% CI | t(18.33) |     p | Alternative |     d |          d  CI</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------------------------------------------------------------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> -7.24      | [-11.28, -3.21] |    -3.77 | 0.001 |   two.sided | -1.76 | [-2.82, -0.67]</span>
+<span class="r-in"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
