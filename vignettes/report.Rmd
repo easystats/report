@@ -33,6 +33,7 @@ if (!requireNamespace("dplyr", quietly = TRUE)) {
 }
 
 library(dplyr)
+library(report)
 ```
 
 # Installation
