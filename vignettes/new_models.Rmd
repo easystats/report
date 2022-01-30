@@ -8,8 +8,8 @@ output:
 tags: [r, report, support new models]
 vignette: >
   %\VignetteIndexEntry{Supporting New Models}
-  %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
   chunk_output_type: console
 ---
