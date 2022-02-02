@@ -74,7 +74,7 @@ report_effectsize.aov <- function(x, ...) {
   table <- as.data.frame(table)[c("Parameter", estimate, "CI_low", "CI_high")]
   names(table)[3:ncol(table)] <- c(paste0(estimate, "_CI_low"), paste0(estimate, "_CI_high"))
 
-  rules <- .text_effectsize(attributes(interpret)$rule_name)
+  rules <- .text_effectsize(attr(attr(interpret, "rules"), "rule_name"))
   parameters <- paste0(interpretation, " (", statistics, ")")
 
 

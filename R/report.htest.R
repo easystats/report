@@ -42,7 +42,7 @@ report_effectsize.htest <- function(x, ...) {
     estimate <- names(table)[1]
 
     interpretation <- effectsize::interpret_cohens_d(table[[estimate]], ...)
-    rules <- .text_effectsize(attributes(interpretation)$rule_name)
+    rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
 
     if (estimate %in% c("d", "Cohens_d")) {
       main <- paste0("Cohen's d = ", insight::format_value(table[[estimate]]))
@@ -74,7 +74,7 @@ report_effectsize.htest <- function(x, ...) {
 
     # same as Pearson's r
     interpretation <- effectsize::interpret_r(table$r_rank_biserial, ...)
-    rules <- .text_effectsize(attributes(interpretation)$rule_name)
+    rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
 
     main <- paste0("r (rank biserial) = ", insight::format_value(table$r_rank_biserial))
     statistics <- paste0(
@@ -95,7 +95,7 @@ report_effectsize.htest <- function(x, ...) {
 
     # Pearson
     interpretation <- effectsize::interpret_r(table[[estimate]], ...)
-    rules <- .text_effectsize(attributes(interpretation)$rule_name)
+    rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
     main <- paste0(estimate, " = ", insight::format_value(table[[estimate]]))
 
     if ("CI_low" %in% names(table)) {
