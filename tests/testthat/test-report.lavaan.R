@@ -17,8 +17,7 @@ if (require("lavaan") && require("effectsize")) {
     expect_snapshot(variant = .Platform$OS.type, report_table(model))
   })
 
-  # TODO: turn this one on when the issue is fixed
-  # test_that("model-lavaan detailed performance", {
-  #   expect_snapshot(variant = .Platform$OS.type, report_performance(model))
-  # })
+  test_that("model-lavaan detailed performance", {
+    expect_snapshot(variant = .Platform$OS.type, report_performance(model))
+  })
 }

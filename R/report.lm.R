@@ -107,7 +107,7 @@ report_effectsize.lm <- function(x, effectsize_method = "refit", ...) {
   names(table)[start_col:ncol(table)] <- c(paste0(estimate, "_CI_low"), paste0(estimate, "_CI_high"))
 
 
-  rules <- .text_effectsize(attributes(interpret)$rule_name)
+  rules <- .text_effectsize(attr(attr(interpret, "rules"), "rule_name"))
   parameters <- paste0(interpretation, " (", statistics, ")")
 
 
