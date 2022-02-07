@@ -256,8 +256,8 @@ report_text.data.frame <- function(x,
   )
 
   # Concatenate text
-  text_full <- paste0("The data contains ", nrow(x), " observations of the following ", ncol(x), " variables:\n", as.character(params))
-  text <- paste0("The data contains ", nrow(x), " observations of the following ", ncol(x), " variables:\n", as.character(summary(params)))
+  text_full <- paste0("The data contains ", nrow(x), " observations of the following ", ncol(x), " variables:\n\n", as.character(params))
+  text <- paste0("The data contains ", nrow(x), " observations of the following ", ncol(x), " variables:\n\n", as.character(summary(params)))
 
   as.report_text(text_full, summary = text)
 }
