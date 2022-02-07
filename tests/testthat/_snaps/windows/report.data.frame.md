@@ -79,6 +79,7 @@
       report(starwars)
     Output
       The data contains 87 observations of the following 11 variables:
+      
         - name: 87 entries, such as Ackbar (n = 1); Adi Gallia (n = 1); Anakin Skywalker (n = 1) and 84 others (0 missing)
         - height: n = 87, Mean = 174.36, SD = 34.77, Median = , MAD = 19.27, range: [66, 264], Skewness = -1.06, Kurtosis = 2.10, 6 missing
         - mass: n = 87, Mean = 97.31, SD = 169.46, Median = , MAD = 16.31, range: [15, 1358], Skewness = 7.34, Kurtosis = 55.42, 28 missing
