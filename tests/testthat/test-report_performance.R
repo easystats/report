@@ -50,34 +50,16 @@ if (require("testthat") && require("report")) {
     # Bayesian
     if (require("rstanarm")) {
       x <- stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 1000, seed = 333)
-      expect_equal(
-        as.character(report_performance(x)),
-        "The model's explanatory power is substantial (R2 = 0.62, 95% CI [0.53, 0.69], adj. R2 = 0.61)"
-      )
-      expect_equal(
-        as.character(summary(report_performance(x))),
-        "The model's explanatory power is substantial (R2 = 0.62, adj. R2 = 0.61)"
-      )
+      expect_snapshot(report_performance(x))
+      expect_snapshot(summary(report_performance(x)))
 
       x <- stan_glm(vs ~ disp, data = mtcars, family = "binomial", refresh = 0, iter = 1000, seed = 333)
-      expect_equal(
-        as.character(report_performance(x)),
-        "The model's explanatory power is substantial (R2 = 0.54, 95% CI [0.27, 0.77])"
-      )
-      expect_equal(
-        as.character(summary(report_performance(x))),
-        "The model's explanatory power is substantial (R2 = 0.54)"
-      )
+      expect_snapshot(report_performance(x))
+      expect_snapshot(summary(report_performance(x)))
 
       x <- stan_lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris, refresh = 0, iter = 1000, seed = 333)
-      expect_equal(
-        as.character(report_performance(x)),
-        "The model's explanatory power is substantial (R2 = 0.83, 95% CI [0.79, 0.87], adj. R2 = 0.83) and the part related to the fixed effects alone (marginal R2) is of 0.95 (95% CI [0.93, 0.97])"
-      )
-      expect_equal(
-        as.character(summary(report_performance(x))),
-        "The model's explanatory power is substantial (R2 = 0.83, adj. R2 = 0.83) and the part related to the fixed effects alone (marginal R2) is of 0.95"
-      )
+      expect_snapshot(report_performance(x))
+      expect_snapshot(summary(report_performance(x)))
     }
   })
 }
