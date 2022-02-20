@@ -1,6 +1,5 @@
-if (require("lavaan") && require("effectsize")) {
-  skip_if_not(packageVersion("effectsize") >= "0.6.0.1")
-
+if (require("lavaan") && require("effectsize") &&
+  packageVersion("effectsize") >= "0.6.1") {
   structure <- " ind60 =~ x1 + x2 + x3
                  dem60 =~ y1 + y2 + y3
                  dem60 ~ ind60 "

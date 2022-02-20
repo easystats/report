@@ -1,4 +1,6 @@
-# report 0.5.0.9000
+# report 0.5.1
+
+* Hotfix release to fix failing tests and to unarchive package on CRAN.
 
 # report 0.5.0
 
