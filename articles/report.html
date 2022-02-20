@@ -36,7 +36,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -167,7 +167,7 @@
 <p><code>report</code> can also be used to provide automated summaries for statistical model objects from correlation, <em>t</em>-tests, Wilcoxon tests, etc.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">wt</span> <span class="op">~</span> <span class="va">am</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span>
-<span class="co"># Effect sizes were labelled following Cohen's (1988) recommendations.</span>
+<span class="co"># </span>
 <span class="co"># </span>
 <span class="co"># The Welch Two Sample t-test testing the difference of wt by am (mean in group 0 = 3.77, mean in group 1 = 2.41) suggests that the effect is positive, statistically significant, and large (difference = 1.36, 95% CI [0.85, 1.86], t(29.23) = 5.49, p &lt; .001; Cohen's d = 2.03, 95% CI [1.13, 2.91])</span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -202,9 +202,7 @@
 <span class="co"># The ANOVA (formula: wt ~ am + mpg) suggests that:</span>
 <span class="co"># </span>
 <span class="co">#   - The main effect of am is statistically significant and large (F(1, 29) = 69.21, p &lt; .001; Eta2 (partial) = 0.70, 95% CI [0.54, 1.00])</span>
-<span class="co">#   - The main effect of mpg is statistically significant and large (F(1, 29) = 46.12, p &lt; .001; Eta2 (partial) = 0.61, 95% CI [0.42, 1.00])</span>
-<span class="co"># </span>
-<span class="co"># Effect sizes were labelled following Field's (2013) recommendations.</span></code></pre></div>
+<span class="co">#   - The main effect of mpg is statistically significant and large (F(1, 29) = 46.12, p &lt; .001; Eta2 (partial) = 0.61, 95% CI [0.42, 1.00])</span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="general-linear-models-glms-glm">General Linear Models (GLMs) (<code>glm</code>)<a class="anchor" aria-label="anchor" href="#general-linear-models-glms-glm"></a>
