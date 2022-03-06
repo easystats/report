@@ -296,3 +296,7 @@ If you like it, you can put a *star* on this repo, and cite the package as follo
 ```{r, citation, comment=""}
 citation("report")
 ```
+
+## Code of Conduct
+
+Please note that the report project is released with a [Contributor Code of Conduct](https://easystats.github.io/report/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.

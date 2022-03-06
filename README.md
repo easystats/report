@@ -95,6 +95,7 @@ report(iris)
 ```
 
     # The data contains 150 observations of the following 5 variables:
+    # 
     #   - Sepal.Length: n = 150, Mean = 5.84, SD = 0.83, Median = 5.80, MAD = 1.04,
     # range: [4.30, 7.90], Skewness = 0.31, Kurtosis = -0.55, 0% missing
     #   - Sepal.Width: n = 150, Mean = 3.06, SD = 0.44, Median = 3.00, MAD = 0.44,
@@ -156,7 +157,9 @@ functions, like for example with this correlation test:
 cor.test(iris$Sepal.Length, iris$Sepal.Width) %>%
   report() %>%
   as.data.frame()
-# Error in abs(r): non-numeric argument to mathematical function
+# Parameter1        |       Parameter2 |     r |        95% CI | t(148) |     p |                               Method | Alternative
+# ----------------------------------------------------------------------------------------------------------------------------------
+# iris$Sepal.Length | iris$Sepal.Width | -0.12 | [-0.27, 0.04] |  -1.44 | 0.152 | Pearson's product-moment correlation |   two.sided
 ```
 
 ### ANOVAs
@@ -252,18 +255,18 @@ report(model)
     # of 1000 iterations and a warmup of 500) to predict mpg with qsec and wt
     # (formula: mpg ~ qsec + wt). Priors over parameters were set as normal (mean =
     # 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The
-    # model's explanatory power is substantial (R2 = 0.81, 95% CI [0.69, 0.89], adj.
+    # model's explanatory power is substantial (R2 = 0.81, 95% CI [0.70, 0.89], adj.
     # R2 = 0.79). The model's intercept, corresponding to qsec = 0 and wt = 0, is at
-    # 19.50 (95% CI [9.31, 30.34]). Within this model:
+    # 19.83 (95% CI [8.85, 30.68]). Within this model:
     # 
-    #   - The effect of qsec (Median = 0.94, 95% CI [0.42, 1.47]) has a 100.00%
-    # probability of being positive (> 0), 98.80% of being significant (> 0.30), and
-    # 0.15% of being large (> 1.81). The estimation successfully converged (Rhat =
-    # 1.000) and the indices are reliable (ESS = 1991)
-    #   - The effect of wt (Median = -5.03, 95% CI [-6.03, -4.10]) has a 100.00%
+    #   - The effect of qsec (Median = 0.92, 95% CI [0.40, 1.50]) has a 99.85%
+    # probability of being positive (> 0), 98.60% of being significant (> 0.30), and
+    # 0.00% of being large (> 1.81). The estimation successfully converged (Rhat =
+    # 1.001) and the indices are reliable (ESS = 1965)
+    #   - The effect of wt (Median = -5.05, 95% CI [-5.99, -4.04]) has a 100.00%
     # probability of being negative (< 0), 100.00% of being significant (< -0.30),
     # and 100.00% of being large (< -1.81). The estimation successfully converged
-    # (Rhat = 1.000) and the indices are reliable (ESS = 2341)
+    # (Rhat = 1.000) and the indices are reliable (ESS = 1770)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
     # framework, we report the median of the posterior distribution and its 95% CI
@@ -336,11 +339,11 @@ report(sessionInfo())
 ```
 
     # Analyses were conducted using the R Statistical language (version 4.1.2; R Core
-    # Team, 2021) on Windows 10 x64 (build 19044), using the packages Rcpp (version
+    # Team, 2021) on Windows 10 x64 (build 22000), using the packages Rcpp (version
     # 1.0.8; Dirk Eddelbuettel and Romain Francois, 2011), Matrix (version 1.3.4;
-    # Douglas Bates and Martin Maechler, 2021), lme4 (version 1.1.27.1; Douglas Bates
+    # Douglas Bates and Martin Maechler, 2021), lme4 (version 1.1.28; Douglas Bates
     # et al., 2015), rstanarm (version 2.21.1; Goodrich B et al., 2020), dplyr
-    # (version 1.0.7; Hadley Wickham et al., 2021) and report (version 0.4.0.1;
+    # (version 1.0.8; Hadley Wickham et al., 2022) and report (version 0.5.1;
     # Makowski et al., 2020).
     # 
     # References
@@ -357,8 +360,8 @@ report(sessionInfo())
     #   - Goodrich B, Gabry J, Ali I & Brilleman S. (2020). rstanarm: Bayesian applied
     # regression modeling via Stan. R package version 2.21.1
     # https://mc-stan.org/rstanarm.
-    #   - Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2021).
-    # dplyr: A Grammar of Data Manipulation. R package version 1.0.7.
+    #   - Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2022).
+    # dplyr: A Grammar of Data Manipulation. R package version 1.0.8.
     # https://CRAN.R-project.org/package=dplyr
     #   - Makowski, D., Ben-Shachar, M.S., Patil, I. & Lüdecke, D. (2020). Automated
     # Results Reporting as a Practical Tool to Improve Reproducibility and
@@ -393,3 +396,9 @@ A BibTeX entry for LaTeX users is
     url = {https://github.com/easystats/report},
   }
 ```
+
+## Code of Conduct
+
+Please note that the report project is released with a [Contributor Code
+of Conduct](https://easystats.github.io/report/CODE_OF_CONDUCT.html). By
+contributing to this project, you agree to abide by its terms.
