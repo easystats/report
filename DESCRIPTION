@@ -48,12 +48,15 @@ Imports:
     bayestestR (>= 0.11.5),
     effectsize (>= 0.6.0),
     insight (>= 0.16.0),
-    parameters (>= 0.16.0),
+    parameters (>= 0.17.0),
     performance (>= 0.8.0),
     datawizard (>= 0.2.3),
     stats,
     tools,
     utils
+Remotes: 
+    easystats/insight,
+    easystats/parameters
 Suggests:
     BayesFactor,
     brms,
@@ -123,4 +126,3 @@ Collate:
     'utils_error_message.R'
     'utils_grouped_df.R'
 Roxygen: list(markdown = TRUE)
-Remotes: easystats/parameters
