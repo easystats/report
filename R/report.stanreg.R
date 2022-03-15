@@ -136,9 +136,9 @@ report_parameters.stanreg <- function(x,
   if (include_diagnostic) {
     diagnostic <- bayestestR::diagnostic_posterior(x, ...)
 
-    text <- text_paste(text, .parameters_diagnostic_bayesian(diagnostic, only_when_insufficient = TRUE)[idx], sep = ". ")
+    text <- datawizard::text_paste(text, .parameters_diagnostic_bayesian(diagnostic, only_when_insufficient = TRUE)[idx], sep = ". ")
 
-    text_full <- text_paste(text_full, .parameters_diagnostic_bayesian(diagnostic, only_when_insufficient = FALSE)[idx], sep = ". ")
+    text_full <- datawizard::text_paste(text_full, .parameters_diagnostic_bayesian(diagnostic, only_when_insufficient = FALSE)[idx], sep = ". ")
 
     info <- paste(info, "Convergence and stability of the Bayesian sampling has been assessed using R-hat, which should be below 1.01 (Vehtari et al., 2019), and Effective Sample Size (ESS), which should be greater than 1000 (Burkner, 2017).")
   }

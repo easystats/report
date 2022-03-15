@@ -210,38 +210,38 @@ report_statistics.lm <- function(x,
 
   # CI
   if (!is.null(table$CI_low)) {
-    text <- text_paste(text, insight::format_ci(table$CI_low, table$CI_high, ci = attributes(table)$ci))
+    text <- datawizard::text_paste(text, insight::format_ci(table$CI_low, table$CI_high, ci = attributes(table)$ci))
   }
 
   # Statistic
   if ("t" %in% names(table)) {
-    text <- text_paste(text, paste0("t(", insight::format_value(table$df, protect_integers = TRUE), ") = ", insight::format_value(table$t)))
+    text <- datawizard::text_paste(text, paste0("t(", insight::format_value(table$df, protect_integers = TRUE), ") = ", insight::format_value(table$t)))
   }
 
   # p-value
   if ("p" %in% names(table)) {
-    text <- text_paste(text, insight::format_p(table$p, stars = FALSE, digits = "apa"))
+    text <- datawizard::text_paste(text, insight::format_p(table$p, stars = FALSE, digits = "apa"))
   }
 
   # pd
   if ("pd" %in% names(table)) {
-    text <- text_paste(text, insight::format_pd(table$pd, stars = FALSE))
+    text <- datawizard::text_paste(text, insight::format_pd(table$pd, stars = FALSE))
   }
 
   # BF
   if ("ROPE_Percentage" %in% names(table)) {
-    text <- text_paste(text, insight::format_rope(table$ROPE_Percentage))
+    text <- datawizard::text_paste(text, insight::format_rope(table$ROPE_Percentage))
   }
 
   # BF
   if ("BF" %in% names(table)) {
-    text <- text_paste(text, insight::format_bf(table$BF, stars = FALSE))
+    text <- datawizard::text_paste(text, insight::format_bf(table$BF, stars = FALSE))
   }
 
   # Effect size
   if (include_effectsize && !is.null(effsize)) {
-    text_full <- text_paste(text, attributes(effsize)$statistics, sep = "; ")
-    text <- text_paste(text, attributes(effsize)$main)
+    text_full <- datawizard::text_paste(text, attributes(effsize)$statistics, sep = "; ")
+    text <- datawizard::text_paste(text, attributes(effsize)$main)
   } else {
     text_full <- text
   }
@@ -254,13 +254,13 @@ report_statistics.lm <- function(x,
       text_diagnostic <- paste0("Rhat = ", insight::format_value(table$Rhat))
     }
 
-    text <- text_paste(text, text_diagnostic)
+    text <- datawizard::text_paste(text, text_diagnostic)
 
     if ("ESS" %in% names(table)) {
-      text_diagnostic <- text_paste(text_diagnostic, paste0("ESS = ", insight::format_value(table$ESS)))
+      text_diagnostic <- datawizard::text_paste(text_diagnostic, paste0("ESS = ", insight::format_value(table$ESS)))
     }
 
-    text_full <- text_paste(text_full, text_diagnostic, sep = "; ")
+    text_full <- datawizard::text_paste(text_full, text_diagnostic, sep = "; ")
   }
 
   as.report_statistics(text_full,

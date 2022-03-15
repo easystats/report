@@ -284,6 +284,6 @@ print.report_performance <- function(x, ...) {
     text_poor <- ""
   }
 
-  text <- text_paste(text_satisfactory, text_poor, sep = " ")
+  text <- datawizard::text_paste(text_satisfactory, text_poor, sep = " ")
   text
 }

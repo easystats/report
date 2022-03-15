@@ -59,7 +59,7 @@ report_statistics.test_performance <- function(x, table = NULL, ...) {
 
   text <- text_short <- ""
   if ("BF" %in% names(table)) {
-    val <- text <- text_paste(text, insight::format_bf(stats::na.omit(table$BF)))
+    val <- text <- datawizard::text_paste(text, insight::format_bf(stats::na.omit(table$BF)))
   }
 
   if ("Omega2" %in% names(table)) {
@@ -70,7 +70,7 @@ report_statistics.test_performance <- function(x, table = NULL, ...) {
       ", ",
       insight::format_p(stats::na.omit(table$p_Omega2))
     )
-    text <- text_paste(text, text2, sep = "; ")
+    text <- datawizard::text_paste(text, text2, sep = "; ")
   }
 
   if ("LR" %in% names(table)) {
@@ -81,7 +81,7 @@ report_statistics.test_performance <- function(x, table = NULL, ...) {
       ", ",
       insight::format_p(stats::na.omit(table$p_LR))
     )
-    text <- text_paste(text, text2, sep = "; ")
+    text <- datawizard::text_paste(text, text2, sep = "; ")
   }
 
   as.report_statistics(text, summary = text_short, table = table)
@@ -143,8 +143,8 @@ report_parameters.test_performance <- report_parameters.compare_performance
 #   #               models[-1],
 #   #               " has a stronger predictive power than ",
 #   #               models[1])
-#   #   text <- text_paste(text, text_bf, sep=", and there is ")
-#   #   text_short <- text_paste(text_short, text_bf, sep=", and there is ")
+#   #   text <- datawizard::text_paste(text, text_bf, sep=", and there is ")
+#   #   text_short <- datawizard::text_paste(text_short, text_bf, sep=", and there is ")
 #   # }
 #
 #   as.report_performance(text, summary = text_short, table = table)
@@ -227,8 +227,8 @@ report_text.test_performance <- function(x, table = NULL, ...) {
   #     "Regarding the predictive power, there is ",
   #     text_concatenate(t))
   #
-  #   text <- text_paste(text, text_bf, sep = ". ")
-  #   text_short <- text_paste(text_short, text_bf, sep = ". ")
+  #   text <- datawizard::text_paste(text, text_bf, sep = ". ")
+  #   text_short <- datawizard::text_paste(text_short, text_bf, sep = ". ")
   # }
 
   as.report_text(text, summary = text_short)
