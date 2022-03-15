@@ -55,7 +55,8 @@ Imports:
     tools,
     utils
 Remotes: 
-    easystats/insight
+    easystats/insight,
+    easystats/parameters
 Suggests:
     BayesFactor,
     brms,
@@ -125,4 +126,3 @@ Collate:
     'utils_error_message.R'
     'utils_grouped_df.R'
 Roxygen: list(markdown = TRUE)
-Remotes: easystats/parameters
