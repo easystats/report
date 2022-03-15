@@ -149,7 +149,7 @@ report_table.htest <- function(x, ...) {
   # If t-test, effect size
   if (insight::model_info(x)$is_ttest) {
     table_full <- cbind(table_full, attributes(effsize)$table)
-    table <- datawizard::datawizard::data_remove(
+    table <- datawizard::data_remove(
       table_full,
       c("Parameter", "Group", "Mean_Group1", "Mean_Group2", "Method")
     )
