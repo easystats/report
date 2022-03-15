@@ -116,31 +116,6 @@ as.data.frame.report <- function(x, ...) {
   as.report_table(x, ...)
 }
 
-# @export
-# as.table.report <- as.data.frame.report
-
-
-# Values ------------------------------------------------------------------
-
-# @export
-# as.list.report <- function(x, ...) {
-#   if (any(class(x) %in% c("parameters_model")) && "Parameter" %in% names(x)) {
-#     vals <- list()
-#
-#     for (param in x$Parameter) {
-#       vals[[param]] <- as.list(x[x$Parameter == param, ])
-#     }
-#   } else if ("values" %in% names(x)) {
-#     vals <- x$values
-#   } else if ("report" %in% class(x)) {
-#     vals <- as.list(x$tables$table_long, ...)
-#   } else {
-#     as.list(x, ...)
-#   }
-#   vals
-# }
-
-
 #' Create or test objects of class [report].
 #'
 #' Allows to create or test whether an object is of the `report` class.
