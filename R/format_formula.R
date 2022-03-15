@@ -16,16 +16,6 @@
 #' }
 #' @export
 format_formula <- function(x, what = "conditional") {
-  f <- .safe_deparse(insight::find_formula(x)[[what]])
+  f <- insight::safe_deparse(insight::find_formula(x)[[what]])
   paste0("formula: ", paste0(f, collapse = " + "))
-}
-
-
-
-#' @keywords internal
-.safe_deparse <- function(string) {
-  if (is.null(string)) {
-    return(NULL)
-  }
-  paste0(sapply(deparse(string, width.cutoff = 500), trimws, simplify = TRUE), collapse = " ")
 }
