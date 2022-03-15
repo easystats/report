@@ -42,7 +42,7 @@ report_table.lavaan <- function(x, ...) {
   parameters <- parameters::model_parameters(x, ...)
   table <- as.data.frame(parameters)
   table$Parameter <- paste(table$To, table$Operator, table$From)
-  table <- data_remove(table, c("To", "Operator", "From"))
+  table <- datawizard::data_remove(table, c("To", "Operator", "From"))
   table <- data_reorder(table, "Parameter")
 
   # Combine -----
@@ -55,8 +55,8 @@ report_table.lavaan <- function(x, ...) {
   # Rename some columns
 
   # Shorten ----
-  table_full <- data_remove(table, "SE")
-  table <- data_remove(table_full, data_findcols(table_full, ends_with = c("_CI_low|_CI_high")))
+  table_full <- datawizard::data_remove(table, "SE")
+  table <- datawizard::data_remove(table_full, data_findcols(table_full, ends_with = c("_CI_low|_CI_high")))
   table <- table[!table$Parameter %in% c(
     "AIC", "BIC",
     "RMSEA"

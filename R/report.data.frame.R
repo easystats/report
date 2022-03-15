@@ -327,7 +327,7 @@ report_statistics.data.frame <- function(x,
   )
 
   for (group in names(dfs)) {
-    dfs[[group]] <- data_remove(dfs[[group]], groups)
+    dfs[[group]] <- datawizard::data_remove(dfs[[group]], groups)
   }
 
   list(dfs = dfs, intro = intro)

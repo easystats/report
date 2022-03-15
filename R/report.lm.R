@@ -160,10 +160,10 @@ report_table.lm <- function(x, include_effectsize = TRUE, ...) {
 
   # Shorten ----
   if (insight::model_info(x)$is_logit) {
-    params <- data_remove(params, "df_error")
+    params <- datawizard::data_remove(params, "df_error")
   }
-  table_full <- data_remove(params, "SE")
-  table <- data_remove(table_full, data_findcols(table_full, ends_with = c("_CI_low|_CI_high")))
+  table_full <- datawizard::data_remove(params, "SE")
+  table <- datawizard::data_remove(table_full, data_findcols(table_full, ends_with = c("_CI_low|_CI_high")))
   table <- table[!table$Parameter %in% c("AIC", "BIC", "ELPD", "LOOIC", "WAIC"), ]
 
   # Prepare -----

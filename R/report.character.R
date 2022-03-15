@@ -59,9 +59,9 @@ report_table.character <- function(x,
   table <- table_full
 
   if (missing_percentage == TRUE) {
-    table <- data_remove(table, "n_Missing")
+    table <- datawizard::data_remove(table, "n_Missing")
   } else {
-    table <- data_remove(table, "percentage_Missing")
+    table <- datawizard::data_remove(table, "percentage_Missing")
   }
 
 
@@ -169,7 +169,7 @@ report_text.character <- function(x,
     }
   } else {
     text_full <- paste0(text_full, " (", text_n_Missing, ")")
-    table <- data_remove(table, "percentage_Missing")
+    table <- datawizard::data_remove(table, "percentage_Missing")
     if (table$n_Missing[1] > 0) {
       text <- paste0(text, " (", text_n_Missing, ")")
     }

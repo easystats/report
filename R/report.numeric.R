@@ -88,41 +88,41 @@ report_table.numeric <- function(x,
   if (!isFALSE(centrality) && !is.null(centrality)) {
     if (centrality == "median") {
       if (dispersion == TRUE) {
-        table <- data_remove(table, c("Mean", "SD"))
+        table <- datawizard::data_remove(table, c("Mean", "SD"))
       } else {
-        table <- data_remove(table, c("Mean", "SD", "MAD"))
+        table <- datawizard::data_remove(table, c("Mean", "SD", "MAD"))
       }
     } else {
       if (dispersion == TRUE) {
-        table <- data_remove(table, c("Median", "MAD"))
+        table <- datawizard::data_remove(table, c("Median", "MAD"))
       } else {
-        table <- data_remove(table, c("Median", "MAD", "SD"))
+        table <- datawizard::data_remove(table, c("Median", "MAD", "SD"))
       }
     }
   }
 
   # Range
   if (range == FALSE) {
-    table <- data_remove(table, c("Min", "Max"))
+    table <- datawizard::data_remove(table, c("Min", "Max"))
   }
 
   # Distribution
   if (distribution == FALSE) {
-    table <- data_remove(table, c("Skewness", "Kurtosis"))
+    table <- datawizard::data_remove(table, c("Skewness", "Kurtosis"))
   }
 
   # Missing
   if (!is.null(missing_percentage)) {
     if (missing_percentage == TRUE) {
-      table <- data_remove(table, "n_Missing")
-      table_full <- data_remove(table_full, "n_Missing")
+      table <- datawizard::data_remove(table, "n_Missing")
+      table_full <- datawizard::data_remove(table_full, "n_Missing")
     } else {
-      table <- data_remove(table, "percentage_Missing")
-      table_full <- data_remove(table_full, "percentage_Missing")
+      table <- datawizard::data_remove(table, "percentage_Missing")
+      table_full <- datawizard::data_remove(table_full, "percentage_Missing")
     }
   } else {
-    table <- data_remove(table, c("percentage_Missing", "n_Missing"))
-    table_full <- data_remove(table_full, c("percentage_Missing", "n_Missing"))
+    table <- datawizard::data_remove(table, c("percentage_Missing", "n_Missing"))
+    table_full <- datawizard::data_remove(table_full, c("percentage_Missing", "n_Missing"))
   }
 
   as.report_table(table_full, summary = table)
