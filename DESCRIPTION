@@ -50,7 +50,7 @@ Imports:
     insight (>= 0.16.0),
     parameters (>= 0.17.0),
     performance (>= 0.8.0),
-    datawizard (>= 0.2.3),
+    datawizard (>= 0.3.0),
     stats,
     tools,
     utils
