@@ -10,7 +10,9 @@
 #' @param intext_suffix A character vector of length 1 containing text to include after in-text citations.
 #'   Defaults to `"."`.
 #'   If `FALSE` or `NA`, no suffix is included.
+#' @param x,object A `"cite_easystats"` object to print.
 #' @param what What elements of the citations to print, can be `"all"`, `"intext"`, or `"refs"`.
+#' @param ... Not used. Included for compatibility with the generic function.
 #'
 #' @return A list of class `"cite_easystats"` with elements:
 #'   - `intext`: In-text citations in the requested `format`
@@ -105,7 +107,7 @@ cite_easystats <- function(packages = "all", format = c("text", "markdown", "bib
   if (isTRUE(intext_prefix)) {
     intext_prefix <- sprintf("Analyses were conducted using the %s collection of packages ", easystats)
   } else if (isFALSE(intext_prefix)) {
-    intext_prefx
+    intext_prefix <- ""
   }
   if (isTRUE(intext_suffix)) {
     intext_suffix <- "."
@@ -117,7 +119,7 @@ cite_easystats <- function(packages = "all", format = c("text", "markdown", "bib
 
 
   # references
-  installed_packages <- installed.packages()[,"Version"]
+  installed_packages <- utils::installed.packages()[,"Version"]
   if (format == "text") {
     ref_packages <- paste(
       "- ",

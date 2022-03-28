@@ -31,6 +31,10 @@ Defaults to \code{"."}.
 If \code{FALSE} or \code{NA}, no suffix is included.}
 
 \item{what}{What elements of the citations to print, can be \code{"all"}, \code{"intext"}, or \code{"refs"}.}
+
+\item{...}{Not used. Included for compatibility with the generic function.}
+
+\item{x, object}{A \code{"cite_easystats"} object to print.}
 }
 \value{
 A list of class \code{"cite_easystats"} with elements:
