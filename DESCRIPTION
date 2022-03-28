@@ -125,4 +125,5 @@ Collate:
     'report_table.R'
     'utils_error_message.R'
     'utils_grouped_df.R'
+    'zzz.R'
 Roxygen: list(markdown = TRUE)

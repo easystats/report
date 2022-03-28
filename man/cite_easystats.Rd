@@ -2,20 +2,49 @@
 % Please edit documentation in R/cite_easystats.R
 \name{cite_easystats}
 \alias{cite_easystats}
+\alias{summary.cite_easystats}
+\alias{print.cite_easystats}
 \title{Cite the easystats ecosystem}
 \usage{
-cite_easystats()
+cite_easystats(
+  packages = "all",
+  format = c("text", "markdown", "biblatex"),
+  intext_prefix = TRUE,
+  intext_suffix = "."
+)
+
+\method{summary}{cite_easystats}(object, what = "all", ...)
+
+\method{print}{cite_easystats}(x, what = "all", ...)
+}
+\arguments{
+\item{packages}{A character vector of packages to cite. Can be \code{"all"} for all \emph{easystats} pacakges or a vector with specific package names.}
+
+\item{format}{The format to generate citations. Can be \code{"text"} for plain text, \code{"markdown"} for markdown citations and CSL bibliography (recommended for writing in RMarkdown), or \code{"biblatex"} for BibLaTeX citations and bibliography.}
+
+\item{intext_prefix}{A character vector of length 1 containing text to include before in-text citations.
+If \code{TRUE}, defaults to \code{"Analyses were conducted using the easystats collection of packages "}.
+If \code{FALSE} or \code{NA}, no prefix is included.}
+
+\item{intext_suffix}{A character vector of length 1 containing text to include after in-text citations.
+Defaults to \code{"."}.
+If \code{FALSE} or \code{NA}, no suffix is included.}
+
+\item{what}{What elements of the citations to print, can be \code{"all"}, \code{"intext"}, or \code{"refs"}.}
 }
 \value{
-An object of class \code{cite_easystats} that can be printed, summarized
-(using \code{summary()}), or transformed into a table (using \code{as.data.frame()}).
+A list of class \code{"cite_easystats"} with elements:
+\itemize{
+\item \code{intext}: In-text citations in the requested \code{format}
+\item \code{refs}: References or bibliography in the requested \code{format}
+}
 }
 \description{
 A convenient function for those who wish to cite the easystats packages.
 }
 \examples{
 cite_easystats()
-summary(cite_easystats())
-as.data.frame(cite_easystats())
+summary(cite_easystats(), what = "all")
+print(cite_easystats(format = "markdown"), what = "refs")
 
 }
