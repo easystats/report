@@ -145,7 +145,7 @@ cite_easystats <- function(packages = "all", format = c("text", "markdown", "bib
         ),
         parameters = c(
           article = "L\u00fcdecke, D., Ben-Shachar, M., Patil, I., & Makowski, D. (2020). Extracting, computing and exploring the parameters of statistical models using R. Journal of Open Source Software, 5(53), 2445. https://doi.org/10.21105/joss.02445",
-          package = sprintf("L\u00fcdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., Højsgaard, S., & Wiernik, B. M. (2022). parameters: Processing of model parameters (%s) [R package]. https://CRAN.R-project.org/package=parameters (Original work published 2019)",
+          package = sprintf("L\u00fcdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., H\u00F8jsgaard, S., & Wiernik, B. M. (2022). parameters: Processing of model parameters (%s) [R package]. https://CRAN.R-project.org/package=parameters (Original work published 2019)",
                             installed_packages["parameters"])
         ),
         effectsize = c(
