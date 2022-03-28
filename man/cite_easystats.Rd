@@ -45,6 +45,14 @@ A convenient function for those who wish to cite the easystats packages.
 \examples{
 cite_easystats()
 summary(cite_easystats(), what = "all")
+
+# To cite easystats packages in an RMarkdown document, use:
+
+## In-text citations:
+print(cite_easystats(format = "markdown"), what = "intext")
+
+## Bibliography (print with the  `output = 'asis'` option on the code chunk)
 print(cite_easystats(format = "markdown"), what = "refs")
+
 
 }
