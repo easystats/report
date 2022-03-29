@@ -72,122 +72,805 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">cite_easystats</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">cite_easystats</span><span class="op">(</span>
+  packages <span class="op">=</span> <span class="st">"all"</span>,
+  format <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"text"</span>, <span class="st">"markdown"</span>, <span class="st">"biblatex"</span><span class="op">)</span>,
+  intext_prefix <span class="op">=</span> <span class="cn">TRUE</span>,
+  intext_suffix <span class="op">=</span> <span class="st">"."</span>
+<span class="op">)</span>
+
+<span class="co"># S3 method for cite_easystats</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">object</span>, what <span class="op">=</span> <span class="st">"all"</span>, <span class="va">...</span><span class="op">)</span>
+
+<span class="co"># S3 method for cite_easystats</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, what <span class="op">=</span> <span class="st">"all"</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
+    <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
+    <dl><dt>packages</dt>
+<dd><p>A character vector of packages to cite. Can be <code>"all"</code> for all <em>easystats</em> pacakges or a vector with specific package names.</p></dd>
+<dt>format</dt>
+<dd><p>The format to generate citations. Can be <code>"text"</code> for plain text, <code>"markdown"</code> for markdown citations and CSL bibliography (recommended for writing in RMarkdown), or <code>"biblatex"</code> for BibLaTeX citations and bibliography.</p></dd>
+<dt>intext_prefix</dt>
+<dd><p>A character vector of length 1 containing text to include before in-text citations.
+If <code>TRUE</code>, defaults to <code>"Analyses were conducted using the easystats collection of packages "</code>.
+If <code>FALSE</code> or <code>NA</code>, no prefix is included.</p></dd>
+<dt>intext_suffix</dt>
+<dd><p>A character vector of length 1 containing text to include after in-text citations.
+Defaults to <code>"."</code>.
+If <code>FALSE</code> or <code>NA</code>, no suffix is included.</p></dd>
+<dt>what</dt>
+<dd><p>What elements of the citations to print, can be <code>"all"</code>, <code>"intext"</code>, or <code>"refs"</code>.</p></dd>
+<dt>...</dt>
+<dd><p>Not used. Included for compatibility with the generic function.</p></dd>
+<dt>x, object</dt>
+<dd><p>A <code>"cite_easystats"</code> object to print.</p></dd>
+</dl></div>
+    <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>An object of class <code>cite_easystats</code> that can be printed, summarized
-(using <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code>), or transformed into a table (using <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code>).</p>
-    </div>
+    <p>A list of class <code>"cite_easystats"</code> with elements:</p><ul><li><p><code>intext</code>: In-text citations in the requested <code>format</code></p></li>
+<li><p><code>refs</code>: References or bibliography in the requested <code>format</code></p></li>
+</ul></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">cite_easystats</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Thanks for crediting us :) You can cite the 'easystats' ecosystem as follows:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Thanks for crediting us! 😀 You can cite the easystats ecosystem as follows:</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Data analysis was carried out using the 'easystats' collection of packagaes (Ludecke, Waggoner, &amp; Makowski, 2019; Makowski, Ben-Shachar, &amp; Ludecke, 2019; Makowski, Ben-Shachar, Patil, &amp; Ludecke, 2020; Ludecke, Ben-Shachar, Patil, &amp; Makowski, 2020; Ben-Shachar, Ludecke, &amp; Makowski, 2020).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Citations</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">----------</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> References</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Analyses were conducted using the _easystats_ collection of packages (Lüdecke et al., 2019/2022a; Lüdecke et al., 2019, 2019/2022b; Makowski et al., 2021/2022a; Makowski et al., 2019, 2019/2022b; Lüdecke et al., 2021a, 2019/2022c; Lüdecke et al., 2020, 2019/2022d; Ben-Shachar et al., 2020, 2019/2022%s; Makowski et al., 2020, 2020/2022c; Makowski et al., 2020/2022d; Lüdecke et al., 2021b, 2019/2022e; Makowski et al., 2021/2022e).</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - Ludecke, D., Waggoner, P. D., &amp; Makowski, D. (2019). insight: A Unified Interface to Access Information from Model Objects in R. Journal of Open Source Software, 4, 1412. doi: 10.21105/joss.01412</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - Makowski, D., Ben-Shachar, M.S., &amp; Ludecke, D. (2019). bayestestR: Describing Effects and their Uncertainty, Existence and Significance within the Bayesian Framework. Journal of Open Source Software, 4(40), 1541. 10.21105/joss.01541</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - Ludecke, D., Ben-Shachar, M.S., Patil, I., Makowski, D. (2020). parameters: Extracting, Computing and Exploring the Parameters of Statistical Models using R. Journal of Open Source Software, 5(53), 2445. doi: 10.21105/joss.02445</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - Ben-Shachar, M.S., Ludecke, D., Makowski, D. (2020). effectsize: Estimation of Effect Size Indices and Standardized Parameters. Journal of Open Source Software, 5(56), 2815. doi: 10.21105/joss.02815</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - Makowski, D., Ben-Shachar, M.S., Patil, I., &amp; Ludecke, D. (2019). Methods and Algorithms for Correlation Analysis in R. Journal of Open Source Software, 5(51), 2306. 10.21105/joss.02306</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">References</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">----------</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Bibtex entries:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ---------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -  Ben-Shachar, M. S., Lüdecke, D., &amp; Makowski, D. (2020). effectsize: Estimation of effect size indices and standardized parameters. Journal of Open Source Software, 5(56), 2815. https://doi.org/10.21105/joss.02815 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Ben-Shachar, M. S., Makowski, D., Lüdecke, D., Patil, I., &amp; Wiernik, B. M. (2022). effectsize: Indices of effect size and standardized parameters (0.6.0.1) [R package]. https://CRAN.R-project.org/package=effectsize (Original work published 2019) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Lüdecke, D., Ben-Shachar, M., Patil, I., &amp; Makowski, D. (2020). Extracting, computing and exploring the parameters of statistical models using R. Journal of Open Source Software, 5(53), 2445. https://doi.org/10.21105/joss.02445 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Lüdecke, D., Ben-Shachar, M., Patil, I., Waggoner, P., &amp; Makowski, D. (2021). performance: An R package for assessment, comparison and testing of statistical models. Journal of Open Source Software, 6(60), 3139. https://doi.org/10.21105/joss.03139 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Lüdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., &amp; Wiernik, B. M. (2022). easystats: Streamline model interpretation, visualization, and reporting (NA) [R package]. https://github.com/easystats/easystats (Original work published 2019) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Lüdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., Højsgaard, S., &amp; Wiernik, B. M. (2022). parameters: Processing of model parameters (0.17.0.5) [R package]. https://CRAN.R-project.org/package=parameters (Original work published 2019) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Lüdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., Waggoner, P., &amp; Wiernik, B. M. (2021). performance: Assessment of regression models performance (0.8.0) [R package]. https://CRAN.R-project.org/package=performance (Original work published 2019) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Lüdecke, D., Makowski, D., Patil, I., Ben-Shachar, M. S., Wiernik, B. M., &amp; Waggoner, P. (2022). see: Visualisation toolbox for 'easystats' (NA) [R package]. https://CRAN.R-project.org/package=see (Original work published 2019) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Lüdecke, D., Makowski, D., Patil, I., Waggoner, P., Ben-Shachar, M. S., Wiernik, B. M., &amp; Arel-Bundock, V. (2022). insight: Easy access to model information for various model objects (0.17.0.1) [R package]. https://CRAN.R-project.org/package=insight (Original work published 2019) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Lüdecke, D., Patil, I., Ben-Shachar, M. S., Wiernik, B. M., Waggoner, P., &amp; Makowski, D. (2021). see: An R package for visualizing statistical models. Journal of Open Source Software, 6(64), 3393. https://doi.org/10.21105/joss.03393 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Lüdecke, D., Waggoner, P., &amp; Makowski, D. (2019). insight: A unified interface to access information from model objects in R. Journal of Open Source Software, 4(38), 1412. https://doi.org/10.21105/joss.01412 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Makowski, D., Ben-Shachar, M., &amp; Lüdecke, D. (2019). bayestestR: Describing effects and their uncertainty, existence and significance within the Bayesian framework. Journal of Open Source Software, 4(40), 1541. https://doi.org/10.21105/joss.01541 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Makowski, D., Ben-Shachar, M., Patil, I., &amp; Lüdecke, D. (2020). Methods and algorithms for correlation analysis in R. Journal of Open Source Software, 5(51), 2306. https://doi.org/10.21105/joss.02306 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Makowski, D., Lüdecke, D., Ben-Shachar, M. S., &amp; Patil, I. (2022). modelbased: Estimation of model-based predictions, contrasts and means (NA) [R package]. https://CRAN.R-project.org/package=modelbased (Original work published 2020) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Makowski, D., Lüdecke, D., Ben-Shachar, M. S., Patil, I., &amp; Wiernik, B. M. (2022). report: Automated reporting of results and statistical models (0.5.1) [R package]. https://CRAN.R-project.org/package=report (Original work published 2021) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Makowski, D., Lüdecke, D., Ben-Shachar, M. S., Patil, I., Wilson, M. D., &amp; Wiernik, B. M. (2021). bayestestR: Understand and describe Bayesian models and posterior distributions (0.11.5) [R package]. https://CRAN.R-project.org/package=bayestestR (Original work published 2019) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Makowski, D., Lüdecke, D., Patil, I., Ben-Shachar, M. S., &amp; Wiernik, B. M. (2022). datawizard: Easy data wrangling (0.3.0) [R package]. https://CRAN.R-project.org/package=datawizard (Original work published 2021) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Makowski, D., Wiernik, B. M., Patil, I., Lüdecke, D., &amp; Ben-Shachar, M. S. (2022). correlation: Methods for correlation analysis (NA) [R package]. https://CRAN.R-project.org/package=correlation (Original work published 2020) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu">cite_easystats</span><span class="op">(</span><span class="op">)</span>, what <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   @article{ludecke2019insight,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     journal = {Journal of Open Source Software},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     doi = {10.21105/joss.01412},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     issn = {2475-9066},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     number = {38},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     publisher = {The Open Journal},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     title = {insight: A Unified Interface to Access Information from Model Objects in R},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     url = {http://dx.doi.org/10.21105/joss.01412},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     volume = {4},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     author = {L{"u}decke, Daniel and Waggoner, Philip and Makowski, Dominique},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     pages = {1412},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     date = {2019-06-25},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     year = {2019},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     month = {6},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     day = {25}</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Citations</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">----------</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Analyses were conducted using the _easystats_ collection of packages (Lüdecke et al., 2019/2022a; Lüdecke et al., 2019, 2019/2022b; Makowski et al., 2021/2022a; Makowski et al., 2019, 2019/2022b; Lüdecke et al., 2021a, 2019/2022c; Lüdecke et al., 2020, 2019/2022d; Ben-Shachar et al., 2020, 2019/2022%s; Makowski et al., 2020, 2020/2022c; Makowski et al., 2020/2022d; Lüdecke et al., 2021b, 2019/2022e; Makowski et al., 2021/2022e).</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   @article{makowski2019bayestestr,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       title = {{bayestestR}: {Describing} {Effects} and their {Uncertainty}, {Existence} and {Significance} within the {Bayesian} {Framework}},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       volume = {4},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       issn = {2475-9066},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       shorttitle = {{bayestestR}},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       url = {https://joss.theoj.org/papers/10.21105/joss.01541},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       doi = {10.21105/joss.01541},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       number = {40},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       urldate = {2019-08-13},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       journal = {Journal of Open Source Software},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       author = {Makowski, Dominique and Ben-Shachar, Mattan S. and L{"u}decke, Daniel},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       month = aug,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       year = {2019},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       pages = {1541}</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">References</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">----------</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   @article{makowski2020correlation,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     doi={10.21105/joss.02306},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     title={Methods and Algorithms for Correlation Analysis in R},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     author={Makowski, Dominique and Ben-Shachar, Mattan S. and Patil, Indrajeet and L{"u}decke, Daniel},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     journal={Journal of Open Source Software},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     volume={5},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     number={51},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     pages={2306},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     year={2020}</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -  Ben-Shachar, M. S., Lüdecke, D., &amp; Makowski, D. (2020). effectsize: Estimation of effect size indices and standardized parameters. Journal of Open Source Software, 5(56), 2815. https://doi.org/10.21105/joss.02815 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Ben-Shachar, M. S., Makowski, D., Lüdecke, D., Patil, I., &amp; Wiernik, B. M. (2022). effectsize: Indices of effect size and standardized parameters (0.6.0.1) [R package]. https://CRAN.R-project.org/package=effectsize (Original work published 2019) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Lüdecke, D., Ben-Shachar, M., Patil, I., &amp; Makowski, D. (2020). Extracting, computing and exploring the parameters of statistical models using R. Journal of Open Source Software, 5(53), 2445. https://doi.org/10.21105/joss.02445 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Lüdecke, D., Ben-Shachar, M., Patil, I., Waggoner, P., &amp; Makowski, D. (2021). performance: An R package for assessment, comparison and testing of statistical models. Journal of Open Source Software, 6(60), 3139. https://doi.org/10.21105/joss.03139 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Lüdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., &amp; Wiernik, B. M. (2022). easystats: Streamline model interpretation, visualization, and reporting (NA) [R package]. https://github.com/easystats/easystats (Original work published 2019) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Lüdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., Højsgaard, S., &amp; Wiernik, B. M. (2022). parameters: Processing of model parameters (0.17.0.5) [R package]. https://CRAN.R-project.org/package=parameters (Original work published 2019) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Lüdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., Waggoner, P., &amp; Wiernik, B. M. (2021). performance: Assessment of regression models performance (0.8.0) [R package]. https://CRAN.R-project.org/package=performance (Original work published 2019) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Lüdecke, D., Makowski, D., Patil, I., Ben-Shachar, M. S., Wiernik, B. M., &amp; Waggoner, P. (2022). see: Visualisation toolbox for 'easystats' (NA) [R package]. https://CRAN.R-project.org/package=see (Original work published 2019) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Lüdecke, D., Makowski, D., Patil, I., Waggoner, P., Ben-Shachar, M. S., Wiernik, B. M., &amp; Arel-Bundock, V. (2022). insight: Easy access to model information for various model objects (0.17.0.1) [R package]. https://CRAN.R-project.org/package=insight (Original work published 2019) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Lüdecke, D., Patil, I., Ben-Shachar, M. S., Wiernik, B. M., Waggoner, P., &amp; Makowski, D. (2021). see: An R package for visualizing statistical models. Journal of Open Source Software, 6(64), 3393. https://doi.org/10.21105/joss.03393 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Lüdecke, D., Waggoner, P., &amp; Makowski, D. (2019). insight: A unified interface to access information from model objects in R. Journal of Open Source Software, 4(38), 1412. https://doi.org/10.21105/joss.01412 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Makowski, D., Ben-Shachar, M., &amp; Lüdecke, D. (2019). bayestestR: Describing effects and their uncertainty, existence and significance within the Bayesian framework. Journal of Open Source Software, 4(40), 1541. https://doi.org/10.21105/joss.01541 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Makowski, D., Ben-Shachar, M., Patil, I., &amp; Lüdecke, D. (2020). Methods and algorithms for correlation analysis in R. Journal of Open Source Software, 5(51), 2306. https://doi.org/10.21105/joss.02306 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Makowski, D., Lüdecke, D., Ben-Shachar, M. S., &amp; Patil, I. (2022). modelbased: Estimation of model-based predictions, contrasts and means (NA) [R package]. https://CRAN.R-project.org/package=modelbased (Original work published 2020) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Makowski, D., Lüdecke, D., Ben-Shachar, M. S., Patil, I., &amp; Wiernik, B. M. (2022). report: Automated reporting of results and statistical models (0.5.1) [R package]. https://CRAN.R-project.org/package=report (Original work published 2021) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Makowski, D., Lüdecke, D., Ben-Shachar, M. S., Patil, I., Wilson, M. D., &amp; Wiernik, B. M. (2021). bayestestR: Understand and describe Bayesian models and posterior distributions (0.11.5) [R package]. https://CRAN.R-project.org/package=bayestestR (Original work published 2019) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Makowski, D., Lüdecke, D., Patil, I., Ben-Shachar, M. S., &amp; Wiernik, B. M. (2022). datawizard: Easy data wrangling (0.3.0) [R package]. https://CRAN.R-project.org/package=datawizard (Original work published 2021) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  -  Makowski, D., Wiernik, B. M., Patil, I., Lüdecke, D., &amp; Ben-Shachar, M. S. (2022). correlation: Methods for correlation analysis (NA) [R package]. https://CRAN.R-project.org/package=correlation (Original work published 2020) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   @article{ludecke20202parameters,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     title = {parameters: Extracting, Computing and Exploring the Parameters of Statistical Models using {R}.},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     volume = {5},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     doi = {10.21105/joss.02445},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     number = {53},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     journal = {Journal of Open Source Software},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     author = {Daniel L{"u}decke and Mattan S. Ben-Shachar and Indrajeet Patil and Dominique Makowski},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     year = {2020},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     pages = {2445},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># To cite easystats packages in an RMarkdown document, use:</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co">## In-text citations:</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu">cite_easystats</span><span class="op">(</span>format <span class="op">=</span> <span class="st">"markdown"</span><span class="op">)</span>, what <span class="op">=</span> <span class="st">"intext"</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   @article{benchashar2020effectsize,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     title = {{e}ffectsize: Estimation of Effect Size Indices and Standardized Parameters},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     author = {Mattan S. Ben-Shachar and Daniel L{"u}decke and Dominique Makowski},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     year = {2020},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     journal = {Journal of Open Source Software},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     volume = {5},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     number = {56},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     pages = {2815},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     publisher = {The Open Journal},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     doi = {10.21105/joss.02815},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     url = {https://doi.org/10.21105/joss.02815},</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   </span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu">cite_easystats</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Data analysis was carried out using the 'easystats' collection of packagaes (Ludecke, Waggoner, &amp; Makowski, 2019; Makowski, Ben-Shachar, &amp; Ludecke, 2019; Makowski, Ben-Shachar, Patil, &amp; Ludecke, 2020; Ludecke, Ben-Shachar, Patil, &amp; Makowski, 2020; Ben-Shachar, Ludecke, &amp; Makowski, 2020).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Citations</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">----------</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> References</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Analyses were conducted using the _easystats_ collection of packages [@easystatsPackage, @insightArticle, @insightPackage, @datawizardPackage, @bayestestRArticle, @bayestestRPackage, @performanceArticle, @performancePackage, @paramatersArticle, @parametersPackage, @effectsizeArticle, @effectsizePackage, @correlationArticle, @correlationPackage, @modelbasedPackage, @seeArticle, @seePackage, @reportPackage].</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co">## Bibliography (print with the  `output = 'asis'` option on the code chunk)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu">cite_easystats</span><span class="op">(</span>format <span class="op">=</span> <span class="st">"markdown"</span><span class="op">)</span>, what <span class="op">=</span> <span class="st">"refs"</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - Ludecke, D., Waggoner, P. D., &amp; Makowski, D. (2019). insight: A Unified Interface to Access Information from Model Objects in R. Journal of Open Source Software, 4, 1412. doi: 10.21105/joss.01412</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - Makowski, D., Ben-Shachar, M.S., &amp; Ludecke, D. (2019). bayestestR: Describing Effects and their Uncertainty, Existence and Significance within the Bayesian Framework. Journal of Open Source Software, 4(40), 1541. 10.21105/joss.01541</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - Ludecke, D., Ben-Shachar, M.S., Patil, I., Makowski, D. (2020). parameters: Extracting, Computing and Exploring the Parameters of Statistical Models using R. Journal of Open Source Software, 5(53), 2445. doi: 10.21105/joss.02445</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - Ben-Shachar, M.S., Ludecke, D., Makowski, D. (2020). effectsize: Estimation of Effect Size Indices and Standardized Parameters. Journal of Open Source Software, 5(56), 2815. doi: 10.21105/joss.02815</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - Makowski, D., Ben-Shachar, M.S., Patil, I., &amp; Ludecke, D. (2019). Methods and Algorithms for Correlation Analysis in R. Journal of Open Source Software, 5(51), 2306. 10.21105/joss.02306</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu">cite_easystats</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                                                                                                                  Reference</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                      Ludecke, D., Waggoner, P. D., &amp; Makowski, D. (2019). insight: A Unified Interface to Access Information from Model Objects in R. Journal of Open Source Software, 4, 1412. doi: 10.21105/joss.01412</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 Makowski, D., Ben-Shachar, M.S., &amp; Ludecke, D. (2019). bayestestR: Describing Effects and their Uncertainty, Existence and Significance within the Bayesian Framework. Journal of Open Source Software, 4(40), 1541. 10.21105/joss.01541</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3     Ludecke, D., Ben-Shachar, M.S., Patil, I., Makowski, D. (2020). parameters: Extracting, Computing and Exploring the Parameters of Statistical Models using R. Journal of Open Source Software, 5(53), 2445. doi: 10.21105/joss.02445</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                                   Ben-Shachar, M.S., Ludecke, D., Makowski, D. (2020). effectsize: Estimation of Effect Size Indices and Standardized Parameters. Journal of Open Source Software, 5(56), 2815. doi: 10.21105/joss.02815</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5                                                Makowski, D., Ben-Shachar, M.S., Patil, I., &amp; Ludecke, D. (2019). Methods and Algorithms for Correlation Analysis in R. Journal of Open Source Software, 5(51), 2306. 10.21105/joss.02306</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">References</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">----------</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> references:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - id: bayestestRArticle</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   accessed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   author:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Makowski</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Dominique</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Ben-Shachar</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Mattan</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Lüdecke</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Daniel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   citation-key: bayestestRArticle</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   container-title: Journal of Open Source Software</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   container-title-short: JOSS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   DOI: 10.21105/joss.01541</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ISSN: 2475-9066</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   issue: '40'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   issued:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2019</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   page: '1541'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title: &gt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;span class="nocase"&gt;bayestestR&lt;/span&gt;: describing effects and their</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     uncertainty, existence and significance within the Bayesian framework</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title-short: &lt;span class="nocase"&gt;bayestestR&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   type: article-journal</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   URL: https://joss.theoj.org/papers/10.21105/joss.01541</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   volume: '4'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - id: bayestestRPackage</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   abstract: &gt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Provides utilities to describe posterior distributions and Bayesian models.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     It includes point-estimates such as Maximum A Posteriori (MAP), measures of</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     dispersion (Highest Density Interval - HDI; Kruschke, 2015</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;doi:10.1016/C2012-0-00477-2&gt;) and indices used for null-hypothesis testing</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     (such as ROPE percentage, pd and Bayes factors).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   accessed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   author:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Makowski</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Dominique</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Lüdecke</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Daniel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Ben-Shachar</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Mattan S.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Patil</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Indrajeet</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Wilson</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Michael D.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Wiernik</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Brenton M.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   citation-key: bayestestRPackage</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   genre: R package</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   issued:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2021</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   original-date:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2019</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title: &gt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;span class="nocase"&gt;bayestestR&lt;/span&gt;: understand and describe Bayesian</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     models and posterior distributions</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title-short: &lt;span class="nocase"&gt;bayestestR&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   type: software</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   URL: https://CRAN.R-project.org/package=bayestestR</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   version: 0.11.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - id: correlationArticle</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   accessed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   author:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Makowski</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Dominique</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Ben-Shachar</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Mattan</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Patil</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Indrajeet</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Lüdecke</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Daniel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   citation-key: correlationArticle</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   container-title: Journal of Open Source Software</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   container-title-short: JOSS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   DOI: 10.21105/joss.02306</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ISSN: 2475-9066</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   issue: '51'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   issued:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2020</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   page: '2306'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title: Methods and algorithms for correlation analysis in R</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   type: article-journal</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   URL: https://joss.theoj.org/papers/10.21105/joss.02306</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   volume: '5'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - id: correlationPackage</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   abstract: &gt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Lightweight package for computing different kinds of correlations, such as</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     partial correlations, Bayesian correlations, multilevel correlations,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     polychoric correlations, biweight correlations, distance correlations and</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     more. Part of the 'easystats' ecosystem.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   accessed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   author:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Makowski</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Dominique</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Wiernik</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Brenton M.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Patil</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Indrajeet</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Lüdecke</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Daniel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Ben-Shachar</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Mattan S.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   citation-key: correlationPackage</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   genre: R package</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   issued:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   original-date:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2020</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title: '&lt;span class="nocase"&gt;correlation&lt;/span&gt;: methods for correlation analysis'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title-short: &lt;span class="nocase"&gt;correlation&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   type: software</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   URL: https://CRAN.R-project.org/package=correlation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   version: NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - id: datawizardPackage</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   abstract: &gt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     A lightweight package to easily manipulate, clean, transform, and prepare</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     your data for analysis. It also forms the data wrangling backend for the</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     packages in the 'easystats' ecosystem.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   accessed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   author:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Makowski</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Dominique</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Lüdecke</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Daniel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Patil</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Indrajeet</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Ben-Shachar</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Mattan S.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Wiernik</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Brenton M.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   citation-key: datawizardPackage</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   genre: R package</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   issued:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   original-date:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2021</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title: '&lt;span class="nocase"&gt;datawizard&lt;/span&gt;: easy data wrangling'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title-short: &lt;span class="nocase"&gt;datawizard&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   type: software</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   URL: https://CRAN.R-project.org/package=datawizard</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   version: 0.3.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - id: easystatsPackage</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   accessed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   author:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Lüdecke</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Daniel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Makowski</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Dominique</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Ben-Shachar</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Mattan S.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Patil</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Indrajeet</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Wiernik</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Brenton M.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   citation-key: easystatsPackage</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   genre: R package</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   issued:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   original-date:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2019</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title: &gt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;span class="nocase"&gt;easystats&lt;/span&gt;: streamline model interpretation,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     visualization, and reporting</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title-short: &lt;span class="nocase"&gt;easystats&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   type: software</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   URL: https://github.com/easystats/easystats</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   version: NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - id: effectsizeArticle</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   accessed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2021</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   author:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Ben-Shachar</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Mattan S.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Lüdecke</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Daniel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Makowski</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Dominique</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   citation-key: effectsizeArticle</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   container-title: Journal of Open Source Software</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   container-title-short: JOSS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   DOI: 10.21105/joss.02815</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ISSN: 2475-9066</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   issue: '56'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   issued:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2020</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   page: '2815'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title: &gt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;span class="nocase"&gt;effectsize&lt;/span&gt;: estimation of effect size indices</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     and standardized parameters</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title-short: &lt;span class="nocase"&gt;effectsize&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   type: article-journal</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   URL: https://joss.theoj.org/papers/10.21105/joss.02815</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   volume: '5'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - id: effectsizePackage</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   abstract: &gt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Provide utilities to work with indices of effect size and standardized</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     parameters for a wide variety of models (see list of supported models using</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     the function 'insight::supported_models()'), allowing computation of and</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     conversion between indices such as Cohen's d, r, odds, etc.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   accessed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   author:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Ben-Shachar</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Mattan S.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Makowski</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Dominique</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Lüdecke</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Daniel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Patil</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Indrajeet</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Wiernik</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Brenton M.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   citation-key: effectsizePackage</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   genre: R package</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   issued:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   original-date:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2019</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title: &gt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;span class="nocase"&gt;effectsize&lt;/span&gt;: indices of effect size and</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     standardized parameters</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title-short: &lt;span class="nocase"&gt;effectsize&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   type: software</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   URL: https://CRAN.R-project.org/package=effectsize</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   version: 0.6.0.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - id: insightArticle</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   accessed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   author:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Lüdecke</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Daniel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Waggoner</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Philip</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Makowski</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Dominique</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   citation-key: insightArticle</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   container-title: Journal of Open Source Software</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   container-title-short: JOSS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   DOI: 10.21105/joss.01412</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ISSN: 2475-9066</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   issue: '38'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   issued:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2019</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   page: '1412'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title: 'insight: a unified interface to access information from model objects in R'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title-short: insight</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   type: article-journal</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   URL: http://joss.theoj.org/papers/10.21105/joss.01412</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   volume: '4'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - id: insightPackage</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   abstract: &gt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     A tool to provide an easy, intuitive and consistent access to information</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     contained in various R models, like model formulas, model terms, information</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     about random effects, data that was used to fit the model or data from</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     response variables. 'insight' mainly revolves around two types of functions:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Functions that find (the names of) information, starting with 'find_', and</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     functions that get the underlying data, starting with 'get_'. The package</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     has a consistent syntax and works with many different model objects, where</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     otherwise functions to access these information are missing.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   accessed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   author:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Lüdecke</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Daniel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Makowski</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Dominique</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Patil</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Indrajeet</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Waggoner</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Philip</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Ben-Shachar</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Mattan S.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Wiernik</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Brenton M.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Arel-Bundock</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Vincent</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   citation-key: insightPackage</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   genre: R package</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   issued:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   original-date:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2019</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title: &gt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;span class="nocase"&gt;insight&lt;/span&gt;: easy access to model information for</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     various model objects</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title-short: &lt;span class="nocase"&gt;insight&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   type: software</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   URL: https://CRAN.R-project.org/package=insight</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   version: 0.17.0.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - id: modelbasedPackage</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   abstract: &gt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Implements a general interface for model-based estimations for a wide</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     variety of models (see support list of insight; Lüdecke, Waggoner &amp; Makowski</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     (2019) &lt;doi:10.21105/joss.01412&gt;), used in the computation of marginal</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     means, contrast analysis and predictions.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   accessed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2021</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   author:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Makowski</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Dominique</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Lüdecke</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Daniel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Ben-Shachar</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Mattan S.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Patil</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Indrajeet</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   citation-key: modelbasedPackage</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   genre: R package</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   issued:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   original-date:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2020</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title: &gt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;span class="nocase"&gt;modelbased&lt;/span&gt;: estimation of model-based</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     predictions, contrasts and means</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title-short: &lt;span class="nocase"&gt;modelbased&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   type: software</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   URL: https://CRAN.R-project.org/package=modelbased</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   version: NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - id: paramatersArticle</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   accessed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2021</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   author:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Lüdecke</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Daniel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Ben-Shachar</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Mattan</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Patil</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Indrajeet</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Makowski</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Dominique</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   citation-key: paramatersArticle</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   container-title: Journal of Open Source Software</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   container-title-short: JOSS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   DOI: 10.21105/joss.02445</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ISSN: 2475-9066</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   issue: '53'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   issued:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2020</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   page: '2445'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title: &gt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Extracting, computing and exploring the parameters of statistical models</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     using R</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   type: article-journal</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   URL: https://joss.theoj.org/papers/10.21105/joss.02445</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   volume: '5'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - id: parametersPackage</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   abstract: &gt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Utilities for processing the parameters of various statistical models.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Beyond computing p values, CIs, and other indices for a wide variety of</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     models (see support list of insight; Lüdecke, Waggoner &amp; Makowski (2019)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;doi:10.21105/joss.01412&gt;), this package implements features like</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     bootstrapping or simulating of parameters and models, feature reduction</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     (feature extraction and variable selection) as well as functions to describe</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     data and variable characteristics (e.g. skewness, kurtosis, smoothness or</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     distribution).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   accessed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2021</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   author:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Lüdecke</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Daniel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Makowski</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Dominique</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Ben-Shachar</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Mattan S.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Patil</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Indrajeet</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Højsgaard</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Søren</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Wiernik</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Brenton M.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   citation-key: parametersPackage</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   genre: R package</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   issued:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   original-date:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2019</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title: '&lt;span class="nocase"&gt;parameters&lt;/span&gt;: processing of model parameters'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title-short: &lt;span class="nocase"&gt;parameters&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   type: software</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   URL: https://CRAN.R-project.org/package=parameters</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   version: 0.17.0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - id: performanceArticle</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   accessed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   author:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Lüdecke</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Daniel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Ben-Shachar</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Mattan</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Patil</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Indrajeet</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Waggoner</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Philip</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Makowski</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Dominique</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   citation-key: performanceArticle</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   container-title: Journal of Open Source Software</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   container-title-short: JOSS</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   DOI: 10.21105/joss.03139</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ISSN: 2475-9066</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   issue: '60'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   issued:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2021</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   page: '3139'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title: &gt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;span class="nocase"&gt;performance&lt;/span&gt;: an R package for assessment,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     comparison and testing of statistical models</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title-short: &lt;span class="nocase"&gt;performance&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   type: article-journal</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   URL: https://joss.theoj.org/papers/10.21105/joss.03139</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   volume: '6'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - id: performancePackage</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   abstract: &gt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Utilities for computing measures to assess model quality, which are not</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     directly provided by R's 'base' or 'stats' packages. These include e.g.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     measures like r-squared, intraclass correlation coefficient (Nakagawa,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Johnson &amp; Schielzeth (2017) &lt;doi:10.1098/rsif.2017.0213&gt;), root mean squared</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     error or functions to check models for overdispersion, singularity or</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     zero-inflation and more. Functions apply to a large variety of regression</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     models, including generalized linear models, mixed effects models and</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Bayesian models.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   accessed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   author:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Lüdecke</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Daniel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Makowski</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Dominique</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Ben-Shachar</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Mattan S.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Patil</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Indrajeet</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Waggoner</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Philip</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Wiernik</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Brenton M.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   citation-key: performancePackage</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   genre: R package</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   issued:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2021</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   original-date:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2019</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title: &gt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;span class="nocase"&gt;performance&lt;/span&gt;: assessment of regression models</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     performance</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title-short: ''</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   type: software</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   URL: https://CRAN.R-project.org/package=performance</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   version: 0.8.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - id: reportPackage</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   abstract: &gt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     The aim of the 'report' package is to bridge the gap between R’s output and</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     the formatted results contained in your manuscript. This package converts</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     statistical models and data frames into textual reports suited for</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     publication, ensuring standardization and quality in results reporting.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   accessed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   author:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Makowski</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Dominique</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Lüdecke</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Daniel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Ben-Shachar</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Mattan S.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Patil</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Indrajeet</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Wiernik</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Brenton M.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   citation-key: reportPackage</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   genre: R package</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   issued:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   original-date:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2021</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title: &gt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;span class="nocase"&gt;report&lt;/span&gt;: automated reporting of results and</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     statistical models</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title-short: &lt;span class="nocase"&gt;report&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   type: software</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   URL: https://CRAN.R-project.org/package=report</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   version: 0.5.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - id: seeArticle</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   abstract: &gt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     The see package is embedded in the easystats ecosystem, a collection of R</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     packages that operate in synergy to provide a consistent and intuitive</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     syntax when working with statistical models in the R programming language (R</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Core Team, 2021). Most easystats packages</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     return comprehensive numeric summaries of model parameters and performance.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     The see package complements these numeric summaries with a host of functions</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     and tools to produce a range of publication-ready visualizations for model</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     parameters, predictions, and performance diagnostics. As a core pillar of</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     easystats, the see package helps users to utilize visualization for more</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     informative, communicable, and well-rounded scientific reporting.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   accessed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2021</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   author:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Lüdecke</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Daniel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Patil</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Indrajeet</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Ben-Shachar</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Mattan S.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Wiernik</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Brenton M.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Waggoner</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Philip</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Makowski</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Dominique</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   citation-key: seeArticle</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   container-title: Journal of Open Source Software</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   DOI: 10.21105/joss.03393</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ISSN: 2475-9066</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   issue: '64'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   issued:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2021</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   language: en</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   page: '3393'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title: &gt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;span class="nocase"&gt;see&lt;/span&gt;: an R package for visualizing statistical</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     models</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title-short: &lt;span class="nocase"&gt;see&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   type: article-journal</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   URL: https://joss.theoj.org/papers/10.21105/joss.03393</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   volume: '6'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - id: seePackage</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   abstract: &gt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Provides plotting utilities supporting easystats-packages</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     (&lt;https://github.com/easystats/easystats&gt;) and some extra themes, geoms, and</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     scales for 'ggplot2'. Color scales are based on</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;https://materialui.co/colors&gt;.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   accessed:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   author:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Lüdecke</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Daniel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Makowski</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Dominique</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Patil</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Indrajeet</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Ben-Shachar</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Mattan S.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Wiernik</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Brenton M.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - family: Waggoner</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       given: Philip</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   citation-key: seePackage</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   genre: R package</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   issued:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   original-date:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     - year: 2019</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       month: 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       day: 24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title: &gt;-</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;span class="nocase"&gt;see&lt;/span&gt;: visualisation toolbox for 'easystats' and</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     extra geoms, themes and color palettes for 'ggplot2'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   title-short: &lt;span class="nocase"&gt;see&lt;/span&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   type: software</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   URL: https://CRAN.R-project.org/package=see</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   version: NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
+<span class="r-in"></span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
