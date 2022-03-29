@@ -2,115 +2,204 @@
 #'
 #' A convenient function for those who wish to cite the easystats packages.
 #'
+#' @param packages A character vector of packages to cite. Can be `"all"` for all *easystats* pacakges or a vector with specific package names.
+#' @param format The format to generate citations. Can be `"text"` for plain text, `"markdown"` for markdown citations and CSL bibliography (recommended for writing in RMarkdown), or `"biblatex"` for BibLaTeX citations and bibliography.
+#' @param intext_prefix A character vector of length 1 containing text to include before in-text citations.
+#'   If `TRUE`, defaults to `"Analyses were conducted using the easystats collection of packages "`.
+#'   If `FALSE` or `NA`, no prefix is included.
+#' @param intext_suffix A character vector of length 1 containing text to include after in-text citations.
+#'   Defaults to `"."`.
+#'   If `FALSE` or `NA`, no suffix is included.
+#' @param x,object A `"cite_easystats"` object to print.
+#' @param what What elements of the citations to print, can be `"all"`, `"intext"`, or `"refs"`.
+#' @param ... Not used. Included for compatibility with the generic function.
+#'
+#' @return A list of class `"cite_easystats"` with elements:
+#'   - `intext`: In-text citations in the requested `format`
+#'   - `refs`: References or bibliography in the requested `format`
+#'
 #' @examples
 #' cite_easystats()
-#' summary(cite_easystats())
-#' as.data.frame(cite_easystats())
+#' summary(cite_easystats(), what = "all")
 #'
-#' @return An object of class `cite_easystats` that can be printed, summarized
-#'   (using `summary()`), or transformed into a table (using `as.data.frame()`).
+#' # To cite easystats packages in an RMarkdown document, use:
+#'
+#' ## In-text citations:
+#' print(cite_easystats(format = "markdown"), what = "intext")
+#'
+#' ## Bibliography (print with the  `output = 'asis'` option on the code chunk)
+#' print(cite_easystats(format = "markdown"), what = "refs")
+#'
 #'
 #' @export
-cite_easystats <- function() {
-  intro <- "Thanks for crediting us :) You can cite the 'easystats' ecosystem as follows:"
-
-  # TODO: How to deal with your umlaut Daniel :( ?
-
-  intext <- "Data analysis was carried out using the 'easystats' collection of packagaes (Ludecke, Waggoner, & Makowski, 2019; Makowski, Ben-Shachar, & Ludecke, 2019; Makowski, Ben-Shachar, Patil, & Ludecke, 2020; Ludecke, Ben-Shachar, Patil, & Makowski, 2020; Ben-Shachar, Ludecke, & Makowski, 2020)."
-
-
-  # References
-  ref_insight <- "Ludecke, D., Waggoner, P. D., & Makowski, D. (2019). insight: A Unified Interface to Access Information from Model Objects in R. Journal of Open Source Software, 4, 1412. doi: 10.21105/joss.01412"
-
-  ref_bayestestR <- "Makowski, D., Ben-Shachar, M.S., & Ludecke, D. (2019). bayestestR: Describing Effects and their Uncertainty, Existence and Significance within the Bayesian Framework. Journal of Open Source Software, 4(40), 1541. 10.21105/joss.01541"
-
-  ref_parameters <- "Ludecke, D., Ben-Shachar, M.S., Patil, I., Makowski, D. (2020). parameters: Extracting, Computing and Exploring the Parameters of Statistical Models using R. Journal of Open Source Software, 5(53), 2445. doi: 10.21105/joss.02445"
-
-  ref_effectsize <- "Ben-Shachar, M.S., Ludecke, D., Makowski, D. (2020). effectsize: Estimation of Effect Size Indices and Standardized Parameters. Journal of Open Source Software, 5(56), 2815. doi: 10.21105/joss.02815"
-
-  ref_correlation <- "Makowski, D., Ben-Shachar, M.S., Patil, I., & Ludecke, D. (2019). Methods and Algorithms for Correlation Analysis in R. Journal of Open Source Software, 5(51), 2306. 10.21105/joss.02306"
-
-  refs <- c(ref_insight, ref_bayestestR, ref_parameters, ref_effectsize, ref_correlation)
-
-  table <- data.frame(Reference = refs)
-
-  bib <- "
-  @article{ludecke2019insight,
-    journal = {Journal of Open Source Software},
-    doi = {10.21105/joss.01412},
-    issn = {2475-9066},
-    number = {38},
-    publisher = {The Open Journal},
-    title = {insight: A Unified Interface to Access Information from Model Objects in R},
-    url = {http://dx.doi.org/10.21105/joss.01412},
-    volume = {4},
-    author = {L{\"u}decke, Daniel and Waggoner, Philip and Makowski, Dominique},
-    pages = {1412},
-    date = {2019-06-25},
-    year = {2019},
-    month = {6},
-    day = {25}
+cite_easystats <- function(packages = "all", format = c("text", "markdown", "biblatex"), intext_prefix = TRUE, intext_suffix = ".") {
+  format <- match.arg(format, choices = c("text", "markdown", "biblatex"))
+  if (packages == "all") {
+    packages <- c("easystats", "insight", "datawizard", "bayestestR",
+                  "performance", "parameters", "effectsize", "correlation",
+                  "modelbased", "see", "report")
   }
 
-
-  @article{makowski2019bayestestr,
-      title = {{bayestestR}: {Describing} {Effects} and their {Uncertainty}, {Existence} and {Significance} within the {Bayesian} {Framework}},
-      volume = {4},
-      issn = {2475-9066},
-      shorttitle = {{bayestestR}},
-      url = {https://joss.theoj.org/papers/10.21105/joss.01541},
-      doi = {10.21105/joss.01541},
-      number = {40},
-      urldate = {2019-08-13},
-      journal = {Journal of Open Source Software},
-      author = {Makowski, Dominique and Ben-Shachar, Mattan S. and L{\"u}decke, Daniel},
-      month = aug,
-      year = {2019},
-      pages = {1541}
+  # in-text
+  if (format == "text") {
+    letters_ludeckePackages <- .disamguation_letters(c("easystats", "insight",
+                                                       "performance", "parameters",
+                                                       "see") %in% packages)
+    letters_ludeckeArticles <- .disamguation_letters(c("performance", "see") %in% packages)
+    letters_makowskiPackages <- .disamguation_letters(c("datawizard", "bayestestR",
+                                                       "correlation", "modelbased",
+                                                       "report") %in% packages)
+    easystats <- "_easystats_"
+    cit_packages <- sprintf(
+      "(%s)",
+      paste0(c(
+        easystats = sprintf("L\u00fcdecke et al., 2019/2022%s", letters_ludeckePackages[1]),
+        insight = sprintf("L\u00fcdecke et al., 2019, 2019/2022%s", letters_ludeckePackages[2]),
+        datawizard = sprintf("Makowski et al., 2021/2022%s", letters_makowskiPackages[1]),
+        bayestestR = sprintf("Makowski et al., 2019, 2019/2022%s", letters_makowskiPackages[2]),
+        performance = sprintf("L\u00fcdecke et al., 2021%s, 2019/2022%s", letters_ludeckeArticles[1], letters_ludeckePackages[3]),
+        parameters = sprintf("L\u00fcdecke et al., 2020, 2019/2022%s", letters_ludeckePackages[4]),
+        effectsize = "Ben-Shachar et al., 2020, 2019/2022%s",
+        correlation = sprintf("Makowski et al., 2020, 2020/2022%s", letters_makowskiPackages[3]),
+        modelbased = sprintf("Makowski et al., 2020/2022%s", letters_makowskiPackages[4]),
+        see = sprintf("L\u00fcdecke et al., 2021%s, 2019/2022%s", letters_ludeckeArticles[2], letters_ludeckePackages[5]),
+        report = sprintf("Makowski et al., 2021/2022%s", letters_makowskiPackages[5])
+      ), collapse = "; ")
+    )
+  } else if (format == "markdown") {
+    easystats <- "_easystats_"
+    cit_packages <- sprintf(
+      "[%s]",
+      paste0(c(
+        easystats = "@easystatsPackage",
+        insight = "@insightArticle, @insightPackage",
+        datawizard = "@datawizardPackage",
+        bayestestR = "@bayestestRArticle, @bayestestRPackage",
+        performance = "@performanceArticle, @performancePackage",
+        parameters = "@paramatersArticle, @parametersPackage",
+        effectsize = "@effectsizeArticle, @effectsizePackage",
+        correlation = "@correlationArticle, @correlationPackage",
+        modelbased = "@modelbasedPackage",
+        see = "@seeArticle, @seePackage",
+        report = "@reportPackage"
+      )[packages], collapse = ", ")
+    )
+  } else {
+    easystats <- "\\emph{easystats}"
+    cit_packages <- sprintf(
+      "\\cite{%s}",
+      paste0(c(
+        easystats = "easystatsPackage",
+        insight = "insightArticle, insightPackage",
+        datawizard = "datawizardPackage",
+        bayestestR = "bayestestRArticle, bayestestRPackage",
+        performance = "performanceArticle, performancePackage",
+        parameters = "paramatersArticle, parametersPackage",
+        effectsize = "effectsizeArticle, effectsizePackage",
+        correlation = "correlationArticle, correlationPackage",
+        modelbased = "modelbasedPackage",
+        see = "seeArticle, seePackage",
+        report = "reportPackage"
+      )[packages], collapse = ", ")
+    )
   }
 
-  @article{makowski2020correlation,
-    doi={10.21105/joss.02306},
-    title={Methods and Algorithms for Correlation Analysis in R},
-    author={Makowski, Dominique and Ben-Shachar, Mattan S. and Patil, Indrajeet and L{\"u}decke, Daniel},
-    journal={Journal of Open Source Software},
-    volume={5},
-    number={51},
-    pages={2306},
-    year={2020}
+  if (isTRUE(intext_prefix)) {
+    intext_prefix <- sprintf("Analyses were conducted using the %s collection of packages ", easystats)
+  } else if (isFALSE(intext_prefix)) {
+    intext_prefix <- ""
+  }
+  if (isTRUE(intext_suffix)) {
+    intext_suffix <- "."
+  }
+  if (isFALSE(intext_suffix) || is.na(intext_suffix)) {
+    intext_suffix <- ""
+  }
+  intext <- sprintf("%s%s%s", intext_prefix, cit_packages, intext_suffix)
+
+
+  # references
+  installed_packages <- utils::installed.packages()[,"Version"]
+  if (format == "text") {
+    ref_packages <- paste(
+      "- ",
+      sort(unlist(list(
+        easystats = sprintf("L\u00fcdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., & Wiernik, B. M. (2022). easystats: Streamline model interpretation, visualization, and reporting (%s) [R package]. https://github.com/easystats/easystats (Original work published 2019)",
+                            installed_packages["easystats"]),
+        insight = c(
+          article = "L\u00fcdecke, D., Waggoner, P., & Makowski, D. (2019). insight: A unified interface to access information from model objects in R. Journal of Open Source Software, 4(38), 1412. https://doi.org/10.21105/joss.01412",
+          package = sprintf("L\u00fcdecke, D., Makowski, D., Patil, I., Waggoner, P., Ben-Shachar, M. S., Wiernik, B. M., & Arel-Bundock, V. (2022). insight: Easy access to model information for various model objects (%s) [R package]. https://CRAN.R-project.org/package=insight (Original work published 2019)",
+                            installed_packages["insight"])
+        ),
+        datawizard = sprintf("Makowski, D., L\u00fcdecke, D., Patil, I., Ben-Shachar, M. S., & Wiernik, B. M. (2022). datawizard: Easy data wrangling (%s) [R package]. https://CRAN.R-project.org/package=datawizard (Original work published 2021)",
+                             installed_packages["datawizard"]),
+        bayestestR = c(
+          article = "Makowski, D., Ben-Shachar, M., & L\u00fcdecke, D. (2019). bayestestR: Describing effects and their uncertainty, existence and significance within the Bayesian framework. Journal of Open Source Software, 4(40), 1541. https://doi.org/10.21105/joss.01541",
+          package = sprintf("Makowski, D., L\u00fcdecke, D., Ben-Shachar, M. S., Patil, I., Wilson, M. D., & Wiernik, B. M. (2021). bayestestR: Understand and describe Bayesian models and posterior distributions (%s) [R package]. https://CRAN.R-project.org/package=bayestestR (Original work published 2019)",
+                            installed_packages["bayestestR"])
+        ),
+        performance = c(
+          article = "L\u00fcdecke, D., Ben-Shachar, M., Patil, I., Waggoner, P., & Makowski, D. (2021). performance: An R package for assessment, comparison and testing of statistical models. Journal of Open Source Software, 6(60), 3139. https://doi.org/10.21105/joss.03139",
+          package = sprintf("L\u00fcdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., Waggoner, P., & Wiernik, B. M. (2021). performance: Assessment of regression models performance (%s) [R package]. https://CRAN.R-project.org/package=performance (Original work published 2019)",
+                            installed_packages["performance"])
+        ),
+        parameters = c(
+          article = "L\u00fcdecke, D., Ben-Shachar, M., Patil, I., & Makowski, D. (2020). Extracting, computing and exploring the parameters of statistical models using R. Journal of Open Source Software, 5(53), 2445. https://doi.org/10.21105/joss.02445",
+          package = sprintf("L\u00fcdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., H\u00F8jsgaard, S., & Wiernik, B. M. (2022). parameters: Processing of model parameters (%s) [R package]. https://CRAN.R-project.org/package=parameters (Original work published 2019)",
+                            installed_packages["parameters"])
+        ),
+        effectsize = c(
+          article = "Ben-Shachar, M. S., L\u00fcdecke, D., & Makowski, D. (2020). effectsize: Estimation of effect size indices and standardized parameters. Journal of Open Source Software, 5(56), 2815. https://doi.org/10.21105/joss.02815",
+          package = sprintf("Ben-Shachar, M. S., Makowski, D., L\u00fcdecke, D., Patil, I., & Wiernik, B. M. (2022). effectsize: Indices of effect size and standardized parameters (%s) [R package]. https://CRAN.R-project.org/package=effectsize (Original work published 2019)",
+                            installed_packages["effectsize"])
+        ),
+        correlation = c(
+          article = "Makowski, D., Ben-Shachar, M., Patil, I., & L\u00fcdecke, D. (2020). Methods and algorithms for correlation analysis in R. Journal of Open Source Software, 5(51), 2306. https://doi.org/10.21105/joss.02306",
+          package = sprintf("Makowski, D., Wiernik, B. M., Patil, I., L\u00fcdecke, D., & Ben-Shachar, M. S. (2022). correlation: Methods for correlation analysis (%s) [R package]. https://CRAN.R-project.org/package=correlation (Original work published 2020)",
+                            installed_packages["correlation"])
+        ),
+        modelbased = sprintf("Makowski, D., L\u00fcdecke, D., Ben-Shachar, M. S., & Patil, I. (2022). modelbased: Estimation of model-based predictions, contrasts and means (%s) [R package]. https://CRAN.R-project.org/package=modelbased (Original work published 2020)",
+                             installed_packages["modelbased"]),
+        see = c(
+          article = "L\u00fcdecke, D., Patil, I., Ben-Shachar, M. S., Wiernik, B. M., Waggoner, P., & Makowski, D. (2021). see: An R package for visualizing statistical models. Journal of Open Source Software, 6(64), 3393. https://doi.org/10.21105/joss.03393",
+          package = sprintf("L\u00fcdecke, D., Makowski, D., Patil, I., Ben-Shachar, M. S., Wiernik, B. M., & Waggoner, P. (2022). see: Visualisation toolbox for 'easystats' (%s) [R package]. https://CRAN.R-project.org/package=see (Original work published 2019)",
+                            installed_packages["see"])
+        ),
+        report = sprintf("Makowski, D., L\u00fcdecke, D., Ben-Shachar, M. S., Patil, I., & Wiernik, B. M. (2022). report: Automated reporting of results and statistical models (%s) [R package]. https://CRAN.R-project.org/package=report (Original work published 2021)",
+                         installed_packages["report"])
+      )[packages])),
+      "\n"
+    )
+  } else if (format == "markdown") {
+    ref_packages <- readLines(system.file("easystats_bib.yaml", package = "report"))
+    ref_packages[ref_packages == "  version: %s"] <- sprintf(
+      ref_packages[ref_packages == "  version: %s"],
+      c(installed_packages["bayestestR"], installed_packages["correlation"],
+        installed_packages["datawizard"], installed_packages["easystats"],
+        installed_packages["effectsize"], installed_packages["insight"],
+        installed_packages["modelbased"], installed_packages["parameters"],
+        installed_packages["performance"], installed_packages["report"],
+        installed_packages["see"])
+    )
+    ref_packages <- paste0(ref_packages, collapse = "\n")
+  } else {
+    ref_packages <- readLines(system.file("easystats_bib.bib", package = "report"))
+    ref_packages[ref_packages == "  version = {%s}"] <- sprintf(
+      ref_packages[ref_packages == "  version = {%s}"],
+      c(installed_packages["bayestestR"], installed_packages["correlation"],
+        installed_packages["datawizard"], installed_packages["easystats"],
+        installed_packages["effectsize"], installed_packages["insight"],
+        installed_packages["modelbased"], installed_packages["parameters"],
+        installed_packages["performance"], installed_packages["report"],
+        installed_packages["see"])
+    )
+    ref_packages <- paste0(ref_packages, collapse = "\n")
   }
 
-  @article{ludecke20202parameters,
-    title = {parameters: Extracting, Computing and Exploring the Parameters of Statistical Models using {R}.},
-    volume = {5},
-    doi = {10.21105/joss.02445},
-    number = {53},
-    journal = {Journal of Open Source Software},
-    author = {Daniel L{\"u}decke and Mattan S. Ben-Shachar and Indrajeet Patil and Dominique Makowski},
-    year = {2020},
-    pages = {2445},
-  }
-
-  @article{benchashar2020effectsize,
-    title = {{e}ffectsize: Estimation of Effect Size Indices and Standardized Parameters},
-    author = {Mattan S. Ben-Shachar and Daniel L{\"u}decke and Dominique Makowski},
-    year = {2020},
-    journal = {Journal of Open Source Software},
-    volume = {5},
-    number = {56},
-    pages = {2815},
-    publisher = {The Open Journal},
-    doi = {10.21105/joss.02815},
-    url = {https://doi.org/10.21105/joss.02815},
-  }
-  "
 
   out <- list(
-    intro = intro,
     intext = intext,
-    refs = refs,
-    table = table,
-    bib = bib
+    refs = ref_packages
   )
 
   class(out) <- c("cite_easystats", class(out))
@@ -119,29 +208,44 @@ cite_easystats <- function() {
 
 
 #' @export
-as.data.frame.cite_easystats <- function(x, ...) {
-  x$table
+#' @rdname cite_easystats
+summary.cite_easystats <- function(object, what = "all", ...) {
+  what <- match.arg(what, choices = c("all", "cite", "intext", "bib", "refs"))
+  what <- switch(what, all = "all", cite = , intext = "intext", bib = , refs = "refs")
+  if (what %in% c("all", "intext")) {
+    insight::print_colour("\nCitations\n----------\n\n", "blue")
+    cat(object$intext)
+    cat("\n")
+  }
+  if (what %in% c("all", "refs")) {
+    insight::print_colour("\nReferences\n----------\n\n", "blue")
+    cat(object$refs)
+    cat("\n")
+  }
 }
 
-#' @export
-as.report_table.cite_easystats <- as.data.frame.cite_easystats
-
 
 #' @export
-summary.cite_easystats <- function(object, ...) {
-  cat(object$intext)
-  insight::print_colour("\n\nReferences\n----------\n\n", "blue")
-  cat(paste0(paste("-", object$refs), collapse = "\n"))
+#' @rdname cite_easystats
+print.cite_easystats <- function(x, what = "all", ...) {
+  what <- match.arg(what, choices = c("all", "cite", "intext", "bib", "refs"))
+  what <- switch(what, all = "all", cite = , intext = "intext", bib = , refs = "refs")
+  if (what == "all") {
+    insight::print_colour(sprintf(
+      "Thanks for crediting us! %s You can cite the easystats ecosystem as follows:",
+      ifelse(.support_unicode, "\U1F600", ":)")
+    ), "blue")
+    cat("\n")
+  }
+  summary(x, what = what, ...)
 }
 
 
-#' @export
-print.cite_easystats <- function(x, ...) {
-  insight::print_colour(x$intro, "blue")
-  cat("\n\n")
-  cat(x$intext)
-  insight::print_colour("\n\nReferences\n----------\n\n", "blue")
-  cat(paste0(paste("-", x$refs), collapse = "\n"))
-  insight::print_colour("\n\nBibtex entries:\n---------------\n\n", "blue")
-  cat(x$bib)
+.disamguation_letters <- function(x) {
+  if (!is.logical(x)) {
+    stop("`x` must be a logical vector.")
+  }
+  count <- sum(x)
+  x[x == FALSE] <- ""
+  x[x != ""] <- letters[seq_len(count)]
 }
