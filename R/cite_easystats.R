@@ -19,8 +19,18 @@
 #'   - `refs`: References or bibliography in the requested `format`
 #'
 #' @examples
+#'
+#' # Cite just the 'easystats' umbrella package:
 #' cite_easystats()
 #' summary(cite_easystats(), what = "all")
+#'
+#' # Cite every easystats package:
+#' cite_easystats(packages = "all")
+#' summary(cite_easystats(packages = "all"), what = "all")
+#'
+#' # Cite specific packages:
+#' cite_easystats(packages = c("modelbased", "see"))
+#' summary(cite_easystats(packages = c("modelbased", "see")), what = "all")
 #'
 #' # To cite easystats packages in an RMarkdown document, use:
 #'
@@ -236,15 +246,17 @@ cite_easystats <- function(packages = "easystats", format = c("text", "markdown"
 summary.cite_easystats <- function(object, what = "all", ...) {
   what <- match.arg(what, choices = c("all", "cite", "intext", "bib", "refs"))
   what <- switch(what, all = "all", cite = , intext = "intext", bib = , refs = "refs")
-  if (what %in% c("all", "intext")) {
+  if (what == "all") {
     insight::print_colour("\nCitations\n----------\n\n", "blue")
     cat(object$intext)
     cat("\n")
-  }
-  if (what %in% c("all", "refs")) {
     insight::print_colour("\nReferences\n----------\n\n", "blue")
     cat(object$refs)
     cat("\n")
+  } else if (what == "intext") {
+    cat(object$intext)
+  } else if (what == "refs") {
+    cat(object$refs)
   }
 }
 
