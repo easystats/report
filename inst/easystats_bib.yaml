@@ -393,7 +393,7 @@ references:
   URL: https://CRAN.R-project.org/package=modelbased
   version: %s
 
-- id: paramatersArticle
+- id: parametersArticle
   accessed:
     - year: 2021
       month: 6
@@ -592,14 +592,13 @@ references:
     The see package is embedded in the easystats ecosystem, a collection of R
     packages that operate in synergy to provide a consistent and intuitive
     syntax when working with statistical models in the R programming language (R
-    Core Team, 2021). Most easystats packages
-
-    return comprehensive numeric summaries of model parameters and performance.
-    The see package complements these numeric summaries with a host of functions
-    and tools to produce a range of publication-ready visualizations for model
-    parameters, predictions, and performance diagnostics. As a core pillar of
-    easystats, the see package helps users to utilize visualization for more
-    informative, communicable, and well-rounded scientific reporting.
+    Core Team, 2021). Most easystats packages return comprehensive numeric summaries
+    of model parameters and performance. The see package complements these numeric
+    summaries with a host of functions and tools to produce a range of
+    publication-ready visualizations for model parameters, predictions, and
+    performance diagnostics. As a core pillar of easystats, the see package helps
+    users to utilize visualization for more informative, communicable, and well-rounded
+    scientific reporting.
   accessed:
     - year: 2021
       month: 8

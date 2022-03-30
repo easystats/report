@@ -111,7 +111,7 @@ cite_easystats <- function(packages = "easystats", format = c("text", "markdown"
         datawizard = "@datawizardPackage",
         bayestestR = "@bayestestRArticle, @bayestestRPackage",
         performance = "@performanceArticle, @performancePackage",
-        parameters = "@paramatersArticle, @parametersPackage",
+        parameters = "@parametersArticle, @parametersPackage",
         effectsize = "@effectsizeArticle, @effectsizePackage",
         correlation = "@correlationArticle, @correlationPackage",
         modelbased = "@modelbasedPackage",
@@ -129,7 +129,7 @@ cite_easystats <- function(packages = "easystats", format = c("text", "markdown"
         datawizard = "datawizardPackage",
         bayestestR = "bayestestRArticle, bayestestRPackage",
         performance = "performanceArticle, performancePackage",
-        parameters = "paramatersArticle, parametersPackage",
+        parameters = "parametersArticle, parametersPackage",
         effectsize = "effectsizeArticle, effectsizePackage",
         correlation = "correlationArticle, correlationPackage",
         modelbased = "modelbasedPackage",
@@ -215,7 +215,12 @@ cite_easystats <- function(packages = "easystats", format = c("text", "markdown"
         installed_packages["performance"], installed_packages["report"],
         installed_packages["see"])
     )
-    ref_packages <- paste0(ref_packages, collapse = "\n")
+    ref_packages <- list(ref_packages[1:2], ref_packages[-c(1:2, length(ref_packages))], ref_packages[length(ref_packages)])
+    ref_packages[[2]] <- split(ref_packages[[2]], cumsum(ref_packages[[2]] == ""))
+    ref_packages[[2]] <- unlist(ref_packages[[2]][
+      grep(paste0("id: ((", paste0(packages, collapse = ")|("), "))"), ref_packages[[2]])
+    ], use.names = FALSE)
+    ref_packages <- paste0(unlist(ref_packages, use.names = FALSE), collapse = "\n")
   } else {
     ref_packages <- readLines(system.file("easystats_bib.bib", package = "report"))
     ref_packages[ref_packages == "  version = {%s}"] <- sprintf(
@@ -227,7 +232,11 @@ cite_easystats <- function(packages = "easystats", format = c("text", "markdown"
         installed_packages["performance"], installed_packages["report"],
         installed_packages["see"])
     )
-    ref_packages <- paste0(ref_packages, collapse = "\n")
+    ref_packages <- split(ref_packages, cumsum(ref_packages == ""))
+    ref_packages <- unlist(ref_packages[
+      grep(paste0("((article)|(software))\\{((", paste0(packages, collapse = ")|("), "))"), ref_packages)
+    ], use.names = FALSE)
+    ref_packages <- paste0(unlist(ref_packages, use.names = FALSE), collapse = "\n")
   }
 
 
