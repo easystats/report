@@ -7,7 +7,7 @@
 \title{Cite the easystats ecosystem}
 \usage{
 cite_easystats(
-  packages = "all",
+  packages = "easystats",
   format = c("text", "markdown", "biblatex"),
   intext_prefix = TRUE,
   intext_suffix = "."
@@ -47,8 +47,18 @@ A list of class \code{"cite_easystats"} with elements:
 A convenient function for those who wish to cite the easystats packages.
 }
 \examples{
+
+# Cite just the 'easystats' umbrella package:
 cite_easystats()
 summary(cite_easystats(), what = "all")
+
+# Cite every easystats package:
+cite_easystats(packages = "all")
+summary(cite_easystats(packages = "all"), what = "all")
+
+# Cite specific packages:
+cite_easystats(packages = c("modelbased", "see"))
+summary(cite_easystats(packages = c("modelbased", "see")), what = "all")
 
 # To cite easystats packages in an RMarkdown document, use:
 
