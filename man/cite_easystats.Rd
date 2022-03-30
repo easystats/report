@@ -7,7 +7,7 @@
 \title{Cite the easystats ecosystem}
 \usage{
 cite_easystats(
-  packages = "all",
+  packages = "easystats",
   format = c("text", "markdown", "biblatex"),
   intext_prefix = TRUE,
   intext_suffix = "."
