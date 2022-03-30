@@ -32,23 +32,48 @@
 #'
 #'
 #' @export
-cite_easystats <- function(packages = "all", format = c("text", "markdown", "biblatex"), intext_prefix = TRUE, intext_suffix = ".") {
+cite_easystats <- function(packages = "easystats", format = c("text", "markdown", "biblatex"), intext_prefix = TRUE, intext_suffix = ".") {
   format <- match.arg(format, choices = c("text", "markdown", "biblatex"))
-  if (packages == "all") {
+  installed_packages <- utils::installed.packages()[,"Version"]
+  if (length(packages) == 1 && packages == "all") {
     packages <- c("easystats", "insight", "datawizard", "bayestestR",
                   "performance", "parameters", "effectsize", "correlation",
                   "modelbased", "see", "report")
+    packages <- packages[packages %in% names(installed_packages)]
+  } else if (length(packages) == 1 && packages == "easystats") {
+    if (! packages %in% names(installed_packages)) {
+      installed_packages <- c(easystats = "")
+    }
+  } else {
+    if (length(missing_packages <- setdiff(packages, names(installed_packages)))) {
+      message(insight::format_message(
+        "Requested package(s) not installed:",
+        paste(missing_packages, collapse = ", "),
+        "Citations to these packages omitted."
+      ))
+      packages <- setdiff(packages, missing_packages)
+    }
   }
+
 
   # in-text
   if (format == "text") {
     letters_ludeckePackages <- .disamguation_letters(c("easystats", "insight",
                                                        "performance", "parameters",
                                                        "see") %in% packages)
+    if (sum(letters_ludeckePackages != "") == 1) {
+      letters_ludeckePackages <- rep("", length(letters_ludeckePackages))
+    }
     letters_ludeckeArticles <- .disamguation_letters(c("performance", "see") %in% packages)
+    if (sum(letters_ludeckeArticles != "") == 1) {
+      letters_ludeckeArticles <- rep("", length(letters_ludeckeArticles))
+    }
     letters_makowskiPackages <- .disamguation_letters(c("datawizard", "bayestestR",
                                                        "correlation", "modelbased",
                                                        "report") %in% packages)
+    if (sum(letters_makowskiPackages != "") == 1) {
+      letters_makowskiPackages <- rep("", length(letters_makowskiPackages))
+    }
     easystats <- "_easystats_"
     cit_packages <- sprintf(
       "(%s)",
@@ -64,7 +89,7 @@ cite_easystats <- function(packages = "all", format = c("text", "markdown", "bib
         modelbased = sprintf("Makowski et al., 2020/2022%s", letters_makowskiPackages[4]),
         see = sprintf("L\u00fcdecke et al., 2021%s, 2019/2022%s", letters_ludeckeArticles[2], letters_ludeckePackages[5]),
         report = sprintf("Makowski et al., 2021/2022%s", letters_makowskiPackages[5])
-      ), collapse = "; ")
+      )[packages], collapse = "; ")
     )
   } else if (format == "markdown") {
     easystats <- "_easystats_"
@@ -119,13 +144,12 @@ cite_easystats <- function(packages = "all", format = c("text", "markdown", "bib
 
 
   # references
-  installed_packages <- utils::installed.packages()[,"Version"]
   if (format == "text") {
     ref_packages <- paste(
       "- ",
       sort(unlist(list(
-        easystats = sprintf("L\u00fcdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., & Wiernik, B. M. (2022). easystats: Streamline model interpretation, visualization, and reporting (%s) [R package]. https://github.com/easystats/easystats (Original work published 2019)",
-                            installed_packages["easystats"]),
+        easystats = sprintf("L\u00fcdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., & Wiernik, B. M. (2022). easystats: Streamline model interpretation, visualization, and reporting%s [R package]. https://github.com/easystats/easystats (Original work published 2019)",
+                            ifelse(installed_packages["easystats"] == "", "", paste0(" (", installed_packages["easystats"], ")"))),
         insight = c(
           article = "L\u00fcdecke, D., Waggoner, P., & Makowski, D. (2019). insight: A unified interface to access information from model objects in R. Journal of Open Source Software, 4(38), 1412. https://doi.org/10.21105/joss.01412",
           package = sprintf("L\u00fcdecke, D., Makowski, D., Patil, I., Waggoner, P., Ben-Shachar, M. S., Wiernik, B. M., & Arel-Bundock, V. (2022). insight: Easy access to model information for various model objects (%s) [R package]. https://CRAN.R-project.org/package=insight (Original work published 2019)",
@@ -248,4 +272,5 @@ print.cite_easystats <- function(x, what = "all", ...) {
   count <- sum(x)
   x[x == FALSE] <- ""
   x[x != ""] <- letters[seq_len(count)]
+  x
 }
