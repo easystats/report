@@ -115,10 +115,62 @@ summary.report_table <- function(object, ...) {
 
 #' @export
 format.report_table <- function(x, ...) {
+  # remove unwanted columns
+  x$Method <- NULL
+  x$Alternative <- NULL
+
   insight::format_table(x, ...)
 }
 
 #' @export
 print.report_table <- function(x, ...) {
-  cat(insight::export_table(format(x, ...), ...))
+  # try to guess appropriate caption and footer
+  caption <- .report_table_caption(x)
+  footer <- .report_table_footer(x)
+
+  cat(insight::export_table(format(x, ...), caption = caption, footer = footer, ...))
+}
+
+
+
+
+# helper to create table captions and footer -----------------------
+
+.report_table_caption <- function(x) {
+  caption <- NULL
+
+  # footer for htest objects
+  if (!is.null(x$Method)) {
+    caption <- x$Method
+  }
+
+  caption
+}
+
+
+.report_table_footer <- function(x) {
+  footer <- NULL
+
+  # footer for htest objects
+  if (!is.null(x$Alternative)) {
+    footer <- "Alternative hypothesis: "
+    if (!is.null(x$null.value)) {
+      if (length(x$null.value) == 1L) {
+        alt.char <- switch(x$Alternative,
+                           two.sided = "not equal to",
+                           less = "less than",
+                           greater = "greater than"
+        )
+        footer <- paste0(footer, "true ", names(x$null.value), " is ", alt.char, " ", x$null.value)
+      } else {
+        footer <- paste0(footer, x$Alternative)
+      }
+    } else {
+      footer <- paste0(footer, x$Alternative)
+    }
+
+    footer <- c(paste0("\n", footer), "blue")
+  }
+
+  footer
 }
