@@ -71,7 +71,8 @@ if (require("dplyr")) {
     df[1, 2] <- NA
     df[1, 6] <- NA
 
-    expect_snapshot(variant = .Platform$OS.type, report(group_by_at(df, "cyl")))
+    report_grouped_df <- suppressWarnings(report(group_by_at(df, "cyl")))
+    expect_snapshot(variant = .Platform$OS.type, report_grouped_df)
 
     # dataframes with list columns
     set.seed(123)
