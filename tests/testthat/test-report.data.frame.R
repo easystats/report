@@ -42,6 +42,8 @@ test_that("report.factor", {
 })
 
 test_that("report.data.frame", {
+  skip_if_not_installed("dplyr")
+
   r <- report(iris)
   expect_equal(nrow(as.data.frame(r)), 7, tolerance = 0)
   expect_equal(mean(as.data.frame(r)$Median, na.rm = TRUE), 3.6125)
@@ -65,7 +67,8 @@ test_that("report.data.frame", {
 })
 
 test_that("report.data.frame - with NAs", {
-  # deliberately introduce NAs
+  skip_if_not_installed("dplyr")
+
   df <- mtcars
   df[1, 2] <- NA
   df[1, 6] <- NA
