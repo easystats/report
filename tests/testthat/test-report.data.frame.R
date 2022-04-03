@@ -43,6 +43,7 @@ test_that("report.factor", {
 
 test_that("report.data.frame", {
   skip_if_not_installed("dplyr")
+  library(dplyr)
 
   r <- report(iris)
   expect_equal(nrow(as.data.frame(r)), 7, tolerance = 0)
@@ -68,6 +69,7 @@ test_that("report.data.frame", {
 
 test_that("report.data.frame - with NAs", {
   skip_if_not_installed("dplyr")
+  library(dplyr)
 
   df <- mtcars
   df[1, 2] <- NA
