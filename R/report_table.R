@@ -157,9 +157,9 @@ print.report_table <- function(x, ...) {
     if (!is.null(x$null.value)) {
       if (length(x$null.value) == 1L) {
         alt.char <- switch(x$Alternative,
-                           two.sided = "not equal to",
-                           less = "less than",
-                           greater = "greater than"
+          two.sided = "not equal to",
+          less = "less than",
+          greater = "greater than"
         )
         footer <- paste0(footer, "true ", names(x$null.value), " is ", alt.char, " ", x$null.value)
       } else {

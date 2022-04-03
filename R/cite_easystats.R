@@ -40,18 +40,19 @@
 #' ## Bibliography (print with the  `output = 'asis'` option on the code chunk)
 #' print(cite_easystats(format = "markdown"), what = "refs")
 #'
-#'
 #' @export
 cite_easystats <- function(packages = "easystats", format = c("text", "markdown", "biblatex"), intext_prefix = TRUE, intext_suffix = ".") {
   format <- match.arg(format, choices = c("text", "markdown", "biblatex"))
-  installed_packages <- utils::installed.packages()[,"Version"]
+  installed_packages <- utils::installed.packages()[, "Version"]
   if (length(packages) == 1 && packages == "all") {
-    packages <- c("easystats", "insight", "datawizard", "bayestestR",
-                  "performance", "parameters", "effectsize", "correlation",
-                  "modelbased", "see", "report")
+    packages <- c(
+      "easystats", "insight", "datawizard", "bayestestR",
+      "performance", "parameters", "effectsize", "correlation",
+      "modelbased", "see", "report"
+    )
     packages <- packages[packages %in% names(installed_packages)]
   } else if (length(packages) == 1 && packages == "easystats") {
-    if (! packages %in% names(installed_packages)) {
+    if (!packages %in% names(installed_packages)) {
       installed_packages <- c(easystats = "")
     }
   } else {
@@ -68,9 +69,11 @@ cite_easystats <- function(packages = "easystats", format = c("text", "markdown"
 
   # in-text
   if (format == "text") {
-    letters_ludeckePackages <- .disamguation_letters(c("easystats", "insight",
-                                                       "performance", "parameters",
-                                                       "see") %in% packages)
+    letters_ludeckePackages <- .disamguation_letters(c(
+      "easystats", "insight",
+      "performance", "parameters",
+      "see"
+    ) %in% packages)
     if (sum(letters_ludeckePackages != "") == 1) {
       letters_ludeckePackages <- rep("", length(letters_ludeckePackages))
     }
@@ -78,9 +81,11 @@ cite_easystats <- function(packages = "easystats", format = c("text", "markdown"
     if (sum(letters_ludeckeArticles != "") == 1) {
       letters_ludeckeArticles <- rep("", length(letters_ludeckeArticles))
     }
-    letters_makowskiPackages <- .disamguation_letters(c("datawizard", "bayestestR",
-                                                       "correlation", "modelbased",
-                                                       "report") %in% packages)
+    letters_makowskiPackages <- .disamguation_letters(c(
+      "datawizard", "bayestestR",
+      "correlation", "modelbased",
+      "report"
+    ) %in% packages)
     if (sum(letters_makowskiPackages != "") == 1) {
       letters_makowskiPackages <- rep("", length(letters_makowskiPackages))
     }
@@ -158,49 +163,71 @@ cite_easystats <- function(packages = "easystats", format = c("text", "markdown"
     ref_packages <- paste(
       "- ",
       sort(unlist(list(
-        easystats = sprintf("L\u00fcdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., & Wiernik, B. M. (2022). easystats: Streamline model interpretation, visualization, and reporting%s [R package]. https://github.com/easystats/easystats (Original work published 2019)",
-                            ifelse(installed_packages["easystats"] == "", "", paste0(" (", installed_packages["easystats"], ")"))),
+        easystats = sprintf(
+          "L\u00fcdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., & Wiernik, B. M. (2022). easystats: Streamline model interpretation, visualization, and reporting%s [R package]. https://github.com/easystats/easystats (Original work published 2019)",
+          ifelse(installed_packages["easystats"] == "", "", paste0(" (", installed_packages["easystats"], ")"))
+        ),
         insight = c(
           article = "L\u00fcdecke, D., Waggoner, P., & Makowski, D. (2019). insight: A unified interface to access information from model objects in R. Journal of Open Source Software, 4(38), 1412. https://doi.org/10.21105/joss.01412",
-          package = sprintf("L\u00fcdecke, D., Makowski, D., Patil, I., Waggoner, P., Ben-Shachar, M. S., Wiernik, B. M., & Arel-Bundock, V. (2022). insight: Easy access to model information for various model objects (%s) [R package]. https://CRAN.R-project.org/package=insight (Original work published 2019)",
-                            installed_packages["insight"])
+          package = sprintf(
+            "L\u00fcdecke, D., Makowski, D., Patil, I., Waggoner, P., Ben-Shachar, M. S., Wiernik, B. M., & Arel-Bundock, V. (2022). insight: Easy access to model information for various model objects (%s) [R package]. https://CRAN.R-project.org/package=insight (Original work published 2019)",
+            installed_packages["insight"]
+          )
         ),
-        datawizard = sprintf("Makowski, D., L\u00fcdecke, D., Patil, I., Ben-Shachar, M. S., & Wiernik, B. M. (2022). datawizard: Easy data wrangling (%s) [R package]. https://CRAN.R-project.org/package=datawizard (Original work published 2021)",
-                             installed_packages["datawizard"]),
+        datawizard = sprintf(
+          "Makowski, D., L\u00fcdecke, D., Patil, I., Ben-Shachar, M. S., & Wiernik, B. M. (2022). datawizard: Easy data wrangling (%s) [R package]. https://CRAN.R-project.org/package=datawizard (Original work published 2021)",
+          installed_packages["datawizard"]
+        ),
         bayestestR = c(
           article = "Makowski, D., Ben-Shachar, M., & L\u00fcdecke, D. (2019). bayestestR: Describing effects and their uncertainty, existence and significance within the Bayesian framework. Journal of Open Source Software, 4(40), 1541. https://doi.org/10.21105/joss.01541",
-          package = sprintf("Makowski, D., L\u00fcdecke, D., Ben-Shachar, M. S., Patil, I., Wilson, M. D., & Wiernik, B. M. (2021). bayestestR: Understand and describe Bayesian models and posterior distributions (%s) [R package]. https://CRAN.R-project.org/package=bayestestR (Original work published 2019)",
-                            installed_packages["bayestestR"])
+          package = sprintf(
+            "Makowski, D., L\u00fcdecke, D., Ben-Shachar, M. S., Patil, I., Wilson, M. D., & Wiernik, B. M. (2021). bayestestR: Understand and describe Bayesian models and posterior distributions (%s) [R package]. https://CRAN.R-project.org/package=bayestestR (Original work published 2019)",
+            installed_packages["bayestestR"]
+          )
         ),
         performance = c(
           article = "L\u00fcdecke, D., Ben-Shachar, M., Patil, I., Waggoner, P., & Makowski, D. (2021). performance: An R package for assessment, comparison and testing of statistical models. Journal of Open Source Software, 6(60), 3139. https://doi.org/10.21105/joss.03139",
-          package = sprintf("L\u00fcdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., Waggoner, P., & Wiernik, B. M. (2021). performance: Assessment of regression models performance (%s) [R package]. https://CRAN.R-project.org/package=performance (Original work published 2019)",
-                            installed_packages["performance"])
+          package = sprintf(
+            "L\u00fcdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., Waggoner, P., & Wiernik, B. M. (2021). performance: Assessment of regression models performance (%s) [R package]. https://CRAN.R-project.org/package=performance (Original work published 2019)",
+            installed_packages["performance"]
+          )
         ),
         parameters = c(
           article = "L\u00fcdecke, D., Ben-Shachar, M., Patil, I., & Makowski, D. (2020). Extracting, computing and exploring the parameters of statistical models using R. Journal of Open Source Software, 5(53), 2445. https://doi.org/10.21105/joss.02445",
-          package = sprintf("L\u00fcdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., H\u00F8jsgaard, S., & Wiernik, B. M. (2022). parameters: Processing of model parameters (%s) [R package]. https://CRAN.R-project.org/package=parameters (Original work published 2019)",
-                            installed_packages["parameters"])
+          package = sprintf(
+            "L\u00fcdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., H\u00F8jsgaard, S., & Wiernik, B. M. (2022). parameters: Processing of model parameters (%s) [R package]. https://CRAN.R-project.org/package=parameters (Original work published 2019)",
+            installed_packages["parameters"]
+          )
         ),
         effectsize = c(
           article = "Ben-Shachar, M. S., L\u00fcdecke, D., & Makowski, D. (2020). effectsize: Estimation of effect size indices and standardized parameters. Journal of Open Source Software, 5(56), 2815. https://doi.org/10.21105/joss.02815",
-          package = sprintf("Ben-Shachar, M. S., Makowski, D., L\u00fcdecke, D., Patil, I., & Wiernik, B. M. (2022). effectsize: Indices of effect size and standardized parameters (%s) [R package]. https://CRAN.R-project.org/package=effectsize (Original work published 2019)",
-                            installed_packages["effectsize"])
+          package = sprintf(
+            "Ben-Shachar, M. S., Makowski, D., L\u00fcdecke, D., Patil, I., & Wiernik, B. M. (2022). effectsize: Indices of effect size and standardized parameters (%s) [R package]. https://CRAN.R-project.org/package=effectsize (Original work published 2019)",
+            installed_packages["effectsize"]
+          )
         ),
         correlation = c(
           article = "Makowski, D., Ben-Shachar, M., Patil, I., & L\u00fcdecke, D. (2020). Methods and algorithms for correlation analysis in R. Journal of Open Source Software, 5(51), 2306. https://doi.org/10.21105/joss.02306",
-          package = sprintf("Makowski, D., Wiernik, B. M., Patil, I., L\u00fcdecke, D., & Ben-Shachar, M. S. (2022). correlation: Methods for correlation analysis (%s) [R package]. https://CRAN.R-project.org/package=correlation (Original work published 2020)",
-                            installed_packages["correlation"])
+          package = sprintf(
+            "Makowski, D., Wiernik, B. M., Patil, I., L\u00fcdecke, D., & Ben-Shachar, M. S. (2022). correlation: Methods for correlation analysis (%s) [R package]. https://CRAN.R-project.org/package=correlation (Original work published 2020)",
+            installed_packages["correlation"]
+          )
         ),
-        modelbased = sprintf("Makowski, D., L\u00fcdecke, D., Ben-Shachar, M. S., & Patil, I. (2022). modelbased: Estimation of model-based predictions, contrasts and means (%s) [R package]. https://CRAN.R-project.org/package=modelbased (Original work published 2020)",
-                             installed_packages["modelbased"]),
+        modelbased = sprintf(
+          "Makowski, D., L\u00fcdecke, D., Ben-Shachar, M. S., & Patil, I. (2022). modelbased: Estimation of model-based predictions, contrasts and means (%s) [R package]. https://CRAN.R-project.org/package=modelbased (Original work published 2020)",
+          installed_packages["modelbased"]
+        ),
         see = c(
           article = "L\u00fcdecke, D., Patil, I., Ben-Shachar, M. S., Wiernik, B. M., Waggoner, P., & Makowski, D. (2021). see: An R package for visualizing statistical models. Journal of Open Source Software, 6(64), 3393. https://doi.org/10.21105/joss.03393",
-          package = sprintf("L\u00fcdecke, D., Makowski, D., Patil, I., Ben-Shachar, M. S., Wiernik, B. M., & Waggoner, P. (2022). see: Visualisation toolbox for 'easystats' (%s) [R package]. https://CRAN.R-project.org/package=see (Original work published 2019)",
-                            installed_packages["see"])
+          package = sprintf(
+            "L\u00fcdecke, D., Makowski, D., Patil, I., Ben-Shachar, M. S., Wiernik, B. M., & Waggoner, P. (2022). see: Visualisation toolbox for 'easystats' (%s) [R package]. https://CRAN.R-project.org/package=see (Original work published 2019)",
+            installed_packages["see"]
+          )
         ),
-        report = sprintf("Makowski, D., L\u00fcdecke, D., Ben-Shachar, M. S., Patil, I., & Wiernik, B. M. (2022). report: Automated reporting of results and statistical models (%s) [R package]. https://CRAN.R-project.org/package=report (Original work published 2021)",
-                         installed_packages["report"])
+        report = sprintf(
+          "Makowski, D., L\u00fcdecke, D., Ben-Shachar, M. S., Patil, I., & Wiernik, B. M. (2022). report: Automated reporting of results and statistical models (%s) [R package]. https://CRAN.R-project.org/package=report (Original work published 2021)",
+          installed_packages["report"]
+        )
       )[packages])),
       "\n"
     )
@@ -208,12 +235,14 @@ cite_easystats <- function(packages = "easystats", format = c("text", "markdown"
     ref_packages <- readLines(system.file("easystats_bib.yaml", package = "report"))
     ref_packages[ref_packages == "  version: %s"] <- sprintf(
       ref_packages[ref_packages == "  version: %s"],
-      c(installed_packages["bayestestR"], installed_packages["correlation"],
+      c(
+        installed_packages["bayestestR"], installed_packages["correlation"],
         installed_packages["datawizard"], installed_packages["easystats"],
         installed_packages["effectsize"], installed_packages["insight"],
         installed_packages["modelbased"], installed_packages["parameters"],
         installed_packages["performance"], installed_packages["report"],
-        installed_packages["see"])
+        installed_packages["see"]
+      )
     )
     ref_packages <- list(ref_packages[1:2], ref_packages[-c(1:2, length(ref_packages))], ref_packages[length(ref_packages)])
     ref_packages[[2]] <- split(ref_packages[[2]], cumsum(ref_packages[[2]] == ""))
@@ -225,12 +254,14 @@ cite_easystats <- function(packages = "easystats", format = c("text", "markdown"
     ref_packages <- readLines(system.file("easystats_bib.bib", package = "report"))
     ref_packages[ref_packages == "  version = {%s}"] <- sprintf(
       ref_packages[ref_packages == "  version = {%s}"],
-      c(installed_packages["bayestestR"], installed_packages["correlation"],
+      c(
+        installed_packages["bayestestR"], installed_packages["correlation"],
         installed_packages["datawizard"], installed_packages["easystats"],
         installed_packages["effectsize"], installed_packages["insight"],
         installed_packages["modelbased"], installed_packages["parameters"],
         installed_packages["performance"], installed_packages["report"],
-        installed_packages["see"])
+        installed_packages["see"]
+      )
     )
     ref_packages <- split(ref_packages, cumsum(ref_packages == ""))
     ref_packages <- unlist(ref_packages[
@@ -254,7 +285,13 @@ cite_easystats <- function(packages = "easystats", format = c("text", "markdown"
 #' @rdname cite_easystats
 summary.cite_easystats <- function(object, what = "all", ...) {
   what <- match.arg(what, choices = c("all", "cite", "intext", "bib", "refs"))
-  what <- switch(what, all = "all", cite = , intext = "intext", bib = , refs = "refs")
+  what <- switch(what,
+    all = "all",
+    cite = ,
+    intext = "intext",
+    bib = ,
+    refs = "refs"
+  )
   if (what == "all") {
     insight::print_colour("\nCitations\n----------\n\n", "blue")
     cat(object$intext)
@@ -274,7 +311,13 @@ summary.cite_easystats <- function(object, what = "all", ...) {
 #' @rdname cite_easystats
 print.cite_easystats <- function(x, what = "all", ...) {
   what <- match.arg(what, choices = c("all", "cite", "intext", "bib", "refs"))
-  what <- switch(what, all = "all", cite = , intext = "intext", bib = , refs = "refs")
+  what <- switch(what,
+    all = "all",
+    cite = ,
+    intext = "intext",
+    bib = ,
+    refs = "refs"
+  )
   if (what == "all") {
     insight::print_colour(sprintf(
       "Thanks for crediting us! %s You can cite the easystats ecosystem as follows:",

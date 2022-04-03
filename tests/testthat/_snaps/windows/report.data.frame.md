@@ -33,7 +33,7 @@
 # report.data.frame - with NAs
 
     Code
-      report(group_by_at(df, "cyl"))
+      report_grouped_df
     Output
       The data contains 32 observations, grouped by cyl, of the following 11 variables:
       
@@ -73,7 +73,7 @@
         - gear: n = 14, Mean = 3.29, SD = 0.73, Median = 3.00, MAD = 0.00, range: [3, 5], Skewness = 2.29, Kurtosis = 3.79, 0 missing
         - carb: n = 14, Mean = 3.50, SD = 1.56, Median = 3.50, MAD = 0.74, range: [2, 8], Skewness = 1.86, Kurtosis = 5.14, 0 missing
 
----
+# report.data.frame - with list columns
 
     Code
       report(starwars)

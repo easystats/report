@@ -41,41 +41,40 @@ test_that("report.factor", {
   expect_equal(nrow(as.data.frame(r)), 4, tolerance = 0)
 })
 
-if (require("dplyr")) {
-  test_that("report.data.frame", {
-    r <- report(iris)
-    expect_equal(nrow(as.data.frame(r)), 7, tolerance = 0)
-    expect_equal(mean(as.data.frame(r)$Median, na.rm = TRUE), 3.6125)
+test_that("report.data.frame", {
+  r <- report(iris)
+  expect_equal(nrow(as.data.frame(r)), 7, tolerance = 0)
+  expect_equal(mean(as.data.frame(r)$Median, na.rm = TRUE), 3.6125)
 
-    r <- report(
-      iris,
-      levels_percentage = FALSE,
-      missing_percentage = TRUE,
-      median = TRUE,
-      range = FALSE,
-      dispersion = FALSE
-    )
-    expect_equal(nrow(as.data.frame(r)), 7, tolerance = 0)
-    expect_equal(mean(as.data.frame(r)$n_Obs), 107, tolerance = 0.01)
+  r <- report(
+    iris,
+    levels_percentage = FALSE,
+    missing_percentage = TRUE,
+    median = TRUE,
+    range = FALSE,
+    dispersion = FALSE
+  )
+  expect_equal(nrow(as.data.frame(r)), 7, tolerance = 0)
+  expect_equal(mean(as.data.frame(r)$n_Obs), 107, tolerance = 0.01)
 
-    r <- report(group_by_at(iris, "Species"))
-    expect_equal(nrow(as.data.frame(r)), 8, tolerance = 0)
-    expect_equal(mean(as.data.frame(r)$n_Obs), 50, tolerance = 0)
+  r <- report(group_by(iris, Species))
+  expect_equal(nrow(as.data.frame(r)), 8, tolerance = 0)
+  expect_equal(mean(as.data.frame(r)$n_Obs), 50, tolerance = 0)
 
-    expect_snapshot(variant = .Platform$OS.type, r)
-  })
+  expect_snapshot(variant = .Platform$OS.type, r)
+})
 
-  test_that("report.data.frame - with NAs", {
-    # deliberately introduce NAs
-    df <- mtcars
-    df[1, 2] <- NA
-    df[1, 6] <- NA
+test_that("report.data.frame - with NAs", {
+  # deliberately introduce NAs
+  df <- mtcars
+  df[1, 2] <- NA
+  df[1, 6] <- NA
 
-    report_grouped_df <- suppressWarnings(report(group_by_at(df, "cyl")))
-    expect_snapshot(variant = .Platform$OS.type, report_grouped_df)
+  report_grouped_df <- suppressWarnings(report(group_by(df, cyl)))
+  expect_snapshot(variant = .Platform$OS.type, report_grouped_df)
+})
 
-    # dataframes with list columns
-    set.seed(123)
-    expect_snapshot(variant = .Platform$OS.type, report(starwars))
-  })
-}
+test_that("report.data.frame - with list columns", {
+  set.seed(123)
+  expect_snapshot(variant = .Platform$OS.type, report(starwars))
+})
