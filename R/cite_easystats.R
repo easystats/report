@@ -99,7 +99,7 @@ cite_easystats <- function(packages = "easystats", format = c("text", "markdown"
         bayestestR = sprintf("Makowski et al., 2019, 2019/2022%s", letters_makowskiPackages[2]),
         performance = sprintf("L\u00fcdecke et al., 2021%s, 2019/2022%s", letters_ludeckeArticles[1], letters_ludeckePackages[3]),
         parameters = sprintf("L\u00fcdecke et al., 2020, 2019/2022%s", letters_ludeckePackages[4]),
-        effectsize = "Ben-Shachar et al., 2020, 2019/2022%s",
+        effectsize = "Ben-Shachar et al., 2020, 2019/2022",
         correlation = sprintf("Makowski et al., 2020, 2020/2022%s", letters_makowskiPackages[3]),
         modelbased = sprintf("Makowski et al., 2020/2022%s", letters_makowskiPackages[4]),
         see = sprintf("L\u00fcdecke et al., 2021%s, 2019/2022%s", letters_ludeckeArticles[2], letters_ludeckePackages[5]),
@@ -160,7 +160,7 @@ cite_easystats <- function(packages = "easystats", format = c("text", "markdown"
 
   # references
   if (format == "text") {
-    ref_packages <- paste(
+    ref_packages <- paste0(
       "- ",
       sort(unlist(list(
         easystats = sprintf(
@@ -294,15 +294,15 @@ summary.cite_easystats <- function(object, what = "all", ...) {
   )
   if (what == "all") {
     insight::print_colour("\nCitations\n----------\n\n", "blue")
-    cat(object$intext)
+    cat(strwrap(object$intext, exdent = 0, width = .95 * getOption("width")), sep = "\n")
     cat("\n")
     insight::print_colour("\nReferences\n----------\n\n", "blue")
-    cat(object$refs)
+    cat(unlist(lapply(object$refs, strwrap, exdent = 4, width = .95 * getOption("width"))), sep = "\n")
     cat("\n")
   } else if (what == "intext") {
-    cat(object$intext)
+    cat(strwrap(object$intext, exdent = 0, width = .95 * getOption("width")), sep = "\n")
   } else if (what == "refs") {
-    cat(object$refs)
+    cat(unlist(lapply(object$refs, strwrap, exdent = 4, width = .95 * getOption("width"))), sep = "\n")
   }
 }
 
