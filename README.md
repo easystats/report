@@ -142,7 +142,7 @@ correlations.
 report(t.test(mtcars$mpg ~ mtcars$am))
 ```
 
-    # Effect sizes were labelled following Cohen's (1988) recommendations.
+    # 
     # 
     # The Welch Two Sample t-test testing the difference of mtcars$mpg by mtcars$am
     # (mean in group 0 = 17.15, mean in group 1 = 24.39) suggests that the effect is
@@ -157,9 +157,13 @@ functions, like for example with this correlation test:
 cor.test(iris$Sepal.Length, iris$Sepal.Width) %>%
   report() %>%
   as.data.frame()
-# Parameter1        |       Parameter2 |     r |        95% CI | t(148) |     p |                               Method | Alternative
-# ----------------------------------------------------------------------------------------------------------------------------------
-# iris$Sepal.Length | iris$Sepal.Width | -0.12 | [-0.27, 0.04] |  -1.44 | 0.152 | Pearson's product-moment correlation |   two.sided
+# Pearson's product-moment correlation
+# 
+# Parameter1        |       Parameter2 |     r |        95% CI | t(148) |     p
+# -----------------------------------------------------------------------------
+# iris$Sepal.Length | iris$Sepal.Width | -0.12 | [-0.27, 0.04] |  -1.44 | 0.152
+# 
+# Alternative hypothesis: two.sided
 ```
 
 ### ANOVAs
@@ -176,8 +180,6 @@ aov(Sepal.Length ~ Species, data = iris) %>%
     # 
     #   - The main effect of Species is statistically significant and large (F(2, 147)
     # = 119.26, p < .001; Eta2 = 0.62, 95% CI [0.54, 1.00])
-    # 
-    # Effect sizes were labelled following Field's (2013) recommendations.
 
 ### General Linear Models (GLMs)
 
@@ -210,8 +212,8 @@ report(model)
 
 ### Mixed Models
 
-Mixed models (coming from example from the `lme4` package), which
-popularity and usage is exploding, can also be reported as it should:
+Mixed models, whose popularity and usage is exploding, can also be
+reported:
 
 ``` r
 library(lme4)
@@ -241,7 +243,7 @@ report(model)
 
 Bayesian models can also be reported using the new
 [**SEXIT**](https://easystats.github.io/bayestestR/reference/sexit.html)
-framework, that combines clarity, precision and usefulness.
+framework, which combines clarity, precision and usefulness.
 
 ``` r
 library(rstanarm)
@@ -257,16 +259,16 @@ report(model)
     # 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The
     # model's explanatory power is substantial (R2 = 0.81, 95% CI [0.70, 0.89], adj.
     # R2 = 0.79). The model's intercept, corresponding to qsec = 0 and wt = 0, is at
-    # 19.83 (95% CI [8.85, 30.68]). Within this model:
+    # 19.85 (95% CI [9.50, 29.84]). Within this model:
     # 
-    #   - The effect of qsec (Median = 0.92, 95% CI [0.40, 1.50]) has a 99.85%
-    # probability of being positive (> 0), 98.60% of being significant (> 0.30), and
+    #   - The effect of qsec (Median = 0.92, 95% CI [0.44, 1.44]) has a 100.00%
+    # probability of being positive (> 0), 99.35% of being significant (> 0.30), and
     # 0.00% of being large (> 1.81). The estimation successfully converged (Rhat =
-    # 1.001) and the indices are reliable (ESS = 1965)
-    #   - The effect of wt (Median = -5.05, 95% CI [-5.99, -4.04]) has a 100.00%
+    # 1.001) and the indices are reliable (ESS = 2153)
+    #   - The effect of wt (Median = -5.05, 95% CI [-5.99, -4.10]) has a 100.00%
     # probability of being negative (< 0), 100.00% of being significant (< -0.30),
     # and 100.00% of being large (< -1.81). The estimation successfully converged
-    # (Rhat = 1.000) and the indices are reliable (ESS = 1770)
+    # (Rhat = 1.000) and the indices are reliable (ESS = 2250)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
     # framework, we report the median of the posterior distribution and its 95% CI
@@ -298,7 +300,7 @@ report_statistics(model)
     # beta = 0.93, 95% CI [0.73, 1.13], t(147) = 9.03, p < .001; Std. beta = 1.12, 95% CI [0.88, 1.37]
     # beta = 1.58, 95% CI [1.38, 1.79], t(147) = 15.37, p < .001; Std. beta = 1.91, 95% CI [1.66, 2.16]
 
-### Report participants details
+### Report participants’ details
 
 This can be useful to complete the **Participants** paragraph of your
 manuscript.
@@ -319,8 +321,8 @@ paste(
 
 ### Report sample
 
-Report can also help you create sample description table (also referred
-to as **Table 1**).
+Report can also help you create a sample description table (also
+referred to as **Table 1**).
 
 | Variable               | setosa (n=50) | versicolor (n=50) | virginica (n=50) | Total (n=150) |
 |:-----------------------|:--------------|:------------------|:-----------------|:--------------|
@@ -338,12 +340,12 @@ analysis paragraph about the tools used.
 report(sessionInfo())
 ```
 
-    # Analyses were conducted using the R Statistical language (version 4.1.2; R Core
-    # Team, 2021) on Windows 10 x64 (build 22000), using the packages Rcpp (version
-    # 1.0.8; Dirk Eddelbuettel and Romain Francois, 2011), Matrix (version 1.3.4;
+    # Analyses were conducted using the R Statistical language (version 4.1.3; R Core
+    # Team, 2022) on macOS Big Sur/Monterey 10.16, using the packages Rcpp (version
+    # 1.0.8.3; Dirk Eddelbuettel and Romain Francois, 2011), Matrix (version 1.4.0;
     # Douglas Bates and Martin Maechler, 2021), lme4 (version 1.1.28; Douglas Bates
-    # et al., 2015), rstanarm (version 2.21.1; Goodrich B et al., 2020), dplyr
-    # (version 1.0.8; Hadley Wickham et al., 2022) and report (version 0.5.1;
+    # et al., 2015), rstanarm (version 2.21.3; Goodrich B et al., 2022), dplyr
+    # (version 1.0.8; Hadley Wickham et al., 2022) and report (version 0.5.1.1;
     # Makowski et al., 2020).
     # 
     # References
@@ -352,13 +354,13 @@ report(sessionInfo())
     # Integration. Journal of Statistical Software, 40(8), 1-18,
     # <doi:10.18637/jss.v040.i08>.
     #   - Douglas Bates and Martin Maechler (2021). Matrix: Sparse and Dense Matrix
-    # Classes and Methods. R package version 1.3-4.
+    # Classes and Methods. R package version 1.4-0.
     # https://CRAN.R-project.org/package=Matrix
     #   - Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015). Fitting
     # Linear Mixed-Effects Models Using lme4. Journal of Statistical Software, 67(1),
     # 1-48. doi:10.18637/jss.v067.i01.
-    #   - Goodrich B, Gabry J, Ali I & Brilleman S. (2020). rstanarm: Bayesian applied
-    # regression modeling via Stan. R package version 2.21.1
+    #   - Goodrich B, Gabry J, Ali I & Brilleman S. (2022). rstanarm: Bayesian applied
+    # regression modeling via Stan. R package version 2.21.3
     # https://mc-stan.org/rstanarm.
     #   - Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2022).
     # dplyr: A Grammar of Data Manipulation. R package version 1.0.8.
@@ -367,7 +369,7 @@ report(sessionInfo())
     # Results Reporting as a Practical Tool to Improve Reproducibility and
     # Methodological Best Practices Adoption. CRAN. Available from
     # https://github.com/easystats/report. doi: .
-    #   - R Core Team (2021). R: A language and environment for statistical computing.
+    #   - R Core Team (2022). R: A language and environment for statistical computing.
     # R Foundation for Statistical Computing, Vienna, Austria. URL
     # https://www.R-project.org/.
 
