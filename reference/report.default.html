@@ -152,6 +152,12 @@ Supporting New Models."><meta property="og:image" content="/reference/figures/ca
 <span class="r-in"><span class="co"># Add a reproducible example instead of the following</span></span>
 <span class="r-in"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Length</span> <span class="op">*</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'data_findcols()' is deprecated and will be removed in a future update.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>   Its usage is discouraged. Please use 'data_find()' instead.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'data_findcols()' is deprecated and will be removed in a future update.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>   Its usage is discouraged. Please use 'data_find()' instead.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'data_findcols()' is deprecated and will be removed in a future update.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>   Its usage is discouraged. Please use 'data_find()' instead.</span>
 <span class="r-in"><span class="va">r</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> We fitted a linear model (estimated using OLS) to predict Sepal.Length with Petal.Length and Species (formula: Sepal.Length ~ Petal.Length * Species). The model explains a statistically significant and substantial proportion of variance (R2 = 0.84, F(5, 144) = 151.71, p &lt; .001, adj. R2 = 0.83). The model's intercept, corresponding to Petal.Length = 0 and Species = setosa, is at 4.21 (95% CI [3.41, 5.02], t(144) = 10.34, p &lt; .001). Within this model:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -209,7 +215,7 @@ Supporting New Models."><meta property="og:image" content="/reference/figures/ca
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
 </div>
 
     </footer></div>
