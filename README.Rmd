@@ -172,7 +172,7 @@ glm(vs ~ mpg * drat, data = mtcars, family = "binomial") %>%
 
 ### Mixed Models
 
-Mixed models (coming from example from the `lme4` package), which popularity and usage is exploding, can also be reported as it should:
+Mixed models, whose popularity and usage is exploding, can also be reported:
 
 ```{r, eval=FALSE}
 library(lme4)
@@ -193,7 +193,7 @@ lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris) %>%
 
 ### Bayesian Models
 
-Bayesian models can also be reported using the new [**SEXIT**](https://easystats.github.io/bayestestR/reference/sexit.html) framework, that combines clarity, precision and usefulness.
+Bayesian models can also be reported using the new [**SEXIT**](https://easystats.github.io/bayestestR/reference/sexit.html) framework, which combines clarity, precision and usefulness.
 
 ```{r, eval=FALSE}
 library(rstanarm)
@@ -235,7 +235,7 @@ print(report_statistics(model), width = 80)
 ```
 
 
-### Report participants details
+### Report participants' details
 
 This can be useful to complete the **Participants** paragraph of your manuscript.
 
@@ -266,7 +266,7 @@ paste(
 
 ### Report sample
 
-Report can also help you create sample description table (also referred to as **Table 1**).
+Report can also help you create a sample description table (also referred to as **Table 1**).
 
 ```{r, include=FALSE}
 report_sample(iris, group_by = "Species")
