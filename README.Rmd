@@ -172,7 +172,7 @@ glm(vs ~ mpg * drat, data = mtcars, family = "binomial") %>%
 
 ### Mixed Models
 
-Mixed models (coming for example from the `lme4` package), whose popularity and usage is exploding, can also be reported as they should:
+Mixed models, whose popularity and usage is exploding, can also be reported:
 
 ```{r, eval=FALSE}
 library(lme4)
