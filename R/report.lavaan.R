@@ -56,7 +56,10 @@ report_table.lavaan <- function(x, ...) {
 
   # Shorten ----
   table_full <- datawizard::data_remove(table, "SE")
-  table <- datawizard::data_remove(table_full, data_findcols(table_full, ends_with = c("_CI_low|_CI_high")))
+  table <- datawizard::data_remove(
+    table_full,
+    datawizard::data_find(table_full, select = "(_CI_low|_CI_high)$", regex = TRUE)
+  )
   table <- table[!table$Parameter %in% c(
     "AIC", "BIC",
     "RMSEA"

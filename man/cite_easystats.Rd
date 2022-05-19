@@ -68,5 +68,4 @@ print(cite_easystats(format = "markdown"), what = "intext")
 ## Bibliography (print with the  `output = 'asis'` option on the code chunk)
 print(cite_easystats(format = "markdown"), what = "refs")
 
-
 }

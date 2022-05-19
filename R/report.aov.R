@@ -124,7 +124,10 @@ report_table.aov <- function(x, ...) {
 
   row.names(table_full) <- NULL
 
-  table <- datawizard::data_remove(table_full, data_findcols(table_full, ends_with = c("_CI_low|_CI_high")))
+  table <- datawizard::data_remove(
+    table_full,
+    datawizard::data_find(table_full, select = "(_CI_low|_CI_high)$", regex = TRUE)
+  )
 
   as.report_table(
     table_full,

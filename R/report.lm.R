@@ -163,7 +163,10 @@ report_table.lm <- function(x, include_effectsize = TRUE, ...) {
     params <- datawizard::data_remove(params, "df_error")
   }
   table_full <- datawizard::data_remove(params, "SE")
-  table <- datawizard::data_remove(table_full, data_findcols(table_full, ends_with = c("_CI_low|_CI_high")))
+  table <- datawizard::data_remove(
+    table_full,
+    datawizard::data_find(table_full, select = "(_CI_low|_CI_high)$", regex = TRUE)
+  )
   table <- table[!table$Parameter %in% c("AIC", "BIC", "ELPD", "LOOIC", "WAIC"), ]
 
   # Prepare -----
@@ -554,7 +557,7 @@ report_text.lm <- function(x, table = NULL, ...) {
   if (!is.null(coefname) && coefname %in% names(table)) {
     estimate <- attributes(table)$coefficient_name
   } else {
-    estimate <- data_findcols(table, candidates)[1]
+    estimate <- datawizard::data_find(table, candidates, regex = TRUE)[1]
   }
   estimate
 }
