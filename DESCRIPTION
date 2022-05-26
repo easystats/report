@@ -54,9 +54,6 @@ Imports:
     stats,
     tools,
     utils
-Remotes: 
-    easystats/insight,
-    easystats/parameters
 Suggests:
     BayesFactor,
     brms,
