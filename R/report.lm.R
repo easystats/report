@@ -203,7 +203,7 @@ report_statistics.lm <- function(x,
 
   # Estimate
   estimate <- .find_regression_estimate(table)
-  if (is.na(estimate) | is.null(estimate) | !estimate %in% names(table)) {
+  if (is.null(estimate) || is.na(estimate) || !estimate %in% names(table)) {
     text <- ""
   } else if (estimate == "Coefficient") {
     text <- paste0("beta = ", insight::format_value(table[[estimate]]))
