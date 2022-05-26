@@ -136,7 +136,7 @@ will run it.</p></dd>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># h-tests</span></span>
 <span class="r-in"><span class="fu">report_text</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Effect sizes were labelled following Cohen's (1988) recommendations.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The Welch Two Sample t-test testing the difference between iris$Sepal.Width and iris$Sepal.Length (mean of x = 3.06, mean of y = 5.84) suggests that the effect is negative, statistically significant, and large (difference = -2.79, 95% CI [-2.94, -2.64], t(225.68) = -36.46, p &lt; .001; Cohen's d = -4.21, 95% CI [-4.66, -3.76])</span>
 <span class="r-in"></span>
@@ -144,17 +144,14 @@ will run it.</p></dd>
 <span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">report_text</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html" class="external-link">aov</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> For one-way between subjects designs, partial eta squared is equivalent to eta squared.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Returning eta squared.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'data_findcols()' is deprecated and will be removed in a future update.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   Its usage is discouraged. Please use 'data_find()' instead.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> For one-way between subjects designs, partial eta squared is equivalent to eta squared.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Returning eta squared.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'data_findcols()' is deprecated and will be removed in a future update.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   Its usage is discouraged. Please use 'data_find()' instead.</span>
 <span class="r-in"><span class="va">r</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The ANOVA (formula: Sepal.Length ~ Species) suggests that:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - The main effect of Species is statistically significant and large (F(2, 147) = 119.26, p &lt; .001; Eta2 = 0.62, 95% CI [0.54, 1.00])</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Effect sizes were labelled following Field's (2013) recommendations.</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The ANOVA suggests that:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -162,12 +159,8 @@ will run it.</p></dd>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># GLMs</span></span>
 <span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">report_text</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Length</span> <span class="op">*</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'data_findcols()' is deprecated and will be removed in a future update.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   Its usage is discouraged. Please use 'data_find()' instead.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'data_findcols()' is deprecated and will be removed in a future update.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   Its usage is discouraged. Please use 'data_find()' instead.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'data_findcols()' is deprecated and will be removed in a future update.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   Its usage is discouraged. Please use 'data_find()' instead.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>argument 'pattern' has length &gt; 1 and only the first element will be used</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>No column names that matched the required search pattern were found.</span>
 <span class="r-in"><span class="va">r</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> We fitted a linear model (estimated using OLS) to predict Sepal.Length with Petal.Length and Species (formula: Sepal.Length ~ Petal.Length * Species). The model explains a statistically significant and substantial proportion of variance (R2 = 0.84, F(5, 144) = 151.71, p &lt; .001, adj. R2 = 0.83). The model's intercept, corresponding to Petal.Length = 0 and Species = setosa, is at 4.21 (95% CI [3.41, 5.02], t(144) = 10.34, p &lt; .001). Within this model:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -193,12 +186,8 @@ will run it.</p></dd>
 <span class="r-in">  <span class="va">r</span></span>
 <span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'data_findcols()' is deprecated and will be removed in a future update.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   Its usage is discouraged. Please use 'data_find()' instead.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'data_findcols()' is deprecated and will be removed in a future update.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   Its usage is discouraged. Please use 'data_find()' instead.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'data_findcols()' is deprecated and will be removed in a future update.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   Its usage is discouraged. Please use 'data_find()' instead.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>argument 'pattern' has length &gt; 1 and only the first element will be used</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>No column names that matched the required search pattern were found.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> We fitted a linear mixed model to predict Sepal.Length with Petal.Length. The model included Species as random effect. The model's total explanatory power is substantial (conditional R2 = 0.97) and the part related to the fixed effects alone (marginal R2) is of 0.66. The model's intercept is at 2.50 (95% CI [1.19, 3.82]). Within this model:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of Petal Length is statistically significant and positive (beta = 0.89, 95% CI [0.76, 1.01], t(146) = 13.93, p &lt; .001, Std. beta = 1.89)</span>
@@ -210,18 +199,14 @@ will run it.</p></dd>
 <span class="r-in">  <span class="va">r</span></span>
 <span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.77). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.81). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'data_findcols()' is deprecated and will be removed in a future update.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   Its usage is discouraged. Please use 'data_find()' instead.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.77). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.76). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'data_findcols()' is deprecated and will be removed in a future update.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   Its usage is discouraged. Please use 'data_find()' instead.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> We fitted a Bayesian linear model to predict mpg with cyl and wt. Priors over parameters were set as normal (mean = 0.00, SD = 8.44) and normal (mean = 0.00, SD = 15.40) distributions. The model's explanatory power is substantial (R2 = 0.81, adj. R2 = 0.79). The model's intercept is at 39.61 (95% CI [36.00, 43.18]). Within this model:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.79). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.79). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.79). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.78). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> We fitted a Bayesian linear model to predict mpg with cyl and wt. Priors over parameters were set as normal (mean = 0.00, SD = 8.44) and normal (mean = 0.00, SD = 15.40) distributions. The model's explanatory power is substantial (R2 = 0.81, adj. R2 = 0.80). The model's intercept is at 39.76 (95% CI [36.12, 42.99]). Within this model:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of cyl (Median = -1.46, 95% CI [-2.29, -0.63]) has 99.83%, 99.58% and 20.83% probability of being negative (&lt; 0), significant (&lt; -0.30) and large (&lt; -1.81). The estimation successfully converged (Rhat = 1.005) but the indices are unreliable (ESS = 539)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of wt (Median = -3.28, 95% CI [-4.78, -1.68]) has 100.00%, 99.92% and 96.25% probability of being negative (&lt; 0), significant (&lt; -0.30) and large (&lt; -1.81). The estimation successfully converged (Rhat = 1.003) but the indices are unreliable (ESS = 537)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of cyl (Median = -1.51, 95% CI [-2.35, -0.65]) has 99.92%, 99.67% and 24.17% probability of being negative (&lt; 0), significant (&lt; -0.30) and large (&lt; -1.81). The estimation successfully converged (Rhat = 1.008) but the indices are unreliable (ESS = 526)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of wt (Median = -3.18, 95% CI [-4.74, -1.66]) has 100.00%, 100.00% and 96.33% probability of being negative (&lt; 0), significant (&lt; -0.30) and large (&lt; -1.81). The estimation successfully converged (Rhat = 1.006) but the indices are unreliable (ESS = 610)</span>
 <span class="r-in"><span class="co"># }</span></span>
 </code></pre></div>
     </div>
