@@ -32,7 +32,7 @@ if (!requireNamespace("dplyr", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
 }
 
-library(dplyr)
+library(dplyr, warn.conflicts = FALSE)
 library(report)
 ```
 
