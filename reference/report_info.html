@@ -119,6 +119,8 @@ objects above).</p></dd>
 <span class="r-in">  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Length</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">Species</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
 <span class="r-in">  <span class="fu">report_info</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Package 'merDeriv' needs to be installed to compute confidence intervals</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   for random effect parameters.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Standardized parameters were obtained by fitting the model on a standardized version of the dataset. 95% Confidence Intervals (CIs) and p-values were computed using </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Bayesian models</span></span>

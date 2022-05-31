@@ -112,6 +112,8 @@ objects above).</p></dd>
 <span class="r-in">  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Length</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">Species</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
 <span class="r-in">  <span class="fu">report_intercept</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Package 'merDeriv' needs to be installed to compute confidence intervals</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   for random effect parameters.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>argument 'pattern' has length &gt; 1 and only the first element will be used</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>No column names that matched the required search pattern were found.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The model's intercept, corresponding to Petal.Length = 0, is at 2.50 (95% CI [1.19, 3.82], t(146) = 3.75, p &lt; .001).</span>
@@ -121,7 +123,7 @@ objects above).</p></dd>
 <span class="r-in">  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html" class="external-link">stan_glm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span>, refresh <span class="op">=</span> <span class="fl">0</span>, iter <span class="op">=</span> <span class="fl">600</span><span class="op">)</span></span>
 <span class="r-in">  <span class="fu">report_intercept</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> The model's intercept, corresponding to Species = setosa, is at 5.01 (95% CI [4.87, 5.15]).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The model's intercept, corresponding to Species = setosa, is at 5.00 (95% CI [4.88, 5.16]).</span>
 <span class="r-in"><span class="co"># }</span></span>
 </code></pre></div>
     </div>

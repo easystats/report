@@ -144,6 +144,8 @@ will run it.</p></dd>
 <span class="r-in">  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Length</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">Species</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
 <span class="r-in">  <span class="fu">report_statistics</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Package 'merDeriv' needs to be installed to compute confidence intervals</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   for random effect parameters.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> beta = 2.50, 95% CI [1.19, 3.82], t(146) = 3.75, p &lt; .001; Std. beta = -1.46e-13, 95% CI [-1.49, 1.49]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> beta = 0.89, 95% CI [0.76, 1.01], t(146) = 13.93, p &lt; .001; Std. beta = 1.89, 95% CI [1.63, 2.16]</span>
 <span class="r-in"></span>
@@ -154,9 +156,9 @@ will run it.</p></dd>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>argument 'pattern' has length &gt; 1 and only the first element will be used</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>No column names that matched the required search pattern were found.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 95% CI [4.86, 5.15], pd = 100%, 0% in ROPE; Std. beta = -1.01, 95% CI [-1.20, -0.83]; Rhat = 1.00, ESS = 1042.24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 95% CI [0.74, 1.12], pd = 100%, 0% in ROPE; Std. beta = 1.13, 95% CI [0.88, 1.38]; Rhat = 1.00, ESS = 1122.40</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 95% CI [1.36, 1.78], pd = 100%, 0% in ROPE; Std. beta = 1.91, 95% CI [1.68, 2.18]; Rhat = 1.00, ESS = 1117.37</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95% CI [4.87, 5.15], pd = 100%, 0% in ROPE; Std. beta = -1.01, 95% CI [-1.18, -0.82]; Rhat = 1.00, ESS = 871.86</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95% CI [0.73, 1.11], pd = 100%, 0% in ROPE; Std. beta = 1.12, 95% CI [0.87, 1.36]; Rhat = 1.00, ESS = 1005.03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95% CI [1.39, 1.77], pd = 100%, 0% in ROPE; Std. beta = 1.91, 95% CI [1.65, 2.16]; Rhat = 1.00, ESS = 949.29</span>
 <span class="r-in"><span class="co"># }</span></span>
 </code></pre></div>
     </div>
