@@ -552,12 +552,12 @@ report_text.lm <- function(x, table = NULL, ...) {
 
 #' @keywords internal
 .find_regression_estimate <- function(table, ...) {
-  candidates <- c("^Coefficient", "beta", "Median", "Mean", "MAP")
+  candidates <- "(^Coefficient|beta|Median|Mean|MAP)"
   coefname <- attributes(table)$coefficient_name
   if (!is.null(coefname) && coefname %in% names(table)) {
     estimate <- attributes(table)$coefficient_name
   } else {
-    estimate <- datawizard::data_find(table, candidates, regex = TRUE)[1]
+    estimate <- datawizard::data_find(table, candidates, regex = TRUE, verbose = FALSE)[1]
   }
   estimate
 }
