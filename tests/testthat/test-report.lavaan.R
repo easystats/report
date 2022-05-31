@@ -9,14 +9,14 @@ if (require("lavaan") && require("effectsize") &&
 
   # Specific reports
   test_that("model-lavaan detailed report", {
-    expect_snapshot(variant = .Platform$OS.type, report(model))
+    expect_snapshot(report(model))
   })
 
   test_that("model-lavaan detailed table", {
-    expect_snapshot(variant = .Platform$OS.type, report_table(model))
+    expect_snapshot(report_table(model))
   })
 
   test_that("model-lavaan detailed performance", {
-    expect_snapshot(variant = .Platform$OS.type, report_performance(model))
+    expect_snapshot(report_performance(model))
   })
 }
