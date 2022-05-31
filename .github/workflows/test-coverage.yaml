@@ -10,7 +10,7 @@ name: test-coverage
 
 jobs:
   test-coverage:
-    runs-on: ubuntu-latest
+    runs-on: macOS-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 

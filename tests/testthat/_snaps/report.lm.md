@@ -2,9 +2,6 @@
 
     Code
       report(lm(Sepal.Width ~ Species, data = iris))
-    Warning <simpleWarning>
-      argument 'pattern' has length > 1 and only the first element will be used
-      No column names that matched the required search pattern were found.
     Output
       We fitted a linear model (estimated using OLS) to predict Sepal.Width with Species (formula: Sepal.Width ~ Species). The model explains a statistically significant and substantial proportion of variance (R2 = 0.40, F(2, 147) = 49.16, p < .001, adj. R2 = 0.39). The model's intercept, corresponding to Species = setosa, is at 3.43 (95% CI [3.33, 3.52], t(147) = 71.36, p < .001). Within this model:
       
@@ -17,9 +14,6 @@
 
     Code
       report(lm(wt ~ as.factor(am) * as.factor(cyl), data = mtcars))
-    Warning <simpleWarning>
-      argument 'pattern' has length > 1 and only the first element will be used
-      No column names that matched the required search pattern were found.
     Output
       We fitted a linear model (estimated using OLS) to predict wt with am and cyl (formula: wt ~ as.factor(am) * as.factor(cyl)). The model explains a statistically significant and substantial proportion of variance (R2 = 0.73, F(5, 26) = 13.73, p < .001, adj. R2 = 0.67). The model's intercept, corresponding to am = 0 and cyl = 0, is at 2.94 (95% CI [2.27, 3.60], t(26) = 9.08, p < .001). Within this model:
       
@@ -35,11 +29,6 @@
 
     Code
       report(glm(vs ~ disp, data = mtcars, family = binomial(link = "probit")))
-    Warning <simpleWarning>
-      argument 'pattern' has length > 1 and only the first element will be used
-      argument 'pattern' has length > 1 and only the first element will be used
-      argument 'pattern' has length > 1 and only the first element will be used
-      No column names that matched the required search pattern were found.
     Output
       We fitted a probit model (estimated using ML) to predict vs with disp (formula: vs ~ disp). The model's explanatory power is substantial (Nagelkerke's R2 = 0.66). The model's intercept, corresponding to disp = 0, is at 2.51 (95% CI [1.13, 4.28], p = 0.001). Within this model:
       
@@ -51,11 +40,6 @@
 
     Code
       report(glm(vs ~ mpg, data = mtcars, family = "poisson"))
-    Warning <simpleWarning>
-      argument 'pattern' has length > 1 and only the first element will be used
-      argument 'pattern' has length > 1 and only the first element will be used
-      argument 'pattern' has length > 1 and only the first element will be used
-      No column names that matched the required search pattern were found.
     Output
       We fitted a poisson model (estimated using ML) to predict vs with mpg (formula: vs ~ mpg). The model's explanatory power is substantial (Nagelkerke's R2 = 0.39). The model's intercept, corresponding to mpg = 0, is at -3.27 (95% CI [-5.46, -1.36], p = 0.002). Within this model:
       
