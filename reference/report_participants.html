@@ -12,7 +12,7 @@ the participants section."><meta property="og:image" content="/reference/figures
     
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,37 +93,58 @@ the participants section.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>data</dt>
 <dd><p>A data frame.</p></dd>
+
+
 <dt>age</dt>
 <dd><p>The name of the column containing the age of the participant.</p></dd>
+
+
 <dt>sex</dt>
 <dd><p>The name of the column containing the sex of the participant. The
 classes should be one of <code>c("Male", "M", "Female", "F")</code>. Note that
 you can specify other characters here as well (e.g., <code>"Intersex"</code>), but
 the function will group all individuals in those groups as <code>"Other"</code>.</p></dd>
+
+
 <dt>gender</dt>
 <dd><p>The name of the column containing the gender of the
 The classes should be one of <code>c("Man", "M", "Woman", "F", "Non-Binary", "N")</code>. Note that you can specify other characters here as well
 (e.g., <code>"Gender Fluid"</code>), but the function will group all individuals in
 those groups as <code>"Non-Binary"</code>.</p></dd>
+
+
 <dt>education</dt>
 <dd><p>The name of the column containing education information.</p></dd>
+
+
 <dt>participants</dt>
 <dd><p>The name of the participants' identifier column (for
 instance in the case of repeated measures).</p></dd>
+
+
 <dt>group</dt>
 <dd><p>A character vector indicating the name(s) of the column(s) used
 for stratified description.</p></dd>
+
+
 <dt>spell_n</dt>
 <dd><p>Fully spell the sample size (<code>"Three participants"</code>
 instead of <code>"3 participants"</code>).</p></dd>
+
+
 <dt>digits</dt>
 <dd><p>Number of significant digits.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Arguments passed to or from other methods.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A character vector with description of the "participants", based on
+    
+
+<p>A character vector with description of the "participants", based on
 the information provided in <code>data</code>.</p>
     </div>
 
@@ -202,7 +223,7 @@ the information provided in <code>data</code>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.9000.</p>
 </div>
 
     </footer></div>

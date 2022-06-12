@@ -12,7 +12,7 @@ list of supported objects in report())."><meta property="og:image" content="/ref
     
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -83,15 +83,22 @@ list of supported objects in <code><a href="report.html">report()</a></code>).</
     <dl><dt>x</dt>
 <dd><p>The R object that you want to report (see list of of supported
 objects above).</p></dd>
+
+
 <dt>table</dt>
 <dd><p>A table obtained via <code><a href="report_table.html">report_table()</a></code>. If not provided,
 will run it.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Arguments passed to or from other methods.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>An object of class <code>report_text()</code>.</p>
+    
+
+<p>An object of class <code>report_text()</code>.</p>
     </div>
 
     <div class="section level2">
@@ -101,7 +108,7 @@ will run it.</p></dd>
 <span class="r-in"><span class="co"># Miscellaneous</span></span>
 <span class="r-in"><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">report_text</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">r</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Analyses were conducted using the R Statistical language (version 4.2.0; R Core Team, 2022) on Ubuntu 20.04.4 LTS, using the packages Rcpp (version 1.0.8.3; Dirk Eddelbuettel and Romain Francois, 2011), rstanarm (version 2.21.3; Goodrich B et al., 2022), performance (version 0.9.0; Lüdecke et al., 2021), bayestestR (version 0.12.1; Makowski et al., 2019), report (version 0.5.1.1; Makowski et al., 2020), lavaan (version 0.6.11; Yves Rosseel, 2012), Matrix (version 1.4.1; NA), dplyr (version 1.0.9; NA) and lme4 (version 1.1.29; NA).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Analyses were conducted using the R Statistical language (version 4.2.0; R Core Team, 2022) on Ubuntu 20.04.4 LTS, using the packages Rcpp (version 1.0.8.3; Dirk Eddelbuettel and Romain Francois, 2011), rstanarm (version 2.21.3; Goodrich B et al., 2022), performance (version 0.9.0; Lüdecke et al., 2021), bayestestR (version 0.12.1; Makowski et al., 2019), report (version 0.5.1.2; Makowski et al., 2020), lavaan (version 0.6.11; Yves Rosseel, 2012), Matrix (version 1.4.1; NA), dplyr (version 1.0.9; NA) and lme4 (version 1.1.29; NA).</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> References</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
@@ -116,7 +123,7 @@ will run it.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - NA</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> The analysis was done using the R Statistical language (v4.2.0; R Core Team, 2022) on Ubuntu 20.04.4 LTS, using the packages Rcpp (v1.0.8.3), rstanarm (v2.21.3), performance (v0.9.0), bayestestR (v0.12.1), report (v0.5.1.1), lavaan (v0.6.11), Matrix (v1.4.1), dplyr (v1.0.9) and lme4 (v1.1.29).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The analysis was done using the R Statistical language (v4.2.0; R Core Team, 2022) on Ubuntu 20.04.4 LTS, using the packages Rcpp (v1.0.8.3), rstanarm (v2.21.3), performance (v0.9.0), bayestestR (v0.12.1), report (v0.5.1.2), lavaan (v0.6.11), Matrix (v1.4.1), dplyr (v1.0.9) and lme4 (v1.1.29).</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Data</span></span>
 <span class="r-in"><span class="fu">report_text</span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span><span class="op">)</span></span>
@@ -199,14 +206,14 @@ will run it.</p></dd>
 <span class="r-in">  <span class="va">r</span></span>
 <span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.78). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.8). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.76). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.78). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.79). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> We fitted a Bayesian linear model to predict mpg with cyl and wt. Priors over parameters were set as normal (mean = 0.00, SD = 8.44) and normal (mean = 0.00, SD = 15.40) distributions. The model's explanatory power is substantial (R2 = 0.82, adj. R2 = 0.80). The model's intercept is at 39.70 (95% CI [36.26, 43.00]). Within this model:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.8). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.77). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> We fitted a Bayesian linear model to predict mpg with cyl and wt. Priors over parameters were set as normal (mean = 0.00, SD = 8.44) and normal (mean = 0.00, SD = 15.40) distributions. The model's explanatory power is substantial (R2 = 0.82, adj. R2 = 0.79). The model's intercept is at 39.75 (95% CI [36.07, 42.92]). Within this model:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of cyl (Median = -1.51, 95% CI [-2.33, -0.68]) has 100.00%, 99.67% and 23.08% probability of being negative (&lt; 0), significant (&lt; -0.30) and large (&lt; -1.81). The estimation successfully converged (Rhat = 0.999) but the indices are unreliable (ESS = 690)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of wt (Median = -3.16, 95% CI [-4.84, -1.59]) has 100.00%, 100.00% and 95.92% probability of being negative (&lt; 0), significant (&lt; -0.30) and large (&lt; -1.81). The estimation successfully converged (Rhat = 1.002) but the indices are unreliable (ESS = 700)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of cyl (Median = -1.52, 95% CI [-2.38, -0.60]) has 100.00%, 99.58% and 23.75% probability of being negative (&lt; 0), significant (&lt; -0.30) and large (&lt; -1.81). The estimation successfully converged (Rhat = 1.000) but the indices are unreliable (ESS = 505)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of wt (Median = -3.20, 95% CI [-4.88, -1.76]) has 100.00%, 100.00% and 96.75% probability of being negative (&lt; 0), significant (&lt; -0.30) and large (&lt; -1.81). The estimation successfully converged (Rhat = 1.000) but the indices are unreliable (ESS = 487)</span>
 <span class="r-in"><span class="co"># }</span></span>
 </code></pre></div>
     </div>
@@ -219,7 +226,7 @@ will run it.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.9000.</p>
 </div>
 
     </footer></div>
