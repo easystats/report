@@ -1,3 +1,9 @@
+# report 0.5.2
+
+BREAKING CHANGES
+
+* The minimum needed R version is now bumped to 3.5.
+
 # report 0.5.1
 
 * Hotfix release to fix failing tests and to unarchive package on CRAN.

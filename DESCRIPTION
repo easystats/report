@@ -1,7 +1,7 @@
 Type: Package
 Package: report
 Title: Automated Reporting of Results and Statistical Models
-Version: 0.5.1.1
+Version: 0.5.1.2
 Authors@R: 
     c(person(given = "Dominique",
              family = "Makowski",
@@ -43,13 +43,13 @@ License: GPL-3 | file LICENSE
 URL: https://easystats.github.io/report/
 BugReports: https://github.com/easystats/report/issues
 Depends:
-    R (>= 3.4)
+    R (>= 3.5)
 Imports:
     bayestestR (>= 0.12.1),
     effectsize (>= 0.7.0),
     insight (>= 0.17.1),
     parameters (>= 0.18.1),
-    performance (>= 0.8.0),
+    performance (>= 0.9.0),
     datawizard (>= 0.4.1),
     stats,
     tools,
