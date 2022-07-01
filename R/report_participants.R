@@ -10,16 +10,18 @@
 #'   you can specify other characters here as well (e.g., `"Intersex"`), but
 #'   the function will group all individuals in those groups as `"Other"`.
 #' @param gender The name of the column containing the gender of the
-#'   The classes should be one of `c("Man", "M", "Woman", "F", "Non-Binary",
-#'   "N")`. Note that you can specify other characters here as well
-#'   (e.g., `"Gender Fluid"`), but the function will group all individuals in
-#'   those groups as `"Non-Binary"`.
+#'   classes should be one of `c("Man", "M", "Male", Woman", "W", F",
+#'   "Female", Non-Binary", "N")`. Note that you can specify other characters
+#'   here as well (e.g., `"Gender Fluid"`), but the function will group all
+#'   individuals in those groups as `"Non-Binary"`.
 #' @param education The name of the column containing education information.
+#' @param country The name of the column containing country information.
+#' @param threshold Percentage after which to combine, e.g., countries (default is 10%, so countries that represent less than 10% will be combined in the "other" category).
 #' @param participants The name of the participants' identifier column (for
 #'   instance in the case of repeated measures).
 #' @param group A character vector indicating the name(s) of the column(s) used
 #'   for stratified description.
-#' @param spell_n Fully spell the sample size (`"Three participants"`
+#' @param spell_n Logical, fully spell the sample size (`"Three participants"`
 #'   instead of `"3 participants"`).
 #' @inheritParams report.numeric
 #'
@@ -49,7 +51,17 @@
 #'   "Highschool", "Bachelor", "Bachelor"
 #' )
 #' report_participants(data, age = "Age", sex = "Sex", gender = "Gender", education = "Education2")
+#' # Country
+#' data <- data.frame(
+#'   "Age" = c(22, 23, 54, 21, 8, 42, 18, 32, 24, 27, 45),
+#'   "Sex" = c("Intersex", "F", "F", "M", "M", "M", "F", "F", "F", "F", "F"),
+#'   "Gender" = c("F", "F", "F", "M", "M", "M", "F", "F", "F", "F", "F"),
+#'   "Country" = c("USA", NA, "Canada", "Canada", "India", "Germany",
+#'   "USA", "USA", "USA", "USA", "Canada"))
+#' report_participants(data)
 #'
+#' # Country, control presentation treshold
+#' report_participants(data, threshold = 5)
 #'
 #' # Repeated measures data
 #' data <- data.frame(
@@ -89,10 +101,12 @@ report_participants <- function(data,
                                 sex = NULL,
                                 gender = NULL,
                                 education = NULL,
+                                country = NULL,
                                 participants = NULL,
                                 group = NULL,
                                 spell_n = FALSE,
                                 digits = 1,
+                                threshold = 10,
                                 ...) {
 
   # find age variable automatically
@@ -115,6 +129,11 @@ report_participants <- function(data,
     education <- .find_education_in_data(data)
   }
 
+  # find country variable automatically
+  if (is.null(country)) {
+    country <- .find_country_in_data(data)
+  }
+
   if (!is.null(group)) {
     text <- c()
     for (i in split(data, data[group])) {
@@ -123,9 +142,11 @@ report_participants <- function(data,
         age = age,
         sex = sex,
         education = education,
+        country = country,
         participants = participants,
         spell_n = spell_n,
-        digits = digits
+        digits = digits,
+        threshold = threshold
       )
 
       pre_text <- paste0("the '", paste0(names(i[group]), " - ", as.character(sapply(i[group], unique)), collapse = " and "), "' group: ")
@@ -140,9 +161,11 @@ report_participants <- function(data,
       sex = sex,
       gender = gender,
       education = education,
+      country = country,
       participants = participants,
       spell_n = spell_n,
       digits = digits,
+      threshold = threshold,
       ...
     )
   }
@@ -157,9 +180,11 @@ report_participants <- function(data,
                                  sex = "Sex",
                                  gender = "Gender",
                                  education = "Education",
+                                 country = "Country",
                                  participants = NULL,
                                  spell_n = FALSE,
                                  digits = 1,
+                                 threshold = 10,
                                  ...) {
   # Sanity checks
   if (is.null(age) | !age %in% names(data)) {
@@ -178,6 +203,10 @@ report_participants <- function(data,
     data$Education <- NA
     education <- "Education"
   }
+  if (is.null(country) | !country %in% names(data)) {
+    data$country <- NA
+    country <- "Country"
+  }
 
   # Grouped data
   if (!is.null(participants)) {
@@ -185,12 +214,14 @@ report_participants <- function(data,
       "Age" = stats::aggregate(data[[age]], by = list(data[[participants]]), FUN = mean)[[2]],
       "Sex" = stats::aggregate(data[[sex]], by = list(data[[participants]]), FUN = utils::head, n = 1)[[2]],
       "Gender" = stats::aggregate(data[[gender]], by = list(data[[participants]]), FUN = utils::head, n = 1)[[2]],
-      "Education" = stats::aggregate(data[[education]], by = list(data[[participants]]), FUN = utils::head, n = 1)[[2]]
+      "Education" = stats::aggregate(data[[education]], by = list(data[[participants]]), FUN = utils::head, n = 1)[[2]],
+      "Country" = stats::aggregate(data[[country]], by = list(data[[participants]]), FUN = utils::head, n = 1)[[2]]
     )
     age <- "Age"
     sex <- "Sex"
     gender <- "Gender"
     education <- "Education"
+    country <- "Country"
   }
 
   if (spell_n) {
@@ -248,23 +279,23 @@ report_participants <- function(data,
   } else if (insight::format_value(length(data[[gender]][tolower(data[[gender]]) %in% c("")]) / nrow(data) * 100) == "0.00") {
     paste0(
       "Gender: ",
-      insight::format_value(length(data[[gender]][tolower(data[[gender]]) %in% c("woman", "w")]) / nrow(data) * 100, digits = digits),
+      insight::format_value(length(data[[gender]][tolower(data[[gender]]) %in% c("woman", "w", "f", "female")]) / nrow(data) * 100, digits = digits),
       "% women, ",
-      insight::format_value(length(data[[gender]][tolower(data[[gender]]) %in% c("man", "m")]) / nrow(data) * 100, digits = digits),
+      insight::format_value(length(data[[gender]][tolower(data[[gender]]) %in% c("man", "m", "male")]) / nrow(data) * 100, digits = digits),
       "% men, ",
-      insight::format_value(100 - length(data[[gender]][tolower(data[[gender]]) %in% c("woman", "w", "man", "m")]) / nrow(data) * 100),
+      insight::format_value(100 - length(data[[gender]][tolower(data[[gender]]) %in% c("woman", "w", "f", "female", "man", "m", "male")]) / nrow(data) * 100),
       "% non-binary"
     )
   } else {
     paste0(
       "Gender: ",
-      insight::format_value(length(data[[gender]][tolower(data[[gender]]) %in% c("woman", "w")]) / nrow(data) * 100, digits = digits),
+      insight::format_value(length(data[[gender]][tolower(data[[gender]]) %in% c("woman", "w", "f", "female")]) / nrow(data) * 100, digits = digits),
       "% women, ",
-      insight::format_value(length(data[[gender]][tolower(data[[gender]]) %in% c("man", "m")]) / nrow(data) * 100, digits = digits),
+      insight::format_value(length(data[[gender]][tolower(data[[gender]]) %in% c("man", "m", "male")]) / nrow(data) * 100, digits = digits),
       "% men, ",
-      insight::format_value(100 - length(data[[gender]][tolower(data[[gender]]) %in% c("woman", "w", "man", "m")]) / nrow(data) * 100),
+      insight::format_value(100 - length(data[[gender]][tolower(data[[gender]]) %in% c("woman", "w", "f", "female", "man", "m", "male")]) / nrow(data) * 100),
       "% non-binary, ",
-      insight::format_value(length(data[[sex]][tolower(data[[sex]]) %in% c(NA)]) / nrow(data) * 100),
+      insight::format_value(length(data[[gender]][tolower(data[[gender]]) %in% c(NA)]) / nrow(data) * 100),
       "% missing"
     )
   }
@@ -297,19 +328,45 @@ report_participants <- function(data,
     }
   }
 
+  text_country <- if (all(is.na(data[[country]]))) {
+    ""
+  } else {
+    country.table <- as.data.frame(datawizard::data_tabulate(data[[country]]))[c(2, 4)]
+    names(country.table) <- c("Country", "Percentage")
+    country.table <- country.table[order(-country.table$Percentage),]
+    upper <- country.table[which(country.table$Percentage >= threshold),]
+    lower <- country.table[which(country.table$Percentage < threshold),]
+    if(nrow(lower) > 0) {
+      lower.sum <- data.frame(Country = "other", Percentage = sum(lower$Percentage))
+      combined <- rbind(upper, lower.sum)
+    } else {
+      combined <- upper
+    }
+    combined$Percentage <- insight::format_value(combined$Percentage)
+    country_string <- paste0(combined$Percentage, "% ", combined$Country, collapse = ", ")
+    text_country <- paste("Country:", country_string)
+  }
 
   paste0(
     size,
     " participants (",
     ifelse(text_age == "", "", text_age),
-    ifelse(text_sex == "", "", paste0(ifelse(text_age == "", "", "; "), text_sex)),
-    ifelse(text_gender == "", "", paste0(ifelse(text_age == "" & text_sex == "", "", "; "), text_gender)),
-    ifelse(text_education == "", "", paste0(ifelse(text_age == "" & text_sex == "" & text_gender == "", "", "; "), text_education)),
-    ")"
+
+    ifelse(text_sex == "", "", paste0(ifelse(
+      text_age == "", "", "; "), text_sex)),
+
+    ifelse(text_gender == "", "", paste0(ifelse(
+      text_age == "" & text_sex == "", "", "; "), text_gender)),
+
+    ifelse(text_education == "", "", paste0(ifelse(
+      text_age == "" & text_sex == "" & text_gender == "", "", "; "), text_education)),
+
+    ifelse(text_country == "", "", paste0(ifelse(
+      text_education == "" & text_age == "" & text_sex == "" &
+        text_gender == "", "", "; "), text_country)),
+    ")."
   )
 }
-
-
 
 #' @keywords internal
 .find_age_in_data <- function(data) {
@@ -370,6 +427,21 @@ report_participants <- function(data,
     "isced"
   } else if (any(grepl("^isced", colnames(data)))) {
     grep("^isced", colnames(data), value = TRUE)[1]
+  } else {
+    ""
+  }
+}
+
+#' @keywords internal
+.find_country_in_data <- function(data) {
+  if ("Country" %in% colnames(data)) {
+    "Country"
+  } else if ("country" %in% colnames(data)) {
+    "country"
+  } else if (any(grepl("^Country", colnames(data)))) {
+    grep("^Country", colnames(data), value = TRUE)[1]
+  } else if (any(grepl("^country", colnames(data)))) {
+    grep("^country", colnames(data), value = TRUE)[1]
   } else {
     ""
   }
