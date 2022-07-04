@@ -28,31 +28,38 @@ test_that("report_participants", {
     "6 participants (Mean age = 28.0, SD = 21.1, range: [8, 54]; Sex: 50.0% females, 16.7% males, 33.3% other; Gender: 50.0% women, 16.7% men, 33.33% non-binary)"
   )
 
-  # TO DO : discuss if this is the correct approach to report in case of missing values
-
-  ###### David Feinberg Comments ##########
-  # There was no reporting of missing values for Age, but there was for Sex,
-  # So I reported missing values for Age, Sex, and Gender.
-  # I didn't touch education. There are no tests for education.
-  # I belive these shouldn't be NA's in tests for Sex and Gender,
-  # because NA means not available
-  # but empty strings are available... they exist...
-  # try:
-  # > is.na("")
-  # [1] FALSE
-  # I suggest testing for empty strings as I put below.
-  # NA works for age because that's supposed to be a number. Not sure if it's
-  # going to work in all cases though...
-  ###### David Feinberg Comments ##########
-
   data3 <- data.frame(
     "Age" = c(22, 82, NA, NA, NA, NA),
-    "Sex" = c("F", "F", "", "", "", ""),
-    "Gender" = c("W", "W", "", "", "", "")
+    "Sex" = c("F", "F", "", "", "NA", NA),
+    "Gender" = c("W", "W", "", "", "NA", NA)
   )
 
   expect_equal(
     report_participants(data3),
-    "6 participants (Mean age = 52.0, SD = 42.4, range: [22, 82], 66.7% missing; Sex: 33.3% females, 0.0% males, 66.7% other, 0.00% missing; Gender: 33.3% women, 0.0% men, 66.67% non-binary, 0.00% missing)"
+    "6 participants (Mean age = 52.0, SD = 42.4, range: [22, 82], 66.7% missing; Sex: 33.3% females, 0.0% males, 0.0% other, 66.67% missing; Gender: 33.3% women, 0.0% men, 0.00% non-binary, 66.67% missing)"
   )
+
+  # Add tests for education and country
+  data4 <- data.frame(
+    "Education" = c(0, 8, -3, -5, 3, 5, NA),
+    "Education2" = c("Bachelor", "PhD", "Highschool", "Highschool", "Bachelor", "Bachelor", NA),
+    "Country" = c("USA", "Canada", "Canada", "India", "Germany", "USA", NA)
+  )
+
+  expect_equal(
+    report_participants(data4),
+    "7 participants (Mean education = 1.3, SD = 4.9, range: [-5, 8]; Country: 28.57% Canada, 28.57% USA, 14.29% Germany, 14.29% India, 14.29% missing)"
+  )
+
+  expect_equal(
+    report_participants(data4, education = "Education2"),
+    "7 participants (Education: Bachelor, 42.86%; Highschool, 28.57%; PhD, 14.29%; missing, 14.29%; Country: 28.57% Canada, 28.57% USA, 14.29% Germany, 14.29% India, 14.29% missing)"
+  )
+
+  expect_equal(
+    report_participants(data4, threshold = 15),
+    "7 participants (Mean education = 1.3, SD = 4.9, range: [-5, 8]; Country: 28.57% Canada, 28.57% USA, 42.86% other)"
+  )
+
 })
+

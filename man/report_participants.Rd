@@ -65,10 +65,9 @@ the participants section.
 library(report)
 data <- data.frame(
   "Age" = c(22, 23, 54, 21, 8, 42),
-  "Sex" = c("Intersex", "F", "M", "M", "M", "F"),
-  "Gender" = c("N", "W", "W", "M", "M", "M")
+  "Sex" = c("Intersex", "F", "M", "M", "NA", NA),
+  "Gender" = c("N", "W", "W", "M", "NA", NA)
 )
-
 report_participants(data, age = "Age", sex = "Sex")
 
 # Years of education (relative to high school graduation)
@@ -84,11 +83,12 @@ data$Education2 <- c(
   "Highschool", "Bachelor", "Bachelor"
 )
 report_participants(data, age = "Age", sex = "Sex", gender = "Gender", education = "Education2")
+
 # Country
 data <- data.frame(
   "Age" = c(22, 23, 54, 21, 8, 42, 18, 32, 24, 27, 45),
   "Sex" = c("Intersex", "F", "F", "M", "M", "M", "F", "F", "F", "F", "F"),
-  "Gender" = c("F", "F", "F", "M", "M", "M", "F", "F", "F", "F", "F"),
+  "Gender" = c("N", "W", "W", "M", "M", "M", "W", "W", "W", "W", "W"),
   "Country" = c("USA", NA, "Canada", "Canada", "India", "Germany",
   "USA", "USA", "USA", "USA", "Canada"))
 report_participants(data)
@@ -103,7 +103,6 @@ data <- data.frame(
   "Gender" = c("N", "W", "W", "M", "M", "M"),
   "Participant" = c("S1", "S1", "s2", "s2", "s3", "s3")
 )
-
 report_participants(data, age = "Age", sex = "Sex", gender = "Gender", participants = "Participant")
 
 # Grouped data
