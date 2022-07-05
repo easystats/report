@@ -72,18 +72,18 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">cite_easystats</span><span class="op">(</span>
-  packages <span class="op">=</span> <span class="st">"easystats"</span>,
-  format <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"text"</span>, <span class="st">"markdown"</span>, <span class="st">"biblatex"</span><span class="op">)</span>,
-  intext_prefix <span class="op">=</span> <span class="cn">TRUE</span>,
-  intext_suffix <span class="op">=</span> <span class="st">"."</span>
-<span class="op">)</span>
-
-<span class="co"># S3 method for cite_easystats</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">object</span>, what <span class="op">=</span> <span class="st">"all"</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for cite_easystats</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, what <span class="op">=</span> <span class="st">"all"</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cite_easystats</span><span class="op">(</span></span>
+<span>  packages <span class="op">=</span> <span class="st">"easystats"</span>,</span>
+<span>  format <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"text"</span>, <span class="st">"markdown"</span>, <span class="st">"biblatex"</span><span class="op">)</span>,</span>
+<span>  intext_prefix <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  intext_suffix <span class="op">=</span> <span class="st">"."</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for cite_easystats</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">object</span>, what <span class="op">=</span> <span class="st">"all"</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for cite_easystats</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, what <span class="op">=</span> <span class="st">"all"</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -130,9 +130,9 @@ If <code>FALSE</code> or <code>NA</code>, no suffix is included.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="co"># Cite just the 'easystats' umbrella package:</span></span>
-<span class="r-in"><span class="fu">cite_easystats</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Cite just the 'easystats' umbrella package:</span></span></span>
+<span class="r-in"><span><span class="fu">cite_easystats</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Thanks for crediting us! 😀 You can cite the easystats ecosystem as follows:</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Citations</span></span>
@@ -150,7 +150,7 @@ If <code>FALSE</code> or <code>NA</code>, no suffix is included.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     and reporting [R package]. https://github.com/easystats/easystats</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     (Original work published 2019)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu">cite_easystats</span><span class="op">(</span><span class="op">)</span>, what <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu">cite_easystats</span><span class="op">(</span><span class="op">)</span>, what <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Citations</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">----------</span></span>
@@ -167,9 +167,9 @@ If <code>FALSE</code> or <code>NA</code>, no suffix is included.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     and reporting [R package]. https://github.com/easystats/easystats</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     (Original work published 2019)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Cite every easystats package:</span></span>
-<span class="r-in"><span class="fu">cite_easystats</span><span class="op">(</span>packages <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Cite every easystats package:</span></span></span>
+<span class="r-in"><span><span class="fu">cite_easystats</span><span class="op">(</span>packages <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Thanks for crediting us! 😀 You can cite the easystats ecosystem as follows:</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Citations</span></span>
@@ -208,7 +208,7 @@ If <code>FALSE</code> or <code>NA</code>, no suffix is included.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     (Original work published 2019)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - Lüdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., Waggoner, P., &amp;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     Wiernik, B. M. (2021). performance: Assessment of regression models</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     performance (0.9.0) [R package].</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     performance (0.9.1) [R package].</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     https://CRAN.R-project.org/package=performance (Original work published</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     2019)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - Lüdecke, D., Makowski, D., Patil, I., Waggoner, P., Ben-Shachar, M. S.,</span>
@@ -237,7 +237,7 @@ If <code>FALSE</code> or <code>NA</code>, no suffix is included.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     https://CRAN.R-project.org/package=datawizard (Original work published</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     2021)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu">cite_easystats</span><span class="op">(</span>packages <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span>, what <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu">cite_easystats</span><span class="op">(</span>packages <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span>, what <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Citations</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">----------</span></span>
@@ -275,7 +275,7 @@ If <code>FALSE</code> or <code>NA</code>, no suffix is included.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     (Original work published 2019)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - Lüdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., Waggoner, P., &amp;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     Wiernik, B. M. (2021). performance: Assessment of regression models</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     performance (0.9.0) [R package].</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     performance (0.9.1) [R package].</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     https://CRAN.R-project.org/package=performance (Original work published</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     2019)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - Lüdecke, D., Makowski, D., Patil, I., Waggoner, P., Ben-Shachar, M. S.,</span>
@@ -304,9 +304,9 @@ If <code>FALSE</code> or <code>NA</code>, no suffix is included.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     https://CRAN.R-project.org/package=datawizard (Original work published</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     2021)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Cite specific packages:</span></span>
-<span class="r-in"><span class="fu">cite_easystats</span><span class="op">(</span>packages <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"modelbased"</span>, <span class="st">"see"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Cite specific packages:</span></span></span>
+<span class="r-in"><span><span class="fu">cite_easystats</span><span class="op">(</span>packages <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"modelbased"</span>, <span class="st">"see"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Requested package(s) not installed:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   modelbased, see</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   Citations to these packages omitted.</span>
@@ -323,7 +323,7 @@ If <code>FALSE</code> or <code>NA</code>, no suffix is included.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> -</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu">cite_easystats</span><span class="op">(</span>packages <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"modelbased"</span>, <span class="st">"see"</span><span class="op">)</span><span class="op">)</span>, what <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu">cite_easystats</span><span class="op">(</span>packages <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"modelbased"</span>, <span class="st">"see"</span><span class="op">)</span><span class="op">)</span>, what <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Requested package(s) not installed:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   modelbased, see</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   Citations to these packages omitted.</span>
@@ -339,16 +339,16 @@ If <code>FALSE</code> or <code>NA</code>, no suffix is included.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> -</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># To cite easystats packages in an RMarkdown document, use:</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## In-text citations:</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu">cite_easystats</span><span class="op">(</span>format <span class="op">=</span> <span class="st">"markdown"</span><span class="op">)</span>, what <span class="op">=</span> <span class="st">"intext"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># To cite easystats packages in an RMarkdown document, use:</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## In-text citations:</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu">cite_easystats</span><span class="op">(</span>format <span class="op">=</span> <span class="st">"markdown"</span><span class="op">)</span>, what <span class="op">=</span> <span class="st">"intext"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Analyses were conducted using the _easystats_ collection of packages</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [@easystatsPackage].</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Bibliography (print with the  `output = 'asis'` option on the code chunk)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu">cite_easystats</span><span class="op">(</span>format <span class="op">=</span> <span class="st">"markdown"</span><span class="op">)</span>, what <span class="op">=</span> <span class="st">"refs"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Bibliography (print with the  `output = 'asis'` option on the code chunk)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu">cite_easystats</span><span class="op">(</span>format <span class="op">=</span> <span class="st">"markdown"</span><span class="op">)</span>, what <span class="op">=</span> <span class="st">"refs"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> --- references:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> - id: easystatsPackage accessed: - year: 2022 month: 3 day: 28 author: -</span>
@@ -361,7 +361,7 @@ If <code>FALSE</code> or <code>NA</code>, no suffix is included.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     visualization, and reporting title-short: &lt;span</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     class="nocase"&gt;easystats&lt;/span&gt; type: software URL:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     https://github.com/easystats/easystats version: ...</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -373,7 +373,7 @@ If <code>FALSE</code> or <code>NA</code>, no suffix is included.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.9000.</p>
 </div>
 
     </footer></div>

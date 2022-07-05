@@ -78,7 +78,7 @@ insert in parentheses in plots or reports.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">report_statistics</span><span class="op">(</span><span class="va">x</span>, table <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">report_statistics</span><span class="op">(</span><span class="va">x</span>, table <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -106,64 +106,64 @@ will run it.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/report/" class="external-link">report</a></span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Data</span></span>
-<span class="r-in"><span class="fu">report_statistics</span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/report/" class="external-link">report</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Data</span></span></span>
+<span class="r-in"><span><span class="fu">report_statistics</span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> n = 150, Mean = 5.84, SD = 0.83, Median = 5.80, MAD = 1.04, range: [4.30, 7.90], Skewness = 0.31, Kurtosis = -0.55, 0% missing</span>
-<span class="r-in"><span class="fu">report_statistics</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">report_statistics</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5, 6.67%%; 5.1, 6.00%%; 6.3, 6.00%%; 5.7, 5.33%%; 6.7, 5.33%%; 5.5, 4.67%%; 5.8, 4.67%%; 6.4, 4.67%%; 4.9, 4.00%%; 5.4, 4.00%%; 5.6, 4.00%%; 6, 4.00%%; 6.1, 4.00%%; 4.8, 3.33%%; 6.5, 3.33%%; 4.6, 2.67%%; 5.2, 2.67%%; 6.2, 2.67%%; 6.9, 2.67%%; 7.7, 2.67%%; 4.4, 2.00%%; 5.9, 2.00%%; 6.8, 2.00%%; 7.2, 2.00%%; 4.7, 1.33%%; 6.6, 1.33%%; 4.3, 0.67%%; 4.5, 0.67%%; 5.3, 0.67%%; 7, 0.67%%; 7.1, 0.67%%; 7.3, 0.67%%; 7.4, 0.67%%; 7.6, 0.67%%; 7.9, 0.67%%</span>
-<span class="r-in"><span class="fu">report_statistics</span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">report_statistics</span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> setosa, n = 50, 33.33%; versicolor, n = 50, 33.33%; virginica, n = 50, 33.33%</span>
-<span class="r-in"><span class="fu">report_statistics</span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">report_statistics</span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> n = 150, Mean = 5.84, SD = 0.83, Median = 5.80, MAD = 1.04, range: [4.30, 7.90], Skewness = 0.31, Kurtosis = -0.55, 0% missing</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> n = 150, Mean = 3.06, SD = 0.44, Median = 3.00, MAD = 0.44, range: [2, 4.40], Skewness = 0.32, Kurtosis = 0.23, 0% missing</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> n = 150, Mean = 3.76, SD = 1.77, Median = 4.35, MAD = 1.85, range: [1, 6.90], Skewness = -0.27, Kurtosis = -1.40, 0% missing</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> n = 150, Mean = 1.20, SD = 0.76, Median = 1.30, MAD = 1.04, range: [0.10, 2.50], Skewness = -0.10, Kurtosis = -1.34, 0% missing</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> setosa, n = 50, 33.33%; versicolor, n = 50, 33.33%; virginica, n = 50, 33.33%</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># h-tests</span></span>
-<span class="r-in"><span class="fu">report_statistics</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># h-tests</span></span></span>
+<span class="r-in"><span><span class="fu">report_statistics</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> difference = -2.79, 95% CI [-2.94, -2.64], t(225.68) = -36.46, p &lt; .001; Cohen's d = -4.21, 95% CI [-4.66, -3.76]</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># ANOVA</span></span>
-<span class="r-in"><span class="fu">report_statistics</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html" class="external-link">aov</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># ANOVA</span></span></span>
+<span class="r-in"><span><span class="fu">report_statistics</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html" class="external-link">aov</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> For one-way between subjects designs, partial eta squared is equivalent to eta squared.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Returning eta squared.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> F(2, 147) = 119.26, p &lt; .001; Eta2 = 0.62, 95% CI [0.54, 1.00]</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># GLMs</span></span>
-<span class="r-in"><span class="fu">report_statistics</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Length</span> <span class="op">*</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># GLMs</span></span></span>
+<span class="r-in"><span><span class="fu">report_statistics</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Length</span> <span class="op">*</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> beta = 4.21, 95% CI [3.41, 5.02], t(144) = 10.34, p &lt; .001; Std. beta = 0.49, 95% CI [-1.03, 2.01]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> beta = 0.54, 95% CI [-4.76e-03, 1.09], t(144) = 1.96, p = 0.052; Std. beta = 1.16, 95% CI [-0.01, 2.32]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> beta = -1.81, 95% CI [-2.99, -0.62], t(144) = -3.02, p = 0.003; Std. beta = -0.88, 95% CI [-2.41, 0.65]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> beta = -3.15, 95% CI [-4.41, -1.90], t(144) = -4.97, p &lt; .001; Std. beta = -1.75, 95% CI [-3.32, -0.18]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> beta = 0.29, 95% CI [-0.30, 0.87], t(144) = 0.97, p = 0.334; Std. beta = 0.61, 95% CI [-0.63, 1.85]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> beta = 0.45, 95% CI [-0.12, 1.03], t(144) = 1.56, p = 0.120; Std. beta = 0.97, 95% CI [-0.26, 2.19]</span>
-<span class="r-in"><span class="fu">report_statistics</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">vs</span> <span class="op">~</span> <span class="va">disp</span>, data <span class="op">=</span> <span class="va">mtcars</span>, family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">report_statistics</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">vs</span> <span class="op">~</span> <span class="va">disp</span>, data <span class="op">=</span> <span class="va">mtcars</span>, family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> beta = 4.14, 95% CI [1.81, 7.44], p = 0.003; Std. beta = -0.85, 95% CI [-2.42, 0.27]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> beta = -0.02, 95% CI [-0.04, -0.01], p = 0.002; Std. beta = -2.68, 95% CI [-4.90, -1.27]</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Mixed models</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/lme4/lme4/" class="external-link">"lme4"</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Length</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">Species</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">report_statistics</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Mixed models</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/lme4/lme4/" class="external-link">"lme4"</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Length</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">Species</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">report_statistics</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Package 'merDeriv' needs to be installed to compute confidence intervals</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   for random effect parameters.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> beta = 2.50, 95% CI [1.19, 3.82], t(146) = 3.75, p &lt; .001; Std. beta = -1.46e-13, 95% CI [-1.49, 1.49]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> beta = 0.89, 95% CI [0.76, 1.01], t(146) = 13.93, p &lt; .001; Std. beta = 1.89, 95% CI [1.63, 2.16]</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Bayesian models</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://mc-stan.org/rstanarm/" class="external-link">"rstanarm"</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html" class="external-link">stan_glm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span>, refresh <span class="op">=</span> <span class="fl">0</span>, iter <span class="op">=</span> <span class="fl">600</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">report_statistics</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Median = 5.00, 95% CI [4.86, 5.15], pd = 100%, 0% in ROPE; Std. beta = -1.01, 95% CI [-1.18, -0.85]; Rhat = 1.00, ESS = 993.05</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Median = 0.93, 95% CI [0.73, 1.13], pd = 100%, 0% in ROPE; Std. beta = 1.12, 95% CI [0.88, 1.38]; Rhat = 1.00, ESS = 1014.97</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Median = 1.59, 95% CI [1.38, 1.79], pd = 100%, 0% in ROPE; Std. beta = 1.92, 95% CI [1.67, 2.17]; Rhat = 1.00, ESS = 1152.62</span>
-<span class="r-in"><span class="co"># }</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Bayesian models</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://mc-stan.org/rstanarm/" class="external-link">"rstanarm"</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html" class="external-link">stan_glm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span>, refresh <span class="op">=</span> <span class="fl">0</span>, iter <span class="op">=</span> <span class="fl">600</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">report_statistics</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Median = 5.01, 95% CI [4.87, 5.16], pd = 100%, 0% in ROPE; Std. beta = -1.01, 95% CI [-1.20, -0.84]; Rhat = 1.00, ESS = 973.30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Median = 0.93, 95% CI [0.72, 1.14], pd = 100%, 0% in ROPE; Std. beta = 1.12, 95% CI [0.86, 1.37]; Rhat = 1.01, ESS = 794.13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Median = 1.58, 95% CI [1.37, 1.77], pd = 100%, 0% in ROPE; Std. beta = 1.92, 95% CI [1.66, 2.17]; Rhat = 1.01, ESS = 1086.31</span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -175,7 +175,7 @@ will run it.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.9000.</p>
 </div>
 
     </footer></div>

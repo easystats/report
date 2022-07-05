@@ -1,9 +1,9 @@
 pandoc: 2.14.2
-pkgdown: 2.0.4.9000
-pkgdown_sha: af84e66bf7bf1fb6fbab8698f8dcd883d634f93a
+pkgdown: 2.0.5.9000
+pkgdown_sha: b4096aa376773d7dee98a267fd0b5a025975a3dc
 articles:
   cite_packages: cite_packages.html
   new_models: new_models.html
   report: report.html
-last_built: 2022-06-16T06:48Z
+last_built: 2022-07-05T05:46Z
 
