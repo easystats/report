@@ -78,8 +78,8 @@ print.report_info <- function(x, ...) {
 # Utils -------------------------------------------------------------------
 
 #' @keywords internal
-.info_df <- function(ci, df_method = NULL) {
-  if (is.null(df_method)) {
+.info_df <- function(ci, ci_method = NULL, test_statistic = NULL, bootstrap = FALSE) {
+  if (is.null(ci_method)) {
     return("")
   }
 
@@ -88,10 +88,43 @@ print.report_info <- function(x, ...) {
     "% Confidence Intervals (CIs) and p-values were computed using "
   )
 
-  if (df_method == "wald") {
-    text <- paste0(text, "the Wald approximation.")
-  } else if (df_method == "kenward") {
-    text <- paste0(text, "the Kenward-Roger approximation.")
+  ci_method <- tolower(ci_method)
+  string_method <- switch(ci_method,
+                          "bci" = ,
+                          "bcai" = "bias-corrected accelerated bootstrap",
+                          "si" = ,
+                          "ci" = ,
+                          "quantile" = ,
+                          "eti" = ,
+                          "hdi" = ifelse(isTRUE(bootstrap), "na\u0131ve bootstrap", "MCMC"),
+                          "normal" = "Wald normal",
+                          "boot" = "parametric bootstrap",
+                          "Wald"
+  )
+
+  if (ci_method %in% c("kenward", "kr", "kenward-roger", "kenward-rogers", "satterthwaite")) {
+    string_approx <- paste0("with ", parameters::format_df_adjust(ci_method, approx_string = "", dof_string = ""), " ")
+  } else {
+    string_approx <- ""
+  }
+
+  if (!is.null(test_statistic) && !ci_method == "normal" && !isTRUE(bootstrap)) {
+    string_statistic <- switch(tolower(test_statistic),
+                               "t-statistic" = "t",
+                               "chi-squared statistic" = ,
+                               "z-statistic" = "z",
+                               ""
+    )
+    string_method <- paste0(string_method, " ", string_statistic, "-")
+  } else {
+    string_method <- paste0(string_method, " ")
+  }
+
+  # bootstrapped intervals
+  if (isTRUE(bootstrap)) {
+    text <- paste0(text, string_method, "intervals.")
+  } else {
+    text <- paste0(text, "a ", string_method, "distribution ", string_approx, "approximation.")
   }
   text
 }
