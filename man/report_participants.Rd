@@ -11,6 +11,7 @@ report_participants(
   gender = NULL,
   education = NULL,
   country = NULL,
+  race = NULL,
   participants = NULL,
   group = NULL,
   spell_n = FALSE,
@@ -37,6 +38,8 @@ individuals in those groups as \code{"Non-Binary"}.}
 \item{education}{The name of the column containing education information.}
 
 \item{country}{The name of the column containing country information.}
+
+\item{race}{The name of the column containing race/ethnicity information.}
 
 \item{participants}{The name of the participants' identifier column (for
 instance in the case of repeated measures).}
@@ -94,6 +97,18 @@ data <- data.frame(
 report_participants(data)
 
 # Country, control presentation treshold
+report_participants(data, threshold = 5)
+
+# Race/ethnicity
+data <- data.frame(
+  "Age" = c(22, 23, 54, 21, 8, 42, 18, 32, 24, 27, 45),
+  "Sex" = c("Intersex", "F", "F", "M", "M", "M", "F", "F", "F", "F", "F"),
+  "Gender" = c("N", "W", "W", "M", "M", "M", "W", "W", "W", "W", "W"),
+  "Race" = c("Black", NA, "White", "Asian", "Black", "Arab", "Black",
+  "White", "Asian", "Southeast Asian", "Mixed"))
+report_participants(data)
+
+# Race/ethnicity, control presentation treshold
 report_participants(data, threshold = 5)
 
 # Repeated measures data
