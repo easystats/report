@@ -12,6 +12,11 @@ Minor changes
 
     * Adds support for country and race demographic information
 
+BUG FIXES
+
+* Fixed bug with truncated output about confidence interval distribution in 
+  `report()`.
+
 # report 0.5.1
 
 * Hotfix release to fix failing tests and to unarchive package on CRAN.

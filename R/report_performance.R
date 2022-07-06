@@ -76,11 +76,7 @@ summary.report_performance <- function(object, ...) {
 }
 
 #' @export
-print.report_performance <- function(x, ...) {
-  cat(paste0(x, collapse = "\n"))
-}
-
-
+print.report_performance <- print.report_text
 
 # Utils -------------------------------------------------------------------
 

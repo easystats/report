@@ -58,10 +58,7 @@ report_text <- function(x, table = NULL, ...) {
 }
 
 
-
-
 # METHODS -----------------------------------------------------------------
-
 
 #' @rdname as.report
 #' @export
@@ -90,8 +87,6 @@ as.report_text.report <- function(x, summary = NULL, ...) {
     summary(x)
   }
 }
-
-
 
 
 #' @export
