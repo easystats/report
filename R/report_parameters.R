@@ -157,7 +157,6 @@ print.report_parameters <- function(x, ...) {
 
 #' @keywords internal
 .parameters_diagnostic_bayesian <- function(diagnostic, only_when_insufficient = FALSE, ...) {
-
   # Convergence
   if ("Rhat" %in% names(diagnostic)) {
     convergence <- effectsize::interpret_rhat(diagnostic$Rhat, ...)

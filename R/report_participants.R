@@ -94,7 +94,6 @@ report_participants <- function(data,
                                 spell_n = FALSE,
                                 digits = 1,
                                 ...) {
-
   # find age variable automatically
   if (is.null(age)) {
     age <- .find_age_in_data(data)

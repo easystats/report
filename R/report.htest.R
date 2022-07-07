@@ -33,7 +33,6 @@ report.htest <- function(x, ...) {
 #' @rdname report.htest
 #' @export
 report_effectsize.htest <- function(x, ...) {
-
   # For t-tests ----------------
 
   if (insight::model_info(x)$is_ttest) {

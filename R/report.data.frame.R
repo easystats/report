@@ -54,7 +54,6 @@ report.data.frame <- function(x,
                               n_entries = 3,
                               missing_percentage = "auto",
                               ...) {
-
   # remove list columns
   if (.has_groups(x) && !inherits(x, "tbl_df")) {
     x <- .groups_set(

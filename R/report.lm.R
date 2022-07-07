@@ -285,7 +285,6 @@ report_parameters.lm <- function(x,
                                  include_effectsize = TRUE,
                                  include_intercept = TRUE,
                                  ...) {
-
   # Get data
   stats <- report_statistics(x, table = table, include_effectsize = include_effectsize, ...)
   params <- attributes(stats)$table

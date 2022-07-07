@@ -22,7 +22,6 @@
 #' summary(as.data.frame(r))
 #' @export
 report.lavaan <- function(model, effsize = "funder2019", ci = 0.95, standardize = TRUE, performance_metrics = "all", ...) {
-
   # Sanity checks -----------------------------------------------------------
   # Multiple CIs
   if (length(c(ci)) > 1) {

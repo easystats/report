@@ -1,6 +1,5 @@
 #' @export
 text_model.glm <- function(model, parameters, ci = NULL, ci_method = NULL, standardize = "refit", standardize_robust = FALSE, effsize = NULL, bootstrap = FALSE, iterations = 500, test = NULL, rope_range = NULL, rope_ci = NULL, p_method = NULL, ...) {
-
   # Model info
   info <- insight::model_info(model)
 

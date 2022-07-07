@@ -1,6 +1,5 @@
 if (require("testthat") && require("report") && require("survival")) {
   test_that("report-survreg", {
-
     # model
     set.seed(123)
     mod_survreg <-

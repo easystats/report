@@ -1,6 +1,5 @@
 #' @export
 text_performance.lavaan <- function(model, performance, ...) {
-
   # Initialialize
   text <- ""
   perf_table <- data.frame(Name = "TEMP", Value = NA, Interpretation = NA, Threshold = NA)

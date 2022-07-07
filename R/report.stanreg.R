@@ -104,7 +104,6 @@ report_parameters.stanreg <- function(x,
                                       include_intercept = TRUE,
                                       include_diagnostic = TRUE,
                                       ...) {
-
   # Get data
   data <- bayestestR::sexit(x, ...)
 
