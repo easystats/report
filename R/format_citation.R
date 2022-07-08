@@ -66,7 +66,8 @@ cite_citation <- function(citation) {
 #' @export
 clean_citation <- function(citation) {
   if ("citation" %in% class(citation)) {
-    citation <- format(citation)[2]
+    citation <- format(citation,
+                       style = "text")
   }
   citation <- unlist(strsplit(citation, "\n"))
   citation <- paste(citation, collapse = "SPLIT")
