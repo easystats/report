@@ -65,7 +65,7 @@ cite_citation <- function(citation) {
 #' @rdname format_citation
 #' @export
 clean_citation <- function(citation) {
-  if ("citation" %in% class(citation)) {
+  if (isTRUE(inherits(citation, "citation"))) {
     citation <- format(citation,
                        style = "text")
   }
