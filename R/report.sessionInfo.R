@@ -146,7 +146,6 @@ report_table.sessionInfo <- function(x, include_R = TRUE, ...) {
 
 #' @export
 report_parameters.sessionInfo <- function(x, table = NULL, include_R = TRUE, ...) {
-
   # Get table
   if (is.null(table)) {
     x <- report_table(x)

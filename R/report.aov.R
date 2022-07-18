@@ -34,7 +34,7 @@ report.aovlist <- report.aov
 #' @rdname report.aov
 #' @export
 report_effectsize.aov <- function(x, ...) {
-  table <- effectsize::effectsize(x, ...)
+  table <- suppressMessages(effectsize::effectsize(x, include_intercept = TRUE, ...))
   estimate <- names(table)[effectsize::is_effectsize_name(names(table))]
 
   if (estimate == "Eta2_partial") {

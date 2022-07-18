@@ -9,8 +9,6 @@ report.numeric <- function(x,
                            missing_percentage = "auto",
                            digits = 2,
                            ...) {
-
-
   # Print warning if only two different vars
   if (length(unique(x)) <= 2) {
     if (is.null(names(x))) {
@@ -311,7 +309,6 @@ report_statistics.numeric <- function(x,
                                       missing_percentage = "auto",
                                       digits = 2,
                                       ...) {
-
   # Get parameters
   params <- report_parameters(
     x,

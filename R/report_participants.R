@@ -121,7 +121,7 @@ report_participants <- function(data,
                                 digits = 1,
                                 threshold = 10,
                                 ...) {
-
+  
   # Convert empty strings to NA
   data.list <- lapply(data, function(x) {
     x[which(x == "")] <- NA

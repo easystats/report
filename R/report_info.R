@@ -90,16 +90,16 @@ print.report_info <- function(x, ...) {
 
   ci_method <- tolower(ci_method)
   string_method <- switch(ci_method,
-                          "bci" = ,
-                          "bcai" = "bias-corrected accelerated bootstrap",
-                          "si" = ,
-                          "ci" = ,
-                          "quantile" = ,
-                          "eti" = ,
-                          "hdi" = ifelse(isTRUE(bootstrap), "na\u0131ve bootstrap", "MCMC"),
-                          "normal" = "Wald normal",
-                          "boot" = "parametric bootstrap",
-                          "Wald"
+    "bci" = ,
+    "bcai" = "bias-corrected accelerated bootstrap",
+    "si" = ,
+    "ci" = ,
+    "quantile" = ,
+    "eti" = ,
+    "hdi" = ifelse(isTRUE(bootstrap), "na\u0131ve bootstrap", "MCMC"),
+    "normal" = "Wald normal",
+    "boot" = "parametric bootstrap",
+    "Wald"
   )
 
   if (ci_method %in% c("kenward", "kr", "kenward-roger", "kenward-rogers", "satterthwaite")) {
@@ -110,10 +110,10 @@ print.report_info <- function(x, ...) {
 
   if (!is.null(test_statistic) && !ci_method == "normal" && !isTRUE(bootstrap)) {
     string_statistic <- switch(tolower(test_statistic),
-                               "t-statistic" = "t",
-                               "chi-squared statistic" = ,
-                               "z-statistic" = "z",
-                               ""
+      "t-statistic" = "t",
+      "chi-squared statistic" = ,
+      "z-statistic" = "z",
+      ""
     )
     string_method <- paste0(string_method, " ", string_statistic, "-")
   } else {

@@ -71,7 +71,6 @@ print.report_intercept <- function(x, ...) {
 
 #' @keywords internal
 .find_intercept <- function(model) {
-
   # Intercept-only
   if (insight::is_nullmodel(model)) {
     return("")
