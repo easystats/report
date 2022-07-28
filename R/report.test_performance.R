@@ -59,7 +59,7 @@ report_statistics.test_performance <- function(x, table = NULL, ...) {
 
   text <- text_short <- ""
   if ("BF" %in% names(table)) {
-    val <- text <- datawizard::text_paste(text, insight::format_bf(stats::na.omit(table$BF)))
+    val <- text <- datawizard::text_paste(text, insight::format_bf(stats::na.omit(table$BF), exact = TRUE))
   }
 
   if ("Omega2" %in% names(table)) {

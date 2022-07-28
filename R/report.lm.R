@@ -238,7 +238,7 @@ report_statistics.lm <- function(x,
 
   # BF
   if ("BF" %in% names(table)) {
-    text <- datawizard::text_paste(text, insight::format_bf(table$BF, stars = FALSE))
+    text <- datawizard::text_paste(text, insight::format_bf(table$BF, stars = FALSE, exact = TRUE))
   }
 
   # Effect size
