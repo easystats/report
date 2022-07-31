@@ -10,10 +10,13 @@ report_participants(
   sex = NULL,
   gender = NULL,
   education = NULL,
+  country = NULL,
+  race = NULL,
   participants = NULL,
   group = NULL,
   spell_n = FALSE,
   digits = 1,
+  threshold = 10,
   ...
 )
 }
@@ -28,11 +31,15 @@ you can specify other characters here as well (e.g., \code{"Intersex"}), but
 the function will group all individuals in those groups as \code{"Other"}.}
 
 \item{gender}{The name of the column containing the gender of the
-The classes should be one of \code{c("Man", "M", "Woman", "F", "Non-Binary", "N")}. Note that you can specify other characters here as well
-(e.g., \code{"Gender Fluid"}), but the function will group all individuals in
-those groups as \code{"Non-Binary"}.}
+classes should be one of \verb{c("Man", "M", "Male", Woman", "W", F", "Female", Non-Binary", "N")}. Note that you can specify other characters
+here as well (e.g., \code{"Gender Fluid"}), but the function will group all
+individuals in those groups as \code{"Non-Binary"}.}
 
 \item{education}{The name of the column containing education information.}
+
+\item{country}{The name of the column containing country information.}
+
+\item{race}{The name of the column containing race/ethnicity information.}
 
 \item{participants}{The name of the participants' identifier column (for
 instance in the case of repeated measures).}
@@ -40,10 +47,12 @@ instance in the case of repeated measures).}
 \item{group}{A character vector indicating the name(s) of the column(s) used
 for stratified description.}
 
-\item{spell_n}{Fully spell the sample size (\code{"Three participants"}
+\item{spell_n}{Logical, fully spell the sample size (\code{"Three participants"}
 instead of \code{"3 participants"}).}
 
 \item{digits}{Number of significant digits.}
+
+\item{threshold}{Percentage after which to combine, e.g., countries (default is 10\%, so countries that represent less than 10\% will be combined in the "other" category).}
 
 \item{...}{Arguments passed to or from other methods.}
 }
@@ -59,10 +68,9 @@ the participants section.
 library(report)
 data <- data.frame(
   "Age" = c(22, 23, 54, 21, 8, 42),
-  "Sex" = c("Intersex", "F", "M", "M", "M", "F"),
-  "Gender" = c("N", "W", "W", "M", "M", "M")
+  "Sex" = c("Intersex", "F", "M", "M", "NA", NA),
+  "Gender" = c("N", "W", "W", "M", "NA", NA)
 )
-
 report_participants(data, age = "Age", sex = "Sex")
 
 # Years of education (relative to high school graduation)
@@ -79,6 +87,29 @@ data$Education2 <- c(
 )
 report_participants(data, age = "Age", sex = "Sex", gender = "Gender", education = "Education2")
 
+# Country
+data <- data.frame(
+  "Age" = c(22, 23, 54, 21, 8, 42, 18, 32, 24, 27, 45),
+  "Sex" = c("Intersex", "F", "F", "M", "M", "M", "F", "F", "F", "F", "F"),
+  "Gender" = c("N", "W", "W", "M", "M", "M", "W", "W", "W", "W", "W"),
+  "Country" = c("USA", NA, "Canada", "Canada", "India", "Germany",
+  "USA", "USA", "USA", "USA", "Canada"))
+report_participants(data)
+
+# Country, control presentation treshold
+report_participants(data, threshold = 5)
+
+# Race/ethnicity
+data <- data.frame(
+  "Age" = c(22, 23, 54, 21, 8, 42, 18, 32, 24, 27, 45),
+  "Sex" = c("Intersex", "F", "F", "M", "M", "M", "F", "F", "F", "F", "F"),
+  "Gender" = c("N", "W", "W", "M", "M", "M", "W", "W", "W", "W", "W"),
+  "Race" = c("Black", NA, "White", "Asian", "Black", "Arab", "Black",
+  "White", "Asian", "Southeast Asian", "Mixed"))
+report_participants(data)
+
+# Race/ethnicity, control presentation treshold
+report_participants(data, threshold = 5)
 
 # Repeated measures data
 data <- data.frame(
@@ -87,7 +118,6 @@ data <- data.frame(
   "Gender" = c("N", "W", "W", "M", "M", "M"),
   "Participant" = c("S1", "S1", "s2", "s2", "s3", "s3")
 )
-
 report_participants(data, age = "Age", sex = "Sex", gender = "Gender", participants = "Participant")
 
 # Grouped data
