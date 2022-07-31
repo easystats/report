@@ -81,10 +81,13 @@ the participants section.</p>
 <span>  sex <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  gender <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  education <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  country <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  race <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  participants <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  group <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  spell_n <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  digits <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  threshold <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -108,13 +111,21 @@ the function will group all individuals in those groups as <code>"Other"</code>.
 
 <dt>gender</dt>
 <dd><p>The name of the column containing the gender of the
-The classes should be one of <code>c("Man", "M", "Woman", "F", "Non-Binary", "N")</code>. Note that you can specify other characters here as well
-(e.g., <code>"Gender Fluid"</code>), but the function will group all individuals in
-those groups as <code>"Non-Binary"</code>.</p></dd>
+classes should be one of <code>c("Man", "M", "Male", Woman", "W", F", "Female", Non-Binary", "N")</code>. Note that you can specify other characters
+here as well (e.g., <code>"Gender Fluid"</code>), but the function will group all
+individuals in those groups as <code>"Non-Binary"</code>.</p></dd>
 
 
 <dt>education</dt>
 <dd><p>The name of the column containing education information.</p></dd>
+
+
+<dt>country</dt>
+<dd><p>The name of the column containing country information.</p></dd>
+
+
+<dt>race</dt>
+<dd><p>The name of the column containing race/ethnicity information.</p></dd>
 
 
 <dt>participants</dt>
@@ -128,12 +139,16 @@ for stratified description.</p></dd>
 
 
 <dt>spell_n</dt>
-<dd><p>Fully spell the sample size (<code>"Three participants"</code>
+<dd><p>Logical, fully spell the sample size (<code>"Three participants"</code>
 instead of <code>"3 participants"</code>).</p></dd>
 
 
 <dt>digits</dt>
 <dd><p>Number of significant digits.</p></dd>
+
+
+<dt>threshold</dt>
+<dd><p>Percentage after which to combine, e.g., countries (default is 10%, so countries that represent less than 10% will be combined in the "other" category).</p></dd>
 
 
 <dt>...</dt>
@@ -153,12 +168,11 @@ the information provided in <code>data</code>.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/report/" class="external-link">report</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="st">"Age"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">22</span>, <span class="fl">23</span>, <span class="fl">54</span>, <span class="fl">21</span>, <span class="fl">8</span>, <span class="fl">42</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  <span class="st">"Sex"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Intersex"</span>, <span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"M"</span>, <span class="st">"M"</span>, <span class="st">"F"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  <span class="st">"Gender"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"N"</span>, <span class="st">"W"</span>, <span class="st">"W"</span>, <span class="st">"M"</span>, <span class="st">"M"</span>, <span class="st">"M"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="st">"Sex"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Intersex"</span>, <span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"M"</span>, <span class="st">"NA"</span>, <span class="cn">NA</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"Gender"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"N"</span>, <span class="st">"W"</span>, <span class="st">"W"</span>, <span class="st">"M"</span>, <span class="st">"NA"</span>, <span class="cn">NA</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">report_participants</span><span class="op">(</span><span class="va">data</span>, age <span class="op">=</span> <span class="st">"Age"</span>, sex <span class="op">=</span> <span class="st">"Sex"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "6 participants (Mean age = 28.3, SD = 16.6, range: [8, 54]; Sex: 33.3% females, 50.0% males, 16.7% other; Gender: 33.3% women, 50.0% men, 16.67% non-binary)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "6 participants (Mean age = 28.3, SD = 16.6, range: [8, 54]; Sex: 16.7% females, 33.3% males, 16.7% other, 33.33% missing; Gender: 33.3% women, 16.7% men, 16.67% non-binary, 33.33% missing)"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Years of education (relative to high school graduation)</span></span></span>
 <span class="r-in"><span><span class="va">data</span><span class="op">$</span><span class="va">Education</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">8</span>, <span class="op">-</span><span class="fl">3</span>, <span class="op">-</span><span class="fl">5</span>, <span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span></span></span>
@@ -166,7 +180,7 @@ the information provided in <code>data</code>.</p>
 <span class="r-in"><span>  age <span class="op">=</span> <span class="st">"Age"</span>, sex <span class="op">=</span> <span class="st">"Sex"</span>, gender <span class="op">=</span> <span class="st">"Gender"</span>,</span></span>
 <span class="r-in"><span>  education <span class="op">=</span> <span class="st">"Education"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "6 participants (Mean age = 28.3, SD = 16.6, range: [8, 54]; Sex: 33.3% females, 50.0% males, 16.7% other; Gender: 33.3% women, 50.0% men, 16.67% non-binary; Mean education = 1.3, SD = 4.9, range: [-5, 8])"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "6 participants (Mean age = 28.3, SD = 16.6, range: [8, 54]; Sex: 16.7% females, 33.3% males, 16.7% other, 33.33% missing; Gender: 33.3% women, 16.7% men, 16.67% non-binary, 33.33% missing; Mean education = 1.3, SD = 4.9, range: [-5, 8])"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Education as factor</span></span></span>
 <span class="r-in"><span><span class="va">data</span><span class="op">$</span><span class="va">Education2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
@@ -174,8 +188,35 @@ the information provided in <code>data</code>.</p>
 <span class="r-in"><span>  <span class="st">"Highschool"</span>, <span class="st">"Bachelor"</span>, <span class="st">"Bachelor"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">report_participants</span><span class="op">(</span><span class="va">data</span>, age <span class="op">=</span> <span class="st">"Age"</span>, sex <span class="op">=</span> <span class="st">"Sex"</span>, gender <span class="op">=</span> <span class="st">"Gender"</span>, education <span class="op">=</span> <span class="st">"Education2"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "6 participants (Mean age = 28.3, SD = 16.6, range: [8, 54]; Sex: 33.3% females, 50.0% males, 16.7% other; Gender: 33.3% women, 50.0% men, 16.67% non-binary; Education: Bachelor, 50.00%; Highschool, 33.33%; PhD, 16.67%)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "6 participants (Mean age = 28.3, SD = 16.6, range: [8, 54]; Sex: 16.7% females, 33.3% males, 16.7% other, 33.33% missing; Gender: 33.3% women, 16.7% men, 16.67% non-binary, 33.33% missing; Education: Bachelor, 50.00%; Highschool, 33.33%; PhD, 16.67%)"</span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Country</span></span></span>
+<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"Age"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">22</span>, <span class="fl">23</span>, <span class="fl">54</span>, <span class="fl">21</span>, <span class="fl">8</span>, <span class="fl">42</span>, <span class="fl">18</span>, <span class="fl">32</span>, <span class="fl">24</span>, <span class="fl">27</span>, <span class="fl">45</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"Sex"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Intersex"</span>, <span class="st">"F"</span>, <span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"M"</span>, <span class="st">"M"</span>, <span class="st">"F"</span>, <span class="st">"F"</span>, <span class="st">"F"</span>, <span class="st">"F"</span>, <span class="st">"F"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"Gender"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"N"</span>, <span class="st">"W"</span>, <span class="st">"W"</span>, <span class="st">"M"</span>, <span class="st">"M"</span>, <span class="st">"M"</span>, <span class="st">"W"</span>, <span class="st">"W"</span>, <span class="st">"W"</span>, <span class="st">"W"</span>, <span class="st">"W"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"Country"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"USA"</span>, <span class="cn">NA</span>, <span class="st">"Canada"</span>, <span class="st">"Canada"</span>, <span class="st">"India"</span>, <span class="st">"Germany"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"USA"</span>, <span class="st">"USA"</span>, <span class="st">"USA"</span>, <span class="st">"USA"</span>, <span class="st">"Canada"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">report_participants</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "11 participants (Mean age = 28.7, SD = 13.4, range: [8, 54]; Sex: 63.6% females, 27.3% males, 9.1% other; Gender: 63.6% women, 27.3% men, 9.09% non-binary; Country: 45.45% USA, 27.27% Canada, 27.27% other)"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Country, control presentation treshold</span></span></span>
+<span class="r-in"><span><span class="fu">report_participants</span><span class="op">(</span><span class="va">data</span>, threshold <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "11 participants (Mean age = 28.7, SD = 13.4, range: [8, 54]; Sex: 63.6% females, 27.3% males, 9.1% other; Gender: 63.6% women, 27.3% men, 9.09% non-binary; Country: 45.45% USA, 27.27% Canada, 9.09% Germany, 9.09% India, 9.09% missing)"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Race/ethnicity</span></span></span>
+<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"Age"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">22</span>, <span class="fl">23</span>, <span class="fl">54</span>, <span class="fl">21</span>, <span class="fl">8</span>, <span class="fl">42</span>, <span class="fl">18</span>, <span class="fl">32</span>, <span class="fl">24</span>, <span class="fl">27</span>, <span class="fl">45</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"Sex"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Intersex"</span>, <span class="st">"F"</span>, <span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"M"</span>, <span class="st">"M"</span>, <span class="st">"F"</span>, <span class="st">"F"</span>, <span class="st">"F"</span>, <span class="st">"F"</span>, <span class="st">"F"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"Gender"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"N"</span>, <span class="st">"W"</span>, <span class="st">"W"</span>, <span class="st">"M"</span>, <span class="st">"M"</span>, <span class="st">"M"</span>, <span class="st">"W"</span>, <span class="st">"W"</span>, <span class="st">"W"</span>, <span class="st">"W"</span>, <span class="st">"W"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"Race"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Black"</span>, <span class="cn">NA</span>, <span class="st">"White"</span>, <span class="st">"Asian"</span>, <span class="st">"Black"</span>, <span class="st">"Arab"</span>, <span class="st">"Black"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"White"</span>, <span class="st">"Asian"</span>, <span class="st">"Southeast Asian"</span>, <span class="st">"Mixed"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">report_participants</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "11 participants (Mean age = 28.7, SD = 13.4, range: [8, 54]; Sex: 63.6% females, 27.3% males, 9.1% other; Gender: 63.6% women, 27.3% men, 9.09% non-binary; Race: 27.27% Black, 18.18% Asian, 18.18% White, 36.36% other)"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Race/ethnicity, control presentation treshold</span></span></span>
+<span class="r-in"><span><span class="fu">report_participants</span><span class="op">(</span><span class="va">data</span>, threshold <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "11 participants (Mean age = 28.7, SD = 13.4, range: [8, 54]; Sex: 63.6% females, 27.3% males, 9.1% other; Gender: 63.6% women, 27.3% men, 9.09% non-binary; Race: 27.27% Black, 18.18% Asian, 18.18% White, 9.09% Arab, 9.09% Mixed, 9.09% Southeast Asian, 9.09% missing)"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Repeated measures data</span></span></span>
 <span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
@@ -184,7 +225,6 @@ the information provided in <code>data</code>.</p>
 <span class="r-in"><span>  <span class="st">"Gender"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"N"</span>, <span class="st">"W"</span>, <span class="st">"W"</span>, <span class="st">"M"</span>, <span class="st">"M"</span>, <span class="st">"M"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"Participant"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"S1"</span>, <span class="st">"S1"</span>, <span class="st">"s2"</span>, <span class="st">"s2"</span>, <span class="st">"s3"</span>, <span class="st">"s3"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">report_participants</span><span class="op">(</span><span class="va">data</span>, age <span class="op">=</span> <span class="st">"Age"</span>, sex <span class="op">=</span> <span class="st">"Sex"</span>, gender <span class="op">=</span> <span class="st">"Gender"</span>, participants <span class="op">=</span> <span class="st">"Participant"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "3 participants (Mean age = 28.0, SD = 23.6, range: [8, 54]; Sex: 33.3% females, 33.3% males, 33.3% other; Gender: 33.3% women, 33.3% men, 33.33% non-binary)"</span>
 <span class="r-in"><span></span></span>

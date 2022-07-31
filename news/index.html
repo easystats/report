@@ -68,7 +68,12 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.2" id="report-052">report 0.5.2<a class="anchor" aria-label="anchor" href="#report-052"></a></h2>
 <p>BREAKING CHANGES</p>
-<ul><li>The minimum needed R version is now bumped to 3.5.</li></ul><p>BUG FIXES</p>
+<ul><li>The minimum needed R version is now bumped to 3.5.</li></ul><p>Minor changes</p>
+<ul><li>
+<p><code>report_participants</code> improvement (<a href="https://github.com/rempsyc" class="external-link">@rempsyc</a>, <a href="https://github.com/easystats/report/issues/260" class="external-link">#260</a>)</p>
+<ul><li><p>Now correctly reports NA values as % missing</p></li>
+<li><p>Adds support for country and race demographic information</p></li>
+</ul></li></ul><p>BUG FIXES</p>
 <ul><li>Fixed bug with truncated output about confidence interval distribution in <code><a href="../reference/report.html">report()</a></code>.</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.1" id="report-051">report 0.5.1<a class="anchor" aria-label="anchor" href="#report-051"></a></h2><p class="text-muted">CRAN release: 2022-02-22</p>
@@ -92,12 +97,13 @@
 <li><p><code>text_remove()</code></p></li>
 <li><p><code>text_wrap()</code></p></li>
 </ul><p>MAJOR CHANGES</p>
-<ul><li><p>Reporting participant’s sex/gender information has improved (thanks to <a href="https://github.com/drfeinberg" class="external-link">@drfeinberg</a>, <a href="https://github.com/easystats/report/issues/212" class="external-link">#212</a>)</p></li>
-<li><p>Separated sex and gender into different searches/columns</p></li>
+<ul><li>
+<p>Reporting participant’s sex/gender information has improved (thanks to <a href="https://github.com/drfeinberg" class="external-link">@drfeinberg</a>, <a href="https://github.com/easystats/report/issues/212" class="external-link">#212</a>)</p>
+<ul><li><p>Separated sex and gender into different searches/columns</p></li>
 <li><p>Sex is reported % female, % male, % other, % missing if any cases are missing</p></li>
 <li><p>Gender is reported % Women, % Men, % Non-Binary, % missing if any cases are missing</p></li>
 <li><p>Age reports % missing if any cases are missing.</p></li>
-</ul></div>
+</ul></li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.0" id="report-040">report 0.4.0<a class="anchor" aria-label="anchor" href="#report-040"></a></h2><p class="text-muted">CRAN release: 2021-09-30</p>
 <ul><li>Maintenance release.</li></ul></div>
