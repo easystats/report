@@ -1,24 +1,8 @@
-authors:
-  Dominique Makowski:
-    href: https://dominiquemakowski.github.io/
-  Daniel Lüdecke:
-    href: https://github.com/strengejacke
-  Mattan S. Ben-Shachar:
-    href: https://github.com/mattansb
-  Indrajeet Patil:
-    href: https://sites.google.com/site/indrajeetspatilmorality/
-
+url: https://easystats.github.io/report/
 
 template:
   bootstrap: 5
-  bslib:
-    primary: "#0054AD"
-  opengraph:
-    image:
-      src: man/figures/card.png
-    twitter:
-      creator: "@easystats4u"
-      card: summary_large_image
+  package: easystatstemplate
 
 # reference:
 # - title: "Create Generic Report Objects"
@@ -56,25 +40,3 @@ template:
 #   - format_model
 #   - format_text
 
-navbar:
-  type: default
-  right:
-  - icon: fa-twitter
-    href: http://twitter.com/easystats4u
-    aria-label: Twitter
-  - icon: fa-github
-    href: https://github.com/easystats/report/
-    aria-label: GitHub
-  left:
-  - icon: fa-home fa-lg
-    href: index.html
-  - text: News
-    href: news/index.html
-  - text: Features
-    href: reference/index.html
-  - text: Get started
-    href: articles/report.html
-  - text: Examples
-    menu:
-      - text: 'Report and Cite Packages'
-        href: articles/cite_packages.html
