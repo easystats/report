@@ -1,138 +1,138 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/404.html</loc>
+    <loc>https://easystats.github.io/report/404.html</loc>
   </url>
   <url>
-    <loc>/CODE_OF_CONDUCT.html</loc>
+    <loc>https://easystats.github.io/report/CODE_OF_CONDUCT.html</loc>
   </url>
   <url>
-    <loc>/CONDUCT.html</loc>
+    <loc>https://easystats.github.io/report/CONDUCT.html</loc>
   </url>
   <url>
-    <loc>/CONTRIBUTING.html</loc>
+    <loc>https://easystats.github.io/report/CONTRIBUTING.html</loc>
   </url>
   <url>
-    <loc>/LICENSE-text.html</loc>
+    <loc>https://easystats.github.io/report/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>/PULL_REQUEST_TEMPLATE.html</loc>
+    <loc>https://easystats.github.io/report/PULL_REQUEST_TEMPLATE.html</loc>
   </url>
   <url>
-    <loc>/articles/cite_packages.html</loc>
+    <loc>https://easystats.github.io/report/articles/cite_packages.html</loc>
   </url>
   <url>
-    <loc>/articles/index.html</loc>
+    <loc>https://easystats.github.io/report/articles/index.html</loc>
   </url>
   <url>
-    <loc>/articles/new_models.html</loc>
+    <loc>https://easystats.github.io/report/articles/new_models.html</loc>
   </url>
   <url>
-    <loc>/articles/report.html</loc>
+    <loc>https://easystats.github.io/report/articles/report.html</loc>
   </url>
   <url>
-    <loc>/authors.html</loc>
+    <loc>https://easystats.github.io/report/authors.html</loc>
   </url>
   <url>
-    <loc>/index.html</loc>
+    <loc>https://easystats.github.io/report/index.html</loc>
   </url>
   <url>
-    <loc>/news/index.html</loc>
+    <loc>https://easystats.github.io/report/news/index.html</loc>
   </url>
   <url>
-    <loc>/reference/as.report.html</loc>
+    <loc>https://easystats.github.io/report/reference/as.report.html</loc>
   </url>
   <url>
-    <loc>/reference/cite_easystats.html</loc>
+    <loc>https://easystats.github.io/report/reference/cite_easystats.html</loc>
   </url>
   <url>
-    <loc>/reference/format_citation.html</loc>
+    <loc>https://easystats.github.io/report/reference/format_citation.html</loc>
   </url>
   <url>
-    <loc>/reference/format_formula.html</loc>
+    <loc>https://easystats.github.io/report/reference/format_formula.html</loc>
   </url>
   <url>
-    <loc>/reference/index.html</loc>
+    <loc>https://easystats.github.io/report/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/report.aov.html</loc>
+    <loc>https://easystats.github.io/report/reference/report.aov.html</loc>
   </url>
   <url>
-    <loc>/reference/report.bayesfactor_models.html</loc>
+    <loc>https://easystats.github.io/report/reference/report.bayesfactor_models.html</loc>
   </url>
   <url>
-    <loc>/reference/report.brmsfit.html</loc>
+    <loc>https://easystats.github.io/report/reference/report.brmsfit.html</loc>
   </url>
   <url>
-    <loc>/reference/report.compare_performance.html</loc>
+    <loc>https://easystats.github.io/report/reference/report.compare_performance.html</loc>
   </url>
   <url>
-    <loc>/reference/report.data.frame.html</loc>
+    <loc>https://easystats.github.io/report/reference/report.data.frame.html</loc>
   </url>
   <url>
-    <loc>/reference/report.default.html</loc>
+    <loc>https://easystats.github.io/report/reference/report.default.html</loc>
   </url>
   <url>
-    <loc>/reference/report.htest.html</loc>
+    <loc>https://easystats.github.io/report/reference/report.htest.html</loc>
   </url>
   <url>
-    <loc>/reference/report.html</loc>
+    <loc>https://easystats.github.io/report/reference/report.html</loc>
   </url>
   <url>
-    <loc>/reference/report.lavaan.html</loc>
+    <loc>https://easystats.github.io/report/reference/report.lavaan.html</loc>
   </url>
   <url>
-    <loc>/reference/report.lm.html</loc>
+    <loc>https://easystats.github.io/report/reference/report.lm.html</loc>
   </url>
   <url>
-    <loc>/reference/report.sessionInfo.html</loc>
+    <loc>https://easystats.github.io/report/reference/report.sessionInfo.html</loc>
   </url>
   <url>
-    <loc>/reference/report.stanreg.html</loc>
+    <loc>https://easystats.github.io/report/reference/report.stanreg.html</loc>
   </url>
   <url>
-    <loc>/reference/report.test_performance.html</loc>
+    <loc>https://easystats.github.io/report/reference/report.test_performance.html</loc>
   </url>
   <url>
-    <loc>/reference/report_date.html</loc>
+    <loc>https://easystats.github.io/report/reference/report_date.html</loc>
   </url>
   <url>
-    <loc>/reference/report_effectsize.html</loc>
+    <loc>https://easystats.github.io/report/reference/report_effectsize.html</loc>
   </url>
   <url>
-    <loc>/reference/report_info.html</loc>
+    <loc>https://easystats.github.io/report/reference/report_info.html</loc>
   </url>
   <url>
-    <loc>/reference/report_intercept.html</loc>
+    <loc>https://easystats.github.io/report/reference/report_intercept.html</loc>
   </url>
   <url>
-    <loc>/reference/report_model.html</loc>
+    <loc>https://easystats.github.io/report/reference/report_model.html</loc>
   </url>
   <url>
-    <loc>/reference/report_parameters.html</loc>
+    <loc>https://easystats.github.io/report/reference/report_parameters.html</loc>
   </url>
   <url>
-    <loc>/reference/report_participants.html</loc>
+    <loc>https://easystats.github.io/report/reference/report_participants.html</loc>
   </url>
   <url>
-    <loc>/reference/report_performance.html</loc>
+    <loc>https://easystats.github.io/report/reference/report_performance.html</loc>
   </url>
   <url>
-    <loc>/reference/report_priors.html</loc>
+    <loc>https://easystats.github.io/report/reference/report_priors.html</loc>
   </url>
   <url>
-    <loc>/reference/report_random.html</loc>
+    <loc>https://easystats.github.io/report/reference/report_random.html</loc>
   </url>
   <url>
-    <loc>/reference/report_sample.html</loc>
+    <loc>https://easystats.github.io/report/reference/report_sample.html</loc>
   </url>
   <url>
-    <loc>/reference/report_statistics.html</loc>
+    <loc>https://easystats.github.io/report/reference/report_statistics.html</loc>
   </url>
   <url>
-    <loc>/reference/report_table.html</loc>
+    <loc>https://easystats.github.io/report/reference/report_table.html</loc>
   </url>
   <url>
-    <loc>/reference/report_text.html</loc>
+    <loc>https://easystats.github.io/report/reference/report_text.html</loc>
   </url>
 </urlset>
