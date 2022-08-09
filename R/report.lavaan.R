@@ -39,7 +39,7 @@ report.lavaan <- function(x, ...) {
 
 #' @export
 report_table.lavaan <- function(x, ...) {
-  parameters <- parameters::model_parameters(x, ...)
+  parameters <- parameters::model_parameters(x, ci_random = FALSE, ...)
   table <- as.data.frame(parameters)
   table$Parameter <- paste(table$To, table$Operator, table$From)
   table <- datawizard::data_remove(table, c("To", "Operator", "From"))

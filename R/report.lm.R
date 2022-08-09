@@ -133,7 +133,7 @@ report_effectsize.lm <- function(x, effectsize_method = "refit", ...) {
 #' @include utils_combine_tables.R
 #' @export
 report_table.lm <- function(x, include_effectsize = TRUE, ...) {
-  params <- parameters::model_parameters(x, ...)
+  params <- parameters::model_parameters(x, ci_random = FALSE, ...)
 
   # Combine -----
   # Add effectsize
@@ -449,7 +449,7 @@ report_model.lm <- function(x, table = NULL, ...) {
 #' @rdname report.lm
 #' @export
 report_performance.lm <- function(x, table = NULL, ...) {
-  if (!is.null(table) | is.null(attributes(table)$performance)) {
+  if (!is.null(table) || is.null(attributes(table)$performance)) {
     table <- report_table(x, ...)
   }
   performance <- attributes(table)$performance

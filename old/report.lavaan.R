@@ -30,7 +30,7 @@ report.lavaan <- function(model, effsize = "funder2019", ci = 0.95, standardize 
   }
 
   performance <- performance::model_performance(model, metrics = performance_metrics)
-  parameters <- parameters::model_parameters(model, ci = ci, standardize = standardize, ...)
+  parameters <- parameters::model_parameters(model, ci = ci, standardize = standardize, ci_random = FALSE, ...)
   parameters$Link <- paste(parameters$To, parameters$Operator, parameters$From)
 
   table_full <- .add_performance_table(parameters, performance)
