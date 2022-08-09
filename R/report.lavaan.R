@@ -85,7 +85,7 @@ report_table.lavaan <- function(x, ...) {
 #' @rdname report.lavaan
 #' @export
 report_performance.lavaan <- function(x, table = NULL, ...) {
-  if (!is.null(table) | is.null(attributes(table)$performance)) {
+  if (!is.null(table) || is.null(attributes(table)$performance)) {
     table <- report_table(x, ...)
   }
   performance <- attributes(table)$performance
