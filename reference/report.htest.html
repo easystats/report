@@ -170,7 +170,8 @@ its re-computation.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># t-tests</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Effect sizes were labelled following Cohen's (1988) recommendations.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The Welch Two Sample t-test testing the difference between iris$Sepal.Width and</span>
@@ -210,6 +211,14 @@ its re-computation.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3.06) and mu = 1 suggests that the effect is positive, statistically</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> significant, and large (difference = 2.06, 95% CI [2.99, 3.13], t(149) = 57.81,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> p &lt; .001; Cohen's d = 4.72, 95% CI [4.15, 5.27])</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Correlations</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Effect sizes were labelled following Funder's (2019) recommendations.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The Pearson's product-moment correlation between iris$Sepal.Width and</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> iris$Sepal.Length is negative, statistically not significant, and small (r =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.12, 95% CI [-0.27, 0.04], t(148) = -1.44, p = 0.152)</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
