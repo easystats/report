@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.3</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -175,17 +175,25 @@ its re-computation.</p></dd>
 <span class="r-in"><span><span class="va">r</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The ANOVA (formula: Sepal.Length ~ Species * Cat1) suggests that:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The main effect of Species is statistically significant and large (F(2, 144) = 118.43, p &lt; .001; Eta2 (partial) = 0.62, 95% CI [0.54, 1.00])</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The main effect of Cat1 is statistically not significant and very small (F(1, 144) = 6.25e-03, p = 0.937; Eta2 (partial) = 4.34e-05, 95% CI [0.00, 1.00])</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The interaction between Species and Cat1 is statistically not significant and small (F(2, 144) = 0.98, p = 0.377; Eta2 (partial) = 0.01, 95% CI [0.00, 1.00])</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The main effect of Species is statistically significant and large (F(2, 144)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> = 118.43, p &lt; .001; Eta2 (partial) = 0.62, 95% CI [0.54, 1.00])</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The main effect of Cat1 is statistically not significant and very small (F(1,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 144) = 6.25e-03, p = 0.937; Eta2 (partial) = 4.34e-05, 95% CI [0.00, 1.00])</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The interaction between Species and Cat1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  is statistically not significant and small (F(2, 144) = 0.98, p = 0.377; Eta2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (partial) = 0.01, 95% CI [0.00, 1.00])</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Effect sizes were labelled following Field's (2013) recommendations.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The ANOVA suggests that:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The main effect of Species is statistically significant and large (F(2, 144) = 118.43, p &lt; .001, Eta2 (partial) = 0.62)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The main effect of Cat1 is statistically not significant and very small (F(1, 144) = 6.25e-03, p = 0.937, Eta2 (partial) = 4.34e-05)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The interaction between Species and Cat1 is statistically not significant and small (F(2, 144) = 0.98, p = 0.377, Eta2 (partial) = 0.01)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The main effect of Species is statistically significant and large (F(2, 144)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> = 118.43, p &lt; .001, Eta2 (partial) = 0.62)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The main effect of Cat1 is statistically not significant and very small (F(1,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 144) = 6.25e-03, p = 0.937, Eta2 (partial) = 4.34e-05)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The interaction between Species and Cat1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  is statistically not significant and small (F(2, 144) = 0.98, p = 0.377, Eta2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (partial) = 0.01)</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Parameter    | Sum_Squares |  df | Mean_Square |        F |      p | Eta2 (partial) | Eta2_partial 95% CI</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---------------------------------------------------------------------------------------------------------</span>

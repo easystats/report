@@ -18,7 +18,7 @@ report())."><meta property="og:image" content="https://easystats.github.io/repor
     
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.3</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -137,7 +137,8 @@ will run it.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># GLMs</span></span></span>
 <span class="r-in"><span><span class="fu">report_performance</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Length</span> <span class="op">*</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> The model explains a statistically significant and substantial proportion of variance (R2 = 0.84, F(5, 144) = 151.71, p &lt; .001, adj. R2 = 0.83)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The model explains a statistically significant and substantial proportion of</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> variance (R2 = 0.84, F(5, 144) = 151.71, p &lt; .001, adj. R2 = 0.83)</span>
 <span class="r-in"><span><span class="fu">report_performance</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">vs</span> <span class="op">~</span> <span class="va">disp</span>, data <span class="op">=</span> <span class="va">mtcars</span>, family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The model's explanatory power is substantial (Tjur's R2 = 0.53)</span>
 <span class="r-in"><span></span></span>
@@ -146,16 +147,16 @@ will run it.</p></dd>
 <span class="r-in"><span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Length</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">Species</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu">report_performance</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Package 'merDeriv' needs to be installed to compute confidence intervals</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   for random effect parameters.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> The model's total explanatory power is substantial (conditional R2 = 0.97) and the part related to the fixed effects alone (marginal R2) is of 0.66</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The model's total explanatory power is substantial (conditional R2 = 0.97) and</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> the part related to the fixed effects alone (marginal R2) is of 0.66</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Bayesian models</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://mc-stan.org/rstanarm/" class="external-link">"rstanarm"</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html" class="external-link">stan_glm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span>, refresh <span class="op">=</span> <span class="fl">0</span>, iter <span class="op">=</span> <span class="fl">600</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu">report_performance</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> The model's explanatory power is substantial (R2 = 0.62, 95% CI [0.54, 0.69], adj. R2 = 0.61)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The model's explanatory power is substantial (R2 = 0.61, 95% CI [0.53, 0.69],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> adj. R2 = 0.61)</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Structural Equation Models (SEM)</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://lavaan.ugent.be" class="external-link">"lavaan"</a></span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageVersion</a></span><span class="op">(</span><span class="st">"effectsize"</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="st">"0.6.0.1"</span> <span class="op">&amp;&amp;</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>

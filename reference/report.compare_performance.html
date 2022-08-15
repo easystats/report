@@ -14,7 +14,7 @@ function in the performance package."><meta property="og:image" content="https:/
     
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.3</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -170,9 +170,13 @@ re-computation.</p></dd>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">performance</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/performance/reference/compare_performance.html" class="external-link">compare_performance</a></span><span class="op">(</span><span class="va">m1</span>, <span class="va">m2</span>, <span class="va">m3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">r</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> We compared three models; lm (R2 = 0.84, adj. R2 = 0.83, AIC = 106.77, BIC = 127.84, RMSE = 0.33, Sigma = 0.34), lm (R2 = 0.84, adj. R2 = 0.83, AIC = 106.23, BIC = 121.29, RMSE = 0.33, Sigma = 0.34) and lm (R2 = 0.76, adj. R2 = 0.76, AIC = 160.04, BIC = 169.07, RMSE = 0.40, Sigma = 0.41).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> We compared three models; lm (R2 = 0.84, adj. R2 = 0.83, AIC = 106.77, BIC =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127.84, RMSE = 0.33, Sigma = 0.34), lm (R2 = 0.84, adj. R2 = 0.83, AIC =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 106.23, BIC = 121.29, RMSE = 0.33, Sigma = 0.34) and lm (R2 = 0.76, adj. R2 =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.76, AIC = 160.04, BIC = 169.07, RMSE = 0.40, Sigma = 0.41).</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> We compared three models; lm (adj. R2 = 0.83, BIC = 127.84), lm (adj. R2 = 0.83, BIC = 121.29) and lm (adj. R2 = 0.76, BIC = 169.07).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> We compared three models; lm (adj. R2 = 0.83, BIC = 127.84), lm (adj. R2 =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.83, BIC = 121.29) and lm (adj. R2 = 0.76, BIC = 169.07).</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Name | Model |    AIC | AIC weights |    BIC | BIC weights |   R2 | R2 (adj.) | RMSE | Sigma</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------------------------------------------------------------------------</span>

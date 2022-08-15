@@ -14,7 +14,7 @@ insert in parentheses in plots or reports."><meta property="og:image" content="h
     
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.3</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -168,8 +168,6 @@ will run it.</p></dd>
 <span class="r-in"><span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Length</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">Species</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu">report_statistics</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Package 'merDeriv' needs to be installed to compute confidence intervals</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   for random effect parameters.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> beta = 2.50, 95% CI [1.19, 3.82], t(146) = 3.75, p &lt; .001; Std. beta = -1.46e-13, 95% CI [-1.49, 1.49]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> beta = 0.89, 95% CI [0.76, 1.01], t(146) = 13.93, p &lt; .001; Std. beta = 1.89, 95% CI [1.63, 2.16]</span>
 <span class="r-in"><span></span></span>
@@ -178,9 +176,9 @@ will run it.</p></dd>
 <span class="r-in"><span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html" class="external-link">stan_glm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span>, refresh <span class="op">=</span> <span class="fl">0</span>, iter <span class="op">=</span> <span class="fl">600</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu">report_statistics</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Median = 5.01, 95% CI [4.86, 5.15], pd = 100%, 0% in ROPE; Std. beta = -1.01, 95% CI [-1.18, -0.85]; Rhat = 1.00, ESS = 1109.25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Median = 0.93, 95% CI [0.73, 1.13], pd = 100%, 0% in ROPE; Std. beta = 1.11, 95% CI [0.88, 1.38]; Rhat = 1.00, ESS = 1125.28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Median = 1.58, 95% CI [1.38, 1.78], pd = 100%, 0% in ROPE; Std. beta = 1.91, 95% CI [1.66, 2.15]; Rhat = 1.00, ESS = 982.22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Median = 5.01, 95% CI [4.86, 5.16], pd = 100%, 0% in ROPE; Std. beta = -1.01, 95% CI [-1.19, -0.84]; Rhat = 1.00, ESS = 1009.31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Median = 0.92, 95% CI [0.71, 1.15], pd = 100%, 0% in ROPE; Std. beta = 1.12, 95% CI [0.87, 1.37]; Rhat = 1.00, ESS = 1041.39</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Median = 1.58, 95% CI [1.37, 1.79], pd = 100%, 0% in ROPE; Std. beta = 1.91, 95% CI [1.67, 2.18]; Rhat = 1.00, ESS = 920.95</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

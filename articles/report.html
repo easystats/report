@@ -39,7 +39,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.3</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -149,13 +149,24 @@
 <p>If an entire dataframe is supplied, <code>report</code> will provide descriptive statistics for all columns:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
-<span><span class="co"># The data contains 150 observations of the following 5 variables:</span></span>
+<span><span class="co"># The data contains 150 observations of the following 5</span></span>
+<span><span class="co"># variables:</span></span>
 <span><span class="co"># </span></span>
-<span><span class="co">#   - Sepal.Length: n = 150, Mean = 5.84, SD = 0.83, Median = 5.80, MAD = 1.04, range: [4.30, 7.90], Skewness = 0.31, Kurtosis = -0.55, 0% missing</span></span>
-<span><span class="co">#   - Sepal.Width: n = 150, Mean = 3.06, SD = 0.44, Median = 3.00, MAD = 0.44, range: [2, 4.40], Skewness = 0.32, Kurtosis = 0.23, 0% missing</span></span>
-<span><span class="co">#   - Petal.Length: n = 150, Mean = 3.76, SD = 1.77, Median = 4.35, MAD = 1.85, range: [1, 6.90], Skewness = -0.27, Kurtosis = -1.40, 0% missing</span></span>
-<span><span class="co">#   - Petal.Width: n = 150, Mean = 1.20, SD = 0.76, Median = 1.30, MAD = 1.04, range: [0.10, 2.50], Skewness = -0.10, Kurtosis = -1.34, 0% missing</span></span>
-<span><span class="co">#   - Species: 3 levels, namely setosa (n = 50, 33.33%), versicolor (n = 50, 33.33%) and virginica (n = 50, 33.33%)</span></span></code></pre></div>
+<span><span class="co">#   - Sepal.Length: n = 150, Mean = 5.84, SD = 0.83, Median =</span></span>
+<span><span class="co"># 5.80, MAD = 1.04, range: [4.30, 7.90], Skewness = 0.31,</span></span>
+<span><span class="co"># Kurtosis = -0.55, 0% missing</span></span>
+<span><span class="co">#   - Sepal.Width: n = 150, Mean = 3.06, SD = 0.44, Median =</span></span>
+<span><span class="co"># 3.00, MAD = 0.44, range: [2, 4.40], Skewness = 0.32,</span></span>
+<span><span class="co"># Kurtosis = 0.23, 0% missing</span></span>
+<span><span class="co">#   - Petal.Length: n = 150, Mean = 3.76, SD = 1.77, Median =</span></span>
+<span><span class="co"># 4.35, MAD = 1.85, range: [1, 6.90], Skewness = -0.27,</span></span>
+<span><span class="co"># Kurtosis = -1.40, 0% missing</span></span>
+<span><span class="co">#   - Petal.Width: n = 150, Mean = 1.20, SD = 0.76, Median =</span></span>
+<span><span class="co"># 1.30, MAD = 1.04, range: [0.10, 2.50], Skewness = -0.10,</span></span>
+<span><span class="co"># Kurtosis = -1.34, 0% missing</span></span>
+<span><span class="co">#   - Species: 3 levels, namely setosa (n = 50, 33.33%),</span></span>
+<span><span class="co"># versicolor (n = 50, 33.33%) and</span></span>
+<span><span class="co"># virginica (n = 50, 33.33%)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="grouped-dataframes">Grouped Dataframes<a class="anchor" aria-label="anchor" href="#grouped-dataframes"></a>
@@ -182,9 +193,15 @@
 <p><code>report</code> can also be used to provide automated summaries for statistical model objects from correlation, <em>t</em>-tests, Wilcoxon tests, etc.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">wt</span> <span class="op">~</span> <span class="va">am</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co"># Effect sizes were labelled following Cohen's (1988) recommendations.</span></span>
+<span><span class="co"># Effect sizes were labelled following Cohen's (1988)</span></span>
+<span><span class="co"># recommendations.</span></span>
 <span><span class="co"># </span></span>
-<span><span class="co"># The Welch Two Sample t-test testing the difference of wt by am (mean in group 0 = 3.77, mean in group 1 = 2.41) suggests that the effect is positive, statistically significant, and large (difference = 1.36, 95% CI [0.85, 1.86], t(29.23) = 5.49, p &lt; .001; Cohen's d = 2.03, 95% CI [1.13, 2.91])</span></span></code></pre></div>
+<span><span class="co"># The Welch Two Sample t-test testing the difference of wt by</span></span>
+<span><span class="co"># am (mean in group 0 = 3.77, mean in group 1 = 2.41)</span></span>
+<span><span class="co"># suggests that the effect is positive, statistically</span></span>
+<span><span class="co"># significant, and large (difference = 1.36, 95% CI [0.85,</span></span>
+<span><span class="co"># 1.86], t(29.23) = 5.49, p &lt; .001; Cohen's d = 2.03, 95% CI</span></span>
+<span><span class="co"># [1.13, 2.91])</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">wt</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -199,12 +216,27 @@
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">wt</span> <span class="op">~</span> <span class="va">am</span> <span class="op">+</span> <span class="va">mpg</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
-<span><span class="co"># We fitted a linear model (estimated using OLS) to predict wt with am and mpg (formula: wt ~ am + mpg). The model explains a statistically significant and substantial proportion of variance (R2 = 0.80, F(2, 29) = 57.66, p &lt; .001, adj. R2 = 0.79). The model's intercept, corresponding to am = 0 and mpg = 0, is at 5.74 (95% CI [5.11, 6.36], t(29) = 18.64, p &lt; .001). Within this model:</span></span>
+<span><span class="co"># We fitted a linear model (estimated using OLS) to predict</span></span>
+<span><span class="co"># wt with am and mpg</span></span>
+<span><span class="co">#  (formula: wt ~ am + mpg). The model explains a</span></span>
+<span><span class="co"># statistically significant and substantial proportion of</span></span>
+<span><span class="co"># variance (R2 = 0.80, F(2, 29) = 57.66, p &lt; .001, adj. R2 =</span></span>
+<span><span class="co"># 0.79). The model's intercept, corresponding to am = 0 and</span></span>
+<span><span class="co"># mpg = 0</span></span>
+<span><span class="co"># , is at 5.74 (95% CI [5.11, 6.36], t(29) = 18.64, p &lt;</span></span>
+<span><span class="co"># .001). Within this model:</span></span>
 <span><span class="co"># </span></span>
-<span><span class="co">#   - The effect of am is statistically significant and negative (beta = -0.53, 95% CI [-0.94, -0.11], t(29) = -2.58, p = 0.015; Std. beta = -0.27, 95% CI [-0.48, -0.06])</span></span>
-<span><span class="co">#   - The effect of mpg is statistically significant and negative (beta = -0.11, 95% CI [-0.15, -0.08], t(29) = -6.79, p &lt; .001; Std. beta = -0.71, 95% CI [-0.92, -0.49])</span></span>
+<span><span class="co">#   - The effect of am is statistically significant and</span></span>
+<span><span class="co"># negative (beta = -0.53, 95% CI [-0.94, -0.11], t(29) =</span></span>
+<span><span class="co"># -2.58, p = 0.015; Std. beta = -0.27, 95% CI [-0.48, -0.06])</span></span>
+<span><span class="co">#   - The effect of mpg is statistically significant and</span></span>
+<span><span class="co"># negative (beta = -0.11, 95% CI [-0.15, -0.08], t(29) =</span></span>
+<span><span class="co"># -6.79, p &lt; .001; Std. beta = -0.71, 95% CI [-0.92, -0.49])</span></span>
 <span><span class="co"># </span></span>
-<span><span class="co"># Standardized parameters were obtained by fitting the model on a standardized version of the dataset. 95% Confidence Intervals (CIs) and p-values were computed using a Wald t-distribution approximation.</span></span></code></pre></div>
+<span><span class="co"># Standardized parameters were obtained by fitting the model</span></span>
+<span><span class="co"># on a standardized version of the dataset. 95% Confidence</span></span>
+<span><span class="co"># Intervals (CIs) and p-values were computed using a Wald</span></span>
+<span><span class="co"># t-distribution approximation.</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="anova-aov">anova (<code>aov</code>)<a class="anchor" aria-label="anchor" href="#anova-aov"></a>
@@ -216,10 +248,15 @@
 <span><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span><span class="co"># The ANOVA (formula: wt ~ am + mpg) suggests that:</span></span>
 <span><span class="co"># </span></span>
-<span><span class="co">#   - The main effect of am is statistically significant and large (F(1, 29) = 69.21, p &lt; .001; Eta2 (partial) = 0.70, 95% CI [0.54, 1.00])</span></span>
-<span><span class="co">#   - The main effect of mpg is statistically significant and large (F(1, 29) = 46.12, p &lt; .001; Eta2 (partial) = 0.61, 95% CI [0.42, 1.00])</span></span>
+<span><span class="co">#   - The main effect of am is statistically significant and</span></span>
+<span><span class="co"># large (F(1, 29) = 69.21, p &lt; .001; Eta2 (partial) = 0.70,</span></span>
+<span><span class="co"># 95% CI [0.54, 1.00])</span></span>
+<span><span class="co">#   - The main effect of mpg is statistically significant and</span></span>
+<span><span class="co"># large (F(1, 29) = 46.12, p &lt; .001; Eta2 (partial) = 0.61,</span></span>
+<span><span class="co"># 95% CI [0.42, 1.00])</span></span>
 <span><span class="co"># </span></span>
-<span><span class="co"># Effect sizes were labelled following Field's (2013) recommendations.</span></span></code></pre></div>
+<span><span class="co"># Effect sizes were labelled following Field's (2013)</span></span>
+<span><span class="co"># recommendations.</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="general-linear-models-glms-glm">General Linear Models (GLMs) (<code>glm</code>)<a class="anchor" aria-label="anchor" href="#general-linear-models-glms-glm"></a>
@@ -228,12 +265,25 @@
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">vs</span> <span class="op">~</span> <span class="va">mpg</span> <span class="op">+</span> <span class="va">cyl</span>, data <span class="op">=</span> <span class="va">mtcars</span>, family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
-<span><span class="co"># We fitted a logistic model (estimated using ML) to predict vs with mpg and cyl (formula: vs ~ mpg + cyl). The model's explanatory power is substantial (Tjur's R2 = 0.67). The model's intercept, corresponding to mpg = 0 and cyl = 0, is at 15.97 (95% CI [-2.71, 44.69], p = 0.147). Within this model:</span></span>
+<span><span class="co"># We fitted a logistic model (estimated using ML) to predict</span></span>
+<span><span class="co"># vs with mpg and cyl</span></span>
+<span><span class="co">#  (formula: vs ~ mpg + cyl). The model's explanatory power is</span></span>
+<span><span class="co"># substantial (Tjur's R2 = 0.67). The model's intercept,</span></span>
+<span><span class="co"># corresponding to mpg = 0 and cyl = 0</span></span>
+<span><span class="co"># , is at 15.97 (95% CI [-2.71, 44.69], p = 0.147). Within</span></span>
+<span><span class="co"># this model:</span></span>
 <span><span class="co"># </span></span>
-<span><span class="co">#   - The effect of mpg is statistically non-significant and negative (beta = -0.16, 95% CI [-0.71, 0.34], p = 0.496; Std. beta = -0.98, 95% CI [-4.28, 2.03])</span></span>
-<span><span class="co">#   - The effect of cyl is statistically significant and negative (beta = -2.15, 95% CI [-5.19, -0.54], p = 0.047; Std. beta = -3.84, 95% CI [-9.26, -0.97])</span></span>
+<span><span class="co">#   - The effect of mpg is statistically non-significant and</span></span>
+<span><span class="co"># negative (beta = -0.16, 95% CI [-0.71, 0.34], p = 0.496;</span></span>
+<span><span class="co"># Std. beta = -0.98, 95% CI [-4.28, 2.03])</span></span>
+<span><span class="co">#   - The effect of cyl is statistically significant and</span></span>
+<span><span class="co"># negative (beta = -2.15, 95% CI [-5.19, -0.54], p = 0.047;</span></span>
+<span><span class="co"># Std. beta = -3.84, 95% CI [-9.26, -0.97])</span></span>
 <span><span class="co"># </span></span>
-<span><span class="co"># Standardized parameters were obtained by fitting the model on a standardized version of the dataset. 95% Confidence Intervals (CIs) and p-values were computed using a Wald z-distribution approximation.</span></span></code></pre></div>
+<span><span class="co"># Standardized parameters were obtained by fitting the model</span></span>
+<span><span class="co"># on a standardized version of the dataset. 95% Confidence</span></span>
+<span><span class="co"># Intervals (CIs) and p-values were computed using a Wald</span></span>
+<span><span class="co"># z-distribution approximation.</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="linear-mixed-effects-models-mermod">Linear Mixed-Effects Models (<code>merMod</code>)<a class="anchor" aria-label="anchor" href="#linear-mixed-effects-models-mermod"></a>
@@ -244,11 +294,26 @@
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Reaction</span> <span class="op">~</span> <span class="va">Days</span> <span class="op">+</span> <span class="op">(</span><span class="va">Days</span> <span class="op">|</span> <span class="va">Subject</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">sleepstudy</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
-<span><span class="co"># We fitted a linear mixed model (estimated using REML and nloptwrap optimizer) to predict Reaction with Days (formula: Reaction ~ Days). The model included Days and Subject as random effects (formula: ~Days | Subject). The model's total explanatory power is substantial (conditional R2 = 0.80) and the part related to the fixed effects alone (marginal R2) is of 0.28. The model's intercept, corresponding to Days = 0, is at 251.41 (95% CI [237.94, 264.87], t(174) = 36.84, p &lt; .001). Within this model:</span></span>
+<span><span class="co"># We fitted a linear mixed model (estimated using REML and</span></span>
+<span><span class="co"># nloptwrap optimizer) to predict Reaction with Days</span></span>
+<span><span class="co">#  (formula: Reaction ~ Days). The model included Days and</span></span>
+<span><span class="co"># Subject</span></span>
+<span><span class="co">#  as random effects (formula: ~Days | Subject). The model's</span></span>
+<span><span class="co"># total explanatory power is substantial (conditional R2 =</span></span>
+<span><span class="co"># 0.80) and the part related to the fixed effects alone</span></span>
+<span><span class="co"># (marginal R2) is of 0.28. The model's intercept,</span></span>
+<span><span class="co"># corresponding to Days = 0</span></span>
+<span><span class="co"># , is at 251.41 (95% CI [237.94, 264.87], t(174) = 36.84, p</span></span>
+<span><span class="co"># &lt; .001). Within this model:</span></span>
 <span><span class="co"># </span></span>
-<span><span class="co">#   - The effect of Days is statistically significant and positive (beta = 10.47, 95% CI [7.42, 13.52], t(174) = 6.77, p &lt; .001; Std. beta = 0.54, 95% CI [0.38, 0.69])</span></span>
+<span><span class="co">#   - The effect of Days is statistically significant and</span></span>
+<span><span class="co"># positive (beta = 10.47, 95% CI [7.42, 13.52], t(174) =</span></span>
+<span><span class="co"># 6.77, p &lt; .001; Std. beta = 0.54, 95% CI [0.38, 0.69])</span></span>
 <span><span class="co"># </span></span>
-<span><span class="co"># Standardized parameters were obtained by fitting the model on a standardized version of the dataset. 95% Confidence Intervals (CIs) and p-values were computed using a Wald t-distribution approximation.</span></span></code></pre></div>
+<span><span class="co"># Standardized parameters were obtained by fitting the model</span></span>
+<span><span class="co"># on a standardized version of the dataset. 95% Confidence</span></span>
+<span><span class="co"># Intervals (CIs) and p-values were computed using a Wald</span></span>
+<span><span class="co"># t-distribution approximation.</span></span></code></pre></div>
 </div>
 </div>
 </div>
