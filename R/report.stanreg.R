@@ -63,7 +63,7 @@ report_priors.stanreg <- function(x, ...) {
   params <- params[params$Parameter != "(Intercept)", ]
 
   # Return empty if no priors info
-  if (!"Prior_Distribution" %in% names(params) | nrow(params) == 0) {
+  if (!"Prior_Distribution" %in% names(params) || nrow(params) == 0) {
     return("")
   }
 
@@ -85,7 +85,7 @@ report_priors.stanreg <- function(x, ...) {
 
   values <- paste0(params$Prior_Distribution, " (", values, ")")
 
-  if (length(unique(values)) == 1 & nrow(params) > 1) {
+  if (length(unique(values)) == 1 && nrow(params) > 1) {
     text <- paste0("all set as ", values[1])
   } else {
     text <- paste0("set as ", format_text(values))
@@ -116,7 +116,7 @@ report_parameters.stanreg <- function(x,
   text <- .parameters_starting_text(x, params)
 
   # Replace parameters names
-  for (i in 1:length(text)) {
+  for (i in seq_along(text)) {
     att$sexit_textlong[i] <- gsub(names(text)[i], text[i], att$sexit_textlong[i], fixed = TRUE)
     att$sexit_textshort[i] <- gsub(names(text)[i], text[i], att$sexit_textshort[i], fixed = TRUE)
   }

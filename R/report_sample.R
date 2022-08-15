@@ -77,7 +77,12 @@ report_sample <- function(data,
     final <- cbind(
       variable,
       summaries,
-      Total = .generate_descriptive_table(total_data[setdiff(variables, group_by)], centrality, weights, digits)[["Summary"]]
+      Total = .generate_descriptive_table(
+        total_data[setdiff(variables, group_by)],
+        centrality,
+        weights,
+        digits
+      )[["Summary"]]
     )
     # add N to column name
     colnames(final)[ncol(final)] <- sprintf(

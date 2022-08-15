@@ -149,7 +149,7 @@ report_table.aovlist <- report_table.aov
 #' @rdname report.aov
 #' @export
 report_statistics.aov <- function(x, table = NULL, ...) {
-  if (is.null(table) | is.null(attributes(table)$effsize)) {
+  if (is.null(table) || is.null(attributes(table)$effsize)) {
     table <- report_table(x, ...)
   }
   effsize <- attributes(table)$effsize

@@ -81,7 +81,7 @@ as.report_text.default <- function(x, summary = NULL, ...) {
 as.report_text.report <- function(x, summary = NULL, ...) {
   class(x) <- class(x)[class(x) != "report"]
 
-  if (is.null(summary) | isFALSE(summary)) {
+  if (is.null(summary) || isFALSE(summary)) {
     x
   } else if (isTRUE(summary)) {
     summary(x)

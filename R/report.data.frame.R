@@ -118,7 +118,7 @@ report_table.data.frame <- function(x,
   table_full <- data.frame()
   table <- data.frame()
 
-  for (i in 1:ncol(x)) {
+  for (i in seq_len(ncol(x))) {
     col <- names(x)[i]
     current_table_full <- report_table(
       x[[col]],
@@ -200,7 +200,7 @@ report_parameters.data.frame <- function(x,
   text_full <- c()
   text <- c()
 
-  for (i in 1:ncol(x)) {
+  for (i in seq_len(ncol(x))) {
     r <- report_text(
       x[[names(x)[i]]],
       n = n,
@@ -282,7 +282,7 @@ report_statistics.data.frame <- function(x,
   text_full <- c()
   text <- c()
 
-  for (i in 1:ncol(x)) {
+  for (i in seq_len(ncol(x))) {
     r <- report_statistics(
       x[[names(x)[i]]],
       n = n,

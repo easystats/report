@@ -178,7 +178,7 @@ report_table.lm <- function(x, include_effectsize = TRUE, ...) {
   )
   if (!is.null(effsize)) attr(out, paste0(names(attributes(effsize)$ci))) <- attributes(effsize)$ci
   # Add attributes from params table
-  for (att in c("ci", "coefficient_name", "pretty_names", "bootstrap", "iterations", "df_method")) {
+  for (att in c("ci", "coefficient_name", "pretty_names", "bootstrap", "iterations", "ci_method")) {
     attr(out, att) <- attributes(params)[[att]]
   }
 
@@ -218,7 +218,10 @@ report_statistics.lm <- function(x,
 
   # Statistic
   if ("t" %in% names(table)) {
-    text <- datawizard::text_paste(text, paste0("t(", insight::format_value(table$df, protect_integers = TRUE), ") = ", insight::format_value(table$t)))
+    text <- datawizard::text_paste(
+      text,
+      paste0("t(", insight::format_value(table$df, protect_integers = TRUE), ") = ", insight::format_value(table$t))
+    )
   }
 
   # p-value
