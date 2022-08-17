@@ -331,7 +331,7 @@ print.cite_easystats <- function(x, what = "all", ...) {
 
 .disamguation_letters <- function(x) {
   if (!is.logical(x)) {
-    stop("`x` must be a logical vector.")
+    stop("`x` must be a logical vector.", call. = FALSE)
   }
   count <- sum(x)
   x[x == FALSE] <- ""

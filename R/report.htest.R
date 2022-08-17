@@ -121,7 +121,7 @@ report_effectsize.htest <- function(x, ...) {
 
   if (insight::model_info(x)$is_chi2test || insight::model_info(x)$is_proptest ||
     insight::model_info(x)$is_xtab) {
-    stop("This test is not yet supported. Please open an issue: https://github.com/easystats/report/issues")
+    stop("This test is not yet supported. Please open an issue: https://github.com/easystats/report/issues", call. = FALSE)
   }
 
   parameters <- paste0(interpretation, " (", statistics, ")")
