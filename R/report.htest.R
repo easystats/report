@@ -247,6 +247,11 @@ report_parameters.htest <- function(x, table = NULL, ...) {
   effsize <- attributes(stats)$effsize
 
 
+  ## TODO see https://github.com/easystats/report/issues/256
+  # insight::model_info() returns "$is_correlation" for shapiro-test,
+  # but shapiro-test has no "estimate", so this fails. We probably need
+  # to handle shapiro separately
+
   # Correlations
   if (insight::model_info(x)$is_correlation) {
     text_full <- paste0(
