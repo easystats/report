@@ -49,21 +49,21 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">
+  <a class="nav-link" href="../reference/index.html" aria-label="Reference">
     <span class="fa fa fa fa-file-code"></span>
      
     Reference
   </a>
 </li>
 <li class="active nav-item">
-  <a class="nav-link" href="../articles/index.html">
+  <a class="nav-link" href="../articles/index.html" aria-label="Articles">
     <span class="fa fa fa fa-book-reader"></span>
      
     Articles
   </a>
 </li>
 <li class="nav-item">
-  <a class="nav-link" href="../news/index.html">
+  <a class="nav-link" href="../news/index.html" aria-label="News">
     <span class="fa fa fa fa-newspaper"></span>
      
     News
@@ -76,7 +76,7 @@
 
       <ul class="navbar-nav">
 <li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown--easystats">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown--easystats" aria-label="easystats">
     <span class="fab fa fab fa-r-project"></span>
      
     easystats
@@ -221,10 +221,28 @@
 <span><span class="co">#  (formula: wt ~ am + mpg). The model explains a</span></span>
 <span><span class="co"># statistically significant and substantial proportion of</span></span>
 <span><span class="co"># variance (R2 = 0.80, F(2, 29) = 57.66, p &lt; .001, adj. R2 =</span></span>
-<span><span class="co"># 0.79). The model's intercept, corresponding to am = 0 and</span></span>
-<span><span class="co"># mpg = 0</span></span>
-<span><span class="co"># , is at 5.74 (95% CI [5.11, 6.36], t(29) = 18.64, p &lt;</span></span>
-<span><span class="co"># .001). Within this model:</span></span>
+<span><span class="co"># 0.79). The model's intercept, corresponding to am = 0, is</span></span>
+<span><span class="co"># at 5.74 (95% CI [5.11, 6.36], t(29) = 18.64, p &lt; .001).</span></span>
+<span><span class="co"># Within this model:</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co">#   - The effect of am is statistically significant and</span></span>
+<span><span class="co"># negative (beta = -0.53, 95% CI [-0.94, -0.11], t(29) =</span></span>
+<span><span class="co"># -2.58, p = 0.015; Std. beta = -0.27, 95% CI [-0.48, -0.06])</span></span>
+<span><span class="co">#   - The effect of mpg is statistically significant and</span></span>
+<span><span class="co"># negative (beta = -0.11, 95% CI [-0.15, -0.08], t(29) =</span></span>
+<span><span class="co"># -6.79, p &lt; .001; Std. beta = -0.71, 95% CI [-0.92, -0.49])</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># Standardized parameters were obtained by fitting the model</span></span>
+<span><span class="co"># on a standardized version of the dataset. 95% Confidence</span></span>
+<span><span class="co"># Intervals (CIs) and p-values were computed using a Wald</span></span>
+<span><span class="co"># t-distribution approximation. and We fitted a linear model</span></span>
+<span><span class="co"># (estimated using OLS) to predict wt with am and mpg</span></span>
+<span><span class="co">#  (formula: wt ~ am + mpg). The model explains a</span></span>
+<span><span class="co"># statistically significant and substantial proportion of</span></span>
+<span><span class="co"># variance (R2 = 0.80, F(2, 29) = 57.66, p &lt; .001, adj. R2 =</span></span>
+<span><span class="co"># 0.79). The model's intercept, corresponding to mpg = 0, is</span></span>
+<span><span class="co"># at 5.74 (95% CI [5.11, 6.36], t(29) = 18.64, p &lt; .001).</span></span>
+<span><span class="co"># Within this model:</span></span>
 <span><span class="co"># </span></span>
 <span><span class="co">#   - The effect of am is statistically significant and</span></span>
 <span><span class="co"># negative (beta = -0.53, 95% CI [-0.94, -0.11], t(29) =</span></span>
@@ -269,9 +287,25 @@
 <span><span class="co"># vs with mpg and cyl</span></span>
 <span><span class="co">#  (formula: vs ~ mpg + cyl). The model's explanatory power is</span></span>
 <span><span class="co"># substantial (Tjur's R2 = 0.67). The model's intercept,</span></span>
-<span><span class="co"># corresponding to mpg = 0 and cyl = 0</span></span>
-<span><span class="co"># , is at 15.97 (95% CI [-2.71, 44.69], p = 0.147). Within</span></span>
-<span><span class="co"># this model:</span></span>
+<span><span class="co"># corresponding to mpg = 0, is at 15.97 (95% CI [-2.71,</span></span>
+<span><span class="co"># 44.69], p = 0.147). Within this model:</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co">#   - The effect of mpg is statistically non-significant and</span></span>
+<span><span class="co"># negative (beta = -0.16, 95% CI [-0.71, 0.34], p = 0.496;</span></span>
+<span><span class="co"># Std. beta = -0.98, 95% CI [-4.28, 2.03])</span></span>
+<span><span class="co">#   - The effect of cyl is statistically significant and</span></span>
+<span><span class="co"># negative (beta = -2.15, 95% CI [-5.19, -0.54], p = 0.047;</span></span>
+<span><span class="co"># Std. beta = -3.84, 95% CI [-9.26, -0.97])</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># Standardized parameters were obtained by fitting the model</span></span>
+<span><span class="co"># on a standardized version of the dataset. 95% Confidence</span></span>
+<span><span class="co"># Intervals (CIs) and p-values were computed using a Wald</span></span>
+<span><span class="co"># z-distribution approximation. and We fitted a logistic</span></span>
+<span><span class="co"># model (estimated using ML) to predict vs with mpg and cyl</span></span>
+<span><span class="co">#  (formula: vs ~ mpg + cyl). The model's explanatory power is</span></span>
+<span><span class="co"># substantial (Tjur's R2 = 0.67). The model's intercept,</span></span>
+<span><span class="co"># corresponding to cyl = 0, is at 15.97 (95% CI [-2.71,</span></span>
+<span><span class="co"># 44.69], p = 0.147). Within this model:</span></span>
 <span><span class="co"># </span></span>
 <span><span class="co">#   - The effect of mpg is statistically non-significant and</span></span>
 <span><span class="co"># negative (beta = -0.16, 95% CI [-0.71, 0.34], p = 0.496;</span></span>
@@ -302,9 +336,8 @@
 <span><span class="co"># total explanatory power is substantial (conditional R2 =</span></span>
 <span><span class="co"># 0.80) and the part related to the fixed effects alone</span></span>
 <span><span class="co"># (marginal R2) is of 0.28. The model's intercept,</span></span>
-<span><span class="co"># corresponding to Days = 0</span></span>
-<span><span class="co"># , is at 251.41 (95% CI [237.94, 264.87], t(174) = 36.84, p</span></span>
-<span><span class="co"># &lt; .001). Within this model:</span></span>
+<span><span class="co"># corresponding to Days = 0, is at 251.41 (95% CI [237.94,</span></span>
+<span><span class="co"># 264.87], t(174) = 36.84, p &lt; .001). Within this model:</span></span>
 <span><span class="co"># </span></span>
 <span><span class="co">#   - The effect of Days is statistically significant and</span></span>
 <span><span class="co"># positive (beta = 10.47, 95% CI [7.42, 13.52], t(174) =</span></span>
