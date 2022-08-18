@@ -97,7 +97,7 @@ report_system <- function(session = NULL) {
     "; ",
     citation,
     ") on ",
-    text_remove(session$running, " \\(build.*")
+    datawizard::text_remove(session$running, " \\(build.*")
   )
 
   as.report_text(text, summary = short)
@@ -190,7 +190,7 @@ report_text.sessionInfo <- function(x, table = NULL, ...) {
   text <- paste0(
     sys,
     ", using the packages ",
-    text_concatenate(params),
+    datawizard::text_concatenate(params),
     ".\n\nReferences\n----------\n",
     as.character(cite_packages(x, table = table, ...))
   )
@@ -198,7 +198,7 @@ report_text.sessionInfo <- function(x, table = NULL, ...) {
   short <- paste0(
     summary(sys),
     ", using the packages ",
-    text_concatenate(summary(params)),
+    datawizard::text_concatenate(summary(params)),
     "."
   )
 

@@ -24,7 +24,7 @@ report_intercept.lme <- report_intercept.lm
 report_random.lme <- function(x, ...) {
   random_terms <- insight::find_terms(x)$random
   if (!is.null(random_terms)) {
-    text <- format_text(random_terms)
+    text <- random_terms
     text <- paste0("The model included ", text, " as random effect")
     text <- ifelse(length(random_terms) > 1, paste0(text, "s"), text)
     text_full <- paste0(text, " (", format_formula(x, "random"), ")")

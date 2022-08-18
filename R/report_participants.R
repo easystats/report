@@ -179,7 +179,7 @@ report_participants <- function(data,
 
       text <- c(text, paste0(pre_text, current_text))
     }
-    text <- paste("For", text_concatenate(text, sep = ", for ", last = " and for "))
+    text <- paste("For", datawizard::text_concatenate(text, sep = ", for ", last = " and for "))
   } else {
     text <- .report_participants(
       data,

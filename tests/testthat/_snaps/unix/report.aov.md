@@ -2,10 +2,6 @@
 
     Code
       suppressWarnings(report(anova(lm(Sepal.Width ~ Species, data = iris))))
-    Message <simpleMessage>
-      Could not find Sum-of-Squares for the (Intercept) in the ANOVA table.
-      For one-way between subjects designs, partial eta squared is equivalent to eta squared.
-      Returning eta squared.
     Output
       The ANOVA suggests that:
       
@@ -18,8 +14,6 @@
 
     Code
       suppressWarnings(report(anova(lm(wt ~ as.factor(am) * as.factor(cyl), data = mtcars))))
-    Message <simpleMessage>
-      Could not find Sum-of-Squares for the (Intercept) in the ANOVA table.
     Output
       The ANOVA suggests that:
       
@@ -27,9 +21,9 @@
       26) = 45.39, p < .001; Eta2 (partial) = 0.64, 95% CI [0.43, 1.00])
         - The main effect of as.factor(cyl) is statistically significant and large
       (F(2, 26) = 11.53, p < .001; Eta2 (partial) = 0.47, 95% CI [0.21, 1.00])
-        - The interaction between as.factor(am) and as.factor(cyl)
-       is statistically not significant and very small (F(2, 26) = 0.11, p = 0.899;
-      Eta2 (partial) = 8.13e-03, 95% CI [0.00, 1.00])
+        - The interaction between as.factor(am) and as.factor(cyl) is statistically not
+      significant and very small (F(2, 26) = 0.11, p = 0.899; Eta2 (partial) =
+      8.13e-03, 95% CI [0.00, 1.00])
       
       Effect sizes were labelled following Field's (2013) recommendations.
 
@@ -37,8 +31,6 @@
 
     Code
       suppressWarnings(report(aov(wt ~ cyl + Error(gear), data = mtcars)))
-    Message <simpleMessage>
-      Could not find Sum-of-Squares for the (Intercept) in the ANOVA table.
     Output
       The repeated-measures ANOVA (formula: wt ~ cyl + Error(gear)) suggests that:
       

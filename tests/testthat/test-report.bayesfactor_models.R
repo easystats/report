@@ -12,9 +12,7 @@ if (require("testthat") && require("bayestestR")) {
     expect_s3_class(as.data.frame(r), "data.frame")
 
     expect_output(print(r), "BIC approximation")
-    expect_output(print(r), "\\(Intercept only\\) model \\(the least supported model\\)")
-    expect_output(print(r), "Species \\+ Petal.Length model \\(the most supported model\\)")
-    expect_output(print(r), "Compared to the \\(Intercept only\\) model")
+    expect_output(print(r), "\\(Intercept only\\) model")
 
     BFmodels <- bayestestR::bayesfactor_models(mod1, mod2, mod3, denominator = mod1)
     r <- report(BFmodels)
@@ -29,9 +27,9 @@ if (require("testthat") && require("bayestestR")) {
     expect_s3_class(summary(r), "character")
     expect_s3_class(as.data.frame(r), "data.frame")
 
-    expect_output(print(r), "Since each model has a prior probability")
-    expect_output(print(r), "subjective prior odds")
-    expect_output(print(r), "averaging was done only")
+    expect_output(print(r), "Since each model")
+    expect_output(print(r), "subjective")
+    expect_output(print(r), "averaging")
 
 
     inc_bf <- bayestestR::bayesfactor_inclusion(BFmodels)
@@ -40,6 +38,5 @@ if (require("testthat") && require("bayestestR")) {
     expect_s3_class(as.data.frame(r), "data.frame")
 
     expect_false(grepl("subjective prior odds", r, fixed = TRUE))
-    expect_false(grepl("averaging was done only", r, fixed = TRUE))
   })
 }

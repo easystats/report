@@ -31,7 +31,7 @@ jobs:
         with:
           extra-packages: |
             deps::.
-            any::report
+            easystats/report
 
       - name: Render README
         run: Rscript -e 'rmarkdown::render("README.Rmd")'

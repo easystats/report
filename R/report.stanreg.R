@@ -88,7 +88,7 @@ report_priors.stanreg <- function(x, ...) {
   if (length(unique(values)) == 1 && nrow(params) > 1) {
     text <- paste0("all set as ", values[1])
   } else {
-    text <- paste0("set as ", format_text(values))
+    text <- paste0("set as ", values)
   }
 
   text <- paste0("Priors over parameters were ", text, " distributions")

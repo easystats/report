@@ -90,7 +90,7 @@
         - vs: n = 6, Mean = 0.67, SD = 0.52, Median = 1.00, MAD = 0.00, range: [0, 1],
       Skewness = -0.97, Kurtosis = -1.88, 0 missing
         - am: n = 6, Mean = 0.33, SD = 0.52, Median = 0.00, MAD = 0.00, range: [0, 1],
-      Skewness = 0.97, Kurtosis = -1.87, 0 missing
+      Skewness = 0.97, Kurtosis = -1.88, 0 missing
         - gear: n = 6, Mean = 3.83, SD = 0.75, Median = 4.00, MAD = 0.74, range: [3,
       5], Skewness = 0.31, Kurtosis = -0.10, 0 missing
         - carb: n = 6, Mean = 3.33, SD = 1.97, Median = 4.00, MAD = 1.48, range: [1,

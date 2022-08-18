@@ -104,8 +104,8 @@ report_text.test_performance <- function(x, table = NULL, ...) {
 
   # Get indices
   models <- table$Model
-  text <- text_concatenate(paste0(models, " (", stats, ")"))
-  text_short <- text_concatenate(paste0(models, " (", summary(stats), ")"))
+  text <- datawizard::text_concatenate(paste0(models, " (", stats, ")"))
+  text_short <- datawizard::text_concatenate(paste0(models, " (", summary(stats), ")"))
 
   # Add intro sentence
   text_start <- paste0(

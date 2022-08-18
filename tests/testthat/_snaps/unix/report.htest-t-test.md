@@ -85,10 +85,10 @@
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
-      The Paired t-test testing the difference between x and y (mean of the
-      differences = 0.43) suggests that the effect is positive, statistically
-      significant, and large (difference = 0.43, 95% CI [0.10, 0.76], t(8) = 3.04, p
-      = 0.016; Cohen's d = 1.07, 95% CI [0.19, 1.92])
+      The Paired t-test testing the difference between x and y (mean difference =
+      0.43) suggests that the effect is positive, statistically significant, and
+      large (difference = 0.43, 95% CI [0.10, 0.76], t(8) = 3.04, p = 0.016; Cohen's
+      d = 1.07, 95% CI [0.19, 1.92])
 
 ---
 
@@ -99,10 +99,10 @@
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
-      The Paired t-test testing the difference between x and y (mean of the
-      differences = 0.43) suggests that the effect is positive, statistically not
-      significant, and large (difference = 0.43, 95% CI [-Inf, 0.70], t(8) = 3.04, p
-      = 0.992; Cohen's d = 1.07, 95% CI [-Inf, 1.77])
+      The Paired t-test testing the difference between x and y (mean difference =
+      0.43) suggests that the effect is positive, statistically not significant, and
+      large (difference = 0.43, 95% CI [-Inf, 0.70], t(8) = 3.04, p = 0.992; Cohen's
+      d = 1.07, 95% CI [-Inf, 1.77])
 
 ---
 
@@ -113,10 +113,10 @@
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
-      The Paired t-test testing the difference between x and y (mean of the
-      differences = 0.43) suggests that the effect is positive, statistically
-      significant, and large (difference = 0.43, 95% CI [0.17, Inf], t(8) = 3.04, p =
-      0.008; Cohen's d = 1.07, 95% CI [0.32, Inf])
+      The Paired t-test testing the difference between x and y (mean difference =
+      0.43) suggests that the effect is positive, statistically significant, and
+      large (difference = 0.43, 95% CI [0.17, Inf], t(8) = 3.04, p = 0.008; Cohen's d
+      = 1.07, 95% CI [0.32, Inf])
 
 ---
 
@@ -128,7 +128,7 @@
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
       The Paired t-test testing the difference between Pair(extra.1, extra.2) (mean
-      of the differences = -1.58) suggests that the effect is negative, statistically
+      difference = -1.58) suggests that the effect is negative, statistically
       significant, and large (difference = -1.58, 95% CI [-2.46, -0.70], t(9) =
       -4.06, p = 0.003; Cohen's d = -1.35, 95% CI [-2.23, -0.44])
 
