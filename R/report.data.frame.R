@@ -157,15 +157,15 @@ report_table.data.frame <- function(x,
 
   if ("Level" %in% names(table)) {
     if ("percentage_Obs" %in% names(table)) {
-      table <- datawizard::data_reorder(table, c("Variable", "Level", "n_Obs", "percentage_Obs"))
-      table_full <- datawizard::data_reorder(table_full, c("Variable", "Level", "n_Obs", "percentage_Obs"))
+      table <- datawizard::data_reorder(table, c("Variable", "Level", "n_Obs", "percentage_Obs"), verbose = FALSE)
+      table_full <- datawizard::data_reorder(table_full, c("Variable", "Level", "n_Obs", "percentage_Obs"), verbose = FALSE)
     } else {
-      table <- datawizard::data_reorder(table, c("Variable", "Level", "n_Obs"))
-      table_full <- datawizard::data_reorder(table_full, c("Variable", "Level", "n_Obs"))
+      table <- datawizard::data_reorder(table, c("Variable", "Level", "n_Obs"), verbose = FALSE)
+      table_full <- datawizard::data_reorder(table_full, c("Variable", "Level", "n_Obs"), verbose = FALSE)
     }
   } else {
-    table <- datawizard::data_reorder(table, c("Variable", "n_Obs"))
-    table_full <- datawizard::data_reorder(table_full, c("Variable", "n_Obs"))
+    table <- datawizard::data_reorder(table, c("Variable", "n_Obs"), verbose = FALSE)
+    table_full <- datawizard::data_reorder(table_full, c("Variable", "n_Obs"), verbose = FALSE)
   }
 
   # Reorder cols
