@@ -38,6 +38,5 @@ if (require("testthat") && require("bayestestR")) {
     expect_s3_class(as.data.frame(r), "data.frame")
 
     expect_false(grepl("subjective prior odds", r, fixed = TRUE))
-    expect_false(grepl("averaging", r, fixed = TRUE))
   })
 }
