@@ -260,7 +260,7 @@ print.report_performance <- print.report_text
   if (length(perf_table[perf_table$Interpretation == "satisfactory", "Text"]) >= 1) {
     text_satisfactory <- paste0(
       "The ",
-      format_text(perf_table[perf_table$Interpretation == "satisfactory", "Text"]),
+      perf_table[perf_table$Interpretation == "satisfactory", "Text"],
       ifelse(length(perf_table[perf_table$Interpretation == "satisfactory", "Text"]) > 1, " suggest", " suggests"),
       " a satisfactory fit."
     )
@@ -272,7 +272,7 @@ print.report_performance <- print.report_text
   if (length(perf_table[perf_table$Interpretation == "poor", "Text"]) >= 1) {
     text_poor <- paste0(
       "The ",
-      format_text(perf_table[perf_table$Interpretation == "poor", "Text"]),
+      perf_table[perf_table$Interpretation == "poor", "Text"],
       ifelse(length(perf_table[perf_table$Interpretation == "poor", "Text"]) > 1, " suggest", " suggests"),
       " a poor fit."
     )

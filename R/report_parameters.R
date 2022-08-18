@@ -107,7 +107,7 @@ print.report_parameters <- function(x, ...) {
 .format_parameters_aov <- function(names) {
   for (i in seq_along(names)) {
     if (grepl(":", names[i], fixed = TRUE)) {
-      names[i] <- format_text(unlist(strsplit(names[i], ":", fixed = TRUE)))
+      names[i] <- unlist(strsplit(names[i], ":", fixed = TRUE))
       names[i] <- paste0("The interaction between ", names[i])
     } else {
       names[i] <- paste0("The main effect of ", names[i])

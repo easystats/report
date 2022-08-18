@@ -420,7 +420,7 @@ report_model.lm <- function(x, table = NULL, ...) {
     to_predict_text <- paste0(
       to_predict_text,
       " with ",
-      format_text(insight::find_predictors(x, effects = "fixed", flatten = TRUE))
+      insight::find_predictors(x, effects = "fixed", flatten = TRUE)
     )
   }
 
