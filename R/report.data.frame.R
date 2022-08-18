@@ -157,15 +157,15 @@ report_table.data.frame <- function(x,
 
   if ("Level" %in% names(table)) {
     if ("percentage_Obs" %in% names(table)) {
-      table <- data_reorder(table, c("Variable", "Level", "n_Obs", "percentage_Obs"))
-      table_full <- data_reorder(table_full, c("Variable", "Level", "n_Obs", "percentage_Obs"))
+      table <- datawizard::data_reorder(table, c("Variable", "Level", "n_Obs", "percentage_Obs"))
+      table_full <- datawizard::data_reorder(table_full, c("Variable", "Level", "n_Obs", "percentage_Obs"))
     } else {
-      table <- data_reorder(table, c("Variable", "Level", "n_Obs"))
-      table_full <- data_reorder(table_full, c("Variable", "Level", "n_Obs"))
+      table <- datawizard::data_reorder(table, c("Variable", "Level", "n_Obs"))
+      table_full <- datawizard::data_reorder(table_full, c("Variable", "Level", "n_Obs"))
     }
   } else {
-    table <- data_reorder(table, c("Variable", "n_Obs"))
-    table_full <- data_reorder(table_full, c("Variable", "n_Obs"))
+    table <- datawizard::data_reorder(table, c("Variable", "n_Obs"))
+    table_full <- datawizard::data_reorder(table_full, c("Variable", "n_Obs"))
   }
 
   # Reorder cols
@@ -377,8 +377,8 @@ report_table.grouped_df <- function(x,
     table <- merge(table, current_table, all = TRUE, sort = FALSE)
   }
 
-  table <- data_reorder(table, "Group")
-  table_full <- data_reorder(table_full, "Group")
+  table <- datawizard::data_reorder(table, "Group")
+  table_full <- datawizard::data_reorder(table_full, "Group")
 
   as.report_table(table_full, summary = table)
 }

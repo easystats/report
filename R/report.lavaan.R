@@ -43,7 +43,7 @@ report_table.lavaan <- function(x, ...) {
   table <- as.data.frame(parameters)
   table$Parameter <- paste(table$To, table$Operator, table$From)
   table <- datawizard::data_remove(table, c("To", "Operator", "From"))
-  table <- data_reorder(table, "Parameter")
+  table <- datawizard::data_reorder(table, "Parameter")
 
   # Combine -----
   # Add performance
