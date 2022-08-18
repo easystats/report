@@ -145,8 +145,8 @@ print.report_performance <- print.report_text
         ")"
       )
     } else {
-      if (text_lastchar(text_full) != ")") text_full <- paste0(text_full, ")")
-      if (text_lastchar(text) != ")") text <- paste0(text, ")")
+      if (datawizard::text_lastchar(text_full) != ")") text_full <- paste0(text_full, ")")
+      if (datawizard::text_lastchar(text) != ")") text <- paste0(text, ")")
     }
   }
 
