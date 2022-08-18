@@ -165,8 +165,7 @@
 <span><span class="co"># 1.30, MAD = 1.04, range: [0.10, 2.50], Skewness = -0.10,</span></span>
 <span><span class="co"># Kurtosis = -1.34, 0% missing</span></span>
 <span><span class="co">#   - Species: 3 levels, namely setosa (n = 50, 33.33%),</span></span>
-<span><span class="co"># versicolor (n = 50, 33.33%) and</span></span>
-<span><span class="co"># virginica (n = 50, 33.33%)</span></span></code></pre></div>
+<span><span class="co"># versicolor (n = 50, 33.33%) and virginica (n = 50, 33.33%)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="grouped-dataframes">Grouped Dataframes<a class="anchor" aria-label="anchor" href="#grouped-dataframes"></a>
@@ -217,8 +216,7 @@
 <span></span>
 <span><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span><span class="co"># We fitted a linear model (estimated using OLS) to predict</span></span>
-<span><span class="co"># wt with am and mpg</span></span>
-<span><span class="co">#  (formula: wt ~ am + mpg). The model explains a</span></span>
+<span><span class="co"># wt with am (formula: wt ~ am + mpg). The model explains a</span></span>
 <span><span class="co"># statistically significant and substantial proportion of</span></span>
 <span><span class="co"># variance (R2 = 0.80, F(2, 29) = 57.66, p &lt; .001, adj. R2 =</span></span>
 <span><span class="co"># 0.79). The model's intercept, corresponding to am = 0, is</span></span>
@@ -236,13 +234,12 @@
 <span><span class="co"># on a standardized version of the dataset. 95% Confidence</span></span>
 <span><span class="co"># Intervals (CIs) and p-values were computed using a Wald</span></span>
 <span><span class="co"># t-distribution approximation. and We fitted a linear model</span></span>
-<span><span class="co"># (estimated using OLS) to predict wt with am and mpg</span></span>
-<span><span class="co">#  (formula: wt ~ am + mpg). The model explains a</span></span>
-<span><span class="co"># statistically significant and substantial proportion of</span></span>
-<span><span class="co"># variance (R2 = 0.80, F(2, 29) = 57.66, p &lt; .001, adj. R2 =</span></span>
-<span><span class="co"># 0.79). The model's intercept, corresponding to mpg = 0, is</span></span>
-<span><span class="co"># at 5.74 (95% CI [5.11, 6.36], t(29) = 18.64, p &lt; .001).</span></span>
-<span><span class="co"># Within this model:</span></span>
+<span><span class="co"># (estimated using OLS) to predict wt with mpg (formula: wt ~</span></span>
+<span><span class="co"># am + mpg). The model explains a statistically significant</span></span>
+<span><span class="co"># and substantial proportion of variance (R2 = 0.80, F(2, 29)</span></span>
+<span><span class="co"># = 57.66, p &lt; .001, adj. R2 = 0.79). The model's intercept,</span></span>
+<span><span class="co"># corresponding to mpg = 0, is at 5.74 (95% CI [5.11, 6.36],</span></span>
+<span><span class="co"># t(29) = 18.64, p &lt; .001). Within this model:</span></span>
 <span><span class="co"># </span></span>
 <span><span class="co">#   - The effect of am is statistically significant and</span></span>
 <span><span class="co"># negative (beta = -0.53, 95% CI [-0.94, -0.11], t(29) =</span></span>
@@ -284,11 +281,10 @@
 <span></span>
 <span><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span><span class="co"># We fitted a logistic model (estimated using ML) to predict</span></span>
-<span><span class="co"># vs with mpg and cyl</span></span>
-<span><span class="co">#  (formula: vs ~ mpg + cyl). The model's explanatory power is</span></span>
-<span><span class="co"># substantial (Tjur's R2 = 0.67). The model's intercept,</span></span>
-<span><span class="co"># corresponding to mpg = 0, is at 15.97 (95% CI [-2.71,</span></span>
-<span><span class="co"># 44.69], p = 0.147). Within this model:</span></span>
+<span><span class="co"># vs with mpg (formula: vs ~ mpg + cyl). The model's</span></span>
+<span><span class="co"># explanatory power is substantial (Tjur's R2 = 0.67). The</span></span>
+<span><span class="co"># model's intercept, corresponding to mpg = 0, is at 15.97</span></span>
+<span><span class="co"># (95% CI [-2.71, 44.69], p = 0.147). Within this model:</span></span>
 <span><span class="co"># </span></span>
 <span><span class="co">#   - The effect of mpg is statistically non-significant and</span></span>
 <span><span class="co"># negative (beta = -0.16, 95% CI [-0.71, 0.34], p = 0.496;</span></span>
@@ -301,8 +297,8 @@
 <span><span class="co"># on a standardized version of the dataset. 95% Confidence</span></span>
 <span><span class="co"># Intervals (CIs) and p-values were computed using a Wald</span></span>
 <span><span class="co"># z-distribution approximation. and We fitted a logistic</span></span>
-<span><span class="co"># model (estimated using ML) to predict vs with mpg and cyl</span></span>
-<span><span class="co">#  (formula: vs ~ mpg + cyl). The model's explanatory power is</span></span>
+<span><span class="co"># model (estimated using ML) to predict vs with cyl (formula:</span></span>
+<span><span class="co"># vs ~ mpg + cyl). The model's explanatory power is</span></span>
 <span><span class="co"># substantial (Tjur's R2 = 0.67). The model's intercept,</span></span>
 <span><span class="co"># corresponding to cyl = 0, is at 15.97 (95% CI [-2.71,</span></span>
 <span><span class="co"># 44.69], p = 0.147). Within this model:</span></span>
@@ -330,9 +326,8 @@
 <span><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span><span class="co"># We fitted a linear mixed model (estimated using REML and</span></span>
 <span><span class="co"># nloptwrap optimizer) to predict Reaction with Days</span></span>
-<span><span class="co">#  (formula: Reaction ~ Days). The model included Days and</span></span>
-<span><span class="co"># Subject</span></span>
-<span><span class="co">#  as random effects (formula: ~Days | Subject). The model's</span></span>
+<span><span class="co"># (formula: Reaction ~ Days). The model included Days as</span></span>
+<span><span class="co"># random effects (formula: ~Days | Subject). The model's</span></span>
 <span><span class="co"># total explanatory power is substantial (conditional R2 =</span></span>
 <span><span class="co"># 0.80) and the part related to the fixed effects alone</span></span>
 <span><span class="co"># (marginal R2) is of 0.28. The model's intercept,</span></span>

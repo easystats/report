@@ -179,10 +179,9 @@ Supporting New Models."><meta property="og:image" content="https://easystats.git
 <span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">r</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> We fitted a linear model (estimated using OLS) to predict Sepal.Length with</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Petal.Length and Species</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  (formula: Sepal.Length ~ Petal.Length * Species). The model explains a</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> statistically significant and substantial proportion of variance (R2 = 0.84,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> F(5, 144) = 151.71, p &lt; .001, adj. R2 = 0.83). The model's intercept,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal.Length (formula: Sepal.Length ~ Petal.Length * Species). The model</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> explains a statistically significant and substantial proportion of variance (R2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> = 0.84, F(5, 144) = 151.71, p &lt; .001, adj. R2 = 0.83). The model's intercept,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> corresponding to Petal.Length = 0, is at 4.21 (95% CI [3.41, 5.02], t(144) =</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10.34, p &lt; .001). Within this model:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -205,13 +204,12 @@ Supporting New Models."><meta property="og:image" content="https://easystats.git
 <span class="r-out co"><span class="r-pr">#&gt;</span> Standardized parameters were obtained by fitting the model on a standardized</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> version of the dataset. 95% Confidence Intervals (CIs) and p-values were</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> computed using a Wald t-distribution approximation. and We fitted a linear</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> model (estimated using OLS) to predict Sepal.Length with Petal.Length and</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Species</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  (formula: Sepal.Length ~ Petal.Length * Species). The model explains a</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> statistically significant and substantial proportion of variance (R2 = 0.84,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> F(5, 144) = 151.71, p &lt; .001, adj. R2 = 0.83). The model's intercept,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> corresponding to Species = setosa, is at 4.21 (95% CI [3.41, 5.02], t(144) =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10.34, p &lt; .001). Within this model:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> model (estimated using OLS) to predict Sepal.Length with Species (formula:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sepal.Length ~ Petal.Length * Species). The model explains a statistically</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> significant and substantial proportion of variance (R2 = 0.84, F(5, 144) =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 151.71, p &lt; .001, adj. R2 = 0.83). The model's intercept, corresponding to</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species = setosa, is at 4.21 (95% CI [3.41, 5.02], t(144) = 10.34, p &lt; .001).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Within this model:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of Petal Length is statistically non-significant and positive</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (beta = 0.54, 95% CI [-4.76e-03, 1.09], t(144) = 1.96, p = 0.052; Std. beta =</span>
@@ -233,9 +231,28 @@ Supporting New Models."><meta property="og:image" content="https://easystats.git
 <span class="r-out co"><span class="r-pr">#&gt;</span> version of the dataset. 95% Confidence Intervals (CIs) and p-values were</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> computed using a Wald t-distribution approximation.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> We fitted a linear model to predict Sepal.Length with Petal.Length and Species</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> . The model's explanatory power is substantial (R2 = 0.84, adj. R2 = 0.83). The</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> model's intercept is at 4.21 (95% CI [3.41, 5.02]). Within this model:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> We fitted a linear model to predict Sepal.Length with Petal.Length. The model's</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> explanatory power is substantial (R2 = 0.84, adj. R2 = 0.83). The model's</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> intercept is at 4.21 (95% CI [3.41, 5.02]). Within this model:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of Petal Length is statistically non-significant and positive</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (beta = 0.54, 95% CI [-4.76e-03, 1.09], t(144) = 1.96, p = 0.052, Std. beta =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1.16)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of Species [versicolor] is statistically significant and negative</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (beta = -1.81, 95% CI [-2.99, -0.62], t(144) = -3.02, p = 0.003, Std. beta =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.88)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of Species [virginica] is statistically significant and negative</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (beta = -3.15, 95% CI [-4.41, -1.90], t(144) = -4.97, p &lt; .001, Std. beta =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -1.75)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The interaction effect of Species [versicolor] on Petal Length is</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> statistically non-significant and positive (beta = 0.29, 95% CI [-0.30, 0.87],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> t(144) = 0.97, p = 0.334, Std. beta = 0.61)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The interaction effect of Species [virginica] on Petal Length is</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> statistically non-significant and positive (beta = 0.45, 95% CI [-0.12, 1.03],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> t(144) = 1.56, p = 0.120, Std. beta = 0.97) and We fitted a linear model to</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> predict Sepal.Length with Species. The model's explanatory power is substantial</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (R2 = 0.84, adj. R2 = 0.83). The model's intercept is at 4.21 (95% CI [3.41,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5.02]). Within this model:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of Petal Length is statistically non-significant and positive</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (beta = 0.54, 95% CI [-4.76e-03, 1.09], t(144) = 1.96, p = 0.052, Std. beta =</span>
