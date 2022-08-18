@@ -113,7 +113,7 @@ report_effectsize.htest <- function(x, ...) {
       # For Spearman and co.
     } else {
       statistics <- main
-      table <- table[c(estimate)]
+      table <- table[estimate]
     }
   }
 
@@ -178,11 +178,14 @@ report_statistics.htest <- function(x, table = NULL, ...) {
   }
 
   effsize <- attributes(table)$effsize
+  text <- NULL
 
   # Estimate
   candidates <- c("rho", "r", "tau", "Difference", "r_rank_biserial")
   estimate <- candidates[candidates %in% names(table)][1]
-  text <- paste0(tolower(estimate), " = ", insight::format_value(table[[estimate]]))
+  if (!is.null(estimate) && !is.na(estimate)) {
+    text <- paste0(tolower(estimate), " = ", insight::format_value(table[[estimate]]))
+  }
 
   # CI
   if (!is.null(attributes(x$conf.int)$conf.level)) {
