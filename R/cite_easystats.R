@@ -2,14 +2,18 @@
 #'
 #' A convenient function for those who wish to cite the easystats packages.
 #'
-#' @param packages A character vector of packages to cite. Can be `"all"` for all *easystats* pacakges or a vector with specific package names.
-#' @param format The format to generate citations. Can be `"text"` for plain text, `"markdown"` for markdown citations and CSL bibliography (recommended for writing in RMarkdown), or `"biblatex"` for BibLaTeX citations and bibliography.
-#' @param intext_prefix A character vector of length 1 containing text to include before in-text citations.
-#'   If `TRUE`, defaults to `"Analyses were conducted using the easystats collection of packages "`.
-#'   If `FALSE` or `NA`, no prefix is included.
-#' @param intext_suffix A character vector of length 1 containing text to include after in-text citations.
-#'   Defaults to `"."`.
-#'   If `FALSE` or `NA`, no suffix is included.
+#' @param packages A character vector of packages to cite. Can be `"all"` for
+#'   all *easystats* pacakges or a vector with specific package names.
+#' @param format The format to generate citations. Can be `"text"` for plain text,
+#'   `"markdown"` for markdown citations and CSL bibliography (recommended for
+#'   writing in RMarkdown), or `"biblatex"` for BibLaTeX citations and bibliography.
+#' @param intext_prefix A character vector of length 1 containing text to include
+#'   before in-text citations. If `TRUE`, defaults to `"Analyses were conducted
+#'   using the easystats collection of packages "`. If `FALSE` or `NA`, no prefix
+#'   is included.
+#' @param intext_suffix A character vector of length 1 containing text to include
+#'   after in-text citations. Defaults to `"."`. If `FALSE` or `NA`, no suffix
+#'   is included.
 #' @param x,object A `"cite_easystats"` object to print.
 #' @param what What elements of the citations to print, can be `"all"`, `"intext"`, or `"refs"`.
 #' @param ... Not used. Included for compatibility with the generic function.

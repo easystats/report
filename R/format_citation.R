@@ -38,8 +38,8 @@ format_citation <- function(citation,
 
   if (isTRUE(short)) {
     n_authors <- sapply(regmatches(citation, gregexpr(",", citation, fixed = TRUE)), length)
-    for (i in 1:length(n_authors)) {
-      if (n_authors[i] > 1 | grepl("&", citation[i])) {
+    for (i in seq_along(n_authors)) {
+      if (n_authors[i] > 1 || grepl("&", citation[i])) {
         citation[i] <- trimws(gsub(",.*\\(", " et al. (", citation[i])) # Replace remaining authors by et al.
       }
     }
