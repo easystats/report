@@ -77,6 +77,10 @@ Encoding: UTF-8
 Language: en-US
 RoxygenNote: 7.2.1
 Config/testthat/edition: 3
+Config/Needs/website:
+    rstudio/bslib,
+    r-lib/pkgdown,
+    easystats/easystatstemplate
 Collate: 
     'cite_easystats.R'
     'format_algorithm.R'
