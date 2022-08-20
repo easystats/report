@@ -67,7 +67,8 @@ cite_citation <- function(citation) {
 clean_citation <- function(citation) {
   if (isTRUE(inherits(citation, "citation"))) {
     citation <- format(citation,
-                       style = "text")
+      style = "text"
+    )
   }
   citation <- unlist(strsplit(citation, "\n"))
   citation <- paste(citation, collapse = "SPLIT")

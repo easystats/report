@@ -1,5 +1,5 @@
 skip_if(.Platform$OS.type != "windows")
-skip_if_not(getRversion() <= '4.2.1')
+skip_if_not(getRversion() <= "4.2.1")
 
 test_that("report.numeric", {
   r <- report(seq(0, 1, length.out = 100))

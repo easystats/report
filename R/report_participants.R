@@ -57,8 +57,11 @@
 #'   "Age" = c(22, 23, 54, 21, 8, 42, 18, 32, 24, 27, 45),
 #'   "Sex" = c("Intersex", "F", "F", "M", "M", "M", "F", "F", "F", "F", "F"),
 #'   "Gender" = c("N", "W", "W", "M", "M", "M", "W", "W", "W", "W", "W"),
-#'   "Country" = c("USA", NA, "Canada", "Canada", "India", "Germany",
-#'   "USA", "USA", "USA", "USA", "Canada"))
+#'   "Country" = c(
+#'     "USA", NA, "Canada", "Canada", "India", "Germany",
+#'     "USA", "USA", "USA", "USA", "Canada"
+#'   )
+#' )
 #' report_participants(data)
 #'
 #' # Country, control presentation treshold
@@ -69,8 +72,11 @@
 #'   "Age" = c(22, 23, 54, 21, 8, 42, 18, 32, 24, 27, 45),
 #'   "Sex" = c("Intersex", "F", "F", "M", "M", "M", "F", "F", "F", "F", "F"),
 #'   "Gender" = c("N", "W", "W", "M", "M", "M", "W", "W", "W", "W", "W"),
-#'   "Race" = c("Black", NA, "White", "Asian", "Black", "Arab", "Black",
-#'   "White", "Asian", "Southeast Asian", "Mixed"))
+#'   "Race" = c(
+#'     "Black", NA, "White", "Asian", "Black", "Arab", "Black",
+#'     "White", "Asian", "Southeast Asian", "Mixed"
+#'   )
+#' )
 #' report_participants(data)
 #'
 #' # Race/ethnicity, control presentation treshold
@@ -121,7 +127,6 @@ report_participants <- function(data,
                                 digits = 1,
                                 threshold = 10,
                                 ...) {
-
   # Convert empty strings to NA
   data.list <- lapply(data, function(x) {
     x[which(x == "")] <- NA
@@ -244,23 +249,29 @@ report_participants <- function(data,
   if (!is.null(participants)) {
     data <- data.frame(
       "Age" = stats::aggregate(data[[age]],
-                               by = list(data[[participants]]),
-                               FUN = mean)[[2]],
+        by = list(data[[participants]]),
+        FUN = mean
+      )[[2]],
       "Sex" = stats::aggregate(data[[sex]],
-                               by = list(data[[participants]]),
-                               FUN = utils::head, n = 1)[[2]],
+        by = list(data[[participants]]),
+        FUN = utils::head, n = 1
+      )[[2]],
       "Gender" = stats::aggregate(data[[gender]],
-                                  by = list(data[[participants]]),
-                                  FUN = utils::head, n = 1)[[2]],
+        by = list(data[[participants]]),
+        FUN = utils::head, n = 1
+      )[[2]],
       "Education" = stats::aggregate(data[[education]],
-                                     by = list(data[[participants]]),
-                                     FUN = utils::head, n = 1)[[2]],
+        by = list(data[[participants]]),
+        FUN = utils::head, n = 1
+      )[[2]],
       "Country" = stats::aggregate(data[[country]],
-                                   by = list(data[[participants]]),
-                                   FUN = utils::head, n = 1)[[2]],
+        by = list(data[[participants]]),
+        FUN = utils::head, n = 1
+      )[[2]],
       "Race" = stats::aggregate(data[[race]],
-                                by = list(data[[participants]]),
-                                FUN = utils::head, n = 1)[[2]]
+        by = list(data[[participants]]),
+        FUN = utils::head, n = 1
+      )[[2]]
     )
     age <- "Age"
     sex <- "Sex"
@@ -299,24 +310,25 @@ report_participants <- function(data,
   } else {
     paste0(
       "Sex: ",
-
       insight::format_value(length(data[[sex]][tolower(
-        data[[sex]]) %in% c("female", "f")]) / nrow(data) * 100, digits = digits),
+        data[[sex]]
+      ) %in% c("female", "f")]) / nrow(data) * 100, digits = digits),
       "% females, ",
-
       insight::format_value(length(data[[sex]][tolower(
-        data[[sex]]) %in% c("male", "m")]) / nrow(data) * 100, digits = digits),
+        data[[sex]]
+      ) %in% c("male", "m")]) / nrow(data) * 100, digits = digits),
       "% males, ",
-
       insight::format_value(100 - length(data[[sex]][tolower(
-        data[[sex]]) %in% c("male", "m", "female", "f", NA, "na")]) /
-          nrow(data) * 100, digits = digits),
+        data[[sex]]
+      ) %in% c("male", "m", "female", "f", NA, "na")]) /
+        nrow(data) * 100, digits = digits),
       "% other",
-
       if (!insight::format_value(length(data[[sex]][tolower(
-        data[[sex]]) %in% c(NA, "na")]) / nrow(data) * 100) == "0.00") {
+        data[[sex]]
+      ) %in% c(NA, "na")]) / nrow(data) * 100) == "0.00") {
         paste0(", ", insight::format_value(length(data[[sex]][tolower(
-          data[[sex]]) %in% c(NA, "na")]) / nrow(data) * 100), "% missing")
+          data[[sex]]
+        ) %in% c(NA, "na")]) / nrow(data) * 100), "% missing")
       }
     )
   }
@@ -326,24 +338,25 @@ report_participants <- function(data,
   } else {
     paste0(
       "Gender: ",
-
       insight::format_value(length(data[[gender]][tolower(
-        data[[gender]]) %in% c("woman", "w", "f", "female")]) / nrow(data) * 100, digits = digits),
+        data[[gender]]
+      ) %in% c("woman", "w", "f", "female")]) / nrow(data) * 100, digits = digits),
       "% women, ",
-
       insight::format_value(length(data[[gender]][tolower(
-        data[[gender]]) %in% c("man", "m", "male")]) / nrow(data) * 100, digits = digits),
+        data[[gender]]
+      ) %in% c("man", "m", "male")]) / nrow(data) * 100, digits = digits),
       "% men, ",
-
       insight::format_value(100 - length(data[[gender]][tolower(
-        data[[gender]]) %in% c("woman", "w", "f", "female", "man", "m", "male", NA, "na")]) /
-          nrow(data) * 100), "% non-binary",
-
+        data[[gender]]
+      ) %in% c("woman", "w", "f", "female", "man", "m", "male", NA, "na")]) /
+        nrow(data) * 100), "% non-binary",
       if (!insight::format_value(length(data[[gender]][tolower(
-        data[[gender]]) %in% c(NA, "na")]) / nrow(data) * 100) == "0.00") {
+        data[[gender]]
+      ) %in% c(NA, "na")]) / nrow(data) * 100) == "0.00") {
         paste0(", ", insight::format_value(length(data[[gender]][tolower(
-          data[[gender]]) %in% c(NA, "na")]) / nrow(data) * 100), "% missing")
-        }
+          data[[gender]]
+        ) %in% c(NA, "na")]) / nrow(data) * 100), "% missing")
+      }
     )
   }
 
@@ -422,24 +435,23 @@ report_participants <- function(data,
     size,
     " participants (",
     ifelse(text_age == "", "", text_age),
-
     ifelse(text_sex == "", "", paste0(ifelse(
-      text_age == "", "", "; "), text_sex)),
-
+      text_age == "", "", "; "
+    ), text_sex)),
     ifelse(text_gender == "", "", paste0(ifelse(
-      text_age == "" & text_sex == "", "", "; "), text_gender)),
-
+      text_age == "" & text_sex == "", "", "; "
+    ), text_gender)),
     ifelse(text_education == "", "", paste0(ifelse(
-      text_age == "" & text_sex == "" & text_gender == "", "", "; "), text_education)),
-
+      text_age == "" & text_sex == "" & text_gender == "", "", "; "
+    ), text_education)),
     ifelse(text_country == "", "", paste0(ifelse(
       text_education == "" & text_age == "" & text_sex == "" &
-        text_gender == "", "", "; "), text_country)),
-
+        text_gender == "", "", "; "
+    ), text_country)),
     ifelse(text_race == "", "", paste0(ifelse(
       text_country == "" & text_education == "" & text_age == "" &
-        text_sex == "" & text_gender == "", "", "; "), text_race)),
-
+        text_sex == "" & text_gender == "", "", "; "
+    ), text_race)),
     ")"
   )
 }

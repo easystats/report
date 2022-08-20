@@ -61,6 +61,4 @@ test_that("report_participants", {
     report_participants(data4, threshold = 15),
     "7 participants (Mean education = 1.3, SD = 4.9, range: [-5, 8]; Country: 28.57% Canada, 28.57% USA, 42.86% other; Race: 42.86% Black, 28.57% White, 28.57% other)"
   )
-
 })
-
