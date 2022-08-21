@@ -92,8 +92,11 @@ data <- data.frame(
   "Age" = c(22, 23, 54, 21, 8, 42, 18, 32, 24, 27, 45),
   "Sex" = c("Intersex", "F", "F", "M", "M", "M", "F", "F", "F", "F", "F"),
   "Gender" = c("N", "W", "W", "M", "M", "M", "W", "W", "W", "W", "W"),
-  "Country" = c("USA", NA, "Canada", "Canada", "India", "Germany",
-  "USA", "USA", "USA", "USA", "Canada"))
+  "Country" = c(
+    "USA", NA, "Canada", "Canada", "India", "Germany",
+    "USA", "USA", "USA", "USA", "Canada"
+  )
+)
 report_participants(data)
 
 # Country, control presentation treshold
@@ -104,8 +107,11 @@ data <- data.frame(
   "Age" = c(22, 23, 54, 21, 8, 42, 18, 32, 24, 27, 45),
   "Sex" = c("Intersex", "F", "F", "M", "M", "M", "F", "F", "F", "F", "F"),
   "Gender" = c("N", "W", "W", "M", "M", "M", "W", "W", "W", "W", "W"),
-  "Race" = c("Black", NA, "White", "Asian", "Black", "Arab", "Black",
-  "White", "Asian", "Southeast Asian", "Mixed"))
+  "Race" = c(
+    "Black", NA, "White", "Asian", "Black", "Arab", "Black",
+    "White", "Asian", "Southeast Asian", "Mixed"
+  )
+)
 report_participants(data)
 
 # Race/ethnicity, control presentation treshold

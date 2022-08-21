@@ -24,15 +24,13 @@ library(dplyr)
 library(report)
 ```
 
-
 [![CRAN](http://www.r-pkg.org/badges/version/report)](https://cran.r-project.org/package=report)
 [![downloads](http://cranlogs.r-pkg.org/badges/report)](https://cran.r-project.org/package=report)
-![Tests](https://github.com/easystats/report/workflows/R-check/badge.svg)
-[![status](https://tinyverse.netlify.com/badge/modelbased)](https://CRAN.R-project.org/package=modelbased)
+[![R-CMD-check](https://github.com/easystats/datawizard/workflows/R-CMD-check/badge.svg?branch=main)](https://github.com/easystats/datawizard/actions) [![status](https://tinyverse.netlify.com/badge/modelbased)](https://CRAN.R-project.org/package=modelbased)
 
 ***"From R to your manuscript"***
 
-**report**'s primary goal is to bridge the gap between R's output and the formatted results contained in your manuscript. It automatically produces reports of models and dataframes according to **best practices** guidelines (*e.g.,* [APA](https://apastyle.apa.org/)'s style), ensuring **standardization** and **quality** in results reporting.
+**report**'s primary goal is to bridge the gap between R's output and the formatted results contained in your manuscript. It automatically produces reports of models and data frames according to **best practices** guidelines (e.g., [APA](https://apastyle.apa.org/)'s style), ensuring **standardization** and **quality** in results reporting.
 
 ```{r}
 library(report)
@@ -40,22 +38,6 @@ library(report)
 model <- lm(Sepal.Length ~ Species, data = iris)
 report(model)
 ```
-
-## Documentation
-
-[![Documentation](https://img.shields.io/badge/documentation-report-orange.svg?colorB=E91E63)](https://easystats.github.io/report/)
-[![Blog](https://img.shields.io/badge/blog-easystats-orange.svg?colorB=FF9800)](https://easystats.github.io/blog/posts/)
-[![Features](https://img.shields.io/badge/features-report-orange.svg?colorB=2196F3)](https://easystats.github.io/report/reference/index.html)
-
-
-The package documentation can be found [**here**](https://easystats.github.io/report/). Check-out these tutorials:
-
-- [Get Started](https://easystats.github.io/report/articles/report.html)
-- [How to Cite Packages](https://easystats.github.io/report/articles/cite_packages.html)
-
-## Contribute
-
-***report* is a young package in need of affection**. You can easily be a part of the [developing](https://github.com/easystats/report/blob/master/.github/CONTRIBUTING.md) community of this open-source software and improve science! Don't be shy, try to code and submit a pull request (See the [contributing guide](https://github.com/easystats/report/blob/master/.github/CONTRIBUTING.md)). Even if it's not perfect, we will help you make it great!
 
 ## Installation
 
@@ -79,8 +61,21 @@ Load the package every time you start R
 library("report")
 ```
 
+## Documentation
 
-## Report all the things <a href=https://easystats.github.io/report/><img src="man/figures/allthethings.jpg" height="100"></a>
+[![Documentation](https://img.shields.io/badge/documentation-report-orange.svg?colorB=E91E63)](https://easystats.github.io/report/)
+[![Blog](https://img.shields.io/badge/blog-easystats-orange.svg?colorB=FF9800)](https://easystats.github.io/blog/posts/)
+[![Features](https://img.shields.io/badge/features-report-orange.svg?colorB=2196F3)](https://easystats.github.io/report/reference/index.html)
+
+
+The package documentation can be found [**here**](https://easystats.github.io/report/). Check-out these tutorials:
+
+- [Get Started](https://easystats.github.io/report/articles/report.html)
+- [How to Cite Packages](https://easystats.github.io/report/articles/cite_packages.html)
+
+## Report all the things 
+
+<a href=https://easystats.github.io/report/><img src="man/figures/allthethings.jpg" height="60"></a>
 
 ### General Workflow
 
@@ -296,6 +291,10 @@ If you like it, you can put a *star* on this repo, and cite the package as follo
 ```{r, citation, comment=""}
 citation("report")
 ```
+
+## Contribute
+
+***report* is a young package in need of affection**. You can easily be a part of the [developing](https://github.com/easystats/report/blob/master/.github/CONTRIBUTING.md) community of this open-source software and improve science! Don't be shy, try to code and submit a pull request (See the [contributing guide](https://github.com/easystats/report/blob/master/.github/CONTRIBUTING.md)). Even if it's not perfect, we will help you make it great!
 
 ## Code of Conduct
 

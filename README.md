@@ -3,55 +3,40 @@
 
 [![CRAN](http://www.r-pkg.org/badges/version/report)](https://cran.r-project.org/package=report)
 [![downloads](http://cranlogs.r-pkg.org/badges/report)](https://cran.r-project.org/package=report)
-![Tests](https://github.com/easystats/report/workflows/R-check/badge.svg)
+[![R-CMD-check](https://github.com/easystats/datawizard/workflows/R-CMD-check/badge.svg?branch=main)](https://github.com/easystats/datawizard/actions)
 [![status](https://tinyverse.netlify.com/badge/modelbased)](https://CRAN.R-project.org/package=modelbased)
 
 ***“From R to your manuscript”***
 
 **report**’s primary goal is to bridge the gap between R’s output and
 the formatted results contained in your manuscript. It automatically
-produces reports of models and dataframes according to **best
-practices** guidelines (*e.g.,* [APA](https://apastyle.apa.org/)’s
-style), ensuring **standardization** and **quality** in results
-reporting.
+produces reports of models and data frames according to **best
+practices** guidelines (e.g., [APA](https://apastyle.apa.org/)’s style),
+ensuring **standardization** and **quality** in results reporting.
 
 ``` r
 library(report)
 
 model <- lm(Sepal.Length ~ Species, data = iris)
 report(model)
-# We fitted a linear model (estimated using OLS) to predict Sepal.Length with Species (formula: Sepal.Length ~ Species). The model explains a statistically significant and substantial proportion of variance (R2 = 0.62, F(2, 147) = 119.26, p < .001, adj. R2 = 0.61). The model's intercept, corresponding to Species = setosa, is at 5.01 (95% CI [4.86, 5.15], t(147) = 68.76, p < .001). Within this model:
+# We fitted a linear model (estimated using OLS) to predict Sepal.Length with
+# Species (formula: Sepal.Length ~ Species). The model explains a statistically
+# significant and substantial proportion of variance (R2 = 0.62, F(2, 147) =
+# 119.26, p < .001, adj. R2 = 0.61). The model's intercept, corresponding to
+# Species = setosa, is at 5.01 (95% CI [4.86, 5.15], t(147) = 68.76, p < .001).
+# Within this model:
 # 
-#   - The effect of Species [versicolor] is statistically significant and positive (beta = 0.93, 95% CI [0.73, 1.13], t(147) = 9.03, p < .001; Std. beta = 1.12, 95% CI [0.88, 1.37])
-#   - The effect of Species [virginica] is statistically significant and positive (beta = 1.58, 95% CI [1.38, 1.79], t(147) = 15.37, p < .001; Std. beta = 1.91, 95% CI [1.66, 2.16])
+#   - The effect of Species [versicolor] is statistically significant and positive
+# (beta = 0.93, 95% CI [0.73, 1.13], t(147) = 9.03, p < .001; Std. beta = 1.12,
+# 95% CI [0.88, 1.37])
+#   - The effect of Species [virginica] is statistically significant and positive
+# (beta = 1.58, 95% CI [1.38, 1.79], t(147) = 15.37, p < .001; Std. beta = 1.91,
+# 95% CI [1.66, 2.16])
 # 
-# Standardized parameters were obtained by fitting the model on a standardized version of the dataset. 95% Confidence Intervals (CIs) and p-values were computed using the Wald approximation.
+# Standardized parameters were obtained by fitting the model on a standardized
+# version of the dataset. 95% Confidence Intervals (CIs) and p-values were
+# computed using a Wald t-distribution approximation.
 ```
-
-## Documentation
-
-[![Documentation](https://img.shields.io/badge/documentation-report-orange.svg?colorB=E91E63)](https://easystats.github.io/report/)
-[![Blog](https://img.shields.io/badge/blog-easystats-orange.svg?colorB=FF9800)](https://easystats.github.io/blog/posts/)
-[![Features](https://img.shields.io/badge/features-report-orange.svg?colorB=2196F3)](https://easystats.github.io/report/reference/index.html)
-
-The package documentation can be found
-[**here**](https://easystats.github.io/report/). Check-out these
-tutorials:
-
--   [Get
-    Started](https://easystats.github.io/report/articles/report.html)
--   [How to Cite
-    Packages](https://easystats.github.io/report/articles/cite_packages.html)
-
-## Contribute
-
-***report* is a young package in need of affection**. You can easily be
-a part of the
-[developing](https://github.com/easystats/report/blob/master/.github/CONTRIBUTING.md)
-community of this open-source software and improve science! Don’t be
-shy, try to code and submit a pull request (See the [contributing
-guide](https://github.com/easystats/report/blob/master/.github/CONTRIBUTING.md)).
-Even if it’s not perfect, we will help you make it great!
 
 ## Installation
 
@@ -75,7 +60,23 @@ Load the package every time you start R
 library("report")
 ```
 
-## Report all the things <a href=https://easystats.github.io/report/><img src="man/figures/allthethings.jpg" height="100"></a>
+## Documentation
+
+[![Documentation](https://img.shields.io/badge/documentation-report-orange.svg?colorB=E91E63)](https://easystats.github.io/report/)
+[![Blog](https://img.shields.io/badge/blog-easystats-orange.svg?colorB=FF9800)](https://easystats.github.io/blog/posts/)
+[![Features](https://img.shields.io/badge/features-report-orange.svg?colorB=2196F3)](https://easystats.github.io/report/reference/index.html)
+
+The package documentation can be found
+[**here**](https://easystats.github.io/report/). Check-out these
+tutorials:
+
+- [Get Started](https://easystats.github.io/report/articles/report.html)
+- [How to Cite
+  Packages](https://easystats.github.io/report/articles/cite_packages.html)
+
+## Report all the things
+
+<a href=https://easystats.github.io/report/><img src="man/figures/allthethings.jpg" height="60"></a>
 
 ### General Workflow
 
@@ -142,7 +143,7 @@ correlations.
 report(t.test(mtcars$mpg ~ mtcars$am))
 ```
 
-    # 
+    # Effect sizes were labelled following Cohen's (1988) recommendations.
     # 
     # The Welch Two Sample t-test testing the difference of mtcars$mpg by mtcars$am
     # (mean in group 0 = 17.15, mean in group 1 = 24.39) suggests that the effect is
@@ -180,6 +181,8 @@ aov(Sepal.Length ~ Species, data = iris) %>%
     # 
     #   - The main effect of Species is statistically significant and large (F(2, 147)
     # = 119.26, p < .001; Eta2 = 0.62, 95% CI [0.54, 1.00])
+    # 
+    # Effect sizes were labelled following Field's (2013) recommendations.
 
 ### General Linear Models (GLMs)
 
@@ -192,10 +195,10 @@ model <- glm(vs ~ mpg * drat, data = mtcars, family = "binomial")
 report(model)
 ```
 
-    # We fitted a logistic model (estimated using ML) to predict vs with mpg and drat
+    # We fitted a logistic model (estimated using ML) to predict vs with mpg
     # (formula: vs ~ mpg * drat). The model's explanatory power is substantial
-    # (Tjur's R2 = 0.51). The model's intercept, corresponding to mpg = 0 and drat =
-    # 0, is at -33.43 (95% CI [-77.90, 3.25], p = 0.083). Within this model:
+    # (Tjur's R2 = 0.51). The model's intercept, corresponding to mpg = 0, is at
+    # -33.43 (95% CI [-77.90, 3.25], p = 0.083). Within this model:
     # 
     #   - The effect of mpg is statistically non-significant and positive (beta = 1.79,
     # 95% CI [-0.10, 4.05], p = 0.066; Std. beta = 3.63, 95% CI [1.36, 7.50])
@@ -206,9 +209,26 @@ report(model)
     # negative (beta = -0.33, 95% CI [-0.83, 0.15], p = 0.141; Std. beta = -1.07, 95%
     # CI [-2.66, 0.48])
     # 
-    #  Standardized parameters were obtained by fitting the model on a standardized
+    # Standardized parameters were obtained by fitting the model on a standardized
     # version of the dataset. 95% Confidence Intervals (CIs) and p-values were
-    # computed using
+    # computed using a Wald z-distribution approximation. and We fitted a logistic
+    # model (estimated using ML) to predict vs with drat (formula: vs ~ mpg * drat).
+    # The model's explanatory power is substantial (Tjur's R2 = 0.51). The model's
+    # intercept, corresponding to drat = 0, is at -33.43 (95% CI [-77.90, 3.25], p =
+    # 0.083). Within this model:
+    # 
+    #   - The effect of mpg is statistically non-significant and positive (beta = 1.79,
+    # 95% CI [-0.10, 4.05], p = 0.066; Std. beta = 3.63, 95% CI [1.36, 7.50])
+    #   - The effect of drat is statistically non-significant and positive (beta =
+    # 5.96, 95% CI [-3.75, 16.26], p = 0.205; Std. beta = -0.36, 95% CI [-1.96,
+    # 0.98])
+    #   - The interaction effect of drat on mpg is statistically non-significant and
+    # negative (beta = -0.33, 95% CI [-0.83, 0.15], p = 0.141; Std. beta = -1.07, 95%
+    # CI [-2.66, 0.48])
+    # 
+    # Standardized parameters were obtained by fitting the model on a standardized
+    # version of the dataset. 95% Confidence Intervals (CIs) and p-values were
+    # computed using a Wald z-distribution approximation.
 
 ### Mixed Models
 
@@ -235,9 +255,9 @@ report(model)
     # 0.89, 95% CI [0.76, 1.01], t(146) = 13.93, p < .001; Std. beta = 1.89, 95% CI
     # [1.63, 2.16])
     # 
-    #  Standardized parameters were obtained by fitting the model on a standardized
+    # Standardized parameters were obtained by fitting the model on a standardized
     # version of the dataset. 95% Confidence Intervals (CIs) and p-values were
-    # computed using
+    # computed using a Wald t-distribution approximation.
 
 ### Bayesian Models
 
@@ -254,21 +274,45 @@ report(model)
 ```
 
     # We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains
-    # of 1000 iterations and a warmup of 500) to predict mpg with qsec and wt
-    # (formula: mpg ~ qsec + wt). Priors over parameters were set as normal (mean =
-    # 0.00, SD = 8.43) and normal (mean = 0.00, SD = 15.40) distributions. The
-    # model's explanatory power is substantial (R2 = 0.81, 95% CI [0.70, 0.89], adj.
-    # R2 = 0.79). The model's intercept, corresponding to qsec = 0 and wt = 0, is at
-    # 19.85 (95% CI [9.50, 29.84]). Within this model:
+    # of 1000 iterations and a warmup of 500) to predict mpg with qsec (formula: mpg
+    # ~ qsec + wt). Priors over parameters were set as normal (mean = 0.00, SD =
+    # 8.43) distributions. The model's explanatory power is substantial (R2 = 0.81,
+    # 95% CI [0.70, 0.89], adj. R2 = 0.79). The model's intercept, corresponding to
+    # qsec = 0, is at 19.81 (95% CI [8.45, 30.63]). Within this model:
     # 
-    #   - The effect of qsec (Median = 0.92, 95% CI [0.44, 1.44]) has a 100.00%
-    # probability of being positive (> 0), 99.35% of being significant (> 0.30), and
-    # 0.00% of being large (> 1.81). The estimation successfully converged (Rhat =
-    # 1.001) and the indices are reliable (ESS = 2153)
-    #   - The effect of wt (Median = -5.05, 95% CI [-5.99, -4.10]) has a 100.00%
+    #   - The effect of qsec (Median = 0.94, 95% CI [0.40, 1.48]) has a 99.80%
+    # probability of being positive (> 0), 98.90% of being significant (> 0.30), and
+    # 0.30% of being large (> 1.81). The estimation successfully converged (Rhat =
+    # 0.999) and the indices are reliable (ESS = 2573)
+    #   - The effect of wt (Median = -5.02, 95% CI [-6.11, -3.99]) has a 100.00%
     # probability of being negative (< 0), 100.00% of being significant (< -0.30),
     # and 100.00% of being large (< -1.81). The estimation successfully converged
-    # (Rhat = 1.000) and the indices are reliable (ESS = 2250)
+    # (Rhat = 0.999) and the indices are reliable (ESS = 1872)
+    # 
+    # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
+    # framework, we report the median of the posterior distribution and its 95% CI
+    # (Highest Density Interval), along the probability of direction (pd), the
+    # probability of significance and the probability of being large. The thresholds
+    # beyond which the effect is considered as significant (i.e., non-negligible) and
+    # large are |0.30| and |1.81| (corresponding respectively to 0.05 and 0.30 of the
+    # outcome's SD). Convergence and stability of the Bayesian sampling has been
+    # assessed using R-hat, which should be below 1.01 (Vehtari et al., 2019), and
+    # Effective Sample Size (ESS), which should be greater than 1000 (Burkner, 2017).
+    # and We fitted a Bayesian linear model (estimated using MCMC sampling with 4
+    # chains of 1000 iterations and a warmup of 500) to predict mpg with wt (formula:
+    # mpg ~ qsec + wt). Priors over parameters were set as normal (mean = 0.00, SD =
+    # 15.40) distributions. The model's explanatory power is substantial (R2 = 0.81,
+    # 95% CI [0.70, 0.89], adj. R2 = 0.79). The model's intercept, corresponding to
+    # wt = 0, is at 19.81 (95% CI [8.45, 30.63]). Within this model:
+    # 
+    #   - The effect of qsec (Median = 0.94, 95% CI [0.40, 1.48]) has a 99.80%
+    # probability of being positive (> 0), 98.90% of being significant (> 0.30), and
+    # 0.30% of being large (> 1.81). The estimation successfully converged (Rhat =
+    # 0.999) and the indices are reliable (ESS = 2573)
+    #   - The effect of wt (Median = -5.02, 95% CI [-6.11, -3.99]) has a 100.00%
+    # probability of being negative (< 0), 100.00% of being significant (< -0.30),
+    # and 100.00% of being large (< -1.81). The estimation successfully converged
+    # (Rhat = 0.999) and the indices are reliable (ESS = 1872)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
     # framework, we report the median of the posterior distribution and its 95% CI
@@ -295,7 +339,8 @@ report_statistics(model)
 ```
 
     # linear model (estimated using OLS) to predict Sepal.Length with Species (formula: Sepal.Length ~ Species)
-    # The model explains a statistically significant and substantial proportion of variance (R2 = 0.62, F(2, 147) = 119.26, p < .001, adj. R2 = 0.61)
+    # The model explains a statistically significant and substantial proportion of
+    # variance (R2 = 0.62, F(2, 147) = 119.26, p < .001, adj. R2 = 0.61)
     # beta = 5.01, 95% CI [4.86, 5.15], t(147) = 68.76, p < .001; Std. beta = -1.01, 95% CI [-1.18, -0.84]
     # beta = 0.93, 95% CI [0.73, 1.13], t(147) = 9.03, p < .001; Std. beta = 1.12, 95% CI [0.88, 1.37]
     # beta = 1.58, 95% CI [1.38, 1.79], t(147) = 15.37, p < .001; Std. beta = 1.91, 95% CI [1.66, 2.16]
@@ -340,38 +385,45 @@ analysis paragraph about the tools used.
 report(sessionInfo())
 ```
 
-    # Analyses were conducted using the R Statistical language (version 4.1.3; R Core
-    # Team, 2022) on macOS Big Sur/Monterey 10.16, using the packages Rcpp (version
-    # 1.0.8.3; Dirk Eddelbuettel and Romain Francois, 2011), Matrix (version 1.4.0;
-    # Douglas Bates and Martin Maechler, 2021), lme4 (version 1.1.28; Douglas Bates
-    # et al., 2015), rstanarm (version 2.21.3; Goodrich B et al., 2022), dplyr
-    # (version 1.0.8; Hadley Wickham et al., 2022) and report (version 0.5.1.1;
-    # Makowski et al., 2020).
+    # Analyses were conducted using the R Statistical language (version 4.2.1; R Core
+    # Team, 2022) on macOS Monterey 12.5, using the packages lme4 (version 1.1.30;
+    # Bates D et al., 2015), Matrix (version 1.4.1; Bates D et al., 2022), Rcpp
+    # (version 1.0.9; Eddelbuettel D, François R, 2011), rstanarm (version 2.21.3;
+    # Goodrich B et al., 2022), report (version 0.5.1.3; Makowski D et al., 2021) and
+    # dplyr (version 1.0.9; Wickham H et al., 2022).
     # 
     # References
     # ----------
-    #   - Dirk Eddelbuettel and Romain Francois (2011). Rcpp: Seamless R and C++
-    # Integration. Journal of Statistical Software, 40(8), 1-18,
-    # <doi:10.18637/jss.v040.i08>.
-    #   - Douglas Bates and Martin Maechler (2021). Matrix: Sparse and Dense Matrix
-    # Classes and Methods. R package version 1.4-0.
-    # https://CRAN.R-project.org/package=Matrix
-    #   - Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015). Fitting
-    # Linear Mixed-Effects Models Using lme4. Journal of Statistical Software, 67(1),
-    # 1-48. doi:10.18637/jss.v067.i01.
-    #   - Goodrich B, Gabry J, Ali I & Brilleman S. (2022). rstanarm: Bayesian applied
-    # regression modeling via Stan. R package version 2.21.3
-    # https://mc-stan.org/rstanarm.
-    #   - Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2022).
-    # dplyr: A Grammar of Data Manipulation. R package version 1.0.8.
-    # https://CRAN.R-project.org/package=dplyr
-    #   - Makowski, D., Ben-Shachar, M.S., Patil, I. & Lüdecke, D. (2020). Automated
-    # Results Reporting as a Practical Tool to Improve Reproducibility and
-    # Methodological Best Practices Adoption. CRAN. Available from
-    # https://github.com/easystats/report. doi: .
-    #   - R Core Team (2022). R: A language and environment for statistical computing.
-    # R Foundation for Statistical Computing, Vienna, Austria. URL
-    # https://www.R-project.org/.
+    #   - Bates D, Mächler M, Bolker B, Walker S (2015). "Fitting LinearMixed-Effects
+    # Models Using lme4." _Journal of Statistical Software_,*67*(1), 1-48.
+    # doi:10.18637/jss.v067.i01<https://doi.org/10.18637/jss.v067.i01>.
+    #   - Bates D, Maechler M, Jagan M (2022). _Matrix: Sparse and Dense MatrixClasses
+    # and Methods_. R package version
+    # 1.4-1,<https://CRAN.R-project.org/package=Matrix>.
+    #   - Eddelbuettel D, François R (2011). "Rcpp: Seamless R and C++Integration."
+    # _Journal of Statistical Software_, *40*(8), 1-18.doi:10.18637/jss.v040.i08
+    # <https://doi.org/10.18637/jss.v040.i08>.Eddelbuettel D (2013). _Seamless R and
+    # C++ Integration with Rcpp_.Springer, New York.
+    # doi:10.1007/978-1-4614-6868-4<https://doi.org/10.1007/978-1-4614-6868-4>, ISBN
+    # 978-1-4614-6867-7.Eddelbuettel D, Balamuta JJ (2018). "Extending extitR with
+    # extitC++: ABrief Introduction to extitRcpp." _The American Statistician_,
+    # *72*(1),28-36.
+    # doi:10.1080/00031305.2017.1375990<https://doi.org/10.1080/00031305.2017.1375990>.
+    #   - Goodrich B, Gabry J, Ali I, Brilleman S (2022). "rstanarm: Bayesianapplied
+    # regression modeling via Stan." R package version
+    # 2.21.3,<https://mc-stan.org/rstanarm/>.Brilleman S, Crowther M, Moreno-Betancur
+    # M, Buros Novik J, Wolfe R(2018). "Joint longitudinal and time-to-event models
+    # via Stan." StanCon2018. 10-12 Jan 2018. Pacific Grove, CA,
+    # USA.,<https://github.com/stan-dev/stancon_talks/>.
+    #   - Makowski D, Ben-Shachar M, Patil I, Lüdecke D (2021). "AutomatedResults
+    # Reporting as a Practical Tool to Improve Reproducibility andMethodological Best
+    # Practices Adoption." _CRAN_.<https://github.com/easystats/report>.
+    #   - R Core Team (2022). _R: A Language and Environment for StatisticalComputing_.
+    # R Foundation for Statistical Computing, Vienna,
+    # Austria.<https://www.R-project.org/>.
+    #   - Wickham H, François R, Henry L, Müller K (2022). _dplyr: A Grammar ofData
+    # Manipulation_. R package version
+    # 1.0.9,<https://CRAN.R-project.org/package=dplyr>.
 
 ## Credits
 
@@ -398,6 +450,16 @@ A BibTeX entry for LaTeX users is
     url = {https://github.com/easystats/report},
   }
 ```
+
+## Contribute
+
+***report* is a young package in need of affection**. You can easily be
+a part of the
+[developing](https://github.com/easystats/report/blob/master/.github/CONTRIBUTING.md)
+community of this open-source software and improve science! Don’t be
+shy, try to code and submit a pull request (See the [contributing
+guide](https://github.com/easystats/report/blob/master/.github/CONTRIBUTING.md)).
+Even if it’s not perfect, we will help you make it great!
 
 ## Code of Conduct
 
