@@ -85,3 +85,8 @@ test_that("report.data.frame - with list columns", {
   set.seed(123)
   expect_snapshot(variant = .Platform$OS.type, report(starwars))
 })
+
+test_that("report.matrix", {
+  r <- report(WorldPhones)
+  expect_equal(r, report(as.data.frame(WorldPhones)))
+})
