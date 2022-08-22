@@ -108,6 +108,7 @@ Collate:
     'report.ivreg.R'
     'report.lavaan.R'
     'report.lme.R'
+    'report.matrix.R'
     'report.numeric.R'
     'report.sessionInfo.R'
     'report.survreg.R'
