@@ -87,11 +87,9 @@ test_that("report.data.frame - with list columns", {
 })
 
 test_that("report.matrix", {
-  r <- report(WorldPhones)
-  expect_equal(r, report(as.data.frame(WorldPhones)))
+  expect_equal(report(WorldPhones), report(as.data.frame(WorldPhones)))
 })
 
 test_that("report.array", {
-  r <- report(iris3)
-  expect_equal(r, report(as.data.frame(iris3)))
+  expect_equal(report(iris3), report(as.data.frame(iris3)))
 })
