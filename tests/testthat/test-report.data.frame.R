@@ -90,3 +90,8 @@ test_that("report.matrix", {
   r <- report(WorldPhones)
   expect_equal(r, report(as.data.frame(WorldPhones)))
 })
+
+test_that("report.array", {
+  r <- report(iris3)
+  expect_equal(r, report(as.data.frame(iris3)))
+})
