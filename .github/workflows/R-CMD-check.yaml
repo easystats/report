@@ -25,12 +25,12 @@ jobs:
           - {os: windows-latest, r: 'devel'}
           - {os: windows-latest, r: 'release'}
           - {os: windows-latest, r: 'oldrel'}
-          - {os: ubuntu-18.04,   r: 'devel'}
-          - {os: ubuntu-18.04,   r: 'release'}
-          - {os: ubuntu-18.04,   r: 'oldrel'}
+          - {os: ubuntu-latest,   r: 'devel'}
+          - {os: ubuntu-latest,   r: 'release'}
+          - {os: ubuntu-latest,   r: 'oldrel'}
           # `{ivreg}` package not available for R < 3.6
-          #- {os: ubuntu-18.04,   r: '3.5.0'}
-          #- {os: ubuntu-18.04,   r: '3.4.0'}
+          #- {os: ubuntu-latest,   r: '3.5.0'}
+          #- {os: ubuntu-latest,   r: '3.4.0'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
