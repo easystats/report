@@ -91,7 +91,7 @@ print.report_intercept <- function(x, ...) {
       text <- c(text, paste0(col, " = [?]"))
     }
   }
-  paste0(", corresponding to ", text, ",")
+  paste0(", corresponding to ", paste(text, collapse = ", "), ",")
 }
 
 

@@ -421,7 +421,7 @@ report_model.lm <- function(x, table = NULL, ...) {
     to_predict_text <- paste0(
       to_predict_text,
       " with ",
-      insight::find_predictors(x, effects = "fixed", flatten = TRUE)
+      paste(insight::find_predictors(x, effects = "fixed", flatten = TRUE), collapse = ", ")
     )
   }
 
@@ -516,10 +516,10 @@ report_text.lm <- function(x, table = NULL, ...) {
   params <- report_parameters(x, table = table, include_intercept = FALSE, ...)
   table <- attributes(params)$table
 
-  info <- report_info(x, effectsize = attributes(params)$effectsize, parameters = params, ...)
-  model <- report_model(x, table = table, ...)
-  perf <- report_performance(x, table = table, ...)
-  intercept <- report_intercept(x, table = table, ...)
+  info <- report_info(x, effectsize = attributes(params)$effectsize, parameters = params)
+  model <- report_model(x, table = table)
+  perf <- report_performance(x, table = table)
+  intercept <- report_intercept(x, table = table)
 
 
   text_full <- paste0(
@@ -543,7 +543,7 @@ report_text.lm <- function(x, table = NULL, ...) {
     ". ",
     summary(intercept),
     " Within this model:\n\n",
-    as.character(summary(params), ...)
+    as.character(summary(params))
   )
 
 
