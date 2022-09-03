@@ -9,10 +9,10 @@
       Can't calculate log-loss.
       Can't calculate proper scoring rules for models without integer response values.
       `performance_pcp()` only works for models with binary response values.
-      We fitted a logistic model to predict Surv(futime, fustat) with ecog.ps, rx
+      We fitted a logistic model to predict Surv(futime, fustat) with ecog.ps and rx
       (formula: Surv(futime, fustat) ~ ecog.ps + rx). The model's explanatory power
       is weak (Nagelkerke's R2 = 0.07). The model's intercept, corresponding to
-      ecog.ps = 0, rx = 0, is at 667.43 (95% CI [-415.59, 1750.45], p = 0.227).
+      ecog.ps = 0 and rx = 0, is at 667.43 (95% CI [-415.59, 1750.45], p = 0.227).
       Within this model:
       
         - The effect of ecog ps is statistically non-significant and negative (beta =

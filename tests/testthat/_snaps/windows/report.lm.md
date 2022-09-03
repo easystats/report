@@ -26,11 +26,11 @@
     Code
       report(lm(wt ~ as.factor(am) * as.factor(cyl), data = mtcars))
     Output
-      We fitted a linear model (estimated using OLS) to predict wt with am, cyl
+      We fitted a linear model (estimated using OLS) to predict wt with am and cyl
       (formula: wt ~ as.factor(am) * as.factor(cyl)). The model explains a
       statistically significant and substantial proportion of variance (R2 = 0.73,
       F(5, 26) = 13.73, p < .001, adj. R2 = 0.67). The model's intercept,
-      corresponding to am = 0, cyl = 0, is at 2.94 (95% CI [2.27, 3.60], t(26) =
+      corresponding to am = 0 and cyl = 0, is at 2.94 (95% CI [2.27, 3.60], t(26) =
       9.08, p < .001). Within this model:
       
         - The effect of am [1] is statistically significant and negative (beta = -0.89,
