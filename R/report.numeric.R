@@ -16,7 +16,9 @@ report.numeric <- function(x,
     } else {
       name <- names(x)
     }
-    warning(paste0("Variable `", name, "` contains only ", length(unique(x)), "different values. Consider converting it to a factor."), call. = FALSE)
+    warning(insight::format_message(
+      paste0("Variable `", name, "` contains only ", length(unique(x)), "different values. Consider converting it to a factor.")
+    ), call. = FALSE)
   }
 
   table <- report_table(
