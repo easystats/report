@@ -231,12 +231,12 @@ Wilcoxon tests, etc.</p>
 <span></span>
 <span><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span><span class="co"># We fitted a linear model (estimated using OLS) to predict</span></span>
-<span><span class="co"># wt with am, mpg (formula: wt ~ am + mpg). The model</span></span>
+<span><span class="co"># wt with am and mpg (formula: wt ~ am + mpg). The model</span></span>
 <span><span class="co"># explains a statistically significant and substantial</span></span>
 <span><span class="co"># proportion of variance (R2 = 0.80, F(2, 29) = 57.66, p &lt;</span></span>
 <span><span class="co"># .001, adj. R2 = 0.79). The model's intercept, corresponding</span></span>
-<span><span class="co"># to am = 0, mpg = 0, is at 5.74 (95% CI [5.11, 6.36], t(29)</span></span>
-<span><span class="co"># = 18.64, p &lt; .001). Within this model:</span></span>
+<span><span class="co"># to am = 0 and mpg = 0, is at 5.74 (95% CI [5.11, 6.36],</span></span>
+<span><span class="co"># t(29) = 18.64, p &lt; .001). Within this model:</span></span>
 <span><span class="co"># </span></span>
 <span><span class="co">#   - The effect of am is statistically significant and</span></span>
 <span><span class="co"># negative (beta = -0.53, 95% CI [-0.94, -0.11], t(29) =</span></span>
@@ -279,10 +279,10 @@ Wilcoxon tests, etc.</p>
 <span></span>
 <span><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span><span class="co"># We fitted a logistic model (estimated using ML) to predict</span></span>
-<span><span class="co"># vs with mpg, cyl (formula: vs ~ mpg + cyl). The model's</span></span>
+<span><span class="co"># vs with mpg and cyl (formula: vs ~ mpg + cyl). The model's</span></span>
 <span><span class="co"># explanatory power is substantial (Tjur's R2 = 0.67). The</span></span>
-<span><span class="co"># model's intercept, corresponding to mpg = 0, cyl = 0, is at</span></span>
-<span><span class="co"># 15.97 (95% CI [-2.71, 44.69], p = 0.147). Within this</span></span>
+<span><span class="co"># model's intercept, corresponding to mpg = 0 and cyl = 0, is</span></span>
+<span><span class="co"># at 15.97 (95% CI [-2.71, 44.69], p = 0.147). Within this</span></span>
 <span><span class="co"># model:</span></span>
 <span><span class="co"># </span></span>
 <span><span class="co">#   - The effect of mpg is statistically non-significant and</span></span>

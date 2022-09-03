@@ -239,11 +239,11 @@ will run it.</p></dd>
 <span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">report_text</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Length</span> <span class="op">*</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">r</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> We fitted a linear model (estimated using OLS) to predict Sepal.Length with</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Petal.Length, Species (formula: Sepal.Length ~ Petal.Length * Species). The</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal.Length and Species (formula: Sepal.Length ~ Petal.Length * Species). The</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> model explains a statistically significant and substantial proportion of</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> variance (R2 = 0.84, F(5, 144) = 151.71, p &lt; .001, adj. R2 = 0.83). The model's</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> intercept, corresponding to Petal.Length = 0, Species = setosa, is at 4.21 (95%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> CI [3.41, 5.02], t(144) = 10.34, p &lt; .001). Within this model:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> intercept, corresponding to Petal.Length = 0 and Species = setosa, is at 4.21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (95% CI [3.41, 5.02], t(144) = 10.34, p &lt; .001). Within this model:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of Petal Length is statistically non-significant and positive</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (beta = 0.54, 95% CI [-4.76e-03, 1.09], t(144) = 1.96, p = 0.052; Std. beta =</span>
@@ -265,7 +265,7 @@ will run it.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> version of the dataset. 95% Confidence Intervals (CIs) and p-values were</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> computed using a Wald t-distribution approximation.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> We fitted a linear model to predict Sepal.Length with Petal.Length, Species.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> We fitted a linear model to predict Sepal.Length with Petal.Length and Species.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The model's explanatory power is substantial (R2 = 0.84, adj. R2 = 0.83). The</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> model's intercept is at 4.21 (95% CI [3.41, 5.02]). Within this model:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -307,36 +307,39 @@ will run it.</p></dd>
 <span class="r-in"><span>  <span class="va">r</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> Running the chains for more iterations may help. See</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#bulk-ess</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.77). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.78). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.76). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.77). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.78). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.81). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> We fitted a Bayesian linear model to predict mpg with cyl, wt. Priors over</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> We fitted a Bayesian linear model to predict mpg with cyl and wt. Priors over</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> parameters were set as normal (mean = 0.00, SD = 8.44) distributions. The</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> model's explanatory power is substantial (R2 = 0.82, adj. R2 = 0.80). The</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> model's intercept is at 39.68 (95% CI [36.04, 43.13]). Within this model:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> model's explanatory power is substantial (R2 = 0.82, adj. R2 = 0.79). The</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> model's intercept is at 39.66 (95% CI [35.94, 43.38]). Within this model:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of cyl (Median = -1.49, 95% CI [-2.41, -0.70]) has 100.00%, 99.83%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> and 23.25% probability of being negative (&lt; 0), significant (&lt; -0.30) and large</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (&lt; -1.81). The estimation successfully converged (Rhat = 1.005) but the indices</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 609)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of wt (Median = -3.24, 95% CI [-4.69, -1.60]) has 100.00%, 100.00%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> and 95.50% probability of being negative (&lt; 0), significant (&lt; -0.30) and large</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (&lt; -1.81). The estimation successfully converged (Rhat = 1.003) but the indices</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 620) and We fitted a Bayesian linear model to predict mpg</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> with cyl, wt. Priors over parameters were set as normal (mean = 0.00, SD =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of cyl (Median = -1.52, 95% CI [-2.42, -0.66]) has 100.00%, 99.92%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> and 24.42% probability of being negative (&lt; 0), significant (&lt; -0.30) and large</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (&lt; -1.81). The estimation successfully converged (Rhat = 1.000) but the indices</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 618)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of wt (Median = -3.17, 95% CI [-4.73, -1.45]) has 100.00%, 100.00%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> and 94.75% probability of being negative (&lt; 0), significant (&lt; -0.30) and large</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (&lt; -1.81). The estimation successfully converged (Rhat = 1.002) but the indices</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 635) and We fitted a Bayesian linear model to predict mpg</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> with cyl and wt. Priors over parameters were set as normal (mean = 0.00, SD =</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 15.40) distributions. The model's explanatory power is substantial (R2 = 0.82,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> adj. R2 = 0.80). The model's intercept is at 39.68 (95% CI [36.04, 43.13]).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> adj. R2 = 0.79). The model's intercept is at 39.66 (95% CI [35.94, 43.38]).</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Within this model:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of cyl (Median = -1.49, 95% CI [-2.41, -0.70]) has 100.00%, 99.83%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> and 23.25% probability of being negative (&lt; 0), significant (&lt; -0.30) and large</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (&lt; -1.81). The estimation successfully converged (Rhat = 1.005) but the indices</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 609)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of wt (Median = -3.24, 95% CI [-4.69, -1.60]) has 100.00%, 100.00%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> and 95.50% probability of being negative (&lt; 0), significant (&lt; -0.30) and large</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (&lt; -1.81). The estimation successfully converged (Rhat = 1.003) but the indices</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 620)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of cyl (Median = -1.52, 95% CI [-2.42, -0.66]) has 100.00%, 99.92%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> and 24.42% probability of being negative (&lt; 0), significant (&lt; -0.30) and large</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (&lt; -1.81). The estimation successfully converged (Rhat = 1.000) but the indices</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 618)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of wt (Median = -3.17, 95% CI [-4.73, -1.45]) has 100.00%, 100.00%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> and 94.75% probability of being negative (&lt; 0), significant (&lt; -0.30) and large</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (&lt; -1.81). The estimation successfully converged (Rhat = 1.002) but the indices</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 635)</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

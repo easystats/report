@@ -136,7 +136,7 @@ will run it.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># GLMs</span></span></span>
 <span class="r-in"><span><span class="fu">report_model</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Length</span> <span class="op">*</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> linear model (estimated using OLS) to predict Sepal.Length with Petal.Length, Species (formula: Sepal.Length ~ Petal.Length * Species)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> linear model (estimated using OLS) to predict Sepal.Length with Petal.Length and Species (formula: Sepal.Length ~ Petal.Length * Species)</span>
 <span class="r-in"><span><span class="fu">report_model</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">vs</span> <span class="op">~</span> <span class="va">disp</span>, data <span class="op">=</span> <span class="va">mtcars</span>, family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> logistic model (estimated using ML) to predict vs with disp (formula: vs ~ disp)</span>
 <span class="r-in"><span></span></span>
