@@ -2,10 +2,6 @@
 
     Code
       report(model)
-    Message <simpleMessage>
-      VSCode WebView has restricted access to local file.
-      Opening in external browser...
-      Browsing file:///C:/Users/mail/AppData/Local/Temp/RtmpGsw1MU/file344c3170f_StanProgress.html
     Output
       We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains
       of 300 iterations and a warmup of 150) to predict mpg with qsec and wt
