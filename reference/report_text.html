@@ -135,7 +135,7 @@ will run it.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Goodrich B et al., 2022), performance (version 0.9.2; Lüdecke D et al., 2021),</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> bayestestR (version 0.12.1; Makowski D et al., 2019), report (version 0.5.5.1;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Makowski D et al., 2021), lavaan (version 0.6.12; Rosseel Y, 2012) and dplyr</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (version 1.0.9; Wickham H et al., 2022).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (version 1.0.10; Wickham H et al., 2022).</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> References</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
@@ -184,7 +184,7 @@ will run it.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The analysis was done using the R Statistical language (v4.2.1; R Core Team,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2022) on Ubuntu 20.04.4 LTS, using the packages Matrix (v1.4.1), lme4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (v1.1.30), Rcpp (v1.0.9), rstanarm (v2.21.3), performance (v0.9.2), bayestestR</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (v0.12.1), report (v0.5.5.1), lavaan (v0.6.12) and dplyr (v1.0.9).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (v0.12.1), report (v0.5.5.1), lavaan (v0.6.12) and dplyr (v1.0.10).</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Data</span></span></span>
 <span class="r-in"><span><span class="fu">report_text</span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span><span class="op">)</span></span></span>
@@ -239,37 +239,11 @@ will run it.</p></dd>
 <span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">report_text</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Length</span> <span class="op">*</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">r</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> We fitted a linear model (estimated using OLS) to predict Sepal.Length with</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Petal.Length (formula: Sepal.Length ~ Petal.Length * Species). The model</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> explains a statistically significant and substantial proportion of variance (R2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> = 0.84, F(5, 144) = 151.71, p &lt; .001, adj. R2 = 0.83). The model's intercept,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> corresponding to Petal.Length = 0, is at 4.21 (95% CI [3.41, 5.02], t(144) =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10.34, p &lt; .001). Within this model:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of Petal Length is statistically non-significant and positive</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (beta = 0.54, 95% CI [-4.76e-03, 1.09], t(144) = 1.96, p = 0.052; Std. beta =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1.16, 95% CI [-0.01, 2.32])</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of Species [versicolor] is statistically significant and negative</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (beta = -1.81, 95% CI [-2.99, -0.62], t(144) = -3.02, p = 0.003; Std. beta =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.88, 95% CI [-2.41, 0.65])</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of Species [virginica] is statistically significant and negative</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (beta = -3.15, 95% CI [-4.41, -1.90], t(144) = -4.97, p &lt; .001; Std. beta =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -1.75, 95% CI [-3.32, -0.18])</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The interaction effect of Species [versicolor] on Petal Length is</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> statistically non-significant and positive (beta = 0.29, 95% CI [-0.30, 0.87],</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> t(144) = 0.97, p = 0.334; Std. beta = 0.61, 95% CI [-0.63, 1.85])</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The interaction effect of Species [virginica] on Petal Length is</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> statistically non-significant and positive (beta = 0.45, 95% CI [-0.12, 1.03],</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> t(144) = 1.56, p = 0.120; Std. beta = 0.97, 95% CI [-0.26, 2.19])</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Standardized parameters were obtained by fitting the model on a standardized</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> version of the dataset. 95% Confidence Intervals (CIs) and p-values were</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> computed using a Wald t-distribution approximation. and We fitted a linear</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> model (estimated using OLS) to predict Sepal.Length with Species (formula:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sepal.Length ~ Petal.Length * Species). The model explains a statistically</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> significant and substantial proportion of variance (R2 = 0.84, F(5, 144) =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 151.71, p &lt; .001, adj. R2 = 0.83). The model's intercept, corresponding to</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Species = setosa, is at 4.21 (95% CI [3.41, 5.02], t(144) = 10.34, p &lt; .001).</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Within this model:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal.Length, Species (formula: Sepal.Length ~ Petal.Length * Species). The</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> model explains a statistically significant and substantial proportion of</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> variance (R2 = 0.84, F(5, 144) = 151.71, p &lt; .001, adj. R2 = 0.83). The model's</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> intercept, corresponding to Petal.Length = 0, Species = setosa, is at 4.21 (95%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> CI [3.41, 5.02], t(144) = 10.34, p &lt; .001). Within this model:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of Petal Length is statistically non-significant and positive</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (beta = 0.54, 95% CI [-4.76e-03, 1.09], t(144) = 1.96, p = 0.052; Std. beta =</span>
@@ -291,28 +265,9 @@ will run it.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> version of the dataset. 95% Confidence Intervals (CIs) and p-values were</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> computed using a Wald t-distribution approximation.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> We fitted a linear model to predict Sepal.Length with Petal.Length. The model's</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> explanatory power is substantial (R2 = 0.84, adj. R2 = 0.83). The model's</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> intercept is at 4.21 (95% CI [3.41, 5.02]). Within this model:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of Petal Length is statistically non-significant and positive</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (beta = 0.54, 95% CI [-4.76e-03, 1.09], t(144) = 1.96, p = 0.052, Std. beta =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1.16)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of Species [versicolor] is statistically significant and negative</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (beta = -1.81, 95% CI [-2.99, -0.62], t(144) = -3.02, p = 0.003, Std. beta =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.88)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of Species [virginica] is statistically significant and negative</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (beta = -3.15, 95% CI [-4.41, -1.90], t(144) = -4.97, p &lt; .001, Std. beta =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -1.75)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The interaction effect of Species [versicolor] on Petal Length is</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> statistically non-significant and positive (beta = 0.29, 95% CI [-0.30, 0.87],</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> t(144) = 0.97, p = 0.334, Std. beta = 0.61)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The interaction effect of Species [virginica] on Petal Length is</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> statistically non-significant and positive (beta = 0.45, 95% CI [-0.12, 1.03],</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> t(144) = 1.56, p = 0.120, Std. beta = 0.97) and We fitted a linear model to</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> predict Sepal.Length with Species. The model's explanatory power is substantial</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (R2 = 0.84, adj. R2 = 0.83). The model's intercept is at 4.21 (95% CI [3.41,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5.02]). Within this model:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> We fitted a linear model to predict Sepal.Length with Petal.Length, Species.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The model's explanatory power is substantial (R2 = 0.84, adj. R2 = 0.83). The</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> model's intercept is at 4.21 (95% CI [3.41, 5.02]). Within this model:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of Petal Length is statistically non-significant and positive</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (beta = 0.54, 95% CI [-4.76e-03, 1.09], t(144) = 1.96, p = 0.052, Std. beta =</span>
@@ -352,36 +307,36 @@ will run it.</p></dd>
 <span class="r-in"><span>  <span class="va">r</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.73). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.79). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.73). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.79). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> We fitted a Bayesian linear model to predict mpg with cyl. Priors over</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.78). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.76). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.78). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Possible multicollinearity between wt and cyl (r = 0.81). This might lead to inappropriate results. See 'Details' in '?rope'.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> We fitted a Bayesian linear model to predict mpg with cyl, wt. Priors over</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> parameters were set as normal (mean = 0.00, SD = 8.44) distributions. The</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> model's explanatory power is substantial (R2 = 0.82, adj. R2 = 0.79). The</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> model's intercept is at 39.65 (95% CI [36.01, 43.57]). Within this model:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> model's explanatory power is substantial (R2 = 0.82, adj. R2 = 0.80). The</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> model's intercept is at 39.68 (95% CI [36.04, 43.13]). Within this model:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of cyl (Median = -1.54, 95% CI [-2.33, -0.69]) has 99.83%, 99.67%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> and 25.00% probability of being negative (&lt; 0), significant (&lt; -0.30) and large</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of cyl (Median = -1.49, 95% CI [-2.41, -0.70]) has 100.00%, 99.83%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> and 23.25% probability of being negative (&lt; 0), significant (&lt; -0.30) and large</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (&lt; -1.81). The estimation successfully converged (Rhat = 1.005) but the indices</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 477)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of wt (Median = -3.13, 95% CI [-4.71, -1.79]) has 100.00%, 100.00%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> and 97.08% probability of being negative (&lt; 0), significant (&lt; -0.30) and large</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (&lt; -1.81). The estimation successfully converged (Rhat = 1.006) but the indices</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 457) and We fitted a Bayesian linear model to predict mpg</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> with wt. Priors over parameters were set as normal (mean = 0.00, SD = 15.40)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> distributions. The model's explanatory power is substantial (R2 = 0.82, adj. R2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> = 0.79). The model's intercept is at 39.65 (95% CI [36.01, 43.57]). Within this</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> model:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 609)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of wt (Median = -3.24, 95% CI [-4.69, -1.60]) has 100.00%, 100.00%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> and 95.50% probability of being negative (&lt; 0), significant (&lt; -0.30) and large</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (&lt; -1.81). The estimation successfully converged (Rhat = 1.003) but the indices</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 620) and We fitted a Bayesian linear model to predict mpg</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> with cyl, wt. Priors over parameters were set as normal (mean = 0.00, SD =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15.40) distributions. The model's explanatory power is substantial (R2 = 0.82,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> adj. R2 = 0.80). The model's intercept is at 39.68 (95% CI [36.04, 43.13]).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Within this model:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of cyl (Median = -1.54, 95% CI [-2.33, -0.69]) has 99.83%, 99.67%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> and 25.00% probability of being negative (&lt; 0), significant (&lt; -0.30) and large</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of cyl (Median = -1.49, 95% CI [-2.41, -0.70]) has 100.00%, 99.83%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> and 23.25% probability of being negative (&lt; 0), significant (&lt; -0.30) and large</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (&lt; -1.81). The estimation successfully converged (Rhat = 1.005) but the indices</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 477)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of wt (Median = -3.13, 95% CI [-4.71, -1.79]) has 100.00%, 100.00%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> and 97.08% probability of being negative (&lt; 0), significant (&lt; -0.30) and large</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (&lt; -1.81). The estimation successfully converged (Rhat = 1.006) but the indices</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 457)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 609)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of wt (Median = -3.24, 95% CI [-4.69, -1.60]) has 100.00%, 100.00%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> and 95.50% probability of being negative (&lt; 0), significant (&lt; -0.30) and large</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (&lt; -1.81). The estimation successfully converged (Rhat = 1.003) but the indices</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 620)</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
