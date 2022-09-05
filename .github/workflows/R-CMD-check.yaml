@@ -1,6 +1,9 @@
 # Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
-
+#
+# NOTE: This workflow is overkill for most R packages and
+# check-standard.yaml is likely a better choice.
+# usethis::use_github_action("check-standard") will install it.
 on:
   push:
     branches: [main, master]
@@ -11,47 +14,4 @@ name: R-CMD-check
 
 jobs:
   R-CMD-check:
-    runs-on: ${{ matrix.config.os }}
-
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
-
-    strategy:
-      fail-fast: false
-      matrix:
-        config:
-          - {os: macOS-latest,   r: 'devel'}
-          - {os: macOS-latest,   r: 'release'}
-          - {os: macOS-latest,   r: 'oldrel'}
-          - {os: windows-latest, r: 'devel'}
-          - {os: windows-latest, r: 'release'}
-          - {os: windows-latest, r: 'oldrel'}
-          - {os: ubuntu-latest,   r: 'devel'}
-          - {os: ubuntu-latest,   r: 'release'}
-          - {os: ubuntu-latest,   r: 'oldrel'}
-          # `{ivreg}` package not available for R < 3.6
-          #- {os: ubuntu-latest,   r: '3.5.0'}
-          #- {os: ubuntu-latest,   r: '3.4.0'}
-
-    env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      R_KEEP_PKG_SOURCE: yes
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - uses: r-lib/actions/setup-pandoc@v2
-
-      - uses: r-lib/actions/setup-r@v2
-        with:
-          r-version: ${{ matrix.config.r }}
-          http-user-agent: ${{ matrix.config.http-user-agent }}
-          use-public-rspm: true
-
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: any::rcmdcheck
-          needs: check
-
-      - uses: r-lib/actions/check-r-package@v2
-        with:
-          error-on: '"note"'
+    uses: easystats/workflows/.github/workflows/R-CMD-check.yaml@main
