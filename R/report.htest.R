@@ -260,6 +260,10 @@ report_parameters.htest <- function(x, table = NULL, ...) {
     # t-tests
   } else if (info$is_ttest) {
     out <- .report_parameters_htest_ttest(table, stats, effsize, ...)
+
+    # TODO: default, same as t-test?
+  } else {
+    out <- .report_parameters_htest_ttest(table, stats, effsize, ...)
   }
 
   as.report_parameters(
