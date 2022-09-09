@@ -251,50 +251,20 @@ report_parameters.htest <- function(x, table = NULL, ...) {
   # insight::model_info() returns "$is_correlation" for shapiro-test,
   # but shapiro-test has no "estimate", so this fails. We probably need
   # to handle shapiro separately
+  info <- insight::model_info(x)
 
   # Correlations
-  if (insight::model_info(x)$is_correlation) {
-    text_full <- paste0(
-      effectsize::interpret_direction(attributes(stats)$estimate),
-      ", statistically ",
-      effectsize::interpret_p(table$p, rules = "default"),
-      ", and ",
-      effectsize::interpret_r(attributes(stats)$estimate, ...),
-      " (",
-      stats,
-      ")"
-    )
-
-    text_short <- text_full
+  if (info$is_correlation) {
+    out <- .report_parameters_htest_correlation(table, stats, ...)
 
     # t-tests
-  } else {
-    text_full <- paste0(
-      effectsize::interpret_direction(attributes(stats)$estimate),
-      ", statistically ",
-      effectsize::interpret_p(table$p, rules = "default"),
-      ", and ",
-      attributes(effsize)$interpretation,
-      " (",
-      stats,
-      ")"
-    )
-
-    text_short <- paste0(
-      effectsize::interpret_direction(attributes(stats)$estimate),
-      ", statistically ",
-      effectsize::interpret_p(table$p, rules = "default"),
-      ", and ",
-      attributes(effsize)$interpretation,
-      " (",
-      summary(stats),
-      ")"
-    )
+  } else if (info$is_ttest) {
+    out <- .report_parameters_htest_ttest(table, stats, effsize, ...)
   }
 
   as.report_parameters(
-    text_full,
-    summary = text_short,
+    out$text_full,
+    summary = out$text_short,
     table = table,
     effectsize = effsize,
     ...
