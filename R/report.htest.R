@@ -167,8 +167,13 @@ report_table.htest <- function(x, ...) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
   }
 
-  table_full <- parameters::model_parameters(x, ...)
-  effsize <- report_effectsize(x, model_info = model_info, ...)
+  # remove arg, so dots can be passed to effectsize
+  dot_args[["model_info"]] <- NULL
+
+  args <- c(list(x), dot_args)
+  table_full <- do.call(parameters::model_parameters, args)
+  args <- c(list(x, model_info = model_info), dot_args)
+  effsize <- do.call(report_effectsize, args)
 
   if (model_info$is_ttest) {
     # If t-test, effect size
