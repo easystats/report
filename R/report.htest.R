@@ -271,7 +271,8 @@ report_statistics.htest <- function(x, table = NULL, ...) {
 #' @rdname report.htest
 #' @export
 report_parameters.htest <- function(x, table = NULL, ...) {
-  if (is.null(model_info <- list(...)$model_info)) {
+  dot_args <- list(...)
+  if (is.null(model_info <- dot_args$model_info)) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
   }
 
@@ -316,9 +317,11 @@ report_parameters.htest <- function(x, table = NULL, ...) {
 #' @rdname report.htest
 #' @export
 report_model.htest <- function(x, table = NULL, ...) {
-  if (is.null(model_info <- list(...)$model_info)) {
+  dot_args <- list(...)
+  if (is.null(model_info <- dot_args$model_info)) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
   }
+
   # remove arg, so dots can be passed to other methods
   dot_args[["model_info"]] <- NULL
 
@@ -390,9 +393,11 @@ report_model.htest <- function(x, table = NULL, ...) {
 #' @rdname report.htest
 #' @export
 report_info.htest <- function(x, effectsize = NULL, ...) {
-  if (is.null(model_info <- list(...)$model_info)) {
+  dot_args <- list(...)
+  if (is.null(model_info <- dot_args$model_info)) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
   }
+
   # remove arg, so dots can be passed to other methods
   dot_args[["model_info"]] <- NULL
 
@@ -410,9 +415,11 @@ report_info.htest <- function(x, effectsize = NULL, ...) {
 #' @rdname report.htest
 #' @export
 report_text.htest <- function(x, table = NULL, ...) {
-  if (is.null(model_info <- list(...)$model_info)) {
+  dot_args <- list(...)
+  if (is.null(model_info <- dot_args$model_info)) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
   }
+
   # remove arg, so dots can be passed to other methods
   dot_args[["model_info"]] <- NULL
 
