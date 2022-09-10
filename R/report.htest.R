@@ -38,9 +38,13 @@ report.htest <- function(x, ...) {
 #' @rdname report.htest
 #' @export
 report_effectsize.htest <- function(x, ...) {
+  if (is.null(model_info <- list(...)$model_info)) {
+    model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
+  }
+
   # For t-tests ----------------
 
-  if (insight::model_info(x)$is_ttest) {
+  if (model_info$is_ttest) {
     table <- effectsize::cohens_d(x, ...)
     ci <- attributes(table)$ci
     estimate <- names(table)[1]
@@ -71,7 +75,7 @@ report_effectsize.htest <- function(x, ...) {
 
   # For wilcox test ---------------
 
-  if (insight::model_info(x)$is_ranktest && !insight::model_info(x)$is_correlation) {
+  if (model_info$is_ranktest && !model_info$is_correlation) {
     table <- parameters::parameters(x, rank_biserial = TRUE, ...)
     ci <- attributes(table)$ci
     estimate <- "r_rank_biserial"
@@ -92,7 +96,7 @@ report_effectsize.htest <- function(x, ...) {
 
   # For correlations ---------------
 
-  if (insight::model_info(x)$is_correlation) {
+  if (model_info$is_correlation) {
     table <- parameters::parameters(x, ...)
     ci <- attributes(table)$ci
     estimate <- names(table)[3]
@@ -120,9 +124,11 @@ report_effectsize.htest <- function(x, ...) {
 
   # TODO: Chi-squared test -------------
 
-  if (insight::model_info(x)$is_chi2test || insight::model_info(x)$is_proptest ||
-    insight::model_info(x)$is_xtab) {
-    stop("This test is not yet supported. Please open an issue: https://github.com/easystats/report/issues", call. = FALSE)
+  if (model_info$is_chi2test || model_info$is_proptest ||
+    model_info$is_xtab) {
+    stop(insight::format_message(
+      "This test is not yet supported. Please open an issue at {.url https://github.com/easystats/report/issues}."
+    ), call. = FALSE)
   }
 
   parameters <- paste0(interpretation, " (", statistics, ")")
@@ -152,7 +158,7 @@ report_table.htest <- function(x, ...) {
   }
 
   table_full <- parameters::model_parameters(x, ...)
-  effsize <- report_effectsize(x, ...)
+  effsize <- report_effectsize(x, model_info, ...)
 
   if (model_info$is_ttest) {
     # If t-test, effect size
@@ -174,8 +180,11 @@ report_table.htest <- function(x, ...) {
 #' @rdname report.htest
 #' @export
 report_statistics.htest <- function(x, table = NULL, ...) {
+  if (is.null(model_info <- list(...)$model_info)) {
+    model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
+  }
   if (is.null(table) || is.null(attributes(table)$effsize)) {
-    table <- report_table(x)
+    table <- report_table(x, model_info)
   }
 
   effsize <- attributes(table)$effsize
@@ -220,8 +229,8 @@ report_statistics.htest <- function(x, table = NULL, ...) {
   text <- paste0(text, ", ", insight::format_p(table$p, stars = FALSE, digits = "apa"))
 
   # Effect size
-  if (insight::model_info(x)$is_ttest ||
-    (insight::model_info(x)$is_ranktest && !insight::model_info(x)$is_correlation)) {
+  if (model_info$is_ttest ||
+    (model_info$is_ranktest && !model_info$is_correlation)) {
     text_full <- paste0(text, "; ", attributes(effsize)$statistics)
     text <- paste0(text, ", ", attributes(effsize)$main)
   } else {
@@ -247,7 +256,7 @@ report_parameters.htest <- function(x, table = NULL, ...) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
   }
 
-  stats <- report_statistics(x, table = table, ...)
+  stats <- report_statistics(x, table = table, model_info, ...)
   table <- attributes(stats)$table
   effsize <- attributes(stats)$effsize
 
@@ -284,12 +293,12 @@ report_parameters.htest <- function(x, table = NULL, ...) {
 #' @rdname report.htest
 #' @export
 report_model.htest <- function(x, table = NULL, ...) {
-  if (is.null(table)) {
-    table <- report_table(x, ...)
-  }
-
   if (is.null(model_info <- list(...)$model_info)) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
+  }
+
+  if (is.null(table)) {
+    table <- report_table(x, model_info, ...)
   }
 
   if (model_info$is_correlation) {
@@ -355,8 +364,11 @@ report_model.htest <- function(x, table = NULL, ...) {
 #' @rdname report.htest
 #' @export
 report_info.htest <- function(x, effectsize = NULL, ...) {
+  if (is.null(model_info <- list(...)$model_info)) {
+    model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
+  }
   if (is.null(effectsize)) {
-    effectsize <- report_effectsize(x, ...)
+    effectsize <- report_effectsize(x, model_info, ...)
   }
 
   as.report_info(attributes(effectsize)$rules)
@@ -375,7 +387,6 @@ report_text.htest <- function(x, table = NULL, ...) {
   table <- attributes(params)$table
   model <- report_model(x, table = table, model_info, ...)
   info <- report_info(x, effectsize = attributes(params)$effectsize, ...)
-
 
   if (model_info$is_correlation) {
     text <- paste0(
