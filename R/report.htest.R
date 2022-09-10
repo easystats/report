@@ -49,87 +49,19 @@ report_effectsize.htest <- function(x, ...) {
   # For t-tests ----------------
 
   if (model_info$is_ttest) {
-    args <- c(list(x), dot_args)
-    table <- do.call(effectsize::cohens_d, args)
-    ci <- attributes(table)$ci
-    estimate <- names(table)[1]
-
-    args <- c(list(table[[estimate]]), dot_args)
-    interpretation <- do.call(effectsize::interpret_cohens_d, args)
-    rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
-
-    if (estimate %in% c("d", "Cohens_d")) {
-      main <- paste0("Cohen's d = ", insight::format_value(table[[estimate]]))
-    } else {
-      main <- paste0(estimate, " = ", insight::format_value(table[[estimate]]))
-    }
-
-    statistics <- paste0(
-      main,
-      ", ",
-      insight::format_ci(table$CI_low, table$CI_high, ci)
-    )
-
-    table <- datawizard::data_rename(
-      as.data.frame(table),
-      c("CI_low", "CI_high"),
-      paste0(estimate, c("_CI_low", "_CI_high"))
-    )
-
-    table <- table[c(estimate, paste0(estimate, c("_CI_low", "_CI_high")))]
+    out <- .report_effectsize_ttest(x, table, dot_args)
   }
 
   # For wilcox test ---------------
 
   if (model_info$is_ranktest && !model_info$is_correlation) {
-    args <- c(list(x, rank_biserial = TRUE), dot_args)
-    table <- do.call(parameters::parameters, args)
-    ci <- attributes(table)$ci
-    estimate <- "r_rank_biserial"
-
-    # same as Pearson's r
-    args <- c(list(table$r_rank_biserial), dot_args)
-    interpretation <- do.call(effectsize::interpret_r, args)
-    rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
-
-    main <- paste0("r (rank biserial) = ", insight::format_value(table$r_rank_biserial))
-    statistics <- paste0(
-      main,
-      ", ",
-      insight::format_ci(table$rank_biserial_CI_low, table$rank_biserial_CI_high, ci)
-    )
-
-    table <- table[c("r_rank_biserial", "rank_biserial_CI_low", "rank_biserial_CI_high")]
+    out <- .report_effectsize_wilcox(x, table, dot_args)
   }
 
   # For correlations ---------------
 
   if (model_info$is_correlation) {
-    args <- c(list(x), dot_args)
-    table <- do.call(parameters::parameters, args)
-    ci <- attributes(table)$ci
-    estimate <- names(table)[3]
-
-    # Pearson
-    args <- c(list(table[[estimate]]), dot_args)
-    interpretation <- do.call(effectsize::interpret_r, args)
-    rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
-    main <- paste0(estimate, " = ", insight::format_value(table[[estimate]]))
-
-    if ("CI_low" %in% names(table)) {
-      statistics <- paste0(
-        main,
-        ", ",
-        insight::format_ci(table$CI_low, table$CI_high, ci)
-      )
-
-      table <- table[c(estimate, "CI_low", "CI_high")]
-
-      # For Spearman and co.
-    } else {
-      statistics <- main
-      table <- table[estimate]
-    }
+    out <- .report_effectsize_correlation(x, table, dot_args)
   }
 
   # TODO: Chi-squared test -------------
@@ -140,18 +72,18 @@ report_effectsize.htest <- function(x, ...) {
     ), call. = FALSE)
   }
 
-  parameters <- paste0(interpretation, " (", statistics, ")")
+  parameters <- paste0(out$interpretation, " (", out$statistics, ")")
 
   # Return output
   as.report_effectsize(
     parameters,
     summary = parameters,
-    table = table,
-    interpretation = interpretation,
-    statistics = statistics,
-    rules = rules,
-    ci = ci,
-    main = main
+    table = out$table,
+    interpretation = out$interpretation,
+    statistics = out$statistics,
+    rules = out$rules,
+    ci = out$ci,
+    main = out$main
   )
 }
 
