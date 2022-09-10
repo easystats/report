@@ -154,22 +154,18 @@ report_table.htest <- function(x, ...) {
   table_full <- parameters::model_parameters(x, ...)
   effsize <- report_effectsize(x, ...)
 
-  # If t-test, effect size
   if (model_info$is_ttest) {
-    table_full <- cbind(table_full, attributes(effsize)$table)
-    table <- datawizard::data_remove(
-      table_full,
-      c("Parameter", "Group", "Mean_Group1", "Mean_Group2", "Method")
-    )
-  }
-
-  # wilcox test
-  if (model_info$is_ranktest && !model_info$is_correlation) {
-    table_full <- cbind(table_full, attributes(effsize)$table)
+    # If t-test, effect size
+    out <- .report_table_ttest(table_full, effsize)
+  } else if (model_info$is_ranktest && !model_info$is_correlation) {
+    # wilcox test
+    out <- .report_table_wilcox(table_full, effsize)
+  } else {
+    out <- list(table_full = table_full, table = NULL)
   }
 
   # Return output
-  as.report_table(table_full, summary = table, effsize = effsize)
+  as.report_table(out$table_full, summary = out$table, effsize = effsize)
 }
 
 
@@ -241,7 +237,7 @@ report_statistics.htest <- function(x, table = NULL, ...) {
 }
 
 
-# report_statistics ------------------------------------------------------------
+# report_parameters ------------------------------------------------------------
 
 
 #' @rdname report.htest
@@ -263,11 +259,11 @@ report_parameters.htest <- function(x, table = NULL, ...) {
 
   # Correlations
   if (model_info$is_correlation) {
-    out <- .report_parameters_htest_correlation(table, stats, ...)
+    out <- .report_parameters_correlation(table, stats, ...)
 
     # t-tests
   } else if (model_info$is_ttest) {
-    out <- .report_parameters_htest_ttest(table, stats, effsize, ...)
+    out <- .report_parameters_ttest(table, stats, effsize, ...)
 
     # TODO: default, same as t-test?
   } else {

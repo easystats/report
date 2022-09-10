@@ -1,21 +1,6 @@
-.report_parameters_htest_correlation <- function(table, stats, ...) {
-  text_full <- paste0(
-    effectsize::interpret_direction(attributes(stats)$estimate),
-    ", statistically ",
-    effectsize::interpret_p(table$p, rules = "default"),
-    ", and ",
-    effectsize::interpret_r(attributes(stats)$estimate, ...),
-    " (",
-    stats,
-    ")"
-  )
+# report_parameters -----------------
 
-  text_short <- text_full
-  list(text_short = text_short, text_full = text_full)
-}
-
-
-.report_parameters_htest_ttest <- function(table, stats, effsize, ...) {
+.report_parameters_ttest <- function(table, stats, effsize, ...) {
   text_full <- paste0(
     effectsize::interpret_direction(attributes(stats)$estimate),
     ", statistically ",
@@ -42,4 +27,13 @@
 }
 
 
-.report_parameters_htest_default <- .report_parameters_htest_ttest
+# report_table -----------------
+
+.report_table_ttest <- function(table_full, effsize) {
+  table_full <- cbind(table_full, attributes(effsize)$table)
+  table <- datawizard::data_remove(
+    table_full,
+    c("Parameter", "Group", "Mean_Group1", "Mean_Group2", "Method")
+  )
+  list(table = table, table_full = table_full)
+}
