@@ -26,6 +26,8 @@
   list(text_short = text_short, text_full = text_full)
 }
 
+.report_parameters_htest_default <- .report_parameters_ttest
+
 
 # report_table -----------------
 
