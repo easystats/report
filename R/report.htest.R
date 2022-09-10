@@ -217,7 +217,11 @@ report_statistics.htest <- function(x, table = NULL, ...) {
     text <- paste0(
       text,
       ", ",
-      insight::format_ci(table$CI_low, table$CI_high, ci = attributes(x$conf.int)$conf.level)
+      insight::format_ci(
+        table$CI_low,
+        table$CI_high,
+        ci = attributes(x$conf.int)$conf.level
+      )
     )
   }
 
@@ -271,7 +275,11 @@ report_parameters.htest <- function(x, table = NULL, ...) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
   }
 
-  stats <- report_statistics(x, table = table, model_info = model_info, ...)
+  # remove arg, so dots can be passed to other methods
+  dot_args[["model_info"]] <- NULL
+
+  args <- c(list(x, table = table, model_info = model_info), dot_args)
+  stats <- do.call(report_statistics, args)
   table <- attributes(stats)$table
   effsize <- attributes(stats)$effsize
 
@@ -311,9 +319,12 @@ report_model.htest <- function(x, table = NULL, ...) {
   if (is.null(model_info <- list(...)$model_info)) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
   }
+  # remove arg, so dots can be passed to other methods
+  dot_args[["model_info"]] <- NULL
 
   if (is.null(table)) {
-    table <- report_table(x, model_info = model_info, ...)
+    args <- c(list(x, model_info = model_info), dot_args)
+    table <- do.call(report_table, args)
   }
 
   if (model_info$is_correlation) {
@@ -382,8 +393,12 @@ report_info.htest <- function(x, effectsize = NULL, ...) {
   if (is.null(model_info <- list(...)$model_info)) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
   }
+  # remove arg, so dots can be passed to other methods
+  dot_args[["model_info"]] <- NULL
+
   if (is.null(effectsize)) {
-    effectsize <- report_effectsize(x, model_info = model_info, ...)
+    args <- c(list(x, model_info = model_info), dot_args)
+    effectsize <- do.call(report_effectsize, args)
   }
 
   as.report_info(attributes(effectsize)$rules)
@@ -398,10 +413,18 @@ report_text.htest <- function(x, table = NULL, ...) {
   if (is.null(model_info <- list(...)$model_info)) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
   }
-  params <- report_parameters(x, table = table, model_info = model_info, ...)
+  # remove arg, so dots can be passed to other methods
+  dot_args[["model_info"]] <- NULL
+
+  args <- c(list(x, table = table, model_info = model_info), dot_args)
+  params <- do.call(report_parameters, args)
+
   table <- attributes(params)$table
-  model <- report_model(x, table = table, model_info = model_info, ...)
-  info <- report_info(x, effectsize = attributes(params)$effectsize, ...)
+  args <- c(list(x, table = table, model_info = model_info), dot_args)
+  model <- do.call(report_model, args)
+
+  args <- c(list(x, effectsize = attributes(params)$effectsize, model_info = model_info), dot_args)
+  info <- do.call(report_info, args)
 
   if (model_info$is_correlation) {
     text <- paste0(
