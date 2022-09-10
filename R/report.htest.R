@@ -292,11 +292,15 @@ report_model.htest <- function(x, table = NULL, ...) {
     table <- report_table(x, ...)
   }
 
-  if (insight::model_info(x)$is_correlation) {
+  if (is.null(model_info <- list(...)$model_info)) {
+    model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
+  }
+
+  if (model_info$is_correlation) {
     text <- paste0(x$method, " between ", x$data.name)
   }
 
-  if (insight::model_info(x)$is_ttest) {
+  if (model_info$is_ttest) {
     # If against mu
     if (names(x$null.value) == "mean") {
       table$Difference <- x$estimate - x$null.value
@@ -323,7 +327,7 @@ report_model.htest <- function(x, table = NULL, ...) {
     )
   }
 
-  if (insight::model_info(x)$is_ranktest && !insight::model_info(x)$is_correlation) {
+  if (model_info$is_ranktest && !model_info$is_correlation) {
     # two-sample
     if ("Parameter1" %in% names(table)) {
       vars_full <- paste0(table$Parameter1[[1]], " and ", table$Parameter2[[1]])
@@ -373,7 +377,7 @@ report_text.htest <- function(x, table = NULL, ...) {
   }
   params <- report_parameters(x, table = table, model_info, ...)
   table <- attributes(params)$table
-  model <- report_model(x, table = table, ...)
+  model <- report_model(x, table = table, model_info, ...)
   info <- report_info(x, effectsize = attributes(params)$effectsize, ...)
 
 
