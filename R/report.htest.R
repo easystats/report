@@ -25,8 +25,9 @@
 #' @return An object of class [report()].
 #' @export
 report.htest <- function(x, ...) {
-  table <- report_table(x, ...)
-  text <- report_text(x, table = table, ...)
+  model_info <- insight::model_info(x, verbose = FALSE)
+  table <- report_table(x, model_info, ...)
+  text <- report_text(x, table = table, model_info, ...)
 
   as.report(text, table = table, ...)
 }
@@ -146,11 +147,15 @@ report_effectsize.htest <- function(x, ...) {
 #' @rdname report.htest
 #' @export
 report_table.htest <- function(x, ...) {
+  if (is.null(model_info <- list(...)$model_info)) {
+    model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
+  }
+
   table_full <- parameters::model_parameters(x, ...)
   effsize <- report_effectsize(x, ...)
 
   # If t-test, effect size
-  if (insight::model_info(x)$is_ttest) {
+  if (model_info$is_ttest) {
     table_full <- cbind(table_full, attributes(effsize)$table)
     table <- datawizard::data_remove(
       table_full,
@@ -159,7 +164,7 @@ report_table.htest <- function(x, ...) {
   }
 
   # wilcox test
-  if (insight::model_info(x)$is_ranktest && !insight::model_info(x)$is_correlation) {
+  if (model_info$is_ranktest && !model_info$is_correlation) {
     table_full <- cbind(table_full, attributes(effsize)$table)
   }
 
@@ -242,6 +247,10 @@ report_statistics.htest <- function(x, table = NULL, ...) {
 #' @rdname report.htest
 #' @export
 report_parameters.htest <- function(x, table = NULL, ...) {
+  if (is.null(model_info <- list(...)$model_info)) {
+    model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
+  }
+
   stats <- report_statistics(x, table = table, ...)
   table <- attributes(stats)$table
   effsize <- attributes(stats)$effsize
@@ -251,14 +260,13 @@ report_parameters.htest <- function(x, table = NULL, ...) {
   # insight::model_info() returns "$is_correlation" for shapiro-test,
   # but shapiro-test has no "estimate", so this fails. We probably need
   # to handle shapiro separately
-  info <- insight::model_info(x)
 
   # Correlations
-  if (info$is_correlation) {
+  if (model_info$is_correlation) {
     out <- .report_parameters_htest_correlation(table, stats, ...)
 
     # t-tests
-  } else if (info$is_ttest) {
+  } else if (model_info$is_ttest) {
     out <- .report_parameters_htest_ttest(table, stats, effsize, ...)
 
     # TODO: default, same as t-test?
@@ -360,13 +368,16 @@ report_info.htest <- function(x, effectsize = NULL, ...) {
 #' @rdname report.htest
 #' @export
 report_text.htest <- function(x, table = NULL, ...) {
-  params <- report_parameters(x, table = table, ...)
+  if (is.null(model_info <- list(...)$model_info)) {
+    model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
+  }
+  params <- report_parameters(x, table = table, model_info, ...)
   table <- attributes(params)$table
   model <- report_model(x, table = table, ...)
   info <- report_info(x, effectsize = attributes(params)$effectsize, ...)
 
 
-  if (insight::model_info(x)$is_correlation) {
+  if (model_info$is_correlation) {
     text <- paste0(
       "The ",
       model,
