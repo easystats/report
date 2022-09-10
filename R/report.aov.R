@@ -19,7 +19,12 @@
 #' summary(as.data.frame(r))
 #' @return An object of class [report()].
 #' @export
-report.aov <- report.htest
+report.aov <- function(x, ...) {
+  table <- report_table(x, ...)
+  text <- report_text(x, table = table, ...)
+
+  as.report(text, table = table, ...)
+}
 
 #' @export
 report.anova <- report.aov
