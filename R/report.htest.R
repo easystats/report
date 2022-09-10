@@ -271,7 +271,7 @@ report_parameters.htest <- function(x, table = NULL, ...) {
 
     # TODO: default, same as t-test?
   } else {
-    out <- .report_parameters_htest_ttest(table, stats, effsize, ...)
+    out <- .report_parameters_htest_default(table, stats, effsize, ...)
   }
 
   as.report_parameters(
