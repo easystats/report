@@ -26,8 +26,8 @@
 #' @export
 report.htest <- function(x, ...) {
   model_info <- insight::model_info(x, verbose = FALSE)
-  table <- report_table(x, model_info, ...)
-  text <- report_text(x, table = table, model_info, ...)
+  table <- report_table(x, model_info = model_info, ...)
+  text <- report_text(x, table = table, model_info = model_info, ...)
 
   as.report(text, table = table, ...)
 }
@@ -38,18 +38,24 @@ report.htest <- function(x, ...) {
 #' @rdname report.htest
 #' @export
 report_effectsize.htest <- function(x, ...) {
-  if (is.null(model_info <- list(...)$model_info)) {
+  dot_args <- list(...)
+  if (is.null(model_info <- dot_args$model_info)) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
   }
+
+  # remove arg, so dots can be passed to effectsize
+  dot_args[["model_info"]] <- NULL
 
   # For t-tests ----------------
 
   if (model_info$is_ttest) {
-    table <- effectsize::cohens_d(x, ...)
+    args <- c(list(x), dot_args)
+    table <- do.call(effectsize::cohens_d, args)
     ci <- attributes(table)$ci
     estimate <- names(table)[1]
 
-    interpretation <- effectsize::interpret_cohens_d(table[[estimate]], ...)
+    args <- c(list(table[[estimate]]), dot_args)
+    interpretation <- do.call(effectsize::interpret_cohens_d, args)
     rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
 
     if (estimate %in% c("d", "Cohens_d")) {
@@ -76,12 +82,14 @@ report_effectsize.htest <- function(x, ...) {
   # For wilcox test ---------------
 
   if (model_info$is_ranktest && !model_info$is_correlation) {
-    table <- parameters::parameters(x, rank_biserial = TRUE, ...)
+    args <- c(list(x, rank_biserial = TRUE), dot_args)
+    table <- do.call(parameters::parameters, args)
     ci <- attributes(table)$ci
     estimate <- "r_rank_biserial"
 
     # same as Pearson's r
-    interpretation <- effectsize::interpret_r(table$r_rank_biserial, ...)
+    args <- c(list(table$r_rank_biserial), dot_args)
+    interpretation <- do.call(effectsize::interpret_r, args)
     rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
 
     main <- paste0("r (rank biserial) = ", insight::format_value(table$r_rank_biserial))
@@ -97,12 +105,14 @@ report_effectsize.htest <- function(x, ...) {
   # For correlations ---------------
 
   if (model_info$is_correlation) {
-    table <- parameters::parameters(x, ...)
+    args <- c(list(x), dot_args)
+    table <- do.call(parameters::parameters, args)
     ci <- attributes(table)$ci
     estimate <- names(table)[3]
 
     # Pearson
-    interpretation <- effectsize::interpret_r(table[[estimate]], ...)
+    args <- c(list(table[[estimate]]), dot_args)
+    interpretation <- do.call(effectsize::interpret_r, args)
     rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
     main <- paste0(estimate, " = ", insight::format_value(table[[estimate]]))
 
@@ -124,8 +134,7 @@ report_effectsize.htest <- function(x, ...) {
 
   # TODO: Chi-squared test -------------
 
-  if (model_info$is_chi2test || model_info$is_proptest ||
-    model_info$is_xtab) {
+  if (model_info$is_chi2test || model_info$is_proptest || model_info$is_xtab) {
     stop(insight::format_message(
       "This test is not yet supported. Please open an issue at {.url https://github.com/easystats/report/issues}."
     ), call. = FALSE)
@@ -153,12 +162,13 @@ report_effectsize.htest <- function(x, ...) {
 #' @rdname report.htest
 #' @export
 report_table.htest <- function(x, ...) {
-  if (is.null(model_info <- list(...)$model_info)) {
+  dot_args <- list(...)
+  if (is.null(model_info <- dot_args$model_info)) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
   }
 
   table_full <- parameters::model_parameters(x, ...)
-  effsize <- report_effectsize(x, model_info, ...)
+  effsize <- report_effectsize(x, model_info = model_info, ...)
 
   if (model_info$is_ttest) {
     # If t-test, effect size
@@ -256,7 +266,7 @@ report_parameters.htest <- function(x, table = NULL, ...) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
   }
 
-  stats <- report_statistics(x, table = table, model_info, ...)
+  stats <- report_statistics(x, table = table, model_info = model_info, ...)
   table <- attributes(stats)$table
   effsize <- attributes(stats)$effsize
 
@@ -298,7 +308,7 @@ report_model.htest <- function(x, table = NULL, ...) {
   }
 
   if (is.null(table)) {
-    table <- report_table(x, model_info, ...)
+    table <- report_table(x, model_info = model_info, ...)
   }
 
   if (model_info$is_correlation) {
@@ -368,7 +378,7 @@ report_info.htest <- function(x, effectsize = NULL, ...) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
   }
   if (is.null(effectsize)) {
-    effectsize <- report_effectsize(x, model_info, ...)
+    effectsize <- report_effectsize(x, model_info = model_info, ...)
   }
 
   as.report_info(attributes(effectsize)$rules)
@@ -383,9 +393,9 @@ report_text.htest <- function(x, table = NULL, ...) {
   if (is.null(model_info <- list(...)$model_info)) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
   }
-  params <- report_parameters(x, table = table, model_info, ...)
+  params <- report_parameters(x, table = table, model_info = model_info, ...)
   table <- attributes(params)$table
-  model <- report_model(x, table = table, model_info, ...)
+  model <- report_model(x, table = table, model_info = model_info, ...)
   info <- report_info(x, effectsize = attributes(params)$effectsize, ...)
 
   if (model_info$is_correlation) {
