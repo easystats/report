@@ -66,7 +66,7 @@ report_effectsize.htest <- function(x, ...) {
 
   # TODO: Chi-squared test -------------
 
-  if (model_info$is_chi2test || model_info$is_proptest || model_info$is_xtab) {
+  if (model_info$is_proptest || (model_info$is_xtab && !model_info$is_chi2test)) {
     stop(insight::format_message(
       "This test is not yet supported. Please open an issue at {.url https://github.com/easystats/report/issues}."
     ), call. = FALSE)
@@ -113,6 +113,9 @@ report_table.htest <- function(x, ...) {
   } else if (model_info$is_ranktest && !model_info$is_correlation) {
     # wilcox test
     out <- .report_table_wilcox(table_full, effsize)
+  } else if (model_info$is_chi2test) {
+    # chi2 test
+    out <- .report_table_chi2(table_full, effsize)
   } else {
     out <- list(table_full = table_full, table = NULL)
   }
