@@ -78,3 +78,38 @@
     rules = rules, ci = ci, main = main
   )
 }
+
+
+# report model ---------------------------
+
+.report_model_ttest <- function(x, table) {
+  # If against mu
+  if (names(x$null.value) == "mean") {
+
+    # TODO: @DominiqueMakowski why do we need "table" here?
+
+    table$Difference <- x$estimate - x$null.value
+    means <- paste0(" (mean = ", insight::format_value(x$estimate), ")")
+    vars_full <- paste0(x$data.name, means, " and mu = ", x$null.value)
+    vars <- paste0(x$data.name, " and mu = ", x$null.value)
+
+    # If between two groups
+  } else {
+    table$Difference <- x$estimate[1] - x$estimate[2]
+    means <- paste0(names(x$estimate), " = ",
+      insight::format_value(x$estimate),
+      collapse = ", "
+    )
+    vars_full <- paste0(x$data.name, " (", means, ")")
+    vars <- paste0(x$data.name)
+  }
+
+  text <- paste0(
+    trimws(x$method),
+    " testing the difference ",
+    ifelse(grepl(" by ", x$data.name), "of ", "between "),
+    vars_full
+  )
+
+  text
+}

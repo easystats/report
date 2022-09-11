@@ -33,3 +33,31 @@
     rules = rules, ci = ci, main = main
   )
 }
+
+
+# report_model ----------------------------
+
+.report_model_wilcox <- function(x, table) {
+  # two-sample
+  if ("Parameter1" %in% names(table)) {
+    vars_full <- paste0(table$Parameter1[[1]], " and ", table$Parameter2[[1]])
+
+    text <- paste0(
+      trimws(x$method),
+      " testing the difference in ranks between ",
+      vars_full
+    )
+  } else {
+    # one-sample
+    vars_full <- paste0(table$Parameter[[1]])
+
+    text <- paste0(
+      trimws(x$method),
+      " testing the difference in rank for ",
+      vars_full,
+      " and true location of 0"
+    )
+  }
+
+  text
+}

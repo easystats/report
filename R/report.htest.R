@@ -131,7 +131,7 @@ report_statistics.htest <- function(x, table = NULL, ...) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
   }
   if (is.null(table) || is.null(attributes(table)$effsize)) {
-    table <- report_table(x, model_info)
+    table <- report_table(x, model_info = model_info)
   }
 
   effsize <- attributes(table)$effsize
@@ -180,8 +180,7 @@ report_statistics.htest <- function(x, table = NULL, ...) {
   text <- paste0(text, ", ", insight::format_p(table$p, stars = FALSE, digits = "apa"))
 
   # Effect size
-  if (model_info$is_ttest ||
-    (model_info$is_ranktest && !model_info$is_correlation)) {
+  if (model_info$is_ttest || (model_info$is_ranktest && !model_info$is_correlation)) {
     text_full <- paste0(text, "; ", attributes(effsize)$statistics)
     text <- paste0(text, ", ", attributes(effsize)$main)
   } else {
@@ -267,53 +266,11 @@ report_model.htest <- function(x, table = NULL, ...) {
   }
 
   if (model_info$is_ttest) {
-    # If against mu
-    if (names(x$null.value) == "mean") {
-      table$Difference <- x$estimate - x$null.value
-      means <- paste0(" (mean = ", insight::format_value(x$estimate), ")")
-      vars_full <- paste0(x$data.name, means, " and mu = ", x$null.value)
-      vars <- paste0(x$data.name, " and mu = ", x$null.value)
-
-      # If between two groups
-    } else {
-      table$Difference <- x$estimate[1] - x$estimate[2]
-      means <- paste0(names(x$estimate), " = ",
-        insight::format_value(x$estimate),
-        collapse = ", "
-      )
-      vars_full <- paste0(x$data.name, " (", means, ")")
-      vars <- paste0(x$data.name)
-    }
-
-    text <- paste0(
-      trimws(x$method),
-      " testing the difference ",
-      ifelse(grepl(" by ", x$data.name), "of ", "between "),
-      vars_full
-    )
+    text <- .report_model_ttest(x, table)
   }
 
   if (model_info$is_ranktest && !model_info$is_correlation) {
-    # two-sample
-    if ("Parameter1" %in% names(table)) {
-      vars_full <- paste0(table$Parameter1[[1]], " and ", table$Parameter2[[1]])
-
-      text <- paste0(
-        trimws(x$method),
-        " testing the difference in ranks between ",
-        vars_full
-      )
-    } else {
-      # one-sample
-      vars_full <- paste0(table$Parameter[[1]])
-
-      text <- paste0(
-        trimws(x$method),
-        " testing the difference in rank for ",
-        vars_full,
-        " and true location of 0"
-      )
-    }
+    text <- .report_model_wilcox(x, table)
   }
 
   as.report_model(text, summary = text)
