@@ -1,4 +1,3 @@
-skip_if(.Platform$OS.type != "windows")
 skip_if_not(getRversion() <= "4.2.1")
 
 test_that("report.numeric", {
