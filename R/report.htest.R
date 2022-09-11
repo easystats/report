@@ -64,6 +64,12 @@ report_effectsize.htest <- function(x, ...) {
     out <- .report_effectsize_correlation(x, table, dot_args)
   }
 
+  # For Chi2 ---------------
+
+  if (model_info$is_chi2test) {
+    out <- .report_effectsize_chi2(x, table, dot_args)
+  }
+
   # TODO: Chi-squared test -------------
 
   if (model_info$is_proptest || (model_info$is_xtab && !model_info$is_chi2test)) {
