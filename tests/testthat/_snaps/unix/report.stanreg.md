@@ -4,11 +4,12 @@
       report(model)
     Output
       We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains
-      of 300 iterations and a warmup of 150) to predict mpg with qsec (formula: mpg ~
-      qsec + wt). Priors over parameters were set as normal (mean = 0.00, SD = 8.43)
-      distributions. The model's explanatory power is substantial (R2 = 0.81, 95% CI
-      [0.70, 0.90], adj. R2 = 0.80). The model's intercept, corresponding to qsec =
-      0, is at 19.71 (95% CI [9.04, 30.18]). Within this model:
+      of 300 iterations and a warmup of 150) to predict mpg with qsec and wt
+      (formula: mpg ~ qsec + wt). Priors over parameters were set as normal (mean =
+      0.00, SD = 8.43) distributions. The model's explanatory power is substantial
+      (R2 = 0.81, 95% CI [0.70, 0.90], adj. R2 = 0.80). The model's intercept,
+      corresponding to qsec = 0 and wt = 0, is at 19.71 (95% CI [9.04, 30.18]).
+      Within this model:
       
         - The effect of qsec (Median = 0.92, 95% CI [0.40, 1.47]) has a 99.83%
       probability of being positive (> 0), 99.00% of being significant (> 0.30), and
@@ -29,11 +30,12 @@
       assessed using R-hat, which should be below 1.01 (Vehtari et al., 2019), and
       Effective Sample Size (ESS), which should be greater than 1000 (Burkner, 2017).
       and We fitted a Bayesian linear model (estimated using MCMC sampling with 4
-      chains of 300 iterations and a warmup of 150) to predict mpg with wt (formula:
-      mpg ~ qsec + wt). Priors over parameters were set as normal (mean = 0.00, SD =
-      15.40) distributions. The model's explanatory power is substantial (R2 = 0.81,
-      95% CI [0.70, 0.90], adj. R2 = 0.80). The model's intercept, corresponding to
-      wt = 0, is at 19.71 (95% CI [9.04, 30.18]). Within this model:
+      chains of 300 iterations and a warmup of 150) to predict mpg with qsec and wt
+      (formula: mpg ~ qsec + wt). Priors over parameters were set as normal (mean =
+      0.00, SD = 15.40) distributions. The model's explanatory power is substantial
+      (R2 = 0.81, 95% CI [0.70, 0.90], adj. R2 = 0.80). The model's intercept,
+      corresponding to qsec = 0 and wt = 0, is at 19.71 (95% CI [9.04, 30.18]).
+      Within this model:
       
         - The effect of qsec (Median = 0.92, 95% CI [0.40, 1.47]) has a 99.83%
       probability of being positive (> 0), 99.00% of being significant (> 0.30), and

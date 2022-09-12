@@ -19,7 +19,12 @@
 #' summary(as.data.frame(r))
 #' @return An object of class [report()].
 #' @export
-report.aov <- report.htest
+report.aov <- function(x, ...) {
+  table <- report_table(x, ...)
+  text <- report_text(x, table = table, ...)
+
+  as.report(text, table = table, ...)
+}
 
 #' @export
 report.anova <- report.aov
@@ -299,7 +304,12 @@ report_model.aovlist <- report_model.aov
 #' @rdname report.aov
 #' @include report.htest.R
 #' @export
-report_info.aov <- report_info.htest
+report_info.aov <- function(x, effectsize = NULL, ...) {
+  if (is.null(effectsize)) {
+    effectsize <- report_effectsize(x, ...)
+  }
+  as.report_info(attributes(effectsize)$rules)
+}
 
 #' @export
 report_info.anova <- report_info.aov
