@@ -116,9 +116,9 @@ report_table.sessionInfo <- function(x, include_R = TRUE, ...) {
     versions <- c(paste0(x$R.version$major, ".", x$R.version$minor))
     names <- c("R")
   } else {
-    citations <- c()
-    versions <- c()
-    names <- c()
+    citations <- NULL
+    versions <- NULL
+    names <- NULL
   }
 
 

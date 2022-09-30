@@ -13,7 +13,6 @@
     estimate <- "Cramers_v"
     effsize <- effectsize::cramers_v(x)[[estimate]]
     effectsize::interpret_cramers_v(effsize)
-
   } else if (grepl("given probabilities", x$method, fixed = TRUE)) {
 
   } else {

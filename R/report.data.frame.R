@@ -197,8 +197,8 @@ report_parameters.data.frame <- function(x,
                                          n_entries = 3,
                                          missing_percentage = "auto",
                                          ...) {
-  text_full <- c()
-  text <- c()
+  text_full <- NULL
+  text <- NULL
 
   for (i in seq_len(ncol(x))) {
     r <- report_text(
@@ -279,8 +279,8 @@ report_statistics.data.frame <- function(x,
                                          n_entries = 3,
                                          missing_percentage = "auto",
                                          ...) {
-  text_full <- c()
-  text <- c()
+  text_full <- NULL
+  text <- NULL
 
   for (i in seq_len(ncol(x))) {
     r <- report_statistics(
@@ -401,8 +401,8 @@ report_parameters.grouped_df <- function(x,
                                          ...) {
   out <- .report_grouped_dataframe(x)
 
-  params_full <- c()
-  params <- c()
+  params_full <- NULL
+  params <- NULL
 
   for (group in names(out$dfs)) {
     data <- out$dfs[[group]]
@@ -493,8 +493,8 @@ report_statistics.grouped_df <- function(x,
                                          ...) {
   out <- .report_grouped_dataframe(x)
 
-  text_full <- c()
-  text <- c()
+  text_full <- NULL
+  text <- NULL
 
   for (group in names(out$dfs)) {
     data <- out$dfs[[group]]

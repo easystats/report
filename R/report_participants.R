@@ -165,7 +165,7 @@ report_participants <- function(data,
   }
 
   if (!is.null(group)) {
-    text <- c()
+    text <- NULL
     for (i in split(data, data[group])) {
       current_text <- .report_participants(
         i,

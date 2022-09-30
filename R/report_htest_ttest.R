@@ -85,7 +85,6 @@
 .report_model_ttest <- function(x, table) {
   # If against mu
   if (names(x$null.value) == "mean") {
-
     # TODO: @DominiqueMakowski why do we need "table" here?
 
     table$Difference <- x$estimate - x$null.value

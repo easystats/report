@@ -79,7 +79,7 @@ print.report_intercept <- function(x, ...) {
   terms <- insight::find_variables(model)$conditional
   model_data <- insight::get_data(model)
   data <- model_data[terms[terms %in% names(model_data)]]
-  text <- c()
+  text <- NULL
   for (col in names(data)) {
     if (is.numeric(data[[col]])) {
       text <- c(text, paste0(col, " = 0"))
