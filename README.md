@@ -60,19 +60,17 @@ Load the package every time you start R
 library("report")
 ```
 
+> **Tip**
+>
+> **Instead of `library(datawizard)`, use `library(easystats)`.** **This
+> will make all features of the easystats-ecosystem available.**
+>
+> **To stay updated, use `easystats::install_latest()`.**
+
 ## Documentation
 
-[![Documentation](https://img.shields.io/badge/documentation-report-orange.svg?colorB=E91E63)](https://easystats.github.io/report/)
-[![Blog](https://img.shields.io/badge/blog-easystats-orange.svg?colorB=FF9800)](https://easystats.github.io/blog/posts/)
-[![Features](https://img.shields.io/badge/features-report-orange.svg?colorB=2196F3)](https://easystats.github.io/report/reference/index.html)
-
 The package documentation can be found
-[**here**](https://easystats.github.io/report/). Check-out these
-tutorials:
-
-- [Get Started](https://easystats.github.io/report/articles/report.html)
-- [How to Cite
-  Packages](https://easystats.github.io/report/articles/cite_packages.html)
+[**here**](https://easystats.github.io/report/).
 
 ## Report all the things
 
@@ -195,27 +193,10 @@ model <- glm(vs ~ mpg * drat, data = mtcars, family = "binomial")
 report(model)
 ```
 
-    # We fitted a logistic model (estimated using ML) to predict vs with mpg
+    # We fitted a logistic model (estimated using ML) to predict vs with mpg and drat
     # (formula: vs ~ mpg * drat). The model's explanatory power is substantial
-    # (Tjur's R2 = 0.51). The model's intercept, corresponding to mpg = 0, is at
-    # -33.43 (95% CI [-77.90, 3.25], p = 0.083). Within this model:
-    # 
-    #   - The effect of mpg is statistically non-significant and positive (beta = 1.79,
-    # 95% CI [-0.10, 4.05], p = 0.066; Std. beta = 3.63, 95% CI [1.36, 7.50])
-    #   - The effect of drat is statistically non-significant and positive (beta =
-    # 5.96, 95% CI [-3.75, 16.26], p = 0.205; Std. beta = -0.36, 95% CI [-1.96,
-    # 0.98])
-    #   - The interaction effect of drat on mpg is statistically non-significant and
-    # negative (beta = -0.33, 95% CI [-0.83, 0.15], p = 0.141; Std. beta = -1.07, 95%
-    # CI [-2.66, 0.48])
-    # 
-    # Standardized parameters were obtained by fitting the model on a standardized
-    # version of the dataset. 95% Confidence Intervals (CIs) and p-values were
-    # computed using a Wald z-distribution approximation. and We fitted a logistic
-    # model (estimated using ML) to predict vs with drat (formula: vs ~ mpg * drat).
-    # The model's explanatory power is substantial (Tjur's R2 = 0.51). The model's
-    # intercept, corresponding to drat = 0, is at -33.43 (95% CI [-77.90, 3.25], p =
-    # 0.083). Within this model:
+    # (Tjur's R2 = 0.51). The model's intercept, corresponding to mpg = 0 and drat =
+    # 0, is at -33.43 (95% CI [-77.90, 3.25], p = 0.083). Within this model:
     # 
     #   - The effect of mpg is statistically non-significant and positive (beta = 1.79,
     # 95% CI [-0.10, 4.05], p = 0.066; Std. beta = 3.63, 95% CI [1.36, 7.50])
@@ -274,20 +255,21 @@ report(model)
 ```
 
     # We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains
-    # of 1000 iterations and a warmup of 500) to predict mpg with qsec (formula: mpg
-    # ~ qsec + wt). Priors over parameters were set as normal (mean = 0.00, SD =
-    # 8.43) distributions. The model's explanatory power is substantial (R2 = 0.81,
-    # 95% CI [0.70, 0.89], adj. R2 = 0.79). The model's intercept, corresponding to
-    # qsec = 0, is at 19.81 (95% CI [8.45, 30.63]). Within this model:
+    # of 1000 iterations and a warmup of 500) to predict mpg with qsec and wt
+    # (formula: mpg ~ qsec + wt). Priors over parameters were set as normal (mean =
+    # 0.00, SD = 8.43) distributions. The model's explanatory power is substantial
+    # (R2 = 0.81, 95% CI [0.70, 0.90], adj. R2 = 0.79). The model's intercept,
+    # corresponding to qsec = 0 and wt = 0, is at 19.72 (95% CI [9.18, 29.63]).
+    # Within this model:
     # 
-    #   - The effect of qsec (Median = 0.94, 95% CI [0.40, 1.48]) has a 99.80%
-    # probability of being positive (> 0), 98.90% of being significant (> 0.30), and
-    # 0.30% of being large (> 1.81). The estimation successfully converged (Rhat =
-    # 0.999) and the indices are reliable (ESS = 2573)
-    #   - The effect of wt (Median = -5.02, 95% CI [-6.11, -3.99]) has a 100.00%
+    #   - The effect of qsec (Median = 0.92, 95% CI [0.42, 1.46]) has a 99.90%
+    # probability of being positive (> 0), 99.00% of being significant (> 0.30), and
+    # 0.15% of being large (> 1.81). The estimation successfully converged (Rhat =
+    # 1.000) and the indices are reliable (ESS = 2411)
+    #   - The effect of wt (Median = -5.04, 95% CI [-6.00, -4.02]) has a 100.00%
     # probability of being negative (< 0), 100.00% of being significant (< -0.30),
     # and 100.00% of being large (< -1.81). The estimation successfully converged
-    # (Rhat = 0.999) and the indices are reliable (ESS = 1872)
+    # (Rhat = 1.000) and the indices are reliable (ESS = 2582)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
     # framework, we report the median of the posterior distribution and its 95% CI
@@ -299,20 +281,21 @@ report(model)
     # assessed using R-hat, which should be below 1.01 (Vehtari et al., 2019), and
     # Effective Sample Size (ESS), which should be greater than 1000 (Burkner, 2017).
     # and We fitted a Bayesian linear model (estimated using MCMC sampling with 4
-    # chains of 1000 iterations and a warmup of 500) to predict mpg with wt (formula:
-    # mpg ~ qsec + wt). Priors over parameters were set as normal (mean = 0.00, SD =
-    # 15.40) distributions. The model's explanatory power is substantial (R2 = 0.81,
-    # 95% CI [0.70, 0.89], adj. R2 = 0.79). The model's intercept, corresponding to
-    # wt = 0, is at 19.81 (95% CI [8.45, 30.63]). Within this model:
+    # chains of 1000 iterations and a warmup of 500) to predict mpg with qsec and wt
+    # (formula: mpg ~ qsec + wt). Priors over parameters were set as normal (mean =
+    # 0.00, SD = 15.40) distributions. The model's explanatory power is substantial
+    # (R2 = 0.81, 95% CI [0.70, 0.90], adj. R2 = 0.79). The model's intercept,
+    # corresponding to qsec = 0 and wt = 0, is at 19.72 (95% CI [9.18, 29.63]).
+    # Within this model:
     # 
-    #   - The effect of qsec (Median = 0.94, 95% CI [0.40, 1.48]) has a 99.80%
-    # probability of being positive (> 0), 98.90% of being significant (> 0.30), and
-    # 0.30% of being large (> 1.81). The estimation successfully converged (Rhat =
-    # 0.999) and the indices are reliable (ESS = 2573)
-    #   - The effect of wt (Median = -5.02, 95% CI [-6.11, -3.99]) has a 100.00%
+    #   - The effect of qsec (Median = 0.92, 95% CI [0.42, 1.46]) has a 99.90%
+    # probability of being positive (> 0), 99.00% of being significant (> 0.30), and
+    # 0.15% of being large (> 1.81). The estimation successfully converged (Rhat =
+    # 1.000) and the indices are reliable (ESS = 2411)
+    #   - The effect of wt (Median = -5.04, 95% CI [-6.00, -4.02]) has a 100.00%
     # probability of being negative (< 0), 100.00% of being significant (< -0.30),
     # and 100.00% of being large (< -1.81). The estimation successfully converged
-    # (Rhat = 0.999) and the indices are reliable (ESS = 1872)
+    # (Rhat = 1.000) and the indices are reliable (ESS = 2582)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
     # framework, we report the median of the posterior distribution and its 95% CI
@@ -386,11 +369,11 @@ report(sessionInfo())
 ```
 
     # Analyses were conducted using the R Statistical language (version 4.2.1; R Core
-    # Team, 2022) on macOS Monterey 12.5, using the packages lme4 (version 1.1.30;
-    # Bates D et al., 2015), Matrix (version 1.4.1; Bates D et al., 2022), Rcpp
+    # Team, 2022) on macOS Monterey 12.6, using the packages lme4 (version 1.1.30;
+    # Bates D et al., 2015), Matrix (version 1.5.1; Bates D et al., 2022), Rcpp
     # (version 1.0.9; Eddelbuettel D, François R, 2011), rstanarm (version 2.21.3;
-    # Goodrich B et al., 2022), report (version 0.5.1.3; Makowski D et al., 2021) and
-    # dplyr (version 1.0.9; Wickham H et al., 2022).
+    # Goodrich B et al., 2022), report (version 0.5.5.2; Makowski D et al., 2021) and
+    # dplyr (version 1.0.10; Wickham H et al., 2022).
     # 
     # References
     # ----------
@@ -399,7 +382,7 @@ report(sessionInfo())
     # doi:10.18637/jss.v067.i01<https://doi.org/10.18637/jss.v067.i01>.
     #   - Bates D, Maechler M, Jagan M (2022). _Matrix: Sparse and Dense MatrixClasses
     # and Methods_. R package version
-    # 1.4-1,<https://CRAN.R-project.org/package=Matrix>.
+    # 1.5-1,<https://CRAN.R-project.org/package=Matrix>.
     #   - Eddelbuettel D, François R (2011). "Rcpp: Seamless R and C++Integration."
     # _Journal of Statistical Software_, *40*(8), 1-18.doi:10.18637/jss.v040.i08
     # <https://doi.org/10.18637/jss.v040.i08>.Eddelbuettel D (2013). _Seamless R and
@@ -423,7 +406,7 @@ report(sessionInfo())
     # Austria.<https://www.R-project.org/>.
     #   - Wickham H, François R, Henry L, Müller K (2022). _dplyr: A Grammar ofData
     # Manipulation_. R package version
-    # 1.0.9,<https://CRAN.R-project.org/package=dplyr>.
+    # 1.0.10,<https://CRAN.R-project.org/package=dplyr>.
 
 ## Credits
 
