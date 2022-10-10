@@ -39,6 +39,51 @@ First, load the `{report}` package, part of the `{easystats}` collection.
 library(easystats)
 ```
 
+
+## Getting started with correlations
+
+Let's start by demonstrating some features with simple tests. The function `report_table()` can be used to create a table for many R objects.
+
+```{r}
+results <- cor.test(mtcars$mpg, mtcars$wt)
+
+report_table(results)
+```
+
+We can also obtain a shorter version by running `summary()` on the output (that we are going to store in a variable called `t` - like table)
+
+```{r}
+t <- summary(report_table(results))
+t
+```
+
+In the example above, running just `t` ran `print(t)` under the hood, which prints the table inside the console. However, one can nicely display that table in markdown documents using `display()`.
+
+```{r, results='asis'}
+display(t)
+```
+
+We can further customize this table, by adding significance stars, 
+
+
+```{r, results='asis'}
+display(t, 
+        stars = TRUE,
+        title = "Table 1", 
+        footer = "Correlation in the mtcars (n = 32) dataset.\n*** p < .001")
+```
+
+## *t*-tests, ...
+
+```{r}
+results <- t.test(mpg ~ am, data=mtcars)
+
+t <- report_table(results)
+t
+```
+
+
+
 ## Regression Models
 
 ```{r}
@@ -48,21 +93,3 @@ report_table(model)
 ```
 
 
-
-## *t*-test, correlations, ...
-
-```{r}
-results <- t.test(mpg ~ am, data=mtcars)
-
-report_table(results)
-
-summary(report_table(results))
-```
-
-```{r}
-results <- cor.test(mtcars$mpg, mtcars$wt)
-
-report_table(results)
-
-summary(report_table(results))
-```
