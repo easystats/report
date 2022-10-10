@@ -59,7 +59,7 @@ t
 
 In the example above, running just `t` ran `print(t)` under the hood, which prints the table inside the console. However, one can nicely display that table in markdown documents using `display()`.
 
-```{r, results='asis'}
+```{r}
 display(t)
 ```
 
