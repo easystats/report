@@ -133,9 +133,109 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/easystats/" class="external-link">easystats</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
+<h2 id="getting-started-with-correlations">Getting started with correlations<a class="anchor" aria-label="anchor" href="#getting-started-with-correlations"></a>
+</h2>
+<p>Let’s start by demonstrating some features with simple tests. The
+function <code><a href="../reference/report_table.html">report_table()</a></code> can be used to create a table for
+many R objects.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">wt</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/report_table.html">report_table</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span>
+<span><span class="co"># Pearson's product-moment correlation</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># Parameter1 | Parameter2 |     r |         95% CI | t(30) |      p</span></span>
+<span><span class="co"># -----------------------------------------------------------------</span></span>
+<span><span class="co"># mtcars$mpg |  mtcars$wt | -0.87 | [-0.93, -0.74] | -9.56 | &lt; .001</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># Alternative hypothesis: two.sided</span></span></code></pre></div>
+<p>We can also obtain a shorter version by running
+<code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> on the output (that we are going to store in a
+variable called <code>t</code> - like table)</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="../reference/report_table.html">report_table</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">t</span></span>
+<span><span class="co"># Pearson's product-moment correlation</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># Parameter1 | Parameter2 |     r |         95% CI |      p</span></span>
+<span><span class="co"># ---------------------------------------------------------</span></span>
+<span><span class="co"># mtcars$mpg |  mtcars$wt | -0.87 | [-0.93, -0.74] | &lt; .001</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># Alternative hypothesis: two.sided</span></span></code></pre></div>
+<p>In the example above, running just <code>t</code> ran
+<code>print(t)</code> under the hood, which prints the table inside the
+console. However, one can nicely display that table in markdown
+documents using <code><a href="https://easystats.github.io/insight/reference/display.html" class="external-link">display()</a></code>.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://easystats.github.io/insight/reference/display.html" class="external-link">display</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<caption>Pearson’s product-moment correlation</caption>
+<thead><tr class="header">
+<th align="left">Parameter1</th>
+<th align="center">Parameter2</th>
+<th align="center">r</th>
+<th align="center">95% CI</th>
+<th align="center">p</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left">mtcars<span class="math inline">\(mpg |
+mtcars\)</span>wt</td>
+<td align="center">-0.87</td>
+<td align="center">(-0.93, -0.74)</td>
+<td align="center">&lt; .001</td>
+<td align="center"></td>
+</tr></tbody>
+</table>
+<p>Alternative hypothesis: true correlation is not equal to 0</p>
+<p>We can further customize this table, by adding significance
+stars,</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://easystats.github.io/insight/reference/display.html" class="external-link">display</a></span><span class="op">(</span><span class="va">t</span>, </span>
+<span>        stars <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>        title <span class="op">=</span> <span class="st">"Table 1"</span>, </span>
+<span>        footer <span class="op">=</span> <span class="st">"Correlation in the mtcars (n = 32) dataset.\n*** p &lt; .001"</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<caption>Table 1</caption>
+<thead><tr class="header">
+<th align="left">Parameter1</th>
+<th align="center">Parameter2</th>
+<th align="center">r</th>
+<th align="center">95% CI</th>
+<th align="center">p</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left">mtcars<span class="math inline">\(mpg |
+mtcars\)</span>wt</td>
+<td align="center">-0.87</td>
+<td align="center">(-0.93, -0.74)</td>
+<td align="center">&lt; .001***</td>
+<td align="center"></td>
+</tr></tbody>
+</table>
+<p>Correlation in the mtcars (n = 32) dataset. *** p &lt; .001</p>
+<p>Alternative hypothesis: true correlation is not equal to 0</p>
+</div>
+<div class="section level2">
+<h2 id="t-tests">
+<em>t</em>-tests, …<a class="anchor" aria-label="anchor" href="#t-tests"></a>
+</h2>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">am</span>, data<span class="op">=</span><span class="va">mtcars</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/report_table.html">report_table</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span>
+<span><span class="va">t</span></span>
+<span><span class="co"># Welch Two Sample t-test</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># Parameter | Group | Mean_Group1 | Mean_Group2 | Difference |          95% CI | t(18.33) |     p |     d |          d  CI</span></span>
+<span><span class="co"># ------------------------------------------------------------------------------------------------------------------------</span></span>
+<span><span class="co"># mpg       |    am |       17.15 |       24.39 |      -7.24 | [-11.28, -3.21] |    -3.77 | 0.001 | -1.76 | [-2.82, -0.67]</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># Alternative hypothesis: two.sided</span></span></code></pre></div>
+</div>
+<div class="section level2">
 <h2 id="regression-models">Regression Models<a class="anchor" aria-label="anchor" href="#regression-models"></a>
 </h2>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Petal.Length</span> <span class="op">~</span> <span class="va">Species</span> <span class="op">*</span> <span class="va">Petal.Width</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/report_table.html">report_table</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
@@ -153,49 +253,6 @@
 <span><span class="co"># R2                                 |             |               |        |        |            |                   |   0.96</span></span>
 <span><span class="co"># R2 (adj.)                          |             |               |        |        |            |                   |   0.96</span></span>
 <span><span class="co"># Sigma                              |             |               |        |        |            |                   |   0.36</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="t-test-correlations">
-<em>t</em>-test, correlations, …<a class="anchor" aria-label="anchor" href="#t-test-correlations"></a>
-</h2>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">am</span>, data<span class="op">=</span><span class="va">mtcars</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="../reference/report_table.html">report_table</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span>
-<span><span class="co"># Welch Two Sample t-test</span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># Parameter | Group | Mean_Group1 | Mean_Group2 | Difference |          95% CI | t(18.33) |     p |     d |          d  CI</span></span>
-<span><span class="co"># ------------------------------------------------------------------------------------------------------------------------</span></span>
-<span><span class="co"># mpg       |    am |       17.15 |       24.39 |      -7.24 | [-11.28, -3.21] |    -3.77 | 0.001 | -1.76 | [-2.82, -0.67]</span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># Alternative hypothesis: two.sided</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="../reference/report_table.html">report_table</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co"># Difference |          95% CI | t(18.33) |     p |     d |          d  CI</span></span>
-<span><span class="co"># ------------------------------------------------------------------------</span></span>
-<span><span class="co"># -7.24      | [-11.28, -3.21] |    -3.77 | 0.001 | -1.76 | [-2.82, -0.67]</span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># Alternative hypothesis: two.sided</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">wt</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="../reference/report_table.html">report_table</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span>
-<span><span class="co"># Pearson's product-moment correlation</span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># Parameter1 | Parameter2 |     r |         95% CI | t(30) |      p</span></span>
-<span><span class="co"># -----------------------------------------------------------------</span></span>
-<span><span class="co"># mtcars$mpg |  mtcars$wt | -0.87 | [-0.93, -0.74] | -9.56 | &lt; .001</span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># Alternative hypothesis: two.sided</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="../reference/report_table.html">report_table</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co"># Pearson's product-moment correlation</span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># Parameter1 | Parameter2 |     r |         95% CI |      p</span></span>
-<span><span class="co"># ---------------------------------------------------------</span></span>
-<span><span class="co"># mtcars$mpg |  mtcars$wt | -0.87 | [-0.93, -0.74] | &lt; .001</span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># Alternative hypothesis: two.sided</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
