@@ -1,5 +1,5 @@
 ---
-title: "Get Started"
+title: "Automated Reporting: Getting Started"
 output: 
   rmarkdown::html_vignette:
     toc: true
@@ -7,7 +7,7 @@ output:
     fig_height: 6
 tags: [r, report]
 vignette: >
-  %\VignetteIndexEntry{Get Started}
+  %\VignetteIndexEntry{Automated Reporting: Getting Started}
   \usepackage[utf8]{inputenc}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
