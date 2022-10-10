@@ -219,23 +219,43 @@ mtcars\)</span>wt</td>
 <h2 id="t-tests">
 <em>t</em>-tests, …<a class="anchor" aria-label="anchor" href="#t-tests"></a>
 </h2>
+<p>It works similarly for <em>t</em>-tests.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">am</span>, data<span class="op">=</span><span class="va">mtcars</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/report_table.html">report_table</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="../reference/report_table.html">report_table</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">t</span></span>
-<span><span class="co"># Welch Two Sample t-test</span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># Parameter | Group | Mean_Group1 | Mean_Group2 | Difference |          95% CI | t(18.33) |     p |     d |          d  CI</span></span>
-<span><span class="co"># ------------------------------------------------------------------------------------------------------------------------</span></span>
-<span><span class="co"># mpg       |    am |       17.15 |       24.39 |      -7.24 | [-11.28, -3.21] |    -3.77 | 0.001 | -1.76 | [-2.82, -0.67]</span></span>
+<span><span class="co"># Difference |          95% CI | t(18.33) |     p |     d</span></span>
+<span><span class="co"># -------------------------------------------------------</span></span>
+<span><span class="co"># -7.24      | [-11.28, -3.21] |    -3.77 | 0.001 | -1.76</span></span>
 <span><span class="co"># </span></span>
 <span><span class="co"># Alternative hypothesis: two.sided</span></span></code></pre></div>
+<p>Note that, by default, <code><a href="../reference/report_table.html">report_table()</a></code> prettifies the
+printing: that means that the column names and its content is,
+underneath, not necessarily what is printed, which can be a bit
+confusing. For instance, while the confidence interval <code>CI</code>
+appears as one column, it this actually made of three columns! One can
+access this <em>raw</em> table as a dataframe:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span></span>
+<span><span class="co">#   Difference   CI    CI_low   CI_high         t df_error</span></span>
+<span><span class="co"># 1  -7.244939 0.95 -11.28019 -3.209684 -3.767123 18.33225</span></span>
+<span><span class="co">#             p Alternative         d</span></span>
+<span><span class="co"># 1 0.001373638   two.sided -1.759673</span></span></code></pre></div>
+<p>In fact, the function used to <em>prettify</em> the output is called
+<code>format_table()</code> and is accessible to you too, so that you
+can prettify the output while keeping it as a dataframe.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">format_table</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span>, stars<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#   Difference          95% CI t(18.33)       p Alternative</span></span>
+<span><span class="co"># 1      -7.24 [-11.28, -3.21]    -3.77 0.001**   two.sided</span></span>
+<span><span class="co">#       d</span></span>
+<span><span class="co"># 1 -1.76</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="regression-models">Regression Models<a class="anchor" aria-label="anchor" href="#regression-models"></a>
 </h2>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Petal.Length</span> <span class="op">~</span> <span class="va">Species</span> <span class="op">*</span> <span class="va">Petal.Width</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/report_table.html">report_table</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
