@@ -5,7 +5,8 @@ articles:
   cite_packages: cite_packages.html
   new_models: new_models.html
   report: report.html
-last_built: 2022-10-09T18:53Z
+  report_table: report_table.html
+last_built: 2022-10-10T05:41Z
 urls:
   reference: https://easystats.github.io/report/reference
   article: https://easystats.github.io/report/articles
