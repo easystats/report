@@ -152,9 +152,6 @@ will run it.</p></dd>
 <span class="r-in"><span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html" class="external-link">stan_glm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span>, refresh <span class="op">=</span> <span class="fl">0</span>, iter <span class="op">=</span> <span class="fl">600</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu">report_model</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> Running the chains for more iterations may help. See</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#bulk-ess</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bayesian linear model (estimated using MCMC sampling with 4 chains of 600 iterations and a warmup of 300) to predict Sepal.Length with Species (formula: Sepal.Length ~ Species). Priors over parameters were all set as normal (mean = 0.00, SD = 4.38) distributions</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
