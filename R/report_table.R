@@ -145,6 +145,13 @@ c.report_table <- function(...) {
 }
 
 
+#' @export
+display.report_table <- function(object, ...) {
+  class(object) <- c("report_table", "parameters_model", "data.frame")
+  NextMethod()
+}
+
+
 # helper to create table captions and footer -----------------------
 
 .report_table_caption <- function(x) {
@@ -185,3 +192,10 @@ c.report_table <- function(...) {
 
   footer
 }
+
+
+# Reexports models ------------------------
+
+#' @importFrom insight display
+#' @export
+insight::display
