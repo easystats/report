@@ -35,7 +35,7 @@
   table_full <- cbind(table_full, attributes(effsize)$table)
   table <- datawizard::data_remove(
     table_full,
-    c("Parameter", "Group", "Mean_Group1", "Mean_Group2", "Method")
+    c("Parameter", "Group", "Mean_Group1", "Mean_Group2", "Method", "d_CI_low", "d_CI_high")
   )
   list(table = table, table_full = table_full)
 }

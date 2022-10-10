@@ -75,13 +75,26 @@ display(t,
 
 ## *t*-tests, ...
 
+It works similarly for *t*-tests.
+
 ```{r}
 results <- t.test(mpg ~ am, data=mtcars)
 
-t <- report_table(results)
+t <- summary(report_table(results))
 t
 ```
 
+Note that, by default, `report_table()` prettifies the printing: that means that the column names and its content is, underneath, not necessarily what is printed, which can be a bit confusing. For instance, while the confidence interval `CI` appears as one column, it this actually made of three columns! One can access this *raw* table as a dataframe:
+
+```{r}
+as.data.frame(t)
+```
+
+You can also prettify the output by keeping it as a dataframe:
+
+```{r}
+format_table(as.data.frame(t))
+```
 
 
 ## Regression Models
