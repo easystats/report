@@ -122,6 +122,7 @@ format.report_table <- function(x, ...) {
   insight::format_table(x, ...)
 }
 
+
 #' @export
 print.report_table <- function(x, ...) {
   # try to guess appropriate caption and footer
@@ -132,13 +133,12 @@ print.report_table <- function(x, ...) {
 }
 
 
-
 #' @export
 c.report_table <- function(...) {
   x <- list(...)
 
   out <- x[[1]]
-  for(i in 2:length(x)) {
+  for (i in 2:length(x)) {
     out <- datawizard::data_join(out, x[[i]], join = "bind")
   }
   out
@@ -147,6 +147,10 @@ c.report_table <- function(...) {
 
 #' @export
 display.report_table <- function(object, ...) {
+  # fix caption
+  if (is.null(list(...)$caption)) {
+    attr(object, "no_caption") <- TRUE
+  }
   class(object) <- c("report_table", "parameters_model", "data.frame")
   NextMethod()
 }
