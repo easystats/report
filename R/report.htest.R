@@ -101,7 +101,8 @@ report_effectsize.htest <- function(x, ...) {
 #' @export
 report_table.htest <- function(x, ...) {
   dot_args <- list(...)
-  if (is.null(model_info <- dot_args$model_info)) {
+  model_info <- dot_args$model_info
+  if (is.null(model_info)) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
   }
 
@@ -122,6 +123,8 @@ report_table.htest <- function(x, ...) {
   } else if (model_info$is_chi2test) {
     # chi2 test
     out <- .report_table_chi2(table_full, effsize)
+  } else if (model_info$is_correlation) {
+    out <- .report_table_correlation(table_full)
   } else {
     out <- list(table_full = table_full, table = NULL)
   }

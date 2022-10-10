@@ -51,6 +51,7 @@ A convenient function for those who wish to cite the easystats packages.
 }
 \examples{
 
+\dontrun{
 # Cite just the 'easystats' umbrella package:
 cite_easystats()
 summary(cite_easystats(), what = "all")
@@ -70,5 +71,6 @@ print(cite_easystats(format = "markdown"), what = "intext")
 
 ## Bibliography (print with the  `output = 'asis'` option on the code chunk)
 print(cite_easystats(format = "markdown"), what = "refs")
+}
 
 }

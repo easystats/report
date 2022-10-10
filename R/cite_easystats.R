@@ -24,6 +24,7 @@
 #'
 #' @examples
 #'
+#' \dontrun{
 #' # Cite just the 'easystats' umbrella package:
 #' cite_easystats()
 #' summary(cite_easystats(), what = "all")
@@ -43,6 +44,7 @@
 #'
 #' ## Bibliography (print with the  `output = 'asis'` option on the code chunk)
 #' print(cite_easystats(format = "markdown"), what = "refs")
+#' }
 #'
 #' @export
 cite_easystats <- function(packages = "easystats", format = c("text", "markdown", "biblatex"), intext_prefix = TRUE, intext_suffix = ".") {

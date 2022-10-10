@@ -16,6 +16,14 @@
   list(text_short = text_short, text_full = text_full)
 }
 
+# report_table -----------------
+
+.report_table_correlation <- function(table_full) {
+  table <- datawizard::data_remove(table_full, c("t", "df_error"))
+  list(table = table, table_full = table_full)
+}
+
+
 
 # report_effectsize ---------------------
 

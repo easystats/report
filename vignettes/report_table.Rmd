@@ -1,0 +1,68 @@
+---
+title: "Publication-ready Tables"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    fig_width: 10.08
+    fig_height: 6
+tags: [r, report]
+vignette: >
+  %\VignetteIndexEntry{Publication-ready Tables}
+  \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  comment = "#"
+)
+
+options(
+  knitr.kable.NA = "",
+  width = 60
+)
+
+if (!requireNamespace("dplyr", quietly = TRUE)) {
+  knitr::opts_chunk$set(eval = FALSE)
+}
+```
+
+
+First, load the `{report}` package, part of the `{easystats}` collection.
+
+```{r}
+library(easystats)
+```
+
+## Regression Models
+
+```{r}
+model <- lm(Petal.Length ~ Species * Petal.Width, data = iris)
+
+report_table(model)
+```
+
+
+
+## *t*-test, correlations, ...
+
+```{r}
+results <- t.test(mpg ~ am, data=mtcars)
+
+report_table(results)
+
+summary(report_table(results))
+```
+
+```{r}
+results <- cor.test(mtcars$mpg, mtcars$wt)
+
+report_table(results)
+
+summary(report_table(results))
+```
