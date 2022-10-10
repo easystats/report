@@ -131,7 +131,6 @@ Collate:
     'report_sample.R'
     'report_statistics.R'
     'report_table.R'
-    'report_table_regression.R'
     'utils_error_message.R'
     'utils_grouped_df.R'
     'zzz.R'
