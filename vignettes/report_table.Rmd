@@ -96,8 +96,25 @@ In fact, the function used to *prettify* the output is called `format_table()` a
 format_table(as.data.frame(t), stars=TRUE)
 ```
 
+Also, you can join the results of multiple tables:
 
-## Regression Models
+```{r}
+results1 <- t.test(mpg ~ am, data=mtcars)
+results2 <- t.test(wt ~ am, data=mtcars)
+results3 <- t.test(qsec ~ am, data=mtcars)
+
+c(report_table(results1),
+  report_table(results2),
+  report_table(results3)) |> 
+  display()
+```
+
+
+## ANOVAs
+
+
+
+## Linear Models
 
 ```{r}
 model <- lm(Petal.Length ~ Species * Petal.Width, data = iris)

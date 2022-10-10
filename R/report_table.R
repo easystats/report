@@ -133,6 +133,17 @@ print.report_table <- function(x, ...) {
 
 
 
+#' @export
+c.report_table <- function(...) {
+  x <- list(...)
+
+  out <- x[[1]]
+  for(i in 2:length(x)) {
+    out <- datawizard::data_join(out, x[[i]], join = "bind")
+  }
+  out
+}
+
 
 # helper to create table captions and footer -----------------------
 
