@@ -39,7 +39,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.5.2</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.5.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -169,7 +169,6 @@ documents using <code><a href="https://easystats.github.io/insight/reference/dis
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://easystats.github.io/insight/reference/display.html" class="external-link">display</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
-<caption>Pearson’s product-moment correlation</caption>
 <thead><tr class="header">
 <th align="left">Parameter1</th>
 <th align="center">Parameter2</th>
@@ -251,11 +250,94 @@ can prettify the output while keeping it as a dataframe.</p>
 <span><span class="co"># 1      -7.24 [-11.28, -3.21]    -3.77 0.001**   two.sided</span></span>
 <span><span class="co">#       d</span></span>
 <span><span class="co"># 1 -1.76</span></span></code></pre></div>
+<p>Also, you can join the results of multiple tables:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">results1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">am</span>, data<span class="op">=</span><span class="va">mtcars</span><span class="op">)</span></span>
+<span><span class="va">results2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">wt</span> <span class="op">~</span> <span class="va">am</span>, data<span class="op">=</span><span class="va">mtcars</span><span class="op">)</span></span>
+<span><span class="va">results3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">qsec</span> <span class="op">~</span> <span class="va">am</span>, data<span class="op">=</span><span class="va">mtcars</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="../reference/report_table.html">report_table</a></span><span class="op">(</span><span class="va">results1</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="../reference/report_table.html">report_table</a></span><span class="op">(</span><span class="va">results2</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="../reference/report_table.html">report_table</a></span><span class="op">(</span><span class="va">results3</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://easystats.github.io/insight/reference/display.html" class="external-link">display</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="8%">
+<col width="5%">
+<col width="11%">
+<col width="11%">
+<col width="10%">
+<col width="14%">
+<col width="5%">
+<col width="5%">
+<col width="6%">
+<col width="5%">
+<col width="13%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Parameter</th>
+<th align="center">Group</th>
+<th align="center">Mean_Group1</th>
+<th align="center">Mean_Group2</th>
+<th align="center">Difference</th>
+<th align="center">95% CI</th>
+<th align="center">t</th>
+<th align="center">df</th>
+<th align="center">p</th>
+<th align="center">d</th>
+<th align="center">d CI</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">mpg</td>
+<td align="center">am</td>
+<td align="center">17.15</td>
+<td align="center">24.39</td>
+<td align="center">-7.24</td>
+<td align="center">(-11.28, -3.21)</td>
+<td align="center">-3.77</td>
+<td align="center">18.33</td>
+<td align="center">0.001</td>
+<td align="center">-1.76</td>
+<td align="center">(-2.82, -0.67)</td>
+</tr>
+<tr class="even">
+<td align="left">wt</td>
+<td align="center">am</td>
+<td align="center">3.77</td>
+<td align="center">2.41</td>
+<td align="center">1.36</td>
+<td align="center">(0.85, 1.86)</td>
+<td align="center">5.49</td>
+<td align="center">29.23</td>
+<td align="center">&lt; .001</td>
+<td align="center">2.03</td>
+<td align="center">(1.13, 2.91)</td>
+</tr>
+<tr class="odd">
+<td align="left">qsec</td>
+<td align="center">am</td>
+<td align="center">18.18</td>
+<td align="center">17.36</td>
+<td align="center">0.82</td>
+<td align="center">(-0.49, 2.14)</td>
+<td align="center">1.29</td>
+<td align="center">25.53</td>
+<td align="center">0.209</td>
+<td align="center">0.51</td>
+<td align="center">(-0.28, 1.29)</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section level2">
-<h2 id="regression-models">Regression Models<a class="anchor" aria-label="anchor" href="#regression-models"></a>
+<h2 id="anovas">ANOVAs<a class="anchor" aria-label="anchor" href="#anovas"></a>
 </h2>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+</div>
+<div class="section level2">
+<h2 id="linear-models">Linear Models<a class="anchor" aria-label="anchor" href="#linear-models"></a>
+</h2>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Petal.Length</span> <span class="op">~</span> <span class="va">Species</span> <span class="op">*</span> <span class="va">Petal.Width</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/report_table.html">report_table</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>

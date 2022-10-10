@@ -12,7 +12,7 @@ list of supported objects in report())."><meta property="og:image" content="http
     
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.5.2</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.5.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -130,7 +130,7 @@ objects above).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - rstanarm (version 2.21.3; Goodrich B et al., 2022)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - performance (version 0.10.0; Lüdecke D et al., 2021)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - bayestestR (version 0.13.0; Makowski D et al., 2019)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - report (version 0.5.5.2; Makowski D et al., 2021)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - report (version 0.5.5.3; Makowski D et al., 2021)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - R (version 4.2.1; R Core Team, 2022)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - lavaan (version 0.6.12; Rosseel Y, 2012)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - dplyr (version 1.0.10; Wickham H et al., 2022)</span>
@@ -141,7 +141,7 @@ objects above).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - rstanarm (v2.21.3)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - performance (v0.10.0)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - bayestestR (v0.13.0)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - report (v0.5.5.2)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - report (v0.5.5.3)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - R (v4.2.1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - lavaan (v0.6.12)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - dplyr (v1.0.10)</span>
@@ -240,9 +240,9 @@ objects above).</p></dd>
 <span class="r-in"><span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html" class="external-link">stan_glm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span>, refresh <span class="op">=</span> <span class="fl">0</span>, iter <span class="op">=</span> <span class="fl">600</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu">report_parameters</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The intercept (Median = 5.01, 95% CI [4.86, 5.15]) has a 100.00% probability of being positive (&gt; 0), 100.00% of being significant (&gt; 0.04), and 100.00% of being large (&gt; 0.25). The estimation successfully converged (Rhat = 1.000) but the indices are unreliable (ESS = 857)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of Species [versicolor] (Median = 0.93, 95% CI [0.71, 1.13]) has a 100.00% probability of being positive (&gt; 0), 100.00% of being significant (&gt; 0.04), and 100.00% of being large (&gt; 0.25). The estimation successfully converged (Rhat = 1.001) but the indices are unreliable (ESS = 966)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of Species [virginica] (Median = 1.58, 95% CI [1.36, 1.78]) has a 100.00% probability of being positive (&gt; 0), 100.00% of being significant (&gt; 0.04), and 100.00% of being large (&gt; 0.25). The estimation successfully converged (Rhat = 1.000) but the indices are unreliable (ESS = 977)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The intercept (Median = 5.00, 95% CI [4.86, 5.14]) has a 100.00% probability of being positive (&gt; 0), 100.00% of being significant (&gt; 0.04), and 100.00% of being large (&gt; 0.25). The estimation successfully converged (Rhat = 1.001) and the indices are reliable (ESS = 1034)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of Species [versicolor] (Median = 0.93, 95% CI [0.74, 1.12]) has a 100.00% probability of being positive (&gt; 0), 100.00% of being significant (&gt; 0.04), and 100.00% of being large (&gt; 0.25). The estimation successfully converged (Rhat = 1.001) and the indices are reliable (ESS = 1215)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of Species [virginica] (Median = 1.58, 95% CI [1.40, 1.80]) has a 100.00% probability of being positive (&gt; 0), 100.00% of being significant (&gt; 0.04), and 100.00% of being large (&gt; 0.25). The estimation successfully converged (Rhat = 1.000) and the indices are reliable (ESS = 1116)</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
