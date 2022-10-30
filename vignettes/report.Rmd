@@ -30,9 +30,10 @@ options(
 
 if (!requireNamespace("dplyr", quietly = TRUE)) {
   knitr::opts_chunk$set(eval = FALSE)
+} else {
+  library(dplyr, warn.conflicts = FALSE)
 }
 
-library(dplyr, warn.conflicts = FALSE)
 library(report)
 ```
 
