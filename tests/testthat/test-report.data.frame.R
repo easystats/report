@@ -81,6 +81,8 @@ test_that("report.data.frame - with NAs", {
 })
 
 test_that("report.data.frame - with list columns", {
+  skip_if_not_installed("dplyr")
+
   set.seed(123)
-  expect_snapshot(variant = .Platform$OS.type, report(starwars))
+  expect_snapshot(variant = .Platform$OS.type, report(dplyr::starwars))
 })
