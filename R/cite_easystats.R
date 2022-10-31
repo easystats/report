@@ -339,7 +339,7 @@ print.cite_easystats <- function(x, what = "all", ...) {
     stop("`x` must be a logical vector.", call. = FALSE)
   }
   count <- sum(x)
-  x[x == FALSE] <- ""
+  x[!x] <- ""
   x[x != ""] <- letters[seq_len(count)]
   x
 }

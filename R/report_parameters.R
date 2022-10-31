@@ -210,7 +210,7 @@ print.report_parameters <- function(x, ...) {
     text <- ""
   }
 
-  if (only_when_insufficient == FALSE) {
+  if (!only_when_insufficient) {
     text
   } else {
     ifelse(convergence != "converged" | stability != "sufficient", text, "")

@@ -32,7 +32,7 @@ report_table.factor <- function(x, levels_percentage = "auto", ...) {
 
   # Shorten
   table <- table_full
-  if (levels_percentage == FALSE) {
+  if (!levels_percentage) {
     table <- datawizard::data_remove(table, "percentage_Obs")
   }
 

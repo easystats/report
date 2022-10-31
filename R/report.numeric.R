@@ -87,13 +87,13 @@ report_table.numeric <- function(x,
   # Centrality and dispersion
   if (!isFALSE(centrality) && !is.null(centrality)) {
     if (centrality == "median") {
-      if (dispersion == TRUE) {
+      if (dispersion) {
         table <- datawizard::data_remove(table, c("Mean", "SD"))
       } else {
         table <- datawizard::data_remove(table, c("Mean", "SD", "MAD"))
       }
     } else {
-      if (dispersion == TRUE) {
+      if (dispersion) {
         table <- datawizard::data_remove(table, c("Median", "MAD"))
       } else {
         table <- datawizard::data_remove(table, c("Median", "MAD", "SD"))
@@ -102,18 +102,18 @@ report_table.numeric <- function(x,
   }
 
   # Range
-  if (range == FALSE) {
+  if (!range) {
     table <- datawizard::data_remove(table, c("Min", "Max"))
   }
 
   # Distribution
-  if (distribution == FALSE) {
+  if (!distribution) {
     table <- datawizard::data_remove(table, c("Skewness", "Kurtosis"))
   }
 
   # Missing
   if (!is.null(missing_percentage)) {
-    if (missing_percentage == TRUE) {
+    if (missing_percentage) {
       table <- datawizard::data_remove(table, "n_Missing")
       table_full <- datawizard::data_remove(table_full, "n_Missing")
     } else {
@@ -181,7 +181,7 @@ report_parameters.numeric <- function(x,
 
   # Missing
   if (!is.null(missing_percentage)) {
-    if (missing_percentage == TRUE) {
+    if (missing_percentage) {
       n_missing <- table$percentage_Missing[1]
       text_missing <- paste0(insight::format_value(table$percentage_Missing[1], protect_integers = TRUE, digits = digits), "% missing")
     } else {
@@ -214,12 +214,12 @@ report_parameters.numeric <- function(x,
   if (!isFALSE(centrality) && !is.null(centrality)) {
     if (centrality == "median") {
       text <- text[!names(text) %in% c("Mean", "Dispersion_Mean")]
-      if (dispersion == FALSE) {
+      if (!dispersion) {
         text <- text[!names(text) %in% c("Dispersion_Median")]
       }
     } else {
       text <- text[!names(text) %in% c("Median", "Dispersion_Median")]
-      if (dispersion == FALSE) {
+      if (!dispersion) {
         text <- text[!names(text) %in% c("Dispersion_Mean")]
       }
     }
@@ -228,12 +228,12 @@ report_parameters.numeric <- function(x,
   }
 
   # Range
-  if (range == FALSE) {
+  if (!range) {
     text <- text[!names(text) %in% c("Range")]
   }
 
   # Distribution
-  if (distribution == FALSE) {
+  if (!distribution) {
     text <- text[!names(text) %in% c("Skewness", "Kurtosis")]
   }
 

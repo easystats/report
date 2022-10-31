@@ -50,7 +50,6 @@ A list of class \code{"cite_easystats"} with elements:
 A convenient function for those who wish to cite the easystats packages.
 }
 \examples{
-
 \dontrun{
 # Cite just the 'easystats' umbrella package:
 cite_easystats()

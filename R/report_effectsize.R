@@ -119,21 +119,21 @@ print.report_effectsize <- function(x, ...) {
   two_sd <- attributes(x)$two_sd
 
   if (method == "refit") {
-    if (robust == TRUE) {
+    if (robust) {
       text <- "(using the median and the MAD, a robust equivalent of the SD) "
     } else {
       text <- ""
     }
     text <- paste0("Standardized parameters were obtained by fitting the model on a standardized version ", text, "of the dataset.")
   } else if (method == "2sd") {
-    if (robust == TRUE) {
+    if (robust) {
       text <- "MAD (a median-based equivalent of the SD) "
     } else {
       text <- "SD "
     }
     text <- paste0("Standardized parameters were obtained by standardizing the data by 2 times the ", text, " (see Gelman, 2008).")
   } else if (method %in% c("smart", "basic", "posthoc")) {
-    if (robust == TRUE) {
+    if (robust) {
       text <- "median and the MAD (a median-based equivalent of the SD) of the response variable."
     } else {
       text <- "mean and the SD of the response variable."
