@@ -67,10 +67,11 @@ We can further customize this table, by adding significance stars,
 
 
 ```{r, results='asis'}
-display(t, 
-        stars = TRUE,
-        title = "Table 1", 
-        footer = "Correlation in the mtcars (n = 32) dataset.\n*** p < .001")
+display(t,
+  stars = TRUE,
+  title = "Table 1",
+  footer = "Correlation in the mtcars (n = 32) dataset.\n*** p < .001"
+)
 ```
 
 ## *t*-tests, ...
@@ -78,7 +79,7 @@ display(t,
 It works similarly for *t*-tests.
 
 ```{r}
-results <- t.test(mpg ~ am, data=mtcars)
+results <- t.test(mpg ~ am, data = mtcars)
 
 t <- summary(report_table(results))
 t
@@ -93,19 +94,21 @@ as.data.frame(t)
 In fact, the function used to *prettify* the output is called `format_table()` and is accessible to you too, so that you can prettify the output while keeping it as a dataframe.
 
 ```{r}
-format_table(as.data.frame(t), stars=TRUE)
+format_table(as.data.frame(t), stars = TRUE)
 ```
 
 Also, you can join the results of multiple tables:
 
 ```{r}
-results1 <- t.test(mpg ~ am, data=mtcars)
-results2 <- t.test(wt ~ am, data=mtcars)
-results3 <- t.test(qsec ~ am, data=mtcars)
+results1 <- t.test(mpg ~ am, data = mtcars)
+results2 <- t.test(wt ~ am, data = mtcars)
+results3 <- t.test(qsec ~ am, data = mtcars)
 
-c(report_table(results1),
+c(
+  report_table(results1),
   report_table(results2),
-  report_table(results3)) |> 
+  report_table(results3)
+) |>
   display()
 ```
 

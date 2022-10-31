@@ -23,7 +23,6 @@
 #'   - `refs`: References or bibliography in the requested `format`
 #'
 #' @examples
-#'
 #' \dontrun{
 #' # Cite just the 'easystats' umbrella package:
 #' cite_easystats()
@@ -300,15 +299,15 @@ summary.cite_easystats <- function(object, what = "all", ...) {
   )
   if (what == "all") {
     insight::print_colour("\nCitations\n----------\n\n", "blue")
-    cat(strwrap(object$intext, exdent = 0, width = .95 * getOption("width")), sep = "\n")
+    cat(strwrap(object$intext, exdent = 0, width = 0.95 * getOption("width")), sep = "\n")
     cat("\n")
     insight::print_colour("\nReferences\n----------\n\n", "blue")
-    cat(unlist(lapply(object$refs, strwrap, exdent = 4, width = .95 * getOption("width"))), sep = "\n")
+    cat(unlist(lapply(object$refs, strwrap, exdent = 4, width = 0.95 * getOption("width"))), sep = "\n")
     cat("\n")
   } else if (what == "intext") {
-    cat(strwrap(object$intext, exdent = 0, width = .95 * getOption("width")), sep = "\n")
+    cat(strwrap(object$intext, exdent = 0, width = 0.95 * getOption("width")), sep = "\n")
   } else if (what == "refs") {
-    cat(unlist(lapply(object$refs, strwrap, exdent = 4, width = .95 * getOption("width"))), sep = "\n")
+    cat(unlist(lapply(object$refs, strwrap, exdent = 4, width = 0.95 * getOption("width"))), sep = "\n")
   }
 }
 
