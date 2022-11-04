@@ -1,8 +1,4 @@
 test_that("report.htest-t-test", {
-  # TODO: remove once you figure out why there is a discrepancy between local
-  # snapshot and CI snapshot
-  skip_on_ci()
-
   # two samples unpaired t-tests summaries ---------------------
 
   set.seed(123)
@@ -27,10 +23,16 @@ test_that("report.htest-t-test", {
   expect_snapshot(variant = .Platform$OS.type, report(t.test(iris$Sepal.Width, mu = 1)))
 
   set.seed(123)
-  expect_snapshot(variant = .Platform$OS.type, report(t.test(iris$Sepal.Width, mu = -1, alternative = "l")))
+  expect_snapshot(variant = .Platform$OS.type, report(t.test(
+    iris$Sepal.Width,
+    mu = -1, alternative = "l"
+  )))
 
   set.seed(123)
-  expect_snapshot(variant = .Platform$OS.type, report(t.test(iris$Sepal.Width, mu = 5, alternative = "g")))
+  expect_snapshot(variant = .Platform$OS.type, report(t.test(
+    iris$Sepal.Width,
+    mu = 5, alternative = "g"
+  )))
 
   # two-sample unpaired t-test ---------------------
 
@@ -60,6 +62,9 @@ test_that("report.htest-t-test", {
   if (getRversion() > "4.0") {
     sleep2 <- reshape(sleep, direction = "wide", idvar = "ID", timevar = "group")
     set.seed(123)
-    expect_snapshot(variant = .Platform$OS.type, report(t.test(Pair(extra.1, extra.2) ~ 1, data = sleep2)))
+    expect_snapshot(
+      variant = .Platform$OS.type,
+      report(t.test(Pair(extra.1, extra.2) ~ 1, data = sleep2))
+    )
   }
 })

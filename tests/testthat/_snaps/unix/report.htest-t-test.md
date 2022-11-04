@@ -39,7 +39,8 @@
     Code
       report(t.test(formula = wt ~ am, data = mtcars))
     Warning <simpleWarning>
-      Unable to retrieve data from htest object. Using t_to_d() approximation.
+      Unable to retrieve data from htest object. Returning an approximate
+        effect size using t_to_d().
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
@@ -53,7 +54,8 @@
     Code
       report(t.test(formula = wt ~ am, data = mtcars, alternative = "l"))
     Warning <simpleWarning>
-      Unable to retrieve data from htest object. Using t_to_d() approximation.
+      Unable to retrieve data from htest object. Returning an approximate
+        effect size using t_to_d().
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
@@ -67,7 +69,8 @@
     Code
       report(t.test(formula = wt ~ am, data = mtcars, alternative = "g"))
     Warning <simpleWarning>
-      Unable to retrieve data from htest object. Using t_to_d() approximation.
+      Unable to retrieve data from htest object. Returning an approximate
+        effect size using t_to_d().
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
@@ -81,7 +84,8 @@
     Code
       report(t.test(x, y, paired = TRUE, data = mtcars))
     Warning <simpleWarning>
-      Unable to retrieve data from htest object. Using t_to_d() approximation.
+      Unable to retrieve data from htest object. Returning an approximate
+        effect size using t_to_d().
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
@@ -95,7 +99,8 @@
     Code
       report(t.test(x, y, paired = TRUE, data = mtcars, alternative = "l"))
     Warning <simpleWarning>
-      Unable to retrieve data from htest object. Using t_to_d() approximation.
+      Unable to retrieve data from htest object. Returning an approximate
+        effect size using t_to_d().
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
@@ -109,7 +114,8 @@
     Code
       report(t.test(x, y, paired = TRUE, data = mtcars, alternative = "g"))
     Warning <simpleWarning>
-      Unable to retrieve data from htest object. Using t_to_d() approximation.
+      Unable to retrieve data from htest object. Returning an approximate
+        effect size using t_to_d().
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
@@ -123,7 +129,8 @@
     Code
       report(t.test(Pair(extra.1, extra.2) ~ 1, data = sleep2))
     Warning <simpleWarning>
-      Unable to retrieve data from htest object. Using t_to_d() approximation.
+      Unable to retrieve data from htest object. Returning an approximate
+        effect size using t_to_d().
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
