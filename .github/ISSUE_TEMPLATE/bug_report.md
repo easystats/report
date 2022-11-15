@@ -20,5 +20,5 @@ A clear and concise description of what you expected to happen.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
-**Specifiations (please complete the following information):**
+**Specifications (please complete the following information):**
  - Package Version [e.g. 0.2.1]
