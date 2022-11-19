@@ -178,7 +178,7 @@ objects above).</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># h-tests</span></span></span>
 <span class="r-in"><span><span class="fu">report_table</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">am</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Unable to retrieve data from htest object. Returning an approximate</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Unable to retrieve data from htest object. Returning an <span style="font-weight: bold;">approximate</span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>   effect size using t_to_d().</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Welch Two Sample t-test</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -186,7 +186,7 @@ objects above).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------------------------------------------------------------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mpg       |    am |       17.15 |       24.39 |      -7.24 | [-11.28, -3.21] |    -3.77 | 0.001 | -1.76 | [-2.82, -0.67]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Alternative hypothesis: two.sided</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Alternative hypothesis: two.sided</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># ANOVAs</span></span></span>
 <span class="r-in"><span><span class="fu">report_table</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html" class="external-link">aov</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span><span class="op">)</span></span></span>
@@ -250,14 +250,14 @@ objects above).</p></dd>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Parameter         | Median |       95% CI |   pd |  Rhat |     ESS |                 Prior | Std. Median | Std_Median 95% CI |     Fit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------------------------------------------------------------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)       |   5.00 | [4.86, 5.15] | 100% | 1.001 | 1084.00 | Normal (5.84 +- 2.07) |        0.00 |      [0.00, 0.00] |        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Speciesversicolor |   0.94 | [0.73, 1.15] | 100% | 1.001 | 1054.00 | Normal (0.00 +- 4.38) |        0.54 |      [0.42, 0.66] |        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Speciesvirginica  |   1.59 | [1.37, 1.78] | 100% | 1.000 | 1082.00 | Normal (0.00 +- 4.38) |        0.91 |      [0.79, 1.02] |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)       |   5.01 | [4.87, 5.15] | 100% | 1.003 |  852.00 | Normal (5.84 +- 2.07) |        0.00 |      [0.00, 0.00] |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Speciesversicolor |   0.93 | [0.70, 1.14] | 100% | 1.001 | 1008.00 | Normal (0.00 +- 4.38) |        0.53 |      [0.40, 0.65] |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Speciesvirginica  |   1.58 | [1.38, 1.78] | 100% | 1.002 |  893.00 | Normal (0.00 +- 4.38) |        0.90 |      [0.79, 1.02] |        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   |        |              |      |       |         |                       |             |                   |        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ELPD              |        |              |      |       |         |                       |             |                   | -115.67</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> LOOIC             |        |              |      |       |         |                       |             |                   |  231.34</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> WAIC              |        |              |      |       |         |                       |             |                   |  231.30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R2                |        |              |      |       |         |                       |             |                   |    0.62</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ELPD              |        |              |      |       |         |                       |             |                   | -116.09</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> LOOIC             |        |              |      |       |         |                       |             |                   |  232.18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> WAIC              |        |              |      |       |         |                       |             |                   |  232.16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2                |        |              |      |       |         |                       |             |                   |    0.61</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> R2 (adj.)         |        |              |      |       |         |                       |             |                   |    0.61</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Sigma             |        |              |      |       |         |                       |             |                   |    0.52</span>
 <span class="r-in"><span></span></span>
