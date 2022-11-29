@@ -182,7 +182,7 @@ aov(Sepal.Length ~ Species, data = iris) %>%
     # 
     # Effect sizes were labelled following Field's (2013) recommendations.
 
-### General Linear Models (GLMs)
+### Generalized Linear Models (GLMs)
 
 Reports are also compatible with GLMs, such as this **logistic
 regression**:
