@@ -148,7 +148,7 @@ aov(Sepal.Length ~ Species, data = iris) %>%
   print(width = 80)
 ```
 
-### General Linear Models (GLMs)
+### Generalized Linear Models (GLMs)
 
 Reports are also compatible with GLMs, such as this **logistic regression**:
 
