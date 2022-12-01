@@ -58,7 +58,7 @@ report_table.character <- function(x,
   table_full$percentage_Missing <- table_full$n_Missing / table_full$n_Obs * 100
   table <- table_full
 
-  if (missing_percentage) {
+  if (isTRUE(missing_percentage)) {
     table <- datawizard::data_remove(table, "n_Missing")
   } else {
     table <- datawizard::data_remove(table, "percentage_Missing")
@@ -158,7 +158,7 @@ report_text.character <- function(x,
   # Missing
   text_n_Missing <- paste0(table$n_Missing[1], " missing")
   text_percentage_Missing <- paste0(insight::format_value(table$percentage_Missing[1]), "% missing")
-  if (missing_percentage) {
+  if (isTRUE(missing_percentage)) {
     text_full <- paste0(text_full, "(", text_percentage_Missing, ")")
     if (table$n_Missing[1] > 0) {
       text <- paste0(text, " (", text_percentage_Missing, ")")

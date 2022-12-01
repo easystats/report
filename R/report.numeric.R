@@ -113,7 +113,7 @@ report_table.numeric <- function(x,
 
   # Missing
   if (!is.null(missing_percentage)) {
-    if (missing_percentage) {
+    if (isTRUE(missing_percentage)) {
       table <- datawizard::data_remove(table, "n_Missing")
       table_full <- datawizard::data_remove(table_full, "n_Missing")
     } else {
@@ -181,7 +181,7 @@ report_parameters.numeric <- function(x,
 
   # Missing
   if (!is.null(missing_percentage)) {
-    if (missing_percentage) {
+    if (isTRUE(missing_percentage)) {
       n_missing <- table$percentage_Missing[1]
       text_missing <- paste0(insight::format_value(table$percentage_Missing[1], protect_integers = TRUE, digits = digits), "% missing")
     } else {
