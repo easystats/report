@@ -39,3 +39,28 @@ test_that("report_participants", {
   expect_snapshot(report_participants(data4, education = "Education2"))
   expect_snapshot(report_participants(data4, threshold = 15))
 })
+
+test_that("report_participants test NAs no warning", {
+
+  data <- data.frame(
+    "Age" = c(22, 23, 54, 21, 8, 42),
+    "Sex" = (c("Intersex", "F", "M", "M", "NA", NA)),
+    "Gender" = (c("N", "W", "W", "M", "NA", NA)),
+    "Country" = (c("USA", NA, "Canada", "Canada", "India", "Germany")),
+    "Education" = factor(c(0, 8, -3, -5, 3, 5)),
+    "Race" = c(LETTERS[1:5], NA)
+  )
+  expect_silent(report_participants(data))
+
+  data <- data.frame(
+    "Age" = factor(c(22, 23, 54, 21, 8, 42)),
+    "Sex" = factor(c("Intersex", "F", "M", "M", "NA", NA)),
+    "Gender" = factor(c("N", "W", "W", "M", "NA", NA)),
+    "Country" = factor(c("USA", NA, "Canada", "Canada", "India", "Germany")),
+    "Education" = factor(c(0, 8, -3, -5, 3, 5)),
+    "Race" = factor(c(LETTERS[1:5], NA))
+  )
+  expect_silent(report_participants(data, age = "Age", sex = "Sex"))
+
+})
+

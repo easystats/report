@@ -392,6 +392,7 @@ report_participants <- function(data,
   text_country <- if (all(is.na(data[[country]]))) {
     ""
   } else {
+    data[[country]] <- as.character(data[[country]])
     data[which(data[[country]] %in% c(NA, "NA")), country] <- "missing"
     frequency.table <- as.data.frame(datawizard::data_tabulate(data[[country]]))[c(2, 4)]
     names(frequency.table)[2] <- "Percent"
@@ -413,6 +414,7 @@ report_participants <- function(data,
   text_race <- if (all(is.na(data[[race]]))) {
     ""
   } else {
+    data[[race]] <- as.character(data[[race]])
     data[which(data[[race]] %in% c(NA, "NA")), race] <- "missing"
     frequency.table <- as.data.frame(datawizard::data_tabulate(data[[race]]))[c(2, 4)]
     names(frequency.table)[2] <- "Percent"
