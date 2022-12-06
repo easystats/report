@@ -50,7 +50,7 @@ test_that("report_participants test NAs no warning", {
     "Education" = factor(c(0, 8, -3, -5, 3, 5)),
     "Race" = c(LETTERS[1:5], NA)
   )
-  expect_silent(report_participants(data))
+  expect_snapshot(report_participants(data))
 
   data <- data.frame(
     "Age" = factor(c(22, 23, 54, 21, 8, 42)),
@@ -60,7 +60,7 @@ test_that("report_participants test NAs no warning", {
     "Education" = factor(c(0, 8, -3, -5, 3, 5)),
     "Race" = factor(c(LETTERS[1:5], NA))
   )
-  expect_silent(report_participants(data, age = "Age", sex = "Sex"))
+  expect_snapshot(report_participants(data, age = "Age", sex = "Sex"))
 
 })
 
