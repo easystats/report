@@ -93,7 +93,7 @@
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for bayesfactor_models</span></span>
-<span><span class="fu"><a href="report.html">report</a></span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://easystats.github.io/report/reference/report-package.html">report</a></span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
 <span>  interpretation <span class="op">=</span> <span class="st">"jeffreys1961"</span>,</span>
 <span>  exact <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -102,7 +102,7 @@
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for bayesfactor_inclusion</span></span>
-<span><span class="fu"><a href="report.html">report</a></span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://easystats.github.io/report/reference/report-package.html">report</a></span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
 <span>  interpretation <span class="op">=</span> <span class="st">"jeffreys1961"</span>,</span>
 <span>  exact <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -140,7 +140,7 @@ scientific format (e.g., 4.24e5), or as truncated values (as "&gt; 1000" and
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>An object of class <code><a href="report.html">report()</a></code>.</p>
+<p>An object of class <code><a href="https://easystats.github.io/report/reference/report-package.html">report()</a></code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -177,14 +177,14 @@ scientific format (e.g., 4.24e5), or as truncated values (as "&gt; 1000" and
 <span class="r-in"><span>  <span class="co"># Bayes factor - models</span></span></span>
 <span class="r-in"><span>  <span class="va">BFmodels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/bayesfactor_models.html" class="external-link">bayesfactor_models</a></span><span class="op">(</span><span class="va">mo1</span>, <span class="va">mo2</span>, <span class="va">mo3</span>, denominator <span class="op">=</span> <span class="va">mo0</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="va">BFmodels</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/report/reference/report-package.html">report</a></span><span class="op">(</span><span class="va">BFmodels</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">r</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># Bayes factor - inclusion</span></span></span>
 <span class="r-in"><span>  <span class="va">inc_bf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/bayesfactor_inclusion.html" class="external-link">bayesfactor_inclusion</a></span><span class="op">(</span><span class="va">BFmodels</span>, prior_odds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, match_models <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="va">inc_bf</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/report/reference/report-package.html">report</a></span><span class="op">(</span><span class="va">inc_bf</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">r</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>

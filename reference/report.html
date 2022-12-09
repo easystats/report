@@ -126,14 +126,14 @@ class:</p><ul><li><p><a href="report.sessionInfo.html">System and packages</a> (
 <li><p><a href="report.bayesfactor_models.html">Bayes factors</a> (from <code>bayestestR</code>)</p></li>
 <li><p><a href="report.lavaan.html">Structural Equation Models (SEM)</a> (from <code>lavaan</code>)</p></li>
 <li><p><a href="report.compare_performance.html">Model comparison</a> (from <code><a href="https://easystats.github.io/performance/reference/compare_performance.html" class="external-link">performance()</a></code>)</p></li>
-</ul><p>Most of the time, the object created by the <code>report()</code> function can be
+</ul><p>Most of the time, the object created by the <code><a href="https://easystats.github.io/report/reference/report-package.html">report()</a></code> function can be
 further transformed, for instance summarized (using <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code>), or
 converted to a table (using <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code>).</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">report</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu"><a href="https://easystats.github.io/report/reference/report-package.html">report</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -161,7 +161,7 @@ well as a short and long table of parameters and fit indices.</p>
 <div class="section">
 <h3 id="organization">Organization<a class="anchor" aria-label="anchor" href="#organization"></a></h3>
 <p><code>report_table</code> and <code>report_text</code> are the two distal representations
-of a report, and are the two provided in <code>report()</code>. However,
+of a report, and are the two provided in <code><a href="https://easystats.github.io/report/reference/report-package.html">report()</a></code>. However,
 intermediate steps are accessible (depending on the object) via specific
 functions (e.g., <code>report_parameters</code>).</p>
 </div>
@@ -170,7 +170,7 @@ functions (e.g., <code>report_parameters</code>).</p>
 <h3 id="output">Output<a class="anchor" aria-label="anchor" href="#output"></a></h3>
 
 
-<p>The <code>report()</code> function generates a report-object that contain in itself
+<p>The <code><a href="https://easystats.github.io/report/reference/report-package.html">report()</a></code> function generates a report-object that contain in itself
 different representations (e.g., text, tables, plots). These different
 representations can be accessed via several functions, such as:</p><ul><li><p><strong><code>as.report_text(r)</code></strong>: Detailed text.</p></li>
 <li><p><strong><code>as.report_text(r, summary=TRUE)</code></strong>: Minimal text giving
@@ -211,7 +211,7 @@ identical.</p>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/report/">report</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">am</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">report</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/report/reference/report-package.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Unable to retrieve data from htest object. Returning an <span style="font-weight: bold;">approximate</span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>   effect size using t_to_d().</span>
 <span class="r-in"><span></span></span>

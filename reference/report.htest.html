@@ -96,7 +96,7 @@ etc.).</p>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for htest</span></span>
-<span><span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://easystats.github.io/report/reference/report-package.html">report</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for htest</span></span>
 <span><span class="fu"><a href="report_effectsize.html">report_effectsize</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
@@ -144,7 +144,7 @@ its re-computation.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>An object of class <code><a href="report.html">report()</a></code>.</p>
+<p>An object of class <code><a href="https://easystats.github.io/report/reference/report-package.html">report()</a></code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -171,7 +171,7 @@ its re-computation.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># t-tests</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://easystats.github.io/report/reference/report-package.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Effect sizes were labelled following Cohen's (1988) recommendations.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The Welch Two Sample t-test testing the difference between iris$Sepal.Width and</span>
@@ -179,7 +179,7 @@ its re-computation.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> is negative, statistically significant, and large (difference = -2.79, 95% CI</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [-2.94, -2.64], t(225.68) = -36.46, p &lt; .001; Cohen's d = -4.21, 95% CI [-4.66,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> -3.76])</span>
-<span class="r-in"><span><span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://easystats.github.io/report/reference/report-package.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Effect sizes were labelled following Cohen's (1988) recommendations.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The Two Sample t-test testing the difference between iris$Sepal.Width and</span>
@@ -187,7 +187,7 @@ its re-computation.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> is negative, statistically significant, and large (difference = -2.79, 95% CI</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [-2.94, -2.64], t(298) = -36.46, p &lt; .001; Cohen's d = -4.21, 95% CI [-4.61,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> -3.80])</span>
-<span class="r-in"><span><span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">mtcars</span><span class="op">$</span><span class="va">vs</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://easystats.github.io/report/reference/report-package.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">mtcars</span><span class="op">$</span><span class="va">vs</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Effect sizes were labelled following Cohen's (1988) recommendations.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The Welch Two Sample t-test testing the difference of mtcars$mpg by mtcars$vs</span>
@@ -195,7 +195,7 @@ its re-computation.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> negative, statistically significant, and large (difference = -7.94, 95% CI</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [-11.46, -4.42], t(22.72) = -4.67, p &lt; .001; Cohen's d = -1.70, 95% CI [-2.55,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> -0.82])</span>
-<span class="r-in"><span><span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">vs</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://easystats.github.io/report/reference/report-package.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">vs</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'y' is numeric but has only 2 unique values.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>   If this is a grouping variable, convert it to a factor.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Effect sizes were labelled following Cohen's (1988) recommendations.</span>
@@ -204,7 +204,7 @@ its re-computation.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> difference = 19.65) suggests that the effect is positive, statistically</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> significant, and large (difference = 19.65, 95% CI [17.60, 21.71], t(31) =</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 19.49, p &lt; .001; Cohen's d = 3.45, 95% CI [2.52, 4.36])</span>
-<span class="r-in"><span><span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span>, mu <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://easystats.github.io/report/reference/report-package.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span>, mu <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Effect sizes were labelled following Cohen's (1988) recommendations.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The One Sample t-test testing the difference between iris$Sepal.Width (mean =</span>
@@ -213,7 +213,7 @@ its re-computation.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> p &lt; .001; Cohen's d = 4.72, 95% CI [4.15, 5.27])</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Correlations</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://easystats.github.io/report/reference/report-package.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Effect sizes were labelled following Funder's (2019) recommendations.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The Pearson's product-moment correlation between iris$Sepal.Width and</span>
