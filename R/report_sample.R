@@ -18,6 +18,8 @@
 #'   `weight`.
 #' @param total Add a `Total` column.
 #' @param digits Number of decimals.
+#' @param n Logical, actual sample size used in the calculation of the
+#' reported descriptive statistics (i.e., without the missing values).
 #' @inheritParams report.data.frame
 #'
 #' @return A data frame of class `report_sample` with variable names and
@@ -29,6 +31,7 @@
 #' report_sample(iris[, 1:4])
 #' report_sample(iris, select = c("Sepal.Length", "Petal.Length", "Species"))
 #' report_sample(iris, group_by = "Species")
+#' report_sample(airquality, group_by = "Month", n = TRUE, total = FALSE)
 #' @export
 report_sample <- function(data,
                           group_by = NULL,
@@ -38,6 +41,7 @@ report_sample <- function(data,
                           weights = NULL,
                           total = TRUE,
                           digits = 2,
+                          n = FALSE,
                           ...) {
   variables <- colnames(data)
 
@@ -62,7 +66,7 @@ report_sample <- function(data,
   out <- if (isTRUE(grouping)) {
     result <- lapply(split(data[variables], factor(data[[group_by]])), function(x) {
       x[[group_by]] <- NULL
-      .generate_descriptive_table(x, centrality, weights, digits)
+      .generate_descriptive_table(x, centrality, weights, digits, n)
     })
     # remember values of first columns
     variable <- result[[1]]["Variable"]
@@ -81,9 +85,14 @@ report_sample <- function(data,
         total_data[setdiff(variables, group_by)],
         centrality,
         weights,
-        digits
+        digits,
+        n
       )[["Summary"]]
     )
+    # Remove Total column if need be
+    if (isFALSE(total)) {
+      final$Total <- NULL
+    }
     # add N to column name
     colnames(final)[ncol(final)] <- sprintf(
       "%s (n=%g)",
@@ -92,28 +101,17 @@ report_sample <- function(data,
     )
     final
   } else {
-    .generate_descriptive_table(data[variables], centrality, weights, digits)
+    .generate_descriptive_table(data[variables], centrality, weights, digits, n)
   }
-
-  # Remove Total column if need be
-  if (isFALSE(total)) {
-    out$Total <- NULL
-  }
-
 
   class(out) <- c("report_sample", class(out))
   out
 }
 
 
-
-
-
-
 # helper ------------------------
 
-
-.generate_descriptive_table <- function(x, centrality, weights, digits) {
+.generate_descriptive_table <- function(x, centrality, weights, digits, n = FALSE) {
   if (!is.null(weights)) {
     w <- x[[weights]]
     columns <- setdiff(colnames(x), weights)
@@ -128,53 +126,63 @@ report_sample <- function(data,
       column = cn,
       centrality = centrality,
       weights = w,
-      digits = digits
+      digits = digits,
+      n = n
     )
   }))
 }
 
 
-
-
-
-
 # create a "table row", i.e. a summary from a variable ------------------------
-
 
 .report_sample_row <- function(x, digits = 1, ...) {
   UseMethod(".report_sample_row")
 }
-
-
 
 .report_sample_row.numeric <- function(x,
                                        column,
                                        centrality = "mean",
                                        weights = NULL,
                                        digits = 1,
+                                       n = FALSE,
                                        ...) {
+
+  n_stat <- ifelse(n, paste0(", ", sum(!is.na(x))), "")
+
   .summary <- if (centrality == "mean") {
-    sprintf("%.*f (%.*f)", digits, .weighted_mean(x, weights), digits, .weighted_sd(x, weights))
+    sprintf("%.*f (%.*f)%s", digits, .weighted_mean(x, weights), digits, .weighted_sd(x, weights), n_stat)
   } else {
-    sprintf("%.*f (%.*f)", digits, .weighted_median(x, weights), digits, stats::mad(x, na.rm = TRUE))
+    sprintf("%.*f (%.*f)%s", digits, .weighted_median(x, weights), digits, stats::mad(x, na.rm = TRUE), n_stat)
   }
 
+  n.label <- ifelse(n, ", n", "")
   if (centrality == "mean") {
-    column <- sprintf("Mean %s (SD)", column)
+    column <- sprintf("Mean %s (SD)%s", column, n.label)
   } else {
-    column <- sprintf("Median %s (MAD)", column)
+    column <- sprintf("Median %s (MAD)%s", column, n.label)
   }
 
-  data.frame(
+  out <- data.frame(
     Variable = column,
     Summary = .summary,
     stringsAsFactors = FALSE
   )
+
+  # if(isTRUE(n)) {
+  #   out$n <- sum(!is.na(x))
+  # }
+
+  out
+
 }
 
 
 
-.report_sample_row.factor <- function(x, column, weights = NULL, digits = 1, ...) {
+.report_sample_row.factor <- function(x,
+                                      column,
+                                      weights = NULL,
+                                      digits = 1,
+                                      ...) {
   if (!is.null(weights)) {
     x[is.na(weights)] <- NA
     weights[is.na(x)] <- NA

@@ -13,6 +13,7 @@ report_sample(
   weights = NULL,
   total = TRUE,
   digits = 2,
+  n = FALSE,
   ...
 )
 }
@@ -40,6 +41,9 @@ weight-variable. Reported descriptive statistics will be weighted by
 \item{total}{Add a \code{Total} column.}
 
 \item{digits}{Number of decimals.}
+
+\item{n}{Logical, actual sample size used in the calculation of the
+reported descriptive statistics (i.e., without the missing values).}
 
 \item{...}{Arguments passed to or from other methods.}
 }
