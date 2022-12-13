@@ -101,6 +101,7 @@
 <span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  total <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  digits <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  n <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -147,6 +148,11 @@ weight-variable. Reported descriptive statistics will be weighted by
 <dd><p>Number of decimals.</p></dd>
 
 
+<dt>n</dt>
+<dd><p>Logical, actual sample size used in the calculation of the
+reported descriptive statistics (i.e., without the missing values).</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Arguments passed to or from other methods.</p></dd>
 
@@ -191,6 +197,16 @@ their related summary statistics.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mean Sepal.Width (SD)  |   3.43 (0.38) |       2.77 (0.31) |      2.97 (0.32) |   3.06 (0.44)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mean Petal.Length (SD) |   1.46 (0.17) |       4.26 (0.47) |      5.55 (0.55) |   3.76 (1.77)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mean Petal.Width (SD)  |   0.25 (0.11) |       1.33 (0.20) |      2.03 (0.27) |   1.20 (0.76)</span>
+<span class="r-in"><span><span class="fu">report_sample</span><span class="op">(</span><span class="va">airquality</span>, group_by <span class="op">=</span> <span class="st">"Month"</span>, n <span class="op">=</span> <span class="cn">TRUE</span>, total <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;"># Descriptive Statistics</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Variable             |            5 (n=31) |           6 (n=30) |           7 (n=31) |           8 (n=31) |   9 (n=30) (n=153)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mean Ozone (SD), n   |   23.62 (22.22), 26 |   29.44 (18.21), 9 |  59.12 (31.64), 26 |  59.96 (39.68), 26 |  31.45 (24.14), 29</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mean Solar.R (SD), n | 181.30 (115.08), 27 | 190.17 (92.88), 30 | 216.48 (80.57), 31 | 171.86 (76.83), 28 | 167.43 (79.12), 30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mean Wind (SD), n    |    11.62 (3.53), 31 |   10.27 (3.77), 30 |    8.94 (3.04), 31 |    8.79 (3.23), 31 |   10.18 (3.46), 30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mean Temp (SD), n    |    65.55 (6.85), 31 |   79.10 (6.60), 30 |   83.90 (4.32), 31 |   83.97 (6.59), 31 |   76.90 (8.36), 30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mean Day (SD), n     |    16.00 (9.09), 31 |   15.50 (8.80), 30 |   16.00 (9.09), 31 |   16.00 (9.09), 31 |   15.50 (8.80), 30</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
