@@ -60,4 +60,5 @@ library(report)
 report_sample(iris[, 1:4])
 report_sample(iris, select = c("Sepal.Length", "Petal.Length", "Species"))
 report_sample(iris, group_by = "Species")
+report_sample(airquality, group_by = "Month", n = TRUE, total = FALSE)
 }
