@@ -4,6 +4,12 @@ Breaking Changes
 
 - The minimum needed R version has been bumped to `3.6`.
 
+Minor changes
+
+* `report_sample` improvement
+  * Gains an `n` argument to also optionally include sample size.
+  * Fixes bug whereas the `total` parameter was not respected.
+
 # report 0.5.5
 
 BREAKING CHANGES

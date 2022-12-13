@@ -13,6 +13,7 @@ report_sample(
   weights = NULL,
   total = TRUE,
   digits = 2,
+  n = FALSE,
   ...
 )
 }
@@ -41,6 +42,9 @@ weight-variable. Reported descriptive statistics will be weighted by
 
 \item{digits}{Number of decimals.}
 
+\item{n}{Logical, actual sample size used in the calculation of the
+reported descriptive statistics (i.e., without the missing values).}
+
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{
@@ -56,4 +60,5 @@ library(report)
 report_sample(iris[, 1:4])
 report_sample(iris, select = c("Sepal.Length", "Petal.Length", "Species"))
 report_sample(iris, group_by = "Species")
+report_sample(airquality, group_by = "Month", n = TRUE, total = FALSE)
 }
