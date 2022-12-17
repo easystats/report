@@ -67,4 +67,43 @@ test_that("report.htest-t-test", {
       report(t.test(Pair(extra.1, extra.2) ~ 1, data = sleep2))
     )
   }
+
+  # type, rules ---------------------
+
+  x <- t.test(mtcars$mpg ~ mtcars$vs)
+  expect_snapshot(
+    variant = .Platform$OS.type,
+    report_effectsize(x))
+  expect_snapshot(
+    variant = .Platform$OS.type,
+    report_effectsize(x, type = "d"))
+  expect_snapshot(
+    variant = .Platform$OS.type,
+    report_effectsize(x, type = "g"))
+  expect_snapshot(
+    variant = .Platform$OS.type,
+    report_effectsize(x, rules = "cohen1988"))
+  expect_snapshot(
+    variant = .Platform$OS.type,
+    report_effectsize(x, rules = "cohen1988", type = "d"))
+  expect_snapshot(
+    variant = .Platform$OS.type,
+    report_effectsize(x, rules = "cohen1988", type = "g"))
+  expect_snapshot(
+    variant = .Platform$OS.type,
+    report_effectsize(x, rules = "sawilowsky2009"))
+  expect_snapshot(
+    variant = .Platform$OS.type,
+    report_effectsize(x, rules = "sawilowsky2009", type = "d"))
+  expect_snapshot(
+    variant = .Platform$OS.type,
+    report_effectsize(x, rules = "sawilowsky2009", type = "g"))
+  expect_snapshot(
+    variant = .Platform$OS.type,
+    report_effectsize(x, rules = "gignac2016"))
+  expect_snapshot(variant = .Platform$OS.type,
+                  report_effectsize(x, rules = "gignac2016", type = "d"))
+  expect_snapshot(
+    variant = .Platform$OS.type,
+    report_effectsize(x, rules = "gignac2016", type = "g"))
 })
