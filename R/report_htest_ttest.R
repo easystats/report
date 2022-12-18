@@ -80,7 +80,6 @@
     table = table, statistics = statistics, interpretation = interpretation,
     rules = rules, ci = ci, main = main
   )
-
 }
 
 

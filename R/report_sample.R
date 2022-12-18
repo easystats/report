@@ -146,7 +146,6 @@ report_sample <- function(data,
                                        digits = 1,
                                        n = FALSE,
                                        ...) {
-
   n_stat <- ifelse(n, paste0(", ", sum(!is.na(x))), "")
 
   .summary <- if (centrality == "mean") {
@@ -173,7 +172,6 @@ report_sample <- function(data,
   # }
 
   out
-
 }
 
 
