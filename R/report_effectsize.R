@@ -94,8 +94,12 @@ print.report_effectsize <- function(x, ...) {
         ifelse(interpretation == "sawilowsky2009", "Savilowsky's (2009)",
           ifelse(interpretation == "gignac2016", "Gignac's (2016)",
             ifelse(interpretation == "funder2019", "Funder's (2019)",
-              ifelse(interpretation == "chen2010", "Chen's (2010)",
-                ifelse(interpretation == "field2013", "Field's (2013)", interpretation)
+              ifelse(interpretation == "lovakov2021", "Lovakov's (2021)",
+                ifelse(interpretation == "evans1996", "Evans's (1996)",
+                  ifelse(interpretation == "chen2010", "Chen's (2010)",
+                    ifelse(interpretation == "field2013", "Field's (2013)", interpretation)
+                  )
+                )
               )
             )
           )
