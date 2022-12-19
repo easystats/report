@@ -1,4 +1,4 @@
-#' \code{report}
+#' \code{report-package}
 #'
 #' @title report: Automated Results Reporting as a Practical Tool to Improve
 #' Reproducibility and Methodological Best Practices Adoption
@@ -12,7 +12,7 @@
 #' and **quality** in results reporting.
 #'
 #' @docType package
-#' @aliases report report-package
+#' @aliases report-package
 #' @name report-package
 #' @keywords internal
 "_PACKAGE"

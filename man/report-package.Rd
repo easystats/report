@@ -4,7 +4,6 @@
 \name{report-package}
 \alias{report-package}
 \alias{_PACKAGE}
-\alias{report}
 \title{report: Automated Results Reporting as a Practical Tool to Improve
 Reproducibility and Methodological Best Practices Adoption}
 \description{
@@ -15,7 +14,7 @@ reports of models and data frames according to \strong{best practices} guideline
 and \strong{quality} in results reporting.
 }
 \details{
-\code{report}
+\code{report-package}
 }
 \seealso{
 Useful links:
