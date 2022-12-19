@@ -41,7 +41,6 @@ test_that("report_participants", {
 })
 
 test_that("report_participants test NAs no warning", {
-
   data <- data.frame(
     "Age" = c(22, 23, 54, 21, 8, 42),
     "Sex" = (c("Intersex", "F", "M", "M", "NA", NA)),
@@ -61,6 +60,4 @@ test_that("report_participants test NAs no warning", {
     "Race" = factor(c(LETTERS[1:5], NA))
   )
   expect_snapshot(report_participants(data, age = "Age", sex = "Sex"))
-
 })
-

@@ -19,7 +19,6 @@
     args <- list(table, rules = rules, dot_args)
     interpretation <- do.call(effectsize::interpret, args)$Interpretation
     rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
-
   } else if (grepl("given probabilities", x$method, fixed = TRUE)) {
 
   } else {
