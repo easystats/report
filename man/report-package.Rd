@@ -2,8 +2,8 @@
 % Please edit documentation in R/report-package.R
 \docType{package}
 \name{report-package}
-\alias{report}
 \alias{report-package}
+\alias{_PACKAGE}
 \title{report: Automated Results Reporting as a Practical Tool to Improve
 Reproducibility and Methodological Best Practices Adoption}
 \description{

@@ -12,6 +12,7 @@
 #' and **quality** in results reporting.
 #'
 #' @docType package
+#' @aliases report-package
 #' @name report-package
 #' @keywords internal
 "_PACKAGE"
