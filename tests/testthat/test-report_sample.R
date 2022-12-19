@@ -6,8 +6,10 @@ test_that("report_sample default", {
 
 test_that("report_sample n = TRUE", {
   expect_snapshot(report_sample(airquality, n = TRUE))
-  expect_equal(nchar(report_sample(airquality, n = TRUE)),
-               c(Variable = 131, Summary = 128))
+  expect_equal(
+    nchar(report_sample(airquality, n = TRUE)),
+    c(Variable = 131, Summary = 128)
+  )
   expect_snapshot(report_sample(mtcars, n = TRUE))
   expect_snapshot(report_sample(iris, n = TRUE))
 })
@@ -25,7 +27,6 @@ test_that("report_sample centrality", {
   expect_snapshot(report_sample(airquality, centrality = "median"))
   expect_snapshot(report_sample(mtcars, centrality = "median"))
   expect_snapshot(report_sample(iris, centrality = "median"))
-
 })
 
 test_that("report_sample select", {

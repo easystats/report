@@ -39,7 +39,8 @@
     Code
       report(t.test(formula = wt ~ am, data = mtcars))
     Warning <simpleWarning>
-      Unable to retrieve data from htest object. Using t_to_d() approximation.
+      Unable to retrieve data from htest object. Returning an approximate
+        effect size using t_to_d().
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
@@ -53,7 +54,8 @@
     Code
       report(t.test(formula = wt ~ am, data = mtcars, alternative = "l"))
     Warning <simpleWarning>
-      Unable to retrieve data from htest object. Using t_to_d() approximation.
+      Unable to retrieve data from htest object. Returning an approximate
+        effect size using t_to_d().
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
@@ -67,7 +69,8 @@
     Code
       report(t.test(formula = wt ~ am, data = mtcars, alternative = "g"))
     Warning <simpleWarning>
-      Unable to retrieve data from htest object. Using t_to_d() approximation.
+      Unable to retrieve data from htest object. Returning an approximate
+        effect size using t_to_d().
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
@@ -81,54 +84,166 @@
     Code
       report(t.test(x, y, paired = TRUE, data = mtcars))
     Warning <simpleWarning>
-      Unable to retrieve data from htest object. Using t_to_d() approximation.
+      Unable to retrieve data from htest object. Returning an approximate
+        effect size using t_to_d().
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
-      The Paired t-test testing the difference between x and y (mean of the
-      differences = 0.43) suggests that the effect is positive, statistically
-      significant, and large (difference = 0.43, 95% CI [0.10, 0.76], t(8) = 3.04, p
-      = 0.016; Cohen's d = 1.07, 95% CI [0.19, 1.92])
+      The Paired t-test testing the difference between x and y (mean difference =
+      0.43) suggests that the effect is positive, statistically significant, and
+      large (difference = 0.43, 95% CI [0.10, 0.76], t(8) = 3.04, p = 0.016; Cohen's
+      d = 1.07, 95% CI [0.19, 1.92])
 
 ---
 
     Code
       report(t.test(x, y, paired = TRUE, data = mtcars, alternative = "l"))
     Warning <simpleWarning>
-      Unable to retrieve data from htest object. Using t_to_d() approximation.
+      Unable to retrieve data from htest object. Returning an approximate
+        effect size using t_to_d().
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
-      The Paired t-test testing the difference between x and y (mean of the
-      differences = 0.43) suggests that the effect is positive, statistically not
-      significant, and large (difference = 0.43, 95% CI [-Inf, 0.70], t(8) = 3.04, p
-      = 0.992; Cohen's d = 1.07, 95% CI [-Inf, 1.77])
+      The Paired t-test testing the difference between x and y (mean difference =
+      0.43) suggests that the effect is positive, statistically not significant, and
+      large (difference = 0.43, 95% CI [-Inf, 0.70], t(8) = 3.04, p = 0.992; Cohen's
+      d = 1.07, 95% CI [-Inf, 1.77])
 
 ---
 
     Code
       report(t.test(x, y, paired = TRUE, data = mtcars, alternative = "g"))
     Warning <simpleWarning>
-      Unable to retrieve data from htest object. Using t_to_d() approximation.
+      Unable to retrieve data from htest object. Returning an approximate
+        effect size using t_to_d().
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
-      The Paired t-test testing the difference between x and y (mean of the
-      differences = 0.43) suggests that the effect is positive, statistically
-      significant, and large (difference = 0.43, 95% CI [0.17, Inf], t(8) = 3.04, p =
-      0.008; Cohen's d = 1.07, 95% CI [0.32, Inf])
+      The Paired t-test testing the difference between x and y (mean difference =
+      0.43) suggests that the effect is positive, statistically significant, and
+      large (difference = 0.43, 95% CI [0.17, Inf], t(8) = 3.04, p = 0.008; Cohen's d
+      = 1.07, 95% CI [0.32, Inf])
 
 ---
 
     Code
       report(t.test(Pair(extra.1, extra.2) ~ 1, data = sleep2))
     Warning <simpleWarning>
-      Unable to retrieve data from htest object. Using t_to_d() approximation.
+      Unable to retrieve data from htest object. Returning an approximate
+        effect size using t_to_d().
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
       The Paired t-test testing the difference between Pair(extra.1, extra.2) (mean
-      of the differences = -1.58) suggests that the effect is negative, statistically
+      difference = -1.58) suggests that the effect is negative, statistically
       significant, and large (difference = -1.58, 95% CI [-2.46, -0.70], t(9) =
       -4.06, p = 0.003; Cohen's d = -1.35, 95% CI [-2.23, -0.44])
+
+---
+
+    Code
+      report_effectsize(x)
+    Output
+      Effect sizes were labelled following Cohen's (1988) recommendations. 
+      
+      large (Cohen's d = -1.70, 95% CI [-2.55, -0.82])
+
+---
+
+    Code
+      report_effectsize(x, type = "d")
+    Output
+      Effect sizes were labelled following Cohen's (1988) recommendations. 
+      
+      large (Cohen's d = -1.70, 95% CI [-2.55, -0.82])
+
+---
+
+    Code
+      report_effectsize(x, type = "g")
+    Output
+      Effect sizes were labelled following Cohen's (1988) recommendations. 
+      
+      large (Hedges's g = -1.64, 95% CI [-2.46, -0.79])
+
+---
+
+    Code
+      report_effectsize(x, rules = "cohen1988")
+    Output
+      Effect sizes were labelled following Cohen's (1988) recommendations. 
+      
+      large (Cohen's d = -1.70, 95% CI [-2.55, -0.82])
+
+---
+
+    Code
+      report_effectsize(x, rules = "cohen1988", type = "d")
+    Output
+      Effect sizes were labelled following Cohen's (1988) recommendations. 
+      
+      large (Cohen's d = -1.70, 95% CI [-2.55, -0.82])
+
+---
+
+    Code
+      report_effectsize(x, rules = "cohen1988", type = "g")
+    Output
+      Effect sizes were labelled following Cohen's (1988) recommendations. 
+      
+      large (Hedges's g = -1.64, 95% CI [-2.46, -0.79])
+
+---
+
+    Code
+      report_effectsize(x, rules = "sawilowsky2009")
+    Output
+      Effect sizes were labelled following Savilowsky's (2009) recommendations. 
+      
+      very large (Cohen's d = -1.70, 95% CI [-2.55, -0.82])
+
+---
+
+    Code
+      report_effectsize(x, rules = "sawilowsky2009", type = "d")
+    Output
+      Effect sizes were labelled following Savilowsky's (2009) recommendations. 
+      
+      very large (Cohen's d = -1.70, 95% CI [-2.55, -0.82])
+
+---
+
+    Code
+      report_effectsize(x, rules = "sawilowsky2009", type = "g")
+    Output
+      Effect sizes were labelled following Savilowsky's (2009) recommendations. 
+      
+      very large (Hedges's g = -1.64, 95% CI [-2.46, -0.79])
+
+---
+
+    Code
+      report_effectsize(x, rules = "gignac2016")
+    Output
+      Effect sizes were labelled following Gignac's (2016) recommendations. 
+      
+      large (Cohen's d = -1.70, 95% CI [-2.55, -0.82])
+
+---
+
+    Code
+      report_effectsize(x, rules = "gignac2016", type = "d")
+    Output
+      Effect sizes were labelled following Gignac's (2016) recommendations. 
+      
+      large (Cohen's d = -1.70, 95% CI [-2.55, -0.82])
+
+---
+
+    Code
+      report_effectsize(x, rules = "gignac2016", type = "g")
+    Output
+      Effect sizes were labelled following Gignac's (2016) recommendations. 
+      
+      large (Hedges's g = -1.64, 95% CI [-2.46, -0.79])
 

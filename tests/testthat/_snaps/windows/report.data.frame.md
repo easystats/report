@@ -121,7 +121,7 @@
 # report.data.frame - with list columns
 
     Code
-      report(starwars)
+      report(dplyr::starwars)
     Output
       The data contains 87 observations of the following 11 variables:
       

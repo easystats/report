@@ -43,18 +43,21 @@
 
 # report_effectsize ---------------------
 
-.report_effectsize_ttest <- function(x, table, dot_args) {
+.report_effectsize_ttest <- function(x, table, dot_args, type, rules = "cohen1988") {
   args <- c(list(x), dot_args)
-  table <- do.call(effectsize::cohens_d, args)
+  table <- do.call(effectsize::effectsize, args)
   ci <- attributes(table)$ci
   estimate <- names(table)[1]
+  rules <- ifelse(is.null(dot_args$rules), rules, dot_args$rules)
 
-  args <- c(list(table[[estimate]]), dot_args)
-  interpretation <- do.call(effectsize::interpret_cohens_d, args)
+  args <- list(table, rules = rules, dot_args)
+  interpretation <- do.call(effectsize::interpret, args)$Interpretation
   rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
 
   if (estimate %in% c("d", "Cohens_d")) {
     main <- paste0("Cohen's d = ", insight::format_value(table[[estimate]]))
+  } else if (estimate %in% c("g", "Hedges_g")) {
+    main <- paste0("Hedges's g = ", insight::format_value(table[[estimate]]))
   } else {
     main <- paste0(estimate, " = ", insight::format_value(table[[estimate]]))
   }
