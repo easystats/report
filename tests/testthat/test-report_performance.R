@@ -50,22 +50,34 @@ if (require("testthat") && require("report")) {
     # Bayesian
     if (require("rstanarm")) {
       x <- stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 1000, seed = 333)
-      expect_snapshot(variant = .Platform$OS.type,
-                      report_performance(x))
-      expect_snapshot(variant = .Platform$OS.type,
-                      summary(report_performance(x)))
+      expect_snapshot(
+        variant = .Platform$OS.type,
+        report_performance(x)
+      )
+      expect_snapshot(
+        variant = .Platform$OS.type,
+        summary(report_performance(x))
+      )
 
       x <- stan_glm(vs ~ disp, data = mtcars, family = "binomial", refresh = 0, iter = 1000, seed = 333)
-      expect_snapshot(variant = .Platform$OS.type,
-                      report_performance(x))
-      expect_snapshot(variant = .Platform$OS.type,
-                      summary(report_performance(x)))
+      expect_snapshot(
+        variant = .Platform$OS.type,
+        report_performance(x)
+      )
+      expect_snapshot(
+        variant = .Platform$OS.type,
+        summary(report_performance(x))
+      )
 
       x <- stan_lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris, refresh = 0, iter = 1000, seed = 333)
-      expect_snapshot(variant = .Platform$OS.type,
-                      report_performance(x))
-      expect_snapshot(variant = .Platform$OS.type,
-                      summary(report_performance(x)))
+      expect_snapshot(
+        variant = .Platform$OS.type,
+        report_performance(x)
+      )
+      expect_snapshot(
+        variant = .Platform$OS.type,
+        summary(report_performance(x))
+      )
     }
   })
 }
