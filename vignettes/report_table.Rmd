@@ -104,12 +104,12 @@ results1 <- t.test(mpg ~ am, data = mtcars)
 results2 <- t.test(wt ~ am, data = mtcars)
 results3 <- t.test(qsec ~ am, data = mtcars)
 
-c(
+results <- c(
   report_table(results1),
   report_table(results2),
   report_table(results3)
-) |>
-  display()
+)
+display(results)
 ```
 
 
