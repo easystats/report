@@ -139,3 +139,111 @@
       significant, and large (difference = -1.58, 95% CI [-2.46, -0.70], t(9) =
       -4.06, p = 0.003; Cohen's d = -1.35, 95% CI [-2.23, -0.44])
 
+---
+
+    Code
+      report_effectsize(x)
+    Output
+      Effect sizes were labelled following Cohen's (1988) recommendations. 
+      
+      large (Cohen's d = -1.70, 95% CI [-2.55, -0.82])
+
+---
+
+    Code
+      report_effectsize(x, type = "d")
+    Output
+      Effect sizes were labelled following Cohen's (1988) recommendations. 
+      
+      large (Cohen's d = -1.70, 95% CI [-2.55, -0.82])
+
+---
+
+    Code
+      report_effectsize(x, type = "g")
+    Output
+      Effect sizes were labelled following Cohen's (1988) recommendations. 
+      
+      large (Hedges's g = -1.64, 95% CI [-2.46, -0.79])
+
+---
+
+    Code
+      report_effectsize(x, rules = "cohen1988")
+    Output
+      Effect sizes were labelled following Cohen's (1988) recommendations. 
+      
+      large (Cohen's d = -1.70, 95% CI [-2.55, -0.82])
+
+---
+
+    Code
+      report_effectsize(x, rules = "cohen1988", type = "d")
+    Output
+      Effect sizes were labelled following Cohen's (1988) recommendations. 
+      
+      large (Cohen's d = -1.70, 95% CI [-2.55, -0.82])
+
+---
+
+    Code
+      report_effectsize(x, rules = "cohen1988", type = "g")
+    Output
+      Effect sizes were labelled following Cohen's (1988) recommendations. 
+      
+      large (Hedges's g = -1.64, 95% CI [-2.46, -0.79])
+
+---
+
+    Code
+      report_effectsize(x, rules = "sawilowsky2009")
+    Output
+      Effect sizes were labelled following Savilowsky's (2009) recommendations. 
+      
+      very large (Cohen's d = -1.70, 95% CI [-2.55, -0.82])
+
+---
+
+    Code
+      report_effectsize(x, rules = "sawilowsky2009", type = "d")
+    Output
+      Effect sizes were labelled following Savilowsky's (2009) recommendations. 
+      
+      very large (Cohen's d = -1.70, 95% CI [-2.55, -0.82])
+
+---
+
+    Code
+      report_effectsize(x, rules = "sawilowsky2009", type = "g")
+    Output
+      Effect sizes were labelled following Savilowsky's (2009) recommendations. 
+      
+      very large (Hedges's g = -1.64, 95% CI [-2.46, -0.79])
+
+---
+
+    Code
+      report_effectsize(x, rules = "gignac2016")
+    Output
+      Effect sizes were labelled following Gignac's (2016) recommendations. 
+      
+      large (Cohen's d = -1.70, 95% CI [-2.55, -0.82])
+
+---
+
+    Code
+      report_effectsize(x, rules = "gignac2016", type = "d")
+    Output
+      Effect sizes were labelled following Gignac's (2016) recommendations. 
+      
+      large (Cohen's d = -1.70, 95% CI [-2.55, -0.82])
+
+---
+
+    Code
+      report_effectsize(x, rules = "gignac2016", type = "g")
+    Output
+      Effect sizes were labelled following Gignac's (2016) recommendations. 
+      
+      large (Hedges's g = -1.64, 95% CI [-2.46, -0.79])
+

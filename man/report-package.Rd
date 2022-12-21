@@ -4,7 +4,6 @@
 \name{report-package}
 \alias{report-package}
 \alias{_PACKAGE}
-\alias{report}
 \title{report: Automated Results Reporting as a Practical Tool to Improve
 Reproducibility and Methodological Best Practices Adoption}
 \description{
@@ -15,7 +14,7 @@ reports of models and data frames according to \strong{best practices} guideline
 and \strong{quality} in results reporting.
 }
 \details{
-\code{report}
+\code{report-package}
 }
 \seealso{
 Useful links:
@@ -34,6 +33,7 @@ Authors:
   \item Mattan S. Ben-Shachar \email{matanshm@post.bgu.ac.il} (\href{https://orcid.org/0000-0002-4287-4801}{ORCID}) (@mattansb)
   \item Indrajeet Patil \email{patilindrajeet.science@gmail.com} (\href{https://orcid.org/0000-0003-1995-6531}{ORCID}) (@patilindrajeets)
   \item Brenton M. Wiernik \email{brenton@wiernik.org} (\href{https://orcid.org/0000-0001-9560-6336}{ORCID}) (@bmwiernik)
+  \item Rémi Thériault \email{remi.theriault@mail.mcgill.ca} (\href{https://orcid.org/0000-0003-4315-6788}{ORCID}) (@rempsyc)
 }
 
 Other contributors:

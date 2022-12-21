@@ -10,6 +10,11 @@ Minor changes
   * Gains an `n` argument to also optionally include sample size.
   * Fixes bug whereas the `total` parameter was not respected.
 
+* `report_effectsize` improvement
+  * For `t.test` (htest) objects, now support the `type` (one of `c("d", "g")`) 
+    and `rules` (one of `c"cohen1988", "sawilowsky2009", "gignac2016")`)
+    arguments.
+
 # report 0.5.5
 
 BREAKING CHANGES
