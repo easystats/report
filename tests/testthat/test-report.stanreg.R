@@ -1,4 +1,4 @@
-if (require("testthat") && require("rstanarm")) {
+if (requiet("rstanarm")) {
   set.seed(123)
   model <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300)
 

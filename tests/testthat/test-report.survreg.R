@@ -1,4 +1,4 @@
-if (require("testthat") && require("report") && require("survival")) {
+if (requiet("survival")) {
   test_that("report-survreg", {
     # model
     set.seed(123)

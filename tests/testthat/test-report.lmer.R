@@ -1,4 +1,4 @@
-if (require("testthat") && require("report") && require("lme4")) {
+if (requiet("lme4")) {
   test_that("report-lmer", {
     df <- lme4::sleepstudy
     set.seed(123)
