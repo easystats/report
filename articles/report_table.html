@@ -128,10 +128,9 @@
 
     
     
-<p>First, load the <a href="https://easystats.github.io/report/">report</a> package, part of the
-<a href="https://easystats.github.io/easystats/" class="external-link">easystats</a> collection.</p>
+<p>First, load the <a href="https://easystats.github.io/report/">report</a> package:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/easystats/" class="external-link">easystats</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/report/">report</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="getting-started-with-correlations">Getting started with correlations<a class="anchor" aria-label="anchor" href="#getting-started-with-correlations"></a>
 </h2>
@@ -243,10 +242,10 @@ access this <em>raw</em> table as a dataframe:</p>
 <span><span class="co">#             p Alternative         d</span></span>
 <span><span class="co"># 1 0.001373638   two.sided -1.759673</span></span></code></pre></div>
 <p>In fact, the function used to <em>prettify</em> the output is called
-<code>format_table()</code> and is accessible to you too, so that you
-can prettify the output while keeping it as a dataframe.</p>
+<code><a href="https://easystats.github.io/insight/reference/format_table.html" class="external-link">insight::format_table()</a></code> and is accessible to you too, so
+that you can prettify the output while keeping it as a data frame.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">format_table</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span>, stars <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu">insight</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/insight/reference/format_table.html" class="external-link">format_table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span>, stars <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#   Difference          95% CI t(18.33)       p Alternative</span></span>
 <span><span class="co"># 1      -7.24 [-11.28, -3.21]    -3.77 0.001**   two.sided</span></span>
 <span><span class="co">#       d</span></span>
