@@ -33,12 +33,11 @@ if (!requireNamespace("dplyr", quietly = TRUE)) {
 ```
 
 
-First, load the `{report}` package, part of the `{easystats}` collection.
+First, load the `{report}` package:
 
 ```{r}
-library(easystats)
+library(report)
 ```
-
 
 ## Getting started with correlations
 
@@ -91,10 +90,10 @@ Note that, by default, `report_table()` prettifies the printing: that means that
 as.data.frame(t)
 ```
 
-In fact, the function used to *prettify* the output is called `format_table()` and is accessible to you too, so that you can prettify the output while keeping it as a dataframe.
+In fact, the function used to *prettify* the output is called `insight::format_table()` and is accessible to you too, so that you can prettify the output while keeping it as a data frame.
 
 ```{r}
-format_table(as.data.frame(t), stars = TRUE)
+insight::format_table(as.data.frame(t), stars = TRUE)
 ```
 
 Also, you can join the results of multiple tables:
