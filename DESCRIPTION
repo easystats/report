@@ -59,6 +59,8 @@ Imports:
     stats,
     tools,
     utils
+Remotes:
+    easystats/effectsize
 Suggests:
     brms,
     ivreg,
