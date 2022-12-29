@@ -102,5 +102,3 @@ test_that("report_performance", {
       )
     }
   })
-}
-
