@@ -1,4 +1,4 @@
-if (require("testthat") && require("report") && require("ivreg")) {
+if (requiet("ivreg")) {
   test_that("report-survreg", {
     data("CigaretteDemand", package = "ivreg")
 

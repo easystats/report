@@ -2,18 +2,18 @@
 #'
 #' Create reports of different objects. See the documentation for your object's
 #' class:
-#' \itemize{
-#'  \item{[System and packages][report.sessionInfo] (`sessionInfo`)}
-#'  \item{[Dataframes and vectors][report.data.frame]}
-#'  \item{[Correlations and t-tests][report.htest] (`htest`)}
-#'  \item{[ANOVAs][report.aov] (`aov, anova, aovlist, ...`)}
-#'  \item{[Regression models][report.lm] (`glm, lm, ...`)}
-#'  \item{[Mixed models][report.lm] (`glmer, lmer, glmmTMB, ...`)}
-#'  \item{[Bayesian models][report.stanreg] (`stanreg, brms...`)}
-#'  \item{[Bayes factors][report.bayesfactor_models] (from `bayestestR`)}
-#'  \item{[Structural Equation Models (SEM)][report.lavaan] (from `lavaan`)}
-#'  \item{[Model comparison][report.compare_performance] (from [`performance()`][performance::compare_performance])}
-#' }
+#'
+#'  - [System and packages][report.sessionInfo] (`sessionInfo`)
+#'  - [Dataframes and vectors][report.data.frame]
+#'  - [Correlations and t-tests][report.htest] (`htest`)
+#'  - [ANOVAs][report.aov] (`aov, anova, aovlist, ...`)
+#'  - [Regression models][report.lm] (`glm, lm, ...`)
+#'  - [Mixed models][report.lm] (`glmer, lmer, glmmTMB, ...`)
+#'  - [Bayesian models][report.stanreg] (`stanreg, brms...`)
+#'  - [Bayes factors][report.bayesfactor_models] (from `bayestestR`)
+#'  - [Structural Equation Models (SEM)][report.lavaan] (from `lavaan`)
+#'  - [Model comparison][report.compare_performance] (from [`performance()`][performance::compare_performance])
+#'
 #' Most of the time, the object created by the `report()` function can be
 #' further transformed, for instance summarized (using `summary()`), or
 #' converted to a table (using `as.data.frame()`).

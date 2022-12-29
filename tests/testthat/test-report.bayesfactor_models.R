@@ -1,4 +1,4 @@
-if (require("testthat") && require("bayestestR")) {
+if (requiet("bayestestR")) {
   mod0 <- lm(Sepal.Length ~ 1, data = iris)
   mod1 <- lm(Sepal.Length ~ Species, data = iris)
   mod2 <- lm(Sepal.Length ~ Species + Petal.Length, data = iris)

@@ -20,23 +20,25 @@ well as a short and long table of parameters and fit indices.
 \description{
 Create reports of different objects. See the documentation for your object's
 class:
-\itemize{
-\item{\link[=report.sessionInfo]{System and packages} (\code{sessionInfo})}
-\item{\link[=report.data.frame]{Dataframes and vectors}}
-\item{\link[=report.htest]{Correlations and t-tests} (\code{htest})}
-\item{\link[=report.aov]{ANOVAs} (\verb{aov, anova, aovlist, ...})}
-\item{\link[=report.lm]{Regression models} (\verb{glm, lm, ...})}
-\item{\link[=report.lm]{Mixed models} (\verb{glmer, lmer, glmmTMB, ...})}
-\item{\link[=report.stanreg]{Bayesian models} (\verb{stanreg, brms...})}
-\item{\link[=report.bayesfactor_models]{Bayes factors} (from \code{bayestestR})}
-\item{\link[=report.lavaan]{Structural Equation Models (SEM)} (from \code{lavaan})}
-\item{\link[=report.compare_performance]{Model comparison} (from \code{\link[performance:compare_performance]{performance()}})}
 }
+\details{
+\itemize{
+\item \link[=report.sessionInfo]{System and packages} (\code{sessionInfo})
+\item \link[=report.data.frame]{Dataframes and vectors}
+\item \link[=report.htest]{Correlations and t-tests} (\code{htest})
+\item \link[=report.aov]{ANOVAs} (\verb{aov, anova, aovlist, ...})
+\item \link[=report.lm]{Regression models} (\verb{glm, lm, ...})
+\item \link[=report.lm]{Mixed models} (\verb{glmer, lmer, glmmTMB, ...})
+\item \link[=report.stanreg]{Bayesian models} (\verb{stanreg, brms...})
+\item \link[=report.bayesfactor_models]{Bayes factors} (from \code{bayestestR})
+\item \link[=report.lavaan]{Structural Equation Models (SEM)} (from \code{lavaan})
+\item \link[=report.compare_performance]{Model comparison} (from \code{\link[performance:compare_performance]{performance()}})
+}
+
 Most of the time, the object created by the \code{report()} function can be
 further transformed, for instance summarized (using \code{summary()}), or
 converted to a table (using \code{as.data.frame()}).
-}
-\details{
+
 \subsection{Organization}{
 \code{report_table} and \code{report_text} are the two distal representations
 of a report, and are the two provided in \code{report()}. However,
