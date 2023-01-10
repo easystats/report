@@ -7,11 +7,11 @@ test_that("report_participants", {
   )
 
   expect_snapshot(
-    variant = .Platform$OS.type,
+    variant = "windows",
     report_participants(data, age = "Age", sex = "Sex", participant = "Participant")
   )
   expect_snapshot(
-    variant = .Platform$OS.type,
+    variant = "windows",
     report_participants(data, participant = "Participant", spell_n = TRUE)
   )
 
@@ -24,7 +24,7 @@ test_that("report_participants", {
   )
 
   expect_snapshot(
-    variant = .Platform$OS.type,
+    variant = "windows",
     report_participants(data2)
   )
 
@@ -35,7 +35,7 @@ test_that("report_participants", {
   )
 
   expect_snapshot(
-    variant = .Platform$OS.type,
+    variant = "windows",
     report_participants(data3)
   )
 
@@ -48,15 +48,15 @@ test_that("report_participants", {
   )
 
   expect_snapshot(
-    variant = .Platform$OS.type,
+    variant = "windows",
     report_participants(data4)
   )
   expect_snapshot(
-    variant = .Platform$OS.type,
+    variant = "windows",
     report_participants(data4, education = "Education2")
   )
   expect_snapshot(
-    variant = .Platform$OS.type,
+    variant = "windows",
     report_participants(data4, threshold = 15)
   )
 })
@@ -71,7 +71,7 @@ test_that("report_participants test NAs no warning", {
     "Race" = c(LETTERS[1:5], NA)
   )
   expect_snapshot(
-    variant = .Platform$OS.type,
+    variant = "windows",
     report_participants(data)
   )
 
@@ -84,7 +84,7 @@ test_that("report_participants test NAs no warning", {
     "Race" = factor(c(LETTERS[1:5], NA))
   )
   expect_snapshot(
-    variant = .Platform$OS.type,
+    variant = "windows",
     report_participants(data, age = "Age", sex = "Sex")
   )
 })

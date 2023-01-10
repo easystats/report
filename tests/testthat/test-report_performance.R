@@ -46,59 +46,59 @@ test_that("report_performance", {
     )
   }
 
-    # Mixed models
-    if (require("lme4")) {
-      x <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
-      expect_equal(
-        as.character(report_performance(x)),
-        "The model's total explanatory power is substantial (conditional R2 = 0.97) and the part related to the fixed effects alone (marginal R2) is of 0.66"
-      )
-      expect_equal(
-        as.character(summary(report_performance(x))),
-        "The model's total explanatory power is substantial (conditional R2 = 0.97) and the part related to the fixed effects alone (marginal R2) is of 0.66"
-      )
+  # Mixed models
+  if (require("lme4")) {
+    x <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
+    expect_equal(
+      as.character(report_performance(x)),
+      "The model's total explanatory power is substantial (conditional R2 = 0.97) and the part related to the fixed effects alone (marginal R2) is of 0.66"
+    )
+    expect_equal(
+      as.character(summary(report_performance(x))),
+      "The model's total explanatory power is substantial (conditional R2 = 0.97) and the part related to the fixed effects alone (marginal R2) is of 0.66"
+    )
 
-      x <- lme4::glmer(vs ~ mpg + (1 | cyl), data = mtcars, family = "binomial")
-      expect_equal(
-        as.character(report_performance(x)),
-        "The model's total explanatory power is substantial (conditional R2 = 0.59) and the part related to the fixed effects alone (marginal R2) is of 0.13"
-      )
-      expect_equal(
-        as.character(summary(report_performance(x))),
-        "The model's total explanatory power is substantial (conditional R2 = 0.59) and the part related to the fixed effects alone (marginal R2) is of 0.13"
-      )
-    }
+    x <- lme4::glmer(vs ~ mpg + (1 | cyl), data = mtcars, family = "binomial")
+    expect_equal(
+      as.character(report_performance(x)),
+      "The model's total explanatory power is substantial (conditional R2 = 0.59) and the part related to the fixed effects alone (marginal R2) is of 0.13"
+    )
+    expect_equal(
+      as.character(summary(report_performance(x))),
+      "The model's total explanatory power is substantial (conditional R2 = 0.59) and the part related to the fixed effects alone (marginal R2) is of 0.13"
+    )
+  }
 
-    # Bayesian
-    if (require("rstanarm")) {
-      x <- stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 1000, seed = 333)
-      expect_snapshot(
-        variant = .Platform$OS.type,
-        report_performance(x)
-      )
-      expect_snapshot(
-        variant = .Platform$OS.type,
-        summary(report_performance(x))
-      )
+  # Bayesian
+  if (require("rstanarm")) {
+    x <- stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 1000, seed = 333)
+    expect_snapshot(
+      variant = "windows",
+      report_performance(x)
+    )
+    expect_snapshot(
+      variant = "windows",
+      summary(report_performance(x))
+    )
 
-      x <- stan_glm(vs ~ disp, data = mtcars, family = "binomial", refresh = 0, iter = 1000, seed = 333)
-      expect_snapshot(
-        variant = .Platform$OS.type,
-        report_performance(x)
-      )
-      expect_snapshot(
-        variant = .Platform$OS.type,
-        summary(report_performance(x))
-      )
+    x <- stan_glm(vs ~ disp, data = mtcars, family = "binomial", refresh = 0, iter = 1000, seed = 333)
+    expect_snapshot(
+      variant = "windows",
+      report_performance(x)
+    )
+    expect_snapshot(
+      variant = "windows",
+      summary(report_performance(x))
+    )
 
-      x <- stan_lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris, refresh = 0, iter = 1000, seed = 333)
-      expect_snapshot(
-        variant = .Platform$OS.type,
-        report_performance(x)
-      )
-      expect_snapshot(
-        variant = .Platform$OS.type,
-        summary(report_performance(x))
-      )
-    }
-  })
+    x <- stan_lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris, refresh = 0, iter = 1000, seed = 333)
+    expect_snapshot(
+      variant = "windows",
+      report_performance(x)
+    )
+    expect_snapshot(
+      variant = "windows",
+      summary(report_performance(x))
+    )
+  }
+})

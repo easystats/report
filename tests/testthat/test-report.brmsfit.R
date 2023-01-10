@@ -10,7 +10,7 @@ if (requiet("brms")) {
     expect_s3_class(summary(r), "character")
     expect_s3_class(as.data.frame(r), "data.frame")
 
-    expect_snapshot(variant = .Platform$OS.type, report(model))
+    expect_snapshot(variant = "windows", report(model))
 
     expect_equal(
       as.data.frame(r)$Parameter,

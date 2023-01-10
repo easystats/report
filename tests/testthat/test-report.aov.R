@@ -31,11 +31,11 @@ test_that("report.aov", {
   # snapshot tests -----
 
   set.seed(123)
-  expect_snapshot(variant = .Platform$OS.type, suppressWarnings(report(anova(lm(Sepal.Width ~ Species, data = iris)))))
+  expect_snapshot(variant = "windows", suppressWarnings(report(anova(lm(Sepal.Width ~ Species, data = iris)))))
 
   set.seed(123)
-  expect_snapshot(variant = .Platform$OS.type, suppressWarnings(report(anova(lm(wt ~ as.factor(am) * as.factor(cyl), data = mtcars)))))
+  expect_snapshot(variant = "windows", suppressWarnings(report(anova(lm(wt ~ as.factor(am) * as.factor(cyl), data = mtcars)))))
 
   set.seed(123)
-  expect_snapshot(variant = .Platform$OS.type, suppressWarnings(report(aov(wt ~ cyl + Error(gear), data = mtcars))))
+  expect_snapshot(variant = "windows", suppressWarnings(report(aov(wt ~ cyl + Error(gear), data = mtcars))))
 })

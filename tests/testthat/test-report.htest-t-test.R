@@ -20,16 +20,16 @@ test_that("report.htest-t-test", {
   # one-sample t-test ---------------------
 
   set.seed(123)
-  expect_snapshot(variant = .Platform$OS.type, report(t.test(iris$Sepal.Width, mu = 1)))
+  expect_snapshot(variant = "windows", report(t.test(iris$Sepal.Width, mu = 1)))
 
   set.seed(123)
-  expect_snapshot(variant = .Platform$OS.type, report(t.test(
+  expect_snapshot(variant = "windows", report(t.test(
     iris$Sepal.Width,
     mu = -1, alternative = "l"
   )))
 
   set.seed(123)
-  expect_snapshot(variant = .Platform$OS.type, report(t.test(
+  expect_snapshot(variant = "windows", report(t.test(
     iris$Sepal.Width,
     mu = 5, alternative = "g"
   )))
@@ -37,13 +37,13 @@ test_that("report.htest-t-test", {
   # two-sample unpaired t-test ---------------------
 
   set.seed(123)
-  expect_snapshot(variant = .Platform$OS.type, report(t.test(formula = wt ~ am, data = mtcars)))
+  expect_snapshot(variant = "windows", report(t.test(formula = wt ~ am, data = mtcars)))
 
   set.seed(123)
-  expect_snapshot(variant = .Platform$OS.type, report(t.test(formula = wt ~ am, data = mtcars, alternative = "l")))
+  expect_snapshot(variant = "windows", report(t.test(formula = wt ~ am, data = mtcars, alternative = "l")))
 
   set.seed(123)
-  expect_snapshot(variant = .Platform$OS.type, report(t.test(formula = wt ~ am, data = mtcars, alternative = "g")))
+  expect_snapshot(variant = "windows", report(t.test(formula = wt ~ am, data = mtcars, alternative = "g")))
 
   # two-sample paired t-test ---------------------
 
@@ -51,19 +51,19 @@ test_that("report.htest-t-test", {
   y <- c(0.878, 0.647, 0.598, 2.05, 1.06, 1.29, 1.06, 3.14, 1.29)
 
   set.seed(123)
-  expect_snapshot(variant = .Platform$OS.type, report(t.test(x, y, paired = TRUE, data = mtcars)))
+  expect_snapshot(variant = "windows", report(t.test(x, y, paired = TRUE, data = mtcars)))
 
   set.seed(123)
-  expect_snapshot(variant = .Platform$OS.type, report(t.test(x, y, paired = TRUE, data = mtcars, alternative = "l")))
+  expect_snapshot(variant = "windows", report(t.test(x, y, paired = TRUE, data = mtcars, alternative = "l")))
 
   set.seed(123)
-  expect_snapshot(variant = .Platform$OS.type, report(t.test(x, y, paired = TRUE, data = mtcars, alternative = "g")))
+  expect_snapshot(variant = "windows", report(t.test(x, y, paired = TRUE, data = mtcars, alternative = "g")))
 
   if (getRversion() > "4.0") {
     sleep2 <- reshape(sleep, direction = "wide", idvar = "ID", timevar = "group")
     set.seed(123)
     expect_snapshot(
-      variant = .Platform$OS.type,
+      variant = "windows",
       report(t.test(Pair(extra.1, extra.2) ~ 1, data = sleep2))
     )
   }
@@ -72,51 +72,51 @@ test_that("report.htest-t-test", {
 
   x <- t.test(mtcars$mpg ~ mtcars$vs)
   expect_snapshot(
-    variant = .Platform$OS.type,
+    variant = "windows",
     report_effectsize(x)
   )
   expect_snapshot(
-    variant = .Platform$OS.type,
+    variant = "windows",
     report_effectsize(x, type = "d")
   )
   expect_snapshot(
-    variant = .Platform$OS.type,
+    variant = "windows",
     report_effectsize(x, type = "g")
   )
   expect_snapshot(
-    variant = .Platform$OS.type,
+    variant = "windows",
     report_effectsize(x, rules = "cohen1988")
   )
   expect_snapshot(
-    variant = .Platform$OS.type,
+    variant = "windows",
     report_effectsize(x, rules = "cohen1988", type = "d")
   )
   expect_snapshot(
-    variant = .Platform$OS.type,
+    variant = "windows",
     report_effectsize(x, rules = "cohen1988", type = "g")
   )
   expect_snapshot(
-    variant = .Platform$OS.type,
+    variant = "windows",
     report_effectsize(x, rules = "sawilowsky2009")
   )
   expect_snapshot(
-    variant = .Platform$OS.type,
+    variant = "windows",
     report_effectsize(x, rules = "sawilowsky2009", type = "d")
   )
   expect_snapshot(
-    variant = .Platform$OS.type,
+    variant = "windows",
     report_effectsize(x, rules = "sawilowsky2009", type = "g")
   )
   expect_snapshot(
-    variant = .Platform$OS.type,
+    variant = "windows",
     report_effectsize(x, rules = "gignac2016")
   )
   expect_snapshot(
-    variant = .Platform$OS.type,
+    variant = "windows",
     report_effectsize(x, rules = "gignac2016", type = "d")
   )
   expect_snapshot(
-    variant = .Platform$OS.type,
+    variant = "windows",
     report_effectsize(x, rules = "gignac2016", type = "g")
   )
 })
