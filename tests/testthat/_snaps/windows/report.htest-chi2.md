@@ -75,9 +75,9 @@
     Code
       report_effectsize(x, type = "tschuprows_t")
     Output
-       
+      Effect sizes were labelled following Funder's (2019) recommendations. 
       
-       (Tschuprow's t = 0.09, 95% CI [0.06, 1.00])
+      very small (Tschuprow's t = 0.09, 95% CI [0.06, 1.00])
 
 ---
 
