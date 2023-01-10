@@ -39,7 +39,6 @@ Authors:
 Other contributors:
 \itemize{
   \item Rudolf Siegel \email{mutlusun@users.noreply.github.com} (\href{https://orcid.org/0000-0002-6021-804X}{ORCID}) [contributor]
-  \item Rémi Thériault \email{remi.theriault@mail.mcgill.ca} (\href{https://orcid.org/0000-0003-4315-6788}{ORCID}) (@rempsyc) [contributor]
 }
 
 }

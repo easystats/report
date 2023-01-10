@@ -37,12 +37,7 @@ Authors@R:
              family = "Siegel",
              role = "ctb",
              email = "mutlusun@users.noreply.github.com",
-             comment = c(ORCID = "0000-0002-6021-804X")),
-      person(given = "Rémi",
-             family = "Thériault",
-             role = "ctb",
-             email = "remi.theriault@mail.mcgill.ca",
-             comment = c(ORCID = "0000-0003-4315-6788", Twitter = "@rempsyc")))
+             comment = c(ORCID = "0000-0002-6021-804X")))
 Maintainer: Dominique Makowski <dom.makowski@gmail.com>
 Description: The aim of the 'report' package is to bridge the gap between
     R’s output and the formatted results contained in your manuscript.
@@ -64,6 +59,8 @@ Imports:
     stats,
     tools,
     utils
+Remotes:
+    easystats/effectsize
 Suggests:
     brms,
     ivreg,

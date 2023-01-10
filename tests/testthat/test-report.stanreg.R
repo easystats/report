@@ -31,6 +31,6 @@ if (requiet("rstanarm")) {
 
   test_that("model-stanreg detailed", {
     skip_on_ci()
-    expect_snapshot(variant = .Platform$OS.type, report(model))
+    expect_snapshot(variant = "windows", report(model))
   })
 }

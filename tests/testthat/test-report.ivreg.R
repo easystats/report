@@ -10,6 +10,6 @@ if (requiet("ivreg")) {
         data = CigaretteDemand
       )
 
-    expect_snapshot(variant = .Platform$OS.type, report(ivr))
+    expect_snapshot(variant = "windows", report(ivr))
   })
 }

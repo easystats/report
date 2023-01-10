@@ -8,5 +8,5 @@ test_that("report-survreg", {
     dist = "logistic"
   )
 
-  expect_snapshot(variant = .Platform$OS.type, report(mod_survreg))
+  expect_snapshot(variant = "windows", report(mod_survreg))
 })

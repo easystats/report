@@ -94,8 +94,12 @@ print.report_effectsize <- function(x, ...) {
         ifelse(interpretation == "sawilowsky2009", "Savilowsky's (2009)",
           ifelse(interpretation == "gignac2016", "Gignac's (2016)",
             ifelse(interpretation == "funder2019", "Funder's (2019)",
-              ifelse(interpretation == "chen2010", "Chen's (2010)",
-                ifelse(interpretation == "field2013", "Field's (2013)", interpretation)
+              ifelse(interpretation == "lovakov2021", "Lovakov's (2021)",
+                ifelse(interpretation == "evans1996", "Evans's (1996)",
+                  ifelse(interpretation == "chen2010", "Chen's (2010)",
+                    ifelse(interpretation == "field2013", "Field's (2013)", interpretation)
+                  )
+                )
               )
             )
           )
@@ -124,14 +128,16 @@ print.report_effectsize <- function(x, ...) {
     } else {
       text <- ""
     }
-    text <- paste0("Standardized parameters were obtained by fitting the model on a standardized version ", text, "of the dataset.")
+    text <- paste0("Standardized parameters were obtained by fitting the model on a standardized version ",
+                   text, "of the dataset.")
   } else if (method == "2sd") {
     if (robust) {
       text <- "MAD (a median-based equivalent of the SD) "
     } else {
       text <- "SD "
     }
-    text <- paste0("Standardized parameters were obtained by standardizing the data by 2 times the ", text, " (see Gelman, 2008).")
+    text <- paste0("Standardized parameters were obtained by standardizing the data by 2 times the ",
+                   text, " (see Gelman, 2008).")
   } else if (method %in% c("smart", "basic", "posthoc")) {
     if (robust) {
       text <- "median and the MAD (a median-based equivalent of the SD) of the response variable."

@@ -6,8 +6,14 @@ test_that("report_participants", {
     "Participant" = c("S1", "S1", "s2", "s2", "s3", "s3")
   )
 
-  expect_snapshot(report_participants(data, age = "Age", sex = "Sex", participant = "Participant"))
-  expect_snapshot(report_participants(data, participant = "Participant", spell_n = TRUE))
+  expect_snapshot(
+    variant = "windows",
+    report_participants(data, age = "Age", sex = "Sex", participant = "Participant")
+  )
+  expect_snapshot(
+    variant = "windows",
+    report_participants(data, participant = "Participant", spell_n = TRUE)
+  )
 
   expect_equal(nchar(report_participants(data, participant = "Participant", spell_n = TRUE)), 160)
 
@@ -17,7 +23,10 @@ test_that("report_participants", {
     "Gender" = c("W", "W", "M", "O", "W", "O")
   )
 
-  expect_snapshot(report_participants(data2))
+  expect_snapshot(
+    variant = "windows",
+    report_participants(data2)
+  )
 
   data3 <- data.frame(
     "Age" = c(22, 82, NA, NA, NA, NA),
@@ -25,7 +34,10 @@ test_that("report_participants", {
     "Gender" = c("W", "W", "", "", "NA", NA)
   )
 
-  expect_snapshot(report_participants(data3))
+  expect_snapshot(
+    variant = "windows",
+    report_participants(data3)
+  )
 
   # Add tests for education, country, race
   data4 <- data.frame(
@@ -35,9 +47,18 @@ test_that("report_participants", {
     "Race" = c("Black", NA, "White", "Asian", "Black", "Black", "White")
   )
 
-  expect_snapshot(report_participants(data4))
-  expect_snapshot(report_participants(data4, education = "Education2"))
-  expect_snapshot(report_participants(data4, threshold = 15))
+  expect_snapshot(
+    variant = "windows",
+    report_participants(data4)
+  )
+  expect_snapshot(
+    variant = "windows",
+    report_participants(data4, education = "Education2")
+  )
+  expect_snapshot(
+    variant = "windows",
+    report_participants(data4, threshold = 15)
+  )
 })
 
 test_that("report_participants test NAs no warning", {
@@ -49,7 +70,10 @@ test_that("report_participants test NAs no warning", {
     "Education" = factor(c(0, 8, -3, -5, 3, 5)),
     "Race" = c(LETTERS[1:5], NA)
   )
-  expect_snapshot(report_participants(data))
+  expect_snapshot(
+    variant = "windows",
+    report_participants(data)
+  )
 
   data <- data.frame(
     "Age" = factor(c(22, 23, 54, 21, 8, 42)),
@@ -59,5 +83,8 @@ test_that("report_participants test NAs no warning", {
     "Education" = factor(c(0, 8, -3, -5, 3, 5)),
     "Race" = factor(c(LETTERS[1:5], NA))
   )
-  expect_snapshot(report_participants(data, age = "Age", sex = "Sex"))
+  expect_snapshot(
+    variant = "windows",
+    report_participants(data, age = "Age", sex = "Sex")
+  )
 })

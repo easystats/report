@@ -36,7 +36,7 @@ test_that("report.factor", {
   r <- report(factor(rep(c("A", "B", "C"), 10)))
   expect_equal(nrow(as.data.frame(r)), 3, tolerance = 0)
   expect_null(as.data.frame(r)$Median)
-  expect_snapshot(variant = .Platform$OS.type, r)
+  expect_snapshot(variant = "windows", r)
 
   r <- report(factor(rep(c("A", "B", "C", NA), 10)), levels_percentage = FALSE)
   expect_equal(nrow(as.data.frame(r)), 4, tolerance = 0)
@@ -65,7 +65,7 @@ test_that("report.data.frame", {
   expect_equal(nrow(as.data.frame(r)), 8, tolerance = 0)
   expect_equal(mean(as.data.frame(r)$n_Obs), 50, tolerance = 0)
 
-  expect_snapshot(variant = .Platform$OS.type, r)
+  expect_snapshot(variant = "windows", r)
 })
 
 test_that("report.data.frame - with NAs", {
@@ -77,12 +77,12 @@ test_that("report.data.frame - with NAs", {
   df[1, 6] <- NA
 
   report_grouped_df <- suppressWarnings(report(group_by(df, cyl)))
-  expect_snapshot(variant = .Platform$OS.type, report_grouped_df)
+  expect_snapshot(variant = "windows", report_grouped_df)
 })
 
 test_that("report.data.frame - with list columns", {
   skip_if_not_installed("dplyr")
 
   set.seed(123)
-  expect_snapshot(variant = .Platform$OS.type, report(dplyr::starwars))
+  expect_snapshot(variant = "windows", report(dplyr::starwars))
 })
