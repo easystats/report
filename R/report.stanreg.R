@@ -131,6 +131,10 @@ report_parameters.stanreg <- function(x,
   text <- att$sexit_textshort[idx]
   text_full <- att$sexit_textlong[idx]
 
+  # remove NAs...
+  text <- text[!is.na(text)]
+  text_full <- text_full[!is.na(text_full)]
+
   # Diagnostic / Convergence
   if (include_diagnostic) {
     diagnostic <- bayestestR::diagnostic_posterior(x, ...)

@@ -38,7 +38,7 @@ Authors@R:
              role = "ctb",
              email = "mutlusun@users.noreply.github.com",
              comment = c(ORCID = "0000-0002-6021-804X")))
-Maintainer: Dominique Makowski <dom.makowski@gmail.com>
+Maintainer: Rémi Thériault <remi.theriault@mail.mcgill.ca>
 Description: The aim of the 'report' package is to bridge the gap between
     R’s output and the formatted results contained in your manuscript.
     This package converts statistical models and data frames into textual
