@@ -13,7 +13,7 @@
 #' # Bayesian models
 #' \dontrun{
 #' if (require("brms")) {
-#'   model <- brm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300)
+#'   model <- suppressWarnings(brm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300))
 #'   r <- report(model)
 #'   r
 #'   summary(r)

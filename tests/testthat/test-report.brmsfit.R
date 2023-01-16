@@ -12,7 +12,7 @@ if (requiet("brms")) {
 
     expect_snapshot(variant = "windows", report(model, verbose = FALSE))
 
-    expect_equal(
+    expect_identical(
       as.data.frame(r)$Parameter,
       c(
         "(Intercept)", "qsec", "wt", "sigma", NA, "ELPD", "LOOIC", "WAIC", "R2",

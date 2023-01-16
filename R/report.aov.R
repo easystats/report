@@ -226,11 +226,11 @@ report_parameters.aov <- function(x, ...) {
   params <- table[table$Parameter != "Residuals", ]
 
   # Text parameters
-  text <- sapply(
+  text <- vapply(
     params$Parameter,
     .format_parameters_aov,
-    simplify = TRUE,
-    USE.NAMES = FALSE
+    USE.NAMES = FALSE,
+    "string"
   )
 
   # Significance
@@ -277,7 +277,7 @@ report_model.aov <- function(x, table = NULL, ...) {
     text <- "ANOVA"
   }
 
-  if ("anova" %in% class(x)) {
+  if (inherits(x, "anova")) {
     text_full <- text # Because anova() does not save the formula.
   } else {
     text_full <- paste0(

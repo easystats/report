@@ -7,7 +7,7 @@ if (requiet("rstanarm")) {
     expect_s3_class(summary(r), "character")
     expect_s3_class(as.data.frame(r), "data.frame")
 
-    expect_equal(
+    expect_identical(
       as.data.frame(r)$Parameter,
       c(
         "(Intercept)", "qsec", "wt", NA, "ELPD", "LOOIC", "WAIC", "R2",
