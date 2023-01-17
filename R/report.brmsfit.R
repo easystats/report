@@ -13,7 +13,7 @@
 #' # Bayesian models
 #' \dontrun{
 #' if (require("brms")) {
-#'   model <- brm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300)
+#'   model <- suppressWarnings(brm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300))
 #'   r <- report(model)
 #'   r
 #'   summary(r)
@@ -66,8 +66,8 @@ report_priors.brmsfit <- function(x, ...) {
 
   # Return empty if no priors info
   if (!"Prior_Distribution" %in% names(params) ||
-    nrow(params) == 0 ||
-    all(is.na(params$Prior_Scale))) {
+        nrow(params) == 0 ||
+        all(is.na(params$Prior_Scale))) {
     return("")
   }
 

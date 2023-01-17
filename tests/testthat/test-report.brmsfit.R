@@ -4,15 +4,15 @@ if (requiet("brms")) {
     # so worth checking only locally
     skip_on_ci()
 
-    model <- brm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300, seed = 333)
-    r <- report(model)
+    model <- suppressWarnings(brm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300, seed = 333))
+    r <- report(model, verbose = FALSE)
 
     expect_s3_class(summary(r), "character")
     expect_s3_class(as.data.frame(r), "data.frame")
 
-    expect_snapshot(variant = "windows", report(model))
+    expect_snapshot(variant = "windows", report(model, verbose = FALSE))
 
-    expect_equal(
+    expect_identical(
       as.data.frame(r)$Parameter,
       c(
         "(Intercept)", "qsec", "wt", "sigma", NA, "ELPD", "LOOIC", "WAIC", "R2",

@@ -1,13 +1,13 @@
 if (requiet("rstanarm")) {
   set.seed(123)
-  model <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300)
+  model <- suppressWarnings(stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300))
 
   test_that("model-stanreg", {
     r <- report(model, centrality = "mean")
     expect_s3_class(summary(r), "character")
     expect_s3_class(as.data.frame(r), "data.frame")
 
-    expect_equal(
+    expect_identical(
       as.data.frame(r)$Parameter,
       c(
         "(Intercept)", "qsec", "wt", NA, "ELPD", "LOOIC", "WAIC", "R2",

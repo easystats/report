@@ -128,16 +128,20 @@ print.report_effectsize <- function(x, ...) {
     } else {
       text <- ""
     }
-    text <- paste0("Standardized parameters were obtained by fitting the model on a standardized version ",
-                   text, "of the dataset.")
+    text <- paste0(
+      "Standardized parameters were obtained by fitting the model on a standardized version ",
+      text, "of the dataset."
+    )
   } else if (method == "2sd") {
     if (robust) {
       text <- "MAD (a median-based equivalent of the SD) "
     } else {
       text <- "SD "
     }
-    text <- paste0("Standardized parameters were obtained by standardizing the data by 2 times the ",
-                   text, " (see Gelman, 2008).")
+    text <- paste0(
+      "Standardized parameters were obtained by standardizing the data by 2 times the ",
+      text, " (see Gelman, 2008)."
+    )
   } else if (method %in% c("smart", "basic", "posthoc")) {
     if (robust) {
       text <- "median and the MAD (a median-based equivalent of the SD) of the response variable."

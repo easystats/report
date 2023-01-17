@@ -131,15 +131,24 @@ report_parameters.stanreg <- function(x,
   text <- att$sexit_textshort[idx]
   text_full <- att$sexit_textlong[idx]
 
+  # remove NAs...
+  text <- text[!is.na(text)]
+  text_full <- text_full[!is.na(text_full)]
+
   # Diagnostic / Convergence
   if (include_diagnostic) {
     diagnostic <- bayestestR::diagnostic_posterior(x, ...)
 
-    text <- datawizard::text_paste(text, .parameters_diagnostic_bayesian(diagnostic, only_when_insufficient = TRUE)[idx], sep = ". ")
+    param.dgn <- .parameters_diagnostic_bayesian(diagnostic, only_when_insufficient = TRUE)[idx]
+    text <- datawizard::text_paste(text, param.dgn, sep = ". ")
 
-    text_full <- datawizard::text_paste(text_full, .parameters_diagnostic_bayesian(diagnostic, only_when_insufficient = FALSE)[idx], sep = ". ")
+    param.dgn <- .parameters_diagnostic_bayesian(diagnostic, only_when_insufficient = FALSE)[idx]
+    text_full <- datawizard::text_paste(text_full, param.dgn, sep = ". ")
 
-    info <- paste(info, "Convergence and stability of the Bayesian sampling has been assessed using R-hat, which should be below 1.01 (Vehtari et al., 2019), and Effective Sample Size (ESS), which should be greater than 1000 (Burkner, 2017).")
+    info <- paste(info,
+                  "Convergence and stability of the Bayesian sampling has been assessed using R-hat,",
+                  "which should be below 1.01 (Vehtari et al., 2019),",
+                  "and Effective Sample Size (ESS), which should be greater than 1000 (Burkner, 2017).")
   }
 
   as.report_parameters(text_full, summary = text, parameters = data, info = info, ...)
