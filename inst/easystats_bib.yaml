@@ -569,6 +569,8 @@ references:
       given: Indrajeet
     - family: Wiernik
       given: Brenton M.
+    - family: Thériault
+      given: Rémi
   citation-key: reportPackage
   genre: R package
   issued:
