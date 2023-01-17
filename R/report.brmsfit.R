@@ -66,8 +66,8 @@ report_priors.brmsfit <- function(x, ...) {
 
   # Return empty if no priors info
   if (!"Prior_Distribution" %in% names(params) ||
-    nrow(params) == 0 ||
-    all(is.na(params$Prior_Scale))) {
+        nrow(params) == 0 ||
+        all(is.na(params$Prior_Scale))) {
     return("")
   }
 
