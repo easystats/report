@@ -75,7 +75,7 @@ Suggests:
 VignetteBuilder:
     knitr
 Encoding: UTF-8
-Language: eng
+Language: en-US
 RoxygenNote: 7.2.3
 Config/testthat/edition: 3
 Config/Needs/website:
