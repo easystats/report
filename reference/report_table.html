@@ -12,7 +12,7 @@ in report())."><meta property="og:image" content="https://easystats.github.io/re
     
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.5.3</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.5.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -135,7 +135,7 @@ objects above).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> lavaan      |  0.6.13 |                                                                                                                                                                                                                                                                                                                                                                                                                             Rosseel Y (2012). “lavaan: An R Package for Structural EquationModeling.” _Journal of Statistical Software_, *48*(2), 1-36.doi:10.18637/jss.v048.i02 &lt;https://doi.org/10.18637/jss.v048.i02&gt;.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> lme4        |  1.1.31 |                                                                                                                                                                                                                                                                                                                                                                                                        Bates D, Mächler M, Bolker B, Walker S (2015). “Fitting LinearMixed-Effects Models Using lme4.” _Journal of Statistical Software_,*67*(1), 1-48. doi:10.18637/jss.v067.i01&lt;https://doi.org/10.18637/jss.v067.i01&gt;.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> performance |  0.10.2 |                                                                                                                                                                                                                                                                                                                                                 Lüdecke D, Ben-Shachar M, Patil I, Waggoner P, Makowski D (2021).“performance: An R Package for Assessment, Comparison and Testing ofStatistical Models.” _Journal of Open Source Software_, *6*(60), 3139.doi:10.21105/joss.03139 &lt;https://doi.org/10.21105/joss.03139&gt;.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> report      | 0.5.5.3 |                                                                                                                                                                                                                                                                                                                                                                                                Makowski D, Ben-Shachar M, Patil I, Lüdecke D (2021). “AutomatedResults Reporting as a Practical Tool to Improve Reproducibility andMethodological Best Practices Adoption.” _CRAN_.&lt;https://github.com/easystats/report&gt;.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> report      | 0.5.5.4 |                                                                                                                                                                                                                                                                                                                                                                                   Makowski D, Ben-Shachar M, Patil I, Lüdecke D, Thériault R (2021).“Automated Results Reporting as a Practical Tool to ImproveReproducibility and Methodological Best Practices Adoption.” _CRAN_.&lt;https://github.com/easystats/report&gt;.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> rstanarm    |  2.21.3 |                                                                                                                                                                                                                   Goodrich B, Gabry J, Ali I, Brilleman S (2022). “rstanarm: Bayesianapplied regression modeling via Stan.” R package version 2.21.3,&lt;https://mc-stan.org/rstanarm/&gt;.Brilleman S, Crowther M, Moreno-Betancur M, Buros Novik J, Wolfe R(2018). “Joint longitudinal and time-to-event models via Stan.” StanCon2018. 10-12 Jan 2018. Pacific Grove, CA, USA.,&lt;https://github.com/stan-dev/stancon_talks/&gt;.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Package     | Version</span>
@@ -149,7 +149,7 @@ objects above).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> lavaan      |  0.6.13</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> lme4        |  1.1.31</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> performance |  0.10.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> report      | 0.5.5.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> report      | 0.5.5.4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> rstanarm    |  2.21.3</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Data</span></span></span>
@@ -179,14 +179,12 @@ objects above).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Species      |  virginica |    50 |          33.33 |      |      |        |      |      |      |          |          |                   </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># h-tests</span></span></span>
-<span class="r-in"><span><span class="fu">report_table</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">am</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Unable to retrieve data from htest object. Returning an <span style="font-weight: bold;">approximate</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   effect size using t_to_d().</span>
+<span class="r-in"><span><span class="fu">report_table</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">mtcars</span><span class="op">$</span><span class="va">am</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Welch Two Sample t-test</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter | Group | Mean_Group1 | Mean_Group2 | Difference |          95% CI | t(18.33) |     p |     d |          d  CI</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mpg       |    am |       17.15 |       24.39 |      -7.24 | [-11.28, -3.21] |    -3.77 | 0.001 | -1.76 | [-2.82, -0.67]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter  |     Group | Mean_Group1 | Mean_Group2 | Difference |          95% CI | t(18.33) |     p | Cohen's d |   Cohens_d  CI</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ---------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mtcars$mpg | mtcars$am |       17.15 |       24.39 |      -7.24 | [-11.28, -3.21] |    -3.77 | 0.001 |     -1.41 | [-2.26, -0.53]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Alternative hypothesis: two.sided</span></span>
 <span class="r-in"><span></span></span>
@@ -253,13 +251,13 @@ objects above).</p></dd>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Parameter         | Median |       95% CI |   pd |  Rhat |     ESS |                 Prior | Std. Median | Std_Median 95% CI |     Fit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------------------------------------------------------------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)       |   5.01 | [4.87, 5.15] | 100% | 1.001 | 1021.00 | Normal (5.84 +- 2.07) |        0.00 |      [0.00, 0.00] |        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Speciesversicolor |   0.93 | [0.73, 1.14] | 100% | 1.003 |  985.00 | Normal (0.00 +- 4.38) |        0.53 |      [0.42, 0.65] |        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Speciesvirginica  |   1.58 | [1.37, 1.79] | 100% | 1.000 | 1022.00 | Normal (0.00 +- 4.38) |        0.90 |      [0.78, 1.03] |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)       |   5.01 | [4.87, 5.16] | 100% | 1.007 |  804.00 | Normal (5.84 +- 2.07) |        0.00 |      [0.00, 0.00] |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Speciesversicolor |   0.93 | [0.72, 1.12] | 100% | 1.010 |  898.00 | Normal (0.00 +- 4.38) |        0.53 |      [0.41, 0.64] |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Speciesvirginica  |   1.58 | [1.38, 1.79] | 100% | 1.002 | 1017.00 | Normal (0.00 +- 4.38) |        0.90 |      [0.79, 1.02] |        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                   |        |              |      |       |         |                       |             |                   |        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ELPD              |        |              |      |       |         |                       |             |                   | -115.98</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> LOOIC             |        |              |      |       |         |                       |             |                   |  231.96</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> WAIC              |        |              |      |       |         |                       |             |                   |  231.92</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ELPD              |        |              |      |       |         |                       |             |                   | -115.91</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> LOOIC             |        |              |      |       |         |                       |             |                   |  231.82</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> WAIC              |        |              |      |       |         |                       |             |                   |  231.79</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> R2                |        |              |      |       |         |                       |             |                   |    0.61</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> R2 (adj.)         |        |              |      |       |         |                       |             |                   |    0.61</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Sigma             |        |              |      |       |         |                       |             |                   |    0.52</span>
@@ -270,9 +268,8 @@ objects above).</p></dd>
 <span class="r-in"><span><span class="st">                 dem60 =~ y1 + y2 + y3</span></span></span>
 <span class="r-in"><span><span class="st">                 dem60 ~ ind60 "</span></span></span>
 <span class="r-in"><span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">lavaan</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">structure</span>, data <span class="op">=</span> <span class="va">PoliticalDemocracy</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="fu">report_table</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu">report_table</span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>No column names that matched the required search pattern were found.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Parameter     | Coefficient |       95% CI |     z |      p |  Component |     Fit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------------------------------------------------------------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ind60 =~ x1   |        1.00 | [1.00, 1.00] |       | &lt; .001 |    Loading |        </span>

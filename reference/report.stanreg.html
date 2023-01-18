@@ -14,7 +14,7 @@ SEXIT documentation)."><meta property="og:image" content="https://easystats.gith
     
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.5.3</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.5.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -151,7 +151,6 @@ the Sequential Effect eXistence and sIgnificance Testing framework (see
 <span class="r-in"><span>  <span class="va">r</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: rstanarm</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> This is rstanarm version 2.21.3</span>
@@ -164,8 +163,21 @@ the Sequential Effect eXistence and sIgnificance Testing framework (see
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:brms’:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     dirichlet, exponential, get_y, lasso, ngrps</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Can't format table, data frame is empty.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Can't export table to text, data frame is empty.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> Running the chains for more iterations may help. See</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> https://mc-stan.org/misc/warnings.html#bulk-ess</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter   | Median |         95% CI |   pd |  Rhat |     ESS |                   Prior |    Fit</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -------------------------------------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) |  19.47 | [ 9.30, 30.37] | 100% | 0.999 |  993.00 | Normal (20.09 +- 15.07) |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> qsec        |   0.94 | [ 0.40,  1.47] | 100% | 1.000 | 1035.00 |   Normal (0.00 +- 8.43) |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> wt          |  -5.07 | [-6.06, -4.09] | 100% | 0.997 |  959.00 |  Normal (0.00 +- 15.40) |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             |        |                |      |       |         |                         |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ELPD        |        |                |      |       |         |                         | -78.97</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> LOOIC       |        |                |      |       |         |                         | 157.94</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> WAIC        |        |                |      |       |         |                         | 157.77</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2          |        |                |      |       |         |                         |   0.81</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (adj.)   |        |                |      |       |         |                         |   0.78</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sigma       |        |                |      |       |         |                         |   2.65</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

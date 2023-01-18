@@ -12,7 +12,7 @@ class:"><meta property="og:image" content="https://easystats.github.io/report/re
     
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.5.3</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.5.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -185,38 +185,37 @@ identical.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/report/">report</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">am</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">mtcars</span><span class="op">$</span><span class="va">am</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">report</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Unable to retrieve data from htest object. Returning an <span style="font-weight: bold;">approximate</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   effect size using t_to_d().</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Text</span></span></span>
 <span class="r-in"><span><span class="va">r</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Effect sizes were labelled following Cohen's (1988) recommendations.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> The Welch Two Sample t-test testing the difference of mpg by am (mean in group</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0 = 17.15, mean in group 1 = 24.39) suggests that the effect is negative,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> statistically significant, and large (difference = -7.24, 95% CI [-11.28,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -3.21], t(18.33) = -3.77, p = 0.001; Cohen's d = -1.76, 95% CI [-2.82, -0.67])</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The Welch Two Sample t-test testing the difference of mtcars$mpg by mtcars$am</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (mean in group 0 = 17.15, mean in group 1 = 24.39) suggests that the effect is</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> negative, statistically significant, and large (difference = -7.24, 95% CI</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [-11.28, -3.21], t(18.33) = -3.77, p = 0.001; Cohen's d = -1.41, 95% CI [-2.26,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.53])</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> The Welch Two Sample t-test testing the difference of mpg by am (mean in group</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0 = 17.15, mean in group 1 = 24.39) suggests that the effect is negative,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> statistically significant, and large (difference = -7.24, 95% CI [-11.28,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -3.21], t(18.33) = -3.77, p = 0.001, Cohen's d = -1.76)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The Welch Two Sample t-test testing the difference of mtcars$mpg by mtcars$am</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (mean in group 0 = 17.15, mean in group 1 = 24.39) suggests that the effect is</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> negative, statistically significant, and large (difference = -7.24, 95% CI</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [-11.28, -3.21], t(18.33) = -3.77, p = 0.001, Cohen's d = -1.41)</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Tables</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Welch Two Sample t-test</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter | Group | Mean_Group1 | Mean_Group2 | Difference |          95% CI | t(18.33) |     p |     d |          d  CI</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mpg       |    am |       17.15 |       24.39 |      -7.24 | [-11.28, -3.21] |    -3.77 | 0.001 | -1.76 | [-2.82, -0.67]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter  |     Group | Mean_Group1 | Mean_Group2 | Difference |          95% CI | t(18.33) |     p | Cohen's d |   Cohens_d  CI</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ---------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mtcars$mpg | mtcars$am |       17.15 |       24.39 |      -7.24 | [-11.28, -3.21] |    -3.77 | 0.001 |     -1.41 | [-2.26, -0.53]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Alternative hypothesis: two.sided</span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Difference |          95% CI | t(18.33) |     p |     d</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -7.24      | [-11.28, -3.21] |    -3.77 | 0.001 | -1.76</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Difference |          95% CI | t(18.33) |     p | Cohen's d |   Cohens_d  CI</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -7.24      | [-11.28, -3.21] |    -3.77 | 0.001 |     -1.41 | [-2.26, -0.53]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">Alternative hypothesis: two.sided</span></span>
 <span class="r-in"><span></span></span>
