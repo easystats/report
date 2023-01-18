@@ -78,7 +78,7 @@ display(t,
 It works similarly for *t*-tests.
 
 ```{r}
-results <- t.test(mpg ~ am, data = mtcars)
+results <- t.test(mtcars$mpg ~ mtcars$am)
 
 t <- summary(report_table(results))
 t
@@ -99,9 +99,9 @@ insight::format_table(as.data.frame(t), stars = TRUE)
 Also, you can join the results of multiple tables:
 
 ```{r}
-results1 <- t.test(mpg ~ am, data = mtcars)
-results2 <- t.test(wt ~ am, data = mtcars)
-results3 <- t.test(qsec ~ am, data = mtcars)
+results1 <- t.test(mtcars$mpg ~ mtcars$am)
+results2 <- t.test(mtcars$wt ~ mtcars$am)
+results3 <- t.test(mtcars$qsec ~ mtcars$am)
 
 results <- c(
   report_table(results1),
