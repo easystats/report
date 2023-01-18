@@ -1,5 +1,5 @@
-## R CMD check results
+## R CMD check results report 0.5.6
 
-0 errors | 0 warnings | 0 note
+0 errors | 0 warnings | 1 note
 
-* Fixes failing tests in CRAN checks.
+* Change of maintainer from Dominique Makowski to Rémi Thériault.

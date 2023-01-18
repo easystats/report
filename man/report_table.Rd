@@ -35,7 +35,7 @@ report_table(iris$Species)
 report_table(iris)
 
 # h-tests
-report_table(t.test(mpg ~ am, data = mtcars))
+report_table(t.test(mtcars$mpg ~ mtcars$am))
 
 # ANOVAs
 report_table(aov(Sepal.Length ~ Species, data = iris))
@@ -62,7 +62,7 @@ if (require("lavaan")) {
                  dem60 =~ y1 + y2 + y3
                  dem60 ~ ind60 "
   model <- lavaan::sem(structure, data = PoliticalDemocracy)
-  report_table(model)
+  suppressWarnings(report_table(model))
 }
 }
 }

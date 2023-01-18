@@ -26,7 +26,7 @@ library(report)
 \dontrun{
 if (require("brms")) {
   model <- suppressWarnings(brm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300))
-  r <- report(model)
+  r <- report(model, verbose = FALSE)
   r
   summary(r)
   as.data.frame(r)

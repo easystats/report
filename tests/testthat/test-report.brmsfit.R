@@ -4,6 +4,7 @@ if (requiet("brms")) {
     # so worth checking only locally
     skip_on_ci()
 
+    set.seed(333)
     model <- suppressWarnings(brm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300, seed = 333))
     r <- report(model, verbose = FALSE)
 

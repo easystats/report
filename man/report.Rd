@@ -68,7 +68,7 @@ identical.
 
 library(report)
 
-model <- t.test(mpg ~ am, data = mtcars)
+model <- t.test(mtcars$mpg ~ mtcars$am)
 r <- report(model)
 
 # Text

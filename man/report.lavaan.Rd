@@ -39,8 +39,8 @@ if (require("lavaan") && FALSE) {
   # summary(as.data.frame(r))
 
   # Specific reports
-  report_table(model)
-  report_performance(model)
+  suppressWarnings(report_table(model))
+  suppressWarnings(report_performance(model))
 }
 }
 }
