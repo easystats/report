@@ -71,8 +71,7 @@ Suggests:
     rmarkdown,
     rstanarm,
     survival,
-    testthat,
-    spelling
+    testthat
 VignetteBuilder:
     knitr
 Encoding: UTF-8
