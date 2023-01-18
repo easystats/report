@@ -278,7 +278,7 @@ cite_easystats <- function(packages = "easystats",
         ),
         report = sprintf(
           paste("Makowski, D., L\u00fcdecke, D., Ben-Shachar, M. S., Patil, I.,",
-                "Wiernik, B. M., & Thériault, R. (2022).",
+                "Wiernik, B. M., & Th\U00E9riault, R. (2022).",
                 "report: Automated reporting of results and statistical models (%s) [R package].",
                 "https://CRAN.R-project.org/package=report (Original work published 2021)"),
           installed_packages["report"]

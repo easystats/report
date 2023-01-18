@@ -17,7 +17,6 @@
 #'   r
 #'   summary(r)
 #'   as.data.frame(r)
-#'   summary(as.data.frame(r))
 #' }
 #' }
 #' @return An object of class [report()].

@@ -50,7 +50,7 @@ etc.).
 report(t.test(iris$Sepal.Width, iris$Sepal.Length))
 report(t.test(iris$Sepal.Width, iris$Sepal.Length, var.equal = TRUE))
 report(t.test(mtcars$mpg ~ mtcars$vs))
-report(t.test(mtcars$mpg, mtcars$vs, paired = TRUE))
+report(t.test(mtcars$mpg, mtcars$vs, paired = TRUE), verbose = FALSE)
 report(t.test(iris$Sepal.Width, mu = 1))
 
 # Correlations

@@ -86,7 +86,7 @@ report.estimate_means <- report.estimate_contrasts
 #' \dontrun{
 #' library(rstanarm)
 #' model <- stan_glm(Sepal.Width ~ Species * Petal.Width, data = iris)
-#' report(estimate_slopes(model))
+#' suppressWarnings(report(estimate_slopes(model)))
 #' }
 #' @rdname report.estimate_contrasts
 #' @export

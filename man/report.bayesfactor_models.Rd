@@ -55,7 +55,6 @@ if (require("bayestestR")) {
 
   r <- report(BFmodels)
   r
-  as.data.frame(r)
 
   # Bayes factor - inclusion
   inc_bf <- bayesfactor_inclusion(BFmodels, prior_odds = c(1, 2, 3), match_models = TRUE)

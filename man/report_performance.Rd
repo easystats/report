@@ -51,7 +51,7 @@ if (require("lavaan") && packageVersion("effectsize") >= "0.6.0.1" && FALSE) {
                  dem60 =~ y1 + y2 + y3
                  dem60 ~ ind60 "
   model <- lavaan::sem(structure, data = PoliticalDemocracy)
-  report_performance(model)
+  suppressWarnings(report_performance(model))
 }
 }
 }
