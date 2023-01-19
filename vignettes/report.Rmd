@@ -89,7 +89,7 @@ iris %>%
 objects from correlation, *t*-tests, Wilcoxon tests, etc.
 
 ```{r}
-report(t.test(formula = wt ~ am, data = mtcars))
+report(t.test(formula = mtcars$wt ~ mtcars$am))
 ```
 
 ```{r, eval=FALSE}
