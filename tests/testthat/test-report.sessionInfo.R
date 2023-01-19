@@ -1,4 +1,3 @@
-
 test_that("report.sessionInfo - High level", {
   x <- sessionInfo()
   r <- report(x)
