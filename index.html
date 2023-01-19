@@ -188,18 +188,18 @@
 <p>The <code><a href="reference/report.html">report()</a></code> function works on a variety of models, as well as other objects such as dataframes:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The data contains 150 observations of the following 5 variables:</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   - Sepal.Length: n = 150, Mean = 5.84, SD = 0.83, Median = 5.80, MAD = 1.04,</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># range: [4.30, 7.90], Skewness = 0.31, Kurtosis = -0.55, 0% missing</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   - Sepal.Width: n = 150, Mean = 3.06, SD = 0.44, Median = 3.00, MAD = 0.44,</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># range: [2, 4.40], Skewness = 0.32, Kurtosis = 0.23, 0% missing</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   - Petal.Length: n = 150, Mean = 3.76, SD = 1.77, Median = 4.35, MAD = 1.85,</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># range: [1, 6.90], Skewness = -0.27, Kurtosis = -1.40, 0% missing</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   - Petal.Width: n = 150, Mean = 1.20, SD = 0.76, Median = 1.30, MAD = 1.04,</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># range: [0.10, 2.50], Skewness = -0.10, Kurtosis = -1.34, 0% missing</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   - Species: 3 levels, namely setosa (n = 50, 33.33%), versicolor (n = 50,</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 33.33%) and virginica (n = 50, 33.33%)</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># The data contains 150 observations of the following 5 variables:</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#   - Sepal.Length: n = 150, Mean = 5.84, SD = 0.83, Median = 5.80, MAD = 1.04,</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co"># range: [4.30, 7.90], Skewness = 0.31, Kurtosis = -0.55, 0% missing</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co">#   - Sepal.Width: n = 150, Mean = 3.06, SD = 0.44, Median = 3.00, MAD = 0.44,</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co"># range: [2, 4.40], Skewness = 0.32, Kurtosis = 0.23, 0% missing</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#   - Petal.Length: n = 150, Mean = 3.76, SD = 1.77, Median = 4.35, MAD = 1.85,</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co"># range: [1, 6.90], Skewness = -0.27, Kurtosis = -1.40, 0% missing</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#   - Petal.Width: n = 150, Mean = 1.20, SD = 0.76, Median = 1.30, MAD = 1.04,</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co"># range: [0.10, 2.50], Skewness = -0.10, Kurtosis = -1.34, 0% missing</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#   - Species: 3 levels, namely setosa (n = 50, 33.33%), versicolor (n = 50,</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co"># 33.33%) and virginica (n = 50, 33.33%)</span></span></code></pre></div>
 <p>These reports nicely work within the <a href="https://github.com/tidyverse" class="external-link"><em>tidyverse</em></a> workflow:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">iris</span> <span class="op">%&gt;%</span></span>
@@ -207,20 +207,20 @@
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The data contains 150 observations, grouped by Species, of the following 3</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># variables:</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - setosa (n = 50):</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   - Petal.Length: Mean = 1.46, SD = 0.17, range: [1, 1.90]</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   - Petal.Width: Mean = 0.25, SD = 0.11, range: [0.10, 0.60]</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># - versicolor (n = 50):</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   - Petal.Length: Mean = 4.26, SD = 0.47, range: [3, 5.10]</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   - Petal.Width: Mean = 1.33, SD = 0.20, range: [1, 1.80]</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># - virginica (n = 50):</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   - Petal.Length: Mean = 5.55, SD = 0.55, range: [4.50, 6.90]</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   - Petal.Width: Mean = 2.03, SD = 0.27, range: [1.40, 2.50]</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># The data contains 150 observations, grouped by Species, of the following 3</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="co"># variables:</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># - setosa (n = 50):</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#   - Petal.Length: Mean = 1.46, SD = 0.17, range: [1, 1.90]</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">#   - Petal.Width: Mean = 0.25, SD = 0.11, range: [0.10, 0.60]</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co"># - versicolor (n = 50):</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co">#   - Petal.Length: Mean = 4.26, SD = 0.47, range: [3, 5.10]</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co">#   - Petal.Width: Mean = 1.33, SD = 0.20, range: [1, 1.80]</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="co"># - virginica (n = 50):</span></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="co">#   - Petal.Length: Mean = 5.55, SD = 0.55, range: [4.50, 6.90]</span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="co">#   - Petal.Width: Mean = 2.03, SD = 0.27, range: [1.40, 2.50]</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="t-tests-and-correlations">
@@ -229,13 +229,13 @@
 <p>Reports can be used to automatically format tests like <em>t</em>-tests or correlations.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">mtcars</span><span class="op">$</span><span class="va">am</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Effect sizes were labelled following Cohen's (1988) recommendations.</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># The Welch Two Sample t-test testing the difference of mtcars$mpg by mtcars$am</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># (mean in group 0 = 17.15, mean in group 1 = 24.39) suggests that the effect is</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># negative, statistically significant, and large (difference = -7.24, 95% CI</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># [-11.28, -3.21], t(18.33) = -3.77, p = 0.001; Cohen's d = -1.41, 95% CI [-2.26,</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># -0.53])</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Effect sizes were labelled following Cohen's (1988) recommendations.</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co"># The Welch Two Sample t-test testing the difference of mtcars$mpg by mtcars$am</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co"># (mean in group 0 = 17.15, mean in group 1 = 24.39) suggests that the effect is</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co"># negative, statistically significant, and large (difference = -7.24, 95% CI</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co"># [-11.28, -3.21], t(18.33) = -3.77, p = 0.001; Cohen's d = -1.41, 95% CI [-2.26,</span></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co"># -0.53])</span></span></code></pre></div>
 <p>As mentioned, you can also create tables with the <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> functions, like for example with this correlation test:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Length</span>, <span class="va">iris</span><span class="op">$</span><span class="va">Sepal.Width</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
@@ -256,12 +256,12 @@
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html" class="external-link">aov</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The ANOVA (formula: Sepal.Length ~ Species) suggests that:</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   - The main effect of Species is statistically significant and large (F(2, 147)</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># = 119.26, p &lt; .001; Eta2 = 0.62, 95% CI [0.54, 1.00])</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Effect sizes were labelled following Field's (2013) recommendations.</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># The ANOVA (formula: Sepal.Length ~ Species) suggests that:</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="co">#   - The main effect of Species is statistically significant and large (F(2, 147)</span></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="co"># = 119.26, p &lt; .001; Eta2 = 0.62, 95% CI [0.54, 1.00])</span></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="co"># Effect sizes were labelled following Field's (2013) recommendations.</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="generalized-linear-models-glms">Generalized Linear Models (GLMs)<a class="anchor" aria-label="anchor" href="#generalized-linear-models-glms"></a>
@@ -271,23 +271,23 @@
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">vs</span> <span class="op">~</span> <span class="va">mpg</span> <span class="op">*</span> <span class="va">drat</span>, data <span class="op">=</span> <span class="va">mtcars</span>, family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We fitted a logistic model (estimated using ML) to predict vs with mpg and drat</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (formula: vs ~ mpg * drat). The model's explanatory power is substantial</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># (Tjur's R2 = 0.51). The model's intercept, corresponding to mpg = 0 and drat =</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 0, is at -33.43 (95% CI [-77.90, 3.25], p = 0.083). Within this model:</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   - The effect of mpg is statistically non-significant and positive (beta = 1.79,</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 95% CI [-0.10, 4.05], p = 0.066; Std. beta = 3.63, 95% CI [1.36, 7.50])</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   - The effect of drat is statistically non-significant and positive (beta =</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 5.96, 95% CI [-3.75, 16.26], p = 0.205; Std. beta = -0.36, 95% CI [-1.96,</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.98])</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   - The effect of mpg × drat is statistically non-significant and negative (beta</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co"># = -0.33, 95% CI [-0.83, 0.15], p = 0.141; Std. beta = -1.07, 95% CI [-2.66,</span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.48])</span></span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Standardized parameters were obtained by fitting the model on a standardized</span></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co"># version of the dataset. 95% Confidence Intervals (CIs) and p-values were</span></span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co"># computed using a Wald z-distribution approximation.</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># We fitted a logistic model (estimated using ML) to predict vs with mpg and drat</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="co"># (formula: vs ~ mpg * drat). The model's explanatory power is substantial</span></span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="co"># (Tjur's R2 = 0.51). The model's intercept, corresponding to mpg = 0 and drat =</span></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="co"># 0, is at -33.43 (95% CI [-77.90, 3.25], p = 0.083). Within this model:</span></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a><span class="co">#   - The effect of mpg is statistically non-significant and positive (beta = 1.79,</span></span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a><span class="co"># 95% CI [-0.10, 4.05], p = 0.066; Std. beta = 3.63, 95% CI [1.36, 7.50])</span></span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a><span class="co">#   - The effect of drat is statistically non-significant and positive (beta =</span></span>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a><span class="co"># 5.96, 95% CI [-3.75, 16.26], p = 0.205; Std. beta = -0.36, 95% CI [-1.96,</span></span>
+<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a><span class="co"># 0.98])</span></span>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a><span class="co">#   - The effect of mpg × drat is statistically non-significant and negative (beta</span></span>
+<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a><span class="co"># = -0.33, 95% CI [-0.83, 0.15], p = 0.141; Std. beta = -1.07, 95% CI [-2.66,</span></span>
+<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a><span class="co"># 0.48])</span></span>
+<span id="cb15-14"><a href="#cb15-14" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb15-15"><a href="#cb15-15" tabindex="-1"></a><span class="co"># Standardized parameters were obtained by fitting the model on a standardized</span></span>
+<span id="cb15-16"><a href="#cb15-16" tabindex="-1"></a><span class="co"># version of the dataset. 95% Confidence Intervals (CIs) and p-values were</span></span>
+<span id="cb15-17"><a href="#cb15-17" tabindex="-1"></a><span class="co"># computed using a Wald z-distribution approximation.</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="mixed-models">Mixed Models<a class="anchor" aria-label="anchor" href="#mixed-models"></a>
@@ -299,21 +299,21 @@
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Length</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">Species</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We fitted a linear mixed model (estimated using REML and nloptwrap optimizer)</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># to predict Sepal.Length with Petal.Length (formula: Sepal.Length ~</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Petal.Length). The model included Species as random effect (formula: ~1 |</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Species). The model's total explanatory power is substantial (conditional R2 =</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.97) and the part related to the fixed effects alone (marginal R2) is of 0.66.</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># The model's intercept, corresponding to Petal.Length = 0, is at 2.50 (95% CI</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># [1.19, 3.82], t(146) = 3.75, p &lt; .001). Within this model:</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   - The effect of Petal Length is statistically significant and positive (beta =</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.89, 95% CI [0.76, 1.01], t(146) = 13.93, p &lt; .001; Std. beta = 1.89, 95% CI</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co"># [1.63, 2.16])</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Standardized parameters were obtained by fitting the model on a standardized</span></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co"># version of the dataset. 95% Confidence Intervals (CIs) and p-values were</span></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co"># computed using a Wald t-distribution approximation.</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># We fitted a linear mixed model (estimated using REML and nloptwrap optimizer)</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a><span class="co"># to predict Sepal.Length with Petal.Length (formula: Sepal.Length ~</span></span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="co"># Petal.Length). The model included Species as random effect (formula: ~1 |</span></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a><span class="co"># Species). The model's total explanatory power is substantial (conditional R2 =</span></span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a><span class="co"># 0.97) and the part related to the fixed effects alone (marginal R2) is of 0.66.</span></span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a><span class="co"># The model's intercept, corresponding to Petal.Length = 0, is at 2.50 (95% CI</span></span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a><span class="co"># [1.19, 3.82], t(146) = 3.75, p &lt; .001). Within this model:</span></span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a><span class="co">#   - The effect of Petal Length is statistically significant and positive (beta =</span></span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a><span class="co"># 0.89, 95% CI [0.76, 1.01], t(146) = 13.93, p &lt; .001; Std. beta = 1.89, 95% CI</span></span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a><span class="co"># [1.63, 2.16])</span></span>
+<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a><span class="co"># Standardized parameters were obtained by fitting the model on a standardized</span></span>
+<span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a><span class="co"># version of the dataset. 95% Confidence Intervals (CIs) and p-values were</span></span>
+<span id="cb17-15"><a href="#cb17-15" tabindex="-1"></a><span class="co"># computed using a Wald t-distribution approximation.</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="bayesian-models">Bayesian Models<a class="anchor" aria-label="anchor" href="#bayesian-models"></a>
@@ -325,58 +325,58 @@
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html" class="external-link">stan_glm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">qsec</span> <span class="op">+</span> <span class="va">wt</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># of 1000 iterations and a warmup of 500) to predict mpg with qsec and wt</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># (formula: mpg ~ qsec + wt). Priors over parameters were set as normal (mean =</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.00, SD = 8.43) distributions. The model's explanatory power is substantial</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># (R2 = 0.81, 95% CI [0.70, 0.89], adj. R2 = 0.79). The model's intercept,</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># corresponding to qsec = 0 and wt = 0, is at 19.76 (95% CI [9.54, 30.70]).</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Within this model:</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   - The effect of qsec (Median = 0.92, 95% CI [0.36, 1.44]) has a 99.85%</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co"># probability of being positive (&gt; 0), 98.55% of being significant (&gt; 0.30), and</span></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.10% of being large (&gt; 1.81). The estimation successfully converged (Rhat =</span></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.999) and the indices are reliable (ESS = 2316)</span></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   - The effect of wt (Median = -5.05, 95% CI [-6.03, -4.03]) has a 100.00%</span></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co"># probability of being negative (&lt; 0), 100.00% of being significant (&lt; -0.30),</span></span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="co"># and 100.00% of being large (&lt; -1.81). The estimation successfully converged</span></span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="co"># (Rhat = 0.999) and the indices are reliable (ESS = 2115)</span></span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)</span></span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="co"># framework, we report the median of the posterior distribution and its 95% CI</span></span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="co"># (Highest Density Interval), along the probability of direction (pd), the</span></span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="co"># probability of significance and the probability of being large. The thresholds</span></span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="co"># beyond which the effect is considered as significant (i.e., non-negligible) and</span></span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a><span class="co"># large are |0.30| and |1.81| (corresponding respectively to 0.05 and 0.30 of the</span></span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a><span class="co"># outcome's SD). Convergence and stability of the Bayesian sampling has been</span></span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a><span class="co"># assessed using R-hat, which should be below 1.01 (Vehtari et al., 2019), and</span></span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Effective Sample Size (ESS), which should be greater than 1000 (Burkner, 2017).</span></span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a><span class="co"># and We fitted a Bayesian linear model (estimated using MCMC sampling with 4</span></span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a><span class="co"># chains of 1000 iterations and a warmup of 500) to predict mpg with qsec and wt</span></span>
-<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a><span class="co"># (formula: mpg ~ qsec + wt). Priors over parameters were set as normal (mean =</span></span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.00, SD = 15.40) distributions. The model's explanatory power is substantial</span></span>
-<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a><span class="co"># (R2 = 0.81, 95% CI [0.70, 0.89], adj. R2 = 0.79). The model's intercept,</span></span>
-<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a><span class="co"># corresponding to qsec = 0 and wt = 0, is at 19.76 (95% CI [9.54, 30.70]).</span></span>
-<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Within this model:</span></span>
-<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a><span class="co">#   - The effect of qsec (Median = 0.92, 95% CI [0.36, 1.44]) has a 99.85%</span></span>
-<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a><span class="co"># probability of being positive (&gt; 0), 98.55% of being significant (&gt; 0.30), and</span></span>
-<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.10% of being large (&gt; 1.81). The estimation successfully converged (Rhat =</span></span>
-<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.999) and the indices are reliable (ESS = 2316)</span></span>
-<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a><span class="co">#   - The effect of wt (Median = -5.05, 95% CI [-6.03, -4.03]) has a 100.00%</span></span>
-<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a><span class="co"># probability of being negative (&lt; 0), 100.00% of being significant (&lt; -0.30),</span></span>
-<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a><span class="co"># and 100.00% of being large (&lt; -1.81). The estimation successfully converged</span></span>
-<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a><span class="co"># (Rhat = 0.999) and the indices are reliable (ESS = 2115)</span></span>
-<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)</span></span>
-<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a><span class="co"># framework, we report the median of the posterior distribution and its 95% CI</span></span>
-<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a><span class="co"># (Highest Density Interval), along the probability of direction (pd), the</span></span>
-<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a><span class="co"># probability of significance and the probability of being large. The thresholds</span></span>
-<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a><span class="co"># beyond which the effect is considered as significant (i.e., non-negligible) and</span></span>
-<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a><span class="co"># large are |0.30| and |1.81| (corresponding respectively to 0.05 and 0.30 of the</span></span>
-<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a><span class="co"># outcome's SD). Convergence and stability of the Bayesian sampling has been</span></span>
-<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a><span class="co"># assessed using R-hat, which should be below 1.01 (Vehtari et al., 2019), and</span></span>
-<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Effective Sample Size (ESS), which should be greater than 1000 (Burkner, 2017).</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="co"># We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains</span></span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="co"># of 1000 iterations and a warmup of 500) to predict mpg with qsec and wt</span></span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a><span class="co"># (formula: mpg ~ qsec + wt). Priors over parameters were set as normal (mean =</span></span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a><span class="co"># 0.00, SD = 8.43) distributions. The model's explanatory power is substantial</span></span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a><span class="co"># (R2 = 0.81, 95% CI [0.70, 0.89], adj. R2 = 0.79). The model's intercept,</span></span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a><span class="co"># corresponding to qsec = 0 and wt = 0, is at 19.76 (95% CI [9.54, 30.70]).</span></span>
+<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a><span class="co"># Within this model:</span></span>
+<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a><span class="co">#   - The effect of qsec (Median = 0.92, 95% CI [0.36, 1.44]) has a 99.85%</span></span>
+<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a><span class="co"># probability of being positive (&gt; 0), 98.55% of being significant (&gt; 0.30), and</span></span>
+<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a><span class="co"># 0.10% of being large (&gt; 1.81). The estimation successfully converged (Rhat =</span></span>
+<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a><span class="co"># 0.999) and the indices are reliable (ESS = 2316)</span></span>
+<span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a><span class="co">#   - The effect of wt (Median = -5.05, 95% CI [-6.03, -4.03]) has a 100.00%</span></span>
+<span id="cb19-14"><a href="#cb19-14" tabindex="-1"></a><span class="co"># probability of being negative (&lt; 0), 100.00% of being significant (&lt; -0.30),</span></span>
+<span id="cb19-15"><a href="#cb19-15" tabindex="-1"></a><span class="co"># and 100.00% of being large (&lt; -1.81). The estimation successfully converged</span></span>
+<span id="cb19-16"><a href="#cb19-16" tabindex="-1"></a><span class="co"># (Rhat = 0.999) and the indices are reliable (ESS = 2115)</span></span>
+<span id="cb19-17"><a href="#cb19-17" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb19-18"><a href="#cb19-18" tabindex="-1"></a><span class="co"># Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)</span></span>
+<span id="cb19-19"><a href="#cb19-19" tabindex="-1"></a><span class="co"># framework, we report the median of the posterior distribution and its 95% CI</span></span>
+<span id="cb19-20"><a href="#cb19-20" tabindex="-1"></a><span class="co"># (Highest Density Interval), along the probability of direction (pd), the</span></span>
+<span id="cb19-21"><a href="#cb19-21" tabindex="-1"></a><span class="co"># probability of significance and the probability of being large. The thresholds</span></span>
+<span id="cb19-22"><a href="#cb19-22" tabindex="-1"></a><span class="co"># beyond which the effect is considered as significant (i.e., non-negligible) and</span></span>
+<span id="cb19-23"><a href="#cb19-23" tabindex="-1"></a><span class="co"># large are |0.30| and |1.81| (corresponding respectively to 0.05 and 0.30 of the</span></span>
+<span id="cb19-24"><a href="#cb19-24" tabindex="-1"></a><span class="co"># outcome's SD). Convergence and stability of the Bayesian sampling has been</span></span>
+<span id="cb19-25"><a href="#cb19-25" tabindex="-1"></a><span class="co"># assessed using R-hat, which should be below 1.01 (Vehtari et al., 2019), and</span></span>
+<span id="cb19-26"><a href="#cb19-26" tabindex="-1"></a><span class="co"># Effective Sample Size (ESS), which should be greater than 1000 (Burkner, 2017).</span></span>
+<span id="cb19-27"><a href="#cb19-27" tabindex="-1"></a><span class="co"># and We fitted a Bayesian linear model (estimated using MCMC sampling with 4</span></span>
+<span id="cb19-28"><a href="#cb19-28" tabindex="-1"></a><span class="co"># chains of 1000 iterations and a warmup of 500) to predict mpg with qsec and wt</span></span>
+<span id="cb19-29"><a href="#cb19-29" tabindex="-1"></a><span class="co"># (formula: mpg ~ qsec + wt). Priors over parameters were set as normal (mean =</span></span>
+<span id="cb19-30"><a href="#cb19-30" tabindex="-1"></a><span class="co"># 0.00, SD = 15.40) distributions. The model's explanatory power is substantial</span></span>
+<span id="cb19-31"><a href="#cb19-31" tabindex="-1"></a><span class="co"># (R2 = 0.81, 95% CI [0.70, 0.89], adj. R2 = 0.79). The model's intercept,</span></span>
+<span id="cb19-32"><a href="#cb19-32" tabindex="-1"></a><span class="co"># corresponding to qsec = 0 and wt = 0, is at 19.76 (95% CI [9.54, 30.70]).</span></span>
+<span id="cb19-33"><a href="#cb19-33" tabindex="-1"></a><span class="co"># Within this model:</span></span>
+<span id="cb19-34"><a href="#cb19-34" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb19-35"><a href="#cb19-35" tabindex="-1"></a><span class="co">#   - The effect of qsec (Median = 0.92, 95% CI [0.36, 1.44]) has a 99.85%</span></span>
+<span id="cb19-36"><a href="#cb19-36" tabindex="-1"></a><span class="co"># probability of being positive (&gt; 0), 98.55% of being significant (&gt; 0.30), and</span></span>
+<span id="cb19-37"><a href="#cb19-37" tabindex="-1"></a><span class="co"># 0.10% of being large (&gt; 1.81). The estimation successfully converged (Rhat =</span></span>
+<span id="cb19-38"><a href="#cb19-38" tabindex="-1"></a><span class="co"># 0.999) and the indices are reliable (ESS = 2316)</span></span>
+<span id="cb19-39"><a href="#cb19-39" tabindex="-1"></a><span class="co">#   - The effect of wt (Median = -5.05, 95% CI [-6.03, -4.03]) has a 100.00%</span></span>
+<span id="cb19-40"><a href="#cb19-40" tabindex="-1"></a><span class="co"># probability of being negative (&lt; 0), 100.00% of being significant (&lt; -0.30),</span></span>
+<span id="cb19-41"><a href="#cb19-41" tabindex="-1"></a><span class="co"># and 100.00% of being large (&lt; -1.81). The estimation successfully converged</span></span>
+<span id="cb19-42"><a href="#cb19-42" tabindex="-1"></a><span class="co"># (Rhat = 0.999) and the indices are reliable (ESS = 2115)</span></span>
+<span id="cb19-43"><a href="#cb19-43" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb19-44"><a href="#cb19-44" tabindex="-1"></a><span class="co"># Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)</span></span>
+<span id="cb19-45"><a href="#cb19-45" tabindex="-1"></a><span class="co"># framework, we report the median of the posterior distribution and its 95% CI</span></span>
+<span id="cb19-46"><a href="#cb19-46" tabindex="-1"></a><span class="co"># (Highest Density Interval), along the probability of direction (pd), the</span></span>
+<span id="cb19-47"><a href="#cb19-47" tabindex="-1"></a><span class="co"># probability of significance and the probability of being large. The thresholds</span></span>
+<span id="cb19-48"><a href="#cb19-48" tabindex="-1"></a><span class="co"># beyond which the effect is considered as significant (i.e., non-negligible) and</span></span>
+<span id="cb19-49"><a href="#cb19-49" tabindex="-1"></a><span class="co"># large are |0.30| and |1.81| (corresponding respectively to 0.05 and 0.30 of the</span></span>
+<span id="cb19-50"><a href="#cb19-50" tabindex="-1"></a><span class="co"># outcome's SD). Convergence and stability of the Bayesian sampling has been</span></span>
+<span id="cb19-51"><a href="#cb19-51" tabindex="-1"></a><span class="co"># assessed using R-hat, which should be below 1.01 (Vehtari et al., 2019), and</span></span>
+<span id="cb19-52"><a href="#cb19-52" tabindex="-1"></a><span class="co"># Effective Sample Size (ESS), which should be greater than 1000 (Burkner, 2017).</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -392,12 +392,12 @@
 <span><span class="fu"><a href="reference/report_model.html">report_model</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/report_performance.html">report_performance</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/report_statistics.html">report_statistics</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb21"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># linear model (estimated using OLS) to predict Sepal.Length with Species (formula: Sepal.Length ~ Species)</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The model explains a statistically significant and substantial proportion of</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># variance (R2 = 0.62, F(2, 147) = 119.26, p &lt; .001, adj. R2 = 0.61)</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># beta = 5.01, 95% CI [4.86, 5.15], t(147) = 68.76, p &lt; .001; Std. beta = -1.01, 95% CI [-1.18, -0.84]</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># beta = 0.93, 95% CI [0.73, 1.13], t(147) = 9.03, p &lt; .001; Std. beta = 1.12, 95% CI [0.88, 1.37]</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># beta = 1.58, 95% CI [1.38, 1.79], t(147) = 15.37, p &lt; .001; Std. beta = 1.91, 95% CI [1.66, 2.16]</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co"># linear model (estimated using OLS) to predict Sepal.Length with Species (formula: Sepal.Length ~ Species)</span></span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="co"># The model explains a statistically significant and substantial proportion of</span></span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a><span class="co"># variance (R2 = 0.62, F(2, 147) = 119.26, p &lt; .001, adj. R2 = 0.61)</span></span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a><span class="co"># beta = 5.01, 95% CI [4.86, 5.15], t(147) = 68.76, p &lt; .001; Std. beta = -1.01, 95% CI [-1.18, -0.84]</span></span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a><span class="co"># beta = 0.93, 95% CI [0.73, 1.13], t(147) = 9.03, p &lt; .001; Std. beta = 1.12, 95% CI [0.88, 1.37]</span></span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a><span class="co"># beta = 1.58, 95% CI [1.38, 1.79], t(147) = 15.37, p &lt; .001; Std. beta = 1.91, 95% CI [1.66, 2.16]</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="report-participants-details">Report participants’ details<a class="anchor" aria-label="anchor" href="#report-participants-details"></a>
@@ -413,7 +413,7 @@
 <span>  <span class="fu"><a href="reference/report_participants.html">report_participants</a></span><span class="op">(</span><span class="va">data</span>, spell_n <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>  <span class="st">"were recruited in the study by means of torture and coercion."</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] "Four participants (Mean age = 30.0, SD = 16.0, range: [21, 54]; Sex: 50.0% females, 50.0% males, 0.0% other) were recruited in the study by means of torture and coercion."</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># [1] "Four participants (Mean age = 30.0, SD = 16.0, range: [21, 54]; Sex: 50.0% females, 50.0% males, 0.0% other) were recruited in the study by means of torture and coercion."</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="report-sample">Report sample<a class="anchor" aria-label="anchor" href="#report-sample"></a>
@@ -472,69 +472,69 @@
 <p>Finally, <strong>report</strong> includes some functions to help you write the data analysis paragraph about the tools used.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb25"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Analyses were conducted using the R Statistical language (version 4.2.2; R Core</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Team, 2022) on macOS Ventura 13.0.1, using the packages lme4 (version 1.1.31;</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Bates D et al., 2015), Matrix (version 1.5.3; Bates D et al., 2022), Rcpp</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># (version 1.0.9; Eddelbuettel D, François R, 2011), rstanarm (version 2.21.3;</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Goodrich B et al., 2022), report (version 0.5.5.3; Makowski D et al., 2021) and</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co"># dplyr (version 1.0.10; Wickham H et al., 2022).</span></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co"># References</span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------</span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   - Bates D, Mächler M, Bolker B, Walker S (2015). "Fitting LinearMixed-Effects</span></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Models Using lme4." _Journal of Statistical Software_,*67*(1), 1-48.</span></span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="co"># doi:10.18637/jss.v067.i01&lt;https://doi.org/10.18637/jss.v067.i01&gt;.</span></span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   - Bates D, Maechler M, Jagan M (2022). _Matrix: Sparse and Dense MatrixClasses</span></span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="co"># and Methods_. R package version</span></span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 1.5-3,&lt;https://CRAN.R-project.org/package=Matrix&gt;.</span></span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   - Eddelbuettel D, François R (2011). "Rcpp: Seamless R and C++Integration."</span></span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="co"># _Journal of Statistical Software_, *40*(8), 1-18.doi:10.18637/jss.v040.i08</span></span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt;https://doi.org/10.18637/jss.v040.i08&gt;.Eddelbuettel D (2013). _Seamless R and</span></span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a><span class="co"># C++ Integration with Rcpp_.Springer, New York.</span></span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="co"># doi:10.1007/978-1-4614-6868-4&lt;https://doi.org/10.1007/978-1-4614-6868-4&gt;, ISBN</span></span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a><span class="co"># 978-1-4614-6867-7.Eddelbuettel D, Balamuta JJ (2018). "Extending extitR with</span></span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a><span class="co"># extitC++: ABrief Introduction to extitRcpp." _The American Statistician_,</span></span>
-<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a><span class="co"># *72*(1),28-36.</span></span>
-<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a><span class="co"># doi:10.1080/00031305.2017.1375990&lt;https://doi.org/10.1080/00031305.2017.1375990&gt;.</span></span>
-<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a><span class="co">#   - Goodrich B, Gabry J, Ali I, Brilleman S (2022). "rstanarm: Bayesianapplied</span></span>
-<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a><span class="co"># regression modeling via Stan." R package version</span></span>
-<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a><span class="co"># 2.21.3,&lt;https://mc-stan.org/rstanarm/&gt;.Brilleman S, Crowther M, Moreno-Betancur</span></span>
-<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a><span class="co"># M, Buros Novik J, Wolfe R(2018). "Joint longitudinal and time-to-event models</span></span>
-<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a><span class="co"># via Stan." StanCon2018. 10-12 Jan 2018. Pacific Grove, CA,</span></span>
-<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a><span class="co"># USA.,&lt;https://github.com/stan-dev/stancon_talks/&gt;.</span></span>
-<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a><span class="co">#   - Makowski D, Ben-Shachar M, Patil I, Lüdecke D (2021). "AutomatedResults</span></span>
-<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Reporting as a Practical Tool to Improve Reproducibility andMethodological Best</span></span>
-<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Practices Adoption." _CRAN_.&lt;https://github.com/easystats/report&gt;.</span></span>
-<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a><span class="co">#   - R Core Team (2022). _R: A Language and Environment for StatisticalComputing_.</span></span>
-<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a><span class="co"># R Foundation for Statistical Computing, Vienna,</span></span>
-<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Austria.&lt;https://www.R-project.org/&gt;.</span></span>
-<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a><span class="co">#   - Wickham H, François R, Henry L, Müller K (2022). _dplyr: A Grammar ofData</span></span>
-<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Manipulation_. R package version</span></span>
-<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a><span class="co"># 1.0.10,&lt;https://CRAN.R-project.org/package=dplyr&gt;.</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="co"># Analyses were conducted using the R Statistical language (version 4.2.2; R Core</span></span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="co"># Team, 2022) on macOS Ventura 13.0.1, using the packages lme4 (version 1.1.31;</span></span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a><span class="co"># Bates D et al., 2015), Matrix (version 1.5.3; Bates D et al., 2022), Rcpp</span></span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a><span class="co"># (version 1.0.9; Eddelbuettel D, François R, 2011), rstanarm (version 2.21.3;</span></span>
+<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a><span class="co"># Goodrich B et al., 2022), report (version 0.5.5.3; Makowski D et al., 2021) and</span></span>
+<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a><span class="co"># dplyr (version 1.0.10; Wickham H et al., 2022).</span></span>
+<span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a><span class="co"># References</span></span>
+<span id="cb25-9"><a href="#cb25-9" tabindex="-1"></a><span class="co"># ----------</span></span>
+<span id="cb25-10"><a href="#cb25-10" tabindex="-1"></a><span class="co">#   - Bates D, Mächler M, Bolker B, Walker S (2015). "Fitting LinearMixed-Effects</span></span>
+<span id="cb25-11"><a href="#cb25-11" tabindex="-1"></a><span class="co"># Models Using lme4." _Journal of Statistical Software_,*67*(1), 1-48.</span></span>
+<span id="cb25-12"><a href="#cb25-12" tabindex="-1"></a><span class="co"># doi:10.18637/jss.v067.i01&lt;https://doi.org/10.18637/jss.v067.i01&gt;.</span></span>
+<span id="cb25-13"><a href="#cb25-13" tabindex="-1"></a><span class="co">#   - Bates D, Maechler M, Jagan M (2022). _Matrix: Sparse and Dense MatrixClasses</span></span>
+<span id="cb25-14"><a href="#cb25-14" tabindex="-1"></a><span class="co"># and Methods_. R package version</span></span>
+<span id="cb25-15"><a href="#cb25-15" tabindex="-1"></a><span class="co"># 1.5-3,&lt;https://CRAN.R-project.org/package=Matrix&gt;.</span></span>
+<span id="cb25-16"><a href="#cb25-16" tabindex="-1"></a><span class="co">#   - Eddelbuettel D, François R (2011). "Rcpp: Seamless R and C++Integration."</span></span>
+<span id="cb25-17"><a href="#cb25-17" tabindex="-1"></a><span class="co"># _Journal of Statistical Software_, *40*(8), 1-18.doi:10.18637/jss.v040.i08</span></span>
+<span id="cb25-18"><a href="#cb25-18" tabindex="-1"></a><span class="co"># &lt;https://doi.org/10.18637/jss.v040.i08&gt;.Eddelbuettel D (2013). _Seamless R and</span></span>
+<span id="cb25-19"><a href="#cb25-19" tabindex="-1"></a><span class="co"># C++ Integration with Rcpp_.Springer, New York.</span></span>
+<span id="cb25-20"><a href="#cb25-20" tabindex="-1"></a><span class="co"># doi:10.1007/978-1-4614-6868-4&lt;https://doi.org/10.1007/978-1-4614-6868-4&gt;, ISBN</span></span>
+<span id="cb25-21"><a href="#cb25-21" tabindex="-1"></a><span class="co"># 978-1-4614-6867-7.Eddelbuettel D, Balamuta JJ (2018). "Extending extitR with</span></span>
+<span id="cb25-22"><a href="#cb25-22" tabindex="-1"></a><span class="co"># extitC++: ABrief Introduction to extitRcpp." _The American Statistician_,</span></span>
+<span id="cb25-23"><a href="#cb25-23" tabindex="-1"></a><span class="co"># *72*(1),28-36.</span></span>
+<span id="cb25-24"><a href="#cb25-24" tabindex="-1"></a><span class="co"># doi:10.1080/00031305.2017.1375990&lt;https://doi.org/10.1080/00031305.2017.1375990&gt;.</span></span>
+<span id="cb25-25"><a href="#cb25-25" tabindex="-1"></a><span class="co">#   - Goodrich B, Gabry J, Ali I, Brilleman S (2022). "rstanarm: Bayesianapplied</span></span>
+<span id="cb25-26"><a href="#cb25-26" tabindex="-1"></a><span class="co"># regression modeling via Stan." R package version</span></span>
+<span id="cb25-27"><a href="#cb25-27" tabindex="-1"></a><span class="co"># 2.21.3,&lt;https://mc-stan.org/rstanarm/&gt;.Brilleman S, Crowther M, Moreno-Betancur</span></span>
+<span id="cb25-28"><a href="#cb25-28" tabindex="-1"></a><span class="co"># M, Buros Novik J, Wolfe R(2018). "Joint longitudinal and time-to-event models</span></span>
+<span id="cb25-29"><a href="#cb25-29" tabindex="-1"></a><span class="co"># via Stan." StanCon2018. 10-12 Jan 2018. Pacific Grove, CA,</span></span>
+<span id="cb25-30"><a href="#cb25-30" tabindex="-1"></a><span class="co"># USA.,&lt;https://github.com/stan-dev/stancon_talks/&gt;.</span></span>
+<span id="cb25-31"><a href="#cb25-31" tabindex="-1"></a><span class="co">#   - Makowski D, Ben-Shachar M, Patil I, Lüdecke D (2021). "AutomatedResults</span></span>
+<span id="cb25-32"><a href="#cb25-32" tabindex="-1"></a><span class="co"># Reporting as a Practical Tool to Improve Reproducibility andMethodological Best</span></span>
+<span id="cb25-33"><a href="#cb25-33" tabindex="-1"></a><span class="co"># Practices Adoption." _CRAN_.&lt;https://github.com/easystats/report&gt;.</span></span>
+<span id="cb25-34"><a href="#cb25-34" tabindex="-1"></a><span class="co">#   - R Core Team (2022). _R: A Language and Environment for StatisticalComputing_.</span></span>
+<span id="cb25-35"><a href="#cb25-35" tabindex="-1"></a><span class="co"># R Foundation for Statistical Computing, Vienna,</span></span>
+<span id="cb25-36"><a href="#cb25-36" tabindex="-1"></a><span class="co"># Austria.&lt;https://www.R-project.org/&gt;.</span></span>
+<span id="cb25-37"><a href="#cb25-37" tabindex="-1"></a><span class="co">#   - Wickham H, François R, Henry L, Müller K (2022). _dplyr: A Grammar ofData</span></span>
+<span id="cb25-38"><a href="#cb25-38" tabindex="-1"></a><span class="co"># Manipulation_. R package version</span></span>
+<span id="cb25-39"><a href="#cb25-39" tabindex="-1"></a><span class="co"># 1.0.10,&lt;https://CRAN.R-project.org/package=dplyr&gt;.</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
 <h2 id="credits">Credits<a class="anchor" aria-label="anchor" href="#credits"></a>
 </h2>
 <p>If you like it, you can put a <em>star</em> on this repo, and cite the package as follows:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">citation</span>(<span class="st">"report"</span>)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>To cite <span class="cf">in</span> publications use<span class="sc">:</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  Makowski, D., Ben<span class="sc">-</span>Shachar, M.S., Patil, I. <span class="sc">&amp;</span> Lüdecke, <span class="fu">D.</span> (<span class="dv">2020</span>).</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  Automated Results Reporting as a Practical Tool to Improve</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  Reproducibility and Methodological Best Practices Adoption. CRAN.</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  Available from https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>easystats<span class="sc">/</span>report. doi<span class="sc">:</span> .</span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="sc">@</span>Article{,</span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    title <span class="ot">=</span> {Automated Results Reporting as a Practical Tool to Improve Reproducibility and Methodological Best Practices Adoption},</span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>    author <span class="ot">=</span> {Dominique Makowski and Mattan S. Ben<span class="sc">-</span>Shachar and Indrajeet Patil and Daniel Lüdecke},</span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>    year <span class="ot">=</span> {<span class="dv">2021</span>},</span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>    journal <span class="ot">=</span> {CRAN},</span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>    url <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>easystats<span class="sc">/</span>report},</span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="fu">citation</span>(<span class="st">"report"</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a>To cite <span class="cf">in</span> publications use<span class="sc">:</span></span>
+<span id="cb26-4"><a href="#cb26-4" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a>  Makowski, D., Ben<span class="sc">-</span>Shachar, M.S., Patil, I. <span class="sc">&amp;</span> Lüdecke, <span class="fu">D.</span> (<span class="dv">2020</span>).</span>
+<span id="cb26-6"><a href="#cb26-6" tabindex="-1"></a>  Automated Results Reporting as a Practical Tool to Improve</span>
+<span id="cb26-7"><a href="#cb26-7" tabindex="-1"></a>  Reproducibility and Methodological Best Practices Adoption. CRAN.</span>
+<span id="cb26-8"><a href="#cb26-8" tabindex="-1"></a>  Available from https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>easystats<span class="sc">/</span>report. doi<span class="sc">:</span> .</span>
+<span id="cb26-9"><a href="#cb26-9" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" tabindex="-1"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
+<span id="cb26-11"><a href="#cb26-11" tabindex="-1"></a></span>
+<span id="cb26-12"><a href="#cb26-12" tabindex="-1"></a>  <span class="sc">@</span>Article{,</span>
+<span id="cb26-13"><a href="#cb26-13" tabindex="-1"></a>    title <span class="ot">=</span> {Automated Results Reporting as a Practical Tool to Improve Reproducibility and Methodological Best Practices Adoption},</span>
+<span id="cb26-14"><a href="#cb26-14" tabindex="-1"></a>    author <span class="ot">=</span> {Dominique Makowski and Mattan S. Ben<span class="sc">-</span>Shachar and Indrajeet Patil and Daniel Lüdecke},</span>
+<span id="cb26-15"><a href="#cb26-15" tabindex="-1"></a>    year <span class="ot">=</span> {<span class="dv">2021</span>},</span>
+<span id="cb26-16"><a href="#cb26-16" tabindex="-1"></a>    journal <span class="ot">=</span> {CRAN},</span>
+<span id="cb26-17"><a href="#cb26-17" tabindex="-1"></a>    url <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>easystats<span class="sc">/</span>report},</span>
+<span id="cb26-18"><a href="#cb26-18" tabindex="-1"></a>  }</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="contribute">Contribute<a class="anchor" aria-label="anchor" href="#contribute"></a>

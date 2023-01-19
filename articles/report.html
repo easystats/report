@@ -206,16 +206,16 @@ allows one to return a tabular summary using the
 for statistical model objects from correlation, <em>t</em>-tests,
 Wilcoxon tests, etc.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">wt</span> <span class="op">~</span> <span class="va">am</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">mtcars</span><span class="op">$</span><span class="va">wt</span> <span class="op">~</span> <span class="va">mtcars</span><span class="op">$</span><span class="va">am</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co"># Effect sizes were labelled following Cohen's (1988)</span></span>
 <span><span class="co"># recommendations.</span></span>
 <span><span class="co"># </span></span>
-<span><span class="co"># The Welch Two Sample t-test testing the difference of wt by</span></span>
-<span><span class="co"># am (mean in group 0 = 3.77, mean in group 1 = 2.41)</span></span>
-<span><span class="co"># suggests that the effect is positive, statistically</span></span>
-<span><span class="co"># significant, and large (difference = 1.36, 95% CI [0.85,</span></span>
-<span><span class="co"># 1.86], t(29.23) = 5.49, p &lt; .001; Cohen's d = 2.03, 95% CI</span></span>
-<span><span class="co"># [1.13, 2.91])</span></span></code></pre></div>
+<span><span class="co"># The Welch Two Sample t-test testing the difference of</span></span>
+<span><span class="co"># mtcars$wt by mtcars$am (mean in group 0 = 3.77, mean in</span></span>
+<span><span class="co"># group 1 = 2.41) suggests that the effect is positive,</span></span>
+<span><span class="co"># statistically significant, and large (difference = 1.36,</span></span>
+<span><span class="co"># 95% CI [0.85, 1.86], t(29.23) = 5.49, p &lt; .001; Cohen's d =</span></span>
+<span><span class="co"># 1.93, 95% CI [1.08, 2.77])</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">wt</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>

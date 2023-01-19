@@ -220,13 +220,13 @@ mtcars\)</span>wt</td>
 </h2>
 <p>It works similarly for <em>t</em>-tests.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">am</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">mtcars</span><span class="op">$</span><span class="va">am</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="../reference/report_table.html">report_table</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">t</span></span>
-<span><span class="co"># Difference |          95% CI | t(18.33) |     p |     d</span></span>
-<span><span class="co"># -------------------------------------------------------</span></span>
-<span><span class="co"># -7.24      | [-11.28, -3.21] |    -3.77 | 0.001 | -1.76</span></span>
+<span><span class="co"># Difference |          95% CI | t(18.33) |     p | Cohen's d |   Cohens_d  CI</span></span>
+<span><span class="co"># ----------------------------------------------------------------------------</span></span>
+<span><span class="co"># -7.24      | [-11.28, -3.21] |    -3.77 | 0.001 |     -1.41 | [-2.26, -0.53]</span></span>
 <span><span class="co"># </span></span>
 <span><span class="co"># Alternative hypothesis: two.sided</span></span></code></pre></div>
 <p>Note that, by default, <code><a href="../reference/report_table.html">report_table()</a></code> prettifies the
@@ -239,8 +239,10 @@ access this <em>raw</em> table as a dataframe:</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span></span>
 <span><span class="co">#   Difference   CI    CI_low   CI_high         t df_error</span></span>
 <span><span class="co"># 1  -7.244939 0.95 -11.28019 -3.209684 -3.767123 18.33225</span></span>
-<span><span class="co">#             p Alternative         d</span></span>
-<span><span class="co"># 1 0.001373638   two.sided -1.759673</span></span></code></pre></div>
+<span><span class="co">#             p Alternative  Cohens_d Cohens_d_CI_low</span></span>
+<span><span class="co"># 1 0.001373638   two.sided -1.411046       -2.260021</span></span>
+<span><span class="co">#   Cohens_d_CI_high</span></span>
+<span><span class="co"># 1       -0.5342257</span></span></code></pre></div>
 <p>In fact, the function used to <em>prettify</em> the output is called
 <code><a href="https://easystats.github.io/insight/reference/format_table.html" class="external-link">insight::format_table()</a></code> and is accessible to you too, so
 that you can prettify the output while keeping it as a data frame.</p>
@@ -248,13 +250,13 @@ that you can prettify the output while keeping it as a data frame.</p>
 <code class="sourceCode R"><span><span class="fu">insight</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/insight/reference/format_table.html" class="external-link">format_table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span>, stars <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#   Difference          95% CI t(18.33)       p Alternative</span></span>
 <span><span class="co"># 1      -7.24 [-11.28, -3.21]    -3.77 0.001**   two.sided</span></span>
-<span><span class="co">#       d</span></span>
-<span><span class="co"># 1 -1.76</span></span></code></pre></div>
+<span><span class="co">#   Cohen's d   Cohens_d  CI</span></span>
+<span><span class="co"># 1     -1.41 [-2.26, -0.53]</span></span></code></pre></div>
 <p>Also, you can join the results of multiple tables:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">results1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">am</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
-<span><span class="va">results2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">wt</span> <span class="op">~</span> <span class="va">am</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
-<span><span class="va">results3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">qsec</span> <span class="op">~</span> <span class="va">am</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">results1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">mtcars</span><span class="op">$</span><span class="va">am</span><span class="op">)</span></span>
+<span><span class="va">results2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">wt</span> <span class="op">~</span> <span class="va">mtcars</span><span class="op">$</span><span class="va">am</span><span class="op">)</span></span>
+<span><span class="va">results3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">qsec</span> <span class="op">~</span> <span class="va">mtcars</span><span class="op">$</span><span class="va">am</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="../reference/report_table.html">report_table</a></span><span class="op">(</span><span class="va">results1</span><span class="op">)</span>,</span>
@@ -264,17 +266,17 @@ that you can prettify the output while keeping it as a data frame.</p>
 <span><span class="fu"><a href="https://easystats.github.io/insight/reference/display.html" class="external-link">display</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
+<col width="9%">
 <col width="8%">
-<col width="5%">
-<col width="11%">
-<col width="11%">
 <col width="10%">
-<col width="14%">
+<col width="10%">
+<col width="9%">
+<col width="13%">
 <col width="5%">
 <col width="5%">
 <col width="6%">
-<col width="5%">
-<col width="13%">
+<col width="8%">
+<col width="12%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">Parameter</th>
@@ -286,13 +288,13 @@ that you can prettify the output while keeping it as a data frame.</p>
 <th align="center">t</th>
 <th align="center">df</th>
 <th align="center">p</th>
-<th align="center">d</th>
-<th align="center">d CI</th>
+<th align="center">Cohen’s d</th>
+<th align="center">Cohens_d CI</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">mpg</td>
-<td align="center">am</td>
+<td align="left">mtcars<span class="math inline">\(mpg |
+mtcars\)</span>am</td>
 <td align="center">17.15</td>
 <td align="center">24.39</td>
 <td align="center">-7.24</td>
@@ -300,12 +302,13 @@ that you can prettify the output while keeping it as a data frame.</p>
 <td align="center">-3.77</td>
 <td align="center">18.33</td>
 <td align="center">0.001</td>
-<td align="center">-1.76</td>
-<td align="center">(-2.82, -0.67)</td>
+<td align="center">-1.41</td>
+<td align="center">(-2.26, -0.53)</td>
+<td align="center"></td>
 </tr>
 <tr class="even">
-<td align="left">wt</td>
-<td align="center">am</td>
+<td align="left">mtcars<span class="math inline">\(wt |
+mtcars\)</span>am</td>
 <td align="center">3.77</td>
 <td align="center">2.41</td>
 <td align="center">1.36</td>
@@ -313,12 +316,13 @@ that you can prettify the output while keeping it as a data frame.</p>
 <td align="center">5.49</td>
 <td align="center">29.23</td>
 <td align="center">&lt; .001</td>
-<td align="center">2.03</td>
-<td align="center">(1.13, 2.91)</td>
+<td align="center">1.93</td>
+<td align="center">(1.08, 2.77)</td>
+<td align="center"></td>
 </tr>
 <tr class="odd">
-<td align="left">qsec</td>
-<td align="center">am</td>
+<td align="left">mtcars<span class="math inline">\(qsec |
+mtcars\)</span>am</td>
 <td align="center">18.18</td>
 <td align="center">17.36</td>
 <td align="center">0.82</td>
@@ -326,8 +330,9 @@ that you can prettify the output while keeping it as a data frame.</p>
 <td align="center">1.29</td>
 <td align="center">25.53</td>
 <td align="center">0.209</td>
-<td align="center">0.51</td>
-<td align="center">(-0.28, 1.29)</td>
+<td align="center">0.46</td>
+<td align="center">(-0.26, 1.18)</td>
+<td align="center"></td>
 </tr>
 </tbody>
 </table>
