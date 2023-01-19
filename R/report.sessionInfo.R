@@ -61,7 +61,7 @@ cite_packages <- function(session = NULL, include_R = TRUE, ...) {
     x <- report_table(session, include_R = include_R)
   }
 
-  x <- x$Reference[order(x$Reference)] # Extract the references
+  x <- sort(x$Reference, na.last = TRUE) # Extract the references
 
   as.report_parameters(x, ...)
 }
@@ -112,9 +112,9 @@ report_table.sessionInfo <- function(x, include_R = TRUE, ...) {
   pkgs <- x$otherPkgs
 
   if (isTRUE(include_R)) {
-    citations <- c(clean_citation(utils::citation("base")))
-    versions <- c(paste0(x$R.version$major, ".", x$R.version$minor))
-    names <- c("R")
+    citations <- clean_citation(utils::citation("base"))
+    versions <- paste0(x$R.version$major, ".", x$R.version$minor)
+    names <- "R"
   } else {
     citations <- NULL
     versions <- NULL

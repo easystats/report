@@ -301,7 +301,7 @@ report_parameters.lm <- function(x,
   text <- paste0(
     text,
     " is statistically ",
-    effectsize::interpret_p(params$p, rules = effectsize::rules(c(0.05), c("significant", "non-significant"))),
+    effectsize::interpret_p(params$p, rules = effectsize::rules(0.05, c("significant", "non-significant"))),
     " and ",
     effectsize::interpret_direction(params$Coefficient)
   )
@@ -495,7 +495,10 @@ report_info.lm <- function(x,
   }
 
   if ("ci_method" %in% names(att)) {
-    text <- paste0(text, " ", .info_df(ci = att$ci, ci_method = att$ci_method, test_statistic = att$test_statistic, bootstrap = att$bootstrap))
+    text <- paste0(text, " ", .info_df(ci = att$ci,
+                                       ci_method = att$ci_method,
+                                       test_statistic = att$test_statistic,
+                                       bootstrap = att$bootstrap))
   }
 
   # if (!is.null(att$ci_method)) {

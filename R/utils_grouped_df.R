@@ -54,12 +54,12 @@
 
   if (length(unknown) > 0L) {
     stop(insight::format_message(
-      sprintf("`groups` missing from `x`: %s.", paste0(groups, collapse = ", "))
+      sprintf("`groups` missing from `x`: %s.", toString(groups))
     ))
   }
 
   unique_groups <- unique(x[, groups, drop = FALSE])
-  is_factor <- do.call(c, lapply(unique_groups, function(x) is.factor(x)))
+  is_factor <- do.call(c, lapply(unique_groups, is.factor))
   n_comb <- nrow(unique_groups)
   rows <- rep(list(NA), n_comb)
 

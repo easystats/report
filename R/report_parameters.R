@@ -145,9 +145,9 @@ print.report_parameters <- function(x, ...) {
     pretty_name <- parameters::format_parameters(x)
   }
 
-  text <- sapply(pretty_name,
+  text <- vapply(pretty_name,
     .format_parameters_regression,
-    simplify = TRUE, USE.NAMES = FALSE
+    USE.NAMES = TRUE, "character"
   )
 
   text

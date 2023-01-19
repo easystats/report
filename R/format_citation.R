@@ -33,13 +33,13 @@ format_citation <- function(citation,
     citation <- trimws(gsub(")..*", ")", citation)) # Remove everything after first parenthesis (hopefully, the date)
     citation <- gsub("[A-Z]\\., ", "", citation) # Remove last first names
     citation <- gsub("[A-Z]\\. ", "", citation) # Remove remaining first names
-    citation <- gsub(", \\(", " (", citation)
+    citation <- gsub(", (", " (", citation, fixed = TRUE)
   }
 
   if (isTRUE(short)) {
-    n_authors <- sapply(regmatches(citation, gregexpr(",", citation, fixed = TRUE)), length)
+    n_authors <- lengths(regmatches(citation, gregexpr(",", citation, fixed = TRUE)))
     for (i in seq_along(n_authors)) {
-      if (n_authors[i] > 1 || grepl("&", citation[i])) {
+      if (n_authors[i] > 1 || grepl("&", citation[i], fixed = TRUE)) {
         citation[i] <- trimws(gsub(",.*\\(", " et al. (", citation[i])) # Replace remaining authors by et al.
       }
     }
@@ -47,7 +47,7 @@ format_citation <- function(citation,
 
   if (isTRUE(intext)) {
     citation <- trimws(gsub(").*", "", citation))
-    citation <- trimws(gsub(" \\(", ", ", citation))
+    citation <- trimws(gsub(" (", ", ", citation, fixed = TRUE))
   }
 
   citation
@@ -70,13 +70,13 @@ clean_citation <- function(citation) {
       style = "text"
     )
   }
-  citation <- unlist(strsplit(citation, "\n"))
+  citation <- unlist(strsplit(citation, "\n", fixed = TRUE))
   citation <- paste(citation, collapse = "SPLIT")
-  citation <- unlist(strsplit(citation, "SPLITSPLIT"))
+  citation <- unlist(strsplit(citation, "SPLITSPLIT", fixed = TRUE))
   i <- 1
-  while (grepl("To cite ", citation[i])) {
+  while (grepl("To cite ", citation[i], fixed = TRUE)) {
     i <- i + 1
   }
-  citation <- gsub("  ", " ", trimws(gsub("SPLIT", "", citation[i]), which = "both"))
+  citation <- gsub("  ", " ", trimws(gsub("SPLIT", " ", citation[i], fixed = TRUE), which = "both"), fixed = TRUE)
   as.character(citation)
 }

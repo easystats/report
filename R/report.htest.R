@@ -39,7 +39,8 @@ report.htest <- function(x, ...) {
 #' @export
 report_effectsize.htest <- function(x, ...) {
   dot_args <- list(...)
-  if (is.null(model_info <- dot_args$model_info)) {
+  model_info <- dot_args$model_info
+  if (is.null(model_info)) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
   }
 
@@ -139,7 +140,8 @@ report_table.htest <- function(x, ...) {
 #' @rdname report.htest
 #' @export
 report_statistics.htest <- function(x, table = NULL, ...) {
-  if (is.null(model_info <- list(...)$model_info)) {
+  model_info <- list(...)$model_info
+  if (is.null(model_info)) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
   }
   if (is.null(table) || is.null(attributes(table)$effsize)) {
@@ -215,7 +217,8 @@ report_statistics.htest <- function(x, table = NULL, ...) {
 #' @export
 report_parameters.htest <- function(x, table = NULL, ...) {
   dot_args <- list(...)
-  if (is.null(model_info <- dot_args$model_info)) {
+  model_info <- dot_args$model_info
+  if (is.null(model_info)) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
   }
 
@@ -261,7 +264,8 @@ report_parameters.htest <- function(x, table = NULL, ...) {
 #' @export
 report_model.htest <- function(x, table = NULL, ...) {
   dot_args <- list(...)
-  if (is.null(model_info <- dot_args$model_info)) {
+  model_info <- dot_args$model_info
+  if (is.null(model_info)) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
   }
 
@@ -295,7 +299,8 @@ report_model.htest <- function(x, table = NULL, ...) {
 #' @export
 report_info.htest <- function(x, effectsize = NULL, ...) {
   dot_args <- list(...)
-  if (is.null(model_info <- dot_args$model_info)) {
+  model_info <- dot_args$model_info
+  if (is.null(model_info)) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
   }
 
@@ -317,7 +322,8 @@ report_info.htest <- function(x, effectsize = NULL, ...) {
 #' @export
 report_text.htest <- function(x, table = NULL, ...) {
   dot_args <- list(...)
-  if (is.null(model_info <- dot_args$model_info)) {
+  model_info <- dot_args$model_info
+  if (is.null(model_info)) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
   }
 

@@ -73,7 +73,7 @@ report_table.lavaan <- function(x, ...) {
     ...
   )
   # Add attributes from params table
-  for (att in c("ci")) {
+  for (att in "ci") {
     attr(out, att) <- attributes(parameters)[[att]]
   }
 
@@ -94,7 +94,7 @@ report_performance.lavaan <- function(x, table = NULL, ...) {
   text_chi2 <- ""
   if (all(c("p_Chi2", "Chi2", "Chi2_df") %in% names(performance))) {
     sig <- "significantly"
-    if (performance$p_Chi2 > .05) {
+    if (performance$p_Chi2 > 0.05) {
       sig <- "not significantly"
     }
     text_chi2 <- paste0(
@@ -112,7 +112,9 @@ report_performance.lavaan <- function(x, table = NULL, ...) {
 
   perf_table <- effectsize::interpret(performance)
   text_full <- datawizard::text_paste(text_chi2, .text_performance_lavaan(perf_table), sep = " ")
-  text <- datawizard::text_paste(text_chi2, .text_performance_lavaan(perf_table[perf_table$Name %in% c("RMSEA", "CFI", "SRMR"), ]), sep = " ")
+  text <- datawizard::text_paste(text_chi2,
+                                 .text_performance_lavaan(perf_table[perf_table$Name %in% c("RMSEA", "CFI", "SRMR"), ]),
+                                 sep = " ")
 
 
   as.report_performance(text_full, summary = text)

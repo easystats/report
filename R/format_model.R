@@ -23,7 +23,7 @@ format_model.default <- function(x) {
     type <- ""
   }
 
-  if ("Mclust" %in% class(x)) {
+  if (inherits(x, "Mclust")) {
     return("Gaussian finite mixture fitted by EM algorithm")
   }
 
@@ -63,7 +63,7 @@ format_model.default <- function(x) {
 
   type <- paste0(type, "model")
 
-  if (grepl("general linear", type)) {
+  if (grepl("general linear", type, fixed = TRUE)) {
     type <- paste0(
       type,
       " (",

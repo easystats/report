@@ -52,7 +52,8 @@ instead of \code{"3 participants"}).}
 
 \item{digits}{Number of significant digits.}
 
-\item{threshold}{Percentage after which to combine, e.g., countries (default is 10\%, so countries that represent less than 10\% will be combined in the "other" category).}
+\item{threshold}{Percentage after which to combine, e.g., countries (default is 10\%,
+so countries that represent less than 10\% will be combined in the "other" category).}
 
 \item{...}{Arguments passed to or from other methods.}
 }
