@@ -1,4 +1,3 @@
-
 set.seed(123)
 response <- rnorm(30)
 
