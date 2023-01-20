@@ -210,7 +210,7 @@ report_participants <- function(data,
 #' @keywords internal
 .check_df_names <- function(data, names) {
   data[names] <- lapply(names, function(x) {
-    if (is.null(x) || !x %in% names(data)) {
+    if (is.null(x) || !(x %in% names(data))) {
       NA
     } else {
       data[[x]]
