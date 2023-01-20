@@ -221,7 +221,7 @@ report_participants <- function(data,
 
 #' @keywords internal
 .replace_names <- function(data, x) {
-  if (is.null(x) || !x %in% names(data)) {
+  if (is.null(x) || !(x %in% names(data))) {
     tools::toTitleCase(deparse(substitute(x)))
   } else {
     x
