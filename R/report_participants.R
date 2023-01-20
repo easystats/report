@@ -98,8 +98,7 @@
 #'   "Sex" = c("I", "I", "M", "M", "F", "F", "F", "F"),
 #'   "Gender" = c("N", "N", "W", "M", "M", "M", "Non-Binary", "Non-Binary"),
 #'   "Participant" = c("S1", "S1", "s2", "s2", "s3", "s3", "s4", "s4"),
-#'   "Condition" = c("A", "A", "A", "A", "B", "B", "B", "B"),
-#'   stringsAsFactors = FALSE
+#'   "Condition" = c("A", "A", "A", "A", "B", "B", "B", "B")
 #' )
 #'
 #' report_participants(data,
@@ -168,6 +167,7 @@ report_participants <- function(data,
 
   if (!is.null(group)) {
     text <- NULL
+    data[[group]] <- as.character(data[[group]])
     for (i in split(data, data[group])) {
       current_text <- .report_participants(
         i,
