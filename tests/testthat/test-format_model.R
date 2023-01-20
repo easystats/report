@@ -1,4 +1,3 @@
-
 test_that("format_model", {
   expect_identical(format_model(lm(Sepal.Length ~ Petal.Length * Species, data = iris)), "linear model")
   expect_identical(format_model(glm(vs ~ disp, data = mtcars, family = "binomial")), "logistic model")
