@@ -4,11 +4,3 @@ requiet <- function(package) {
     require(package, warn.conflicts = FALSE, character.only = TRUE)
   )
 }
-
-# load all hard dependencies
-library(bayestestR)
-library(insight)
-library(datawizard)
-library(effectsize)
-library(parameters)
-library(performance)

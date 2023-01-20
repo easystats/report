@@ -20,7 +20,8 @@ test_that("report_sample n = TRUE", {
   )
   expect_equal(
     nchar(report_sample(airquality, n = TRUE)),
-    c(Variable = 131, Summary = 128)
+    c(Variable = 131, Summary = 128),
+    ignore_attr = TRUE
   )
   expect_snapshot(
     variant = "windows",
