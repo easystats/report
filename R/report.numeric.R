@@ -17,7 +17,8 @@ report.numeric <- function(x,
       name <- names(x)
     }
     warning(insight::format_message(
-      paste0("Variable `", name, "` contains only ", length(unique(x)), "different values. Consider converting it to a factor.")
+      paste0("Variable `", name, "` contains only ", length(unique(x)),
+             "different values. Consider converting it to a factor.")
     ), call. = FALSE)
   }
 
@@ -173,7 +174,9 @@ report_parameters.numeric <- function(x,
   text_mad <- insight::format_value(table$MAD[1], digits = digits)
 
   # Range
-  text_range <- paste0("[", insight::format_value(table$Min[1], protect_integers = TRUE, digits = digits), ", ", insight::format_value(table$Max[1], protect_integers = TRUE), "]")
+  text_range <- paste0("[",
+                       insight::format_value(table$Min[1], protect_integers = TRUE, digits = digits),
+                       ", ", insight::format_value(table$Max[1], protect_integers = TRUE), "]")
 
   # Distribution
   text_skewness <- paste0("Skewness = ", insight::format_value(table$Skewness[1]))
@@ -183,7 +186,9 @@ report_parameters.numeric <- function(x,
   if (!is.null(missing_percentage)) {
     if (isTRUE(missing_percentage)) {
       n_missing <- table$percentage_Missing[1]
-      text_missing <- paste0(insight::format_value(table$percentage_Missing[1], protect_integers = TRUE, digits = digits), "% missing")
+      text_missing <- paste0(insight::format_value(table$percentage_Missing[1],
+                                                   protect_integers = TRUE,
+                                                   digits = digits), "% missing")
     } else {
       n_missing <- table$n_Missing[1]
       text_missing <- paste0(table$n_Missing[1], " missing")
@@ -208,19 +213,19 @@ report_parameters.numeric <- function(x,
   text <- text_full
 
   # N observations
-  if (isFALSE(n)) text <- text[!names(text) %in% c("n_Obs")]
+  if (isFALSE(n)) text <- text[!names(text) %in% "n_Obs"]
 
   # Centrality and dispersion
   if (!isFALSE(centrality) && !is.null(centrality)) {
     if (centrality == "median") {
       text <- text[!names(text) %in% c("Mean", "Dispersion_Mean")]
       if (!dispersion) {
-        text <- text[!names(text) %in% c("Dispersion_Median")]
+        text <- text[!names(text) %in% "Dispersion_Median"]
       }
     } else {
       text <- text[!names(text) %in% c("Median", "Dispersion_Median")]
       if (!dispersion) {
-        text <- text[!names(text) %in% c("Dispersion_Mean")]
+        text <- text[!names(text) %in% "Dispersion_Mean"]
       }
     }
   } else {
@@ -229,7 +234,7 @@ report_parameters.numeric <- function(x,
 
   # Range
   if (!range) {
-    text <- text[!names(text) %in% c("Range")]
+    text <- text[!names(text) %in% "Range"]
   }
 
   # Distribution
@@ -238,7 +243,7 @@ report_parameters.numeric <- function(x,
   }
 
   if (is.null(missing_percentage) || n_missing == 0) {
-    text <- text[!names(text) %in% c("Missing")]
+    text <- text[!names(text) %in% "Missing"]
   }
 
   as.report_parameters(text_full, summary = text, ...)
@@ -284,13 +289,13 @@ report_text.numeric <- function(x,
   text <- paste0(
     name,
     ": ",
-    paste0(params, collapse = ", ")
+    toString(params)
   )
 
   short <- paste0(
     name,
     ": ",
-    paste0(summary(params), collapse = ", ")
+    toString(summary(params))
   )
 
   as.report_text(text, summary = short)
@@ -325,8 +330,8 @@ report_statistics.numeric <- function(x,
     ...
   )
 
-  text <- paste0(params, collapse = ", ")
-  short <- paste0(summary(params), collapse = ", ")
+  text <- toString(params)
+  short <- toString(summary(params))
 
   as.report_statistics(text, summary = short)
 }

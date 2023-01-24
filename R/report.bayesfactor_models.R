@@ -139,17 +139,17 @@ report_text.bayesfactor_models <- function(x,
 
 
   #### text full ####
-  if (grepl("BIC", BF_method)) {
+  if (grepl("BIC", BF_method, fixed = TRUE)) {
     bf_explain <- paste0(
       "Bayes factors were computed using the BIC approximation, ",
       "by which BF10 = exp((BIC0 - BIC1)/2). "
     )
-  } else if (grepl("JZS", BF_method)) {
+  } else if (grepl("JZS", BF_method, fixed = TRUE)) {
     bf_explain <- paste0(
       "Bayes factors were computed with the `BayesFactor` package, ",
       "using JZS priors. "
     )
-  } else if (grepl("bridgesampling", BF_method)) {
+  } else if (grepl("bridgesampling", BF_method, fixed = TRUE)) {
     bf_explain <- paste0(
       "Bayes factors were computed by comparing marginal likelihoods, ",
       "using the `bridgesampling` package. "
@@ -325,7 +325,7 @@ report_text.bayesfactor_inclusion <- function(x,
     } else {
       paste0(
         " (here we used subjective prior odds of ",
-        paste0(priorOdds, collapse = ", "), ")"
+        toString(priorOdds), ")"
       )
     },
     ", it is possible to sum the prior probability of all models that include ",
@@ -384,7 +384,7 @@ report_text.bayesfactor_inclusion <- function(x,
     sprintf("\nAcross %s", ifelse(matched, "matched models only.", "all models.")),
     ifelse(is.null(priorOdds),
       "\nAssuming unifor prior odds.",
-      paste0("\nWith custom prior odds of [", paste0(priorOdds, collapse = ", "), "].")
+      paste0("\nWith custom prior odds of [", toString(priorOdds), "].")
     )
   )
   attr(bf_table, "table_footer") <- footer

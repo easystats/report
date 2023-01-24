@@ -145,9 +145,9 @@ print.report_parameters <- function(x, ...) {
     pretty_name <- parameters::format_parameters(x)
   }
 
-  text <- sapply(pretty_name,
+  text <- vapply(pretty_name,
     .format_parameters_regression,
-    simplify = TRUE, USE.NAMES = FALSE
+    USE.NAMES = TRUE, "character"
   )
 
   text
@@ -175,36 +175,20 @@ print.report_parameters <- function(x, ...) {
 
     if ("ESS" %in% names(diagnostic)) {
       stability <- effectsize::interpret_ess(diagnostic$ESS, ...)
-      text <- ifelse(stability == "sufficient" & convergence == "converged",
-        paste0(
-          text,
-          " and the indices are reliable (ESS = ",
-          insight::format_value(diagnostic$ESS, digits = 0),
-          ")"
-        ),
-        ifelse(stability == "sufficient" & convergence != "converged",
-          paste0(
-            text,
-            " even though the indices appear as reliable (ESS = ",
-            insight::format_value(diagnostic$ESS, digits = 0),
-            ")"
-          ),
-          ifelse(stability != "sufficient" & convergence == "converged",
-            paste0(
-              text,
-              " but the indices are unreliable (ESS = ",
-              insight::format_value(diagnostic$ESS, digits = 0),
-              ")"
-            ),
-            paste0(
-              text,
-              " and the indices are unreliable (ESS = ",
-              insight::format_value(diagnostic$ESS, digits = 0),
-              ")"
-            )
-          )
+      text <- lapply(seq_len(length(stability)), function(x) {
+        y <- switch(EXPR = paste(stability[x] == "sufficient", convergence[x] == "converged"),
+          "TRUE TRUE" = paste0(text, " and the indices are reliable (ESS = ",
+                               insight::format_value(diagnostic$ESS, digits = 0), ")"),
+          "TRUE FALSE" = paste0(text, " even though the indices appear as reliable (ESS = ",
+                                insight::format_value(diagnostic$ESS, digits = 0), ")"),
+          "FALSE TRUE" = paste0(text, " but the indices are unreliable (ESS = ",
+                                insight::format_value(diagnostic$ESS, digits = 0), ")"),
+          "FALSE FALSE" = paste0(text, " and the indices are unreliable (ESS = ",
+                                 insight::format_value(diagnostic$ESS, digits = 0), ")")
         )
-      )
+        y[[x]]
+      })
+      text <- unlist(text)
     }
   } else {
     text <- ""

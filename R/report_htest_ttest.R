@@ -109,7 +109,7 @@
   text <- paste0(
     trimws(x$method),
     " testing the difference ",
-    ifelse(grepl(" by ", x$data.name), "of ", "between "),
+    ifelse(grepl(" by ", x$data.name, fixed = TRUE), "of ", "between "),
     vars_full
   )
 

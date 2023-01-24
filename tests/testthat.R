@@ -6,7 +6,6 @@
 # since the values included are of character type.
 if (tolower(Sys.info()[["sysname"]]) == "windows") {
   library(testthat)
-  library(report)
 
   test_check("report")
 }

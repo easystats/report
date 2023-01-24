@@ -37,34 +37,35 @@ test_that("report.htest-t-test", {
   # two-sample unpaired t-test ---------------------
 
   set.seed(123)
-  expect_snapshot(variant = "windows", report(t.test(formula = wt ~ am, data = mtcars)))
+  expect_snapshot(variant = "windows", report(t.test(mtcars$wt ~ mtcars$am)))
 
   set.seed(123)
-  expect_snapshot(variant = "windows", report(t.test(formula = wt ~ am, data = mtcars, alternative = "l")))
+  expect_snapshot(variant = "windows", report(t.test(mtcars$wt ~ mtcars$am, alternative = "l")))
 
   set.seed(123)
-  expect_snapshot(variant = "windows", report(t.test(formula = wt ~ am, data = mtcars, alternative = "g")))
+  expect_snapshot(variant = "windows", report(t.test(mtcars$wt ~ mtcars$am, alternative = "g")))
 
   # two-sample paired t-test ---------------------
 
   x <- c(1.83, 0.50, 1.62, 2.48, 1.68, 1.88, 1.55, 3.06, 1.30)
   y <- c(0.878, 0.647, 0.598, 2.05, 1.06, 1.29, 1.06, 3.14, 1.29)
+  df <- data.frame(x, y)
 
   set.seed(123)
-  expect_snapshot(variant = "windows", report(t.test(x, y, paired = TRUE, data = mtcars)))
+  expect_snapshot(variant = "windows", report(t.test(df$x, df$y, paired = TRUE)))
 
   set.seed(123)
-  expect_snapshot(variant = "windows", report(t.test(x, y, paired = TRUE, data = mtcars, alternative = "l")))
+  expect_snapshot(variant = "windows", report(t.test(df$x, df$y, paired = TRUE, alternative = "l")))
 
   set.seed(123)
-  expect_snapshot(variant = "windows", report(t.test(x, y, paired = TRUE, data = mtcars, alternative = "g")))
+  expect_snapshot(variant = "windows", report(t.test(df$x, df$y, paired = TRUE, alternative = "g")))
 
   if (getRversion() > "4.0") {
     sleep2 <- reshape(sleep, direction = "wide", idvar = "ID", timevar = "group")
     set.seed(123)
     expect_snapshot(
       variant = "windows",
-      report(t.test(Pair(extra.1, extra.2) ~ 1, data = sleep2))
+      report(t.test(sleep2$extra.1, sleep2$extra.2, paired = TRUE))
     )
   }
 

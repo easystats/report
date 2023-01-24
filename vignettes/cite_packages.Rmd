@@ -79,7 +79,6 @@ R, you can include (usually at the end) every used package's citation using the
 
 ```{r, results='asis'}
 library(report)
-library(dplyr)
 
 cite_packages()
 ```

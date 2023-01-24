@@ -195,7 +195,7 @@ report_sample <- function(data,
   if (length(proportions) == 2) {
     proportions <- proportions[2]
   }
-  .summary <- sapply(proportions, function(i) sprintf("%.1f", 100 * i))
+  .summary <- vapply(proportions, function(i) sprintf("%.1f", 100 * i), "character")
   data.frame(
     Variable = sprintf("%s [%s], %%", column, names(.summary)),
     Summary = as.vector(.summary),

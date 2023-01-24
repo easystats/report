@@ -33,7 +33,9 @@ if (require("lme4")) {
 # Bayesian models
 if (require("rstanarm")) {
   model <- suppressWarnings(stan_lmer(
-    mpg ~ disp + (1 | cyl), data = mtcars, refresh = 0, iter = 1000))
+    mpg ~ disp + (1 | cyl),
+    data = mtcars, refresh = 0, iter = 1000
+  ))
   r <- report_random(model)
   r
   summary(r)
