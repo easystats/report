@@ -39,7 +39,7 @@
 #'
 #' # Bayesian models
 #' if (require("rstanarm")) {
-#'   model <- stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600)
+#'   model <- suppressWarnings(stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600))
 #'   report_statistics(model)
 #' }
 #' }
