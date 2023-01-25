@@ -17,8 +17,10 @@ report.numeric <- function(x,
       name <- names(x)
     }
     warning(insight::format_message(
-      paste0("Variable `", name, "` contains only ", length(unique(x)),
-             "different values. Consider converting it to a factor.")
+      paste0(
+        "Variable `", name, "` contains only ", length(unique(x)),
+        "different values. Consider converting it to a factor."
+      )
     ), call. = FALSE)
   }
 
@@ -174,9 +176,11 @@ report_parameters.numeric <- function(x,
   text_mad <- insight::format_value(table$MAD[1], digits = digits)
 
   # Range
-  text_range <- paste0("[",
-                       insight::format_value(table$Min[1], protect_integers = TRUE, digits = digits),
-                       ", ", insight::format_value(table$Max[1], protect_integers = TRUE), "]")
+  text_range <- paste0(
+    "[",
+    insight::format_value(table$Min[1], protect_integers = TRUE, digits = digits),
+    ", ", insight::format_value(table$Max[1], protect_integers = TRUE), "]"
+  )
 
   # Distribution
   text_skewness <- paste0("Skewness = ", insight::format_value(table$Skewness[1]))
@@ -187,8 +191,9 @@ report_parameters.numeric <- function(x,
     if (isTRUE(missing_percentage)) {
       n_missing <- table$percentage_Missing[1]
       text_missing <- paste0(insight::format_value(table$percentage_Missing[1],
-                                                   protect_integers = TRUE,
-                                                   digits = digits), "% missing")
+        protect_integers = TRUE,
+        digits = digits
+      ), "% missing")
     } else {
       n_missing <- table$n_Missing[1]
       text_missing <- paste0(table$n_Missing[1], " missing")

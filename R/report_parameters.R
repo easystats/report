@@ -177,14 +177,22 @@ print.report_parameters <- function(x, ...) {
       stability <- effectsize::interpret_ess(diagnostic$ESS, ...)
       text <- lapply(seq_len(length(stability)), function(x) {
         y <- switch(EXPR = paste(stability[x] == "sufficient", convergence[x] == "converged"),
-          "TRUE TRUE" = paste0(text, " and the indices are reliable (ESS = ",
-                               insight::format_value(diagnostic$ESS, digits = 0), ")"),
-          "TRUE FALSE" = paste0(text, " even though the indices appear as reliable (ESS = ",
-                                insight::format_value(diagnostic$ESS, digits = 0), ")"),
-          "FALSE TRUE" = paste0(text, " but the indices are unreliable (ESS = ",
-                                insight::format_value(diagnostic$ESS, digits = 0), ")"),
-          "FALSE FALSE" = paste0(text, " and the indices are unreliable (ESS = ",
-                                 insight::format_value(diagnostic$ESS, digits = 0), ")")
+          "TRUE TRUE" = paste0(
+            text, " and the indices are reliable (ESS = ",
+            insight::format_value(diagnostic$ESS, digits = 0), ")"
+          ),
+          "TRUE FALSE" = paste0(
+            text, " even though the indices appear as reliable (ESS = ",
+            insight::format_value(diagnostic$ESS, digits = 0), ")"
+          ),
+          "FALSE TRUE" = paste0(
+            text, " but the indices are unreliable (ESS = ",
+            insight::format_value(diagnostic$ESS, digits = 0), ")"
+          ),
+          "FALSE FALSE" = paste0(
+            text, " and the indices are unreliable (ESS = ",
+            insight::format_value(diagnostic$ESS, digits = 0), ")"
+          )
         )
         y[[x]]
       })

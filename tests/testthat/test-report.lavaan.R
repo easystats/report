@@ -1,5 +1,4 @@
-if (requiet("lavaan") && requiet("effectsize") &&
-      packageVersion("effectsize") >= "0.6.1") {
+if (requiet("lavaan")) {
   structure <- " ind60 =~ x1 + x2 + x3
   dem60 =~ y1 + y2 + y3
   dem60 ~ ind60 "

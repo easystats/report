@@ -7,7 +7,7 @@ output: github_document
 ```{r, message=FALSE, warning=FALSE, echo=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  dpi = 450,
+  dpi = 300,
   fig.path = "man/figures/",
   comment = "#",
   message = FALSE,

@@ -182,9 +182,11 @@ report_participants <- function(data,
         threshold = threshold
       )
 
-      pre_text <- paste0("the '",
-                         paste0(names(i[group]), " - ", vapply(i[group], unique, "character"), collapse = " and "),
-                         "' group: ")
+      pre_text <- paste0(
+        "the '",
+        paste0(names(i[group]), " - ", vapply(i[group], unique, "character"), collapse = " and "),
+        "' group: "
+      )
 
       text <- c(text, paste0(pre_text, current_text))
     }
@@ -242,7 +244,6 @@ report_participants <- function(data,
                                  digits = 1,
                                  threshold = 10,
                                  ...) {
-
   # Sanity checks
   demo.names <- c("Age", "Sex", "Gender", "Education", "Country", "Race")
   data <- .check_df_names(data, names = demo.names)

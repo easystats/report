@@ -159,7 +159,8 @@ report_table.data.frame <- function(x,
     if ("percentage_Obs" %in% names(table)) {
       table <- datawizard::data_reorder(table, c("Variable", "Level", "n_Obs", "percentage_Obs"), verbose = FALSE)
       table_full <- datawizard::data_reorder(table_full, c("Variable", "Level", "n_Obs", "percentage_Obs"),
-                                             verbose = FALSE)
+        verbose = FALSE
+      )
     } else {
       table <- datawizard::data_reorder(table, c("Variable", "Level", "n_Obs"), verbose = FALSE)
       table_full <- datawizard::data_reorder(table_full, c("Variable", "Level", "n_Obs"), verbose = FALSE)
@@ -256,14 +257,18 @@ report_text.data.frame <- function(x,
   )
 
   # Concatenate text
-  text_full <- paste0("The data contains ",
-                      nrow(x), " observations of the following ",
-                      ncol(x), " variables:\n\n",
-                      as.character(params))
-  text <- paste0("The data contains ",
-                 nrow(x), " observations of the following ",
-                 ncol(x), " variables:\n\n",
-                 as.character(summary(params)))
+  text_full <- paste0(
+    "The data contains ",
+    nrow(x), " observations of the following ",
+    ncol(x), " variables:\n\n",
+    as.character(params)
+  )
+  text <- paste0(
+    "The data contains ",
+    nrow(x), " observations of the following ",
+    ncol(x), " variables:\n\n",
+    as.character(summary(params))
+  )
 
   as.report_text(text_full, summary = text)
 }

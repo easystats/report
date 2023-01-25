@@ -259,17 +259,17 @@ report(model)
     # (formula: mpg ~ qsec + wt). Priors over parameters were set as normal (mean =
     # 0.00, SD = 8.43) distributions. The model's explanatory power is substantial
     # (R2 = 0.81, 95% CI [0.70, 0.89], adj. R2 = 0.79). The model's intercept,
-    # corresponding to qsec = 0 and wt = 0, is at 19.76 (95% CI [9.54, 30.70]).
+    # corresponding to qsec = 0 and wt = 0, is at 19.95 (95% CI [9.66, 30.11]).
     # Within this model:
     # 
-    #   - The effect of qsec (Median = 0.92, 95% CI [0.36, 1.44]) has a 99.85%
-    # probability of being positive (> 0), 98.55% of being significant (> 0.30), and
-    # 0.10% of being large (> 1.81). The estimation successfully converged (Rhat =
-    # 0.999) and the indices are reliable (ESS = 2316)
-    #   - The effect of wt (Median = -5.05, 95% CI [-6.03, -4.03]) has a 100.00%
+    #   - The effect of qsec (Median = 0.92, 95% CI [0.39, 1.44]) has a 100.00%
+    # probability of being positive (> 0), 99.05% of being significant (> 0.30), and
+    # 0.20% of being large (> 1.81). The estimation successfully converged (Rhat =
+    # 1.000) and the indices are reliable (ESS = 1819)
+    #   - The effect of wt (Median = -5.04, 95% CI [-6.01, -4.08]) has a 100.00%
     # probability of being negative (< 0), 100.00% of being significant (< -0.30),
     # and 100.00% of being large (< -1.81). The estimation successfully converged
-    # (Rhat = 0.999) and the indices are reliable (ESS = 2115)
+    # (Rhat = 1.000) and the indices are reliable (ESS = 2034)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
     # framework, we report the median of the posterior distribution and its 95% CI
@@ -285,17 +285,17 @@ report(model)
     # (formula: mpg ~ qsec + wt). Priors over parameters were set as normal (mean =
     # 0.00, SD = 15.40) distributions. The model's explanatory power is substantial
     # (R2 = 0.81, 95% CI [0.70, 0.89], adj. R2 = 0.79). The model's intercept,
-    # corresponding to qsec = 0 and wt = 0, is at 19.76 (95% CI [9.54, 30.70]).
+    # corresponding to qsec = 0 and wt = 0, is at 19.95 (95% CI [9.66, 30.11]).
     # Within this model:
     # 
-    #   - The effect of qsec (Median = 0.92, 95% CI [0.36, 1.44]) has a 99.85%
-    # probability of being positive (> 0), 98.55% of being significant (> 0.30), and
-    # 0.10% of being large (> 1.81). The estimation successfully converged (Rhat =
-    # 0.999) and the indices are reliable (ESS = 2316)
-    #   - The effect of wt (Median = -5.05, 95% CI [-6.03, -4.03]) has a 100.00%
+    #   - The effect of qsec (Median = 0.92, 95% CI [0.39, 1.44]) has a 100.00%
+    # probability of being positive (> 0), 99.05% of being significant (> 0.30), and
+    # 0.20% of being large (> 1.81). The estimation successfully converged (Rhat =
+    # 1.000) and the indices are reliable (ESS = 1819)
+    #   - The effect of wt (Median = -5.04, 95% CI [-6.01, -4.08]) has a 100.00%
     # probability of being negative (< 0), 100.00% of being significant (< -0.30),
     # and 100.00% of being large (< -1.81). The estimation successfully converged
-    # (Rhat = 0.999) and the indices are reliable (ESS = 2115)
+    # (Rhat = 1.000) and the indices are reliable (ESS = 2034)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
     # framework, we report the median of the posterior distribution and its 95% CI
@@ -369,11 +369,11 @@ report(sessionInfo())
 ```
 
     # Analyses were conducted using the R Statistical language (version 4.2.2; R Core
-    # Team, 2022) on macOS Ventura 13.0.1, using the packages lme4 (version 1.1.31;
+    # Team, 2022) on macOS Ventura 13.1, using the packages lme4 (version 1.1.31;
     # Bates D et al., 2015), Matrix (version 1.5.3; Bates D et al., 2022), Rcpp
-    # (version 1.0.9; Eddelbuettel D, François R, 2011), rstanarm (version 2.21.3;
-    # Goodrich B et al., 2022), report (version 0.5.5.3; Makowski D et al., 2021) and
-    # dplyr (version 1.0.10; Wickham H et al., 2022).
+    # (version 1.0.10; Eddelbuettel D, François R, 2011), rstanarm (version 2.21.3;
+    # Goodrich B et al., 2022), report (version 0.5.5.4; Makowski D et al., 2021) and
+    # dplyr (version 1.0.99.9000; Wickham H et al., 2022).
     # 
     # References
     # ----------
@@ -398,15 +398,16 @@ report(sessionInfo())
     # M, Buros Novik J, Wolfe R(2018). "Joint longitudinal and time-to-event models
     # via Stan." StanCon2018. 10-12 Jan 2018. Pacific Grove, CA,
     # USA.,<https://github.com/stan-dev/stancon_talks/>.
-    #   - Makowski D, Ben-Shachar M, Patil I, Lüdecke D (2021). "AutomatedResults
-    # Reporting as a Practical Tool to Improve Reproducibility andMethodological Best
-    # Practices Adoption." _CRAN_.<https://github.com/easystats/report>.
+    #   - Makowski D, Ben-Shachar M, Patil I, Lüdecke D, Thériault R (2021)."Automated
+    # Results Reporting as a Practical Tool to ImproveReproducibility and
+    # Methodological Best Practices Adoption."
+    # _CRAN_.<https://github.com/easystats/report>.
     #   - R Core Team (2022). _R: A Language and Environment for StatisticalComputing_.
     # R Foundation for Statistical Computing, Vienna,
     # Austria.<https://www.R-project.org/>.
-    #   - Wickham H, François R, Henry L, Müller K (2022). _dplyr: A Grammar ofData
-    # Manipulation_. R package version
-    # 1.0.10,<https://CRAN.R-project.org/package=dplyr>.
+    #   - Wickham H, François R, Henry L, Müller K, Vaughan D (2022). _dplyr: AGrammar
+    # of Data Manipulation_.
+    # https://dplyr.tidyverse.org,https://github.com/tidyverse/dplyr.
 
 ## Credits
 
@@ -418,8 +419,8 @@ citation("report")
 
 To cite in publications use:
 
-  Makowski, D., Ben-Shachar, M.S., Patil, I. & Lüdecke, D. (2020).
-  Automated Results Reporting as a Practical Tool to Improve
+  Makowski, D., Ben-Shachar, M.S., Patil, I., Lüdecke, D., & Thériault,
+  R. (2020). Automated Results Reporting as a Practical Tool to Improve
   Reproducibility and Methodological Best Practices Adoption. CRAN.
   Available from https://github.com/easystats/report. doi: .
 
@@ -427,7 +428,7 @@ A BibTeX entry for LaTeX users is
 
   @Article{,
     title = {Automated Results Reporting as a Practical Tool to Improve Reproducibility and Methodological Best Practices Adoption},
-    author = {Dominique Makowski and Mattan S. Ben-Shachar and Indrajeet Patil and Daniel Lüdecke},
+    author = {Dominique Makowski and Mattan S. Ben-Shachar and Indrajeet Patil and Daniel Lüdecke and Rémi Thériault},
     year = {2021},
     journal = {CRAN},
     url = {https://github.com/easystats/report},

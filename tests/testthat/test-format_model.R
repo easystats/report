@@ -9,10 +9,14 @@ test_that("format_model", {
 test_that("format_model", {
   requiet("lme4")
   expect_identical(format_model(lme4::lmer(wt ~ cyl + (1 | gear), data = mtcars)), "linear mixed model")
-  expect_identical(format_model(lme4::glmer(vs ~ cyl + (1 | gear), data = mtcars, family = "binomial")),
-                   "logistic mixed model")
-  expect_identical(format_model(lme4::glmer(vs ~ drat + cyl + (1 | gear), data = mtcars, family = "binomial")),
-                   "logistic mixed model")
+  expect_identical(
+    format_model(lme4::glmer(vs ~ cyl + (1 | gear), data = mtcars, family = "binomial")),
+    "logistic mixed model"
+  )
+  expect_identical(
+    format_model(lme4::glmer(vs ~ drat + cyl + (1 | gear), data = mtcars, family = "binomial")),
+    "logistic mixed model"
+  )
 })
 
 
@@ -20,12 +24,17 @@ test_that("format_model", {
 
 test_that("format_model", {
   requiet("rstanarm")
-  expect_identical(format_model(suppressWarnings(rstanarm::stan_glm(mpg ~ wt, data = mtcars, refresh = 0, iter = 50))),
-                   "Bayesian linear model")
-  expect_identical(format_model(suppressWarnings(rstanarm::stan_glm(vs ~ wt,
-                                                                    data = mtcars,
-                                                                    family = "binomial",
-                                                                    refresh = 0,
-                                                                    iter = 50))),
-                   "Bayesian logistic model")
+  expect_identical(
+    format_model(suppressWarnings(rstanarm::stan_glm(mpg ~ wt, data = mtcars, refresh = 0, iter = 50))),
+    "Bayesian linear model"
+  )
+  expect_identical(
+    format_model(suppressWarnings(rstanarm::stan_glm(vs ~ wt,
+      data = mtcars,
+      family = "binomial",
+      refresh = 0,
+      iter = 50
+    ))),
+    "Bayesian logistic model"
+  )
 })
