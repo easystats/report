@@ -47,21 +47,20 @@ test_that("report.htest-t-test", {
 
   # two-sample paired t-test ---------------------
 
-  x <- c(1.83, 0.50, 1.62, 2.48, 1.68, 1.88, 1.55, 3.06, 1.30)
-  y <- c(0.878, 0.647, 0.598, 2.05, 1.06, 1.29, 1.06, 3.14, 1.29)
-  df <- data.frame(x, y)
+  x <<- c(1.83, 0.50, 1.62, 2.48, 1.68, 1.88, 1.55, 3.06, 1.30)
+  y <<- c(0.878, 0.647, 0.598, 2.05, 1.06, 1.29, 1.06, 3.14, 1.29)
 
   set.seed(123)
-  expect_snapshot(variant = "windows", report(t.test(df$x, df$y, paired = TRUE)))
+  expect_snapshot(variant = "windows", report(t.test(x, y, paired = TRUE)))
 
   set.seed(123)
-  expect_snapshot(variant = "windows", report(t.test(df$x, df$y, paired = TRUE, alternative = "l")))
+  expect_snapshot(variant = "windows", report(t.test(x, y, paired = TRUE, alternative = "l")))
 
   set.seed(123)
-  expect_snapshot(variant = "windows", report(t.test(df$x, df$y, paired = TRUE, alternative = "g")))
+  expect_snapshot(variant = "windows", report(t.test(x, y, paired = TRUE, alternative = "g")))
 
   if (getRversion() > "4.0") {
-    sleep2 <- reshape(sleep, direction = "wide", idvar = "ID", timevar = "group")
+    sleep2 <<- reshape(sleep, direction = "wide", idvar = "ID", timevar = "group")
     set.seed(123)
     expect_snapshot(
       variant = "windows",

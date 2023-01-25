@@ -73,36 +73,36 @@
 ---
 
     Code
-      report(t.test(df$x, df$y, paired = TRUE))
+      report(t.test(x, y, paired = TRUE))
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
-      The Paired t-test testing the difference between df$x and df$y (mean difference
-      = 0.43) suggests that the effect is positive, statistically significant, and
+      The Paired t-test testing the difference between x and y (mean difference =
+      0.43) suggests that the effect is positive, statistically significant, and
       large (difference = 0.43, 95% CI [0.10, 0.76], t(8) = 3.04, p = 0.016; Cohen's
       d = 1.01, 95% CI [0.18, 1.81])
 
 ---
 
     Code
-      report(t.test(df$x, df$y, paired = TRUE, alternative = "l"))
+      report(t.test(x, y, paired = TRUE, alternative = "l"))
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
-      The Paired t-test testing the difference between df$x and df$y (mean difference
-      = 0.43) suggests that the effect is positive, statistically not significant,
-      and large (difference = 0.43, 95% CI [-Inf, 0.70], t(8) = 3.04, p = 0.992;
-      Cohen's d = 1.01, 95% CI [-Inf, 1.67])
+      The Paired t-test testing the difference between x and y (mean difference =
+      0.43) suggests that the effect is positive, statistically not significant, and
+      large (difference = 0.43, 95% CI [-Inf, 0.70], t(8) = 3.04, p = 0.992; Cohen's
+      d = 1.01, 95% CI [-Inf, 1.67])
 
 ---
 
     Code
-      report(t.test(df$x, df$y, paired = TRUE, alternative = "g"))
+      report(t.test(x, y, paired = TRUE, alternative = "g"))
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
-      The Paired t-test testing the difference between df$x and df$y (mean difference
-      = 0.43) suggests that the effect is positive, statistically significant, and
+      The Paired t-test testing the difference between x and y (mean difference =
+      0.43) suggests that the effect is positive, statistically significant, and
       large (difference = 0.43, 95% CI [0.17, Inf], t(8) = 3.04, p = 0.008; Cohen's d
       = 1.01, 95% CI [0.30, Inf])
 
