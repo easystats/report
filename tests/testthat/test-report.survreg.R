@@ -1,5 +1,5 @@
 test_that("report-survreg", {
-  requiet("survival")
+  skip_if_not_or_load_if_installed("survival")
 
   set.seed(123)
   mod_survreg <- survival::survreg(

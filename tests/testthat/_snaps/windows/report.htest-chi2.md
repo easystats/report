@@ -82,6 +82,15 @@
 ---
 
     Code
+      report_effectsize(x, type = "cohens_w")
+    Output
+      Effect sizes were labelled following Funder's (2019) recommendations. 
+      
+      small (Cohens_w = 0.10, 95% CI [0.07, 1.00])
+
+---
+
+    Code
       report_effectsize(x, type = "phi")
     Output
       Effect sizes were labelled following Funder's (2019) recommendations. 
