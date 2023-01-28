@@ -5,6 +5,7 @@
 [![downloads](http://cranlogs.r-pkg.org/badges/report)](https://cran.r-project.org/package=report)
 [![R-CMD-check](https://github.com/easystats/datawizard/workflows/R-CMD-check/badge.svg?branch=main)](https://github.com/easystats/datawizard/actions)
 [![status](https://tinyverse.netlify.com/badge/modelbased)](https://CRAN.R-project.org/package=modelbased)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 
 ***“From R to your manuscript”***
 
@@ -259,17 +260,17 @@ report(model)
     # (formula: mpg ~ qsec + wt). Priors over parameters were set as normal (mean =
     # 0.00, SD = 8.43) distributions. The model's explanatory power is substantial
     # (R2 = 0.81, 95% CI [0.70, 0.89], adj. R2 = 0.79). The model's intercept,
-    # corresponding to qsec = 0 and wt = 0, is at 19.95 (95% CI [9.66, 30.11]).
+    # corresponding to qsec = 0 and wt = 0, is at 19.83 (95% CI [8.99, 30.00]).
     # Within this model:
     # 
-    #   - The effect of qsec (Median = 0.92, 95% CI [0.39, 1.44]) has a 100.00%
-    # probability of being positive (> 0), 99.05% of being significant (> 0.30), and
-    # 0.20% of being large (> 1.81). The estimation successfully converged (Rhat =
-    # 1.000) and the indices are reliable (ESS = 1819)
-    #   - The effect of wt (Median = -5.04, 95% CI [-6.01, -4.08]) has a 100.00%
+    #   - The effect of qsec (Median = 0.93, 95% CI [0.40, 1.48]) has a 99.95%
+    # probability of being positive (> 0), 98.85% of being significant (> 0.30), and
+    # 0.25% of being large (> 1.81). The estimation successfully converged (Rhat =
+    # 0.999) and the indices are reliable (ESS = 1983)
+    #   - The effect of wt (Median = -5.04, 95% CI [-6.06, -4.07]) has a 100.00%
     # probability of being negative (< 0), 100.00% of being significant (< -0.30),
     # and 100.00% of being large (< -1.81). The estimation successfully converged
-    # (Rhat = 1.000) and the indices are reliable (ESS = 2034)
+    # (Rhat = 1.001) and the indices are reliable (ESS = 2060)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
     # framework, we report the median of the posterior distribution and its 95% CI
@@ -285,17 +286,17 @@ report(model)
     # (formula: mpg ~ qsec + wt). Priors over parameters were set as normal (mean =
     # 0.00, SD = 15.40) distributions. The model's explanatory power is substantial
     # (R2 = 0.81, 95% CI [0.70, 0.89], adj. R2 = 0.79). The model's intercept,
-    # corresponding to qsec = 0 and wt = 0, is at 19.95 (95% CI [9.66, 30.11]).
+    # corresponding to qsec = 0 and wt = 0, is at 19.83 (95% CI [8.99, 30.00]).
     # Within this model:
     # 
-    #   - The effect of qsec (Median = 0.92, 95% CI [0.39, 1.44]) has a 100.00%
-    # probability of being positive (> 0), 99.05% of being significant (> 0.30), and
-    # 0.20% of being large (> 1.81). The estimation successfully converged (Rhat =
-    # 1.000) and the indices are reliable (ESS = 1819)
-    #   - The effect of wt (Median = -5.04, 95% CI [-6.01, -4.08]) has a 100.00%
+    #   - The effect of qsec (Median = 0.93, 95% CI [0.40, 1.48]) has a 99.95%
+    # probability of being positive (> 0), 98.85% of being significant (> 0.30), and
+    # 0.25% of being large (> 1.81). The estimation successfully converged (Rhat =
+    # 0.999) and the indices are reliable (ESS = 1983)
+    #   - The effect of wt (Median = -5.04, 95% CI [-6.06, -4.07]) has a 100.00%
     # probability of being negative (< 0), 100.00% of being significant (< -0.30),
     # and 100.00% of being large (< -1.81). The estimation successfully converged
-    # (Rhat = 1.000) and the indices are reliable (ESS = 2034)
+    # (Rhat = 1.001) and the indices are reliable (ESS = 2060)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
     # framework, we report the median of the posterior distribution and its 95% CI
@@ -369,45 +370,45 @@ report(sessionInfo())
 ```
 
     # Analyses were conducted using the R Statistical language (version 4.2.2; R Core
-    # Team, 2022) on macOS Ventura 13.1, using the packages lme4 (version 1.1.31;
-    # Bates D et al., 2015), Matrix (version 1.5.3; Bates D et al., 2022), Rcpp
-    # (version 1.0.10; Eddelbuettel D, François R, 2011), rstanarm (version 2.21.3;
-    # Goodrich B et al., 2022), report (version 0.5.5.4; Makowski D et al., 2021) and
-    # dplyr (version 1.0.99.9000; Wickham H et al., 2022).
+    # Team, 2022) on Windows 10 x64 (build 19045), using the packages lme4 (version
+    # 1.1.31; Bates D et al., 2015), Matrix (version 1.5.1; Bates D et al., 2022),
+    # Rcpp (version 1.0.9; Eddelbuettel D, François R, 2011), rstanarm (version
+    # 2.21.3; Goodrich B et al., 2022), report (version 0.5.5.4; Makowski D et al.,
+    # 2021) and dplyr (version 1.0.10; Wickham H et al., 2022).
     # 
     # References
     # ----------
-    #   - Bates D, Mächler M, Bolker B, Walker S (2015). "Fitting LinearMixed-Effects
-    # Models Using lme4." _Journal of Statistical Software_,*67*(1), 1-48.
-    # doi:10.18637/jss.v067.i01<https://doi.org/10.18637/jss.v067.i01>.
-    #   - Bates D, Maechler M, Jagan M (2022). _Matrix: Sparse and Dense MatrixClasses
-    # and Methods_. R package version
-    # 1.5-3,<https://CRAN.R-project.org/package=Matrix>.
-    #   - Eddelbuettel D, François R (2011). "Rcpp: Seamless R and C++Integration."
-    # _Journal of Statistical Software_, *40*(8), 1-18.doi:10.18637/jss.v040.i08
-    # <https://doi.org/10.18637/jss.v040.i08>.Eddelbuettel D (2013). _Seamless R and
-    # C++ Integration with Rcpp_.Springer, New York.
-    # doi:10.1007/978-1-4614-6868-4<https://doi.org/10.1007/978-1-4614-6868-4>, ISBN
-    # 978-1-4614-6867-7.Eddelbuettel D, Balamuta JJ (2018). "Extending extitR with
-    # extitC++: ABrief Introduction to extitRcpp." _The American Statistician_,
-    # *72*(1),28-36.
-    # doi:10.1080/00031305.2017.1375990<https://doi.org/10.1080/00031305.2017.1375990>.
-    #   - Goodrich B, Gabry J, Ali I, Brilleman S (2022). "rstanarm: Bayesianapplied
-    # regression modeling via Stan." R package version
-    # 2.21.3,<https://mc-stan.org/rstanarm/>.Brilleman S, Crowther M, Moreno-Betancur
-    # M, Buros Novik J, Wolfe R(2018). "Joint longitudinal and time-to-event models
-    # via Stan." StanCon2018. 10-12 Jan 2018. Pacific Grove, CA,
-    # USA.,<https://github.com/stan-dev/stancon_talks/>.
-    #   - Makowski D, Ben-Shachar M, Patil I, Lüdecke D, Thériault R (2021)."Automated
-    # Results Reporting as a Practical Tool to ImproveReproducibility and
-    # Methodological Best Practices Adoption."
-    # _CRAN_.<https://github.com/easystats/report>.
-    #   - R Core Team (2022). _R: A Language and Environment for StatisticalComputing_.
-    # R Foundation for Statistical Computing, Vienna,
-    # Austria.<https://www.R-project.org/>.
-    #   - Wickham H, François R, Henry L, Müller K, Vaughan D (2022). _dplyr: AGrammar
-    # of Data Manipulation_.
-    # https://dplyr.tidyverse.org,https://github.com/tidyverse/dplyr.
+    #   - Bates D, Mächler M, Bolker B, Walker S (2015). "Fitting Linear Mixed-Effects
+    # Models Using lme4." _Journal of Statistical Software_, *67*(1), 1-48.
+    # doi:10.18637/jss.v067.i01 <https://doi.org/10.18637/jss.v067.i01>.
+    #   - Bates D, Maechler M, Jagan M (2022). _Matrix: Sparse and Dense Matrix Classes
+    # and Methods_. R package version 1.5-1,
+    # <https://CRAN.R-project.org/package=Matrix>.
+    #   - Eddelbuettel D, François R (2011). "Rcpp: Seamless R and C++ Integration."
+    # _Journal of Statistical Software_, *40*(8), 1-18. doi:10.18637/jss.v040.i08
+    # <https://doi.org/10.18637/jss.v040.i08>. Eddelbuettel D (2013). _Seamless R and
+    # C++ Integration with Rcpp_. Springer, New York. doi:10.1007/978-1-4614-6868-4
+    # <https://doi.org/10.1007/978-1-4614-6868-4>, ISBN 978-1-4614-6867-7.
+    # Eddelbuettel D, Balamuta JJ (2018). "Extending extitR with extitC++: A Brief
+    # Introduction to extitRcpp." _The American Statistician_, *72*(1), 28-36.
+    # doi:10.1080/00031305.2017.1375990
+    # <https://doi.org/10.1080/00031305.2017.1375990>.
+    #   - Goodrich B, Gabry J, Ali I, Brilleman S (2022). "rstanarm: Bayesian applied
+    # regression modeling via Stan." R package version 2.21.3,
+    # <https://mc-stan.org/rstanarm/>. Brilleman S, Crowther M, Moreno-Betancur M,
+    # Buros Novik J, Wolfe R (2018). "Joint longitudinal and time-to-event models via
+    # Stan." StanCon 2018. 10-12 Jan 2018. Pacific Grove, CA, USA.,
+    # <https://github.com/stan-dev/stancon_talks/>.
+    #   - Makowski D, Lüdecke D, Ben-Shachar M, Patil I, Wiernik B, Thériault R (2021).
+    # "Automated Results Reporting as a Practical Tool to Improve Reproducibility and
+    # Methodological Best Practices Adoption." _CRAN_.
+    # <https://easystats.github.io/report>.
+    #   - R Core Team (2022). _R: A Language and Environment for Statistical
+    # Computing_. R Foundation for Statistical Computing, Vienna, Austria.
+    # <https://www.R-project.org/>.
+    #   - Wickham H, François R, Henry L, Müller K (2022). _dplyr: A Grammar of Data
+    # Manipulation_. R package version 1.0.10,
+    # <https://CRAN.R-project.org/package=dplyr>.
 
 ## Credits
 
@@ -422,16 +423,16 @@ To cite in publications use:
   Makowski, D., Ben-Shachar, M.S., Patil, I., Lüdecke, D., & Thériault,
   R. (2020). Automated Results Reporting as a Practical Tool to Improve
   Reproducibility and Methodological Best Practices Adoption. CRAN.
-  Available from https://github.com/easystats/report. doi: .
+  Available from https://easystats.github.io/report. doi: .
 
 A BibTeX entry for LaTeX users is
 
   @Article{,
     title = {Automated Results Reporting as a Practical Tool to Improve Reproducibility and Methodological Best Practices Adoption},
-    author = {Dominique Makowski and Mattan S. Ben-Shachar and Indrajeet Patil and Daniel Lüdecke and Rémi Thériault},
+    author = {Dominique Makowski and Daniel Lüdecke and Mattan S. Ben-Shachar and Indrajeet Patil and Brenton M. Wiernik and Rémi Thériault},
     year = {2021},
     journal = {CRAN},
-    url = {https://github.com/easystats/report},
+    url = {https://easystats.github.io/report},
   }
 ```
 

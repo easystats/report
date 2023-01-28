@@ -2,41 +2,44 @@ url: https://easystats.github.io/report/
 
 template:
   bootstrap: 5
+  bslib:
+    primary: "#2ECC71"
   package: easystatstemplate
 
-# reference:
-# - title: "Create Generic Report Objects"
-#   contents:
-#   - report
-#   - report.aov
-#   - report.default
-#   - report.lmerMod
-#   - report.stanreg
-#   - report.htest
-#   - report.bayesfactor_models
-#   - report.character
+navbar:
+  type: default
+  left:
+  - text: Tutorials
+    icon: fa fa-book-reader
+    href: articles/index.html
+    aria-label: Articles
+    menu:
+      - text: Report and Cite Packages
+        href: articles/cite_packages.html
+      - text: Supporting New Models
+        href: articles/new_models.html
+      - text: 'Automated Reporting: Getting Started'
+        href: articles/report.html
+      - text: Publication-ready Tables
+        href: articles/report_table.html
+  - text: Functions
+    icon: fa fa-file-code
+    href: reference/index.html
+    aria-label: Reference
+  - text: News
+    icon: fa fa-newspaper
+    href: news/index.html
+    aria-label: News
+  - text: Help
+    icon: fa fa-question-circle
+    href: SUPPORT.html
+    aria-label: Support
 
-# - title: "Create Specific Report Objects"
-#   contents:
-#   - report_intercept
-#   - report_participants
-#   - report_sample
-
-# - title: "Extract Tables and Summaries from Reports"
-#   contents:
-#   - model_table
-#   - model_text
-#   - text_short
-
-# - title: "Utilities"
-#   contents:
-#   - as.report
-#   - rename_if_possible
-#   - show_packages
-
-# - title: "String Formatting"
-#   contents:
-#   - format_algorithm
-#   - format_model
-#   - format_text
-
+articles:
+- title: Tutorials
+  navbar: ~
+  contents:
+  - cite_packages
+  - new_models
+  - report
+  - report_table
