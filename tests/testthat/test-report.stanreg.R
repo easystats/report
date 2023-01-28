@@ -30,6 +30,5 @@ test_that("model-stanreg", {
 })
 
 test_that("model-stanreg detailed", {
-  skip_on_ci()
   expect_snapshot(variant = "windows", report(model))
 })
