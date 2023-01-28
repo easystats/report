@@ -5,7 +5,7 @@ skip_if_not_or_load_if_installed <- function(package) {
   )
 }
 
-# skip_if_not_or_load_if_installed all hard dependencies
+# load all hard dependencies to use them without namespacing
 skip_if_not_or_load_if_installed("bayestestR")
 skip_if_not_or_load_if_installed("insight")
 skip_if_not_or_load_if_installed("datawizard")
