@@ -81,25 +81,24 @@ An object of class \code{\link[=report]{report()}}.
 Create reports for data frames.
 }
 \examples{
-library(report)
-
 r <- report(iris,
-  centrality = "median", dispersion = FALSE,
-  distribution = TRUE, missing_percentage = TRUE
+            centrality = "median", dispersion = FALSE,
+            distribution = TRUE, missing_percentage = TRUE
 )
 r
 summary(r)
 as.data.frame(r)
 summary(as.data.frame(r))
 
+\dontshow{if (requireNamespace("dplyr", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # grouped analysis using `{dplyr}` package
-if (require("dplyr")) {
-  r <- iris \%>\%
-    group_by(Species) \%>\%
-    report()
-  r
-  summary(r)
-  as.data.frame(r)
-  summary(as.data.frame(r))
-}
+library(dplyr)
+r <- iris \%>\%
+  group_by(Species) \%>\%
+  report()
+r
+summary(r)
+as.data.frame(r)
+summary(as.data.frame(r))
+\dontshow{\}) # examplesIf}
 }

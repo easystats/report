@@ -3,10 +3,11 @@
 #' model <- lm(Sepal.Length ~ Species, data = iris)
 #' format_algorithm(model)
 #'
-#' if (require("lme4")) {
-#'   model <- lme4::lmer(Sepal.Length ~ Sepal.Width + (1 | Species), data = iris)
-#'   format_algorithm(model)
-#' }
+#' @examplesIf requireNamespace("lme4", quietly = TRUE)
+#' # Mixed models
+#' library(lme4)
+#' model <- lme4::lmer(Sepal.Length ~ Sepal.Width + (1 | Species), data = iris)
+#' format_algorithm(model)
 #' @return A character string.
 #' @export
 format_algorithm <- function(x) {
@@ -67,7 +68,6 @@ format_algorithm <- function(x) {
       " optimizer"
     )
   }
-
 
   text
 }

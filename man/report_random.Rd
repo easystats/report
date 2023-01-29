@@ -20,33 +20,36 @@ Reports random effects of mixed models (see list of supported objects in
 \code{\link[=report]{report()}}).
 }
 \examples{
-library(report)
-
+\dontshow{if (requireNamespace("lme4", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
 # Mixed models
-if (require("lme4")) {
-  model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
-  r <- report_random(model)
-  r
-  summary(r)
+library(lme4)
+model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
+r <- report_random(model)
+r
+summary(r)
 }
+\dontshow{\}) # examplesIf}
+\dontshow{if (requireNamespace("rstanarm", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 # Bayesian models
-if (require("rstanarm")) {
-  model <- suppressWarnings(stan_lmer(
-    mpg ~ disp + (1 | cyl),
-    data = mtcars, refresh = 0, iter = 1000
-  ))
-  r <- report_random(model)
-  r
-  summary(r)
+library(rstanarm)
+model <- suppressWarnings(stan_lmer(
+mpg ~ disp + (1 | cyl),
+data = mtcars, refresh = 0, iter = 1000
+))
+r <- report_random(model)
+r
+summary(r)
 }
+\dontshow{\}) # examplesIf}
+\dontshow{if (requireNamespace("brms", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
+library(brms)
+model <- suppressWarnings(brm(mpg ~ disp + (1 | cyl), data = mtcars, refresh = 0, iter = 1000))
+r <- report_random(model)
+r
+summary(r)
 }
-\dontrun{
-if (require("brms")) {
-  model <- suppressWarnings(brm(mpg ~ disp + (1 | cyl), data = mtcars, refresh = 0, iter = 1000))
-  r <- report_random(model)
-  r
-  summary(r)
-}
-}
+\dontshow{\}) # examplesIf}
 }

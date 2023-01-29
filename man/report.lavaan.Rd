@@ -24,25 +24,25 @@ An object of class \code{\link[=report]{report()}}.
 Create a report for \code{lavaan} objects.
 }
 \examples{
-library(report)
+\dontshow{if (requireNamespace("lavaan", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 # Structural Equation Models (SEM)
-if (require("lavaan") && FALSE) {
-  structure <- " ind60 =~ x1 + x2 + x3
-                 dem60 =~ y1 + y2 + y3
-                 dem60 ~ ind60 "
-  model <- lavaan::sem(structure, data = PoliticalDemocracy)
-  r <- report(model)
-  r
-  # summary(r)
-  # as.data.frame(r)
-  # summary(as.data.frame(r))
+library(lavaan)
+structure <- "ind60 =~ x1 + x2 + x3
+              dem60 =~ y1 + y2 + y3
+              dem60 ~ ind60"
+model <- lavaan::sem(structure, data = PoliticalDemocracy)
+r <- report(model)
+r
+summary(r)
+as.data.frame(r)
+summary(as.data.frame(r))
 
-  # Specific reports
-  suppressWarnings(report_table(model))
-  suppressWarnings(report_performance(model))
+# Specific reports
+suppressWarnings(report_table(model))
+suppressWarnings(report_performance(model))
 }
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Specific components of reports (especially for stats models):

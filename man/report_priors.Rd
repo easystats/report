@@ -20,13 +20,14 @@ Reports priors of Bayesian models (see list of supported objects in
 \code{\link[=report]{report()}}).
 }
 \examples{
-library(report)
-
+\dontshow{if (requireNamespace("rstanarm", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
 # Bayesian models
-if (require("rstanarm")) {
-  model <- stan_glm(mpg ~ disp, data = mtcars, refresh = 0, iter = 1000)
-  r <- report_priors(model)
-  r
-  summary(r)
+library(rstanarm)
+model <- stan_glm(mpg ~ disp, data = mtcars, refresh = 0, iter = 1000)
+r <- report_priors(model)
+r
+summary(r)
 }
+\dontshow{\}) # examplesIf}
 }

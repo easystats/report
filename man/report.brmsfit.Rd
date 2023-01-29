@@ -20,19 +20,18 @@ follows the Sequential Effect eXistence and sIgnificance Testing framework
 (see \link[bayestestR:sexit]{SEXIT documentation}).
 }
 \examples{
-library(report)
-
-# Bayesian models
+\dontshow{if (requireNamespace("brms", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \dontrun{
-if (require("brms")) {
-  model <- suppressWarnings(brm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300))
-  r <- report(model, verbose = FALSE)
-  r
-  summary(r)
-  as.data.frame(r)
-  summary(as.data.frame(r))
+# Bayesian models
+library(brms)
+model <- suppressWarnings(brm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300))
+r <- report(model, verbose = FALSE)
+r
+summary(r)
+as.data.frame(r)
+summary(as.data.frame(r))
 }
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Specific components of reports (especially for stats models):

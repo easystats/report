@@ -7,19 +7,16 @@
 #' @inheritParams report.lm
 #' @inherit report return seealso
 #'
-#' @examples
-#' library(report)
-#'
-#' # Bayesian models
+#' @examplesIf requireNamespace("brms", quietly = TRUE)
 #' \dontrun{
-#' if (require("brms")) {
-#'   model <- suppressWarnings(brm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300))
-#'   r <- report(model, verbose = FALSE)
-#'   r
-#'   summary(r)
-#'   as.data.frame(r)
-#'   summary(as.data.frame(r))
-#' }
+#' # Bayesian models
+#' library(brms)
+#' model <- suppressWarnings(brm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300))
+#' r <- report(model, verbose = FALSE)
+#' r
+#' summary(r)
+#' as.data.frame(r)
+#' summary(as.data.frame(r))
 #' }
 #' @return An object of class [report()].
 #' @include report.lm.R report.stanreg.R report.lme4.R

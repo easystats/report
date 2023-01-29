@@ -15,32 +15,36 @@
 #'
 #' @examples
 #' \donttest{
-#' library(report)
-#'
 #' # GLMs
 #' report_performance(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 #' report_performance(glm(vs ~ disp, data = mtcars, family = "binomial"))
+#' }
 #'
+#' @examplesIf requireNamespace("lme4", quietly = TRUE)
+#' \donttest{
 #' # Mixed models
-#' if (require("lme4")) {
-#'   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
-#'   report_performance(model)
+#' library(lme4)
+#' model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
+#' report_performance(model)
 #' }
 #'
+#' @examplesIf requireNamespace("rstanarm", quietly = TRUE)
+#' \donttest{
 #' # Bayesian models
-#' if (require("rstanarm")) {
-#'   model <- suppressWarnings(stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600))
-#'   report_performance(model)
+#' library(rstanarm)
+#' model <- suppressWarnings(stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600))
+#' report_performance(model)
 #' }
 #'
+#' @examplesIf requireNamespace("lavaan", quietly = TRUE) && packageVersion("effectsize") >= "0.6.0.1"
+#' \donttest{
 #' # Structural Equation Models (SEM)
-#' if (require("lavaan") && packageVersion("effectsize") >= "0.6.0.1" && FALSE) {
-#'   structure <- " ind60 =~ x1 + x2 + x3
-#'                  dem60 =~ y1 + y2 + y3
-#'                  dem60 ~ ind60 "
-#'   model <- lavaan::sem(structure, data = PoliticalDemocracy)
-#'   suppressWarnings(report_performance(model))
-#' }
+#' library(lavaan)
+#' structure <- "ind60 =~ x1 + x2 + x3
+#'               dem60 =~ y1 + y2 + y3
+#'               dem60 ~ ind60 "
+#' model <- lavaan::sem(structure, data = PoliticalDemocracy)
+#' suppressWarnings(report_performance(model))
 #' }
 #' @export
 report_performance <- function(x, table = NULL, ...) {

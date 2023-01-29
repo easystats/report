@@ -30,18 +30,22 @@
 #' # GLMs
 #' report_statistics(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 #' report_statistics(glm(vs ~ disp, data = mtcars, family = "binomial"))
+#' }
 #'
+#' @examplesIf requireNamespace("lme4", quietly = TRUE)
+#' \donttest{
 #' # Mixed models
-#' if (require("lme4")) {
-#'   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
-#'   report_statistics(model)
+#' library(lme4)
+#' model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
+#' report_statistics(model)
 #' }
 #'
+#' @examplesIf requireNamespace("rstanarm", quietly = TRUE)
+#' \donttest{
 #' # Bayesian models
-#' if (require("rstanarm")) {
-#'   model <- suppressWarnings(stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600))
-#'   report_statistics(model)
-#' }
+#' library(rstanarm)
+#' model <- suppressWarnings(stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600))
+#' report_statistics(model)
 #' }
 #' @export
 

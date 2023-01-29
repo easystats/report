@@ -20,27 +20,25 @@
 #' @param digits Number of significant digits.
 #'
 #' @examples
-#' library(report)
-#'
 #' r <- report(iris,
-#'   centrality = "median", dispersion = FALSE,
-#'   distribution = TRUE, missing_percentage = TRUE
+#'             centrality = "median", dispersion = FALSE,
+#'             distribution = TRUE, missing_percentage = TRUE
 #' )
 #' r
 #' summary(r)
 #' as.data.frame(r)
 #' summary(as.data.frame(r))
 #'
+#' @examplesIf requireNamespace("dplyr", quietly = TRUE)
 #' # grouped analysis using `{dplyr}` package
-#' if (require("dplyr")) {
-#'   r <- iris %>%
-#'     group_by(Species) %>%
-#'     report()
-#'   r
-#'   summary(r)
-#'   as.data.frame(r)
-#'   summary(as.data.frame(r))
-#' }
+#' library(dplyr)
+#' r <- iris %>%
+#'   group_by(Species) %>%
+#'   report()
+#' r
+#' summary(r)
+#' as.data.frame(r)
+#' summary(as.data.frame(r))
 #' @return An object of class [report()].
 #' @export
 report.data.frame <- function(x,

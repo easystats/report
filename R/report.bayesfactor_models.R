@@ -9,28 +9,24 @@
 #' @inheritParams effectsize::interpret_bf
 #' @inherit report return seealso
 #'
-#' @examples
-#' library(report)
-#'
+#' @examplesIf requireNamespace("bayestestR", quietly = TRUE)
+#' library(bayestestR)
+#' # Bayes factor - models
 #' mo0 <- lm(Sepal.Length ~ 1, data = iris)
 #' mo1 <- lm(Sepal.Length ~ Species, data = iris)
 #' mo2 <- lm(Sepal.Length ~ Species + Petal.Length, data = iris)
 #' mo3 <- lm(Sepal.Length ~ Species * Petal.Length, data = iris)
+#' BFmodels <- bayesfactor_models(mo1, mo2, mo3, denominator = mo0)
 #'
-#' if (require("bayestestR")) {
-#'   # Bayes factor - models
-#'   BFmodels <- bayesfactor_models(mo1, mo2, mo3, denominator = mo0)
+#' r <- report(BFmodels)
+#' r
 #'
-#'   r <- report(BFmodels)
-#'   r
+#' # Bayes factor - inclusion
+#' inc_bf <- bayesfactor_inclusion(BFmodels, prior_odds = c(1, 2, 3), match_models = TRUE)
 #'
-#'   # Bayes factor - inclusion
-#'   inc_bf <- bayesfactor_inclusion(BFmodels, prior_odds = c(1, 2, 3), match_models = TRUE)
-#'
-#'   r <- report(inc_bf)
-#'   r
-#'   as.data.frame(r)
-#' }
+#' r <- report(inc_bf)
+#' r
+#' as.data.frame(r)
 #' @return An object of class [report()].
 #' @export
 report.bayesfactor_models <- function(x,

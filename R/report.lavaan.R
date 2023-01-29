@@ -9,25 +9,23 @@
 #'
 #' @inherit report return seealso
 #'
-#' @examples
-#' library(report)
+#' @examplesIf requireNamespace("lavaan", quietly = TRUE)
 #' \donttest{
 #' # Structural Equation Models (SEM)
-#' if (require("lavaan") && FALSE) {
-#'   structure <- " ind60 =~ x1 + x2 + x3
-#'                  dem60 =~ y1 + y2 + y3
-#'                  dem60 ~ ind60 "
-#'   model <- lavaan::sem(structure, data = PoliticalDemocracy)
-#'   r <- report(model)
-#'   r
-#'   # summary(r)
-#'   # as.data.frame(r)
-#'   # summary(as.data.frame(r))
+#' library(lavaan)
+#' structure <- "ind60 =~ x1 + x2 + x3
+#'               dem60 =~ y1 + y2 + y3
+#'               dem60 ~ ind60"
+#' model <- lavaan::sem(structure, data = PoliticalDemocracy)
+#' r <- report(model)
+#' r
+#' summary(r)
+#' as.data.frame(r)
+#' summary(as.data.frame(r))
 #'
-#'   # Specific reports
-#'   suppressWarnings(report_table(model))
-#'   suppressWarnings(report_performance(model))
-#' }
+#' # Specific reports
+#' suppressWarnings(report_table(model))
+#' suppressWarnings(report_performance(model))
 #' }
 #' @return An object of class [report()].
 #' @export
