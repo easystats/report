@@ -43,7 +43,7 @@ r
 summary(r)
 }
 \dontshow{\}) # examplesIf}
-\dontshow{if (requireNamespace("brms", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("brms", quietly = TRUE) && packageVersion("rstan") >= "2.26.0") (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 library(brms)
 model <- suppressWarnings(brm(mpg ~ disp + (1 | cyl), data = mtcars, refresh = 0, iter = 1000))

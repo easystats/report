@@ -20,7 +20,7 @@ the Sequential Effect eXistence and sIgnificance Testing framework (see
 \link[bayestestR:sexit]{SEXIT documentation}).
 }
 \examples{
-\dontshow{if (requireNamespace("report", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("rstanarm", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 # Bayesian models
 library(rstanarm)

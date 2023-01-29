@@ -33,7 +33,7 @@
 #' summary(r)
 #' }
 #'
-#' @examplesIf requireNamespace("brms", quietly = TRUE)
+#' @examplesIf requireNamespace("brms", quietly = TRUE) && packageVersion("rstan") >= "2.26.0"
 #' \donttest{
 #' library(brms)
 #' model <- suppressWarnings(brm(mpg ~ disp + (1 | cyl), data = mtcars, refresh = 0, iter = 1000))

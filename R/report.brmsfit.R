@@ -7,7 +7,7 @@
 #' @inheritParams report.lm
 #' @inherit report return seealso
 #'
-#' @examplesIf requireNamespace("brms", quietly = TRUE)
+#' @examplesIf requireNamespace("brms", quietly = TRUE) && packageVersion("rstan") >= "2.26.0"
 #' \dontrun{
 #' # Bayesian models
 #' library(brms)
