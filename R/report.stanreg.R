@@ -7,7 +7,7 @@
 #' @inheritParams report.lm
 #' @inherit report return seealso
 #'
-#' @examplesIf requireNamespace("report", quietly = TRUE)
+#' @examplesIf requireNamespace("rstanarm", quietly = TRUE)
 #' \donttest{
 #' # Bayesian models
 #' library(rstanarm)
