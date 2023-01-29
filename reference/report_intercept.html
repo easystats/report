@@ -8,7 +8,7 @@ report())."><meta property="og:image" content="https://easystats.github.io/repor
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
+    <nav class="navbar fixed-top navbar-default navbar-expand-lg bg-light"><div class="container">
     
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
@@ -20,18 +20,24 @@ report())."><meta property="og:image" content="https://easystats.github.io/repor
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item">
+      <ul class="navbar-nav me-auto"><li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown--tutorials" aria-label="Articles">
+    <span class="fa fa fa fa-book-reader"></span>
+     
+    Tutorials
+  </a>
+  <div class="dropdown-menu" aria-labelledby="dropdown--tutorials">
+    <a class="dropdown-item" href="../articles/cite_packages.html">Report and Cite Packages</a>
+    <a class="dropdown-item" href="../articles/new_models.html">Supporting New Models</a>
+    <a class="dropdown-item" href="../articles/report.html">Automated Reporting: Getting Started</a>
+    <a class="dropdown-item" href="../articles/report_table.html">Publication-ready Tables</a>
+  </div>
+</li>
+<li class="active nav-item">
   <a class="nav-link" href="../reference/index.html" aria-label="Reference">
     <span class="fa fa fa fa-file-code"></span>
      
-    Reference
-  </a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../articles/index.html" aria-label="Articles">
-    <span class="fa fa fa fa-book-reader"></span>
-     
-    Articles
+    Functions
   </a>
 </li>
 <li class="nav-item">
@@ -39,6 +45,13 @@ report())."><meta property="og:image" content="https://easystats.github.io/repor
     <span class="fa fa fa fa-newspaper"></span>
      
     News
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../SUPPORT.html" aria-label="Support">
+    <span class="fa fa fa fa-question-circle"></span>
+     
+    Help
   </a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -139,7 +152,7 @@ objects above).</p></dd>
 <span class="r-in"><span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html" class="external-link">stan_glm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span>, refresh <span class="op">=</span> <span class="fl">0</span>, iter <span class="op">=</span> <span class="fl">600</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu">report_intercept</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> The model's intercept, corresponding to Species = setosa, is at 5.01 (95% CI [4.88, 5.16]).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The model's intercept, corresponding to Species = setosa, is at 5.01 (95% CI [4.87, 5.15]).</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

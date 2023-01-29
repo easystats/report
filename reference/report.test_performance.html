@@ -10,7 +10,7 @@ function in the performance package."><meta property="og:image" content="https:/
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
+    <nav class="navbar fixed-top navbar-default navbar-expand-lg bg-light"><div class="container">
     
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
@@ -22,18 +22,24 @@ function in the performance package."><meta property="og:image" content="https:/
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item">
+      <ul class="navbar-nav me-auto"><li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown--tutorials" aria-label="Articles">
+    <span class="fa fa fa fa-book-reader"></span>
+     
+    Tutorials
+  </a>
+  <div class="dropdown-menu" aria-labelledby="dropdown--tutorials">
+    <a class="dropdown-item" href="../articles/cite_packages.html">Report and Cite Packages</a>
+    <a class="dropdown-item" href="../articles/new_models.html">Supporting New Models</a>
+    <a class="dropdown-item" href="../articles/report.html">Automated Reporting: Getting Started</a>
+    <a class="dropdown-item" href="../articles/report_table.html">Publication-ready Tables</a>
+  </div>
+</li>
+<li class="active nav-item">
   <a class="nav-link" href="../reference/index.html" aria-label="Reference">
     <span class="fa fa fa fa-file-code"></span>
      
-    Reference
-  </a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../articles/index.html" aria-label="Articles">
-    <span class="fa fa fa fa-book-reader"></span>
-     
-    Articles
+    Functions
   </a>
 </li>
 <li class="nav-item">
@@ -41,6 +47,13 @@ function in the performance package."><meta property="og:image" content="https:/
     <span class="fa fa fa fa-newspaper"></span>
      
     News
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../SUPPORT.html" aria-label="Support">
+    <span class="fa fa fa fa-question-circle"></span>
+     
+    Help
   </a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -170,41 +183,40 @@ re-computation.</p></dd>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">performance</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/performance/reference/test_performance.html" class="external-link">test_performance</a></span><span class="op">(</span><span class="va">m1</span>, <span class="va">m2</span>, <span class="va">m3</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">r</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> We compared three models; lm (BF = 26.52; Omega2 = 0.03, p = 0.223; LR = 3.47,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> p = 0.200), lm (BF = 4.20e-11; Omega2 = 0.31, p &lt; .001; LR = 57.81, p &lt; .001)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> and lm (BF = 26.52; Omega2 = 0.03, p = 0.223; LR = 3.47, p = 0.200).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> We compared three models; lm (BF = 26.52), lm (BF = 4.20e-11) and lm (BF =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26.52).</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> We compared three models; lm (), lm () and lm ().</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Name | Model |       BF | Omega2 | p (Omega2) |    LR | p (LR)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> m1   |    lm |          |        |            |       |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> m2   |    lm |    26.52 |   0.03 |     0.223  |  3.47 | 0.200 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> m3   |    lm | 4.20e-11 |   0.31 |     &lt; .001 | 57.81 | &lt; .001</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Name | Model |       BF | df | df_diff |  Chi2 |      p</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> m1   |    lm |          |  7 |         |       |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> m2   |    lm |    26.52 |  5 |   -2.00 |  3.47 | 0.177 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> m3   |    lm | 4.20e-11 |  3 |   -2.00 | 57.81 | &lt; .001</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Models were detected as nested and are compared in sequential order.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Name | Model |       BF | Omega2 | p (Omega2) |    LR | p (LR)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> m1   |    lm |          |        |            |       |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> m2   |    lm |    26.52 |   0.03 |     0.223  |  3.47 | 0.200 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> m3   |    lm | 4.20e-11 |   0.31 |     &lt; .001 | 57.81 | &lt; .001</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Name | Model |       BF | df | df_diff |  Chi2 |      p</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> m1   |    lm |          |  7 |         |       |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> m2   |    lm |    26.52 |  5 |   -2.00 |  3.47 | 0.177 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> m3   |    lm | 4.20e-11 |  3 |   -2.00 | 57.81 | &lt; .001</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Models were detected as nested and are compared in sequential order.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Specific reports</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="report_table.html">report_table</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Name | Model |       BF | Omega2 | p (Omega2) |    LR | p (LR)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> m1   |    lm |          |        |            |       |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> m2   |    lm |    26.52 |   0.03 |     0.223  |  3.47 | 0.200 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> m3   |    lm | 4.20e-11 |   0.31 |     &lt; .001 | 57.81 | &lt; .001</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Name | Model |       BF | df | df_diff |  Chi2 |      p</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> m1   |    lm |          |  7 |         |       |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> m2   |    lm |    26.52 |  5 |   -2.00 |  3.47 | 0.177 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> m3   |    lm | 4.20e-11 |  3 |   -2.00 | 57.81 | &lt; .001</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Models were detected as nested and are compared in sequential order.</span>
 <span class="r-in"><span><span class="fu"><a href="report_statistics.html">report_statistics</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> BF = 26.52; Omega2 = 0.03, p = 0.223; LR = 3.47, p = 0.200</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> BF = 4.20e-11; Omega2 = 0.31, p &lt; .001; LR = 57.81, p &lt; .001</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> BF = 26.52</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> BF = 4.20e-11</span>
 <span class="r-in"><span><span class="fu"><a href="report_parameters.html">report_parameters</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - lm (BF = 26.52; Omega2 = 0.03, p = 0.223; LR = 3.47, p = 0.200)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - lm (BF = 4.20e-11; Omega2 = 0.31, p &lt; .001; LR = 57.81, p &lt; .001)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - lm (BF = 26.52; Omega2 = 0.03, p = 0.223; LR = 3.47, p = 0.200)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - lm (BF = 26.52)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - lm (BF = 4.20e-11)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - lm (BF = 26.52)</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

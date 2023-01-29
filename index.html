@@ -43,7 +43,7 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
+    <nav class="navbar fixed-top navbar-default navbar-expand-lg bg-light"><div class="container">
     
     <a class="navbar-brand me-2" href="index.html">report</a>
 
@@ -56,18 +56,24 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown--tutorials" aria-label="Articles">
+    <span class="fa fa fa fa-book-reader"></span>
+     
+    Tutorials
+  </a>
+  <div class="dropdown-menu" aria-labelledby="dropdown--tutorials">
+    <a class="dropdown-item" href="articles/cite_packages.html">Report and Cite Packages</a>
+    <a class="dropdown-item" href="articles/new_models.html">Supporting New Models</a>
+    <a class="dropdown-item" href="articles/report.html">Automated Reporting: Getting Started</a>
+    <a class="dropdown-item" href="articles/report_table.html">Publication-ready Tables</a>
+  </div>
+</li>
 <li class="nav-item">
   <a class="nav-link" href="reference/index.html" aria-label="Reference">
     <span class="fa fa fa fa-file-code"></span>
      
-    Reference
-  </a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="articles/index.html" aria-label="Articles">
-    <span class="fa fa fa fa-book-reader"></span>
-     
-    Articles
+    Functions
   </a>
 </li>
 <li class="nav-item">
@@ -75,6 +81,13 @@
     <span class="fa fa fa fa-newspaper"></span>
      
     News
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="SUPPORT.html" aria-label="Support">
+    <span class="fa fa fa fa-question-circle"></span>
+     
+    Help
   </a>
 </li>
       </ul>
@@ -127,7 +140,7 @@
 <img src="logo.png" class="logo" alt=""><h1 id="report-">report <a class="anchor" aria-label="anchor" href="#report-"></a>
 </h1>
 </div>
-<p><a href="https://cran.r-project.org/package=report" class="external-link"><img src="http://www.r-pkg.org/badges/version/report" alt="CRAN"></a> <a href="https://cran.r-project.org/package=report" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/report" alt="downloads"></a> <a href="https://github.com/easystats/datawizard/actions" class="external-link"><img src="https://github.com/easystats/datawizard/workflows/R-CMD-check/badge.svg?branch=main" alt="R-CMD-check"></a> <a href="https://CRAN.R-project.org/package=modelbased" class="external-link"><img src="https://tinyverse.netlify.com/badge/modelbased" alt="status"></a></p>
+<p><a href="https://cran.r-project.org/package=report" class="external-link"><img src="http://www.r-pkg.org/badges/version/report" alt="CRAN"></a> <a href="https://cran.r-project.org/package=report" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/report" alt="downloads"></a> <a href="https://github.com/easystats/datawizard/actions" class="external-link"><img src="https://github.com/easystats/datawizard/workflows/R-CMD-check/badge.svg?branch=main" alt="R-CMD-check"></a> <a href="https://CRAN.R-project.org/package=modelbased" class="external-link"><img src="https://tinyverse.netlify.com/badge/modelbased" alt="status"></a> <a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="lifecycle"></a></p>
 <p><strong><em>“From R to your manuscript”</em></strong></p>
 <p><strong>report</strong>’s primary goal is to bridge the gap between R’s output and the formatted results contained in your manuscript. It automatically produces reports of models and data frames according to <strong>best practices</strong> guidelines (e.g., <a href="https://apastyle.apa.org/" class="external-link">APA</a>’s style), ensuring <strong>standardization</strong> and <strong>quality</strong> in results reporting.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -161,7 +174,7 @@
 <p>If you would instead like to experiment with the development version, you can download it from <code>GitHub</code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"easystats/report"</span><span class="op">)</span> <span class="co"># You only need to do that once</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"easystats/report"</span><span class="op">)</span> <span class="co"># You only need to do that once</span></span></code></pre></div>
 <p>Load the package every time you start R</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://easystats.github.io/report/">"report"</a></span><span class="op">)</span></span></code></pre></div>
@@ -330,17 +343,17 @@
 <span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a><span class="co"># (formula: mpg ~ qsec + wt). Priors over parameters were set as normal (mean =</span></span>
 <span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a><span class="co"># 0.00, SD = 8.43) distributions. The model's explanatory power is substantial</span></span>
 <span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a><span class="co"># (R2 = 0.81, 95% CI [0.70, 0.89], adj. R2 = 0.79). The model's intercept,</span></span>
-<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a><span class="co"># corresponding to qsec = 0 and wt = 0, is at 19.95 (95% CI [9.66, 30.11]).</span></span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a><span class="co"># corresponding to qsec = 0 and wt = 0, is at 19.83 (95% CI [8.99, 30.00]).</span></span>
 <span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a><span class="co"># Within this model:</span></span>
 <span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a><span class="co">#   - The effect of qsec (Median = 0.92, 95% CI [0.39, 1.44]) has a 100.00%</span></span>
-<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a><span class="co"># probability of being positive (&gt; 0), 99.05% of being significant (&gt; 0.30), and</span></span>
-<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a><span class="co"># 0.20% of being large (&gt; 1.81). The estimation successfully converged (Rhat =</span></span>
-<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a><span class="co"># 1.000) and the indices are reliable (ESS = 1819)</span></span>
-<span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a><span class="co">#   - The effect of wt (Median = -5.04, 95% CI [-6.01, -4.08]) has a 100.00%</span></span>
+<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a><span class="co">#   - The effect of qsec (Median = 0.93, 95% CI [0.40, 1.48]) has a 99.95%</span></span>
+<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a><span class="co"># probability of being positive (&gt; 0), 98.85% of being significant (&gt; 0.30), and</span></span>
+<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a><span class="co"># 0.25% of being large (&gt; 1.81). The estimation successfully converged (Rhat =</span></span>
+<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a><span class="co"># 0.999) and the indices are reliable (ESS = 1983)</span></span>
+<span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a><span class="co">#   - The effect of wt (Median = -5.04, 95% CI [-6.06, -4.07]) has a 100.00%</span></span>
 <span id="cb19-14"><a href="#cb19-14" tabindex="-1"></a><span class="co"># probability of being negative (&lt; 0), 100.00% of being significant (&lt; -0.30),</span></span>
 <span id="cb19-15"><a href="#cb19-15" tabindex="-1"></a><span class="co"># and 100.00% of being large (&lt; -1.81). The estimation successfully converged</span></span>
-<span id="cb19-16"><a href="#cb19-16" tabindex="-1"></a><span class="co"># (Rhat = 1.000) and the indices are reliable (ESS = 2034)</span></span>
+<span id="cb19-16"><a href="#cb19-16" tabindex="-1"></a><span class="co"># (Rhat = 1.001) and the indices are reliable (ESS = 2060)</span></span>
 <span id="cb19-17"><a href="#cb19-17" tabindex="-1"></a><span class="co"># </span></span>
 <span id="cb19-18"><a href="#cb19-18" tabindex="-1"></a><span class="co"># Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)</span></span>
 <span id="cb19-19"><a href="#cb19-19" tabindex="-1"></a><span class="co"># framework, we report the median of the posterior distribution and its 95% CI</span></span>
@@ -356,17 +369,17 @@
 <span id="cb19-29"><a href="#cb19-29" tabindex="-1"></a><span class="co"># (formula: mpg ~ qsec + wt). Priors over parameters were set as normal (mean =</span></span>
 <span id="cb19-30"><a href="#cb19-30" tabindex="-1"></a><span class="co"># 0.00, SD = 15.40) distributions. The model's explanatory power is substantial</span></span>
 <span id="cb19-31"><a href="#cb19-31" tabindex="-1"></a><span class="co"># (R2 = 0.81, 95% CI [0.70, 0.89], adj. R2 = 0.79). The model's intercept,</span></span>
-<span id="cb19-32"><a href="#cb19-32" tabindex="-1"></a><span class="co"># corresponding to qsec = 0 and wt = 0, is at 19.95 (95% CI [9.66, 30.11]).</span></span>
+<span id="cb19-32"><a href="#cb19-32" tabindex="-1"></a><span class="co"># corresponding to qsec = 0 and wt = 0, is at 19.83 (95% CI [8.99, 30.00]).</span></span>
 <span id="cb19-33"><a href="#cb19-33" tabindex="-1"></a><span class="co"># Within this model:</span></span>
 <span id="cb19-34"><a href="#cb19-34" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb19-35"><a href="#cb19-35" tabindex="-1"></a><span class="co">#   - The effect of qsec (Median = 0.92, 95% CI [0.39, 1.44]) has a 100.00%</span></span>
-<span id="cb19-36"><a href="#cb19-36" tabindex="-1"></a><span class="co"># probability of being positive (&gt; 0), 99.05% of being significant (&gt; 0.30), and</span></span>
-<span id="cb19-37"><a href="#cb19-37" tabindex="-1"></a><span class="co"># 0.20% of being large (&gt; 1.81). The estimation successfully converged (Rhat =</span></span>
-<span id="cb19-38"><a href="#cb19-38" tabindex="-1"></a><span class="co"># 1.000) and the indices are reliable (ESS = 1819)</span></span>
-<span id="cb19-39"><a href="#cb19-39" tabindex="-1"></a><span class="co">#   - The effect of wt (Median = -5.04, 95% CI [-6.01, -4.08]) has a 100.00%</span></span>
+<span id="cb19-35"><a href="#cb19-35" tabindex="-1"></a><span class="co">#   - The effect of qsec (Median = 0.93, 95% CI [0.40, 1.48]) has a 99.95%</span></span>
+<span id="cb19-36"><a href="#cb19-36" tabindex="-1"></a><span class="co"># probability of being positive (&gt; 0), 98.85% of being significant (&gt; 0.30), and</span></span>
+<span id="cb19-37"><a href="#cb19-37" tabindex="-1"></a><span class="co"># 0.25% of being large (&gt; 1.81). The estimation successfully converged (Rhat =</span></span>
+<span id="cb19-38"><a href="#cb19-38" tabindex="-1"></a><span class="co"># 0.999) and the indices are reliable (ESS = 1983)</span></span>
+<span id="cb19-39"><a href="#cb19-39" tabindex="-1"></a><span class="co">#   - The effect of wt (Median = -5.04, 95% CI [-6.06, -4.07]) has a 100.00%</span></span>
 <span id="cb19-40"><a href="#cb19-40" tabindex="-1"></a><span class="co"># probability of being negative (&lt; 0), 100.00% of being significant (&lt; -0.30),</span></span>
 <span id="cb19-41"><a href="#cb19-41" tabindex="-1"></a><span class="co"># and 100.00% of being large (&lt; -1.81). The estimation successfully converged</span></span>
-<span id="cb19-42"><a href="#cb19-42" tabindex="-1"></a><span class="co"># (Rhat = 1.000) and the indices are reliable (ESS = 2034)</span></span>
+<span id="cb19-42"><a href="#cb19-42" tabindex="-1"></a><span class="co"># (Rhat = 1.001) and the indices are reliable (ESS = 2060)</span></span>
 <span id="cb19-43"><a href="#cb19-43" tabindex="-1"></a><span class="co"># </span></span>
 <span id="cb19-44"><a href="#cb19-44" tabindex="-1"></a><span class="co"># Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)</span></span>
 <span id="cb19-45"><a href="#cb19-45" tabindex="-1"></a><span class="co"># framework, we report the median of the posterior distribution and its 95% CI</span></span>
@@ -473,45 +486,45 @@
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb25"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="co"># Analyses were conducted using the R Statistical language (version 4.2.2; R Core</span></span>
-<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="co"># Team, 2022) on macOS Ventura 13.1, using the packages lme4 (version 1.1.31;</span></span>
-<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a><span class="co"># Bates D et al., 2015), Matrix (version 1.5.3; Bates D et al., 2022), Rcpp</span></span>
-<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a><span class="co"># (version 1.0.10; Eddelbuettel D, François R, 2011), rstanarm (version 2.21.3;</span></span>
-<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a><span class="co"># Goodrich B et al., 2022), report (version 0.5.5.4; Makowski D et al., 2021) and</span></span>
-<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a><span class="co"># dplyr (version 1.0.99.9000; Wickham H et al., 2022).</span></span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="co"># Team, 2022) on Windows 10 x64 (build 19045), using the packages lme4 (version</span></span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a><span class="co"># 1.1.31; Bates D et al., 2015), Matrix (version 1.5.1; Bates D et al., 2022),</span></span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a><span class="co"># Rcpp (version 1.0.9; Eddelbuettel D, François R, 2011), rstanarm (version</span></span>
+<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a><span class="co"># 2.21.3; Goodrich B et al., 2022), report (version 0.5.5.4; Makowski D et al.,</span></span>
+<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a><span class="co"># 2021) and dplyr (version 1.0.10; Wickham H et al., 2022).</span></span>
 <span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a><span class="co"># </span></span>
 <span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a><span class="co"># References</span></span>
 <span id="cb25-9"><a href="#cb25-9" tabindex="-1"></a><span class="co"># ----------</span></span>
-<span id="cb25-10"><a href="#cb25-10" tabindex="-1"></a><span class="co">#   - Bates D, Mächler M, Bolker B, Walker S (2015). "Fitting LinearMixed-Effects</span></span>
-<span id="cb25-11"><a href="#cb25-11" tabindex="-1"></a><span class="co"># Models Using lme4." _Journal of Statistical Software_,*67*(1), 1-48.</span></span>
-<span id="cb25-12"><a href="#cb25-12" tabindex="-1"></a><span class="co"># doi:10.18637/jss.v067.i01&lt;https://doi.org/10.18637/jss.v067.i01&gt;.</span></span>
-<span id="cb25-13"><a href="#cb25-13" tabindex="-1"></a><span class="co">#   - Bates D, Maechler M, Jagan M (2022). _Matrix: Sparse and Dense MatrixClasses</span></span>
-<span id="cb25-14"><a href="#cb25-14" tabindex="-1"></a><span class="co"># and Methods_. R package version</span></span>
-<span id="cb25-15"><a href="#cb25-15" tabindex="-1"></a><span class="co"># 1.5-3,&lt;https://CRAN.R-project.org/package=Matrix&gt;.</span></span>
-<span id="cb25-16"><a href="#cb25-16" tabindex="-1"></a><span class="co">#   - Eddelbuettel D, François R (2011). "Rcpp: Seamless R and C++Integration."</span></span>
-<span id="cb25-17"><a href="#cb25-17" tabindex="-1"></a><span class="co"># _Journal of Statistical Software_, *40*(8), 1-18.doi:10.18637/jss.v040.i08</span></span>
-<span id="cb25-18"><a href="#cb25-18" tabindex="-1"></a><span class="co"># &lt;https://doi.org/10.18637/jss.v040.i08&gt;.Eddelbuettel D (2013). _Seamless R and</span></span>
-<span id="cb25-19"><a href="#cb25-19" tabindex="-1"></a><span class="co"># C++ Integration with Rcpp_.Springer, New York.</span></span>
-<span id="cb25-20"><a href="#cb25-20" tabindex="-1"></a><span class="co"># doi:10.1007/978-1-4614-6868-4&lt;https://doi.org/10.1007/978-1-4614-6868-4&gt;, ISBN</span></span>
-<span id="cb25-21"><a href="#cb25-21" tabindex="-1"></a><span class="co"># 978-1-4614-6867-7.Eddelbuettel D, Balamuta JJ (2018). "Extending extitR with</span></span>
-<span id="cb25-22"><a href="#cb25-22" tabindex="-1"></a><span class="co"># extitC++: ABrief Introduction to extitRcpp." _The American Statistician_,</span></span>
-<span id="cb25-23"><a href="#cb25-23" tabindex="-1"></a><span class="co"># *72*(1),28-36.</span></span>
-<span id="cb25-24"><a href="#cb25-24" tabindex="-1"></a><span class="co"># doi:10.1080/00031305.2017.1375990&lt;https://doi.org/10.1080/00031305.2017.1375990&gt;.</span></span>
-<span id="cb25-25"><a href="#cb25-25" tabindex="-1"></a><span class="co">#   - Goodrich B, Gabry J, Ali I, Brilleman S (2022). "rstanarm: Bayesianapplied</span></span>
-<span id="cb25-26"><a href="#cb25-26" tabindex="-1"></a><span class="co"># regression modeling via Stan." R package version</span></span>
-<span id="cb25-27"><a href="#cb25-27" tabindex="-1"></a><span class="co"># 2.21.3,&lt;https://mc-stan.org/rstanarm/&gt;.Brilleman S, Crowther M, Moreno-Betancur</span></span>
-<span id="cb25-28"><a href="#cb25-28" tabindex="-1"></a><span class="co"># M, Buros Novik J, Wolfe R(2018). "Joint longitudinal and time-to-event models</span></span>
-<span id="cb25-29"><a href="#cb25-29" tabindex="-1"></a><span class="co"># via Stan." StanCon2018. 10-12 Jan 2018. Pacific Grove, CA,</span></span>
-<span id="cb25-30"><a href="#cb25-30" tabindex="-1"></a><span class="co"># USA.,&lt;https://github.com/stan-dev/stancon_talks/&gt;.</span></span>
-<span id="cb25-31"><a href="#cb25-31" tabindex="-1"></a><span class="co">#   - Makowski D, Ben-Shachar M, Patil I, Lüdecke D, Thériault R (2021)."Automated</span></span>
-<span id="cb25-32"><a href="#cb25-32" tabindex="-1"></a><span class="co"># Results Reporting as a Practical Tool to ImproveReproducibility and</span></span>
-<span id="cb25-33"><a href="#cb25-33" tabindex="-1"></a><span class="co"># Methodological Best Practices Adoption."</span></span>
-<span id="cb25-34"><a href="#cb25-34" tabindex="-1"></a><span class="co"># _CRAN_.&lt;https://github.com/easystats/report&gt;.</span></span>
-<span id="cb25-35"><a href="#cb25-35" tabindex="-1"></a><span class="co">#   - R Core Team (2022). _R: A Language and Environment for StatisticalComputing_.</span></span>
-<span id="cb25-36"><a href="#cb25-36" tabindex="-1"></a><span class="co"># R Foundation for Statistical Computing, Vienna,</span></span>
-<span id="cb25-37"><a href="#cb25-37" tabindex="-1"></a><span class="co"># Austria.&lt;https://www.R-project.org/&gt;.</span></span>
-<span id="cb25-38"><a href="#cb25-38" tabindex="-1"></a><span class="co">#   - Wickham H, François R, Henry L, Müller K, Vaughan D (2022). _dplyr: AGrammar</span></span>
-<span id="cb25-39"><a href="#cb25-39" tabindex="-1"></a><span class="co"># of Data Manipulation_.</span></span>
-<span id="cb25-40"><a href="#cb25-40" tabindex="-1"></a><span class="co"># https://dplyr.tidyverse.org,https://github.com/tidyverse/dplyr.</span></span></code></pre></div>
+<span id="cb25-10"><a href="#cb25-10" tabindex="-1"></a><span class="co">#   - Bates D, Mächler M, Bolker B, Walker S (2015). "Fitting Linear Mixed-Effects</span></span>
+<span id="cb25-11"><a href="#cb25-11" tabindex="-1"></a><span class="co"># Models Using lme4." _Journal of Statistical Software_, *67*(1), 1-48.</span></span>
+<span id="cb25-12"><a href="#cb25-12" tabindex="-1"></a><span class="co"># doi:10.18637/jss.v067.i01 &lt;https://doi.org/10.18637/jss.v067.i01&gt;.</span></span>
+<span id="cb25-13"><a href="#cb25-13" tabindex="-1"></a><span class="co">#   - Bates D, Maechler M, Jagan M (2022). _Matrix: Sparse and Dense Matrix Classes</span></span>
+<span id="cb25-14"><a href="#cb25-14" tabindex="-1"></a><span class="co"># and Methods_. R package version 1.5-1,</span></span>
+<span id="cb25-15"><a href="#cb25-15" tabindex="-1"></a><span class="co"># &lt;https://CRAN.R-project.org/package=Matrix&gt;.</span></span>
+<span id="cb25-16"><a href="#cb25-16" tabindex="-1"></a><span class="co">#   - Eddelbuettel D, François R (2011). "Rcpp: Seamless R and C++ Integration."</span></span>
+<span id="cb25-17"><a href="#cb25-17" tabindex="-1"></a><span class="co"># _Journal of Statistical Software_, *40*(8), 1-18. doi:10.18637/jss.v040.i08</span></span>
+<span id="cb25-18"><a href="#cb25-18" tabindex="-1"></a><span class="co"># &lt;https://doi.org/10.18637/jss.v040.i08&gt;. Eddelbuettel D (2013). _Seamless R and</span></span>
+<span id="cb25-19"><a href="#cb25-19" tabindex="-1"></a><span class="co"># C++ Integration with Rcpp_. Springer, New York. doi:10.1007/978-1-4614-6868-4</span></span>
+<span id="cb25-20"><a href="#cb25-20" tabindex="-1"></a><span class="co"># &lt;https://doi.org/10.1007/978-1-4614-6868-4&gt;, ISBN 978-1-4614-6867-7.</span></span>
+<span id="cb25-21"><a href="#cb25-21" tabindex="-1"></a><span class="co"># Eddelbuettel D, Balamuta JJ (2018). "Extending extitR with extitC++: A Brief</span></span>
+<span id="cb25-22"><a href="#cb25-22" tabindex="-1"></a><span class="co"># Introduction to extitRcpp." _The American Statistician_, *72*(1), 28-36.</span></span>
+<span id="cb25-23"><a href="#cb25-23" tabindex="-1"></a><span class="co"># doi:10.1080/00031305.2017.1375990</span></span>
+<span id="cb25-24"><a href="#cb25-24" tabindex="-1"></a><span class="co"># &lt;https://doi.org/10.1080/00031305.2017.1375990&gt;.</span></span>
+<span id="cb25-25"><a href="#cb25-25" tabindex="-1"></a><span class="co">#   - Goodrich B, Gabry J, Ali I, Brilleman S (2022). "rstanarm: Bayesian applied</span></span>
+<span id="cb25-26"><a href="#cb25-26" tabindex="-1"></a><span class="co"># regression modeling via Stan." R package version 2.21.3,</span></span>
+<span id="cb25-27"><a href="#cb25-27" tabindex="-1"></a><span class="co"># &lt;https://mc-stan.org/rstanarm/&gt;. Brilleman S, Crowther M, Moreno-Betancur M,</span></span>
+<span id="cb25-28"><a href="#cb25-28" tabindex="-1"></a><span class="co"># Buros Novik J, Wolfe R (2018). "Joint longitudinal and time-to-event models via</span></span>
+<span id="cb25-29"><a href="#cb25-29" tabindex="-1"></a><span class="co"># Stan." StanCon 2018. 10-12 Jan 2018. Pacific Grove, CA, USA.,</span></span>
+<span id="cb25-30"><a href="#cb25-30" tabindex="-1"></a><span class="co"># &lt;https://github.com/stan-dev/stancon_talks/&gt;.</span></span>
+<span id="cb25-31"><a href="#cb25-31" tabindex="-1"></a><span class="co">#   - Makowski D, Lüdecke D, Ben-Shachar M, Patil I, Wiernik B, Thériault R (2021).</span></span>
+<span id="cb25-32"><a href="#cb25-32" tabindex="-1"></a><span class="co"># "Automated Results Reporting as a Practical Tool to Improve Reproducibility and</span></span>
+<span id="cb25-33"><a href="#cb25-33" tabindex="-1"></a><span class="co"># Methodological Best Practices Adoption." _CRAN_.</span></span>
+<span id="cb25-34"><a href="#cb25-34" tabindex="-1"></a><span class="co"># &lt;https://easystats.github.io/report&gt;.</span></span>
+<span id="cb25-35"><a href="#cb25-35" tabindex="-1"></a><span class="co">#   - R Core Team (2022). _R: A Language and Environment for Statistical</span></span>
+<span id="cb25-36"><a href="#cb25-36" tabindex="-1"></a><span class="co"># Computing_. R Foundation for Statistical Computing, Vienna, Austria.</span></span>
+<span id="cb25-37"><a href="#cb25-37" tabindex="-1"></a><span class="co"># &lt;https://www.R-project.org/&gt;.</span></span>
+<span id="cb25-38"><a href="#cb25-38" tabindex="-1"></a><span class="co">#   - Wickham H, François R, Henry L, Müller K (2022). _dplyr: A Grammar of Data</span></span>
+<span id="cb25-39"><a href="#cb25-39" tabindex="-1"></a><span class="co"># Manipulation_. R package version 1.0.10,</span></span>
+<span id="cb25-40"><a href="#cb25-40" tabindex="-1"></a><span class="co"># &lt;https://CRAN.R-project.org/package=dplyr&gt;.</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -525,16 +538,16 @@
 <span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a>  Makowski, D., Ben<span class="sc">-</span>Shachar, M.S., Patil, I., Lüdecke, D., <span class="sc">&amp;</span> Thériault,</span>
 <span id="cb26-6"><a href="#cb26-6" tabindex="-1"></a>  <span class="fu">R.</span> (<span class="dv">2020</span>). Automated Results Reporting as a Practical Tool to Improve</span>
 <span id="cb26-7"><a href="#cb26-7" tabindex="-1"></a>  Reproducibility and Methodological Best Practices Adoption. CRAN.</span>
-<span id="cb26-8"><a href="#cb26-8" tabindex="-1"></a>  Available from https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>easystats<span class="sc">/</span>report. doi<span class="sc">:</span> .</span>
+<span id="cb26-8"><a href="#cb26-8" tabindex="-1"></a>  Available from https<span class="sc">:</span><span class="er">//</span>easystats.github.io<span class="sc">/</span>report. doi<span class="sc">:</span> .</span>
 <span id="cb26-9"><a href="#cb26-9" tabindex="-1"></a></span>
 <span id="cb26-10"><a href="#cb26-10" tabindex="-1"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
 <span id="cb26-11"><a href="#cb26-11" tabindex="-1"></a></span>
 <span id="cb26-12"><a href="#cb26-12" tabindex="-1"></a>  <span class="sc">@</span>Article{,</span>
 <span id="cb26-13"><a href="#cb26-13" tabindex="-1"></a>    title <span class="ot">=</span> {Automated Results Reporting as a Practical Tool to Improve Reproducibility and Methodological Best Practices Adoption},</span>
-<span id="cb26-14"><a href="#cb26-14" tabindex="-1"></a>    author <span class="ot">=</span> {Dominique Makowski and Mattan S. Ben<span class="sc">-</span>Shachar and Indrajeet Patil and Daniel Lüdecke and Rémi Thériault},</span>
+<span id="cb26-14"><a href="#cb26-14" tabindex="-1"></a>    author <span class="ot">=</span> {Dominique Makowski and Daniel Lüdecke and Mattan S. Ben<span class="sc">-</span>Shachar and Indrajeet Patil and Brenton M. Wiernik and Rémi Thériault},</span>
 <span id="cb26-15"><a href="#cb26-15" tabindex="-1"></a>    year <span class="ot">=</span> {<span class="dv">2021</span>},</span>
 <span id="cb26-16"><a href="#cb26-16" tabindex="-1"></a>    journal <span class="ot">=</span> {CRAN},</span>
-<span id="cb26-17"><a href="#cb26-17" tabindex="-1"></a>    url <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>easystats<span class="sc">/</span>report},</span>
+<span id="cb26-17"><a href="#cb26-17" tabindex="-1"></a>    url <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>easystats.github.io<span class="sc">/</span>report},</span>
 <span id="cb26-18"><a href="#cb26-18" tabindex="-1"></a>  }</span></code></pre></div>
 </div>
 <div class="section level2">
@@ -572,6 +585,7 @@
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
+<li><a href="SUPPORT.html">Getting help</a></li>
 </ul>
 </div>
 

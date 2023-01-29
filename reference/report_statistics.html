@@ -10,7 +10,7 @@ insert in parentheses in plots or reports."><meta property="og:image" content="h
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
+    <nav class="navbar fixed-top navbar-default navbar-expand-lg bg-light"><div class="container">
     
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
@@ -22,18 +22,24 @@ insert in parentheses in plots or reports."><meta property="og:image" content="h
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item">
+      <ul class="navbar-nav me-auto"><li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown--tutorials" aria-label="Articles">
+    <span class="fa fa fa fa-book-reader"></span>
+     
+    Tutorials
+  </a>
+  <div class="dropdown-menu" aria-labelledby="dropdown--tutorials">
+    <a class="dropdown-item" href="../articles/cite_packages.html">Report and Cite Packages</a>
+    <a class="dropdown-item" href="../articles/new_models.html">Supporting New Models</a>
+    <a class="dropdown-item" href="../articles/report.html">Automated Reporting: Getting Started</a>
+    <a class="dropdown-item" href="../articles/report_table.html">Publication-ready Tables</a>
+  </div>
+</li>
+<li class="active nav-item">
   <a class="nav-link" href="../reference/index.html" aria-label="Reference">
     <span class="fa fa fa fa-file-code"></span>
      
-    Reference
-  </a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../articles/index.html" aria-label="Articles">
-    <span class="fa fa fa fa-book-reader"></span>
-     
-    Articles
+    Functions
   </a>
 </li>
 <li class="nav-item">
@@ -41,6 +47,13 @@ insert in parentheses in plots or reports."><meta property="og:image" content="h
     <span class="fa fa fa fa-newspaper"></span>
      
     News
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../SUPPORT.html" aria-label="Support">
+    <span class="fa fa fa fa-question-circle"></span>
+     
+    Help
   </a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -176,9 +189,9 @@ will run it.</p></dd>
 <span class="r-in"><span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html" class="external-link">stan_glm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span>, refresh <span class="op">=</span> <span class="fl">0</span>, iter <span class="op">=</span> <span class="fl">600</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu">report_statistics</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Median = 5.01, 95% CI [4.86, 5.16], pd = 100%; Std. beta = -1.02, 95% CI [-1.18, -0.82]; Rhat = 1.00, ESS = 871.05</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Median = 0.93, 95% CI [0.70, 1.13], pd = 100%; Std. beta = 1.13, 95% CI [0.87, 1.38]; Rhat = 1.00, ESS = 784.34</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Median = 1.58, 95% CI [1.37, 1.78], pd = 100%; Std. beta = 1.91, 95% CI [1.66, 2.15]; Rhat = 1.00, ESS = 832.66</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Median = 5.01, 95% CI [4.85, 5.15], pd = 100%; Std. beta = -1.01, 95% CI [-1.18, -0.85]; Rhat = 1.00, ESS = 919.20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Median = 0.93, 95% CI [0.73, 1.12], pd = 100%; Std. beta = 1.12, 95% CI [0.90, 1.37]; Rhat = 1.00, ESS = 835.36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Median = 1.58, 95% CI [1.37, 1.79], pd = 100%; Std. beta = 1.91, 95% CI [1.68, 2.15]; Rhat = 1.00, ESS = 1001.82</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

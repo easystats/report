@@ -6,7 +6,7 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
+    <nav class="navbar fixed-top navbar-default navbar-expand-lg bg-light"><div class="container">
     
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
@@ -18,18 +18,24 @@
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item">
+      <ul class="navbar-nav me-auto"><li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown--tutorials" aria-label="Articles">
+    <span class="fa fa fa fa-book-reader"></span>
+     
+    Tutorials
+  </a>
+  <div class="dropdown-menu" aria-labelledby="dropdown--tutorials">
+    <a class="dropdown-item" href="../articles/cite_packages.html">Report and Cite Packages</a>
+    <a class="dropdown-item" href="../articles/new_models.html">Supporting New Models</a>
+    <a class="dropdown-item" href="../articles/report.html">Automated Reporting: Getting Started</a>
+    <a class="dropdown-item" href="../articles/report_table.html">Publication-ready Tables</a>
+  </div>
+</li>
+<li class="active nav-item">
   <a class="nav-link" href="../reference/index.html" aria-label="Reference">
     <span class="fa fa fa fa-file-code"></span>
      
-    Reference
-  </a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../articles/index.html" aria-label="Articles">
-    <span class="fa fa fa fa-book-reader"></span>
-     
-    Articles
+    Functions
   </a>
 </li>
 <li class="nav-item">
@@ -37,6 +43,13 @@
     <span class="fa fa fa fa-newspaper"></span>
      
     News
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../SUPPORT.html" aria-label="Support">
+    <span class="fa fa fa fa-question-circle"></span>
+     
+    Help
   </a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -136,9 +149,9 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/report/">report</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">report_date</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> It's Wednesday, January 25 of the year 2023, at  5pm 30 and 21 seconds</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> It's Sunday, January 29 of the year 2023, at  7am 35 and 55 seconds</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu">report_date</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25/01/23 - 17:30:21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29/01/23 - 07:35:55</span>
 <span class="r-in"><span><span class="fu">report_story</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Did you ever hear the tragedy of Darth Plagueis The Wise? I thought not. It's</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> not a story the Jedi would tell you. It's a Sith legend. Darth Plagueis was a</span>

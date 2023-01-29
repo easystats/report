@@ -10,7 +10,7 @@ SEXIT documentation)."><meta property="og:image" content="https://easystats.gith
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
+    <nav class="navbar fixed-top navbar-default navbar-expand-lg bg-light"><div class="container">
     
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
@@ -22,18 +22,24 @@ SEXIT documentation)."><meta property="og:image" content="https://easystats.gith
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item">
+      <ul class="navbar-nav me-auto"><li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown--tutorials" aria-label="Articles">
+    <span class="fa fa fa fa-book-reader"></span>
+     
+    Tutorials
+  </a>
+  <div class="dropdown-menu" aria-labelledby="dropdown--tutorials">
+    <a class="dropdown-item" href="../articles/cite_packages.html">Report and Cite Packages</a>
+    <a class="dropdown-item" href="../articles/new_models.html">Supporting New Models</a>
+    <a class="dropdown-item" href="../articles/report.html">Automated Reporting: Getting Started</a>
+    <a class="dropdown-item" href="../articles/report_table.html">Publication-ready Tables</a>
+  </div>
+</li>
+<li class="active nav-item">
   <a class="nav-link" href="../reference/index.html" aria-label="Reference">
     <span class="fa fa fa fa-file-code"></span>
      
-    Reference
-  </a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../articles/index.html" aria-label="Articles">
-    <span class="fa fa fa fa-book-reader"></span>
-     
-    Articles
+    Functions
   </a>
 </li>
 <li class="nav-item">
@@ -41,6 +47,13 @@ SEXIT documentation)."><meta property="og:image" content="https://easystats.gith
     <span class="fa fa fa fa-newspaper"></span>
      
     News
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../SUPPORT.html" aria-label="Support">
+    <span class="fa fa fa fa-question-circle"></span>
+     
+    Help
   </a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -163,18 +176,18 @@ the Sequential Effect eXistence and sIgnificance Testing framework (see
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:brms’:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     dirichlet, exponential, get_y, lasso, ngrps</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter   | Median |         95% CI |   pd |  Rhat |    ESS |                   Prior |    Fit</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) |  19.48 | [ 8.19, 30.20] | 100% | 1.007 | 594.00 | Normal (20.09 +- 15.07) |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> qsec        |   0.94 | [ 0.40,  1.50] | 100% | 1.005 | 666.00 |   Normal (0.00 +- 8.43) |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> wt          |  -5.04 | [-5.95, -3.96] | 100% | 1.007 | 872.00 |  Normal (0.00 +- 15.40) |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             |        |                |      |       |        |                         |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ELPD        |        |                |      |       |        |                         | -78.95</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> LOOIC       |        |                |      |       |        |                         | 157.90</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> WAIC        |        |                |      |       |        |                         | 157.65</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R2          |        |                |      |       |        |                         |   0.81</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (adj.)   |        |                |      |       |        |                         |   0.79</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sigma       |        |                |      |       |        |                         |   2.64</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter   | Median |         95% CI |     pd |  Rhat |    ESS |                   Prior |    Fit</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------------------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) |  19.48 | [ 8.18, 31.57] |   100% | 1.000 | 775.00 | Normal (20.09 +- 15.07) |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> qsec        |   0.93 | [ 0.33,  1.50] | 99.90% | 1.000 | 937.00 |   Normal (0.00 +- 8.43) |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> wt          |  -5.03 | [-6.04, -3.84] |   100% | 0.997 | 941.00 |  Normal (0.00 +- 15.40) |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             |        |                |        |       |        |                         |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ELPD        |        |                |        |       |        |                         | -79.45</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> LOOIC       |        |                |        |       |        |                         | 158.90</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> WAIC        |        |                |        |       |        |                         | 158.62</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2          |        |                |        |       |        |                         |   0.81</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (adj.)   |        |                |        |       |        |                         |   0.79</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sigma       |        |                |        |       |        |                         |   2.68</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
