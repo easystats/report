@@ -48,12 +48,12 @@ test_that("report.htest-chi2", {
   expect_snapshot(
     variant = "windows",
     report_effectsize(x, type = "tschuprows_t")
-  ) # tschuprows_t has no interpretation in effectsize!!!
-  # Watch carefully in case effectsize adds support
+  )
 
-  # max_possible not found for cohens_w
-  # report_effectsize(x, type = "cohens_w")
-  # Watch carefully in case effectsize adds support
+  expect_snapshot(
+    variant = "windows",
+    report_effectsize(x, type = "cohens_w")
+  )
 
   # Change dataset for "Error: Phi is not appropriate for non-2x2 tables."
   dat <- structure(

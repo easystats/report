@@ -27,105 +27,106 @@ test_that("report_performance", {
   )
 
   # Mixed models
-  if (requiet("lme4")) {
-    x <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
-    expect_identical(
-      as.character(report_performance(x)),
-      paste(
-        "The model's total explanatory power is substantial (conditional R2 = 0.97) and the",
-        "part related to the fixed effects alone (marginal R2) is of 0.66"
-      )
-    )
-    expect_identical(
-      as.character(summary(report_performance(x))),
-      paste(
-        "The model's total explanatory power is substantial (conditional R2 = 0.97) and the",
-        "part related to the fixed effects alone (marginal R2) is of 0.66"
-      )
-    )
+  skip_if_not_or_load_if_installed("lme4")
 
-    x <- lme4::glmer(vs ~ mpg + (1 | cyl), data = mtcars, family = "binomial")
-    expect_identical(
-      as.character(report_performance(x)),
-      paste(
-        "The model's total explanatory power is substantial (conditional R2 = 0.59) and the",
-        "part related to the fixed effects alone (marginal R2) is of 0.13"
-      )
+  x <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
+  expect_identical(
+    as.character(report_performance(x)),
+    paste(
+      "The model's total explanatory power is substantial (conditional R2 = 0.97) and the",
+      "part related to the fixed effects alone (marginal R2) is of 0.66"
     )
-    expect_identical(
-      as.character(summary(report_performance(x))),
-      paste(
-        "The model's total explanatory power is substantial (conditional R2 = 0.59) and the",
-        "part related to the fixed effects alone (marginal R2) is of 0.13"
-      )
+  )
+  expect_identical(
+    as.character(summary(report_performance(x))),
+    paste(
+      "The model's total explanatory power is substantial (conditional R2 = 0.97) and the",
+      "part related to the fixed effects alone (marginal R2) is of 0.66"
     )
-  }
+  )
+
+  x <- lme4::glmer(vs ~ mpg + (1 | cyl), data = mtcars, family = "binomial")
+  expect_identical(
+    as.character(report_performance(x)),
+    paste(
+      "The model's total explanatory power is substantial (conditional R2 = 0.59) and the",
+      "part related to the fixed effects alone (marginal R2) is of 0.13"
+    )
+  )
+  expect_identical(
+    as.character(summary(report_performance(x))),
+    paste(
+      "The model's total explanatory power is substantial (conditional R2 = 0.59) and the",
+      "part related to the fixed effects alone (marginal R2) is of 0.13"
+    )
+  )
+
 
   # Mixed models
-  if (requiet("lme4")) {
-    x <- lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
-    expect_identical(
-      as.character(report_performance(x)),
-      paste(
-        "The model's total explanatory power is substantial (conditional R2 = 0.97) and the",
-        "part related to the fixed effects alone (marginal R2) is of 0.66"
-      )
-    )
-    expect_identical(
-      as.character(summary(report_performance(x))),
-      paste(
-        "The model's total explanatory power is substantial (conditional R2 = 0.97) and the",
-        "part related to the fixed effects alone (marginal R2) is of 0.66"
-      )
-    )
+  skip_if_not_or_load_if_installed("lme4")
 
-    x <- lme4::glmer(vs ~ mpg + (1 | cyl), data = mtcars, family = "binomial")
-    expect_identical(
-      as.character(report_performance(x)),
-      paste(
-        "The model's total explanatory power is substantial (conditional R2 = 0.59) and the",
-        "part related to the fixed effects alone (marginal R2) is of 0.13"
-      )
+  x <- lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
+  expect_identical(
+    as.character(report_performance(x)),
+    paste(
+      "The model's total explanatory power is substantial (conditional R2 = 0.97) and the",
+      "part related to the fixed effects alone (marginal R2) is of 0.66"
     )
-    expect_identical(
-      as.character(summary(report_performance(x))),
-      paste(
-        "The model's total explanatory power is substantial (conditional R2 = 0.59) and the",
-        "part related to the fixed effects alone (marginal R2) is of 0.13"
-      )
+  )
+  expect_identical(
+    as.character(summary(report_performance(x))),
+    paste(
+      "The model's total explanatory power is substantial (conditional R2 = 0.97) and the",
+      "part related to the fixed effects alone (marginal R2) is of 0.66"
     )
-  }
+  )
+
+  x <- lme4::glmer(vs ~ mpg + (1 | cyl), data = mtcars, family = "binomial")
+  expect_identical(
+    as.character(report_performance(x)),
+    paste(
+      "The model's total explanatory power is substantial (conditional R2 = 0.59) and the",
+      "part related to the fixed effects alone (marginal R2) is of 0.13"
+    )
+  )
+  expect_identical(
+    as.character(summary(report_performance(x))),
+    paste(
+      "The model's total explanatory power is substantial (conditional R2 = 0.59) and the",
+      "part related to the fixed effects alone (marginal R2) is of 0.13"
+    )
+  )
 
   # Bayesian
-  if (requiet("rstanarm")) {
-    x <- stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 1000, seed = 333)
-    expect_snapshot(
-      variant = "windows",
-      report_performance(x)
-    )
-    expect_snapshot(
-      variant = "windows",
-      summary(report_performance(x))
-    )
+  skip_if_not_or_load_if_installed("rstanarm")
 
-    x <- stan_glm(vs ~ disp, data = mtcars, family = "binomial", refresh = 0, iter = 1000, seed = 333)
-    expect_snapshot(
-      variant = "windows",
-      report_performance(x)
-    )
-    expect_snapshot(
-      variant = "windows",
-      summary(report_performance(x))
-    )
+  x <- stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 1000, seed = 333)
+  expect_snapshot(
+    variant = "windows",
+    report_performance(x)
+  )
+  expect_snapshot(
+    variant = "windows",
+    summary(report_performance(x))
+  )
 
-    x <- stan_lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris, refresh = 0, iter = 1000, seed = 333)
-    expect_snapshot(
-      variant = "windows",
-      report_performance(x)
-    )
-    expect_snapshot(
-      variant = "windows",
-      summary(report_performance(x))
-    )
-  }
+  x <- stan_glm(vs ~ disp, data = mtcars, family = "binomial", refresh = 0, iter = 1000, seed = 333)
+  expect_snapshot(
+    variant = "windows",
+    report_performance(x)
+  )
+  expect_snapshot(
+    variant = "windows",
+    summary(report_performance(x))
+  )
+
+  x <- stan_lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris, refresh = 0, iter = 1000, seed = 333)
+  expect_snapshot(
+    variant = "windows",
+    report_performance(x)
+  )
+  expect_snapshot(
+    variant = "windows",
+    summary(report_performance(x))
+  )
 })

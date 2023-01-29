@@ -43,8 +43,7 @@ test_that("report.factor", {
 })
 
 test_that("report.data.frame", {
-  skip_if_not_installed("dplyr")
-  library(dplyr)
+  skip_if_not_or_load_if_installed("dplyr")
 
   r <- report(iris)
   expect_equal(nrow(as.data.frame(r)), 7, tolerance = 0)
@@ -69,19 +68,18 @@ test_that("report.data.frame", {
 })
 
 test_that("report.data.frame - with NAs", {
-  skip_if_not_installed("dplyr")
-  library(dplyr)
+  skip_if_not_or_load_if_installed("dplyr")
 
   df <- mtcars
   df[1, 2] <- NA
   df[1, 6] <- NA
 
-  report_grouped_df <- suppressWarnings(report(group_by(df, cyl)))
+  report_grouped_df <- report(group_by(df, cyl))
   expect_snapshot(variant = "windows", report_grouped_df)
 })
 
 test_that("report.data.frame - with list columns", {
-  skip_if_not_installed("dplyr")
+  skip_if_not_or_load_if_installed("dplyr")
 
   set.seed(123)
   expect_snapshot(variant = "windows", report(dplyr::starwars))
