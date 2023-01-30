@@ -193,8 +193,8 @@ will run it.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> _Journal of Statistical Software_, *48*(2), 1-36. doi:10.18637/jss.v048.i02</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;https://doi.org/10.18637/jss.v048.i02&gt;.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - Wickham H, François R, Henry L, Müller K, Vaughan D (2023). _dplyr: A Grammar</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> of Data Manipulation_. R package version 1.1.0,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;https://CRAN.R-project.org/package=dplyr&gt;.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> of Data Manipulation_. https://dplyr.tidyverse.org,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> https://github.com/tidyverse/dplyr.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The analysis was done using the R Statistical language (v4.2.2; R Core Team,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2022) on Ubuntu 22.04.1 LTS, using the packages Matrix (v1.5.3), lme4</span>
@@ -339,18 +339,18 @@ will run it.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> of 600 iterations and a warmup of 300) to predict mpg with cyl and wt (formula:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mpg ~ cyl + wt). Priors over parameters were set as normal (mean = 0.00, SD =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8.44) distributions. The model's explanatory power is substantial (R2 = 0.82,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 95% CI [0.72, 0.89], adj. R2 = 0.80). The model's intercept, corresponding to</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> cyl = 0 and wt = 0, is at 39.67 (95% CI [36.45, 43.11]). Within this model:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8.44) distributions. The model's explanatory power is substantial (R2 = 0.81,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95% CI [0.71, 0.90], adj. R2 = 0.80). The model's intercept, corresponding to</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> cyl = 0 and wt = 0, is at 39.78 (95% CI [36.13, 43.40]). Within this model:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of cyl (Median = -1.53, 95% CI [-2.36, -0.62]) has a 100.00%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> probability of being negative (&lt; 0), 99.67% of being significant (&lt; -0.30), and</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25.00% of being large (&lt; -1.81). The estimation successfully converged (Rhat =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1.004) but the indices are unreliable (ESS = 604)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of wt (Median = -3.19, 95% CI [-4.74, -1.52]) has a 99.92%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> probability of being negative (&lt; 0), 99.92% of being significant (&lt; -0.30), and</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 95.58% of being large (&lt; -1.81). The estimation successfully converged (Rhat =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1.004) but the indices are unreliable (ESS = 612)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of cyl (Median = -1.54, 95% CI [-2.38, -0.56]) has a 100.00%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> probability of being negative (&lt; 0), 99.33% of being significant (&lt; -0.30), and</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28.33% of being large (&lt; -1.81). The estimation successfully converged (Rhat =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1.002) but the indices are unreliable (ESS = 675)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of wt (Median = -3.18, 95% CI [-4.74, -1.72]) has a 100.00%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> probability of being negative (&lt; 0), 100.00% of being significant (&lt; -0.30),</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> and 96.25% of being large (&lt; -1.81). The estimation successfully converged</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Rhat = 1.002) but the indices are unreliable (ESS = 547)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> framework, we report the median of the posterior distribution and its 95% CI</span>
@@ -365,18 +365,18 @@ will run it.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> chains of 600 iterations and a warmup of 300) to predict mpg with cyl and wt</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (formula: mpg ~ cyl + wt). Priors over parameters were set as normal (mean =</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 0.00, SD = 15.40) distributions. The model's explanatory power is substantial</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (R2 = 0.82, 95% CI [0.72, 0.89], adj. R2 = 0.80). The model's intercept,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> corresponding to cyl = 0 and wt = 0, is at 39.67 (95% CI [36.45, 43.11]).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (R2 = 0.81, 95% CI [0.71, 0.90], adj. R2 = 0.80). The model's intercept,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> corresponding to cyl = 0 and wt = 0, is at 39.78 (95% CI [36.13, 43.40]).</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Within this model:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of cyl (Median = -1.53, 95% CI [-2.36, -0.62]) has a 100.00%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> probability of being negative (&lt; 0), 99.67% of being significant (&lt; -0.30), and</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25.00% of being large (&lt; -1.81). The estimation successfully converged (Rhat =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1.004) but the indices are unreliable (ESS = 604)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of wt (Median = -3.19, 95% CI [-4.74, -1.52]) has a 99.92%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> probability of being negative (&lt; 0), 99.92% of being significant (&lt; -0.30), and</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 95.58% of being large (&lt; -1.81). The estimation successfully converged (Rhat =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1.004) but the indices are unreliable (ESS = 612)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of cyl (Median = -1.54, 95% CI [-2.38, -0.56]) has a 100.00%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> probability of being negative (&lt; 0), 99.33% of being significant (&lt; -0.30), and</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28.33% of being large (&lt; -1.81). The estimation successfully converged (Rhat =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1.002) but the indices are unreliable (ESS = 675)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of wt (Median = -3.18, 95% CI [-4.74, -1.72]) has a 100.00%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> probability of being negative (&lt; 0), 100.00% of being significant (&lt; -0.30),</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> and 96.25% of being large (&lt; -1.81). The estimation successfully converged</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Rhat = 1.002) but the indices are unreliable (ESS = 547)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> framework, we report the median of the posterior distribution and its 95% CI</span>
@@ -390,30 +390,30 @@ will run it.</p></dd>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> We fitted a Bayesian linear model to predict mpg with cyl and wt. Priors over</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> parameters were set as normal (mean = 0.00, SD = 8.44) distributions. The</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> model's explanatory power is substantial (R2 = 0.82, adj. R2 = 0.80). The</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> model's intercept is at 39.67 (95% CI [36.45, 43.11]). Within this model:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> model's explanatory power is substantial (R2 = 0.81, adj. R2 = 0.80). The</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> model's intercept is at 39.78 (95% CI [36.13, 43.40]). Within this model:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of cyl (Median = -1.53, 95% CI [-2.36, -0.62]) has 100.00%, 99.67%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> and 25.00% probability of being negative (&lt; 0), significant (&lt; -0.30) and large</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (&lt; -1.81). The estimation successfully converged (Rhat = 1.004) but the indices</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 604)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of wt (Median = -3.19, 95% CI [-4.74, -1.52]) has 99.92%, 99.92%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> and 95.58% probability of being negative (&lt; 0), significant (&lt; -0.30) and large</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (&lt; -1.81). The estimation successfully converged (Rhat = 1.004) but the indices</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 612) and We fitted a Bayesian linear model to predict mpg</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of cyl (Median = -1.54, 95% CI [-2.38, -0.56]) has 100.00%, 99.33%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> and 28.33% probability of being negative (&lt; 0), significant (&lt; -0.30) and large</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (&lt; -1.81). The estimation successfully converged (Rhat = 1.002) but the indices</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 675)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of wt (Median = -3.18, 95% CI [-4.74, -1.72]) has 100.00%, 100.00%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> and 96.25% probability of being negative (&lt; 0), significant (&lt; -0.30) and large</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (&lt; -1.81). The estimation successfully converged (Rhat = 1.002) but the indices</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 547) and We fitted a Bayesian linear model to predict mpg</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> with cyl and wt. Priors over parameters were set as normal (mean = 0.00, SD =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15.40) distributions. The model's explanatory power is substantial (R2 = 0.82,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> adj. R2 = 0.80). The model's intercept is at 39.67 (95% CI [36.45, 43.11]).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15.40) distributions. The model's explanatory power is substantial (R2 = 0.81,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> adj. R2 = 0.80). The model's intercept is at 39.78 (95% CI [36.13, 43.40]).</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Within this model:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of cyl (Median = -1.53, 95% CI [-2.36, -0.62]) has 100.00%, 99.67%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> and 25.00% probability of being negative (&lt; 0), significant (&lt; -0.30) and large</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (&lt; -1.81). The estimation successfully converged (Rhat = 1.004) but the indices</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 604)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of wt (Median = -3.19, 95% CI [-4.74, -1.52]) has 99.92%, 99.92%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> and 95.58% probability of being negative (&lt; 0), significant (&lt; -0.30) and large</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (&lt; -1.81). The estimation successfully converged (Rhat = 1.004) but the indices</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 612)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of cyl (Median = -1.54, 95% CI [-2.38, -0.56]) has 100.00%, 99.33%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> and 28.33% probability of being negative (&lt; 0), significant (&lt; -0.30) and large</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (&lt; -1.81). The estimation successfully converged (Rhat = 1.002) but the indices</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 675)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of wt (Median = -3.18, 95% CI [-4.74, -1.72]) has 100.00%, 100.00%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> and 96.25% probability of being negative (&lt; 0), significant (&lt; -0.30) and large</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (&lt; -1.81). The estimation successfully converged (Rhat = 1.002) but the indices</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 547)</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
