@@ -30,7 +30,7 @@
 #' # Mixed models
 #' library(lme4)
 #' model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
-#'  report_model(model)
+#' report_model(model)
 #' }
 #'
 #' @examplesIf requireNamespace("rstanarm", quietly = TRUE)
@@ -38,7 +38,7 @@
 #' # Bayesian models
 #' library(rstanarm)
 #' model <- suppressWarnings(stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600))
-#'  report_model(model)
+#' report_model(model)
 #' }
 #' @export
 report_model <- function(x, table = NULL, ...) {

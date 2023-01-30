@@ -116,7 +116,7 @@ r
 summary(r)
 as.data.frame(r)
 summary(as.data.frame(r))
- }
+}
 \dontshow{\}) # examplesIf}
 }
 \seealso{
