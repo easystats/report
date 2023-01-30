@@ -104,17 +104,20 @@ r
 summary(r)
 as.data.frame(r)
 summary(as.data.frame(r))
+}
 
+\dontshow{if (requireNamespace("lme4", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
 # Mixed models
-if (require("lme4")) {
-  model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
-  r <- report(model)
-  r
-  summary(r)
-  as.data.frame(r)
-  summary(as.data.frame(r))
-}
-}
+library(lme4)
+model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
+r <- report(model)
+r
+summary(r)
+as.data.frame(r)
+summary(as.data.frame(r))
+ }
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Specific components of reports (especially for stats models):

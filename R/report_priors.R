@@ -10,15 +10,14 @@
 #'
 #' @return An object of class [report_priors()].
 #'
-#' @examples
-#' library(report)
-#'
+#' @examplesIf requireNamespace("rstanarm", quietly = TRUE)
+#' \donttest{
 #' # Bayesian models
-#' if (require("rstanarm")) {
-#'   model <- stan_glm(mpg ~ disp, data = mtcars, refresh = 0, iter = 1000)
-#'   r <- report_priors(model)
-#'   r
-#'   summary(r)
+#' library(rstanarm)
+#' model <- stan_glm(mpg ~ disp, data = mtcars, refresh = 0, iter = 1000)
+#' r <- report_priors(model)
+#' r
+#' summary(r)
 #' }
 #' @export
 report_priors <- function(x, ...) {

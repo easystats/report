@@ -28,10 +28,15 @@ options(
   width = 60
 )
 
-if (!requireNamespace("dplyr", quietly = TRUE)) {
-  knitr::opts_chunk$set(eval = FALSE)
+pkgs <- c("dplyr", "lme4")
+successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
+can_evaluate <- all(successfully_loaded)
+
+if (can_evaluate) {
+  knitr::opts_chunk$set(eval = TRUE)
+  vapply(pkgs, require, FUN.VALUE = logical(1L), quietly = TRUE, character.only = TRUE)
 } else {
-  library(dplyr, warn.conflicts = FALSE)
+  knitr::opts_chunk$set(eval = FALSE)
 }
 
 library(report)

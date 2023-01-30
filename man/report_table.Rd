@@ -21,8 +21,6 @@ in \code{\link[=report]{report()}}).
 }
 \examples{
 \donttest{
-library(report)
-
 # Miscellaneous
 r <- report_table(sessionInfo())
 r
@@ -43,26 +41,33 @@ report_table(aov(Sepal.Length ~ Species, data = iris))
 # GLMs
 report_table(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 report_table(glm(vs ~ disp, data = mtcars, family = "binomial"))
+}
 
+\dontshow{if (requireNamespace("lme4", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
 # Mixed models
-if (require("lme4")) {
-  model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
-  report_table(model)
+library(lme4)
+model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
+report_table(model)
 }
-
+\dontshow{\}) # examplesIf}
+\dontshow{if (requireNamespace("rstanarm", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
 # Bayesian models
-if (require("rstanarm")) {
-  model <- suppressWarnings(stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600))
-  report_table(model, effectsize_method = "basic")
+library(rstanarm)
+model <- suppressWarnings(stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600))
+report_table(model, effectsize_method = "basic")
 }
-
+\dontshow{\}) # examplesIf}
+\dontshow{if (requireNamespace("lavaan", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
 # Structural Equation Models (SEM)
-if (require("lavaan")) {
-  structure <- " ind60 =~ x1 + x2 + x3
-                 dem60 =~ y1 + y2 + y3
-                 dem60 ~ ind60 "
-  model <- lavaan::sem(structure, data = PoliticalDemocracy)
-  suppressWarnings(report_table(model))
+library(lavaan)
+structure <- "ind60 =~ x1 + x2 + x3
+              dem60 =~ y1 + y2 + y3
+              dem60 ~ ind60"
+model <- lavaan::sem(structure, data = PoliticalDemocracy)
+suppressWarnings(report_table(model))
 }
-}
+\dontshow{\}) # examplesIf}
 }

@@ -20,17 +20,17 @@ the Sequential Effect eXistence and sIgnificance Testing framework (see
 \link[bayestestR:sexit]{SEXIT documentation}).
 }
 \examples{
-library(report)
+\dontshow{if (requireNamespace("rstanarm", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 # Bayesian models
-if (require("rstanarm")) {
-  model <- suppressWarnings(stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 500))
-  r <- report(model)
-  r
-  summary(r)
-  as.data.frame(r)
+library(rstanarm)
+model <- suppressWarnings(stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 500))
+r <- report(model)
+r
+summary(r)
+as.data.frame(r)
 }
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Specific components of reports (especially for stats models):

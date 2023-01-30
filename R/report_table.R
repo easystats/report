@@ -9,8 +9,6 @@
 #'
 #' @examples
 #' \donttest{
-#' library(report)
-#'
 #' # Miscellaneous
 #' r <- report_table(sessionInfo())
 #' r
@@ -31,27 +29,33 @@
 #' # GLMs
 #' report_table(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 #' report_table(glm(vs ~ disp, data = mtcars, family = "binomial"))
+#' }
 #'
+#' @examplesIf requireNamespace("lme4", quietly = TRUE)
+#' \donttest{
 #' # Mixed models
-#' if (require("lme4")) {
-#'   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
-#'   report_table(model)
+#' library(lme4)
+#' model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
+#' report_table(model)
 #' }
 #'
+#' @examplesIf requireNamespace("rstanarm", quietly = TRUE)
+#' \donttest{
 #' # Bayesian models
-#' if (require("rstanarm")) {
-#'   model <- suppressWarnings(stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600))
-#'   report_table(model, effectsize_method = "basic")
+#' library(rstanarm)
+#' model <- suppressWarnings(stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600))
+#' report_table(model, effectsize_method = "basic")
 #' }
 #'
+#' @examplesIf requireNamespace("lavaan", quietly = TRUE)
+#' \donttest{
 #' # Structural Equation Models (SEM)
-#' if (require("lavaan")) {
-#'   structure <- " ind60 =~ x1 + x2 + x3
-#'                  dem60 =~ y1 + y2 + y3
-#'                  dem60 ~ ind60 "
-#'   model <- lavaan::sem(structure, data = PoliticalDemocracy)
-#'   suppressWarnings(report_table(model))
-#' }
+#' library(lavaan)
+#' structure <- "ind60 =~ x1 + x2 + x3
+#'               dem60 =~ y1 + y2 + y3
+#'               dem60 ~ ind60"
+#' model <- lavaan::sem(structure, data = PoliticalDemocracy)
+#' suppressWarnings(report_table(model))
 #' }
 #' @export
 report_table <- function(x, ...) {

@@ -10,35 +10,36 @@
 #'
 #' @return An object of class [report_random()].
 #'
-#' @examples
-#' library(report)
-#'
+#' @examplesIf requireNamespace("lme4", quietly = TRUE)
+#' \donttest{
 #' # Mixed models
-#' if (require("lme4")) {
-#'   model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
-#'   r <- report_random(model)
-#'   r
-#'   summary(r)
+#' library(lme4)
+#' model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
+#' r <- report_random(model)
+#' r
+#' summary(r)
 #' }
+#'
+#' @examplesIf requireNamespace("rstanarm", quietly = TRUE)
 #' \donttest{
 #' # Bayesian models
-#' if (require("rstanarm")) {
-#'   model <- suppressWarnings(stan_lmer(
-#'     mpg ~ disp + (1 | cyl),
-#'     data = mtcars, refresh = 0, iter = 1000
-#'   ))
-#'   r <- report_random(model)
-#'   r
-#'   summary(r)
+#' library(rstanarm)
+#' model <- suppressWarnings(stan_lmer(
+#' mpg ~ disp + (1 | cyl),
+#' data = mtcars, refresh = 0, iter = 1000
+#' ))
+#' r <- report_random(model)
+#' r
+#' summary(r)
 #' }
-#' }
-#' \dontrun{
-#' if (require("brms")) {
-#'   model <- suppressWarnings(brm(mpg ~ disp + (1 | cyl), data = mtcars, refresh = 0, iter = 1000))
-#'   r <- report_random(model)
-#'   r
-#'   summary(r)
-#' }
+#'
+#' @examplesIf requireNamespace("brms", quietly = TRUE) && packageVersion("rstan") >= "2.26.0"
+#' \donttest{
+#' library(brms)
+#' model <- suppressWarnings(brm(mpg ~ disp + (1 | cyl), data = mtcars, refresh = 0, iter = 1000))
+#' r <- report_random(model)
+#' r
+#' summary(r)
 #' }
 #' @export
 report_random <- function(x, ...) {

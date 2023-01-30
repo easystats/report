@@ -26,17 +26,22 @@ library(report)
 # GLMs
 report_intercept(lm(Sepal.Length ~ Species, data = iris))
 report_intercept(glm(vs ~ disp, data = mtcars, family = "binomial"))
+}
 
+\dontshow{if (requireNamespace("lme4", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
 # Mixed models
-if (require("lme4")) {
-  model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
-  report_intercept(model)
+library(lme4)
+model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
+ report_intercept(model)
 }
-
+\dontshow{\}) # examplesIf}
+\dontshow{if (requireNamespace("rstanarm", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
 # Bayesian models
-if (require("rstanarm")) {
-  model <- suppressWarnings(stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600))
-  report_intercept(model)
+library(rstanarm)
+model <- suppressWarnings(stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600))
+report_intercept(model)
 }
-}
+\dontshow{\}) # examplesIf}
 }

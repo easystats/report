@@ -7,17 +7,15 @@
 #' @inheritParams report.lm
 #' @inherit report return seealso
 #'
-#' @examples
-#' library(report)
+#' @examplesIf requireNamespace("rstanarm", quietly = TRUE)
 #' \donttest{
 #' # Bayesian models
-#' if (require("rstanarm")) {
-#'   model <- suppressWarnings(stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 500))
-#'   r <- report(model)
-#'   r
-#'   summary(r)
-#'   as.data.frame(r)
-#' }
+#' library(rstanarm)
+#' model <- suppressWarnings(stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 500))
+#' r <- report(model)
+#' r
+#' summary(r)
+#' as.data.frame(r)
 #' }
 #' @return An object of class [report()].
 #' @include report.lm.R report.lme4.R
