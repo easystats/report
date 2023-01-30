@@ -167,7 +167,8 @@ report_table.lm <- function(x, include_effectsize = TRUE, ...) {
   table_full <- datawizard::data_remove(params, "SE")
   table <- datawizard::data_remove(
     table_full,
-    datawizard::data_find(table_full, select = "(_CI_low|_CI_high)$", regex = TRUE, verbose = FALSE),
+    select = "(_CI_low|_CI_high)$",
+    regex = TRUE,
     verbose = FALSE
   )
   table <- table[!table$Parameter %in% c("AIC", "BIC", "ELPD", "LOOIC", "WAIC"), ]
