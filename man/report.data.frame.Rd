@@ -82,8 +82,8 @@ Create reports for data frames.
 }
 \examples{
 r <- report(iris,
-            centrality = "median", dispersion = FALSE,
-            distribution = TRUE, missing_percentage = TRUE
+  centrality = "median", dispersion = FALSE,
+  distribution = TRUE, missing_percentage = TRUE
 )
 r
 summary(r)

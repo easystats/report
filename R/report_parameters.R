@@ -50,7 +50,7 @@
 #' # Bayesian models
 #' library(rstanarm)
 #' model <- suppressWarnings(stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600))
-#'  report_parameters(model)
+#' report_parameters(model)
 #' }
 #' @export
 report_parameters <- function(x, ...) {

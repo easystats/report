@@ -42,7 +42,7 @@ report_model(glm(vs ~ disp, data = mtcars, family = "binomial"))
 # Mixed models
 library(lme4)
 model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
- report_model(model)
+report_model(model)
 }
 \dontshow{\}) # examplesIf}
 \dontshow{if (requireNamespace("rstanarm", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
@@ -50,7 +50,7 @@ model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 # Bayesian models
 library(rstanarm)
 model <- suppressWarnings(stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600))
- report_model(model)
+report_model(model)
 }
 \dontshow{\}) # examplesIf}
 }

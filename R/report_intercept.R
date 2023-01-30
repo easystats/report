@@ -24,7 +24,7 @@
 #' # Mixed models
 #' library(lme4)
 #' model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
-#'  report_intercept(model)
+#' report_intercept(model)
 #' }
 #'
 #' @examplesIf requireNamespace("rstanarm", quietly = TRUE)

@@ -33,7 +33,7 @@ report_intercept(glm(vs ~ disp, data = mtcars, family = "binomial"))
 # Mixed models
 library(lme4)
 model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
- report_intercept(model)
+report_intercept(model)
 }
 \dontshow{\}) # examplesIf}
 \dontshow{if (requireNamespace("rstanarm", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

@@ -30,11 +30,11 @@ test_that("format_model", {
   )
   expect_identical(
     format_model(suppressWarnings(rstanarm::stan_glm(vs ~ wt,
-                                    data = mtcars,
-                                    family = "binomial",
-                                    refresh = 0,
-                                    iter = 50
-                                  ))),
+      data = mtcars,
+      family = "binomial",
+      refresh = 0,
+      iter = 50
+    ))),
     "Bayesian logistic model"
   )
 })
