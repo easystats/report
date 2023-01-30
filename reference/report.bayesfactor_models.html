@@ -179,28 +179,50 @@ scientific format (e.g., 4.24e5), or as truncated values (as "&gt; 1000" and
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/report/">report</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/bayestestR/" class="external-link">bayestestR</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Bayes factor - models</span></span></span>
 <span class="r-in"><span><span class="va">mo0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">mo1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">mo2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span> <span class="op">+</span> <span class="va">Petal.Length</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">mo3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span> <span class="op">*</span> <span class="va">Petal.Length</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">BFmodels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/bayesfactor_models.html" class="external-link">bayesfactor_models</a></span><span class="op">(</span><span class="va">mo1</span>, <span class="va">mo2</span>, <span class="va">mo3</span>, denominator <span class="op">=</span> <span class="va">mo0</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://easystats.github.io/bayestestR/" class="external-link">"bayestestR"</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="co"># Bayes factor - models</span></span></span>
-<span class="r-in"><span>  <span class="va">BFmodels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/bayesfactor_models.html" class="external-link">bayesfactor_models</a></span><span class="op">(</span><span class="va">mo1</span>, <span class="va">mo2</span>, <span class="va">mo3</span>, denominator <span class="op">=</span> <span class="va">mo0</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="va">BFmodels</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Bayes factors were computed using the BIC approximation, by which BF10 =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> exp((BIC0 - BIC1)/2). Compared to the (Intercept only) model (the least</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> supported model), we found extreme evidence (BF = 1.70e+29) in favour of the</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species model; extreme evidence (BF = 5.84e+55) in favour of the Species +</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal.Length model (the most supported model); extreme evidence (BF = 2.20e+54)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> in favour of the Species * Petal.Length model.</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="va">BFmodels</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">r</span></span></span>
+<span class="r-in"><span><span class="co"># Bayes factor - inclusion</span></span></span>
+<span class="r-in"><span><span class="va">inc_bf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/bayesfactor_inclusion.html" class="external-link">bayesfactor_inclusion</a></span><span class="op">(</span><span class="va">BFmodels</span>, prior_odds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, match_models <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># Bayes factor - inclusion</span></span></span>
-<span class="r-in"><span>  <span class="va">inc_bf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/bayestestR/reference/bayesfactor_inclusion.html" class="external-link">bayesfactor_inclusion</a></span><span class="op">(</span><span class="va">BFmodels</span>, prior_odds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, match_models <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="va">inc_bf</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">r</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: bayestestR</span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="va">inc_bf</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Bayesian model averaging (BMA) was used to obtain the average evidence for each</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> predictor. Since each model has a prior probability (here we used subjective</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> prior odds of 1, 2, 3), it is possible to sum the prior probability of all</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> models that include a predictor of interest (the prior inclusion probability),</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> and of all models that do not include that predictor (the prior exclusion</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> probability). After the data are observed, we can similarly consider the sums</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> of the posterior models' probabilities to obtain the posterior inclusion</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> probability and the posterior exclusion probability. The change from prior to</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> posterior inclusion odds is the Inclusion Bayes factor. For each predictor,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> averaging was done only across models that did not include any interactions</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> with that predictor; additionally, for each interaction predictor, averaging</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> was done only across models that contained the main effect from which the</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> interaction predictor was comprised. This was done to prevent Inclusion Bayes</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> factors from being contaminated with non-relevant evidence (see Mathot, 2017).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> We found extreme evidence (BF = 3.90e+55) in favour of including Species, with</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> models including Species having an overall posterior probability of 95%;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> extreme evidence (BF = 6.89e+26) in favour of including Petal.Length, with</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> models including Petal.Length having an overall posterior probability of 95%;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> strong evidence (BF = 1/26.52) against including Petal.Length:Species, with</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> models including Petal.Length:Species having an overall posterior probability</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> of 5%.</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Terms                | Pr(prior) | Pr(posterior) | Inclusion BF</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---------------------------------------------------------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Species              |      0.43 |          0.95 |       128.00</span>

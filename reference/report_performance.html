@@ -146,39 +146,57 @@ will run it.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/report/">report</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># GLMs</span></span></span>
 <span class="r-in"><span><span class="fu">report_performance</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Length</span> <span class="op">*</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The model explains a statistically significant and substantial proportion of</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> variance (R2 = 0.84, F(5, 144) = 151.71, p &lt; .001, adj. R2 = 0.83)</span>
 <span class="r-in"><span><span class="fu">report_performance</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">vs</span> <span class="op">~</span> <span class="va">disp</span>, data <span class="op">=</span> <span class="va">mtcars</span>, family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The model's explanatory power is substantial (Tjur's R2 = 0.53)</span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># Mixed models</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://github.com/lme4/lme4/" class="external-link">"lme4"</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Length</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">Species</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="fu">report_performance</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lme4/lme4/" class="external-link">lme4</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Petal.Length</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">Species</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">report_performance</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The model's total explanatory power is substantial (conditional R2 = 0.97) and</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> the part related to the fixed effects alone (marginal R2) is of 0.66</span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># Bayesian models</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://mc-stan.org/rstanarm/" class="external-link">"rstanarm"</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html" class="external-link">stan_glm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span>, refresh <span class="op">=</span> <span class="fl">0</span>, iter <span class="op">=</span> <span class="fl">600</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="fu">report_performance</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> The model's explanatory power is substantial (R2 = 0.61, 95% CI [0.54, 0.69],</span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://mc-stan.org/rstanarm/" class="external-link">rstanarm</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html" class="external-link">stan_glm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span>, refresh <span class="op">=</span> <span class="fl">0</span>, iter <span class="op">=</span> <span class="fl">600</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">report_performance</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The model's explanatory power is substantial (R2 = 0.62, 95% CI [0.54, 0.70],</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> adj. R2 = 0.61)</span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># Structural Equation Models (SEM)</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://lavaan.ugent.be" class="external-link">"lavaan"</a></span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageVersion</a></span><span class="op">(</span><span class="st">"effectsize"</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="st">"0.6.0.1"</span> <span class="op">&amp;&amp;</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="va">structure</span> <span class="op">&lt;-</span> <span class="st">" ind60 =~ x1 + x2 + x3</span></span></span>
-<span class="r-in"><span><span class="st">                 dem60 =~ y1 + y2 + y3</span></span></span>
-<span class="r-in"><span><span class="st">                 dem60 ~ ind60 "</span></span></span>
-<span class="r-in"><span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">lavaan</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">structure</span>, data <span class="op">=</span> <span class="va">PoliticalDemocracy</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu">report_performance</span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lavaan.ugent.be" class="external-link">lavaan</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">structure</span> <span class="op">&lt;-</span> <span class="st">"ind60 =~ x1 + x2 + x3</span></span></span>
+<span class="r-in"><span><span class="st">              dem60 =~ y1 + y2 + y3</span></span></span>
+<span class="r-in"><span><span class="st">              dem60 ~ ind60 "</span></span></span>
+<span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">lavaan</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">structure</span>, data <span class="op">=</span> <span class="va">PoliticalDemocracy</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu">report_performance</span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The model is not significantly different from a baseline model (Chi2(8) = 7.98,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> p = 0.435). The GFI (.97 &gt; .95) suggest a satisfactory fit., The model is not</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> significantly different from a baseline model (Chi2(8) = 7.98, p = 0.435). The</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AGFI (.91 &gt; .90) suggest a satisfactory fit., The model is not significantly</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> different from a baseline model (Chi2(8) = 7.98, p = 0.435). The NFI (.97 &gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> .90) suggest a satisfactory fit., The model is not significantly different from</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a baseline model (Chi2(8) = 7.98, p = 0.435). The NNFI (.00 &gt; .90) suggest a</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> satisfactory fit., The model is not significantly different from a baseline</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> model (Chi2(8) = 7.98, p = 0.435). The CFI (.00 &gt; .90) suggest a satisfactory</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> fit., The model is not significantly different from a baseline model (Chi2(8) =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7.98, p = 0.435). The RMSEA (.00 &lt; .05) suggest a satisfactory fit., The model</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> is not significantly different from a baseline model (Chi2(8) = 7.98, p =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.435). The SRMR (.03 &lt; .08) suggest a satisfactory fit., The model is not</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> significantly different from a baseline model (Chi2(8) = 7.98, p = 0.435). The</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> RFI (.95 &gt; .90) suggest a satisfactory fit., The model is not significantly</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> different from a baseline model (Chi2(8) = 7.98, p = 0.435). The PNFI (.52 &gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> .50) suggest a satisfactory fit. and The model is not significantly different</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> from a baseline model (Chi2(8) = 7.98, p = 0.435). The IFI (.00 &gt; .90) suggest</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a satisfactory fit.</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

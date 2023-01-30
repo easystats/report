@@ -157,27 +157,86 @@ re-computation.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/report/">report</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># Structural Equation Models (SEM)</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://lavaan.ugent.be" class="external-link">"lavaan"</a></span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="va">structure</span> <span class="op">&lt;-</span> <span class="st">" ind60 =~ x1 + x2 + x3</span></span></span>
-<span class="r-in"><span><span class="st">                 dem60 =~ y1 + y2 + y3</span></span></span>
-<span class="r-in"><span><span class="st">                 dem60 ~ ind60 "</span></span></span>
-<span class="r-in"><span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">lavaan</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">structure</span>, data <span class="op">=</span> <span class="va">PoliticalDemocracy</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">r</span></span></span>
-<span class="r-in"><span>  <span class="co"># summary(r)</span></span></span>
-<span class="r-in"><span>  <span class="co"># as.data.frame(r)</span></span></span>
-<span class="r-in"><span>  <span class="co"># summary(as.data.frame(r))</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># Specific reports</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="report_table.html">report_table</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="report_performance.html">report_performance</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: lavaan</span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lavaan.ugent.be" class="external-link">lavaan</a></span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> This is lavaan 0.6-13</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> lavaan is FREE software! Please report any bugs.</span>
+<span class="r-in"><span><span class="va">structure</span> <span class="op">&lt;-</span> <span class="st">"ind60 =~ x1 + x2 + x3</span></span></span>
+<span class="r-in"><span><span class="st">              dem60 =~ y1 + y2 + y3</span></span></span>
+<span class="r-in"><span><span class="st">              dem60 ~ ind60"</span></span></span>
+<span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">lavaan</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">structure</span>, data <span class="op">=</span> <span class="va">PoliticalDemocracy</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Support for lavaan not fully implemented yet :("</span>
+<span class="r-in"><span><span class="va">r</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Support for lavaan not fully implemented yet :("</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Length     Class      Mode </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         1 character character </span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                 r</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 Support for lavaan not fully implemented yet :(</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       r            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Length:1          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Class :character  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Mode  :character  </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Specific reports</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="report_table.html">report_table</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter     | Coefficient |       95% CI |     z |      p |  Component |     Fit</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ind60 =~ x1   |        1.00 | [1.00, 1.00] |       | &lt; .001 |    Loading |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ind60 =~ x2   |        2.18 | [1.91, 2.45] | 15.59 | &lt; .001 |    Loading |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ind60 =~ x3   |        1.82 | [1.52, 2.12] | 11.96 | &lt; .001 |    Loading |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dem60 =~ y1   |        1.00 | [1.00, 1.00] |       | &lt; .001 |    Loading |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dem60 =~ y2   |        1.04 | [0.66, 1.43] |  5.33 | &lt; .001 |    Loading |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dem60 =~ y3   |        0.98 | [0.65, 1.30] |  5.89 | &lt; .001 |    Loading |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dem60 ~ ind60 |        1.37 | [0.53, 2.21] |  3.20 | 0.001  | Regression |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               |             |              |       |        |            |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chi2          |             |              |       |        |            |    7.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Chi2_df       |             |              |       |        |            |    8.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> p_Chi2        |             |              |       |        |            |    0.44</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> p_Baseline    |             |              |       |        |            |    0.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GFI           |             |              |       |        |            |    0.97</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AGFI          |             |              |       |        |            |    0.91</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NFI           |             |              |       |        |            |    0.97</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NNFI          |             |              |       |        |            |    1.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> CFI           |             |              |       |        |            |    1.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> RMSEA         |             |              |       |        |            |    0.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> RMSEA_CI_low  |             |              |       |        |            |    0.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> RMSEA_CI_high |             |              |       |        |            |    0.14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> p_RMSEA       |             |              |       |        |            |    0.57</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> RMR           |             |              |       |        |            |    0.10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> SRMR          |             |              |       |        |            |    0.03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> RFI           |             |              |       |        |            |    0.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> PNFI          |             |              |       |        |            |    0.52</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IFI           |             |              |       |        |            |    1.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> RNI           |             |              |       |        |            |    1.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Loglikelihood |             |              |       |        |            | -778.27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AIC           |             |              |       |        |            | 1582.54</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> BIC           |             |              |       |        |            | 1612.67</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> BIC (adj.)    |             |              |       |        |            | 1571.69</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="report_performance.html">report_performance</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> The model is not significantly different from a baseline model (Chi2(8) = 7.98,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> p = 0.435). The GFI (.97 &gt; .95) suggest a satisfactory fit., The model is not</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> significantly different from a baseline model (Chi2(8) = 7.98, p = 0.435). The</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AGFI (.91 &gt; .90) suggest a satisfactory fit., The model is not significantly</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> different from a baseline model (Chi2(8) = 7.98, p = 0.435). The NFI (.97 &gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> .90) suggest a satisfactory fit., The model is not significantly different from</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a baseline model (Chi2(8) = 7.98, p = 0.435). The NNFI (.00 &gt; .90) suggest a</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> satisfactory fit., The model is not significantly different from a baseline</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> model (Chi2(8) = 7.98, p = 0.435). The CFI (.00 &gt; .90) suggest a satisfactory</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> fit., The model is not significantly different from a baseline model (Chi2(8) =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7.98, p = 0.435). The RMSEA (.00 &lt; .05) suggest a satisfactory fit., The model</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> is not significantly different from a baseline model (Chi2(8) = 7.98, p =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.435). The SRMR (.03 &lt; .08) suggest a satisfactory fit., The model is not</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> significantly different from a baseline model (Chi2(8) = 7.98, p = 0.435). The</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> RFI (.95 &gt; .90) suggest a satisfactory fit., The model is not significantly</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> different from a baseline model (Chi2(8) = 7.98, p = 0.435). The PNFI (.52 &gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> .50) suggest a satisfactory fit. and The model is not significantly different</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> from a baseline model (Chi2(8) = 7.98, p = 0.435). The IFI (.00 &gt; .90) suggest</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a satisfactory fit.</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

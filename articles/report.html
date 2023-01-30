@@ -141,15 +141,25 @@
 
     
     
+<pre><code><span><span class="co">## </span></span>
+<span><span class="co">## Attaching package: 'dplyr'</span></span></code></pre>
+<pre><code><span><span class="co">## The following objects are masked from 'package:stats':</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##     filter, lag</span></span></code></pre>
+<pre><code><span><span class="co">## The following objects are masked from 'package:base':</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##     intersect, setdiff, setequal, union</span></span></code></pre>
+<pre><code><span><span class="co">## dplyr  lme4 </span></span>
+<span><span class="co">##  TRUE  TRUE</span></span></code></pre>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>First, install R and R studio. Then, copy and paste the following
 lines in the console:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"easystats/report"</span><span class="op">)</span> <span class="co"># You only need to do that once</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://easystats.github.io/report/">"report"</a></span><span class="op">)</span> <span class="co"># Load the package every time you start R</span></span></code></pre></div>
 <p>Great! The <code>report</code> package is now installed and loaded in
 your session.</p>
@@ -168,7 +178,7 @@ Moreover, you can also access a more compact version of the report using
 </h3>
 <p>If an entire dataframe is supplied, <code>report</code> will provide
 descriptive statistics for all columns:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
 <span><span class="co"># The data contains 150 observations of the following 5</span></span>
 <span><span class="co"># variables:</span></span>
@@ -197,7 +207,7 @@ return a separate report for each level of the grouping variable.
 Additionally, instead of textual summary, <code>report</code> also
 allows one to return a tabular summary using the
 <code><a href="../reference/report_table.html">report_table()</a></code> function:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/report_table.html">report_table</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -218,7 +228,7 @@ allows one to return a tabular summary using the
 <p><code>report</code> can also be used to provide automated summaries
 for statistical model objects from correlation, <em>t</em>-tests,
 Wilcoxon tests, etc.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">mtcars</span><span class="op">$</span><span class="va">wt</span> <span class="op">~</span> <span class="va">mtcars</span><span class="op">$</span><span class="va">am</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co"># Effect sizes were labelled following Cohen's (1988)</span></span>
 <span><span class="co"># recommendations.</span></span>
@@ -229,7 +239,7 @@ Wilcoxon tests, etc.</p>
 <span><span class="co"># statistically significant, and large (difference = 1.36,</span></span>
 <span><span class="co"># 95% CI [0.85, 1.86], t(29.23) = 5.49, p &lt; .001; Cohen's d =</span></span>
 <span><span class="co"># 1.93, 95% CI [1.08, 2.77])</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">wt</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -239,7 +249,7 @@ Wilcoxon tests, etc.</p>
 <h4 id="linear-regression-lm">Linear regression (<code>lm</code>)<a class="anchor" aria-label="anchor" href="#linear-regression-lm"></a>
 </h4>
 <p>We will start out simple: a simple linear regression</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">wt</span> <span class="op">~</span> <span class="va">am</span> <span class="op">+</span> <span class="va">mpg</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
@@ -268,7 +278,7 @@ Wilcoxon tests, etc.</p>
 </h4>
 <p>And its close cousin ANOVA is also covered by
 <code>report</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html" class="external-link">aov</a></span><span class="op">(</span><span class="va">wt</span> <span class="op">~</span> <span class="va">am</span> <span class="op">+</span> <span class="va">mpg</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
@@ -287,7 +297,7 @@ Wilcoxon tests, etc.</p>
 <div class="section level4">
 <h4 id="general-linear-models-glms-glm">General Linear Models (GLMs) (<code>glm</code>)<a class="anchor" aria-label="anchor" href="#general-linear-models-glms-glm"></a>
 </h4>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">vs</span> <span class="op">~</span> <span class="va">mpg</span> <span class="op">+</span> <span class="va">cyl</span>, data <span class="op">=</span> <span class="va">mtcars</span>, family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
@@ -313,7 +323,7 @@ Wilcoxon tests, etc.</p>
 <div class="section level4">
 <h4 id="linear-mixed-effects-models-mermod">Linear Mixed-Effects Models (<code>merMod</code>)<a class="anchor" aria-label="anchor" href="#linear-mixed-effects-models-mermod"></a>
 </h4>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lme4/lme4/" class="external-link">lme4</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">Reaction</span> <span class="op">~</span> <span class="va">Days</span> <span class="op">+</span> <span class="op">(</span><span class="va">Days</span> <span class="op">|</span> <span class="va">Subject</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">sleepstudy</span><span class="op">)</span></span>
