@@ -17,7 +17,7 @@ test_that("report.numeric", {
   expect_null(summary(as.data.frame(r))$Mean)
   expect_null(summary(as.data.frame(r))$Min)
   expect_null(summary(as.data.frame(r))$MAD)
-  expect_warning(report(c(0, 0, 0, 1, 1)))
+  expect_warning(report(c(0, 0, 0, 1, 1)), "factor")
 })
 
 
