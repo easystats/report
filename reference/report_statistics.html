@@ -14,7 +14,7 @@ insert in parentheses in plots or reports."><meta property="og:image" content="h
     
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.5.4</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -190,9 +190,9 @@ will run it.</p></dd>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://mc-stan.org/rstanarm/" class="external-link">rstanarm</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html" class="external-link">stan_glm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span>, refresh <span class="op">=</span> <span class="fl">0</span>, iter <span class="op">=</span> <span class="fl">600</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">report_statistics</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Median = 5.00, 95% CI [4.86, 5.15], pd = 100%; Std. beta = -1.01, 95% CI [-1.19, -0.83]; Rhat = 1.00, ESS = 1167.32</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Median = 0.93, 95% CI [0.75, 1.13], pd = 100%; Std. beta = 1.12, 95% CI [0.86, 1.36]; Rhat = 1.00, ESS = 1179.01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Median = 1.58, 95% CI [1.39, 1.80], pd = 100%; Std. beta = 1.91, 95% CI [1.64, 2.17]; Rhat = 1.00, ESS = 1099.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Median = 5.01, 95% CI [4.86, 5.15], pd = 100%; Std. beta = -1.01, 95% CI [-1.19, -0.82]; Rhat = 1.00, ESS = 908.79</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Median = 0.93, 95% CI [0.71, 1.14], pd = 100%; Std. beta = 1.13, 95% CI [0.86, 1.38]; Rhat = 1.00, ESS = 943.41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Median = 1.58, 95% CI [1.39, 1.78], pd = 100%; Std. beta = 1.91, 95% CI [1.65, 2.16]; Rhat = 1.00, ESS = 809.78</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
@@ -201,7 +201,7 @@ will run it.</p></dd>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by <a href="https://dominiquemakowski.github.io/" class="external-link">Dominique Makowski</a>, <a href="https://github.com/strengejacke" class="external-link">Daniel Lüdecke</a>, <a href="https://home.msbstats.info/" class="external-link">Mattan S. Ben-Shachar</a>, <a href="https://sites.google.com/site/indrajeetspatilmorality/" class="external-link">Indrajeet Patil</a>, <a href="https://wiernik.org/" class="external-link">Brenton M. Wiernik</a>, <a href="https://remi-theriault.com/" class="external-link">Rémi Thériault</a>.</p>
+  <p></p><p>Developed by <a href="https://dominiquemakowski.github.io/" class="external-link">Dominique Makowski</a>, <a href="https://github.com/strengejacke" class="external-link">Daniel Lüdecke</a>, <a href="https://sites.google.com/site/indrajeetspatilmorality/" class="external-link">Indrajeet Patil</a>, <a href="https://remi-theriault.com/" class="external-link">Rémi Thériault</a>, <a href="https://home.msbstats.info/" class="external-link">Mattan S. Ben-Shachar</a>, <a href="https://wiernik.org/" class="external-link">Brenton M. Wiernik</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
