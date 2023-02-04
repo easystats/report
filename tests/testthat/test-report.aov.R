@@ -48,7 +48,7 @@ test_that("report.aov", {
 
   model <- aov(Sepal.Length ~ Species * Cat1 + Error(Cat2), data = data)
   r5 <- report(model, verbose = FALSE)
-  expect_warning(report(model))
+  expect_warning(report(model), "non-finite")
   expect_equal(
     c(
       ncol(as.report_table(r5, summary = TRUE)),

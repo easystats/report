@@ -178,9 +178,9 @@ references:
 
 - id: easystatsPackage
   accessed:
-    - year: 2022
-      month: 3
-      day: 28
+    - year: 2023
+      month: 2
+      day: 4
   author:
     - family: Lüdecke
       given: Daniel
@@ -192,12 +192,16 @@ references:
       given: Indrajeet
     - family: Wiernik
       given: Brenton M.
+    - family: Bacher
+      given: Etienne
+    - family: Thériault
+      given: Rémi
   citation-key: easystatsPackage
   genre: R package
   issued:
-    - year: 2022
-      month: 3
-      day: 27
+    - year: 2023
+      month: 2
+      day: 4
   original-date:
     - year: 2019
       month: 1
@@ -207,7 +211,7 @@ references:
     visualization, and reporting
   title-short: <span class="nocase">easystats</span>
   type: software
-  URL: https://github.com/easystats/easystats
+  URL: https://easystats.github.io/easystats/
   version: %s
 
 - id: effectsizeArticle
@@ -555,28 +559,28 @@ references:
     statistical models and data frames into textual reports suited for
     publication, ensuring standardization and quality in results reporting.
   accessed:
-    - year: 2022
-      month: 1
-      day: 28
+    - year: 2023
+      month: 2
+      day: 4
   author:
     - family: Makowski
       given: Dominique
     - family: Lüdecke
       given: Daniel
-    - family: Ben-Shachar
-      given: Mattan S.
     - family: Patil
       given: Indrajeet
-    - family: Wiernik
-      given: Brenton M.
     - family: Thériault
       given: Rémi
+    - family: Ben-Shachar
+      given: Mattan S.
+    - family: Wiernik
+      given: Brenton M.
   citation-key: reportPackage
   genre: R package
   issued:
-    - year: 2022
+    - year: 2023
       month: 2
-      day: 22
+      day: 04
   original-date:
     - year: 2021
       month: 4
@@ -586,7 +590,7 @@ references:
     statistical models
   title-short: <span class="nocase">report</span>
   type: software
-  URL: https://CRAN.R-project.org/package=report
+  URL: https://easystats.github.io/easystats/
   version: %s
 
 - id: seeArticle
