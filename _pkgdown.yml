@@ -4,6 +4,7 @@ template:
   bootstrap: 5
   bslib:
     primary: "#2ECC71"
+    navbar-light-color: "#4ba370"
   package: easystatstemplate
 
 navbar:

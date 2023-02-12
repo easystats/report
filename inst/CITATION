@@ -1,6 +1,6 @@
 bibentry(bibtype = "Article",
          title = "Automated Results Reporting as a Practical Tool to Improve Reproducibility and Methodological Best Practices Adoption",
-         author=c(person("Dominique", "Makowski"), person("Daniel", "Lüdecke"), person("Indrajeet", "Patil"), person("Rémi", "Thériault")), person("Mattan S.", "Ben-Shachar"), person("Brenton M.", "Wiernik"),
+         author=c(person("Dominique", "Makowski"), person("Daniel", "Lüdecke"), person("Indrajeet", "Patil"), person("Rémi", "Thériault"), person("Mattan S.", "Ben-Shachar"), person("Brenton M.", "Wiernik")),
          year = 2023,
          journal = "CRAN",
          url = "https://easystats.github.io/report/",
