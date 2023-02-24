@@ -32,7 +32,7 @@ affiliations:
 - index: 2
   name: Center for Humans and Machines, Max Planck Institute for Human Development, Berlin, Germany
 - index: 3
-  name: Ben-Gurion University of the Negev, Israel
+  name: Independent Researcher
 - index: 4
   name: Independent Researcher
 - index: 5
