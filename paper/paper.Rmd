@@ -3,6 +3,9 @@ title: "report: Automated Reporting of Results and Statistical Models in R"
 tags:
   - R
   - easystats
+  - statistical reporting
+  - tables
+  - manuscript
 authors:
 - affiliation: 1
   name: Dominique Makowski
@@ -41,7 +44,7 @@ affiliations:
   name: University Medical Center Hamburg-Eppendorf, Germany
 - index: 7
   name: Université du Québec à Montréal, Montréal, Canada
-      
+
 date: "`r Sys.Date()`"
 bibliography: paper.bib
 output: rticles::joss_article
@@ -68,23 +71,47 @@ set.seed(2016)
 
 # Summary
 
-The `{report}` package is a powerful tool for researchers who use R to analyze data and create reports for publication. It bridges the gap between R's output and the formatted results to be included in a manuscript, allowing users to easily convert statistical models and data frames into textual reports that are suitable for publication. This paper provides an overview of this package, including its features, advantages, and how to use it. We also provide examples of how the package can be used to standardize and improve results reporting in R.
+The `{report}` package is a powerful tool for researchers who use R to analyze data and create reports for publication. It bridges the gap between R's output and the formatted results to be included in a manuscript, allowing users to easily convert statistical models and data frames into textual reports that are suitable for publication. This paper provides an overview of this package, including its features, advantages, and ways to use it. We also provide examples of how the package can be used to standardize and improve results reporting in R.
 
 # Statement of Need
 
-Reporting results is a crucial part of scientific research. Researchers need to ensure that their results are reported accurately and clearly, so that other researchers can understand and reproduce their work. However, the process of results reporting can be time-consuming and error-prone, particularly when it comes to formatting data for publication. The `{report}` package was developed to address this problem, providing researchers with a tool that can help standardize and improve reporting results from their workflows in R.
+Reporting results is a crucial part of scientific research. Researchers need to ensure that their results are reported accurately and clearly, so that other researchers can understand and reproduce their work. However, the process of results reporting can be time-consuming and error-prone, particularly when it comes to formatting data for publication [@nuijten2016prevalence]. The `{report}` package was developed to address this problem, providing researchers with a tool that can help standardize and improve reporting results from their workflows in R. `{report}` is part of the *easystats* ecosystem of packages that build an R framework for easy statistical modeling, visualization, and reporting [@easystatspackage].
 
 # Features
 
-The package includes several features that make it a valuable tool for researchers. It can convert statistical models and data frames into textual reports, which can be easily customized and formatted to meet the requirements of a particular journal or publication. The package supports a wide range of output formats, including HTML, LaTeX, and Microsoft Word, via RMarkdown.
+The package includes several features that make it a valuable tool for researchers. It can convert statistical models and data frames into textual reports, which can be easily customized and formatted to meet the requirements of a particular journal or publication. It can also automatically report demographics information from column names. The package supports a wide range of output formats, including HTML, LaTeX, and Microsoft Word, via RMarkdown.
 
 Using this package in an analytic workflow has several advantages. First, it can help standardize results reporting across a research team or project, ensuring that everyone is using the same format and style. Second, the package can save researchers time by automating many of the tasks involved in reporting results, such as formatting tables and text. Third, the package can improve the quality of results reporting by providing users with a tool that is specifically designed for this purpose. Additionally, it prevents any copy-and-paste errors.
 
-The examples below illustrate the ease with which `{report}` can create detailed textual or tabular summaries for statistical objects:
+The examples below illustrate the ease with which `{report}` can create detailed textual or tabular summaries for statistical objects.
 
-```{r}
+## Demographics
+
+Note that When using `rmarkdown`, setting a chunk option to `results = "asis"` will print the output as regular text, as below, for a rather seamless reading experience.
+
+```{r, results = "asis"}
 library(report)
 
+data <- data.frame(
+  "Age" = c(22, 23, 54, 21, 8, 42, 18, 32, 24, 27, 45),
+  "Sex" = c("Intersex", "F", "F", "M", "M", "M", "F", "F", "F", "F", "F"),
+  "Gender" = c("N", "W", "W", "M", "M", "M", "W", "W", "W", "W", "W"),
+  "Race" = c("Black", NA, "White", "Asian", "Black", "Arab", "Black", 
+             "White", "Asian", "Southeast Asian", "Mixed"),
+  "Education" = c("Bachelor", "PhD", "Highschool", "Master", "Bachelor", 
+                  "Highschool", "Highschool", "Bachelor", "Bachelor", 
+                  "Highschool", "Master"),
+  "Country" = c("USA", NA, "Canada", "Canada", "India", "Germany", "USA", 
+                "USA", "USA", "USA", "Canada")
+)
+
+cat(paste0("This study includes data from ", 
+           report_participants(data), "."))
+```
+
+## Models
+
+```{r}
 m_lm <- lm(mpg ~ qsec + wt, data = mtcars)
 report(m_lm)
 
@@ -96,6 +123,22 @@ library(rstanarm)
 m_rstan <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 1000)
 report(m_rstan)
 ```
+
+## Tables
+
+If preferred, you can output the information as a table instead.
+
+```{r, results="asis"}
+library(insight)
+
+export_table(format_table(report_table(m_lm)), format = "markdown")
+
+export_table(format_table(report_table(m_lmer)), format = "markdown")
+
+export_table(format_table(report_table(m_rstan)), format = "markdown")
+```
+
+## Grouped Data
 
 You can also seamlessly integrate `{report}` with *tidyverse* workflows:
 
@@ -111,7 +154,7 @@ iris %>%
 
 # Conclusion
 
-The `{report}` package is a valuable tool for researchers who use R to analyze data and create reports for publication. It can help standardize and improve results reporting while saving researchers time and improving the quality of their work. 
+The `{report}` package is a valuable tool for researchers who use R to analyze data and create reports for publication. It can help standardize and improve results reporting while saving researchers time and improving the quality of their work.
 
 # Licensing and Availability
 
