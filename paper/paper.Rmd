@@ -47,9 +47,11 @@ affiliations:
 
 date: "`r Sys.Date()`"
 bibliography: paper.bib
-output: rticles::joss_article
+output: 
+  rticles::joss_article:
+    includes:
+      in_header: preamble.tex
 csl: apa.csl
-journal: JOSS
 link-citations: yes
 ---
 
@@ -60,7 +62,8 @@ knitr::opts_chunk$set(
   dpi = 300,
   comment = "#>",
   message = FALSE,
-  warning = FALSE
+  warning = FALSE,
+  results="asis"
 )
 
 options(width = 60)
@@ -87,9 +90,9 @@ The examples below illustrate the ease with which `{report}` can create detailed
 
 ## Demographics
 
-Note that When using `rmarkdown`, setting a chunk option to `results = "asis"` will print the output as regular text, as below, for a rather seamless reading experience.
+Note that when using `rmarkdown`, setting a chunk option to `results = "asis"` will print the output as regular text, as below, for a rather seamless reading experience.
 
-```{r, results = "asis"}
+```{r}
 library(report)
 
 data <- data.frame(
@@ -111,24 +114,57 @@ cat(paste0("This study includes data from ",
 
 ## Models
 
-```{r}
+```{r, eval=FALSE}
 m_lm <- lm(mpg ~ qsec + wt, data = mtcars)
 report(m_lm)
+```
 
+::: {.blackbox data-latex=""}
+
+```{r, echo=FALSE}
+m_lm <- lm(mpg ~ qsec + wt, data = mtcars)
+report(m_lm)
+```
+
+:::
+
+```{r, eval=FALSE}
 library(lme4)
 m_lmer <- lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 report(m_lmer)
+```
 
+::: {.blackbox data-latex=""}
+
+```{r, echo=FALSE}
+library(lme4)
+m_lmer <- lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
+report(m_lmer)
+```
+
+:::
+
+```{r, eval=FALSE}
 library(rstanarm)
 m_rstan <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 1000)
 report(m_rstan)
 ```
 
+::: {.blackbox data-latex=""}
+
+```{r, echo=FALSE}
+library(rstanarm)
+m_rstan <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 1000)
+report(m_rstan)
+```
+
+:::
+
 ## Tables
 
 If preferred, you can output the information as a table instead.
 
-```{r, results="asis"}
+```{r}
 library(insight)
 
 export_table(format_table(report_table(m_lm)), format = "markdown")
@@ -142,7 +178,7 @@ export_table(format_table(report_table(m_rstan)), format = "markdown")
 
 You can also seamlessly integrate `{report}` with *tidyverse* workflows:
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, eval=FALSE}
 library(dplyr)
 
 iris %>%
@@ -151,6 +187,20 @@ iris %>%
   report() %>%
   summary()
 ```
+
+::: {.blackbox data-latex=""}
+
+```{r, warning=FALSE, echo=FALSE}
+library(dplyr)
+
+iris %>%
+  select(-starts_with("Sepal")) %>%
+  group_by(Species) %>%
+  report() %>%
+  summary()
+```
+
+:::
 
 # Conclusion
 
