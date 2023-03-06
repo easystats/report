@@ -174,14 +174,14 @@
 <p>If you would instead like to experiment with the development version, you can download it from <code>GitHub</code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"easystats/report"</span><span class="op">)</span> <span class="co"># You only need to do that once</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"easystats/report"</span><span class="op">)</span> <span class="co"># You only need to do that once</span></span></code></pre></div>
 <p>Load the package every time you start R</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://easystats.github.io/report/">"report"</a></span><span class="op">)</span></span></code></pre></div>
 <blockquote>
 <p><strong>Tip</strong></p>
 <p><strong>Instead of <code><a href="https://easystats.github.io/report/">library(report)</a></code>, use <code><a href="https://easystats.github.io/easystats/" class="external-link">library(easystats)</a></code>.</strong> <strong>This will make all features of the easystats-ecosystem available.</strong></p>
-<p><strong>To stay updated, use <code><a href="https://easystats.github.io/easystats/reference/install_latest.html" class="external-link">easystats::install_latest()</a></code>.</strong></p>
+<p><strong>To stay updated, use <code>easystats::install_latest()</code>.</strong></p>
 </blockquote>
 </div>
 <div class="section level2">
@@ -340,20 +340,20 @@
 <span><span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb19"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="co"># We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains</span></span>
 <span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="co"># of 1000 iterations and a warmup of 500) to predict mpg with qsec and wt</span></span>
-<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a><span class="co"># (formula: mpg ~ qsec + wt). Priors over parameters were set as normal (mean =</span></span>
-<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a><span class="co"># 0.00, SD = 8.43) distributions. The model's explanatory power is substantial</span></span>
-<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a><span class="co"># (R2 = 0.81, 95% CI [0.70, 0.89], adj. R2 = 0.79). The model's intercept,</span></span>
-<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a><span class="co"># corresponding to qsec = 0 and wt = 0, is at 19.53 (95% CI [9.69, 30.43]).</span></span>
-<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a><span class="co"># Within this model:</span></span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a><span class="co"># (formula: mpg ~ qsec + wt). Priors over parameters were all set as normal (mean</span></span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a><span class="co"># = 0.00, SD = 8.43; mean = 0.00, SD = 15.40) distributions. The model's</span></span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a><span class="co"># explanatory power is substantial (R2 = 0.81, 95% CI [0.70, 0.90], adj. R2 =</span></span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a><span class="co"># 0.79). The model's intercept, corresponding to qsec = 0 and wt = 0, is at 19.96</span></span>
+<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a><span class="co"># (95% CI [8.93, 31.01]). Within this model:</span></span>
 <span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a><span class="co">#   - The effect of qsec (Median = 0.93, 95% CI [0.39, 1.45]) has a 99.95%</span></span>
-<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a><span class="co"># probability of being positive (&gt; 0), 99.05% of being significant (&gt; 0.30), and</span></span>
-<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a><span class="co"># 0.10% of being large (&gt; 1.81). The estimation successfully converged (Rhat =</span></span>
-<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a><span class="co"># 1.000) and the indices are reliable (ESS = 1974)</span></span>
-<span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a><span class="co">#   - The effect of wt (Median = -5.04, 95% CI [-6.04, -4.10]) has a 100.00%</span></span>
+<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a><span class="co">#   - The effect of qsec (Median = 0.92, 95% CI [0.34, 1.47]) has a 99.85%</span></span>
+<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a><span class="co"># probability of being positive (&gt; 0), 98.25% of being significant (&gt; 0.30), and</span></span>
+<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a><span class="co"># 0.05% of being large (&gt; 1.81). The estimation successfully converged (Rhat =</span></span>
+<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a><span class="co"># 0.999) and the indices are reliable (ESS = 2268)</span></span>
+<span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a><span class="co">#   - The effect of wt (Median = -5.04, 95% CI [-6.07, -4.12]) has a 100.00%</span></span>
 <span id="cb19-14"><a href="#cb19-14" tabindex="-1"></a><span class="co"># probability of being negative (&lt; 0), 100.00% of being significant (&lt; -0.30),</span></span>
 <span id="cb19-15"><a href="#cb19-15" tabindex="-1"></a><span class="co"># and 100.00% of being large (&lt; -1.81). The estimation successfully converged</span></span>
-<span id="cb19-16"><a href="#cb19-16" tabindex="-1"></a><span class="co"># (Rhat = 1.000) and the indices are reliable (ESS = 2233)</span></span>
+<span id="cb19-16"><a href="#cb19-16" tabindex="-1"></a><span class="co"># (Rhat = 1.002) and the indices are reliable (ESS = 2074)</span></span>
 <span id="cb19-17"><a href="#cb19-17" tabindex="-1"></a><span class="co"># </span></span>
 <span id="cb19-18"><a href="#cb19-18" tabindex="-1"></a><span class="co"># Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)</span></span>
 <span id="cb19-19"><a href="#cb19-19" tabindex="-1"></a><span class="co"># framework, we report the median of the posterior distribution and its 95% CI</span></span>
@@ -363,33 +363,7 @@
 <span id="cb19-23"><a href="#cb19-23" tabindex="-1"></a><span class="co"># large are |0.30| and |1.81| (corresponding respectively to 0.05 and 0.30 of the</span></span>
 <span id="cb19-24"><a href="#cb19-24" tabindex="-1"></a><span class="co"># outcome's SD). Convergence and stability of the Bayesian sampling has been</span></span>
 <span id="cb19-25"><a href="#cb19-25" tabindex="-1"></a><span class="co"># assessed using R-hat, which should be below 1.01 (Vehtari et al., 2019), and</span></span>
-<span id="cb19-26"><a href="#cb19-26" tabindex="-1"></a><span class="co"># Effective Sample Size (ESS), which should be greater than 1000 (Burkner, 2017).</span></span>
-<span id="cb19-27"><a href="#cb19-27" tabindex="-1"></a><span class="co"># and We fitted a Bayesian linear model (estimated using MCMC sampling with 4</span></span>
-<span id="cb19-28"><a href="#cb19-28" tabindex="-1"></a><span class="co"># chains of 1000 iterations and a warmup of 500) to predict mpg with qsec and wt</span></span>
-<span id="cb19-29"><a href="#cb19-29" tabindex="-1"></a><span class="co"># (formula: mpg ~ qsec + wt). Priors over parameters were set as normal (mean =</span></span>
-<span id="cb19-30"><a href="#cb19-30" tabindex="-1"></a><span class="co"># 0.00, SD = 15.40) distributions. The model's explanatory power is substantial</span></span>
-<span id="cb19-31"><a href="#cb19-31" tabindex="-1"></a><span class="co"># (R2 = 0.81, 95% CI [0.70, 0.89], adj. R2 = 0.79). The model's intercept,</span></span>
-<span id="cb19-32"><a href="#cb19-32" tabindex="-1"></a><span class="co"># corresponding to qsec = 0 and wt = 0, is at 19.53 (95% CI [9.69, 30.43]).</span></span>
-<span id="cb19-33"><a href="#cb19-33" tabindex="-1"></a><span class="co"># Within this model:</span></span>
-<span id="cb19-34"><a href="#cb19-34" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb19-35"><a href="#cb19-35" tabindex="-1"></a><span class="co">#   - The effect of qsec (Median = 0.93, 95% CI [0.39, 1.45]) has a 99.95%</span></span>
-<span id="cb19-36"><a href="#cb19-36" tabindex="-1"></a><span class="co"># probability of being positive (&gt; 0), 99.05% of being significant (&gt; 0.30), and</span></span>
-<span id="cb19-37"><a href="#cb19-37" tabindex="-1"></a><span class="co"># 0.10% of being large (&gt; 1.81). The estimation successfully converged (Rhat =</span></span>
-<span id="cb19-38"><a href="#cb19-38" tabindex="-1"></a><span class="co"># 1.000) and the indices are reliable (ESS = 1974)</span></span>
-<span id="cb19-39"><a href="#cb19-39" tabindex="-1"></a><span class="co">#   - The effect of wt (Median = -5.04, 95% CI [-6.04, -4.10]) has a 100.00%</span></span>
-<span id="cb19-40"><a href="#cb19-40" tabindex="-1"></a><span class="co"># probability of being negative (&lt; 0), 100.00% of being significant (&lt; -0.30),</span></span>
-<span id="cb19-41"><a href="#cb19-41" tabindex="-1"></a><span class="co"># and 100.00% of being large (&lt; -1.81). The estimation successfully converged</span></span>
-<span id="cb19-42"><a href="#cb19-42" tabindex="-1"></a><span class="co"># (Rhat = 1.000) and the indices are reliable (ESS = 2233)</span></span>
-<span id="cb19-43"><a href="#cb19-43" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb19-44"><a href="#cb19-44" tabindex="-1"></a><span class="co"># Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)</span></span>
-<span id="cb19-45"><a href="#cb19-45" tabindex="-1"></a><span class="co"># framework, we report the median of the posterior distribution and its 95% CI</span></span>
-<span id="cb19-46"><a href="#cb19-46" tabindex="-1"></a><span class="co"># (Highest Density Interval), along the probability of direction (pd), the</span></span>
-<span id="cb19-47"><a href="#cb19-47" tabindex="-1"></a><span class="co"># probability of significance and the probability of being large. The thresholds</span></span>
-<span id="cb19-48"><a href="#cb19-48" tabindex="-1"></a><span class="co"># beyond which the effect is considered as significant (i.e., non-negligible) and</span></span>
-<span id="cb19-49"><a href="#cb19-49" tabindex="-1"></a><span class="co"># large are |0.30| and |1.81| (corresponding respectively to 0.05 and 0.30 of the</span></span>
-<span id="cb19-50"><a href="#cb19-50" tabindex="-1"></a><span class="co"># outcome's SD). Convergence and stability of the Bayesian sampling has been</span></span>
-<span id="cb19-51"><a href="#cb19-51" tabindex="-1"></a><span class="co"># assessed using R-hat, which should be below 1.01 (Vehtari et al., 2019), and</span></span>
-<span id="cb19-52"><a href="#cb19-52" tabindex="-1"></a><span class="co"># Effective Sample Size (ESS), which should be greater than 1000 (Burkner, 2017).</span></span></code></pre></div>
+<span id="cb19-26"><a href="#cb19-26" tabindex="-1"></a><span class="co"># Effective Sample Size (ESS), which should be greater than 1000 (Burkner, 2017).</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -403,20 +377,22 @@
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/report_model.html">report_model</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span><span class="co"># linear model (estimated using OLS) to predict Sepal.Length with Species (formula: Sepal.Length ~ Species)</span></span>
+<span></span>
 <span><span class="fu"><a href="reference/report_performance.html">report_performance</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/report_statistics.html">report_statistics</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb21"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co"># linear model (estimated using OLS) to predict Sepal.Length with Species (formula: Sepal.Length ~ Species)</span></span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="co"># The model explains a statistically significant and substantial proportion of</span></span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a><span class="co"># variance (R2 = 0.62, F(2, 147) = 119.26, p &lt; .001, adj. R2 = 0.61)</span></span>
-<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a><span class="co"># beta = 5.01, 95% CI [4.86, 5.15], t(147) = 68.76, p &lt; .001; Std. beta = -1.01, 95% CI [-1.18, -0.84]</span></span>
-<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a><span class="co"># beta = 0.93, 95% CI [0.73, 1.13], t(147) = 9.03, p &lt; .001; Std. beta = 1.12, 95% CI [0.88, 1.37]</span></span>
-<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a><span class="co"># beta = 1.58, 95% CI [1.38, 1.79], t(147) = 15.37, p &lt; .001; Std. beta = 1.91, 95% CI [1.66, 2.16]</span></span></code></pre></div>
+<span><span class="co"># The model explains a statistically significant and substantial proportion of</span></span>
+<span><span class="co"># variance (R2 = 0.62, F(2, 147) = 119.26, p &lt; .001, adj. R2 = 0.61)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/report_statistics.html">report_statistics</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span><span class="co"># beta = 5.01, 95% CI [4.86, 5.15], t(147) = 68.76, p &lt; .001; Std. beta = -1.01, 95% CI [-1.18, -0.84]</span></span>
+<span><span class="co"># beta = 0.93, 95% CI [0.73, 1.13], t(147) = 9.03, p &lt; .001; Std. beta = 1.12, 95% CI [0.88, 1.37]</span></span>
+<span><span class="co"># beta = 1.58, 95% CI [1.38, 1.79], t(147) = 15.37, p &lt; .001; Std. beta = 1.91, 95% CI [1.66, 2.16]</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="report-participants-details">Report participants’ details<a class="anchor" aria-label="anchor" href="#report-participants-details"></a>
 </h3>
 <p>This can be useful to complete the <strong>Participants</strong> paragraph of your manuscript.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Age"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">22</span>, <span class="fl">23</span>, <span class="fl">54</span>, <span class="fl">21</span><span class="op">)</span>,</span>
 <span>  <span class="st">"Sex"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"M"</span><span class="op">)</span></span>
@@ -426,12 +402,16 @@
 <span>  <span class="fu"><a href="reference/report_participants.html">report_participants</a></span><span class="op">(</span><span class="va">data</span>, spell_n <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>  <span class="st">"were recruited in the study by means of torture and coercion."</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># [1] "Four participants (Mean age = 30.0, SD = 16.0, range: [21, 54]; Sex: 50.0% females, 50.0% males, 0.0% other) were recruited in the study by means of torture and coercion."</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co"># Four participants (Mean age = 30.0, SD = 16.0, range: [21, 54]; Sex:</span></span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a><span class="co">#   50.0% females, 50.0% males, 0.0% other) were recruited in the study by</span></span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a><span class="co">#   means of torture and coercion.</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="report-sample">Report sample<a class="anchor" aria-label="anchor" href="#report-sample"></a>
 </h3>
 <p>Report can also help you create a sample description table (also referred to as <strong>Table 1</strong>).</p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/report_sample.html">report_sample</a></span><span class="op">(</span><span class="va">iris</span>, group_by <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="26%">
@@ -490,7 +470,7 @@
 <span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a><span class="co"># 1.1.31; Bates D et al., 2015), Matrix (version 1.5.3; Bates D et al., 2022),</span></span>
 <span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a><span class="co"># Rcpp (version 1.0.9; Eddelbuettel D, François R, 2011), rstanarm (version</span></span>
 <span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a><span class="co"># 2.21.3; Goodrich B et al., 2022), report (version 0.5.6; Makowski D et al.,</span></span>
-<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a><span class="co"># 2023) and dplyr (version 1.0.10; Wickham H et al., 2022).</span></span>
+<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a><span class="co"># 2023) and dplyr (version 1.1.0; Wickham H et al., 2023).</span></span>
 <span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a><span class="co"># </span></span>
 <span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a><span class="co"># References</span></span>
 <span id="cb25-9"><a href="#cb25-9" tabindex="-1"></a><span class="co"># ----------</span></span>
@@ -522,8 +502,8 @@
 <span id="cb25-35"><a href="#cb25-35" tabindex="-1"></a><span class="co">#   - R Core Team (2022). _R: A Language and Environment for Statistical</span></span>
 <span id="cb25-36"><a href="#cb25-36" tabindex="-1"></a><span class="co"># Computing_. R Foundation for Statistical Computing, Vienna, Austria.</span></span>
 <span id="cb25-37"><a href="#cb25-37" tabindex="-1"></a><span class="co"># &lt;https://www.R-project.org/&gt;.</span></span>
-<span id="cb25-38"><a href="#cb25-38" tabindex="-1"></a><span class="co">#   - Wickham H, François R, Henry L, Müller K (2022). _dplyr: A Grammar of Data</span></span>
-<span id="cb25-39"><a href="#cb25-39" tabindex="-1"></a><span class="co"># Manipulation_. R package version 1.0.10,</span></span>
+<span id="cb25-38"><a href="#cb25-38" tabindex="-1"></a><span class="co">#   - Wickham H, François R, Henry L, Müller K, Vaughan D (2023). _dplyr: A Grammar</span></span>
+<span id="cb25-39"><a href="#cb25-39" tabindex="-1"></a><span class="co"># of Data Manipulation_. R package version 1.1.0,</span></span>
 <span id="cb25-40"><a href="#cb25-40" tabindex="-1"></a><span class="co"># &lt;https://CRAN.R-project.org/package=dplyr&gt;.</span></span></code></pre></div>
 </div>
 </div>
