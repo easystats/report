@@ -217,22 +217,15 @@ model <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 1000) %>%
 
 One can, for complex reports, directly access the pieces of the reports:
 
-```{r, eval=FALSE}
+```{r}
 model <- lm(Sepal.Length ~ Species, data = iris)
 
 report_model(model)
+
 report_performance(model)
+
 report_statistics(model)
 ```
-
-```{r echo=FALSE}
-model <- lm(Sepal.Length ~ Species, data = iris)
-
-print(report_model(model), width = 80)
-print(report_performance(model), width = 80)
-print(report_statistics(model), width = 80)
-```
-
 
 ### Report participants' details
 
@@ -250,7 +243,7 @@ paste(
 )
 ```
 
-```{r echo=FALSE}
+```{r echo=F}
 data <- data.frame(
   "Age" = c(22, 23, 54, 21),
   "Sex" = c("F", "F", "M", "M")
@@ -259,15 +252,16 @@ data <- data.frame(
 paste(
   report_participants(data, spell_n = TRUE),
   "were recruited in the study by means of torture and coercion."
-) %>%
-  print(width = 80)
+) |>
+  insight::format_message() %>%
+  cat()
 ```
 
 ### Report sample
 
 Report can also help you create a sample description table (also referred to as **Table 1**).
 
-```{r, include=FALSE}
+```{r, eval=FALSE}
 report_sample(iris, group_by = "Species")
 ```
 
