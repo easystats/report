@@ -253,7 +253,7 @@ paste(
   report_participants(data, spell_n = TRUE),
   "were recruited in the study by means of torture and coercion."
 ) |>
-  insight::format_message() %>% 
+  insight::format_message() %>%
   cat()
 ```
 
