@@ -260,46 +260,20 @@ report(model)
 
     # We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains
     # of 1000 iterations and a warmup of 500) to predict mpg with qsec and wt
-    # (formula: mpg ~ qsec + wt). Priors over parameters were set as normal (mean =
-    # 0.00, SD = 8.43) distributions. The model's explanatory power is substantial
-    # (R2 = 0.81, 95% CI [0.70, 0.89], adj. R2 = 0.79). The model's intercept,
-    # corresponding to qsec = 0 and wt = 0, is at 19.53 (95% CI [9.69, 30.43]).
-    # Within this model:
+    # (formula: mpg ~ qsec + wt). Priors over parameters were all set as normal (mean
+    # = 0.00, SD = 8.43; mean = 0.00, SD = 15.40) distributions. The model's
+    # explanatory power is substantial (R2 = 0.81, 95% CI [0.70, 0.90], adj. R2 =
+    # 0.79). The model's intercept, corresponding to qsec = 0 and wt = 0, is at 19.96
+    # (95% CI [8.93, 31.01]). Within this model:
     # 
-    #   - The effect of qsec (Median = 0.93, 95% CI [0.39, 1.45]) has a 99.95%
-    # probability of being positive (> 0), 99.05% of being significant (> 0.30), and
-    # 0.10% of being large (> 1.81). The estimation successfully converged (Rhat =
-    # 1.000) and the indices are reliable (ESS = 1974)
-    #   - The effect of wt (Median = -5.04, 95% CI [-6.04, -4.10]) has a 100.00%
+    #   - The effect of qsec (Median = 0.92, 95% CI [0.34, 1.47]) has a 99.85%
+    # probability of being positive (> 0), 98.25% of being significant (> 0.30), and
+    # 0.05% of being large (> 1.81). The estimation successfully converged (Rhat =
+    # 0.999) and the indices are reliable (ESS = 2268)
+    #   - The effect of wt (Median = -5.04, 95% CI [-6.07, -4.12]) has a 100.00%
     # probability of being negative (< 0), 100.00% of being significant (< -0.30),
     # and 100.00% of being large (< -1.81). The estimation successfully converged
-    # (Rhat = 1.000) and the indices are reliable (ESS = 2233)
-    # 
-    # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
-    # framework, we report the median of the posterior distribution and its 95% CI
-    # (Highest Density Interval), along the probability of direction (pd), the
-    # probability of significance and the probability of being large. The thresholds
-    # beyond which the effect is considered as significant (i.e., non-negligible) and
-    # large are |0.30| and |1.81| (corresponding respectively to 0.05 and 0.30 of the
-    # outcome's SD). Convergence and stability of the Bayesian sampling has been
-    # assessed using R-hat, which should be below 1.01 (Vehtari et al., 2019), and
-    # Effective Sample Size (ESS), which should be greater than 1000 (Burkner, 2017).
-    # and We fitted a Bayesian linear model (estimated using MCMC sampling with 4
-    # chains of 1000 iterations and a warmup of 500) to predict mpg with qsec and wt
-    # (formula: mpg ~ qsec + wt). Priors over parameters were set as normal (mean =
-    # 0.00, SD = 15.40) distributions. The model's explanatory power is substantial
-    # (R2 = 0.81, 95% CI [0.70, 0.89], adj. R2 = 0.79). The model's intercept,
-    # corresponding to qsec = 0 and wt = 0, is at 19.53 (95% CI [9.69, 30.43]).
-    # Within this model:
-    # 
-    #   - The effect of qsec (Median = 0.93, 95% CI [0.39, 1.45]) has a 99.95%
-    # probability of being positive (> 0), 99.05% of being significant (> 0.30), and
-    # 0.10% of being large (> 1.81). The estimation successfully converged (Rhat =
-    # 1.000) and the indices are reliable (ESS = 1974)
-    #   - The effect of wt (Median = -5.04, 95% CI [-6.04, -4.10]) has a 100.00%
-    # probability of being negative (< 0), 100.00% of being significant (< -0.30),
-    # and 100.00% of being large (< -1.81). The estimation successfully converged
-    # (Rhat = 1.000) and the indices are reliable (ESS = 2233)
+    # (Rhat = 1.002) and the indices are reliable (ESS = 2074)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
     # framework, we report the median of the posterior distribution and its 95% CI
@@ -321,16 +295,17 @@ One can, for complex reports, directly access the pieces of the reports:
 model <- lm(Sepal.Length ~ Species, data = iris)
 
 report_model(model)
-report_performance(model)
-report_statistics(model)
-```
+# linear model (estimated using OLS) to predict Sepal.Length with Species (formula: Sepal.Length ~ Species)
 
-    # linear model (estimated using OLS) to predict Sepal.Length with Species (formula: Sepal.Length ~ Species)
-    # The model explains a statistically significant and substantial proportion of
-    # variance (R2 = 0.62, F(2, 147) = 119.26, p < .001, adj. R2 = 0.61)
-    # beta = 5.01, 95% CI [4.86, 5.15], t(147) = 68.76, p < .001; Std. beta = -1.01, 95% CI [-1.18, -0.84]
-    # beta = 0.93, 95% CI [0.73, 1.13], t(147) = 9.03, p < .001; Std. beta = 1.12, 95% CI [0.88, 1.37]
-    # beta = 1.58, 95% CI [1.38, 1.79], t(147) = 15.37, p < .001; Std. beta = 1.91, 95% CI [1.66, 2.16]
+report_performance(model)
+# The model explains a statistically significant and substantial proportion of
+# variance (R2 = 0.62, F(2, 147) = 119.26, p < .001, adj. R2 = 0.61)
+
+report_statistics(model)
+# beta = 5.01, 95% CI [4.86, 5.15], t(147) = 68.76, p < .001; Std. beta = -1.01, 95% CI [-1.18, -0.84]
+# beta = 0.93, 95% CI [0.73, 1.13], t(147) = 9.03, p < .001; Std. beta = 1.12, 95% CI [0.88, 1.37]
+# beta = 1.58, 95% CI [1.38, 1.79], t(147) = 15.37, p < .001; Std. beta = 1.91, 95% CI [1.66, 2.16]
+```
 
 ### Report participants’ details
 
@@ -349,12 +324,18 @@ paste(
 )
 ```
 
-    # [1] "Four participants (Mean age = 30.0, SD = 16.0, range: [21, 54]; Sex: 50.0% females, 50.0% males, 0.0% other) were recruited in the study by means of torture and coercion."
+    # Four participants (Mean age = 30.0, SD = 16.0, range: [21, 54]; Sex:
+    #   50.0% females, 50.0% males, 0.0% other) were recruited in the study by
+    #   means of torture and coercion.
 
 ### Report sample
 
 Report can also help you create a sample description table (also
 referred to as **Table 1**).
+
+``` r
+report_sample(iris, group_by = "Species")
+```
 
 | Variable               | setosa (n=50) | versicolor (n=50) | virginica (n=50) | Total (n=150) |
 |:-----------------------|:--------------|:------------------|:-----------------|:--------------|
@@ -377,7 +358,7 @@ report(sessionInfo())
     # 1.1.31; Bates D et al., 2015), Matrix (version 1.5.3; Bates D et al., 2022),
     # Rcpp (version 1.0.9; Eddelbuettel D, François R, 2011), rstanarm (version
     # 2.21.3; Goodrich B et al., 2022), report (version 0.5.6; Makowski D et al.,
-    # 2023) and dplyr (version 1.0.10; Wickham H et al., 2022).
+    # 2023) and dplyr (version 1.1.0; Wickham H et al., 2023).
     # 
     # References
     # ----------
@@ -409,8 +390,8 @@ report(sessionInfo())
     #   - R Core Team (2022). _R: A Language and Environment for Statistical
     # Computing_. R Foundation for Statistical Computing, Vienna, Austria.
     # <https://www.R-project.org/>.
-    #   - Wickham H, François R, Henry L, Müller K (2022). _dplyr: A Grammar of Data
-    # Manipulation_. R package version 1.0.10,
+    #   - Wickham H, François R, Henry L, Müller K, Vaughan D (2023). _dplyr: A Grammar
+    # of Data Manipulation_. R package version 1.1.0,
     # <https://CRAN.R-project.org/package=dplyr>.
 
 ## Credits
