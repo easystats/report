@@ -1,4 +1,4 @@
-# report (development version)
+# report 0.5.6
 
 Breaking Changes
 

@@ -24,10 +24,14 @@ library(dplyr)
 library(report)
 ```
 
+[![R-CMD-check](https://github.com/easystats/report/workflows/R-CMD-check/badge.svg?branch=main)](https://github.com/easystats/report/actions)
 [![CRAN](http://www.r-pkg.org/badges/version/report)](https://cran.r-project.org/package=report)
+[![r-universe](https://easystats.r-universe.dev/badges/report)](https://easystats.r-universe.dev/report)
 [![downloads](http://cranlogs.r-pkg.org/badges/report)](https://cran.r-project.org/package=report)
-[![R-CMD-check](https://github.com/easystats/datawizard/workflows/R-CMD-check/badge.svg?branch=main)](https://github.com/easystats/datawizard/actions) [![status](https://tinyverse.netlify.com/badge/modelbased)](https://CRAN.R-project.org/package=modelbased)
+[![total](https://cranlogs.r-pkg.org/badges/grand-total/report)](https://shinyus.ipub.com/cranview/)
+ [![status](https://tinyverse.netlify.com/badge/report)](https://CRAN.R-project.org/package=report)
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+[![stars](https://img.shields.io/github/stars/easystats/report?style=social)](https://github.com/easystats/report/stargazers)
 
 ***"From R to your manuscript"***
 
@@ -64,7 +68,7 @@ library("report")
 
 > **Tip**
 >
-> **Instead of `library(datawizard)`, use `library(easystats)`.**
+> **Instead of `library(report)`, use `library(easystats)`.**
 > **This will make all features of the  easystats-ecosystem available.**
 >
 > **To stay updated, use `easystats::install_latest()`.**
@@ -213,22 +217,15 @@ model <- stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 1000) %>%
 
 One can, for complex reports, directly access the pieces of the reports:
 
-```{r, eval=FALSE}
+```{r}
 model <- lm(Sepal.Length ~ Species, data = iris)
 
 report_model(model)
+
 report_performance(model)
+
 report_statistics(model)
 ```
-
-```{r echo=FALSE}
-model <- lm(Sepal.Length ~ Species, data = iris)
-
-print(report_model(model), width = 80)
-print(report_performance(model), width = 80)
-print(report_statistics(model), width = 80)
-```
-
 
 ### Report participants' details
 
@@ -246,7 +243,7 @@ paste(
 )
 ```
 
-```{r echo=FALSE}
+```{r echo=F}
 data <- data.frame(
   "Age" = c(22, 23, 54, 21),
   "Sex" = c("F", "F", "M", "M")
@@ -255,15 +252,16 @@ data <- data.frame(
 paste(
   report_participants(data, spell_n = TRUE),
   "were recruited in the study by means of torture and coercion."
-) %>%
-  print(width = 80)
+) |>
+  insight::format_message() %>%
+  cat()
 ```
 
 ### Report sample
 
 Report can also help you create a sample description table (also referred to as **Table 1**).
 
-```{r, include=FALSE}
+```{r, eval=FALSE}
 report_sample(iris, group_by = "Species")
 ```
 

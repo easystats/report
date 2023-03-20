@@ -102,7 +102,7 @@ cite_easystats <- function(packages = "easystats",
     cit_packages <- sprintf(
       "(%s)",
       toString(c(
-        easystats = sprintf("L\u00fcdecke et al., 2019/2022%s", letters_ludeckePackages[1]),
+        easystats = sprintf("L\u00fcdecke et al., 2019/2023%s", letters_ludeckePackages[1]),
         insight = sprintf("L\u00fcdecke et al., 2019, 2019/2022%s", letters_ludeckePackages[2]),
         datawizard = sprintf("Makowski et al., 2021/2022%s", letters_makowskiPackages[1]),
         bayestestR = sprintf("Makowski et al., 2019, 2019/2022%s", letters_makowskiPackages[2]),
@@ -118,7 +118,7 @@ cite_easystats <- function(packages = "easystats",
           "L\u00fcdecke et al., 2021%s, 2019/2022%s",
           letters_ludeckeArticles[2], letters_ludeckePackages[5]
         ),
-        report = sprintf("Makowski et al., 2021/2022%s", letters_makowskiPackages[5])
+        report = sprintf("Makowski et al., 2021/2023%s", letters_makowskiPackages[5])
       )[packages])
     )
   } else if (format == "markdown") {
@@ -180,9 +180,10 @@ cite_easystats <- function(packages = "easystats",
       sort(unlist(list(
         easystats = sprintf(
           paste(
-            "L\u00fcdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., & Wiernik, B. M. (2022).",
+            "L\u00fcdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., Wiernik, B. M.,",
+            "Bacher, Etienne, & Th\U00E9riault, R. (2023).",
             "easystats: Streamline model interpretation, visualization, and reporting%s [R package].",
-            "https://github.com/easystats/easystats (Original work published 2019)"
+            "https://easystats.github.io/easystats/ (Original work published 2019)"
           ),
           ifelse(installed_packages["easystats"] == "", "", paste0(" (", installed_packages["easystats"], ")"))
         ),
@@ -316,10 +317,10 @@ cite_easystats <- function(packages = "easystats",
         ),
         report = sprintf(
           paste(
-            "Makowski, D., L\u00fcdecke, D., Ben-Shachar, M. S., Patil, I.,",
-            "Wiernik, B. M., & Th\U00E9riault, R. (2022).",
+            "Makowski, D., L\u00fcdecke, D., Patil, I., Th\U00E9riault, R., Ben-Shachar, M. S.,",
+            "& Wiernik, B. M. (2023).",
             "report: Automated reporting of results and statistical models (%s) [R package].",
-            "https://CRAN.R-project.org/package=report (Original work published 2021)"
+            "https://easystats.github.io/easystats/ (Original work published 2021)"
           ),
           installed_packages["report"]
         )

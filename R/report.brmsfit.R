@@ -7,7 +7,7 @@
 #' @inheritParams report.lm
 #' @inherit report return seealso
 #'
-#' @examplesIf requireNamespace("brms", quietly = TRUE) && packageVersion("rstan") >= "2.26.0"
+#' @examplesIf require("brms", quietly = TRUE)
 #' \dontrun{
 #' # Bayesian models
 #' library(brms)
@@ -85,7 +85,7 @@ report_priors.brmsfit <- function(x, ...) {
 
   values <- paste0(params$Prior_Distribution, " (", values, ")")
 
-  if (length(unique(values)) == 1 && nrow(params) > 1) {
+  if (length(unique(values)) == 1L && nrow(params) > 1L) {
     text <- paste0("all set as ", values[1])
   } else {
     text <- paste0("set as ", values)
