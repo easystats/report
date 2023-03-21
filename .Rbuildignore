@@ -10,6 +10,7 @@
 ^revdep$
 ^codecov\.yml$
 ^_pkgdown\.yml$
+^pkgdown$
 ^data-raw$
 ^\.httr-oauth$
 ^CRAN-RELEASE$
