@@ -5,7 +5,7 @@
 [![CRAN](http://www.r-pkg.org/badges/version/report)](https://cran.r-project.org/package=report)
 [![r-universe](https://easystats.r-universe.dev/badges/report)](https://easystats.r-universe.dev/report)
 [![downloads](http://cranlogs.r-pkg.org/badges/report)](https://cran.r-project.org/package=report)
-[![total](https://cranlogs.r-pkg.org/badges/grand-total/report)](https://shinyus.ipub.com/cranview/)
+[![total](https://cranlogs.r-pkg.org/badges/grand-total/report)](https://cranlogs.r-pkg.org/)
 [![status](https://tinyverse.netlify.com/badge/report)](https://CRAN.R-project.org/package=report)
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![stars](https://img.shields.io/github/stars/easystats/report?style=social)](https://github.com/easystats/report/stargazers)
@@ -262,28 +262,28 @@ report(model)
     # of 1000 iterations and a warmup of 500) to predict mpg with qsec and wt
     # (formula: mpg ~ qsec + wt). Priors over parameters were all set as normal (mean
     # = 0.00, SD = 8.43; mean = 0.00, SD = 15.40) distributions. The model's
-    # explanatory power is substantial (R2 = 0.81, 95% CI [0.70, 0.90], adj. R2 =
-    # 0.79). The model's intercept, corresponding to qsec = 0 and wt = 0, is at 19.96
-    # (95% CI [8.93, 31.01]). Within this model:
+    # explanatory power is substantial (R2 = 0.81, 95% CI [0.69, 0.89], adj. R2 =
+    # 0.79). The model's intercept, corresponding to qsec = 0 and wt = 0, is at 19.56
+    # (95% CI [9.60, 30.59]). Within this model:
     # 
-    #   - The effect of qsec (Median = 0.92, 95% CI [0.34, 1.47]) has a 99.85%
-    # probability of being positive (> 0), 98.25% of being significant (> 0.30), and
+    #   - The effect of qsec (Median = 0.94, 95% CI [0.38, 1.45]) has a 99.90%
+    # probability of being positive (> 0), 98.80% of being significant (> 0.30), and
     # 0.05% of being large (> 1.81). The estimation successfully converged (Rhat =
-    # 0.999) and the indices are reliable (ESS = 2268)
-    #   - The effect of wt (Median = -5.04, 95% CI [-6.07, -4.12]) has a 100.00%
+    # 1.001) and the indices are reliable (ESS = 1921)
+    #   - The effect of wt (Median = -5.05, 95% CI [-6.01, -4.05]) has a 100.00%
     # probability of being negative (< 0), 100.00% of being significant (< -0.30),
     # and 100.00% of being large (< -1.81). The estimation successfully converged
-    # (Rhat = 1.002) and the indices are reliable (ESS = 2074)
+    # (Rhat = 1.000) and the indices are reliable (ESS = 2020)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
     # framework, we report the median of the posterior distribution and its 95% CI
     # (Highest Density Interval), along the probability of direction (pd), the
     # probability of significance and the probability of being large. The thresholds
     # beyond which the effect is considered as significant (i.e., non-negligible) and
-    # large are |0.30| and |1.81| (corresponding respectively to 0.05 and 0.30 of the
-    # outcome's SD). Convergence and stability of the Bayesian sampling has been
-    # assessed using R-hat, which should be below 1.01 (Vehtari et al., 2019), and
-    # Effective Sample Size (ESS), which should be greater than 1000 (Burkner, 2017).
+    # large are |0.30| and |1.81|. Convergence and stability of the Bayesian sampling
+    # has been assessed using R-hat, which should be below 1.01 (Vehtari et al.,
+    # 2019), and Effective Sample Size (ESS), which should be greater than 1000
+    # (Burkner, 2017).
 
 ## Other types of reports
 
@@ -354,11 +354,11 @@ report(sessionInfo())
 ```
 
     # Analyses were conducted using the R Statistical language (version 4.2.2; R Core
-    # Team, 2022) on Windows 10 x64 (build 19045), using the packages lme4 (version
-    # 1.1.31; Bates D et al., 2015), Matrix (version 1.5.3; Bates D et al., 2022),
-    # Rcpp (version 1.0.9; Eddelbuettel D, François R, 2011), rstanarm (version
-    # 2.21.3; Goodrich B et al., 2022), report (version 0.5.6; Makowski D et al.,
-    # 2023) and dplyr (version 1.1.0; Wickham H et al., 2023).
+    # Team, 2022) on macOS Ventura 13.1, using the packages lme4 (version 1.1.32;
+    # Bates D et al., 2015), Matrix (version 1.5.3; Bates D et al., 2022), Rcpp
+    # (version 1.0.10; Eddelbuettel D, François R, 2011), rstanarm (version 2.21.3;
+    # Goodrich B et al., 2022), report (version 0.5.7; Makowski D et al., 2023) and
+    # dplyr (version 1.1.0; Wickham H et al., 2023).
     # 
     # References
     # ----------
