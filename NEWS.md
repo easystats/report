@@ -1,3 +1,7 @@
+# report 0.5.7
+
+Hotfix for CRAN reverse dependency compatibility.
+
 # report 0.5.6
 
 Breaking Changes
