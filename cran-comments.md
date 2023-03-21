@@ -1,6 +1,6 @@
 ## R CMD check results report 0.5.7
 
-0 errors | 0 warnings | 0 note
+0 errors | 0 warnings | 0 note 
 
 ## R CMD check results report 0.5.6
 
