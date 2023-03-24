@@ -72,7 +72,7 @@ report_sample <- function(data,
     variable <- result[[1]]["Variable"]
     # number of observation, based on weights
     if (!is.null(weights)) {
-      n_obs <- round(as.vector(xtabs(data[[weights]] ~ data[[group_by]])))
+      n_obs <- round(as.vector(stats::xtabs(data[[weights]] ~ data[[group_by]])))
     } else {
       n_obs <- as.vector(table(data[[group_by]]))
     }
