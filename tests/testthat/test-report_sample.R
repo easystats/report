@@ -23,7 +23,7 @@ test_that("report_sample weights, coorect weighted N", {
   expect_identical(
     capture.output(print(out2)),
     c(
-      "# Descriptive Statistics",
+      "# Descriptive Statistics (weighted)",
       "",
       "Variable | 1 (n=6) | 2 (n=9) | Total (n=15)",
       "-------------------------------------------",
