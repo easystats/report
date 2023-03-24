@@ -70,8 +70,14 @@ report_sample <- function(data,
     })
     # remember values of first columns
     variable <- result[[1]]["Variable"]
+    # number of observation, based on weights
+    if (!is.null(weights)) {
+      n_obs <- round(as.vector(xtabs(data[[weights]] ~ data[[group_by]])))
+    } else {
+      n_obs <- as.vector(table(data[[group_by]]))
+    }
     # column names for groups
-    cn <- sprintf("%s (n=%g)", names(result), as.vector(table(data[[group_by]])))
+    cn <- sprintf("%s (n=%g)", names(result), n_obs)
     # just extract summary columns
     summaries <- do.call(cbind, lapply(result, function(i) i["Summary"]))
     colnames(summaries) <- cn
