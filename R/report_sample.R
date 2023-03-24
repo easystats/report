@@ -70,8 +70,14 @@ report_sample <- function(data,
     })
     # remember values of first columns
     variable <- result[[1]]["Variable"]
+    # number of observation, based on weights
+    if (!is.null(weights)) {
+      n_obs <- round(as.vector(stats::xtabs(data[[weights]] ~ data[[group_by]])))
+    } else {
+      n_obs <- as.vector(table(data[[group_by]]))
+    }
     # column names for groups
-    cn <- sprintf("%s (n=%g)", names(result), as.vector(table(data[[group_by]])))
+    cn <- sprintf("%s (n=%g)", names(result), n_obs)
     # just extract summary columns
     summaries <- do.call(cbind, lapply(result, function(i) i["Summary"]))
     colnames(summaries) <- cn
@@ -93,17 +99,24 @@ report_sample <- function(data,
     if (isFALSE(total)) {
       final$Total <- NULL
     }
+    # define total N, based on weights
+    if (!is.null(weights)) {
+      total_n <- sum(as.vector(table(data[[group_by]]))) * mean(data[[weights]], na.rm = TRUE)
+    } else {
+      total_n <- sum(as.vector(table(data[[group_by]])))
+    }
     # add N to column name
     colnames(final)[ncol(final)] <- sprintf(
       "%s (n=%g)",
       colnames(final)[ncol(final)],
-      sum(as.vector(table(data[[group_by]])))
+      total_n
     )
     final
   } else {
     .generate_descriptive_table(data[variables], centrality, weights, digits, n)
   }
 
+  attr(out, "weighted") <- !is.null(weights)
   class(out) <- c("report_sample", class(out))
   out
 }
@@ -213,7 +226,12 @@ report_sample <- function(data,
 
 #' @export
 print.report_sample <- function(x, ...) {
-  insight::print_colour("# Descriptive Statistics\n\n", "blue")
+  if (isTRUE(attributes(x)$weighted)) {
+    header <- "# Descriptive Statistics (weighted)\n\n"
+  } else {
+    header <- "# Descriptive Statistics\n\n"
+  }
+  insight::print_colour(header, "blue")
   cat(insight::export_table(x))
 }
 

@@ -1,3 +1,10 @@
+# report 0.5.8
+
+Minor changes
+
+* `report_sample` now reports the weighted number of observations when data
+  is both grouped an weighted.
+
 # report 0.5.7
 
 Hotfix for CRAN reverse dependency compatibility.
