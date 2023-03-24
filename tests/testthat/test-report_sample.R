@@ -1,3 +1,39 @@
+test_that("report_sample weights, coorect weighted N", {
+  d <- data.frame(
+    x = c("a", "a", "a", "a", "b", "b", "b", "b", "c", "c", "c", "c"),
+    g = c(1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2),
+    w = c(0.5, 0.5, 1, 1, 1.5, 1.5, 2, 2, 1, 1, 1.5, 1.5),
+    stringsAsFactors = FALSE
+  )
+
+  out1 <- report_sample(d, select = "x", group_by = "g")
+  out2 <- report_sample(d, select = "x", group_by = "g", weights = "w")
+  expect_identical(
+    capture.output(print(out1)),
+    c(
+      "# Descriptive Statistics",
+      "",
+      "Variable | 1 (n=6) | 2 (n=6) | Total (n=12)",
+      "-------------------------------------------",
+      "x [a], % |    33.3 |    33.3 |         33.3",
+      "x [b], % |    33.3 |    33.3 |         33.3",
+      "x [c], % |    33.3 |    33.3 |         33.3"
+    )
+  )
+  expect_identical(
+    capture.output(print(out2)),
+    c(
+      "# Descriptive Statistics",
+      "",
+      "Variable | 1 (n=6) | 2 (n=9) | Total (n=12)",
+      "-------------------------------------------",
+      "x [a], % |    16.7 |    22.2 |         20.0",
+      "x [b], % |    50.0 |    44.4 |         46.7",
+      "x [c], % |    33.3 |    33.3 |         33.3"
+    )
+  )
+})
+
 test_that("report_sample default", {
   expect_snapshot(
     variant = "windows",
