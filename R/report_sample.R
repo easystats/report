@@ -101,7 +101,7 @@ report_sample <- function(data,
     }
     # define total N, based on weights
     if (!is.null(weights)) {
-      total_n <- sum(as.vector(table(data[[group_by]]))) * mean(data[[weights]], na.rm = TRUE)
+      total_n <- round(sum(as.vector(table(data[[group_by]]))) * mean(data[[weights]], na.rm = TRUE))
     } else {
       total_n <- sum(as.vector(table(data[[group_by]])))
     }
