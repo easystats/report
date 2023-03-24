@@ -116,6 +116,7 @@ report_sample <- function(data,
     .generate_descriptive_table(data[variables], centrality, weights, digits, n)
   }
 
+  attr(out, "weighted") <- !is.null(weights)
   class(out) <- c("report_sample", class(out))
   out
 }
@@ -225,7 +226,12 @@ report_sample <- function(data,
 
 #' @export
 print.report_sample <- function(x, ...) {
-  insight::print_colour("# Descriptive Statistics\n\n", "blue")
+  if (isTRUE(attributes(x)$weighted)) {
+    header <- "# Descriptive Statistics (weighted)\n\n"
+  } else {
+    header <- "# Descriptive Statistics\n\n"
+  }
+  insight::print_colour(header, "blue")
   cat(insight::export_table(x))
 }
 
