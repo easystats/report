@@ -25,7 +25,7 @@ test_that("report_sample weights, coorect weighted N", {
     c(
       "# Descriptive Statistics",
       "",
-      "Variable | 1 (n=6) | 2 (n=9) | Total (n=12)",
+      "Variable | 1 (n=6) | 2 (n=9) | Total (n=15)",
       "-------------------------------------------",
       "x [a], % |    16.7 |    22.2 |         20.0",
       "x [b], % |    50.0 |    44.4 |         46.7",

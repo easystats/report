@@ -99,11 +99,17 @@ report_sample <- function(data,
     if (isFALSE(total)) {
       final$Total <- NULL
     }
+    # define total N, based on weights
+    if (!is.null(weights)) {
+      total_n <- sum(as.vector(table(data[[group_by]]))) * mean(data[[weights]], na.rm = TRUE)
+    } else {
+      total_n <- sum(as.vector(table(data[[group_by]])))
+    }
     # add N to column name
     colnames(final)[ncol(final)] <- sprintf(
       "%s (n=%g)",
       colnames(final)[ncol(final)],
-      sum(as.vector(table(data[[group_by]])))
+      total_n
     )
     final
   } else {
