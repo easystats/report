@@ -45,9 +45,14 @@ report_sample <- function(data,
                           ...) {
   variables <- colnames(data)
 
+  # select all?
+  if (is.null(select)) {
+    select <- colnames(data)
+  }
+
   # variables to keep
   if (!is.null(weights)) {
-    select <- c(select, weights)
+    select <- unique(c(select, weights))
   }
 
   # variables to keep
