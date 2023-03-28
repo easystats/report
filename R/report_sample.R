@@ -49,9 +49,14 @@ report_sample <- function(data,
                           ...) {
   variables <- colnames(data)
 
+  # select all?
+  if (is.null(select)) {
+    select <- colnames(data)
+  }
+
   # variables to keep
   if (!is.null(weights)) {
-    select <- c(select, weights)
+    select <- unique(c(select, weights))
   }
 
   # variables to keep
@@ -176,7 +181,7 @@ report_sample <- function(data,
   .summary <- if (centrality == "mean") {
     sprintf("%.*f (%.*f)%s", digits, .weighted_mean(x, weights), digits, .weighted_sd(x, weights), n_stat)
   } else {
-    sprintf("%.*f (%.*f)%s", digits, .weighted_median(x, weights), digits, stats::mad(x, na.rm = TRUE), n_stat)
+    sprintf("%.*f (%.*f)%s", digits, .weighted_median(x, weights), digits, .weighted_mad(x, weights), n_stat)
   }
 
   n.label <- ifelse(n, ", n", "")
@@ -265,7 +270,6 @@ print.report_sample <- function(x, ...) {
 
 # helper for weighted stuff --------------------------
 
-
 .weighted_variance <- function(x, weights = NULL) {
   if (is.null(weights)) {
     return(stats::var(x, na.rm = TRUE))
@@ -279,14 +283,12 @@ print.report_sample <- function(x, ...) {
 }
 
 
-
 .weighted_sd <- function(x, weights = NULL) {
   if (is.null(weights)) {
     return(stats::sd(x, na.rm = TRUE))
   }
   sqrt(.weighted_variance(x, weights))
 }
-
 
 
 .weighted_median <- function(x, weights = NULL, p = 0.5) {
@@ -310,7 +312,6 @@ print.report_sample <- function(x, ...) {
 }
 
 
-
 .weighted_mean <- function(x, weights = NULL) {
   if (is.null(weights)) {
     return(mean(x, na.rm = TRUE))
@@ -320,4 +321,11 @@ print.report_sample <- function(x, ...) {
   weights <- stats::na.omit(weights)
   x <- stats::na.omit(x)
   stats::weighted.mean(x, w = weights, na.rm = TRUE)
+}
+
+
+.weighted_mad <- function(x, weights = NULL, constant = 1.4826) {
+  center <- .weighted_median(x, weights = weights)
+  x <- abs(x - center)
+  constant * .weighted_median(x, weights = weights)
 }
