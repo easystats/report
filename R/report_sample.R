@@ -11,7 +11,27 @@
 #'   deviation) as summary.
 #' @param ci Level of confidence interval for relative frequencies (proportions).
 #'   If not `NULL`, confidence intervals are shown for proportions of factor
-#'   levels.
+#'   levels. If `p` is the proportion of a factor level, the related confidence
+#'   intervals are calculated as follows:
+#'
+#'   \deqn{p +/- z * \sqrt{\frac{p * (1 - p)}{n}}}
+#'
+#'   where `z` is the critical z-score based on the ci-level and `n` is the
+#'   length of the vector.
+#' @param ci_adjust Scalar, if not `NULL`, applies *Wilson's adjustment* to
+#'   confidence intervals of proportions that are close to 0 or 1. `ci_adjust`
+#'   must be a value between 0 and 1, indicating how close a proportions must
+#'   be to 0 or 1 in order to apply the adjustment to its confidence intervals.
+#'   E.g., if `ci_adjust = 0.07`, confidence intervals of all proportions smaller
+#'   than 0.07 or greater than 0.93 will be adjusted. Their calculation is as
+#'   follows:
+#'
+#'   \deqn{p +/- z * \sqrt{\frac{p * (1 - p)}{n + 4}}}
+#'
+#'   where `p` is
+#'
+#'   \deqn{p = \frac{x + 2}{n + 4}}
+#'
 #' @param select Character vector, with column names that should be included in
 #'   the descriptive table.
 #' @param exclude Character vector, with column names that should be excluded
@@ -40,6 +60,7 @@ report_sample <- function(data,
                           group_by = NULL,
                           centrality = "mean",
                           ci = NULL,
+                          ci_adjust = NULL,
                           select = NULL,
                           exclude = NULL,
                           weights = NULL,
@@ -75,7 +96,7 @@ report_sample <- function(data,
   out <- if (isTRUE(grouping)) {
     result <- lapply(split(data[variables], factor(data[[group_by]])), function(x) {
       x[[group_by]] <- NULL
-      .generate_descriptive_table(x, centrality, weights, digits, n, ci)
+      .generate_descriptive_table(x, centrality, weights, digits, n, ci, ci_adjust)
     })
     # remember values of first columns
     variable <- result[[1]]["Variable"]
@@ -102,7 +123,8 @@ report_sample <- function(data,
         weights,
         digits,
         n,
-        ci
+        ci,
+        ci_adjust
       )[["Summary"]]
     )
     # Remove Total column if need be
@@ -123,7 +145,7 @@ report_sample <- function(data,
     )
     final
   } else {
-    .generate_descriptive_table(data[variables], centrality, weights, digits, n, ci)
+    .generate_descriptive_table(data[variables], centrality, weights, digits, n, ci, ci_adjust)
   }
 
   attr(out, "weighted") <- !is.null(weights)
@@ -139,7 +161,8 @@ report_sample <- function(data,
                                         weights,
                                         digits,
                                         n = FALSE,
-                                        ci = NULL) {
+                                        ci = NULL,
+                                        ci_adjust = NULL) {
   if (!is.null(weights)) {
     w <- x[[weights]]
     columns <- setdiff(colnames(x), weights)
@@ -156,7 +179,8 @@ report_sample <- function(data,
       weights = w,
       digits = digits,
       n = n,
-      ci = ci
+      ci = ci,
+      ci_adjust = ci_adjust
     )
   }))
 }
@@ -174,7 +198,6 @@ report_sample <- function(data,
                                        weights = NULL,
                                        digits = 1,
                                        n = FALSE,
-                                       ci = NULL,
                                        ...) {
   n_stat <- ifelse(n, paste0(", ", sum(!is.na(x))), "")
 
@@ -211,6 +234,7 @@ report_sample <- function(data,
                                       weights = NULL,
                                       digits = 1,
                                       ci = NULL,
+                                      ci_adjust = NULL,
                                       ...) {
   if (!is.null(weights)) {
     x[is.na(weights)] <- NA
@@ -229,7 +253,17 @@ report_sample <- function(data,
 
   # CI for proportions?
   if (!is.null(ci)) {
-    relative_ci <- stats::qnorm((1 + ci) / 2) * suppressWarnings(sqrt(proportions * (1 - proportions) / length(stats::na.omit(x))))
+    p_hat <- proportions
+    n <- length(stats::na.omit(x))
+    # Wilson's adjustment for p close to 0 or 1
+    if (!is.null(ci_adjust) && !is.na(ci_adjust) && is.numeric(ci_adjust)) {
+      fix <- p_hat < ci_adjust | p_hat > (1 - ci_adjust)
+      if (any(fix)) {
+        p_hat[fix] <- (p_hat[fix] + 0.02) / 1.04 # p = (x + 2) / (n + 4)
+        n <- n + 4
+      }
+    }
+    relative_ci <- stats::qnorm((1 + ci) / 2) * suppressWarnings(sqrt(p_hat * (1 - p_hat) / n))
     .summary <- sprintf(
       "%.1f (%.1f, %.1f)",
       100 * proportions,
