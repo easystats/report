@@ -9,6 +9,9 @@
 #'   calculated for numeric variables. May be `"mean"` (for mean and
 #'   standard deviation) or `"median"` (for median and median absolute
 #'   deviation) as summary.
+#' @param ci Level of confidence interval for relative frequencies (proportions).
+#'   If not `NULL`, confidence intervals are shown for proportions of factor
+#'   levels.
 #' @param select Character vector, with column names that should be included in
 #'   the descriptive table.
 #' @param exclude Character vector, with column names that should be excluded
@@ -36,6 +39,7 @@
 report_sample <- function(data,
                           group_by = NULL,
                           centrality = "mean",
+                          ci = NULL,
                           select = NULL,
                           exclude = NULL,
                           weights = NULL,
@@ -66,7 +70,7 @@ report_sample <- function(data,
   out <- if (isTRUE(grouping)) {
     result <- lapply(split(data[variables], factor(data[[group_by]])), function(x) {
       x[[group_by]] <- NULL
-      .generate_descriptive_table(x, centrality, weights, digits, n)
+      .generate_descriptive_table(x, centrality, weights, digits, n, ci)
     })
     # remember values of first columns
     variable <- result[[1]]["Variable"]
@@ -92,7 +96,8 @@ report_sample <- function(data,
         centrality,
         weights,
         digits,
-        n
+        n,
+        ci
       )[["Summary"]]
     )
     # Remove Total column if need be
@@ -113,7 +118,7 @@ report_sample <- function(data,
     )
     final
   } else {
-    .generate_descriptive_table(data[variables], centrality, weights, digits, n)
+    .generate_descriptive_table(data[variables], centrality, weights, digits, n, ci)
   }
 
   attr(out, "weighted") <- !is.null(weights)
@@ -124,7 +129,12 @@ report_sample <- function(data,
 
 # helper ------------------------
 
-.generate_descriptive_table <- function(x, centrality, weights, digits, n = FALSE) {
+.generate_descriptive_table <- function(x,
+                                        centrality,
+                                        weights,
+                                        digits,
+                                        n = FALSE,
+                                        ci = NULL) {
   if (!is.null(weights)) {
     w <- x[[weights]]
     columns <- setdiff(colnames(x), weights)
@@ -140,7 +150,8 @@ report_sample <- function(data,
       centrality = centrality,
       weights = w,
       digits = digits,
-      n = n
+      n = n,
+      ci = ci
     )
   }))
 }
@@ -158,6 +169,7 @@ report_sample <- function(data,
                                        weights = NULL,
                                        digits = 1,
                                        n = FALSE,
+                                       ci = NULL,
                                        ...) {
   n_stat <- ifelse(n, paste0(", ", sum(!is.na(x))), "")
 
@@ -193,6 +205,7 @@ report_sample <- function(data,
                                       column,
                                       weights = NULL,
                                       digits = 1,
+                                      ci = NULL,
                                       ...) {
   if (!is.null(weights)) {
     x[is.na(weights)] <- NA
@@ -208,9 +221,24 @@ report_sample <- function(data,
   if (length(proportions) == 2) {
     proportions <- proportions[2]
   }
-  .summary <- vapply(proportions, function(i) sprintf("%.1f", 100 * i), "character")
+
+  # CI for proportions?
+  if (!is.null(ci)) {
+    relative_ci <- stats::qnorm((1 + ci) / 2) * suppressWarnings(sqrt(proportions * (1 - proportions) / length(stats::na.omit(x))))
+    .summary <- vapply(seq_along(proportions), function(i) {
+      sprintf(
+        "%.1f (%.1f, %.1f)",
+        100 * proportions[i],
+        100 * (proportions[i] - relative_ci[i]),
+        100 * (proportions[i] + relative_ci[i])
+      )
+    }, "character")
+  } else {
+    .summary <- vapply(proportions, function(i) sprintf("%.1f", 100 * i), "character")
+  }
+
   data.frame(
-    Variable = sprintf("%s [%s], %%", column, names(.summary)),
+    Variable = sprintf("%s [%s], %%", column, names(proportions)),
     Summary = as.vector(.summary),
     stringsAsFactors = FALSE
   )
