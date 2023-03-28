@@ -74,6 +74,21 @@ test_that("report_sample CI", {
     variant = "windows",
     report_sample(iris, select = c("Sepal.Length", "Species"), ci = 0.95)
   )
+
+  set.seed(123)
+  d <- data.frame(x = as.factor(rbinom(1000, 1, prob = 0.03)))
+  expect_snapshot(
+    variant = "windows",
+    report_sample(d, ci = 0.95)
+  )
+  expect_snapshot(
+    variant = "windows",
+    report_sample(d, ci = 0.95, ci_adjust = 0.04)
+  )
+  expect_snapshot(
+    variant = "windows",
+    report_sample(d, ci = 0.95, ci_adjust = 0.02)
+  )
 })
 
 test_that("report_sample group_by", {

@@ -120,6 +120,39 @@
       Species [versicolor], % | 33.3 (25.8, 40.9)
       Species [virginica], %  | 33.3 (25.8, 40.9)
 
+---
+
+    Code
+      report_sample(d, ci = 0.95)
+    Output
+      # Descriptive Statistics
+      
+      Variable |        Summary
+      -------------------------
+      x [1], % | 2.9 (1.9, 3.9)
+
+---
+
+    Code
+      report_sample(d, ci = 0.95, ci_adjust = 0.04)
+    Output
+      # Descriptive Statistics
+      
+      Variable |        Summary
+      -------------------------
+      x [1], % | 2.9 (1.6, 4.2)
+
+---
+
+    Code
+      report_sample(d, ci = 0.95, ci_adjust = 0.02)
+    Output
+      # Descriptive Statistics
+      
+      Variable |        Summary
+      -------------------------
+      x [1], % | 2.9 (1.9, 3.9)
+
 # report_sample group_by
 
     Code
