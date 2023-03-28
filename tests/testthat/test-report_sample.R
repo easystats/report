@@ -69,6 +69,13 @@ test_that("report_sample n = TRUE", {
   )
 })
 
+test_that("report_sample CI", {
+  expect_snapshot(
+    variant = "windows",
+    report_sample(iris, select = c("Sepal.Length", "Species"), ci = 0.95)
+  )
+})
+
 test_that("report_sample group_by", {
   expect_snapshot(
     variant = "windows",
