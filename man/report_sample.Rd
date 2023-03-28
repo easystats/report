@@ -35,7 +35,7 @@ If not \code{NULL}, confidence intervals are shown for proportions of factor
 levels. If \code{p} is the proportion of a factor level, the related confidence
 interval is calculated as follows:
 
-\deqn{p +/- z * \sqrt{\frac{p * (1 - p)}{n}}}
+\deqn{p +/- z \sqrt{\frac{p (1 - p)}{n}}}
 
 where \code{z} is the critical z-score based on the interval level and \code{n} is
 the length of the vector.}
@@ -48,7 +48,7 @@ E.g., if \code{ci_adjust = 0.07}, confidence intervals of all proportions smalle
 than 0.07 or greater than 0.93 will be adjusted. Their calculation is as
 follows:
 
-\deqn{p +/- z * \sqrt{\frac{p * (1 - p)}{n + 4}}}
+\deqn{p +/- z \sqrt{\frac{p (1 - p)}{n + 4}}}
 
 where \code{p} is
 

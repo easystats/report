@@ -14,7 +14,7 @@
 #'   levels. If `p` is the proportion of a factor level, the related confidence
 #'   interval is calculated as follows:
 #'
-#'   \deqn{p +/- z * \sqrt{\frac{p * (1 - p)}{n}}}
+#'   \deqn{p +/- z \sqrt{\frac{p (1 - p)}{n}}}
 #'
 #'   where `z` is the critical z-score based on the interval level and `n` is
 #'   the length of the vector.
@@ -26,7 +26,7 @@
 #'   than 0.07 or greater than 0.93 will be adjusted. Their calculation is as
 #'   follows:
 #'
-#'   \deqn{p +/- z * \sqrt{\frac{p * (1 - p)}{n + 4}}}
+#'   \deqn{p +/- z \sqrt{\frac{p (1 - p)}{n + 4}}}
 #'
 #'   where `p` is
 #'
