@@ -33,12 +33,12 @@ deviation) as summary.}
 \item{ci}{Level of confidence interval for relative frequencies (proportions).
 If not \code{NULL}, confidence intervals are shown for proportions of factor
 levels. If \code{p} is the proportion of a factor level, the related confidence
-intervals are calculated as follows:
+interval is calculated as follows:
 
 \deqn{p +/- z * \sqrt{\frac{p * (1 - p)}{n}}}
 
-where \code{z} is the critical z-score based on the ci-level and \code{n} is the
-length of the vector.}
+where \code{z} is the critical z-score based on the interval level and \code{n} is
+the length of the vector.}
 
 \item{ci_adjust}{Scalar, if not \code{NULL}, applies \emph{Wilson's adjustment} to
 confidence intervals of proportions that are close to 0 or 1. \code{ci_adjust}

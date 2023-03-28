@@ -12,12 +12,12 @@
 #' @param ci Level of confidence interval for relative frequencies (proportions).
 #'   If not `NULL`, confidence intervals are shown for proportions of factor
 #'   levels. If `p` is the proportion of a factor level, the related confidence
-#'   intervals are calculated as follows:
+#'   interval is calculated as follows:
 #'
 #'   \deqn{p +/- z * \sqrt{\frac{p * (1 - p)}{n}}}
 #'
-#'   where `z` is the critical z-score based on the ci-level and `n` is the
-#'   length of the vector.
+#'   where `z` is the critical z-score based on the interval level and `n` is
+#'   the length of the vector.
 #' @param ci_adjust Scalar, if not `NULL`, applies *Wilson's adjustment* to
 #'   confidence intervals of proportions that are close to 0 or 1. `ci_adjust`
 #'   must be a value between 0 and 1, indicating how close a proportions must
