@@ -183,8 +183,8 @@ test_that("report_sample digits", {
   )
 })
 
-# test_that("report_sample weights", {
-#   expect_snapshot(report_sample(airquality, weights = "Temp"))
-#   expect_snapshot(report_sample(mtcars, weights = "carb"))
-#   expect_snapshot(report_sample(iris, weights = "Petal.Width"))
-# })
+test_that("report_sample weights", {
+  expect_snapshot(report_sample(airquality, weights = "Temp"))
+  expect_snapshot(report_sample(mtcars, weights = "carb"))
+  expect_snapshot(report_sample(iris, weights = "Petal.Width"))
+})
