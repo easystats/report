@@ -48,6 +48,10 @@
 #' @return A data frame of class `report_sample` with variable names and
 #'   their related summary statistics.
 #'
+#' @references
+#' Wilson, E. B. (1927). Probable inference, the law of succession, and statistical
+#' inference. Journal of the American Statistical Association. 22 (158): 209–212
+#'
 #' @examples
 #' library(report)
 #'

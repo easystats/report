@@ -88,3 +88,7 @@ report_sample(iris, select = c("Sepal.Length", "Petal.Length", "Species"))
 report_sample(iris, group_by = "Species")
 report_sample(airquality, group_by = "Month", n = TRUE, total = FALSE)
 }
+\references{
+Wilson, E. B. (1927). Probable inference, the law of succession, and statistical
+inference. Journal of the American Statistical Association. 22 (158): 209–212
+}
