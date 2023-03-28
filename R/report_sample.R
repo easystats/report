@@ -259,8 +259,14 @@ report_sample <- function(data,
     if (!is.null(ci_adjust) && !is.na(ci_adjust) && is.numeric(ci_adjust)) {
       fix <- p_hat < ci_adjust | p_hat > (1 - ci_adjust)
       if (any(fix)) {
-        p_hat[fix] <- (p_hat[fix] + 0.02) / 1.04 # p = (x + 2) / (n + 4)
-        n <- n + 4
+        p_adjusted <- (as.vector(table(x)) + 2) / (n + 4)
+        # for binary factors, just need one level
+        if (length(p_adjusted) == 2) {
+          p_adjusted <- p_adjusted[2]
+        }
+        p_hat[fix] <- p_adjusted[fix]
+        n <- rep(n, length(p_hat))
+        n[fix] <- n[fix] + 4
       }
     }
     relative_ci <- stats::qnorm((1 + ci) / 2) * suppressWarnings(sqrt(p_hat * (1 - p_hat) / n))
