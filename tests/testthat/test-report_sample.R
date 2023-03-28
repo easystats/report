@@ -82,15 +82,15 @@ test_that("report_sample CI", {
   )
   expect_snapshot(
     variant = "windows",
-    report_sample(d, ci = 0.95)
+    report_sample(d, ci = 0.95, select = "x")
   )
   expect_snapshot(
     variant = "windows",
-    report_sample(d, ci = 0.95, ci_adjust = 0.04)
+    report_sample(d, ci = 0.95, ci_adjust = 0.04, select = "x")
   )
   expect_snapshot(
     variant = "windows",
-    report_sample(d, ci = 0.95, ci_adjust = 0.02)
+    report_sample(d, ci = 0.95, ci_adjust = 0.02, select = "x")
   )
   expect_warning(report_sample(d, ci = 0.95, weights = "w"), regex = "accurate")
 })
