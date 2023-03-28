@@ -14,7 +14,7 @@ SEXIT documentation)."><meta property="og:image" content="https://easystats.gith
     
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.7.1</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.7.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -175,18 +175,18 @@ the Sequential Effect eXistence and sIgnificance Testing framework (see
 <span class="r-out co"><span class="r-pr">#&gt;</span> of 500 iterations and a warmup of 250) to predict mpg with qsec and wt</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (formula: mpg ~ qsec + wt). Priors over parameters were all set as normal (mean</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> = 0.00, SD = 8.43; mean = 0.00, SD = 15.40) distributions. The model's</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> explanatory power is substantial (R2 = 0.81, 95% CI [0.71, 0.89], adj. R2 =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.78). The model's intercept, corresponding to qsec = 0 and wt = 0, is at 20.37</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (95% CI [8.92, 30.51]). Within this model:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> explanatory power is substantial (R2 = 0.81, 95% CI [0.70, 0.89], adj. R2 =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.79). The model's intercept, corresponding to qsec = 0 and wt = 0, is at 19.66</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (95% CI [8.06, 30.60]). Within this model:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of qsec (Median = 0.90, 95% CI [0.38, 1.49]) has a 99.80%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of qsec (Median = 0.94, 95% CI [0.40, 1.50]) has a 99.90%</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> probability of being positive (&gt; 0), 98.80% of being significant (&gt; 0.30), and</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 0.20% of being large (&gt; 1.81). The estimation successfully converged (Rhat =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.998) but the indices are unreliable (ESS = 789)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of wt (Median = -5.03, 95% CI [-6.07, -4.09]) has a 100.00%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1.002) and the indices are reliable (ESS = 1164)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of wt (Median = -5.07, 95% CI [-6.01, -4.03]) has a 100.00%</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> probability of being negative (&lt; 0), 100.00% of being significant (&lt; -0.30),</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> and 100.00% of being large (&lt; -1.81). The estimation successfully converged</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Rhat = 0.999) and the indices are reliable (ESS = 1006)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Rhat = 0.999) and the indices are reliable (ESS = 1191)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> framework, we report the median of the posterior distribution and its 95% CI</span>
@@ -201,29 +201,28 @@ the Sequential Effect eXistence and sIgnificance Testing framework (see
 <span class="r-out co"><span class="r-pr">#&gt;</span> We fitted a Bayesian linear model to predict mpg with qsec and wt. Priors over</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> parameters were all set as normal (mean = 0.00, SD = 8.43; mean = 0.00, SD =</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 15.40) distributions. The model's explanatory power is substantial (R2 = 0.81,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> adj. R2 = 0.78). The model's intercept is at 20.37 (95% CI [8.92, 30.51]).</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> adj. R2 = 0.79). The model's intercept is at 19.66 (95% CI [8.06, 30.60]).</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Within this model:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of qsec (Median = 0.90, 95% CI [0.38, 1.49]) has 99.80%, 98.80%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of qsec (Median = 0.94, 95% CI [0.40, 1.50]) has 99.90%, 98.80%</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> and 0.20% probability of being positive (&gt; 0), significant (&gt; 0.30) and large</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (&gt; 1.81). The estimation successfully converged (Rhat = 0.998) but the indices</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 789)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of wt (Median = -5.03, 95% CI [-6.07, -4.09]) has 100.00%, 100.00%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (&gt; 1.81)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of wt (Median = -5.07, 95% CI [-6.01, -4.03]) has 100.00%, 100.00%</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> and 100.00% probability of being negative (&lt; 0), significant (&lt; -0.30) and</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> large (&lt; -1.81)</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Parameter   | Median |         95% CI |     pd |  Rhat |     ESS |                   Prior |    Fit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---------------------------------------------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) |  20.37 | [ 8.92, 30.51] |   100% | 0.999 |  772.00 | Normal (20.09 +- 15.07) |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> qsec        |   0.90 | [ 0.38,  1.49] | 99.80% | 0.998 |  789.00 |   Normal (0.00 +- 8.43) |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> wt          |  -5.03 | [-6.07, -4.09] |   100% | 0.999 | 1006.00 |  Normal (0.00 +- 15.40) |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) |  19.66 | [ 8.06, 30.60] |   100% | 1.001 | 1064.00 | Normal (20.09 +- 15.07) |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> qsec        |   0.94 | [ 0.40,  1.50] | 99.90% | 1.002 | 1164.00 |   Normal (0.00 +- 8.43) |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> wt          |  -5.07 | [-6.01, -4.03] |   100% | 0.999 | 1191.00 |  Normal (0.00 +- 15.40) |       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             |        |                |        |       |         |                         |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ELPD        |        |                |        |       |         |                         | -79.41</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> LOOIC       |        |                |        |       |         |                         | 158.83</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> WAIC        |        |                |        |       |         |                         | 158.21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ELPD        |        |                |        |       |         |                         | -79.11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> LOOIC       |        |                |        |       |         |                         | 158.22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> WAIC        |        |                |        |       |         |                         | 158.01</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> R2          |        |                |        |       |         |                         |   0.81</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (adj.)   |        |                |        |       |         |                         |   0.78</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sigma       |        |                |        |       |         |                         |   2.65</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (adj.)   |        |                |        |       |         |                         |   0.79</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sigma       |        |                |        |       |         |                         |   2.67</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

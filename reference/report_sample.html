@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.7.1</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.7.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -109,6 +109,8 @@
 <span>  <span class="va">data</span>,</span>
 <span>  group_by <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  centrality <span class="op">=</span> <span class="st">"mean"</span>,</span>
+<span>  ci <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ci_adjust <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  select <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  exclude <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -135,6 +137,29 @@ of the descriptive table.</p></dd>
 calculated for numeric variables. May be <code>"mean"</code> (for mean and
 standard deviation) or <code>"median"</code> (for median and median absolute
 deviation) as summary.</p></dd>
+
+
+<dt>ci</dt>
+<dd><p>Level of confidence interval for relative frequencies (proportions).
+If not <code>NULL</code>, confidence intervals are shown for proportions of factor
+levels. If <code>p</code> is the proportion of a factor level, the related confidence
+interval is calculated as follows:</p>
+<p>$$p +/- z \sqrt{\frac{p (1 - p)}{n}}$$</p>
+<p>where <code>z</code> is the critical z-score based on the interval level and <code>n</code> is
+the length of the vector.</p></dd>
+
+
+<dt>ci_adjust</dt>
+<dd><p>Scalar, if not <code>NULL</code>, applies <em>Wilson's adjustment</em> to
+confidence intervals of proportions that are close to 0 or 1. <code>ci_adjust</code>
+must be a value between 0 and 1, indicating how close a proportions must
+be to 0 or 1 in order to apply the adjustment to its confidence intervals.
+E.g., if <code>ci_adjust = 0.07</code>, confidence intervals of all proportions smaller
+than 0.07 or greater than 0.93 will be adjusted. Their calculation is as
+follows:</p>
+<p>$$p +/- z \sqrt{\frac{p (1 - p)}{n + 4}}$$</p>
+<p>where <code>p</code> is</p>
+<p>$$p = \frac{x + 2}{n + 4}$$</p></dd>
 
 
 <dt>select</dt>
@@ -176,6 +201,11 @@ reported descriptive statistics (i.e., without the missing values).</p></dd>
 
 <p>A data frame of class <code>report_sample</code> with variable names and
 their related summary statistics.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
+    <p>Wilson, E. B. (1927). Probable inference, the law of succession, and statistical
+inference. Journal of the American Statistical Association. 22 (158): 209–212</p>
     </div>
 
     <div class="section level2">
