@@ -257,28 +257,12 @@ report_sample <- function(data,
 
   # CI for proportions?
   if (!is.null(ci)) {
-    p_hat <- proportions
-    n <- length(stats::na.omit(x))
-    # Wilson's adjustment for p close to 0 or 1
-    if (!is.null(ci_adjust) && !is.na(ci_adjust) && is.numeric(ci_adjust)) {
-      fix <- p_hat < ci_adjust | p_hat > (1 - ci_adjust)
-      if (any(fix)) {
-        p_adjusted <- (as.vector(table(x)) + 2) / (n + 4)
-        # for binary factors, just need one level
-        if (length(p_adjusted) == 2) {
-          p_adjusted <- p_adjusted[2]
-        }
-        p_hat[fix] <- p_adjusted[fix]
-        n <- rep(n, length(p_hat))
-        n[fix] <- n[fix] + 4
-      }
-    }
-    relative_ci <- stats::qnorm((1 + ci) / 2) * suppressWarnings(sqrt(p_hat * (1 - p_hat) / n))
+    se <- .se_proportion(x, proportions, weights, ci, ci_adjust)
     .summary <- sprintf(
       "%.1f (%.1f, %.1f)",
       100 * proportions,
-      100 * (proportions - relative_ci),
-      100 * (proportions + relative_ci)
+      100 * (proportions - se),
+      100 * (proportions + se)
     )
   } else {
     .summary <- sprintf("%.1f", 100 * proportions)
@@ -296,8 +280,47 @@ report_sample <- function(data,
 
 
 
-# print-method --------------------------------------------
+# Standard error for confidence interval of proportions ----
 
+.se_proportion <- function(x, proportions, weights, ci, ci_adjust) {
+  p_hat <- proportions
+  n <- length(stats::na.omit(x))
+
+  # Wilson's adjustment for p close to 0 or 1
+  if (!is.null(ci_adjust) && !is.na(ci_adjust) && is.numeric(ci_adjust)) {
+    fix <- p_hat < ci_adjust | p_hat > (1 - ci_adjust)
+    if (any(fix)) {
+      if (is.null(weights)) {
+        p_adjusted <- (as.vector(table(x)) + 2) / (n + 4)
+      } else {
+        p_adjusted <- (as.vector(round(stats::xtabs(weights ~ x))) + 2) / (round(sum(weights)) + 4)
+      }
+      # for binary factors, just need one level
+      if (length(p_adjusted) == 2) {
+        p_adjusted <- p_adjusted[2]
+      }
+      p_hat[fix] <- p_adjusted[fix]
+      n <- rep(n, length(p_hat))
+      n[fix] <- n[fix] + 4
+    }
+  }
+
+  ## FIXME: Once know how to do, calculate accurate SE for weighted data
+
+  # There is a formula how to deal with SE for weighted data, see
+  # https://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval
+  # but it seems "p_hat" is unknown. For now, we give a warning instead of
+  # estimating p_hat for weighted data
+  if (!is.null(weights)) {
+    insight::format_warning("Confidence intervals are not accurate for weighted data.")
+  }
+
+  stats::qnorm((1 + ci) / 2) * suppressWarnings(sqrt(p_hat * (1 - p_hat) / n))
+}
+
+
+
+# print-method --------------------------------------------
 
 #' @export
 print.report_sample <- function(x, ...) {

@@ -76,7 +76,10 @@ test_that("report_sample CI", {
   )
 
   set.seed(123)
-  d <- data.frame(x = as.factor(rbinom(1000, 1, prob = 0.03)))
+  d <- data.frame(
+    x = as.factor(rbinom(1000, 1, prob = 0.03)),
+    w = abs(rnorm(1000, 1, 0.1))
+  )
   expect_snapshot(
     variant = "windows",
     report_sample(d, ci = 0.95)
@@ -89,6 +92,7 @@ test_that("report_sample CI", {
     variant = "windows",
     report_sample(d, ci = 0.95, ci_adjust = 0.02)
   )
+  expect_warning(report_sample(d, ci = 0.95, weights = "w"), regex = "accurate")
 })
 
 test_that("report_sample group_by", {
