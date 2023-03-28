@@ -8,6 +8,8 @@ report_sample(
   data,
   group_by = NULL,
   centrality = "mean",
+  ci = NULL,
+  ci_adjust = NULL,
   select = NULL,
   exclude = NULL,
   weights = NULL,
@@ -27,6 +29,30 @@ of the descriptive table.}
 calculated for numeric variables. May be \code{"mean"} (for mean and
 standard deviation) or \code{"median"} (for median and median absolute
 deviation) as summary.}
+
+\item{ci}{Level of confidence interval for relative frequencies (proportions).
+If not \code{NULL}, confidence intervals are shown for proportions of factor
+levels. If \code{p} is the proportion of a factor level, the related confidence
+interval is calculated as follows:
+
+\deqn{p +/- z \sqrt{\frac{p (1 - p)}{n}}}
+
+where \code{z} is the critical z-score based on the interval level and \code{n} is
+the length of the vector.}
+
+\item{ci_adjust}{Scalar, if not \code{NULL}, applies \emph{Wilson's adjustment} to
+confidence intervals of proportions that are close to 0 or 1. \code{ci_adjust}
+must be a value between 0 and 1, indicating how close a proportions must
+be to 0 or 1 in order to apply the adjustment to its confidence intervals.
+E.g., if \code{ci_adjust = 0.07}, confidence intervals of all proportions smaller
+than 0.07 or greater than 0.93 will be adjusted. Their calculation is as
+follows:
+
+\deqn{p +/- z \sqrt{\frac{p (1 - p)}{n + 4}}}
+
+where \code{p} is
+
+\deqn{p = \frac{x + 2}{n + 4}}}
 
 \item{select}{Character vector, with column names that should be included in
 the descriptive table.}
@@ -61,4 +87,8 @@ report_sample(iris[, 1:4])
 report_sample(iris, select = c("Sepal.Length", "Petal.Length", "Species"))
 report_sample(iris, group_by = "Species")
 report_sample(airquality, group_by = "Month", n = TRUE, total = FALSE)
+}
+\references{
+Wilson, E. B. (1927). Probable inference, the law of succession, and statistical
+inference. Journal of the American Statistical Association. 22 (158): 209–212
 }

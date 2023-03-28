@@ -106,6 +106,53 @@
       Species [versicolor], %   |             33.3
       Species [virginica], %    |             33.3
 
+# report_sample CI
+
+    Code
+      report_sample(iris, select = c("Sepal.Length", "Species"), ci = 0.95)
+    Output
+      # Descriptive Statistics
+      
+      Variable                |           Summary
+      -------------------------------------------
+      Mean Sepal.Length (SD)  |       5.84 (0.83)
+      Species [setosa], %     | 33.3 (25.8, 40.9)
+      Species [versicolor], % | 33.3 (25.8, 40.9)
+      Species [virginica], %  | 33.3 (25.8, 40.9)
+
+---
+
+    Code
+      report_sample(d, ci = 0.95, select = "x")
+    Output
+      # Descriptive Statistics
+      
+      Variable |        Summary
+      -------------------------
+      x [1], % | 2.9 (1.9, 3.9)
+
+---
+
+    Code
+      report_sample(d, ci = 0.95, ci_adjust = 0.04, select = "x")
+    Output
+      # Descriptive Statistics
+      
+      Variable |        Summary
+      -------------------------
+      x [1], % | 2.9 (1.8, 4.0)
+
+---
+
+    Code
+      report_sample(d, ci = 0.95, ci_adjust = 0.02, select = "x")
+    Output
+      # Descriptive Statistics
+      
+      Variable |        Summary
+      -------------------------
+      x [1], % | 2.9 (1.9, 3.9)
+
 # report_sample group_by
 
     Code

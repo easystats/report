@@ -5,6 +5,9 @@ Minor changes
 * `report_sample` now reports the weighted number of observations when data
   is both grouped an weighted.
 
+* `report_sample` gains a `ci` argument, to compute confidence intervals for
+  proportions of factor levels.
+
 # report 0.5.7
 
 Hotfix for CRAN reverse dependency compatibility.
