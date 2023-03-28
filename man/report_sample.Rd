@@ -8,6 +8,7 @@ report_sample(
   data,
   group_by = NULL,
   centrality = "mean",
+  ci = NULL,
   select = NULL,
   exclude = NULL,
   weights = NULL,
@@ -27,6 +28,10 @@ of the descriptive table.}
 calculated for numeric variables. May be \code{"mean"} (for mean and
 standard deviation) or \code{"median"} (for median and median absolute
 deviation) as summary.}
+
+\item{ci}{Level of confidence interval for relative frequencies (proportions).
+If not \code{NULL}, confidence intervals are shown for proportions of factor
+levels.}
 
 \item{select}{Character vector, with column names that should be included in
 the descriptive table.}
