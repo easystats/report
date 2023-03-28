@@ -225,16 +225,14 @@ report_sample <- function(data,
   # CI for proportions?
   if (!is.null(ci)) {
     relative_ci <- stats::qnorm((1 + ci) / 2) * suppressWarnings(sqrt(proportions * (1 - proportions) / length(stats::na.omit(x))))
-    .summary <- vapply(seq_along(proportions), function(i) {
-      sprintf(
-        "%.1f (%.1f, %.1f)",
-        100 * proportions[i],
-        100 * (proportions[i] - relative_ci[i]),
-        100 * (proportions[i] + relative_ci[i])
-      )
-    }, "character")
+    .summary <- sprintf(
+      "%.1f (%.1f, %.1f)",
+      100 * proportions,
+      100 * (proportions - relative_ci),
+      100 * (proportions + relative_ci)
+    )
   } else {
-    .summary <- vapply(proportions, function(i) sprintf("%.1f", 100 * i), "character")
+    .summary <- sprintf("%.1f", 100 * proportions)
   }
 
   data.frame(
