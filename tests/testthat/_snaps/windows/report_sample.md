@@ -123,7 +123,7 @@
 ---
 
     Code
-      report_sample(d, ci = 0.95)
+      report_sample(d, ci = 0.95, select = "x")
     Output
       # Descriptive Statistics
       
@@ -134,7 +134,7 @@
 ---
 
     Code
-      report_sample(d, ci = 0.95, ci_adjust = 0.04)
+      report_sample(d, ci = 0.95, ci_adjust = 0.04, select = "x")
     Output
       # Descriptive Statistics
       
@@ -145,7 +145,7 @@
 ---
 
     Code
-      report_sample(d, ci = 0.95, ci_adjust = 0.02)
+      report_sample(d, ci = 0.95, ci_adjust = 0.02, select = "x")
     Output
       # Descriptive Statistics
       
