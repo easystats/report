@@ -301,5 +301,5 @@ print.report_sample <- function(x, ...) {
 .weighted_mad <- function(x, weights = NULL, constant = 1.4826) {
   center <- .weighted_median(x, weights = weights)
   x <- abs(x - center)
-  constant * weighted_median(x, weights = weights)
+  constant * .weighted_median(x, weights = weights)
 }
