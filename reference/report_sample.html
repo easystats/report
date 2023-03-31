@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.7.3</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.7.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -110,7 +110,8 @@
 <span>  group_by <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  centrality <span class="op">=</span> <span class="st">"mean"</span>,</span>
 <span>  ci <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  ci_adjust <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ci_method <span class="op">=</span> <span class="st">"wilson"</span>,</span>
+<span>  ci_correct <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  select <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  exclude <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -142,24 +143,28 @@ deviation) as summary.</p></dd>
 <dt>ci</dt>
 <dd><p>Level of confidence interval for relative frequencies (proportions).
 If not <code>NULL</code>, confidence intervals are shown for proportions of factor
-levels. If <code>p</code> is the proportion of a factor level, the related confidence
-interval is calculated as follows:</p>
-<p>$$p +/- z \sqrt{\frac{p (1 - p)}{n}}$$</p>
-<p>where <code>z</code> is the critical z-score based on the interval level and <code>n</code> is
-the length of the vector.</p></dd>
+levels.</p></dd>
 
 
-<dt>ci_adjust</dt>
-<dd><p>Scalar, if not <code>NULL</code>, applies <em>Wilson's adjustment</em> to
-confidence intervals of proportions that are close to 0 or 1. <code>ci_adjust</code>
-must be a value between 0 and 1, indicating how close a proportions must
-be to 0 or 1 in order to apply the adjustment to its confidence intervals.
-E.g., if <code>ci_adjust = 0.07</code>, confidence intervals of all proportions smaller
-than 0.07 or greater than 0.93 will be adjusted. Their calculation is as
-follows:</p>
-<p>$$p +/- z \sqrt{\frac{p (1 - p)}{n + 4}}$$</p>
-<p>where <code>p</code> is</p>
-<p>$$p = \frac{x + 2}{n + 4}$$</p></dd>
+<dt>ci_method</dt>
+<dd><p>Character, indicating the method how to calculate confidence
+intervals for proportions. Currently implemented methods are <code>"wald"</code> and
+<code>"wilson"</code>. Note that <code>"wald"</code> can produce intervals outside the plausible
+range of [0, 1], and thus it is recommended to prefer the <code>"wilson"</code> method.
+The formulae for the confidence intervals are:</p><ul><li><p><code>"wald"</code>:</p>
+<p>$$p \pm z \sqrt{\frac{p (1 - p)}{n}}$$</p></li>
+<li><p><code>"wilson"</code>:</p>
+<p>$$\frac{2np + z^2 \pm z \sqrt{z^2 + 4npq}}{2(n + z^2)}$$</p>
+<p>where <code>p</code> is the proportion (of a factor level), <code>q</code> is <code>1-p</code>, <code>z</code> is the
+critical z-score based on the interval level and <code>n</code> is the length of the
+vector (cf. <em>Newcombe 1998</em>, <em>Wilson 1927</em>).</p></li>
+</ul></dd>
+
+
+<dt>ci_correct</dt>
+<dd><p>Logical, it <code>TRUE</code>, applies continuity correction. See
+<em>Newcombe 1998</em> for different correction-methods based on the chosen
+<code>ci_method</code>.</p></dd>
 
 
 <dt>select</dt>
@@ -204,9 +209,13 @@ their related summary statistics.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-    <p>Wilson, E. B. (1927). Probable inference, the law of succession, and statistical
-inference. Journal of the American Statistical Association. 22 (158): 209–212</p>
-    </div>
+    
+<ul><li><p>Newcombe, R. G. (1998). Two-sided confidence intervals for the single
+proportion: comparison of seven methods. Statistics in Medicine. 17 (8):
+857–872</p></li>
+<li><p>Wilson, E. B. (1927). Probable inference, the law of succession, and statistical
+inference. Journal of the American Statistical Association. 22 (158): 209–212</p></li>
+</ul></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -250,6 +259,34 @@ inference. Journal of the American Statistical Association. 22 (158): 209–212<
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mean Wind (SD), n    |    11.62 (3.53), 31 |   10.27 (3.77), 30 |    8.94 (3.04), 31 |    8.79 (3.23), 31 |   10.18 (3.46), 30</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mean Temp (SD), n    |    65.55 (6.85), 31 |   79.10 (6.60), 30 |   83.90 (4.32), 31 |   83.97 (6.59), 31 |   76.90 (8.36), 30</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Mean Day (SD), n     |    16.00 (9.09), 31 |   15.50 (8.80), 30 |   16.00 (9.09), 31 |   16.00 (9.09), 31 |   15.50 (8.80), 30</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># confidence intervals for proportions</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>, <span class="fl">100</span>, <span class="cn">TRUE</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.01</span>, <span class="fl">0.39</span>, <span class="fl">0.6</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">report_sample</span><span class="op">(</span><span class="va">d</span>, ci <span class="op">=</span> <span class="fl">0.95</span>, ci_method <span class="op">=</span> <span class="st">"wald"</span><span class="op">)</span> <span class="co"># ups, negative CI</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;"># Descriptive Statistics</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Variable |           Summary</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x [a], % |   1.0 (-1.0, 3.0)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x [b], % | 39.0 (29.4, 48.6)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x [c], % | 60.0 (50.4, 69.6)</span>
+<span class="r-in"><span><span class="fu">report_sample</span><span class="op">(</span><span class="va">d</span>, ci <span class="op">=</span> <span class="fl">0.95</span>, ci_method <span class="op">=</span> <span class="st">"wilson"</span><span class="op">)</span> <span class="co"># negative CI fixed</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;"># Descriptive Statistics</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Variable |           Summary</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x [a], % |    1.0 (0.2, 5.4)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x [b], % | 39.0 (30.0, 48.8)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x [c], % | 60.0 (50.2, 69.1)</span>
+<span class="r-in"><span><span class="fu">report_sample</span><span class="op">(</span><span class="va">d</span>, ci <span class="op">=</span> <span class="fl">0.95</span>, ci_correct <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># continuity correction</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;"># Descriptive Statistics</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Variable |           Summary</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x [a], % |    1.0 (0.1, 6.2)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x [b], % | 39.0 (29.6, 49.3)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x [c], % | 60.0 (49.7, 69.5)</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
