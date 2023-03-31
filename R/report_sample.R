@@ -361,7 +361,7 @@ report_sample <- function(data,
     out <- c(prop - moe, prop + moe) / (2 * (n + z^2))
   } else {
     moe <- z * suppressWarnings(sqrt(p_hat * (1 - p_hat) / n))
-    out <- c(p_hat - se, p_hat + se)
+    out <- c(p_hat - moe, p_hat + moe)
   }
   out
 }
