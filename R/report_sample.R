@@ -19,11 +19,11 @@
 #'   The formulae for the confidence intervals are:
 #' - `"wald"`:
 #'
-#'   \deqn{p +/- z \sqrt{\frac{p (1 - p)}{n}}}
+#'   \deqn{p \pm z \sqrt{\frac{p (1 - p)}{n}}}
 #'
 #' - `"wilson"`:
 #'
-#'   \deqn{\frac{2np + z^2 +/- z \sqrt{z^2 + 4npq}}{2(n + z^2)}}
+#'   \deqn{\frac{2np + z^2 \pm z \sqrt{z^2 + 4npq}}{2(n + z^2)}}
 #'
 #'   where `p` is the proportion (of a factor level), `q` is `1-p`, `z` is the
 #'   critical z-score based on the interval level and `n` is the length of the

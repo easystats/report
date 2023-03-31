@@ -43,10 +43,10 @@ The formulae for the confidence intervals are:
 \itemize{
 \item \code{"wald"}:
 
-\deqn{p +/- z \sqrt{\frac{p (1 - p)}{n}}}
+\deqn{p \pm z \sqrt{\frac{p (1 - p)}{n}}}
 \item \code{"wilson"}:
 
-\deqn{\frac{2np + z^2 +/- z \sqrt{z^2 + 4npq}}{2(n + z^2)}}
+\deqn{\frac{2np + z^2 \pm z \sqrt{z^2 + 4npq}}{2(n + z^2)}}
 
 where \code{p} is the proportion (of a factor level), \code{q} is \code{1-p}, \code{z} is the
 critical z-score based on the interval level and \code{n} is the length of the
