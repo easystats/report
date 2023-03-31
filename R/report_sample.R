@@ -15,7 +15,7 @@
 #' @param ci_method Character, indicating the method how to calculate confidence
 #'   intervals for proportions. Currently implemented methods are `"wald"` and
 #'   `"wilson"`. Note that `"wald"` can produce intervals outside the plausible
-#'   range of [0, 1], and thus it is recommended to prefer the `"wilson"` method.
+#'   range of \[0, 1\], and thus it is recommended to prefer the `"wilson"` method.
 #'   The formulae for the confidence intervals are:
 #' - `"wald"`:
 #'

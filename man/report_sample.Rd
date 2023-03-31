@@ -38,7 +38,7 @@ levels.}
 \item{ci_method}{Character, indicating the method how to calculate confidence
 intervals for proportions. Currently implemented methods are \code{"wald"} and
 \code{"wilson"}. Note that \code{"wald"} can produce intervals outside the plausible
-range of \link{0, 1}, and thus it is recommended to prefer the \code{"wilson"} method.
+range of [0, 1], and thus it is recommended to prefer the \code{"wilson"} method.
 The formulae for the confidence intervals are:
 \itemize{
 \item \code{"wald"}:
