@@ -302,7 +302,7 @@ report_sample <- function(data,
   if (!is.null(ci)) {
     ci_low_high <- .ci_proportion(x, proportions, weights, ci, ci_method, ci_correct)
     .summary <- sprintf(
-      "%.1f (%.1f, %.1f)",
+      "%.1f [%.1f, %.1f]",
       100 * proportions,
       100 * ci_low_high$ci_low,
       100 * ci_low_high$ci_high
@@ -396,6 +396,25 @@ print.report_sample <- function(x, ...) {
   cat(insight::export_table(x))
 }
 
+#' @export
+print_html.report_sample <- function(x, ...) {
+  if (isTRUE(attributes(x)$weighted)) {
+    caption <- "Descriptive Statistics (weighted)"
+  } else {
+    caption <- "Descriptive Statistics"
+  }
+  insight::export_table(x, format = "html", caption = caption, ...)
+}
+
+#' @export
+print_md.report_sample <- function(x, ...) {
+  if (isTRUE(attributes(x)$weighted)) {
+    caption <- "Descriptive Statistics (weighted)"
+  } else {
+    caption <- "Descriptive Statistics"
+  }
+  insight::export_table(x, format = "markdown", caption = caption, ...)
+}
 
 
 # helper for weighted stuff --------------------------

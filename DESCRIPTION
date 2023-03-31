@@ -86,6 +86,7 @@ Collate:
     'format_citation.R'
     'format_formula.R'
     'format_model.R'
+    'reexports.r'
     'report-package.R'
     'utils_combine_tables.R'
     'report.lm.R'
