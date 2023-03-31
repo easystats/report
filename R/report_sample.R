@@ -358,7 +358,7 @@ report_sample <- function(data,
   if (ci_method == "wilson") {
     prop <- (2 * n * p_hat) + z^2
     moe <- z * sqrt(z^2 + 4 * n * p_hat * (1 - p_hat))
-    out <- c(prop - se, prop + se) / (2 * (n + z^2))
+    out <- c(prop - moe, prop + moe) / (2 * (n + z^2))
   } else {
     se <- z * suppressWarnings(sqrt(p_hat * (1 - p_hat) / n))
     out <- c(p_hat - se, p_hat + se)
