@@ -10,7 +10,7 @@ report_sample(
   centrality = "mean",
   ci = NULL,
   ci_method = "wilson",
-  ci_adjust = NULL,
+  ci_correct = FALSE,
   select = NULL,
   exclude = NULL,
   weights = NULL,
@@ -53,19 +53,9 @@ critical z-score based on the interval level and \code{n} is the length of the
 vector (cf. \emph{Newcombe 1998}, \emph{Wilson 1927}).
 }}
 
-\item{ci_adjust}{Scalar, if not \code{NULL}, applies \emph{Wilson's adjustment} to
-confidence intervals of proportions that are close to 0 or 1. \code{ci_adjust}
-must be a value between 0 and 1, indicating how close a proportions must
-be to 0 or 1 in order to apply the adjustment to its confidence intervals.
-E.g., if \code{ci_adjust = 0.07}, confidence intervals of all proportions smaller
-than 0.07 or greater than 0.93 will be adjusted. Their calculation is as
-follows (cf. \emph{Wilson 1927}):
-
-\deqn{p \pm z \sqrt{\frac{p (1 - p)}{n + 4}}}
-
-where \code{p} is
-
-\deqn{p = \frac{x + 2}{n + 4}}}
+\item{ci_correct}{Logical, it \code{TRUE}, applies contintuity correction. See
+\emph{Newcombe 1998} for different correction-methods based on the chosen
+\code{ci_method}.}
 
 \item{select}{Character vector, with column names that should be included in
 the descriptive table.}

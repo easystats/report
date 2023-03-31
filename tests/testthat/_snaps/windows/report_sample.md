@@ -117,9 +117,9 @@
       Variable                |           Summary
       -------------------------------------------
       Mean Sepal.Length (SD)  |       5.84 (0.83)
-      Species [setosa], %     | 33.3 (25.8, 25.8)
-      Species [versicolor], % | 33.3 (25.8, 25.8)
-      Species [virginica], %  | 33.3 (25.8, 25.8)
+      Species [setosa], %     | 33.3 (25.8, 40.9)
+      Species [versicolor], % | 33.3 (25.8, 40.9)
+      Species [virginica], %  | 33.3 (25.8, 40.9)
 
 ---
 
@@ -132,9 +132,9 @@
       Variable                |           Summary
       -------------------------------------------
       Mean Sepal.Length (SD)  |       5.84 (0.83)
-      Species [setosa], %     | 33.3 (26.3, 26.3)
-      Species [versicolor], % | 33.3 (26.3, 26.3)
-      Species [virginica], %  | 33.3 (26.3, 26.3)
+      Species [setosa], %     | 33.3 (26.3, 41.2)
+      Species [versicolor], % | 33.3 (26.3, 41.2)
+      Species [virginica], %  | 33.3 (26.3, 41.2)
 
 ---
 
@@ -161,46 +161,24 @@
 ---
 
     Code
-      report_sample(d, ci = 0.95, ci_adjust = 0.04, select = "x", ci_method = "wald")
+      report_sample(d, ci = 0.95, ci_correct = TRUE, select = "x", ci_method = "wald")
+    Output
+      # Descriptive Statistics
+      
+      Variable |        Summary
+      -------------------------
+      x [1], % | 2.9 (1.8, 4.0)
+
+---
+
+    Code
+      report_sample(d, ci = 0.95, ci_correct = TRUE, select = "x", ci_method = "wilson")
     Output
       # Descriptive Statistics
       
       Variable |        Summary
       -------------------------
       x [1], % | 2.9 (2.0, 4.2)
-
----
-
-    Code
-      report_sample(d, ci = 0.95, ci_adjust = 0.04, select = "x", ci_method = "wilson")
-    Output
-      # Descriptive Statistics
-      
-      Variable |        Summary
-      -------------------------
-      x [1], % | 2.9 (2.2, 4.3)
-
----
-
-    Code
-      report_sample(d, ci = 0.95, ci_adjust = 0.02, select = "x", ci_method = "wald")
-    Output
-      # Descriptive Statistics
-      
-      Variable |        Summary
-      -------------------------
-      x [1], % | 2.9 (1.9, 3.9)
-
----
-
-    Code
-      report_sample(d, ci = 0.95, ci_adjust = 0.02, select = "x", ci_method = "wilson")
-    Output
-      # Descriptive Statistics
-      
-      Variable |        Summary
-      -------------------------
-      x [1], % | 2.9 (2.0, 4.1)
 
 # report_sample group_by
 

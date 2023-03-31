@@ -28,20 +28,9 @@
 #'   where `p` is the proportion (of a factor level), `q` is `1-p`, `z` is the
 #'   critical z-score based on the interval level and `n` is the length of the
 #'   vector (cf. *Newcombe 1998*, *Wilson 1927*).
-#' @param ci_adjust Scalar, if not `NULL`, applies *Wilson's adjustment* to
-#'   confidence intervals of proportions that are close to 0 or 1. `ci_adjust`
-#'   must be a value between 0 and 1, indicating how close a proportions must
-#'   be to 0 or 1 in order to apply the adjustment to its confidence intervals.
-#'   E.g., if `ci_adjust = 0.07`, confidence intervals of all proportions smaller
-#'   than 0.07 or greater than 0.93 will be adjusted. Their calculation is as
-#'   follows (cf. *Wilson 1927*):
-#'
-#'   \deqn{p \pm z \sqrt{\frac{p (1 - p)}{n + 4}}}
-#'
-#'   where `p` is
-#'
-#'   \deqn{p = \frac{x + 2}{n + 4}}
-#'
+#' @param ci_correct Logical, it `TRUE`, applies contintuity correction. See
+#'   *Newcombe 1998* for different correction-methods based on the chosen
+#'   `ci_method`.
 #' @param select Character vector, with column names that should be included in
 #'   the descriptive table.
 #' @param exclude Character vector, with column names that should be excluded
@@ -79,7 +68,7 @@ report_sample <- function(data,
                           centrality = "mean",
                           ci = NULL,
                           ci_method = "wilson",
-                          ci_adjust = NULL,
+                          ci_correct = FALSE,
                           select = NULL,
                           exclude = NULL,
                           weights = NULL,
@@ -123,7 +112,7 @@ report_sample <- function(data,
         n,
         ci,
         ci_method,
-        ci_adjust
+        ci_correct
       )
     })
     # remember values of first columns
@@ -153,7 +142,7 @@ report_sample <- function(data,
         n,
         ci,
         ci_method,
-        ci_adjust
+        ci_correct
       )[["Summary"]]
     )
     # Remove Total column if need be
@@ -182,7 +171,7 @@ report_sample <- function(data,
       n,
       ci,
       ci_method,
-      ci_adjust
+      ci_correct
     )
   }
 
@@ -201,7 +190,7 @@ report_sample <- function(data,
                                         n = FALSE,
                                         ci = NULL,
                                         ci_method = "wilson",
-                                        ci_adjust = NULL) {
+                                        ci_correct = FALSE) {
   if (!is.null(weights)) {
     w <- x[[weights]]
     columns <- setdiff(colnames(x), weights)
@@ -220,7 +209,7 @@ report_sample <- function(data,
       n = n,
       ci = ci,
       ci_method = ci_method,
-      ci_adjust = ci_adjust
+      ci_correct = ci_correct
     )
   }))
 }
@@ -275,7 +264,7 @@ report_sample <- function(data,
                                       digits = 1,
                                       ci = NULL,
                                       ci_method = "wilson",
-                                      ci_adjust = NULL,
+                                      ci_correct = FALSE,
                                       ...) {
   if (!is.null(weights)) {
     x[is.na(weights)] <- NA
@@ -294,12 +283,12 @@ report_sample <- function(data,
 
   # CI for proportions?
   if (!is.null(ci)) {
-    ci_low_high <- .ci_proportion(x, proportions, weights, ci, ci_method, ci_adjust)
+    ci_low_high <- .ci_proportion(x, proportions, weights, ci, ci_method, ci_correct)
     .summary <- sprintf(
       "%.1f (%.1f, %.1f)",
       100 * proportions,
-      100 * ci_low_high[1],
-      100 * ci_low_high[2]
+      100 * ci_low_high$ci_low,
+      100 * ci_low_high$ci_high
     )
   } else {
     .summary <- sprintf("%.1f", 100 * proportions)
@@ -319,49 +308,58 @@ report_sample <- function(data,
 
 # Standard error for confidence interval of proportions ----
 
-.ci_proportion <- function(x, proportions, weights, ci, ci_method, ci_adjust) {
+.ci_proportion <- function(x, proportions, weights, ci, ci_method, ci_correct) {
   ci_method <- match.arg(tolower(ci_method), c("wald", "wilson"))
-  p_hat <- proportions
-  n <- length(stats::na.omit(x))
 
-  # Wilson's adjustment for p close to 0 or 1
-  if (!is.null(ci_adjust) && !is.na(ci_adjust) && is.numeric(ci_adjust)) {
-    fix <- p_hat < ci_adjust | p_hat > (1 - ci_adjust)
-    if (any(fix)) {
-      if (is.null(weights)) {
-        p_adjusted <- (as.vector(table(x)) + 2) / (n + 4)
-      } else {
-        p_adjusted <- (as.vector(round(stats::xtabs(weights ~ x))) + 2) / (round(sum(weights)) + 4)
-      }
-      # for binary factors, just need one level
-      if (length(p_adjusted) == 2) {
-        p_adjusted <- p_adjusted[2]
-      }
-      p_hat[fix] <- p_adjusted[fix]
-      n <- rep(n, length(p_hat))
-      n[fix] <- n[fix] + 4
-    }
-  }
+  # variables
+  p <- as.vector(proportions)
+  q <- 1 - p
+  n <- length(stats::na.omit(x))
+  z <- stats::qnorm((1 + ci) / 2)
 
   ## FIXME: Once know how to do, calculate accurate SE for weighted data
 
   # There is a formula how to deal with SE for weighted data, see
   # https://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval
-  # but it seems "p_hat" is unknown. For now, we give a warning instead of
-  # estimating p_hat for weighted data
+  # but it seems "p" is unknown. For now, we give a warning instead of
+  # estimating p for weighted data
   if (!is.null(weights)) {
     insight::format_warning("Confidence intervals are not accurate for weighted data.")
   }
 
-  z <- stats::qnorm((1 + ci) / 2)
-
   if (ci_method == "wilson") {
-    prop <- (2 * n * p_hat) + z^2
-    moe <- z * sqrt(z^2 + 4 * n * p_hat * (1 - p_hat))
-    out <- c(prop - moe, prop + moe) / (2 * (n + z^2))
+
+    # Wilson CIs -------------------
+    if (isTRUE(ci_correct)) {
+      ci_low <- (2 * n * p + z^2 - 1 - z * sqrt(z^2 - 2 - 1 / n + 4 * p * (n * q + 1))) / (2 * (n + z^2))
+      ci_high <- (2 * n * p + z^2 + 1 + z * sqrt(z^2 + 2 - 1 / n + 4 * p * (n * q - 1))) / (2 * (n + z^2))
+      # close to 0 or 1, then CI is 0 resp. 1
+      fix <- p < 0.00001 | ci_low < 0.00001
+      if (any(fix)) {
+        ci_low[fix] <- 0
+      }
+      fix <- p > 0.99999 | ci_high > 0.99999
+      if (any(fix)) {
+        ci_high[fix] <- 1
+      }
+      out <- list(ci_low = ci_low, ci_high = ci_high)
+    } else {
+      prop <- (2 * n * p) + z^2
+      moe <- z * sqrt(z^2 + 4 * n * p * q)
+      correction <- 2 * (n + z^2)
+      out <- list(
+        ci_low = (prop - moe) / correction,
+        ci_high = (prop + moe) / correction
+      )
+    }
   } else {
-    moe <- z * suppressWarnings(sqrt(p_hat * (1 - p_hat) / n))
-    out <- c(p_hat - moe, p_hat + moe)
+
+    # Wald CIs -------------------
+    moe <- z * suppressWarnings(sqrt(p * q / n))
+    if (isTRUE(ci_correct)) {
+      moe <- moe + 1 / (2 * n)
+    }
+    out <- list(ci_low = p - moe, ci_high = p + moe)
   }
   out
 }
