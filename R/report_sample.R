@@ -83,6 +83,16 @@ report_sample <- function(data,
                           digits = 2,
                           n = FALSE,
                           ...) {
+  # check for correct input type
+  if (!is.data.frame(data)) {
+    data <- tryCatch(
+      as.data.frame(data, stringsAsFactors = FALSE),
+      error = function(e) {
+        insight::format_error("`data` must be a data frame, or an object that can be coerced to a data frame.")
+      }
+    )
+  }
+
   variables <- colnames(data)
 
   # select all?

@@ -34,6 +34,11 @@ test_that("report_sample weights, coorect weighted N", {
   )
 })
 
+test_that("report_sample check input", {
+  data(iris)
+  expect_error(report_sample(iris$Species))
+})
+
 test_that("report_sample default", {
   expect_snapshot(
     variant = "windows",
