@@ -11,20 +11,29 @@
 #'   deviation) as summary.
 #' @param ci Level of confidence interval for relative frequencies (proportions).
 #'   If not `NULL`, confidence intervals are shown for proportions of factor
-#'   levels. If `p` is the proportion of a factor level, the related confidence
+#'   levels.
+#' @param ci_method Character, indicating the method how to calculate confidence
+#'   intervals for proportions. Currently implemented methods are `"wald"` and
+#'   `"wilson"`. If `p` is the proportion of a factor level, the related confidence
 #'   interval is calculated as follows:
+#' - `"wald"`:
 #'
 #'   \deqn{p +/- z \sqrt{\frac{p (1 - p)}{n}}}
 #'
-#'   where `z` is the critical z-score based on the interval level and `n` is
-#'   the length of the vector.
+#' - `"wilson"`:
+#'
+#'   \deqn{\frac{2np + z^2 +/- z \sqrt{z^2 + 4npq}}{2(n + z^2)}}
+#'
+#'   where `p` is the proportion (of a factor level), `q` is `1-p`, `z` is the
+#'   critical z-score based on the interval level and `n` is the length of the
+#'   vector (cf. *Newcombe 1998*, *Wilson 1927*).
 #' @param ci_adjust Scalar, if not `NULL`, applies *Wilson's adjustment* to
 #'   confidence intervals of proportions that are close to 0 or 1. `ci_adjust`
 #'   must be a value between 0 and 1, indicating how close a proportions must
 #'   be to 0 or 1 in order to apply the adjustment to its confidence intervals.
 #'   E.g., if `ci_adjust = 0.07`, confidence intervals of all proportions smaller
 #'   than 0.07 or greater than 0.93 will be adjusted. Their calculation is as
-#'   follows:
+#'   follows (cf. *Wilson 1927*):
 #'
 #'   \deqn{p +/- z \sqrt{\frac{p (1 - p)}{n + 4}}}
 #'
@@ -49,8 +58,12 @@
 #'   their related summary statistics.
 #'
 #' @references
-#' Wilson, E. B. (1927). Probable inference, the law of succession, and statistical
-#' inference. Journal of the American Statistical Association. 22 (158): 209–212
+#' - Newcombe, R. G. (1998). Two-sided confidence intervals for the single
+#'   proportion: comparison of seven methods. Statistics in Medicine. 17 (8):
+#'   857–872
+#'
+#' - Wilson, E. B. (1927). Probable inference, the law of succession, and statistical
+#'   inference. Journal of the American Statistical Association. 22 (158): 209–212
 #'
 #' @examples
 #' library(report)
@@ -64,6 +77,7 @@ report_sample <- function(data,
                           group_by = NULL,
                           centrality = "mean",
                           ci = NULL,
+                          ci_method = "wald",
                           ci_adjust = NULL,
                           select = NULL,
                           exclude = NULL,
@@ -100,7 +114,16 @@ report_sample <- function(data,
   out <- if (isTRUE(grouping)) {
     result <- lapply(split(data[variables], factor(data[[group_by]])), function(x) {
       x[[group_by]] <- NULL
-      .generate_descriptive_table(x, centrality, weights, digits, n, ci, ci_adjust)
+      .generate_descriptive_table(
+        x,
+        centrality,
+        weights,
+        digits,
+        n,
+        ci,
+        ci_method,
+        ci_adjust
+      )
     })
     # remember values of first columns
     variable <- result[[1]]["Variable"]
@@ -128,6 +151,7 @@ report_sample <- function(data,
         digits,
         n,
         ci,
+        ci_method,
         ci_adjust
       )[["Summary"]]
     )
@@ -149,7 +173,16 @@ report_sample <- function(data,
     )
     final
   } else {
-    .generate_descriptive_table(data[variables], centrality, weights, digits, n, ci, ci_adjust)
+    .generate_descriptive_table(
+      data[variables],
+      centrality,
+      weights,
+      digits,
+      n,
+      ci,
+      ci_method,
+      ci_adjust
+    )
   }
 
   attr(out, "weighted") <- !is.null(weights)
@@ -166,6 +199,7 @@ report_sample <- function(data,
                                         digits,
                                         n = FALSE,
                                         ci = NULL,
+                                        ci_method = "wald",
                                         ci_adjust = NULL) {
   if (!is.null(weights)) {
     w <- x[[weights]]
@@ -184,6 +218,7 @@ report_sample <- function(data,
       digits = digits,
       n = n,
       ci = ci,
+      ci_method = ci_method,
       ci_adjust = ci_adjust
     )
   }))
@@ -238,6 +273,7 @@ report_sample <- function(data,
                                       weights = NULL,
                                       digits = 1,
                                       ci = NULL,
+                                      ci_method = "wald",
                                       ci_adjust = NULL,
                                       ...) {
   if (!is.null(weights)) {
@@ -257,12 +293,12 @@ report_sample <- function(data,
 
   # CI for proportions?
   if (!is.null(ci)) {
-    se <- .se_proportion(x, proportions, weights, ci, ci_adjust)
+    ci_low_high <- .ci_proportion(x, proportions, weights, ci, ci_method, ci_adjust)
     .summary <- sprintf(
       "%.1f (%.1f, %.1f)",
       100 * proportions,
-      100 * (proportions - se),
-      100 * (proportions + se)
+      100 * ci_low_high[1],
+      100 * ci_low_high[2]
     )
   } else {
     .summary <- sprintf("%.1f", 100 * proportions)
@@ -282,7 +318,8 @@ report_sample <- function(data,
 
 # Standard error for confidence interval of proportions ----
 
-.se_proportion <- function(x, proportions, weights, ci, ci_adjust) {
+.ci_proportion <- function(x, proportions, weights, ci, ci_method, ci_adjust) {
+  ci_method <- match.arg(tolower(ci_method), c("wald", "wilson"))
   p_hat <- proportions
   n <- length(stats::na.omit(x))
 
@@ -315,7 +352,17 @@ report_sample <- function(data,
     insight::format_warning("Confidence intervals are not accurate for weighted data.")
   }
 
-  stats::qnorm((1 + ci) / 2) * suppressWarnings(sqrt(p_hat * (1 - p_hat) / n))
+  z <- stats::qnorm((1 + ci) / 2)
+
+  if (ci_method == "wilson") {
+    prop <- (2 * n * p_hat) + z^2
+    se <- z * sqrt((z^2 + 4 * n * p_hat * (1 - p_hat)))
+    out <- c(prop - se, prop + se) / (2 * (n + z^2))
+  } else {
+    se <- z * suppressWarnings(sqrt(p_hat * (1 - p_hat) / n))
+    out <- c(proportions - se, proportions + se)
+  }
+  out
 }
 
 

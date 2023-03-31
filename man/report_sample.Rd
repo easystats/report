@@ -9,6 +9,7 @@ report_sample(
   group_by = NULL,
   centrality = "mean",
   ci = NULL,
+  ci_method = "wald",
   ci_adjust = NULL,
   select = NULL,
   exclude = NULL,
@@ -32,13 +33,24 @@ deviation) as summary.}
 
 \item{ci}{Level of confidence interval for relative frequencies (proportions).
 If not \code{NULL}, confidence intervals are shown for proportions of factor
-levels. If \code{p} is the proportion of a factor level, the related confidence
+levels.}
+
+\item{ci_method}{Character, indicating the method how to calculate confidence
+intervals for proportions. Currently implemented methods are \code{"wald"} and
+\code{"wilson"}. If \code{p} is the proportion of a factor level, the related confidence
 interval is calculated as follows:
+\itemize{
+\item \code{"wald"}:
 
 \deqn{p +/- z \sqrt{\frac{p (1 - p)}{n}}}
+\item \code{"wilson"}:
 
-where \code{z} is the critical z-score based on the interval level and \code{n} is
-the length of the vector.}
+\deqn{\frac{2np + z^2 +/- z \sqrt{z^2 + 4npq}}{2(n + z^2)}}
+
+where \code{p} is the proportion (of a factor level), \code{q} is \code{1-p}, \code{z} is the
+critical z-score based on the interval level and \code{n} is the length of the
+vector (cf. \emph{Newcombe 1998}, \emph{Wilson 1927}).
+}}
 
 \item{ci_adjust}{Scalar, if not \code{NULL}, applies \emph{Wilson's adjustment} to
 confidence intervals of proportions that are close to 0 or 1. \code{ci_adjust}
@@ -46,7 +58,7 @@ must be a value between 0 and 1, indicating how close a proportions must
 be to 0 or 1 in order to apply the adjustment to its confidence intervals.
 E.g., if \code{ci_adjust = 0.07}, confidence intervals of all proportions smaller
 than 0.07 or greater than 0.93 will be adjusted. Their calculation is as
-follows:
+follows (cf. \emph{Wilson 1927}):
 
 \deqn{p +/- z \sqrt{\frac{p (1 - p)}{n + 4}}}
 
@@ -89,6 +101,11 @@ report_sample(iris, group_by = "Species")
 report_sample(airquality, group_by = "Month", n = TRUE, total = FALSE)
 }
 \references{
-Wilson, E. B. (1927). Probable inference, the law of succession, and statistical
+\itemize{
+\item Newcombe, R. G. (1998). Two-sided confidence intervals for the single
+proportion: comparison of seven methods. Statistics in Medicine. 17 (8):
+857–872
+\item Wilson, E. B. (1927). Probable inference, the law of succession, and statistical
 inference. Journal of the American Statistical Association. 22 (158): 209–212
+}
 }
