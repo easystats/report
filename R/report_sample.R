@@ -345,7 +345,6 @@ report_sample <- function(data,
   }
 
   if (ci_method == "wilson") {
-
     # Wilson CIs -------------------
     if (isTRUE(ci_correct)) {
       ci_low <- (2 * n * p + z^2 - 1 - z * sqrt(z^2 - 2 - 1 / n + 4 * p * (n * q + 1))) / (2 * (n + z^2))
@@ -370,7 +369,6 @@ report_sample <- function(data,
       )
     }
   } else {
-
     # Wald CIs -------------------
     moe <- z * suppressWarnings(sqrt(p * q / n))
     if (isTRUE(ci_correct)) {
