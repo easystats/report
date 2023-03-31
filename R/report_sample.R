@@ -28,7 +28,7 @@
 #'   where `p` is the proportion (of a factor level), `q` is `1-p`, `z` is the
 #'   critical z-score based on the interval level and `n` is the length of the
 #'   vector (cf. *Newcombe 1998*, *Wilson 1927*).
-#' @param ci_correct Logical, it `TRUE`, applies contintuity correction. See
+#' @param ci_correct Logical, it `TRUE`, applies continuity correction. See
 #'   *Newcombe 1998* for different correction-methods based on the chosen
 #'   `ci_method`.
 #' @param select Character vector, with column names that should be included in

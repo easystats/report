@@ -53,7 +53,7 @@ critical z-score based on the interval level and \code{n} is the length of the
 vector (cf. \emph{Newcombe 1998}, \emph{Wilson 1927}).
 }}
 
-\item{ci_correct}{Logical, it \code{TRUE}, applies contintuity correction. See
+\item{ci_correct}{Logical, it \code{TRUE}, applies continuity correction. See
 \emph{Newcombe 1998} for different correction-methods based on the chosen
 \code{ci_method}.}
 
