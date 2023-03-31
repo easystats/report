@@ -90,6 +90,13 @@ report_sample(iris[, 1:4])
 report_sample(iris, select = c("Sepal.Length", "Petal.Length", "Species"))
 report_sample(iris, group_by = "Species")
 report_sample(airquality, group_by = "Month", n = TRUE, total = FALSE)
+
+# confidence intervals for proportions
+set.seed(123)
+d <- data.frame(x = factor(sample(letters[1:3], 100, TRUE, c(0.01, 0.39, 0.6))))
+report_sample(d, ci = 0.95, ci_method = "wald") # ups, negative CI
+report_sample(d, ci = 0.95, ci_method = "wilson") # negative CI fixed
+report_sample(d, ci = 0.95, ci_correct = TRUE) # continuity correction
 }
 \references{
 \itemize{
