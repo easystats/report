@@ -61,7 +61,7 @@ E.g., if \code{ci_adjust = 0.07}, confidence intervals of all proportions smalle
 than 0.07 or greater than 0.93 will be adjusted. Their calculation is as
 follows (cf. \emph{Wilson 1927}):
 
-\deqn{p +/- z \sqrt{\frac{p (1 - p)}{n + 4}}}
+\deqn{p \pm z \sqrt{\frac{p (1 - p)}{n + 4}}}
 
 where \code{p} is
 

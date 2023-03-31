@@ -36,7 +36,7 @@
 #'   than 0.07 or greater than 0.93 will be adjusted. Their calculation is as
 #'   follows (cf. *Wilson 1927*):
 #'
-#'   \deqn{p +/- z \sqrt{\frac{p (1 - p)}{n + 4}}}
+#'   \deqn{p \pm z \sqrt{\frac{p (1 - p)}{n + 4}}}
 #'
 #'   where `p` is
 #'
