@@ -5,8 +5,9 @@ Minor changes
 * `report_sample` now reports the weighted number of observations when data
   is both grouped an weighted.
 
-* `report_sample` gains a `ci` argument, to compute confidence intervals for
-  proportions of factor levels.
+* `report_sample` gains `ci`, `ci_method` and `ci_adjust` arguments, to compute
+  confidence intervals for proportions of factor levels. Currently, two different
+  methods (*Wald* and *Wilson*) are available.
 
 # report 0.5.7
 

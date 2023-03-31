@@ -9,7 +9,8 @@ report_sample(
   group_by = NULL,
   centrality = "mean",
   ci = NULL,
-  ci_adjust = NULL,
+  ci_method = "wilson",
+  ci_correct = FALSE,
   select = NULL,
   exclude = NULL,
   weights = NULL,
@@ -32,27 +33,29 @@ deviation) as summary.}
 
 \item{ci}{Level of confidence interval for relative frequencies (proportions).
 If not \code{NULL}, confidence intervals are shown for proportions of factor
-levels. If \code{p} is the proportion of a factor level, the related confidence
-interval is calculated as follows:
+levels.}
 
-\deqn{p +/- z \sqrt{\frac{p (1 - p)}{n}}}
+\item{ci_method}{Character, indicating the method how to calculate confidence
+intervals for proportions. Currently implemented methods are \code{"wald"} and
+\code{"wilson"}. Note that \code{"wald"} can produce intervals outside the plausible
+range of [0, 1], and thus it is recommended to prefer the \code{"wilson"} method.
+The formulae for the confidence intervals are:
+\itemize{
+\item \code{"wald"}:
 
-where \code{z} is the critical z-score based on the interval level and \code{n} is
-the length of the vector.}
+\deqn{p \pm z \sqrt{\frac{p (1 - p)}{n}}}
+\item \code{"wilson"}:
 
-\item{ci_adjust}{Scalar, if not \code{NULL}, applies \emph{Wilson's adjustment} to
-confidence intervals of proportions that are close to 0 or 1. \code{ci_adjust}
-must be a value between 0 and 1, indicating how close a proportions must
-be to 0 or 1 in order to apply the adjustment to its confidence intervals.
-E.g., if \code{ci_adjust = 0.07}, confidence intervals of all proportions smaller
-than 0.07 or greater than 0.93 will be adjusted. Their calculation is as
-follows:
+\deqn{\frac{2np + z^2 \pm z \sqrt{z^2 + 4npq}}{2(n + z^2)}}
 
-\deqn{p +/- z \sqrt{\frac{p (1 - p)}{n + 4}}}
+where \code{p} is the proportion (of a factor level), \code{q} is \code{1-p}, \code{z} is the
+critical z-score based on the interval level and \code{n} is the length of the
+vector (cf. \emph{Newcombe 1998}, \emph{Wilson 1927}).
+}}
 
-where \code{p} is
-
-\deqn{p = \frac{x + 2}{n + 4}}}
+\item{ci_correct}{Logical, it \code{TRUE}, applies continuity correction. See
+\emph{Newcombe 1998} for different correction-methods based on the chosen
+\code{ci_method}.}
 
 \item{select}{Character vector, with column names that should be included in
 the descriptive table.}
@@ -87,8 +90,20 @@ report_sample(iris[, 1:4])
 report_sample(iris, select = c("Sepal.Length", "Petal.Length", "Species"))
 report_sample(iris, group_by = "Species")
 report_sample(airquality, group_by = "Month", n = TRUE, total = FALSE)
+
+# confidence intervals for proportions
+set.seed(123)
+d <- data.frame(x = factor(sample(letters[1:3], 100, TRUE, c(0.01, 0.39, 0.6))))
+report_sample(d, ci = 0.95, ci_method = "wald") # ups, negative CI
+report_sample(d, ci = 0.95, ci_method = "wilson") # negative CI fixed
+report_sample(d, ci = 0.95, ci_correct = TRUE) # continuity correction
 }
 \references{
-Wilson, E. B. (1927). Probable inference, the law of succession, and statistical
+\itemize{
+\item Newcombe, R. G. (1998). Two-sided confidence intervals for the single
+proportion: comparison of seven methods. Statistics in Medicine. 17 (8):
+857–872
+\item Wilson, E. B. (1927). Probable inference, the law of succession, and statistical
 inference. Journal of the American Statistical Association. 22 (158): 209–212
+}
 }

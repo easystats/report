@@ -109,7 +109,8 @@
 # report_sample CI
 
     Code
-      report_sample(iris, select = c("Sepal.Length", "Species"), ci = 0.95)
+      report_sample(iris, select = c("Sepal.Length", "Species"), ci = 0.95,
+      ci_method = "wald")
     Output
       # Descriptive Statistics
       
@@ -123,7 +124,22 @@
 ---
 
     Code
-      report_sample(d, ci = 0.95, select = "x")
+      report_sample(iris, select = c("Sepal.Length", "Species"), ci = 0.95,
+      ci_method = "wilson")
+    Output
+      # Descriptive Statistics
+      
+      Variable                |           Summary
+      -------------------------------------------
+      Mean Sepal.Length (SD)  |       5.84 (0.83)
+      Species [setosa], %     | 33.3 (26.3, 41.2)
+      Species [versicolor], % | 33.3 (26.3, 41.2)
+      Species [virginica], %  | 33.3 (26.3, 41.2)
+
+---
+
+    Code
+      report_sample(d, ci = 0.95, select = "x", ci_method = "wald")
     Output
       # Descriptive Statistics
       
@@ -134,7 +150,18 @@
 ---
 
     Code
-      report_sample(d, ci = 0.95, ci_adjust = 0.04, select = "x")
+      report_sample(d, ci = 0.95, select = "x", ci_method = "wilson")
+    Output
+      # Descriptive Statistics
+      
+      Variable |        Summary
+      -------------------------
+      x [1], % | 2.9 (2.0, 4.1)
+
+---
+
+    Code
+      report_sample(d, ci = 0.95, ci_correct = TRUE, select = "x", ci_method = "wald")
     Output
       # Descriptive Statistics
       
@@ -145,13 +172,13 @@
 ---
 
     Code
-      report_sample(d, ci = 0.95, ci_adjust = 0.02, select = "x")
+      report_sample(d, ci = 0.95, ci_correct = TRUE, select = "x", ci_method = "wilson")
     Output
       # Descriptive Statistics
       
       Variable |        Summary
       -------------------------
-      x [1], % | 2.9 (1.9, 3.9)
+      x [1], % | 2.9 (2.0, 4.2)
 
 # report_sample group_by
 
