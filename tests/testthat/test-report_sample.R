@@ -36,7 +36,8 @@ test_that("report_sample weights, coorect weighted N", {
 
 test_that("report_sample check input", {
   data(iris)
-  expect_error(report_sample(iris$Species))
+  expect_error(report_sample(lm(Sepal.Length ~ Species, data = iris)))
+  expect_silent(report_sample(iris$Species))
 })
 
 test_that("report_sample default", {
