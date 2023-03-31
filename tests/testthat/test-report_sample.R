@@ -72,7 +72,12 @@ test_that("report_sample n = TRUE", {
 test_that("report_sample CI", {
   expect_snapshot(
     variant = "windows",
-    report_sample(iris, select = c("Sepal.Length", "Species"), ci = 0.95)
+    report_sample(iris, select = c("Sepal.Length", "Species"), ci = 0.95, ci_method = "wald")
+  )
+
+  expect_snapshot(
+    variant = "windows",
+    report_sample(iris, select = c("Sepal.Length", "Species"), ci = 0.95, ci_method = "wilson")
   )
 
   set.seed(123)
@@ -82,17 +87,29 @@ test_that("report_sample CI", {
   )
   expect_snapshot(
     variant = "windows",
-    report_sample(d, ci = 0.95, select = "x")
+    report_sample(d, ci = 0.95, select = "x", ci_method = "wald")
   )
   expect_snapshot(
     variant = "windows",
-    report_sample(d, ci = 0.95, ci_adjust = 0.04, select = "x")
+    report_sample(d, ci = 0.95, select = "x", ci_method = "wilson")
   )
   expect_snapshot(
     variant = "windows",
-    report_sample(d, ci = 0.95, ci_adjust = 0.02, select = "x")
+    report_sample(d, ci = 0.95, ci_adjust = 0.04, select = "x", ci_method = "wald")
   )
-  expect_warning(report_sample(d, ci = 0.95, weights = "w"), regex = "accurate")
+  expect_snapshot(
+    variant = "windows",
+    report_sample(d, ci = 0.95, ci_adjust = 0.04, select = "x", ci_method = "wilson")
+  )
+  expect_snapshot(
+    variant = "windows",
+    report_sample(d, ci = 0.95, ci_adjust = 0.02, select = "x", ci_method = "wald")
+  )
+  expect_snapshot(
+    variant = "windows",
+    report_sample(d, ci = 0.95, ci_adjust = 0.02, select = "x", ci_method = "wilson")
+  )
+  expect_warning(report_sample(d, ci = 0.95, weights = "w", ci_method = "wald"), regex = "accurate")
 })
 
 test_that("report_sample group_by", {

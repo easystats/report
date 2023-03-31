@@ -14,8 +14,9 @@
 #'   levels.
 #' @param ci_method Character, indicating the method how to calculate confidence
 #'   intervals for proportions. Currently implemented methods are `"wald"` and
-#'   `"wilson"`. If `p` is the proportion of a factor level, the related confidence
-#'   interval is calculated as follows:
+#'   `"wilson"`. Note that `"wald"` can produce intervals outside the plausible
+#'   range of [0, 1], and thus it is recommended to prefer the `"wilson"` method.
+#'   The formulae for the confidence intervals are:
 #' - `"wald"`:
 #'
 #'   \deqn{p +/- z \sqrt{\frac{p (1 - p)}{n}}}
@@ -77,7 +78,7 @@ report_sample <- function(data,
                           group_by = NULL,
                           centrality = "mean",
                           ci = NULL,
-                          ci_method = "wald",
+                          ci_method = "wilson",
                           ci_adjust = NULL,
                           select = NULL,
                           exclude = NULL,
@@ -199,7 +200,7 @@ report_sample <- function(data,
                                         digits,
                                         n = FALSE,
                                         ci = NULL,
-                                        ci_method = "wald",
+                                        ci_method = "wilson",
                                         ci_adjust = NULL) {
   if (!is.null(weights)) {
     w <- x[[weights]]
@@ -273,7 +274,7 @@ report_sample <- function(data,
                                       weights = NULL,
                                       digits = 1,
                                       ci = NULL,
-                                      ci_method = "wald",
+                                      ci_method = "wilson",
                                       ci_adjust = NULL,
                                       ...) {
   if (!is.null(weights)) {

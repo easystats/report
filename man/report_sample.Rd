@@ -9,7 +9,7 @@ report_sample(
   group_by = NULL,
   centrality = "mean",
   ci = NULL,
-  ci_method = "wald",
+  ci_method = "wilson",
   ci_adjust = NULL,
   select = NULL,
   exclude = NULL,
@@ -37,8 +37,9 @@ levels.}
 
 \item{ci_method}{Character, indicating the method how to calculate confidence
 intervals for proportions. Currently implemented methods are \code{"wald"} and
-\code{"wilson"}. If \code{p} is the proportion of a factor level, the related confidence
-interval is calculated as follows:
+\code{"wilson"}. Note that \code{"wald"} can produce intervals outside the plausible
+range of \link{0, 1}, and thus it is recommended to prefer the \code{"wilson"} method.
+The formulae for the confidence intervals are:
 \itemize{
 \item \code{"wald"}:
 
