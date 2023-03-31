@@ -360,7 +360,7 @@ report_sample <- function(data,
     out <- c(prop - se, prop + se) / (2 * (n + z^2))
   } else {
     se <- z * suppressWarnings(sqrt(p_hat * (1 - p_hat) / n))
-    out <- c(proportions - se, proportions + se)
+    out <- c(p_hat - se, p_hat + se)
   }
   out
 }
