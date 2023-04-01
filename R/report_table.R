@@ -200,10 +200,3 @@ display.report_table <- function(object, ...) {
 
   footer
 }
-
-
-# Reexports models ------------------------
-
-#' @importFrom insight display
-#' @export
-insight::display

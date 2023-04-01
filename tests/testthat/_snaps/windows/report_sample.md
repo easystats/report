@@ -117,9 +117,9 @@
       Variable                |           Summary
       -------------------------------------------
       Mean Sepal.Length (SD)  |       5.84 (0.83)
-      Species [setosa], %     | 33.3 (25.8, 40.9)
-      Species [versicolor], % | 33.3 (25.8, 40.9)
-      Species [virginica], %  | 33.3 (25.8, 40.9)
+      Species [setosa], %     | 33.3 [25.8, 40.9]
+      Species [versicolor], % | 33.3 [25.8, 40.9]
+      Species [virginica], %  | 33.3 [25.8, 40.9]
 
 ---
 
@@ -132,9 +132,9 @@
       Variable                |           Summary
       -------------------------------------------
       Mean Sepal.Length (SD)  |       5.84 (0.83)
-      Species [setosa], %     | 33.3 (26.3, 41.2)
-      Species [versicolor], % | 33.3 (26.3, 41.2)
-      Species [virginica], %  | 33.3 (26.3, 41.2)
+      Species [setosa], %     | 33.3 [26.3, 41.2]
+      Species [versicolor], % | 33.3 [26.3, 41.2]
+      Species [virginica], %  | 33.3 [26.3, 41.2]
 
 ---
 
@@ -145,7 +145,7 @@
       
       Variable |        Summary
       -------------------------
-      x [1], % | 2.9 (1.9, 3.9)
+      x [1], % | 2.9 [1.9, 3.9]
 
 ---
 
@@ -156,7 +156,7 @@
       
       Variable |        Summary
       -------------------------
-      x [1], % | 2.9 (2.0, 4.1)
+      x [1], % | 2.9 [2.0, 4.1]
 
 ---
 
@@ -167,7 +167,7 @@
       
       Variable |        Summary
       -------------------------
-      x [1], % | 2.9 (1.8, 4.0)
+      x [1], % | 2.9 [1.8, 4.0]
 
 ---
 
@@ -178,7 +178,7 @@
       
       Variable |        Summary
       -------------------------
-      x [1], % | 2.9 (2.0, 4.2)
+      x [1], % | 2.9 [2.0, 4.2]
 
 # report_sample group_by
 
