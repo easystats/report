@@ -5,8 +5,13 @@
     Message <simpleMessage>
       Formula contains log- or sqrt-terms.
         See help("standardize") for how such terms are standardized.
+    Warning <simpleWarning>
+      Following elements are no valid metric: `Sargan` and `Wu_Hausman`
+    Message <simpleMessage>
       Formula contains log- or sqrt-terms.
         See help("standardize") for how such terms are standardized.
+    Warning <simpleWarning>
+      Following elements are no valid metric: `Sargan` and `Wu_Hausman`
     Output
       We fitted a linear model to predict packs with rprice, rincome and salestax
       (formula: log(packs) ~ log(rprice) + log(rincome)). The model's explanatory
