@@ -27,7 +27,7 @@ test_that("report_performance", {
   )
 
   # Mixed models
-  skip_if_not_or_load_if_installed("lme4")
+  skip_if_not_installed("lme4")
 
   x <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
   expect_identical(
@@ -61,11 +61,10 @@ test_that("report_performance", {
     )
   )
 
-
   # Mixed models
-  skip_if_not_or_load_if_installed("lme4")
+  skip_if_not_installed("lme4")
 
-  x <- lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
+  x <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
   expect_identical(
     as.character(report_performance(x)),
     paste(
@@ -98,9 +97,12 @@ test_that("report_performance", {
   )
 
   # Bayesian
-  skip_if_not_or_load_if_installed("rstanarm")
+  skip_if_not_installed("rstanarm")
 
-  x <- stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 1000, seed = 333)
+  x <- rstanarm::stan_glm(
+    Sepal.Length ~ Species,
+    data = iris, refresh = 0, iter = 1000, seed = 333
+  )
   expect_snapshot(
     variant = "windows",
     report_performance(x)
@@ -110,7 +112,10 @@ test_that("report_performance", {
     summary(report_performance(x))
   )
 
-  x <- stan_glm(vs ~ disp, data = mtcars, family = "binomial", refresh = 0, iter = 1000, seed = 333)
+  x <- rstanarm::stan_glm(vs ~ disp,
+    data = mtcars, family = "binomial",
+    refresh = 0, iter = 1000, seed = 333
+  )
   expect_snapshot(
     variant = "windows",
     report_performance(x)
@@ -120,7 +125,19 @@ test_that("report_performance", {
     summary(report_performance(x))
   )
 
-  x <- stan_lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris, refresh = 0, iter = 1000, seed = 333)
+  suppressWarnings(suppressMessages(library(rstanarm)))
+  # Using namespace instead of loading the package throws an error:
+  # could not find function "stan_glmer"
+  # But we don't call "stan_glmer" directly, I suppose it must be called internally
+  # Even defining it manually, however, we get another error:
+  # stan_glmer <- rstanarm::stan_glmer
+  # Unable to refit the model with standardized data.
+  # Try instead to standardize the data (standardize(data)) and refit the
+  # model manually.
+
+  x <- rstanarm::stan_lmer(Sepal.Length ~ Petal.Length + (1 | Species),
+    data = iris, refresh = 0, iter = 1000, seed = 333
+  )
   expect_snapshot(
     variant = "windows",
     report_performance(x)
@@ -129,4 +146,5 @@ test_that("report_performance", {
     variant = "windows",
     summary(report_performance(x))
   )
+  unloadNamespace("rstanarm")
 })

@@ -18,8 +18,6 @@ test_that("models", {
   expect_output(print(r), "Compared to the Species model")
 })
 
-
-
 test_that("inclusion", {
   inc_bf <- bayestestR::bayesfactor_inclusion(BFmodels, prior_odds = c(1, 2, 3), match_models = TRUE)
   r <- report(inc_bf)

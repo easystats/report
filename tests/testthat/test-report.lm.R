@@ -1,4 +1,5 @@
-skip_if_not(getRversion() <= "4.2.1")
+# skip_if_not(getRversion() <= "4.2.1")
+# This skip does not seem necessary??
 
 test_that("report.lm - lm", {
   # lm -------
