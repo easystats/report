@@ -1,17 +1,12 @@
 test_that("report-survreg", {
-  skip_if_not_or_load_if_installed("survival")
-  # skip_if_not_installed("survival")
-  # Using namespace instead of loading the package throws an error:
-  # Unable to refit the model with standardized data.
-  # Try instead to standardize the data (standardize(data)) and refit the
-  # model manually.
+  skip_if_not_installed("survival")
+  require("survival", quietly = TRUE)
 
-  Surv <- survival::Surv
-
+  # TODO: Use namespace when https://github.com/easystats/datawizard/issues/401 is resolved
   set.seed(123)
-  mod_survreg <- survival::survreg(
+  mod_survreg <- survreg(
     formula = Surv(futime, fustat) ~ ecog.ps + rx,
-    data = survival::ovarian,
+    data = ovarian,
     dist = "logistic"
   )
 
