@@ -1,10 +1,13 @@
-skip_if_not_or_load_if_installed("brms")
+skip_if_not_installed("brms")
 
 test_that("report.brms", {
-  testthat::skip_if_not(packageVersion("rstan") >= "2.26.0")
+  testthat::skip_if_not_installed("rstan", "2.26.0")
 
   set.seed(333)
-  model <- suppressWarnings(brm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300, seed = 333))
+  model <- suppressMessages(suppressWarnings(brms::brm(
+    mpg ~ qsec + wt,
+    data = mtcars, refresh = 0, iter = 300, seed = 333
+  )))
   r <- report(model, verbose = FALSE)
 
   expect_s3_class(summary(r), "character")

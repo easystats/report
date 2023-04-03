@@ -1,4 +1,5 @@
-skip_if_not(getRversion() <= "4.2.1")
+# skip_if_not(getRversion() <= "4.2.1")
+# This skip does not seem necessary??
 
 test_that("report.numeric", {
   r <- report(seq(0, 1, length.out = 100))
@@ -43,7 +44,7 @@ test_that("report.factor", {
 })
 
 test_that("report.data.frame", {
-  skip_if_not_or_load_if_installed("dplyr")
+  skip_if_not_installed("dplyr")
 
   r <- report(iris)
   expect_equal(nrow(as.data.frame(r)), 7, tolerance = 0)
@@ -60,7 +61,7 @@ test_that("report.data.frame", {
   expect_equal(nrow(as.data.frame(r)), 7, tolerance = 0)
   expect_equal(mean(as.data.frame(r)$n_Obs), 107, tolerance = 0.01)
 
-  r <- report(group_by(iris, Species))
+  r <- report(dplyr::group_by(iris, Species))
   expect_equal(nrow(as.data.frame(r)), 8, tolerance = 0)
   expect_equal(mean(as.data.frame(r)$n_Obs), 50, tolerance = 0)
 
@@ -68,18 +69,18 @@ test_that("report.data.frame", {
 })
 
 test_that("report.data.frame - with NAs", {
-  skip_if_not_or_load_if_installed("dplyr")
+  skip_if_not_installed("dplyr")
 
   df <- mtcars
   df[1, 2] <- NA
   df[1, 6] <- NA
 
-  report_grouped_df <- report(group_by(df, cyl))
+  report_grouped_df <- report(dplyr::group_by(df, cyl))
   expect_snapshot(variant = "windows", report_grouped_df)
 })
 
 test_that("report.data.frame - with list columns", {
-  skip_if_not_or_load_if_installed("dplyr")
+  skip_if_not_installed("dplyr")
 
   set.seed(123)
   expect_snapshot(variant = "windows", report(dplyr::starwars))

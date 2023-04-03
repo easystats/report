@@ -35,6 +35,7 @@ test_that("report_sample weights, coorect weighted N", {
 })
 
 test_that("report_sample check input", {
+  skip_if(packageVersion("parameters") < "0.20.3")
   data(iris)
   expect_error(report_sample(lm(Sepal.Length ~ Species, data = iris)))
   expect_silent(report_sample(iris$Species))
