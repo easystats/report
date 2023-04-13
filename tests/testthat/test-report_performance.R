@@ -125,16 +125,11 @@ test_that("report_performance", {
     summary(report_performance(x))
   )
 
-  suppressWarnings(suppressMessages(library(rstanarm)))
   # Using namespace instead of loading the package throws an error:
   # could not find function "stan_glmer"
   # But we don't call "stan_glmer" directly, I suppose it must be called internally
-  # Even defining it manually, however, we get another error:
-  # stan_glmer <- rstanarm::stan_glmer
-  # Unable to refit the model with standardized data.
-  # Try instead to standardize the data (standardize(data)) and refit the
-  # model manually.
-
+  # So we must define it manually:
+  stan_glmer <- rstanarm::stan_glmer
   x <- rstanarm::stan_lmer(Sepal.Length ~ Petal.Length + (1 | Species),
     data = iris, refresh = 0, iter = 1000, seed = 333
   )
