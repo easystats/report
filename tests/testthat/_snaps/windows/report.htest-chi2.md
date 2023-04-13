@@ -122,5 +122,5 @@
     Output
        
       
-       (Risk_ratio = 2.54, 95% CI [1.87, 3.45])
+       (Risk_ratio = 2.54, 95% CI [1.80, 3.60])
 

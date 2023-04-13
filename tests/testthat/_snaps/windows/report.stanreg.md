@@ -25,8 +25,8 @@
       (Highest Density Interval), along the probability of direction (pd), the
       probability of significance and the probability of being large. The thresholds
       beyond which the effect is considered as significant (i.e., non-negligible) and
-      large are |0.30| and |1.81| (corresponding respectively to 0.05 and 0.30 of the
-      outcome's SD). Convergence and stability of the Bayesian sampling has been
-      assessed using R-hat, which should be below 1.01 (Vehtari et al., 2019), and
-      Effective Sample Size (ESS), which should be greater than 1000 (Burkner, 2017).
+      large are |0.30| and |1.81|. Convergence and stability of the Bayesian sampling
+      has been assessed using R-hat, which should be below 1.01 (Vehtari et al.,
+      2019), and Effective Sample Size (ESS), which should be greater than 1000
+      (Burkner, 2017).
 
