@@ -70,7 +70,7 @@ Suggests:
     rstanarm,
     survival,
     testthat
-remotes: easystats/datawizard
+Remotes: easystats/datawizard
 VignetteBuilder:
     knitr
 Encoding: UTF-8
