@@ -1,6 +1,3 @@
-# skip_if_not(getRversion() <= "4.2.1")
-# This skip does not seem necessary??
-
 test_that("report.numeric", {
   r <- report(seq(0, 1, length.out = 100))
   expect_equal(as.data.frame(r)$Mean, 0.5, tolerance = 0)
