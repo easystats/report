@@ -190,10 +190,13 @@ report_parameters.numeric <- function(x,
   if (!is.null(missing_percentage)) {
     if (isTRUE(missing_percentage)) {
       n_missing <- table$percentage_Missing[1]
-      text_missing <- paste0(insight::format_value(table$percentage_Missing[1],
-        protect_integers = TRUE,
-        digits = digits
-      ), "% missing")
+      text_missing <- paste0(
+        insight::format_value(table$percentage_Missing[1],
+          protect_integers = TRUE,
+          digits = digits
+        ),
+        "% missing"
+      )
     } else {
       n_missing <- table$n_Missing[1]
       text_missing <- paste0(table$n_Missing[1], " missing")
