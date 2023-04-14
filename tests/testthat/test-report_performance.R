@@ -86,8 +86,8 @@ test_that("report_performance Bayesian)", {
   )
 
   x6 <- rstanarm::stan_glm(vs ~ disp,
-                          data = mtcars, family = "binomial",
-                          refresh = 0, iter = 1000, seed = 333
+    data = mtcars, family = "binomial",
+    refresh = 0, iter = 1000, seed = 333
   )
   expect_snapshot(
     variant = "windows",
@@ -104,7 +104,7 @@ test_that("report_performance Bayesian)", {
   # So we must define it manually:
   stan_glmer <- rstanarm::stan_glmer
   x7 <- rstanarm::stan_lmer(Sepal.Length ~ Petal.Length + (1 | Species),
-                           data = iris, refresh = 0, iter = 1000, seed = 333
+    data = iris, refresh = 0, iter = 1000, seed = 333
   )
   expect_snapshot(
     variant = "windows",
