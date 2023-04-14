@@ -133,7 +133,7 @@ report_parameters.stanreg <- function(x,
   text <- text[!is.na(text)]
   text_full <- text_full[!is.na(text_full)]
 
-  # Diagnostic / Convergence
+  # Diagnostic or Convergence
   if (include_diagnostic) {
     diagnostic <- bayestestR::diagnostic_posterior(x, ...)
 
