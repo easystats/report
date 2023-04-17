@@ -71,14 +71,14 @@ reference:
       - format_formula
       - format_model
       - as.report_text
-      - report.default
       - report
+      - report.default
       - report_table
       - report_text
 
   - title: Report Statistical Objects
     desc: |
-      Main functions for reporting of statistical objects
+      Helper functions for reporting of statistical objects
     contents:
       - report.aov
       - report.bayesfactor_models
@@ -92,7 +92,7 @@ reference:
 
   - title: Report Non-Statistical Objects
     desc: |
-      Main functions for reporting of non-statistical objects
+      Helper functions for reporting of non-statistical objects
     contents:
       - report.numeric
       - report.character
