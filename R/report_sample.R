@@ -118,6 +118,14 @@ report_sample <- function(data,
   # grouped by?
   grouping <- !is.null(group_by) && group_by %in% colnames(data)
 
+  # character to factor
+  data[] <- lapply(data, function(i) {
+    if (is.character(i)) {
+      i <- as.factor(i)
+    }
+    i
+  })
+
   out <- if (isTRUE(grouping)) {
     result <- lapply(split(data[variables], factor(data[[group_by]])), function(x) {
       x[[group_by]] <- NULL
@@ -266,9 +274,9 @@ report_sample <- function(data,
     stringsAsFactors = FALSE
   )
 
-  # if(isTRUE(n)) {
-  #   out$n <- sum(!is.na(x))
-  # }
+  if (isTRUE(n)) {
+    out$n <- sum(!is.na(x))
+  }
 
   out
 }
@@ -282,7 +290,17 @@ report_sample <- function(data,
                                       ci = NULL,
                                       ci_method = "wilson",
                                       ci_correct = FALSE,
+                                      n = FALSE,
                                       ...) {
+  # we need a factor here, to determine number of levels. For binary variables,
+  # only one category is shown. However, for grouped data, sometimes not all
+  # levels are present in each group. A character would then have only two values
+  # and recognized as binary, even if it actually would be a factor with more
+  # than two levels...
+  if (is.character(x)) {
+    x <- as.factor(x)
+  }
+
   if (!is.null(weights)) {
     x[is.na(weights)] <- NA
     weights[is.na(x)] <- NA
@@ -294,7 +312,7 @@ report_sample <- function(data,
   }
 
   # for binary factors, just need one level
-  if (length(proportions) == 2) {
+  if (nlevels(x) == 2) {
     proportions <- proportions[2]
   }
 
@@ -311,11 +329,17 @@ report_sample <- function(data,
     .summary <- sprintf("%.1f", 100 * proportions)
   }
 
-  data.frame(
+  out <- data.frame(
     Variable = sprintf("%s [%s], %%", column, names(proportions)),
     Summary = as.vector(.summary),
     stringsAsFactors = FALSE
   )
+
+  if (isTRUE(n)) {
+    out$n <- round(sum(!is.na(x)) * as.vector(proportions))
+  }
+
+  out
 }
 
 
