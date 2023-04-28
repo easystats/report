@@ -268,17 +268,11 @@ report_sample <- function(data,
     column <- sprintf("Median %s (MAD)%s", column, n.label)
   }
 
-  out <- data.frame(
+  data.frame(
     Variable = column,
     Summary = .summary,
     stringsAsFactors = FALSE
   )
-
-  if (isTRUE(n)) {
-    out$n <- sum(!is.na(x))
-  }
-
-  out
 }
 
 
@@ -329,17 +323,16 @@ report_sample <- function(data,
     .summary <- sprintf("%.1f", 100 * proportions)
   }
 
-  out <- data.frame(
-    Variable = sprintf("%s [%s], %%", column, names(proportions)),
+  if (isTRUE(n)) {
+    .summary <- paste0(.summary, ", ", round(sum(!is.na(x)) * as.vector(proportions)))
+  }
+
+  n.label <- ifelse(n, ", n", "")
+  data.frame(
+    Variable = sprintf("%s [%s], %%%s", column, names(proportions), n.label),
     Summary = as.vector(.summary),
     stringsAsFactors = FALSE
   )
-
-  if (isTRUE(n)) {
-    out$n <- round(sum(!is.na(x)) * as.vector(proportions))
-  }
-
-  out
 }
 
 
