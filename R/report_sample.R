@@ -261,11 +261,11 @@ report_sample <- function(data,
     sprintf("%.*f (%.*f)%s", digits, .weighted_median(x, weights), digits, .weighted_mad(x, weights), n_stat)
   }
 
-  n.label <- ifelse(n, ", n", "")
+  n_label <- ifelse(n, ", n", "")
   if (centrality == "mean") {
-    column <- sprintf("Mean %s (SD)%s", column, n.label)
+    column <- sprintf("Mean %s (SD)%s", column, n_label)
   } else {
-    column <- sprintf("Median %s (MAD)%s", column, n.label)
+    column <- sprintf("Median %s (MAD)%s", column, n_label)
   }
 
   data.frame(
@@ -327,9 +327,9 @@ report_sample <- function(data,
     .summary <- paste0(.summary, ", ", round(sum(!is.na(x)) * as.vector(proportions)))
   }
 
-  n.label <- ifelse(n, ", n", "")
+  n_label <- ifelse(n, ", n", "")
   data.frame(
-    Variable = sprintf("%s [%s], %%%s", column, names(proportions), n.label),
+    Variable = sprintf("%s [%s], %%%s", column, names(proportions), n_label),
     Summary = as.vector(.summary),
     stringsAsFactors = FALSE
   )
@@ -467,11 +467,11 @@ print_md.report_sample <- function(x, ...) {
   x <- x[order]
   weights <- weights[order]
   rw <- cumsum(weights) / sum(weights)
-  md.values <- min(which(rw >= p))
-  if (rw[md.values] == p) {
-    mean(x[md.values:(md.values + 1)])
+  md_values <- min(which(rw >= p))
+  if (rw[md_values] == p) {
+    mean(x[md_values:(md_values + 1)])
   } else {
-    x[md.values]
+    x[md_values]
   }
 }
 
