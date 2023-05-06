@@ -89,6 +89,7 @@ reference:
       - report.lm
       - report.stanreg
       - report.test_performance
+      - report.estimate_contrasts
 
   - title: Report Non-Statistical Objects
     desc: |

@@ -11,7 +11,7 @@
 #'
 #' @inherit report return seealso
 #'
-#' @examplesIf requireNamespace("modelbased", quietly = TRUE)
+#' @examplesIf requireNamespace("modelbased", quietly = TRUE) && requireNamespace("emmeans", quietly = TRUE)
 #' library(modelbased)
 #' model <- lm(Sepal.Width ~ Species, data = iris)
 #' contr <- estimate_contrasts(model)
@@ -40,7 +40,7 @@ report_effectsize.estimate_contrasts <- function(x, ...) {
     values_from = "Sepal.Width",
     names_from = "Species")
 
-  eff <- lapply(seq(nrow(x)), function(i) {
+  eff <- lapply(seq_len(nrow(x)), function(i) {
     effectsize::cohens_d(x = x$Level1[i], y = x$Level2[i], data = dat_wide)
   })
 
@@ -78,12 +78,12 @@ report_text.estimate_contrasts <- function(x, table = NULL, ...) {
 
   text <- paste0("The difference between ", x$Level1, " and ", x$Level2, " is ",
                 ifelse(x$Difference < 0, " negative,", "positive,"), " statistically ",
-                ifelse(x$p < .05, "significant,", "non-significant,"), " and ",
+                ifelse(x$p < 0.05, "significant,", "non-significant,"), " and ",
                 effectsize::interpret_cohens_d(table$Cohens_d), " ",
                 "(difference = ", f.table$Difference, ", 95% CI ", f.table$CI, ", ",
                 names(f.table)[6], " = ", f.table[[6]], ", ", insight::format_p(table$p),
                 ", ", "Cohen's d = ", f.table$`Cohen's d`, ", 95% CI ", f.table$`Cohens_d 95% CI`,
-                ")", sep = ". "
+                ")", collapse = ". "
                 )
 
   text <- paste("The marginal contrasts analysis suggests the following.", paste0(text, collapse = ""))

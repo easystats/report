@@ -33,7 +33,7 @@ An object of class \code{\link[=report]{report()}}.
 Create reports for \code{estimate_contrasts} objects.
 }
 \examples{
-\dontshow{if (requireNamespace("modelbased", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("modelbased", quietly = TRUE) && requireNamespace("emmeans", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 library(modelbased)
 model <- lm(Sepal.Width ~ Species, data = iris)
 contr <- estimate_contrasts(model)
