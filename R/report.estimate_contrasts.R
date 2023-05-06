@@ -31,14 +31,14 @@ report.estimate_contrasts <- function(x, ...) {
 #' @rdname report.estimate_contrasts
 #' @export
 report_effectsize.estimate_contrasts <- function(x, ...) {
-
   att <- attributes(x)
   dat <- insight::get_data(att$model)
 
   dat_wide <- datawizard::data_to_wide(
     dat,
     values_from = "Sepal.Width",
-    names_from = "Species")
+    names_from = "Species"
+  )
 
   eff <- lapply(seq_len(nrow(x)), function(i) {
     effectsize::cohens_d(x = x$Level1[i], y = x$Level2[i], data = dat_wide)
@@ -58,7 +58,6 @@ report_effectsize.estimate_contrasts <- function(x, ...) {
 #' @rdname report.estimate_contrasts
 #' @export
 report_table.estimate_contrasts <- function(x, effectsize = NULL, ...) {
-
   if (is.null(effectsize)) {
     effectsize <- report_effectsize(x)
   }
@@ -73,21 +72,20 @@ report_table.estimate_contrasts <- function(x, effectsize = NULL, ...) {
 #' @rdname report.estimate_contrasts
 #' @export
 report_text.estimate_contrasts <- function(x, table = NULL, ...) {
-
-  f.table <- insight::format_table(table)
+  f_table <- insight::format_table(table)
 
   text <- paste0("The difference between ", x$Level1, " and ", x$Level2, " is ",
-                ifelse(x$Difference < 0, " negative,", "positive,"), " statistically ",
-                ifelse(x$p < 0.05, "significant,", "non-significant,"), " and ",
-                effectsize::interpret_cohens_d(table$Cohens_d), " ",
-                "(difference = ", f.table$Difference, ", 95% CI ", f.table$CI, ", ",
-                names(f.table)[6], " = ", f.table[[6]], ", ", insight::format_p(table$p),
-                ", ", "Cohen's d = ", f.table$`Cohen's d`, ", 95% CI ", f.table$`Cohens_d 95% CI`,
-                ")", collapse = ". "
-                )
+    ifelse(x$Difference < 0, " negative,", "positive,"), " statistically ",
+    ifelse(x$p < 0.05, "significant,", "non-significant,"), " and ",
+    effectsize::interpret_cohens_d(table$Cohens_d), " ",
+    "(difference = ", f_table$Difference, ", 95% CI ", f_table$CI, ", ",
+    names(f_table)[6], " = ", f_table[[6]], ", ", insight::format_p(table$p),
+    ", ", "Cohen's d = ", f_table$`Cohen's d`, ", 95% CI ", f_table$`Cohens_d 95% CI`,
+    ")",
+    collapse = ". "
+  )
 
   text <- paste("The marginal contrasts analysis suggests the following.", paste0(text, collapse = ""))
 
   as.report_text(text)
-
 }
