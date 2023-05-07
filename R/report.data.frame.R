@@ -384,7 +384,7 @@ report_table.grouped_df <- function(x,
     } else {
       table_full <- current_table_full
     }
-    
+
     current_table <- summary(current_table_full)
     current_table$Group <- group
     if (!length(table) == 0) {
