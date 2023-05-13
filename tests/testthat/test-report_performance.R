@@ -97,12 +97,23 @@ test_that("report_performance Bayesian)", {
     variant = "windows",
     summary(report_performance(x6))
   )
+})
 
+test_that("report_performance Bayesian 2)", {
+  set.seed(123)
+  # Bayesian
+  skip_if_not_installed("rstanarm")
   # Using namespace instead of loading the package throws an error:
   # could not find function "stan_glmer"
   # But we don't call "stan_glmer" directly, I suppose it must be called internally
   # So we must define it manually:
-  stan_glmer <<- rstanarm::stan_glmer
+
+  is_stan_glmer_avail <- !inherits(try(stan_glmer, silent = TRUE), "try-error")
+  if (!is_stan_glmer_avail) {
+    stan_glmer <<- rstanarm::stan_glmer
+    on.exit(remove(stan_glmer, envir = .GlobalEnv))
+  }
+
   x7 <- rstanarm::stan_lmer(Sepal.Length ~ Petal.Length + (1 | Species),
     data = iris, refresh = 0, iter = 1000, seed = 333
   )
@@ -114,6 +125,4 @@ test_that("report_performance Bayesian)", {
     variant = "windows",
     summary(report_performance(x7))
   )
-  remove(stan_glmer, envir = .GlobalEnv)
-  unloadNamespace("rstanarm")
 })

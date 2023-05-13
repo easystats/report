@@ -96,15 +96,15 @@
     Output
       # Descriptive Statistics
       
-      Variable                  |          Summary
-      --------------------------------------------
-      Mean Sepal.Length (SD), n | 5.84 (0.83), 150
-      Mean Sepal.Width (SD), n  | 3.06 (0.44), 150
-      Mean Petal.Length (SD), n | 3.76 (1.77), 150
-      Mean Petal.Width (SD), n  | 1.20 (0.76), 150
-      Species [setosa], %       |             33.3
-      Species [versicolor], %   |             33.3
-      Species [virginica], %    |             33.3
+      Variable                   |          Summary
+      ---------------------------------------------
+      Mean Sepal.Length (SD), n  | 5.84 (0.83), 150
+      Mean Sepal.Width (SD), n   | 3.06 (0.44), 150
+      Mean Petal.Length (SD), n  | 3.76 (1.77), 150
+      Mean Petal.Width (SD), n   | 1.20 (0.76), 150
+      Species [setosa], %, n     |         33.3, 50
+      Species [versicolor], %, n |         33.3, 50
+      Species [virginica], %, n  |         33.3, 50
 
 # report_sample CI
 
