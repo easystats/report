@@ -126,4 +126,3 @@ test_that("report_performance Bayesian 2)", {
     summary(report_performance(x7))
   )
 })
-
