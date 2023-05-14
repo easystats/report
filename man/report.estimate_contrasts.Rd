@@ -2,16 +2,13 @@
 % Please edit documentation in R/report.estimate_contrasts.R
 \name{report.estimate_contrasts}
 \alias{report.estimate_contrasts}
-\alias{report_effectsize.estimate_contrasts}
 \alias{report_table.estimate_contrasts}
 \alias{report_text.estimate_contrasts}
 \title{Reporting \code{estimate_contrasts} objects}
 \usage{
 \method{report}{estimate_contrasts}(x, ...)
 
-\method{report_effectsize}{estimate_contrasts}(x, ...)
-
-\method{report_table}{estimate_contrasts}(x, effectsize = NULL, ...)
+\method{report_table}{estimate_contrasts}(x, ...)
 
 \method{report_text}{estimate_contrasts}(x, table = NULL, ...)
 }
@@ -19,9 +16,6 @@
 \item{x}{Object of class \code{estimate_contrasts}.}
 
 \item{...}{Arguments passed to or from other methods.}
-
-\item{effectsize}{Provide the output of \code{report_effectsize()} to avoid
-its re-computation.}
 
 \item{table}{Provide the output of  \code{report_table()} to avoid its
 re-computation.}
