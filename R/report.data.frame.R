@@ -379,12 +379,19 @@ report_table.grouped_df <- function(x,
     )
 
     current_table_full$Group <- group
-    # table_full <- rbind(table_full, current_table_full)
-    table_full <- merge(table_full, current_table_full, all = TRUE, sort = FALSE)
+    if (!length(table_full) == 0) {
+      table_full <- merge(table_full, current_table_full, all = TRUE, sort = FALSE)
+    } else {
+      table_full <- current_table_full
+    }
+
     current_table <- summary(current_table_full)
     current_table$Group <- group
-    # table <- rbind(table, current_table)
-    table <- merge(table, current_table, all = TRUE, sort = FALSE)
+    if (!length(table) == 0) {
+      table <- merge(table, current_table, all = TRUE, sort = FALSE)
+    } else {
+      table <- current_table
+    }
   }
 
   table <- datawizard::data_reorder(table, "Group")

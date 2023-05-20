@@ -37,7 +37,12 @@ Authors@R:
              family = "Siegel",
              role = "ctb",
              email = "mutlusun@users.noreply.github.com",
-             comment = c(ORCID = "0000-0002-6021-804X")))
+             comment = c(ORCID = "0000-0002-6021-804X")),
+     person(given = "Camden",
+            family = "Bock",
+            role = "ctb",
+            email = "camden.bock@maine.edu",
+            comment = c(ORCID = "0000-0002-3907-7748")))
 Maintainer: Rémi Thériault <remi.theriault@mail.mcgill.ca>
 Description: The aim of the 'report' package is to bridge the gap between
     R’s output and the formatted results contained in your manuscript.
