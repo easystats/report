@@ -158,7 +158,7 @@
 lines in the console:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"easystats/report"</span><span class="op">)</span> <span class="co"># You only need to do that once</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"easystats/report"</span><span class="op">)</span> <span class="co"># You only need to do that once</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://easystats.github.io/report/">"report"</a></span><span class="op">)</span> <span class="co"># Load the package every time you start R</span></span></code></pre></div>
 <p>Great! The <code>report</code> package is now installed and loaded in
@@ -213,6 +213,10 @@ allows one to return a tabular summary using the
 <span>  <span class="fu"><a href="../reference/report_table.html">report_table</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co"># Group      |     Variable | n_Obs | Mean |   SD | Median |  MAD |  Min |  Max | Skewness | Kurtosis | n_Missing</span></span>
 <span><span class="co"># ---------------------------------------------------------------------------------------------------------------</span></span>
+<span><span class="co"># setosa     | Sepal.Length |    50 | 5.01 | 0.35 |   5.00 | 0.30 | 4.30 | 5.80 |     0.12 |    -0.25 |         0</span></span>
+<span><span class="co"># setosa     |  Sepal.Width |    50 | 3.43 | 0.38 |   3.40 | 0.37 | 2.30 | 4.40 |     0.04 |     0.95 |         0</span></span>
+<span><span class="co"># setosa     | Petal.Length |    50 | 1.46 | 0.17 |   1.50 | 0.15 | 1.00 | 1.90 |     0.11 |     1.02 |         0</span></span>
+<span><span class="co"># setosa     |  Petal.Width |    50 | 0.25 | 0.11 |   0.20 | 0.00 | 0.10 | 0.60 |     1.25 |     1.72 |         0</span></span>
 <span><span class="co"># versicolor | Sepal.Length |    50 | 5.94 | 0.52 |   5.90 | 0.52 | 4.90 | 7.00 |     0.11 |    -0.53 |         0</span></span>
 <span><span class="co"># versicolor |  Sepal.Width |    50 | 2.77 | 0.31 |   2.80 | 0.30 | 2.00 | 3.40 |    -0.36 |    -0.37 |         0</span></span>
 <span><span class="co"># versicolor | Petal.Length |    50 | 4.26 | 0.47 |   4.35 | 0.52 | 3.00 | 5.10 |    -0.61 |     0.05 |         0</span></span>
