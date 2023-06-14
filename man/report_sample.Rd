@@ -25,7 +25,7 @@ report_sample(
 
 \item{group_by}{Character vector, indicating the column(s) for possible grouping
 of the descriptive table. Note that weighting (see \code{weights}) does not work
-wirh more than one grouping column.}
+with more than one grouping column.}
 
 \item{centrality}{Character, indicates the statistics that should be
 calculated for numeric variables. May be \code{"mean"} (for mean and

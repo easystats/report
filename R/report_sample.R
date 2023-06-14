@@ -5,7 +5,7 @@
 #' @param data A data frame for which descriptive statistics should be created.
 #' @param group_by Character vector, indicating the column(s) for possible grouping
 #'   of the descriptive table. Note that weighting (see `weights`) does not work
-#' wirh more than one grouping column.
+#'   with more than one grouping column.
 #' @param centrality Character, indicates the statistics that should be
 #'   calculated for numeric variables. May be `"mean"` (for mean and
 #'   standard deviation) or `"median"` (for median and median absolute

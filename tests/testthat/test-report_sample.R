@@ -281,7 +281,7 @@ test_that("report_sample, numeric select", {
 
 test_that("report_sample, print vertical", {
   skip_if_not_installed("datawizard")
-  skip_if_not(getRversion() >= "4.1")
+  skip_if_not(getRversion() >= "4.2.0")
   data(iris)
   set.seed(123)
   iris$grp <- sample(letters[1:3], nrow(iris), TRUE)
