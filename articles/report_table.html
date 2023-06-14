@@ -39,7 +39,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.7.4</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.7.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -237,7 +237,7 @@ mtcars\)</span>wt</td>
 <span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="../reference/report_table.html">report_table</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">t</span></span>
-<span><span class="co"># Difference |          95% CI | t(18.33) |     p | Cohen's d |   Cohens_d  CI</span></span>
+<span><span class="co"># Difference |          95% CI | t(18.33) |     p | Cohen's d |  Cohen's d  CI</span></span>
 <span><span class="co"># ----------------------------------------------------------------------------</span></span>
 <span><span class="co"># -7.24      | [-11.28, -3.21] |    -3.77 | 0.001 |     -1.41 | [-2.26, -0.53]</span></span>
 <span><span class="co"># </span></span>
@@ -263,7 +263,7 @@ that you can prettify the output while keeping it as a data frame.</p>
 <code class="sourceCode R"><span><span class="fu">insight</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/insight/reference/format_table.html" class="external-link">format_table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span>, stars <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#   Difference          95% CI t(18.33)       p Alternative</span></span>
 <span><span class="co"># 1      -7.24 [-11.28, -3.21]    -3.77 0.001**   two.sided</span></span>
-<span><span class="co">#   Cohen's d   Cohens_d  CI</span></span>
+<span><span class="co">#   Cohen's d  Cohen's d  CI</span></span>
 <span><span class="co"># 1     -1.41 [-2.26, -0.53]</span></span></code></pre></div>
 <p>Also, you can join the results of multiple tables:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -302,7 +302,7 @@ that you can prettify the output while keeping it as a data frame.</p>
 <th align="center">df</th>
 <th align="center">p</th>
 <th align="center">Cohen’s d</th>
-<th align="center">Cohens_d CI</th>
+<th align="center">Cohen’s d CI</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
