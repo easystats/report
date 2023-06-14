@@ -9,6 +9,9 @@ Minor changes
   confidence intervals for proportions of factor levels. Currently, two different
   methods (*Wald* and *Wilson*) are available.
 
+* `report_sample` now works on grouped data frame, using the defined groups as
+  values for the `group_by` argument.
+
 # report 0.5.7
 
 Hotfix for CRAN reverse dependency compatibility.

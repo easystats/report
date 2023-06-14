@@ -230,3 +230,20 @@ test_that("report_sample weights", {
   expect_snapshot(report_sample(mtcars, weights = "carb"), variant = "windows")
   expect_snapshot(report_sample(iris, weights = "Petal.Width"), variant = "windows")
 })
+
+test_that("report_sample grouped data frames", {
+  skip_if_not_installed("datawizard")
+  data(mtcars)
+  mtcars_grouped <- datawizard::data_group(mtcars, "gear")
+  out1 <- report_sample(mtcars_grouped, select = c("hp", "mpg"))
+  out2 <- report_sample(mtcars, group_by = "gear", select = c("hp", "mpg"))
+  expect_identical(out1, out2)
+})
+
+test_that("report_sample, error on more than one grouping variable", {
+  data(mtcars)
+  expect_error(
+    report_sample(mtcars, group_by = c("vs", "gear"), select = c("hp", "mpg")),
+    regex = "only works"
+  )
+})

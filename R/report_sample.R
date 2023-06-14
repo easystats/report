@@ -115,6 +115,19 @@ report_sample <- function(data,
     variables <- setdiff(variables, exclude)
   }
 
+  # for grouped data frames, use groups as group_by argument
+  if (inherits(data, "grouped_df") && is.null(group_by)) {
+    group_by <- setdiff(colnames(attributes(data)$groups), ".rows")
+  }
+
+  # group_by is not allow to be longer than 1 element
+  if (length(group_by) > 1) {
+    insight::format_error(
+      "`report_sample` only works for one grouping variable.",
+      "Thus, `group_by` must be of length 1, or data frames are only allowed to be grouped by one variable."
+    )
+  }
+
   # grouped by?
   grouping <- !is.null(group_by) && group_by %in% colnames(data)
 
