@@ -281,12 +281,10 @@ test_that("report_sample, numeric select", {
 
 test_that("report_sample, print vertical", {
   skip_if_not_installed("datawizard")
-  skip_if_not(getRversion() >= "4.2.0")
   data(iris)
   set.seed(123)
   iris$grp <- sample(letters[1:3], nrow(iris), TRUE)
-  out <- iris |>
-    datawizard::data_group(c("Species", "grp")) |>
-    report_sample(select = 1:3)
+  iris_grp <- datawizard::data_group(c("Species", "grp"))
+  out <- report_sample(iris_grp, select = 1:3)
   expect_snapshot(print(out, layout = "vertical"))
 })
