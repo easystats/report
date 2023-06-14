@@ -529,16 +529,21 @@ report_text.lm <- function(x, table = NULL, ...) {
   perf <- report_performance(x, table = table, ...)
   intercept <- report_intercept(x, table = table, ...)
 
+  if (insight::is_nullmodel(model)) {
+    params_text_full <- params_text <- ""
+  } else {
+    params_text_full <- c(" Within this model:\n\n", as.character(params))
+    params_text <- c(" Within this model:\n\n", as.character(summary(params), ...))
+  }
 
   text_full <- paste0(
     "We fitted a ",
     model,
     ". ",
     perf,
-    ". ",
+    ifelse(nchar(perf) > 0, ". ", ""),
     intercept,
-    " Within this model:\n\n",
-    as.character(params),
+    params_text_full,
     "\n\n",
     info
   )
@@ -548,10 +553,9 @@ report_text.lm <- function(x, table = NULL, ...) {
     summary(model),
     ". ",
     summary(perf),
-    ". ",
+    ifelse(nchar(perf) > 0, ". ", ""),
     summary(intercept),
-    " Within this model:\n\n",
-    as.character(summary(params), ...)
+    params_text
   )
 
 

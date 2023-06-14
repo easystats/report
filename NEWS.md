@@ -20,6 +20,10 @@ Minor changes
 * The `print` method for `report_sample` gains a `layout` argument, to print
   tables either in `"horizontal"` or `"vertical"` layout.
 
+Bug fixes
+
+* Fixed printing issue for intercept-only models.
+
 # report 0.5.7
 
 Hotfix for CRAN reverse dependency compatibility.
