@@ -2,6 +2,8 @@
 
 Minor changes
 
+* `report` now supports variables of class `Date`, treating them like factors.
+
 * `report_sample` now reports the weighted number of observations when data
   is both grouped an weighted.
 
