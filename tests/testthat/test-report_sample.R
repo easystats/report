@@ -252,7 +252,7 @@ test_that("report_sample grouped data frames", {
   expect_identical(out1, out2)
 })
 
-test_that("report_sample, error on more than one grouping variable", {
+test_that("report_sample, with more than one grouping variable", {
   data(iris)
   set.seed(123)
   iris$grp <- sample(letters[1:3], nrow(iris), TRUE)
@@ -264,4 +264,29 @@ test_that("report_sample, error on more than one grouping variable", {
   # verified against
   expected <- aggregate(iris["Sepal.Length"], iris[c("Species", "grp")], mean)
   expect_snapshot(out)
+})
+
+test_that("report_sample, numeric select", {
+  data(iris)
+  out1 <- report_sample(
+    iris,
+    select = c("Sepal.Length", "Sepal.Width")
+  )
+  out2 <- report_sample(
+    iris,
+    select = 1:2
+  )
+  expect_identical(out1, out2)
+})
+
+test_that("report_sample, print vertical", {
+  skip_if_not_installed("datawizard")
+  skip_if_not(getRversion() >= "4.1")
+  data(iris)
+  set.seed(123)
+  iris$grp <- sample(letters[1:3], nrow(iris), TRUE)
+  out <- iris |>
+    datawizard::data_group(c("Species", "grp")) |>
+    report_sample(select = 1:3)
+  expect_snapshot(print(out, layout = "vertical"))
 })

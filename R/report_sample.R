@@ -101,15 +101,18 @@ report_sample <- function(data,
     select <- colnames(data)
   }
 
+  # for numeric indices, select related column names
+  if (is.numeric(select)) {
+    select <- colnames(data)[select]
+  }
+
   # variables to keep
   if (!is.null(weights)) {
     select <- unique(c(select, weights))
   }
 
   # variables to keep
-  if (!is.null(select)) {
-    variables <- intersect(select, variables)
-  }
+  variables <- intersect(select, variables)
 
   # variables to exclude
   if (!is.null(exclude)) {
@@ -430,32 +433,45 @@ report_sample <- function(data,
 # print-method --------------------------------------------
 
 #' @export
-print.report_sample <- function(x, ...) {
+print.report_sample <- function(x, layout = "horizontal", ...) {
+  layout <- match.arg(layout, choices = c("horizontal", "vertical"))
   if (isTRUE(attributes(x)$weighted)) {
     header <- "# Descriptive Statistics (weighted)\n\n"
   } else {
     header <- "# Descriptive Statistics\n\n"
+  }
+
+  if (layout == "vertical") {
+    x <- datawizard::data_transpose(x, colnames = TRUE, rownames = "Groups")
   }
   insight::print_colour(header, "blue")
   cat(insight::export_table(x))
 }
 
 #' @export
-print_html.report_sample <- function(x, ...) {
+print_html.report_sample <- function(x, layout = "horizontal", ...) {
+  layout <- match.arg(layout, choices = c("horizontal", "vertical"))
   if (isTRUE(attributes(x)$weighted)) {
     caption <- "Descriptive Statistics (weighted)"
   } else {
     caption <- "Descriptive Statistics"
   }
+  if (layout == "vertical") {
+    x <- datawizard::data_transpose(x, colnames = TRUE, rownames = "Groups")
+  }
   insight::export_table(x, format = "html", caption = caption, ...)
 }
 
 #' @export
-print_md.report_sample <- function(x, ...) {
+print_md.report_sample <- function(x, layout = "horizontal", ...) {
+  layout <- match.arg(layout, choices = c("horizontal", "vertical"))
   if (isTRUE(attributes(x)$weighted)) {
     caption <- "Descriptive Statistics (weighted)"
   } else {
     caption <- "Descriptive Statistics"
+  }
+  if (layout == "vertical") {
+    x <- datawizard::data_transpose(x, colnames = TRUE, rownames = "Groups")
   }
   insight::export_table(x, format = "markdown", caption = caption, ...)
 }

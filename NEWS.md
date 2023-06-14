@@ -15,6 +15,9 @@ Minor changes
 * `report_sample` can now summarize data based on more than one grouping variable
   (i.e. `group_by` is allowed to be longer than 1).
 
+* The `print` method for `report_sample` gains a `layout` argument, to print
+  tables either in `"horizontal"` or `"vertical"` layout.
+
 # report 0.5.7
 
 Hotfix for CRAN reverse dependency compatibility.
