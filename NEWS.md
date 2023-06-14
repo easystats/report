@@ -12,6 +12,9 @@ Minor changes
 * `report_sample` now works on grouped data frame, using the defined groups as
   values for the `group_by` argument.
 
+* `report_sample` can now summarize data based on more than one grouping variable
+  (i.e. `group_by` is allowed to be longer than 1).
+
 # report 0.5.7
 
 Hotfix for CRAN reverse dependency compatibility.

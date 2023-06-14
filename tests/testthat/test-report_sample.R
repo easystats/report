@@ -32,6 +32,18 @@ test_that("report_sample weights, coorect weighted N", {
       "x [c], % |    33.3 |    33.3 |         33.3"
     )
   )
+
+  d <- data.frame(
+    x = c("a", "a", "a", "a", "b", "b", "b", "b", "c", "c", "c", "c"),
+    g1 = c(1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2),
+    g2 = c(3, 2, 1, 3, 2, 1, 3, 2, 1, 3, 2, 1),
+    w = c(0.5, 0.5, 1, 1, 1.5, 1.5, 2, 2, 1, 1, 1.5, 1.5),
+    stringsAsFactors = FALSE
+  )
+  expect_error(
+    report_sample(d, select = "x", group_by = c("g1", "g2"), weights = "w"),
+    regex = "Cannot apply"
+  )
 })
 
 test_that("report_sample check input", {
@@ -241,9 +253,15 @@ test_that("report_sample grouped data frames", {
 })
 
 test_that("report_sample, error on more than one grouping variable", {
-  data(mtcars)
-  expect_error(
-    report_sample(mtcars, group_by = c("vs", "gear"), select = c("hp", "mpg")),
-    regex = "only works"
+  data(iris)
+  set.seed(123)
+  iris$grp <- sample(letters[1:3], nrow(iris), TRUE)
+  out <- report_sample(
+    iris,
+    group_by = c("Species", "grp"),
+    select = c("Sepal.Length", "Sepal.Width")
   )
+  # verified against
+  expected <- aggregate(iris["Sepal.Length"], iris[c("Species", "grp")], mean)
+  expect_snapshot(out)
 })

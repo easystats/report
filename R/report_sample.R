@@ -3,8 +3,9 @@
 #' Create sample description table (also referred to as "Table 1").
 #'
 #' @param data A data frame for which descriptive statistics should be created.
-#' @param group_by Character vector, indicating the column for possible grouping
-#'   of the descriptive table.
+#' @param group_by Character vector, indicating the column(s) for possible grouping
+#'   of the descriptive table. Note that weighting (see `weights`) does not work
+#' wirh more than one grouping column.
 #' @param centrality Character, indicates the statistics that should be
 #'   calculated for numeric variables. May be `"mean"` (for mean and
 #'   standard deviation) or `"median"` (for median and median absolute
@@ -120,16 +121,13 @@ report_sample <- function(data,
     group_by <- setdiff(colnames(attributes(data)$groups), ".rows")
   }
 
-  # group_by is not allow to be longer than 1 element
-  if (length(group_by) > 1) {
-    insight::format_error(
-      "`report_sample` only works for one grouping variable.",
-      "Thus, `group_by` must be of length 1, or data frames are only allowed to be grouped by one variable."
-    )
-  }
-
   # grouped by?
-  grouping <- !is.null(group_by) && group_by %in% colnames(data)
+  grouping <- !is.null(group_by) && all(group_by %in% colnames(data))
+
+  # sanity check - weights and grouping
+  if (!is.null(group_by) && length(group_by) > 1 && !is.null(weights)) {
+    insight::format_error("Cannot apply `weights` when grouping is done by more than one variable.")
+  }
 
   # character to factor
   data[] <- lapply(data, function(i) {
@@ -139,9 +137,12 @@ report_sample <- function(data,
     i
   })
 
+  # coerce group_by columns to factor
+  groups <- as.data.frame(lapply(data[group_by], factor))
+
   out <- if (isTRUE(grouping)) {
-    result <- lapply(split(data[variables], factor(data[[group_by]])), function(x) {
-      x[[group_by]] <- NULL
+    result <- lapply(split(data[variables], groups), function(x) {
+      x[group_by] <- NULL
       .generate_descriptive_table(
         x,
         centrality,
@@ -153,13 +154,28 @@ report_sample <- function(data,
         ci_correct
       )
     })
+    # for more than one group, fix column names. we don't want "a.b (n=10)",
+    # but rather ""a, b (n=10)""
+    if (length(group_by) > 1) {
+      old_names <- datawizard::data_unite(
+        unique(groups),
+        new_column = ".old_names",
+        separator = "."
+      )[[".old_names"]]
+      new_names <- datawizard::data_unite(
+        unique(groups),
+        new_column = ".new_names",
+        separator = ", "
+      )[[".new_names"]]
+      result <- datawizard::data_rename(result, pattern = old_names, replacement = new_names)
+    }
     # remember values of first columns
     variable <- result[[1]]["Variable"]
     # number of observation, based on weights
     if (!is.null(weights)) {
       n_obs <- round(as.vector(stats::xtabs(data[[weights]] ~ data[[group_by]])))
     } else {
-      n_obs <- as.vector(table(data[[group_by]]))
+      n_obs <- as.vector(table(data[group_by]))
     }
     # column names for groups
     cn <- sprintf("%s (n=%g)", names(result), n_obs)
@@ -167,7 +183,7 @@ report_sample <- function(data,
     summaries <- do.call(cbind, lapply(result, function(i) i["Summary"]))
     colnames(summaries) <- cn
     # generate data for total column, but make sure to remove missings
-    total_data <- data[!is.na(data[[group_by]]), unique(c(variables, group_by))]
+    total_data <- data[stats::complete.cases(data[group_by]), unique(c(variables, group_by))]
     # bind all together, including total column
     final <- cbind(
       variable,
@@ -189,9 +205,9 @@ report_sample <- function(data,
     }
     # define total N, based on weights
     if (!is.null(weights)) {
-      total_n <- round(sum(as.vector(table(data[[group_by]]))) * mean(data[[weights]], na.rm = TRUE))
+      total_n <- round(sum(as.vector(table(data[group_by]))) * mean(data[[weights]], na.rm = TRUE))
     } else {
-      total_n <- sum(as.vector(table(data[[group_by]])))
+      total_n <- sum(as.vector(table(data[group_by])))
     }
     # add N to column name
     colnames(final)[ncol(final)] <- sprintf(
