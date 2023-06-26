@@ -529,7 +529,7 @@ report_text.lm <- function(x, table = NULL, ...) {
   perf <- report_performance(x, table = table, ...)
   intercept <- report_intercept(x, table = table, ...)
 
-  if (insight::is_nullmodel(model)) {
+  if (insight::is_nullmodel(x)) {
     params_text_full <- params_text <- ""
   } else {
     params_text_full <- c(" Within this model:\n\n", as.character(params))
