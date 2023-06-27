@@ -74,6 +74,8 @@ Suggests:
     rmarkdown,
     rstanarm,
     survival,
+    modelbased,
+    emmeans,
     testthat
 VignetteBuilder:
     knitr
@@ -108,6 +110,7 @@ Collate:
     'report.compare_performance.R'
     'report.data.frame.R'
     'report.default.R'
+    'report.estimate_contrasts.R'
     'report.factor.R'
     'report.glm.R'
     'report.glmmTMB.R'
