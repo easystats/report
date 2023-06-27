@@ -133,7 +133,7 @@ report_sample <- function(data,
   }
 
   # make clean data frame
-  clas(data) <- "data.frame"
+  class(data) <- "data.frame"
 
   # character to factor
   data[] <- lapply(data, function(i) {
