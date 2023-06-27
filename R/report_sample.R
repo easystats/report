@@ -132,6 +132,9 @@ report_sample <- function(data,
     insight::format_error("Cannot apply `weights` when grouping is done by more than one variable.")
   }
 
+  # make clean data frame
+  class(data) <- "data.frame"
+
   # character to factor
   data[] <- lapply(data, function(i) {
     if (is.character(i)) {

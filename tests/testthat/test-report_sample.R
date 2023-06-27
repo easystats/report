@@ -284,7 +284,7 @@ test_that("report_sample, print vertical", {
   data(iris)
   set.seed(123)
   iris$grp <- sample(letters[1:3], nrow(iris), TRUE)
-  iris_grp <- datawizard::data_group(c("Species", "grp"))
+  iris_grp <- datawizard::data_group(iris, c("Species", "grp"))
   out <- report_sample(iris_grp, select = 1:3)
   expect_snapshot(print(out, layout = "vertical"))
 })

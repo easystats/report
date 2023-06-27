@@ -77,7 +77,6 @@ Suggests:
     modelbased,
     emmeans,
     testthat
-Remotes: easystats/datawizard
 VignetteBuilder:
     knitr
 Encoding: UTF-8
@@ -144,3 +143,4 @@ Collate:
     'utils_grouped_df.R'
     'zzz.R'
 Roxygen: list(markdown = TRUE)
+Remotes: easystats/insight

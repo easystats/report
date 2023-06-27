@@ -389,7 +389,7 @@ report_model.lm <- function(x, table = NULL, ...) {
 
   # Model info
   info <- insight::model_info(x)
-  is_nullmodel <- insight::is_nullmodel(x)
+  is_nullmodel <- suppressWarnings(insight::is_nullmodel(x))
 
   # Boostrap
   if (attributes(table)$bootstrap) {
@@ -463,7 +463,7 @@ report_performance.lm <- function(x, table = NULL, ...) {
 
 
   # Intercept-only
-  if (insight::is_nullmodel(x)) {
+  if (suppressWarnings(insight::is_nullmodel(x))) {
     return(as.report_performance("", summary = ""))
   }
 
@@ -529,11 +529,11 @@ report_text.lm <- function(x, table = NULL, ...) {
   perf <- report_performance(x, table = table, ...)
   intercept <- report_intercept(x, table = table, ...)
 
-  if (insight::is_nullmodel(model)) {
+  if (suppressWarnings(insight::is_nullmodel(x))) {
     params_text_full <- params_text <- ""
   } else {
-    params_text_full <- c(" Within this model:\n\n", as.character(params))
-    params_text <- c(" Within this model:\n\n", as.character(summary(params), ...))
+    params_text_full <- paste0(" Within this model:\n\n", as.character(params))
+    params_text <- paste0(" Within this model:\n\n", as.character(summary(params), ...))
   }
 
   text_full <- paste0(
