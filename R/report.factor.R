@@ -1,16 +1,20 @@
 #' @rdname report.data.frame
 #' @export
 report.factor <- function(x, levels_percentage = "auto", ...) {
+  if (!is.factor(x)) {
+    x <- as.factor(x)
+  }
   table <- report_table(x, levels_percentage = levels_percentage, ...)
   text <- report_text(x, levels_percentage = levels_percentage, ...)
 
   as.report(text, table = table, ...)
 }
 
-
 #' @export
 report.logical <- report.factor
 
+#' @export
+report.Date <- report.factor
 
 
 # report_table ------------------------------------------------------------
@@ -19,6 +23,9 @@ report.logical <- report.factor
 
 #' @export
 report_table.factor <- function(x, levels_percentage = "auto", ...) {
+  if (!is.factor(x)) {
+    x <- as.factor(x)
+  }
   levels_percentage <- .report_dataframe_percentage(x, levels_percentage)
 
   if (length(x[is.na(x)]) != 0) {
@@ -42,12 +49,19 @@ report_table.factor <- function(x, levels_percentage = "auto", ...) {
 #' @export
 report_table.logical <- report_table.factor
 
+#' @export
+report_table.Date <- report_table.factor
+
+
 # report_parameters -------------------------------------------------------
 
 
 
 #' @export
 report_parameters.factor <- function(x, table = NULL, levels_percentage = "auto", ...) {
+  if (!is.factor(x)) {
+    x <- as.factor(x)
+  }
   # Get table
   if (is.null(table)) {
     table <- report_table(x, levels_percentage = levels_percentage, ...)
@@ -78,14 +92,20 @@ report_parameters.factor <- function(x, table = NULL, levels_percentage = "auto"
   as.report_parameters(text_full, summary = text, ...)
 }
 
-
 #' @export
 report_parameters.logical <- report_parameters.factor
+
+#' @export
+report_parameters.Date <- report_parameters.factor
+
 
 # report_text -------------------------------------------------------------
 
 #' @export
 report_text.factor <- function(x, table = NULL, levels_percentage = "auto", ...) {
+  if (!is.factor(x)) {
+    x <- as.factor(x)
+  }
   if (!is.null(list(...)$varname)) {
     name <- list(...)$varname
   } else if (is.null(names(x))) {
@@ -116,6 +136,9 @@ report_text.factor <- function(x, table = NULL, levels_percentage = "auto", ...)
 #' @export
 report_text.logical <- report_text.factor
 
+#' @export
+report_text.Date <- report_text.factor
+
 
 
 # report_statistics -------------------------------------------------------
@@ -123,6 +146,9 @@ report_text.logical <- report_text.factor
 
 #' @export
 report_statistics.factor <- function(x, table = NULL, levels_percentage = "auto", ...) {
+  if (!is.factor(x)) {
+    x <- as.factor(x)
+  }
   if (is.null(table)) {
     table <- report_table(x, levels_percentage = levels_percentage, ...)
   }
@@ -151,3 +177,6 @@ report_statistics.factor <- function(x, table = NULL, levels_percentage = "auto"
 
   as.report_statistics(paste0(text_full, collapse = "; "), summary = paste0(text, collapse = "; "))
 }
+
+#' @export
+report_statistics.Date <- report_statistics.factor

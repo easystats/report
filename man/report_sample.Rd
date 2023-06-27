@@ -23,8 +23,9 @@ report_sample(
 \arguments{
 \item{data}{A data frame for which descriptive statistics should be created.}
 
-\item{group_by}{Character vector, indicating the column for possible grouping
-of the descriptive table.}
+\item{group_by}{Character vector, indicating the column(s) for possible grouping
+of the descriptive table. Note that weighting (see \code{weights}) does not work
+with more than one grouping column.}
 
 \item{centrality}{Character, indicates the statistics that should be
 calculated for numeric variables. May be \code{"mean"} (for mean and

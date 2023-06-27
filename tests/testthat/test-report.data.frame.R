@@ -40,6 +40,17 @@ test_that("report.factor", {
   expect_equal(nrow(as.data.frame(r)), 4, tolerance = 0)
 })
 
+test_that("report.Date", {
+  set.seed(123)
+  x <- sample(seq(as.Date("1999/01/01"), as.Date("1999/01/05"), by = "day"), 30, replace = TRUE)
+  r <- report(x)
+  expect_equal(
+    as.character(r),
+    "x: 5 levels, namely 1999-01-01 (n = 6, 20.00%), 1999-01-02 (n = 6, 20.00%), 1999-01-03 (n = 9, 30.00%), 1999-01-04 (n = 4, 13.33%) and 1999-01-05 (n = 5, 16.67%)",
+    ignore_attr = TRUE
+  )
+})
+
 test_that("report.data.frame", {
   skip_if_not_installed("dplyr")
 

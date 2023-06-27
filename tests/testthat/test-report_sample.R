@@ -32,6 +32,18 @@ test_that("report_sample weights, coorect weighted N", {
       "x [c], % |    33.3 |    33.3 |         33.3"
     )
   )
+
+  d <- data.frame(
+    x = c("a", "a", "a", "a", "b", "b", "b", "b", "c", "c", "c", "c"),
+    g1 = c(1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2),
+    g2 = c(3, 2, 1, 3, 2, 1, 3, 2, 1, 3, 2, 1),
+    w = c(0.5, 0.5, 1, 1, 1.5, 1.5, 2, 2, 1, 1, 1.5, 1.5),
+    stringsAsFactors = FALSE
+  )
+  expect_error(
+    report_sample(d, select = "x", group_by = c("g1", "g2"), weights = "w"),
+    regex = "Cannot apply"
+  )
 })
 
 test_that("report_sample check input", {
@@ -229,4 +241,50 @@ test_that("report_sample weights", {
   expect_snapshot(report_sample(airquality, weights = "Temp"), variant = "windows")
   expect_snapshot(report_sample(mtcars, weights = "carb"), variant = "windows")
   expect_snapshot(report_sample(iris, weights = "Petal.Width"), variant = "windows")
+})
+
+test_that("report_sample grouped data frames", {
+  skip_if_not_installed("datawizard")
+  data(mtcars)
+  mtcars_grouped <- datawizard::data_group(mtcars, "gear")
+  out1 <- report_sample(mtcars_grouped, select = c("hp", "mpg"))
+  out2 <- report_sample(mtcars, group_by = "gear", select = c("hp", "mpg"))
+  expect_identical(out1, out2)
+})
+
+test_that("report_sample, with more than one grouping variable", {
+  data(iris)
+  set.seed(123)
+  iris$grp <- sample(letters[1:3], nrow(iris), TRUE)
+  out <- report_sample(
+    iris,
+    group_by = c("Species", "grp"),
+    select = c("Sepal.Length", "Sepal.Width")
+  )
+  # verified against
+  expected <- aggregate(iris["Sepal.Length"], iris[c("Species", "grp")], mean)
+  expect_snapshot(out)
+})
+
+test_that("report_sample, numeric select", {
+  data(iris)
+  out1 <- report_sample(
+    iris,
+    select = c("Sepal.Length", "Sepal.Width")
+  )
+  out2 <- report_sample(
+    iris,
+    select = 1:2
+  )
+  expect_identical(out1, out2)
+})
+
+test_that("report_sample, print vertical", {
+  skip_if_not_installed("datawizard")
+  data(iris)
+  set.seed(123)
+  iris$grp <- sample(letters[1:3], nrow(iris), TRUE)
+  iris_grp <- datawizard::data_group(c("Species", "grp"))
+  out <- report_sample(iris_grp, select = 1:3)
+  expect_snapshot(print(out, layout = "vertical"))
 })
