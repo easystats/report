@@ -18,7 +18,7 @@ format_model <- function(x) {
 format_model.default <- function(x) {
   info <- insight::model_info(x)
 
-  if (insight::is_nullmodel(x)) {
+  if (suppressWarnings(insight::is_nullmodel(x))) {
     type <- "constant (intercept-only) "
   } else {
     type <- ""

@@ -27,7 +27,7 @@ test_that("report.lm - glm", {
 test_that("report.lm - lm intercept-only", {
   data(sleep)
   d <- datawizard::data_modify(sleep, group = as.integer(group) - 1L)
-  d_wide <- datawizard::data_to_wide(
+  d_wide <<- datawizard::data_to_wide(
     d,
     names_from = "group",
     values_from = "extra",
