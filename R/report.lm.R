@@ -532,8 +532,8 @@ report_text.lm <- function(x, table = NULL, ...) {
   if (insight::is_nullmodel(x)) {
     params_text_full <- params_text <- ""
   } else {
-    params_text_full <- c(" Within this model:\n\n", as.character(params))
-    params_text <- c(" Within this model:\n\n", as.character(summary(params), ...))
+    params_text_full <- paste0(" Within this model:\n\n", as.character(params))
+    params_text <- paste0(" Within this model:\n\n", as.character(summary(params), ...))
   }
 
   text_full <- paste0(
