@@ -82,6 +82,9 @@
     <loc>https://easystats.github.io/report/reference/report.default.html</loc>
   </url>
   <url>
+    <loc>https://easystats.github.io/report/reference/report.estimate_contrasts.html</loc>
+  </url>
+  <url>
     <loc>https://easystats.github.io/report/reference/report.htest.html</loc>
   </url>
   <url>
