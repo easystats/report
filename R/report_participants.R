@@ -129,11 +129,11 @@ report_participants <- function(data,
                                 threshold = 10,
                                 ...) {
   # Convert empty strings to NA
-  data.list <- lapply(data, function(x) {
+  data_list <- lapply(data, function(x) {
     x[which(x == "")] <- NA
     x
   })
-  data <- as.data.frame(data.list)
+  data <- as.data.frame(data_list)
 
   # find age variable automatically
   if (is.null(age)) {
