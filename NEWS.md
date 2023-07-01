@@ -22,6 +22,9 @@ Minor changes
 
 Bug fixes
 
+* Fixed issue in `report_participants`, which did not print the `"gender"`
+  category for grouped output when that argument was written in lower-case.
+
 * Fixed printing issue for intercept-only models.
 
 # report 0.5.7
