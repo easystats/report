@@ -246,8 +246,8 @@ report_participants <- function(data,
                                  threshold = 10,
                                  ...) {
   # Sanity checks
-  demo.names <- c("Age", "Sex", "Gender", "Education", "Country", "Race")
-  data <- .check_df_names(data, names = demo.names)
+  demo_names <- c("Age", "Sex", "Gender", "Education", "Country", "Race")
+  data <- .check_df_names(data, names = demo_names)
 
   age <- .replace_names(data, age)
   sex <- .replace_names(data, sex)
@@ -405,15 +405,15 @@ report_participants <- function(data,
   } else {
     data[[country]] <- as.character(data[[country]])
     data[which(data[[country]] %in% c(NA, "NA")), country] <- "missing"
-    frequency.table <- as.data.frame(datawizard::data_tabulate(data[[country]]))[c(2, 4)]
-    names(frequency.table)[2] <- "Percent"
-    frequency.table <- frequency.table[-which(is.na(frequency.table$Value)), ]
-    frequency.table <- frequency.table[order(-frequency.table$Percent), ]
-    upper <- frequency.table[which(frequency.table$Percent >= threshold), ]
-    lower <- frequency.table[which(frequency.table$Percent < threshold), ]
+    frequency_table <- as.data.frame(datawizard::data_tabulate(data[[country]]))[c(2, 4)]
+    names(frequency_table)[2] <- "Percent"
+    frequency_table <- frequency_table[-which(is.na(frequency_table$Value)), ]
+    frequency_table <- frequency_table[order(-frequency_table$Percent), ]
+    upper <- frequency_table[which(frequency_table$Percent >= threshold), ]
+    lower <- frequency_table[which(frequency_table$Percent < threshold), ]
     if (nrow(lower) > 0) {
-      lower.sum <- data.frame(Value = "other", Percent = sum(lower$Percent), stringsAsFactors = FALSE)
-      combined <- rbind(upper, lower.sum)
+      lower_sum <- data.frame(Value = "other", Percent = sum(lower$Percent), stringsAsFactors = FALSE)
+      combined <- rbind(upper, lower_sum)
     } else {
       combined <- upper
     }
@@ -427,15 +427,15 @@ report_participants <- function(data,
   } else {
     data[[race]] <- as.character(data[[race]])
     data[which(data[[race]] %in% c(NA, "NA")), race] <- "missing"
-    frequency.table <- as.data.frame(datawizard::data_tabulate(data[[race]]))[c(2, 4)]
-    names(frequency.table)[2] <- "Percent"
-    frequency.table <- frequency.table[-which(is.na(frequency.table$Value)), ]
-    frequency.table <- frequency.table[order(-frequency.table$Percent), ]
-    upper <- frequency.table[which(frequency.table$Percent >= threshold), ]
-    lower <- frequency.table[which(frequency.table$Percent < threshold), ]
+    frequency_table <- as.data.frame(datawizard::data_tabulate(data[[race]]))[c(2, 4)]
+    names(frequency_table)[2] <- "Percent"
+    frequency_table <- frequency_table[-which(is.na(frequency_table$Value)), ]
+    frequency_table <- frequency_table[order(-frequency_table$Percent), ]
+    upper <- frequency_table[which(frequency_table$Percent >= threshold), ]
+    lower <- frequency_table[which(frequency_table$Percent < threshold), ]
     if (nrow(lower) > 0) {
-      lower.sum <- data.frame(Value = "other", Percent = sum(lower$Percent), stringsAsFactors = FALSE)
-      combined <- rbind(upper, lower.sum)
+      lower_sum <- data.frame(Value = "other", Percent = sum(lower$Percent), stringsAsFactors = FALSE)
+      combined <- rbind(upper, lower_sum)
     } else {
       combined <- upper
     }
