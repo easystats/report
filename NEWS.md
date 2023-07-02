@@ -1,20 +1,22 @@
 # report 0.5.8
 
-Minor changes
+Minor changes 
 
 * `report` now supports variables of class `Date`, treating them like factors.
 
-* `report_sample` now reports the weighted number of observations when data
-  is both grouped an weighted.
+* `report` now supports objects of class `estimate_contrasts`, from easystats'
+  `modelbased::estimate_contrasts`, outputting either the results in text form,
+  or as a table.
 
-* `report_sample` gains `ci`, `ci_method` and `ci_adjust` arguments, to compute
+* `report_sample`
+  * now reports the weighted number of observations when data
+  is both grouped an weighted.
+  * gains `ci`, `ci_method` and `ci_adjust` arguments, to compute
   confidence intervals for proportions of factor levels. Currently, two different
   methods (*Wald* and *Wilson*) are available.
-
-* `report_sample` now works on grouped data frame, using the defined groups as
+  * now works on grouped data frame, using the defined groups as
   values for the `group_by` argument.
-
-* `report_sample` can now summarize data based on more than one grouping variable
+  * can now summarize data based on more than one grouping variable
   (i.e. `group_by` is allowed to be longer than 1).
 
 * The `print` method for `report_sample` gains a `layout` argument, to print
