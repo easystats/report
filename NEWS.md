@@ -1,6 +1,6 @@
 # report 0.5.8
 
-Minor changes
+Minor changes 
 
 * `report` now supports variables of class `Date`, treating them like factors.
 
