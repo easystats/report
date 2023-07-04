@@ -44,3 +44,60 @@ articles:
   - new_models
   - report
   - report_table
+
+reference:
+  - title: Report Statistical Information
+    desc: |
+      Main functions for reporting statistical information
+    contents:
+      - report_effectsize
+      - report_info
+      - report_intercept
+      - report_model
+      - report_parameters
+      - report_participants
+      - report_performance
+      - report_priors
+      - report_random
+      - report_sample
+      - report_statistics
+
+  - title: Formatting
+    desc: |
+      Functions for formatting content
+    contents:
+      - cite_easystats
+      - format_citation
+      - format_formula
+      - format_model
+      - as.report_text
+      - report
+      - report.default
+      - report_table
+      - report_text
+
+  - title: Report Statistical Objects
+    desc: |
+      Helper functions for reporting of statistical objects
+    contents:
+      - report.aov
+      - report.bayesfactor_models
+      - report.brmsfit
+      - report.compare_performance
+      - report.htest
+      - report.lavaan
+      - report.lm
+      - report.stanreg
+      - report.test_performance
+      - report.estimate_contrasts
+
+  - title: Report Non-Statistical Objects
+    desc: |
+      Helper functions for reporting of non-statistical objects
+    contents:
+      - report.numeric
+      - report.character
+      - report.factor
+      - report.data.frame
+      - report_date
+      - report.sessionInfo

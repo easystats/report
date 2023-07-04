@@ -1,6 +1,7 @@
-skip_if_not_or_load_if_installed("rstanarm")
+skip_if_not_installed("rstanarm")
+
 set.seed(123)
-model <- suppressWarnings(stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300))
+model <- suppressWarnings(rstanarm::stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300))
 
 test_that("model-stanreg", {
   r <- report(model, centrality = "mean")

@@ -39,6 +39,7 @@ Authors:
 Other contributors:
 \itemize{
   \item Rudolf Siegel \email{mutlusun@users.noreply.github.com} (\href{https://orcid.org/0000-0002-6021-804X}{ORCID}) [contributor]
+  \item Camden Bock \email{camden.bock@maine.edu} (\href{https://orcid.org/0000-0002-3907-7748}{ORCID}) [contributor]
 }
 
 }

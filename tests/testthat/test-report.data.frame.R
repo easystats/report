@@ -1,5 +1,3 @@
-skip_if_not(getRversion() <= "4.2.1")
-
 test_that("report.numeric", {
   r <- report(seq(0, 1, length.out = 100))
   expect_equal(as.data.frame(r)$Mean, 0.5, tolerance = 0)
@@ -42,8 +40,19 @@ test_that("report.factor", {
   expect_equal(nrow(as.data.frame(r)), 4, tolerance = 0)
 })
 
+test_that("report.Date", {
+  set.seed(123)
+  x <- sample(seq(as.Date("1999/01/01"), as.Date("1999/01/05"), by = "day"), 30, replace = TRUE)
+  r <- report(x)
+  expect_equal(
+    as.character(r),
+    "x: 5 levels, namely 1999-01-01 (n = 6, 20.00%), 1999-01-02 (n = 6, 20.00%), 1999-01-03 (n = 9, 30.00%), 1999-01-04 (n = 4, 13.33%) and 1999-01-05 (n = 5, 16.67%)",
+    ignore_attr = TRUE
+  )
+})
+
 test_that("report.data.frame", {
-  skip_if_not_or_load_if_installed("dplyr")
+  skip_if_not_installed("dplyr")
 
   r <- report(iris)
   expect_equal(nrow(as.data.frame(r)), 7, tolerance = 0)
@@ -60,26 +69,26 @@ test_that("report.data.frame", {
   expect_equal(nrow(as.data.frame(r)), 7, tolerance = 0)
   expect_equal(mean(as.data.frame(r)$n_Obs), 107, tolerance = 0.01)
 
-  r <- report(group_by(iris, Species))
-  expect_equal(nrow(as.data.frame(r)), 8, tolerance = 0)
+  r <- report(dplyr::group_by(iris, Species))
+  expect_equal(nrow(as.data.frame(r)), 12, tolerance = 0)
   expect_equal(mean(as.data.frame(r)$n_Obs), 50, tolerance = 0)
 
   expect_snapshot(variant = "windows", r)
 })
 
 test_that("report.data.frame - with NAs", {
-  skip_if_not_or_load_if_installed("dplyr")
+  skip_if_not_installed("dplyr")
 
   df <- mtcars
   df[1, 2] <- NA
   df[1, 6] <- NA
 
-  report_grouped_df <- report(group_by(df, cyl))
+  report_grouped_df <- report(dplyr::group_by(df, cyl))
   expect_snapshot(variant = "windows", report_grouped_df)
 })
 
 test_that("report.data.frame - with list columns", {
-  skip_if_not_or_load_if_installed("dplyr")
+  skip_if_not_installed("dplyr")
 
   set.seed(123)
   expect_snapshot(variant = "windows", report(dplyr::starwars))

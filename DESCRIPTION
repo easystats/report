@@ -1,7 +1,7 @@
 Type: Package
 Package: report
 Title: Automated Reporting of Results and Statistical Models
-Version: 0.5.6
+Version: 0.5.7.10
 Authors@R:
     c(person(given = "Dominique",
              family = "Makowski",
@@ -37,7 +37,12 @@ Authors@R:
              family = "Siegel",
              role = "ctb",
              email = "mutlusun@users.noreply.github.com",
-             comment = c(ORCID = "0000-0002-6021-804X")))
+             comment = c(ORCID = "0000-0002-6021-804X")),
+     person(given = "Camden",
+            family = "Bock",
+            role = "ctb",
+            email = "camden.bock@maine.edu",
+            comment = c(ORCID = "0000-0002-3907-7748")))
 Maintainer: Rémi Thériault <remi.theriault@mail.mcgill.ca>
 Description: The aim of the 'report' package is to bridge the gap between
     R’s output and the formatted results contained in your manuscript.
@@ -52,10 +57,10 @@ Depends:
 Imports:
     bayestestR (>= 0.13.0),
     effectsize (> 0.8.2),
-    insight (>= 0.18.8),
-    parameters (>= 0.20.0),
-    performance (>= 0.9.2),
-    datawizard (>= 0.6.5),
+    insight (>= 0.19.1),
+    parameters (>= 0.20.2),
+    performance (>= 0.10.2),
+    datawizard (>= 0.7.0),
     stats,
     tools,
     utils
@@ -69,12 +74,14 @@ Suggests:
     rmarkdown,
     rstanarm,
     survival,
+    modelbased,
+    emmeans,
     testthat
 VignetteBuilder:
     knitr
 Encoding: UTF-8
 Language: en-US
-RoxygenNote: 7.2.3.9000
+RoxygenNote: 7.2.3
 Config/testthat/edition: 3
 Config/Needs/website:
     rstudio/bslib,
@@ -86,6 +93,7 @@ Collate:
     'format_citation.R'
     'format_formula.R'
     'format_model.R'
+    'reexports.R'
     'report-package.R'
     'utils_combine_tables.R'
     'report.lm.R'
@@ -102,6 +110,7 @@ Collate:
     'report.compare_performance.R'
     'report.data.frame.R'
     'report.default.R'
+    'report.estimate_contrasts.R'
     'report.factor.R'
     'report.glm.R'
     'report.glmmTMB.R'
@@ -134,3 +143,4 @@ Collate:
     'utils_grouped_df.R'
     'zzz.R'
 Roxygen: list(markdown = TRUE)
+Remotes: easystats/insight

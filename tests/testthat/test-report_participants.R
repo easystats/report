@@ -1,3 +1,44 @@
+test_that("report_participants, argument gender works", {
+  # Works when capitalized
+  data <- data.frame(
+    "Age" = c(22, 22, 54, 54, 8, 8, 42, 42),
+    "Gender" = c("N", "N", "W", "M", "M", "M", "Non-Binary", "Non-Binary"),
+    "Condition" = c("A", "A", "A", "A", "B", "B", "B", "B"),
+    stringsAsFactors = FALSE
+  )
+  out <- report_participants(data)
+  expect_identical(
+    out,
+    paste(
+      "8 participants (Mean age = 31.5, SD = 19.0, range: [8, 54];",
+      "Gender: 12.5% women, 37.5% men, 50.00% non-binary)"
+    )
+  )
+  out <- report_participants(data, group = "Condition")
+  expect_identical(
+    out,
+    paste(
+      "For the 'Condition - A' group: 4 participants (Mean age = 38.0,",
+      "SD = 18.5, range: [22, 54]; Gender: 25.0% women, 25.0% men,",
+      "50.00% non-binary) and for the 'Condition - B' group: 4 participants",
+      "(Mean age = 25.0, SD = 19.6, range: [8, 42]; Gender: 0.0% women,",
+      "50.0% men, 50.00% non-binary)"
+    )
+  )
+  # works when lowercase
+  out <- report_participants(data, group = "Condition")
+  expect_identical(
+    out,
+    paste(
+      "For the 'Condition - A' group: 4 participants (Mean age = 38.0,",
+      "SD = 18.5, range: [22, 54]; Gender: 25.0% women, 25.0% men,",
+      "50.00% non-binary) and for the 'Condition - B' group: 4 participants",
+      "(Mean age = 25.0, SD = 19.6, range: [8, 42]; Gender: 0.0% women,",
+      "50.0% men, 50.00% non-binary)"
+    )
+  )
+})
+
 test_that("report_participants", {
   data <- data.frame(
     "Age" = c(22, 22, 54, 54, 8, 8),
@@ -9,14 +50,24 @@ test_that("report_participants", {
 
   expect_snapshot(
     variant = "windows",
-    report_participants(data, age = "Age", sex = "Sex", participant = "Participant")
+    report_participants(data,
+      age = "Age", sex = "Sex",
+      participant = "Participant"
+    )
   )
   expect_snapshot(
     variant = "windows",
     report_participants(data, participant = "Participant", spell_n = TRUE)
   )
 
-  expect_equal(nchar(report_participants(data, participant = "Participant", spell_n = TRUE)), 160, ignore_attr = TRUE)
+  expect_equal(
+    nchar(report_participants(data,
+      participant = "Participant",
+      spell_n = TRUE
+    )),
+    160,
+    ignore_attr = TRUE
+  )
 
   data2 <- data.frame(
     "Age" = c(22, 22, 54, 54, 8, 8),
@@ -45,7 +96,10 @@ test_that("report_participants", {
   # Add tests for education, country, race
   data4 <- data.frame(
     "Education" = c(0, 8, -3, -5, 3, 5, NA),
-    "Education2" = c("Bachelor", "PhD", "Highschool", "Highschool", "Bachelor", "Bachelor", NA),
+    "Education2" = c(
+      "Bachelor", "PhD", "Highschool", "Highschool",
+      "Bachelor", "Bachelor", NA
+    ),
     "Country" = c("USA", "Canada", "Canada", "India", "Germany", "USA", NA),
     "Race" = c("Black", NA, "White", "Asian", "Black", "Black", "White"),
     stringsAsFactors = FALSE

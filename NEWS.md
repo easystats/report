@@ -1,3 +1,38 @@
+# report 0.5.8
+
+Minor changes 
+
+* `report` now supports variables of class `Date`, treating them like factors.
+
+* `report` now supports objects of class `estimate_contrasts`, from easystats'
+  `modelbased::estimate_contrasts`, outputting either the results in text form,
+  or as a table.
+
+* `report_sample`
+  * now reports the weighted number of observations when data
+  is both grouped an weighted.
+  * gains `ci`, `ci_method` and `ci_adjust` arguments, to compute
+  confidence intervals for proportions of factor levels. Currently, two different
+  methods (*Wald* and *Wilson*) are available.
+  * now works on grouped data frame, using the defined groups as
+  values for the `group_by` argument.
+  * can now summarize data based on more than one grouping variable
+  (i.e. `group_by` is allowed to be longer than 1).
+
+* The `print` method for `report_sample` gains a `layout` argument, to print
+  tables either in `"horizontal"` or `"vertical"` layout.
+
+Bug fixes
+
+* Fixed issue in `report_participants`, which did not print the `"gender"`
+  category for grouped output when that argument was written in lower-case.
+
+* Fixed printing issue for intercept-only models.
+
+# report 0.5.7
+
+Hotfix for CRAN reverse dependency compatibility.
+
 # report 0.5.6
 
 Breaking Changes

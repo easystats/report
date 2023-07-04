@@ -9,8 +9,6 @@
 
     Code
       report_table(model)
-    Warning <simpleWarning>
-      No column names that matched the required search pattern were found.
     Output
       Parameter     | Coefficient |       95% CI |     z |      p |  Component |     Fit
       ----------------------------------------------------------------------------------
@@ -50,8 +48,6 @@
 
     Code
       report_performance(model)
-    Warning <simpleWarning>
-      No column names that matched the required search pattern were found.
     Output
       The model is not significantly different from a baseline model (Chi2(8) = 7.98,
       p = 0.435). The GFI (.97 > .95) suggest a satisfactory fit., The model is not

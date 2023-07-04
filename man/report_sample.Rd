@@ -8,6 +8,9 @@ report_sample(
   data,
   group_by = NULL,
   centrality = "mean",
+  ci = NULL,
+  ci_method = "wilson",
+  ci_correct = FALSE,
   select = NULL,
   exclude = NULL,
   weights = NULL,
@@ -20,13 +23,40 @@ report_sample(
 \arguments{
 \item{data}{A data frame for which descriptive statistics should be created.}
 
-\item{group_by}{Character vector, indicating the column for possible grouping
-of the descriptive table.}
+\item{group_by}{Character vector, indicating the column(s) for possible grouping
+of the descriptive table. Note that weighting (see \code{weights}) does not work
+with more than one grouping column.}
 
 \item{centrality}{Character, indicates the statistics that should be
 calculated for numeric variables. May be \code{"mean"} (for mean and
 standard deviation) or \code{"median"} (for median and median absolute
 deviation) as summary.}
+
+\item{ci}{Level of confidence interval for relative frequencies (proportions).
+If not \code{NULL}, confidence intervals are shown for proportions of factor
+levels.}
+
+\item{ci_method}{Character, indicating the method how to calculate confidence
+intervals for proportions. Currently implemented methods are \code{"wald"} and
+\code{"wilson"}. Note that \code{"wald"} can produce intervals outside the plausible
+range of [0, 1], and thus it is recommended to prefer the \code{"wilson"} method.
+The formulae for the confidence intervals are:
+\itemize{
+\item \code{"wald"}:
+
+\deqn{p \pm z \sqrt{\frac{p (1 - p)}{n}}}
+\item \code{"wilson"}:
+
+\deqn{\frac{2np + z^2 \pm z \sqrt{z^2 + 4npq}}{2(n + z^2)}}
+
+where \code{p} is the proportion (of a factor level), \code{q} is \code{1-p}, \code{z} is the
+critical z-score based on the interval level and \code{n} is the length of the
+vector (cf. \emph{Newcombe 1998}, \emph{Wilson 1927}).
+}}
+
+\item{ci_correct}{Logical, it \code{TRUE}, applies continuity correction. See
+\emph{Newcombe 1998} for different correction-methods based on the chosen
+\code{ci_method}.}
 
 \item{select}{Character vector, with column names that should be included in
 the descriptive table.}
@@ -61,4 +91,20 @@ report_sample(iris[, 1:4])
 report_sample(iris, select = c("Sepal.Length", "Petal.Length", "Species"))
 report_sample(iris, group_by = "Species")
 report_sample(airquality, group_by = "Month", n = TRUE, total = FALSE)
+
+# confidence intervals for proportions
+set.seed(123)
+d <- data.frame(x = factor(sample(letters[1:3], 100, TRUE, c(0.01, 0.39, 0.6))))
+report_sample(d, ci = 0.95, ci_method = "wald") # ups, negative CI
+report_sample(d, ci = 0.95, ci_method = "wilson") # negative CI fixed
+report_sample(d, ci = 0.95, ci_correct = TRUE) # continuity correction
+}
+\references{
+\itemize{
+\item Newcombe, R. G. (1998). Two-sided confidence intervals for the single
+proportion: comparison of seven methods. Statistics in Medicine. 17 (8):
+857–872
+\item Wilson, E. B. (1927). Probable inference, the law of succession, and statistical
+inference. Journal of the American Statistical Association. 22 (158): 209–212
+}
 }

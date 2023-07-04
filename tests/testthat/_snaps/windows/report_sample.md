@@ -96,15 +96,89 @@
     Output
       # Descriptive Statistics
       
-      Variable                  |          Summary
-      --------------------------------------------
-      Mean Sepal.Length (SD), n | 5.84 (0.83), 150
-      Mean Sepal.Width (SD), n  | 3.06 (0.44), 150
-      Mean Petal.Length (SD), n | 3.76 (1.77), 150
-      Mean Petal.Width (SD), n  | 1.20 (0.76), 150
-      Species [setosa], %       |             33.3
-      Species [versicolor], %   |             33.3
-      Species [virginica], %    |             33.3
+      Variable                   |          Summary
+      ---------------------------------------------
+      Mean Sepal.Length (SD), n  | 5.84 (0.83), 150
+      Mean Sepal.Width (SD), n   | 3.06 (0.44), 150
+      Mean Petal.Length (SD), n  | 3.76 (1.77), 150
+      Mean Petal.Width (SD), n   | 1.20 (0.76), 150
+      Species [setosa], %, n     |         33.3, 50
+      Species [versicolor], %, n |         33.3, 50
+      Species [virginica], %, n  |         33.3, 50
+
+# report_sample CI
+
+    Code
+      report_sample(iris, select = c("Sepal.Length", "Species"), ci = 0.95,
+      ci_method = "wald")
+    Output
+      # Descriptive Statistics
+      
+      Variable                |           Summary
+      -------------------------------------------
+      Mean Sepal.Length (SD)  |       5.84 (0.83)
+      Species [setosa], %     | 33.3 [25.8, 40.9]
+      Species [versicolor], % | 33.3 [25.8, 40.9]
+      Species [virginica], %  | 33.3 [25.8, 40.9]
+
+---
+
+    Code
+      report_sample(iris, select = c("Sepal.Length", "Species"), ci = 0.95,
+      ci_method = "wilson")
+    Output
+      # Descriptive Statistics
+      
+      Variable                |           Summary
+      -------------------------------------------
+      Mean Sepal.Length (SD)  |       5.84 (0.83)
+      Species [setosa], %     | 33.3 [26.3, 41.2]
+      Species [versicolor], % | 33.3 [26.3, 41.2]
+      Species [virginica], %  | 33.3 [26.3, 41.2]
+
+---
+
+    Code
+      report_sample(d, ci = 0.95, select = "x", ci_method = "wald")
+    Output
+      # Descriptive Statistics
+      
+      Variable |        Summary
+      -------------------------
+      x [1], % | 2.9 [1.9, 3.9]
+
+---
+
+    Code
+      report_sample(d, ci = 0.95, select = "x", ci_method = "wilson")
+    Output
+      # Descriptive Statistics
+      
+      Variable |        Summary
+      -------------------------
+      x [1], % | 2.9 [2.0, 4.1]
+
+---
+
+    Code
+      report_sample(d, ci = 0.95, ci_correct = TRUE, select = "x", ci_method = "wald")
+    Output
+      # Descriptive Statistics
+      
+      Variable |        Summary
+      -------------------------
+      x [1], % | 2.9 [1.8, 4.0]
+
+---
+
+    Code
+      report_sample(d, ci = 0.95, ci_correct = TRUE, select = "x", ci_method = "wilson")
+    Output
+      # Descriptive Statistics
+      
+      Variable |        Summary
+      -------------------------
+      x [1], % | 2.9 [2.0, 4.2]
 
 # report_sample group_by
 
@@ -492,4 +566,55 @@
       Species [setosa], %     |              33.3
       Species [versicolor], % |              33.3
       Species [virginica], %  |              33.3
+
+# report_sample weights
+
+    Code
+      report_sample(airquality, weights = "Temp")
+    Output
+      # Descriptive Statistics (weighted)
+      
+      Variable          |        Summary
+      ----------------------------------
+      Mean Ozone (SD)   |  44.91 (33.54)
+      Mean Solar.R (SD) | 188.84 (87.33)
+      Mean Wind (SD)    |    9.76 (3.48)
+      Mean Month (SD)   |    7.07 (1.37)
+      Mean Day (SD)     |   15.66 (8.93)
+
+---
+
+    Code
+      report_sample(mtcars, weights = "carb")
+    Output
+      # Descriptive Statistics (weighted)
+      
+      Variable       |         Summary
+      --------------------------------
+      Mean mpg (SD)  |    18.24 (5.17)
+      Mean cyl (SD)  |     6.71 (1.57)
+      Mean disp (SD) | 257.96 (120.25)
+      Mean hp (SD)   |  175.29 (75.91)
+      Mean drat (SD) |     3.57 (0.48)
+      Mean wt (SD)   |     3.45 (0.95)
+      Mean qsec (SD) |    17.20 (1.76)
+      Mean vs (SD)   |     0.28 (0.45)
+      Mean am (SD)   |     0.42 (0.50)
+      Mean gear (SD) |     3.80 (0.81)
+
+---
+
+    Code
+      report_sample(iris, weights = "Petal.Width")
+    Output
+      # Descriptive Statistics (weighted)
+      
+      Variable                |     Summary
+      -------------------------------------
+      Mean Sepal.Length (SD)  | 6.27 (0.72)
+      Mean Sepal.Width (SD)   | 2.96 (0.36)
+      Mean Petal.Length (SD)  | 4.83 (1.19)
+      Species [setosa], %     |         6.8
+      Species [versicolor], % |        36.9
+      Species [virginica], %  |        56.3
 

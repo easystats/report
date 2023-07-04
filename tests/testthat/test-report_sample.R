@@ -1,3 +1,58 @@
+test_that("report_sample weights, coorect weighted N", {
+  d <- data.frame(
+    x = c("a", "a", "a", "a", "b", "b", "b", "b", "c", "c", "c", "c"),
+    g = c(1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2),
+    w = c(0.5, 0.5, 1, 1, 1.5, 1.5, 2, 2, 1, 1, 1.5, 1.5),
+    stringsAsFactors = FALSE
+  )
+
+  out1 <- report_sample(d, select = "x", group_by = "g")
+  out2 <- report_sample(d, select = "x", group_by = "g", weights = "w")
+  expect_identical(
+    capture.output(print(out1)),
+    c(
+      "# Descriptive Statistics",
+      "",
+      "Variable | 1 (n=6) | 2 (n=6) | Total (n=12)",
+      "-------------------------------------------",
+      "x [a], % |    33.3 |    33.3 |         33.3",
+      "x [b], % |    33.3 |    33.3 |         33.3",
+      "x [c], % |    33.3 |    33.3 |         33.3"
+    )
+  )
+  expect_identical(
+    capture.output(print(out2)),
+    c(
+      "# Descriptive Statistics (weighted)",
+      "",
+      "Variable | 1 (n=6) | 2 (n=9) | Total (n=15)",
+      "-------------------------------------------",
+      "x [a], % |    16.7 |    22.2 |         20.0",
+      "x [b], % |    50.0 |    44.4 |         46.7",
+      "x [c], % |    33.3 |    33.3 |         33.3"
+    )
+  )
+
+  d <- data.frame(
+    x = c("a", "a", "a", "a", "b", "b", "b", "b", "c", "c", "c", "c"),
+    g1 = c(1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2),
+    g2 = c(3, 2, 1, 3, 2, 1, 3, 2, 1, 3, 2, 1),
+    w = c(0.5, 0.5, 1, 1, 1.5, 1.5, 2, 2, 1, 1, 1.5, 1.5),
+    stringsAsFactors = FALSE
+  )
+  expect_error(
+    report_sample(d, select = "x", group_by = c("g1", "g2"), weights = "w"),
+    regex = "Cannot apply"
+  )
+})
+
+test_that("report_sample check input", {
+  skip_if(packageVersion("parameters") < "0.20.3")
+  data(iris)
+  expect_error(report_sample(lm(Sepal.Length ~ Species, data = iris)))
+  expect_silent(report_sample(iris$Species))
+})
+
 test_that("report_sample default", {
   expect_snapshot(
     variant = "windows",
@@ -31,6 +86,41 @@ test_that("report_sample n = TRUE", {
     variant = "windows",
     report_sample(iris, n = TRUE)
   )
+})
+
+test_that("report_sample CI", {
+  expect_snapshot(
+    variant = "windows",
+    report_sample(iris, select = c("Sepal.Length", "Species"), ci = 0.95, ci_method = "wald")
+  )
+
+  expect_snapshot(
+    variant = "windows",
+    report_sample(iris, select = c("Sepal.Length", "Species"), ci = 0.95, ci_method = "wilson")
+  )
+
+  set.seed(123)
+  d <- data.frame(
+    x = as.factor(rbinom(1000, 1, prob = 0.03)),
+    w = abs(rnorm(1000, 1, 0.1))
+  )
+  expect_snapshot(
+    variant = "windows",
+    report_sample(d, ci = 0.95, select = "x", ci_method = "wald")
+  )
+  expect_snapshot(
+    variant = "windows",
+    report_sample(d, ci = 0.95, select = "x", ci_method = "wilson")
+  )
+  expect_snapshot(
+    variant = "windows",
+    report_sample(d, ci = 0.95, ci_correct = TRUE, select = "x", ci_method = "wald")
+  )
+  expect_snapshot(
+    variant = "windows",
+    report_sample(d, ci = 0.95, ci_correct = TRUE, select = "x", ci_method = "wilson")
+  )
+  expect_warning(report_sample(d, ci = 0.95, weights = "w", ci_method = "wald"), regex = "accurate")
 })
 
 test_that("report_sample group_by", {
@@ -147,8 +237,54 @@ test_that("report_sample digits", {
   )
 })
 
-# test_that("report_sample weights", {
-#   expect_snapshot(report_sample(airquality, weights = "Temp"))
-#   expect_snapshot(report_sample(mtcars, weights = "carb"))
-#   expect_snapshot(report_sample(iris, weights = "Petal.Width"))
-# })
+test_that("report_sample weights", {
+  expect_snapshot(report_sample(airquality, weights = "Temp"), variant = "windows")
+  expect_snapshot(report_sample(mtcars, weights = "carb"), variant = "windows")
+  expect_snapshot(report_sample(iris, weights = "Petal.Width"), variant = "windows")
+})
+
+test_that("report_sample grouped data frames", {
+  skip_if_not_installed("datawizard")
+  data(mtcars)
+  mtcars_grouped <- datawizard::data_group(mtcars, "gear")
+  out1 <- report_sample(mtcars_grouped, select = c("hp", "mpg"))
+  out2 <- report_sample(mtcars, group_by = "gear", select = c("hp", "mpg"))
+  expect_identical(out1, out2)
+})
+
+test_that("report_sample, with more than one grouping variable", {
+  data(iris)
+  set.seed(123)
+  iris$grp <- sample(letters[1:3], nrow(iris), TRUE)
+  out <- report_sample(
+    iris,
+    group_by = c("Species", "grp"),
+    select = c("Sepal.Length", "Sepal.Width")
+  )
+  # verified against
+  expected <- aggregate(iris["Sepal.Length"], iris[c("Species", "grp")], mean)
+  expect_snapshot(out)
+})
+
+test_that("report_sample, numeric select", {
+  data(iris)
+  out1 <- report_sample(
+    iris,
+    select = c("Sepal.Length", "Sepal.Width")
+  )
+  out2 <- report_sample(
+    iris,
+    select = 1:2
+  )
+  expect_identical(out1, out2)
+})
+
+test_that("report_sample, print vertical", {
+  skip_if_not_installed("datawizard")
+  data(iris)
+  set.seed(123)
+  iris$grp <- sample(letters[1:3], nrow(iris), TRUE)
+  iris_grp <- datawizard::data_group(iris, c("Species", "grp"))
+  out <- report_sample(iris_grp, select = 1:3)
+  expect_snapshot(print(out, layout = "vertical"))
+})
