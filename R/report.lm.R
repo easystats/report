@@ -113,7 +113,7 @@ report_effectsize.lm <- function(x, effectsize_method = "refit", ...) {
   parameters <- paste0(interpretation, " (", statistics, ")")
 
 
-  # Return output
+
   as.report_effectsize(parameters,
     summary = parameters,
     table = table,

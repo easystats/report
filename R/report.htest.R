@@ -81,7 +81,7 @@ report_effectsize.htest <- function(x, ...) {
 
   parameters <- paste0(out$interpretation, " (", out$statistics, ")")
 
-  # Return output
+
   as.report_effectsize(
     parameters,
     summary = parameters,
@@ -130,7 +130,7 @@ report_table.htest <- function(x, ...) {
     out <- list(table_full = table_full, table = NULL)
   }
 
-  # Return output
+
   as.report_table(out$table_full, summary = out$table, effsize = effsize)
 }
 
