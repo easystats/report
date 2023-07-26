@@ -16,6 +16,9 @@ report_s <- function(s = NULL, p = NULL) {
   if ((is.null(s) && is.null(p)) || (is.na(s) && is.na(p))) {
     insight::format_error("You must provide either `s` or `p`.")
   }
+  if (length(s) > 1 || length(p) > 1) {
+    insight::format_error("You must provide a single value for `s` or `p`.")
+  }
   # make sure we have both s and p
   if (!is.null(p) && !is.na(p)) {
     s <- -log2(p)
