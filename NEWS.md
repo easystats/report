@@ -1,5 +1,10 @@
 # report 0.5.8
 
+New features
+
+* `report_s()` to report the interpretation of S- and p-values in an easy-to-understand
+  language.
+
 Minor changes 
 
 * `report` now supports variables of class `Date`, treating them like factors.

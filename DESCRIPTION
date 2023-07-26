@@ -1,7 +1,7 @@
 Type: Package
 Package: report
 Title: Automated Reporting of Results and Statistical Models
-Version: 0.5.7.10
+Version: 0.5.7.11
 Authors@R:
     c(person(given = "Dominique",
              family = "Makowski",
@@ -136,6 +136,7 @@ Collate:
     'report_performance.R'
     'report_priors.R'
     'report_random.R'
+    'report_s.R'
     'report_sample.R'
     'report_statistics.R'
     'report_table.R'
