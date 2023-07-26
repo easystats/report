@@ -4,9 +4,13 @@
 #'
 #' @param s An S-value. Either `s` or `p` must be provided.
 #' @param p A p-value. Either `s` or `p` must be provided.
+#'
+#' @return A string with the interpretation of the S- or p-value.
+#'
 #' @examples
 #' report_s(s = 1.5)
 #' report_s(p = 0.05)
+#' @export
 report_s <- function(s = NULL, p = NULL) {
   # sanity check arguments
   if ((is.null(s) && is.null(p)) || (is.na(s) && is.na(p))) {

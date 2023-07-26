@@ -11,6 +11,9 @@ report_s(s = NULL, p = NULL)
 
 \item{p}{A p-value. Either \code{s} or \code{p} must be provided.}
 }
+\value{
+A string with the interpretation of the S- or p-value.
+}
 \description{
 Reports interpretation of S- and p-values in easy language.
 }
