@@ -28,7 +28,7 @@ report_s <- function(s = NULL, p = NULL) {
   all_heads <- round(s)
   chance <- sprintf("%.2g", 100 * p)
   msg <- paste0(
-    "If the test hypothesis and entire model (all assumptions) were true, ",
+    paste0("If the test hypothesis (", test_parameter, " = ", test_value) " and all model assumptions were true, ",
     "there is a ", chance, "% chance of observing this outcome. How weird is that? ",
     "It's hardly more surprising than getting ", all_heads, " heads in a row with fair coin tosses."
   )
