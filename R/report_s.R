@@ -13,7 +13,7 @@
 #' @export
 report_s <- function(s = NULL, p = NULL) {
   # sanity check arguments
-  if ((is.null(s) && is.null(p)) || (is.na(s) && is.na(p))) {
+  if ((is.null(s) || is.na(s)) && (is.null(p) || is.na(p))) {
     insight::format_error("You must provide either `s` or `p`.")
   }
   if (length(s) > 1 || length(p) > 1) {
