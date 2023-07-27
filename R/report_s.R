@@ -11,7 +11,7 @@
 #' report_s(s = 1.5)
 #' report_s(p = 0.05)
 #' @export
-report_s <- function(s = NULL, p = NULL) {
+report_s <- function(s = NULL, p = NULL, test_value = 0, test_parameter = "parameter") {
   # sanity check arguments
   if ((is.null(s) || is.na(s)) && (is.null(p) || is.na(p))) {
     insight::format_error("You must provide either `s` or `p`.")
