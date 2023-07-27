@@ -4,12 +4,16 @@
 \alias{report_s}
 \title{Report S- and p-values in easy language.}
 \usage{
-report_s(s = NULL, p = NULL)
+report_s(s = NULL, p = NULL, test_value = 0, test_parameter = "parameter")
 }
 \arguments{
 \item{s}{An S-value. Either \code{s} or \code{p} must be provided.}
 
 \item{p}{A p-value. Either \code{s} or \code{p} must be provided.}
+
+\item{test_value}{The value of the test parameter under the null hypothesis.}
+
+\item{test_parameter}{The name of the test parameter under the null hypothesis.}
 }
 \value{
 A string with the interpretation of the S- or p-value.
