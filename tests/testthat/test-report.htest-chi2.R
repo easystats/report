@@ -1,7 +1,7 @@
 test_that("report.htest-chi2", {
-  M <- as.table(rbind(c(762, 327, 468), c(484, 239, 477)))
-  dimnames(M) <- list(gender = c("F", "M"), party = c("Democrat", "Independent", "Republican"))
-  x <- chisq.test(M)
+  m <- as.table(rbind(c(762, 327, 468), c(484, 239, 477)))
+  dimnames(m) <- list(gender = c("F", "M"), party = c("Democrat", "Independent", "Republican"))
+  x <- chisq.test(m)
 
   expect_snapshot(
     variant = "windows",
