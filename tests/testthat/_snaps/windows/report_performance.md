@@ -27,7 +27,7 @@
     Output
       [1] "The model's explanatory power is substantial (R2 = 0.54)"
 
----
+# report_performance Bayesian 2)
 
     Code
       report_performance(x7)

@@ -47,6 +47,11 @@ test_that("report.htest-chi2", {
 
   expect_snapshot(
     variant = "windows",
+    report_effectsize(x, type = "tschuprows_t", adjust = FALSE)
+  )
+
+  expect_snapshot(
+    variant = "windows",
     report_effectsize(x, type = "tschuprows_t")
   )
 
