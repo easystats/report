@@ -262,27 +262,27 @@ report_participants <- function(data,
   # Grouped data
   if (!is.null(participants)) {
     data <- data.frame(
-      "Age" = stats::aggregate(data[[age]],
+      Age = stats::aggregate(data[[age]],
         by = list(data[[participants]]),
         FUN = mean
       )[[2]],
-      "Sex" = stats::aggregate(data[[sex]],
+      Sex = stats::aggregate(data[[sex]],
         by = list(data[[participants]]),
         FUN = utils::head, n = 1
       )[[2]],
-      "Gender" = stats::aggregate(data[[gender]],
+      Gender = stats::aggregate(data[[gender]],
         by = list(data[[participants]]),
         FUN = utils::head, n = 1
       )[[2]],
-      "Education" = stats::aggregate(data[[education]],
+      Education = stats::aggregate(data[[education]],
         by = list(data[[participants]]),
         FUN = utils::head, n = 1
       )[[2]],
-      "Country" = stats::aggregate(data[[country]],
+      Country = stats::aggregate(data[[country]],
         by = list(data[[participants]]),
         FUN = utils::head, n = 1
       )[[2]],
-      "Race" = stats::aggregate(data[[race]],
+      Race = stats::aggregate(data[[race]],
         by = list(data[[participants]]),
         FUN = utils::head, n = 1
       )[[2]]
