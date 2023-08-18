@@ -256,6 +256,9 @@ report_participants <- function(data,
   country <- .replace_names(data, country)
   race <- .replace_names(data, race)
 
+  # Set age as numeric
+  data[[age]] <- as.numeric(data[[age]])
+
   # Grouped data
   if (!is.null(participants)) {
     data <- data.frame(
@@ -344,6 +347,12 @@ report_participants <- function(data,
     )
   }
 
+  genders_woman <- c("woman", "w", "female", "women", "girl",
+                     "lady", "miss", "madam", "dame", "lass")
+  genders_man <- c("man", "m", "male", "men", "boy",
+                   "guy", "dude", "lad", "sir")
+  both_genders <- c(genders_woman, genders_man, NA, "na")
+
   text_gender <- if (all(is.na(data[[gender]]))) {
     ""
   } else {
@@ -351,15 +360,15 @@ report_participants <- function(data,
       "Gender: ",
       insight::format_value(length(data[[gender]][tolower(
         data[[gender]]
-      ) %in% c("woman", "w", "f", "female")]) / nrow(data) * 100, digits = digits),
+      ) %in% genders_woman]) / nrow(data) * 100, digits = digits),
       "% women, ",
       insight::format_value(length(data[[gender]][tolower(
         data[[gender]]
-      ) %in% c("man", "m", "male")]) / nrow(data) * 100, digits = digits),
+      ) %in% genders_man]) / nrow(data) * 100, digits = digits),
       "% men, ",
       insight::format_value(100 - length(data[[gender]][tolower(
         data[[gender]]
-      ) %in% c("woman", "w", "f", "female", "man", "m", "male", NA, "na")]) /
+      ) %in% both_genders]) /
         nrow(data) * 100), "% non-binary",
       if (!insight::format_value(length(data[[gender]][tolower(
         data[[gender]]

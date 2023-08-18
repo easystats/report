@@ -146,3 +146,27 @@ test_that("report_participants test NAs no warning", {
     report_participants(data, age = "Age", sex = "Sex")
   )
 })
+
+test_that("report_participants age as character", {
+  data <- data.frame(
+    "Age" = as.character(c(22, 22, 28, 11, 42, 52))
+  )
+  expect_snapshot(
+    variant = "windows",
+    report_participants(data)
+  )
+})
+
+test_that("report_participants different gender spellings", {
+  data <- data.frame(
+    "Gender" = c("Man", "M", "Male", "Men", "Boy", "Guy",
+                 "Dude", "Lad", "Sir",
+                 "Woman", "W", "Female", "Women", "Girl",
+                 "Lady", "Miss", "Madam", "Dame", "Lass",
+                 NA)
+  )
+  expect_snapshot(
+    variant = "windows",
+    report_participants(data)
+  )
+})
