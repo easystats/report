@@ -77,16 +77,16 @@
     Output
       Effect sizes were labelled following Funder's (2019) recommendations. 
       
-      very small (Tschuprows_t_adjusted = 0.08, 95% CI [0.06, 1.00])
+      very small (Tschuprow's t = 0.09, 95% CI [0.06, 1.00])
 
 ---
 
     Code
       report_effectsize(x, type = "tschuprows_t")
     Output
-       
+      Effect sizes were labelled following Funder's (2019) recommendations. 
       
-       (Adjusted Tschuprow's t = 0.08, 95% CI [0.06, 1.00])
+      very small (Adjusted Tschuprow's t = 0.08, 95% CI [0.06, 1.00])
 
 ---
 
