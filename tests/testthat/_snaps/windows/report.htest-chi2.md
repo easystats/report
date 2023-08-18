@@ -73,11 +73,20 @@
 ---
 
     Code
-      report_effectsize(x, type = "tschuprows_t")
+      report_effectsize(x, type = "tschuprows_t", adjust = FALSE)
     Output
       Effect sizes were labelled following Funder's (2019) recommendations. 
       
       very small (Tschuprow's t = 0.09, 95% CI [0.06, 1.00])
+
+---
+
+    Code
+      report_effectsize(x, type = "tschuprows_t")
+    Output
+       
+      
+       (Adjusted Tschuprow's t = 0.08, 95% CI [0.06, 1.00])
 
 ---
 
@@ -95,7 +104,7 @@
     Output
       Effect sizes were labelled following Funder's (2019) recommendations. 
       
-      large (Adjusted's Phi = 0.36, 95% CI [0.25, 1.00])
+      large (Adjusted Phi = 0.36, 95% CI [0.25, 1.00])
 
 ---
 
@@ -122,5 +131,5 @@
     Output
        
       
-       (Risk_ratio = 2.54, 95% CI [1.87, 3.45])
+       (Risk_ratio = 2.54, 95% CI [1.80, 3.60])
 

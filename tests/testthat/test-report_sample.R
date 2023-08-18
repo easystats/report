@@ -263,7 +263,7 @@ test_that("report_sample, with more than one grouping variable", {
   )
   # verified against
   expected <- aggregate(iris["Sepal.Length"], iris[c("Species", "grp")], mean)
-  expect_snapshot(out)
+  expect_snapshot(variant = "windows", out)
 })
 
 test_that("report_sample, numeric select", {
@@ -286,5 +286,5 @@ test_that("report_sample, print vertical", {
   iris$grp <- sample(letters[1:3], nrow(iris), TRUE)
   iris_grp <- datawizard::data_group(iris, c("Species", "grp"))
   out <- report_sample(iris_grp, select = 1:3)
-  expect_snapshot(print(out, layout = "vertical"))
+  expect_snapshot(variant = "windows", print(out, layout = "vertical"))
 })

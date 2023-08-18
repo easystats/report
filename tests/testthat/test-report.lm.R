@@ -36,6 +36,6 @@ test_that("report.lm - lm intercept-only", {
   )
 
   model_io <- lm(d_wide$group0 - d_wide$group1 ~ 1)
-  out <- report(model_io)
-  expect_snapshot(out)
+  out <- suppressWarnings(report(model_io, verbose = FALSE))
+  expect_snapshot(variant = "windows", out)
 })
