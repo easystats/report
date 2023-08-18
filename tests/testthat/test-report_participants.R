@@ -159,11 +159,13 @@ test_that("report_participants age as character", {
 
 test_that("report_participants different gender spellings", {
   data <- data.frame(
-    "Gender" = c("Man", "M", "Male", "Men", "Boy", "Guy",
-                 "Dude", "Lad", "Sir",
-                 "Woman", "W", "Female", "Women", "Girl",
-                 "Lady", "Miss", "Madam", "Dame", "Lass",
-                 NA)
+    "Gender" = c(
+      "Man", "M", "Male", "Men", "Boy", "Guy",
+      "Dude", "Lad", "Sir",
+      "Woman", "W", "Female", "Women", "Girl",
+      "Lady", "Miss", "Madam", "Dame", "Lass",
+      NA
+    )
   )
   expect_snapshot(
     variant = "windows",

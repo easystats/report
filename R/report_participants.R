@@ -347,10 +347,14 @@ report_participants <- function(data,
     )
   }
 
-  genders_woman <- c("woman", "w", "female", "women", "girl",
-                     "lady", "miss", "madam", "dame", "lass")
-  genders_man <- c("man", "m", "male", "men", "boy",
-                   "guy", "dude", "lad", "sir")
+  genders_woman <- c(
+    "woman", "w", "female", "women", "girl",
+    "lady", "miss", "madam", "dame", "lass"
+  )
+  genders_man <- c(
+    "man", "m", "male", "men", "boy",
+    "guy", "dude", "lad", "sir"
+  )
   both_genders <- c(genders_woman, genders_man, NA, "na")
 
   text_gender <- if (all(is.na(data[[gender]]))) {
