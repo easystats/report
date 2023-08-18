@@ -8,7 +8,7 @@
 
 # report_effectsize ---------------------
 
-.report_effectsize_chi2 <- function(x, table, dot_args, type, rules = "funder2019") {
+.report_effectsize_chi2 <- function(x, table, dot_args, rules = "funder2019") {
   if (grepl("Pearson", x$method, fixed = TRUE)) {
     args <- c(list(x), dot_args)
     table <- do.call(effectsize::effectsize, args)
@@ -31,10 +31,12 @@
     main <- paste0("Adjusted Cramer's v = ", insight::format_value(table[[estimate]]))
   } else if (estimate %in% "Tschuprows_t") {
     main <- paste0("Tschuprow's t = ", insight::format_value(table[[estimate]]))
+  } else if (estimate %in% "Tschuprows_t_adjusted") {
+    main <- paste0("Adjusted Tschuprow's t = ", insight::format_value(table[[estimate]]))
   } else if (estimate %in% "Pearsons_c") {
     main <- paste0("Pearson's c = ", insight::format_value(table[[estimate]]))
   } else if (estimate %in% "phi_adjusted") {
-    main <- paste0("Adjusted's Phi = ", insight::format_value(table[[estimate]]))
+    main <- paste0("Adjusted Phi = ", insight::format_value(table[[estimate]]))
   } else if (estimate %in% "Cohens_h") {
     main <- paste0("Cohen's h = ", insight::format_value(table[[estimate]]))
   } else if (estimate %in% "Odds_ratio") {
