@@ -26,6 +26,8 @@ Bug fixes
 
 * Fixed issue in `report_participants`, which did not print the `"gender"`
   category for grouped output when that argument was written in lower-case.
+  Gender now also supports more alternate spellings, and age converts the
+  respective column to numeric.
 
 * Fixed printing issue for intercept-only models.
 
