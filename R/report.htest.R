@@ -53,10 +53,16 @@ report_effectsize.htest <- function(x, ...) {
     out <- .report_effectsize_ttest(x, table, dot_args)
   }
 
-  # For wilcox test ---------------
-
   if (model_info$is_ranktest && !model_info$is_correlation) {
-    out <- .report_effectsize_wilcox(x, table, dot_args)
+    # For friedman test ---------------
+
+    if (grepl("Friedman", attributes(x$statistic)$names)) {
+      out <- .report_effectsize_friedman(x, table, dot_args)
+    } else {
+       # For wilcox test ---------------
+
+      out <- .report_effectsize_wilcox(x, table, dot_args)
+    }
   }
 
   # For correlations ---------------
@@ -125,6 +131,7 @@ report_table.htest <- function(x, ...) {
     # chi2 test
     out <- .report_table_chi2(table_full, effsize)
   } else if (model_info$is_correlation) {
+    # correlation test
     out <- .report_table_correlation(table_full)
   } else {
     out <- list(table_full = table_full, table = NULL)
@@ -152,7 +159,7 @@ report_statistics.htest <- function(x, table = NULL, ...) {
   text <- NULL
 
   # Estimate
-  candidates <- c("rho", "r", "tau", "Difference", "r_rank_biserial")
+  candidates <- c("rho", "r", "tau", "Difference", "r_rank_biserial", "Chi2")
   estimate <- candidates[candidates %in% names(table)][1]
   if (!is.null(estimate) && !is.na(estimate)) {
     text <- paste0(tolower(estimate), " = ", insight::format_value(table[[estimate]]))
@@ -186,15 +193,14 @@ report_statistics.htest <- function(x, table = NULL, ...) {
     text <- paste0(text, ", z = ", insight::format_value(table$z))
   } else if ("W" %in% names(table)) {
     text <- paste0("W = ", insight::format_value(table$W))
-  } else if ("Chi2" %in% names(table)) {
-    text <- paste0(text, ", Chi2 = ", insight::format_value(table$Chi2))
   }
 
   # p-value
   text <- paste0(text, ", ", insight::format_p(table$p, stars = FALSE, digits = "apa"))
 
   # Effect size
-  if (model_info$is_ttest || (model_info$is_ranktest && !model_info$is_correlation)) {
+  if (model_info$is_ttest || (model_info$is_ranktest && !model_info$is_correlation) ||
+      model_info$is_chi2test) {
     text_full <- paste0(text, "; ", attributes(effsize)$statistics)
     text <- paste0(text, ", ", attributes(effsize)$main)
   } else {
@@ -244,6 +250,10 @@ report_parameters.htest <- function(x, table = NULL, ...) {
   } else if (model_info$is_ttest) {
     out <- .report_parameters_ttest(table, stats, effsize, ...)
 
+  } else if (model_info$is_ranktest &&
+             grepl("Friedman", attributes(x$statistic)$names)) {
+    out <- .report_parameters_friedman(table, stats, effsize, ...)
+
     # TODO: default, same as t-test?
   } else {
     out <- .report_parameters_htest_default(table, stats, effsize, ...)
@@ -287,6 +297,10 @@ report_model.htest <- function(x, table = NULL, ...) {
 
   if (model_info$is_ranktest && !model_info$is_correlation) {
     text <- .report_model_wilcox(x, table)
+  }
+
+  if (model_info$is_chi2test) {
+    text <- .report_model_chi2(x, table)
   }
 
   as.report_model(text, summary = text)

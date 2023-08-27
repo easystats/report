@@ -101,7 +101,8 @@ print.report_effectsize <- function(x, ...) {
         "lovakov2021" = "Lovakov's (2021)",
         "evans1996" = "Evans's (1996)",
         "chen2010" = "Chen's (2010)",
-        "field2013" = "Field's (2013)"
+        "field2013" = "Field's (2013)",
+        "landis1977" = "Landis' (1977)"
       )
       text <- paste0("Effect sizes were labelled following ", effsize_name, " recommendations.")
     } else {
