@@ -56,10 +56,10 @@ report_effectsize.htest <- function(x, ...) {
   if (model_info$is_ranktest && !model_info$is_correlation) {
     # For friedman test ---------------
 
-    if (grepl("Friedman", attributes(x$statistic)$names)) {
+    if (grepl("Friedman", attributes(x$statistic)$names, fixed = TRUE)) {
       out <- .report_effectsize_friedman(x, table, dot_args)
     } else {
-       # For wilcox test ---------------
+      # For wilcox test ---------------
 
       out <- .report_effectsize_wilcox(x, table, dot_args)
     }
@@ -200,7 +200,7 @@ report_statistics.htest <- function(x, table = NULL, ...) {
 
   # Effect size
   if (model_info$is_ttest || (model_info$is_ranktest && !model_info$is_correlation) ||
-      model_info$is_chi2test) {
+    model_info$is_chi2test) {
     text_full <- paste0(text, "; ", attributes(effsize)$statistics)
     text <- paste0(text, ", ", attributes(effsize)$main)
   } else {
@@ -249,9 +249,8 @@ report_parameters.htest <- function(x, table = NULL, ...) {
     # t-tests
   } else if (model_info$is_ttest) {
     out <- .report_parameters_ttest(table, stats, effsize, ...)
-
   } else if (model_info$is_ranktest &&
-             grepl("Friedman", attributes(x$statistic)$names)) {
+    grepl("Friedman", attributes(x$statistic)$names, fixed = TRUE)) {
     out <- .report_parameters_friedman(table, stats, effsize, ...)
 
     # TODO: default, same as t-test?

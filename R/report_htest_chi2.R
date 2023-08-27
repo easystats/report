@@ -72,7 +72,6 @@
 # report_model ----------------------------
 
 .report_model_chi2 <- function(x, table) {
-
   # vars_full <- paste0(table$Parameter1[[1]], " and ", table$Parameter2[[1]])
   vars_full <- paste0(names(attributes(x$observed)$dimnames), collapse = " and ")
 
@@ -83,5 +82,4 @@
   )
 
   text
-
 }
