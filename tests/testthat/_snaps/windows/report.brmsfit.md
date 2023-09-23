@@ -9,7 +9,7 @@
       of 300 iterations and a warmup of 150) to predict mpg with qsec and wt
       (formula: mpg ~ qsec + wt). Priors over parameters were set as student_t
       (location = 19.20, scale = 5.40) distributions. The model's explanatory power
-      is substantial (R2 = 0.82, 95% CI [0.75, 0.85], adj. R2 = 0.78).  Within this
+      is substantial (R2 = 0.82, 95% CI [0.75, 0.85], adj. R2 = 0.79).  Within this
       model:
       
         - The effect of b Intercept (Median = 19.74, 95% CI [9.45, 32.02]) has a 99.83%
@@ -37,7 +37,7 @@
       sampling with 4 chains of 300 iterations and a warmup of 150) to predict mpg
       with qsec and wt (formula: mpg ~ qsec + wt). Priors over parameters were set as
       uniform (location = , scale = ) distributions. The model's explanatory power is
-      substantial (R2 = 0.82, 95% CI [0.75, 0.85], adj. R2 = 0.78).  Within this
+      substantial (R2 = 0.82, 95% CI [0.75, 0.85], adj. R2 = 0.79).  Within this
       model:
       
         - The effect of b Intercept (Median = 19.74, 95% CI [9.45, 32.02]) has a 99.83%
@@ -65,7 +65,7 @@
       sampling with 4 chains of 300 iterations and a warmup of 150) to predict mpg
       with qsec and wt (formula: mpg ~ qsec + wt). Priors over parameters were set as
       uniform (location = , scale = ) distributions. The model's explanatory power is
-      substantial (R2 = 0.82, 95% CI [0.75, 0.85], adj. R2 = 0.78).  Within this
+      substantial (R2 = 0.82, 95% CI [0.75, 0.85], adj. R2 = 0.79).  Within this
       model:
       
         - The effect of b Intercept (Median = 19.74, 95% CI [9.45, 32.02]) has a 99.83%
@@ -94,7 +94,7 @@
       with qsec and wt (formula: mpg ~ qsec + wt). Priors over parameters were set as
       student_t (location = 0.00, scale = 5.40) distributions. The model's
       explanatory power is substantial (R2 = 0.82, 95% CI [0.75, 0.85], adj. R2 =
-      0.78).  Within this model:
+      0.79).  Within this model:
       
         - The effect of b Intercept (Median = 19.74, 95% CI [9.45, 32.02]) has a 99.83%
       probability of being positive (> 0), 99.83% of being significant (> 0.30), and

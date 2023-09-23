@@ -1,7 +1,7 @@
 Type: Package
 Package: report
 Title: Automated Reporting of Results and Statistical Models
-Version: 0.5.7.10
+Version: 0.5.7.11
 Authors@R:
     c(person(given = "Dominique",
              family = "Makowski",
@@ -125,6 +125,7 @@ Collate:
     'report_effectsize.R'
     'report_htest_chi2.R'
     'report_htest_cor.R'
+    'report_htest_friedman.R'
     'report_htest_ttest.R'
     'report_htest_wilcox.R'
     'report_info.R'
