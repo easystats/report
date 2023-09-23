@@ -1,5 +1,9 @@
 # report 0.5.8
 
+Major Changes
+
+* This release changes the licensing model of `{see}` to an MIT license.
+
 Minor changes 
 
 * `report` now supports variables of class `Date`, treating them like factors.
