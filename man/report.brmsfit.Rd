@@ -21,7 +21,7 @@ follows the Sequential Effect eXistence and sIgnificance Testing framework
 }
 \examples{
 \dontshow{if (require("brms", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-\dontrun{
+\donttest{
 # Bayesian models
 library(brms)
 model <- suppressWarnings(brm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300))
