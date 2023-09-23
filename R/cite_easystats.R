@@ -23,7 +23,7 @@
 #'   - `refs`: References or bibliography in the requested `format`
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Cite just the 'easystats' umbrella package:
 #' cite_easystats()
 #' summary(cite_easystats(), what = "all")
