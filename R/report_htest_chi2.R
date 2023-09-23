@@ -27,23 +27,23 @@
     ), call. = FALSE)
   }
 
-  if (estimate %in% "Cramers_v_adjusted") {
+  if (estimate == "Cramers_v_adjusted") {
     main <- paste0("Adjusted Cramer's v = ", insight::format_value(table[[estimate]]))
-  } else if (estimate %in% "Tschuprows_t") {
+  } else if (estimate == "Tschuprows_t") {
     main <- paste0("Tschuprow's t = ", insight::format_value(table[[estimate]]))
-  } else if (estimate %in% "Tschuprows_t_adjusted") {
+  } else if (estimate == "Tschuprows_t_adjusted") {
     main <- paste0("Adjusted Tschuprow's t = ", insight::format_value(table[[estimate]]))
-  } else if (estimate %in% "Pearsons_c") {
+  } else if (estimate == "Pearsons_c") {
     main <- paste0("Pearson's c = ", insight::format_value(table[[estimate]]))
-  } else if (estimate %in% "phi_adjusted") {
+  } else if (estimate == "phi_adjusted") {
     main <- paste0("Adjusted Phi = ", insight::format_value(table[[estimate]]))
-  } else if (estimate %in% "Cohens_h") {
+  } else if (estimate == "Cohens_h") {
     main <- paste0("Cohen's h = ", insight::format_value(table[[estimate]]))
-  } else if (estimate %in% "Odds_ratio") {
+  } else if (estimate == "Odds_ratio") {
     main <- paste0("Odds ratio = ", insight::format_value(table[[estimate]]))
-  } else if (estimate %in% "Ris_kratio") {
+  } else if (estimate == "Ris_kratio") {
     main <- paste0("Risk ratio = ", insight::format_value(table[[estimate]]))
-  } else if (estimate %in% "cohens_h") {
+  } else if (estimate == "cohens_h") {
     main <- paste0("Cohen's w = ", insight::format_value(table[[estimate]]))
   } else {
     main <- paste0(estimate, " = ", insight::format_value(table[[estimate]]))
@@ -72,7 +72,6 @@
 # report_model ----------------------------
 
 .report_model_chi2 <- function(x, table) {
-  # vars_full <- paste0(table$Parameter1[[1]], " and ", table$Parameter2[[1]])
   vars_full <- paste0(names(attributes(x$observed)$dimnames), collapse = " and ")
 
   text <- paste0(

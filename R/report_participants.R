@@ -165,7 +165,22 @@ report_participants <- function(data,
     race <- .find_race_in_data(data)
   }
 
-  if (!is.null(group)) {
+  if (is.null(group)) {
+    text <- .report_participants(
+      data,
+      age = age,
+      sex = sex,
+      gender = gender,
+      education = education,
+      country = country,
+      race = race,
+      participants = participants,
+      spell_n = spell_n,
+      digits = digits,
+      threshold = threshold,
+      ...
+    )
+  } else {
     text <- NULL
     data[[group]] <- as.character(data[[group]])
     for (i in split(data, data[group])) {
@@ -192,21 +207,6 @@ report_participants <- function(data,
       text <- c(text, paste0(pre_text, current_text))
     }
     text <- paste("For", datawizard::text_concatenate(text, sep = ", for ", last = " and for "))
-  } else {
-    text <- .report_participants(
-      data,
-      age = age,
-      sex = sex,
-      gender = gender,
-      education = education,
-      country = country,
-      race = race,
-      participants = participants,
-      spell_n = spell_n,
-      digits = digits,
-      threshold = threshold,
-      ...
-    )
   }
   text
 }

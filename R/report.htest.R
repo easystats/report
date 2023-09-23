@@ -126,6 +126,7 @@ report_table.htest <- function(x, ...) {
     out <- .report_table_ttest(table_full, effsize)
   } else if (model_info$is_ranktest && !model_info$is_correlation) {
     # wilcox test
+    # but same function for Friedman
     out <- .report_table_wilcox(table_full, effsize)
   } else if (model_info$is_chi2test) {
     # chi2 test
@@ -295,7 +296,15 @@ report_model.htest <- function(x, table = NULL, ...) {
   }
 
   if (model_info$is_ranktest && !model_info$is_correlation) {
-    text <- .report_model_wilcox(x, table)
+    # For friedman test ---------------
+
+    if (grepl("Friedman", attributes(x$statistic)$names, fixed = TRUE)) {
+      text <- .report_model_friedman(x, table)
+    } else {
+      # For wilcox test ---------------
+
+      text <- .report_model_wilcox(x, table)
+    }
   }
 
   if (model_info$is_chi2test) {

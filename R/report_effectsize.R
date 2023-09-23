@@ -91,7 +91,9 @@ print.report_effectsize <- function(x, ...) {
 #' @keywords internal
 .text_effectsize <- function(interpretation) {
   # Effect size
-  if (!is.null(interpretation)) {
+  if (is.null(interpretation)) {
+    text <- ""
+  } else {
     if (is.character(interpretation)) {
       effsize_name <- switch(interpretation,
         cohen1988 = "Cohen's (1988)",
@@ -108,8 +110,6 @@ print.report_effectsize <- function(x, ...) {
     } else {
       text <- paste0("Effect sizes were labelled following a custom set of rules.")
     }
-  } else {
-    text <- ""
   }
   text
 }

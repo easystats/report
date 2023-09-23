@@ -40,7 +40,7 @@
 .report_model_friedman <- function(x, table) {
   # two-sample
   if ("Parameter1" %in% names(table)) {
-    vars_full <- paste0(table$Parameter1[[1]], " and ", table$Parameter2[[1]])
+    vars_full <- paste0(table$Parameter1[[1]], ", and ", table$Parameter2[[1]])
 
     text <- paste0(
       trimws(x$method),
@@ -64,10 +64,9 @@
 
 .report_parameters_friedman <- function(table, stats, effsize, ...) {
   text_full <- paste0(
-    effectsize::interpret_direction(attributes(stats)$estimate),
-    ", statistically ",
+    "statistically ",
     effectsize::interpret_p(table$p, rules = "default"),
-    ", and ",
+    ", and in ",
     attributes(effsize)$interpretation,
     " (",
     stats,
@@ -75,10 +74,9 @@
   )
 
   text_short <- paste0(
-    effectsize::interpret_direction(attributes(stats)$estimate),
-    ", statistically ",
+    "statistically ",
     effectsize::interpret_p(table$p, rules = "default"),
-    ", and ",
+    ", and in ",
     attributes(effsize)$interpretation,
     " (",
     summary(stats),
