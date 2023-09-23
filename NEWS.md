@@ -2,7 +2,7 @@
 
 Minor changes 
 
-* `report` now supports variables of class `htest` of type Friedman test.
+* `report` now supports variables of class `htest` for the Friedman test.
 
 * `report` now supports variables of class `Date`, treating them like factors.
 
