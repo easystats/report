@@ -186,4 +186,22 @@ test_that("report.htest-chi2 report", {
     report(x, type = "riskratio")
   ) # riskratio has no interpretation in effectsize
   # Watch carefully in case effectsize adds support
+
+  # Mattan example comparison
+  x <- chisq.test(mtcars$cyl, mtcars$am)
+
+  expect_snapshot(
+    variant = "windows",
+    report(x)
+  )
+})
+
+test_that("report.htest-chi2 for given probabilities", {
+  # Mattan example comparison
+  x <- chisq.test(table(mtcars$cyl), p = c(0.1, 0.3, 0.6))
+
+  expect_snapshot(
+    variant = "windows",
+    report(x)
+  )
 })

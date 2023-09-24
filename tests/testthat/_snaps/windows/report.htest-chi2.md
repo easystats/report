@@ -140,9 +140,9 @@
     Output
       Effect sizes were labelled following Funder's (2019) recommendations.
       
-      The Pearson's Chi-squared test testing the association between gender and party
-      suggests that the effect is positive, statistically significant, and small
-      (chi2 = 30.07, p < .001; Adjusted Cramer's v = 0.10, 95% CI [0.07, 1.00])
+      The Pearson's Chi-squared test of independence between gender and party
+      suggests that the effect is statistically significant, and small (chi2 = 30.07,
+      p < .001; Adjusted Cramer's v = 0.10, 95% CI [0.07, 1.00])
 
 ---
 
@@ -151,9 +151,9 @@
     Output
       Effect sizes were labelled following Funder's (2019) recommendations.
       
-      The Pearson's Chi-squared test testing the association between gender and party
-      suggests that the effect is positive, statistically significant, and small
-      (chi2 = 30.07, p < .001; Adjusted Cramer's v = 0.10, 95% CI [0.07, 1.00])
+      The Pearson's Chi-squared test of independence between gender and party
+      suggests that the effect is statistically significant, and small (chi2 = 30.07,
+      p < .001; Adjusted Cramer's v = 0.10, 95% CI [0.07, 1.00])
 
 ---
 
@@ -162,9 +162,9 @@
     Output
       Effect sizes were labelled following Gignac's (2016) recommendations.
       
-      The Pearson's Chi-squared test testing the association between gender and party
-      suggests that the effect is positive, statistically significant, and small
-      (chi2 = 30.07, p < .001; Adjusted Cramer's v = 0.10, 95% CI [0.07, 1.00])
+      The Pearson's Chi-squared test of independence between gender and party
+      suggests that the effect is statistically significant, and small (chi2 = 30.07,
+      p < .001; Adjusted Cramer's v = 0.10, 95% CI [0.07, 1.00])
 
 ---
 
@@ -173,9 +173,9 @@
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
-      The Pearson's Chi-squared test testing the association between gender and party
-      suggests that the effect is positive, statistically significant, and small
-      (chi2 = 30.07, p < .001; Adjusted Cramer's v = 0.10, 95% CI [0.07, 1.00])
+      The Pearson's Chi-squared test of independence between gender and party
+      suggests that the effect is statistically significant, and small (chi2 = 30.07,
+      p < .001; Adjusted Cramer's v = 0.10, 95% CI [0.07, 1.00])
 
 ---
 
@@ -184,9 +184,9 @@
     Output
       Effect sizes were labelled following Evans's (1996) recommendations.
       
-      The Pearson's Chi-squared test testing the association between gender and party
-      suggests that the effect is positive, statistically significant, and very weak
-      (chi2 = 30.07, p < .001; Adjusted Cramer's v = 0.10, 95% CI [0.07, 1.00])
+      The Pearson's Chi-squared test of independence between gender and party
+      suggests that the effect is statistically significant, and very weak (chi2 =
+      30.07, p < .001; Adjusted Cramer's v = 0.10, 95% CI [0.07, 1.00])
 
 ---
 
@@ -195,9 +195,9 @@
     Output
       Effect sizes were labelled following Lovakov's (2021) recommendations.
       
-      The Pearson's Chi-squared test testing the association between gender and party
-      suggests that the effect is positive, statistically significant, and very small
-      (chi2 = 30.07, p < .001; Adjusted Cramer's v = 0.10, 95% CI [0.07, 1.00])
+      The Pearson's Chi-squared test of independence between gender and party
+      suggests that the effect is statistically significant, and very small (chi2 =
+      30.07, p < .001; Adjusted Cramer's v = 0.10, 95% CI [0.07, 1.00])
 
 ---
 
@@ -206,9 +206,9 @@
     Output
       Effect sizes were labelled following Funder's (2019) recommendations.
       
-      The Pearson's Chi-squared test testing the association between gender and party
-      suggests that the effect is positive, statistically significant, and small
-      (chi2 = 30.07, p < .001; Adjusted Cramer's v = 0.10, 95% CI [0.07, 1.00])
+      The Pearson's Chi-squared test of independence between gender and party
+      suggests that the effect is statistically significant, and small (chi2 = 30.07,
+      p < .001; Adjusted Cramer's v = 0.10, 95% CI [0.07, 1.00])
 
 ---
 
@@ -217,9 +217,9 @@
     Output
       Effect sizes were labelled following Funder's (2019) recommendations.
       
-      The Pearson's Chi-squared test testing the association between gender and party
-      suggests that the effect is positive, statistically significant, and small
-      (chi2 = 30.07, p < .001; Pearson's c = 0.10, 95% CI [0.07, 1.00])
+      The Pearson's Chi-squared test of independence between gender and party
+      suggests that the effect is statistically significant, and small (chi2 = 30.07,
+      p < .001; Pearson's c = 0.10, 95% CI [0.07, 1.00])
 
 ---
 
@@ -228,9 +228,9 @@
     Output
       Effect sizes were labelled following Funder's (2019) recommendations.
       
-      The Pearson's Chi-squared test testing the association between gender and party
-      suggests that the effect is positive, statistically significant, and very small
-      (chi2 = 30.07, p < .001; Tschuprow's t = 0.09, 95% CI [0.06, 1.00])
+      The Pearson's Chi-squared test of independence between gender and party
+      suggests that the effect is statistically significant, and very small (chi2 =
+      30.07, p < .001; Tschuprow's t = 0.09, 95% CI [0.06, 1.00])
 
 ---
 
@@ -239,9 +239,9 @@
     Output
       Effect sizes were labelled following Funder's (2019) recommendations.
       
-      The Pearson's Chi-squared test testing the association between gender and party
-      suggests that the effect is positive, statistically significant, and very small
-      (chi2 = 30.07, p < .001; Adjusted Tschuprow's t = 0.08, 95% CI [0.06, 1.00])
+      The Pearson's Chi-squared test of independence between gender and party
+      suggests that the effect is statistically significant, and very small (chi2 =
+      30.07, p < .001; Adjusted Tschuprow's t = 0.08, 95% CI [0.06, 1.00])
 
 ---
 
@@ -250,9 +250,9 @@
     Output
       Effect sizes were labelled following Funder's (2019) recommendations.
       
-      The Pearson's Chi-squared test testing the association between gender and party
-      suggests that the effect is positive, statistically significant, and small
-      (chi2 = 30.07, p < .001; Cohens_w = 0.10, 95% CI [0.07, 1.00])
+      The Pearson's Chi-squared test of independence between gender and party
+      suggests that the effect is statistically significant, and small (chi2 = 30.07,
+      p < .001; Cohens_w = 0.10, 95% CI [0.07, 1.00])
 
 ---
 
@@ -261,8 +261,8 @@
     Output
       Effect sizes were labelled following Funder's (2019) recommendations.
       
-      The Pearson's Chi-squared test with Yates' continuity correction testing the
-      association between Diagnosis and Group suggests that the effect is positive,
+      The Pearson's Chi-squared test with Yates' continuity correction of
+      independence between Diagnosis and Group suggests that the effect is
       statistically significant, and large (chi2 = 31.57, p < .001; Adjusted Phi =
       0.36, 95% CI [0.25, 1.00])
 
@@ -273,8 +273,8 @@
     Output
       Effect sizes were labelled following Savilowsky's (2009) recommendations.
       
-      The Pearson's Chi-squared test with Yates' continuity correction testing the
-      association between Diagnosis and Group suggests that the effect is positive,
+      The Pearson's Chi-squared test with Yates' continuity correction of
+      independence between Diagnosis and Group suggests that the effect is
       statistically significant, and medium (chi2 = 31.57, p < .001; Cohen's h =
       0.74, 95% CI [0.50, 0.99])
 
@@ -285,8 +285,8 @@
     Output
       Effect sizes were labelled following Chen's (2010) recommendations.
       
-      The Pearson's Chi-squared test with Yates' continuity correction testing the
-      association between Diagnosis and Group suggests that the effect is positive,
+      The Pearson's Chi-squared test with Yates' continuity correction of
+      independence between Diagnosis and Group suggests that the effect is
       statistically significant, and medium (chi2 = 31.57, p < .001; Odds ratio =
       4.73, 95% CI [2.74, 8.17])
 
@@ -297,8 +297,19 @@
     Output
       
       
-      The Pearson's Chi-squared test with Yates' continuity correction testing the
-      association between Diagnosis and Group suggests that the effect is positive,
+      The Pearson's Chi-squared test with Yates' continuity correction of
+      independence between Diagnosis and Group suggests that the effect is
       statistically significant, and (chi2 = 31.57, p < .001; Risk_ratio = 2.54, 95%
       CI [1.80, 3.60])
+
+---
+
+    Code
+      report(x)
+    Output
+      Effect sizes were labelled following Funder's (2019) recommendations.
+      
+      The Pearson's Chi-squared test of independence between mtcars$cyl and mtcars$am
+      suggests that the effect is statistically significant, and very large (chi2 =
+      8.74, p = 0.013; Adjusted Cramer's v = 0.46, 95% CI [0.00, 1.00])
 
