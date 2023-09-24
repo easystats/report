@@ -313,3 +313,15 @@
       suggests that the effect is statistically significant, and very large (chi2 =
       8.74, p = 0.013; Adjusted Cramer's v = 0.46, 95% CI [0.00, 1.00])
 
+# report.htest-chi2 for given probabilities
+
+    Code
+      report(x)
+    Output
+      
+      
+      The Chi-squared test for given probabilities / goodness of fit of
+      table(mtcars$cyl) to a distribution of [4: n=3.2, 6: n=9.6, 8: n=19.2] suggests
+      that the effect is statistically significant, and (chi2 = 21.12, p < .001; Fei
+      = 0.27, 95% CI [0.17, 1.00])
+

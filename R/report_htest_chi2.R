@@ -74,7 +74,6 @@
 # report_model ----------------------------
 
 .report_model_chi2 <- function(x, table) {
-
   if (chi2_type(x) == "pearson") {
     type <- " of independence between"
     vars_full <- paste0(names(attributes(x$observed)$dimnames), collapse = " and ")
@@ -83,7 +82,10 @@
     dist <- ifelse(
       grepl("non", attr(table, "table_footer")), "a uniform distribution",
       paste0("a distribution of [", paste0(
-        names(x$expected), ": n=", x$expected, collapse = ", "), "]"))
+        names(x$expected), ": n=", x$expected,
+        collapse = ", "
+      ), "]")
+    )
 
     vars_full <- paste(x$data.name, "to", dist)
   }

@@ -132,7 +132,6 @@ report_table.htest <- function(x, ...) {
     # chi2 test
     out <- .report_table_chi2(table_full, effsize)
     attr(out$table_full, "table_footer") <- attr(attr(effsize, "table"), "table_footer")
-
   } else if (model_info$is_correlation) {
     # correlation test
     out <- .report_table_correlation(table_full)
