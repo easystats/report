@@ -80,7 +80,7 @@
   } else if (chi2_type(x) == "probabilities") {
     type <- " / goodness of fit of "
     dist <- ifelse(
-      grepl("non", attr(table, "table_footer")), "a uniform distribution",
+      grepl("non", attr(table, "table_footer"), fixed = TRUE), "a uniform distribution",
       paste0("a distribution of [", paste0(
         names(x$expected), ": n=", x$expected,
         collapse = ", "

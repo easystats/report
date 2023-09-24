@@ -188,7 +188,7 @@ test_that("report.htest-chi2 report", {
   # Watch carefully in case effectsize adds support
 
   # Mattan example comparison
-  suppressWarnings(x <- chisq.test(mtcars$cyl, mtcars$am))
+  x <- suppressWarnings(chisq.test(mtcars$cyl, mtcars$am))
 
   expect_snapshot(
     variant = "windows",
@@ -198,7 +198,7 @@ test_that("report.htest-chi2 report", {
 
 test_that("report.htest-chi2 for given probabilities", {
   # Mattan example comparison
-  suppressWarnings(x <- chisq.test(table(mtcars$cyl), p = c(0.1, 0.3, 0.6)))
+  x <- suppressWarnings(chisq.test(table(mtcars$cyl), p = c(0.1, 0.3, 0.6)))
 
   expect_snapshot(
     variant = "windows",
