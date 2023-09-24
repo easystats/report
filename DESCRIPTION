@@ -125,6 +125,7 @@ Collate:
     'report_effectsize.R'
     'report_htest_chi2.R'
     'report_htest_cor.R'
+    'report_htest_friedman.R'
     'report_htest_ttest.R'
     'report_htest_wilcox.R'
     'report_info.R'
