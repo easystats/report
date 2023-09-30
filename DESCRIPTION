@@ -49,7 +49,7 @@ Description: The aim of the 'report' package is to bridge the gap between
     This package converts statistical models and data frames into textual
     reports suited for publication, ensuring standardization and quality
     in results reporting.
-License: GPL-3 | file LICENSE
+License: MIT + file LICENSE
 URL: https://easystats.github.io/report/
 BugReports: https://github.com/easystats/report/issues
 Depends:
