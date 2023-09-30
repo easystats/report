@@ -165,8 +165,10 @@ report_statistics.htest <- function(x, table = NULL, ...) {
   text <- NULL
 
   # Estimate
-  candidates <- c("rho", "r", "tau", "Difference", "r_rank_biserial",
-                  "Chi2", "Odds Ratio")
+  candidates <- c(
+    "rho", "r", "tau", "Difference", "r_rank_biserial",
+    "Chi2", "Odds Ratio"
+  )
   estimate <- candidates[candidates %in% names(table)][1]
   if (!is.null(estimate) && !is.na(estimate)) {
     text <- paste0(tolower(estimate), " = ", insight::format_value(table[[estimate]]))
@@ -262,11 +264,11 @@ report_parameters.htest <- function(x, table = NULL, ...) {
     out <- .report_parameters_friedman(table, stats, effsize, ...)
     # chi2
   } else if (model_info$is_chi2test) {
-      if (chi2_type(x) == "fisher") {
-        out <- .report_parameters_fisher(table, stats, effsize, ...)
-      } else {
-        out <- .report_parameters_chi2(table, stats, effsize, ...)  
-      }
+    if (chi2_type(x) == "fisher") {
+      out <- .report_parameters_fisher(table, stats, effsize, ...)
+    } else {
+      out <- .report_parameters_chi2(table, stats, effsize, ...)
+    }
   } else {
     # TODO: default, same as t-test?
     out <- .report_parameters_htest_default(table, stats, effsize, ...)

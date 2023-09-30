@@ -9,18 +9,17 @@
 # report_effectsize ---------------------
 
 .report_effectsize_fisher <- function(x, table, dot_args, rules = "funder2019") {
+  args <- c(list(x), dot_args)
+  table <- do.call(effectsize::effectsize, args)
+  ci <- attributes(table)$ci
+  estimate <- names(table)[1]
+  rules <- ifelse(is.null(dot_args$rules), rules, dot_args$rules)
 
-    args <- c(list(x), dot_args)
-    table <- do.call(effectsize::effectsize, args)
-    ci <- attributes(table)$ci
-    estimate <- names(table)[1]
-    rules <- ifelse(is.null(dot_args$rules), rules, dot_args$rules)
+  args <- list(table, rules = rules, dot_args)
+  interpretation <- do.call(effectsize::interpret, args)$Interpretation
+  rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
 
-    args <- list(table, rules = rules, dot_args)
-    interpretation <- do.call(effectsize::interpret, args)$Interpretation
-    rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
-
-   if (estimate == "Cramers_v_adjusted") {
+  if (estimate == "Cramers_v_adjusted") {
     main <- paste0("Adjusted Cramer's v = ", insight::format_value(table[[estimate]]))
   } else if (estimate == "Tschuprows_t") {
     main <- paste0("Tschuprow's t = ", insight::format_value(table[[estimate]]))
