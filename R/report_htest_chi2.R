@@ -9,9 +9,10 @@
 # report_effectsize ---------------------
 
 .report_effectsize_chi2 <- function(x, table, dot_args, rules = "funder2019") {
-  if (grepl("Pearson", x$method, fixed = TRUE)) {
+  if (chi2_type(x) %in% c("pearson", "probabilities")) {
     args <- c(list(x), dot_args)
     table <- do.call(effectsize::effectsize, args)
+    table_footer <- attributes(table)$table_footer
     ci <- attributes(table)$ci
     estimate <- names(table)[1]
     rules <- ifelse(is.null(dot_args$rules), rules, dot_args$rules)
@@ -19,8 +20,6 @@
     args <- list(table, rules = rules, dot_args)
     interpretation <- do.call(effectsize::interpret, args)$Interpretation
     rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
-  } else if (grepl("given probabilities", x$method, fixed = TRUE)) {
-
   } else {
     stop(insight::format_message(
       "This test is not yet supported. Please open an issue at {.url https://github.com/easystats/report/issues}."
@@ -29,6 +28,8 @@
 
   if (estimate == "Cramers_v_adjusted") {
     main <- paste0("Adjusted Cramer's v = ", insight::format_value(table[[estimate]]))
+  } else if (estimate == "Fei") {
+    main <- paste0("Fei = ", insight::format_value(table[[estimate]]))
   } else if (estimate == "Tschuprows_t") {
     main <- paste0("Tschuprow's t = ", insight::format_value(table[[estimate]]))
   } else if (estimate == "Tschuprows_t_adjusted") {
@@ -62,6 +63,7 @@
   )
 
   table <- table[c(estimate, paste0(estimate, c("_CI_low", "_CI_high")))]
+  attributes(table)$table_footer <- table_footer
 
   list(
     table = table, statistics = statistics, interpretation = interpretation,
@@ -72,13 +74,62 @@
 # report_model ----------------------------
 
 .report_model_chi2 <- function(x, table) {
-  vars_full <- paste0(names(attributes(x$observed)$dimnames), collapse = " and ")
+  if (chi2_type(x) == "pearson") {
+    type <- " of independence between"
+    vars_full <- paste0(names(attributes(x$observed)$dimnames), collapse = " and ")
+  } else if (chi2_type(x) == "probabilities") {
+    type <- " / goodness of fit of "
+    dist <- ifelse(
+      grepl("non", attr(table, "table_footer"), fixed = TRUE), "a uniform distribution",
+      paste0("a distribution of [", paste0(
+        names(x$expected), ": n=", x$expected,
+        collapse = ", "
+      ), "]")
+    )
+
+    vars_full <- paste(x$data.name, "to", dist)
+  }
 
   text <- paste0(
     trimws(x$method),
-    " testing the association between ",
-    vars_full
+    type,
+    paste0(" ", vars_full)
   )
 
   text
+}
+
+chi2_type <- function(x) {
+  if (grepl("probabilities", x$method, fixed = TRUE)) {
+    out <- "probabilities"
+  } else if (grepl("Pearson", x$method, fixed = TRUE)) {
+    out <- "pearson"
+  }
+  out
+}
+
+# report_parameters ----------------------------
+
+.report_parameters_chi2 <- function(table, stats, effsize, ...) {
+  text_full <- paste0(
+    "statistically ",
+    effectsize::interpret_p(table$p, rules = "default"),
+    ", and ",
+    attributes(effsize)$interpretation,
+    " (",
+    stats,
+    ")"
+  )
+
+  text_short <- paste0(
+    "statistically ",
+    effectsize::interpret_p(table$p, rules = "default"),
+    ", and ",
+    attributes(effsize)$interpretation,
+    " (",
+    summary(stats),
+    ")"
+  )
+
+  list(text_short = text_short, text_full = text_full)
 }

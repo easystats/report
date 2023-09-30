@@ -65,13 +65,13 @@ report_effectsize.htest <- function(x, ...) {
     }
   }
 
-  # For correlations ---------------
+  ## For correlations ---------------
 
   if (model_info$is_correlation) {
     out <- .report_effectsize_correlation(x, table, dot_args)
   }
 
-  # For Chi2 ---------------
+  ## For Chi2 ---------------
 
   if (model_info$is_chi2test) {
     if (chi2_type(x) == "fisher") {
@@ -135,6 +135,7 @@ report_table.htest <- function(x, ...) {
   } else if (model_info$is_chi2test) {
     # chi2 test
     out <- .report_table_chi2(table_full, effsize)
+    attr(out$table_full, "table_footer") <- attr(attr(effsize, "table"), "table_footer")
   } else if (model_info$is_correlation) {
     # correlation test
     out <- .report_table_correlation(table_full)
@@ -255,14 +256,16 @@ report_parameters.htest <- function(x, table = NULL, ...) {
     # t-tests
   } else if (model_info$is_ttest) {
     out <- .report_parameters_ttest(table, stats, effsize, ...)
+    # Friedman
   } else if (model_info$is_ranktest &&
     grepl("Friedman", attributes(x$statistic)$names, fixed = TRUE)) {
     out <- .report_parameters_friedman(table, stats, effsize, ...)
-
     # chi2
   } else if (model_info$is_chi2test) {
       if (chi2_type(x) == "fisher") {
         out <- .report_parameters_fisher(table, stats, effsize, ...)
+      } else {
+        out <- .report_parameters_chi2(table, stats, effsize, ...)  
       }
   } else {
     # TODO: default, same as t-test?
