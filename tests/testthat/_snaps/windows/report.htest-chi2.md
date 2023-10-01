@@ -318,10 +318,10 @@
     Code
       report(x)
     Output
-      
+      Effect sizes were labelled following Funder's (2019) recommendations.
       
       The Chi-squared test for given probabilities / goodness of fit of
       table(mtcars$cyl) to a distribution of [4: n=3.2, 6: n=9.6, 8: n=19.2] suggests
-      that the effect is statistically significant, and (chi2 = 21.12, p < .001; Fei
-      = 0.27, 95% CI [0.17, 1.00])
+      that the effect is statistically significant, and medium (chi2 = 21.12, p <
+      .001; Fei = 0.27, 95% CI [0.17, 1.00])
 

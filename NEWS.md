@@ -6,7 +6,7 @@ Major Changes
 
 Minor changes 
 
-* `report` now supports variables of class `htest` for the Friedman test.
+* `report` now supports variables of class `htest` for the Chi2, Friedman test, Fisher's exact test, and Kruskal-Wallis.
 
 * `report` now supports variables of class `Date`, treating them like factors.
 
