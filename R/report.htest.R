@@ -78,7 +78,11 @@ report_effectsize.htest <- function(x, ...) {
   ## For Chi2 ---------------
 
   if (model_info$is_chi2test) {
-    out <- .report_effectsize_chi2(x, table, dot_args)
+    if (chi2_type(x) == "fisher") {
+      out <- .report_effectsize_fisher(x, table, dot_args)
+    } else {
+      out <- .report_effectsize_chi2(x, table, dot_args)
+    }
   }
 
   # TODO: Chi-squared test -------------
@@ -165,7 +169,10 @@ report_statistics.htest <- function(x, table = NULL, ...) {
   text <- NULL
 
   # Estimate
-  candidates <- c("rho", "r", "tau", "Difference", "r_rank_biserial", "Chi2")
+  candidates <- c(
+    "rho", "r", "tau", "Difference", "r_rank_biserial",
+    "Chi2", "Odds Ratio"
+  )
   estimate <- candidates[candidates %in% names(table)][1]
   if (!is.null(estimate) && !is.na(estimate)) {
     text <- paste0(tolower(estimate), " = ", insight::format_value(table[[estimate]]))
@@ -264,7 +271,11 @@ report_parameters.htest <- function(x, table = NULL, ...) {
     out <- .report_parameters_kruskal(table, stats, effsize, ...)
     # chi2
   } else if (model_info$is_chi2test) {
-    out <- .report_parameters_chi2(table, stats, effsize, ...)
+    if (chi2_type(x) == "fisher") {
+      out <- .report_parameters_fisher(table, stats, effsize, ...)
+    } else {
+      out <- .report_parameters_chi2(table, stats, effsize, ...)
+    }
   } else {
     # TODO: default, same as t-test?
     out <- .report_parameters_htest_default(table, stats, effsize, ...)
@@ -319,7 +330,11 @@ report_model.htest <- function(x, table = NULL, ...) {
   }
 
   if (model_info$is_chi2test) {
-    text <- .report_model_chi2(x, table)
+    if (chi2_type(x) == "fisher") {
+      text <- .report_model_fisher(x, table)
+    } else {
+      text <- .report_model_chi2(x, table)
+    }
   }
 
   as.report_model(text, summary = text)
