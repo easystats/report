@@ -2,7 +2,7 @@
 
     Code
       report(ivr)
-    Message <simpleMessage>
+    Message
       Formula contains log- or sqrt-terms.
         See help("standardize") for how such terms are standardized.
       Formula contains log- or sqrt-terms.

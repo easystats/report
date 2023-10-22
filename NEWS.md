@@ -2,11 +2,11 @@
 
 Major Changes
 
-* This release changes the licensing model of `{see}` to an MIT license.
+* This release changes the licensing model of `{see}` to an MIT license. 
 
 Minor changes 
 
-* `report` now supports variables of class `htest` for the Friedman test.
+* `report` now supports variables of class `htest` for the Chi2, Friedman test, and Fisher's exact test.
 
 * `report` now supports variables of class `Date`, treating them like factors.
 
