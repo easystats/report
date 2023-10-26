@@ -129,9 +129,9 @@ report_table.sessionInfo <- function(x, include_R = TRUE, ...) {
   }
 
   data <- data.frame(
-    "Package" = names,
-    "Version" = versions,
-    "Reference" = citations,
+    Package = names,
+    Version = versions,
+    Reference = citations,
     stringsAsFactors = FALSE
   )
 
