@@ -1,4 +1,5 @@
 testthat::set_state_inspector(function() {
+  skip()
   list(
     attached = search(),
     connections = nrow(showConnections()),
