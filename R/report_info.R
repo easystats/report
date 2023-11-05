@@ -94,15 +94,15 @@ print.report_info <- function(x, ...) {
 
   ci_method <- tolower(ci_method)
   string_method <- switch(ci_method,
-    "bci" = ,
-    "bcai" = "bias-corrected accelerated bootstrap",
-    "si" = ,
-    "ci" = ,
-    "quantile" = ,
-    "eti" = ,
-    "hdi" = ifelse(isTRUE(bootstrap), "na\u0131ve bootstrap", "MCMC"),
-    "normal" = "Wald normal",
-    "boot" = "parametric bootstrap",
+    bci = ,
+    bcai = "bias-corrected accelerated bootstrap",
+    si = ,
+    ci = ,
+    quantile = ,
+    eti = ,
+    hdi = ifelse(isTRUE(bootstrap), "na\u0131ve bootstrap", "MCMC"),
+    normal = "Wald normal",
+    boot = "parametric bootstrap",
     "Wald"
   )
 

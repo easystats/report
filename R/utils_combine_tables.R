@@ -38,8 +38,8 @@
 
   # add performance
   perf_vertical <- data.frame(
-    "Parameter" = perf_names,
-    "Fit" = as.numeric(performance[1, ]),
+    Parameter = perf_names,
+    Fit = as.numeric(performance[1, ]),
     stringsAsFactors = FALSE
   )
 

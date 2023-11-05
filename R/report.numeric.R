@@ -206,15 +206,15 @@ report_parameters.numeric <- function(x,
   }
 
   text_full <- c(
-    "n_Obs" = text_n,
-    "Mean" = text_mean,
-    "Dispersion_Mean" = paste0("SD = ", text_sd),
-    "Median" = text_median,
-    "Dispersion_Median" = paste0("MAD = ", text_mad),
-    "Range" = paste0("range: ", text_range),
-    "Skewness" = text_skewness,
-    "Kurtosis" = text_kurtosis,
-    "Missing" = text_missing
+    n_Obs = text_n,
+    Mean = text_mean,
+    Dispersion_Mean = paste0("SD = ", text_sd),
+    Median = text_median,
+    Dispersion_Median = paste0("MAD = ", text_mad),
+    Range = paste0("range: ", text_range),
+    Skewness = text_skewness,
+    Kurtosis = text_kurtosis,
+    Missing = text_missing
   )
 
   # Shorten ---
