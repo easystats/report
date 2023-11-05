@@ -58,7 +58,10 @@ report_effectsize.htest <- function(x, ...) {
 
     if (grepl("Friedman", attributes(x$statistic)$names, fixed = TRUE)) {
       out <- .report_effectsize_friedman(x, table, dot_args)
-    } else if (grepl("Kruskal", attributes(x$statistic)$names, fixed = TRUE)) {
+    } else if (!is.null(x$statistic) && grepl(
+      "Kruskal", attributes(x$statistic)$names,
+      fixed = TRUE
+    )) {
       # For Kruskal-Wallis test ---------------
 
       out <- .report_effectsize_kruskal(x, table, dot_args)
@@ -266,7 +269,10 @@ report_parameters.htest <- function(x, table = NULL, ...) {
     model_info$is_ranktest &&
       grepl("Friedman", attributes(x$statistic)$names, fixed = TRUE)) {
     out <- .report_parameters_friedman(table, stats, effsize, ...)
-  } else if (grepl("Kruskal", attributes(x$statistic)$names, fixed = TRUE)) {
+  } else if (!is.null(x$statistic) && grepl(
+    "Kruskal", attributes(x$statistic)$names,
+    fixed = TRUE
+  )) {
     # Kruskal
     out <- .report_parameters_kruskal(table, stats, effsize, ...)
     # chi2
