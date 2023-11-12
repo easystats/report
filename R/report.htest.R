@@ -53,22 +53,39 @@ report_effectsize.htest <- function(x, ...) {
     out <- .report_effectsize_ttest(x, table, dot_args)
   }
 
-  # For wilcox test ---------------
-
   if (model_info$is_ranktest && !model_info$is_correlation) {
-    out <- .report_effectsize_wilcox(x, table, dot_args)
+    # For friedman test ---------------
+
+    if (grepl("Friedman", attributes(x$statistic)$names, fixed = TRUE)) {
+      out <- .report_effectsize_friedman(x, table, dot_args)
+    } else if (!is.null(x$statistic) && grepl(
+      "Kruskal", attributes(x$statistic)$names,
+      fixed = TRUE
+    )) {
+      # For Kruskal-Wallis test ---------------
+
+      out <- .report_effectsize_kruskal(x, table, dot_args)
+    } else {
+      # For wilcox test ---------------
+
+      out <- .report_effectsize_wilcox(x, table, dot_args)
+    }
   }
 
-  # For correlations ---------------
+  ## For correlations ---------------
 
   if (model_info$is_correlation) {
     out <- .report_effectsize_correlation(x, table, dot_args)
   }
 
-  # For Chi2 ---------------
+  ## For Chi2 ---------------
 
   if (model_info$is_chi2test) {
-    out <- .report_effectsize_chi2(x, table, dot_args)
+    if (chi2_type(x) == "fisher") {
+      out <- .report_effectsize_fisher(x, table, dot_args)
+    } else {
+      out <- .report_effectsize_chi2(x, table, dot_args)
+    }
   }
 
   # TODO: Chi-squared test -------------
@@ -81,7 +98,7 @@ report_effectsize.htest <- function(x, ...) {
 
   parameters <- paste0(out$interpretation, " (", out$statistics, ")")
 
-  # Return output
+
   as.report_effectsize(
     parameters,
     summary = parameters,
@@ -120,17 +137,20 @@ report_table.htest <- function(x, ...) {
     out <- .report_table_ttest(table_full, effsize)
   } else if (model_info$is_ranktest && !model_info$is_correlation) {
     # wilcox test
+    # but same function for Friedman
     out <- .report_table_wilcox(table_full, effsize)
   } else if (model_info$is_chi2test) {
     # chi2 test
     out <- .report_table_chi2(table_full, effsize)
+    attr(out$table_full, "table_footer") <- attr(attr(effsize, "table"), "table_footer")
   } else if (model_info$is_correlation) {
+    # correlation test
     out <- .report_table_correlation(table_full)
   } else {
     out <- list(table_full = table_full, table = NULL)
   }
 
-  # Return output
+
   as.report_table(out$table_full, summary = out$table, effsize = effsize)
 }
 
@@ -152,7 +172,10 @@ report_statistics.htest <- function(x, table = NULL, ...) {
   text <- NULL
 
   # Estimate
-  candidates <- c("rho", "r", "tau", "Difference", "r_rank_biserial")
+  candidates <- c(
+    "rho", "r", "tau", "Difference", "r_rank_biserial",
+    "Chi2", "Odds Ratio"
+  )
   estimate <- candidates[candidates %in% names(table)][1]
   if (!is.null(estimate) && !is.na(estimate)) {
     text <- paste0(tolower(estimate), " = ", insight::format_value(table[[estimate]]))
@@ -186,15 +209,14 @@ report_statistics.htest <- function(x, table = NULL, ...) {
     text <- paste0(text, ", z = ", insight::format_value(table$z))
   } else if ("W" %in% names(table)) {
     text <- paste0("W = ", insight::format_value(table$W))
-  } else if ("Chi2" %in% names(table)) {
-    text <- paste0(text, ", Chi2 = ", insight::format_value(table$Chi2))
   }
 
   # p-value
   text <- paste0(text, ", ", insight::format_p(table$p, stars = FALSE, digits = "apa"))
 
   # Effect size
-  if (model_info$is_ttest || (model_info$is_ranktest && !model_info$is_correlation)) {
+  if (model_info$is_ttest || (model_info$is_ranktest && !model_info$is_correlation) ||
+    model_info$is_chi2test) {
     text_full <- paste0(text, "; ", attributes(effsize)$statistics)
     text <- paste0(text, ", ", attributes(effsize)$main)
   } else {
@@ -239,13 +261,29 @@ report_parameters.htest <- function(x, table = NULL, ...) {
   # Correlations
   if (model_info$is_correlation) {
     out <- .report_parameters_correlation(table, stats, ...)
-
     # t-tests
   } else if (model_info$is_ttest) {
     out <- .report_parameters_ttest(table, stats, effsize, ...)
-
-    # TODO: default, same as t-test?
+    # Friedman
+  } else if (
+    model_info$is_ranktest &&
+      grepl("Friedman", attributes(x$statistic)$names, fixed = TRUE)) {
+    out <- .report_parameters_friedman(table, stats, effsize, ...)
+  } else if (!is.null(x$statistic) && grepl(
+    "Kruskal", attributes(x$statistic)$names,
+    fixed = TRUE
+  )) {
+    # Kruskal
+    out <- .report_parameters_kruskal(table, stats, effsize, ...)
+    # chi2
+  } else if (model_info$is_chi2test) {
+    if (chi2_type(x) == "fisher") {
+      out <- .report_parameters_fisher(table, stats, effsize, ...)
+    } else {
+      out <- .report_parameters_chi2(table, stats, effsize, ...)
+    }
   } else {
+    # TODO: default, same as t-test?
     out <- .report_parameters_htest_default(table, stats, effsize, ...)
   }
 
@@ -286,7 +324,23 @@ report_model.htest <- function(x, table = NULL, ...) {
   }
 
   if (model_info$is_ranktest && !model_info$is_correlation) {
-    text <- .report_model_wilcox(x, table)
+    # For friedman test ---------------
+
+    if (grepl("Friedman", attributes(x$statistic)$names, fixed = TRUE)) {
+      text <- .report_model_friedman(x, table)
+    } else {
+      # For wilcox test ---------------
+
+      text <- .report_model_wilcox(x, table)
+    }
+  }
+
+  if (model_info$is_chi2test) {
+    if (chi2_type(x) == "fisher") {
+      text <- .report_model_fisher(x, table)
+    } else {
+      text <- .report_model_chi2(x, table)
+    }
   }
 
   as.report_model(text, summary = text)

@@ -83,7 +83,7 @@ report_effectsize.aov <- function(x, ...) {
   parameters <- paste0(interpretation, " (", statistics, ")")
 
 
-  # Return output
+
   as.report_effectsize(parameters,
     summary = parameters,
     table = table,

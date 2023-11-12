@@ -8,7 +8,7 @@
 #' @inherit report return seealso
 #'
 #' @examplesIf require("brms", quietly = TRUE)
-#' \dontrun{
+#' \donttest{
 #' # Bayesian models
 #' library(brms)
 #' model <- suppressWarnings(brm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300))

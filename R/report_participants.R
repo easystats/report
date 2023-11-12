@@ -133,7 +133,7 @@ report_participants <- function(data,
     x[which(x == "")] <- NA
     x
   })
-  data <- as.data.frame(data_list)
+  data <- as.data.frame(data_list, stringsAsFactors = FALSE)
 
   # find age variable automatically
   if (is.null(age)) {
@@ -165,7 +165,22 @@ report_participants <- function(data,
     race <- .find_race_in_data(data)
   }
 
-  if (!is.null(group)) {
+  if (is.null(group)) {
+    text <- .report_participants(
+      data,
+      age = age,
+      sex = sex,
+      gender = gender,
+      education = education,
+      country = country,
+      race = race,
+      participants = participants,
+      spell_n = spell_n,
+      digits = digits,
+      threshold = threshold,
+      ...
+    )
+  } else {
     text <- NULL
     data[[group]] <- as.character(data[[group]])
     for (i in split(data, data[group])) {
@@ -192,21 +207,6 @@ report_participants <- function(data,
       text <- c(text, paste0(pre_text, current_text))
     }
     text <- paste("For", datawizard::text_concatenate(text, sep = ", for ", last = " and for "))
-  } else {
-    text <- .report_participants(
-      data,
-      age = age,
-      sex = sex,
-      gender = gender,
-      education = education,
-      country = country,
-      race = race,
-      participants = participants,
-      spell_n = spell_n,
-      digits = digits,
-      threshold = threshold,
-      ...
-    )
   }
   text
 }
@@ -256,33 +256,37 @@ report_participants <- function(data,
   country <- .replace_names(data, country)
   race <- .replace_names(data, race)
 
+  # Set age as numeric
+  data[[age]] <- as.numeric(data[[age]])
+
   # Grouped data
   if (!is.null(participants)) {
     data <- data.frame(
-      "Age" = stats::aggregate(data[[age]],
+      Age = stats::aggregate(data[[age]],
         by = list(data[[participants]]),
         FUN = mean
       )[[2]],
-      "Sex" = stats::aggregate(data[[sex]],
+      Sex = stats::aggregate(data[[sex]],
         by = list(data[[participants]]),
         FUN = utils::head, n = 1
       )[[2]],
-      "Gender" = stats::aggregate(data[[gender]],
+      Gender = stats::aggregate(data[[gender]],
         by = list(data[[participants]]),
         FUN = utils::head, n = 1
       )[[2]],
-      "Education" = stats::aggregate(data[[education]],
+      Education = stats::aggregate(data[[education]],
         by = list(data[[participants]]),
         FUN = utils::head, n = 1
       )[[2]],
-      "Country" = stats::aggregate(data[[country]],
+      Country = stats::aggregate(data[[country]],
         by = list(data[[participants]]),
         FUN = utils::head, n = 1
       )[[2]],
-      "Race" = stats::aggregate(data[[race]],
+      Race = stats::aggregate(data[[race]],
         by = list(data[[participants]]),
         FUN = utils::head, n = 1
-      )[[2]]
+      )[[2]],
+      stringsAsFactors = FALSE
     )
     age <- "Age"
     sex <- "Sex"
@@ -344,6 +348,16 @@ report_participants <- function(data,
     )
   }
 
+  genders_woman <- c(
+    "woman", "w", "female", "women", "girl",
+    "lady", "miss", "madam", "dame", "lass"
+  )
+  genders_man <- c(
+    "man", "m", "male", "men", "boy",
+    "guy", "dude", "lad", "sir"
+  )
+  both_genders <- c(genders_woman, genders_man, NA, "na")
+
   text_gender <- if (all(is.na(data[[gender]]))) {
     ""
   } else {
@@ -351,15 +365,15 @@ report_participants <- function(data,
       "Gender: ",
       insight::format_value(length(data[[gender]][tolower(
         data[[gender]]
-      ) %in% c("woman", "w", "f", "female")]) / nrow(data) * 100, digits = digits),
+      ) %in% genders_woman]) / nrow(data) * 100, digits = digits),
       "% women, ",
       insight::format_value(length(data[[gender]][tolower(
         data[[gender]]
-      ) %in% c("man", "m", "male")]) / nrow(data) * 100, digits = digits),
+      ) %in% genders_man]) / nrow(data) * 100, digits = digits),
       "% men, ",
       insight::format_value(100 - length(data[[gender]][tolower(
         data[[gender]]
-      ) %in% c("woman", "w", "f", "female", "man", "m", "male", NA, "na")]) /
+      ) %in% both_genders]) /
         nrow(data) * 100), "% non-binary",
       if (!insight::format_value(length(data[[gender]][tolower(
         data[[gender]]
@@ -405,14 +419,19 @@ report_participants <- function(data,
   } else {
     data[[country]] <- as.character(data[[country]])
     data[which(data[[country]] %in% c(NA, "NA")), country] <- "missing"
-    frequency_table <- as.data.frame(datawizard::data_tabulate(data[[country]]))[c(2, 4)]
+    frequency_table <- as.data.frame(datawizard::data_tabulate(data[[country]]),
+      stringsAsFactors = FALSE
+    )[c(2, 4)]
     names(frequency_table)[2] <- "Percent"
     frequency_table <- frequency_table[-which(is.na(frequency_table$Value)), ]
     frequency_table <- frequency_table[order(-frequency_table$Percent), ]
     upper <- frequency_table[which(frequency_table$Percent >= threshold), ]
     lower <- frequency_table[which(frequency_table$Percent < threshold), ]
     if (nrow(lower) > 0) {
-      lower_sum <- data.frame(Value = "other", Percent = sum(lower$Percent), stringsAsFactors = FALSE)
+      lower_sum <- data.frame(
+        Value = "other", Percent = sum(lower$Percent),
+        stringsAsFactors = FALSE
+      )
       combined <- rbind(upper, lower_sum)
     } else {
       combined <- upper
@@ -427,14 +446,19 @@ report_participants <- function(data,
   } else {
     data[[race]] <- as.character(data[[race]])
     data[which(data[[race]] %in% c(NA, "NA")), race] <- "missing"
-    frequency_table <- as.data.frame(datawizard::data_tabulate(data[[race]]))[c(2, 4)]
+    frequency_table <- as.data.frame(datawizard::data_tabulate(data[[race]]),
+      stringsAsFactors = FALSE
+    )[c(2, 4)]
     names(frequency_table)[2] <- "Percent"
     frequency_table <- frequency_table[-which(is.na(frequency_table$Value)), ]
     frequency_table <- frequency_table[order(-frequency_table$Percent), ]
     upper <- frequency_table[which(frequency_table$Percent >= threshold), ]
     lower <- frequency_table[which(frequency_table$Percent < threshold), ]
     if (nrow(lower) > 0) {
-      lower_sum <- data.frame(Value = "other", Percent = sum(lower$Percent), stringsAsFactors = FALSE)
+      lower_sum <- data.frame(
+        Value = "other", Percent = sum(lower$Percent),
+        stringsAsFactors = FALSE
+      )
       combined <- rbind(upper, lower_sum)
     } else {
       combined <- upper

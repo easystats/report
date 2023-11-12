@@ -1,6 +1,12 @@
 # report 0.5.8
 
+Major Changes
+
+* This release changes the licensing model of `{see}` to an MIT license. 
+
 Minor changes 
+
+* `report` now supports variables of class `htest` for the Chi2, Friedman test, Fisher's exact test, and Kruskal-Wallis.
 
 * `report` now supports variables of class `Date`, treating them like factors.
 
@@ -26,6 +32,8 @@ Bug fixes
 
 * Fixed issue in `report_participants`, which did not print the `"gender"`
   category for grouped output when that argument was written in lower-case.
+  Gender now also supports more alternate spellings, and age converts the
+  respective column to numeric.
 
 * Fixed printing issue for intercept-only models.
 
