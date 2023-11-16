@@ -13,6 +13,7 @@ test_that("report.brms", {
   expect_s3_class(summary(r), "character")
   expect_s3_class(as.data.frame(r), "data.frame")
 
+  set.seed(333)
   expect_snapshot(variant = "windows", report(model, verbose = FALSE))
 
   expect_identical(
