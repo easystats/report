@@ -127,12 +127,12 @@
       
         - name: 87 entries, such as Ackbar (n = 1); Adi Gallia (n = 1); Anakin
       Skywalker (n = 1) and 84 others (0 missing)
-        - height: n = 87, Mean = 174.36, SD = 34.77, Median = , MAD = 19.27, range:
-      [66, 264], Skewness = -1.06, Kurtosis = 2.10, 6 missing
+        - height: n = 87, Mean = 174.60, SD = 34.77, Median = , MAD = 17.79, range:
+      [66, 264], Skewness = -1.09, Kurtosis = 2.13, 6 missing
         - mass: n = 87, Mean = 97.31, SD = 169.46, Median = , MAD = 16.31, range: [15,
       1358], Skewness = 7.34, Kurtosis = 55.42, 28 missing
-        - hair_color: 12 entries, such as none (n = 37); brown (n = 18); black (n = 13)
-      and 9 others (5 missing)
+        - hair_color: 11 entries, such as none (n = 38); brown (n = 18); black (n = 13)
+      and 8 others (5 missing)
         - skin_color: 31 entries, such as fair (n = 17); light (n = 11); dark (n = 6)
       and 28 others (0 missing)
         - eye_color: 15 entries, such as brown (n = 21); blue (n = 19); yellow (n = 11)
