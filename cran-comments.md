@@ -1,4 +1,4 @@
-## R CMD check results report 0.5.8
+## R CMD check results report 0.5.8 
 
 0 errors | 0 warnings | 0 note
 
