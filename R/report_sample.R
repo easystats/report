@@ -277,7 +277,7 @@ report_sample <- function(data,
 
 # create a "table row", i.e. a summary from a variable ------------------------
 
-.report_sample_row <- function(x, digits = 1, ...) {
+.report_sample_row <- function(x, ...) {
   UseMethod(".report_sample_row")
 }
 
