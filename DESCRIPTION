@@ -139,6 +139,7 @@ Collate:
     'report_performance.R'
     'report_priors.R'
     'report_random.R'
+    'report_s.R'
     'report_sample.R'
     'report_statistics.R'
     'report_table.R'

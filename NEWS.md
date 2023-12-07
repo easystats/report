@@ -1,5 +1,10 @@
 # report 0.5.8
 
+New features
+
+* `report_s()` to report the interpretation of S- and p-values in an easy-to-understand
+  language.
+
 Major Changes
 
 * This release changes the licensing model of `{report}` to an MIT license. 
