@@ -59,5 +59,19 @@
     Code
       report_participants(data, age = "Age", sex = "Sex")
     Output
-      [1] "6 participants (8, n = 1; 21, n = 1; 22, n = 1; 23, n = 1; 42, n = 1; 54, n = 1; Sex: 16.7% females, 33.3% males, 16.7% other, 33.33% missing; Gender: 33.3% women, 16.7% men, 16.67% non-binary, 33.33% missing; Education: -5, 16.67%; -3, 16.67%; 0, 16.67%; 3, 16.67%; 5, 16.67%; 8, 16.67%; Country: 33.33% Canada, 16.67% Germany, 16.67% India, 16.67% USA, 16.67% missing; Race: 16.67% A, 16.67% B, 16.67% C, 16.67% D, 16.67% E, 16.67% missing)"
+      [1] "6 participants (Mean age = 3.5, SD = 1.9, range: [1, 6]; Sex: 16.7% females, 33.3% males, 16.7% other, 33.33% missing; Gender: 33.3% women, 16.7% men, 16.67% non-binary, 33.33% missing; Education: -5, 16.67%; -3, 16.67%; 0, 16.67%; 3, 16.67%; 5, 16.67%; 8, 16.67%; Country: 33.33% Canada, 16.67% Germany, 16.67% India, 16.67% USA, 16.67% missing; Race: 16.67% A, 16.67% B, 16.67% C, 16.67% D, 16.67% E, 16.67% missing)"
+
+# report_participants age as character
+
+    Code
+      report_participants(data)
+    Output
+      [1] "6 participants (Mean age = 29.5, SD = 15.0, range: [11, 52])"
+
+# report_participants different gender spellings
+
+    Code
+      report_participants(data)
+    Output
+      [1] "20 participants (Gender: 50.0% women, 45.0% men, 0.00% non-binary, 5.00% missing)"
 

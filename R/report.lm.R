@@ -99,20 +99,17 @@ report_effectsize.lm <- function(x, effectsize_method = "refit", ...) {
 
   if ("Component" %in% colnames(table)) {
     merge_by <- c("Parameter", "Component")
-    start_col <- 4
+    start_col <- 4L
   } else {
     merge_by <- "Parameter"
-    start_col <- 3
+    start_col <- 3L
   }
 
   table <- as.data.frame(table)[c(merge_by, estimate, "CI_low", "CI_high")]
   names(table)[start_col:ncol(table)] <- c(paste0(estimate, "_CI_low"), paste0(estimate, "_CI_high"))
 
-
   rules <- .text_effectsize(attr(attr(interpret, "rules"), "rule_name"))
   parameters <- paste0(interpretation, " (", statistics, ")")
-
-
 
   as.report_effectsize(parameters,
     summary = parameters,

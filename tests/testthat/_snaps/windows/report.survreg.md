@@ -4,10 +4,16 @@
       report(mod_survreg)
     Output
       Can't calculate log-loss.
-      Can't calculate proper scoring rules for models without integer response values.
+    Message
+      Can't calculate proper scoring rules for models without integer response
+        values.
+    Output
       `performance_pcp()` only works for models with binary response values.
       Can't calculate log-loss.
-      Can't calculate proper scoring rules for models without integer response values.
+    Message
+      Can't calculate proper scoring rules for models without integer response
+        values.
+    Output
       `performance_pcp()` only works for models with binary response values.
       We fitted a logistic model to predict survival::Surv(futime, fustat) with
       ecog.ps and rx (formula: survival::Surv(futime, fustat) ~ ecog.ps + rx). The

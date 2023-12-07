@@ -23,11 +23,11 @@
 
     Code
       report(m2)
-    Message <simpleMessage>
+    Message
       boundary (singular) fit: see help('isSingular')
     Output
       Random effect variances not available. Returned R2 does not account for random effects.
-    Message <simpleMessage>
+    Message
       boundary (singular) fit: see help('isSingular')
     Output
       Random effect variances not available. Returned R2 does not account for random effects.
