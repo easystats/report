@@ -74,6 +74,8 @@
 
     Code
       report(t.test(x, y, paired = TRUE))
+    Message
+      For paired samples, 'repeated_measures_d()' provides more options.
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
@@ -86,6 +88,8 @@
 
     Code
       report(t.test(x, y, paired = TRUE, alternative = "l"))
+    Message
+      For paired samples, 'repeated_measures_d()' provides more options.
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
@@ -98,6 +102,8 @@
 
     Code
       report(t.test(x, y, paired = TRUE, alternative = "g"))
+    Message
+      For paired samples, 'repeated_measures_d()' provides more options.
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       
@@ -110,6 +116,8 @@
 
     Code
       report(t.test(sleep2$extra.1, sleep2$extra.2, paired = TRUE))
+    Message
+      For paired samples, 'repeated_measures_d()' provides more options.
     Output
       Effect sizes were labelled following Cohen's (1988) recommendations.
       

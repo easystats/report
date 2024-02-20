@@ -1,7 +1,7 @@
 Package: report
 Type: Package
 Title: Automated Reporting of Results and Statistical Models
-Version: 0.5.7.13
+Version: 0.5.8
 Authors@R:
     c(person(given = "Dominique",
              family = "Makowski",
@@ -57,10 +57,10 @@ Depends:
 Imports:
     bayestestR (>= 0.13.1),
     effectsize (>= 0.8.6),
-    insight (>= 0.19.6),
-    parameters (>= 0.21.2),
+    insight (>= 0.19.7),
+    parameters (>= 0.21.3),
     performance (>= 0.10.8),
-    datawizard (>= 0.9.0),
+    datawizard (>= 0.9.1),
     stats,
     tools,
     utils
@@ -139,6 +139,7 @@ Collate:
     'report_performance.R'
     'report_priors.R'
     'report_random.R'
+    'report_s.R'
     'report_sample.R'
     'report_statistics.R'
     'report_table.R'
@@ -146,10 +147,3 @@ Collate:
     'utils_grouped_df.R'
     'zzz.R'
 Roxygen: list(markdown = TRUE)
-Remotes: 
-  easystats/insight,
-  easystats/datawizard,
-  easystats/parameters,
-  easystats/effectsize,
-  easystats/bayestestR,
-  easystats/performance

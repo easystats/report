@@ -59,6 +59,7 @@ reference:
       - report_performance
       - report_priors
       - report_random
+      - report_s
       - report_sample
       - report_statistics
 
