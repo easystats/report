@@ -4,6 +4,41 @@
       report(model, verbose = FALSE)
     Message
       Start sampling
+      Chain 1 Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
+      Chain 1 Exception: normal_id_glm_lpdf: Scale vector is 0, but must be positive finite! (in 'C:/Users/DL/AppData/Local/Temp/RtmpERRA9z/model-12d437f47a61.stan', line 35, column 4 to column 62)
+      Chain 1 If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,
+      Chain 1 but if this warning occurs often then your model may be either severely ill-conditioned or misspecified.
+      Chain 1 
+      Chain 2 Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
+      Chain 2 Exception: normal_id_glm_lpdf: Scale vector is inf, but must be positive finite! (in 'C:/Users/DL/AppData/Local/Temp/RtmpERRA9z/model-12d437f47a61.stan', line 35, column 4 to column 62)
+      Chain 2 If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,
+      Chain 2 but if this warning occurs often then your model may be either severely ill-conditioned or misspecified.
+      Chain 2 
+      Chain 2 Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
+      Chain 2 Exception: normal_id_glm_lpdf: Scale vector is inf, but must be positive finite! (in 'C:/Users/DL/AppData/Local/Temp/RtmpERRA9z/model-12d437f47a61.stan', line 35, column 4 to column 62)
+      Chain 2 If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,
+      Chain 2 but if this warning occurs often then your model may be either severely ill-conditioned or misspecified.
+      Chain 2 
+      Chain 3 Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
+      Chain 3 Exception: normal_id_glm_lpdf: Scale vector is inf, but must be positive finite! (in 'C:/Users/DL/AppData/Local/Temp/RtmpERRA9z/model-12d437f47a61.stan', line 35, column 4 to column 62)
+      Chain 3 If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,
+      Chain 3 but if this warning occurs often then your model may be either severely ill-conditioned or misspecified.
+      Chain 3 
+      Chain 3 Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
+      Chain 3 Exception: normal_id_glm_lpdf: Scale vector is inf, but must be positive finite! (in 'C:/Users/DL/AppData/Local/Temp/RtmpERRA9z/model-12d437f47a61.stan', line 35, column 4 to column 62)
+      Chain 3 If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,
+      Chain 3 but if this warning occurs often then your model may be either severely ill-conditioned or misspecified.
+      Chain 3 
+      Chain 3 Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
+      Chain 3 Exception: normal_id_glm_lpdf: Scale vector is inf, but must be positive finite! (in 'C:/Users/DL/AppData/Local/Temp/RtmpERRA9z/model-12d437f47a61.stan', line 35, column 4 to column 62)
+      Chain 3 If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,
+      Chain 3 but if this warning occurs often then your model may be either severely ill-conditioned or misspecified.
+      Chain 3 
+      Chain 3 Informational Message: The current Metropolis proposal is about to be rejected because of the following issue:
+      Chain 3 Exception: normal_id_glm_lpdf: Scale vector is inf, but must be positive finite! (in 'C:/Users/DL/AppData/Local/Temp/RtmpERRA9z/model-12d437f47a61.stan', line 35, column 4 to column 62)
+      Chain 3 If this warning occurs sporadically, such as for highly constrained variable types like covariance matrices, then the sampler is fine,
+      Chain 3 but if this warning occurs often then your model may be either severely ill-conditioned or misspecified.
+      Chain 3 
     Output
       We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains
       of 300 iterations and a warmup of 150) to predict mpg with qsec and wt
@@ -12,18 +47,18 @@
       is substantial (R2 = 0.82, 95% CI [0.75, 0.85], adj. R2 = 0.79).  Within this
       model:
       
-        - The effect of b Intercept (Median = 19.74, 95% CI [9.45, 32.02]) has a 99.83%
-      probability of being positive (> 0), 99.83% of being significant (> 0.30), and
-      99.67% of being large (> 1.81). The estimation successfully converged (Rhat =
-      1.000) but the indices are unreliable (ESS = 522)
-        - The effect of b qsec (Median = 0.92, 95% CI [0.34, 1.47]) has a 99.83%
-      probability of being positive (> 0), 98.17% of being significant (> 0.30), and
-      0.17% of being large (> 1.81). The estimation successfully converged (Rhat =
-      1.002) but the indices are unreliable (ESS = 521)
-        - The effect of b wt (Median = -5.09, 95% CI [-6.06, -4.09]) has a 100.00%
+        - The effect of b Intercept (Median = 19.23, 95% CI [6.80, 31.02]) has a 99.67%
+      probability of being positive (> 0), 99.67% of being significant (> 0.30), and
+      99.33% of being large (> 1.81). The estimation successfully converged (Rhat =
+      0.999) but the indices are unreliable (ESS = 343)
+        - The effect of b qsec (Median = 0.95, 95% CI [0.41, 1.56]) has a 100.00%
+      probability of being positive (> 0), 99.17% of being significant (> 0.30), and
+      0.33% of being large (> 1.81). The estimation successfully converged (Rhat =
+      0.999) but the indices are unreliable (ESS = 345)
+        - The effect of b wt (Median = -5.02, 95% CI [-6.06, -4.09]) has a 100.00%
       probability of being negative (< 0), 100.00% of being significant (< -0.30),
       and 100.00% of being large (< -1.81). The estimation successfully converged
-      (Rhat = 0.997) but the indices are unreliable (ESS = 543)
+      (Rhat = 0.999) but the indices are unreliable (ESS = 586)
       
       Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
       framework, we report the median of the posterior distribution and its 95% CI
@@ -41,18 +76,18 @@
       substantial (R2 = 0.82, 95% CI [0.75, 0.85], adj. R2 = 0.79).  Within this
       model:
       
-        - The effect of b Intercept (Median = 19.74, 95% CI [9.45, 32.02]) has a 99.83%
-      probability of being positive (> 0), 99.83% of being significant (> 0.30), and
-      99.67% of being large (> 1.81). The estimation successfully converged (Rhat =
-      1.000) but the indices are unreliable (ESS = 522)
-        - The effect of b qsec (Median = 0.92, 95% CI [0.34, 1.47]) has a 99.83%
-      probability of being positive (> 0), 98.17% of being significant (> 0.30), and
-      0.17% of being large (> 1.81). The estimation successfully converged (Rhat =
-      1.002) but the indices are unreliable (ESS = 521)
-        - The effect of b wt (Median = -5.09, 95% CI [-6.06, -4.09]) has a 100.00%
+        - The effect of b Intercept (Median = 19.23, 95% CI [6.80, 31.02]) has a 99.67%
+      probability of being positive (> 0), 99.67% of being significant (> 0.30), and
+      99.33% of being large (> 1.81). The estimation successfully converged (Rhat =
+      0.999) but the indices are unreliable (ESS = 343)
+        - The effect of b qsec (Median = 0.95, 95% CI [0.41, 1.56]) has a 100.00%
+      probability of being positive (> 0), 99.17% of being significant (> 0.30), and
+      0.33% of being large (> 1.81). The estimation successfully converged (Rhat =
+      0.999) but the indices are unreliable (ESS = 345)
+        - The effect of b wt (Median = -5.02, 95% CI [-6.06, -4.09]) has a 100.00%
       probability of being negative (< 0), 100.00% of being significant (< -0.30),
       and 100.00% of being large (< -1.81). The estimation successfully converged
-      (Rhat = 0.997) but the indices are unreliable (ESS = 543)
+      (Rhat = 0.999) but the indices are unreliable (ESS = 586)
       
       Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
       framework, we report the median of the posterior distribution and its 95% CI
@@ -70,18 +105,18 @@
       substantial (R2 = 0.82, 95% CI [0.75, 0.85], adj. R2 = 0.79).  Within this
       model:
       
-        - The effect of b Intercept (Median = 19.74, 95% CI [9.45, 32.02]) has a 99.83%
-      probability of being positive (> 0), 99.83% of being significant (> 0.30), and
-      99.67% of being large (> 1.81). The estimation successfully converged (Rhat =
-      1.000) but the indices are unreliable (ESS = 522)
-        - The effect of b qsec (Median = 0.92, 95% CI [0.34, 1.47]) has a 99.83%
-      probability of being positive (> 0), 98.17% of being significant (> 0.30), and
-      0.17% of being large (> 1.81). The estimation successfully converged (Rhat =
-      1.002) but the indices are unreliable (ESS = 521)
-        - The effect of b wt (Median = -5.09, 95% CI [-6.06, -4.09]) has a 100.00%
+        - The effect of b Intercept (Median = 19.23, 95% CI [6.80, 31.02]) has a 99.67%
+      probability of being positive (> 0), 99.67% of being significant (> 0.30), and
+      99.33% of being large (> 1.81). The estimation successfully converged (Rhat =
+      0.999) but the indices are unreliable (ESS = 343)
+        - The effect of b qsec (Median = 0.95, 95% CI [0.41, 1.56]) has a 100.00%
+      probability of being positive (> 0), 99.17% of being significant (> 0.30), and
+      0.33% of being large (> 1.81). The estimation successfully converged (Rhat =
+      0.999) but the indices are unreliable (ESS = 345)
+        - The effect of b wt (Median = -5.02, 95% CI [-6.06, -4.09]) has a 100.00%
       probability of being negative (< 0), 100.00% of being significant (< -0.30),
       and 100.00% of being large (< -1.81). The estimation successfully converged
-      (Rhat = 0.997) but the indices are unreliable (ESS = 543)
+      (Rhat = 0.999) but the indices are unreliable (ESS = 586)
       
       Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
       framework, we report the median of the posterior distribution and its 95% CI
@@ -99,18 +134,18 @@
       substantial (R2 = 0.82, 95% CI [0.75, 0.85], adj. R2 = 0.79).  Within this
       model:
       
-        - The effect of b Intercept (Median = 19.74, 95% CI [9.45, 32.02]) has a 99.83%
-      probability of being positive (> 0), 99.83% of being significant (> 0.30), and
-      99.67% of being large (> 1.81). The estimation successfully converged (Rhat =
-      1.000) but the indices are unreliable (ESS = 522)
-        - The effect of b qsec (Median = 0.92, 95% CI [0.34, 1.47]) has a 99.83%
-      probability of being positive (> 0), 98.17% of being significant (> 0.30), and
-      0.17% of being large (> 1.81). The estimation successfully converged (Rhat =
-      1.002) but the indices are unreliable (ESS = 521)
-        - The effect of b wt (Median = -5.09, 95% CI [-6.06, -4.09]) has a 100.00%
+        - The effect of b Intercept (Median = 19.23, 95% CI [6.80, 31.02]) has a 99.67%
+      probability of being positive (> 0), 99.67% of being significant (> 0.30), and
+      99.33% of being large (> 1.81). The estimation successfully converged (Rhat =
+      0.999) but the indices are unreliable (ESS = 343)
+        - The effect of b qsec (Median = 0.95, 95% CI [0.41, 1.56]) has a 100.00%
+      probability of being positive (> 0), 99.17% of being significant (> 0.30), and
+      0.33% of being large (> 1.81). The estimation successfully converged (Rhat =
+      0.999) but the indices are unreliable (ESS = 345)
+        - The effect of b wt (Median = -5.02, 95% CI [-6.06, -4.09]) has a 100.00%
       probability of being negative (< 0), 100.00% of being significant (< -0.30),
       and 100.00% of being large (< -1.81). The estimation successfully converged
-      (Rhat = 0.997) but the indices are unreliable (ESS = 543)
+      (Rhat = 0.999) but the indices are unreliable (ESS = 586)
       
       Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
       framework, we report the median of the posterior distribution and its 95% CI

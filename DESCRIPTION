@@ -1,7 +1,7 @@
 Package: report
 Type: Package
 Title: Automated Reporting of Results and Statistical Models
-Version: 0.5.8
+Version: 0.5.8.1
 Authors@R:
     c(person(given = "Dominique",
              family = "Makowski",
@@ -55,11 +55,11 @@ BugReports: https://github.com/easystats/report/issues
 Depends:
     R (>= 3.6)
 Imports:
-    bayestestR (>= 0.13.1),
+    bayestestR (>= 0.13.2),
     effectsize (>= 0.8.6),
-    insight (>= 0.19.7),
-    parameters (>= 0.21.3),
-    performance (>= 0.10.8),
+    insight (>= 0.19.8),
+    parameters (>= 0.21.5),
+    performance (>= 0.10.9),
     datawizard (>= 0.9.1),
     stats,
     tools,
@@ -76,12 +76,12 @@ Suggests:
     survival,
     modelbased,
     emmeans,
-    testthat
+    testthat (>= 3.2.1)
 VignetteBuilder:
     knitr
 Encoding: UTF-8
 Language: en-US
-RoxygenNote: 7.2.3.9000
+RoxygenNote: 7.3.1
 Config/testthat/edition: 3
 Config/Needs/website:
     rstudio/bslib,

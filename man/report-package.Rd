@@ -3,7 +3,6 @@
 \docType{package}
 \name{report-package}
 \alias{report-package}
-\alias{_PACKAGE}
 \title{report: Automated Results Reporting as a Practical Tool to Improve
 Reproducibility and Methodological Best Practices Adoption}
 \description{
