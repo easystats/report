@@ -45,7 +45,7 @@ affiliations:
 - index: 7
   name: Université du Québec à Montréal, Montréal, Canada
 
-date: "2023-02-26"
+date: "2024-03-04"
 bibliography: paper.bib
 output: 
   rticles::joss_article:
@@ -85,17 +85,25 @@ data <- data.frame(
   "Age" = c(22, 23, 54, 21, 8, 42, 18, 32, 24, 27, 45),
   "Sex" = c("Intersex", "F", "F", "M", "M", "M", "F", "F", "F", "F", "F"),
   "Gender" = c("N", "W", "W", "M", "M", "M", "W", "W", "W", "W", "W"),
-  "Race" = c("Black", NA, "White", "Asian", "Black", "Arab", "Black", 
-             "White", "Asian", "Southeast Asian", "Mixed"),
-  "Education" = c("Bachelor", "PhD", "Highschool", "Master", "Bachelor", 
-                  "Highschool", "Highschool", "Bachelor", "Bachelor", 
-                  "Highschool", "Master"),
-  "Country" = c("USA", NA, "Canada", "Canada", "India", "Germany", "USA", 
-                "USA", "USA", "USA", "Canada")
+  "Race" = c(
+    "Black", NA, "White", "Asian", "Black", "Arab", "Black",
+    "White", "Asian", "Southeast Asian", "Mixed"
+  ),
+  "Education" = c(
+    "Bachelor", "PhD", "Highschool", "Master", "Bachelor",
+    "Highschool", "Highschool", "Bachelor", "Bachelor",
+    "Highschool", "Master"
+  ),
+  "Country" = c(
+    "USA", NA, "Canada", "Canada", "India", "Germany", "USA",
+    "USA", "USA", "USA", "Canada"
+  )
 )
 
-cat(paste0("This study includes data from ", 
-           report_participants(data), "."))
+cat(paste0(
+  "This study includes data from ",
+  report_participants(data), "."
+))
 ```
 
 This study includes data from 11 participants (Mean age = 28.7, SD = 13.4, range: [8, 54]; Sex: 63.6% females, 27.3% males, 9.1% other; Gender: 63.6% women, 27.3% men, 9.09% non-binary; Education: Bachelor, 36.36%; Highschool, 36.36%; Master, 18.18%; PhD, 9.09%; Country: 45.45% USA, 27.27% Canada, 27.27% other; Race: 27.27% Black, 18.18% Asian, 18.18% White, 36.36% other).
@@ -175,41 +183,8 @@ report(m_rstan)
 We fitted a Bayesian linear model (estimated using MCMC
 sampling with 4 chains of 1000 iterations and a warmup of
 500) to predict mpg with qsec and wt (formula: mpg ~ qsec +
-wt). Priors over parameters were set as normal (mean =
-0.00, SD = 8.43) distributions. The model's explanatory
-power is substantial (R2 = 0.81, 95% CI [0.69, 0.89], adj.
-R2 = 0.79). The model's intercept, corresponding to qsec =
-0 and wt = 0, is at 19.59 (95% CI [8.71, 30.63]). Within
-this model:
-
-  - The effect of qsec (Median = 0.93, 95% CI [0.38, 1.50])
-has a 99.85% probability of being positive (> 0), 98.65% of
-being significant (> 0.30), and 0.10% of being large (>
-1.81). The estimation successfully converged (Rhat = 1.001)
-and the indices are reliable (ESS = 2048)
-  - The effect of wt (Median = -5.05, 95% CI [-6.07, -4.05])
-has a 100.00% probability of being negative (< 0), 100.00%
-of being significant (< -0.30), and 100.00% of being large
-(< -1.81). The estimation successfully converged (Rhat =
-0.999) and the indices are reliable (ESS = 1744)
-
-Following the Sequential Effect eXistence and sIgnificance
-Testing (SEXIT) framework, we report the median of the
-posterior distribution and its 95% CI (Highest Density
-Interval), along the probability of direction (pd), the
-probability of significance and the probability of being
-large. The thresholds beyond which the effect is considered
-as significant (i.e., non-negligible) and large are |0.30|
-and |1.81| (corresponding respectively to 0.05 and 0.30 of
-the outcome's SD). Convergence and stability of the
-Bayesian sampling has been assessed using R-hat, which
-should be below 1.01 (Vehtari et al., 2019), and Effective
-Sample Size (ESS), which should be greater than 1000
-(Burkner, 2017). and We fitted a Bayesian linear model
-(estimated using MCMC sampling with 4 chains of 1000
-iterations and a warmup of 500) to predict mpg with qsec
-and wt (formula: mpg ~ qsec + wt). Priors over parameters
-were set as normal (mean = 0.00, SD = 15.40) distributions.
+wt). Priors over parameters were all set as normal (mean =
+0.00, SD = 8.43; mean = 0.00, SD = 15.40) distributions.
 The model's explanatory power is substantial (R2 = 0.81,
 95% CI [0.69, 0.89], adj. R2 = 0.79). The model's
 intercept, corresponding to qsec = 0 and wt = 0, is at
@@ -257,7 +232,7 @@ export_table(format_table(report_table(m_lm)), format = "markdown")
 
 |Parameter   | Coefficient|        95% CI |  t(29)|     p | Std. Coef.| Std. Coef. 95% CI|    Fit|
 |:-----------|-----------:|:--------------|------:|:------|----------:|-----------------:|------:|
-|(Intercept) |       19.75|[ 9.00, 30.49] |   3.76|< .001 |  -5.21e-17|    [-0.16,  0.16]|       |
+|(Intercept) |       19.75|[ 9.00, 30.49] |   3.76|< .001 |  -1.36e-17|    [-0.16,  0.16]|       |
 |qsec        |        0.93|[ 0.39,  1.47] |   3.51|0.001  |       0.28|    [ 0.11,  0.44]|       |
 |wt          |       -5.05|[-6.04, -4.06] | -10.43|< .001 |      -0.82|    [-0.98, -0.66]|       |
 |            |            |               |       |       |           |                  |       |
@@ -268,6 +243,8 @@ export_table(format_table(report_table(m_lm)), format = "markdown")
 |R2 (adj.)   |            |               |       |       |           |                  |   0.81|
 |Sigma       |            |               |       |       |           |                  |   2.60|
 
+
+
 ```r
 
 export_table(format_table(report_table(m_lmer)), format = "markdown")
@@ -277,7 +254,7 @@ export_table(format_table(report_table(m_lmer)), format = "markdown")
 
 |Parameter        | Coefficient|      95% CI | t(146)|     p | Effects|    Group| Std. Coef.| Std. Coef. 95% CI|    Fit|
 |:----------------|-----------:|:------------|------:|:------|-------:|--------:|----------:|-----------------:|------:|
-|(Intercept)      |        2.50|[1.19, 3.82] |   3.75|< .001 |   fixed|         |  -1.46e-13|     [-1.49, 1.49]|       |
+|(Intercept)      |        2.50|[1.19, 3.82] |   3.75|< .001 |   fixed|         |  -5.11e-13|     [-1.49, 1.49]|       |
 |Petal Length     |        0.89|[0.76, 1.01] |  13.93|< .001 |   fixed|         |       1.89|     [ 1.63, 2.16]|       |
 |                 |        1.08|             |       |       |  random|  Species|           |                  |       |
 |                 |        0.34|             |       |       |  random| Residual|           |                  |       |
@@ -288,6 +265,8 @@ export_table(format_table(report_table(m_lmer)), format = "markdown")
 |R2 (conditional) |            |             |       |       |        |         |           |                  |   0.97|
 |R2 (marginal)    |            |             |       |       |        |         |           |                  |   0.66|
 |Sigma            |            |             |       |       |        |         |           |                  |   0.34|
+
+
 
 ```r
 
@@ -308,6 +287,8 @@ export_table(format_table(report_table(m_rstan)), format = "markdown")
 |R2          |       |               |       |      |        |                        |            |                  |   0.81|
 |R2 (adj.)   |       |               |       |      |        |                        |            |                  |   0.79|
 |Sigma       |       |               |       |      |        |                        |            |                  |   2.65|
+
+
 
 ## Grouped Data
 

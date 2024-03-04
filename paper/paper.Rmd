@@ -63,7 +63,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   message = FALSE,
   warning = FALSE,
-  results="asis"
+  results = "asis"
 )
 
 options(width = 60)
@@ -99,17 +99,25 @@ data <- data.frame(
   "Age" = c(22, 23, 54, 21, 8, 42, 18, 32, 24, 27, 45),
   "Sex" = c("Intersex", "F", "F", "M", "M", "M", "F", "F", "F", "F", "F"),
   "Gender" = c("N", "W", "W", "M", "M", "M", "W", "W", "W", "W", "W"),
-  "Race" = c("Black", NA, "White", "Asian", "Black", "Arab", "Black", 
-             "White", "Asian", "Southeast Asian", "Mixed"),
-  "Education" = c("Bachelor", "PhD", "Highschool", "Master", "Bachelor", 
-                  "Highschool", "Highschool", "Bachelor", "Bachelor", 
-                  "Highschool", "Master"),
-  "Country" = c("USA", NA, "Canada", "Canada", "India", "Germany", "USA", 
-                "USA", "USA", "USA", "Canada")
+  "Race" = c(
+    "Black", NA, "White", "Asian", "Black", "Arab", "Black",
+    "White", "Asian", "Southeast Asian", "Mixed"
+  ),
+  "Education" = c(
+    "Bachelor", "PhD", "Highschool", "Master", "Bachelor",
+    "Highschool", "Highschool", "Bachelor", "Bachelor",
+    "Highschool", "Master"
+  ),
+  "Country" = c(
+    "USA", NA, "Canada", "Canada", "India", "Germany", "USA",
+    "USA", "USA", "USA", "Canada"
+  )
 )
 
-cat(paste0("This study includes data from ", 
-           report_participants(data), "."))
+cat(paste0(
+  "This study includes data from ",
+  report_participants(data), "."
+))
 ```
 
 ## Models
