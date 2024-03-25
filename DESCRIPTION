@@ -107,6 +107,7 @@ Collate:
     'report.stanreg.R'
     'report.brmsfit.R'
     'report.character.R'
+    'report.compare.loo.R'
     'report.compare_performance.R'
     'report.data.frame.R'
     'report.default.R'
