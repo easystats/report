@@ -3,6 +3,8 @@
 #' Automatically report the results of Bayesian model comparison using the `loo` package.
 #'
 #' @param x An object of class [loo_compare()].
+#' @param index type if index to report - expected log pointwise predictive
+#'   density (ELPD) or information criteria (IC).
 #'
 #' @examplesIf require("brms", quietly = TRUE)
 #' \donttest{
@@ -26,7 +28,7 @@
 #'
 #' @return Objects of class [report_text()].
 #' @export
-report.compare.loo <- function(x, ...) {
+report.compare.loo <- function(x, index = c("ELPD", "IC"), ...) {
   # https://stats.stackexchange.com/questions/608881/how-to-interpret-elpd-diff-of-bayesian-loo-estimate-in-bayesian-logistic-regress
   # https://users.aalto.fi/%7Eave/CV-FAQ.html#12_What_is_the_interpretation_of_ELPD__elpd_loo__elpd_diff
   # https://users.aalto.fi/%7Eave/CV-FAQ.html#se_diff
@@ -34,26 +36,65 @@ report.compare.loo <- function(x, ...) {
   # The difference in expected log predictive density (elpd) between each model
   # and the best model as well as the standard error of this difference (assuming
   # the difference is approximately normal).
+  index <- match.arg(index)
   x <- as.data.frame(x)
   # The values in the first row are 0s because the models are ordered from best to worst according to their elpd.
   modnames <- rownames(x)
 
-  #
-  z_elpd_diff <- x$elpd_diff / x$se_diff
+  elpd_diff <- x[["elpd_diff"]]
+  ic_diff <- -2 * elpd_diff
 
-  text <- "The difference in predictive accuracy, as index by Expected Log Predictive Density (ELPD), suggests that '"
-  text <- paste0(text, modnames[1], "' is the best model, followed by '")
+  z_elpd_diff <- elpd_diff / x[["se_diff"]]
+  z_ic_diff <- -z_elpd_diff
 
-  for (m in 2:(nrow(x))) {
-    text <- paste0(text, modnames[m ],
-                   "' (diff = ",
-                   insight::format_value(x$elpd_diff[m]),
-                   # " ± ",
-                   # insight::format_value(x$se_diff[m]),
-                   ", Z-diff = ",
-                   insight::format_value(z_elpd_diff[m]),
-                   ")")
+  if ("looic" %in% colnames(x)) {
+    type <- "LOO"
+    ENP <- x[["p_loo"]]
+  } else {
+    type <- "WAIC"
+    ENP <- x[["p_waic"]]
   }
+
+  if (index == "ELPD") {
+    index_label <- sprintf("Expected Log Predictive Density (ELPD-%s)", type)
+  } else {
+    if (type == "LOO") {
+      index_label <- "Leave-One-Out CV Information Criterion (LOOIC)"
+    } else {
+      index_label <- "Widely Applicable Information Criterion (WAIC)"
+    }
+  }
+
+  text <- sprintf("The difference in predictive accuracy, as index by %s, suggests that '%s' is the best model (effective number of parameters (ENP) = %.2f), followed by",
+                  index_label, modnames[1], ENP[1])
+
+  if (index == "ELPD") {
+    other_texts <- sprintf("'%s' (diff = %.2f, ENP = %.2f, z-diff = %.2f)",
+                           modnames[-1],
+                           elpd_diff[-1],
+                           ENP[-1],
+                           z_elpd_diff[-1])
+  } else {
+    other_texts <- sprintf("'%s' (diff = %.2f, ENP = %.2f, z-diff = %.2f)",
+                           modnames[-1],
+                           ic_diff[-1],
+                           ENP[-1],
+                           z_ic_diff[-1])
+  }
+
+  sep <- "."
+  nothermods <- length(other_texts)
+  if (nothermods > 1L) {
+    if (nothermods == 2L) {
+      sep <- c(" and ", sep)
+    } else {
+      sep <- c(rep(", ", length = nothermods - 2), ", and ", sep)
+    }
+  }
+
+  other_texts <- paste0(other_texts, sep, collapse = "")
+
+  text <- paste(text, other_texts, collapse = "")
   class(text) <- c("report_text", class(text))
   text
 }
