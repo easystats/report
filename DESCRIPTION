@@ -95,6 +95,7 @@ Collate:
     'format_model.R'
     'reexports.R'
     'report-package.R'
+    'report.BFBayesFactor.R'
     'utils_combine_tables.R'
     'report.lm.R'
     'report.MixMod.R'
