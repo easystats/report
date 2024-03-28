@@ -2,9 +2,10 @@
 #'
 #' Automatically report the results of Bayesian model comparison using the `loo` package.
 #'
-#' @param x An object of class [loo_compare()].
+#' @param x An object of class [brms::loo_compare].
 #' @param index type if index to report - expected log pointwise predictive
 #'   density (ELPD) or information criteria (IC).
+#' @param ... Additional arguments (not used for now).
 #'
 #' @examplesIf require("brms", quietly = TRUE)
 #' \donttest{

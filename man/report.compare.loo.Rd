@@ -7,10 +7,12 @@
 \method{report}{compare.loo}(x, index = c("ELPD", "IC"), ...)
 }
 \arguments{
-\item{x}{An object of class \code{\link[=loo_compare]{loo_compare()}}.}
+\item{x}{An object of class \link[brms:loo_compare.brmsfit]{brms::loo_compare}.}
 
 \item{index}{type if index to report - expected log pointwise predictive
 density (ELPD) or information criteria (IC).}
+
+\item{...}{Additional arguments (not used for now).}
 }
 \value{
 Objects of class \code{\link[=report_text]{report_text()}}.
