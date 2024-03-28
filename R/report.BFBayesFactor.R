@@ -19,7 +19,17 @@
 #'
 #' @export
 report.BFBayesFactor <- function(x, h0="H0", h1="H1", ...) {
-  param <- parameters::parameters(x, ...)
+  if ("BFlinearModel" %in% class(x@numerator[[1]])) {
+    return(report(bayestestR::bayesfactor_models(x), ...))
+  }
+
+  if (length(x@numerator) > 1) {
+    insight::format_alert("Multiple `BFBayesFactor` models detected - reporting for the first numerator model.",
+                          "See help(\"get_parameters\", package = \"insight\").")
+    x <- x[1]
+  }
+
+  param <- parameters::parameters(x[1], ...)
   bf <- param$BF
   dir <- ifelse(bf < 1, "h0", "h1")
 
@@ -31,7 +41,7 @@ report.BFBayesFactor <- function(x, h0="H0", h1="H1", ...) {
                   h1,
                   " over ",
                   h0,
-                  " (", report_statistics(x), ").")
+                  " (", report_statistics(x, ...), ").")
   } else {
     text <- paste0("There is ",
                   effectsize::interpret_bf(1/bf, ...),
@@ -39,7 +49,7 @@ report.BFBayesFactor <- function(x, h0="H0", h1="H1", ...) {
                   h0,
                   " over ",
                   h1,
-                  " (", report_statistics(x), ").")
+                  " (", report_statistics(x, ...), ").")
   }
   text
 }
@@ -50,13 +60,18 @@ report.BFBayesFactor <- function(x, h0="H0", h1="H1", ...) {
 #' @export
 report_statistics.BFBayesFactor <- function(x, table = NULL, ...) {
   if(is.null(table)) {
+    if (length(x@numerator) > 1) {
+      insight::format_alert("Multiple `BFBayesFactor` models detected - reporting for the first numerator model.",
+                            "See help(\"get_parameters\", package = \"insight\").")
+      x <- x[1]
+    }
     table <- parameters::parameters(x, ...)
   }
 
   bf <- table$BF
   text <- ifelse(bf < 1,
-                 insight::format_bf(1/bf, name="BF01"),
-                 insight::format_bf(bf, name="BF10"))
+                 insight::format_bf(1/bf, name="BF01", ...),
+                 insight::format_bf(bf, name="BF10", ...))
   text
 }
 
