@@ -4,6 +4,8 @@
 #'
 #' @param x An object of class `BFBayesFactor`.
 #' @param h0,h1 Names of the null and alternative hypotheses.
+#' @param table A `parameters` table (this argument is meant for internal use).
+#' @param ... Other arguments to be passed to [effectsize::interpret_bf] and [insight::format_bf].
 #'
 #' @examplesIf requireNamespace("BayesFactor", quietly = TRUE)
 #' \donttest{

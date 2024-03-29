@@ -13,6 +13,10 @@
 \item{x}{An object of class \code{BFBayesFactor}.}
 
 \item{h0, h1}{Names of the null and alternative hypotheses.}
+
+\item{...}{Other arguments to be passed to \link[effectsize:interpret_bf]{effectsize::interpret_bf} and \link[insight:format_bf]{insight::format_bf}.}
+
+\item{table}{A \code{parameters} table (this argument is meant for internal use).}
 }
 \description{
 Interpretation of the Bayes factor output from the \code{BayesFactor} package.
