@@ -65,6 +65,7 @@ Imports:
     tools,
     utils
 Suggests:
+    BayesFactor,
     brms,
     ivreg,
     knitr,
