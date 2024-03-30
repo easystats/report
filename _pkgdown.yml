@@ -91,6 +91,7 @@ reference:
       - report.stanreg
       - report.test_performance
       - report.estimate_contrasts
+      - report.compare.loo
 
   - title: Report Non-Statistical Objects
     desc: |

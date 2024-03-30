@@ -11,12 +11,13 @@
 #' \donttest{
 #' library(brms)
 #'
-#' m1 <- brms::brm(mpg ~ qsec, data=mtcars)
-#' m2 <- brms::brm(mpg ~ qsec + drat, data=mtcars)
+#' m1 <- brms::brm(mpg ~ qsec, data = mtcars)
+#' m2 <- brms::brm(mpg ~ qsec + drat, data = mtcars)
 #'
 #' x <- brms::loo_compare(brms::add_criterion(m1, "loo"),
-#'                        brms::add_criterion(m2, "loo"),
-#'                        model_names=c("m1", "m2"))
+#'   brms::add_criterion(m2, "loo"),
+#'   model_names = c("m1", "m2")
+#' )
 #' report(x)
 #' }
 #'
@@ -66,21 +67,27 @@ report.compare.loo <- function(x, index = c("ELPD", "IC"), ...) {
     }
   }
 
-  text <- sprintf("The difference in predictive accuracy, as index by %s, suggests that '%s' is the best model (effective number of parameters (ENP) = %.2f), followed by",
-                  index_label, modnames[1], ENP[1])
+  text <- sprintf(
+    "The difference in predictive accuracy, as index by %s, suggests that '%s' is the best model (effective number of parameters (ENP) = %.2f), followed by",
+    index_label, modnames[1], ENP[1]
+  )
 
   if (index == "ELPD") {
-    other_texts <- sprintf("'%s' (diff = %.2f, ENP = %.2f, z-diff = %.2f)",
-                           modnames[-1],
-                           elpd_diff[-1],
-                           ENP[-1],
-                           z_elpd_diff[-1])
+    other_texts <- sprintf(
+      "'%s' (diff = %.2f, ENP = %.2f, z-diff = %.2f)",
+      modnames[-1],
+      elpd_diff[-1],
+      ENP[-1],
+      z_elpd_diff[-1]
+    )
   } else {
-    other_texts <- sprintf("'%s' (diff = %.2f, ENP = %.2f, z-diff = %.2f)",
-                           modnames[-1],
-                           ic_diff[-1],
-                           ENP[-1],
-                           z_ic_diff[-1])
+    other_texts <- sprintf(
+      "'%s' (diff = %.2f, ENP = %.2f, z-diff = %.2f)",
+      modnames[-1],
+      ic_diff[-1],
+      ENP[-1],
+      z_ic_diff[-1]
+    )
   }
 
   sep <- "."
