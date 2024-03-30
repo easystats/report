@@ -59,16 +59,15 @@ report.compare.loo <- function(x, index = c("ELPD", "IC"), ...) {
 
   if (index == "ELPD") {
     index_label <- sprintf("Expected Log Predictive Density (ELPD-%s)", type)
-  } else {
-    if (type == "LOO") {
+  } else if (type == "LOO") {
       index_label <- "Leave-One-Out CV Information Criterion (LOOIC)"
     } else {
       index_label <- "Widely Applicable Information Criterion (WAIC)"
-    }
   }
 
-  text <- sprintf(
-    "The difference in predictive accuracy, as index by %s, suggests that '%s' is the best model (effective number of parameters (ENP) = %.2f), followed by",
+  out_text <- sprintf(paste(
+    "The difference in predictive accuracy, as index by %s, suggests that '%s' ",
+    "is the best model (effective number of parameters (ENP) = %.2f), followed by"),
     index_label, modnames[1], ENP[1]
   )
 
@@ -102,7 +101,7 @@ report.compare.loo <- function(x, index = c("ELPD", "IC"), ...) {
 
   other_texts <- paste0(other_texts, sep, collapse = "")
 
-  text <- paste(text, other_texts, collapse = "")
+  out_text <- paste(out_text, other_texts, collapse = "")
   class(text) <- c("report_text", class(text))
-  text
+  out_text
 }

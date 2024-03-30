@@ -32,12 +32,13 @@ distributed.
 \donttest{
 library(brms)
 
-m1 <- brms::brm(mpg ~ qsec, data=mtcars)
-m2 <- brms::brm(mpg ~ qsec + drat, data=mtcars)
+m1 <- brms::brm(mpg ~ qsec, data = mtcars)
+m2 <- brms::brm(mpg ~ qsec + drat, data = mtcars)
 
 x <- brms::loo_compare(brms::add_criterion(m1, "loo"),
-                       brms::add_criterion(m2, "loo"),
-                       model_names=c("m1", "m2"))
+  brms::add_criterion(m2, "loo"),
+  model_names = c("m1", "m2")
+)
 report(x)
 }
 \dontshow{\}) # examplesIf}
