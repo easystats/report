@@ -60,14 +60,16 @@ report.compare.loo <- function(x, index = c("ELPD", "IC"), ...) {
   if (index == "ELPD") {
     index_label <- sprintf("Expected Log Predictive Density (ELPD-%s)", type)
   } else if (type == "LOO") {
-      index_label <- "Leave-One-Out CV Information Criterion (LOOIC)"
-    } else {
-      index_label <- "Widely Applicable Information Criterion (WAIC)"
+    index_label <- "Leave-One-Out CV Information Criterion (LOOIC)"
+  } else {
+    index_label <- "Widely Applicable Information Criterion (WAIC)"
   }
 
-  out_text <- sprintf(paste(
-    "The difference in predictive accuracy, as index by %s, suggests that '%s' ",
-    "is the best model (effective number of parameters (ENP) = %.2f), followed by"),
+  out_text <- sprintf(
+    paste(
+      "The difference in predictive accuracy, as index by %s, suggests that '%s' ",
+      "is the best model (effective number of parameters (ENP) = %.2f), followed by"
+    ),
     index_label, modnames[1], ENP[1]
   )
 
