@@ -27,8 +27,8 @@ Interpretation of the Bayes factor output from the \code{BayesFactor} package.
 library(BayesFactor)
 
 rez <- BayesFactor::ttestBF(iris$Sepal.Width, iris$Sepal.Length)
-report_statistics(rez, exact=TRUE)  # Print exact BF
-report(rez, h0="the null hypothesis", h1="the alternative")
+report_statistics(rez, exact = TRUE) # Print exact BF
+report(rez, h0 = "the null hypothesis", h1 = "the alternative")
 
 rez <- BayesFactor::correlationBF(iris$Sepal.Width, iris$Sepal.Length)
 report(rez)
