@@ -3,7 +3,7 @@
 # Readding back because of a .1 decimal difference in snapshots
 
 test_that("report.lm - lm", {
-  skip("Skipping because of a .1 decimal difference in snapshots")
+  skip("Skipping because of a .01 decimal difference in snapshots")
   # lm -------
 
   # simple effect

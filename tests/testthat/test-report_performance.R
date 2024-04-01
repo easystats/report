@@ -121,7 +121,7 @@ test_that("report_performance Bayesian 2)", {
     variant = "windows",
     summary(report_performance(x7))
   )
-  skip("Skipping because of a .1 decimal difference in snapshots")
+  skip("Skipping because of a .01 decimal difference in snapshots")
   expect_snapshot(
     variant = "windows",
     report_performance(x7)
