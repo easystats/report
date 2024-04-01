@@ -31,9 +31,9 @@
 #' @return Objects of class [report_text()].
 #' @export
 report.compare.loo <- function(x, index = c("ELPD", "IC"), ...) {
-  #no lint start
+  # no lint start
   # https://stats.stackexchange.com/questions/608881/how-to-interpret-elpd-diff-of-bayesian-loo-estimate-in-bayesian-logistic-regress
-  #no lint end
+  # no lint end
   # https://users.aalto.fi/%7Eave/CV-FAQ.html#12_What_is_the_interpretation_of_ELPD__elpd_loo__elpd_diff
   # https://users.aalto.fi/%7Eave/CV-FAQ.html#se_diff
 
