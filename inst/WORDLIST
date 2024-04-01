@@ -1,5 +1,6 @@
 APA
 Args
+BayesFactor
 BibLaTeX
 CMD
 CSL
@@ -30,7 +31,6 @@ easystats
 elpd
 github
 htest
-https
 ivreg
 lifecycle
 mattansb

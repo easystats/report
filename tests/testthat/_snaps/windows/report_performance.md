@@ -30,15 +30,6 @@
 # report_performance Bayesian 2)
 
     Code
-      report_performance(x7)
-    Output
-      The model's explanatory power is substantial (R2 = 0.83, 95% CI [0.79, 0.86],
-      adj. R2 = 0.83) and the part related to the fixed effects alone (marginal R2)
-      is of 0.95 (95% CI [0.93, 0.97])
-
----
-
-    Code
       summary(report_performance(x7))
     Output
       [1] "The model's explanatory power is substantial (R2 = 0.83, adj. R2 = 0.83) and the part related to the fixed effects alone (marginal R2) is of 0.95"
