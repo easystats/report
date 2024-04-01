@@ -91,8 +91,8 @@ reference:
       - report.stanreg
       - report.test_performance
       - report.estimate_contrasts
-      - report.BFBayesFactor
       - report.compare.loo
+      - report.BFBayesFactor
 
   - title: Report Non-Statistical Objects
     desc: |
