@@ -1,3 +1,9 @@
+# report 0.5.9
+
+Minor changes 
+
+* `report` now supports reporting of Bayesian model comparison with variables of class `brms::loo_compare`.
+
 # report 0.5.8
 
 New features

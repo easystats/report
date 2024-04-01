@@ -92,6 +92,7 @@ reference:
       - report.test_performance
       - report.estimate_contrasts
       - report.BFBayesFactor
+      - report.compare.loo
 
   - title: Report Non-Statistical Objects
     desc: |
