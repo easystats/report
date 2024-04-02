@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.12.2)  4 MAR 2024 06:58
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.12.2)  2 APR 2024 22:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -915,31 +915,31 @@ Package: footnotehyper 2021/08/13 v1.1e hyperref aware footnote.sty (JFB)
 (./paper.aux)
 \openout1 = `paper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 312.
-LaTeX Font Info:    ... okay on input line 312.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 312.
-LaTeX Font Info:    ... okay on input line 312.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 312.
-LaTeX Font Info:    ... okay on input line 312.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 312.
-LaTeX Font Info:    ... okay on input line 312.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 312.
-LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 312.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 309.
+LaTeX Font Info:    ... okay on input line 309.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 309.
+LaTeX Font Info:    ... okay on input line 309.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 309.
+LaTeX Font Info:    ... okay on input line 309.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 309.
+LaTeX Font Info:    ... okay on input line 309.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 309.
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 309.
 (/Users/indrajeetpatil/Library/TinyTeX/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 312.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 312.
-LaTeX Font Info:    ... okay on input line 312.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 312.
-LaTeX Font Info:    ... okay on input line 312.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 312.
-LaTeX Font Info:    ... okay on input line 312.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 312.
-LaTeX Font Info:    ... okay on input line 312.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 312.
-LaTeX Font Info:    ... okay on input line 312.
-Package hyperref Info: Link coloring ON on input line 312.
+LaTeX Font Info:    ... okay on input line 309.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 309.
+LaTeX Font Info:    ... okay on input line 309.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 309.
+LaTeX Font Info:    ... okay on input line 309.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 309.
+LaTeX Font Info:    ... okay on input line 309.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 309.
+LaTeX Font Info:    ... okay on input line 309.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 309.
+LaTeX Font Info:    ... okay on input line 309.
+Package hyperref Info: Link coloring ON on input line 309.
 (./paper.out) (./paper.out)
 \@outlinefile=\write6
 \openout6 = `paper.out'.
@@ -964,8 +964,8 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'paper.bbl' not found.
 No file paper.bbl.
-Package biblatex Info: Reference section=0 on input line 312.
-Package biblatex Info: Reference segment=0 on input line 312.
+Package biblatex Info: Reference section=0 on input line 309.
+Package biblatex Info: Reference segment=0 on input line 309.
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -1000,12 +1000,12 @@ Package biblatex Info: Reference segment=0 on input line 312.
 * \@reversemargintrue
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Redefining \microtypecontext on input line 312.
-Package microtype Info: Applying patch `item' on input line 312.
-Package microtype Info: Applying patch `toc' on input line 312.
-Package microtype Info: Applying patch `eqnum' on input line 312.
-Package microtype Info: Applying patch `footnote' on input line 312.
-Package microtype Info: Applying patch `verbatim' on input line 312.
+LaTeX Info: Redefining \microtypecontext on input line 309.
+Package microtype Info: Applying patch `item' on input line 309.
+Package microtype Info: Applying patch `toc' on input line 309.
+Package microtype Info: Applying patch `eqnum' on input line 309.
+Package microtype Info: Applying patch `footnote' on input line 309.
+Package microtype Info: Applying patch `verbatim' on input line 309.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: No adjustment of tracking.
@@ -1021,274 +1021,271 @@ Package microtype Info: Loading generic protrusion settings for font family
 (/Users/indrajeetpatil/Library/TinyTeX/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 313.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 310.
 (/Users/indrajeetpatil/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/Users/indrajeetpatil/Library/TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 313.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 310.
 (/Users/indrajeetpatil/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/Users/indrajeetpatil/Library/TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 
-Package hyperref Warning: Suppressing link with empty target on input line 339.
+Package hyperref Warning: Suppressing link with empty target on input line 336.
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 339.
+Package hyperref Warning: Suppressing link with empty target on input line 336.
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 339.
+Package hyperref Warning: Suppressing link with empty target on input line 336.
 
 
-LaTeX Warning: Citation 'ref-nuijten2016prevalence' on page 1 undefined on input line 360.
+LaTeX Warning: Citation 'ref-nuijten2016prevalence' on page 1 undefined on input line 357.
 
 
-LaTeX Warning: Citation 'ref-easystatspackage' on page 1 undefined on input line 365.
+LaTeX Warning: Citation 'ref-easystatspackage' on page 1 undefined on input line 362.
 
 File: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png Graphic file (type bmp)
 </Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png>
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <8> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 385.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 382.
 [1
 
 ]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 398.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 395.
 File: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png Graphic file (type bmp)
 </Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png>
 [2]
-Underfull \vbox (badness 1348) detected at line 547
- []
-
 File: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png Graphic file (type bmp)
 </Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png>
 [3]
-Overfull \hbox (4.38113pt too wide) in paragraph at lines 572--573
+Overfull \hbox (4.38113pt too wide) in paragraph at lines 569--570
 []\TU/lmr/m/n/10 Parameter  
  []
 
 
-Overfull \hbox (4.94113pt too wide) in paragraph at lines 574--575
+Overfull \hbox (4.94113pt too wide) in paragraph at lines 571--572
  []\TU/lmr/m/n/10 Coefficient
  []
 
 
-Overfull \hbox (6.36113pt too wide) in paragraph at lines 592--592
+Overfull \hbox (6.36113pt too wide) in paragraph at lines 589--589
 []|\TU/lmr/m/n/10 (Intercept)|  
  []
 
 
-Overfull \hbox (3.90579pt too wide) in paragraph at lines 599--600
+Overfull \hbox (3.90579pt too wide) in paragraph at lines 596--597
  []|\TU/lmr/m/n/10 156.72|
  []
 
 
-Overfull \hbox (3.90579pt too wide) in paragraph at lines 600--601
+Overfull \hbox (3.90579pt too wide) in paragraph at lines 597--598
  []|\TU/lmr/m/n/10 158.20|
  []
 
 
-Overfull \hbox (3.90579pt too wide) in paragraph at lines 601--602
+Overfull \hbox (3.90579pt too wide) in paragraph at lines 598--599
  []|\TU/lmr/m/n/10 162.58|
  []
 
 
-Overfull \hbox (1.69156pt too wide) in paragraph at lines 627--628
+Overfull \hbox (1.69156pt too wide) in paragraph at lines 624--625
 []\TU/lmr/m/n/10 Parameter  
  []
 
 
-Overfull \hbox (15.07275pt too wide) in paragraph at lines 629--630
+Overfull \hbox (15.07275pt too wide) in paragraph at lines 626--627
  []\TU/lmr/m/n/10 Coefficient
  []
 
 
-Overfull \hbox (7.56822pt too wide) in paragraph at lines 633--634
+Overfull \hbox (7.56822pt too wide) in paragraph at lines 630--631
  []\TU/lmr/m/n/10 t(146)
  []
 
 
-Overfull \hbox (8.84802pt too wide) in paragraph at lines 637--638
+Overfull \hbox (8.84802pt too wide) in paragraph at lines 634--635
  []\TU/lmr/m/n/10 Effects
  []
 
 
-Overfull \hbox (4.81781pt too wide) in paragraph at lines 639--640
+Overfull \hbox (4.81781pt too wide) in paragraph at lines 636--637
  []\TU/lmr/m/n/10 Group
  []
 
 
-Overfull \hbox (3.67155pt too wide) in paragraph at lines 651--651
+Overfull \hbox (3.67155pt too wide) in paragraph at lines 648--648
 []|\TU/lmr/m/n/10 (Intercept)|  
  []
 
 
-Overfull \hbox (4.84822pt too wide) in paragraph at lines 653--653
+Overfull \hbox (4.84822pt too wide) in paragraph at lines 650--650
  []|\TU/lmr/m/n/10 13.93|
  []
 
 
-Overfull \hbox (12.86801pt too wide) in paragraph at lines 655--655
+Overfull \hbox (12.86801pt too wide) in paragraph at lines 652--652
  []|\TU/lmr/m/n/10 random|
  []
 
 
-Overfull \hbox (8.36781pt too wide) in paragraph at lines 655--655
+Overfull \hbox (8.36781pt too wide) in paragraph at lines 652--652
  []|\TU/lmr/m/n/10 Species|
  []
 
 
-Overfull \hbox (12.86801pt too wide) in paragraph at lines 656--656
+Overfull \hbox (12.86801pt too wide) in paragraph at lines 653--653
  []|\TU/lmr/m/n/10 random|
  []
 
 
-Overfull \hbox (14.34781pt too wide) in paragraph at lines 656--656
+Overfull \hbox (14.34781pt too wide) in paragraph at lines 653--653
  []|\TU/lmr/m/n/10 Residual|
  []
 
 
-Overfull \hbox (9.84822pt too wide) in paragraph at lines 658--659
+Overfull \hbox (9.84822pt too wide) in paragraph at lines 655--656
  []|\TU/lmr/m/n/10 127.79|
  []
 
 
-Overfull \hbox (9.84822pt too wide) in paragraph at lines 659--660
+Overfull \hbox (9.84822pt too wide) in paragraph at lines 656--657
  []|\TU/lmr/m/n/10 128.07|
  []
 
 
-Overfull \hbox (9.84822pt too wide) in paragraph at lines 660--661
+Overfull \hbox (9.84822pt too wide) in paragraph at lines 657--658
  []|\TU/lmr/m/n/10 139.84|
  []
 
 
-Overfull \hbox (1.40157pt too wide) in paragraph at lines 662--662
+Overfull \hbox (1.40157pt too wide) in paragraph at lines 659--659
 \TU/lmr/m/n/10 (marginal)|  
  []
 
 File: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png Graphic file (type bmp)
 </Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png>
 [4]
-Overfull \hbox (16.3882pt too wide) in paragraph at lines 686--687
+Overfull \hbox (16.3882pt too wide) in paragraph at lines 683--684
 []\TU/lmr/m/n/10 Parameter  
  []
 
 
-Overfull \hbox (15.66512pt too wide) in paragraph at lines 688--689
+Overfull \hbox (15.66512pt too wide) in paragraph at lines 685--686
  []\TU/lmr/m/n/10 Median
  []
 
 
-Overfull \hbox (7.09909pt too wide) in paragraph at lines 694--695
+Overfull \hbox (7.09909pt too wide) in paragraph at lines 691--692
 []\TU/lmr/m/n/10 Rhat  
  []
 
 
-Overfull \hbox (11.66747pt too wide) in paragraph at lines 702--703
+Overfull \hbox (11.66747pt too wide) in paragraph at lines 699--700
  []\TU/lmr/m/n/10 Std_Median
  []
 
 
-Overfull \hbox (18.3682pt too wide) in paragraph at lines 710--710
+Overfull \hbox (18.3682pt too wide) in paragraph at lines 707--707
 []|\TU/lmr/m/n/10 (Intercept)|  
  []
 
 
-Overfull \hbox (5.93512pt too wide) in paragraph at lines 710--710
+Overfull \hbox (5.93512pt too wide) in paragraph at lines 707--707
  []|\TU/lmr/m/n/10 19.59|
  []
 
 
-Overfull \hbox (6.48512pt too wide) in paragraph at lines 710--710
+Overfull \hbox (6.48512pt too wide) in paragraph at lines 707--707
  []|\TU/lmr/m/n/10 100%|
  []
 
 
-Overfull \hbox (8.3391pt too wide) in paragraph at lines 710--710
+Overfull \hbox (8.3391pt too wide) in paragraph at lines 707--707
 []|\TU/lmr/m/n/10 1.001|  
  []
 
 
-Overfull \hbox (13.50557pt too wide) in paragraph at lines 710--710
+Overfull \hbox (13.50557pt too wide) in paragraph at lines 707--707
 []|\TU/lmr/m/n/10 1907.00|  
  []
 
 
-Overfull \hbox (0.93512pt too wide) in paragraph at lines 712--712
+Overfull \hbox (0.93512pt too wide) in paragraph at lines 709--709
  []|\TU/lmr/m/n/10 0.93|
  []
 
 
-Overfull \hbox (14.26512pt too wide) in paragraph at lines 712--712
+Overfull \hbox (14.26512pt too wide) in paragraph at lines 709--709
  []|\TU/lmr/m/n/10 99.85%|
  []
 
 
-Overfull \hbox (8.3391pt too wide) in paragraph at lines 712--712
+Overfull \hbox (8.3391pt too wide) in paragraph at lines 709--709
 []|\TU/lmr/m/n/10 1.001|  
  []
 
 
-Overfull \hbox (13.50557pt too wide) in paragraph at lines 712--712
+Overfull \hbox (13.50557pt too wide) in paragraph at lines 709--709
 []|\TU/lmr/m/n/10 2048.00|  
  []
 
 
-Overfull \hbox (0.93512pt too wide) in paragraph at lines 714--714
+Overfull \hbox (0.93512pt too wide) in paragraph at lines 711--711
  \TU/lmr/m/n/10 5.05|
  []
 
 
-Overfull \hbox (6.48512pt too wide) in paragraph at lines 714--714
+Overfull \hbox (6.48512pt too wide) in paragraph at lines 711--711
  []|\TU/lmr/m/n/10 100%|
  []
 
 
-Overfull \hbox (8.3391pt too wide) in paragraph at lines 714--714
+Overfull \hbox (8.3391pt too wide) in paragraph at lines 711--711
 []|\TU/lmr/m/n/10 0.999|  
  []
 
 
-Overfull \hbox (13.50557pt too wide) in paragraph at lines 714--714
+Overfull \hbox (13.50557pt too wide) in paragraph at lines 711--711
 []|\TU/lmr/m/n/10 1744.00|  
  []
 
 
-Overfull \hbox (5.68512pt too wide) in paragraph at lines 717--718
+Overfull \hbox (5.68512pt too wide) in paragraph at lines 714--715
  \TU/lmr/m/n/10 79.23|
  []
 
 
-Overfull \hbox (3.7582pt too wide) in paragraph at lines 718--718
+Overfull \hbox (3.7582pt too wide) in paragraph at lines 715--715
 []|\TU/lmr/m/n/10 LOOIC|  
  []
 
 
-Overfull \hbox (10.93512pt too wide) in paragraph at lines 718--719
+Overfull \hbox (10.93512pt too wide) in paragraph at lines 715--716
  []|\TU/lmr/m/n/10 158.46|
  []
 
 
-Overfull \hbox (10.93512pt too wide) in paragraph at lines 719--720
+Overfull \hbox (10.93512pt too wide) in paragraph at lines 716--717
  []|\TU/lmr/m/n/10 158.15|
  []
 
 
-Overfull \hbox (0.93512pt too wide) in paragraph at lines 720--721
+Overfull \hbox (0.93512pt too wide) in paragraph at lines 717--718
  []|\TU/lmr/m/n/10 0.81|
  []
 
 
-Overfull \hbox (0.93512pt too wide) in paragraph at lines 721--722
+Overfull \hbox (0.93512pt too wide) in paragraph at lines 718--719
  []|\TU/lmr/m/n/10 0.79|
  []
 
 
-Overfull \hbox (0.93512pt too wide) in paragraph at lines 722--723
+Overfull \hbox (0.93512pt too wide) in paragraph at lines 719--720
  []|\TU/lmr/m/n/10 2.65|
  []
 
@@ -1317,10 +1314,10 @@ Package logreq Info: Writing requests to 'paper.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 37241 strings out of 474924
- 763301 string characters out of 5755242
- 1963186 words of memory out of 5000000
- 58679 multiletter control sequences out of 15000+600000
+ 37240 strings out of 474924
+ 763296 string characters out of 5755242
+ 1961186 words of memory out of 5000000
+ 58678 multiletter control sequences out of 15000+600000
  564941 words of font info for 84 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  84i,12n,87p,1194b,1159s stack positions out of 10000i,1000n,20000p,200000b,200000s

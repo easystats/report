@@ -20,12 +20,9 @@ authors:
   name: Brenton M. Wiernik^[Brenton Wiernik is currently an independent researcher and Research Scientist at Meta, Demography and Survey Science. The current work was done in an independent capacity.]
   orcid: 0000-0001-9560-6336
 - affiliation: 5
-  name: Etienne Bacher
-  orcid: 0000-0002-9271-5075 
-- affiliation: 6
   name: Daniel Lüdecke
   orcid: 0000-0002-8895-3206
-- affiliation: 7
+- affiliation: 6
   name: Rémi Thériault
   orcid: 0000-0003-4315-6788
     
@@ -39,13 +36,11 @@ affiliations:
 - index: 4
   name: Independent Researcher
 - index: 5
-  name: Luxembourg Institute of Socio-Economic Research (LISER), Luxembourg
-- index: 6
   name: University Medical Center Hamburg-Eppendorf, Germany
-- index: 7
+- index: 6
   name: Université du Québec à Montréal, Montréal, Canada
 
-date: "2024-03-04"
+date: "2024-04-02"
 bibliography: paper.bib
 output: 
   rticles::joss_article:
