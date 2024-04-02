@@ -1,7 +1,7 @@
 Package: report
 Type: Package
 Title: Automated Reporting of Results and Statistical Models
-Version: 0.5.8.1
+Version: 0.5.8.2
 Authors@R:
     c(person(given = "Dominique",
              family = "Makowski",
@@ -57,14 +57,15 @@ Depends:
 Imports:
     bayestestR (>= 0.13.2),
     effectsize (>= 0.8.6),
-    insight (>= 0.19.8),
-    parameters (>= 0.21.5),
-    performance (>= 0.10.9),
-    datawizard (>= 0.9.1),
+    insight (>= 0.19.10),
+    parameters (>= 0.21.6),
+    performance (>= 0.11.0),
+    datawizard (>= 0.10.0),
     stats,
     tools,
     utils
 Suggests:
+    BayesFactor,
     brms,
     ivreg,
     knitr,
@@ -95,6 +96,7 @@ Collate:
     'format_model.R'
     'reexports.R'
     'report-package.R'
+    'report.BFBayesFactor.R'
     'utils_combine_tables.R'
     'report.lm.R'
     'report.MixMod.R'
@@ -107,6 +109,7 @@ Collate:
     'report.stanreg.R'
     'report.brmsfit.R'
     'report.character.R'
+    'report.compare.loo.R'
     'report.compare_performance.R'
     'report.data.frame.R'
     'report.default.R'
