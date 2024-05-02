@@ -79,7 +79,7 @@ The package documentation can be found [**here**](https://easystats.github.io/re
 
 ## Report all the things 
 
-<a href=https://easystats.github.io/report/><img src="man/figures/allthethings.jpg" height="60"></a>
+<a href=https://easystats.github.io/report/><img src="man/figures/allthethings.jpg" height="60" alt="All the things meme by Allie Brosh" ></a>
 
 ### General Workflow
 
