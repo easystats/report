@@ -48,6 +48,8 @@ x <- brms::loo_compare(
   model_names = c("m1", "m2", "m3")
 )
 report(x)
+report(x, include_IC = FALSE)
+report(x, include_ENP = TRUE)
 }
 \dontshow{\}) # examplesIf}
 }

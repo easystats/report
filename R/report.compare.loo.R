@@ -59,7 +59,7 @@ report.compare.loo <- function(x, include_IC = TRUE, include_ENP = FALSE, ...) {
   ic_diff <- -2 * elpd_diff
 
   z_elpd_diff <- elpd_diff / se_elpd_diff
-  p_elpd_diff <- 2 * pnorm(-abs(z_elpd_diff))
+  p_elpd_diff <- 2 * stats::pnorm(-abs(z_elpd_diff))
   z_ic_diff <- -z_elpd_diff
 
   if ("looic" %in% colnames(x)) {
@@ -80,45 +80,45 @@ report.compare.loo <- function(x, include_IC = TRUE, include_ENP = FALSE, ...) {
   # in a parameters.compare.loo() function which would be run here.
 
   # Starting text -----
-  text <- sprintf(
+  text1 <- sprintf(
     paste0(
       "The difference in predictive accuracy, as indexed by Expected Log ",
       "Predictive Density (%s), suggests that '%s' is the best model ("
     ),
     index_label, modnames[1]
   )
-  if(all(c(include_IC, include_ENP) == FALSE)) {
-    text <- sprintf(paste0(text, "ELPD = %.2f)"), elpd[1])
-  } else {
-    if(include_IC) {
-      text <- sprintf(paste0(text, "%s = %.2f"), index_ic, ic[1])
+  if (all(c(include_IC, include_ENP))) {
+    if (include_IC) {
+      text1 <- sprintf(paste0(text1, "%s = %.2f"), index_ic, ic[1])
     }
-    if(include_ENP) {
-      if(include_IC) {
-        text <- sprintf(paste0(text, ", ENP = %.2f)"), enp[1])
+    if (include_ENP) {
+      if (include_IC) {
+        text1 <- sprintf(paste0(text1, ", ENP = %.2f)"), enp[1])
       } else {
-        text <- sprintf(paste0(text, "ENP = %.2f)"), enp[1])
+        text1 <- sprintf(paste0(text1, "ENP = %.2f)"), enp[1])
       }
     } else {
-      text <- paste0(text, ")")
+      text1 <- paste0(text1, ")")
     }
+  } else {
+    text1 <- sprintf(paste0(text1, "ELPD = %.2f)"), elpd[1])
   }
 
   # Other models ---
-  text_models <- sprintf("'%s' (diff-ELPD = %.2f +- %.2f, %s",
-                         modnames[-1],
-                         elpd_diff[-1],
-                         se_elpd_diff[-1],
-                         insight::format_p(p_elpd_diff[-1]))
+  text_models <- sprintf(
+    "'%s' (diff-ELPD = %.2f +- %.2f, %s",
+    modnames[-1],
+    elpd_diff[-1],
+    se_elpd_diff[-1],
+    insight::format_p(p_elpd_diff[-1])
+  )
 
-  if(all(c(include_IC, include_ENP) == FALSE)) {
-    text_models <- paste0(text_models, ")")
-  } else {
-    if(include_IC) {
+  if (all(c(include_IC, include_ENP))) {
+    if (include_IC) {
       text_models <- sprintf(paste0(text_models, ", %s = %.2f"), index_ic, ic[-1])
     }
-    if(include_ENP) {
-      if(include_IC) {
+    if (include_ENP) {
+      if (include_IC) {
         text_models <- sprintf(paste0(text_models, ", ENP = %.2f)"), enp[-1])
       } else {
         text_models <- sprintf(paste0(text_models, "ENP = %.2f)"), enp[-1])
@@ -126,10 +126,12 @@ report.compare.loo <- function(x, include_IC = TRUE, include_ENP = FALSE, ...) {
     } else {
       text_models <- sprintf(paste0(text_models, ")"))
     }
+  } else {
+    text_models <- paste0(text_models, ")")
   }
 
 
-  text <- paste0(text, ", followed by ", datawizard::text_concatenate( text_models))
-  class(text) <- c("report_text", class(text))
-  text
+  text1 <- paste0(text1, ", followed by ", datawizard::text_concatenate(text_models))
+  class(text1) <- c("report_text", class(text1))
+  text1
 }
