@@ -4,13 +4,14 @@
 \alias{report.compare.loo}
 \title{Reporting Bayesian Model Comparison}
 \usage{
-\method{report}{compare.loo}(x, index = c("ELPD", "IC"), ...)
+\method{report}{compare.loo}(x, include_IC = TRUE, include_ENP = FALSE, ...)
 }
 \arguments{
 \item{x}{An object of class \link[brms:loo_compare.brmsfit]{brms::loo_compare}.}
 
-\item{index}{type if index to report - expected log pointwise predictive
-density (ELPD) or information criteria (IC).}
+\item{include_IC}{Whether to include the information criteria (IC).}
+
+\item{include_ENP}{Whether to include the effective number of parameters (ENP).}
 
 \item{...}{Additional arguments (not used for now).}
 }
@@ -25,7 +26,11 @@ The rule of thumb is that the models are "very similar" if |elpd_diff| (the
 absolute value of elpd_diff) is less than 4 (Sivula, Magnusson and Vehtari, 2020).
 If superior to 4, then one can use the SE to obtain a standardized difference
 (Z-diff) and interpret it as such, assuming that the difference is normally
-distributed.
+distributed. The corresponding p-value is then calculated as \code{2 * pnorm(-abs(Z-diff))}.
+However, note that if the raw ELPD difference is small (less than 4), it doesn't
+make much sense to rely on its standardized value: it is not very useful to
+conclude that a model is much better than another if both models make very
+similar predictions.
 }
 \examples{
 \dontshow{if (require("brms", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
@@ -34,12 +39,17 @@ library(brms)
 
 m1 <- brms::brm(mpg ~ qsec, data = mtcars)
 m2 <- brms::brm(mpg ~ qsec + drat, data = mtcars)
+m3 <- brms::brm(mpg ~ qsec + drat + wt, data = mtcars)
 
-x <- brms::loo_compare(brms::add_criterion(m1, "loo"),
+x <- brms::loo_compare(
+  brms::add_criterion(m1, "loo"),
   brms::add_criterion(m2, "loo"),
-  model_names = c("m1", "m2")
+  brms::add_criterion(m3, "loo"),
+  model_names = c("m1", "m2", "m3")
 )
 report(x)
+report(x, include_IC = FALSE)
+report(x, include_ENP = TRUE)
 }
 \dontshow{\}) # examplesIf}
 }
