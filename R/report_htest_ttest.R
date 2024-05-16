@@ -33,25 +33,25 @@
 
 .report_table_ttest <- function(table_full, effsize) {
   table_full <- cbind(table_full, attributes(effsize)$table)
-  table <- datawizard::data_remove(
+  table_small <- datawizard::data_remove(
     table_full,
     c("Parameter", "Group", "Mean_Group1", "Mean_Group2", "Method", "d_CI_low", "d_CI_high")
   )
-  list(table = table, table_full = table_full)
+  list(table = table_small, table_full = table_full)
 }
 
 
 # report_effectsize ---------------------
 
 .report_effectsize_ttest <- function(x, table, dot_args, type, rules = "cohen1988") {
-  args <- c(list(x), dot_args)
-  table <- do.call(effectsize::effectsize, args)
+  my_args <- c(list(x), dot_args)
+  table <- do.call(effectsize::effectsize, my_args)
   ci <- attributes(table)$ci
   estimate <- names(table)[1]
   rules <- ifelse(is.null(dot_args$rules), rules, dot_args$rules)
 
-  args <- list(table, rules = rules, dot_args)
-  interpretation <- do.call(effectsize::interpret, args)$Interpretation
+  my_args <- list(table, rules = rules, dot_args)
+  interpretation <- do.call(effectsize::interpret, my_args)$Interpretation
   rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
 
   if (estimate %in% c("d", "Cohens_d")) {
