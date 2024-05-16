@@ -132,6 +132,7 @@ report_participants <- function(data,
                                 ...) {
   ## TODO: deprecate later
   if (!is.null(group)) {
+    format_warning("Argument `group` is deprecated and will be removed in a future release. Please use `by` instead.") # nolint
     by <- group
   }
 

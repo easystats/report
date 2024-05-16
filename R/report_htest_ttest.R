@@ -106,12 +106,12 @@
     vars <- paste0(x$data.name)
   }
 
-  text <- paste0(
+  final_text <- paste0(
     trimws(x$method),
     " testing the difference ",
     ifelse(grepl(" by ", x$data.name, fixed = TRUE), "of ", "between "),
     vars_full
   )
 
-  text
+  final_text
 }
