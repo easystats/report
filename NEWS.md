@@ -6,6 +6,7 @@ Breaking
   releases. of _easystats_ packages. Please use `by` instead. This affects
   following functions in *report*:
 
+  * `report_participants()`
   * `report_sample()`
 
 # report 0.5.9
