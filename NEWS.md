@@ -1,4 +1,4 @@
-# report 0.5.10
+# report 0.5.9
 
 Breaking
 
@@ -8,8 +8,6 @@ Breaking
 
   * `report_participants()`
   * `report_sample()`
-
-# report 0.5.9
 
 Minor changes 
 
