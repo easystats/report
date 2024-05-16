@@ -1,3 +1,13 @@
+# report 0.5.10
+
+Breaking
+
+* Arguments named `group`, `at` and `group_by` will be deprecated in future
+  releases. of _easystats_ packages. Please use `by` instead. This affects
+  following functions in *report*:
+
+  * `report_sample()`
+
 # report 0.5.9
 
 Minor changes 
