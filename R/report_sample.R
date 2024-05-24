@@ -88,7 +88,7 @@ report_sample <- function(data,
                           ...) {
   ## TODO: deprecate later
   if (!is.null(group_by)) {
-    format_warning("Argument `group_by` is deprecated and will be removed in a future release. Please use `by` instead.") # nolint
+    insight::format_warning("Argument `group_by` is deprecated and will be removed in a future release. Please use `by` instead.") # nolint
     by <- group_by
   }
 
