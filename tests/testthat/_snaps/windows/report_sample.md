@@ -180,10 +180,10 @@
       -------------------------
       x [1], % | 2.9 [2.0, 4.2]
 
-# report_sample group_by
+# report_sample by
 
     Code
-      report_sample(airquality, group_by = "Month")
+      report_sample(airquality, by = "Month")
     Output
       # Descriptive Statistics
       
@@ -198,7 +198,7 @@
 ---
 
     Code
-      report_sample(mtcars, group_by = "cyl")
+      report_sample(mtcars, by = "cyl")
     Output
       # Descriptive Statistics
       
@@ -218,7 +218,7 @@
 ---
 
     Code
-      report_sample(iris, group_by = "Species")
+      report_sample(iris, by = "Species")
     Output
       # Descriptive Statistics
       
@@ -456,7 +456,7 @@
 ---
 
     Code
-      report_sample(airquality, group_by = "Month", total = TRUE)
+      report_sample(airquality, by = "Month", total = TRUE)
     Output
       # Descriptive Statistics
       
@@ -471,7 +471,7 @@
 ---
 
     Code
-      report_sample(airquality, group_by = "Month", total = FALSE)
+      report_sample(airquality, by = "Month", total = FALSE)
     Output
       # Descriptive Statistics
       
@@ -486,7 +486,7 @@
 ---
 
     Code
-      report_sample(airquality, group_by = "Month", total = FALSE, n = TRUE)
+      report_sample(airquality, by = "Month", total = FALSE, n = TRUE)
     Output
       # Descriptive Statistics
       
@@ -501,7 +501,7 @@
 ---
 
     Code
-      report_sample(airquality, group_by = "Month", total = TRUE, n = TRUE)
+      report_sample(airquality, by = "Month", total = TRUE, n = TRUE)
     Output
       # Descriptive Statistics
       
