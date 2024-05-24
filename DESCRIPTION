@@ -150,4 +150,4 @@ Collate:
     'utils_grouped_df.R'
     'zzz.R'
 Roxygen: list(markdown = TRUE)
-Remotes: easystats/insight, easystats/datawizard, easystats/parameters, easystats/performance
+Remotes: easystats/insight, easystats/datawizard, easystats/parameters, easystats/performance, easystats/modelbased
