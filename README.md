@@ -78,7 +78,7 @@ The package documentation can be found
 
 ## Report all the things
 
-<a href=https://easystats.github.io/report/><img src="man/figures/allthethings.jpg" height="60"></a>
+<a href=https://easystats.github.io/report/><img src="man/figures/allthethings.jpg" height="60" alt="All the things meme by Allie Brosh" ></a>
 
 ### General Workflow
 
@@ -262,28 +262,28 @@ report(model)
     # of 1000 iterations and a warmup of 500) to predict mpg with qsec and wt
     # (formula: mpg ~ qsec + wt). Priors over parameters were all set as normal (mean
     # = 0.00, SD = 8.43; mean = 0.00, SD = 15.40) distributions. The model's
-    # explanatory power is substantial (R2 = 0.81, 95% CI [0.69, 0.89], adj. R2 =
-    # 0.79). The model's intercept, corresponding to qsec = 0 and wt = 0, is at 19.56
-    # (95% CI [9.60, 30.59]). Within this model:
+    # explanatory power is substantial (R2 = 0.81, 95% CI [0.70, 0.90], adj. R2 =
+    # 0.79). The model's intercept, corresponding to qsec = 0 and wt = 0, is at 19.80
+    # (95% CI [8.93, 29.80]). Within this model:
     # 
-    #   - The effect of qsec (Median = 0.94, 95% CI [0.38, 1.45]) has a 99.90%
-    # probability of being positive (> 0), 98.80% of being significant (> 0.30), and
-    # 0.05% of being large (> 1.81). The estimation successfully converged (Rhat =
-    # 1.001) and the indices are reliable (ESS = 1921)
-    #   - The effect of wt (Median = -5.05, 95% CI [-6.01, -4.05]) has a 100.00%
+    #   - The effect of qsec (Median = 0.93, 95% CI [0.40, 1.49]) has a 100.00%
+    # probability of being positive (> 0), 99.05% of being significant (> 0.30), and
+    # 0.25% of being large (> 1.81). The estimation successfully converged (Rhat =
+    # 1.000) and the indices are reliable (ESS = 1864)
+    #   - The effect of wt (Median = -5.04, 95% CI [-5.99, -4.08]) has a 100.00%
     # probability of being negative (< 0), 100.00% of being significant (< -0.30),
     # and 100.00% of being large (< -1.81). The estimation successfully converged
-    # (Rhat = 1.000) and the indices are reliable (ESS = 2020)
+    # (Rhat = 0.999) and the indices are reliable (ESS = 2424)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
     # framework, we report the median of the posterior distribution and its 95% CI
     # (Highest Density Interval), along the probability of direction (pd), the
     # probability of significance and the probability of being large. The thresholds
     # beyond which the effect is considered as significant (i.e., non-negligible) and
-    # large are |0.30| and |1.81|. Convergence and stability of the Bayesian sampling
-    # has been assessed using R-hat, which should be below 1.01 (Vehtari et al.,
-    # 2019), and Effective Sample Size (ESS), which should be greater than 1000
-    # (Burkner, 2017).
+    # large are |0.30| and |1.81| (corresponding respectively to 0.05 and 0.30 of the
+    # outcome's SD). Convergence and stability of the Bayesian sampling has been
+    # assessed using R-hat, which should be below 1.01 (Vehtari et al., 2019), and
+    # Effective Sample Size (ESS), which should be greater than 1000 (Burkner, 2017).
 
 ## Other types of reports
 
@@ -296,10 +296,16 @@ model <- lm(Sepal.Length ~ Species, data = iris)
 
 report_model(model)
 # linear model (estimated using OLS) to predict Sepal.Length with Species (formula: Sepal.Length ~ Species)
+```
+
+``` r
 
 report_performance(model)
 # The model explains a statistically significant and substantial proportion of
 # variance (R2 = 0.62, F(2, 147) = 119.26, p < .001, adj. R2 = 0.61)
+```
+
+``` r
 
 report_statistics(model)
 # beta = 5.01, 95% CI [4.86, 5.15], t(147) = 68.76, p < .001; Std. beta = -1.01, 95% CI [-1.18, -0.84]
@@ -334,7 +340,7 @@ Report can also help you create a sample description table (also
 referred to as **Table 1**).
 
 ``` r
-report_sample(iris, group_by = "Species")
+report_sample(iris, by = "Species")
 ```
 
 | Variable               | setosa (n=50) | versicolor (n=50) | virginica (n=50) | Total (n=150) |
@@ -353,32 +359,35 @@ analysis paragraph about the tools used.
 report(sessionInfo())
 ```
 
-    # Analyses were conducted using the R Statistical language (version 4.2.2; R Core
-    # Team, 2022) on macOS Ventura 13.1, using the packages lme4 (version 1.1.32;
-    # Bates D et al., 2015), Matrix (version 1.5.3; Bates D et al., 2022), Rcpp
-    # (version 1.0.10; Eddelbuettel D, François R, 2011), rstanarm (version 2.21.3;
-    # Goodrich B et al., 2022), report (version 0.5.7; Makowski D et al., 2023) and
-    # dplyr (version 1.1.0; Wickham H et al., 2023).
+    # Analyses were conducted using the R Statistical language (version 4.4.0; R Core
+    # Team, 2024) on Windows 11 x64 (build 22631), using the packages lme4 (version
+    # 1.1.35.3; Bates D et al., 2015), Matrix (version 1.7.0; Bates D et al., 2024),
+    # Rcpp (version 1.0.12; Eddelbuettel D et al., 2024), rstanarm (version 2.32.1;
+    # Goodrich B et al., 2024), report (version 0.5.8.3; Makowski D et al., 2023) and
+    # dplyr (version 1.1.4; Wickham H et al., 2023).
     # 
     # References
     # ----------
     #   - Bates D, Mächler M, Bolker B, Walker S (2015). "Fitting Linear Mixed-Effects
     # Models Using lme4." _Journal of Statistical Software_, *67*(1), 1-48.
     # doi:10.18637/jss.v067.i01 <https://doi.org/10.18637/jss.v067.i01>.
-    #   - Bates D, Maechler M, Jagan M (2022). _Matrix: Sparse and Dense Matrix Classes
-    # and Methods_. R package version 1.5-3,
+    #   - Bates D, Maechler M, Jagan M (2024). _Matrix: Sparse and Dense Matrix Classes
+    # and Methods_. R package version 1.7-0,
     # <https://CRAN.R-project.org/package=Matrix>.
-    #   - Eddelbuettel D, François R (2011). "Rcpp: Seamless R and C++ Integration."
-    # _Journal of Statistical Software_, *40*(8), 1-18. doi:10.18637/jss.v040.i08
+    #   - Eddelbuettel D, Francois R, Allaire J, Ushey K, Kou Q, Russell N, Ucar I,
+    # Bates D, Chambers J (2024). _Rcpp: Seamless R and C++ Integration_. R package
+    # version 1.0.12, <https://CRAN.R-project.org/package=Rcpp>. Eddelbuettel D,
+    # François R (2011). "Rcpp: Seamless R and C++ Integration." _Journal of
+    # Statistical Software_, *40*(8), 1-18. doi:10.18637/jss.v040.i08
     # <https://doi.org/10.18637/jss.v040.i08>. Eddelbuettel D (2013). _Seamless R and
     # C++ Integration with Rcpp_. Springer, New York. doi:10.1007/978-1-4614-6868-4
     # <https://doi.org/10.1007/978-1-4614-6868-4>, ISBN 978-1-4614-6867-7.
-    # Eddelbuettel D, Balamuta JJ (2018). "Extending extitR with extitC++: A Brief
-    # Introduction to extitRcpp." _The American Statistician_, *72*(1), 28-36.
+    # Eddelbuettel D, Balamuta J (2018). "Extending R with C++: A Brief Introduction
+    # to Rcpp." _The American Statistician_, *72*(1), 28-36.
     # doi:10.1080/00031305.2017.1375990
     # <https://doi.org/10.1080/00031305.2017.1375990>.
-    #   - Goodrich B, Gabry J, Ali I, Brilleman S (2022). "rstanarm: Bayesian applied
-    # regression modeling via Stan." R package version 2.21.3,
+    #   - Goodrich B, Gabry J, Ali I, Brilleman S (2024). "rstanarm: Bayesian applied
+    # regression modeling via Stan." R package version 2.32.1,
     # <https://mc-stan.org/rstanarm/>. Brilleman S, Crowther M, Moreno-Betancur M,
     # Buros Novik J, Wolfe R (2018). "Joint longitudinal and time-to-event models via
     # Stan." StanCon 2018. 10-12 Jan 2018. Pacific Grove, CA, USA.,
@@ -387,11 +396,11 @@ report(sessionInfo())
     # "Automated Results Reporting as a Practical Tool to Improve Reproducibility and
     # Methodological Best Practices Adoption." _CRAN_.
     # <https://easystats.github.io/report/>.
-    #   - R Core Team (2022). _R: A Language and Environment for Statistical
+    #   - R Core Team (2024). _R: A Language and Environment for Statistical
     # Computing_. R Foundation for Statistical Computing, Vienna, Austria.
     # <https://www.R-project.org/>.
     #   - Wickham H, François R, Henry L, Müller K, Vaughan D (2023). _dplyr: A Grammar
-    # of Data Manipulation_. R package version 1.1.0,
+    # of Data Manipulation_. R package version 1.1.4,
     # <https://CRAN.R-project.org/package=dplyr>.
 
 ## Credits
@@ -401,7 +410,6 @@ as follows:
 
 ``` r
 citation("report")
-
 To cite in publications use:
 
   Makowski, D., Lüdecke, D., Patil, I., Thériault, R., Ben-Shachar,
