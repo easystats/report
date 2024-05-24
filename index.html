@@ -7,12 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="The aim of the report package is to bridge the gap between R’s output and the formatted results contained in your manuscript. This package converts statistical models and data frames into textual reports suited for publication, ensuring standardization and quality in results reporting.">
 <title>Automated Reporting of Results and Statistical Models • report</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Roboto-0.4.9/font.css" rel="stylesheet">
@@ -26,103 +20,55 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:creator" content="@easystats4u">
 <meta name="twitter:site" content="@easystats4u">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
-
-    <nav class="navbar fixed-top navbar-default navbar-expand-lg bg-light" data-bs-theme="default"><div class="container">
-    
+    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="default" aria-label="Site navigation"><div class="container">
     <a class="navbar-brand me-2" href="index.html">report</a>
-
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.8.2</small>
-
-    
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.8.3</small>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown--tutorials" aria-label="Articles">
-    <span class="fa fa fa fa-book-reader"></span>
-     
-    Tutorials
-  </a>
-  <div class="dropdown-menu" aria-labelledby="dropdown--tutorials">
-    <a class="dropdown-item" href="articles/cite_packages.html">Report and Cite Packages</a>
-    <a class="dropdown-item" href="articles/new_models.html">Supporting New Models</a>
-    <a class="dropdown-item" href="articles/report.html">Automated Reporting: Getting Started</a>
-    <a class="dropdown-item" href="articles/report_table.html">Publication-ready Tables</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-tutorials" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Articles"><span class="fa fa-book-reader"></span> Tutorials</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-tutorials">
+<li><a class="dropdown-item" href="articles/cite_packages.html">Report and Cite Packages</a></li>
+    <li><a class="dropdown-item" href="articles/new_models.html">Supporting New Models</a></li>
+    <li><a class="dropdown-item" href="articles/report.html">Automated Reporting: Getting Started</a></li>
+    <li><a class="dropdown-item" href="articles/report_table.html">Publication-ready Tables</a></li>
+  </ul>
 </li>
-<li class="nav-item">
-  <a class="nav-link" href="reference/index.html" aria-label="Reference">
-    <span class="fa fa fa fa-file-code"></span>
-     
-    Functions
-  </a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="news/index.html" aria-label="News">
-    <span class="fa fa fa fa-newspaper"></span>
-     
-    News
-  </a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="SUPPORT.html" aria-label="Support">
-    <span class="fa fa fa fa-question-circle"></span>
-     
-    Help
-  </a>
-</li>
+<li class="nav-item"><a class="nav-link" href="reference/index.html" aria-label="Reference"><span class="fa fa-file-code"></span> Functions</a></li>
+<li class="nav-item"><a class="nav-link" href="news/index.html" aria-label="News"><span class="fa fa-newspaper"></span> News</a></li>
+<li class="nav-item"><a class="nav-link" href="SUPPORT.html" aria-label="Support"><span class="fa fa-question-circle"></span> Help</a></li>
       </ul>
 <ul class="navbar-nav">
-<li><form class="form-inline" role="search">
-<input type="search" class="form-control" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
 </form></li>
 <li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown--easystats" aria-label="easystats">
-    <span class="fab fa fab fa-r-project"></span>
-     
-    easystats
-  </a>
-  <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown--easystats">
-    <a class="external-link dropdown-item" href="https://easystats.github.io/bayestestR/">bayestestR</a>
-    <a class="external-link dropdown-item" href="https://easystats.github.io/correlation/">correlation</a>
-    <a class="external-link dropdown-item" href="https://easystats.github.io/datawizard/">datawizard</a>
-    <a class="external-link dropdown-item" href="https://easystats.github.io/easystats/">easystats</a>
-    <a class="external-link dropdown-item" href="https://easystats.github.io/effectsize/">effectsize</a>
-    <a class="external-link dropdown-item" href="https://easystats.github.io/insight/">insight</a>
-    <a class="external-link dropdown-item" href="https://easystats.github.io/modelbased/">modelbased</a>
-    <a class="external-link dropdown-item" href="https://easystats.github.io/performance/">performance</a>
-    <a class="external-link dropdown-item" href="https://easystats.github.io/parameters/">parameters</a>
-    <a class="dropdown-item" href="https://easystats.github.io/report/">report</a>
-    <a class="external-link dropdown-item" href="https://easystats.github.io/see/">see</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-easystats" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="easystats"><span class="fa fab fa-r-project"></span> easystats</button>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-easystats">
+<li><a class="external-link dropdown-item" href="https://easystats.github.io/bayestestR/">bayestestR</a></li>
+    <li><a class="external-link dropdown-item" href="https://easystats.github.io/correlation/">correlation</a></li>
+    <li><a class="external-link dropdown-item" href="https://easystats.github.io/datawizard/">datawizard</a></li>
+    <li><a class="external-link dropdown-item" href="https://easystats.github.io/easystats/">easystats</a></li>
+    <li><a class="external-link dropdown-item" href="https://easystats.github.io/effectsize/">effectsize</a></li>
+    <li><a class="external-link dropdown-item" href="https://easystats.github.io/insight/">insight</a></li>
+    <li><a class="external-link dropdown-item" href="https://easystats.github.io/modelbased/">modelbased</a></li>
+    <li><a class="external-link dropdown-item" href="https://easystats.github.io/performance/">performance</a></li>
+    <li><a class="external-link dropdown-item" href="https://easystats.github.io/parameters/">parameters</a></li>
+    <li><a class="dropdown-item" href="https://easystats.github.io/report/">report</a></li>
+    <li><a class="external-link dropdown-item" href="https://easystats.github.io/see/">see</a></li>
+  </ul>
 </li>
-<li class="nav-item">
-  <a class="external-link nav-link" href="http://twitter.com/easystats4u" aria-label="Twitter">
-    <span class="fa fa-twitter"></span>
-     
-  </a>
-</li>
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/easystats/report/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<li class="nav-item"><a class="external-link nav-link" href="http://twitter.com/easystats4u" aria-label="Twitter"><span class="fa fa-twitter"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/easystats/report/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
-
-    
   </div>
 </nav><div class="container template-home">
 <div class="row">
@@ -183,7 +129,7 @@
 <div class="section level2">
 <h2 id="report-all-the-things">Report all the things<a class="anchor" aria-label="anchor" href="#report-all-the-things"></a>
 </h2>
-<p><a href="https://easystats.github.io/report/"><img src="reference/figures/allthethings.jpg" height="60"></a></p>
+<p><a href="https://easystats.github.io/report/"><img src="reference/figures/allthethings.jpg" height="60" alt="All the things meme by Allie Brosh"></a></p>
 <div class="section level3">
 <h3 id="general-workflow">General Workflow<a class="anchor" aria-label="anchor" href="#general-workflow"></a>
 </h3>
@@ -333,28 +279,28 @@
 <span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="co"># of 1000 iterations and a warmup of 500) to predict mpg with qsec and wt</span></span>
 <span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a><span class="co"># (formula: mpg ~ qsec + wt). Priors over parameters were all set as normal (mean</span></span>
 <span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a><span class="co"># = 0.00, SD = 8.43; mean = 0.00, SD = 15.40) distributions. The model's</span></span>
-<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a><span class="co"># explanatory power is substantial (R2 = 0.81, 95% CI [0.69, 0.89], adj. R2 =</span></span>
-<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a><span class="co"># 0.79). The model's intercept, corresponding to qsec = 0 and wt = 0, is at 19.56</span></span>
-<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a><span class="co"># (95% CI [9.60, 30.59]). Within this model:</span></span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a><span class="co"># explanatory power is substantial (R2 = 0.81, 95% CI [0.70, 0.90], adj. R2 =</span></span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a><span class="co"># 0.79). The model's intercept, corresponding to qsec = 0 and wt = 0, is at 19.80</span></span>
+<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a><span class="co"># (95% CI [8.93, 29.80]). Within this model:</span></span>
 <span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a><span class="co">#   - The effect of qsec (Median = 0.94, 95% CI [0.38, 1.45]) has a 99.90%</span></span>
-<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a><span class="co"># probability of being positive (&gt; 0), 98.80% of being significant (&gt; 0.30), and</span></span>
-<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a><span class="co"># 0.05% of being large (&gt; 1.81). The estimation successfully converged (Rhat =</span></span>
-<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a><span class="co"># 1.001) and the indices are reliable (ESS = 1921)</span></span>
-<span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a><span class="co">#   - The effect of wt (Median = -5.05, 95% CI [-6.01, -4.05]) has a 100.00%</span></span>
+<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a><span class="co">#   - The effect of qsec (Median = 0.93, 95% CI [0.40, 1.49]) has a 100.00%</span></span>
+<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a><span class="co"># probability of being positive (&gt; 0), 99.05% of being significant (&gt; 0.30), and</span></span>
+<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a><span class="co"># 0.25% of being large (&gt; 1.81). The estimation successfully converged (Rhat =</span></span>
+<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a><span class="co"># 1.000) and the indices are reliable (ESS = 1864)</span></span>
+<span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a><span class="co">#   - The effect of wt (Median = -5.04, 95% CI [-5.99, -4.08]) has a 100.00%</span></span>
 <span id="cb19-14"><a href="#cb19-14" tabindex="-1"></a><span class="co"># probability of being negative (&lt; 0), 100.00% of being significant (&lt; -0.30),</span></span>
 <span id="cb19-15"><a href="#cb19-15" tabindex="-1"></a><span class="co"># and 100.00% of being large (&lt; -1.81). The estimation successfully converged</span></span>
-<span id="cb19-16"><a href="#cb19-16" tabindex="-1"></a><span class="co"># (Rhat = 1.000) and the indices are reliable (ESS = 2020)</span></span>
+<span id="cb19-16"><a href="#cb19-16" tabindex="-1"></a><span class="co"># (Rhat = 0.999) and the indices are reliable (ESS = 2424)</span></span>
 <span id="cb19-17"><a href="#cb19-17" tabindex="-1"></a><span class="co"># </span></span>
 <span id="cb19-18"><a href="#cb19-18" tabindex="-1"></a><span class="co"># Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)</span></span>
 <span id="cb19-19"><a href="#cb19-19" tabindex="-1"></a><span class="co"># framework, we report the median of the posterior distribution and its 95% CI</span></span>
 <span id="cb19-20"><a href="#cb19-20" tabindex="-1"></a><span class="co"># (Highest Density Interval), along the probability of direction (pd), the</span></span>
 <span id="cb19-21"><a href="#cb19-21" tabindex="-1"></a><span class="co"># probability of significance and the probability of being large. The thresholds</span></span>
 <span id="cb19-22"><a href="#cb19-22" tabindex="-1"></a><span class="co"># beyond which the effect is considered as significant (i.e., non-negligible) and</span></span>
-<span id="cb19-23"><a href="#cb19-23" tabindex="-1"></a><span class="co"># large are |0.30| and |1.81|. Convergence and stability of the Bayesian sampling</span></span>
-<span id="cb19-24"><a href="#cb19-24" tabindex="-1"></a><span class="co"># has been assessed using R-hat, which should be below 1.01 (Vehtari et al.,</span></span>
-<span id="cb19-25"><a href="#cb19-25" tabindex="-1"></a><span class="co"># 2019), and Effective Sample Size (ESS), which should be greater than 1000</span></span>
-<span id="cb19-26"><a href="#cb19-26" tabindex="-1"></a><span class="co"># (Burkner, 2017).</span></span></code></pre></div>
+<span id="cb19-23"><a href="#cb19-23" tabindex="-1"></a><span class="co"># large are |0.30| and |1.81| (corresponding respectively to 0.05 and 0.30 of the</span></span>
+<span id="cb19-24"><a href="#cb19-24" tabindex="-1"></a><span class="co"># outcome's SD). Convergence and stability of the Bayesian sampling has been</span></span>
+<span id="cb19-25"><a href="#cb19-25" tabindex="-1"></a><span class="co"># assessed using R-hat, which should be below 1.01 (Vehtari et al., 2019), and</span></span>
+<span id="cb19-26"><a href="#cb19-26" tabindex="-1"></a><span class="co"># Effective Sample Size (ESS), which should be greater than 1000 (Burkner, 2017).</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -368,12 +314,14 @@
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/report_model.html">report_model</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
-<span><span class="co"># linear model (estimated using OLS) to predict Sepal.Length with Species (formula: Sepal.Length ~ Species)</span></span>
-<span></span>
+<span><span class="co"># linear model (estimated using OLS) to predict Sepal.Length with Species (formula: Sepal.Length ~ Species)</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="reference/report_performance.html">report_performance</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span><span class="co"># The model explains a statistically significant and substantial proportion of</span></span>
-<span><span class="co"># variance (R2 = 0.62, F(2, 147) = 119.26, p &lt; .001, adj. R2 = 0.61)</span></span>
-<span></span>
+<span><span class="co"># variance (R2 = 0.62, F(2, 147) = 119.26, p &lt; .001, adj. R2 = 0.61)</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="reference/report_statistics.html">report_statistics</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span><span class="co"># beta = 5.01, 95% CI [4.86, 5.15], t(147) = 68.76, p &lt; .001; Std. beta = -1.01, 95% CI [-1.18, -0.84]</span></span>
 <span><span class="co"># beta = 0.93, 95% CI [0.73, 1.13], t(147) = 9.03, p &lt; .001; Std. beta = 1.12, 95% CI [0.88, 1.37]</span></span>
@@ -383,7 +331,7 @@
 <h3 id="report-participants-details">Report participants’ details<a class="anchor" aria-label="anchor" href="#report-participants-details"></a>
 </h3>
 <p>This can be useful to complete the <strong>Participants</strong> paragraph of your manuscript.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Age"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">22</span>, <span class="fl">23</span>, <span class="fl">54</span>, <span class="fl">21</span><span class="op">)</span>,</span>
 <span>  <span class="st">"Sex"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"M"</span><span class="op">)</span></span>
@@ -393,16 +341,16 @@
 <span>  <span class="fu"><a href="reference/report_participants.html">report_participants</a></span><span class="op">(</span><span class="va">data</span>, spell_n <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>  <span class="st">"were recruited in the study by means of torture and coercion."</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co"># Four participants (Mean age = 30.0, SD = 16.0, range: [21, 54]; Sex:</span></span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a><span class="co">#   50.0% females, 50.0% males, 0.0% other) were recruited in the study by</span></span>
-<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a><span class="co">#   means of torture and coercion.</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="co"># Four participants (Mean age = 30.0, SD = 16.0, range: [21, 54]; Sex:</span></span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a><span class="co">#   50.0% females, 50.0% males, 0.0% other) were recruited in the study by</span></span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a><span class="co">#   means of torture and coercion.</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="report-sample">Report sample<a class="anchor" aria-label="anchor" href="#report-sample"></a>
 </h3>
 <p>Report can also help you create a sample description table (also referred to as <strong>Table 1</strong>).</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/report_sample.html">report_sample</a></span><span class="op">(</span><span class="va">iris</span>, group_by <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/report_sample.html">report_sample</a></span><span class="op">(</span><span class="va">iris</span>, by <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="26%">
@@ -454,73 +402,75 @@
 <h3 id="report-system-and-packages">Report system and packages<a class="anchor" aria-label="anchor" href="#report-system-and-packages"></a>
 </h3>
 <p>Finally, <strong>report</strong> includes some functions to help you write the data analysis paragraph about the tools used.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb25"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="co"># Analyses were conducted using the R Statistical language (version 4.2.2; R Core</span></span>
-<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="co"># Team, 2022) on macOS Ventura 13.1, using the packages lme4 (version 1.1.32;</span></span>
-<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a><span class="co"># Bates D et al., 2015), Matrix (version 1.5.3; Bates D et al., 2022), Rcpp</span></span>
-<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a><span class="co"># (version 1.0.10; Eddelbuettel D, François R, 2011), rstanarm (version 2.21.3;</span></span>
-<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a><span class="co"># Goodrich B et al., 2022), report (version 0.5.7; Makowski D et al., 2023) and</span></span>
-<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a><span class="co"># dplyr (version 1.1.0; Wickham H et al., 2023).</span></span>
-<span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a><span class="co"># References</span></span>
-<span id="cb25-9"><a href="#cb25-9" tabindex="-1"></a><span class="co"># ----------</span></span>
-<span id="cb25-10"><a href="#cb25-10" tabindex="-1"></a><span class="co">#   - Bates D, Mächler M, Bolker B, Walker S (2015). "Fitting Linear Mixed-Effects</span></span>
-<span id="cb25-11"><a href="#cb25-11" tabindex="-1"></a><span class="co"># Models Using lme4." _Journal of Statistical Software_, *67*(1), 1-48.</span></span>
-<span id="cb25-12"><a href="#cb25-12" tabindex="-1"></a><span class="co"># doi:10.18637/jss.v067.i01 &lt;https://doi.org/10.18637/jss.v067.i01&gt;.</span></span>
-<span id="cb25-13"><a href="#cb25-13" tabindex="-1"></a><span class="co">#   - Bates D, Maechler M, Jagan M (2022). _Matrix: Sparse and Dense Matrix Classes</span></span>
-<span id="cb25-14"><a href="#cb25-14" tabindex="-1"></a><span class="co"># and Methods_. R package version 1.5-3,</span></span>
-<span id="cb25-15"><a href="#cb25-15" tabindex="-1"></a><span class="co"># &lt;https://CRAN.R-project.org/package=Matrix&gt;.</span></span>
-<span id="cb25-16"><a href="#cb25-16" tabindex="-1"></a><span class="co">#   - Eddelbuettel D, François R (2011). "Rcpp: Seamless R and C++ Integration."</span></span>
-<span id="cb25-17"><a href="#cb25-17" tabindex="-1"></a><span class="co"># _Journal of Statistical Software_, *40*(8), 1-18. doi:10.18637/jss.v040.i08</span></span>
-<span id="cb25-18"><a href="#cb25-18" tabindex="-1"></a><span class="co"># &lt;https://doi.org/10.18637/jss.v040.i08&gt;. Eddelbuettel D (2013). _Seamless R and</span></span>
-<span id="cb25-19"><a href="#cb25-19" tabindex="-1"></a><span class="co"># C++ Integration with Rcpp_. Springer, New York. doi:10.1007/978-1-4614-6868-4</span></span>
-<span id="cb25-20"><a href="#cb25-20" tabindex="-1"></a><span class="co"># &lt;https://doi.org/10.1007/978-1-4614-6868-4&gt;, ISBN 978-1-4614-6867-7.</span></span>
-<span id="cb25-21"><a href="#cb25-21" tabindex="-1"></a><span class="co"># Eddelbuettel D, Balamuta JJ (2018). "Extending extitR with extitC++: A Brief</span></span>
-<span id="cb25-22"><a href="#cb25-22" tabindex="-1"></a><span class="co"># Introduction to extitRcpp." _The American Statistician_, *72*(1), 28-36.</span></span>
-<span id="cb25-23"><a href="#cb25-23" tabindex="-1"></a><span class="co"># doi:10.1080/00031305.2017.1375990</span></span>
-<span id="cb25-24"><a href="#cb25-24" tabindex="-1"></a><span class="co"># &lt;https://doi.org/10.1080/00031305.2017.1375990&gt;.</span></span>
-<span id="cb25-25"><a href="#cb25-25" tabindex="-1"></a><span class="co">#   - Goodrich B, Gabry J, Ali I, Brilleman S (2022). "rstanarm: Bayesian applied</span></span>
-<span id="cb25-26"><a href="#cb25-26" tabindex="-1"></a><span class="co"># regression modeling via Stan." R package version 2.21.3,</span></span>
-<span id="cb25-27"><a href="#cb25-27" tabindex="-1"></a><span class="co"># &lt;https://mc-stan.org/rstanarm/&gt;. Brilleman S, Crowther M, Moreno-Betancur M,</span></span>
-<span id="cb25-28"><a href="#cb25-28" tabindex="-1"></a><span class="co"># Buros Novik J, Wolfe R (2018). "Joint longitudinal and time-to-event models via</span></span>
-<span id="cb25-29"><a href="#cb25-29" tabindex="-1"></a><span class="co"># Stan." StanCon 2018. 10-12 Jan 2018. Pacific Grove, CA, USA.,</span></span>
-<span id="cb25-30"><a href="#cb25-30" tabindex="-1"></a><span class="co"># &lt;https://github.com/stan-dev/stancon_talks/&gt;.</span></span>
-<span id="cb25-31"><a href="#cb25-31" tabindex="-1"></a><span class="co">#   - Makowski D, Lüdecke D, Patil I, Thériault R, Ben-Shachar M, Wiernik B (2023).</span></span>
-<span id="cb25-32"><a href="#cb25-32" tabindex="-1"></a><span class="co"># "Automated Results Reporting as a Practical Tool to Improve Reproducibility and</span></span>
-<span id="cb25-33"><a href="#cb25-33" tabindex="-1"></a><span class="co"># Methodological Best Practices Adoption." _CRAN_.</span></span>
-<span id="cb25-34"><a href="#cb25-34" tabindex="-1"></a><span class="co"># &lt;https://easystats.github.io/report/&gt;.</span></span>
-<span id="cb25-35"><a href="#cb25-35" tabindex="-1"></a><span class="co">#   - R Core Team (2022). _R: A Language and Environment for Statistical</span></span>
-<span id="cb25-36"><a href="#cb25-36" tabindex="-1"></a><span class="co"># Computing_. R Foundation for Statistical Computing, Vienna, Austria.</span></span>
-<span id="cb25-37"><a href="#cb25-37" tabindex="-1"></a><span class="co"># &lt;https://www.R-project.org/&gt;.</span></span>
-<span id="cb25-38"><a href="#cb25-38" tabindex="-1"></a><span class="co">#   - Wickham H, François R, Henry L, Müller K, Vaughan D (2023). _dplyr: A Grammar</span></span>
-<span id="cb25-39"><a href="#cb25-39" tabindex="-1"></a><span class="co"># of Data Manipulation_. R package version 1.1.0,</span></span>
-<span id="cb25-40"><a href="#cb25-40" tabindex="-1"></a><span class="co"># &lt;https://CRAN.R-project.org/package=dplyr&gt;.</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="co"># Analyses were conducted using the R Statistical language (version 4.4.0; R Core</span></span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a><span class="co"># Team, 2024) on Windows 11 x64 (build 22631), using the packages lme4 (version</span></span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a><span class="co"># 1.1.35.3; Bates D et al., 2015), Matrix (version 1.7.0; Bates D et al., 2024),</span></span>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a><span class="co"># Rcpp (version 1.0.12; Eddelbuettel D et al., 2024), rstanarm (version 2.32.1;</span></span>
+<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a><span class="co"># Goodrich B et al., 2024), report (version 0.5.8.3; Makowski D et al., 2023) and</span></span>
+<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a><span class="co"># dplyr (version 1.1.4; Wickham H et al., 2023).</span></span>
+<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb27-8"><a href="#cb27-8" tabindex="-1"></a><span class="co"># References</span></span>
+<span id="cb27-9"><a href="#cb27-9" tabindex="-1"></a><span class="co"># ----------</span></span>
+<span id="cb27-10"><a href="#cb27-10" tabindex="-1"></a><span class="co">#   - Bates D, Mächler M, Bolker B, Walker S (2015). "Fitting Linear Mixed-Effects</span></span>
+<span id="cb27-11"><a href="#cb27-11" tabindex="-1"></a><span class="co"># Models Using lme4." _Journal of Statistical Software_, *67*(1), 1-48.</span></span>
+<span id="cb27-12"><a href="#cb27-12" tabindex="-1"></a><span class="co"># doi:10.18637/jss.v067.i01 &lt;https://doi.org/10.18637/jss.v067.i01&gt;.</span></span>
+<span id="cb27-13"><a href="#cb27-13" tabindex="-1"></a><span class="co">#   - Bates D, Maechler M, Jagan M (2024). _Matrix: Sparse and Dense Matrix Classes</span></span>
+<span id="cb27-14"><a href="#cb27-14" tabindex="-1"></a><span class="co"># and Methods_. R package version 1.7-0,</span></span>
+<span id="cb27-15"><a href="#cb27-15" tabindex="-1"></a><span class="co"># &lt;https://CRAN.R-project.org/package=Matrix&gt;.</span></span>
+<span id="cb27-16"><a href="#cb27-16" tabindex="-1"></a><span class="co">#   - Eddelbuettel D, Francois R, Allaire J, Ushey K, Kou Q, Russell N, Ucar I,</span></span>
+<span id="cb27-17"><a href="#cb27-17" tabindex="-1"></a><span class="co"># Bates D, Chambers J (2024). _Rcpp: Seamless R and C++ Integration_. R package</span></span>
+<span id="cb27-18"><a href="#cb27-18" tabindex="-1"></a><span class="co"># version 1.0.12, &lt;https://CRAN.R-project.org/package=Rcpp&gt;. Eddelbuettel D,</span></span>
+<span id="cb27-19"><a href="#cb27-19" tabindex="-1"></a><span class="co"># François R (2011). "Rcpp: Seamless R and C++ Integration." _Journal of</span></span>
+<span id="cb27-20"><a href="#cb27-20" tabindex="-1"></a><span class="co"># Statistical Software_, *40*(8), 1-18. doi:10.18637/jss.v040.i08</span></span>
+<span id="cb27-21"><a href="#cb27-21" tabindex="-1"></a><span class="co"># &lt;https://doi.org/10.18637/jss.v040.i08&gt;. Eddelbuettel D (2013). _Seamless R and</span></span>
+<span id="cb27-22"><a href="#cb27-22" tabindex="-1"></a><span class="co"># C++ Integration with Rcpp_. Springer, New York. doi:10.1007/978-1-4614-6868-4</span></span>
+<span id="cb27-23"><a href="#cb27-23" tabindex="-1"></a><span class="co"># &lt;https://doi.org/10.1007/978-1-4614-6868-4&gt;, ISBN 978-1-4614-6867-7.</span></span>
+<span id="cb27-24"><a href="#cb27-24" tabindex="-1"></a><span class="co"># Eddelbuettel D, Balamuta J (2018). "Extending R with C++: A Brief Introduction</span></span>
+<span id="cb27-25"><a href="#cb27-25" tabindex="-1"></a><span class="co"># to Rcpp." _The American Statistician_, *72*(1), 28-36.</span></span>
+<span id="cb27-26"><a href="#cb27-26" tabindex="-1"></a><span class="co"># doi:10.1080/00031305.2017.1375990</span></span>
+<span id="cb27-27"><a href="#cb27-27" tabindex="-1"></a><span class="co"># &lt;https://doi.org/10.1080/00031305.2017.1375990&gt;.</span></span>
+<span id="cb27-28"><a href="#cb27-28" tabindex="-1"></a><span class="co">#   - Goodrich B, Gabry J, Ali I, Brilleman S (2024). "rstanarm: Bayesian applied</span></span>
+<span id="cb27-29"><a href="#cb27-29" tabindex="-1"></a><span class="co"># regression modeling via Stan." R package version 2.32.1,</span></span>
+<span id="cb27-30"><a href="#cb27-30" tabindex="-1"></a><span class="co"># &lt;https://mc-stan.org/rstanarm/&gt;. Brilleman S, Crowther M, Moreno-Betancur M,</span></span>
+<span id="cb27-31"><a href="#cb27-31" tabindex="-1"></a><span class="co"># Buros Novik J, Wolfe R (2018). "Joint longitudinal and time-to-event models via</span></span>
+<span id="cb27-32"><a href="#cb27-32" tabindex="-1"></a><span class="co"># Stan." StanCon 2018. 10-12 Jan 2018. Pacific Grove, CA, USA.,</span></span>
+<span id="cb27-33"><a href="#cb27-33" tabindex="-1"></a><span class="co"># &lt;https://github.com/stan-dev/stancon_talks/&gt;.</span></span>
+<span id="cb27-34"><a href="#cb27-34" tabindex="-1"></a><span class="co">#   - Makowski D, Lüdecke D, Patil I, Thériault R, Ben-Shachar M, Wiernik B (2023).</span></span>
+<span id="cb27-35"><a href="#cb27-35" tabindex="-1"></a><span class="co"># "Automated Results Reporting as a Practical Tool to Improve Reproducibility and</span></span>
+<span id="cb27-36"><a href="#cb27-36" tabindex="-1"></a><span class="co"># Methodological Best Practices Adoption." _CRAN_.</span></span>
+<span id="cb27-37"><a href="#cb27-37" tabindex="-1"></a><span class="co"># &lt;https://easystats.github.io/report/&gt;.</span></span>
+<span id="cb27-38"><a href="#cb27-38" tabindex="-1"></a><span class="co">#   - R Core Team (2024). _R: A Language and Environment for Statistical</span></span>
+<span id="cb27-39"><a href="#cb27-39" tabindex="-1"></a><span class="co"># Computing_. R Foundation for Statistical Computing, Vienna, Austria.</span></span>
+<span id="cb27-40"><a href="#cb27-40" tabindex="-1"></a><span class="co"># &lt;https://www.R-project.org/&gt;.</span></span>
+<span id="cb27-41"><a href="#cb27-41" tabindex="-1"></a><span class="co">#   - Wickham H, François R, Henry L, Müller K, Vaughan D (2023). _dplyr: A Grammar</span></span>
+<span id="cb27-42"><a href="#cb27-42" tabindex="-1"></a><span class="co"># of Data Manipulation_. R package version 1.1.4,</span></span>
+<span id="cb27-43"><a href="#cb27-43" tabindex="-1"></a><span class="co"># &lt;https://CRAN.R-project.org/package=dplyr&gt;.</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
 <h2 id="credits">Credits<a class="anchor" aria-label="anchor" href="#credits"></a>
 </h2>
 <p>If you like it, you can put a <em>star</em> on this repo, and cite the package as follows:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="fu">citation</span>(<span class="st">"report"</span>)</span>
-<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a>To cite <span class="cf">in</span> publications use<span class="sc">:</span></span>
-<span id="cb26-4"><a href="#cb26-4" tabindex="-1"></a></span>
-<span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a>  Makowski, D., Lüdecke, D., Patil, I., Thériault, R., Ben<span class="sc">-</span>Shachar,</span>
-<span id="cb26-6"><a href="#cb26-6" tabindex="-1"></a>  M.S., <span class="sc">&amp;</span> Wiernik, <span class="fu">B.M.</span> (<span class="dv">2023</span>). Automated Results Reporting as a</span>
-<span id="cb26-7"><a href="#cb26-7" tabindex="-1"></a>  Practical Tool to Improve Reproducibility and Methodological Best</span>
-<span id="cb26-8"><a href="#cb26-8" tabindex="-1"></a>  Practices Adoption. CRAN. Available from</span>
-<span id="cb26-9"><a href="#cb26-9" tabindex="-1"></a>  https<span class="sc">:</span><span class="er">//</span>easystats.github.io<span class="sc">/</span>report<span class="sc">/</span> doi<span class="sc">:</span> .</span>
-<span id="cb26-10"><a href="#cb26-10" tabindex="-1"></a></span>
-<span id="cb26-11"><a href="#cb26-11" tabindex="-1"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
-<span id="cb26-12"><a href="#cb26-12" tabindex="-1"></a></span>
-<span id="cb26-13"><a href="#cb26-13" tabindex="-1"></a>  <span class="sc">@</span>Article{,</span>
-<span id="cb26-14"><a href="#cb26-14" tabindex="-1"></a>    title <span class="ot">=</span> {Automated Results Reporting as a Practical Tool to Improve Reproducibility and Methodological Best Practices Adoption},</span>
-<span id="cb26-15"><a href="#cb26-15" tabindex="-1"></a>    author <span class="ot">=</span> {Dominique Makowski and Daniel Lüdecke and Indrajeet Patil and Rémi Thériault and Mattan S. Ben<span class="sc">-</span>Shachar and Brenton M. Wiernik},</span>
-<span id="cb26-16"><a href="#cb26-16" tabindex="-1"></a>    year <span class="ot">=</span> {<span class="dv">2023</span>},</span>
-<span id="cb26-17"><a href="#cb26-17" tabindex="-1"></a>    journal <span class="ot">=</span> {CRAN},</span>
-<span id="cb26-18"><a href="#cb26-18" tabindex="-1"></a>    url <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>easystats.github.io<span class="sc">/</span>report<span class="sc">/</span>},</span>
-<span id="cb26-19"><a href="#cb26-19" tabindex="-1"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="fu">citation</span>(<span class="st">"report"</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>To cite <span class="cf">in</span> publications use<span class="sc">:</span></span>
+<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a>  Makowski, D., Lüdecke, D., Patil, I., Thériault, R., Ben<span class="sc">-</span>Shachar,</span>
+<span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a>  M.S., <span class="sc">&amp;</span> Wiernik, <span class="fu">B.M.</span> (<span class="dv">2023</span>). Automated Results Reporting as a</span>
+<span id="cb28-6"><a href="#cb28-6" tabindex="-1"></a>  Practical Tool to Improve Reproducibility and Methodological Best</span>
+<span id="cb28-7"><a href="#cb28-7" tabindex="-1"></a>  Practices Adoption. CRAN. Available from</span>
+<span id="cb28-8"><a href="#cb28-8" tabindex="-1"></a>  https<span class="sc">:</span><span class="er">//</span>easystats.github.io<span class="sc">/</span>report<span class="sc">/</span> doi<span class="sc">:</span> .</span>
+<span id="cb28-9"><a href="#cb28-9" tabindex="-1"></a></span>
+<span id="cb28-10"><a href="#cb28-10" tabindex="-1"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
+<span id="cb28-11"><a href="#cb28-11" tabindex="-1"></a></span>
+<span id="cb28-12"><a href="#cb28-12" tabindex="-1"></a>  <span class="sc">@</span>Article{,</span>
+<span id="cb28-13"><a href="#cb28-13" tabindex="-1"></a>    title <span class="ot">=</span> {Automated Results Reporting as a Practical Tool to Improve Reproducibility and Methodological Best Practices Adoption},</span>
+<span id="cb28-14"><a href="#cb28-14" tabindex="-1"></a>    author <span class="ot">=</span> {Dominique Makowski and Daniel Lüdecke and Indrajeet Patil and Rémi Thériault and Mattan S. Ben<span class="sc">-</span>Shachar and Brenton M. Wiernik},</span>
+<span id="cb28-15"><a href="#cb28-15" tabindex="-1"></a>    year <span class="ot">=</span> {<span class="dv">2023</span>},</span>
+<span id="cb28-16"><a href="#cb28-16" tabindex="-1"></a>    journal <span class="ot">=</span> {CRAN},</span>
+<span id="cb28-17"><a href="#cb28-17" tabindex="-1"></a>    url <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>easystats.github.io<span class="sc">/</span>report<span class="sc">/</span>},</span>
+<span id="cb28-18"><a href="#cb28-18" tabindex="-1"></a>  }</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="contribute">Contribute<a class="anchor" aria-label="anchor" href="#contribute"></a>
@@ -542,7 +492,6 @@
 <li><a href="https://easystats.github.io/easystats/index.html" class="external-link">Learn more</a></li>
 </ul>
 </div>
-
 <div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
@@ -550,7 +499,6 @@
 <li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
-
 <div class="community">
 <h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
@@ -559,14 +507,12 @@
 <li><a href="SUPPORT.html">Getting help</a></li>
 </ul>
 </div>
-
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
 <li><a href="authors.html#citation">Citing report</a></li>
 </ul>
 </div>
-
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
@@ -586,26 +532,15 @@
 </ul>
 </div>
 
-
-
   </aside>
 </div>
-
-
     <footer><div class="pkgdown-footer-left">
   <p>Developed by <a href="https://dominiquemakowski.github.io/" class="external-link">Dominique Makowski</a>, <a href="https://github.com/strengejacke" class="external-link">Daniel Lüdecke</a>, <a href="https://sites.google.com/site/indrajeetspatilmorality/" class="external-link">Indrajeet Patil</a>, <a href="https://remi-theriault.com/" class="external-link">Rémi Thériault</a>, <a href="https://home.msbstats.info/" class="external-link">Mattan S. Ben-Shachar</a>, <a href="https://wiernik.org/" class="external-link">Brenton M. Wiernik</a>.</p>
 </div>
-
 <div class="pkgdown-footer-right">
   <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.9000.</p>
 </div>
-
     </footer>
 </div>
-
-  
-
-  
-
   </body>
 </html>
