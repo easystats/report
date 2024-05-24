@@ -6,8 +6,8 @@ test_that("report_sample weights, coorect weighted N", {
     stringsAsFactors = FALSE
   )
 
-  out1 <- report_sample(d, select = "x", group_by = "g")
-  out2 <- report_sample(d, select = "x", group_by = "g", weights = "w")
+  out1 <- report_sample(d, select = "x", by = "g")
+  out2 <- report_sample(d, select = "x", by = "g", weights = "w")
   expect_identical(
     capture.output(print(out1)),
     c(
@@ -41,7 +41,7 @@ test_that("report_sample weights, coorect weighted N", {
     stringsAsFactors = FALSE
   )
   expect_error(
-    report_sample(d, select = "x", group_by = c("g1", "g2"), weights = "w"),
+    report_sample(d, select = "x", by = c("g1", "g2"), weights = "w"),
     regex = "Cannot apply"
   )
 })
@@ -123,18 +123,18 @@ test_that("report_sample CI", {
   expect_warning(report_sample(d, ci = 0.95, weights = "w", ci_method = "wald"), regex = "accurate")
 })
 
-test_that("report_sample group_by", {
+test_that("report_sample by", {
   expect_snapshot(
     variant = "windows",
-    report_sample(airquality, group_by = "Month")
+    report_sample(airquality, by = "Month")
   )
   expect_snapshot(
     variant = "windows",
-    report_sample(mtcars, group_by = "cyl")
+    report_sample(mtcars, by = "cyl")
   )
   expect_snapshot(
     variant = "windows",
-    report_sample(iris, group_by = "Species")
+    report_sample(iris, by = "Species")
   )
 })
 
@@ -206,19 +206,19 @@ test_that("report_sample total", {
   )
   expect_snapshot(
     variant = "windows",
-    report_sample(airquality, group_by = "Month", total = TRUE)
+    report_sample(airquality, by = "Month", total = TRUE)
   )
   expect_snapshot(
     variant = "windows",
-    report_sample(airquality, group_by = "Month", total = FALSE)
+    report_sample(airquality, by = "Month", total = FALSE)
   )
   expect_snapshot(
     variant = "windows",
-    report_sample(airquality, group_by = "Month", total = FALSE, n = TRUE)
+    report_sample(airquality, by = "Month", total = FALSE, n = TRUE)
   )
   expect_snapshot(
     variant = "windows",
-    report_sample(airquality, group_by = "Month", total = TRUE, n = TRUE)
+    report_sample(airquality, by = "Month", total = TRUE, n = TRUE)
   )
 })
 
@@ -248,7 +248,7 @@ test_that("report_sample grouped data frames", {
   data(mtcars)
   mtcars_grouped <- datawizard::data_group(mtcars, "gear")
   out1 <- report_sample(mtcars_grouped, select = c("hp", "mpg"))
-  out2 <- report_sample(mtcars, group_by = "gear", select = c("hp", "mpg"))
+  out2 <- report_sample(mtcars, by = "gear", select = c("hp", "mpg"))
   expect_identical(out1, out2)
 })
 
@@ -258,7 +258,7 @@ test_that("report_sample, with more than one grouping variable", {
   iris$grp <- sample(letters[1:3], nrow(iris), TRUE)
   out <- report_sample(
     iris,
-    group_by = c("Species", "grp"),
+    by = c("Species", "grp"),
     select = c("Sepal.Length", "Sepal.Width")
   )
   # verified against
