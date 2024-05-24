@@ -103,6 +103,6 @@ summary.report_text <- function(object, ...) {
 
 #' @export
 print.report_text <- function(x, width = NULL, ...) {
-  x <- datawizard::format_text(as.character(x), width = width, ...)
+  x <- datawizard::text_format(as.character(x), width = width, ...)
   cat(x)
 }

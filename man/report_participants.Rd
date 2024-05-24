@@ -13,10 +13,11 @@ report_participants(
   country = NULL,
   race = NULL,
   participants = NULL,
-  group = NULL,
+  by = NULL,
   spell_n = FALSE,
   digits = 1,
   threshold = 10,
+  group = NULL,
   ...
 )
 }
@@ -44,7 +45,7 @@ individuals in those groups as \code{"Non-Binary"}.}
 \item{participants}{The name of the participants' identifier column (for
 instance in the case of repeated measures).}
 
-\item{group}{A character vector indicating the name(s) of the column(s) used
+\item{by}{A character vector indicating the name(s) of the column(s) used
 for stratified description.}
 
 \item{spell_n}{Logical, fully spell the sample size (\code{"Three participants"}
@@ -54,6 +55,8 @@ instead of \code{"3 participants"}).}
 
 \item{threshold}{Percentage after which to combine, e.g., countries (default is 10\%,
 so countries that represent less than 10\% will be combined in the "other" category).}
+
+\item{group}{Deprecated. Use \code{by} instead.}
 
 \item{...}{Arguments passed to or from other methods.}
 }
@@ -141,7 +144,7 @@ report_participants(data,
   sex = "Sex",
   gender = "Gender",
   participants = "Participant",
-  group = "Condition"
+  by = "Condition"
 )
 
 # Spell sample size

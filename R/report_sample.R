@@ -3,7 +3,7 @@
 #' Create sample description table (also referred to as "Table 1").
 #'
 #' @param data A data frame for which descriptive statistics should be created.
-#' @param group_by Character vector, indicating the column(s) for possible grouping
+#' @param by Character vector, indicating the column(s) for possible grouping
 #'   of the descriptive table. Note that weighting (see `weights`) does not work
 #'   with more than one grouping column.
 #' @param centrality Character, indicates the statistics that should be
@@ -43,6 +43,7 @@
 #' @param digits Number of decimals.
 #' @param n Logical, actual sample size used in the calculation of the
 #' reported descriptive statistics (i.e., without the missing values).
+#' @param group_by Deprecated. Use `by` instead.
 #' @inheritParams report.data.frame
 #'
 #' @return A data frame of class `report_sample` with variable names and
@@ -61,8 +62,8 @@
 #'
 #' report_sample(iris[, 1:4])
 #' report_sample(iris, select = c("Sepal.Length", "Petal.Length", "Species"))
-#' report_sample(iris, group_by = "Species")
-#' report_sample(airquality, group_by = "Month", n = TRUE, total = FALSE)
+#' report_sample(iris, by = "Species")
+#' report_sample(airquality, by = "Month", n = TRUE, total = FALSE)
 #'
 #' # confidence intervals for proportions
 #' set.seed(123)
@@ -72,7 +73,7 @@
 #' report_sample(d, ci = 0.95, ci_correct = TRUE) # continuity correction
 #' @export
 report_sample <- function(data,
-                          group_by = NULL,
+                          by = NULL,
                           centrality = "mean",
                           ci = NULL,
                           ci_method = "wilson",
@@ -83,7 +84,14 @@ report_sample <- function(data,
                           total = TRUE,
                           digits = 2,
                           n = FALSE,
+                          group_by = NULL,
                           ...) {
+  ## TODO: deprecate later
+  if (!is.null(group_by)) {
+    insight::format_warning("Argument `group_by` is deprecated and will be removed in a future release. Please use `by` instead.") # nolint
+    by <- group_by
+  }
+
   # check for correct input type
   if (!is.data.frame(data)) {
     data <- tryCatch(
@@ -119,16 +127,16 @@ report_sample <- function(data,
     variables <- setdiff(variables, exclude)
   }
 
-  # for grouped data frames, use groups as group_by argument
-  if (inherits(data, "grouped_df") && is.null(group_by)) {
-    group_by <- setdiff(colnames(attributes(data)$groups), ".rows")
+  # for grouped data frames, use groups as by argument
+  if (inherits(data, "grouped_df") && is.null(by)) {
+    by <- setdiff(colnames(attributes(data)$groups), ".rows")
   }
 
   # grouped by?
-  grouping <- !is.null(group_by) && all(group_by %in% colnames(data))
+  do_grouping <- !is.null(by) && all(by %in% colnames(data))
 
   # sanity check - weights and grouping
-  if (!is.null(group_by) && length(group_by) > 1 && !is.null(weights)) {
+  if (!is.null(by) && length(by) > 1 && !is.null(weights)) {
     insight::format_error("Cannot apply `weights` when grouping is done by more than one variable.")
   }
 
@@ -143,12 +151,12 @@ report_sample <- function(data,
     i
   })
 
-  # coerce group_by columns to factor
-  groups <- as.data.frame(lapply(data[group_by], factor))
+  # coerce by columns to factor
+  groups <- as.data.frame(lapply(data[by], factor))
 
-  out <- if (isTRUE(grouping)) {
+  out <- if (isTRUE(do_grouping)) {
     result <- lapply(split(data[variables], groups), function(x) {
-      x[group_by] <- NULL
+      x[by] <- NULL
       .generate_descriptive_table(
         x,
         centrality,
@@ -162,7 +170,7 @@ report_sample <- function(data,
     })
     # for more than one group, fix column names. we don't want "a.b (n=10)",
     # but rather ""a, b (n=10)""
-    if (length(group_by) > 1) {
+    if (length(by) > 1) {
       old_names <- datawizard::data_unite(
         unique(groups),
         new_column = ".old_names",
@@ -179,9 +187,9 @@ report_sample <- function(data,
     variable <- result[[1]]["Variable"]
     # number of observation, based on weights
     if (!is.null(weights)) {
-      n_obs <- round(as.vector(stats::xtabs(data[[weights]] ~ data[[group_by]])))
+      n_obs <- round(as.vector(stats::xtabs(data[[weights]] ~ data[[by]])))
     } else {
-      n_obs <- as.vector(table(data[group_by]))
+      n_obs <- as.vector(table(data[by]))
     }
     # column names for groups
     cn <- sprintf("%s (n=%g)", names(result), n_obs)
@@ -189,13 +197,13 @@ report_sample <- function(data,
     summaries <- do.call(cbind, lapply(result, function(i) i["Summary"]))
     colnames(summaries) <- cn
     # generate data for total column, but make sure to remove missings
-    total_data <- data[stats::complete.cases(data[group_by]), unique(c(variables, group_by))]
+    total_data <- data[stats::complete.cases(data[by]), unique(c(variables, by))]
     # bind all together, including total column
     final <- cbind(
       variable,
       summaries,
       Total = .generate_descriptive_table(
-        total_data[setdiff(variables, group_by)],
+        total_data[setdiff(variables, by)],
         centrality,
         weights,
         digits,
@@ -211,9 +219,9 @@ report_sample <- function(data,
     }
     # define total N, based on weights
     if (!is.null(weights)) {
-      total_n <- round(sum(as.vector(table(data[group_by]))) * mean(data[[weights]], na.rm = TRUE))
+      total_n <- round(sum(as.vector(table(data[by]))) * mean(data[[weights]], na.rm = TRUE))
     } else {
-      total_n <- sum(as.vector(table(data[group_by])))
+      total_n <- sum(as.vector(table(data[by])))
     }
     # add N to column name
     colnames(final)[ncol(final)] <- sprintf(
@@ -335,36 +343,36 @@ report_sample <- function(data,
     weights[is.na(x)] <- NA
     weights <- stats::na.omit(weights)
     x <- stats::na.omit(x)
-    proportions <- prop.table(stats::xtabs(weights ~ x))
+    table_proportions <- prop.table(stats::xtabs(weights ~ x))
   } else {
-    proportions <- prop.table(table(x))
+    table_proportions <- prop.table(table(x))
   }
 
   # for binary factors, just need one level
   if (nlevels(x) == 2) {
-    proportions <- proportions[2]
+    table_proportions <- table_proportions[2]
   }
 
   # CI for proportions?
   if (!is.null(ci)) {
-    ci_low_high <- .ci_proportion(x, proportions, weights, ci, ci_method, ci_correct)
+    ci_low_high <- .ci_proportion(x, table_proportions, weights, ci, ci_method, ci_correct)
     .summary <- sprintf(
       "%.1f [%.1f, %.1f]",
-      100 * proportions,
+      100 * table_proportions,
       100 * ci_low_high$ci_low,
       100 * ci_low_high$ci_high
     )
   } else {
-    .summary <- sprintf("%.1f", 100 * proportions)
+    .summary <- sprintf("%.1f", 100 * table_proportions)
   }
 
   if (isTRUE(n)) {
-    .summary <- paste0(.summary, ", ", round(sum(!is.na(x)) * as.vector(proportions)))
+    .summary <- paste0(.summary, ", ", round(sum(!is.na(x)) * as.vector(table_proportions)))
   }
 
   n_label <- ifelse(n, ", n", "")
   data.frame(
-    Variable = sprintf("%s [%s], %%%s", column, names(proportions), n_label),
+    Variable = sprintf("%s [%s], %%%s", column, names(table_proportions), n_label),
     Summary = as.vector(.summary),
     stringsAsFactors = FALSE
   )
@@ -377,12 +385,12 @@ report_sample <- function(data,
 
 # Standard error for confidence interval of proportions ----
 
-.ci_proportion <- function(x, proportions, weights, ci, ci_method, ci_correct) {
+.ci_proportion <- function(x, table_proportions, weights, ci, ci_method, ci_correct) {
   ci_method <- match.arg(tolower(ci_method), c("wald", "wilson"))
 
   # variables
-  p <- as.vector(proportions)
-  q <- 1 - p
+  p <- as.vector(table_proportions)
+  quant <- 1 - p
   n <- length(stats::na.omit(x))
   z <- stats::qnorm((1 + ci) / 2)
 
@@ -399,21 +407,21 @@ report_sample <- function(data,
   if (ci_method == "wilson") {
     # Wilson CIs -------------------
     if (isTRUE(ci_correct)) {
-      ci_low <- (2 * n * p + z^2 - 1 - z * sqrt(z^2 - 2 - 1 / n + 4 * p * (n * q + 1))) / (2 * (n + z^2))
-      ci_high <- (2 * n * p + z^2 + 1 + z * sqrt(z^2 + 2 - 1 / n + 4 * p * (n * q - 1))) / (2 * (n + z^2))
+      ci_low <- (2 * n * p + z^2 - 1 - z * sqrt(z^2 - 2 - 1 / n + 4 * p * (n * quant + 1))) / (2 * (n + z^2))
+      ci_high <- (2 * n * p + z^2 + 1 + z * sqrt(z^2 + 2 - 1 / n + 4 * p * (n * quant - 1))) / (2 * (n + z^2))
       # close to 0 or 1, then CI is 0 resp. 1
-      fix <- p < 0.00001 | ci_low < 0.00001
-      if (any(fix)) {
-        ci_low[fix] <- 0
+      fix_ci <- p < 0.00001 | ci_low < 0.00001
+      if (any(fix_ci)) {
+        ci_low[fix_ci] <- 0
       }
-      fix <- p > 0.99999 | ci_high > 0.99999
-      if (any(fix)) {
-        ci_high[fix] <- 1
+      fix_ci <- p > 0.99999 | ci_high > 0.99999
+      if (any(fix_ci)) {
+        ci_high[fix_ci] <- 1
       }
       out <- list(ci_low = ci_low, ci_high = ci_high)
     } else {
       prop <- (2 * n * p) + z^2
-      moe <- z * sqrt(z^2 + 4 * n * p * q)
+      moe <- z * sqrt(z^2 + 4 * n * p * quant)
       correction <- 2 * (n + z^2)
       out <- list(
         ci_low = (prop - moe) / correction,
@@ -422,7 +430,7 @@ report_sample <- function(data,
     }
   } else {
     # Wald CIs -------------------
-    moe <- z * suppressWarnings(sqrt(p * q / n))
+    moe <- z * suppressWarnings(sqrt(p * quant / n))
     if (isTRUE(ci_correct)) {
       moe <- moe + 1 / (2 * n)
     }
@@ -511,9 +519,9 @@ print_md.report_sample <- function(x, layout = "horizontal", ...) {
   weights[is.na(x)] <- NA
   weights <- stats::na.omit(weights)
   x <- stats::na.omit(x)
-  order <- order(x)
-  x <- x[order]
-  weights <- weights[order]
+  x_order <- order(x)
+  x <- x[x_order]
+  weights <- weights[x_order]
   rw <- cumsum(weights) / sum(weights)
   md_values <- min(which(rw >= p))
   if (rw[md_values] == p) {

@@ -6,7 +6,7 @@
 \usage{
 report_sample(
   data,
-  group_by = NULL,
+  by = NULL,
   centrality = "mean",
   ci = NULL,
   ci_method = "wilson",
@@ -17,13 +17,14 @@ report_sample(
   total = TRUE,
   digits = 2,
   n = FALSE,
+  group_by = NULL,
   ...
 )
 }
 \arguments{
 \item{data}{A data frame for which descriptive statistics should be created.}
 
-\item{group_by}{Character vector, indicating the column(s) for possible grouping
+\item{by}{Character vector, indicating the column(s) for possible grouping
 of the descriptive table. Note that weighting (see \code{weights}) does not work
 with more than one grouping column.}
 
@@ -75,6 +76,8 @@ weight-variable. Reported descriptive statistics will be weighted by
 \item{n}{Logical, actual sample size used in the calculation of the
 reported descriptive statistics (i.e., without the missing values).}
 
+\item{group_by}{Deprecated. Use \code{by} instead.}
+
 \item{...}{Arguments passed to or from other methods.}
 }
 \value{
@@ -89,8 +92,8 @@ library(report)
 
 report_sample(iris[, 1:4])
 report_sample(iris, select = c("Sepal.Length", "Petal.Length", "Species"))
-report_sample(iris, group_by = "Species")
-report_sample(airquality, group_by = "Month", n = TRUE, total = FALSE)
+report_sample(iris, by = "Species")
+report_sample(airquality, by = "Month", n = TRUE, total = FALSE)
 
 # confidence intervals for proportions
 set.seed(123)

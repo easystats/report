@@ -262,11 +262,11 @@ paste(
 Report can also help you create a sample description table (also referred to as **Table 1**).
 
 ```{r, eval=FALSE}
-report_sample(iris, group_by = "Species")
+report_sample(iris, by = "Species")
 ```
 
 ```{r, echo=FALSE}
-knitr::kable(report_sample(iris, group_by = "Species"))
+knitr::kable(report_sample(iris, by = "Species"))
 ```
 
 ### Report system and packages

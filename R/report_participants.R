@@ -21,11 +21,12 @@
 #' so countries that represent less than 10% will be combined in the "other" category).
 #' @param participants The name of the participants' identifier column (for
 #'   instance in the case of repeated measures).
-#' @param group A character vector indicating the name(s) of the column(s) used
+#' @param by A character vector indicating the name(s) of the column(s) used
 #'   for stratified description.
 #' @param spell_n Logical, fully spell the sample size (`"Three participants"`
 #'   instead of `"3 participants"`).
 #' @inheritParams report.numeric
+#' @param group Deprecated. Use `by` instead.
 #'
 #' @return A character vector with description of the "participants", based on
 #'   the information provided in `data`.
@@ -106,7 +107,7 @@
 #'   sex = "Sex",
 #'   gender = "Gender",
 #'   participants = "Participant",
-#'   group = "Condition"
+#'   by = "Condition"
 #' )
 #'
 #' # Spell sample size
@@ -123,14 +124,21 @@ report_participants <- function(data,
                                 country = NULL,
                                 race = NULL,
                                 participants = NULL,
-                                group = NULL,
+                                by = NULL,
                                 spell_n = FALSE,
                                 digits = 1,
                                 threshold = 10,
+                                group = NULL,
                                 ...) {
+  ## TODO: deprecate later
+  if (!is.null(group)) {
+    insight::format_warning("Argument `group` is deprecated and will be removed in a future release. Please use `by` instead.") # nolint
+    by <- group
+  }
+
   # Convert empty strings to NA
   data_list <- lapply(data, function(x) {
-    x[which(x == "")] <- NA
+    x[which(x == "")] <- NA # nolint
     x
   })
   data <- as.data.frame(data_list, stringsAsFactors = FALSE)
@@ -165,8 +173,8 @@ report_participants <- function(data,
     race <- .find_race_in_data(data)
   }
 
-  if (is.null(group)) {
-    text <- .report_participants(
+  if (is.null(by)) {
+    final_text <- .report_participants(
       data,
       age = age,
       sex = sex,
@@ -181,9 +189,9 @@ report_participants <- function(data,
       ...
     )
   } else {
-    text <- NULL
-    data[[group]] <- as.character(data[[group]])
-    for (i in split(data, data[group])) {
+    final_text <- NULL
+    data[[by]] <- as.character(data[[by]])
+    for (i in split(data, data[by])) {
       current_text <- .report_participants(
         i,
         age = age,
@@ -200,15 +208,15 @@ report_participants <- function(data,
 
       pre_text <- paste0(
         "the '",
-        paste0(names(i[group]), " - ", vapply(i[group], unique, "character"), collapse = " and "),
+        paste0(names(i[by]), " - ", vapply(i[by], unique, "character"), collapse = " and "),
         "' group: "
       )
 
-      text <- c(text, paste0(pre_text, current_text))
+      final_text <- c(final_text, paste0(pre_text, current_text))
     }
-    text <- paste("For", datawizard::text_concatenate(text, sep = ", for ", last = " and for "))
+    final_text <- paste("For", datawizard::text_concatenate(final_text, sep = ", for ", last = " and for "))
   }
-  text
+  final_text
 }
 
 #' @keywords internal
@@ -338,9 +346,7 @@ report_participants <- function(data,
       ) %in% c("male", "m", "female", "f", NA, "na")]) /
         nrow(data) * 100, digits = digits),
       "% other",
-      if (!insight::format_value(length(data[[sex]][tolower(
-        data[[sex]]
-      ) %in% c(NA, "na")]) / nrow(data) * 100) == "0.00") {
+      if (insight::format_value(length(data[[sex]][tolower(data[[sex]]) %in% c(NA, "na")]) / nrow(data) * 100) != "0.00") { # nolint
         paste0(", ", insight::format_value(length(data[[sex]][tolower(
           data[[sex]]
         ) %in% c(NA, "na")]) / nrow(data) * 100), "% missing")
@@ -375,9 +381,9 @@ report_participants <- function(data,
         data[[gender]]
       ) %in% both_genders]) /
         nrow(data) * 100), "% non-binary",
-      if (!insight::format_value(length(data[[gender]][tolower(
+      if (insight::format_value(length(data[[gender]][tolower(
         data[[gender]]
-      ) %in% c(NA, "na")]) / nrow(data) * 100) == "0.00") {
+      ) %in% c(NA, "na")]) / nrow(data) * 100) != "0.00") {
         paste0(", ", insight::format_value(length(data[[gender]][tolower(
           data[[gender]]
         ) %in% c(NA, "na")]) / nrow(data) * 100), "% missing")
@@ -387,31 +393,29 @@ report_participants <- function(data,
 
   if (all(is.na(data[[education]]))) {
     text_education <- ""
-  } else {
-    if (is.numeric(data[[education]])) {
-      text_education <- summary(
-        report_statistics(
-          data[[education]],
-          n = FALSE,
-          centrality = "mean",
-          missing_percentage = NULL,
-          digits = digits,
-          ...
-        )
-      )
-
-      text_education <- sub("Mean =", "Mean education =", text_education, fixed = TRUE)
-    } else {
-      data[which(data[[education]] %in% c(NA, "NA")), education] <- "missing"
-      txt <- summary(report_statistics(
-        as.factor(data[[education]]),
-        levels_percentage = TRUE,
+  } else if (is.numeric(data[[education]])) {
+    text_education <- summary(
+      report_statistics(
+        data[[education]],
+        n = FALSE,
+        centrality = "mean",
+        missing_percentage = NULL,
         digits = digits,
         ...
-      ))
+      )
+    )
 
-      text_education <- paste0("Education: ", txt)
-    }
+    text_education <- sub("Mean =", "Mean education =", text_education, fixed = TRUE)
+  } else {
+    data[which(data[[education]] %in% c(NA, "NA")), education] <- "missing"
+    txt <- summary(report_statistics(
+      as.factor(data[[education]]),
+      levels_percentage = TRUE,
+      digits = digits,
+      ...
+    ))
+
+    text_education <- paste0("Education: ", txt)
   }
 
   text_country <- if (all(is.na(data[[country]]))) {
@@ -468,6 +472,7 @@ report_participants <- function(data,
     text_race <- paste("Race:", value_string)
   }
 
+  # nolint start
   paste0(
     size,
     " participants (",
@@ -491,6 +496,7 @@ report_participants <- function(data,
     ), text_race)),
     ")"
   )
+  # nolint end
 }
 
 #' @keywords internal

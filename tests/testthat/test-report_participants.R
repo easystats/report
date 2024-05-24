@@ -14,7 +14,7 @@ test_that("report_participants, argument gender works", {
       "Gender: 12.5% women, 37.5% men, 50.00% non-binary)"
     )
   )
-  out <- report_participants(data, group = "Condition")
+  out <- report_participants(data, by = "Condition")
   expect_identical(
     out,
     paste(
@@ -26,7 +26,7 @@ test_that("report_participants, argument gender works", {
     )
   )
   # works when lowercase
-  out <- report_participants(data, group = "Condition")
+  out <- report_participants(data, by = "Condition")
   expect_identical(
     out,
     paste(
