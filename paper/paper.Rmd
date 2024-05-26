@@ -41,12 +41,14 @@ affiliations:
   name: Université du Québec à Montréal, Montréal, Canada
 
 date: "`r Sys.Date()`"
-bibliography: paper.bib
+
 output: 
-  rticles::joss_article:
-    includes:
-      in_header: preamble.tex
+    md_document:
+      variant: "markdown"
+      preserve_yaml: true
+      standalone: true
 csl: apa.csl
+bibliography: paper.bib
 link-citations: yes
 ---
 
