@@ -51,6 +51,8 @@ test_that("report_sample check input", {
   data(iris)
   expect_error(report_sample(lm(Sepal.Length ~ Species, data = iris)))
   expect_silent(report_sample(iris$Species))
+  expect_error(report_sample(iris, by = "Spedies"), regex = "The following column")
+  expect_error(report_sample(iris, select = "Spedies"), regex = "The following column")
 })
 
 test_that("report_sample default", {

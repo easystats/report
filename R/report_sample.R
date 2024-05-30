@@ -114,6 +114,12 @@ report_sample <- function(data,
     select <- colnames(data)[select]
   }
 
+  # sanity check for existing columns
+  .check_spelling(data, select)
+  .check_spelling(data, exclude)
+  .check_spelling(data, by)
+  .check_spelling(data, weights)
+
   # variables to keep
   if (!is.null(weights)) {
     select <- unique(c(select, weights))
