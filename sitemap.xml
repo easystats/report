@@ -1,162 +1,56 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://easystats.github.io/report/404.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/SUPPORT.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/articles/cite_packages.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/articles/new_models.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/articles/report.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/articles/report_table.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/index.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/as.report.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/cite_easystats.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/format_citation.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/format_formula.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/reexports.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report-package.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report.BFBayesFactor.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report.aov.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report.bayesfactor_models.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report.brmsfit.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report.compare.loo.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report.compare_performance.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report.data.frame.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report.default.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report.estimate_contrasts.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report.htest.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report.lavaan.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report.lm.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report.sessionInfo.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report.stanreg.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report.test_performance.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report_date.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report_effectsize.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report_info.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report_intercept.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report_model.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report_parameters.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report_participants.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report_performance.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report_priors.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report_random.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report_s.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report_sample.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report_statistics.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report_table.html</loc>
-  </url>
-  <url>
-    <loc>https://easystats.github.io/report/reference/report_text.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://easystats.github.io/report/404.html</loc></url>
+<url><loc>https://easystats.github.io/report/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://easystats.github.io/report/CONDUCT.html</loc></url>
+<url><loc>https://easystats.github.io/report/CONTRIBUTING.html</loc></url>
+<url><loc>https://easystats.github.io/report/LICENSE-text.html</loc></url>
+<url><loc>https://easystats.github.io/report/LICENSE.html</loc></url>
+<url><loc>https://easystats.github.io/report/SUPPORT.html</loc></url>
+<url><loc>https://easystats.github.io/report/articles/cite_packages.html</loc></url>
+<url><loc>https://easystats.github.io/report/articles/index.html</loc></url>
+<url><loc>https://easystats.github.io/report/articles/new_models.html</loc></url>
+<url><loc>https://easystats.github.io/report/articles/report.html</loc></url>
+<url><loc>https://easystats.github.io/report/articles/report_table.html</loc></url>
+<url><loc>https://easystats.github.io/report/authors.html</loc></url>
+<url><loc>https://easystats.github.io/report/index.html</loc></url>
+<url><loc>https://easystats.github.io/report/news/index.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/as.report.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/cite_easystats.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/format_citation.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/format_formula.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/index.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/reexports.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report-package.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report.BFBayesFactor.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report.aov.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report.bayesfactor_models.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report.brmsfit.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report.compare.loo.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report.compare_performance.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report.data.frame.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report.default.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report.estimate_contrasts.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report.htest.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report.lavaan.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report.lm.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report.sessionInfo.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report.stanreg.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report.test_performance.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report_date.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report_effectsize.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report_info.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report_intercept.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report_model.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report_parameters.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report_participants.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report_performance.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report_priors.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report_random.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report_s.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report_sample.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report_statistics.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report_table.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report_text.html</loc></url>
 </urlset>
+
