@@ -355,7 +355,7 @@ report_participants <- function(data,
   }
 
   genders_woman <- c(
-    "woman", "w", "female", "women", "girl",
+    "woman", "w", "female", "f", "women", "girl",
     "lady", "miss", "madam", "dame", "lass"
   )
   genders_man <- c(
