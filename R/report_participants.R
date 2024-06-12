@@ -10,7 +10,7 @@
 #'   you can specify other characters here as well (e.g., `"Intersex"`), but
 #'   the function will group all individuals in those groups as `"Other"`.
 #' @param gender The name of the column containing the gender of the
-#'   classes should be one of `c("Man", "M", "Male", Woman", "W", F",
+#'   classes should be one of `c("Man", "M", "Male", Woman", "W", "F",
 #'   "Female", Non-Binary", "N")`. Note that you can specify other characters
 #'   here as well (e.g., `"Gender Fluid"`), but the function will group all
 #'   individuals in those groups as `"Non-Binary"`.
