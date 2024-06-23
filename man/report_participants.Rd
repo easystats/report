@@ -32,7 +32,7 @@ you can specify other characters here as well (e.g., \code{"Intersex"}), but
 the function will group all individuals in those groups as \code{"Other"}.}
 
 \item{gender}{The name of the column containing the gender of the
-classes should be one of \verb{c("Man", "M", "Male", Woman", "W", F", "Female", Non-Binary", "N")}. Note that you can specify other characters
+classes should be one of \verb{c("Man", "M", "Male", Woman", "W", "F", "Female", Non-Binary", "N")}. Note that you can specify other characters
 here as well (e.g., \code{"Gender Fluid"}), but the function will group all
 individuals in those groups as \code{"Non-Binary"}.}
 
