@@ -3,12 +3,19 @@
 the participants section."><meta property="og:description" content="A helper function to help you format the participants data (age, sex, ...) in
 the participants section."><meta property="og:image" content="https://easystats.github.io/report/reference/figures/card.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:creator" content="@easystats4u"><meta name="twitter:site" content="@easystats4u"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+
+
     <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../index.html">report</a>
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.8.4</small>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.8.4</small>
+
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-tutorials" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Articles"><span class="fa fa-book-reader"></span> Tutorials</button>
@@ -45,18 +52,22 @@ the participants section."><meta property="og:image" content="https://easystats.
     <li><button class="dropdown-item" data-bs-theme-value="auto"><span class="fa fa-adjust"></span> Auto</button></li>
   </ul></li>
       </ul></div>
+
+
   </div>
 </nav><div class="container template-reference-topic">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Reporting the participant data</h1>
-      <small class="dont-index">Source: <a href="https://github.com/easystats/report/blob/HEAD/R/report_participants.R" class="external-link"><code>R/report_participants.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/easystats/report/blob/main/R/report_participants.R" class="external-link"><code>R/report_participants.R</code></a></small>
       <div class="d-none name"><code>report_participants.Rd</code></div>
     </div>
+
     <div class="ref-description section level2">
     <p>A helper function to help you format the participants data (age, sex, ...) in
 the participants section.</p>
     </div>
+
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">report_participants</span><span class="op">(</span></span>
@@ -76,52 +87,83 @@ the participants section.</p>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
+
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt id="arg-data">data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>
+
+
+<dl><dt id="arg-data">data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>
 <dd><p>A data frame.</p></dd>
+
+
 <dt id="arg-age">age<a class="anchor" aria-label="anchor" href="#arg-age"></a></dt>
 <dd><p>The name of the column containing the age of the participant.</p></dd>
+
+
 <dt id="arg-sex">sex<a class="anchor" aria-label="anchor" href="#arg-sex"></a></dt>
 <dd><p>The name of the column containing the sex of the participant. The
 classes should be one of <code>c("Male", "M", "Female", "F")</code>. Note that
 you can specify other characters here as well (e.g., <code>"Intersex"</code>), but
 the function will group all individuals in those groups as <code>"Other"</code>.</p></dd>
+
+
 <dt id="arg-gender">gender<a class="anchor" aria-label="anchor" href="#arg-gender"></a></dt>
 <dd><p>The name of the column containing the gender of the
-classes should be one of <code>c("Man", "M", "Male", Woman", "W", F", "Female", Non-Binary", "N")</code>. Note that you can specify other characters
+classes should be one of <code>c("Man", "M", "Male", Woman", "W", "F", "Female", Non-Binary", "N")</code>. Note that you can specify other characters
 here as well (e.g., <code>"Gender Fluid"</code>), but the function will group all
 individuals in those groups as <code>"Non-Binary"</code>.</p></dd>
+
+
 <dt id="arg-education">education<a class="anchor" aria-label="anchor" href="#arg-education"></a></dt>
 <dd><p>The name of the column containing education information.</p></dd>
+
+
 <dt id="arg-country">country<a class="anchor" aria-label="anchor" href="#arg-country"></a></dt>
 <dd><p>The name of the column containing country information.</p></dd>
+
+
 <dt id="arg-race">race<a class="anchor" aria-label="anchor" href="#arg-race"></a></dt>
 <dd><p>The name of the column containing race/ethnicity information.</p></dd>
+
+
 <dt id="arg-participants">participants<a class="anchor" aria-label="anchor" href="#arg-participants"></a></dt>
 <dd><p>The name of the participants' identifier column (for
 instance in the case of repeated measures).</p></dd>
+
+
 <dt id="arg-by">by<a class="anchor" aria-label="anchor" href="#arg-by"></a></dt>
 <dd><p>A character vector indicating the name(s) of the column(s) used
 for stratified description.</p></dd>
+
+
 <dt id="arg-spell-n">spell_n<a class="anchor" aria-label="anchor" href="#arg-spell-n"></a></dt>
 <dd><p>Logical, fully spell the sample size (<code>"Three participants"</code>
 instead of <code>"3 participants"</code>).</p></dd>
+
+
 <dt id="arg-digits">digits<a class="anchor" aria-label="anchor" href="#arg-digits"></a></dt>
 <dd><p>Number of significant digits.</p></dd>
+
+
 <dt id="arg-threshold">threshold<a class="anchor" aria-label="anchor" href="#arg-threshold"></a></dt>
 <dd><p>Percentage after which to combine, e.g., countries (default is 10%,
 so countries that represent less than 10% will be combined in the "other" category).</p></dd>
+
+
 <dt id="arg-group">group<a class="anchor" aria-label="anchor" href="#arg-group"></a></dt>
 <dd><p>Deprecated. Use <code>by</code> instead.</p></dd>
+
+
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Arguments passed to or from other methods.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-<p>A character vector with description of the "participants", based on
+    <p>A character vector with description of the "participants", based on
 the information provided in <code>data</code>.</p>
     </div>
+
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/report/">report</a></span><span class="op">)</span></span></span>
@@ -221,12 +263,21 @@ the information provided in <code>data</code>.</p>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
+
+
     <footer><div class="pkgdown-footer-left">
   <p>Developed by <a href="https://dominiquemakowski.github.io/" class="external-link">Dominique Makowski</a>, <a href="https://github.com/strengejacke" class="external-link">Daniel Lüdecke</a>, <a href="https://sites.google.com/site/indrajeetspatilmorality/" class="external-link">Indrajeet Patil</a>, <a href="https://remi-theriault.com/" class="external-link">Rémi Thériault</a>, <a href="https://home.msbstats.info/" class="external-link">Mattan S. Ben-Shachar</a>, <a href="https://wiernik.org/" class="external-link">Brenton M. Wiernik</a>.</p>
 </div>
+
 <div class="pkgdown-footer-right">
   <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.9000.</p>
 </div>
+
     </footer></div>
+
+
+
+
+
   </body></html>
 

@@ -3,12 +3,19 @@
 class:"><meta property="og:description" content="Create reports of different objects. See the documentation for your object's
 class:"><meta property="og:image" content="https://easystats.github.io/report/reference/figures/card.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:creator" content="@easystats4u"><meta name="twitter:site" content="@easystats4u"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+
+
     <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../index.html">report</a>
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.8.4</small>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.8.4</small>
+
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-tutorials" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Articles"><span class="fa fa-book-reader"></span> Tutorials</button>
@@ -45,38 +52,49 @@ class:"><meta property="og:image" content="https://easystats.github.io/report/re
     <li><button class="dropdown-item" data-bs-theme-value="auto"><span class="fa fa-adjust"></span> Auto</button></li>
   </ul></li>
       </ul></div>
+
+
   </div>
 </nav><div class="container template-reference-topic">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Automatic reporting of R objects</h1>
-      <small class="dont-index">Source: <a href="https://github.com/easystats/report/blob/HEAD/R/report.R" class="external-link"><code>R/report.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/easystats/report/blob/main/R/report.R" class="external-link"><code>R/report.R</code></a></small>
       <div class="d-none name"><code>report.Rd</code></div>
     </div>
+
     <div class="ref-description section level2">
     <p>Create reports of different objects. See the documentation for your object's
 class:</p>
     </div>
+
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">report</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
+
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
+
+
+<dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
 <dd><p>The R object that you want to report (see list of of supported
 objects above).</p></dd>
+
+
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Arguments passed to or from other methods.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-<p>A list-object of class <code>report</code>, which contains further
+    <p>A list-object of class <code>report</code>, which contains further
 list-objects with a short and long description of the model summary, as
 well as a short and long table of parameters and fit indices.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+
 <ul><li><p><a href="report.sessionInfo.html">System and packages</a> (<code>sessionInfo</code>)</p></li>
 <li><p><a href="report.data.frame.html">Dataframes and vectors</a></p></li>
 <li><p><a href="report.htest.html">Correlations and t-tests</a> (<code>htest</code>)</p></li>
@@ -97,8 +115,11 @@ of a report, and are the two provided in <code>report()</code>. However,
 intermediate steps are accessible (depending on the object) via specific
 functions (e.g., <code>report_parameters</code>).</p>
 </div>
+
 <div class="section">
 <h3 id="output">Output<a class="anchor" aria-label="anchor" href="#output"></a></h3>
+
+
 <p>The <code>report()</code> function generates a report-object that contain in itself
 different representations (e.g., text, tables, plots). These different
 representations can be accessed via several functions, such as:</p><ul><li><p><strong><code>as.report_text(r)</code></strong>: Detailed text.</p></li>
@@ -110,6 +131,7 @@ available indices.</p></li>
 </ul><p>Note that for some report objects, some of these representations might be
 identical.</p>
 </div>
+
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -132,6 +154,7 @@ identical.</p>
 </ul><p>Template file for supporting new models:</p><ul><li><p><code><a href="report.default.html">report.default()</a></code></p></li>
 </ul></div>
     </div>
+
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
@@ -175,12 +198,21 @@ identical.</p>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
+
+
     <footer><div class="pkgdown-footer-left">
   <p>Developed by <a href="https://dominiquemakowski.github.io/" class="external-link">Dominique Makowski</a>, <a href="https://github.com/strengejacke" class="external-link">Daniel Lüdecke</a>, <a href="https://sites.google.com/site/indrajeetspatilmorality/" class="external-link">Indrajeet Patil</a>, <a href="https://remi-theriault.com/" class="external-link">Rémi Thériault</a>, <a href="https://home.msbstats.info/" class="external-link">Mattan S. Ben-Shachar</a>, <a href="https://wiernik.org/" class="external-link">Brenton M. Wiernik</a>.</p>
 </div>
+
 <div class="pkgdown-footer-right">
   <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.9000.</p>
 </div>
+
     </footer></div>
+
+
+
+
+
   </body></html>
 
