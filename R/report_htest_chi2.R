@@ -14,15 +14,15 @@
       "This test is not yet supported. Please open an issue at {.url https://github.com/easystats/report/issues}."
     )
   }
-  args <- c(list(x), dot_args)
-  table <- do.call(effectsize::effectsize, args)
+  es_args <- c(list(x), dot_args)
+  table <- do.call(effectsize::effectsize, es_args)
   table_footer <- attributes(table)$table_footer
   ci <- attributes(table)$ci
   estimate <- names(table)[1]
   rules <- ifelse(is.null(dot_args$rules), rules, dot_args$rules)
 
-  args <- list(table, rules = rules, dot_args)
-  interpretation <- do.call(effectsize::interpret, args)$Interpretation
+  es_args <- c(list(table, rules = rules), dot_args)
+  interpretation <- do.call(effectsize::interpret, es_args)$Interpretation
   rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
 
   main <- switch(estimate,
@@ -68,7 +68,7 @@
     vars_full <- paste0(names(attributes(x$observed)$dimnames), collapse = " and ")
   } else if (chi2_type(x) == "probabilities") {
     type <- " / goodness of fit of "
-    dist <- ifelse(
+    distr <- ifelse(
       grepl("non", attr(table, "table_footer"), fixed = TRUE), "a uniform distribution",
       paste0("a distribution of [", paste0(
         names(x$expected), ": n=", x$expected,
@@ -76,16 +76,14 @@
       ), "]")
     )
 
-    vars_full <- paste(x$data.name, "to", dist)
+    vars_full <- paste(x$data.name, "to", distr)
   }
 
-  text <- paste0(
+  paste0(
     trimws(x$method),
     type,
     paste0(" ", vars_full)
   )
-
-  text
 }
 
 chi2_type <- function(x) {
