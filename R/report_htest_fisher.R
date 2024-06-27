@@ -15,7 +15,7 @@
   estimate <- names(table)[1]
   rules <- ifelse(is.null(dot_args$rules), rules, dot_args$rules)
 
-  args <- list(table, rules = rules, dot_args)
+  args <- c(list(table, rules = rules), dot_args)
   interpretation <- do.call(effectsize::interpret, args)$Interpretation
   rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
 
