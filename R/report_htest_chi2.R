@@ -9,46 +9,35 @@
 # report_effectsize ---------------------
 
 .report_effectsize_chi2 <- function(x, table, dot_args, rules = "funder2019") {
-  if (chi2_type(x) %in% c("pearson", "probabilities")) {
-    args <- c(list(x), dot_args)
-    table <- do.call(effectsize::effectsize, args)
-    table_footer <- attributes(table)$table_footer
-    ci <- attributes(table)$ci
-    estimate <- names(table)[1]
-    rules <- ifelse(is.null(dot_args$rules), rules, dot_args$rules)
-
-    args <- c(list(table, rules = rules), dot_args)
-    interpretation <- do.call(effectsize::interpret, args)$Interpretation
-    rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
-  } else {
-    stop(insight::format_message(
+  if (!chi2_type(x) %in% c("pearson", "probabilities")) {
+    insight::format_error(
       "This test is not yet supported. Please open an issue at {.url https://github.com/easystats/report/issues}."
-    ), call. = FALSE)
+    )
   }
+  es_args <- c(list(x), dot_args)
+  table <- do.call(effectsize::effectsize, es_args)
+  table_footer <- attributes(table)$table_footer
+  ci <- attributes(table)$ci
+  estimate <- names(table)[1]
+  rules <- ifelse(is.null(dot_args$rules), rules, dot_args$rules)
 
-  if (estimate == "Cramers_v_adjusted") {
-    main <- paste0("Adjusted Cramer's v = ", insight::format_value(table[[estimate]]))
-  } else if (estimate == "Fei") {
-    main <- paste0("Fei = ", insight::format_value(table[[estimate]]))
-  } else if (estimate == "Tschuprows_t") {
-    main <- paste0("Tschuprow's t = ", insight::format_value(table[[estimate]]))
-  } else if (estimate == "Tschuprows_t_adjusted") {
-    main <- paste0("Adjusted Tschuprow's t = ", insight::format_value(table[[estimate]]))
-  } else if (estimate == "Pearsons_c") {
-    main <- paste0("Pearson's c = ", insight::format_value(table[[estimate]]))
-  } else if (estimate == "phi_adjusted") {
-    main <- paste0("Adjusted Phi = ", insight::format_value(table[[estimate]]))
-  } else if (estimate == "Cohens_h") {
-    main <- paste0("Cohen's h = ", insight::format_value(table[[estimate]]))
-  } else if (estimate == "Odds_ratio") {
-    main <- paste0("Odds ratio = ", insight::format_value(table[[estimate]]))
-  } else if (estimate == "Ris_kratio") {
-    main <- paste0("Risk ratio = ", insight::format_value(table[[estimate]]))
-  } else if (estimate == "cohens_h") {
-    main <- paste0("Cohen's w = ", insight::format_value(table[[estimate]]))
-  } else {
-    main <- paste0(estimate, " = ", insight::format_value(table[[estimate]]))
-  }
+  es_args <- c(list(table, rules = rules), dot_args)
+  interpretation <- do.call(effectsize::interpret, es_args)$Interpretation
+  rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
+
+  main <- switch(estimate,
+    Cramers_v_adjusted = paste0("Adjusted Cramer's v = ", insight::format_value(table[[estimate]])),
+    Fei = paste0("Fei = ", insight::format_value(table[[estimate]])),
+    Tschuprows_t = paste0("Tschuprow's t = ", insight::format_value(table[[estimate]])),
+    Tschuprows_t_adjusted = paste0("Adjusted Tschuprow's t = ", insight::format_value(table[[estimate]])),
+    Pearsons_c = paste0("Pearson's c = ", insight::format_value(table[[estimate]])),
+    phi_adjusted = paste0("Adjusted Phi = ", insight::format_value(table[[estimate]])),
+    Cohens_h = paste0("Cohen's h = ", insight::format_value(table[[estimate]])),
+    Odds_ratio = paste0("Odds ratio = ", insight::format_value(table[[estimate]])),
+    Ris_kratio = paste0("Risk ratio = ", insight::format_value(table[[estimate]])),
+    cohens_h = paste0("Cohen's w = ", insight::format_value(table[[estimate]])),
+    paste0(estimate, " = ", insight::format_value(table[[estimate]]))
+  )
 
   statistics <- paste0(
     main,
@@ -79,7 +68,7 @@
     vars_full <- paste0(names(attributes(x$observed)$dimnames), collapse = " and ")
   } else if (chi2_type(x) == "probabilities") {
     type <- " / goodness of fit of "
-    dist <- ifelse(
+    distr <- ifelse(
       grepl("non", attr(table, "table_footer"), fixed = TRUE), "a uniform distribution",
       paste0("a distribution of [", paste0(
         names(x$expected), ": n=", x$expected,
@@ -87,16 +76,14 @@
       ), "]")
     )
 
-    vars_full <- paste(x$data.name, "to", dist)
+    vars_full <- paste(x$data.name, "to", distr)
   }
 
-  text <- paste0(
+  paste0(
     trimws(x$method),
     type,
     paste0(" ", vars_full)
   )
-
-  text
 }
 
 chi2_type <- function(x) {

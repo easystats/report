@@ -90,7 +90,7 @@ report_effectsize.htest <- function(x, ...) {
 
   # TODO: Chi-squared test -------------
 
-  if (model_info$is_proptest || (model_info$is_xtab && !model_info$is_chi2test)) {
+  if (model_info$is_proptest || (model_info$is_xtab && !model_info$is_chi2test) || model_info$is_onewaytest) {
     stop(insight::format_message(
       "This test is not yet supported. Please open an issue at {.url https://github.com/easystats/report/issues}."
     ), call. = FALSE)
