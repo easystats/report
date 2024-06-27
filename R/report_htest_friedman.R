@@ -9,7 +9,7 @@
 # report_effectsize ---------------------
 
 .report_effectsize_friedman <- function(x, table, dot_args) {
-  args <- c(list(x, effectsize_type = "kendalls_w"), dot_args)
+  args <- c(list(x, es_type = "kendalls_w"), dot_args)
   table <- do.call(parameters::parameters, args)
   ci <- attributes(table)$ci
   estimate <- "kendalls_w"
