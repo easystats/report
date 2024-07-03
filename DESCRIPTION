@@ -82,7 +82,7 @@ VignetteBuilder:
     knitr
 Encoding: UTF-8
 Language: en-US
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Config/testthat/edition: 3
 Config/Needs/website:
     rstudio/bslib,
@@ -111,6 +111,7 @@ Collate:
     'report.character.R'
     'report.compare.loo.R'
     'report.compare_performance.R'
+    'report.coxph.R'
     'report.data.frame.R'
     'report.default.R'
     'report.estimate_contrasts.R'
