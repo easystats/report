@@ -65,7 +65,7 @@
 .report_model_chi2 <- function(x, table) {
   if (chi2_type(x) == "pearson") {
     type <- " of independence between"
-    vars_full <- paste0(names(attributes(x$observed)$dimnames), collapse = " and ")
+    vars_full <- paste(names(attributes(x$observed)$dimnames), collapse = " and ")
   } else if (chi2_type(x) == "probabilities") {
     type <- " / goodness of fit of "
     distr <- ifelse(

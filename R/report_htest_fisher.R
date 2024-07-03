@@ -9,37 +9,29 @@
 # report_effectsize ---------------------
 
 .report_effectsize_fisher <- function(x, table, dot_args, rules = "funder2019") {
-  args <- c(list(x), dot_args)
-  table <- do.call(effectsize::effectsize, args)
+  es_args <- c(list(x), dot_args)
+  table <- do.call(effectsize::effectsize, es_args)
   ci <- attributes(table)$ci
   estimate <- names(table)[1]
   dot_args$rules <- ifelse(is.null(dot_args$rules), rules, dot_args$rules)
 
-  args <- c(list(table), dot_args)
-  interpretation <- do.call(effectsize::interpret, args)$Interpretation
+  es_args <- c(list(table), dot_args)
+  interpretation <- do.call(effectsize::interpret, es_args)$Interpretation
   rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
 
-  if (estimate == "Cramers_v_adjusted") {
-    main <- paste0("Adjusted Cramer's v = ", insight::format_value(table[[estimate]]))
-  } else if (estimate == "Tschuprows_t") {
-    main <- paste0("Tschuprow's t = ", insight::format_value(table[[estimate]]))
-  } else if (estimate == "Tschuprows_t_adjusted") {
-    main <- paste0("Adjusted Tschuprow's t = ", insight::format_value(table[[estimate]]))
-  } else if (estimate == "Pearsons_c") {
-    main <- paste0("Pearson's c = ", insight::format_value(table[[estimate]]))
-  } else if (estimate == "phi_adjusted") {
-    main <- paste0("Adjusted Phi = ", insight::format_value(table[[estimate]]))
-  } else if (estimate == "Cohens_h") {
-    main <- paste0("Cohen's h = ", insight::format_value(table[[estimate]]))
-  } else if (estimate == "Odds_ratio") {
-    main <- paste0("Odds ratio = ", insight::format_value(table[[estimate]]))
-  } else if (estimate == "Ris_kratio") {
-    main <- paste0("Risk ratio = ", insight::format_value(table[[estimate]]))
-  } else if (estimate == "cohens_h") {
-    main <- paste0("Cohen's w = ", insight::format_value(table[[estimate]]))
-  } else {
-    main <- paste0(estimate, " = ", insight::format_value(table[[estimate]]))
-  }
+  main <- switch(
+    estimate,
+    Cramers_v_adjusted = paste0("Adjusted Cramer's v = ", insight::format_value(table[[estimate]])),
+    Tschuprows_t = paste0("Tschuprow's t = ", insight::format_value(table[[estimate]])),
+    Tschuprows_t_adjusted = paste0("Adjusted Tschuprow's t = ", insight::format_value(table[[estimate]])),
+    Pearsons_c = paste0("Pearson's c = ", insight::format_value(table[[estimate]])),
+    phi_adjusted = paste0("Adjusted Phi = ", insight::format_value(table[[estimate]])),
+    Cohens_h = paste0("Cohen's h = ", insight::format_value(table[[estimate]])),
+    Odds_ratio = paste0("Odds ratio = ", insight::format_value(table[[estimate]])),
+    Ris_kratio = paste0("Risk ratio = ", insight::format_value(table[[estimate]])),
+    cohens_h = paste0("Cohen's w = ", insight::format_value(table[[estimate]])),
+    paste0(estimate, " = ", insight::format_value(table[[estimate]]))
+  )
 
   statistics <- paste0(
     main,
@@ -64,15 +56,15 @@
 # report_model ----------------------------
 
 .report_model_fisher <- function(x, table) {
-  vars_full <- paste0(names(attributes(x$observed)$dimnames), collapse = " and ")
+  vars_full <- paste(names(attributes(x$observed)$dimnames), collapse = " and ")
 
-  text <- paste0(
+  final_text <- paste0(
     trimws(x$method),
     " testing the association between the variables of the ",
     x$data.name, " dataset "
   )
 
-  text
+  final_text
 }
 
 chi2_type <- function(x) {
