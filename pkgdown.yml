@@ -1,12 +1,12 @@
 pandoc: 3.2.1
 pkgdown: 2.0.9.9000
-pkgdown_sha: a98c134518cc9f5006f9ce17d4b6fc29ea37b56b
+pkgdown_sha: 138a53ba77e2c601fe6c1125ba1259dc52f3b8d6
 articles:
   cite_packages: cite_packages.html
   new_models: new_models.html
   report_table: report_table.html
   report: report.html
-last_built: 2024-07-01T14:01Z
+last_built: 2024-07-03T14:38Z
 urls:
   reference: https://easystats.github.io/report/reference
   article: https://easystats.github.io/report/articles
