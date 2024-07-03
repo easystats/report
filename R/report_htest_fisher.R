@@ -19,8 +19,7 @@
   interpretation <- do.call(effectsize::interpret, es_args)$Interpretation
   rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
 
-  main <- switch(
-    estimate,
+  main <- switch(estimate,
     Cramers_v_adjusted = paste0("Adjusted Cramer's v = ", insight::format_value(table[[estimate]])),
     Tschuprows_t = paste0("Tschuprow's t = ", insight::format_value(table[[estimate]])),
     Tschuprows_t_adjusted = paste0("Adjusted Tschuprow's t = ", insight::format_value(table[[estimate]])),
