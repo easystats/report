@@ -151,4 +151,3 @@ Collate:
     'utils_misspelled_variables.R'
     'zzz.R'
 Roxygen: list(markdown = TRUE)
-Remotes: easystats/insight, easystats/datawizard, easystats/parameters, easystats/performance, easystats/modelbased
