@@ -19,9 +19,9 @@
   table_footer <- attributes(table)$table_footer
   ci <- attributes(table)$ci
   estimate <- names(table)[1]
-  rules <- ifelse(is.null(dot_args$rules), rules, dot_args$rules)
+  dot_args$rules <- ifelse(is.null(dot_args$rules), rules, dot_args$rules)
 
-  es_args <- c(list(table, rules = rules), dot_args)
+  es_args <- c(list(table), dot_args)
   interpretation <- do.call(effectsize::interpret, es_args)$Interpretation
   rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
 

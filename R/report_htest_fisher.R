@@ -13,9 +13,9 @@
   table <- do.call(effectsize::effectsize, args)
   ci <- attributes(table)$ci
   estimate <- names(table)[1]
-  rules <- ifelse(is.null(dot_args$rules), rules, dot_args$rules)
+  dot_args$rules <- ifelse(is.null(dot_args$rules), rules, dot_args$rules)
 
-  args <- c(list(table, rules = rules), dot_args)
+  args <- c(list(table), dot_args)
   interpretation <- do.call(effectsize::interpret, args)$Interpretation
   rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
 
