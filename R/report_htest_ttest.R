@@ -44,14 +44,14 @@
 # report_effectsize ---------------------
 
 .report_effectsize_ttest <- function(x, table, dot_args, type, rules = "cohen1988") {
-  my_args <- c(list(x), dot_args)
-  table <- do.call(effectsize::effectsize, my_args)
+  es_args <- c(list(x), dot_args)
+  table <- do.call(effectsize::effectsize, es_args)
   ci <- attributes(table)$ci
   estimate <- names(table)[1]
-  rules <- ifelse(is.null(dot_args$rules), rules, dot_args$rules)
+  dot_args$rules <- ifelse(is.null(dot_args$rules), rules, dot_args$rules)
 
-  my_args <- c(list(table, rules = rules), dot_args)
-  interpretation <- do.call(effectsize::interpret, my_args)$Interpretation
+  es_args <- c(list(table), dot_args)
+  interpretation <- do.call(effectsize::interpret, es_args)$Interpretation
   rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
 
   if (estimate %in% c("d", "Cohens_d")) {

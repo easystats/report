@@ -17,8 +17,14 @@ test_that("report.htest-correlation", {
   expect_snapshot(variant = "windows", report(cor.test(mtcars$wt, mtcars$mpg)))
 
   set.seed(123)
-  expect_snapshot(variant = "windows", report(cor.test(mtcars$wt, mtcars$mpg, method = "spearman")))
+  expect_snapshot(variant = "windows", report(suppressWarnings(cor.test(
+    mtcars$wt, mtcars$mpg,
+    method = "spearman"
+  ))))
 
   set.seed(123)
-  expect_snapshot(variant = "windows", report(cor.test(mtcars$wt, mtcars$mpg, method = "kendall")))
+  expect_snapshot(variant = "windows", report(suppressWarnings(cor.test(
+    mtcars$wt, mtcars$mpg,
+    method = "kendall"
+  ))))
 })
