@@ -12,10 +12,7 @@
 ---
 
     Code
-      report(cor.test(mtcars$wt, mtcars$mpg, method = "spearman"))
-    Condition
-      Warning in `cor.test.default()`:
-      Cannot compute exact p-value with ties
+      report(suppressWarnings(cor.test(mtcars$wt, mtcars$mpg, method = "spearman")))
     Output
       Effect sizes were labelled following Funder's (2019) recommendations.
       
@@ -26,10 +23,7 @@
 ---
 
     Code
-      report(cor.test(mtcars$wt, mtcars$mpg, method = "kendall"))
-    Condition
-      Warning in `cor.test.default()`:
-      Cannot compute exact p-value with ties
+      report(suppressWarnings(cor.test(mtcars$wt, mtcars$mpg, method = "kendall")))
     Output
       Effect sizes were labelled following Funder's (2019) recommendations.
       

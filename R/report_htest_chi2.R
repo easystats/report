@@ -19,9 +19,9 @@
   table_footer <- attributes(table)$table_footer
   ci <- attributes(table)$ci
   estimate <- names(table)[1]
-  rules <- ifelse(is.null(dot_args$rules), rules, dot_args$rules)
+  dot_args$rules <- ifelse(is.null(dot_args$rules), rules, dot_args$rules)
 
-  es_args <- c(list(table, rules = rules), dot_args)
+  es_args <- c(list(table), dot_args)
   interpretation <- do.call(effectsize::interpret, es_args)$Interpretation
   rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
 
@@ -65,7 +65,7 @@
 .report_model_chi2 <- function(x, table) {
   if (chi2_type(x) == "pearson") {
     type <- " of independence between"
-    vars_full <- paste0(names(attributes(x$observed)$dimnames), collapse = " and ")
+    vars_full <- paste(names(attributes(x$observed)$dimnames), collapse = " and ")
   } else if (chi2_type(x) == "probabilities") {
     type <- " / goodness of fit of "
     distr <- ifelse(
