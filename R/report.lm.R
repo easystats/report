@@ -345,6 +345,12 @@ report_intercept.lm <- function(x, table = NULL, ...) {
   } else {
     idx <- !is.na(table$Parameter) & table$Parameter == "(Intercept)"
   }
+
+  # sanity check - if model has no intercept, return NULL
+  if (!any(idx)) {
+    return(NULL)
+  }
+
   intercept <- table[idx, ]
 
   estimate <- .find_regression_estimate(table)

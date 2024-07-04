@@ -111,6 +111,7 @@ Collate:
     'report.character.R'
     'report.compare.loo.R'
     'report.compare_performance.R'
+    'report.coxph.R'
     'report.data.frame.R'
     'report.default.R'
     'report.estimate_contrasts.R'
