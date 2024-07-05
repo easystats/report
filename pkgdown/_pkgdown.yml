@@ -2,9 +2,6 @@ url: https://easystats.github.io/report/
 
 template:
   bootstrap: 5
-  bslib:
-    primary: "#2ECC71"
-    navbar-light-color: "#4ba370"
   package: easystatstemplate
 
 navbar:
