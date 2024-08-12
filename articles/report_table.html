@@ -12,14 +12,15 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
-<script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="../lightswitch.js"></script><script src="../katex-auto.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.9/font.css" rel="stylesheet">
 <link href="../deps/JetBrains_Mono-0.4.9/font.css" rel="stylesheet">
 <link href="../deps/Roboto_Slab-0.4.9/font.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Publication-ready Tables">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><link href="../deps/KaTex-0.16.10/katex.min.css" rel="stylesheet">
+<script src="../deps/KaTex-0.16.10/katex.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Publication-ready Tables">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -96,7 +97,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>Publication-ready Tables</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/easystats/report/blob/v0.5.9/vignettes/report_table.Rmd" class="external-link"><code>vignettes/report_table.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/easystats/report/blob/main/vignettes/report_table.Rmd" class="external-link"><code>vignettes/report_table.Rmd</code></a></small>
       <div class="d-none name"><code>report_table.Rmd</code></div>
     </div>
 
@@ -150,7 +151,8 @@ documents using <code><a href="https://easystats.github.io/insight/reference/dis
 <th align="center">p</th>
 </tr></thead>
 <tbody><tr>
-<td align="left">mtcars<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>p</mi><mi>g</mi><mo stretchy="false" form="prefix">|</mo><mi>m</mi><mi>t</mi><mi>c</mi><mi>a</mi><mi>r</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">mpg |  mtcars</annotation></semantics></math>wt</td>
+<td align="left">mtcars<span class="math inline">mpg
+|  mtcars</span>wt</td>
 <td align="center">-0.87</td>
 <td align="center">(-0.93, -0.74)</td>
 <td align="center">&lt; .001</td>
@@ -176,7 +178,8 @@ stars,</p>
 <th align="center">p</th>
 </tr></thead>
 <tbody><tr>
-<td align="left">mtcars<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>p</mi><mi>g</mi><mo stretchy="false" form="prefix">|</mo><mi>m</mi><mi>t</mi><mi>c</mi><mi>a</mi><mi>r</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">mpg |  mtcars</annotation></semantics></math>wt</td>
+<td align="left">mtcars<span class="math inline">mpg
+|  mtcars</span>wt</td>
 <td align="center">-0.87</td>
 <td align="center">(-0.93, -0.74)</td>
 <td align="center">&lt; .001***</td>
@@ -265,7 +268,8 @@ that you can prettify the output while keeping it as a data frame.</p>
 </tr></thead>
 <tbody>
 <tr>
-<td align="left">mtcars<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>p</mi><mi>g</mi><mo stretchy="false" form="prefix">|</mo><mi>m</mi><mi>t</mi><mi>c</mi><mi>a</mi><mi>r</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">mpg  | mtcars</annotation></semantics></math>am</td>
+<td align="left">mtcars<span class="math inline">mpg  |
+mtcars</span>am</td>
 <td align="center">17.15</td>
 <td align="center">24.39</td>
 <td align="center">-7.24</td>
@@ -278,7 +282,8 @@ that you can prettify the output while keeping it as a data frame.</p>
 <td align="center"></td>
 </tr>
 <tr>
-<td align="left">mtcars<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mi>t</mi><mo stretchy="false" form="prefix">|</mo><mi>m</mi><mi>t</mi><mi>c</mi><mi>a</mi><mi>r</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">wt   | mtcars</annotation></semantics></math>am</td>
+<td align="left">mtcars<span class="math inline">wt   |
+mtcars</span>am</td>
 <td align="center">3.77</td>
 <td align="center">2.41</td>
 <td align="center">1.36</td>
@@ -291,7 +296,8 @@ that you can prettify the output while keeping it as a data frame.</p>
 <td align="center"></td>
 </tr>
 <tr>
-<td align="left">mtcars<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>q</mi><mi>s</mi><mi>e</mi><mi>c</mi><mo stretchy="false" form="prefix">|</mo><mi>m</mi><mi>t</mi><mi>c</mi><mi>a</mi><mi>r</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">qsec | mtcars</annotation></semantics></math>am</td>
+<td align="left">mtcars<span class="math inline">qsec |
+mtcars</span>am</td>
 <td align="center">18.18</td>
 <td align="center">17.36</td>
 <td align="center">0.82</td>
