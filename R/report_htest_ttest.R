@@ -48,7 +48,7 @@
   table <- do.call(effectsize::effectsize, es_args)
   ci <- attributes(table)$ci
   estimate <- names(table)[1]
-  dot_args$rules <- ifelse(is.null(dot_args$rules), rules, dot_args$rules)
+  dot_args$rules <- if(is.null(dot_args$rules)) rules else dot_args$rules
 
   es_args <- c(list(table), dot_args)
   interpretation <- do.call(effectsize::interpret, es_args)$Interpretation
