@@ -7,7 +7,9 @@
 #' @param include_ENP Whether to include the effective number of parameters (ENP).
 #' @param ... Additional arguments (not used for now).
 #'
+# nolint start
 #' @examplesIf requireNamespace("brms", quietly = TRUE) && requireNamespace("RcppEigen", quietly = TRUE) && requireNamespace("BH", quietly = TRUE)
+# nolint end
 #' \donttest{
 #' library(brms)
 #'
