@@ -32,5 +32,5 @@
     Code
       summary(report_performance(x7))
     Output
-      [1] "The model's explanatory power is substantial (R2 = 0.83, adj. R2 = 0.83) and the part related to the fixed effects alone (marginal R2) is of 0.95"
+      [1] "The model's explanatory power is substantial (R2 = 0.83, adj. R2 = 0.83) and the part related to the fixed effects alone (marginal R2) is of 0.74"
 

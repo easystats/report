@@ -33,7 +33,7 @@ conclude that a model is much better than another if both models make very
 similar predictions.
 }
 \examples{
-\dontshow{if (require("brms", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("brms", quietly = TRUE) && requireNamespace("RcppEigen", quietly = TRUE) && requireNamespace("BH", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 library(brms)
 
@@ -41,12 +41,12 @@ m1 <- brms::brm(mpg ~ qsec, data = mtcars)
 m2 <- brms::brm(mpg ~ qsec + drat, data = mtcars)
 m3 <- brms::brm(mpg ~ qsec + drat + wt, data = mtcars)
 
-x <- brms::loo_compare(
+x <- suppressWarnings(brms::loo_compare(
   brms::add_criterion(m1, "loo"),
   brms::add_criterion(m2, "loo"),
   brms::add_criterion(m3, "loo"),
   model_names = c("m1", "m2", "m3")
-)
+))
 report(x)
 report(x, include_IC = FALSE)
 report(x, include_ENP = TRUE)
