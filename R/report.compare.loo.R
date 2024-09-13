@@ -7,7 +7,7 @@
 #' @param include_ENP Whether to include the effective number of parameters (ENP).
 #' @param ... Additional arguments (not used for now).
 #'
-#' @examplesIf requireNamespace("brms", quietly = TRUE) && requireNamespace)(RcppEigen) && requireNamespace)(BH)
+#' @examplesIf requireNamespace("brms", quietly = TRUE) && requireNamespace(RcppEigen) && requireNamespace(BH)
 #' \donttest{
 #' library(brms)
 #'
@@ -15,12 +15,12 @@
 #' m2 <- brms::brm(mpg ~ qsec + drat, data = mtcars)
 #' m3 <- brms::brm(mpg ~ qsec + drat + wt, data = mtcars)
 #'
-#' x <- brms::loo_compare(
+#' x <- suppressWarnings(brms::loo_compare(
 #'   brms::add_criterion(m1, "loo"),
 #'   brms::add_criterion(m2, "loo"),
 #'   brms::add_criterion(m3, "loo"),
 #'   model_names = c("m1", "m2", "m3")
-#' )
+#' ))
 #' report(x)
 #' report(x, include_IC = FALSE)
 #' report(x, include_ENP = TRUE)
