@@ -29,8 +29,6 @@ library(report)
 [![r-universe](https://easystats.r-universe.dev/badges/report)](https://easystats.r-universe.dev/report)
 [![downloads](http://cranlogs.r-pkg.org/badges/report)](https://cran.r-project.org/package=report)
 [![total](https://cranlogs.r-pkg.org/badges/grand-total/report)](https://cranlogs.r-pkg.org/)
- [![status](https://tinyverse.netlify.com/badge/report)](https://CRAN.R-project.org/package=report)
-[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![stars](https://img.shields.io/github/stars/easystats/report?style=social)](https://github.com/easystats/report/stargazers)
 
 ***"From R to your manuscript"***

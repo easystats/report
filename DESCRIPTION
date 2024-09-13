@@ -77,6 +77,8 @@ Suggests:
     survival,
     modelbased,
     emmeans,
+    RcppEigen,
+    BH,
     testthat (>= 3.2.1)
 VignetteBuilder:
     knitr

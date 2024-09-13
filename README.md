@@ -6,8 +6,6 @@
 [![r-universe](https://easystats.r-universe.dev/badges/report)](https://easystats.r-universe.dev/report)
 [![downloads](http://cranlogs.r-pkg.org/badges/report)](https://cran.r-project.org/package=report)
 [![total](https://cranlogs.r-pkg.org/badges/grand-total/report)](https://cranlogs.r-pkg.org/)
-[![status](https://tinyverse.netlify.com/badge/report)](https://CRAN.R-project.org/package=report)
-[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![stars](https://img.shields.io/github/stars/easystats/report?style=social)](https://github.com/easystats/report/stargazers)
 
 ***“From R to your manuscript”***
@@ -262,18 +260,18 @@ report(model)
     # of 1000 iterations and a warmup of 500) to predict mpg with qsec and wt
     # (formula: mpg ~ qsec + wt). Priors over parameters were all set as normal (mean
     # = 0.00, SD = 8.43; mean = 0.00, SD = 15.40) distributions. The model's
-    # explanatory power is substantial (R2 = 0.81, 95% CI [0.70, 0.90], adj. R2 =
-    # 0.79). The model's intercept, corresponding to qsec = 0 and wt = 0, is at 19.80
-    # (95% CI [8.93, 29.80]). Within this model:
+    # explanatory power is substantial (R2 = 0.81, 95% CI [0.71, 0.90], adj. R2 =
+    # 0.79). The model's intercept, corresponding to qsec = 0 and wt = 0, is at 19.67
+    # (95% CI [8.34, 30.67]). Within this model:
     # 
-    #   - The effect of qsec (Median = 0.93, 95% CI [0.40, 1.49]) has a 100.00%
-    # probability of being positive (> 0), 99.05% of being significant (> 0.30), and
-    # 0.25% of being large (> 1.81). The estimation successfully converged (Rhat =
-    # 1.000) and the indices are reliable (ESS = 1864)
-    #   - The effect of wt (Median = -5.04, 95% CI [-5.99, -4.08]) has a 100.00%
+    #   - The effect of qsec (Median = 0.93, 95% CI [0.39, 1.51]) has a 99.90%
+    # probability of being positive (> 0), 98.65% of being significant (> 0.30), and
+    # 0.30% of being large (> 1.81). The estimation successfully converged (Rhat =
+    # 1.000) and the indices are reliable (ESS = 1762)
+    #   - The effect of wt (Median = -5.05, 95% CI [-6.01, -4.05]) has a 100.00%
     # probability of being negative (< 0), 100.00% of being significant (< -0.30),
     # and 100.00% of being large (< -1.81). The estimation successfully converged
-    # (Rhat = 0.999) and the indices are reliable (ESS = 2424)
+    # (Rhat = 1.000) and the indices are reliable (ESS = 2213)
     # 
     # Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
     # framework, we report the median of the posterior distribution and its 95% CI
@@ -296,16 +294,10 @@ model <- lm(Sepal.Length ~ Species, data = iris)
 
 report_model(model)
 # linear model (estimated using OLS) to predict Sepal.Length with Species (formula: Sepal.Length ~ Species)
-```
-
-``` r
 
 report_performance(model)
 # The model explains a statistically significant and substantial proportion of
 # variance (R2 = 0.62, F(2, 147) = 119.26, p < .001, adj. R2 = 0.61)
-```
-
-``` r
 
 report_statistics(model)
 # beta = 5.01, 95% CI [4.86, 5.15], t(147) = 68.76, p < .001; Std. beta = -1.01, 95% CI [-1.18, -0.84]
@@ -359,11 +351,11 @@ analysis paragraph about the tools used.
 report(sessionInfo())
 ```
 
-    # Analyses were conducted using the R Statistical language (version 4.4.0; R Core
+    # Analyses were conducted using the R Statistical language (version 4.4.1; R Core
     # Team, 2024) on Windows 11 x64 (build 22631), using the packages lme4 (version
-    # 1.1.35.3; Bates D et al., 2015), Matrix (version 1.7.0; Bates D et al., 2024),
-    # Rcpp (version 1.0.12; Eddelbuettel D et al., 2024), rstanarm (version 2.32.1;
-    # Goodrich B et al., 2024), report (version 0.5.8.3; Makowski D et al., 2023) and
+    # 1.1.35.5; Bates D et al., 2015), Matrix (version 1.7.0; Bates D et al., 2024),
+    # Rcpp (version 1.0.13; Eddelbuettel D et al., 2024), rstanarm (version 2.32.1;
+    # Goodrich B et al., 2024), report (version 0.5.9; Makowski D et al., 2023) and
     # dplyr (version 1.1.4; Wickham H et al., 2023).
     # 
     # References
@@ -376,7 +368,7 @@ report(sessionInfo())
     # <https://CRAN.R-project.org/package=Matrix>.
     #   - Eddelbuettel D, Francois R, Allaire J, Ushey K, Kou Q, Russell N, Ucar I,
     # Bates D, Chambers J (2024). _Rcpp: Seamless R and C++ Integration_. R package
-    # version 1.0.12, <https://CRAN.R-project.org/package=Rcpp>. Eddelbuettel D,
+    # version 1.0.13, <https://CRAN.R-project.org/package=Rcpp>. Eddelbuettel D,
     # François R (2011). "Rcpp: Seamless R and C++ Integration." _Journal of
     # Statistical Software_, *40*(8), 1-18. doi:10.18637/jss.v040.i08
     # <https://doi.org/10.18637/jss.v040.i08>. Eddelbuettel D (2013). _Seamless R and
