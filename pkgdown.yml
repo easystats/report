@@ -1,12 +1,12 @@
-pandoc: '3.4'
-pkgdown: 2.1.0.9000
-pkgdown_sha: 800340f4b1b6d5c8c0c3510ef34776436b14b298
+pandoc: '3.5'
+pkgdown: 2.1.1.9000
+pkgdown_sha: 71fd32ce95f17b379e57e7e33f2294bc034727fd
 articles:
   cite_packages: cite_packages.html
   new_models: new_models.html
   report_table: report_table.html
   report: report.html
-last_built: 2024-09-13T19:10Z
+last_built: 2024-10-10T09:25Z
 urls:
   reference: https://easystats.github.io/report/reference
   article: https://easystats.github.io/report/articles
