@@ -201,25 +201,45 @@ observations larger than 100.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - Species: 3 levels, namely setosa (n = 50), versicolor (n = 50) and virginica</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (n = 50)</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Variable     |      Level | n_Obs | percentage_Obs | Mean |   SD | Median |  MAD |  Min |  Max | Skewness | Kurtosis | percentage_Missing</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------------------------------------------------------------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sepal.Length |            |   150 |                | 5.84 | 0.83 |   5.80 | 1.04 | 4.30 | 7.90 |     0.31 |    -0.55 |               0.00</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sepal.Width  |            |   150 |                | 3.06 | 0.44 |   3.00 | 0.44 | 2.00 | 4.40 |     0.32 |     0.23 |               0.00</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Petal.Length |            |   150 |                | 3.76 | 1.77 |   4.35 | 1.85 | 1.00 | 6.90 |    -0.27 |    -1.40 |               0.00</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Petal.Width  |            |   150 |                | 1.20 | 0.76 |   1.30 | 1.04 | 0.10 | 2.50 |    -0.10 |    -1.34 |               0.00</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Species      |     setosa |    50 |          33.33 |      |      |        |      |      |      |          |          |                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Species      | versicolor |    50 |          33.33 |      |      |        |      |      |      |          |          |                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Species      |  virginica |    50 |          33.33 |      |      |        |      |      |      |          |          |                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Variable     |      Level | n_Obs | percentage_Obs | Mean |   SD | Median</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -------------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sepal.Length |            |   150 |                | 5.84 | 0.83 |   5.80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sepal.Width  |            |   150 |                | 3.06 | 0.44 |   3.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal.Length |            |   150 |                | 3.76 | 1.77 |   4.35</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal.Width  |            |   150 |                | 1.20 | 0.76 |   1.30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species      |     setosa |    50 |          33.33 |      |      |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species      | versicolor |    50 |          33.33 |      |      |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species      |  virginica |    50 |          33.33 |      |      |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Variable     |  MAD |  Min |  Max | Skewness | Kurtosis | percentage_Missing</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sepal.Length | 1.04 | 4.30 | 7.90 |     0.31 |    -0.55 |               0.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sepal.Width  | 0.44 | 2.00 | 4.40 |     0.32 |     0.23 |               0.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal.Length | 1.85 | 1.00 | 6.90 |    -0.27 |    -1.40 |               0.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal.Width  | 1.04 | 0.10 | 2.50 |    -0.10 |    -1.34 |               0.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species      |      |      |      |          |          |                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species      |      |      |      |          |          |                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species      |      |      |      |          |          |                   </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Variable     |      Level | n_Obs | percentage_Obs | Median |  Min |  Max | Skewness | Kurtosis | percentage_Missing</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------------------------------------------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sepal.Length |            |       |                |   5.80 | 4.30 | 7.90 |     0.31 |    -0.55 |               0.00</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sepal.Width  |            |       |                |   3.00 | 2.00 | 4.40 |     0.32 |     0.23 |               0.00</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Petal.Length |            |       |                |   4.35 | 1.00 | 6.90 |    -0.27 |    -1.40 |               0.00</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Petal.Width  |            |       |                |   1.30 | 0.10 | 2.50 |    -0.10 |    -1.34 |               0.00</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Species      |     setosa |    50 |          33.33 |        |      |      |          |          |                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Species      | versicolor |    50 |          33.33 |        |      |      |          |          |                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Species      |  virginica |    50 |          33.33 |        |      |      |          |          |                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Variable     |      Level | n_Obs | percentage_Obs | Median |  Min |  Max</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -------------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sepal.Length |            |       |                |   5.80 | 4.30 | 7.90</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sepal.Width  |            |       |                |   3.00 | 2.00 | 4.40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal.Length |            |       |                |   4.35 | 1.00 | 6.90</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal.Width  |            |       |                |   1.30 | 0.10 | 2.50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species      |     setosa |    50 |          33.33 |        |      |     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species      | versicolor |    50 |          33.33 |        |      |     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species      |  virginica |    50 |          33.33 |        |      |     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Variable     | Skewness | Kurtosis | percentage_Missing</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sepal.Length |     0.31 |    -0.55 |               0.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sepal.Width  |     0.32 |     0.23 |               0.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal.Length |    -0.27 |    -1.40 |               0.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal.Width  |    -0.10 |    -1.34 |               0.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species      |          |          |                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species      |          |          |                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species      |          |          |                   </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># grouped analysis using `{dplyr}` package</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></span>
@@ -289,20 +309,35 @@ observations larger than 100.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - Petal.Length: Mean = 5.55, SD = 0.55, range: [4.50, 6.90]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - Petal.Width: Mean = 2.03, SD = 0.27, range: [1.40, 2.50]</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Group      |     Variable | n_Obs | Mean |   SD | Median |  MAD |  Min |  Max | Skewness | Kurtosis | n_Missing</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ---------------------------------------------------------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> setosa     | Sepal.Length |    50 | 5.01 | 0.35 |   5.00 | 0.30 | 4.30 | 5.80 |     0.12 |    -0.25 |         0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> setosa     |  Sepal.Width |    50 | 3.43 | 0.38 |   3.40 | 0.37 | 2.30 | 4.40 |     0.04 |     0.95 |         0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> setosa     | Petal.Length |    50 | 1.46 | 0.17 |   1.50 | 0.15 | 1.00 | 1.90 |     0.11 |     1.02 |         0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> setosa     |  Petal.Width |    50 | 0.25 | 0.11 |   0.20 | 0.00 | 0.10 | 0.60 |     1.25 |     1.72 |         0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> versicolor | Sepal.Length |    50 | 5.94 | 0.52 |   5.90 | 0.52 | 4.90 | 7.00 |     0.11 |    -0.53 |         0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> versicolor |  Sepal.Width |    50 | 2.77 | 0.31 |   2.80 | 0.30 | 2.00 | 3.40 |    -0.36 |    -0.37 |         0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> versicolor | Petal.Length |    50 | 4.26 | 0.47 |   4.35 | 0.52 | 3.00 | 5.10 |    -0.61 |     0.05 |         0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> versicolor |  Petal.Width |    50 | 1.33 | 0.20 |   1.30 | 0.22 | 1.00 | 1.80 |    -0.03 |    -0.41 |         0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> virginica  | Sepal.Length |    50 | 6.59 | 0.64 |   6.50 | 0.59 | 4.90 | 7.90 |     0.12 |     0.03 |         0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> virginica  |  Sepal.Width |    50 | 2.97 | 0.32 |   3.00 | 0.30 | 2.20 | 3.80 |     0.37 |     0.71 |         0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> virginica  | Petal.Length |    50 | 5.55 | 0.55 |   5.55 | 0.67 | 4.50 | 6.90 |     0.55 |    -0.15 |         0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> virginica  |  Petal.Width |    50 | 2.03 | 0.27 |   2.00 | 0.30 | 1.40 | 2.50 |    -0.13 |    -0.60 |         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Group      |     Variable | n_Obs | Mean |   SD | Median |  MAD |  Min |  Max</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> setosa     | Sepal.Length |    50 | 5.01 | 0.35 |   5.00 | 0.30 | 4.30 | 5.80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> setosa     |  Sepal.Width |    50 | 3.43 | 0.38 |   3.40 | 0.37 | 2.30 | 4.40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> setosa     | Petal.Length |    50 | 1.46 | 0.17 |   1.50 | 0.15 | 1.00 | 1.90</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> setosa     |  Petal.Width |    50 | 0.25 | 0.11 |   0.20 | 0.00 | 0.10 | 0.60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> versicolor | Sepal.Length |    50 | 5.94 | 0.52 |   5.90 | 0.52 | 4.90 | 7.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> versicolor |  Sepal.Width |    50 | 2.77 | 0.31 |   2.80 | 0.30 | 2.00 | 3.40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> versicolor | Petal.Length |    50 | 4.26 | 0.47 |   4.35 | 0.52 | 3.00 | 5.10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> versicolor |  Petal.Width |    50 | 1.33 | 0.20 |   1.30 | 0.22 | 1.00 | 1.80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> virginica  | Sepal.Length |    50 | 6.59 | 0.64 |   6.50 | 0.59 | 4.90 | 7.90</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> virginica  |  Sepal.Width |    50 | 2.97 | 0.32 |   3.00 | 0.30 | 2.20 | 3.80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> virginica  | Petal.Length |    50 | 5.55 | 0.55 |   5.55 | 0.67 | 4.50 | 6.90</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> virginica  |  Petal.Width |    50 | 2.03 | 0.27 |   2.00 | 0.30 | 1.40 | 2.50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Group      | Skewness | Kurtosis | n_Missing</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> setosa     |     0.12 |    -0.25 |         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> setosa     |     0.04 |     0.95 |         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> setosa     |     0.11 |     1.02 |         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> setosa     |     1.25 |     1.72 |         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> versicolor |     0.11 |    -0.53 |         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> versicolor |    -0.36 |    -0.37 |         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> versicolor |    -0.61 |     0.05 |         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> versicolor |    -0.03 |    -0.41 |         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> virginica  |     0.12 |     0.03 |         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> virginica  |     0.37 |     0.71 |         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> virginica  |     0.55 |    -0.15 |         0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> virginica  |    -0.13 |    -0.60 |         0</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Group      |     Variable | Mean |   SD |  Min |  Max | n_Missing</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------------------------------------------</span>

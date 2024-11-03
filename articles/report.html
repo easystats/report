@@ -173,20 +173,35 @@ allows one to return a tabular summary using the
 <code class="sourceCode R"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/report_table.html">report_table</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co"># Group      |     Variable | n_Obs | Mean |   SD | Median |  MAD |  Min |  Max | Skewness | Kurtosis | n_Missing</span></span>
-<span><span class="co"># ---------------------------------------------------------------------------------------------------------------</span></span>
-<span><span class="co"># setosa     | Sepal.Length |    50 | 5.01 | 0.35 |   5.00 | 0.30 | 4.30 | 5.80 |     0.12 |    -0.25 |         0</span></span>
-<span><span class="co"># setosa     |  Sepal.Width |    50 | 3.43 | 0.38 |   3.40 | 0.37 | 2.30 | 4.40 |     0.04 |     0.95 |         0</span></span>
-<span><span class="co"># setosa     | Petal.Length |    50 | 1.46 | 0.17 |   1.50 | 0.15 | 1.00 | 1.90 |     0.11 |     1.02 |         0</span></span>
-<span><span class="co"># setosa     |  Petal.Width |    50 | 0.25 | 0.11 |   0.20 | 0.00 | 0.10 | 0.60 |     1.25 |     1.72 |         0</span></span>
-<span><span class="co"># versicolor | Sepal.Length |    50 | 5.94 | 0.52 |   5.90 | 0.52 | 4.90 | 7.00 |     0.11 |    -0.53 |         0</span></span>
-<span><span class="co"># versicolor |  Sepal.Width |    50 | 2.77 | 0.31 |   2.80 | 0.30 | 2.00 | 3.40 |    -0.36 |    -0.37 |         0</span></span>
-<span><span class="co"># versicolor | Petal.Length |    50 | 4.26 | 0.47 |   4.35 | 0.52 | 3.00 | 5.10 |    -0.61 |     0.05 |         0</span></span>
-<span><span class="co"># versicolor |  Petal.Width |    50 | 1.33 | 0.20 |   1.30 | 0.22 | 1.00 | 1.80 |    -0.03 |    -0.41 |         0</span></span>
-<span><span class="co"># virginica  | Sepal.Length |    50 | 6.59 | 0.64 |   6.50 | 0.59 | 4.90 | 7.90 |     0.12 |     0.03 |         0</span></span>
-<span><span class="co"># virginica  |  Sepal.Width |    50 | 2.97 | 0.32 |   3.00 | 0.30 | 2.20 | 3.80 |     0.37 |     0.71 |         0</span></span>
-<span><span class="co"># virginica  | Petal.Length |    50 | 5.55 | 0.55 |   5.55 | 0.67 | 4.50 | 6.90 |     0.55 |    -0.15 |         0</span></span>
-<span><span class="co"># virginica  |  Petal.Width |    50 | 2.03 | 0.27 |   2.00 | 0.30 | 1.40 | 2.50 |    -0.13 |    -0.60 |         0</span></span></code></pre></div>
+<span><span class="co"># Group      |     Variable | n_Obs | Mean |   SD | Median</span></span>
+<span><span class="co"># --------------------------------------------------------</span></span>
+<span><span class="co"># setosa     | Sepal.Length |    50 | 5.01 | 0.35 |   5.00</span></span>
+<span><span class="co"># setosa     |  Sepal.Width |    50 | 3.43 | 0.38 |   3.40</span></span>
+<span><span class="co"># setosa     | Petal.Length |    50 | 1.46 | 0.17 |   1.50</span></span>
+<span><span class="co"># setosa     |  Petal.Width |    50 | 0.25 | 0.11 |   0.20</span></span>
+<span><span class="co"># versicolor | Sepal.Length |    50 | 5.94 | 0.52 |   5.90</span></span>
+<span><span class="co"># versicolor |  Sepal.Width |    50 | 2.77 | 0.31 |   2.80</span></span>
+<span><span class="co"># versicolor | Petal.Length |    50 | 4.26 | 0.47 |   4.35</span></span>
+<span><span class="co"># versicolor |  Petal.Width |    50 | 1.33 | 0.20 |   1.30</span></span>
+<span><span class="co"># virginica  | Sepal.Length |    50 | 6.59 | 0.64 |   6.50</span></span>
+<span><span class="co"># virginica  |  Sepal.Width |    50 | 2.97 | 0.32 |   3.00</span></span>
+<span><span class="co"># virginica  | Petal.Length |    50 | 5.55 | 0.55 |   5.55</span></span>
+<span><span class="co"># virginica  |  Petal.Width |    50 | 2.03 | 0.27 |   2.00</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># Group      |  MAD |  Min |  Max | Skewness | Kurtosis | n_Missing</span></span>
+<span><span class="co"># -----------------------------------------------------------------</span></span>
+<span><span class="co"># setosa     | 0.30 | 4.30 | 5.80 |     0.12 |    -0.25 |         0</span></span>
+<span><span class="co"># setosa     | 0.37 | 2.30 | 4.40 |     0.04 |     0.95 |         0</span></span>
+<span><span class="co"># setosa     | 0.15 | 1.00 | 1.90 |     0.11 |     1.02 |         0</span></span>
+<span><span class="co"># setosa     | 0.00 | 0.10 | 0.60 |     1.25 |     1.72 |         0</span></span>
+<span><span class="co"># versicolor | 0.52 | 4.90 | 7.00 |     0.11 |    -0.53 |         0</span></span>
+<span><span class="co"># versicolor | 0.30 | 2.00 | 3.40 |    -0.36 |    -0.37 |         0</span></span>
+<span><span class="co"># versicolor | 0.52 | 3.00 | 5.10 |    -0.61 |     0.05 |         0</span></span>
+<span><span class="co"># versicolor | 0.22 | 1.00 | 1.80 |    -0.03 |    -0.41 |         0</span></span>
+<span><span class="co"># virginica  | 0.59 | 4.90 | 7.90 |     0.12 |     0.03 |         0</span></span>
+<span><span class="co"># virginica  | 0.30 | 2.20 | 3.80 |     0.37 |     0.71 |         0</span></span>
+<span><span class="co"># virginica  | 0.67 | 4.50 | 6.90 |     0.55 |    -0.15 |         0</span></span>
+<span><span class="co"># virginica  | 0.30 | 1.40 | 2.50 |    -0.13 |    -0.60 |         0</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="correlations-t-test-and-wilcox-test">Correlations, t-test, and Wilcox test<a class="anchor" aria-label="anchor" href="#correlations-t-test-and-wilcox-test"></a>

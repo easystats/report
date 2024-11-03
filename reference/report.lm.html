@@ -247,35 +247,65 @@ its re-computation.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> non-significant and positive (beta = 0.45, 95% CI [-0.12, 1.03], t(144) = 1.56,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> p = 0.120, Std. beta = 0.97)</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter                           | Coefficient |         95% CI | t(144) |      p | Std. Coef. | Std. Coef. 95% CI |    Fit</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------------------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)                         |        4.21 | [ 3.41,  5.02] |  10.34 | &lt; .001 |       0.49 |    [-1.03,  2.01] |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length                        |        0.54 | [ 0.00,  1.09] |   1.96 | 0.052  |       1.16 |    [-0.01,  2.32] |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Species [versicolor]                |       -1.81 | [-2.99, -0.62] |  -3.02 | 0.003  |      -0.88 |    [-2.41,  0.65] |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Species [virginica]                 |       -3.15 | [-4.41, -1.90] |  -4.97 | &lt; .001 |      -1.75 |    [-3.32, -0.18] |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length × Species [versicolor] |        0.29 | [-0.30,  0.87] |   0.97 | 0.334  |       0.61 |    [-0.63,  1.85] |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length × Species [virginica]  |        0.45 | [-0.12,  1.03] |   1.56 | 0.120  |       0.97 |    [-0.26,  2.19] |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                     |             |                |        |        |            |                   |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> AIC                                 |             |                |        |        |            |                   | 106.77</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> AICc                                |             |                |        |        |            |                   | 107.56</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> BIC                                 |             |                |        |        |            |                   | 127.84</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R2                                  |             |                |        |        |            |                   |   0.84</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (adj.)                           |             |                |        |        |            |                   |   0.83</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sigma                               |             |                |        |        |            |                   |   0.34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter                           | Coefficient |         95% CI | t(144)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ---------------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)                         |        4.21 | [ 3.41,  5.02] |  10.34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length                        |        0.54 | [ 0.00,  1.09] |   1.96</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species [versicolor]                |       -1.81 | [-2.99, -0.62] |  -3.02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species [virginica]                 |       -3.15 | [-4.41, -1.90] |  -4.97</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length × Species [versicolor] |        0.29 | [-0.30,  0.87] |   0.97</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length × Species [virginica]  |        0.45 | [-0.12,  1.03] |   1.56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     |             |                |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AIC                                 |             |                |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AICc                                |             |                |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> BIC                                 |             |                |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2                                  |             |                |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (adj.)                           |             |                |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sigma                               |             |                |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter                           |      p | Std. Coef. | Std. Coef. 95% CI |    Fit</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)                         | &lt; .001 |       0.49 |    [-1.03,  2.01] |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length                        | 0.052  |       1.16 |    [-0.01,  2.32] |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species [versicolor]                | 0.003  |      -0.88 |    [-2.41,  0.65] |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species [virginica]                 | &lt; .001 |      -1.75 |    [-3.32, -0.18] |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length × Species [versicolor] | 0.334  |       0.61 |    [-0.63,  1.85] |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length × Species [virginica]  | 0.120  |       0.97 |    [-0.26,  2.19] |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     |        |            |                   |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AIC                                 |        |            |                   | 106.77</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AICc                                |        |            |                   | 107.56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> BIC                                 |        |            |                   | 127.84</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2                                  |        |            |                   |   0.84</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (adj.)                           |        |            |                   |   0.83</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sigma                               |        |            |                   |   0.34</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter                           | Coefficient |         95% CI | t(144) |      p | Std. Coef. |    Fit</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------------------------------------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)                         |        4.21 | [ 3.41,  5.02] |  10.34 | &lt; .001 |       0.49 |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length                        |        0.54 | [ 0.00,  1.09] |   1.96 | 0.052  |       1.16 |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Species [versicolor]                |       -1.81 | [-2.99, -0.62] |  -3.02 | 0.003  |      -0.88 |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Species [virginica]                 |       -3.15 | [-4.41, -1.90] |  -4.97 | &lt; .001 |      -1.75 |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length × Species [versicolor] |        0.29 | [-0.30,  0.87] |   0.97 | 0.334  |       0.61 |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length × Species [virginica]  |        0.45 | [-0.12,  1.03] |   1.56 | 0.120  |       0.97 |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                     |             |                |        |        |            |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> AICc                                |             |                |        |        |            | 107.56</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R2                                  |             |                |        |        |            |   0.84</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (adj.)                           |             |                |        |        |            |   0.83</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sigma                               |             |                |        |        |            |   0.34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter                           | Coefficient |         95% CI | t(144)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ---------------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)                         |        4.21 | [ 3.41,  5.02] |  10.34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length                        |        0.54 | [ 0.00,  1.09] |   1.96</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species [versicolor]                |       -1.81 | [-2.99, -0.62] |  -3.02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species [virginica]                 |       -3.15 | [-4.41, -1.90] |  -4.97</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length × Species [versicolor] |        0.29 | [-0.30,  0.87] |   0.97</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length × Species [virginica]  |        0.45 | [-0.12,  1.03] |   1.56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     |             |                |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AICc                                |             |                |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2                                  |             |                |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (adj.)                           |             |                |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sigma                               |             |                |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter                           |      p | Std. Coef. |    Fit</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)                         | &lt; .001 |       0.49 |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length                        | 0.052  |       1.16 |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species [versicolor]                | 0.003  |      -0.88 |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species [virginica]                 | &lt; .001 |      -1.75 |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length × Species [versicolor] | 0.334  |       0.61 |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length × Species [virginica]  | 0.120  |       0.97 |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     |        |            |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AICc                                |        |            | 107.56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2                                  |        |            |   0.84</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (adj.)                           |        |            |   0.83</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sigma                               |        |            |   0.34</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Logistic models</span></span></span>
 <span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">vs</span> <span class="op">~</span> <span class="va">disp</span>, data <span class="op">=</span> <span class="va">mtcars</span>, family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span></span></span>
@@ -300,17 +330,29 @@ its re-computation.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of disp is statistically significant and negative (beta = -0.02,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 95% CI [-0.04, -0.01], p = 0.002, Std. beta = -2.68)</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter   | Coefficient |         95% CI |     z |     p | Std. Coef. | Std. Coef. 95% CI |   Fit</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ---------------------------------------------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) |        4.14 | [ 1.81,  7.44] |  2.98 | 0.003 |      -0.85 |    [-2.42,  0.27] |      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> disp        |       -0.02 | [-0.04, -0.01] | -3.03 | 0.002 |      -2.68 |    [-4.90, -1.27] |      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             |             |                |       |       |            |                   |      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> AIC         |             |                |       |       |            |                   | 26.70</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> AICc        |             |                |       |       |            |                   | 27.11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> BIC         |             |                |       |       |            |                   | 29.63</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Tjur's R2   |             |                |       |       |            |                   |  0.53</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sigma       |             |                |       |       |            |                   |  1.00</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Log_loss    |             |                |       |       |            |                   |  0.35</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter   | Coefficient |         95% CI |     z |     p | Std. Coef.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) |        4.14 | [ 1.81,  7.44] |  2.98 | 0.003 |      -0.85</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> disp        |       -0.02 | [-0.04, -0.01] | -3.03 | 0.002 |      -2.68</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             |             |                |       |       |           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AIC         |             |                |       |       |           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AICc        |             |                |       |       |           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> BIC         |             |                |       |       |           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Tjur's R2   |             |                |       |       |           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sigma       |             |                |       |       |           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Log_loss    |             |                |       |       |           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter   | Std. Coef. 95% CI |   Fit</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ---------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept) |    [-2.42,  0.27] |      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> disp        |    [-4.90, -1.27] |      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             |                   |      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AIC         |                   | 26.70</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AICc        |                   | 27.11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> BIC         |                   | 29.63</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Tjur's R2   |                   |  0.53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sigma       |                   |  1.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Log_loss    |                   |  0.35</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Parameter   | Coefficient |         95% CI |     z |     p | Std. Coef. |   Fit</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> -------------------------------------------------------------------------------</span>
@@ -354,31 +396,57 @@ its re-computation.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of Petal Length is statistically significant and positive (beta =</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 0.89, 95% CI [0.76, 1.01], t(146) = 13.93, p &lt; .001, Std. beta = 1.89)</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter        | Coefficient |       95% CI | t(146) |      p | Effects |    Group | Std. Coef. | Std. Coef. 95% CI |    Fit</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------------------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)      |        2.50 | [1.19, 3.82] |   3.75 | &lt; .001 |   fixed |          |  -1.46e-13 |     [-1.49, 1.49] |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length     |        0.89 | [0.76, 1.01] |  13.93 | &lt; .001 |   fixed |          |       1.89 |     [ 1.63, 2.16] |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  |        1.08 |              |        |        |  random |  Species |            |                   |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  |        0.34 |              |        |        |  random | Residual |            |                   |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  |             |              |        |        |         |          |            |                   |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> AIC              |             |              |        |        |         |          |            |                   | 127.79</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> AICc             |             |              |        |        |         |          |            |                   | 128.07</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> BIC              |             |              |        |        |         |          |            |                   | 139.84</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (conditional) |             |              |        |        |         |          |            |                   |   0.97</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (marginal)    |             |              |        |        |         |          |            |                   |   0.66</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sigma            |             |              |        |        |         |          |            |                   |   0.34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter        | Coefficient |       95% CI | t(146) |      p | Effects</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -------------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)      |        2.50 | [1.19, 3.82] |   3.75 | &lt; .001 |   fixed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length     |        0.89 | [0.76, 1.01] |  13.93 | &lt; .001 |   fixed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  |        1.08 |              |        |        |  random</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  |        0.34 |              |        |        |  random</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  |             |              |        |        |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AIC              |             |              |        |        |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AICc             |             |              |        |        |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> BIC              |             |              |        |        |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (conditional) |             |              |        |        |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (marginal)    |             |              |        |        |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sigma            |             |              |        |        |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter        |    Group | Std. Coef. | Std. Coef. 95% CI |    Fit</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ---------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)      |          |  -1.46e-13 |     [-1.49, 1.49] |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length     |          |       1.89 |     [ 1.63, 2.16] |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  |  Species |            |                   |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  | Residual |            |                   |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  |          |            |                   |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AIC              |          |            |                   | 127.79</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AICc             |          |            |                   | 128.07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> BIC              |          |            |                   | 139.84</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (conditional) |          |            |                   |   0.97</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (marginal)    |          |            |                   |   0.66</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sigma            |          |            |                   |   0.34</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter        | Coefficient |       95% CI | t(146) |      p | Effects |    Group | Std. Coef. |    Fit</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------------------------------------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)      |        2.50 | [1.19, 3.82] |   3.75 | &lt; .001 |   fixed |          |  -1.46e-13 |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length     |        0.89 | [0.76, 1.01] |  13.93 | &lt; .001 |   fixed |          |       1.89 |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  |        1.08 |              |        |        |  random |  Species |            |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  |        0.34 |              |        |        |  random | Residual |            |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  |             |              |        |        |         |          |            |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> AICc             |             |              |        |        |         |          |            | 128.07</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (conditional) |             |              |        |        |         |          |            |   0.97</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (marginal)    |             |              |        |        |         |          |            |   0.66</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sigma            |             |              |        |        |         |          |            |   0.34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter        | Coefficient |       95% CI | t(146) |      p | Effects</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -------------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)      |        2.50 | [1.19, 3.82] |   3.75 | &lt; .001 |   fixed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length     |        0.89 | [0.76, 1.01] |  13.93 | &lt; .001 |   fixed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  |        1.08 |              |        |        |  random</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  |        0.34 |              |        |        |  random</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  |             |              |        |        |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AICc             |             |              |        |        |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (conditional) |             |              |        |        |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (marginal)    |             |              |        |        |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sigma            |             |              |        |        |        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter        |    Group | Std. Coef. |    Fit</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)      |          |  -1.46e-13 |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length     |          |       1.89 |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  |  Species |            |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  | Residual |            |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  |          |            |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AICc             |          |            | 128.07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (conditional) |          |            |   0.97</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (marginal)    |          |            |   0.66</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sigma            |          |            |   0.34</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

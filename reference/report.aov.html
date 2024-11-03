@@ -168,12 +168,19 @@ its re-computation.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - The interaction between Species and Cat1 is statistically not significant and</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> small (F(2, 144) = 0.98, p = 0.377, Eta2 (partial) = 0.01)</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter    | Sum_Squares |  df | Mean_Square |        F |      p | Eta2 (partial) | Eta2_partial 95% CI</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ---------------------------------------------------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Species      |       63.21 |   2 |       31.61 |   118.43 | &lt; .001 |           0.62 |        [0.54, 1.00]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Cat1         |    1.67e-03 |   1 |    1.67e-03 | 6.25e-03 | 0.937  |       4.34e-05 |        [0.00, 1.00]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Species:Cat1 |        0.52 |   2 |        0.26 |     0.98 | 0.377  |           0.01 |        [0.00, 1.00]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Residuals    |       38.43 | 144 |        0.27 |          |        |                |                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter    | Sum_Squares |  df | Mean_Square |        F |      p</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species      |       63.21 |   2 |       31.61 |   118.43 | &lt; .001</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Cat1         |    1.67e-03 |   1 |    1.67e-03 | 6.25e-03 | 0.937 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species:Cat1 |        0.52 |   2 |        0.26 |     0.98 | 0.377 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Residuals    |       38.43 | 144 |        0.27 |          |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter    | Eta2 (partial) | Eta2_partial 95% CI</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ---------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species      |           0.62 |        [0.54, 1.00]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Cat1         |       4.34e-05 |        [0.00, 1.00]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species:Cat1 |           0.01 |        [0.00, 1.00]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Residuals    |                |                    </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Parameter    | Sum_Squares |  df | Mean_Square |        F |      p | Eta2 (partial)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> -----------------------------------------------------------------------------------</span>

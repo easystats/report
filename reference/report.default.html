@@ -200,35 +200,65 @@ Supporting New Models."><meta property="og:image" content="https://easystats.git
 <span class="r-out co"><span class="r-pr">#&gt;</span> non-significant and positive (beta = 0.45, 95% CI [-0.12, 1.03], t(144) = 1.56,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> p = 0.120, Std. beta = 0.97)</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter                           | Coefficient |         95% CI | t(144) |      p | Std. Coef. | Std. Coef. 95% CI |    Fit</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------------------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)                         |        4.21 | [ 3.41,  5.02] |  10.34 | &lt; .001 |       0.49 |    [-1.03,  2.01] |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length                        |        0.54 | [ 0.00,  1.09] |   1.96 | 0.052  |       1.16 |    [-0.01,  2.32] |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Species [versicolor]                |       -1.81 | [-2.99, -0.62] |  -3.02 | 0.003  |      -0.88 |    [-2.41,  0.65] |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Species [virginica]                 |       -3.15 | [-4.41, -1.90] |  -4.97 | &lt; .001 |      -1.75 |    [-3.32, -0.18] |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length × Species [versicolor] |        0.29 | [-0.30,  0.87] |   0.97 | 0.334  |       0.61 |    [-0.63,  1.85] |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length × Species [virginica]  |        0.45 | [-0.12,  1.03] |   1.56 | 0.120  |       0.97 |    [-0.26,  2.19] |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                     |             |                |        |        |            |                   |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> AIC                                 |             |                |        |        |            |                   | 106.77</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> AICc                                |             |                |        |        |            |                   | 107.56</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> BIC                                 |             |                |        |        |            |                   | 127.84</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R2                                  |             |                |        |        |            |                   |   0.84</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (adj.)                           |             |                |        |        |            |                   |   0.83</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sigma                               |             |                |        |        |            |                   |   0.34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter                           | Coefficient |         95% CI | t(144)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ---------------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)                         |        4.21 | [ 3.41,  5.02] |  10.34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length                        |        0.54 | [ 0.00,  1.09] |   1.96</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species [versicolor]                |       -1.81 | [-2.99, -0.62] |  -3.02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species [virginica]                 |       -3.15 | [-4.41, -1.90] |  -4.97</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length × Species [versicolor] |        0.29 | [-0.30,  0.87] |   0.97</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length × Species [virginica]  |        0.45 | [-0.12,  1.03] |   1.56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     |             |                |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AIC                                 |             |                |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AICc                                |             |                |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> BIC                                 |             |                |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2                                  |             |                |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (adj.)                           |             |                |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sigma                               |             |                |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter                           |      p | Std. Coef. | Std. Coef. 95% CI |    Fit</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)                         | &lt; .001 |       0.49 |    [-1.03,  2.01] |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length                        | 0.052  |       1.16 |    [-0.01,  2.32] |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species [versicolor]                | 0.003  |      -0.88 |    [-2.41,  0.65] |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species [virginica]                 | &lt; .001 |      -1.75 |    [-3.32, -0.18] |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length × Species [versicolor] | 0.334  |       0.61 |    [-0.63,  1.85] |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length × Species [virginica]  | 0.120  |       0.97 |    [-0.26,  2.19] |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     |        |            |                   |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AIC                                 |        |            |                   | 106.77</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AICc                                |        |            |                   | 107.56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> BIC                                 |        |            |                   | 127.84</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2                                  |        |            |                   |   0.84</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (adj.)                           |        |            |                   |   0.83</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sigma                               |        |            |                   |   0.34</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter                           | Coefficient |         95% CI | t(144) |      p | Std. Coef. |    Fit</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------------------------------------------------------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)                         |        4.21 | [ 3.41,  5.02] |  10.34 | &lt; .001 |       0.49 |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length                        |        0.54 | [ 0.00,  1.09] |   1.96 | 0.052  |       1.16 |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Species [versicolor]                |       -1.81 | [-2.99, -0.62] |  -3.02 | 0.003  |      -0.88 |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Species [virginica]                 |       -3.15 | [-4.41, -1.90] |  -4.97 | &lt; .001 |      -1.75 |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length × Species [versicolor] |        0.29 | [-0.30,  0.87] |   0.97 | 0.334  |       0.61 |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length × Species [virginica]  |        0.45 | [-0.12,  1.03] |   1.56 | 0.120  |       0.97 |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                     |             |                |        |        |            |       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> AICc                                |             |                |        |        |            | 107.56</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R2                                  |             |                |        |        |            |   0.84</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (adj.)                           |             |                |        |        |            |   0.83</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Sigma                               |             |                |        |        |            |   0.34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter                           | Coefficient |         95% CI | t(144)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ---------------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)                         |        4.21 | [ 3.41,  5.02] |  10.34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length                        |        0.54 | [ 0.00,  1.09] |   1.96</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species [versicolor]                |       -1.81 | [-2.99, -0.62] |  -3.02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species [virginica]                 |       -3.15 | [-4.41, -1.90] |  -4.97</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length × Species [versicolor] |        0.29 | [-0.30,  0.87] |   0.97</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length × Species [virginica]  |        0.45 | [-0.12,  1.03] |   1.56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     |             |                |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AICc                                |             |                |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2                                  |             |                |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (adj.)                           |             |                |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sigma                               |             |                |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Parameter                           |      p | Std. Coef. |    Fit</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------------------------------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)                         | &lt; .001 |       0.49 |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length                        | 0.052  |       1.16 |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species [versicolor]                | 0.003  |      -0.88 |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Species [virginica]                 | &lt; .001 |      -1.75 |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length × Species [versicolor] | 0.334  |       0.61 |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal Length × Species [virginica]  | 0.120  |       0.97 |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     |        |            |       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AICc                                |        |            | 107.56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2                                  |        |            |   0.84</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (adj.)                           |        |            |   0.83</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sigma                               |        |            |   0.34</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
