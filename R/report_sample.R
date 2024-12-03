@@ -187,7 +187,7 @@ report_sample <- function(data,
         new_column = ".new_names",
         separator = ", "
       )[[".new_names"]]
-      result <- datawizard::data_rename(result, pattern = old_names, replacement = new_names)
+      result <- datawizard::data_rename(result, select = old_names, replacement = new_names)
     }
     # remember values of first columns
     variable <- result[[1]]["Variable"]
