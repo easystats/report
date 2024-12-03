@@ -32,8 +32,8 @@ test_that("report.aov", {
   expect_equal(sum(as.report_table(r3, summary = TRUE)$Mean_Square), 5.787854, tolerance = 0.01)
 
   data <- iris
-  data$Cat1 <- rep(c("X", "X", "Y"), length.out = nrow(data))
-  data$Cat2 <- rep(c("A", "B"), length.out = nrow(data))
+  data$Cat1 <- rep_len(c("X", "X", "Y"), nrow(data))
+  data$Cat2 <- rep_len(c("A", "B"), nrow(data))
 
   model <- aov(Sepal.Length ~ Species * Cat1 * Cat2, data = data)
   r4 <- report(model)
