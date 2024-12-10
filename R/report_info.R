@@ -46,7 +46,6 @@ report_info <- function(x, ...) {
 }
 
 
-
 # METHODS -----------------------------------------------------------------
 
 
@@ -76,7 +75,6 @@ summary.report_info <- function(object, ...) {
 print.report_info <- function(x, ...) {
   cat(paste0(x, collapse = "\n"))
 }
-
 
 
 # Utils -------------------------------------------------------------------

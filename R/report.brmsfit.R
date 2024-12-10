@@ -53,7 +53,6 @@ report_text.brmsfit <- report_text.lm
 # ==================== Specific to Bayes ===================================
 
 
-
 # report_priors -----------------------------------------------------------
 
 #' @export

@@ -65,7 +65,6 @@ report.lm <- function(x, include_effectsize = TRUE, effectsize_method = "refit",
 }
 
 
-
 # report_effectsize -------------------------------------------------------
 
 #' @rdname report.lm
@@ -122,7 +121,6 @@ report_effectsize.lm <- function(x, effectsize_method = "refit", ...) {
     main = main
   )
 }
-
 
 
 # report_table ------------------------------------------------------------
@@ -276,7 +274,6 @@ report_statistics.lm <- function(x,
     effsize = effsize
   )
 }
-
 
 
 # report_statistics ------------------------------------------------------------
@@ -475,7 +472,6 @@ report_performance.lm <- function(x, table = NULL, ...) {
 }
 
 
-
 # report_info ------------------------------------------------------------
 
 #' @rdname report.lm
@@ -516,7 +512,6 @@ report_info.lm <- function(x,
 
   as.report_info(info_text)
 }
-
 
 
 # report_text ------------------------------------------------------------

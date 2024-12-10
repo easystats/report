@@ -25,11 +25,7 @@ report.character <- function(x,
 }
 
 
-
-
-
 # report_table ------------------------------------------------------------
-
 
 
 #' @export
@@ -68,7 +64,6 @@ report_table.character <- function(x,
 }
 
 
-
 # report_parameters -------------------------------------------------------
 
 #' @export
@@ -100,7 +95,6 @@ report_parameters.character <- function(x,
 
   as.report_parameters(text, summary = text[1:n_entries], ...)
 }
-
 
 
 # report_text -------------------------------------------------------------
@@ -173,7 +167,6 @@ report_text.character <- function(x,
 
   as.report_text(text_full, summary = text)
 }
-
 
 
 # report_statistics -------------------------------------------------------

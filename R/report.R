@@ -141,7 +141,6 @@ as.report <- function(text, table = NULL, plot = NULL, ...) {
 }
 
 
-
 #' @rdname as.report
 #' @export
 is.report <- function(x) inherits(x, "report")

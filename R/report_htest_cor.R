@@ -24,7 +24,6 @@
 }
 
 
-
 # report_effectsize ---------------------
 
 .report_effectsize_correlation <- function(x, table, dot_args) {
