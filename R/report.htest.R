@@ -44,6 +44,16 @@ report_effectsize.htest <- function(x, ...) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
   }
 
+  model_data <- insight::get_data(x)
+  if (is.null(model_data) && is.null(dot_args$data)) {
+    insight::format_alert(
+      paste0(
+        "In the report() function, for htest objects, you can try providing ",
+        "the data argument manually, e.g., report(x, data = data)."
+      )
+    )
+  }
+
   # remove arg, so dots can be passed to effectsize
   dot_args[["model_info"]] <- NULL
 
