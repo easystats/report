@@ -63,7 +63,6 @@ report_table <- function(x, ...) {
 }
 
 
-
 # METHODS -----------------------------------------------------------------
 
 #' @rdname as.report
@@ -102,9 +101,6 @@ as.report_table.report <- function(x, summary = NULL, ...) {
     summary(attributes(x)$table)
   }
 }
-
-
-
 
 
 #' @export

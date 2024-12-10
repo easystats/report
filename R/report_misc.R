@@ -22,7 +22,6 @@ report_date <- function(...) {
 }
 
 
-
 #' @rdname report_date
 #' @export
 report_story <- function(...) {

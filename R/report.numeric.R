@@ -51,7 +51,6 @@ report.numeric <- function(x,
 }
 
 
-
 # report_table ------------------------------------------------------------
 
 #' @export
@@ -130,8 +129,6 @@ report_table.numeric <- function(x,
 
   as.report_table(table_full, summary = table)
 }
-
-
 
 
 # report_parameters -------------------------------------------------------
@@ -256,7 +253,6 @@ report_parameters.numeric <- function(x,
 
   as.report_parameters(text_full, summary = text, ...)
 }
-
 
 
 # report_text -------------------------------------------------------------

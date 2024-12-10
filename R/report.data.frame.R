@@ -100,7 +100,6 @@ report.data.frame <- function(x,
 # report_table ------------------------------------------------------------
 
 
-
 #' @export
 report_table.data.frame <- function(x,
                                     n = FALSE,
@@ -178,10 +177,7 @@ report_table.data.frame <- function(x,
 }
 
 
-
-
 # report_parameters -------------------------------------------------------
-
 
 
 #' @export
@@ -222,7 +218,6 @@ report_parameters.data.frame <- function(x,
 
   as.report_parameters(text_full, summary = text, ...)
 }
-
 
 
 # report_text -------------------------------------------------------------
@@ -270,7 +265,6 @@ report_text.data.frame <- function(x,
 
   as.report_text(text_full, summary = text)
 }
-
 
 
 # report_statistics -------------------------------------------------------
@@ -401,8 +395,6 @@ report_table.grouped_df <- function(x,
 }
 
 
-
-
 #' @export
 report_parameters.grouped_df <- function(x,
                                          table = NULL,
@@ -494,7 +486,6 @@ report_text.grouped_df <- function(x,
 report.grouped_df <- report.data.frame
 
 
-
 #' @export
 report_statistics.grouped_df <- function(x,
                                          table = NULL,
@@ -536,12 +527,6 @@ report_statistics.grouped_df <- function(x,
 
   as.report_statistics(text_full, summary = text)
 }
-
-
-
-
-
-
 
 
 # Utils -------------------------------------------------------------------

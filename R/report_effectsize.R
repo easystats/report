@@ -83,9 +83,7 @@ print.report_effectsize <- function(x, ...) {
 }
 
 
-
 # Utilities ---------------------------------------------------------------
-
 
 
 #' @keywords internal

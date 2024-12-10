@@ -20,8 +20,6 @@ test_that("format_model", {
 })
 
 
-
-
 test_that("format_model", {
   skip_if_not_installed("rstanarm")
   expect_identical(

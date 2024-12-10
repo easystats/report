@@ -3,12 +3,12 @@ skip_if_not_installed("lme4")
 test_that("report-lmer", {
   df <- lme4::sleepstudy
   set.seed(123)
-  df$mygrp <- sample(1:5, size = 180, replace = TRUE)
+  df$mygrp <- sample.int(5, size = 180, replace = TRUE)
   df$mysubgrp <- NA
   for (i in 1:5) {
     filter_group <- df$mygrp == i
     df$mysubgrp[filter_group] <-
-      sample(1:30, size = sum(filter_group), replace = TRUE)
+      sample.int(30, size = sum(filter_group), replace = TRUE)
   }
 
   set.seed(123)
