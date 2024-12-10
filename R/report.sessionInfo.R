@@ -37,7 +37,6 @@ report.sessionInfo <- function(x, ...) {
 }
 
 
-
 # Aliases -----------------------------------------------------------------
 
 
@@ -65,7 +64,6 @@ cite_packages <- function(session = NULL, include_R = TRUE, ...) {
 
   as.report_parameters(x, ...)
 }
-
 
 
 # report_system --------------------------------------------------------------
@@ -104,7 +102,6 @@ report_system <- function(session = NULL) {
 }
 
 
-
 # report_table ------------------------------------------------------------
 
 #' @export
@@ -139,7 +136,6 @@ report_table.sessionInfo <- function(x, include_R = TRUE, ...) {
   row.names(x) <- NULL
   as.report_table(x, summary = x[c("Package", "Version")])
 }
-
 
 
 # report_parameters -------------------------------------------------------
@@ -177,7 +173,6 @@ report_parameters.sessionInfo <- function(x, table = NULL, include_R = TRUE, ...
 
   as.report_parameters(params, summary = short, ...)
 }
-
 
 
 # report_text -------------------------------------------------------------

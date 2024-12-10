@@ -83,7 +83,6 @@ report_effectsize.aov <- function(x, ...) {
   parameters <- paste0(interpretation, " (", statistics, ")")
 
 
-
   as.report_effectsize(parameters,
     summary = parameters,
     table = table,
@@ -211,9 +210,6 @@ report_statistics.anova <- report_statistics.aov
 report_statistics.aovlist <- report_statistics.aov
 
 
-
-
-
 # report_parameters ------------------------------------------------------------
 
 
@@ -317,7 +313,6 @@ report_info.anova <- report_info.aov
 
 #' @export
 report_info.aovlist <- report_info.aov
-
 
 
 # report_text ------------------------------------------------------------

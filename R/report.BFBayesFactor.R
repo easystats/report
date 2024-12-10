@@ -63,7 +63,6 @@ report.BFBayesFactor <- function(x, h0 = "H0", h1 = "H1", ...) {
 }
 
 
-
 #' @rdname report.BFBayesFactor
 #' @export
 report_statistics.BFBayesFactor <- function(x, table = NULL, ...) {

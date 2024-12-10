@@ -20,7 +20,6 @@ report.Date <- report.factor
 # report_table ------------------------------------------------------------
 
 
-
 #' @export
 report_table.factor <- function(x, levels_percentage = "auto", ...) {
   if (!is.factor(x)) {
@@ -54,7 +53,6 @@ report_table.Date <- report_table.factor
 
 
 # report_parameters -------------------------------------------------------
-
 
 
 #' @export
@@ -138,7 +136,6 @@ report_text.logical <- report_text.factor
 
 #' @export
 report_text.Date <- report_text.factor
-
 
 
 # report_statistics -------------------------------------------------------

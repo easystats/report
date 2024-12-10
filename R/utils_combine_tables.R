@@ -14,7 +14,6 @@
 }
 
 
-
 #' @keywords internal
 .combine_tables_performance <- function(parameters, performance) {
   table <- parameters
@@ -65,7 +64,6 @@
 
   table
 }
-
 
 
 #' @keywords internal

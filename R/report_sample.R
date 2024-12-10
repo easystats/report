@@ -325,7 +325,6 @@ report_sample <- function(data,
 }
 
 
-
 .report_sample_row.factor <- function(x,
                                       column,
                                       weights = NULL,
@@ -388,7 +387,6 @@ report_sample <- function(data,
 .report_sample_row.character <- .report_sample_row.factor
 
 
-
 # Standard error for confidence interval of proportions ----
 
 .ci_proportion <- function(x, table_proportions, weights, ci, ci_method, ci_correct) {
@@ -444,7 +442,6 @@ report_sample <- function(data,
   }
   out
 }
-
 
 
 # print-method --------------------------------------------

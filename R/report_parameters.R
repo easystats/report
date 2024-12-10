@@ -104,7 +104,6 @@ print.report_parameters <- function(x, ...) {
 }
 
 
-
 # Utils -------------------------------------------------------------------
 
 #' @keywords internal
@@ -156,7 +155,6 @@ print.report_parameters <- function(x, ...) {
 
   text
 }
-
 
 
 #' @keywords internal

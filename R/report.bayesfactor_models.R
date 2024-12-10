@@ -99,7 +99,6 @@ report_text.bayesfactor_models <- function(x,
 }
 
 
-
 #' @keywords internal
 .report.bayesfactor_models <- function(model,
                                        interpretation = "jeffreys1961",
@@ -209,7 +208,6 @@ report_text.bayesfactor_models <- function(x,
     BF_method = BF_method
   )
 }
-
 
 
 # bayesfactor_inclusion ---------------------------------------------------

@@ -99,7 +99,6 @@ print.report_intercept <- function(x, ...) {
 }
 
 
-
 .find_reference_level <- function(f) {
   tryCatch(
     {

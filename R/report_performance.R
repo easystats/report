@@ -52,7 +52,6 @@ report_performance <- function(x, table = NULL, ...) {
 }
 
 
-
 # METHODS -----------------------------------------------------------------
 
 
@@ -83,7 +82,6 @@ summary.report_performance <- function(object, ...) {
 print.report_performance <- print.report_text
 
 # Utils -------------------------------------------------------------------
-
 
 
 #' @keywords internal
