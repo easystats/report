@@ -1,3 +1,8 @@
+# report 0.6.0
+
+Minor changes
+* `report_htest_chi2` stops supporting rule "chen2010" (following change in `effectsize`).
+
 # report 0.5.9
 
 Breaking

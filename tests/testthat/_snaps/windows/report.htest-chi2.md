@@ -146,26 +146,14 @@
 ---
 
     Code
-      report(x, type = "oddsratio", rules = "chen2010")
-    Output
-      Effect sizes were labelled following Chen's (2010) recommendations.
-      
-      The Pearson's Chi-squared test with Yates' continuity correction of
-      independence between Diagnosis and Group suggests that the effect is
-      statistically significant, and medium (chi2 = 31.57, p < .001; Odds ratio =
-      4.73, 95% CI [2.74, 8.17])
-
----
-
-    Code
       report(x, type = "riskratio")
     Output
       
       
       The Pearson's Chi-squared test with Yates' continuity correction of
       independence between Diagnosis and Group suggests that the effect is
-      statistically significant, and (chi2 = 31.57, p < .001; Risk_ratio = 2.54, 95%
-      CI [1.80, 3.60])
+      statistically significant (chi2 = 31.57, p < .001; Risk_ratio = 2.54, 95% CI
+      [1.80, 3.60])
 
 ---
 
