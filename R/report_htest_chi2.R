@@ -98,11 +98,16 @@ chi2_type <- function(x) {
 # report_parameters ----------------------------
 
 .report_parameters_chi2 <- function(table, stats, effsize, ...) {
+  if (is.null(attributes(effsize)$interpretation)) {
+    and <- ""
+  } else {
+    and <- paste0(", and ", attributes(effsize)$interpretation)
+  }
+
   text_full <- paste0(
     "statistically ",
     effectsize::interpret_p(table$p, rules = "default"),
-    ", and ",
-    attributes(effsize)$interpretation,
+    and,
     " (",
     stats,
     ")"
@@ -111,8 +116,7 @@ chi2_type <- function(x) {
   text_short <- paste0(
     "statistically ",
     effectsize::interpret_p(table$p, rules = "default"),
-    ", and ",
-    attributes(effsize)$interpretation,
+    and,
     " (",
     summary(stats),
     ")"

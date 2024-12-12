@@ -1,3 +1,8 @@
+# report 0.6.0
+
+Minor changes
+* `report_htest_chi2` stops supporting rule "chen2010" (following change in `effectsize`).
+
 # report 0.5.9
 
 Breaking
@@ -9,7 +14,7 @@ Breaking
   * `report_participants()`
   * `report_sample()`
 
-Minor changes 
+Minor changes
 
 * `report` now supports reporting of Bayesian model comparison with variables of class `brms::loo_compare`.
 * `report` now supports reporting of BayesFactor objects with variables of class `BFBayesFactor`.
