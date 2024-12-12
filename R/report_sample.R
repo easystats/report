@@ -177,17 +177,8 @@ report_sample <- function(data,
     # for more than one group, fix column names. we don't want "a.b (n=10)",
     # but rather ""a, b (n=10)""
     if (length(by) > 1) {
-      old_names <- datawizard::data_unite(
-        unique(groups),
-        new_column = ".old_names",
-        separator = "."
-      )[[".old_names"]]
-      new_names <- datawizard::data_unite(
-        unique(groups),
-        new_column = ".new_names",
-        separator = ", "
-      )[[".new_names"]]
-      result <- datawizard::data_rename(result, pattern = old_names, replacement = new_names)
+      group_names <- gsub("[.]", ", ", names(result))
+      result <- setNames(result, group_names)
     }
     # remember values of first columns
     variable <- result[[1]]["Variable"]
