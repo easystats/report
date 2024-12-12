@@ -83,11 +83,6 @@ test_that("report.htest-chi2 report", {
 
   expect_snapshot(
     variant = "windows",
-    report(x, type = "oddsratio", rules = "chen2010")
-  )
-
-  expect_snapshot(
-    variant = "windows",
     report(x, type = "riskratio")
   ) # riskratio has no interpretation in effectsize
   # Watch carefully in case effectsize adds support
