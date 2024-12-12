@@ -14,7 +14,7 @@ Breaking
   * `report_participants()`
   * `report_sample()`
 
-Minor changes 
+Minor changes
 
 * `report` now supports reporting of Bayesian model comparison with variables of class `brms::loo_compare`.
 * `report` now supports reporting of BayesFactor objects with variables of class `BFBayesFactor`.

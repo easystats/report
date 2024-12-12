@@ -154,4 +154,4 @@ Collate:
     'utils_misspelled_variables.R'
     'zzz.R'
 Roxygen: list(markdown = TRUE)
-Remotes: easystats/insight, easystats/effectsize
+Remotes: easystats/insight, easystats/effectsize, easystats/see, easystats/performance, easystats/bayestestR
