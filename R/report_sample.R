@@ -178,7 +178,7 @@ report_sample <- function(data,
     # but rather ""a, b (n=10)""
     if (length(by) > 1) {
       group_names <- gsub("[.]", ", ", names(result))
-      result <- setNames(result, group_names)
+      result <- stats::setNames(result, group_names)
     }
     # remember values of first columns
     variable <- result[[1]]["Variable"]
