@@ -18,9 +18,9 @@ Authors@R:
              role = "aut",
              email = "patilindrajeet.science@gmail.com",
              comment = c(ORCID = "0000-0003-1995-6531")),
-      person(given = "Rémi", 
+      person(given = "Rémi",
              family = "Thériault",
-             role = c("aut", "cre"), 
+             role = c("aut", "cre"),
              email = "remi.theriault@mail.mcgill.ca",
              comment = c(ORCID = "0000-0003-4315-6788")),
       person(given = "Mattan S.",
@@ -154,4 +154,4 @@ Collate:
     'utils_misspelled_variables.R'
     'zzz.R'
 Roxygen: list(markdown = TRUE)
-Remotes: easystats/insight, easystats/effectsize, easystats/see, easystats/performance, easystats/bayestestR
+Remotes: easystats/datawizard, easystats/parameters, easystats/performance, easystats/see, easystats/bayestestR
