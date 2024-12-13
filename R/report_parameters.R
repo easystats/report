@@ -84,7 +84,7 @@ as.character.report_parameters <- function(x, prefix = NULL, ...) {
 
   # Concatenate
   text <- paste0(prefix, x)
-  text <- paste0(text, collapse = "\n")
+  text <- paste(text, collapse = "\n")
   text
 }
 
@@ -125,7 +125,7 @@ print.report_parameters <- function(x, ...) {
     # Interaction
     if (grepl(" * ", names[i], fixed = TRUE)) {
       parts <- unlist(strsplit(names[i], " * ", fixed = TRUE))
-      basis <- paste0(utils::head(parts, -1), collapse = " * ")
+      basis <- paste(utils::head(parts, -1), collapse = " * ")
       names[i] <- paste0("The interaction effect of ", utils::tail(parts, 1), " on ", basis)
 
       # Intercept

@@ -46,7 +46,7 @@ report_text.estimate_contrasts <- function(x, table = NULL, ...) {
     collapse = ". "
   )
 
-  text <- paste("The marginal contrasts analysis suggests the following.", paste0(text, collapse = ""))
+  text <- paste("The marginal contrasts analysis suggests the following.", paste(text, collapse = ""))
 
   as.report_text(text)
 }

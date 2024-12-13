@@ -76,5 +76,5 @@ summary.report_statistics <- summary.report_parameters
 
 #' @export
 print.report_statistics <- function(x, ...) {
-  cat(paste0(x, collapse = "\n"))
+  cat(paste(x, collapse = "\n"))
 }

@@ -303,7 +303,7 @@ report_text.bayesfactor_inclusion <- function(x,
   bf_text <- paste0(
     "Bayesian model averaging (BMA) was used to obtain the average evidence ",
     "for each predictor. We found ",
-    paste0(
+    paste(
       paste0(bf_results$evidence, " including ", bf_results$Term),
       collapse = "; "
     ), "."
@@ -349,7 +349,7 @@ report_text.bayesfactor_inclusion <- function(x,
     bf_explain,
     paste0(
       "We found ",
-      paste0(
+      paste(
         paste0(
           bf_results$evidence, " including ", bf_results$Term,
           ", with models including ", bf_results$Term,

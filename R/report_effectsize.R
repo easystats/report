@@ -79,7 +79,7 @@ print.report_effectsize <- function(x, ...) {
     cat(attributes(x)$rules, "\n\n")
   }
 
-  cat(paste0(x, collapse = "\n"))
+  cat(paste(x, collapse = "\n"))
 }
 
 

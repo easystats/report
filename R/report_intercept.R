@@ -67,7 +67,7 @@ summary.report_intercept <- function(object, ...) {
 
 #' @export
 print.report_intercept <- function(x, ...) {
-  cat(paste0(x, collapse = "\n"))
+  cat(paste(x, collapse = "\n"))
 }
 
 
