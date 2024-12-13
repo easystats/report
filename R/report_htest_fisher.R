@@ -40,8 +40,8 @@
 
   table <- datawizard::data_rename(
     as.data.frame(table),
-    c("CI_low", "CI_high"),
-    paste0(estimate, c("_CI_low", "_CI_high"))
+    select = c("CI_low", "CI_high"),
+    replacement = paste0(estimate, c("_CI_low", "_CI_high"))
   )
 
   table <- table[c(estimate, paste0(estimate, c("_CI_low", "_CI_high")))]
