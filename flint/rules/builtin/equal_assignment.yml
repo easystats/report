@@ -1,0 +1,10 @@
+id: equal_assignment
+language: r
+severity: hint
+rule:
+  pattern: $LHS = $RHS
+  has:
+    field: lhs
+    kind: identifier
+fix: ~~LHS~~ <- ~~RHS~~
+message: Use <-, not =, for assignment.

@@ -1,0 +1,97 @@
+id: true_false_symbol
+language: r
+severity: warning
+rule:
+  pattern: T
+  kind: identifier
+  not:
+    any:
+      - precedes:
+          any:
+            - pattern: <-
+            - pattern: =
+            - regex: ^~$
+      - follows:
+          any:
+            - pattern: $
+            - regex: ^~$
+      - inside:
+          any:
+            - kind: parameter
+            - kind: call
+            - kind: binary_operator
+              follows:
+                regex: ^~$
+                stopBy: end
+          stopBy:
+            kind:
+              argument
+fix: TRUE
+message: Use TRUE instead of the symbol T.
+
+---
+
+id: true_false_symbol-2
+language: r
+severity: warning
+rule:
+  pattern: F
+  kind: identifier
+  not:
+    any:
+      - precedes:
+          any:
+            - pattern: <-
+            - pattern: =
+            - regex: ^~$
+      - follows:
+          any:
+            - pattern: $
+            - regex: ^~$
+      - inside:
+          any:
+            - kind: parameter
+            - kind: call
+            - kind: binary_operator
+              follows:
+                regex: ^~$
+                stopBy: end
+          stopBy:
+            kind:
+              argument
+fix: FALSE
+message: Use FALSE instead of the symbol F.
+
+---
+
+id: true_false_symbol-3
+language: r
+severity: warning
+rule:
+  pattern: T
+  kind: identifier
+  precedes:
+    any:
+      - pattern: <-
+      - pattern: =
+  not:
+    inside:
+      kind: argument
+message: Don't use T as a variable name, as it can break code relying on T being TRUE.
+
+---
+
+id: true_false_symbol-4
+language: r
+severity: warning
+rule:
+  pattern: F
+  kind: identifier
+  precedes:
+    any:
+      - pattern: <-
+      - pattern: =
+  not:
+    inside:
+      kind: argument
+message: Don't use F as a variable name, as it can break code relying on F being FALSE.

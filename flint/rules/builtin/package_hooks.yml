@@ -1,0 +1,127 @@
+id: package_hooks-1
+language: r
+severity: warning
+rule:
+  pattern: packageStartupMessage($$$)
+  inside:
+    stopBy: end
+    kind: binary_operator
+    has:
+      stopBy: end
+      field: lhs
+      pattern: .onLoad
+message: Put packageStartupMessage() calls in .onAttach(), not .onLoad().
+
+---
+
+id: package_hooks-2
+language: r
+severity: warning
+rule:
+  pattern: library.dynam($$$)
+  inside:
+    stopBy: end
+    kind: binary_operator
+    has:
+      stopBy: end
+      field: lhs
+      pattern: .onAttach
+message: Put library.dynam() calls in .onLoad(), not .onAttach().
+
+---
+
+id: package_hooks-3
+language: r
+severity: warning
+rule:
+  pattern: $FN($$$)
+  inside:
+    stopBy: end
+    kind: binary_operator
+    has:
+      stopBy: end
+      field: lhs
+      pattern: .onLoad
+constraints:
+  FN:
+    regex: '^(cat|installed.packages|message|packageStartupMessage|print|writeLines)$'
+message: Don't use ~~FN~~() in .onLoad().
+
+---
+
+id: package_hooks-4
+language: r
+severity: warning
+rule:
+  pattern: $FN($$$)
+  inside:
+    stopBy: end
+    kind: binary_operator
+    has:
+      stopBy: end
+      field: lhs
+      pattern: .onAttach
+constraints:
+  FN:
+    # library.dynam already has its own linter
+    regex: '^(cat|installed.packages|message|print|writeLines)$'
+message: Don't use ~~FN~~() in .onAttach().
+
+---
+
+id: package_hooks-5
+language: r
+severity: warning
+rule:
+  pattern: $FN($$$)
+  inside:
+    stopBy: end
+    kind: binary_operator
+    has:
+      stopBy: end
+      field: lhs
+      pattern: $LOAD
+constraints:
+  LOAD:
+    regex: '^(\.onAttach|\.onLoad)$'
+  FN:
+    regex: '^(require|library)$'
+message: Don't alter the search() path in ~~LOAD~~() by calling ~~FN~~().
+
+---
+
+id: package_hooks-6
+language: r
+severity: warning
+rule:
+  pattern: installed.packages($$$)
+  inside:
+    stopBy: end
+    kind: binary_operator
+    has:
+      stopBy: end
+      field: lhs
+      pattern: $LOAD
+constraints:
+  LOAD:
+    regex: '^(\.onAttach|\.onLoad)$'
+message: Don't slow down package load by running installed.packages() in ~~LOAD~~().
+
+---
+
+id: package_hooks-7
+language: r
+severity: warning
+rule:
+  pattern: library.dynam.unload($$$)
+  inside:
+    stopBy: end
+    kind: binary_operator
+    has:
+      stopBy: end
+      field: lhs
+      pattern: $LOAD
+constraints:
+  LOAD:
+    regex: '^(\.onDetach|\.Last\.lib)$'
+message: Use library.dynam.unload() calls in .onUnload(), not ~~LOAD~~().

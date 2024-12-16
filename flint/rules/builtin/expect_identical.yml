@@ -1,0 +1,42 @@
+id: expect_identical-1
+language: r
+severity: warning
+rule:
+  pattern: expect_true(identical($VAL1, $VAL2))
+fix: expect_identical(~~VAL1~~, ~~VAL2~~)
+message: Use expect_identical(x, y) instead of expect_true(identical(x, y)).
+
+---
+
+id: expect_identical-2
+language: r
+severity: warning
+rule:
+  pattern: expect_equal($VAL1, $VAL2)
+fix: expect_identical(~~VAL1~~, ~~VAL2~~)
+constraints:
+  VAL1:
+    all:
+      - not:
+          has:
+            stopBy: end
+            kind: float
+            regex: \.
+      - not:
+          regex: ^typeof
+      - not:
+          pattern: NULL
+  VAL2:
+    all:
+      - not:
+          has:
+            stopBy: end
+            kind: float
+            regex: \.
+      - not:
+          regex: ^typeof
+      - not:
+          pattern: NULL
+message: |
+  Use expect_identical(x, y) by default; resort to expect_equal() only when
+  needed, e.g. when setting ignore_attr= or tolerance=.

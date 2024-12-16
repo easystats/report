@@ -1,0 +1,7 @@
+id: length_levels-1
+language: r
+severity: warning
+rule:
+  pattern: length(levels($VAR))
+fix: nlevels(~~VAR~~)
+message: nlevels(x) is better than length(levels(x)). df

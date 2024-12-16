@@ -1,0 +1,43 @@
+id: sample_int-1
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: sample(1:$N, $$$OTHER)
+    - pattern: sample(1L:$N, $$$OTHER)
+fix: sample.int(~~N~~, ~~OTHER~~)
+message: sample.int(n, m, ...) is preferable to sample(1:n, m, ...).
+
+---
+
+id: sample_int-2
+language: r
+severity: warning
+rule:
+  pattern: sample(seq($N), $$$OTHER)
+fix: sample.int(~~N~~, ~~OTHER~~)
+message: sample.int(n, m, ...) is preferable to sample(seq(n), m, ...).
+
+---
+
+id: sample_int-3
+language: r
+severity: warning
+rule:
+  pattern: sample(seq_len($N), $$$OTHER)
+fix: sample.int(~~N~~, ~~OTHER~~)
+message: sample.int(n, m, ...) is preferable to sample(seq_len(n), m, ...).
+
+---
+
+# Strangely this panicks if I rename FIRST to N
+id: sample_int-4
+language: r
+severity: warning
+rule:
+  pattern: sample($FIRST, $$$OTHER)
+constraints:
+  FIRST:
+    regex: ^\d+(L|)$
+fix: sample.int(~~N~~, ~~OTHER~~)
+message: sample.int(n, m, ...) is preferable to sample(n, m, ...).

@@ -1,0 +1,79 @@
+id: expect_named-1
+language: r
+severity: warning
+rule:
+  any:
+    - pattern:
+        context: expect_identical(names($OBJ), $VALUES)
+        strictness: ast
+    - pattern:
+        context: expect_identical($VALUES, names($OBJ))
+        strictness: ast
+constraints:
+  VALUES:
+    not:
+      regex: colnames|rownames|dimnames|NULL
+      has:
+        kind: null
+fix: expect_named(~~OBJ~~, ~~VALUES~~)
+message: expect_named(x, n) is better than expect_identical(names(x), n).
+
+---
+
+id: expect_named-2
+language: r
+severity: warning
+rule:
+  any:
+    - pattern:
+        context: expect_equal(names($OBJ), $VALUES)
+        strictness: ast
+    - pattern:
+        context: expect_equal($VALUES, names($OBJ))
+        strictness: ast
+constraints:
+  VALUES:
+    not:
+      regex: colnames|rownames|dimnames|NULL
+fix: expect_named(~~OBJ~~, ~~VALUES~~)
+message: expect_named(x, n) is better than expect_equal(names(x), n).
+
+---
+
+id: expect_named-3
+language: r
+severity: warning
+rule:
+  any:
+    - pattern:
+        context: testthat::expect_identical(names($OBJ), $VALUES)
+        strictness: ast
+    - pattern:
+        context: testthat::expect_identical($VALUES, names($OBJ))
+        strictness: ast
+constraints:
+  VALUES:
+    not:
+      regex: colnames|rownames|dimnames|NULL
+fix: testthat::expect_named(~~OBJ~~, ~~VALUES~~)
+message: expect_named(x, n) is better than expect_identical(names(x), n).
+
+---
+
+id: expect_named-4
+language: r
+severity: warning
+rule:
+  any:
+    - pattern:
+        context: testthat::expect_equal(names($OBJ), $VALUES)
+        strictness: ast
+    - pattern:
+        context: testthat::expect_equal($VALUES, names($OBJ))
+        strictness: ast
+constraints:
+  VALUES:
+    not:
+      regex: colnames|rownames|dimnames|NULL
+fix: testthat::expect_named(~~OBJ~~, ~~VALUES~~)
+message: expect_named(x, n) is better than expect_equal(names(x), n).

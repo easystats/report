@@ -1,0 +1,27 @@
+id: for_loop_index-1
+language: r
+severity: warning
+rule:
+  pattern: for ($IDX in $IDX)
+message: Don't re-use any sequence symbols as the index symbol in a for loop.
+
+---
+
+id: for_loop_index-2
+language: r
+severity: warning
+rule:
+  pattern: for ($IDX in $SEQ)
+constraints:
+  SEQ:
+    kind: call
+    has:
+      kind: arguments
+      has:
+        kind: argument
+        stopBy: end
+        has:
+          kind: identifier
+          field: value
+          pattern: $IDX
+message: Don't re-use any sequence symbols as the index symbol in a for loop.

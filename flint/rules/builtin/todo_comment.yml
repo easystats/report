@@ -1,0 +1,7 @@
+id: todo_comment-1
+language: r
+severity: warning
+rule:
+  kind: comment
+  regex: '(?i)#(|\s+)\b(todo|fixme)\b'
+message: Remove TODO comments.

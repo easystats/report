@@ -1,0 +1,37 @@
+id: expect_comparison-1
+language: r
+severity: warning
+rule:
+  pattern: expect_true($X > $Y)
+fix: expect_gt(~~X~~, ~~Y~~)
+message: expect_gt(x, y) is better than expect_true(x > y).
+
+---
+
+id: expect_comparison-2
+language: r
+severity: warning
+rule:
+  pattern: expect_true($X >= $Y)
+fix: expect_gte(~~X~~, ~~Y~~)
+message: expect_gte(x, y) is better than expect_true(x >= y).
+
+---
+
+id: expect_comparison-3
+language: r
+severity: warning
+rule:
+  pattern: expect_true($X < $Y)
+fix: expect_lt(~~X~~, ~~Y~~)
+message: expect_lt(x, y) is better than expect_true(x < y).
+
+---
+
+id: expect_comparison-4
+language: r
+severity: warning
+rule:
+  pattern: expect_true($X <= $Y)
+fix: expect_lte(~~X~~, ~~Y~~)
+message: expect_lte(x, y) is better than expect_true(x <= y).

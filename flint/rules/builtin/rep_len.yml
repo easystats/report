@@ -1,0 +1,7 @@
+id: rep_len-1
+language: r
+severity: warning
+rule:
+  pattern: rep($OBJ, length.out = $LEN)
+fix: rep_len(~~OBJ~~, ~~LEN~~)
+message: Use rep_len(x, n) instead of rep(x, length.out = n).

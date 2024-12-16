@@ -1,0 +1,10 @@
+id: right_assignment
+language: r
+severity: hint
+rule:
+  pattern: $RHS -> $LHS
+  has:
+    field: rhs
+    kind: identifier
+fix: ~~LHS~~<- ~~RHS~~
+message: Use <-, not ->, for assignment.

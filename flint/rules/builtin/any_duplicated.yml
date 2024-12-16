@@ -1,0 +1,91 @@
+id: any_duplicated-1
+language: r
+severity: warning
+rule:
+  pattern: any($$$ duplicated($MYVAR) $$$)
+fix: anyDuplicated(~~MYVAR~~) > 0
+message: anyDuplicated(x, ...) > 0 is better than any(duplicated(x), ...).
+
+---
+
+id: any_duplicated-2
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: length(unique($MYVAR)) == length($MYVAR)
+    - pattern: length($MYVAR) == length(unique($MYVAR))
+fix: anyDuplicated(~~MYVAR~~) == 0L
+message: anyDuplicated(x) == 0L is better than length(unique(x)) == length(x).
+
+---
+
+id: any_duplicated-3
+language: r
+severity: warning
+rule:
+  pattern: length(unique($MYVAR)) != length($MYVAR)
+fix: anyDuplicated(~~MYVAR~~) != 0L
+message: |
+  Use anyDuplicated(x) != 0L (or > or <)  instead of length(unique(x)) != length(x)
+  (or > or <).
+
+---
+
+id: any_duplicated-4
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: nrow($DATA) != length(unique($DATA$µCOL))
+    - pattern: length(unique($DATA$µCOL)) != nrow($DATA)
+fix: anyDuplicated(~~DATA~~$~~COL~~) != 0L
+message: |
+  anyDuplicated(DF$col) != 0L is better than length(unique(DF$col)) != nrow(DF)
+
+---
+
+# id: any_duplicated-5
+# language: r
+# severity: warning
+# rule:
+#   any:
+#     - pattern:
+#         context: nrow($DATA) != length(unique($DATA[["µCOL"]]))
+#         strictness: ast
+#     - pattern:
+#         context: length(unique($DATA[["µCOL"]])) != nrow($DATA)
+#         strictness: ast
+# fix: anyDuplicated(~~DATA~~[["~~COL~~"]]) != 0L
+# message: |
+#   anyDuplicated(DF[["col"]]) != 0L is better than length(unique(DF[["col"]])) != nrow(DF)
+#
+# ---
+
+id: any_duplicated-6
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: nrow($DATA) == length(unique($DATA$µCOL))
+    - pattern: length(unique($DATA$µCOL)) == nrow($DATA)
+fix: anyDuplicated(~~DATA~~$~~COL~~) == 0L
+message: |
+  anyDuplicated(DF$col) == 0L is better than length(unique(DF$col)) == nrow(DF)
+
+# ---
+#
+# id: any_duplicated-7
+# language: r
+# severity: warning
+# rule:
+#   any:
+#     - pattern:
+#         context: nrow($DATA) == length(unique($DATA[["µCOL"]]))
+#         strictness: ast
+#     - pattern:
+#         context: length(unique($DATA[["µCOL"]])) == nrow($DATA)
+#         strictness: ast
+# fix: anyDuplicated(~~DATA~~[["~~COL~~"]]) == 0L
+# message: |
+#   anyDuplicated(DF[["col"]]) == 0L is better than length(unique(DF[["col"]])) == nrow(DF)

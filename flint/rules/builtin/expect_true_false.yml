@@ -1,0 +1,28 @@
+id: expect_true_false-1
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: $FUN(TRUE, $VALUES)
+    - pattern: $FUN($VALUES, TRUE)
+constraints:
+  FUN:
+    regex: ^(expect_identical|expect_equal)$
+fix: expect_true(~~VALUES~~)
+message: expect_true(x) is better than ~~FUN~~(x, TRUE).
+
+---
+
+id: expect_true_false-2
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: $FUN(FALSE, $VALUES)
+    - pattern: $FUN($VALUES, FALSE)
+constraints:
+  FUN:
+    regex: ^(expect_identical|expect_equal)$
+fix: expect_false(~~VALUES~~)
+message: expect_false(x) is better than ~~FUN~~(x, FALSE).
+

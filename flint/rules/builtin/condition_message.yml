@@ -1,0 +1,23 @@
+id: condition_message-1
+language: r
+severity: warning
+rule:
+  pattern: $FUN($$$ paste0($$$MSG) $$$)
+  kind: call
+  not:
+    any:
+      - has:
+          kind: extract_operator
+      - has:
+          stopBy: end
+          kind: argument
+          has:
+            field: name
+            regex: "^collapse|recycle0$"
+            stopBy: end
+constraints:
+  FUN:
+    regex: "^(packageStartupMessage|stop|warning)$"
+fix: ~~FUN~~(~~MSG~~)
+message: |
+  ~~FUN~~(paste0(...)) can be rewritten as ~~FUN~~(...).

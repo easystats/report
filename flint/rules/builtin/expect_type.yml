@@ -1,0 +1,51 @@
+id: expect_type-1
+language: r
+severity: warning
+rule:
+  any:
+    - pattern:
+        context: expect_identical(typeof($OBJ), $VALUES)
+        strictness: ast
+    - pattern:
+        context: expect_identical($VALUES, typeof($OBJ))
+        strictness: ast
+constraints:
+  VALUES:
+    not:
+      regex: typeof
+fix: expect_type(~~OBJ~~, ~~VALUES~~)
+message: expect_type(x, t) is better than expect_identical(typeof(x), t).
+
+---
+
+id: expect_type-2
+language: r
+severity: warning
+rule:
+  any:
+    - pattern:
+        context: expect_equal(typeof($OBJ), $VALUES)
+        strictness: ast
+    - pattern:
+        context: expect_equal($VALUES, typeof($OBJ))
+        strictness: ast
+constraints:
+  VALUES:
+    not:
+      regex: typeof
+fix: expect_type(~~OBJ~~, ~~VALUES~~)
+message: expect_type(x, t) is better than expect_equal(typeof(x), t).
+
+---
+
+id: expect_type-3
+language: r
+severity: warning
+rule:
+  pattern: expect_true($FUN($OBJ))
+constraints:
+  FUN:
+    regex: ^is\.
+    not:
+      regex: data\.frame$
+message: expect_type(x, t) is better than expect_true(is.<t>(x)).

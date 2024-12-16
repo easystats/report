@@ -1,0 +1,23 @@
+id: right_double_assignment
+language: r
+severity: hint
+rule:
+  pattern: $RHS ->> $LHS
+  has:
+    field: rhs
+    kind: identifier
+message: ->> can have hard-to-predict behavior; prefer assigning to a
+  specific environment instead (with assign() or <-).
+
+---
+
+id: left_double_assignment
+language: r
+severity: hint
+rule:
+  pattern: $LHS <<- $RHS
+  has:
+    field: lhs
+    kind: identifier
+message: <<- can have hard-to-predict behavior; prefer assigning to a
+  specific environment instead (with assign() or <-).

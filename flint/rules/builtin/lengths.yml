@@ -1,0 +1,59 @@
+id: sapply_lengths-1
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: sapply($MYVAR, length)
+    - pattern: sapply(FUN = length, $MYVAR)
+    - pattern: sapply($MYVAR, FUN = length)
+    - pattern: vapply($MYVAR, length $$$)
+
+    - pattern: map_dbl($MYVAR, length)
+    - pattern: map_dbl($MYVAR, .f = length)
+    - pattern: map_dbl(.f = length, $MYVAR)
+    - pattern: map_int($MYVAR, length)
+    - pattern: map_int($MYVAR, .f = length)
+    - pattern: map_int(.f = length, $MYVAR)
+
+    - pattern: purrr::map_dbl($MYVAR, length)
+    - pattern: purrr::map_dbl($MYVAR, .f = length)
+    - pattern: purrr::map_dbl(.f = length, $MYVAR)
+    - pattern: purrr::map_int($MYVAR, length)
+    - pattern: purrr::map_int($MYVAR, .f = length)
+    - pattern: purrr::map_int(.f = length, $MYVAR)
+fix: lengths(~~MYVAR~~)
+message: Use lengths() to find the length of each element in a list.
+
+---
+
+id: sapply_lengths-2
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: $MYVAR |> sapply(length)
+    - pattern: $MYVAR |> sapply(FUN = length)
+    - pattern: $MYVAR |> vapply(length $$$)
+    - pattern: $MYVAR |> map_int(length)
+    - pattern: $MYVAR |> map_int(length $$$)
+    - pattern: $MYVAR |> purrr::map_int(length)
+    - pattern: $MYVAR |> purrr::map_int(length $$$)
+fix: ~~MYVAR~~ |> lengths()
+message: Use lengths() to find the length of each element in a list.
+
+---
+
+id: sapply_lengths-3
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: $MYVAR %>% sapply(length)
+    - pattern: $MYVAR %>% sapply(FUN = length)
+    - pattern: $MYVAR %>% vapply(length $$$)
+    - pattern: $MYVAR %>% map_int(length)
+    - pattern: $MYVAR %>% map_int(length $$$)
+    - pattern: $MYVAR %>% purrr::map_int(length)
+    - pattern: $MYVAR %>% purrr::map_int(length $$$)
+fix: ~~MYVAR~~ %>% lengths()
+message: Use lengths() to find the length of each element in a list.

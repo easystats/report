@@ -1,0 +1,44 @@
+id: missing_argument-1
+language: r
+severity: warning
+rule:
+  kind: arguments
+  has:
+    kind: comma
+    any:
+      - precedes:
+          stopBy: neighbor
+          any:
+            - regex: '^\)$'
+            - kind: comma
+      - follows:
+          any:
+            - regex: '^\($'
+            - kind: argument
+              regex: '=$'
+  follows:
+    kind: identifier
+    not:
+      regex: '^(quote|switch|alist)$'
+    inside:
+      kind: call
+message: Missing argument in function call.
+
+---
+
+id: missing_argument-2
+language: r
+severity: warning
+rule:
+  kind: arguments
+  regex: '=(\s+|)\)$'
+  follows:
+    any:
+      - kind: identifier
+      - kind: extract_operator
+      - kind: namespace_operator
+    not:
+      regex: '^(quote|switch|alist)$'
+    inside:
+      kind: call
+message: Missing argument in function call.

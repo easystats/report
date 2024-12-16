@@ -1,0 +1,12 @@
+id: expect_length-1
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: $FUN(length($OBJ), $VALUE)
+    - pattern: $FUN($VALUE, length($OBJ))
+constraints:
+  FUN:
+    regex: ^(expect_identical|expect_equal)$
+fix: expect_length(~~OBJ~~, ~~VALUE~~)
+message: expect_length(x, n) is better than ~~FUN~~(length(x), n).
