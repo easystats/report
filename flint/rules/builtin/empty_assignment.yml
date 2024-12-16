@@ -1,0 +1,15 @@
+id: empty_assignment-1
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: $OBJ <- {}
+    - pattern: $OBJ <- {$CONTENT}
+    - pattern: $OBJ = {}
+    - pattern: $OBJ = {$CONTENT}
+constraints:
+  CONTENT:
+    regex: ^\s+$
+message: |
+  Assign NULL explicitly or, whenever possible, allocate the empty object with
+  the right type and size.

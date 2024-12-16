@@ -1,0 +1,25 @@
+id: is_numeric-1
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: is.numeric($VAR) || is.integer($VAR)
+    - pattern: is.integer($VAR) || is.numeric($VAR)
+message: is.numeric(x) || is.integer(x) can be simplified to is.numeric(x). Use
+    is.double(x) to test for objects stored as 64-bit floating point.
+
+---
+
+id: is_numeric-2
+language: r
+severity: warning
+rule:
+  any:
+    - pattern:
+        context: class($VAR) %in% c("numeric", "integer")
+        strictness: ast
+    - pattern:
+        context: class($VAR) %in% c("integer", "numeric")
+        strictness: ast
+message: class(x) %in% c("numeric", "integer") can be simplified to is.numeric(x). Use
+    is.double(x) to test for objects stored as 64-bit floating point.

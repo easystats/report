@@ -1,0 +1,42 @@
+id: class_equals-1
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: class($VAR) == $CLASSNAME
+    - pattern: $CLASSNAME == class($VAR)
+  not:
+    inside:
+      kind: argument
+fix: inherits(~~VAR~~, ~~CLASSNAME~~)
+message: Instead of comparing class(x) with ==, use inherits(x, 'class-name') or is.<class> or is(x, 'class')
+
+---
+
+id: class_equals-2
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: class($VAR) != $CLASSNAME
+    - pattern: $CLASSNAME != class($VAR)
+  not:
+    inside:
+      kind: argument
+fix: "!inherits(~~VAR~~, ~~CLASSNAME~~)"
+message: "Instead of comparing class(x) with !=, use !inherits(x, 'class-name') or is.<class> or is(x, 'class')"
+
+---
+
+id: class_equals-3
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: $CLASSNAME %in% class($VAR)
+    - pattern: class($VAR) %in% $CLASSNAME
+constraints:
+  CLASSNAME:
+    kind: string
+fix: inherits(~~VAR~~, ~~CLASSNAME~~)
+message: Instead of comparing class(x) with %in%, use inherits(x, 'class-name') or is.<class> or is(x, 'class')

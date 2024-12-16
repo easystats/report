@@ -133,7 +133,7 @@ report_text.character <- function(x,
     ...
   )
 
-  text <- paste0(summary(params), collapse = "; ")
+  text <- paste(summary(params), collapse = "; ")
   if (nrow(entries) > 1) {
     text <- paste0(name, ": ", nrow(entries), " entries, such as ", text)
   } else {
@@ -198,5 +198,5 @@ report_statistics.character <- function(x,
     text <- paste0(entries$Entry, ", n = ", entries$n_Entry)
   }
 
-  as.report_statistics(paste0(text, collapse = "; "), summary = paste0(text[1:n_entries], collapse = "; "))
+  as.report_statistics(paste(text, collapse = "; "), summary = paste(text[1:n_entries], collapse = "; "))
 }

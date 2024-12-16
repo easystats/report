@@ -1,0 +1,7 @@
+id: which_grepl-1
+language: r
+severity: warning
+rule:
+  pattern: which(grepl($$$ARGS))
+fix: grep(~~ARGS~~)
+message: grep(pattern, x) is better than which(grepl(pattern, x)).

@@ -1,0 +1,75 @@
+id: paste-1
+language: r
+severity: warning
+rule:
+  pattern:
+    context: paste($$$CONTENT sep = "" $$$CONTENT2)
+    strictness: ast
+# fix: paste0($$$CONTENT)
+message: paste0(...) is better than paste(..., sep = "").
+
+---
+
+id: paste-2
+language: r
+severity: warning
+rule:
+  any:
+    - pattern:
+        context: paste($CONTENT, collapse = ", ")
+        strictness: ast
+    - pattern:
+        context: paste(collapse = ", ", $CONTENT)
+        strictness: ast
+# fix: paste0($$$CONTENT)
+message: toString(.) is more expressive than paste(., collapse = ", ").
+
+---
+
+id: paste-3
+language: r
+severity: warning
+rule:
+  pattern:
+    context: paste0($$$CONTENT sep = $USELESS $$$CONTENT2)
+    strictness: ast
+# fix: paste0($$$CONTENT)
+message: |
+  sep= is not a formal argument to paste0(); did you mean to use paste(), or
+  collapse=?
+
+---
+
+id: paste-4
+language: r
+severity: warning
+rule:
+  any:
+    - pattern:
+        context: paste0($CONTENT, collapse = $FOO)
+        strictness: ast
+    - pattern:
+        context: paste0(collapse = $FOO, $CONTENT)
+        strictness: ast
+  not:
+    has:
+      regex: sep
+      kind: argument
+# fix: paste0($$$CONTENT)
+message: |
+  Use paste(), not paste0(), to collapse a character vector when sep= is not used.
+
+# ---
+#
+# id: paste-5
+# language: r
+# severity: warning
+# rule:
+#   pattern:
+#     context: paste0(rep($VAR, $TIMES), collapse = "")
+#     strictness: ast
+# constraints:
+#   VAR:
+#     kind: string
+# fix: strrep(~~VAR~~, ~~TIMES~~)
+# message: strrep(x, times) is better than paste0(rep(x, times), collapse = "").

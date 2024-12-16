@@ -24,3 +24,7 @@ tests\^spelling
 ^WIP/.
 \.code-workspace$
 ^CRAN-SUBMISSION$
+
+
+# flint files
+^flint$

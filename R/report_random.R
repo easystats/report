@@ -74,5 +74,5 @@ summary.report_random <- function(object, ...) {
 
 #' @export
 print.report_random <- function(x, ...) {
-  cat(paste0(x, collapse = "\n"))
+  cat(paste(x, collapse = "\n"))
 }

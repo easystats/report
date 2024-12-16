@@ -1,0 +1,69 @@
+id: implicit_assignment-1
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: $RECEIVER <- $VALUE
+    - pattern: $RECEIVER <<- $VALUE
+    - pattern: $VALUE -> $RECEIVER
+    - pattern: $VALUE ->> $RECEIVER
+  inside:
+    any:
+      - kind: if_statement
+      - kind: while_statement
+    field: condition
+    stopBy: end
+    strictness: cst
+message: |
+  Avoid implicit assignments in function calls. For example, instead of
+  `if (x <- 1L) { ... }`, write `x <- 1L; if (x) { ... }`.
+
+---
+
+id: implicit_assignment-2
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: $RECEIVER <- $VALUE
+    - pattern: $RECEIVER <<- $VALUE
+    - pattern: $VALUE -> $RECEIVER
+    - pattern: $VALUE ->> $RECEIVER
+  inside:
+    kind: for_statement
+    field: sequence
+    stopBy: end
+    strictness: cst
+message: |
+  Avoid implicit assignments in function calls. For example, instead of
+  `if (x <- 1L) { ... }`, write `x <- 1L; if (x) { ... }`.
+
+# ---
+#
+# id: implicit_assignment-3
+# language: r
+# severity: warning
+# rule:
+#   any:
+#     - pattern: $RECEIVER <- $VALUE
+#     - pattern: $RECEIVER <<- $VALUE
+#     - pattern: $VALUE -> $RECEIVER
+#     - pattern: $VALUE ->> $RECEIVER
+#   inside:
+#     kind: argument
+#     field: value
+#     strictness: cst
+#     stopBy: end
+#   not:
+#     inside:
+#       kind: call
+#       field: function
+#       has:
+#         kind: identifier
+#         regex: ^(lapply)$
+#       stopBy: end
+#       strictness: cst
+# message: |
+#   Avoid implicit assignments in function calls. For example, instead of
+#   `if (x <- 1L) { ... }`, write `x <- 1L; if (x) { ... }`.
+

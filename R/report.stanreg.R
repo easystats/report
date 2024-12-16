@@ -80,7 +80,7 @@ report_priors.stanreg <- function(x, ...) {
     )
   )
 
-  values <- paste0(values, collapse = "; ")
+  values <- paste(values, collapse = "; ")
   values <- paste0(params$Prior_Distribution, " (", values, ")")
 
   if (length(unique(values)) == 1 && nrow(params) > 1) {

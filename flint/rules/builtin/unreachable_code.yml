@@ -1,0 +1,64 @@
+id: unreachable_code-1
+language: r
+severity: warning
+rule:
+  regex: '[^}]+'
+  not:
+    regex: 'else'
+  follows:
+    any:
+      - pattern: return($$$A)
+      - pattern: stop($$$A)
+    not:
+      precedes:
+        regex: 'else'
+    stopBy: end
+message: Code and comments coming after a return() or stop() should be removed.
+
+---
+
+id: unreachable_code-2
+language: r
+severity: warning
+rule:
+  regex: '[^}]+'
+  not:
+    regex: 'else'
+  follows:
+    any:
+      - pattern: next
+      - pattern: break
+    stopBy: end
+message: Remove code and comments coming after `next` or `break`
+
+---
+
+id: unreachable_code-3
+language: r
+severity: warning
+rule:
+  inside:
+    any:
+      - kind: if_statement
+        pattern: if (FALSE)
+      - kind: while_statement
+        pattern: while (FALSE)
+    stopBy: end
+message: Remove code inside a conditional loop with a deterministically false condition.
+
+---
+
+id: unreachable_code-4
+language: r
+severity: warning
+rule:
+  inside:
+    any:
+      - kind: if_statement
+        pattern: if (TRUE)
+      - kind: while_statement
+        pattern: while (TRUE)
+    stopBy: end
+message: |
+  One branch has a a deterministically true condition. The other branches can
+  be removed.

@@ -73,5 +73,5 @@ summary.report_model <- function(object, ...) {
 
 #' @export
 print.report_model <- function(x, ...) {
-  cat(paste0(x, collapse = "\n"))
+  cat(paste(x, collapse = "\n"))
 }

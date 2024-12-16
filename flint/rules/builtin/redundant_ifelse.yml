@@ -1,0 +1,67 @@
+id: redundant_ifelse-1
+language: r
+severity: warning
+rule:
+  pattern: $FUN($COND, $VAL1, $VAL2)
+constraints:
+  VAL1:
+    regex: ^TRUE$
+  VAL2:
+    regex: ^FALSE$
+  FUN:
+    regex: ^(ifelse|fifelse|if_else)$
+fix: ~~COND~~
+message: |
+  Use ~~COND~~ directly instead of calling ~~FUN~~(~~COND~~, TRUE, FALSE).
+
+---
+
+id: redundant_ifelse-2
+language: r
+severity: warning
+rule:
+  pattern: $FUN($COND, $VAL1, $VAL2)
+constraints:
+  VAL1:
+    regex: ^FALSE$
+  VAL2:
+    regex: ^TRUE$
+  FUN:
+    regex: ^(ifelse|fifelse|if_else)$
+fix: '!(~~COND~~)'
+message: |
+  Use !(~~COND~~) directly instead of calling ~~FUN~~(~~COND~~, FALSE, TRUE).
+
+---
+
+id: redundant_ifelse-3
+language: r
+severity: warning
+rule:
+  pattern: $FUN($COND, $VAL1, $VAL2)
+constraints:
+  VAL1:
+    regex: ^(1|1L)$
+  VAL2:
+    regex: ^(0|0L)$
+  FUN:
+    regex: ^(ifelse|fifelse|if_else)$
+fix: as.integer(~~COND~~)
+message: Prefer as.integer(~~COND~~) to ~~FUN~~(~~COND~~, ~~VAL1~~, ~~VAL2~~).
+
+---
+
+id: redundant_ifelse-4
+language: r
+severity: warning
+rule:
+  pattern: $FUN($COND, $VAL1, $VAL2)
+constraints:
+  VAL1:
+    regex: ^(0|0L)$
+  VAL2:
+    regex: ^(1|1L)$
+  FUN:
+    regex: ^(ifelse|fifelse|if_else)$
+fix: as.integer(!(~~COND~~))
+message: Prefer as.integer(!(~~COND~~)) to ~~FUN~~(~~COND~~, ~~VAL1~~, ~~VAL2~~).

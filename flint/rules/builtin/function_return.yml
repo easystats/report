@@ -1,0 +1,11 @@
+id: function_return-1
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: return($OBJ <- $VAL)
+    - pattern: return($OBJ <<- $VAL)
+    - pattern: return($VAL -> $OBJ)
+    - pattern: return($VAL ->> $OBJ)
+message: |
+  Move the assignment outside of the return() clause, or skip assignment altogether.

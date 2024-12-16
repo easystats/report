@@ -18,5 +18,5 @@
 #' @export
 format_formula <- function(x, what = "conditional") {
   f <- insight::safe_deparse(insight::find_formula(x, verbose = FALSE)[[what]])
-  paste0("formula: ", paste0(f, collapse = " + "))
+  paste0("formula: ", paste(f, collapse = " + "))
 }

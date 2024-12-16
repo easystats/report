@@ -1,0 +1,85 @@
+id: sort-1
+language: r
+severity: warning
+rule:
+  pattern: $OBJ[order($OBJ)]
+fix: sort(~~OBJ~~, na.last = TRUE)
+message: sort(~~OBJ~~, na.last = TRUE) is better than ~~OBJ~~[order(~~OBJ~~)].
+
+---
+
+id: sort-2
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: $OBJ[order($OBJ, decreasing = $DECREASING)]
+    - pattern: $OBJ[order(decreasing = $DECREASING, $OBJ)]
+constraints:
+  DECREASING:
+    regex: ^(TRUE|FALSE)$
+fix: sort(~~OBJ~~, decreasing = ~~DECREASING~~, na.last = TRUE)
+message: |
+  sort(~~OBJ~~, decreasing = ~~DECREASING~~, na.last = TRUE) is better than
+  ~~OBJ~~[order(~~OBJ~~, decreasing = ~~DECREASING~~)].
+
+---
+
+id: sort-3
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: $OBJ[order($OBJ, na.last = $NALAST)]
+    - pattern: $OBJ[order(na.last = $NALAST, $OBJ)]
+constraints:
+  NALAST:
+    regex: ^(TRUE|FALSE)$
+fix: sort(~~OBJ~~, na.last = ~~NALAST~~, na.last = TRUE)
+message: |
+  sort(~~OBJ~~, na.last = ~~NALAST~~, na.last = TRUE) is better than
+  ~~OBJ~~[order(~~OBJ~~, na.last = ~~NALAST~~)].
+
+---
+
+id: sort-4
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: $OBJ[order($OBJ, decreasing = TRUE, na.last = FALSE)]
+    - pattern: $OBJ[order($OBJ, na.last = FALSE, decreasing = TRUE)]
+    - pattern: $OBJ[order(decreasing = TRUE, $OBJ, na.last = FALSE)]
+    - pattern: $OBJ[order(decreasing = TRUE, na.last = FALSE, $OBJ)]
+    - pattern: $OBJ[order(na.last = FALSE, decreasing = TRUE, $OBJ)]
+    - pattern: $OBJ[order(na.last = FALSE, $OBJ, decreasing = TRUE)]
+fix: sort(~~OBJ~~, decreasing = TRUE, na.last = FALSE)
+message: |
+  sort(~~OBJ~~, decreasing = TRUE, na.last = FALSE) is better than
+  ~~OBJ~~[order(~~OBJ~~, na.last = FALSE, decreasing = TRUE)].
+
+---
+
+id: sort-5
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: sort($OBJ) == $OBJ
+    - pattern: $OBJ == sort($OBJ)
+fix: !is.unsorted(~~OBJ~~)
+message: |
+  Use !is.unsorted(~~OBJ~~) to test the sortedness of a vector.
+
+---
+
+id: sort-6
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: sort($OBJ) != $OBJ
+    - pattern: $OBJ != sort($OBJ)
+fix: is.unsorted(~~OBJ~~)
+message: |
+  Use is.unsorted(~~OBJ~~) to test the unsortedness of a vector.

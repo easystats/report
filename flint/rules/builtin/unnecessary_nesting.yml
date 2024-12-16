@@ -1,0 +1,36 @@
+id: unnecessary_nesting-1
+language: r
+severity: warning
+rule:
+  kind: if_statement
+  any:
+    - has:
+        kind: 'braced_expression'
+        field: consequence
+        has:
+          kind: if_statement
+          stopBy: neighbor
+          not:
+            has:
+              kind: 'braced_expression'
+              field: alternative
+              stopBy: end
+        not:
+          any:
+            - has:
+                nthChild: 2
+            - precedes:
+                regex: "^else$"
+    - has:
+        kind: if_statement
+        field: consequence
+        stopBy: neighbor
+  # Can be in if(), but not else if()
+  not:
+    inside:
+      field: alternative
+      kind: if_statement
+message: |
+  Don't use nested `if` statements, where a single `if` with the combined
+  conditional expression will do. For example, instead of `if (x) { if (y) { ... }}`,
+  use `if (x && y) { ... }`.

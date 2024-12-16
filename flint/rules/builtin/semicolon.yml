@@ -1,0 +1,10 @@
+id: semicolon-1
+language: r
+severity: warning
+rule:
+  regex: ;\s+$
+  not:
+    inside:
+      kind: string
+      stopBy: end
+message: Trailing semicolons are not needed.

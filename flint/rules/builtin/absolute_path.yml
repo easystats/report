@@ -1,0 +1,13 @@
+# id: absolute_path-1
+# language: r
+# severity: warning
+# rule:
+#   kind: string_content
+#   any:
+#     - regex: '^~[[:alpha:]]'
+#     - regex: '^~/[[:alpha:]]'
+#     - regex: '^[[:alpha:]]:'
+#     - regex: '^(/|~)$'
+#     - regex: '^/[[:alpha:]]'
+#     - regex: '^\\'
+# message: Do not use absolute paths.

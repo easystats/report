@@ -1,0 +1,22 @@
+id: expect_null-1
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: $FUN(NULL, $VALUES)
+    - pattern: $FUN($VALUES, NULL)
+constraints:
+  FUN:
+    regex: ^(expect_identical|expect_equal)$
+fix: expect_null(~~VALUES~~)
+message: expect_null(x) is better than ~~FUN~~(x, NULL).
+
+---
+
+id: expect_null-2
+language: r
+severity: warning
+rule:
+  pattern: expect_true(is.null($VALUES))
+fix: expect_null(~~VALUES~~)
+message: expect_null(x) is better than expect_true(is.null(x)).

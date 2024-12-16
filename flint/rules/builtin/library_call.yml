@@ -1,0 +1,26 @@
+id: library_call
+language: r
+severity: warning
+rule:
+  kind: call
+  has:
+    regex: ^library|require$
+    kind: identifier
+  follows:
+    not:
+      any:
+        - kind: call
+          has:
+            regex: ^library|require$
+            kind: identifier
+        - kind: comment
+  not:
+    inside:
+      any:
+        - kind: function_definition
+        - kind: call
+          has:
+            pattern: suppressPackageStartupMessages
+            kind: identifier
+message: Move all library/require calls to the top of the script.
+

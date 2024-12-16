@@ -1,0 +1,110 @@
+id: matrix_apply-1
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: apply($INPUT, 2, sum)
+    - pattern: apply($INPUT, MARGIN = 2, sum)
+    - pattern: apply($INPUT, 2, FUN = sum)
+    - pattern: apply($INPUT, MARGIN = 2, FUN = sum)
+fix: colSums(~~INPUT~~)
+message: Use colSums(x) rather than apply(x, 1, sum)
+
+---
+
+id: matrix_apply-2
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: apply($INPUT, 2, sum, na.rm = $NARM)
+    - pattern: apply($INPUT, MARGIN = 2, sum, na.rm = $NARM)
+    - pattern: apply($INPUT, 2, FUN = sum, na.rm = $NARM)
+    - pattern: apply($INPUT, MARGIN = 2, FUN = sum, na.rm = $NARM)
+fix: colSums(~~INPUT~~, na.rm = ~~NARM~~)
+message: Use colSums(x, na.rm = ~~NARM~~) rather than apply(x, 2, sum, na.rm = ~~NARM~~).
+
+---
+
+id: matrix_apply-3
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: apply($INPUT, 1, sum)
+    - pattern: apply($INPUT, MARGIN = 1, sum)
+    - pattern: apply($INPUT, 1, FUN = sum)
+    - pattern: apply($INPUT, MARGIN = 1, FUN = sum)
+fix: rowSums(~~INPUT~~)
+message: Use rowSums(x) rather than apply(x, 1, sum)
+
+---
+
+id: matrix_apply-4
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: apply($INPUT, 1, sum, na.rm = $NARM)
+    - pattern: apply($INPUT, MARGIN = 1, sum, na.rm = $NARM)
+    - pattern: apply($INPUT, 1, FUN = sum, na.rm = $NARM)
+    - pattern: apply($INPUT, MARGIN = 1, FUN = sum, na.rm = $NARM)
+fix: rowSums(~~INPUT~~, na.rm = ~~NARM~~)
+message: Use rowSums(x, na.rm = ~~NARM~~) rather than apply(x, 1, sum, na.rm = ~~NARM~~).
+
+---
+
+id: matrix_apply-5
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: apply($INPUT, 1, mean)
+    - pattern: apply($INPUT, MARGIN = 1, mean)
+    - pattern: apply($INPUT, 1, FUN = mean)
+    - pattern: apply($INPUT, MARGIN = 1, FUN = mean)
+fix: rowMeans(~~INPUT~~)
+message: Use rowMeans(x) rather than apply(x, 1, mean).
+
+---
+
+id: matrix_apply-6
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: apply($INPUT, 1, mean, na.rm = $NARM)
+    - pattern: apply($INPUT, MARGIN = 1, mean, na.rm = $NARM)
+    - pattern: apply($INPUT, 1, FUN = mean, na.rm = $NARM)
+    - pattern: apply($INPUT, MARGIN = 1, FUN = mean, na.rm = $NARM)
+fix: rowMeans(~~INPUT~~, na.rm = ~~NARM~~)
+message: Use rowMeans(x, na.rm = ~~NARM~~) rather than apply(x, 1, mean, na.rm = ~~NARM~~).
+
+---
+
+id: matrix_apply-7
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: apply($INPUT, 2, mean)
+    - pattern: apply($INPUT, MARGIN = 2, mean)
+    - pattern: apply($INPUT, 2, FUN = mean)
+    - pattern: apply($INPUT, MARGIN = 2, FUN = mean)
+fix: colMeans(~~INPUT~~)
+message: Use colMeans(x) rather than apply(x, 2, mean).
+
+---
+
+id: matrix_apply-8
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: apply($INPUT, 2, mean, na.rm = $NARM)
+    - pattern: apply($INPUT, MARGIN = 2, mean, na.rm = $NARM)
+    - pattern: apply($INPUT, 2, FUN = mean, na.rm = $NARM)
+    - pattern: apply($INPUT, MARGIN = 2, FUN = mean, na.rm = $NARM)
+fix: colMeans(~~INPUT~~, na.rm = ~~NARM~~)
+message: Use colMeans(x, na.rm = ~~NARM~~) rather than apply(x, 2, mean, na.rm = ~~NARM~~).
+

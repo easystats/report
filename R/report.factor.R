@@ -172,7 +172,7 @@ report_statistics.factor <- function(x, table = NULL, levels_percentage = "auto"
     )
   }
 
-  as.report_statistics(paste0(text_full, collapse = "; "), summary = paste0(text, collapse = "; "))
+  as.report_statistics(paste(text_full, collapse = "; "), summary = paste(text, collapse = "; "))
 }
 
 #' @export

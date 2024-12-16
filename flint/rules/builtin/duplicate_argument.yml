@@ -1,0 +1,46 @@
+id: duplicate_argument-1
+language: r
+severity: warning
+rule:
+  # Look for a function argument...
+  kind: argument
+  any:
+    - has:
+        kind: identifier
+        field: name
+        pattern: $OBJ
+    - has:
+        kind: string_content
+        pattern: $OBJ
+        stopBy: end
+
+  # ... that follows other argument(s) with the same name...
+  follows:
+    kind: argument
+    stopBy: end
+    has:
+      stopBy: end
+      kind: identifier
+      field: name
+      pattern: $OBJ
+
+  # ... inside a function call (or a subset environment for data.table)...
+  inside:
+    kind: arguments
+    follows:
+      any:
+        - kind: identifier
+          pattern: $FUN
+        - kind: string
+      inside:
+        any:
+          - kind: call
+          - kind: subset
+
+# ... that is not a function listed below.
+constraints:
+  FUN:
+    not:
+      regex: ^(mutate|transmute)$
+
+message: Avoid duplicate arguments in function calls.

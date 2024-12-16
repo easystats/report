@@ -1,0 +1,121 @@
+id: seq-1
+language: r
+severity: warning
+rule:
+  pattern: seq(length($VAR))
+fix: seq_along(~~VAR~~)
+message: |
+  seq(length(...)) is likely to be wrong in the empty edge case. Use seq_along(...) instead.
+
+---
+
+id: seq-2
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: 1:nrow($VAR)
+    - pattern: 1L:nrow($VAR)
+  regex: ^1
+fix: seq_len(nrow(~~VAR~~))
+message: |
+  1:nrow(...) is likely to be wrong in the empty edge case. Use seq_len(nrow(...)) instead.
+
+---
+
+id: seq-3
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: 1:n()
+    - pattern: 1L:n()
+  regex: ^1
+fix: seq_len(n())
+message: |
+  1:n() is likely to be wrong in the empty edge case. Use seq_len(n()) instead.
+
+---
+
+id: seq-4
+language: r
+severity: warning
+rule:
+  pattern: seq(nrow($VAR))
+fix: seq_len(nrow(~~VAR~~))
+message: |
+  seq(nrow(...)) is likely to be wrong in the empty edge case. Use seq_len(nrow(...)) instead.
+
+---
+
+id: seq-5
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: 1:length($VAR)
+    - pattern: 1L:length($VAR)
+  regex: ^1
+fix: seq_along(~~VAR~~)
+message: |
+  1:length(...) is likely to be wrong in the empty edge case. Use seq_along(...) instead.
+
+---
+
+id: seq-6
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: 1:ncol($VAR)
+    - pattern: 1L:ncol($VAR)
+  regex: ^1
+fix: seq_len(ncol(~~VAR~~))
+message: |
+  1:ncol(...) is likely to be wrong in the empty edge case. Use seq_len(ncol(...)) instead.
+
+---
+
+id: seq-7
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: 1:NCOL($VAR)
+    - pattern: 1L:NCOL($VAR)
+  regex: ^1
+fix: seq_len(NCOL(~~VAR~~))
+message: |
+  1:NCOL(...) is likely to be wrong in the empty edge case. Use seq_len(NCOL(...)) instead.
+
+---
+
+id: seq-8
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: 1:NROW($VAR)
+    - pattern: 1L:NROW($VAR)
+  regex: ^1
+fix: seq_len(NROW(~~VAR~~))
+message: |
+  1:NROW(...) is likely to be wrong in the empty edge case. Use seq_len(NROW(...)) instead.
+
+
+---
+
+id: seq-9
+language: r
+severity: warning
+rule:
+  pattern: seq(1, $VAL)
+  not:
+    pattern: seq(1, 0)
+constraints:
+  VAL:
+    regex: ^\d+(|L)$
+fix: seq_len(~~VAL~~)
+message: seq_len(~~VAL~~) is more efficient than seq(1, ~~VAL~~).
+
+

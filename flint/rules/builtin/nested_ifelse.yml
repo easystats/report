@@ -1,0 +1,29 @@
+id: nested_ifelse-1
+language: r
+severity: warning
+rule:
+  pattern: $FUN($COND, $TRUE, $FALSE)
+constraints:
+  FALSE:
+    regex: ^(ifelse|if_else|fifelse)
+  FUN:
+    regex: ^(ifelse|if_else|fifelse)
+message: |
+  Don't use nested ~~FUN~~() calls; instead, try (1) data.table::fcase;
+  (2) dplyr::case_when; or (3) using a lookup table.
+
+---
+
+id: nested_ifelse-2
+language: r
+severity: warning
+rule:
+  pattern: $FUN($COND, $TRUE, $FALSE)
+constraints:
+  TRUE:
+    regex: ^(ifelse|if_else|fifelse)
+  FUN:
+    regex: ^(ifelse|if_else|fifelse)
+message: |
+  Don't use nested ~~FUN~~() calls; instead, try (1) data.table::fcase;
+  (2) dplyr::case_when; or (3) using a lookup table.

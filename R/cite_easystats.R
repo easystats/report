@@ -346,9 +346,9 @@ cite_easystats <- function(packages = "easystats",
       ref_packages[length(ref_packages)]
     )
     ref_packages[[2]] <- split(ref_packages[[2]], cumsum(ref_packages[[2]] == ""))
-    ref_packages.index <- grep(paste0("id: ((", paste0(packages, collapse = ")|("), "))"), ref_packages[[2]])
+    ref_packages.index <- grep(paste0("id: ((", paste(packages, collapse = ")|("), "))"), ref_packages[[2]])
     ref_packages[[2]] <- unlist(ref_packages[[2]][ref_packages.index], use.names = FALSE)
-    ref_packages <- paste0(unlist(ref_packages, use.names = FALSE), collapse = "\n")
+    ref_packages <- paste(unlist(ref_packages, use.names = FALSE), collapse = "\n")
   } else {
     ref_packages <- readLines(system.file("easystats_bib.bib", package = "report"))
     ref_packages[ref_packages == "  version = {%s}"] <- sprintf(
@@ -365,10 +365,10 @@ cite_easystats <- function(packages = "easystats",
     ref_packages <- split(ref_packages, cumsum(ref_packages == ""))
     ref_packages.index <- grep(paste0(
       "((article)|(software))\\{((",
-      paste0(packages, collapse = ")|("), "))"
+      paste(packages, collapse = ")|("), "))"
     ), ref_packages)
     ref_packages <- unlist(ref_packages[ref_packages.index], use.names = FALSE)
-    ref_packages <- paste0(unlist(ref_packages, use.names = FALSE), collapse = "\n")
+    ref_packages <- paste(unlist(ref_packages, use.names = FALSE), collapse = "\n")
   }
 
 

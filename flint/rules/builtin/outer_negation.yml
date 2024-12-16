@@ -1,0 +1,29 @@
+id: outer_negation-1
+language: r
+severity: warning
+rule:
+  pattern: all(!$VAR)
+constraints:
+  VAR:
+    not:
+      regex: '^!'
+fix: '!any(~~VAR~~)'
+message: |
+  !any(x) is better than all(!x). The former applies negation only once after
+  aggregation instead of many times for each element of x.
+
+---
+
+id: outer_negation-2
+language: r
+severity: warning
+rule:
+  pattern: any(! $VAR)
+constraints:
+  VAR:
+    not:
+      regex: '^!'
+fix: '!all(~~VAR~~)'
+message: |
+  !all(x) is better than any(!x). The former applies negation only once after
+  aggregation instead of many times for each element of x.

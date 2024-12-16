@@ -1,0 +1,37 @@
+id: equals_na
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: $MYVAR == NA
+    - pattern: $MYVAR == NA_integer_
+    - pattern: $MYVAR == NA_real_
+    - pattern: $MYVAR == NA_complex_
+    - pattern: $MYVAR == NA_character_
+    - pattern: NA == $MYVAR
+    - pattern: NA_integer_ == $MYVAR
+    - pattern: NA_real_ == $MYVAR
+    - pattern: NA_complex_ == $MYVAR
+    - pattern: NA_character_ == $MYVAR
+fix: is.na(~~MYVAR~~)
+message: Use is.na for comparisons to NA (not == or !=).
+
+---
+
+id: equals_na-2
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: $MYVAR != NA
+    - pattern: $MYVAR != NA_integer_
+    - pattern: $MYVAR != NA_real_
+    - pattern: $MYVAR != NA_complex_
+    - pattern: $MYVAR != NA_character_
+    - pattern: NA != $MYVAR
+    - pattern: NA_integer_ != $MYVAR
+    - pattern: NA_real_ != $MYVAR
+    - pattern: NA_complex_ != $MYVAR
+    - pattern: NA_character_ != $MYVAR
+fix: is.na(~~MYVAR~~)
+message: Use is.na for comparisons to NA (not == or !=).

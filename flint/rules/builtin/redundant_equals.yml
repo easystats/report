@@ -1,0 +1,29 @@
+id: redundant_equals-1
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: $VAR == TRUE
+    - pattern: TRUE == $VAR
+    - pattern: $VAR == FALSE
+    - pattern: FALSE == $VAR
+message: |
+  Using == on a logical vector is redundant. Well-named logical vectors can be
+  used directly in filtering. For data.table's `i` argument, wrap the column
+  name in (), like `DT[(is_treatment)]`.
+
+---
+
+id: redundant_equals-2
+language: r
+severity: warning
+rule:
+  any:
+    - pattern: $VAR != TRUE
+    - pattern: TRUE != $VAR
+    - pattern: $VAR != FALSE
+    - pattern: FALSE != $VAR
+message: |
+  Using != on a logical vector is redundant. Well-named logical vectors can be
+  used directly in filtering. For data.table's `i` argument, wrap the column
+  name in (), like `DT[(is_treatment)]`.

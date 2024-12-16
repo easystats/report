@@ -1,0 +1,89 @@
+id: literal_coercion-1
+language: r
+severity: warning
+rule:
+  pattern: $FUN($VALUE)
+constraints:
+  VALUE:
+    kind: argument
+    has:
+      kind: float
+    not:
+      regex: 'e'
+  FUN:
+    regex: ^(int|as\.integer)$
+fix: ~~VALUE~~L
+message: |
+  Use ~~VALUE~~L instead of ~~FUN~~(~~VALUE~~), i.e., use literals directly
+  where possible, instead of coercion.
+
+---
+
+id: literal_coercion-2
+language: r
+severity: warning
+rule:
+  pattern: as.character(NA)
+fix: NA_character_
+message: |
+  Use NA_character_ instead of as.character(NA), i.e., use literals directly
+  where possible, instead of coercion.
+
+---
+
+id: literal_coercion-3
+language: r
+severity: warning
+rule:
+  pattern: as.logical($VAR)
+constraints:
+  VAR:
+    kind: argument
+    has:
+      any:
+        - regex: ^1L$
+        - regex: ^1$
+        - regex: 'true'
+fix: TRUE
+message: Use TRUE instead of as.logical(~~VAR~~).
+
+---
+
+id: literal_coercion-4
+language: r
+severity: warning
+rule:
+  pattern: $FUN($VAR)
+constraints:
+  VAR:
+    kind: argument
+    has:
+      kind: float
+  FUN:
+    regex: ^(as\.numeric|as\.double)$
+fix: ~~VAR~~
+message: Use ~~VAR~~ instead of ~~FUN~~(~~VAR~~).
+
+---
+
+id: literal_coercion-5
+language: r
+severity: warning
+rule:
+  pattern: as.integer(NA)
+fix: NA_integer_
+message: Use NA_integer_ instead of as.integer(NA).
+
+---
+
+id: literal_coercion-6
+language: r
+severity: warning
+rule:
+  pattern: $FUN(NA)
+constraints:
+  FUN:
+    regex: ^(as\.numeric|as\.double)$
+fix: NA_real_
+message: Use NA_real_ instead of ~~FUN~~(NA).
+

@@ -1,0 +1,11 @@
+id: numeric_leading_zero-1
+language: r
+severity: warning
+rule:
+  pattern: $VALUE
+  any:
+    - kind: float
+    - kind: identifier
+  regex: ^\.[0-9]
+fix: 0~~VALUE~~
+message: Include the leading zero for fractional numeric constants.

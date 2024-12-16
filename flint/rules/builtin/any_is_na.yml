@@ -1,0 +1,7 @@
+id: any_na-1
+language: r
+severity: warning
+rule:
+  pattern: any($$$ is.na($MYVAR) $$$)
+fix: anyNA(~~MYVAR~~)
+message: anyNA(x) is better than any(is.na(x)).
