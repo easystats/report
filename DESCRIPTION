@@ -1,7 +1,7 @@
 Package: report
 Type: Package
 Title: Automated Reporting of Results and Statistical Models
-Version: 0.5.9.2
+Version: 0.5.9.3
 Authors@R:
     c(person(given = "Dominique",
              family = "Makowski",
@@ -77,6 +77,7 @@ Suggests:
     survival,
     modelbased,
     emmeans,
+    marginaleffects,
     RcppEigen,
     BH,
     testthat (>= 3.2.1)
