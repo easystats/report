@@ -9,7 +9,7 @@
 #'
 #' @inherit report return seealso
 #'
-#' @examplesIf requireNamespace("modelbased", quietly = TRUE) && requireNamespace("emmeans", quietly = TRUE)
+#' @examplesIf all(insight::check_if_installed(c("modelbased", "marginaleffects", "collapse", "Formula"), quietly = TRUE))
 #' library(modelbased)
 #' model <- lm(Sepal.Width ~ Species, data = iris)
 #' contr <- estimate_contrasts(model)

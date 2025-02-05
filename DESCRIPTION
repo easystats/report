@@ -1,7 +1,7 @@
 Package: report
 Type: Package
 Title: Automated Reporting of Results and Statistical Models
-Version: 0.6.0
+Version: 0.6.1
 Authors@R:
     c(person(given = "Dominique",
              family = "Makowski",
@@ -57,27 +57,29 @@ Depends:
 Imports:
     bayestestR (>= 0.15.0),
     effectsize (>= 1.0.0),
-    insight (>= 1.0.0),
-    parameters (>= 0.24.0),
-    performance (>= 0.12.4),
-    datawizard (>= 0.13.0),
+    insight (>= 1.0.1),
+    parameters (>= 0.24.1),
+    performance (>= 0.13.0),
+    datawizard (>= 1.0.0),
     stats,
     tools,
     utils
 Suggests:
     BayesFactor,
     brms,
+    collapse,
     ivreg,
     knitr,
     lavaan,
     lme4,
     dplyr,
+    Formula,
     rmarkdown,
     rstanarm,
     survival,
-    modelbased,
+    modelbased (>= 0.9.0),
     emmeans,
-    marginaleffects,
+    marginaleffects (>= 0.25.0),
     RcppEigen,
     BH,
     testthat (>= 3.2.1)
