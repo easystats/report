@@ -1,4 +1,4 @@
-# report 0.6.0
+# report 0.6.1
 
 Bug fixes
 
