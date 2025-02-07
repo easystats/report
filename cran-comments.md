@@ -1,3 +1,11 @@
+## R CMD check results report 0.6.1
+
+0 errors | 0 warnings | 0 note
+
+## R CMD check results report 0.6.0
+
+0 errors | 0 warnings | 0 note
+
 ## R CMD check results report 0.5.9
 
 0 errors | 0 warnings | 0 note

@@ -1,3 +1,9 @@
+# report 0.6.1
+
+Bug fixes
+
+* Fixed CRAN check failures.
+
 # report 0.6.0
 
 Minor changes
@@ -34,9 +40,9 @@ New features
 
 Major Changes
 
-* This release changes the licensing model of `{report}` to an MIT license. 
+* This release changes the licensing model of `{report}` to an MIT license.
 
-Minor changes 
+Minor changes
 
 * `report` now supports variables of class `htest` for the Chi2, Friedman test, Fisher's exact test, and Kruskal-Wallis.
 
@@ -86,7 +92,7 @@ Minor changes
   * Fixes bug whereas the `total` parameter was not respected.
 
 * `report_effectsize` improvement
-  * For `t.test` (htest) objects, now support the `type` (one of `c("d", "g")`) 
+  * For `t.test` (htest) objects, now support the `type` (one of `c("d", "g")`)
     and `rules` (one of `c"cohen1988", "sawilowsky2009", "gignac2016")`)
     arguments.
 
@@ -106,7 +112,7 @@ Minor changes
 
 BUG FIXES
 
-* Fixed bug with truncated output about confidence interval distribution in 
+* Fixed bug with truncated output about confidence interval distribution in
   `report()`.
 
 # report 0.5.1
@@ -180,4 +186,3 @@ MAJOR CHANGES
 # report 0.3.0
 
 * Initial release of the package.
-
