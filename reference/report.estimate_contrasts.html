@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,7 +57,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Reporting <code>estimate_contrasts</code> objects</h1>
-      <small class="dont-index">Source: <a href="https://github.com/easystats/report/blob/v0.6.0/R/report.estimate_contrasts.R" class="external-link"><code>R/report.estimate_contrasts.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/easystats/report/blob/v0.6.1/R/report.estimate_contrasts.R" class="external-link"><code>R/report.estimate_contrasts.R</code></a></small>
       <div class="d-none name"><code>report.estimate_contrasts.Rd</code></div>
     </div>
 
@@ -125,18 +125,15 @@ re-computation.</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/modelbased/" class="external-link">modelbased</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Sepal.Width</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">contr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://easystats.github.io/modelbased/reference/estimate_contrasts.html" class="external-link">estimate_contrasts</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> No variable was specified for contrast estimation. Selecting `contrast =</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   "</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   Species</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   "`.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> We selected `contrast=c("Species")`.</span>
 <span class="r-in"><span><span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="va">contr</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> The marginal contrasts analysis suggests the following. The difference between</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> setosa and versicolor is positive and statistically significant (difference =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.66, 95% CI [ 0.49, 0.82], t(147) = 9.69, p &lt; .001). The difference between</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> setosa and virginica is positive and statistically significant (difference =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.45, 95% CI [ 0.29, 0.62], t(147) = 6.68, p &lt; .001). The difference between</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> versicolor and virginica is negative and statistically significant (difference</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> = -0.20, 95% CI [-0.37, -0.04], t(147) = -3.00, p = 0.003)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> versicolor and setosa is negative and statistically significant (difference =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.66, 95% CI [-0.79, -0.52], t(147) = -9.69, p &lt; .001). The difference between</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> virginica and setosa is negative and statistically significant (difference =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.45, 95% CI [-0.59, -0.32], t(147) = -6.68, p &lt; .001). The difference between</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> virginica and versicolor is positive and statistically significant (difference</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> = 0.20, 95% CI [ 0.07, 0.34], t(147) = 3.00, p = 0.003)</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
