@@ -40,7 +40,7 @@ report.aovlist <- report.aov
 #' @inheritParams report.lm
 #' @export
 report_effectsize.aov <- function(x, include_intercept = TRUE, ...) {
-  table <- suppressMessages(effectsize::effectsize(x, include_intercept = include_intercept, ...))
+  table <- suppressWarnings(suppressMessages(effectsize::effectsize(x, include_intercept = include_intercept, ...)))
   estimate <- names(table)[effectsize::is_effectsize_name(names(table))]
 
   if (estimate == "Eta2_partial") {
