@@ -13,9 +13,9 @@
 \usage{
 \method{report}{aov}(x, ...)
 
-\method{report_effectsize}{aov}(x, include_intercept = TRUE, ...)
+\method{report_effectsize}{aov}(x, include_intercept = FALSE, ...)
 
-\method{report_table}{aov}(x, include_intercept = TRUE, ...)
+\method{report_table}{aov}(x, include_intercept = FALSE, ...)
 
 \method{report_statistics}{aov}(x, table = NULL, ...)
 
@@ -32,7 +32,7 @@
 
 \item{...}{Arguments passed to or from other methods.}
 
-\item{include_intercept}{If \code{FALSE}, won't include the intercept.}
+\item{include_intercept}{Set to \code{TRUE} to include the intercept (relevant for type-3 ANOVA tables).}
 
 \item{table}{Provide the output of  \code{report_table()} to avoid its
 re-computation.}
