@@ -1,7 +1,8 @@
+skip_on_cran()
 skip_if_not_installed("brms")
 
 test_that("report.brms", {
-  testthat::skip_if_not_installed("rstan", "2.26.0")
+  skip_if_not_installed("rstan", "2.26.0")
 
   set.seed(333)
   model <- suppressMessages(suppressWarnings(brms::brm(
