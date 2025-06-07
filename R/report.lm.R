@@ -51,7 +51,6 @@
 #' }
 #' @return An object of class [report()].
 #' @export
-
 report.lm <- function(x, include_effectsize = TRUE, effectsize_method = "refit", ...) {
   table <- report_table(x,
     include_effectsize = include_effectsize,
