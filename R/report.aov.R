@@ -3,6 +3,7 @@
 #' Create reports for ANOVA models.
 #'
 #' @param x Object of class `aov`, `anova` or `aovlist`.
+#' @param include_intercept	Set to `TRUE` to include the intercept (relevant for type-3 ANOVA tables).
 #' @inheritParams report
 #' @inheritParams report.htest
 #' @inherit report return seealso
@@ -37,9 +38,10 @@ report.aovlist <- report.aov
 
 
 #' @rdname report.aov
+#' @inheritParams report.lm
 #' @export
-report_effectsize.aov <- function(x, ...) {
-  table <- suppressMessages(effectsize::effectsize(x, include_intercept = FALSE, ...))
+report_effectsize.aov <- function(x, include_intercept = FALSE, ...) {
+  table <- suppressMessages(effectsize::effectsize(x, include_intercept = include_intercept, ...))
   estimate <- names(table)[effectsize::is_effectsize_name(names(table))]
 
   if (estimate == "Eta2_partial") {
@@ -104,10 +106,14 @@ report_effectsize.aovlist <- report_effectsize.aov
 
 #' @rdname report.aov
 #' @export
-report_table.aov <- function(x, ...) {
-  effsize <- report_effectsize(x, ...)
+report_table.aov <- function(x, include_intercept = FALSE, ...) {
+  effsize <- report_effectsize(x, include_intercept = include_intercept, ...)
   effsize_table <- attributes(effsize)$table
   params <- parameters::model_parameters(x, ...)
+
+  if (!include_intercept) {
+    params <- params[params$Parameter != "(Intercept)", ]
+  }
 
   if ("Group" %in% names(params)) {
     effsize_table$Group <- "Within"
