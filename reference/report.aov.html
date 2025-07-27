@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,10 +71,10 @@
 <span><span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'aov'</span></span>
-<span><span class="fu"><a href="report_effectsize.html">report_effectsize</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu"><a href="report_effectsize.html">report_effectsize</a></span><span class="op">(</span><span class="va">x</span>, include_intercept <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'aov'</span></span>
-<span><span class="fu"><a href="report_table.html">report_table</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu"><a href="report_table.html">report_table</a></span><span class="op">(</span><span class="va">x</span>, include_intercept <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'aov'</span></span>
 <span><span class="fu"><a href="report_statistics.html">report_statistics</a></span><span class="op">(</span><span class="va">x</span>, table <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
@@ -102,6 +102,10 @@
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Arguments passed to or from other methods.</p></dd>
+
+
+<dt id="arg-include-intercept">include_intercept<a class="anchor" aria-label="anchor" href="#arg-include-intercept"></a></dt>
+<dd><p>Set to <code>TRUE</code> to include the intercept (relevant for type-3 ANOVA tables).</p></dd>
 
 
 <dt id="arg-table">table<a class="anchor" aria-label="anchor" href="#arg-table"></a></dt>
