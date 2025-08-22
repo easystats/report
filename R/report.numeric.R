@@ -68,7 +68,7 @@ report_table.numeric <- function(x,
   table_full <- data.frame(
     Mean = mean(x, na.rm = TRUE),
     SD = stats::sd(x, na.rm = TRUE),
-    Median = stats::median(x),
+    Median = stats::median(x, na.rm = TRUE),
     MAD = stats::mad(x, na.rm = TRUE),
     Min = min(x, na.rm = TRUE),
     Max = max(x, na.rm = TRUE),
