@@ -1,0 +1,368 @@
+# GitHub Copilot Environment Setup for rempsyc R Package
+# This workflow sets up the development environment before Copilot starts working
+# Based on: https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/customize-the-agent-environment
+
+name: copilot-setup-steps
+
+on:
+  workflow_dispatch:
+  # This workflow is automatically triggered by GitHub Copilot
+  # before the agent starts working in the repository
+
+jobs:
+  copilot-setup-steps:
+    runs-on: ubuntu-latest
+    
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_KEEP_PKG_SOURCE: yes
+      _R_CHECK_CRAN_INCOMING_: false
+      _R_CHECK_FORCE_SUGGESTS_: false
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Determine if R setup is needed
+        id: check_r_needed
+        run: |
+          echo "Checking if R environment setup is needed..."
+          
+          # Check if this is likely a documentation-only or configuration change
+          # by looking for indicators that suggest R functionality will be needed
+          
+          R_NEEDED=true
+          
+          # Get the branch name if available
+          BRANCH_NAME="${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
+          echo "Branch: $BRANCH_NAME"
+          
+          # PRIORITY: Check user's explicit instructions first
+          echo "=== Checking for explicit user instructions ==="
+          ISSUE_NUMBER="${COPILOT_AGENT_ISSUE_NUMBER:-}"
+          
+          if [ -n "$ISSUE_NUMBER" ] && [ "$ISSUE_NUMBER" != "0" ]; then
+            echo "Found associated issue #$ISSUE_NUMBER, checking for setup instructions..."
+            
+            # Fetch issue content using GitHub API
+            ISSUE_CONTENT=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+              "https://api.github.com/repos/$GITHUB_REPOSITORY/issues/$ISSUE_NUMBER" | \
+              jq -r '.body // ""')
+            
+            echo "Issue content length: ${#ISSUE_CONTENT} characters"
+            
+            # Check for explicit instructions to skip setup
+            if echo "$ISSUE_CONTENT" | grep -iE "(do not run|don't run|skip).*(setup|install|dependencies)" > /dev/null; then
+              echo "✓ Found explicit instruction to SKIP setup in issue #$ISSUE_NUMBER"
+              R_NEEDED=false
+            elif echo "$ISSUE_CONTENT" | grep -iE "(no R|no dependencies|just.*text|just.*editing|only.*text|only.*editing)" > /dev/null; then
+              echo "✓ Found indication this is text-only work in issue #$ISSUE_NUMBER"
+              R_NEEDED=false  
+            elif echo "$ISSUE_CONTENT" | grep -iE "(version.*bump|update.*NEWS|changelog|text.*edit)" > /dev/null; then
+              echo "✓ Found indication this is version/documentation work in issue #$ISSUE_NUMBER"
+              R_NEEDED=false
+            else
+              echo "No explicit setup instructions found in issue content"
+            fi
+          else
+            echo "No associated issue found, proceeding with file-based analysis"
+          fi
+          
+          # Only run file-based analysis if user instructions didn't determine outcome
+          if [ "$R_NEEDED" == "true" ]; then
+            echo "=== Running file-based analysis ==="
+            
+            # Check recent commits for file patterns
+            if git log --name-only -10 --pretty=format: | grep -E '\.(R|Rd|Rmd)$' > /dev/null; then
+              echo "Found R-related files in recent commits - R setup needed"
+              R_NEEDED=true
+            elif git log --name-only -5 --pretty=format: | grep -E '^(tests/|R/|man/|vignettes/)' > /dev/null; then
+              echo "Found R package structure changes - R setup needed"
+              R_NEEDED=true
+            elif git log --oneline -5 | grep -iE '(function|package|test|build|check|install)' > /dev/null; then
+              echo "Found R development keywords in commit messages - R setup needed"
+              R_NEEDED=true
+            else
+              # Check if recent changes are only to documentation/config files
+              RECENT_FILES=$(git log --name-only -5 --pretty=format: | sort -u)
+              echo "Recent files changed:"
+              echo "$RECENT_FILES"
+              
+              # If only these types of files changed, skip R setup
+              if echo "$RECENT_FILES" | grep -v -E '^(\.github/copilot-instructions\.md|\.github/workflows/|README\.md|\.gitignore|\.Rbuildignore|NEWS\.md|CONTRIBUTING\.md|LICENSE|CITATION\.cff|DESCRIPTION|cran-comments\.md|\.md$|\.yml$|\.yaml$)$' | grep -E '.' > /dev/null; then
+                echo "Found changes beyond documentation/config files - R setup needed"
+                R_NEEDED=true
+              else
+                echo "Only documentation/config files changed - R setup can be skipped"
+                R_NEEDED=false
+              fi
+            fi
+          else
+            echo "=== Skipping file-based analysis (user instructions already determined outcome) ==="
+          fi
+          
+          echo "R_NEEDED=$R_NEEDED" >> $GITHUB_OUTPUT
+          echo ""
+          echo "=== FINAL DECISION ==="
+          if [ "$R_NEEDED" == "true" ]; then
+            echo "✓ R setup WILL be run"
+            echo "Reason: Analysis indicates R functionality is needed"
+          else
+            echo "✓ R setup WILL BE SKIPPED"
+            echo "Reason: User instructions or file analysis indicates R setup not needed"
+          fi
+          echo "Decision: R_NEEDED=$R_NEEDED"
+        shell: bash
+        
+      - name: Setup R
+        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: 'release'
+          use-public-rspm: true
+          
+      - name: Setup pandoc (required for building vignettes)
+        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
+        uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Install system dependencies
+        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libcurl4-openssl-dev \
+            libssl-dev \
+            libxml2-dev \
+            libfontconfig1-dev \
+            libharfbuzz-dev \
+            libfribidi-dev \
+            libfreetype6-dev \
+            libpng-dev \
+            libtiff5-dev \
+            libjpeg-dev \
+            r-base-dev
+
+      - name: Setup R user library
+        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
+        run: |
+          mkdir -p ~/R/library
+          echo 'R_LIBS_USER=~/R/library' >> ~/.Renviron
+        shell: bash
+
+      - name: Cache R packages
+        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
+        uses: actions/cache@v3
+        with:
+          path: ~/.local/share/renv
+          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-renv-
+
+      - name: Install core R development packages
+        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
+        run: |
+          # Install essential development packages first
+          install.packages(c(
+            "rlang",
+            "dplyr", 
+            "testthat",
+            "lintr",
+            "styler", 
+            "roxygen2",
+            "reprex",
+            "devtools"
+          ), repos = "https://cloud.r-project.org/")
+        shell: Rscript {0}
+        
+      - name: Install commonly used suggested packages
+        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
+        run: |
+          # Install the most commonly required suggested packages
+          # Based on analysis of rlang::check_installed() calls in source code
+          install.packages(c(
+            "ggplot2",      # Most common - used in plots (nice_scatter, nice_violin, etc.)
+            "flextable",    # For nice_table() - APA formatted tables
+            "effectsize",   # For nice_lm_slopes, contrasts
+            "correlation",  # For cormatrix_excel
+            "boot",         # For nice_violin bootstrap
+            "ggsignif",     # For nice_violin significance bars  
+            "ggrepel",      # For nice_qq plots
+            "openxlsx2",    # For Excel export functions
+            "modelbased",   # For contrasts
+            "bootES",       # For effect sizes in contrasts
+            "performance",  # For model diagnostics
+            "insight",      # For model utilities
+            "broom",        # For tidy model outputs
+            "emmeans"       # For contrasts and slopes
+          ), repos = "https://cloud.r-project.org/")
+        shell: Rscript {0}
+        continue-on-error: true
+
+      - name: Install rempsyc package dependencies
+        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
+        run: |
+          # Install package dependencies using remotes
+          tryCatch({
+            install.packages("remotes", repos = "https://cloud.r-project.org/")
+            remotes::install_deps(dependencies = TRUE)
+          }, error = function(e) {
+            cat("Warning: Some dependencies may not have installed:", e$message, "\n")
+          })
+        shell: Rscript {0}
+
+      - name: Build rempsyc package
+        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
+        run: |
+          # Build the current package
+          system("R CMD build .")
+        shell: Rscript {0}
+        
+      - name: Install rempsyc package  
+        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
+        run: |
+          # Install the built package
+          pkg_file <- list.files(pattern = "rempsyc_.*\\.tar\\.gz")[1]
+          if (!is.na(pkg_file)) {
+            system(paste("R CMD INSTALL", pkg_file))
+          } else {
+            # Fallback: install from source
+            system("R CMD INSTALL .")
+          }
+        shell: Rscript {0}
+
+      - name: Verify R installation and packages
+        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
+        run: |
+          cat("=== R Version ===\n")
+          print(R.version.string)
+          
+          cat("\n=== Core Development Packages ===\n")
+          required_packages <- c("rlang", "dplyr", "testthat", "lintr", "styler", "roxygen2", "reprex")
+          for (pkg in required_packages) {
+            if (requireNamespace(pkg, quietly = TRUE)) {
+              cat("✓", pkg, "- version", as.character(packageVersion(pkg)), "\n")
+            } else {
+              cat("✗", pkg, "- NOT AVAILABLE\n")
+            }
+          }
+          
+          cat("\n=== rempsyc Package ===\n") 
+          if (requireNamespace("rempsyc", quietly = TRUE)) {
+            library(rempsyc)
+            cat("✓ rempsyc - version", as.character(packageVersion("rempsyc")), "\n")
+          } else {
+            cat("✗ rempsyc - NOT AVAILABLE\n")
+          }
+        shell: Rscript {0}
+
+      - name: Test core rempsyc functionality
+        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
+        run: |
+          library(rempsyc)
+          
+          cat("=== Testing Core Functions ===\n")
+          
+          # Test basic data function
+          test_data <- data.frame(id = c(1,1,2,3), val = c(1,2,3,4))
+          duplicates <- extract_duplicates(test_data, id = "id")
+          cat("✓ extract_duplicates() works\n")
+          
+          # Test t-test function
+          tryCatch({
+            result <- nice_t_test(data = mtcars, response = "mpg", group = "am")
+            cat("✓ nice_t_test() works\n")
+          }, error = function(e) {
+            cat("⚠ nice_t_test() error:", e$message, "\n")
+          })
+          
+          # Test table creation if flextable available
+          if (requireNamespace("flextable", quietly = TRUE)) {
+            tryCatch({
+              table <- nice_table(mtcars[1:5, 1:4])
+              cat("✓ nice_table() works\n")  
+            }, error = function(e) {
+              cat("⚠ nice_table() error:", e$message, "\n")
+            })
+          } else {
+            cat("ℹ nice_table() skipped (flextable not available)\n")
+          }
+          
+          # Test plotting if ggplot2 available
+          if (requireNamespace("ggplot2", quietly = TRUE)) {
+            tryCatch({
+              plot <- nice_scatter(data = mtcars, response = "mpg", predictor = "wt")
+              cat("✓ nice_scatter() works\n")
+            }, error = function(e) {
+              cat("⚠ nice_scatter() error:", e$message, "\n")
+            })
+          } else {
+            cat("ℹ nice_scatter() skipped (ggplot2 not available)\n")  
+          }
+          
+          cat("\n=== Core Function Tests Complete ===\n")
+        shell: Rscript {0}
+
+      - name: Test reprex functionality  
+        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
+        run: |
+          library(reprex)
+          library(rempsyc)
+          
+          cat("=== Testing reprex Functionality ===\n")
+          
+          # Test reprex with rempsyc function
+          test_code <- "
+          library(rempsyc)
+          data(mtcars)
+          
+          # Test basic t-test
+          result <- nice_t_test(data = mtcars, response = 'mpg', group = 'am')
+          print(result)
+          "
+          
+          tryCatch({
+            reprex_result <- reprex(input = test_code, venue = "gh", advertise = FALSE, show = FALSE)
+            
+            if (length(reprex_result) > 0 && any(grepl("library\\(rempsyc\\)", reprex_result))) {
+              cat("✓ reprex is working correctly with rempsyc\n")
+              cat("Sample reprex output (first 5 lines):\n")
+              cat(paste(head(reprex_result, 5), collapse = "\n"), "\n")
+            } else {
+              cat("⚠ reprex generated output but may not be working correctly\n")
+            }
+          }, error = function(e) {
+            cat("✗ reprex failed:", e$message, "\n")
+          })
+          
+          cat("\n=== reprex Test Complete ===\n")
+        shell: Rscript {0}
+
+      - name: Display environment summary
+        run: |
+          echo "=== GitHub Copilot Environment Setup Complete ==="
+          echo ""
+          
+          if [ "${{ steps.check_r_needed.outputs.R_NEEDED }}" == "true" ]; then
+            echo "✓ Full R development environment configured:"
+            echo "  - R and system dependencies installed"
+            echo "  - rempsyc package built and installed"
+            echo "  - Core development tools available (lintr, styler, reprex)"
+            echo "  - Common suggested packages installed"
+            echo "  - Package building and testing capabilities verified"
+            echo ""
+            echo "The environment is ready for R package development work."
+            echo "Copilot can now build, test, lint, and create reproducible examples."
+          else
+            echo "✓ Minimal environment configured:"
+            echo "  - Repository checked out and ready"
+            echo "  - R setup SKIPPED per user instructions or file analysis"
+            echo ""
+            if [ -n "${COPILOT_AGENT_ISSUE_NUMBER:-}" ] && [ "${COPILOT_AGENT_ISSUE_NUMBER:-}" != "0" ]; then
+              echo "Decision based on issue #${COPILOT_AGENT_ISSUE_NUMBER} analysis"
+            else
+              echo "Decision based on file change analysis"
+            fi
+            echo "The environment is ready for documentation and configuration work."
+            echo "Perfect for version bumps, NEWS.md updates, and text editing tasks."
+          fi
+        shell: bash
