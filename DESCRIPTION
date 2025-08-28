@@ -1,7 +1,7 @@
 Package: report
 Type: Package
 Title: Automated Reporting of Results and Statistical Models
-Version: 0.6.1
+Version: 0.6.1.1
 Authors@R:
     c(person(given = "Dominique",
              family = "Makowski",
@@ -55,12 +55,12 @@ BugReports: https://github.com/easystats/report/issues
 Depends:
     R (>= 3.6)
 Imports:
-    bayestestR (>= 0.15.3),
-    effectsize (>= 1.0.0),
-    insight (>= 1.2.0),
-    parameters (>= 0.25.0),
-    performance (>= 0.13.0),
-    datawizard (>= 1.0.2),
+    bayestestR (>= 0.16.1),
+    effectsize (>= 1.0.1),
+    insight (>= 1.3.1),
+    parameters (>= 0.27.0),
+    performance (>= 0.15.0),
+    datawizard (>= 1.2.0),
     stats,
     tools,
     utils
@@ -157,3 +157,4 @@ Collate:
     'utils_misspelled_variables.R'
     'zzz.R'
 Roxygen: list(markdown = TRUE)
+Remotes: easystats/insight, easystats/bayestestR, easystats/parameters, easystats/performance

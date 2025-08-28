@@ -1,3 +1,9 @@
+# report 0.6.x
+
+Bug fixes
+
+* Fixed issue with missing effect size for the Intercept term in type 3 anova tables (#451)
+
 # report 0.6.1
 
 Bug fixes
