@@ -9,10 +9,15 @@ on:
   # This workflow is automatically triggered by GitHub Copilot
   # before the agent starts working in the repository
   pull_request:
-    types: [opened, synchronize, reopened, ready_for_review]
+    types: [opened, synchronize]
 
 jobs:
   copilot-setup-steps:
+  if: >
+        github.event_name == 'workflow_dispatch' ||
+        (github.event_name == 'pull_request' &&
+         github.event.action == 'synchronize' &&
+         github.actor == 'github-copilot')
     runs-on: ubuntu-latest
     
     env:
