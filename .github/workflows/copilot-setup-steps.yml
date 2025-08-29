@@ -174,36 +174,16 @@ jobs:
           ), repos = "https://cloud.r-project.org/")
         shell: Rscript {0}
         
-      - name: Install commonly used suggested packages
+      - name: Install report package dependencies (Imports only)
         if: steps.check_r_needed.outputs.R_NEEDED == 'true'
         run: |
-          # Install the most commonly required suggested packages
-          # Based on analysis of requireNamespace() calls in source code
-          install.packages(c(
-            "BayesFactor",    # For report.BFBayesFactor()
-            "brms",          # For report.brmsfit() 
-            "lme4",          # For report.lme4()
-            "lavaan",        # For report.lavaan()
-            "rstanarm",      # For report.stanreg()
-            "survival",      # For report.coxph()
-            "ivreg",         # For report.ivreg()
-            "modelbased",    # For contrasts and slopes
-            "emmeans",       # For contrasts 
-            "knitr",         # For vignettes
-            "dplyr",         # For data manipulation in tests
-            "rmarkdown",     # For documentation
-            "collapse"       # Sometimes used in performance
-          ), repos = "https://cloud.r-project.org/")
-        shell: Rscript {0}
-        continue-on-error: true
-
-      - name: Install report package dependencies
-        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
-        run: |
-          # Install package dependencies using remotes
+          # Install only required dependencies (Imports) to save time and resources
+          # Suggested packages are NOT installed by default and should be 
+          # installed "as necessary" based on the specific PR requirements
+          # This follows the copilot instructions philosophy of targeted installation
           tryCatch({
             install.packages("remotes", repos = "https://cloud.r-project.org/")
-            remotes::install_deps(dependencies = TRUE)
+            remotes::install_deps(dependencies = c("Depends", "Imports"))
           }, error = function(e) {
             cat("Warning: Some dependencies may not have installed:", e$message, "\n")
           })
@@ -345,7 +325,8 @@ jobs:
             echo "  - R and system dependencies installed"
             echo "  - report package built and installed"
             echo "  - Core development tools available (lintr, styler, reprex)"
-            echo "  - Common suggested packages installed"
+            echo "  - ONLY required dependencies (Imports) installed to save time"
+            echo "  - Suggested packages NOT installed - install as needed per PR"
             echo "  - Package building and testing capabilities verified"
             echo ""
             echo "The environment is ready for R package development work."

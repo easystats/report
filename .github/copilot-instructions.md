@@ -18,6 +18,7 @@ The `report` package is an R package for automated reporting of results and stat
 - Core development packages (rlang, dplyr, testthat, lintr, styler, roxygen2, reprex)
 - Easystats ecosystem packages (insight, bayestestR, effectsize, performance, parameters, datawizard)
 - The report package itself (built and installed)
+- **ONLY required dependencies (Imports) - suggested packages are NOT pre-installed to save time and resources**
 - Verified functionality of core functions and reprex
 
 **For documentation/configuration tasks** (editing .md files, .yml files, copilot instructions, etc.), it runs minimal setup:
@@ -37,7 +38,7 @@ If this works without errors, the environment is ready. If not, follow the manua
 ## Environment Setup (Manual - if pre-configuration failed)
 
 ### Package Installation Philosophy
-**CRITICAL**: Install packages minimally and on-demand to avoid long installation times. Only install packages that are actually required by the specific function you are modifying in your current PR.
+**CRITICAL**: Install packages minimally and on-demand to avoid long installation times. Only install packages that are actually required by the specific function you are modifying in your current PR. **The custom copilot environment setup now follows this philosophy by only installing required dependencies (Imports) and NOT installing suggested packages by default.**
 
 ### Install R and Required System Dependencies
 **CRITICAL**: Always ensure R is properly installed and functional before proceeding with any package development tasks.
@@ -583,8 +584,8 @@ R --no-restore --no-save -e 'install.packages("BayesFactor", repos="https://clou
 12. **Style the code**: `R --no-restore --no-save -e 'library(styler); style_file("R/[function_name].R")'`
 13. **Update documentation**: `R --no-restore --no-save -e 'roxygen2::document()'`
 14. **Validate documentation consistency**: Check for "Codoc mismatches" warnings
-15. Rebuild and test: `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz`
-16. Run tests: `R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'`
+15. Rebuild and test: `R CMD build . && R CMD INSTALL report_*.tar.gz`
+16. Run tests: `R --no-restore --no-save -e 'library(testthat); library(report); test_local()'`
 17. **Create reprex examples**: Prepare reproducible examples showing the new function in action for PR description
 18. **If making additional commits**: DO NOT update version/NEWS.md again - use same version for all commits in this PR
 
@@ -603,7 +604,7 @@ R --no-restore --no-save -e 'install.packages("BayesFactor", repos="https://clou
 12. **Style the code**: `R --no-restore --no-save -e 'library(styler); style_file("R/[file].R")'`
 13. **Update documentation if changed**: `R --no-restore --no-save -e 'roxygen2::document()'`
 14. **Validate documentation consistency**: Check for "Codoc mismatches" warnings
-15. **Always rebuild and reinstall**: `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz`
+15. **Always rebuild and reinstall**: `R CMD build . && R CMD INSTALL report_*.tar.gz`
 16. **Always test the specific function manually**
 17. Run full test suite to check for regressions
 18. **Create before/after reprexes**: Prepare examples showing the old vs new behavior for PR description
@@ -922,7 +923,7 @@ if (length(actual_reprex) > 0) {
 
 ### "Could not find function" Errors
 - **Cause**: Package not loaded or installed
-- **Solution**: Run `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz` then `library(rempsyc)`
+- **Solution**: Run `R CMD build . && R CMD INSTALL report_*.tar.gz` then `library(report)`
 
 ### Missing Package Errors
 - **Cause**: Suggested packages not installed
