@@ -1,9 +1,9 @@
-# rempsyc: Convenience Functions for Psychology R Package
+# report: Automated Results Reporting R Package
 
 Always follow these instructions EXACTLY and only search for additional context if the information here is incomplete or found to be in error.
 
 ## Overview
-The `rempsyc` package is an R package providing convenience functions for psychology research, including statistical analysis, publication-ready tables (APA style), and data visualization. The package is built using R 4.3.3+ and follows standard R package development practices.
+The `report` package is an R package for automated reporting of results and statistical models. It is part of the [easystats ecosystem](https://github.com/easystats/easystats), providing functions to convert statistical models and data frames into textual reports suited for publication. The package follows standard R package development practices and focuses on ensuring standardization and quality in results reporting.
 
 **CRITICAL REMINDER**: Every PR must include version number updates in DESCRIPTION and changelog entries in NEWS.md. See the [Version Management section](#version-management-and-changelog-updates) for detailed instructions.
 
@@ -16,8 +16,8 @@ The `rempsyc` package is an R package providing convenience functions for psycho
 **For R package development tasks** (editing .R files, functions, tests, etc.), it pre-installs:
 - R and system dependencies
 - Core development packages (rlang, dplyr, testthat, lintr, styler, roxygen2, reprex)
-- Most commonly used suggested packages (ggplot2, flextable, effectsize, correlation, boot, ggsignif, etc.)
-- The rempsyc package itself (built and installed)
+- Easystats ecosystem packages (insight, bayestestR, effectsize, performance, parameters, datawizard)
+- The report package itself (built and installed)
 - Verified functionality of core functions and reprex
 
 **For documentation/configuration tasks** (editing .md files, .yml files, copilot instructions, etc.), it runs minimal setup:
@@ -29,7 +29,7 @@ The `rempsyc` package is an R package providing convenience functions for psycho
 
 **Verification**: Check if the environment is pre-configured by running:
 ```bash
-R --no-restore --no-save -e 'library(rempsyc); packageVersion("rempsyc")'
+R --no-restore --no-save -e 'library(report); packageVersion("report")'
 ```
 
 If this works without errors, the environment is ready. If not, follow the manual setup below.
@@ -135,46 +135,42 @@ if (length(result) > 0) {
 #### Determine Required Packages for Your Function
 ```bash
 # Step 1: Find which packages your specific function actually requires
-# Check the function's rlang::check_installed() calls in the source code
-cd /home/runner/work/rempsyc/rempsyc
-grep -A2 -B2 "rlang::check_installed" R/[your_function_file].R
+# Check the function's requireNamespace() calls and package dependencies in the source code
+cd /home/runner/work/report/report
+grep -A2 -B2 "requireNamespace\|check_installed" R/[your_function_file].R
 
 # Or search for all function dependencies:
-# grep -r "check_installed\|requireNamespace" R/[your_function_file].R
+# grep -r "requireNamespace\|@importFrom" R/[your_function_file].R
 ```
 
 #### Install Only Required Packages
 ```bash
 # Step 2: Install ONLY the packages found in Step 1
-# Example: If working on nice_scatter(), you only need ggplot2
-R --no-restore --no-save -e 'install.packages("ggplot2", repos="https://cloud.r-project.org/")'
+# Example: If working on report.lm(), you might need modelbased and effectsize
+R --no-restore --no-save -e 'install.packages(c("modelbased", "effectsize"), repos="https://cloud.r-project.org/")'
 
-# Example: If working on nice_table(), you only need flextable  
-R --no-restore --no-save -e 'install.packages("flextable", repos="https://cloud.r-project.org/")'
+# Example: If working on report.lavaan(), you might need lavaan  
+R --no-restore --no-save -e 'install.packages("lavaan", repos="https://cloud.r-project.org/")'
 
-# Example: If working on nice_violin(), you need multiple packages
-R --no-restore --no-save -e 'install.packages(c("ggplot2", "boot", "ggsignif"), repos="https://cloud.r-project.org/")'
+# Example: If working on report.brmsfit(), you need brms and related packages
+R --no-restore --no-save -e 'install.packages(c("brms", "rstanarm"), repos="https://cloud.r-project.org/")'
 ```
 
-#### Use rempsyc's Built-in Utility (After Building Package)
+#### Use report's Built-in Utilities (After Building Package)
 ```bash
-# Alternative: Use rempsyc's install_if_not_installed() for specific packages
+# Alternative: Check the report package's dependencies and install as needed
 R --no-restore --no-save -e '
-# First build and install the current rempsyc package to access utility functions
+# First build and install the current report package to access its functions
 if (file.exists("DESCRIPTION")) {
   system("R CMD build .")
-  pkg_file <- list.files(pattern = "rempsyc_.*\\.tar\\.gz")[1]
+  pkg_file <- list.files(pattern = "report_.*\\.tar\\.gz")[1]
   if (!is.na(pkg_file)) system(paste("R CMD INSTALL", pkg_file))
 }
 
-# Load rempsyc and install only specific packages for your function
-library(rempsyc)
+# Load report and install only specific packages for your function
+library(report)
 # ONLY install packages needed for your specific function:
-if (exists("install_if_not_installed")) {
-  install_if_not_installed(c("ggplot2"))  # Example: only ggplot2 for nice_scatter
-} else {
-  install.packages("ggplot2", repos="https://cloud.r-project.org/")  # Fallback
-}
+# install.packages("your_specific_package", repos="https://cloud.r-project.org/")
 '
 ```
 
@@ -193,8 +189,8 @@ echo 'R_LIBS_USER=~/R/library' >> ~/.Renviron
 1. **Identify your function**: Determine which specific function you're modifying
 2. **Find dependencies**: Check what packages that function actually requires:
    ```bash
-   cd /home/runner/work/rempsyc/rempsyc
-   grep -A2 -B2 "rlang::check_installed\|requireNamespace" R/[your_function].R
+   cd /home/runner/work/report/report
+   grep -A2 -B2 "requireNamespace\|@importFrom" R/[your_function].R
    ```
 3. **Install only required packages**: Install ONLY the packages found in step 2
 4. **Test function**: Test that your specific function works with the installed packages
@@ -203,16 +199,16 @@ echo 'R_LIBS_USER=~/R/library' >> ~/.Renviron
 ### Build the Package
 **NEVER CANCEL: Build takes ~19 seconds. Set timeout to 60+ seconds.**
 ```bash
-cd /home/runner/work/rempsyc/rempsyc
+cd /home/runner/work/report/report
 R CMD build .
-# Creates: rempsyc_0.1.91.tar.gz (version may vary)
+# Creates: report_0.6.1.1.tar.gz (version may vary)
 ```
 
 ### Install the Package
 **NEVER CANCEL: Install takes ~3 seconds. Set timeout to 60+ seconds.**
 ```bash
-cd /home/runner/work/rempsyc/rempsyc
-R CMD INSTALL rempsyc_0.1.91.tar.gz
+cd /home/runner/work/report/report
+R CMD INSTALL report_0.6.1.1.tar.gz
 # Or install from source:
 # R CMD INSTALL .
 ```
@@ -220,8 +216,8 @@ R CMD INSTALL rempsyc_0.1.91.tar.gz
 ### Run Tests
 **NEVER CANCEL: Tests take ~11 seconds. Set timeout to 30+ seconds.**
 ```bash
-cd /home/runner/work/rempsyc/rempsyc
-R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'
+cd /home/runner/work/report/report
+R --no-restore --no-save -e 'library(testthat); library(report); test_local()'
 ```
 
 Expected results: 
@@ -233,19 +229,19 @@ Expected results:
 ### Run Linting
 **NEVER CANCEL: Linting takes ~20 seconds. Set timeout to 60+ seconds.**
 ```bash
-cd /home/runner/work/rempsyc/rempsyc
+cd /home/runner/work/report/report
 R --no-restore --no-save -e 'library(lintr); lint_package()'
 ```
 
 Expected results:
-- Many style warnings (673+ issues found - normal for existing codebase)
+- Style warnings (normal for existing codebase)
 - Focus on new code adhering to style guidelines
 - Package is functional despite style warnings
 
 ### Auto-format Code with Styler
 **NEVER CANCEL: Styling takes ~10-30 seconds depending on package size. Set timeout to 60+ seconds.**
 ```bash
-cd /home/runner/work/rempsyc/rempsyc
+cd /home/runner/work/report/report
 # Style entire package
 R --no-restore --no-save -e 'library(styler); style_pkg()'
 
@@ -265,7 +261,7 @@ Expected results:
 ### Update Documentation with roxygen2
 **NEVER CANCEL: Documentation update takes ~5-15 seconds. Set timeout to 60+ seconds.**
 ```bash
-cd /home/runner/work/rempsyc/rempsyc
+cd /home/runner/work/report/report
 # Update documentation after making changes to roxygen2 comments
 R --no-restore --no-save -e 'roxygen2::document()'
 
@@ -288,16 +284,16 @@ Expected results:
 ### Run R CMD Check
 **NEVER CANCEL: R CMD check takes ~30 seconds (without suggested packages) to 5 minutes (full). Set timeout to 10+ minutes.**
 ```bash
-cd /home/runner/work/rempsyc/rempsyc
+cd /home/runner/work/report/report
 # Without suggested packages (due to network limitations):
-_R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check rempsyc_0.1.91.tar.gz --no-manual --no-vignettes
+_R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check report_0.6.1.1.tar.gz --no-manual --no-vignettes
 
 # With all checks (if network access available):
-# R CMD check rempsyc_0.1.91.tar.gz
+# R CMD check report_0.6.1.1.tar.gz
 ```
 
 Expected results:
-- Status: 1 ERROR (missing suggested packages - normal), 2 NOTEs  
+- Status: May show 1 ERROR (missing suggested packages - normal), few NOTEs  
 - Core functionality passes all checks
 - Tests pass correctly
 - Examples may fail due to missing optional packages (expected)
@@ -308,25 +304,24 @@ Expected results:
 Test the main functions to ensure they work correctly:
 
 ```bash
-cd /home/runner/work/rempsyc/rempsyc
+cd /home/runner/work/report/report
 R --no-restore --no-save -e '
-library(rempsyc)
+library(report)
 
-# Test t-test function
-result <- nice_t_test(data = mtcars, response = "mpg", group = "am")
+# Test basic report function
+data(mtcars)
+model <- lm(mpg ~ wt + hp, data = mtcars)
+result <- report(model)
 print(result)
 
-# Test table formatting
-library(testthat)  # If available
-if (requireNamespace("flextable", quietly = TRUE)) {
-  table <- nice_table(result)
-  print("Table creation successful")
-} else {
-  print("Flextable not available - table creation skipped")
-}
+# Test data frame reporting
+report_data <- report(mtcars)
+print(report_data)
 
-# Test basic data functions
-data <- extract_duplicates(data.frame(id = c(1,1,2), val = c(1,2,3)), id = "id")
+# Test sample reporting
+sample_report <- report_sample(mtcars)
+print(sample_report)
+
 print("Core functions working correctly")
 '
 ```
@@ -335,19 +330,20 @@ print("Core functions working correctly")
 **CRITICAL**: Always verify reprex is working before modifying any code that will require a PR:
 
 ```bash
-cd /home/runner/work/rempsyc/rempsyc
+cd /home/runner/work/report/report
 R --no-restore --no-save -e '
 # Load required packages
 library(reprex)
-library(rempsyc)
+library(report)
 
-# Create a test reprex with actual rempsyc function
+# Create a test reprex with actual report function
 test_code <- "
-library(rempsyc)
+library(report)
 data(mtcars)
 
-# Example function test
-result <- nice_t_test(data = mtcars, response = \"mpg\", group = \"am\")
+# Example model reporting
+model <- lm(mpg ~ wt + hp, data = mtcars)
+result <- report(model)
 print(result)
 "
 
@@ -356,8 +352,8 @@ cat("Testing reprex functionality...\n")
 reprex_result <- reprex(input = test_code, venue = "gh", advertise = FALSE, show = FALSE)
 
 # Verify it worked
-if (length(reprex_result) > 0 && any(grepl("library\\(rempsyc\\)", reprex_result))) {
-  cat("SUCCESS: reprex is working correctly and can generate examples with rempsyc\n")
+if (length(reprex_result) > 0 && any(grepl("library\\(report\\)", reprex_result))) {
+  cat("SUCCESS: reprex is working correctly and can generate examples with report\n")
   cat("Sample reprex output (first few lines):\n")
   cat(paste(head(reprex_result, 10), collapse = "\n"))
   cat("\n")
@@ -372,18 +368,18 @@ After making changes to package functions:
 
 1. **Always rebuild and reinstall the package**:
    ```bash
-   cd /home/runner/work/rempsyc/rempsyc
-   R CMD build . && R CMD INSTALL rempsyc_*.tar.gz
+   cd /home/runner/work/report/report
+   R CMD build . && R CMD INSTALL report_*.tar.gz
    ```
 
 2. **Test the specific function you modified**:
    ```bash
-   R --no-restore --no-save -e 'library(rempsyc); [your_function_test_here]'
+   R --no-restore --no-save -e 'library(report); [your_function_test_here]'
    ```
 
 3. **Run relevant tests**:
    ```bash
-   R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_file("tests/testthat/test-[function_name].R")'
+   R --no-restore --no-save -e 'library(testthat); library(report); test_file("tests/testthat/test-[function_name].R")'
    ```
 
 ## Key Locations and Files
@@ -391,20 +387,20 @@ After making changes to package functions:
 ### Repository Exploration Commands
 ```bash
 # View repository structure
-ls -la /home/runner/work/rempsyc/rempsyc/
+ls -la /home/runner/work/report/report/
 
 # View R source files
-ls -la /home/runner/work/rempsyc/rempsyc/R/
+ls -la /home/runner/work/report/report/R/
 
 # View test files
-ls -la /home/runner/work/rempsyc/rempsyc/tests/testthat/
+ls -la /home/runner/work/report/report/tests/testthat/
 
 # Check package metadata
-cat /home/runner/work/rempsyc/rempsyc/DESCRIPTION
+cat /home/runner/work/report/report/DESCRIPTION
 ```
 
 ### Source Code Structure
-- `/R/` - All R function source files (34+ files)
+- `/R/` - All R function source files (60+ files)
 - `/tests/testthat/` - Test files using testthat framework
 - `/tests/testthat.R` - Test runner entry point  
 - `/man/` - Documentation files (auto-generated from roxygen2)
@@ -417,24 +413,27 @@ cat /home/runner/work/rempsyc/rempsyc/DESCRIPTION
 - `.Rbuildignore` - Files to exclude from package build
 
 ### Important Functions by Category
-**Statistical Analysis**: `nice_t_test()`, `nice_contrasts()`, `nice_mod()`, `nice_lm()`
-**Tables**: `nice_table()` (publication-ready APA tables)
-**Visualization**: `nice_violin()`, `nice_scatter()`, `plot_outliers()`
-**Data Utilities**: `extract_duplicates()`, `nice_na()`, `scale_mad()`
+**Core Reporting**: `report()`, `report.lm()`, `report.aov()`, `report.htest()`
+**Data Reporting**: `report.data.frame()`, `report_sample()`, `report_participants()`
+**Model Components**: `report_parameters()`, `report_performance()`, `report_statistics()`
+**Text Formatting**: `report_text()`, `report_table()`, `format_value()`
+**Utilities**: `cite_easystats()`, `report_info()`, `report_intercept()`
 
 ## Dependencies and Package Management
 
 ### Core Dependencies (Always Required)
 ```r
 # In DESCRIPTION file:
-Imports: rlang, dplyr (>= 1.1.0)
+Imports: bayestestR (>= 0.16.1), effectsize (>= 1.0.1), insight (>= 1.3.1), 
+         parameters (>= 0.27.0), performance (>= 0.15.0), datawizard (>= 1.2.0),
+         stats, tools, utils
 Depends: R (>= 3.6)
 ```
 
 ### Suggested Packages (Optional)
-Many functions require optional packages. The package uses `rlang::check_installed()` to prompt users to install needed packages when functions are called.
+Many functions require optional packages. The package uses `requireNamespace()` to check if needed packages are available when functions are called.
 
-**Key suggested packages**: flextable, ggplot2, effectsize, performance, testthat, styler, roxygen2
+**Key suggested packages**: BayesFactor, brms, collapse, ivreg, knitr, lavaan, lme4, dplyr, rstanarm, survival, modelbased, emmeans, marginaleffects
 
 **ESSENTIAL for development**: reprex (mandatory for creating PR examples)
 
@@ -462,40 +461,41 @@ R --no-restore --no-save -e 'install.packages("pak", repos="https://r-lib.github
 #### Common Function-Specific Package Requirements
 **DO NOT install all of these - only install what you need for your specific function:**
 
-- **nice_table()**: flextable
-- **nice_scatter()**: ggplot2  
-- **nice_violin()**: ggplot2, boot, ggsignif
-- **nice_qq()**: ggplot2, qqplotr, ggrepel
-- **cormatrix_excel()**: correlation, openxlsx2
-- **nice_lm_slopes()**: effectsize
-- **overlap_circle()**: VennDiagram
-- **plot_outliers()**: ggplot2
+- **report.lm()**: modelbased, effectsize
+- **report.aov()**: effectsize, emmeans
+- **report.brmsfit()**: brms, rstanarm
+- **report.lavaan()**: lavaan
+- **report.lme4()**: lme4, modelbased
+- **report.BFBayesFactor()**: BayesFactor
+- **report.ivreg()**: ivreg
+- **report.coxph()**: survival
+- **report_sample()**: datawizard (already imported)
 
 #### Check Function Dependencies Before Installing
 ```bash
 # Find exactly which packages a function requires:
-cd /home/runner/work/rempsyc/rempsyc
-grep -A2 -B2 "rlang::check_installed\|requireNamespace" R/[function_file].R
+cd /home/runner/work/report/report
+grep -A2 -B2 "requireNamespace\|@importFrom" R/[function_file].R
 
 # Examples:
-# For nice_scatter.R: only requires ggplot2
-# For nice_table.R: only requires flextable  
-# For nice_violin.R: requires ggplot2, boot, ggsignif
+# For report.lm.R: requires modelbased, effectsize
+# For report.lavaan.R: requires lavaan  
+# For report.brmsfit.R: requires brms, rstanarm
 ```
 
 #### Targeted Installation Examples
 ```bash
-# Example 1: Working on nice_scatter() function
-R --no-restore --no-save -e 'install.packages("ggplot2", repos="https://cloud.r-project.org/")'
+# Example 1: Working on report.lm() function
+R --no-restore --no-save -e 'install.packages(c("modelbased", "effectsize"), repos="https://cloud.r-project.org/")'
 
-# Example 2: Working on nice_table() function  
-R --no-restore --no-save -e 'install.packages("flextable", repos="https://cloud.r-project.org/")'
+# Example 2: Working on report.lavaan() function  
+R --no-restore --no-save -e 'install.packages("lavaan", repos="https://cloud.r-project.org/")'
 
-# Example 3: Working on nice_violin() function (multiple dependencies)
-R --no-restore --no-save -e 'install.packages(c("ggplot2", "boot", "ggsignif"), repos="https://cloud.r-project.org/")'
+# Example 3: Working on report.brmsfit() function
+R --no-restore --no-save -e 'install.packages(c("brms", "rstanarm"), repos="https://cloud.r-project.org/")'
 
-# Example 4: Working on cormatrix_excel() function
-R --no-restore --no-save -e 'install.packages(c("correlation", "openxlsx2"), repos="https://cloud.r-project.org/")'
+# Example 4: Working on report.BFBayesFactor() function
+R --no-restore --no-save -e 'install.packages("BayesFactor", repos="https://cloud.r-project.org/")'
 ```
 
 ## Code Quality and Best Practices
@@ -617,54 +617,54 @@ R --no-restore --no-save -e 'install.packages(c("correlation", "openxlsx2"), rep
 
 ### Version Numbering System
 
-The rempsyc package follows this versioning pattern:
-- **Major releases** (CRAN submissions): Two decimals (e.g., 0.1.9, 0.1.8, 0.1.7)
-- **Development versions** (between CRAN releases): Three decimals (e.g., 0.1.8.3, 0.1.8.2, 0.1.8.1)
+The report package follows this versioning pattern:
+- **Major releases** (CRAN submissions): Standard semantic versioning (e.g., 0.6.1, 0.6.0, 0.5.9)
+- **Development versions** (between CRAN releases): Add a fourth decimal (e.g., 0.6.1.1, 0.6.1.2, 0.6.1.3)
 
 ### When to Bump Versions
 
 **ALWAYS** bump the version for ANY change that affects the package:
-1. **Bug fixes**: Increment the third decimal (0.1.91 → 0.1.92)
-2. **New features**: Increment the third decimal (0.1.91 → 0.1.92) 
-3. **Breaking changes**: Increment the second decimal (0.1.91 → 0.2.0) - rare
-4. **Documentation-only changes**: Still increment third decimal for tracking
+1. **Bug fixes**: Increment the fourth decimal (0.6.1.1 → 0.6.1.2)
+2. **New features**: Increment the fourth decimal (0.6.1.1 → 0.6.1.2) 
+3. **Breaking changes**: Increment the minor version (0.6.1 → 0.7.0) - rare
+4. **Documentation-only changes**: Still increment fourth decimal for tracking
 
 ### Multiple Commits Within a Single PR
 
 **CRITICAL RULE**: If your PR involves multiple commits, use the same version number for ALL commits in that PR.
 
 **Correct approach for multi-commit PR**:
-1. **At the start of your PR work**: Bump version from 0.1.91 → 0.1.92 and update NEWS.md
+1. **At the start of your PR work**: Bump version from 0.6.1.1 → 0.6.1.2 and update NEWS.md
 2. **First commit**: Contains version bump + your first set of changes
-3. **Subsequent commits**: Use the same version (0.1.92) for any additional changes
+3. **Subsequent commits**: Use the same version (0.6.1.2) for any additional changes
 4. **Do NOT bump version again** until you start a new PR
 
 **Example of correct multi-commit PR**:
-- Commit 1: "Bump version to 0.1.92 and add new feature X"
-- Commit 2: "Fix bug in feature X (still version 0.1.92)" 
-- Commit 3: "Update documentation for feature X (still version 0.1.92)"
-- All commits use version 0.1.92, NEWS.md updated once in commit 1
+- Commit 1: "Bump version to 0.6.1.2 and add new feature X"
+- Commit 2: "Fix bug in feature X (still version 0.6.1.2)" 
+- Commit 3: "Update documentation for feature X (still version 0.6.1.2)"
+- All commits use version 0.6.1.2, NEWS.md updated once in commit 1
 
 **NEVER do this** (incorrect approach):
-- Commit 1: "Add feature X, bump to 0.1.92"
-- Commit 2: "Fix bug in feature X, bump to 0.1.93" ❌ WRONG
-- Commit 3: "Update docs, bump to 0.1.94" ❌ WRONG
+- Commit 1: "Add feature X, bump to 0.6.1.2"
+- Commit 2: "Fix bug in feature X, bump to 0.6.1.3" ❌ WRONG
+- Commit 3: "Update docs, bump to 0.6.1.4" ❌ WRONG
 
 ### How to Update Version Number
 
 1. **Edit the DESCRIPTION file**:
    ```bash
-   cd /home/runner/work/rempsyc/rempsyc
+   cd /home/runner/work/report/report
    # Find current version
    grep "Version:" DESCRIPTION
-   # Update to next version (example: 0.1.91 → 0.1.92)
+   # Update to next version (example: 0.6.1.1 → 0.6.1.2)
    ```
 
 2. **Version update pattern**:
    ```r
-   # Current version: 0.1.91
-   # For your PR: 0.1.92
-   # Next PR: 0.1.93
+   # Current version: 0.6.1.1
+   # For your PR: 0.6.1.2
+   # Next PR: 0.6.1.3
    # etc.
    ```
 
@@ -672,52 +672,50 @@ The rempsyc package follows this versioning pattern:
 
 **MANDATORY**: Add your changes to the top of NEWS.md following this exact format:
 
-1. **For first change after a major release** (e.g., after 0.1.9 was released):
+1. **For first change after a major release** (e.g., after 0.6.1 was released):
    ```markdown
-   # rempsyc 0.1.10
-   * CRAN submission (when ready)
-   
-   ## rempsyc 0.1.9.1
+   # report 0.6.x
+
+   Bug fixes
+
    * Your change description here
    ```
 
-2. **For subsequent development changes** (when 0.1.9.1 already exists):
+2. **For subsequent development changes** (when 0.6.x already exists):
    ```markdown
-   # rempsyc 0.1.10
-   * CRAN submission (when ready)
-   
-   ## rempsyc 0.1.9.2
+   # report 0.6.x
+
+   Bug fixes
+
    * Your new change description here
-   
-   ## rempsyc 0.1.9.1  
    * Previous change description here
    ```
 
 3. **Change description guidelines**:
-   - Use function names in backticks: `nice_table()`
+   - Use function names in backticks: `report()`, `report_sample()`
    - Be specific about what changed
-   - Include issue references if applicable: (#28)
+   - Include issue references if applicable: (#451)
    - Examples:
-     - `nice_table()`: fix bug with grouped tibbles leading to an error
-     - `nice_scatter()`: add new `color_by` argument for categorical coloring  
-     - `cormatrix_excel()` now relies entirely on `correlation::cormatrix_to_excel()` to reduce maintenance
+     - `report.lm()`: fix issue with missing coefficients in summary output
+     - `report_sample()`: add new `ci_method` argument for confidence interval calculation
+     - Fixed CRAN check failures related to test dependencies
 
 ### Automated Version Management Workflow
 
 **Follow this exact sequence ONCE PER PR** (not per commit):
 
 ```bash
-cd /home/runner/work/rempsyc/rempsyc
+cd /home/runner/work/report/report
 
 # Step 1: Check current version
 grep "Version:" DESCRIPTION
-grep -A5 "^# rempsyc" NEWS.md | head -10
+grep -A5 "^# report" NEWS.md | head -10
 
 # Step 2: Determine new version number
-# Current: 0.1.91 → New: 0.1.92 (example)
+# Current: 0.6.1.1 → New: 0.6.1.2 (example)
 
 # Step 3: Update DESCRIPTION file (ONCE per PR)
-sed -i 's/Version: 0.1.91/Version: 0.1.92/' DESCRIPTION
+sed -i 's/Version: 0.6.1.1/Version: 0.6.1.2/' DESCRIPTION
 
 # Step 4: Update NEWS.md (ONCE per PR - add entry at the top)
 # Use your preferred text editor or str_replace_editor
@@ -735,41 +733,50 @@ head -10 NEWS.md
 
 #### Example 1: Bug Fix
 ```markdown
-# In DESCRIPTION: Version: 0.1.91 → 0.1.92
+# In DESCRIPTION: Version: 0.6.1.1 → 0.6.1.2
 # In NEWS.md (add at top):
-## rempsyc 0.1.91.1  
-* `nice_table()`: fix column alignment issue with long variable names
+# report 0.6.x
+
+Bug fixes
+
+* `report.lm()`: fix issue with confidence intervals in summary output
 ```
 
 #### Example 2: New Feature  
 ```markdown
-# In DESCRIPTION: Version: 0.1.92 → 0.1.93
+# In DESCRIPTION: Version: 0.6.1.2 → 0.6.1.3
 # In NEWS.md (add at top):
-## rempsyc 0.1.92.1
-* `nice_scatter()`: add `theme_preset` argument for quick plot styling options
+# report 0.6.x
+
+New features
+
+* `report_sample()`: add `weights` argument for weighted sample descriptions
 ```
 
 #### Example 3: Multiple Changes
 ```markdown
-# In DESCRIPTION: Version: 0.1.93 → 0.1.94  
+# In DESCRIPTION: Version: 0.6.1.3 → 0.6.1.4  
 # In NEWS.md (add at top):
-## rempsyc 0.1.93.1
-* `nice_violin()`: improve error messages for invalid grouping variables
-* `plot_outliers()`: add support for custom outlier detection methods
-* Documentation updates for improved clarity across all visualization functions
+# report 0.6.x
+
+Bug fixes
+
+* `report()`: improve error messages for unsupported model classes
+* `report_participants()`: fix issue with missing gender categories
+* Documentation updates for improved clarity across reporting functions
 ```
 
 ### Before Submitting Your PR (Final Validation)
 **CRITICAL**: Always run this complete validation sequence to ensure workflow checks pass on first try. This should be done once before submitting your PR for review, not before every individual commit.
 
 ```bash
-cd /home/runner/work/rempsyc/rempsyc
+cd /home/runner/work/report/report
 
 # 0. ENSURE: Version number and NEWS.md were already updated once at the beginning of this PR
 #    (Do NOT update them again if this is a subsequent commit in the same PR)
 
 # 1. Check for global variable binding issues first (look for "no visible binding" warnings)
-R --no-restore --no-save -e 'warnings(); R CMD check rempsyc_*.tar.gz --no-manual --no-vignettes 2>&1 | grep -i "binding"'
+R --no-restore --no-save -e 'warnings(); R CMD check report_*.tar.gz --no-manual --no-vignettes 2>&1 | grep -i "binding"'
 
 # 2. Lint code to identify style issues (20 seconds)
 R --no-restore --no-save -e 'library(lintr); lint_package()'
@@ -784,13 +791,13 @@ R --no-restore --no-save -e 'roxygen2::document()'
 R CMD build .
 
 # 6. Install  
-R CMD INSTALL rempsyc_*.tar.gz
+R CMD INSTALL report_*.tar.gz
 
 # 7. Test (11 seconds) 
-R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'
+R --no-restore --no-save -e 'library(testthat); library(report); test_local()'
 
 # 8. Final R CMD check for all issues (~30 seconds) - REQUIRED before PR submission
-_R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check rempsyc_*.tar.gz --no-manual --no-vignettes
+_R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check report_*.tar.gz --no-manual --no-vignettes
 
 # 9. Look specifically for critical warnings that fail CI:
 # - "no visible binding for global variable"
@@ -836,7 +843,7 @@ _R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check rempsyc_*.tar.gz --no-manual --no-vig
    
    # For BEFORE behavior (if modifying existing function):
    before_code <- "
-   library(rempsyc)
+   library(report)
    data(mtcars)
    # [your code showing current behavior]
    "
@@ -844,7 +851,7 @@ _R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check rempsyc_*.tar.gz --no-manual --no-vig
    
    # For AFTER behavior (with your changes):
    after_code <- "
-   library(rempsyc)
+   library(report)
    data(mtcars)
    # [your code showing improved behavior]
    "
@@ -859,25 +866,24 @@ _R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check rempsyc_*.tar.gz --no-manual --no-vig
 **NEVER SKIP**: Always generate actual reprex, never simulate or guess:
 
 ```bash
-cd /home/runner/work/rempsyc/rempsyc
+cd /home/runner/work/report/report
 R --no-restore --no-save -e '
 library(reprex)
-library(rempsyc)
+library(report)
 
 # Create ACTUAL reprex for your changes
 example_code <- "
-library(rempsyc)
+library(report)
 data(mtcars)
 
 # Example: test the function you modified
-result <- nice_t_test(data = mtcars, response = \"mpg\", group = \"am\")
+model <- lm(mpg ~ wt + hp, data = mtcars)
+result <- report(model)
 print(result)
 
-# If working with plots, include them:
-if (requireNamespace(\"ggplot2\", quietly = TRUE)) {
-  plot_result <- nice_scatter(data = mtcars, response = \"mpg\", predictor = \"wt\")
-  print(plot_result)
-}
+# Example: test report_sample function
+sample_report <- report_sample(mtcars)
+print(sample_report)
 "
 
 # Generate actual reprex
@@ -1001,67 +1007,62 @@ The following are outputs from frequently used commands. Reference them instead 
 
 ### Repository Root Structure
 ```
-ls -la /home/runner/work/rempsyc/rempsyc/
+ls -la /home/runner/work/report/report/
 
 .Rbuildignore       - Files to exclude from package build
 .github/            - GitHub workflows and actions
 .gitignore          - Git ignore patterns
-CITATION.cff        - Citation metadata
 DESCRIPTION         - Package metadata and dependencies
-LICENSE.md          - Package license (GPL 3+)
+LICENSE             - Package license (MIT)
+LICENSE.md          - License details
 NAMESPACE           - Package exports (auto-generated)
 NEWS.md             - Change log
-R/                  - R source code (34+ files)
+R/                  - R source code (60+ files)
 README.Rmd          - Source for README (edit this, not README.md)
 README.md           - Main repository documentation
-TODOS.md            - Development roadmap
 cran-comments.md    - CRAN submission notes
-docs/               - pkgdown documentation site
 inst/               - Package installation files
 man/                - Help documentation (auto-generated)
+paper/              - Academic paper materials
+pkgdown/            - Documentation site configuration
 tests/              - Test files (testthat framework)
 vignettes/          - R Markdown tutorials
 ```
 
 ### Core R Functions by File
 ```
-R/nice_t_test.R      - t-test analysis
-R/nice_table.R       - APA formatted tables  
-R/nice_scatter.R     - Scatter plot visualization (uses .data[[var]] notation)
-R/nice_violin.R      - Violin plot visualization
-R/extract_duplicates.R - Data cleaning utilities
-R/nice_na.R          - Missing data analysis
-R/format_value.R     - Value formatting (p, r, d values)
-R/scale_mad.R        - Robust standardization
-R/global_variables.R - DEPRECATED: Do not add to this file
+R/report.R           - Main report() generic function
+R/report.lm.R        - Linear model reporting
+R/report.aov.R       - ANOVA reporting
+R/report.htest.R     - Statistical test reporting
+R/report_sample.R    - Sample description reporting
+R/report_parameters.R - Parameter reporting
+R/report_performance.R - Model performance reporting
+R/format_*.R         - Text formatting utilities
+R/cite_easystats.R   - Citation utilities
 ```
 
 ### Code Quality Examples
 
-#### CORRECT: Proper Variable Referencing
+#### CORRECT: Proper Variable Referencing and Imports
 ```r
-# In dplyr operations - USE .data[[var]] notation:
-data %>%
-  group_by(.data[[group]]) %>%
-  summarize(mean_val = mean(.data[[response]], na.rm = TRUE))
+# In report functions - USE proper imports and namespacing:
+#' @importFrom insight get_parameters
+#' @importFrom bayestestR describe_posterior
+#' @importFrom effectsize effectsize
 
-# In ggplot operations - USE .data[[var]] notation:
-ggplot(data, aes(x = .data[[predictor]], y = .data[[response]]))
-
-# Always include proper imports:
-#' @importFrom dplyr group_by summarize
-#' @importFrom ggplot2 ggplot aes
+# Always include proper imports for external functions:
+#' @importFrom stats lm
+#' @importFrom utils head
 ```
 
-#### INCORRECT: Causes CI Failures  
+#### INCORRECT: Missing Imports (Causes CI Failures)  
 ```r
-# DO NOT: Bare variable names (causes binding warnings)
-data %>%
-  group_by(group) %>%
-  summarize(mean_val = mean(response, na.rm = TRUE))
+# DO NOT: Use functions without proper imports
+get_parameters(model)  # Should be insight::get_parameters or use @importFrom
 
-# DO NOT: Add to global_variables.R file
-utils::globalVariables(c("group", "response"))
+# DO NOT: Missing namespace declarations
+describe_posterior(model)  # Should have @importFrom bayestestR describe_posterior
 ```
 
 ## CI/CD Integration
@@ -1099,20 +1100,20 @@ When packages can't be installed from CRAN:
 Before making any PR, verify locally:
 ```bash
 # Must show ZERO "no visible binding" warnings:
-R CMD check rempsyc_*.tar.gz 2>&1 | grep -i "binding"
+R CMD check report_*.tar.gz 2>&1 | grep -i "binding"
 
 # Must show ZERO "Codoc mismatches" warnings:  
-R CMD check rempsyc_*.tar.gz 2>&1 | grep -i "codoc"
+R CMD check report_*.tar.gz 2>&1 | grep -i "codoc"
 
-# All tests must pass (94+ passing tests expected):
-R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'
+# All tests must pass (expected number varies):
+R --no-restore --no-save -e 'library(testthat); library(report); test_local()'
 ```
 
 #### 5. PR Description Requirements  
 **CRITICAL**: Always include reprexes in PR descriptions to demonstrate code changes:
 ```r
 # Create examples showing before/after behavior:
-library(rempsyc)
+library(report)
 data(mtcars)
 
 # BEFORE (if modifying existing function):
@@ -1126,14 +1127,14 @@ data(mtcars)
 
 - Package build: ~19 seconds
 - Package install: ~3 seconds  
-- Test suite: ~11 seconds (99 tests: 94 pass, 5 snapshot failures expected)
-- Linting: ~20 seconds (673 style issues - normal for existing codebase)
+- Test suite: ~15 seconds (varies based on enabled tests)
+- Linting: ~20 seconds (normal for existing codebase)
 - Code styling: ~10-30 seconds depending on package size
 - Documentation update: ~5-15 seconds (roxygen2)
-- R CMD check: ~29 seconds (without suggested packages), 2-5 minutes (full check)
+- R CMD check: ~30 seconds (without suggested packages), 2-5 minutes (full check)
 - Function loading after install: Near instant
 - **Package installation**: 1-5 seconds per package (targeted) vs 2-10 minutes (batch installation of all suggested packages)
 
 **CRITICAL**: Never cancel builds or tests prematurely. Always wait for completion and set appropriate timeouts (60+ seconds for builds, 30+ seconds for tests, 10+ minutes for R CMD check).
 
-**PACKAGE INSTALLATION**: Use targeted installation (install only what the specific function needs) to avoid "The package installation is taking a long time" messages. Installing all 22+ suggested packages takes 2-10 minutes; installing 1-3 specific packages takes 1-5 seconds each.
+**PACKAGE INSTALLATION**: Use targeted installation (install only what the specific function needs) to avoid "The package installation is taking a long time" messages. Installing all 15+ suggested packages takes 2-10 minutes; installing 1-3 specific packages takes 1-5 seconds each.
