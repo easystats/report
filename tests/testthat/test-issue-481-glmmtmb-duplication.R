@@ -10,7 +10,7 @@ test_that("issue #481 - no text duplication in gsub pattern", {
   attr(mock_effectsize, "rules") <- "Effect sizes were interpreted according to Cohen's (1988) conventions."
   
   result1 <- report:::.info_effectsize(NULL, effectsize = mock_effectsize, include_effectsize = TRUE)
-  expected1 <- "Standardized parameters were obtained by fitting the model on a standardized version of the dataset. and were interpreted according to Cohen's (1988) conventions."
+  expected1 <- "Standardized parameters were obtained by fitting the model on a standardized version of the dataset and were interpreted according to Cohen's (1988) conventions."
   expect_equal(result1, expected1)
   
   # Test case 2: Should NOT replace when there's no literal period before "Effect sizes"
