@@ -199,6 +199,10 @@ report_statistics.lm <- function(x,
   table <- .remove_performance(table)
   effsize <- attributes(table)$effsize
 
+  # For glmmTMB models with multiple components, don't filter the table itself
+  # but prepare effectsize alignment for text generation
+
+
   # Estimate
   estimate <- .find_regression_estimate(table)
   if (is.null(estimate) || is.na(estimate) || !estimate %in% names(table)) {
@@ -244,8 +248,47 @@ report_statistics.lm <- function(x,
 
   # Effect size
   if (include_effectsize && !is.null(effsize)) {
-    text_full <- datawizard::text_paste(text, attributes(effsize)$statistics, sep = "; ")
-    text <- datawizard::text_paste(text, attributes(effsize)$main)
+    # For glmmTMB models with components, align effectsize with the table parameters
+    if (inherits(x, "glmmTMB") && "Component" %in% colnames(table)) {
+      # Find matching indices between table and effectsize
+      effsize_table <- attributes(effsize)$table
+
+      # Create matching vectors for both table and effectsize
+      table_keys <- paste(table$Parameter, table$Component)
+      effsize_keys <- paste(effsize_table$Parameter, effsize_table$Component)
+
+      # Find which effectsize entries match table entries
+      match_idx <- match(table_keys, effsize_keys)
+
+      # Use only the matched effectsize elements, fill missing with empty strings
+      n_params <- nrow(table)
+      effsize_stats <- character(n_params)
+      effsize_main <- character(n_params)
+
+      for (i in seq_len(n_params)) {
+        if (!is.na(match_idx[i])) {
+          effsize_stats[i] <- attributes(effsize)$statistics[match_idx[i]]
+          effsize_main[i] <- attributes(effsize)$main[match_idx[i]]
+        } else {
+          effsize_stats[i] <- ""
+          effsize_main[i] <- ""
+        }
+      }
+    } else {
+      effsize_stats <- attributes(effsize)$statistics
+      effsize_main <- attributes(effsize)$main
+    }
+
+    # Only include non-empty effectsize information
+    has_effectsize <- !is.na(effsize_stats) & effsize_stats != ""
+    text_full <- ifelse(has_effectsize,
+      datawizard::text_paste(text, effsize_stats, sep = "; "),
+      text
+    )
+    text <- ifelse(has_effectsize,
+      datawizard::text_paste(text, effsize_main),
+      text
+    )
   } else {
     text_full <- text
   }
@@ -336,7 +379,9 @@ report_intercept.lm <- function(x, table = NULL, ...) {
     table <- report_table(x, ...)
   }
 
-  if (insight::model_info(x)$is_zero_inflated && "Component" %in% colnames(table)) {
+  if ((insight::model_info(x)$is_zero_inflated ||
+    (inherits(x, "glmmTMB") && "dispersion" %in% table$Component)) &&
+    "Component" %in% colnames(table)) {
     idx <- !is.na(table$Parameter) & table$Parameter == "(Intercept)" & table$Component == "conditional"
   } else {
     idx <- !is.na(table$Parameter) & table$Parameter == "(Intercept)"
@@ -495,8 +540,11 @@ report_info.lm <- function(x,
     att <- attributes(parameters)
   }
 
-  if ("ci_method" %in% names(att)) {
-    info_text <- paste0(info_text, " ", .info_df(
+  # Only add CI information if effectsize info is empty or doesn't already contain CI details
+  no_ci_info <- nzchar(info_text) == FALSE ||
+    !grepl("Confidence Intervals.*computed using.*approximation", info_text)
+  if ("ci_method" %in% names(att) && no_ci_info) {
+    info_text <- paste0(info_text, ifelse(nzchar(info_text), " ", ""), .info_df(
       ci = att$ci,
       ci_method = att$ci_method,
       test_statistic = att$test_statistic,

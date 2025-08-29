@@ -139,7 +139,7 @@ print.report_info <- function(x, ...) {
     text <- attributes(effectsize)$method
     if (include_effectsize) {
       text <- paste0(text, attributes(effectsize)$rules)
-      text <- gsub(".Effect sizes ", " and ", text)
+      text <- gsub("\\.Effect sizes ", " and ", text)
     }
   }
 
