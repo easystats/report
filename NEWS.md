@@ -2,6 +2,9 @@
 
 Bug fixes
 
+* Enhanced copilot environment setup with complete reprex dependency management (pandoc, knitr, rmarkdown, clipr) to prevent "reprex appears to crash R" errors
+* Added CLIPR_ALLOW=TRUE environment variable configuration in reprex testing to ensure stable operation
+* Updated copilot instructions with comprehensive reprex debugging guide and imgur integration workflow for GitHub Copilot agents
 * Fixed issue with missing effect size for the Intercept term in type 3 anova tables (#451)
 
 # report 0.6.1

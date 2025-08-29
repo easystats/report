@@ -180,7 +180,11 @@ jobs:
             "styler", 
             "roxygen2",
             "reprex",
-            "devtools"
+            "devtools",
+            # Dependencies specifically needed for reprex functionality
+            "knitr",
+            "rmarkdown",
+            "clipr"
           ), repos = "https://cloud.r-project.org/")
         shell: Rscript {0}
         
@@ -226,7 +230,7 @@ jobs:
           print(R.version.string)
           
           cat("\n=== Core Development Packages ===\n")
-          required_packages <- c("rlang", "dplyr", "testthat", "lintr", "styler", "roxygen2", "reprex")
+          required_packages <- c("rlang", "dplyr", "testthat", "lintr", "styler", "roxygen2", "reprex", "knitr", "rmarkdown", "clipr")
           for (pkg in required_packages) {
             if (requireNamespace(pkg, quietly = TRUE)) {
               cat("✓", pkg, "- version", as.character(packageVersion(pkg)), "\n")
@@ -291,6 +295,8 @@ jobs:
 
       - name: Test reprex functionality  
         if: steps.check_r_needed.outputs.R_NEEDED == 'true'
+        env:
+          CLIPR_ALLOW: true
         run: |
           library(reprex)
           library(report)
@@ -309,17 +315,25 @@ jobs:
           "
           
           tryCatch({
-            reprex_result <- reprex(input = test_code, venue = "gh", advertise = FALSE, show = FALSE)
+            reprex_result <- reprex(input = test_code, venue = "gh", advertise = FALSE, show = FALSE, html_preview = FALSE)
             
             if (length(reprex_result) > 0 && any(grepl("library\\(report\\)", reprex_result))) {
               cat("✓ reprex is working correctly with report\n")
-              cat("Sample reprex output (first 5 lines):\n")
-              cat(paste(head(reprex_result, 5), collapse = "\n"), "\n")
+              cat("Sample reprex output (first 10 lines):\n")
+              cat(paste(head(reprex_result, 10), collapse = "\n"), "\n")
+              
+              # Check for complete reprex format including session info
+              if (any(grepl("Created on", reprex_result)) || any(grepl("reprex v", reprex_result))) {
+                cat("✓ Complete reprex format with session info detected\n")
+              } else {
+                cat("⚠ reprex output may be incomplete - missing session info\n")
+              }
             } else {
               cat("⚠ reprex generated output but may not be working correctly\n")
             }
           }, error = function(e) {
             cat("✗ reprex failed:", e$message, "\n")
+            cat("This may be due to missing dependencies or environment issues\n")
           })
           
           cat("\n=== reprex Test Complete ===\n")
@@ -334,7 +348,8 @@ jobs:
             echo "✓ Full R development environment configured:"
             echo "  - R and system dependencies installed"
             echo "  - report package built and installed"
-            echo "  - Core development tools available (lintr, styler, reprex)"
+            echo "  - Core development tools available (lintr, styler, roxygen2)"
+            echo "  - Complete reprex setup (reprex + knitr + rmarkdown + pandoc)"
             echo "  - ONLY required dependencies (Imports) installed to save time"
             echo "  - Suggested packages NOT installed - install as needed per PR"
             echo "  - Package building and testing capabilities verified"
