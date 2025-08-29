@@ -1,4 +1,4 @@
-# GitHub Copilot Environment Setup for rempsyc R Package
+# GitHub Copilot Environment Setup for report R Package
 # This workflow sets up the development environment before Copilot starts working
 # Based on: https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/customize-the-agent-environment
 
@@ -174,54 +174,33 @@ jobs:
           ), repos = "https://cloud.r-project.org/")
         shell: Rscript {0}
         
-      - name: Install commonly used suggested packages
+      - name: Install report package dependencies (Imports only)
         if: steps.check_r_needed.outputs.R_NEEDED == 'true'
         run: |
-          # Install the most commonly required suggested packages
-          # Based on analysis of rlang::check_installed() calls in source code
-          install.packages(c(
-            "ggplot2",      # Most common - used in plots (nice_scatter, nice_violin, etc.)
-            "flextable",    # For nice_table() - APA formatted tables
-            "effectsize",   # For nice_lm_slopes, contrasts
-            "correlation",  # For cormatrix_excel
-            "boot",         # For nice_violin bootstrap
-            "ggsignif",     # For nice_violin significance bars  
-            "ggrepel",      # For nice_qq plots
-            "openxlsx2",    # For Excel export functions
-            "modelbased",   # For contrasts
-            "bootES",       # For effect sizes in contrasts
-            "performance",  # For model diagnostics
-            "insight",      # For model utilities
-            "broom",        # For tidy model outputs
-            "emmeans"       # For contrasts and slopes
-          ), repos = "https://cloud.r-project.org/")
-        shell: Rscript {0}
-        continue-on-error: true
-
-      - name: Install rempsyc package dependencies
-        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
-        run: |
-          # Install package dependencies using remotes
+          # Install only required dependencies (Imports) to save time and resources
+          # Suggested packages are NOT installed by default and should be 
+          # installed "as necessary" based on the specific PR requirements
+          # This follows the copilot instructions philosophy of targeted installation
           tryCatch({
             install.packages("remotes", repos = "https://cloud.r-project.org/")
-            remotes::install_deps(dependencies = TRUE)
+            remotes::install_deps(dependencies = c("Depends", "Imports"))
           }, error = function(e) {
             cat("Warning: Some dependencies may not have installed:", e$message, "\n")
           })
         shell: Rscript {0}
 
-      - name: Build rempsyc package
+      - name: Build report package
         if: steps.check_r_needed.outputs.R_NEEDED == 'true'
         run: |
           # Build the current package
           system("R CMD build .")
         shell: Rscript {0}
         
-      - name: Install rempsyc package  
+      - name: Install report package  
         if: steps.check_r_needed.outputs.R_NEEDED == 'true'
         run: |
           # Install the built package
-          pkg_file <- list.files(pattern = "rempsyc_.*\\.tar\\.gz")[1]
+          pkg_file <- list.files(pattern = "report_.*\\.tar\\.gz")[1]
           if (!is.na(pkg_file)) {
             system(paste("R CMD INSTALL", pkg_file))
           } else {
@@ -246,58 +225,56 @@ jobs:
             }
           }
           
-          cat("\n=== rempsyc Package ===\n") 
-          if (requireNamespace("rempsyc", quietly = TRUE)) {
-            library(rempsyc)
-            cat("✓ rempsyc - version", as.character(packageVersion("rempsyc")), "\n")
+          cat("\n=== report Package ===\n") 
+          if (requireNamespace("report", quietly = TRUE)) {
+            library(report)
+            cat("✓ report - version", as.character(packageVersion("report")), "\n")
           } else {
-            cat("✗ rempsyc - NOT AVAILABLE\n")
+            cat("✗ report - NOT AVAILABLE\n")
           }
         shell: Rscript {0}
 
-      - name: Test core rempsyc functionality
+      - name: Test core report functionality
         if: steps.check_r_needed.outputs.R_NEEDED == 'true'
         run: |
-          library(rempsyc)
+          library(report)
           
           cat("=== Testing Core Functions ===\n")
           
-          # Test basic data function
-          test_data <- data.frame(id = c(1,1,2,3), val = c(1,2,3,4))
-          duplicates <- extract_duplicates(test_data, id = "id")
-          cat("✓ extract_duplicates() works\n")
-          
-          # Test t-test function
+          # Test basic report function
           tryCatch({
-            result <- nice_t_test(data = mtcars, response = "mpg", group = "am")
-            cat("✓ nice_t_test() works\n")
+            data(mtcars)
+            model <- lm(mpg ~ wt + hp, data = mtcars)
+            result <- report(model)
+            cat("✓ report() works\n")
           }, error = function(e) {
-            cat("⚠ nice_t_test() error:", e$message, "\n")
+            cat("⚠ report() error:", e$message, "\n")
           })
           
-          # Test table creation if flextable available
-          if (requireNamespace("flextable", quietly = TRUE)) {
-            tryCatch({
-              table <- nice_table(mtcars[1:5, 1:4])
-              cat("✓ nice_table() works\n")  
-            }, error = function(e) {
-              cat("⚠ nice_table() error:", e$message, "\n")
-            })
-          } else {
-            cat("ℹ nice_table() skipped (flextable not available)\n")
-          }
+          # Test data frame reporting
+          tryCatch({
+            report_data <- report(mtcars)
+            cat("✓ report(data.frame) works\n")
+          }, error = function(e) {
+            cat("⚠ report(data.frame) error:", e$message, "\n")
+          })
           
-          # Test plotting if ggplot2 available
-          if (requireNamespace("ggplot2", quietly = TRUE)) {
-            tryCatch({
-              plot <- nice_scatter(data = mtcars, response = "mpg", predictor = "wt")
-              cat("✓ nice_scatter() works\n")
-            }, error = function(e) {
-              cat("⚠ nice_scatter() error:", e$message, "\n")
-            })
-          } else {
-            cat("ℹ nice_scatter() skipped (ggplot2 not available)\n")  
-          }
+          # Test sample reporting
+          tryCatch({
+            sample_report <- report_sample(mtcars)
+            cat("✓ report_sample() works\n")
+          }, error = function(e) {
+            cat("⚠ report_sample() error:", e$message, "\n")
+          })
+          
+          # Test participants reporting
+          tryCatch({
+            test_data <- data.frame(Age = c(25, 30, 35), Sex = c("F", "M", "F"))
+            participants_report <- report_participants(test_data)
+            cat("✓ report_participants() works\n")
+          }, error = function(e) {
+            cat("⚠ report_participants() error:", e$message, "\n")
+          })
           
           cat("\n=== Core Function Tests Complete ===\n")
         shell: Rscript {0}
@@ -306,25 +283,26 @@ jobs:
         if: steps.check_r_needed.outputs.R_NEEDED == 'true'
         run: |
           library(reprex)
-          library(rempsyc)
+          library(report)
           
           cat("=== Testing reprex Functionality ===\n")
           
-          # Test reprex with rempsyc function
+          # Test reprex with report function
           test_code <- "
-          library(rempsyc)
+          library(report)
           data(mtcars)
           
-          # Test basic t-test
-          result <- nice_t_test(data = mtcars, response = 'mpg', group = 'am')
+          # Test basic model reporting
+          model <- lm(mpg ~ wt + hp, data = mtcars)
+          result <- report(model)
           print(result)
           "
           
           tryCatch({
             reprex_result <- reprex(input = test_code, venue = "gh", advertise = FALSE, show = FALSE)
             
-            if (length(reprex_result) > 0 && any(grepl("library\\(rempsyc\\)", reprex_result))) {
-              cat("✓ reprex is working correctly with rempsyc\n")
+            if (length(reprex_result) > 0 && any(grepl("library\\(report\\)", reprex_result))) {
+              cat("✓ reprex is working correctly with report\n")
               cat("Sample reprex output (first 5 lines):\n")
               cat(paste(head(reprex_result, 5), collapse = "\n"), "\n")
             } else {
@@ -345,9 +323,10 @@ jobs:
           if [ "${{ steps.check_r_needed.outputs.R_NEEDED }}" == "true" ]; then
             echo "✓ Full R development environment configured:"
             echo "  - R and system dependencies installed"
-            echo "  - rempsyc package built and installed"
+            echo "  - report package built and installed"
             echo "  - Core development tools available (lintr, styler, reprex)"
-            echo "  - Common suggested packages installed"
+            echo "  - ONLY required dependencies (Imports) installed to save time"
+            echo "  - Suggested packages NOT installed - install as needed per PR"
             echo "  - Package building and testing capabilities verified"
             echo ""
             echo "The environment is ready for R package development work."
