@@ -13,11 +13,12 @@ on:
 
 jobs:
   copilot-setup-steps:
-  if: >
-        github.event_name == 'workflow_dispatch' ||
-        (github.event_name == 'pull_request' &&
-         github.event.action == 'synchronize' &&
-         github.actor == 'github-copilot')
+    # Optional: only run on Copilot agent commits; remove this if you also want your own pushes to trigger it
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' &&
+       github.actor == 'github-copilot')
+
     runs-on: ubuntu-latest
     
     env:
