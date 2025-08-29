@@ -146,7 +146,8 @@ print.report_parameters <- function(x, ...) {
     pretty_name <- attributes(params)$pretty_names[params$Parameter]
   } else {
     # For glmmTMB models with multiple components, need to handle component-specific naming
-    if (inherits(x, "glmmTMB") && "Component" %in% colnames(params) && length(unique(params$Component[!is.na(params$Component)])) > 1) {
+    if (inherits(x, "glmmTMB") && "Component" %in% colnames(params) &&
+          length(unique(params$Component[!is.na(params$Component)])) > 1) {
       # Create component-aware parameter names for glmmTMB models
       formatted_params <- parameters::format_parameters(x)
       # Map parameter names to include component information
@@ -233,9 +234,9 @@ print.report_parameters <- function(x, ...) {
     text <- ""
   }
 
-  if (!only_when_insufficient) {
-    text
-  } else {
+  if (only_when_insufficient) {
     ifelse(convergence != "converged" | stability != "sufficient", text, "")
+  } else {
+    text
   }
 }
