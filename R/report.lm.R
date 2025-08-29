@@ -336,7 +336,9 @@ report_intercept.lm <- function(x, table = NULL, ...) {
     table <- report_table(x, ...)
   }
 
-  if (insight::model_info(x)$is_zero_inflated && "Component" %in% colnames(table)) {
+  if ((insight::model_info(x)$is_zero_inflated || 
+       (inherits(x, "glmmTMB") && "dispersion" %in% table$Component)) && 
+      "Component" %in% colnames(table)) {
     idx <- !is.na(table$Parameter) & table$Parameter == "(Intercept)" & table$Component == "conditional"
   } else {
     idx <- !is.na(table$Parameter) & table$Parameter == "(Intercept)"
