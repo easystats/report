@@ -159,7 +159,7 @@ print.report_parameters <- function(x, ...) {
           if (component == "dispersion") {
             # For dispersion component, modify the name to indicate it affects variability
             if (param_name == "(Intercept)") {
-              pretty_name[i] <- paste0(formatted_params[param_name], " (dispersion)")
+              pretty_name[i] <- "(Intercept) (dispersion)"
             } else {
               pretty_name[i] <- paste0(formatted_params[param_name], " (on dispersion)")
             }
