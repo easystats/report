@@ -495,8 +495,9 @@ report_info.lm <- function(x,
     att <- attributes(parameters)
   }
 
-  if ("ci_method" %in% names(att)) {
-    info_text <- paste0(info_text, " ", .info_df(
+  # Only add CI information if effectsize info is empty or doesn't already contain CI details
+  if ("ci_method" %in% names(att) && (nzchar(info_text) == FALSE || !grepl("Confidence Intervals.*computed using.*approximation", info_text))) {
+    info_text <- paste0(info_text, ifelse(nzchar(info_text), " ", ""), .info_df(
       ci = att$ci,
       ci_method = att$ci_method,
       test_statistic = att$test_statistic,

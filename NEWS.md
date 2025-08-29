@@ -2,7 +2,7 @@
 
 Bug fixes
 
-* Fixed duplicated text output in `report()` for glmmTMB objects caused by incorrect regex pattern in effect size text processing
+* Fixed duplicated text output in `report()` for glmmTMB objects by addressing both regex pattern and redundant CI information concatenation in `report_info.lm()`
 * Fixed issue with missing effect size for the Intercept term in type 3 anova tables (#451)
 
 # report 0.6.1

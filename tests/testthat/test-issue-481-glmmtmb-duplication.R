@@ -59,3 +59,35 @@ test_that("gsub regex pattern is correctly escaped", {
   # Note: both should produce same result for this specific case, but old pattern 
   # would incorrectly match other characters too
 })
+
+test_that("no redundant CI information concatenation in report_info.lm", {
+  # Test that report_info.lm doesn't duplicate CI information when effectsize already contains it
+  
+  data(mtcars)
+  model <- lm(mpg ~ hp + wt, data = mtcars)
+  
+  # Create mock effectsize object with CI information already included
+  mock_effectsize <- structure(c(1, 2, 3), class = "effectsize_table")
+  attr(mock_effectsize, "method") <- "Standardized parameters were obtained by fitting the model on a standardized version of the dataset. 95% Confidence Intervals (CIs) and p-values were computed using a Wald z-distribution approximation."
+  attr(mock_effectsize, "rules") <- "Effect sizes follow Cohen's conventions."
+  
+  # Get parameters to have proper attributes structure
+  table <- report_table(model, include_effectsize = TRUE)
+  params <- report_parameters(model, table = table)
+  attributes(params)$effectsize <- mock_effectsize
+  
+  # Test report_info with the mock effectsize
+  info_result <- report_info(model, effectsize = mock_effectsize, parameters = params, include_effectsize = TRUE)
+  info_text <- as.character(info_result)
+  
+  # Should NOT contain duplicate CI descriptions
+  ci_pattern_count <- length(gregexpr("Confidence Intervals.*computed using.*approximation", info_text)[[1]])
+  expect_equal(ci_pattern_count, 1, info = paste("Expected 1 CI description, got", ci_pattern_count, "in text:", info_text))
+  
+  # Should contain the z-distribution info from effectsize, not t-distribution
+  expect_true(grepl("z-distribution approximation", info_text))
+  expect_false(grepl("t-distribution approximation", info_text))
+  
+  # Should contain properly joined text with " and " from regex fix
+  expect_true(grepl("approximation and follow", info_text))
+})
