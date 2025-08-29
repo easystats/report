@@ -36,6 +36,36 @@ R --no-restore --no-save -e 'library(report); packageVersion("report")'
 
 If this works without errors, the environment is ready. If not, follow the manual setup below.
 
+## Resource-Conscious Two-Step Development Approach
+
+**CRITICAL PHILOSOPHY**: Installing R and dependencies is very expensive (time, resources, environment impact). The setup workflow is designed to minimize resource usage through a two-step approach:
+
+### Two-Step Development Scenarios
+
+**Scenario 1: Documentation/Configuration Changes Only**
+- First run: No R installation (not necessary) ✅
+- Change documentation: Still no R installation (not necessary) ✅
+- Perfect resource optimization
+
+**Scenario 2: Code Changes Required**
+- **First run: No R installation** (intentionally delayed to save resources)
+  - Make code changes to the best ability without full testing
+  - Basic syntax checking and file editing
+  - Commit initial code changes
+- **Second run: R installation triggered** (after code changes detected)  
+  - Full R setup occurs because `git diff` now detects R file changes
+  - Complete testing, building, and validation
+  - Full development workflow available
+
+### Benefits of Two-Step Approach
+- 🌱 **Environmental**: Avoids unnecessary R installations (~5-10 minutes saved per run)
+- 💰 **Cost savings**: Reduces compute resource usage significantly  
+- ⏱️ **Time efficiency**: First iterations are much faster (2-3 minutes vs 7-15 minutes)
+- 🔄 **Natural workflow**: Matches how developers actually work (edit first, test second)
+- 🎯 **Smart resource allocation**: Full resources only when actually needed
+
+**Implementation Note**: This approach means the environment setup workflow will intentionally skip R installation on first runs, even when R code changes are planned. This is not a bug - it's a deliberate resource optimization strategy.
+
 ## Environment Setup (Manual - if pre-configuration failed)
 
 ### Package Installation Philosophy
