@@ -7,6 +7,8 @@ The `rempsyc` package is an R package providing convenience functions for psycho
 
 **CRITICAL REMINDER**: Every PR must include version number updates in DESCRIPTION and changelog entries in NEWS.md. See the [Version Management section](#version-management-and-changelog-updates) for detailed instructions.
 
+**VERSION MANAGEMENT FREQUENCY**: Version numbers and NEWS.md should be updated **ONCE PER PULL REQUEST**, not once per commit. Multiple commits within the same PR should use the same version number.
+
 ## Pre-Configured Environment 
 
 **NEW**: This repository now includes `.github/workflows/copilot-setup-steps.yml` which automatically configures the development environment before GitHub Copilot starts working. This workflow intelligently determines what setup is needed:
@@ -567,49 +569,51 @@ R --no-restore --no-save -e 'install.packages(c("correlation", "openxlsx2"), rep
 ## Common Development Tasks
 
 ### Adding a New Function
-1. Create the function in `/R/[function_name].R`
-2. **Identify required packages**: Check which packages the function will need using `rlang::check_installed()`
-3. **Install only required packages**: Use targeted installation instead of batch installation
-4. **Use proper variable referencing**: Use `.data[[var]]` for dplyr/ggplot2 operations
-5. Add roxygen2 documentation above the function (ensure parameter names match exactly)
-6. Add `@importFrom` statements for all external functions used
-7. Add exports to roxygen2 comments if needed (`@export`)
-8. Create tests in `/tests/testthat/test-[function_name].R`
-9. **Check for global variable issues**: `R CMD check` should show no binding warnings
-10. **Lint the code**: `R --no-restore --no-save -e 'library(lintr); lint_package()'`
-11. **Style the code**: `R --no-restore --no-save -e 'library(styler); style_file("R/[function_name].R")'`
-12. **Update documentation**: `R --no-restore --no-save -e 'roxygen2::document()'`
-13. **Validate documentation consistency**: Check for "Codoc mismatches" warnings
-14. Rebuild and test: `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz`
-15. Run tests: `R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'`
-16. **Update version number**: Bump version in DESCRIPTION file (see Version Management section)
-17. **Update NEWS.md**: Add changelog entry describing the new function (see Version Management section)
-18. **Create reprex examples**: Prepare reproducible examples showing the new function in action for PR description
+1. **FIRST: Update version number and NEWS.md** (see Version Management section - do this ONCE per PR)
+2. Create the function in `/R/[function_name].R`
+3. **Identify required packages**: Check which packages the function will need using `rlang::check_installed()`
+4. **Install only required packages**: Use targeted installation instead of batch installation
+5. **Use proper variable referencing**: Use `.data[[var]]` for dplyr/ggplot2 operations
+6. Add roxygen2 documentation above the function (ensure parameter names match exactly)
+7. Add `@importFrom` statements for all external functions used
+8. Add exports to roxygen2 comments if needed (`@export`)
+9. Create tests in `/tests/testthat/test-[function_name].R`
+10. **Check for global variable issues**: `R CMD check` should show no binding warnings
+11. **Lint the code**: `R --no-restore --no-save -e 'library(lintr); lint_package()'`
+12. **Style the code**: `R --no-restore --no-save -e 'library(styler); style_file("R/[function_name].R")'`
+13. **Update documentation**: `R --no-restore --no-save -e 'roxygen2::document()'`
+14. **Validate documentation consistency**: Check for "Codoc mismatches" warnings
+15. Rebuild and test: `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz`
+16. Run tests: `R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'`
+17. **Create reprex examples**: Prepare reproducible examples showing the new function in action for PR description
+18. **If making additional commits**: DO NOT update version/NEWS.md again - use same version for all commits in this PR
 
 ### Modifying Existing Functions
-1. **Identify current function dependencies**: Check which packages the function currently requires
-2. Edit the function in appropriate `/R/[file].R`
-3. **Check if new packages are needed**: If adding functionality, identify any new package requirements
-4. **Install only new required packages**: Install only what's newly needed, not all suggested packages
-5. **Ensure proper variable referencing**: Replace bare variable names with `.data[[var]]` notation
-6. Update documentation if parameters changed (ensure exact parameter name matches)
-7. Update `@importFrom` statements if new external functions are used
-8. Update tests if function behavior changes
-9. **Check for global variable issues**: `R CMD check` should show no binding warnings
-10. **Lint the code**: `R --no-restore --no-save -e 'library(lintr); lint_package()'`
-11. **Style the code**: `R --no-restore --no-save -e 'library(styler); style_file("R/[file].R")'`
-12. **Update documentation if changed**: `R --no-restore --no-save -e 'roxygen2::document()'`
-13. **Validate documentation consistency**: Check for "Codoc mismatches" warnings
-14. **Always rebuild and reinstall**: `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz`
-15. **Always test the specific function manually**
-16. Run full test suite to check for regressions
-17. **Update version number**: Bump version in DESCRIPTION file (see Version Management section)
-18. **Update NEWS.md**: Add changelog entry describing your changes (see Version Management section)
-19. **Create before/after reprexes**: Prepare examples showing the old vs new behavior for PR description
+1. **FIRST: Update version number and NEWS.md** (see Version Management section - do this ONCE per PR)
+2. **Identify current function dependencies**: Check which packages the function currently requires
+3. Edit the function in appropriate `/R/[file].R`
+4. **Check if new packages are needed**: If adding functionality, identify any new package requirements
+5. **Install only new required packages**: Install only what's newly needed, not all suggested packages
+6. **Ensure proper variable referencing**: Replace bare variable names with `.data[[var]]` notation
+7. Update documentation if parameters changed (ensure exact parameter name matches)
+8. Update `@importFrom` statements if new external functions are used
+9. Update tests if function behavior changes
+10. **Check for global variable issues**: `R CMD check` should show no binding warnings
+11. **Lint the code**: `R --no-restore --no-save -e 'library(lintr); lint_package()'`
+12. **Style the code**: `R --no-restore --no-save -e 'library(styler); style_file("R/[file].R")'`
+13. **Update documentation if changed**: `R --no-restore --no-save -e 'roxygen2::document()'`
+14. **Validate documentation consistency**: Check for "Codoc mismatches" warnings
+15. **Always rebuild and reinstall**: `R CMD build . && R CMD INSTALL rempsyc_*.tar.gz`
+16. **Always test the specific function manually**
+17. Run full test suite to check for regressions
+18. **Create before/after reprexes**: Prepare examples showing the old vs new behavior for PR description
+19. **If making additional commits**: DO NOT update version/NEWS.md again - use same version for all commits in this PR
 
 ## Version Management and Changelog Updates
 
 **CRITICAL**: Every PR must include version number updates and NEWS.md changelog entries. This is mandatory for all changes.
+
+**IMPORTANT CLARIFICATION**: Version numbers should be bumped **ONCE PER PULL REQUEST**, not once per commit. If you make multiple commits within a single PR, all commits should use the same version number. Only bump the version once at the beginning of your PR work or before submitting the PR for review.
 
 ### Version Numbering System
 
@@ -624,6 +628,27 @@ The rempsyc package follows this versioning pattern:
 2. **New features**: Increment the third decimal (0.1.91 → 0.1.92) 
 3. **Breaking changes**: Increment the second decimal (0.1.91 → 0.2.0) - rare
 4. **Documentation-only changes**: Still increment third decimal for tracking
+
+### Multiple Commits Within a Single PR
+
+**CRITICAL RULE**: If your PR involves multiple commits, use the same version number for ALL commits in that PR.
+
+**Correct approach for multi-commit PR**:
+1. **At the start of your PR work**: Bump version from 0.1.91 → 0.1.92 and update NEWS.md
+2. **First commit**: Contains version bump + your first set of changes
+3. **Subsequent commits**: Use the same version (0.1.92) for any additional changes
+4. **Do NOT bump version again** until you start a new PR
+
+**Example of correct multi-commit PR**:
+- Commit 1: "Bump version to 0.1.92 and add new feature X"
+- Commit 2: "Fix bug in feature X (still version 0.1.92)" 
+- Commit 3: "Update documentation for feature X (still version 0.1.92)"
+- All commits use version 0.1.92, NEWS.md updated once in commit 1
+
+**NEVER do this** (incorrect approach):
+- Commit 1: "Add feature X, bump to 0.1.92"
+- Commit 2: "Fix bug in feature X, bump to 0.1.93" ❌ WRONG
+- Commit 3: "Update docs, bump to 0.1.94" ❌ WRONG
 
 ### How to Update Version Number
 
@@ -679,7 +704,7 @@ The rempsyc package follows this versioning pattern:
 
 ### Automated Version Management Workflow
 
-**Follow this exact sequence for every PR**:
+**Follow this exact sequence ONCE PER PR** (not per commit):
 
 ```bash
 cd /home/runner/work/rempsyc/rempsyc
@@ -691,10 +716,10 @@ grep -A5 "^# rempsyc" NEWS.md | head -10
 # Step 2: Determine new version number
 # Current: 0.1.91 → New: 0.1.92 (example)
 
-# Step 3: Update DESCRIPTION file
+# Step 3: Update DESCRIPTION file (ONCE per PR)
 sed -i 's/Version: 0.1.91/Version: 0.1.92/' DESCRIPTION
 
-# Step 4: Update NEWS.md (add entry at the top)
+# Step 4: Update NEWS.md (ONCE per PR - add entry at the top)
 # Use your preferred text editor or str_replace_editor
 
 # Step 5: Verify updates
@@ -702,6 +727,8 @@ grep "Version:" DESCRIPTION
 head -10 NEWS.md
 
 # Step 6: Proceed with normal build/test workflow
+# Step 7: Make your code changes and commit everything together
+# Step 8: Any additional commits in this PR should NOT change version numbers again
 ```
 
 ### Version Update Examples
@@ -732,13 +759,14 @@ head -10 NEWS.md
 * Documentation updates for improved clarity across all visualization functions
 ```
 
-### Before Committing Changes
-**CRITICAL**: Always run this complete validation sequence to ensure workflow checks pass on first try:
+### Before Submitting Your PR (Final Validation)
+**CRITICAL**: Always run this complete validation sequence to ensure workflow checks pass on first try. This should be done once before submitting your PR for review, not before every individual commit.
 
 ```bash
 cd /home/runner/work/rempsyc/rempsyc
 
-# 0. MANDATORY: Update version number and NEWS.md (see Version Management section below)
+# 0. ENSURE: Version number and NEWS.md were already updated once at the beginning of this PR
+#    (Do NOT update them again if this is a subsequent commit in the same PR)
 
 # 1. Check for global variable binding issues first (look for "no visible binding" warnings)
 R --no-restore --no-save -e 'warnings(); R CMD check rempsyc_*.tar.gz --no-manual --no-vignettes 2>&1 | grep -i "binding"'
@@ -761,13 +789,13 @@ R CMD INSTALL rempsyc_*.tar.gz
 # 7. Test (11 seconds) 
 R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'
 
-# 8. Final R CMD check for all issues (~30 seconds) - REQUIRED before committing
+# 8. Final R CMD check for all issues (~30 seconds) - REQUIRED before PR submission
 _R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check rempsyc_*.tar.gz --no-manual --no-vignettes
 
 # 9. Look specifically for critical warnings that fail CI:
 # - "no visible binding for global variable"
 # - "Codoc mismatches from Rd file"
-# - Fix these issues before committing
+# - Fix these issues before submitting your PR
 ```
 
 ### Pull Request Requirements
