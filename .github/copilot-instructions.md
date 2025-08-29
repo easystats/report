@@ -11,7 +11,7 @@ The `report` package is an R package for automated reporting of results and stat
 
 ## Pre-Configured Environment 
 
-**NEW**: This repository now includes `.github/workflows/copilot-setup-steps.yml` which automatically configures the development environment before GitHub Copilot starts working. This workflow intelligently determines what setup is needed:
+**NEW**: This repository now includes `.github/workflows/copilot-setup-steps.yml` which automatically configures the development environment before GitHub Copilot starts working. This workflow intelligently determines what setup is needed using **sophisticated conditional logic**:
 
 **For R package development tasks** (editing .R files, functions, tests, etc.), it pre-installs:
 - R and system dependencies
@@ -23,8 +23,9 @@ The `report` package is an R package for automated reporting of results and stat
 
 **For documentation/configuration tasks** (editing .md files, .yml files, copilot instructions, etc.), it runs minimal setup:
 - Repository checkout only
+- **SMART DETECTION**: Uses PR file analysis (GitHub API) or git diff for accurate change detection
 - Skips time-consuming R installation and package setup
-- Saves significant time for non-code changes
+- Saves significant time for non-code changes (2-3 minutes)
 
 **If the pre-configured environment is working**, you can skip most manual installation steps below and go directly to the [Build and Development Workflow](#build-and-development-workflow) section.
 

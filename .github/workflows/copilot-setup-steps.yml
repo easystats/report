@@ -8,6 +8,8 @@ on:
   workflow_dispatch:
   # This workflow is automatically triggered by GitHub Copilot
   # before the agent starts working in the repository
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
 
 jobs:
   copilot-setup-steps:
@@ -15,6 +17,7 @@ jobs:
     
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
       _R_CHECK_CRAN_INCOMING_: false
       _R_CHECK_FORCE_SUGGESTS_: false
@@ -22,86 +25,88 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
         
       - name: Determine if R setup is needed
         id: check_r_needed
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          set -euo pipefail
           echo "Checking if R environment setup is needed..."
-          
-          # Check if this is likely a documentation-only or configuration change
-          # by looking for indicators that suggest R functionality will be needed
-          
+
           R_NEEDED=true
-          
-          # Get the branch name if available
-          BRANCH_NAME="${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
-          echo "Branch: $BRANCH_NAME"
-          
-          # PRIORITY: Check user's explicit instructions first
-          echo "=== Checking for explicit user instructions ==="
-          ISSUE_NUMBER="${COPILOT_AGENT_ISSUE_NUMBER:-}"
-          
-          if [ -n "$ISSUE_NUMBER" ] && [ "$ISSUE_NUMBER" != "0" ]; then
-            echo "Found associated issue #$ISSUE_NUMBER, checking for setup instructions..."
-            
-            # Fetch issue content using GitHub API
-            ISSUE_CONTENT=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
-              "https://api.github.com/repos/$GITHUB_REPOSITORY/issues/$ISSUE_NUMBER" | \
-              jq -r '.body // ""')
-            
-            echo "Issue content length: ${#ISSUE_CONTENT} characters"
-            
-            # Check for explicit instructions to skip setup
-            if echo "$ISSUE_CONTENT" | grep -iE "(do not run|don't run|skip).*(setup|install|dependencies)" > /dev/null; then
-              echo "✓ Found explicit instruction to SKIP setup in issue #$ISSUE_NUMBER"
-              R_NEEDED=false
-            elif echo "$ISSUE_CONTENT" | grep -iE "(no R|no dependencies|just.*text|just.*editing|only.*text|only.*editing)" > /dev/null; then
-              echo "✓ Found indication this is text-only work in issue #$ISSUE_NUMBER"
-              R_NEEDED=false  
-            elif echo "$ISSUE_CONTENT" | grep -iE "(version.*bump|update.*NEWS|changelog|text.*edit)" > /dev/null; then
-              echo "✓ Found indication this is version/documentation work in issue #$ISSUE_NUMBER"
-              R_NEEDED=false
-            else
-              echo "No explicit setup instructions found in issue content"
-            fi
-          else
-            echo "No associated issue found, proceeding with file-based analysis"
-          fi
-          
-          # Only run file-based analysis if user instructions didn't determine outcome
-          if [ "$R_NEEDED" == "true" ]; then
-            echo "=== Running file-based analysis ==="
-            
-            # Check recent commits for file patterns
-            if git log --name-only -10 --pretty=format: | grep -E '\.(R|Rd|Rmd)$' > /dev/null; then
-              echo "Found R-related files in recent commits - R setup needed"
-              R_NEEDED=true
-            elif git log --name-only -5 --pretty=format: | grep -E '^(tests/|R/|man/|vignettes/)' > /dev/null; then
-              echo "Found R package structure changes - R setup needed"
-              R_NEEDED=true
-            elif git log --oneline -5 | grep -iE '(function|package|test|build|check|install)' > /dev/null; then
-              echo "Found R development keywords in commit messages - R setup needed"
+
+          # If this is a PR, use the PR's changed files (authoritative)
+          if [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
+            PR_NUMBER=$(jq -r '.number' < "$GITHUB_EVENT_PATH")
+            echo "PR number: $PR_NUMBER"
+
+            # Get changed files from the PR
+            FILES=$(curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+              -H "Accept: application/vnd.github+json" \
+              "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/files?per_page=100" \
+              | jq -r '.[].filename')
+
+            echo "Files in PR:"
+            echo "${FILES}"
+
+            # If ANY file is not in the "docs/config-only" set -> need R
+            # Allowed-only set (docs/config): tweak as you like
+            # Note: use a temporary file to avoid word-splitting issues
+            echo "${FILES}" > /tmp/pr_files.txt
+
+            if grep -E '\.(R|Rmd|Rd)$' /tmp/pr_files.txt >/dev/null || \
+               grep -E '^(R/|tests/|man/|vignettes/|src/)' /tmp/pr_files.txt >/dev/null; then
+              echo "Detected R-related paths in PR."
               R_NEEDED=true
             else
-              # Check if recent changes are only to documentation/config files
-              RECENT_FILES=$(git log --name-only -5 --pretty=format: | sort -u)
-              echo "Recent files changed:"
-              echo "$RECENT_FILES"
-              
-              # If only these types of files changed, skip R setup
-              if echo "$RECENT_FILES" | grep -v -E '^(\.github/copilot-instructions\.md|\.github/workflows/|README\.md|\.gitignore|\.Rbuildignore|NEWS\.md|CONTRIBUTING\.md|LICENSE|CITATION\.cff|DESCRIPTION|cran-comments\.md|\.md$|\.yml$|\.yaml$)$' | grep -E '.' > /dev/null; then
-                echo "Found changes beyond documentation/config files - R setup needed"
+              # Anything outside the allowed docs/config list? Then R is needed.
+              if grep -v -E '^(\.github/copilot-instructions\.md|\.github/workflows/|README\.md|\.gitignore|\.Rbuildignore|NEWS\.md|CONTRIBUTING\.md|LICENSE|CITATION\.cff|DESCRIPTION|cran-comments\.md|.+\.md$|.+\.ya?ml$)$' /tmp/pr_files.txt | grep -E '.' >/dev/null; then
+                echo "Changes go beyond docs/config-only."
                 R_NEEDED=true
               else
-                echo "Only documentation/config files changed - R setup can be skipped"
+                echo "PR is docs/config-only."
                 R_NEEDED=false
               fi
             fi
+
           else
-            echo "=== Skipping file-based analysis (user instructions already determined outcome) ==="
+            # No PR context (Copilot run, pushes, etc.)
+            # Fallback: fast probe + light heuristics
+
+            echo "No PR context; using probe/heuristics."
+
+            # Example probe: if R already present and renv/cache present, skip
+            if command -v R >/dev/null 2>&1 && [ -f "renv.lock" ] && [ -d "~/.cache/R" ]; then
+              echo "R and cache present; likely no heavy setup needed."
+              R_NEEDED=false
+            else
+              # Last-commit heuristic (with full history available)
+              # Compare against the immediate parent only, to avoid "recent history" bias
+              if git rev-parse --verify HEAD~1 >/dev/null 2>&1; then
+                CHANGED=$(git diff --name-only HEAD~1...HEAD || true)
+              else
+                CHANGED=$(git ls-files) # first run in a new repo clone
+              fi
+              echo "${CHANGED}" > /tmp/changed.txt
+
+              if grep -E '\.(R|Rmd|Rd)$' /tmp/changed.txt >/dev/null || \
+                 grep -E '^(R/|tests/|man/|vignettes/|src/)' /tmp/changed.txt >/dev/null; then
+                R_NEEDED=true
+              else
+                if grep -v -E '^(\.github/copilot-instructions\.md|\.github/workflows/|README\.md|\.gitignore|\.Rbuildignore|NEWS\.md|CONTRIBUTING\.md|LICENSE|CITATION\.cff|DESCRIPTION|cran-comments\.md|.+\.md$|.+\.ya?ml$)$' /tmp/changed.txt | grep -E '.' >/dev/null; then
+                  R_NEEDED=true
+                else
+                  R_NEEDED=false
+                fi
+              fi
+            fi
           fi
+
+          echo "R_NEEDED=${R_NEEDED}" | tee -a "$GITHUB_OUTPUT"
           
-          echo "R_NEEDED=$R_NEEDED" >> $GITHUB_OUTPUT
           echo ""
           echo "=== FINAL DECISION ==="
           if [ "$R_NEEDED" == "true" ]; then
@@ -109,10 +114,9 @@ jobs:
             echo "Reason: Analysis indicates R functionality is needed"
           else
             echo "✓ R setup WILL BE SKIPPED"
-            echo "Reason: User instructions or file analysis indicates R setup not needed"
+            echo "Reason: Only documentation/config files detected"
           fi
           echo "Decision: R_NEEDED=$R_NEEDED"
-        shell: bash
         
       - name: Setup R
         if: steps.check_r_needed.outputs.R_NEEDED == 'true'
@@ -334,12 +338,12 @@ jobs:
           else
             echo "✓ Minimal environment configured:"
             echo "  - Repository checked out and ready"
-            echo "  - R setup SKIPPED per user instructions or file analysis"
+            echo "  - R setup SKIPPED - only documentation/config changes detected"
             echo ""
-            if [ -n "${COPILOT_AGENT_ISSUE_NUMBER:-}" ] && [ "${COPILOT_AGENT_ISSUE_NUMBER:-}" != "0" ]; then
-              echo "Decision based on issue #${COPILOT_AGENT_ISSUE_NUMBER} analysis"
+            if [ "${GITHUB_EVENT_NAME:-}" = "pull_request" ]; then
+              echo "Decision based on PR file analysis using GitHub API"
             else
-              echo "Decision based on file change analysis"
+              echo "Decision based on git diff analysis"
             fi
             echo "The environment is ready for documentation and configuration work."
             echo "Perfect for version bumps, NEWS.md updates, and text editing tasks."
