@@ -198,6 +198,19 @@ report_statistics.lm <- function(x,
   }
   table <- .remove_performance(table)
   effsize <- attributes(table)$effsize
+  
+  # For glmmTMB models with multiple components, align table with effectsize scope
+  # Effectsize only includes conditional components, so filter table to match
+  if (!is.null(effsize) && inherits(x, "glmmTMB") && "Component" %in% colnames(table)) {
+    # Get the parameters that effectsize covers
+    effsize_params <- attributes(effsize)$table$Parameter
+    effsize_components <- rep("conditional", length(effsize_params))  # effectsize only covers conditional
+    
+    # Filter table to match effectsize parameters and components
+    table_match_idx <- table$Parameter %in% effsize_params & 
+                       (is.na(table$Component) | table$Component == "conditional")
+    table <- table[table_match_idx, ]
+  }
 
   # Estimate
   estimate <- .find_regression_estimate(table)
