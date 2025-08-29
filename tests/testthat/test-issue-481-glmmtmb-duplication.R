@@ -34,7 +34,7 @@ test_that("issue #481 - no text duplication in gsub pattern", {
 test_that("gsub regex pattern is correctly escaped", {
   # Direct test of the regex pattern to ensure it only matches literal periods
   
-  # Test strings that should be replaced (literal period)
+  # Test strings that should be replaced (literal period followed by space)
   test_string1 <- "Some text.Effect sizes follow Cohen's recommendations."
   result1 <- gsub("\\.Effect sizes ", " and ", test_string1)
   expect_equal(result1, "Some text and follow Cohen's recommendations.")
@@ -47,4 +47,15 @@ test_that("gsub regex pattern is correctly escaped", {
   test_string3 <- "Some text Effect sizes follow Cohen's recommendations."
   result3 <- gsub("\\.Effect sizes ", " and ", test_string3)  
   expect_equal(result3, test_string3)  # Should remain unchanged (space, not period)
+  
+  # Test the problematic case that could cause duplication
+  problem_case <- "Standardized parameters were computed.Effect sizes were interpreted."
+  fixed_result <- gsub("\\.Effect sizes ", " and ", problem_case)
+  expect_equal(fixed_result, "Standardized parameters were computed and were interpreted.")
+  
+  # Show what the old broken pattern would do (for documentation)
+  broken_result <- gsub(".Effect sizes ", " and ", problem_case)
+  expect_equal(broken_result, "Standardized parameters were computed and were interpreted.")
+  # Note: both should produce same result for this specific case, but old pattern 
+  # would incorrectly match other characters too
 })
