@@ -14,8 +14,9 @@ The `report` package is an R package for automated reporting of results and stat
 **NEW**: This repository now includes `.github/workflows/copilot-setup-steps.yml` which automatically configures the development environment before GitHub Copilot starts working. This workflow intelligently determines what setup is needed using **sophisticated conditional logic**:
 
 **For R package development tasks** (editing .R files, functions, tests, etc.), it pre-installs:
-- R and system dependencies
-- Core development packages (rlang, dplyr, testthat, lintr, styler, roxygen2, reprex)
+- R and system dependencies  
+- Core development packages (rlang, dplyr, testthat, lintr, styler, roxygen2, reprex, devtools)
+- **Complete reprex setup**: knitr, rmarkdown, pandoc, clipr (all dependencies needed for creating reproducible examples)
 - Easystats ecosystem packages (insight, bayestestR, effectsize, performance, parameters, datawizard)
 - The report package itself (built and installed)
 - **ONLY required dependencies (Imports) - suggested packages are NOT pre-installed to save time and resources**
@@ -112,22 +113,31 @@ R --no-restore --no-save -e 'print("R is working correctly")'
 
 # Verify core packages are available
 R --no-restore --no-save -e '
-required_packages <- c("dplyr", "rlang", "testthat", "lintr", "reprex", "styler", "roxygen2")
+required_packages <- c("dplyr", "rlang", "testthat", "lintr", "reprex", "styler", "roxygen2", "knitr", "rmarkdown", "clipr")
 missing_packages <- required_packages[!sapply(required_packages, requireNamespace, quietly = TRUE)]
 if (length(missing_packages) > 0) {
   cat("Missing packages:", paste(missing_packages, collapse = ", "), "\n")
   cat("Run installation commands to install missing packages\n")
 } else {
   cat("All core development packages are available\n")
+  cat("reprex functionality fully supported\n")
 }
 '
 ```
 
-### Essential reprex Package Setup
-**CRITICAL**: The reprex package is mandatory for creating reproducible examples in pull requests. Always ensure it's installed and functional.
+### Essential reprex Package Setup  
+**CRITICAL**: The reprex package is mandatory for creating reproducible examples in pull requests. 
+
+**If using the pre-configured environment**: reprex and all its dependencies (pandoc, knitr, rmarkdown, clipr) are already installed and tested. Skip to step 4 to verify functionality.
+
+**If setting up manually**: Follow this complete setup process:
 
 ```bash
-# Install reprex if not already installed
+# Step 1: Install required dependencies for reprex
+sudo apt install -y pandoc
+R --no-restore --no-save -e 'install.packages(c("knitr", "rmarkdown"), repos="https://cloud.r-project.org/")'
+
+# Step 2: Install reprex package
 R --no-restore --no-save -e '
 if (!requireNamespace("reprex", quietly = TRUE)) {
   # Try multiple installation methods
@@ -144,21 +154,26 @@ if (!requireNamespace("reprex", quietly = TRUE)) {
 }
 '
 
-# Verify reprex functionality with a simple test
-R --no-restore --no-save -e '
+# Step 3: CRITICAL - Set environment variable and test
+export CLIPR_ALLOW=TRUE && R --no-restore --no-save -e '
 library(reprex)
 # Test reprex with simple code
-test_code <- "
-x <- 1:5
-mean(x)
-"
-result <- reprex(input = test_code, venue = "gh", advertise = FALSE, show = FALSE)
+result <- reprex({
+  x <- 1:5
+  mean(x)
+}, venue = "gh", advertise = FALSE, html_preview = FALSE)
+
 if (length(result) > 0) {
-  cat("reprex package is working correctly\n")
+  cat("SUCCESS: reprex package is working correctly\n")
+  cat("Sample output:\n")
+  cat(paste(head(result, 5), collapse = "\n"))
 } else {
-  stop("reprex package installation failed - this is required for PR creation")
+  stop("FAILED: reprex package installation failed - this is required for PR creation")
 }
 '
+```
+
+**ESSENTIAL**: Always run `export CLIPR_ALLOW=TRUE` before using reprex to prevent crashes.
 ```
 
 ### Install Function-Specific Dependencies Only
@@ -363,34 +378,31 @@ print("Core functions working correctly")
 
 ```bash
 cd /home/runner/work/report/report
-R --no-restore --no-save -e '
+export CLIPR_ALLOW=TRUE && R --no-restore --no-save -e '
 # Load required packages
 library(reprex)
 library(report)
 
-# Create a test reprex with actual report function
-test_code <- "
-library(report)
-data(mtcars)
+# Create a test reprex with actual report function (WORKING EXAMPLE)
+reprex_result <- reprex({
+  library(report)
+  data(mtcars)
 
-# Example model reporting
-model <- lm(mpg ~ wt + hp, data = mtcars)
-result <- report(model)
-print(result)
-"
-
-# Generate reprex
-cat("Testing reprex functionality...\n")
-reprex_result <- reprex(input = test_code, venue = "gh", advertise = FALSE, show = FALSE)
+  # Example model reporting
+  model <- lm(mpg ~ wt + hp, data = mtcars)
+  result <- report(model)
+  print(result)
+  
+}, venue = "gh", advertise = FALSE, html_preview = FALSE)
 
 # Verify it worked
 if (length(reprex_result) > 0 && any(grepl("library\\(report\\)", reprex_result))) {
-  cat("SUCCESS: reprex is working correctly and can generate examples with report\n")
-  cat("Sample reprex output (first few lines):\n")
-  cat(paste(head(reprex_result, 10), collapse = "\n"))
+  cat("SUCCESS: reprex is working correctly with report functions\n")
+  cat("Sample reprex output:\n")
+  cat(paste(reprex_result, collapse = "\n"))
   cat("\n")
 } else {
-  stop("FAILED: reprex is not working correctly - install reprex before proceeding")
+  stop("FAILED: reprex is not working correctly - follow debugging guide in Troubleshooting section")
 }
 '
 ```
@@ -894,44 +906,44 @@ _R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check report_*.tar.gz --no-manual --no-vign
    - **Before**: Real reprex output showing the current (problematic) behavior
    - **After**: Real reprex output showing the improved behavior with your changes
 
-#### Quick Reprex Creation Workflow:
-**NEVER SKIP**: Always generate actual reprex, never simulate or guess:
+#### Optimized Reprex Creation with Image Handling:
+**ESSENTIAL**: Always generate actual reprex with automatic imgur integration for plots:
 
 ```bash
 cd /home/runner/work/report/report
-R --no-restore --no-save -e '
+export CLIPR_ALLOW=TRUE && R --no-restore --no-save -e '
 library(reprex)
 library(report)
 
-# Create ACTUAL reprex for your changes
-example_code <- "
-library(report)
-data(mtcars)
+# Create ACTUAL reprex - plots automatically uploaded to imgur
+reprex_result <- reprex({
+  library(report)
+  
+  # Example: Create basic report output
+  data(mtcars)
+  model <- lm(mpg ~ wt + hp, data = mtcars)
+  result <- report(model)
+  print(result)
+  
+  # Example: Sample reporting
+  sample_report <- report_sample(mtcars)  
+  print(sample_report)
+  
+}, venue = "gh", advertise = TRUE, html_preview = FALSE)
 
-# Example: test the function you modified
-model <- lm(mpg ~ wt + hp, data = mtcars)
-result <- report(model)
-print(result)
-
-# Example: test report_sample function
-sample_report <- report_sample(mtcars)
-print(sample_report)
-"
-
-# Generate actual reprex
-actual_reprex <- reprex(input = example_code, venue = "gh", advertise = FALSE)
-
-# Verify it worked
-if (length(actual_reprex) > 0) {
-  cat("SUCCESS: Generated actual reprex for PR\n")
-  cat("Copy this output to your PR description:\n")
-  cat("========================================\n")
-  cat(paste(actual_reprex, collapse = "\n"))
-  cat("\n========================================\n")
-} else {
-  stop("FAILED: Could not generate reprex - fix reprex installation first")
-}
+# Display complete reprex with imgur links embedded
+cat(paste(reprex_result, collapse = "\n"))
 '
+```
+
+**Key Benefits of This Approach**:
+- ✅ **Automatic image hosting**: Plots automatically uploaded to imgur (whitelisted domain)
+- ✅ **No local artifacts**: No PNG files left in repository to accidentally commit  
+- ✅ **Complete format**: Includes "Created on [date] with reprex v[version]" footer
+- ✅ **Direct embedding**: Images display directly in GitHub responses
+- ✅ **Clean workflow**: No manual upload or cleanup steps required
+
+**CRITICAL**: Always set `advertise = TRUE` to get the complete format with date/version info that provides authority to your reprex.
 ```
 
 **RStudio Users**: Use the reprex addin for faster creation:
@@ -1002,36 +1014,112 @@ if (length(actual_reprex) > 0) {
   - Try R-universe: `repos="https://r-universe.dev"`  
   - Use pak package: `pak::pak("[package-name]")`
 
-### reprex Package Issues
-- **Cause**: reprex package not installed or not working correctly
-- **Solution**: Follow the comprehensive reprex installation steps:
-  ```bash
-  # Multi-method installation
-  R --no-restore --no-save -e '
-  if (!requireNamespace("reprex", quietly = TRUE)) {
-    tryCatch({
-      install.packages("reprex", repos="https://cloud.r-project.org/")
-    }, error = function(e1) {
-      tryCatch({
-        install.packages("reprex", repos="https://r-universe.dev")
-      }, error = function(e2) {
-        install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")
-        pak::pak("reprex")
-      })
-    })
-  }
-  '
-  ```
-- **Verification**: Always test reprex functionality before creating PRs using the validation scenario
+### reprex Package Issues and Complete Debugging Guide
+**CRITICAL SOLUTION**: The main issues with reprex are missing dependencies and environment variables. 
 
-### reprex Not Generating Output
-- **Cause**: Code errors, missing packages, or input format issues
-- **Solution**: 
-  - Test with simple code first: `x <- 1:5; mean(x)`
-  - Ensure all required packages are loaded in the reprex code
-  - Use `venue = "gh"` for GitHub-formatted output
-  - Check for syntax errors in the input code
-- **Debug**: Use `reprex(input = your_code, venue = "gh", advertise = FALSE, show = TRUE)` to see detailed output
+**NEW**: In the pre-configured environment (copilot-setup-steps.yml), all reprex dependencies are now pre-installed: pandoc, knitr, rmarkdown, clipr. If you're using the pre-configured environment, skip to Step 3 (Set Environment Variables).
+
+**For manual setup or debugging**: Follow this complete debugging guide:
+
+#### Step 1: Install Required Dependencies
+```bash
+# Install core dependencies first
+sudo apt install -y pandoc
+R --no-restore --no-save -e 'install.packages(c("knitr", "rmarkdown"), repos="https://cloud.r-project.org/")'
+```
+
+#### Step 2: Install reprex Package
+```bash
+# Multi-method installation
+R --no-restore --no-save -e '
+if (!requireNamespace("reprex", quietly = TRUE)) {
+  tryCatch({
+    install.packages("reprex", repos="https://cloud.r-project.org/")
+  }, error = function(e1) {
+    tryCatch({
+      install.packages("reprex", repos="https://r-universe.dev")
+    }, error = function(e2) {
+      install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")
+      pak::pak("reprex")
+    })
+  })
+}
+'
+```
+
+#### Step 3: Set Environment Variables (CRITICAL)
+```bash
+# ESSENTIAL: Set clipboard environment variable to prevent crashes
+export CLIPR_ALLOW=TRUE
+```
+
+#### Step 4: Test reprex with Simple Example
+```bash
+export CLIPR_ALLOW=TRUE && R --no-restore --no-save -e '
+library(reprex)
+
+# Test basic functionality
+result <- reprex({
+  x <- 1:5
+  mean(x)
+}, venue = "gh", advertise = FALSE, html_preview = FALSE)
+
+cat("SUCCESS: Basic reprex working\n")
+cat(result, sep = "\n")
+'
+```
+
+#### Step 5: Test reprex with report Functions
+```bash
+export CLIPR_ALLOW=TRUE && R --no-restore --no-save -e '
+library(reprex)
+
+# Working reprex example with report
+result <- reprex({
+  library(report)
+  data(mtcars)
+  
+  # Example model reporting
+  model <- lm(mpg ~ wt + hp, data = mtcars)
+  result <- report(model)
+  print(result)
+  
+}, venue = "gh", advertise = FALSE, html_preview = FALSE)
+
+cat("SUCCESS: report reprex working\n")
+cat(result, sep = "\n")
+'
+```
+
+#### Common Error Solutions:
+
+**Error: "This reprex appears to crash R"**
+- **Cause**: CLIPR_ALLOW not set or missing dependencies
+- **Solution**: Set `export CLIPR_ALLOW=TRUE` and install pandoc, knitr, rmarkdown
+
+**Error: "CLIPR_ALLOW has not been set"**
+- **Cause**: Missing environment variable
+- **Solution**: Always run `export CLIPR_ALLOW=TRUE` before using reprex
+
+**Plot Rendering Issues**
+- **Cause**: Complex ggplot objects cause crashes in reprex rendering
+- **Solution**: For plots, keep examples simple or use `ggsave()` to save plots separately
+- **Workaround**: Document plot creation without displaying the plot object in reprex
+
+#### Verified Working Example Template
+```r
+# ALWAYS use this pattern for report reprex:
+export CLIPR_ALLOW=TRUE
+library(reprex)
+
+result <- reprex({
+  library(report)
+  
+  # Your report example here
+  # Keep it simple, avoid complex plots in reprex
+  
+}, venue = "gh", advertise = FALSE, html_preview = FALSE)
+```
 
 ## Common Reference Information
 
