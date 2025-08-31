@@ -85,7 +85,11 @@ R --version
 which R
 
 # Install core R packages via system package manager (recommended)
-sudo apt install -y r-cran-dplyr r-cran-rlang r-cran-testthat r-cran-lintr
+sudo apt install -y r-cran-dplyr r-cran-rlang r-cran-testthat
+
+# CRITICAL: Install development version of lintr to match CI environment
+# The easystats CI uses r-lib/lintr (development version) not CRAN stable
+R --no-restore --no-save -e 'pak::pak("r-lib/lintr")' || sudo apt install -y r-cran-lintr
 
 # Install reprex (ESSENTIAL for creating reproducible examples in PRs)
 sudo apt install -y r-cran-reprex || R --no-restore --no-save -e 'install.packages("reprex", repos="https://cloud.r-project.org/")'
@@ -1064,6 +1068,31 @@ cat(paste(reprex_result, collapse = "\n"))
 - **Solution**: Replace with `.data[[variable_name]]` notation and add proper `@importFrom` statements
 - **Example**: Change `group_by(var)` to `group_by(.data[[var]])`
 - **DO NOT**: Create `global_variables.R` files with `utils::globalVariables()`
+
+### Lintr CI vs Local Discrepancies (CRITICAL VERSION ISSUE)
+- **Cause**: CI uses development lintr (`r-lib/lintr`) while local uses CRAN stable (`r-cran-lintr`)
+- **Symptoms**: Local lintr passes but CI lintr fails with stricter rules
+- **Root issue**: Development lintr prefers `grepv()` over `grep(..., value = TRUE)` and has stricter rules
+- **Solution**: Always install development lintr to match CI:
+  ```bash
+  # Install development lintr to match CI (R 4.5.0+ required)
+  R --no-restore --no-save -e 'pak::pak("r-lib/lintr")'
+  # Fallback to stable if network issues:
+  sudo apt install -y r-cran-lintr
+  ```
+- **Testing**: Use exact CI configuration for local validation:
+  ```bash
+  R --no-restore --no-save -e 'library(lintr); lint_package(linters = all_linters(
+    absolute_path_linter = NULL, cyclocomp_linter(40L), if_not_else_linter(exceptions = character(0L)),
+    indentation_linter = NULL, implicit_integer_linter = NULL, library_call_linter = NULL,
+    line_length_linter(120L), namespace_linter = NULL, nonportable_path_linter = NULL,
+    object_length_linter(50L), object_name_linter = NULL, object_usage_linter = NULL,
+    one_call_pipe_linter = NULL, todo_comment_linter = NULL, commented_code_linter = NULL,
+    undesirable_function_linter(c("mapply" = NA, "setwd" = NA)), undesirable_operator_linter = NULL,
+    unnecessary_concatenation_linter(allow_single_expression = FALSE), unused_import_linter = NULL
+  ))'
+  ```
+- **Prevention**: Always use `grepv()` instead of `grep(..., value = TRUE)` in new R code (R 4.5.0+)
 
 ### Documentation Mismatch Warnings ("Codoc mismatches")
 - **Cause**: Function parameter names don't match the documentation
