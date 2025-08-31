@@ -274,7 +274,7 @@ Expected results:
 - Some tests may be skipped if optional packages not available
 
 ### Run Linting with Easystats Settings
-**IMPORTANT**: This package uses the easystats organization's centralized lintr configuration. The repository includes a `.lintr` file that automatically applies the standardized settings from the [easystats/workflows](https://github.com/easystats/workflows) repository. This ensures consistency across all easystats packages without duplicating configuration.
+**IMPORTANT**: This package uses the easystats organization's centralized lintr configuration defined in [easystats/workflows](https://github.com/easystats/workflows/blob/main/.github/workflows/lint-changed-files.yaml). This ensures consistency across all easystats packages and stays automatically up-to-date with organization standards.
 
 **NEVER CANCEL: Linting takes ~20 seconds. Set timeout to 60+ seconds.**
 
@@ -289,7 +289,28 @@ if (file.exists("changed_files.txt") && file.size("changed_files.txt") > 0) {
   changed_files <- readLines("changed_files.txt")
   changed_files <- changed_files[file.exists(changed_files)]
   if (length(changed_files) > 0) {
-    lint(changed_files)
+    # Use the same lintr configuration as the CI workflow
+    lint(changed_files, linters = all_linters(
+      absolute_path_linter = NULL,
+      cyclocomp_linter(40L),
+      if_not_else_linter(exceptions = character(0L)),
+      indentation_linter = NULL,
+      implicit_integer_linter = NULL,
+      library_call_linter = NULL,
+      line_length_linter(120L),
+      namespace_linter = NULL,
+      nonportable_path_linter = NULL,
+      object_length_linter(50L),
+      object_name_linter = NULL,
+      object_usage_linter = NULL,
+      one_call_pipe_linter = NULL,
+      todo_comment_linter = NULL,
+      commented_code_linter = NULL,
+      undesirable_function_linter(c("mapply" = NA, "setwd" = NA)),
+      undesirable_operator_linter = NULL,
+      unnecessary_concatenation_linter(allow_single_expression = FALSE),
+      unused_import_linter = NULL
+    ))
   } else {
     cat("No R files changed\n")
   }
@@ -300,18 +321,12 @@ if (file.exists("changed_files.txt") && file.size("changed_files.txt") > 0) {
 rm -f changed_files.txt
 ```
 
-**Alternative** - Lint **entire package** (use only when needed for comprehensive check):
-```bash
-cd /home/runner/work/report/report
-R --no-restore --no-save -e 'library(lintr); lint_package()'
-```
-
 Expected results:
 - Style warnings (normal for existing codebase)
 - Focus on new code adhering to style guidelines
 - Package is functional despite style warnings
 
-**Note**: The `.lintr` file in this repository automatically uses the easystats organization's standardized lintr configuration from [easystats/workflows](https://github.com/easystats/workflows). This eliminates the need to specify lintr settings manually and ensures consistency across all easystats packages. The CI workflow `lint-changed-files.yaml` uses the same `.lintr` file and only lints files changed in the PR, making the process efficient and focused.
+**Note**: The lintr configuration above exactly matches the current settings in [easystats/workflows/lint-changed-files.yaml](https://github.com/easystats/workflows/blob/main/.github/workflows/lint-changed-files.yaml). This ensures the local linting matches the CI workflow exactly and stays current with organization standards.
 
 ### Auto-format Code with Styler
 **NEVER CANCEL: Styling takes ~10-30 seconds depending on package size. Set timeout to 60+ seconds.**
@@ -850,8 +865,28 @@ cd /home/runner/work/report/report
 # 1. Check for global variable binding issues first (look for "no visible binding" warnings)
 R --no-restore --no-save -e 'warnings(); R CMD check report_*.tar.gz --no-manual --no-vignettes 2>&1 | grep -i "binding"'
 
-# 2. Lint code to identify style issues (20 seconds) - use .lintr configuration
-R --no-restore --no-save -e 'library(lintr); lint_package()'
+# 2. Lint code to identify style issues (20 seconds) - use easystats/workflows configuration
+R --no-restore --no-save -e 'library(lintr); lint_package(linters = all_linters(
+  absolute_path_linter = NULL,
+  cyclocomp_linter(40L),
+  if_not_else_linter(exceptions = character(0L)),
+  indentation_linter = NULL,
+  implicit_integer_linter = NULL,
+  library_call_linter = NULL,
+  line_length_linter(120L),
+  namespace_linter = NULL,
+  nonportable_path_linter = NULL,
+  object_length_linter(50L),
+  object_name_linter = NULL,
+  object_usage_linter = NULL,
+  one_call_pipe_linter = NULL,
+  todo_comment_linter = NULL,
+  commented_code_linter = NULL,
+  undesirable_function_linter(c("mapply" = NA, "setwd" = NA)),
+  undesirable_operator_linter = NULL,
+  unnecessary_concatenation_linter(allow_single_expression = FALSE),
+  unused_import_linter = NULL
+))'
 
 # 3. Style code to automatically fix issues (10-30 seconds) - optional but recommended
 R --no-restore --no-save -e 'library(styler); style_pkg()'
