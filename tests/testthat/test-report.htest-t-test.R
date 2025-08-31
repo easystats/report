@@ -119,4 +119,15 @@ test_that("report.htest-t-test", {
     variant = "windows",
     report_effectsize(x, rules = "gignac2016", type = "g")
   )
+  
+  # custom rules ---------------------
+  custom_rules <- effectsize::rules(1, c("tiny", "yeah okay"), name = "Unknown")
+  expect_snapshot(
+    variant = "windows",
+    report_effectsize(x, rules = custom_rules)
+  )
+  expect_snapshot(
+    variant = "windows",
+    report(x, rules = custom_rules)
+  )
 })

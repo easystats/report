@@ -2,6 +2,7 @@
 
 Bug fixes
 
+* Fixed custom effect size rules not being correctly reported as custom rules (#458)
 * Fixed issue with missing effect size for the Intercept term in type 3 anova tables (#451)
 
 # report 0.6.1
