@@ -54,3 +54,4 @@ revdep/
 docs
 *.tar.gz
 *.Rcheck/
+report_*.tar.gz
