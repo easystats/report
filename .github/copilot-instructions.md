@@ -274,41 +274,44 @@ Expected results:
 - Some tests may be skipped if optional packages not available
 
 ### Run Linting with Easystats Settings
-**IMPORTANT**: This package uses the easystats organization's lintr configuration, which differs from the default lintr settings. Use the specific configuration below to match CI workflow requirements.
+**IMPORTANT**: This package uses the easystats organization's centralized lintr configuration. The repository includes a `.lintr` file that automatically applies the standardized settings from the [easystats/workflows](https://github.com/easystats/workflows) repository. This ensures consistency across all easystats packages without duplicating configuration.
 
 **NEVER CANCEL: Linting takes ~20 seconds. Set timeout to 60+ seconds.**
+
+**Recommended approach** - Lint **changed files only** (matches CI workflow behavior):
 ```bash
 cd /home/runner/work/report/report
+# Get list of changed R files in current PR/branch
+git diff --name-only HEAD~1 | grep "\\.R$" > changed_files.txt
 R --no-restore --no-save -e '
 library(lintr)
-lint_package(linters = all_linters(
-  absolute_path_linter = NULL,
-  cyclocomp_linter(40L),
-  if_not_else_linter(exceptions = character(0L)),
-  indentation_linter = NULL,
-  implicit_integer_linter = NULL,
-  library_call_linter = NULL,
-  line_length_linter(120L),
-  namespace_linter = NULL,
-  nonportable_path_linter = NULL,
-  object_length_linter(50L),
-  object_name_linter = NULL,
-  object_usage_linter = NULL,
-  one_call_pipe_linter = NULL,
-  todo_comment_linter = NULL,
-  commented_code_linter = NULL,
-  undesirable_function_linter(c("mapply" = NA, "setwd" = NA)),
-  undesirable_operator_linter = NULL,
-  unnecessary_concatenation_linter(allow_single_expression = FALSE),
-  unused_import_linter = NULL
-))
+if (file.exists("changed_files.txt") && file.size("changed_files.txt") > 0) {
+  changed_files <- readLines("changed_files.txt")
+  changed_files <- changed_files[file.exists(changed_files)]
+  if (length(changed_files) > 0) {
+    lint(changed_files)
+  } else {
+    cat("No R files changed\n")
+  }
+} else {
+  cat("No R files changed\n")
+}
 '
+rm -f changed_files.txt
+```
+
+**Alternative** - Lint **entire package** (use only when needed for comprehensive check):
+```bash
+cd /home/runner/work/report/report
+R --no-restore --no-save -e 'library(lintr); lint_package()'
 ```
 
 Expected results:
 - Style warnings (normal for existing codebase)
 - Focus on new code adhering to style guidelines
 - Package is functional despite style warnings
+
+**Note**: The `.lintr` file in this repository automatically uses the easystats organization's standardized lintr configuration from [easystats/workflows](https://github.com/easystats/workflows). This eliminates the need to specify lintr settings manually and ensures consistency across all easystats packages. The CI workflow `lint-changed-files.yaml` uses the same `.lintr` file and only lints files changed in the PR, making the process efficient and focused.
 
 ### Auto-format Code with Styler
 **NEVER CANCEL: Styling takes ~10-30 seconds depending on package size. Set timeout to 60+ seconds.**
@@ -648,7 +651,7 @@ R --no-restore --no-save -e 'install.packages("BayesFactor", repos="https://clou
 8. Add exports to roxygen2 comments if needed (`@export`)
 9. Create tests in `/tests/testthat/test-[function_name].R`
 10. **Check for global variable issues**: `R CMD check` should show no binding warnings
-11. **Lint the code with easystats settings**: `R --no-restore --no-save -e 'library(lintr); lint_package(linters = all_linters(absolute_path_linter = NULL, cyclocomp_linter(40L), if_not_else_linter(exceptions = character(0L)), indentation_linter = NULL, implicit_integer_linter = NULL, library_call_linter = NULL, line_length_linter(120L), namespace_linter = NULL, nonportable_path_linter = NULL, object_length_linter(50L), object_name_linter = NULL, object_usage_linter = NULL, one_call_pipe_linter = NULL, todo_comment_linter = NULL, commented_code_linter = NULL, undesirable_function_linter(c("mapply" = NA, "setwd" = NA)), undesirable_operator_linter = NULL, unnecessary_concatenation_linter(allow_single_expression = FALSE), unused_import_linter = NULL))'`
+11. **Lint the code**: `R --no-restore --no-save -e 'library(lintr); lint("R/[function_name].R")'` (lint specific file) or `R --no-restore --no-save -e 'library(lintr); lint_package()'` (lint entire package)
 12. **Style the code**: `R --no-restore --no-save -e 'library(styler); style_file("R/[function_name].R")'`
 13. **Update documentation**: `R --no-restore --no-save -e 'roxygen2::document()'`
 14. **Validate documentation consistency**: Check for "Codoc mismatches" warnings
@@ -668,7 +671,7 @@ R --no-restore --no-save -e 'install.packages("BayesFactor", repos="https://clou
 8. Update `@importFrom` statements if new external functions are used
 9. Update tests if function behavior changes
 10. **Check for global variable issues**: `R CMD check` should show no binding warnings
-11. **Lint the code with easystats settings**: `R --no-restore --no-save -e 'library(lintr); lint_package(linters = all_linters(absolute_path_linter = NULL, cyclocomp_linter(40L), if_not_else_linter(exceptions = character(0L)), indentation_linter = NULL, implicit_integer_linter = NULL, library_call_linter = NULL, line_length_linter(120L), namespace_linter = NULL, nonportable_path_linter = NULL, object_length_linter(50L), object_name_linter = NULL, object_usage_linter = NULL, one_call_pipe_linter = NULL, todo_comment_linter = NULL, commented_code_linter = NULL, undesirable_function_linter(c("mapply" = NA, "setwd" = NA)), undesirable_operator_linter = NULL, unnecessary_concatenation_linter(allow_single_expression = FALSE), unused_import_linter = NULL))'`
+11. **Lint the code**: `R --no-restore --no-save -e 'library(lintr); lint("R/[file].R")'` (lint specific file) or `R --no-restore --no-save -e 'library(lintr); lint_package()'` (lint entire package)
 12. **Style the code**: `R --no-restore --no-save -e 'library(styler); style_file("R/[file].R")'`
 13. **Update documentation if changed**: `R --no-restore --no-save -e 'roxygen2::document()'`
 14. **Validate documentation consistency**: Check for "Codoc mismatches" warnings
@@ -847,31 +850,8 @@ cd /home/runner/work/report/report
 # 1. Check for global variable binding issues first (look for "no visible binding" warnings)
 R --no-restore --no-save -e 'warnings(); R CMD check report_*.tar.gz --no-manual --no-vignettes 2>&1 | grep -i "binding"'
 
-# 2. Lint code to identify style issues with easystats settings (20 seconds)
-R --no-restore --no-save -e '
-library(lintr)
-lint_package(linters = all_linters(
-  absolute_path_linter = NULL,
-  cyclocomp_linter(40L),
-  if_not_else_linter(exceptions = character(0L)),
-  indentation_linter = NULL,
-  implicit_integer_linter = NULL,
-  library_call_linter = NULL,
-  line_length_linter(120L),
-  namespace_linter = NULL,
-  nonportable_path_linter = NULL,
-  object_length_linter(50L),
-  object_name_linter = NULL,
-  object_usage_linter = NULL,
-  one_call_pipe_linter = NULL,
-  todo_comment_linter = NULL,
-  commented_code_linter = NULL,
-  undesirable_function_linter(c("mapply" = NA, "setwd" = NA)),
-  undesirable_operator_linter = NULL,
-  unnecessary_concatenation_linter(allow_single_expression = FALSE),
-  unused_import_linter = NULL
-))
-'
+# 2. Lint code to identify style issues (20 seconds) - use .lintr configuration
+R --no-restore --no-save -e 'library(lintr); lint_package()'
 
 # 3. Style code to automatically fix issues (10-30 seconds) - optional but recommended
 R --no-restore --no-save -e 'library(styler); style_pkg()'
@@ -1237,9 +1217,11 @@ describe_posterior(model)  # Should have @importFrom bayestestR describe_posteri
 
 The package uses GitHub Actions with these workflows:
 - **R-CMD-check**: Multi-platform testing (Ubuntu, macOS, Windows)  
-- **lint**: Code style checking with lintr
+- **lint-changed-files**: Code style checking with lintr (only on changed files - efficient!)
 - **test-coverage**: Code coverage reporting with covr
 - **pkgdown**: Documentation website generation
+
+**Centralized Workflow System**: The easystats organization uses a centralized workflow system at [easystats/workflows](https://github.com/easystats/workflows) that all repositories reference. This ensures consistency and automatically keeps all packages up-to-date with the latest organization standards without manual maintenance.
 
 These workflows run automatically on pushes and pull requests to main/master branches.
 
