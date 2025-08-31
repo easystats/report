@@ -2,6 +2,7 @@
 
 Bug fixes
 
+* Updated copilot instructions to use easystats organization lintr settings instead of default lintr configuration for consistency with CI workflows
 * Enhanced copilot environment setup with complete reprex dependency management (pandoc, knitr, rmarkdown, clipr) to prevent "reprex appears to crash R" errors
 * Added CLIPR_ALLOW=TRUE environment variable configuration in reprex testing to ensure stable operation
 * Updated copilot instructions with comprehensive reprex debugging guide and imgur integration workflow for GitHub Copilot agents

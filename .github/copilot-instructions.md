@@ -273,11 +273,36 @@ Expected results:
 - 3-5 snapshot failures due to minor precision differences (normal and expected)
 - Some tests may be skipped if optional packages not available
 
-### Run Linting
+### Run Linting with Easystats Settings
+**IMPORTANT**: This package uses the easystats organization's lintr configuration, which differs from the default lintr settings. Use the specific configuration below to match CI workflow requirements.
+
 **NEVER CANCEL: Linting takes ~20 seconds. Set timeout to 60+ seconds.**
 ```bash
 cd /home/runner/work/report/report
-R --no-restore --no-save -e 'library(lintr); lint_package()'
+R --no-restore --no-save -e '
+library(lintr)
+lint_package(linters = all_linters(
+  absolute_path_linter = NULL,
+  cyclocomp_linter(40L),
+  if_not_else_linter(exceptions = character(0L)),
+  indentation_linter = NULL,
+  implicit_integer_linter = NULL,
+  library_call_linter = NULL,
+  line_length_linter(120L),
+  namespace_linter = NULL,
+  nonportable_path_linter = NULL,
+  object_length_linter(50L),
+  object_name_linter = NULL,
+  object_usage_linter = NULL,
+  one_call_pipe_linter = NULL,
+  todo_comment_linter = NULL,
+  commented_code_linter = NULL,
+  undesirable_function_linter(c("mapply" = NA, "setwd" = NA)),
+  undesirable_operator_linter = NULL,
+  unnecessary_concatenation_linter(allow_single_expression = FALSE),
+  unused_import_linter = NULL
+))
+'
 ```
 
 Expected results:
@@ -623,7 +648,7 @@ R --no-restore --no-save -e 'install.packages("BayesFactor", repos="https://clou
 8. Add exports to roxygen2 comments if needed (`@export`)
 9. Create tests in `/tests/testthat/test-[function_name].R`
 10. **Check for global variable issues**: `R CMD check` should show no binding warnings
-11. **Lint the code**: `R --no-restore --no-save -e 'library(lintr); lint_package()'`
+11. **Lint the code with easystats settings**: `R --no-restore --no-save -e 'library(lintr); lint_package(linters = all_linters(absolute_path_linter = NULL, cyclocomp_linter(40L), if_not_else_linter(exceptions = character(0L)), indentation_linter = NULL, implicit_integer_linter = NULL, library_call_linter = NULL, line_length_linter(120L), namespace_linter = NULL, nonportable_path_linter = NULL, object_length_linter(50L), object_name_linter = NULL, object_usage_linter = NULL, one_call_pipe_linter = NULL, todo_comment_linter = NULL, commented_code_linter = NULL, undesirable_function_linter(c("mapply" = NA, "setwd" = NA)), undesirable_operator_linter = NULL, unnecessary_concatenation_linter(allow_single_expression = FALSE), unused_import_linter = NULL))'`
 12. **Style the code**: `R --no-restore --no-save -e 'library(styler); style_file("R/[function_name].R")'`
 13. **Update documentation**: `R --no-restore --no-save -e 'roxygen2::document()'`
 14. **Validate documentation consistency**: Check for "Codoc mismatches" warnings
@@ -643,7 +668,7 @@ R --no-restore --no-save -e 'install.packages("BayesFactor", repos="https://clou
 8. Update `@importFrom` statements if new external functions are used
 9. Update tests if function behavior changes
 10. **Check for global variable issues**: `R CMD check` should show no binding warnings
-11. **Lint the code**: `R --no-restore --no-save -e 'library(lintr); lint_package()'`
+11. **Lint the code with easystats settings**: `R --no-restore --no-save -e 'library(lintr); lint_package(linters = all_linters(absolute_path_linter = NULL, cyclocomp_linter(40L), if_not_else_linter(exceptions = character(0L)), indentation_linter = NULL, implicit_integer_linter = NULL, library_call_linter = NULL, line_length_linter(120L), namespace_linter = NULL, nonportable_path_linter = NULL, object_length_linter(50L), object_name_linter = NULL, object_usage_linter = NULL, one_call_pipe_linter = NULL, todo_comment_linter = NULL, commented_code_linter = NULL, undesirable_function_linter(c("mapply" = NA, "setwd" = NA)), undesirable_operator_linter = NULL, unnecessary_concatenation_linter(allow_single_expression = FALSE), unused_import_linter = NULL))'`
 12. **Style the code**: `R --no-restore --no-save -e 'library(styler); style_file("R/[file].R")'`
 13. **Update documentation if changed**: `R --no-restore --no-save -e 'roxygen2::document()'`
 14. **Validate documentation consistency**: Check for "Codoc mismatches" warnings
@@ -822,8 +847,31 @@ cd /home/runner/work/report/report
 # 1. Check for global variable binding issues first (look for "no visible binding" warnings)
 R --no-restore --no-save -e 'warnings(); R CMD check report_*.tar.gz --no-manual --no-vignettes 2>&1 | grep -i "binding"'
 
-# 2. Lint code to identify style issues (20 seconds)
-R --no-restore --no-save -e 'library(lintr); lint_package()'
+# 2. Lint code to identify style issues with easystats settings (20 seconds)
+R --no-restore --no-save -e '
+library(lintr)
+lint_package(linters = all_linters(
+  absolute_path_linter = NULL,
+  cyclocomp_linter(40L),
+  if_not_else_linter(exceptions = character(0L)),
+  indentation_linter = NULL,
+  implicit_integer_linter = NULL,
+  library_call_linter = NULL,
+  line_length_linter(120L),
+  namespace_linter = NULL,
+  nonportable_path_linter = NULL,
+  object_length_linter(50L),
+  object_name_linter = NULL,
+  object_usage_linter = NULL,
+  one_call_pipe_linter = NULL,
+  todo_comment_linter = NULL,
+  commented_code_linter = NULL,
+  undesirable_function_linter(c("mapply" = NA, "setwd" = NA)),
+  undesirable_operator_linter = NULL,
+  unnecessary_concatenation_linter(allow_single_expression = FALSE),
+  unused_import_linter = NULL
+))
+'
 
 # 3. Style code to automatically fix issues (10-30 seconds) - optional but recommended
 R --no-restore --no-save -e 'library(styler); style_pkg()'
