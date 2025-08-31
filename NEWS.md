@@ -2,6 +2,7 @@
 
 Bug fixes
 
+* `report.brmsfit()`: fix issue with duplicated report text output for brms models (#418)
 * Fixed issue with missing effect size for the Intercept term in type 3 anova tables (#451)
 
 # report 0.6.1

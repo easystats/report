@@ -25,7 +25,13 @@ report.brmsfit <- function(x, ...) {
   table <- report_table(x, include_effectsize = FALSE, ...)
   text <- report_text(x, table = table, ...)
 
-  as.report(text, table = table, ...)
+  # Create the report object
+  result <- as.report(text, table = table, ...)
+  
+  # Add a flag to track that this is a brmsfit report to prevent duplication
+  attr(result, "model_class") <- "brmsfit"
+  
+  result
 }
 
 #' @export
@@ -47,7 +53,55 @@ report_random.brmsfit <- report_random.merMod
 report_model.brmsfit <- report_model.lm
 
 #' @export
-report_text.brmsfit <- report_text.lm
+report_text.brmsfit <- function(x, table = NULL, ...) {
+  # For brmsfit objects, ensure proper text assembly without duplication
+  # The issue occurs when brms-specific methods create text that conflicts
+  # with the lm-based text assembly pipeline
+  
+  params <- report_parameters(x, table = table, include_intercept = FALSE, ...)
+  table <- attributes(params)$table
+
+  info <- report_info(x, effectsize = attributes(params)$effectsize, parameters = params, ...)
+  model <- report_model(x, table = table, ...)
+  perf <- report_performance(x, table = table, ...)
+  intercept <- report_intercept(x, table = table, ...)
+
+  if (suppressWarnings(insight::is_nullmodel(x))) {
+    params_text_full <- params_text <- ""
+  } else {
+    # Convert parameters to character once to avoid multiple conversions
+    # that might cause duplication in brms processing
+    params_char <- as.character(params)
+    params_summary_char <- as.character(summary(params))
+    
+    params_text_full <- paste0(" Within this model:\n\n", params_char)
+    params_text <- paste0(" Within this model:\n\n", params_summary_char)
+  }
+
+  text_full <- paste0(
+    "We fitted a ",
+    model,
+    ". ",
+    perf,
+    ifelse(nzchar(perf, keepNA = TRUE), ". ", ""),
+    intercept,
+    params_text_full,
+    "\n\n",
+    info
+  )
+
+  summary_text <- paste0(
+    "We fitted a ",
+    summary(model),
+    ". ",
+    summary(perf),
+    ifelse(nzchar(perf, keepNA = TRUE), ". ", ""),
+    summary(intercept),
+    params_text
+  )
+
+  as.report_text(text_full, summary = summary_text)
+}
 
 
 # ==================== Specific to Bayes ===================================
