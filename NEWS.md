@@ -2,6 +2,8 @@
 
 Bug fixes
 
+* `report.lm()`: Fixed spelling error in variable name for bootstrap functionality
+* `report.lm()`: Updated deprecated `extract_column_names()` call to use standard R `grepl()` for better compatibility
 * Fixed issue with missing effect size for the Intercept term in type 3 anova tables (#451)
 
 # report 0.6.1

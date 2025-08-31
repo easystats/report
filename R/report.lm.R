@@ -390,16 +390,16 @@ report_model.lm <- function(x, table = NULL, ...) {
   info <- insight::model_info(x)
   is_nullmodel <- suppressWarnings(insight::is_nullmodel(x))
 
-  # Boostrap
+  # Bootstrap
   if (attributes(table)$bootstrap) {
-    boostrapped <- paste0("bootstrapped (", attributes(table)$iterations, " iterations) ")
+    bootstrapped <- paste0("bootstrapped (", attributes(table)$iterations, " iterations) ")
   } else {
-    boostrapped <- ""
+    bootstrapped <- ""
   }
 
   # Initial
   text <- paste0(
-    boostrapped,
+    bootstrapped,
     format_model(x)
   )
 
@@ -569,7 +569,7 @@ report_text.lm <- function(x, table = NULL, ...) {
   if (!is.null(coefname) && coefname %in% names(table)) {
     estimate <- attributes(table)$coefficient_name
   } else {
-    estimate <- datawizard::extract_column_names(table, candidates, regex = TRUE, verbose = FALSE)[1]
+    estimate <- names(table)[grepl(candidates, names(table))][1]
   }
   estimate
 }
