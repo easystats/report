@@ -1,5 +1,9 @@
 # report 0.6.x
 
+New features
+
+* `report.glm()`: added explainability guidance for interpreting GLM coefficients (odds ratios for binomial models, rate ratios for Poisson models) to help users understand how to transform coefficients for easier interpretation (#484)
+
 Bug fixes
 
 * Enhanced copilot environment setup with complete reprex dependency management (pandoc, knitr, rmarkdown, clipr) to prevent "reprex appears to crash R" errors
