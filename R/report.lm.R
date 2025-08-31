@@ -569,7 +569,7 @@ report_text.lm <- function(x, table = NULL, ...) {
   if (!is.null(coefname) && coefname %in% names(table)) {
     estimate <- attributes(table)$coefficient_name
   } else {
-    estimate <- grep(candidates, names(table), value = TRUE)[1]
+    estimate <- grepv(candidates, names(table))[1]
   }
   estimate
 }
