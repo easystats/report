@@ -147,7 +147,7 @@ print.report_parameters <- function(x, ...) {
   } else {
     # For glmmTMB models with multiple components, need to handle component-specific naming
     if (inherits(x, "glmmTMB") && "Component" %in% colnames(params) &&
-          length(unique(params$Component[!is.na(params$Component)])) > 1) {
+      length(unique(params$Component[!is.na(params$Component)])) > 1) {
       # Create component-aware parameter names for glmmTMB models
       formatted_params <- parameters::format_parameters(x)
       # Map parameter names to include component information

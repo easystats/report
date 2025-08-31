@@ -96,7 +96,7 @@ test_that("no redundant CI information concatenation in report_info.lm", {
   # Should NOT contain duplicate CI descriptions
   ci_pattern_count <- length(gregexpr("Confidence Intervals.*computed using.*approximation", info_text)[[1]])
   expect_identical(
-    ci_pattern_count, 1,
+    ci_pattern_count, 1L,
     info = paste("Expected 1 CI description, got", ci_pattern_count, "in text:", info_text)
   )
 
