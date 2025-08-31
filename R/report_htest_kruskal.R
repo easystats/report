@@ -8,7 +8,7 @@
 
 # report_effectsize ---------------------
 
-.report_effectsize_kruskal <- function(x, table, dot_args, rules = "funder2019") {
+.report_effectsize_kruskal <- function(x, dot_args, rules = "funder2019") {
   args <- c(list(x), dot_args)
   table <- do.call(effectsize::effectsize, args)
   ci <- attributes(table)$ci

@@ -8,7 +8,7 @@
 
 # report_effectsize ---------------------
 
-.report_effectsize_chi2 <- function(x, table, dot_args, rules = "funder2019") {
+.report_effectsize_chi2 <- function(x, dot_args, rules = "funder2019") {
   if (!chi2_type(x) %in% c("pearson", "probabilities")) {
     insight::format_error(
       "This test is not yet supported. Please open an issue at {.url https://github.com/easystats/report/issues}."

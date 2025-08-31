@@ -8,7 +8,7 @@
 
 # report_effectsize ---------------------
 
-.report_effectsize_fisher <- function(x, table, dot_args, rules = "funder2019") {
+.report_effectsize_fisher <- function(x, dot_args, rules = "funder2019") {
   es_args <- c(list(x), dot_args)
   table <- do.call(effectsize::effectsize, es_args)
   ci <- attributes(table)$ci
