@@ -1,0 +1,41 @@
+as.report_text          Create or test objects of class report.
+cite_easystats          Cite the easystats ecosystem
+format_algorithm        Convenient formatting of text components
+format_citation         Citation formatting
+report                  Automatic reporting of R objects
+report.BFBayesFactor    Reporting 'BFBayesFactor' objects from the
+                        'BayesFactor' package
+report.aov              Reporting ANOVAs
+report.bayesfactor_models
+                        Reporting Models' Bayes Factor
+report.brmsfit          Reporting Bayesian Models from brms
+report.character        Reporting Datasets and Dataframes
+report.compare.loo      Reporting Bayesian Model Comparison
+report.compare_performance
+                        Reporting models comparison
+report.default          Template to add report support for new objects
+report.estimate_contrasts
+                        Reporting 'estimate_contrasts' objects
+report.htest            Reporting 'htest' objects (Correlation,
+                        t-test...)
+report.lavaan           Reports of Structural Equation Models (SEM)
+report.lm               Reporting (General) Linear Models
+report.sessionInfo      Report R environment (packages, system, etc.)
+report.stanreg          Reporting Bayesian Models
+report.test_performance
+                        Reporting models comparison
+report_date             Miscellaneous reports
+report_effectsize       Report the effect size(s) of a model or a test
+report_info             Report additional information
+report_intercept        Report intercept
+report_model            Report the model type
+report_parameters       Report the parameters of a model
+report_participants     Reporting the participant data
+report_performance      Report the model's quality and fit indices
+report_priors           Report priors of Bayesian models
+report_random           Report random effects and factors
+report_s                Report S- and p-values in easy language.
+report_sample           Sample Description
+report_statistics       Report the statistics of a model
+report_table            Report a descriptive table
+report_text             Report a textual description of an object

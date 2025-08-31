@@ -1,0 +1,127 @@
+---
+title: "Publication-ready Tables"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    fig_width: 10.08
+    fig_height: 6
+tags: [r, report]
+vignette: >
+  %\VignetteIndexEntry{Publication-ready Tables}
+  \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  comment = "#"
+)
+
+options(
+  knitr.kable.NA = "",
+  width = 60
+)
+
+if (!requireNamespace("dplyr", quietly = TRUE)) {
+  knitr::opts_chunk$set(eval = FALSE)
+}
+```
+
+
+First, load the `{report}` package:
+
+```{r}
+library(report)
+```
+
+## Getting started with correlations
+
+Let's start by demonstrating some features with simple tests. The function `report_table()` can be used to create a table for many R objects.
+
+```{r}
+results <- cor.test(mtcars$mpg, mtcars$wt)
+
+report_table(results)
+```
+
+We can also obtain a shorter version by running `summary()` on the output (that we are going to store in a variable called `t` - like table)
+
+```{r}
+t <- summary(report_table(results))
+t
+```
+
+In the example above, running just `t` ran `print(t)` under the hood, which prints the table inside the console. However, one can nicely display that table in markdown documents using `display()`.
+
+```{r}
+display(t)
+```
+
+We can further customize this table, by adding significance stars, 
+
+
+```{r, results='asis'}
+display(t,
+  stars = TRUE,
+  title = "Table 1",
+  footer = "Correlation in the mtcars (n = 32) dataset.\n*** p < .001"
+)
+```
+
+## *t*-tests, ...
+
+It works similarly for *t*-tests.
+
+```{r}
+results <- t.test(mtcars$mpg ~ mtcars$am)
+
+t <- summary(report_table(results))
+t
+```
+
+Note that, by default, `report_table()` prettifies the printing: that means that the column names and its content is, underneath, not necessarily what is printed, which can be a bit confusing. For instance, while the confidence interval `CI` appears as one column, it this actually made of three columns! One can access this *raw* table as a dataframe:
+
+```{r}
+as.data.frame(t)
+```
+
+In fact, the function used to *prettify* the output is called `insight::format_table()` and is accessible to you too, so that you can prettify the output while keeping it as a data frame.
+
+```{r}
+insight::format_table(as.data.frame(t), stars = TRUE)
+```
+
+Also, you can join the results of multiple tables:
+
+```{r}
+results1 <- t.test(mtcars$mpg ~ mtcars$am)
+results2 <- t.test(mtcars$wt ~ mtcars$am)
+results3 <- t.test(mtcars$qsec ~ mtcars$am)
+
+results <- c(
+  report_table(results1),
+  report_table(results2),
+  report_table(results3)
+)
+display(results)
+```
+
+
+## ANOVAs
+
+
+
+## Linear Models
+
+```{r}
+model <- lm(Petal.Length ~ Species * Petal.Width, data = iris)
+
+report_table(model)
+```
+
+

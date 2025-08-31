@@ -1,0 +1,32 @@
+---
+title: "Supporting New Models"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    fig_width: 10.08
+    fig_height: 6
+tags: [r, report, support new models]
+vignette: >
+  %\VignetteIndexEntry{Supporting New Models}
+  \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE
+)
+```
+
+## 1. Open an Issue on GitHub
+
+If there is a model that you would like to report but is not currently supported
+in `report`, you can suggest it to us. You can do so by opening an issue on
+[https://github.com/easystats/report/issues](https://github.com/easystats/report/issues),
+and saying what would you like to see, and how you can eventually help out (e.g., you can help us test the new functionality).
+
+## 2. Use template file
+
+Copy and paste the [**template file**](https://github.com/easystats/report/blob/master/R/report.default.R), and replace the function with the one you would like to see supported.
