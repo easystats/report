@@ -309,7 +309,7 @@ report_parameters.lm <- function(x,
 
   # Include intercept
   if (isFALSE(include_intercept)) {
-    idx <- !params$Parameter == "(Intercept)"
+    idx <- params$Parameter != "(Intercept)"
   } else {
     idx <- rep(TRUE, nrow(params))
   }
@@ -569,7 +569,7 @@ report_text.lm <- function(x, table = NULL, ...) {
   if (!is.null(coefname) && coefname %in% names(table)) {
     estimate <- attributes(table)$coefficient_name
   } else {
-    estimate <- names(table)[grepl(candidates, names(table))][1]
+    estimate <- grep(candidates, names(table), value = TRUE)[1]
   }
   estimate
 }
