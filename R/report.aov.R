@@ -187,6 +187,8 @@ report_statistics.aov <- function(x, table = NULL, ...) {
     text <- paste0(text, ", ", insight::format_value(DoF_residual, protect_integers = TRUE))
   } else if ("DoF_Residuals" %in% names(parameters)) {
     text <- paste0(text, ", ", insight::format_value(parameters$DoF_Residuals, protect_integers = TRUE))
+  } else if ("df_error" %in% names(parameters)) {
+    text <- paste0(text, ", ", insight::format_value(parameters$df_error, protect_integers = TRUE))
   }
 
   # Indices

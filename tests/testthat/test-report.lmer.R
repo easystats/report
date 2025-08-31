@@ -21,3 +21,19 @@ test_that("report-lmer", {
 
   expect_snapshot(variant = "windows", report(m2))
 })
+
+test_that("report-lmerTest-anova includes denominator df", {
+  skip_if_not_installed("lmerTest")
+  
+  # Test case for issue #453: lmerTest ANOVA should include denominator degrees of freedom
+  m <- lmerTest::lmer(mpg ~ wt + (1 | gear), data = mtcars)
+  anova_result <- anova(m)
+  report_output <- report(anova_result)
+  
+  # The report should include denominator df in F-statistic
+  # Should be F(1, 21.92) not just F(1)
+  expect_match(as.character(report_output), "F\\(1, [0-9.]+\\)")
+  
+  # Should not have the old pattern without denominator df
+  expect_no_match(as.character(report_output), "F\\(1\\) =")
+})
