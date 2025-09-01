@@ -591,6 +591,39 @@ R --no-restore --no-save -e 'install.packages("BayesFactor", repos="https://clou
 
 ## Code Quality and Best Practices
 
+### R Version Compatibility Requirements
+
+**CRITICAL**: Always check minimum R version requirements before using any functions to ensure compatibility across all supported environments.
+
+#### Version Checking Process:
+
+1. **Check DESCRIPTION file**: Always verify the minimum R version in the package DESCRIPTION file:
+   ```bash
+   cd /home/runner/work/report/report
+   grep "Depends:" DESCRIPTION
+   # Shows: R (>= 3.6) - must use functions available in R 3.6+
+   ```
+
+2. **Function availability validation**: Before using any R function, verify it was available in the minimum supported version:
+   - **R 3.6.0+**: Functions like `grep(..., value = TRUE)`, standard base R operations
+   - **R 4.0.0+**: New features and syntax improvements 
+   - **R 4.1.0+**: Native pipe `|>`, new lambda syntax
+   - **R 4.5.0+**: Functions like `grepv()` (if it existed)
+
+3. **Safe function usage**: 
+   ```r
+   # CORRECT: Use functions available in R 3.6+
+   result <- grep(pattern, x, value = TRUE)
+   
+   # INCORRECT: Don't use functions from later R versions
+   # result <- grepv(pattern, x)  # Not available in R 3.6
+   ```
+
+#### Documentation for Minimum R Versions:
+- **R 3.6.0 reference**: Check base R documentation for function availability
+- **When in doubt**: Use `help(function_name)` to check when functions were introduced
+- **Alternative approach**: Use more basic/older functions that are guaranteed to exist
+
 ### Avoiding Global Variable Binding Issues
 
 **CRITICAL**: Always use proper variable referencing to prevent "no visible binding for global variable" warnings that make CI workflows fail.
@@ -1072,11 +1105,11 @@ cat(paste(reprex_result, collapse = "\n"))
 ### Lintr CI vs Local Discrepancies (CRITICAL VERSION ISSUE)
 - **Cause**: CI uses development lintr (`r-lib/lintr`) while local uses CRAN stable (`r-cran-lintr`)
 - **Symptoms**: Local lintr passes but CI lintr fails with stricter rules
-- **Root issue**: Development lintr prefers `grepv()` over `grep(..., value = TRUE)` and has stricter rules
+- **Root issue**: Development lintr has stricter rules and different function preferences
 - **Solution**: Always install development lintr to match CI:
   ```bash
-  # Install development lintr to match CI (R 4.5.0+ required)
-  R --no-restore --no-save -e 'pak::pak("r-lib/lintr")'
+  # Install development lintr to match CI using workflow approach
+  R --no-restore --no-save -e 'remotes::install_github("r-lib/lintr")'
   # Fallback to stable if network issues:
   sudo apt install -y r-cran-lintr
   ```
@@ -1092,7 +1125,7 @@ cat(paste(reprex_result, collapse = "\n"))
     unnecessary_concatenation_linter(allow_single_expression = FALSE), unused_import_linter = NULL
   ))'
   ```
-- **Prevention**: Always use `grepv()` instead of `grep(..., value = TRUE)` in new R code (R 4.5.0+)
+- **R Version Compatibility**: Always check the minimum R version in DESCRIPTION file (`Depends: R (>= X.X)`) to ensure functions used are available in the minimum supported version. Do not use functions introduced in later R versions.
 
 ### Documentation Mismatch Warnings ("Codoc mismatches")
 - **Cause**: Function parameter names don't match the documentation
