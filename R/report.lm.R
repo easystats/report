@@ -52,15 +52,15 @@
 #' @return An object of class [report()].
 #' @export
 report.lm <- function(x, include_effectsize = TRUE, effectsize_method = "refit", ...) {
-  table <- report_table(x,
+  result_table <- report_table(x,
     include_effectsize = include_effectsize,
     effectsize_method = effectsize_method, ...
   )
-  text <- report_text(x,
-    table = table, ...
+  result_text <- report_text(x,
+    table = result_table, ...
   )
 
-  as.report(text, table = table, ...)
+  as.report(result_text, table = result_table, ...)
 }
 
 
