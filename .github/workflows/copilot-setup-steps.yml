@@ -161,14 +161,14 @@ jobs:
           extra-packages: |
             local::.
             any::testthat
-            any::lintr
-            any::styler
             any::roxygen2
             any::devtools
             any::reprex
             any::knitr
             any::rmarkdown
             any::clipr
+            r-lib/lintr
+            r-lib/styler
           needs: check
           # Let r-lib/actions handle caching automatically (more efficient than manual cache)
 

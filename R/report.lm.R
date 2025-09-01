@@ -213,20 +213,30 @@ report_statistics.lm <- function(x,
 
   # CI
   if (!is.null(params_table$CI_low)) {
-    estimate_text <- datawizard::text_paste(estimate_text, insight::format_ci(params_table$CI_low, params_table$CI_high, ci = attributes(params_table)$ci))
+    estimate_text <- datawizard::text_paste(
+      estimate_text, insight::format_ci(
+        params_table$CI_low, params_table$CI_high,
+        ci = attributes(params_table)$ci
+      )
+    )
   }
 
   # Statistic
   if ("t" %in% names(params_table)) {
     estimate_text <- datawizard::text_paste(
       estimate_text,
-      paste0("t(", insight::format_value(params_table$df, protect_integers = TRUE), ") = ", insight::format_value(params_table$t))
+      paste0("t(", insight::format_value(
+        params_table$df,
+        protect_integers = TRUE
+      ), ") = ", insight::format_value(params_table$t))
     )
   }
 
   # p-value
   if ("p" %in% names(params_table)) {
-    estimate_text <- datawizard::text_paste(estimate_text, insight::format_p(params_table$p, stars = FALSE, digits = "apa"))
+    estimate_text <- datawizard::text_paste(
+      estimate_text, insight::format_p(params_table$p, stars = FALSE, digits = "apa")
+    )
   }
 
   # pd
@@ -241,7 +251,9 @@ report_statistics.lm <- function(x,
 
   # BF
   if ("BF" %in% names(params_table)) {
-    estimate_text <- datawizard::text_paste(estimate_text, insight::format_bf(params_table$BF, stars = FALSE, exact = TRUE))
+    estimate_text <- datawizard::text_paste(
+      estimate_text, insight::format_bf(params_table$BF, stars = FALSE, exact = TRUE)
+    )
   }
 
   # Effect size
@@ -263,7 +275,9 @@ report_statistics.lm <- function(x,
     estimate_text <- datawizard::text_paste(estimate_text, text_diagnostic)
 
     if ("ESS" %in% names(params_table)) {
-      text_diagnostic <- datawizard::text_paste(text_diagnostic, paste0("ESS = ", insight::format_value(params_table$ESS)))
+      text_diagnostic <- datawizard::text_paste(
+        text_diagnostic, paste0("ESS = ", insight::format_value(params_table$ESS))
+      )
     }
 
     text_full <- datawizard::text_paste(text_full, text_diagnostic, sep = "; ")
@@ -341,7 +355,9 @@ report_intercept.lm <- function(x, table = NULL, ...) {
   }
 
   if (insight::model_info(x)$is_zero_inflated && "Component" %in% colnames(intercept_table)) {
-    idx <- !is.na(intercept_table$Parameter) & intercept_table$Parameter == "(Intercept)" & intercept_table$Component == "conditional"
+    idx <- !is.na(intercept_table$Parameter) &
+      intercept_table$Parameter == "(Intercept)" &
+      intercept_table$Component == "conditional"
   } else {
     idx <- !is.na(intercept_table$Parameter) & intercept_table$Parameter == "(Intercept)"
   }
