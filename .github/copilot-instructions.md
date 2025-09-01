@@ -737,7 +737,7 @@ R --no-restore --no-save -e 'install.packages("BayesFactor", repos="https://clou
 
 **CRITICAL**: Every PR must include version number updates and NEWS.md changelog entries. This is mandatory for all changes.
 
-**IMPORTANT CLARIFICATION**: Version numbers should be bumped **ONCE PER PULL REQUEST**, not once per commit. If you make multiple commits within a single PR, all commits should use the same version number. Only bump the version once at the beginning of your PR work or before submitting the PR for review.
+**IMPORTANT CLARIFICATION**: Version numbers should be bumped **ONCE PER PULL REQUEST**, not once per commit. If you make multiple commits within a single PR, all commits should use the same version number. Only bump the version once at the beginning of your PR work or before submitting the PR for review. Only bump if making changes to functions (e.g, not for copilot instructions, workflow, etc.).
 
 ### Version Numbering System
 
@@ -752,6 +752,7 @@ The report package follows this versioning pattern:
 2. **New features**: Increment the fourth decimal (0.6.1.1 → 0.6.1.2) 
 3. **Breaking changes**: Increment the minor version (0.6.1 → 0.7.0) - rare
 4. **Documentation-only changes**: Still increment fourth decimal for tracking
+5. Do not bump when only making changes to copilot instructions, workflow, etc.
 
 ### Multiple Commits Within a Single PR
 
