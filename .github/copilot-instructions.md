@@ -299,6 +299,7 @@ if (file.exists("changed_files.txt") && file.size("changed_files.txt") > 0) {
   if (length(changed_files) > 0) {
     # Use the same lintr configuration as the CI workflow
     lint(changed_files, linters = all_linters(
+      coalesce_linter = NULL,
       absolute_path_linter = NULL,
       cyclocomp_linter(40L),
       if_not_else_linter(exceptions = character(0L)),
