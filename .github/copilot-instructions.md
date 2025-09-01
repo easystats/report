@@ -89,7 +89,34 @@ sudo apt install -y r-cran-dplyr r-cran-rlang r-cran-testthat
 
 # CRITICAL: Install development version of lintr to match CI environment
 # The easystats CI uses r-lib/lintr (development version) not CRAN stable
-R --no-restore --no-save -e 'pak::pak("r-lib/lintr")' || sudo apt install -y r-cran-lintr
+# Check if lintr is already installed first to save resources/time/errors
+R --no-restore --no-save -e '
+if (!requireNamespace("lintr", quietly = TRUE)) {
+  # Set GitHub token if available to avoid rate limits
+  if (Sys.getenv("GH_PAT") != "") {
+    Sys.setenv(GITHUB_TOKEN = Sys.getenv("GH_PAT"))
+  }
+  # Try pak first
+  if (!requireNamespace("pak", quietly = TRUE)) {
+    install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")
+  }
+  tryCatch({
+    pak::pak("r-lib/lintr")
+  }, error = function(e1) {
+    # Fallback to remotes if pak fails
+    tryCatch({
+      if (!requireNamespace("remotes", quietly = TRUE)) {
+        install.packages("remotes", repos="https://cloud.r-project.org/")
+      }
+      remotes::install_github("r-lib/lintr")
+    }, error = function(e2) {
+      cat("WARNING: Cannot install development lintr. Make high-confidence lint changes only.\n")
+      cat("Proper lint fixes will be completed on second run when copilot setup workflow runs.\n")
+    })
+  })
+} else {
+  cat("Development lintr already installed. Version:", as.character(packageVersion("lintr")), "\n")
+}'
 
 # Install reprex (ESSENTIAL for creating reproducible examples in PRs)
 sudo apt install -y r-cran-reprex || R --no-restore --no-save -e 'install.packages("reprex", repos="https://cloud.r-project.org/")'
@@ -295,6 +322,7 @@ if (file.exists("changed_files.txt") && file.size("changed_files.txt") > 0) {
   if (length(changed_files) > 0) {
     # Use the same lintr configuration as the CI workflow
     lint(changed_files, linters = all_linters(
+      coalesce_linter = NULL,
       absolute_path_linter = NULL,
       cyclocomp_linter(40L),
       if_not_else_linter(exceptions = character(0L)),
@@ -1107,12 +1135,39 @@ cat(paste(reprex_result, collapse = "\n"))
 - **Cause**: CI uses development lintr (`r-lib/lintr`) while local uses CRAN stable (`r-cran-lintr`)
 - **Symptoms**: Local lintr passes but CI lintr fails with stricter rules
 - **Root issue**: Development lintr has stricter rules and different function preferences
-- **Solution**: Always install development lintr to match CI:
+- **Solution**: Always install development lintr to match CI. Check if installed first, then try pak, fallback to remotes, NEVER use CRAN:
   ```bash
-  # Install development lintr to match CI using workflow approach
-  R --no-restore --no-save -e 'remotes::install_github("r-lib/lintr")'
-  # Fallback to stable if network issues:
-  sudo apt install -y r-cran-lintr
+  # Install development lintr to match CI - check if already installed first
+  R --no-restore --no-save -e '
+  if (!requireNamespace("lintr", quietly = TRUE)) {
+    # Set GitHub token if available to avoid rate limits
+    if (Sys.getenv("GH_PAT") != "") {
+      Sys.setenv(GITHUB_TOKEN = Sys.getenv("GH_PAT"))
+    }
+    # Try pak first
+    if (!requireNamespace("pak", quietly = TRUE)) {
+      install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")
+    }
+    tryCatch({
+      pak::pak("r-lib/lintr")
+    }, error = function(e1) {
+      # Fallback to remotes if pak fails
+      tryCatch({
+        if (!requireNamespace("remotes", quietly = TRUE)) {
+          install.packages("remotes", repos="https://cloud.r-project.org/")
+        }
+        remotes::install_github("r-lib/lintr")
+      }, error = function(e2) {
+        cat("WARNING: Cannot install development lintr\n")
+        cat("Make high-confidence lint changes only, then report that\n")
+        cat("proper lint fixes will be completed on second run when\n")
+        cat("copilot setup workflow runs automatically\n")
+      })
+    })
+  } else {
+    cat("Development lintr already installed. Version:", as.character(packageVersion("lintr")), "\n")
+  }
+  '
   ```
 - **Testing**: Use exact CI configuration for local validation:
   ```bash
