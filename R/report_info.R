@@ -48,7 +48,6 @@ report_info <- function(x, ...) {
 
 # METHODS -----------------------------------------------------------------
 
-
 #' @rdname as.report
 #' @export
 as.report_info <- function(x, summary = NULL, ...) {
@@ -65,10 +64,7 @@ as.report_info <- function(x, summary = NULL, ...) {
 #' @export
 summary.report_info <- function(object, ...) {
   summary_attr <- attributes(object)$summary
-  if (!is.null(summary_attr)) {
-    return(summary_attr)
-  }
-  object
+  if (is.null(summary_attr)) object else summary_attr
 }
 
 #' @export
@@ -80,7 +76,12 @@ print.report_info <- function(x, ...) {
 # Utils -------------------------------------------------------------------
 
 #' @keywords internal
-.info_df <- function(ci, ci_method = NULL, test_statistic = NULL, bootstrap = FALSE) {
+.info_df <- function(
+  ci,
+  ci_method = NULL,
+  test_statistic = NULL,
+  bootstrap = FALSE
+) {
   if (is.null(ci_method)) {
     return("")
   }
@@ -91,7 +92,8 @@ print.report_info <- function(x, ...) {
   )
 
   ci_method <- tolower(ci_method)
-  string_method <- switch(ci_method,
+  string_method <- switch(
+    ci_method,
     bci = ,
     bcai = "bias-corrected accelerated bootstrap",
     si = ,
@@ -104,14 +106,26 @@ print.report_info <- function(x, ...) {
     "Wald"
   )
 
-  if (ci_method %in% c("kenward", "kr", "kenward-roger", "kenward-rogers", "satterthwaite")) {
-    string_approx <- paste0("with ", parameters::format_df_adjust(ci_method, approx_string = "", dof_string = ""), " ")
+  if (
+    ci_method %in%
+      c("kenward", "kr", "kenward-roger", "kenward-rogers", "satterthwaite")
+  ) {
+    string_approx <- paste0(
+      "with ",
+      parameters::format_df_adjust(
+        ci_method,
+        approx_string = "",
+        dof_string = ""
+      ),
+      " "
+    )
   } else {
     string_approx <- ""
   }
 
   if (!is.null(test_statistic) && ci_method != "normal" && !isTRUE(bootstrap)) {
-    string_statistic <- switch(tolower(test_statistic),
+    string_statistic <- switch(
+      tolower(test_statistic),
       "t-statistic" = "t",
       "chi-squared statistic" = ,
       "z-statistic" = "z",
@@ -126,7 +140,14 @@ print.report_info <- function(x, ...) {
   if (isTRUE(bootstrap)) {
     text_output <- paste0(text_output, string_method, "intervals.")
   } else {
-    text_output <- paste0(text_output, "a ", string_method, "distribution ", string_approx, "approximation.")
+    text_output <- paste0(
+      text_output,
+      "a ",
+      string_method,
+      "distribution ",
+      string_approx,
+      "approximation."
+    )
   }
   text_output
 }
