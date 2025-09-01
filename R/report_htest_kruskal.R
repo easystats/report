@@ -10,7 +10,29 @@
 
 .report_effectsize_kruskal <- function(x, table, dot_args, rules = "funder2019") {
   args <- c(list(x), dot_args)
-  table <- do.call(effectsize::effectsize, args)
+
+  # Try to calculate effect size with confidence intervals
+  table <- tryCatch(
+    {
+      do.call(effectsize::effectsize, args)
+    },
+    error = function(e) {
+      # If CI calculation fails (e.g., degenerate cases), fallback to no CI
+      if (grepl("confidence intervals", e$message, ignore.case = TRUE) ||
+        grepl("differing number of rows", e$message)) {
+        args_no_ci <- c(list(x), dot_args, list(ci = NULL))
+        do.call(effectsize::effectsize, args_no_ci)
+      } else if (grepl("Unable to retrieve data", e$message)) {
+        # Data retrieval failed - this happens with certain htest object forms
+        # For now, we'll let this error propagate as the user should use the formula interface
+        # or provide data manually as suggested in the main report.htest function
+        stop(e)
+      } else {
+        stop(e)
+      }
+    }
+  )
+
   ci <- attributes(table)$ci
   estimate <- names(table)[1]
 
@@ -22,13 +44,23 @@
   rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
 
   main <- paste0("Epsilon squared (rank) = ", insight::format_value(table$rank_epsilon_squared))
-  statistics <- paste0(
-    main,
-    ", ",
-    insight::format_ci(table$CI_low, table$CI_high, ci)
-  )
 
-  table <- table[names(table)[-2]]
+  # Handle cases where CI calculation failed and CI columns are missing
+  if (all(c("CI_low", "CI_high") %in% names(table))) {
+    statistics <- paste0(
+      main,
+      ", ",
+      insight::format_ci(table$CI_low, table$CI_high, ci)
+    )
+  } else {
+    # No CI available - report only the effect size
+    statistics <- main
+  }
+
+  # Remove CI_lower column if present (original code logic)
+  if (ncol(table) > 1) {
+    table <- table[names(table)[-2]]
+  }
 
   list(
     table = table, statistics = statistics, interpretation = interpretation,

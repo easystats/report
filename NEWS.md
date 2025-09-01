@@ -2,6 +2,7 @@
 
 Bug fixes
 
+* `report()`: fix failure when reporting Kruskal-Wallis tests with degenerate cases (one observation per group) (#454)
 * Fixed issue with missing effect size for the Intercept term in type 3 anova tables (#451)
 
 # report 0.6.1
