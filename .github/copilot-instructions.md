@@ -89,7 +89,11 @@ sudo apt install -y r-cran-dplyr r-cran-rlang r-cran-testthat
 
 # CRITICAL: Install development version of lintr to match CI environment
 # The easystats CI uses r-lib/lintr (development version) not CRAN stable
-R --no-restore --no-save -e 'pak::pak("r-lib/lintr")' || sudo apt install -y r-cran-lintr
+# Try pak first, fallback to remotes, NEVER use CRAN version (too different)
+R --no-restore --no-save -e 'pak::pak("r-lib/lintr")' || R --no-restore --no-save -e 'remotes::install_github("r-lib/lintr")' || {
+  echo "WARNING: Cannot install development lintr. Make high-confidence lint changes only."
+  echo "Proper lint fixes will be completed on second run when copilot setup workflow runs."
+}
 
 # Install reprex (ESSENTIAL for creating reproducible examples in PRs)
 sudo apt install -y r-cran-reprex || R --no-restore --no-save -e 'install.packages("reprex", repos="https://cloud.r-project.org/")'
@@ -1107,12 +1111,19 @@ cat(paste(reprex_result, collapse = "\n"))
 - **Cause**: CI uses development lintr (`r-lib/lintr`) while local uses CRAN stable (`r-cran-lintr`)
 - **Symptoms**: Local lintr passes but CI lintr fails with stricter rules
 - **Root issue**: Development lintr has stricter rules and different function preferences
-- **Solution**: Always install development lintr to match CI:
+- **Solution**: Always install development lintr to match CI (try pak first, fallback to remotes, NEVER use CRAN):
   ```bash
-  # Install development lintr to match CI using workflow approach
-  R --no-restore --no-save -e 'remotes::install_github("r-lib/lintr")'
-  # Fallback to stable if network issues:
-  sudo apt install -y r-cran-lintr
+  # Install development lintr to match CI - try pak first
+  R --no-restore --no-save -e 'pak::pak("r-lib/lintr")' || 
+  # Fallback to remotes approach if pak fails
+  R --no-restore --no-save -e 'remotes::install_github("r-lib/lintr")' ||
+  # If both fail, make high-confidence changes only and report for second run
+  {
+    echo "WARNING: Cannot install development lintr"
+    echo "Make high-confidence lint changes only, then report that"  
+    echo "proper lint fixes will be completed on second run when"
+    echo "copilot setup workflow runs automatically"
+  }
   ```
 - **Testing**: Use exact CI configuration for local validation:
   ```bash
