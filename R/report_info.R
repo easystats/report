@@ -64,11 +64,8 @@ as.report_info <- function(x, summary = NULL, ...) {
 
 #' @export
 summary.report_info <- function(object, ...) {
-  if (is.null(attributes(object)$summary)) {
-    object
-  } else {
-    attributes(object)$summary
-  }
+  summary_attr <- attributes(object)$summary
+  if (is.null(summary_attr)) object else summary_attr
 }
 
 #' @export
@@ -85,7 +82,7 @@ print.report_info <- function(x, ...) {
     return("")
   }
 
-  text <- paste0(
+  text_output <- paste0(
     insight::format_value(ci * 100, protect_integers = TRUE),
     "% Confidence Intervals (CIs) and p-values were computed using "
   )
@@ -110,7 +107,7 @@ print.report_info <- function(x, ...) {
     string_approx <- ""
   }
 
-  if (!is.null(test_statistic) && !ci_method == "normal" && !isTRUE(bootstrap)) {
+  if (!is.null(test_statistic) && ci_method != "normal" && !isTRUE(bootstrap)) {
     string_statistic <- switch(tolower(test_statistic),
       "t-statistic" = "t",
       "chi-squared statistic" = ,
@@ -124,24 +121,24 @@ print.report_info <- function(x, ...) {
 
   # bootstrapped intervals
   if (isTRUE(bootstrap)) {
-    text <- paste0(text, string_method, "intervals.")
+    text_output <- paste0(text_output, string_method, "intervals.")
   } else {
-    text <- paste0(text, "a ", string_method, "distribution ", string_approx, "approximation.")
+    text_output <- paste0(text_output, "a ", string_method, "distribution ", string_approx, "approximation.")
   }
-  text
+  text_output
 }
 
 #' @keywords internal
 .info_effectsize <- function(x, effectsize = NULL, include_effectsize = FALSE) {
-  text <- ""
+  text_output <- ""
 
   if (!is.null(effectsize)) {
-    text <- attributes(effectsize)$method
+    text_output <- attributes(effectsize)$method
     if (include_effectsize) {
-      text <- paste0(text, attributes(effectsize)$rules)
-      text <- gsub(".Effect sizes ", " and ", text)
+      text_output <- paste0(text_output, attributes(effectsize)$rules)
+      text_output <- gsub(".Effect sizes ", " and ", text_output, fixed = TRUE)
     }
   }
 
-  text
+  text_output
 }
