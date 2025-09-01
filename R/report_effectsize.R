@@ -104,7 +104,12 @@ print.report_effectsize <- function(x, ...) {
         field2013 = "Field's (2013)",
         landis1977 = "Landis' (1977)"
       )
-      text <- paste0("Effect sizes were labelled following ", effsize_name, " recommendations.")
+      # If effsize_name is NULL, it means we have a custom rule name
+      if (is.null(effsize_name)) {
+        text <- paste0("Effect sizes were labelled following a custom set of rules.")
+      } else {
+        text <- paste0("Effect sizes were labelled following ", effsize_name, " recommendations.")
+      }
     } else {
       text <- paste0("Effect sizes were labelled following a custom set of rules.")
     }
