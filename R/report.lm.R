@@ -70,32 +70,32 @@ report.lm <- function(x, include_effectsize = TRUE, effectsize_method = "refit",
 #' @export
 
 report_effectsize.lm <- function(x, effectsize_method = "refit", ...) {
-  table <- suppressWarnings(effectsize::effectsize(x, method = effectsize_method, ...))
-  method <- .text_standardize(table)
-  estimate <- names(table)[effectsize::is_effectsize_name(names(table))]
+  effect_table <- suppressWarnings(effectsize::effectsize(x, method = effectsize_method, ...))
+  method <- .text_standardize(effect_table)
+  estimate <- names(effect_table)[effectsize::is_effectsize_name(names(effect_table))]
 
   # TODO: finally solve this.
   # interpret <- effectsize::interpret_parameters(x, ...)
   if (insight::model_info(x)$is_logit) {
-    interpret <- effectsize::interpret_oddsratio(table[[estimate]], log = TRUE, ...)
+    interpret <- effectsize::interpret_oddsratio(effect_table[[estimate]], log = TRUE, ...)
   } else {
-    interpret <- effectsize::interpret_cohens_d(table[[estimate]], ...)
+    interpret <- effectsize::interpret_cohens_d(effect_table[[estimate]], ...)
   }
 
   interpretation <- interpret
-  main <- paste0("Std. beta = ", insight::format_value(table[[estimate]]))
+  main <- paste0("Std. beta = ", insight::format_value(effect_table[[estimate]]))
 
 
-  ci <- table$CI
+  ci <- effect_table$CI
   names(ci) <- paste0("ci_", estimate)
 
   statistics <- paste0(
     main,
     ", ",
-    insight::format_ci(table$CI_low, table$CI_high, ci)
+    insight::format_ci(effect_table$CI_low, effect_table$CI_high, ci)
   )
 
-  if ("Component" %in% colnames(table)) {
+  if ("Component" %in% colnames(effect_table)) {
     merge_by <- c("Parameter", "Component")
     start_col <- 4L
   } else {
@@ -103,15 +103,15 @@ report_effectsize.lm <- function(x, effectsize_method = "refit", ...) {
     start_col <- 3L
   }
 
-  table <- as.data.frame(table)[c(merge_by, estimate, "CI_low", "CI_high")]
-  names(table)[start_col:ncol(table)] <- c(paste0(estimate, "_CI_low"), paste0(estimate, "_CI_high"))
+  effect_table <- as.data.frame(effect_table)[c(merge_by, estimate, "CI_low", "CI_high")]
+  names(effect_table)[start_col:ncol(effect_table)] <- c(paste0(estimate, "_CI_low"), paste0(estimate, "_CI_high"))
 
   rules <- .text_effectsize(attr(attr(interpret, "rules"), "rule_name"))
   parameters <- paste0(interpretation, " (", statistics, ")")
 
   as.report_effectsize(parameters,
     summary = parameters,
-    table = table,
+    table = effect_table,
     interpretation = interpretation,
     statistics = statistics,
     rules = rules,
@@ -159,17 +159,17 @@ report_table.lm <- function(x, include_effectsize = TRUE, ...) {
     params <- datawizard::data_remove(params, "df_error")
   }
   table_full <- datawizard::data_remove(params, "SE")
-  table <- datawizard::data_remove(
+  params_table <- datawizard::data_remove(
     table_full,
     select = "(_CI_low|_CI_high)$",
     regex = TRUE,
     verbose = FALSE
   )
-  table <- table[!table$Parameter %in% c("AIC", "BIC", "ELPD", "LOOIC", "WAIC"), ]
+  params_table <- params_table[!params_table$Parameter %in% c("AIC", "BIC", "ELPD", "LOOIC", "WAIC"), ]
 
   # Prepare -----
   out <- as.report_table(table_full,
-    summary = table,
+    summary = params_table,
     effsize = effsize,
     performance = performance,
     ...
@@ -194,82 +194,84 @@ report_statistics.lm <- function(x,
                                  include_diagnostic = TRUE,
                                  ...) {
   if (is.null(table)) {
-    table <- report_table(x, ...)
+    params_table <- report_table(x, ...)
+  } else {
+    params_table <- table
   }
-  table <- .remove_performance(table)
-  effsize <- attributes(table)$effsize
+  params_table <- .remove_performance(params_table)
+  effsize <- attributes(params_table)$effsize
 
   # Estimate
-  estimate <- .find_regression_estimate(table)
-  if (is.null(estimate) || is.na(estimate) || !estimate %in% names(table)) {
-    text <- ""
+  estimate <- .find_regression_estimate(params_table)
+  if (is.null(estimate) || is.na(estimate) || !estimate %in% names(params_table)) {
+    estimate_text <- ""
   } else if (estimate == "Coefficient") {
-    text <- paste0("beta = ", insight::format_value(table[[estimate]]))
+    estimate_text <- paste0("beta = ", insight::format_value(params_table[[estimate]]))
   } else {
-    text <- paste0(estimate, " = ", insight::format_value(table[[estimate]]))
+    estimate_text <- paste0(estimate, " = ", insight::format_value(params_table[[estimate]]))
   }
 
   # CI
-  if (!is.null(table$CI_low)) {
-    text <- datawizard::text_paste(text, insight::format_ci(table$CI_low, table$CI_high, ci = attributes(table)$ci))
+  if (!is.null(params_table$CI_low)) {
+    estimate_text <- datawizard::text_paste(estimate_text, insight::format_ci(params_table$CI_low, params_table$CI_high, ci = attributes(params_table)$ci))
   }
 
   # Statistic
-  if ("t" %in% names(table)) {
-    text <- datawizard::text_paste(
-      text,
-      paste0("t(", insight::format_value(table$df, protect_integers = TRUE), ") = ", insight::format_value(table$t))
+  if ("t" %in% names(params_table)) {
+    estimate_text <- datawizard::text_paste(
+      estimate_text,
+      paste0("t(", insight::format_value(params_table$df, protect_integers = TRUE), ") = ", insight::format_value(params_table$t))
     )
   }
 
   # p-value
-  if ("p" %in% names(table)) {
-    text <- datawizard::text_paste(text, insight::format_p(table$p, stars = FALSE, digits = "apa"))
+  if ("p" %in% names(params_table)) {
+    estimate_text <- datawizard::text_paste(estimate_text, insight::format_p(params_table$p, stars = FALSE, digits = "apa"))
   }
 
   # pd
-  if ("pd" %in% names(table)) {
-    text <- datawizard::text_paste(text, insight::format_pd(table$pd, stars = FALSE))
+  if ("pd" %in% names(params_table)) {
+    estimate_text <- datawizard::text_paste(estimate_text, insight::format_pd(params_table$pd, stars = FALSE))
   }
 
   # BF
-  if ("ROPE_Percentage" %in% names(table)) {
-    text <- datawizard::text_paste(text, insight::format_rope(table$ROPE_Percentage))
+  if ("ROPE_Percentage" %in% names(params_table)) {
+    estimate_text <- datawizard::text_paste(estimate_text, insight::format_rope(params_table$ROPE_Percentage))
   }
 
   # BF
-  if ("BF" %in% names(table)) {
-    text <- datawizard::text_paste(text, insight::format_bf(table$BF, stars = FALSE, exact = TRUE))
+  if ("BF" %in% names(params_table)) {
+    estimate_text <- datawizard::text_paste(estimate_text, insight::format_bf(params_table$BF, stars = FALSE, exact = TRUE))
   }
 
   # Effect size
   if (include_effectsize && !is.null(effsize)) {
-    text_full <- datawizard::text_paste(text, attributes(effsize)$statistics, sep = "; ")
-    text <- datawizard::text_paste(text, attributes(effsize)$main)
+    text_full <- datawizard::text_paste(estimate_text, attributes(effsize)$statistics, sep = "; ")
+    estimate_text <- datawizard::text_paste(estimate_text, attributes(effsize)$main)
   } else {
-    text_full <- text
+    text_full <- estimate_text
   }
 
   # Quality / Diagnostic
   if (include_diagnostic) {
     text_diagnostic <- ""
 
-    if ("Rhat" %in% names(table)) {
-      text_diagnostic <- paste0("Rhat = ", insight::format_value(table$Rhat))
+    if ("Rhat" %in% names(params_table)) {
+      text_diagnostic <- paste0("Rhat = ", insight::format_value(params_table$Rhat))
     }
 
-    text <- datawizard::text_paste(text, text_diagnostic)
+    estimate_text <- datawizard::text_paste(estimate_text, text_diagnostic)
 
-    if ("ESS" %in% names(table)) {
-      text_diagnostic <- datawizard::text_paste(text_diagnostic, paste0("ESS = ", insight::format_value(table$ESS)))
+    if ("ESS" %in% names(params_table)) {
+      text_diagnostic <- datawizard::text_paste(text_diagnostic, paste0("ESS = ", insight::format_value(params_table$ESS)))
     }
 
     text_full <- datawizard::text_paste(text_full, text_diagnostic, sep = "; ")
   }
 
   as.report_statistics(text_full,
-    summary = text,
-    table = table,
+    summary = estimate_text,
+    table = params_table,
     effsize = effsize
   )
 }
@@ -291,11 +293,11 @@ report_parameters.lm <- function(x,
   effsize <- attributes(stats)$effsize
 
   # Parameters' names
-  text <- as.character(.parameters_starting_text(x, params))
+  params_text <- as.character(.parameters_starting_text(x, params))
 
   # Significance and effect size
-  text <- paste0(
-    text,
+  params_text <- paste0(
+    params_text,
     " is statistically ",
     effectsize::interpret_p(params$p, rules = effectsize::rules(0.05, c("significant", "non-significant"))),
     " and ",
@@ -304,7 +306,7 @@ report_parameters.lm <- function(x,
 
   # Effect size
   # if(include_effectsize){
-  #   text <- paste0(text,  " and ", attributes(effsize)$interpretation)
+  #   params_text <- paste0(params_text,  " and ", attributes(effsize)$interpretation)
   # }
 
   # Include intercept
@@ -314,13 +316,13 @@ report_parameters.lm <- function(x,
     idx <- rep(TRUE, nrow(params))
   }
 
-  text_full <- paste0(text[idx], " (", stats[idx], ")")
-  text <- paste0(text[idx], " (", summary(stats)[idx], ")")
+  text_full <- paste0(params_text[idx], " (", stats[idx], ")")
+  result_text <- paste0(params_text[idx], " (", summary(stats)[idx], ")")
 
 
   as.report_parameters(
     text_full,
-    summary = text,
+    summary = result_text,
     table = params,
     effectsize = effsize,
     ...
@@ -333,13 +335,15 @@ report_parameters.lm <- function(x,
 #' @export
 report_intercept.lm <- function(x, table = NULL, ...) {
   if (is.null(table)) {
-    table <- report_table(x, ...)
+    intercept_table <- report_table(x, ...)
+  } else {
+    intercept_table <- table
   }
 
-  if (insight::model_info(x)$is_zero_inflated && "Component" %in% colnames(table)) {
-    idx <- !is.na(table$Parameter) & table$Parameter == "(Intercept)" & table$Component == "conditional"
+  if (insight::model_info(x)$is_zero_inflated && "Component" %in% colnames(intercept_table)) {
+    idx <- !is.na(intercept_table$Parameter) & intercept_table$Parameter == "(Intercept)" & intercept_table$Component == "conditional"
   } else {
-    idx <- !is.na(table$Parameter) & table$Parameter == "(Intercept)"
+    idx <- !is.na(intercept_table$Parameter) & intercept_table$Parameter == "(Intercept)"
   }
 
   # sanity check - if model has no intercept, return NULL
@@ -347,14 +351,14 @@ report_intercept.lm <- function(x, table = NULL, ...) {
     return(NULL)
   }
 
-  intercept <- table[idx, ]
+  intercept <- intercept_table[idx, ]
 
-  estimate <- .find_regression_estimate(table)
+  estimate <- .find_regression_estimate(intercept_table)
   is_at <- insight::format_value(intercept[[estimate]])
 
   intercept[[estimate]] <- NULL
 
-  text <- paste0(
+  intercept_text <- paste0(
     "The model's intercept is at ",
     insight::format_value(is_at),
     " (",
@@ -373,7 +377,7 @@ report_intercept.lm <- function(x, table = NULL, ...) {
 
   text_full <- gsub("std. beta", "std. intercept", text_full, fixed = TRUE)
 
-  as.report_intercept(text_full, summary = text, ...)
+  as.report_intercept(text_full, summary = intercept_text, ...)
 }
 
 
@@ -383,7 +387,9 @@ report_intercept.lm <- function(x, table = NULL, ...) {
 #' @export
 report_model.lm <- function(x, table = NULL, ...) {
   if (is.null(table)) {
-    table <- report_table(x, ...)
+    model_table <- report_table(x, ...)
+  } else {
+    model_table <- table
   }
 
   # Model info
@@ -391,14 +397,14 @@ report_model.lm <- function(x, table = NULL, ...) {
   is_nullmodel <- suppressWarnings(insight::is_nullmodel(x))
 
   # Bootstrap
-  if (attributes(table)$bootstrap) {
-    bootstrapped <- paste0("bootstrapped (", attributes(table)$iterations, " iterations) ")
+  if (attributes(model_table)$bootstrap) {
+    bootstrapped <- paste0("bootstrapped (", attributes(model_table)$iterations, " iterations) ")
   } else {
     bootstrapped <- ""
   }
 
   # Initial
-  text <- paste0(
+  model_text <- paste0(
     bootstrapped,
     format_model(x)
   )
@@ -407,13 +413,13 @@ report_model.lm <- function(x, table = NULL, ...) {
   algorithm <- format_algorithm(x)
   if (algorithm != "") {
     text_full <- paste0(
-      text,
+      model_text,
       " (estimated using ",
       algorithm,
       ")"
     )
   } else {
-    text_full <- text
+    text_full <- model_text
   }
 
 
@@ -429,24 +435,24 @@ report_model.lm <- function(x, table = NULL, ...) {
 
   # Formula
   text_full <- paste0(text_full, to_predict_text, " (", format_formula(x), ")")
-  text <- paste0(text, to_predict_text)
+  model_text <- paste0(model_text, to_predict_text)
 
   # Random
   if (info$is_mixed) {
     random_text <- report_random(x)
     text_full <- paste0(text_full, ". ", as.character(random_text))
-    text <- paste0(text, ". ", summary(random_text))
+    model_text <- paste0(model_text, ". ", summary(random_text))
   }
 
   # Bayesian
   if (info$is_bayesian) {
     priors_text <- report_priors(x)
     text_full <- paste0(text_full, ". ", as.character(priors_text))
-    text <- paste0(text, ". ", summary(priors_text))
+    model_text <- paste0(model_text, ". ", summary(priors_text))
   }
 
 
-  as.report_model(text_full, summary = text, ...)
+  as.report_model(text_full, summary = model_text, ...)
 }
 
 
@@ -456,9 +462,11 @@ report_model.lm <- function(x, table = NULL, ...) {
 #' @export
 report_performance.lm <- function(x, table = NULL, ...) {
   if (!is.null(table) || is.null(attributes(table)$performance)) {
-    table <- report_table(x, ...)
+    perf_table <- report_table(x, ...)
+  } else {
+    perf_table <- table
   }
-  performance <- attributes(table)$performance
+  performance <- attributes(perf_table)$performance
 
 
   # Intercept-only
@@ -519,12 +527,12 @@ report_info.lm <- function(x,
 #' @export
 report_text.lm <- function(x, table = NULL, ...) {
   params <- report_parameters(x, table = table, include_intercept = FALSE, ...)
-  table <- attributes(params)$table
+  report_table_data <- attributes(params)$table
 
   info <- report_info(x, effectsize = attributes(params)$effectsize, parameters = params, ...)
-  model <- report_model(x, table = table, ...)
-  perf <- report_performance(x, table = table, ...)
-  intercept <- report_intercept(x, table = table, ...)
+  model <- report_model(x, table = report_table_data, ...)
+  perf <- report_performance(x, table = report_table_data, ...)
+  intercept <- report_intercept(x, table = report_table_data, ...)
 
   if (suppressWarnings(insight::is_nullmodel(x))) {
     params_text_full <- params_text <- ""
@@ -545,7 +553,7 @@ report_text.lm <- function(x, table = NULL, ...) {
     info
   )
 
-  summary_text <- paste0(
+  result_summary <- paste0(
     "We fitted a ",
     summary(model),
     ". ",
@@ -556,7 +564,7 @@ report_text.lm <- function(x, table = NULL, ...) {
   )
 
 
-  as.report_text(text_full, summary = summary_text)
+  as.report_text(text_full, summary = result_summary)
 }
 
 
@@ -569,7 +577,7 @@ report_text.lm <- function(x, table = NULL, ...) {
   if (!is.null(coefname) && coefname %in% names(table)) {
     estimate <- attributes(table)$coefficient_name
   } else {
-    estimate <- grepv(candidates, names(table))[1]
+    estimate <- grep(candidates, names(table), value = TRUE)[1]
   }
   estimate
 }

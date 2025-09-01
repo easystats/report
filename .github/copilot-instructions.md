@@ -87,9 +87,18 @@ which R
 # Install core R packages via system package manager (recommended)
 sudo apt install -y r-cran-dplyr r-cran-rlang r-cran-testthat
 
-# CRITICAL: Install development version of lintr to match CI environment
-# The easystats CI uses r-lib/lintr (development version) not CRAN stable
-R --no-restore --no-save -e 'pak::pak("r-lib/lintr")' || sudo apt install -y r-cran-lintr
+# CRITICAL: Install development version of lintr and styler to match CI environment
+# The easystats CI uses r-lib/lintr and r-lib/styler (development versions) not CRAN stable
+# Use the same approach as the existing workflow file:
+R --no-restore --no-save -e '
+  install.packages("remotes", repos="https://cloud.r-project.org/")
+  # Use the same installation method as GitHub workflow
+  remotes::install_github("r-lib/lintr")
+  remotes::install_github("r-lib/styler")
+' || {
+  # Fallback to CRAN if GitHub access fails
+  sudo apt install -y r-cran-lintr
+}
 
 # Install reprex (ESSENTIAL for creating reproducible examples in PRs)
 sudo apt install -y r-cran-reprex || R --no-restore --no-save -e 'install.packages("reprex", repos="https://cloud.r-project.org/")'
@@ -1073,10 +1082,14 @@ cat(paste(reprex_result, collapse = "\n"))
 - **Cause**: CI uses development lintr (`r-lib/lintr`) while local uses CRAN stable (`r-cran-lintr`)
 - **Symptoms**: Local lintr passes but CI lintr fails with stricter rules
 - **Root issue**: Development lintr prefers `grepv()` over `grep(..., value = TRUE)` and has stricter rules
-- **Solution**: Always install development lintr to match CI:
+- **Solution**: Always install development lintr and styler to match CI using the workflow approach:
   ```bash
-  # Install development lintr to match CI (R 4.5.0+ required)
-  R --no-restore --no-save -e 'pak::pak("r-lib/lintr")'
+  # Install development versions to match CI using remotes (same as workflow)
+  R --no-restore --no-save -e '
+    install.packages("remotes", repos="https://cloud.r-project.org/")
+    remotes::install_github("r-lib/lintr")
+    remotes::install_github("r-lib/styler")
+  '
   # Fallback to stable if network issues:
   sudo apt install -y r-cran-lintr
   ```
