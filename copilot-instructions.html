@@ -117,23 +117,27 @@
 <span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="fu">which</span> R</span>
 <span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a></span>
 <span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co"># Install core R packages via system package manager (recommended)</span></span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-cran-dplyr r-cran-rlang r-cran-testthat r-cran-lintr</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-cran-dplyr r-cran-rlang r-cran-testthat</span>
 <span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co"># Install reprex (ESSENTIAL for creating reproducible examples in PRs)</span></span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-cran-reprex <span class="kw">||</span> <span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("reprex", repos="https://cloud.r-project.org/")'</span></span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="co"># Install other essential development packages via system packages when possible</span></span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-cran-devtools r-cran-roxygen2 r-cran-styler <span class="kw">||</span> <span class="bu">echo</span> <span class="st">"Some packages not available via apt, will install via R"</span></span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="co"># If styler, roxygen2, or devtools are not available via system packages, install via R:</span></span>
-<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
-<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="st">packages_needed &lt;- c("styler", "roxygen2", "devtools")</span></span>
-<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a><span class="st">packages_installed &lt;- rownames(installed.packages())</span></span>
-<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a><span class="st">packages_to_install &lt;- setdiff(packages_needed, packages_installed)</span></span>
-<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a><span class="st">if (length(packages_to_install) &gt; 0) {</span></span>
-<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a><span class="st">  install.packages(packages_to_install, repos="https://cloud.r-project.org/")</span></span>
-<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co"># CRITICAL: Install development version of lintr to match CI environment</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co"># The easystats CI uses r-lib/lintr (development version) not CRAN stable</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'pak::pak("r-lib/lintr")'</span> <span class="kw">||</span> <span class="fu">sudo</span> apt install <span class="at">-y</span> r-cran-lintr</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="co"># Install reprex (ESSENTIAL for creating reproducible examples in PRs)</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-cran-reprex <span class="kw">||</span> <span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("reprex", repos="https://cloud.r-project.org/")'</span></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="co"># Install other essential development packages via system packages when possible</span></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-cran-devtools r-cran-roxygen2 r-cran-styler <span class="kw">||</span> <span class="bu">echo</span> <span class="st">"Some packages not available via apt, will install via R"</span></span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a><span class="co"># If styler, roxygen2, or devtools are not available via system packages, install via R:</span></span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a><span class="st">packages_needed &lt;- c("styler", "roxygen2", "devtools")</span></span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a><span class="st">packages_installed &lt;- rownames(installed.packages())</span></span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a><span class="st">packages_to_install &lt;- setdiff(packages_needed, packages_installed)</span></span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a><span class="st">if (length(packages_to_install) &gt; 0) {</span></span>
+<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a><span class="st">  install.packages(packages_to_install, repos="https://cloud.r-project.org/")</span></span>
+<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="verify-r-installation-and-core-packages">Verify R Installation and Core Packages<a class="anchor" aria-label="anchor" href="#verify-r-installation-and-core-packages"></a></h3>
@@ -578,13 +582,55 @@ grep -A2 -B2 "requireNamespace\|check_installed" R/[your_function_file].R
 <div class="section level2">
 <h2 id="code-quality-and-best-practices">Code Quality and Best Practices<a class="anchor" aria-label="anchor" href="#code-quality-and-best-practices"></a></h2>
 <div class="section level3">
+<h3 id="r-version-compatibility-requirements">R Version Compatibility Requirements<a class="anchor" aria-label="anchor" href="#r-version-compatibility-requirements"></a></h3>
+<p><strong>CRITICAL</strong>: Always check minimum R version requirements before using any functions to ensure compatibility across all supported environments.</p>
+<div class="section level4">
+<h4 id="version-checking-process">Version Checking Process:<a class="anchor" aria-label="anchor" href="#version-checking-process"></a></h4>
+<ol style="list-style-type: decimal"><li>
+<p><strong>Check DESCRIPTION file</strong>: Always verify the minimum R version in the package DESCRIPTION file:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/report/report</span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"Depends:"</span> DESCRIPTION</span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a><span class="co"># Shows: R (&gt;= 3.6) - must use functions available in R 3.6+</span></span></code></pre></div>
+</li>
+<li>
+<p><strong>Function availability validation</strong>: Before using any R function, verify it was available in the minimum supported version:</p>
+<ul><li>
+<strong>R 3.6.0+</strong>: Functions like <code>grep(..., value = TRUE)</code>, standard base R operations</li>
+<li>
+<strong>R 4.0.0+</strong>: New features and syntax improvements</li>
+<li>
+<strong>R 4.1.0+</strong>: Native pipe <code>|&gt;</code>, new lambda syntax</li>
+<li>
+<strong>R 4.5.0+</strong>: Functions like <code><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepv()</a></code> (if it existed)</li>
+</ul></li>
+<li>
+<p><strong>Safe function usage</strong>:</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># CORRECT: Use functions available in R 3.6+</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="va">pattern</span>, <span class="va">x</span>, value <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># INCORRECT: Don't use functions from later R versions</span></span>
+<span><span class="co"># result &lt;- grepv(pattern, x)  # Not available in R 3.6</span></span></code></pre></div>
+</li>
+</ol></div>
+<div class="section level4">
+<h4 id="documentation-for-minimum-r-versions">Documentation for Minimum R Versions:<a class="anchor" aria-label="anchor" href="#documentation-for-minimum-r-versions"></a></h4>
+<ul><li>
+<strong>R 3.6.0 reference</strong>: Check base R documentation for function availability</li>
+<li>
+<strong>When in doubt</strong>: Use <code>help(function_name)</code> to check when functions were introduced</li>
+<li>
+<strong>Alternative approach</strong>: Use more basic/older functions that are guaranteed to exist</li>
+</ul></div>
+</div>
+<div class="section level3">
 <h3 id="avoiding-global-variable-binding-issues">Avoiding Global Variable Binding Issues<a class="anchor" aria-label="anchor" href="#avoiding-global-variable-binding-issues"></a></h3>
 <p><strong>CRITICAL</strong>: Always use proper variable referencing to prevent “no visible binding for global variable” warnings that make CI workflows fail.</p>
 <div class="section level4">
 <h4 id="recommended-approaches">Recommended Approaches:<a class="anchor" aria-label="anchor" href="#recommended-approaches"></a></h4>
 <ol style="list-style-type: decimal"><li>
 <p><strong>For dplyr operations</strong>: Use <code>.data[[variable_name]]</code> notation</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># CORRECT: Use .data[[var]] notation</span></span>
 <span><span class="va">data</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">group_var</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
@@ -597,7 +643,7 @@ grep -A2 -B2 "requireNamespace\|check_installed" R/[your_function_file].R
 </li>
 <li>
 <p><strong>For ggplot2 operations</strong>: Use <code>.data[[variable_name]]</code> or <code>aes_string()</code></p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># CORRECT: Use .data[[var]] in aes()</span></span>
 <span><span class="fu">ggplot</span><span class="op">(</span><span class="va">data</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">.data</span><span class="op">[[</span><span class="va">x_var</span><span class="op">]</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">.data</span><span class="op">[[</span><span class="va">y_var</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -606,7 +652,7 @@ grep -A2 -B2 "requireNamespace\|check_installed" R/[your_function_file].R
 </li>
 <li>
 <p><strong>Import required functions</strong>: Always explicitly import from other packages</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @importFrom dplyr group_by summarize</span></span>
 <span><span class="co">#' @importFrom ggplot2 ggplot aes</span></span></code></pre></div>
 </li>
@@ -629,7 +675,7 @@ grep -A2 -B2 "requireNamespace\|check_installed" R/[your_function_file].R
 <h4 id="documentation-validation-steps">Documentation Validation Steps:<a class="anchor" aria-label="anchor" href="#documentation-validation-steps"></a></h4>
 <ol style="list-style-type: decimal"><li>
 <p><strong>Match all parameter names exactly</strong>:</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' @param response The dependent variable name</span></span>
 <span><span class="co">#' @param group The grouping variable name  </span></span>
 <span><span class="va">function_name</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">response</span>, <span class="va">group</span><span class="op">)</span> <span class="op">{</span> <span class="va">...</span> <span class="op">}</span></span></code></pre></div>
@@ -642,10 +688,10 @@ grep -A2 -B2 "requireNamespace\|check_installed" R/[your_function_file].R
 </ul></li>
 <li>
 <p><strong>Validate before building</strong>:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="co"># Check for documentation mismatches</span></span>
-<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'roxygen2::document()'</span></span>
-<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a><span class="ex">R</span> CMD build .</span>
-<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a><span class="co"># Look for "Codoc mismatches" warnings</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a><span class="co"># Check for documentation mismatches</span></span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'roxygen2::document()'</span></span>
+<span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a><span class="ex">R</span> CMD build .</span>
+<span id="cb33-4"><a href="#cb33-4" tabindex="-1"></a><span class="co"># Look for "Codoc mismatches" warnings</span></span></code></pre></div>
 </li>
 </ol></div>
 </div>
@@ -734,14 +780,14 @@ grep -A2 -B2 "requireNamespace\|check_installed" R/[your_function_file].R
 <div class="section level2">
 <h2 id="version-management-and-changelog-updates">Version Management and Changelog Updates<a class="anchor" aria-label="anchor" href="#version-management-and-changelog-updates"></a></h2>
 <p><strong>CRITICAL</strong>: Every PR must include version number updates and NEWS.md changelog entries. This is mandatory for all changes.</p>
-<p><strong>IMPORTANT CLARIFICATION</strong>: Version numbers should be bumped <strong>ONCE PER PULL REQUEST</strong>, not once per commit. If you make multiple commits within a single PR, all commits should use the same version number. Only bump the version once at the beginning of your PR work or before submitting the PR for review.</p>
+<p><strong>IMPORTANT CLARIFICATION</strong>: Version numbers should be bumped <strong>ONCE PER PULL REQUEST</strong>, not once per commit. If you make multiple commits within a single PR, all commits should use the same version number. Only bump the version once at the beginning of your PR work or before submitting the PR for review. Only bump if making changes to functions (e.g, not for copilot instructions, workflow, etc.).</p>
 <div class="section level3">
 <h3 id="version-numbering-system">Version Numbering System<a class="anchor" aria-label="anchor" href="#version-numbering-system"></a></h3>
 <p>The report package follows this versioning pattern: - <strong>Major releases</strong> (CRAN submissions): Standard semantic versioning (e.g., 0.6.1, 0.6.0, 0.5.9) - <strong>Development versions</strong> (between CRAN releases): Add a fourth decimal (e.g., 0.6.1.1, 0.6.1.2, 0.6.1.3)</p>
 </div>
 <div class="section level3">
 <h3 id="when-to-bump-versions">When to Bump Versions<a class="anchor" aria-label="anchor" href="#when-to-bump-versions"></a></h3>
-<p><strong>ALWAYS</strong> bump the version for ANY change that affects the package: 1. <strong>Bug fixes</strong>: Increment the fourth decimal (0.6.1.1 → 0.6.1.2) 2. <strong>New features</strong>: Increment the fourth decimal (0.6.1.1 → 0.6.1.2) 3. <strong>Breaking changes</strong>: Increment the minor version (0.6.1 → 0.7.0) - rare 4. <strong>Documentation-only changes</strong>: Still increment fourth decimal for tracking</p>
+<p><strong>ALWAYS</strong> bump the version for ANY change that affects the package: 1. <strong>Bug fixes</strong>: Increment the fourth decimal (0.6.1.1 → 0.6.1.2) 2. <strong>New features</strong>: Increment the fourth decimal (0.6.1.1 → 0.6.1.2) 3. <strong>Breaking changes</strong>: Increment the minor version (0.6.1 → 0.7.0) - rare 4. <strong>Documentation-only changes</strong>: Still increment fourth decimal for tracking 5. Do not bump when only making changes to copilot instructions, workflow, etc.</p>
 </div>
 <div class="section level3">
 <h3 id="multiple-commits-within-a-single-pr">Multiple Commits Within a Single PR<a class="anchor" aria-label="anchor" href="#multiple-commits-within-a-single-pr"></a></h3>
@@ -754,14 +800,14 @@ grep -A2 -B2 "requireNamespace\|check_installed" R/[your_function_file].R
 <h3 id="how-to-update-version-number">How to Update Version Number<a class="anchor" aria-label="anchor" href="#how-to-update-version-number"></a></h3>
 <ol style="list-style-type: decimal"><li>
 <p><strong>Edit the DESCRIPTION file</strong>:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/report/report</span>
-<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a><span class="co"># Find current version</span></span>
-<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"Version:"</span> DESCRIPTION</span>
-<span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a><span class="co"># Update to next version (example: 0.6.1.1 → 0.6.1.2)</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/report/report</span>
+<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a><span class="co"># Find current version</span></span>
+<span id="cb34-3"><a href="#cb34-3" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"Version:"</span> DESCRIPTION</span>
+<span id="cb34-4"><a href="#cb34-4" tabindex="-1"></a><span class="co"># Update to next version (example: 0.6.1.1 → 0.6.1.2)</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Version update pattern</strong>:</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Current version: 0.6.1.1</span></span>
 <span><span class="co"># For your PR: 0.6.1.2</span></span>
 <span><span class="co"># Next PR: 0.6.1.3</span></span>
@@ -773,20 +819,20 @@ grep -A2 -B2 "requireNamespace\|check_installed" R/[your_function_file].R
 <p><strong>MANDATORY</strong>: Add your changes to the top of NEWS.md following this exact format:</p>
 <ol style="list-style-type: decimal"><li>
 <p><strong>For first change after a major release</strong> (e.g., after 0.6.1 was released):</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a><span class="fu"># report 0.6.x</span></span>
-<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a></span>
-<span id="cb34-3"><a href="#cb34-3" tabindex="-1"></a>Bug fixes</span>
-<span id="cb34-4"><a href="#cb34-4" tabindex="-1"></a></span>
-<span id="cb34-5"><a href="#cb34-5" tabindex="-1"></a><span class="ss">* </span>Your change description here</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="fu"># report 0.6.x</span></span>
+<span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a>Bug fixes</span>
+<span id="cb36-4"><a href="#cb36-4" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" tabindex="-1"></a><span class="ss">* </span>Your change description here</span></code></pre></div>
 </li>
 <li>
 <p><strong>For subsequent development changes</strong> (when 0.6.x already exists):</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a><span class="fu"># report 0.6.x</span></span>
-<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a></span>
-<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a>Bug fixes</span>
-<span id="cb35-4"><a href="#cb35-4" tabindex="-1"></a></span>
-<span id="cb35-5"><a href="#cb35-5" tabindex="-1"></a><span class="ss">* </span>Your new change description here</span>
-<span id="cb35-6"><a href="#cb35-6" tabindex="-1"></a><span class="ss">* </span>Previous change description here</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a><span class="fu"># report 0.6.x</span></span>
+<span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" tabindex="-1"></a>Bug fixes</span>
+<span id="cb37-4"><a href="#cb37-4" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" tabindex="-1"></a><span class="ss">* </span>Your new change description here</span>
+<span id="cb37-6"><a href="#cb37-6" tabindex="-1"></a><span class="ss">* </span>Previous change description here</span></code></pre></div>
 </li>
 <li>
 <p><strong>Change description guidelines</strong>:</p>
@@ -806,120 +852,120 @@ grep -A2 -B2 "requireNamespace\|check_installed" R/[your_function_file].R
 <div class="section level3">
 <h3 id="automated-version-management-workflow">Automated Version Management Workflow<a class="anchor" aria-label="anchor" href="#automated-version-management-workflow"></a></h3>
 <p><strong>Follow this exact sequence ONCE PER PR</strong> (not per commit):</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/report/report</span>
-<span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a></span>
-<span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a><span class="co"># Step 1: Check current version</span></span>
-<span id="cb36-4"><a href="#cb36-4" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"Version:"</span> DESCRIPTION</span>
-<span id="cb36-5"><a href="#cb36-5" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-A5</span> <span class="st">"^# report"</span> NEWS.md <span class="kw">|</span> <span class="fu">head</span> <span class="at">-10</span></span>
-<span id="cb36-6"><a href="#cb36-6" tabindex="-1"></a></span>
-<span id="cb36-7"><a href="#cb36-7" tabindex="-1"></a><span class="co"># Step 2: Determine new version number</span></span>
-<span id="cb36-8"><a href="#cb36-8" tabindex="-1"></a><span class="co"># Current: 0.6.1.1 → New: 0.6.1.2 (example)</span></span>
-<span id="cb36-9"><a href="#cb36-9" tabindex="-1"></a></span>
-<span id="cb36-10"><a href="#cb36-10" tabindex="-1"></a><span class="co"># Step 3: Update DESCRIPTION file (ONCE per PR)</span></span>
-<span id="cb36-11"><a href="#cb36-11" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="st">'s/Version: 0.6.1.1/Version: 0.6.1.2/'</span> DESCRIPTION</span>
-<span id="cb36-12"><a href="#cb36-12" tabindex="-1"></a></span>
-<span id="cb36-13"><a href="#cb36-13" tabindex="-1"></a><span class="co"># Step 4: Update NEWS.md (ONCE per PR - add entry at the top)</span></span>
-<span id="cb36-14"><a href="#cb36-14" tabindex="-1"></a><span class="co"># Use your preferred text editor or str_replace_editor</span></span>
-<span id="cb36-15"><a href="#cb36-15" tabindex="-1"></a></span>
-<span id="cb36-16"><a href="#cb36-16" tabindex="-1"></a><span class="co"># Step 5: Verify updates</span></span>
-<span id="cb36-17"><a href="#cb36-17" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"Version:"</span> DESCRIPTION</span>
-<span id="cb36-18"><a href="#cb36-18" tabindex="-1"></a><span class="fu">head</span> <span class="at">-10</span> NEWS.md</span>
-<span id="cb36-19"><a href="#cb36-19" tabindex="-1"></a></span>
-<span id="cb36-20"><a href="#cb36-20" tabindex="-1"></a><span class="co"># Step 6: Proceed with normal build/test workflow</span></span>
-<span id="cb36-21"><a href="#cb36-21" tabindex="-1"></a><span class="co"># Step 7: Make your code changes and commit everything together</span></span>
-<span id="cb36-22"><a href="#cb36-22" tabindex="-1"></a><span class="co"># Step 8: Any additional commits in this PR should NOT change version numbers again</span></span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/report/report</span>
+<span id="cb38-2"><a href="#cb38-2" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" tabindex="-1"></a><span class="co"># Step 1: Check current version</span></span>
+<span id="cb38-4"><a href="#cb38-4" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"Version:"</span> DESCRIPTION</span>
+<span id="cb38-5"><a href="#cb38-5" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-A5</span> <span class="st">"^# report"</span> NEWS.md <span class="kw">|</span> <span class="fu">head</span> <span class="at">-10</span></span>
+<span id="cb38-6"><a href="#cb38-6" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="#cb38-7" tabindex="-1"></a><span class="co"># Step 2: Determine new version number</span></span>
+<span id="cb38-8"><a href="#cb38-8" tabindex="-1"></a><span class="co"># Current: 0.6.1.1 → New: 0.6.1.2 (example)</span></span>
+<span id="cb38-9"><a href="#cb38-9" tabindex="-1"></a></span>
+<span id="cb38-10"><a href="#cb38-10" tabindex="-1"></a><span class="co"># Step 3: Update DESCRIPTION file (ONCE per PR)</span></span>
+<span id="cb38-11"><a href="#cb38-11" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="st">'s/Version: 0.6.1.1/Version: 0.6.1.2/'</span> DESCRIPTION</span>
+<span id="cb38-12"><a href="#cb38-12" tabindex="-1"></a></span>
+<span id="cb38-13"><a href="#cb38-13" tabindex="-1"></a><span class="co"># Step 4: Update NEWS.md (ONCE per PR - add entry at the top)</span></span>
+<span id="cb38-14"><a href="#cb38-14" tabindex="-1"></a><span class="co"># Use your preferred text editor or str_replace_editor</span></span>
+<span id="cb38-15"><a href="#cb38-15" tabindex="-1"></a></span>
+<span id="cb38-16"><a href="#cb38-16" tabindex="-1"></a><span class="co"># Step 5: Verify updates</span></span>
+<span id="cb38-17"><a href="#cb38-17" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"Version:"</span> DESCRIPTION</span>
+<span id="cb38-18"><a href="#cb38-18" tabindex="-1"></a><span class="fu">head</span> <span class="at">-10</span> NEWS.md</span>
+<span id="cb38-19"><a href="#cb38-19" tabindex="-1"></a></span>
+<span id="cb38-20"><a href="#cb38-20" tabindex="-1"></a><span class="co"># Step 6: Proceed with normal build/test workflow</span></span>
+<span id="cb38-21"><a href="#cb38-21" tabindex="-1"></a><span class="co"># Step 7: Make your code changes and commit everything together</span></span>
+<span id="cb38-22"><a href="#cb38-22" tabindex="-1"></a><span class="co"># Step 8: Any additional commits in this PR should NOT change version numbers again</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="version-update-examples">Version Update Examples<a class="anchor" aria-label="anchor" href="#version-update-examples"></a></h3>
 <div class="section level4">
 <h4 id="example-1-bug-fix">Example 1: Bug Fix<a class="anchor" aria-label="anchor" href="#example-1-bug-fix"></a></h4>
-<div class="sourceCode" id="cb37"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a><span class="fu"># In DESCRIPTION: Version: 0.6.1.1 → 0.6.1.2</span></span>
-<span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a><span class="fu"># In NEWS.md (add at top):</span></span>
-<span id="cb37-3"><a href="#cb37-3" tabindex="-1"></a><span class="fu"># report 0.6.x</span></span>
-<span id="cb37-4"><a href="#cb37-4" tabindex="-1"></a></span>
-<span id="cb37-5"><a href="#cb37-5" tabindex="-1"></a>Bug fixes</span>
-<span id="cb37-6"><a href="#cb37-6" tabindex="-1"></a></span>
-<span id="cb37-7"><a href="#cb37-7" tabindex="-1"></a><span class="ss">* </span><span class="in">`report.lm()`</span>: fix issue with confidence intervals in summary output</span></code></pre></div>
-</div>
-<div class="section level4">
-<h4 id="example-2-new-feature">Example 2: New Feature<a class="anchor" aria-label="anchor" href="#example-2-new-feature"></a></h4>
-<div class="sourceCode" id="cb38"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a><span class="fu"># In DESCRIPTION: Version: 0.6.1.2 → 0.6.1.3</span></span>
-<span id="cb38-2"><a href="#cb38-2" tabindex="-1"></a><span class="fu"># In NEWS.md (add at top):</span></span>
-<span id="cb38-3"><a href="#cb38-3" tabindex="-1"></a><span class="fu"># report 0.6.x</span></span>
-<span id="cb38-4"><a href="#cb38-4" tabindex="-1"></a></span>
-<span id="cb38-5"><a href="#cb38-5" tabindex="-1"></a>New features</span>
-<span id="cb38-6"><a href="#cb38-6" tabindex="-1"></a></span>
-<span id="cb38-7"><a href="#cb38-7" tabindex="-1"></a><span class="ss">* </span><span class="in">`report_sample()`</span>: add <span class="in">`weights`</span> argument for weighted sample descriptions</span></code></pre></div>
-</div>
-<div class="section level4">
-<h4 id="example-3-multiple-changes">Example 3: Multiple Changes<a class="anchor" aria-label="anchor" href="#example-3-multiple-changes"></a></h4>
-<div class="sourceCode" id="cb39"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a><span class="fu"># In DESCRIPTION: Version: 0.6.1.3 → 0.6.1.4  </span></span>
+<div class="sourceCode" id="cb39"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a><span class="fu"># In DESCRIPTION: Version: 0.6.1.1 → 0.6.1.2</span></span>
 <span id="cb39-2"><a href="#cb39-2" tabindex="-1"></a><span class="fu"># In NEWS.md (add at top):</span></span>
 <span id="cb39-3"><a href="#cb39-3" tabindex="-1"></a><span class="fu"># report 0.6.x</span></span>
 <span id="cb39-4"><a href="#cb39-4" tabindex="-1"></a></span>
 <span id="cb39-5"><a href="#cb39-5" tabindex="-1"></a>Bug fixes</span>
 <span id="cb39-6"><a href="#cb39-6" tabindex="-1"></a></span>
-<span id="cb39-7"><a href="#cb39-7" tabindex="-1"></a><span class="ss">* </span><span class="in">`report()`</span>: improve error messages for unsupported model classes</span>
-<span id="cb39-8"><a href="#cb39-8" tabindex="-1"></a><span class="ss">* </span><span class="in">`report_participants()`</span>: fix issue with missing gender categories</span>
-<span id="cb39-9"><a href="#cb39-9" tabindex="-1"></a><span class="ss">* </span>Documentation updates for improved clarity across reporting functions</span></code></pre></div>
+<span id="cb39-7"><a href="#cb39-7" tabindex="-1"></a><span class="ss">* </span><span class="in">`report.lm()`</span>: fix issue with confidence intervals in summary output</span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="example-2-new-feature">Example 2: New Feature<a class="anchor" aria-label="anchor" href="#example-2-new-feature"></a></h4>
+<div class="sourceCode" id="cb40"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a><span class="fu"># In DESCRIPTION: Version: 0.6.1.2 → 0.6.1.3</span></span>
+<span id="cb40-2"><a href="#cb40-2" tabindex="-1"></a><span class="fu"># In NEWS.md (add at top):</span></span>
+<span id="cb40-3"><a href="#cb40-3" tabindex="-1"></a><span class="fu"># report 0.6.x</span></span>
+<span id="cb40-4"><a href="#cb40-4" tabindex="-1"></a></span>
+<span id="cb40-5"><a href="#cb40-5" tabindex="-1"></a>New features</span>
+<span id="cb40-6"><a href="#cb40-6" tabindex="-1"></a></span>
+<span id="cb40-7"><a href="#cb40-7" tabindex="-1"></a><span class="ss">* </span><span class="in">`report_sample()`</span>: add <span class="in">`weights`</span> argument for weighted sample descriptions</span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="example-3-multiple-changes">Example 3: Multiple Changes<a class="anchor" aria-label="anchor" href="#example-3-multiple-changes"></a></h4>
+<div class="sourceCode" id="cb41"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a><span class="fu"># In DESCRIPTION: Version: 0.6.1.3 → 0.6.1.4  </span></span>
+<span id="cb41-2"><a href="#cb41-2" tabindex="-1"></a><span class="fu"># In NEWS.md (add at top):</span></span>
+<span id="cb41-3"><a href="#cb41-3" tabindex="-1"></a><span class="fu"># report 0.6.x</span></span>
+<span id="cb41-4"><a href="#cb41-4" tabindex="-1"></a></span>
+<span id="cb41-5"><a href="#cb41-5" tabindex="-1"></a>Bug fixes</span>
+<span id="cb41-6"><a href="#cb41-6" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="#cb41-7" tabindex="-1"></a><span class="ss">* </span><span class="in">`report()`</span>: improve error messages for unsupported model classes</span>
+<span id="cb41-8"><a href="#cb41-8" tabindex="-1"></a><span class="ss">* </span><span class="in">`report_participants()`</span>: fix issue with missing gender categories</span>
+<span id="cb41-9"><a href="#cb41-9" tabindex="-1"></a><span class="ss">* </span>Documentation updates for improved clarity across reporting functions</span></code></pre></div>
 </div>
 </div>
 <div class="section level3">
 <h3 id="before-submitting-your-pr-final-validation">Before Submitting Your PR (Final Validation)<a class="anchor" aria-label="anchor" href="#before-submitting-your-pr-final-validation"></a></h3>
 <p><strong>CRITICAL</strong>: Always run this complete validation sequence to ensure workflow checks pass on first try. This should be done once before submitting your PR for review, not before every individual commit.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/report/report</span>
-<span id="cb40-2"><a href="#cb40-2" tabindex="-1"></a></span>
-<span id="cb40-3"><a href="#cb40-3" tabindex="-1"></a><span class="co"># 0. ENSURE: Version number and NEWS.md were already updated once at the beginning of this PR</span></span>
-<span id="cb40-4"><a href="#cb40-4" tabindex="-1"></a><span class="co">#    (Do NOT update them again if this is a subsequent commit in the same PR)</span></span>
-<span id="cb40-5"><a href="#cb40-5" tabindex="-1"></a></span>
-<span id="cb40-6"><a href="#cb40-6" tabindex="-1"></a><span class="co"># 1. Check for global variable binding issues first (look for "no visible binding" warnings)</span></span>
-<span id="cb40-7"><a href="#cb40-7" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'warnings(); R CMD check report_*.tar.gz --no-manual --no-vignettes 2&gt;&amp;1 | grep -i "binding"'</span></span>
-<span id="cb40-8"><a href="#cb40-8" tabindex="-1"></a></span>
-<span id="cb40-9"><a href="#cb40-9" tabindex="-1"></a><span class="co"># 2. Lint code to identify style issues (20 seconds) - use easystats/workflows configuration</span></span>
-<span id="cb40-10"><a href="#cb40-10" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(lintr); lint_package(linters = all_linters(</span></span>
-<span id="cb40-11"><a href="#cb40-11" tabindex="-1"></a><span class="st">  absolute_path_linter = NULL,</span></span>
-<span id="cb40-12"><a href="#cb40-12" tabindex="-1"></a><span class="st">  cyclocomp_linter(40L),</span></span>
-<span id="cb40-13"><a href="#cb40-13" tabindex="-1"></a><span class="st">  if_not_else_linter(exceptions = character(0L)),</span></span>
-<span id="cb40-14"><a href="#cb40-14" tabindex="-1"></a><span class="st">  indentation_linter = NULL,</span></span>
-<span id="cb40-15"><a href="#cb40-15" tabindex="-1"></a><span class="st">  implicit_integer_linter = NULL,</span></span>
-<span id="cb40-16"><a href="#cb40-16" tabindex="-1"></a><span class="st">  library_call_linter = NULL,</span></span>
-<span id="cb40-17"><a href="#cb40-17" tabindex="-1"></a><span class="st">  line_length_linter(120L),</span></span>
-<span id="cb40-18"><a href="#cb40-18" tabindex="-1"></a><span class="st">  namespace_linter = NULL,</span></span>
-<span id="cb40-19"><a href="#cb40-19" tabindex="-1"></a><span class="st">  nonportable_path_linter = NULL,</span></span>
-<span id="cb40-20"><a href="#cb40-20" tabindex="-1"></a><span class="st">  object_length_linter(50L),</span></span>
-<span id="cb40-21"><a href="#cb40-21" tabindex="-1"></a><span class="st">  object_name_linter = NULL,</span></span>
-<span id="cb40-22"><a href="#cb40-22" tabindex="-1"></a><span class="st">  object_usage_linter = NULL,</span></span>
-<span id="cb40-23"><a href="#cb40-23" tabindex="-1"></a><span class="st">  one_call_pipe_linter = NULL,</span></span>
-<span id="cb40-24"><a href="#cb40-24" tabindex="-1"></a><span class="st">  todo_comment_linter = NULL,</span></span>
-<span id="cb40-25"><a href="#cb40-25" tabindex="-1"></a><span class="st">  commented_code_linter = NULL,</span></span>
-<span id="cb40-26"><a href="#cb40-26" tabindex="-1"></a><span class="st">  undesirable_function_linter(c("mapply" = NA, "setwd" = NA)),</span></span>
-<span id="cb40-27"><a href="#cb40-27" tabindex="-1"></a><span class="st">  undesirable_operator_linter = NULL,</span></span>
-<span id="cb40-28"><a href="#cb40-28" tabindex="-1"></a><span class="st">  unnecessary_concatenation_linter(allow_single_expression = FALSE),</span></span>
-<span id="cb40-29"><a href="#cb40-29" tabindex="-1"></a><span class="st">  unused_import_linter = NULL</span></span>
-<span id="cb40-30"><a href="#cb40-30" tabindex="-1"></a><span class="st">))'</span></span>
-<span id="cb40-31"><a href="#cb40-31" tabindex="-1"></a></span>
-<span id="cb40-32"><a href="#cb40-32" tabindex="-1"></a><span class="co"># 3. Style code to automatically fix issues (10-30 seconds) - optional but recommended</span></span>
-<span id="cb40-33"><a href="#cb40-33" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(styler); style_pkg()'</span></span>
-<span id="cb40-34"><a href="#cb40-34" tabindex="-1"></a></span>
-<span id="cb40-35"><a href="#cb40-35" tabindex="-1"></a><span class="co"># 4. Update documentation if documentation was changed (5-15 seconds)</span></span>
-<span id="cb40-36"><a href="#cb40-36" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'roxygen2::document()'</span></span>
-<span id="cb40-37"><a href="#cb40-37" tabindex="-1"></a></span>
-<span id="cb40-38"><a href="#cb40-38" tabindex="-1"></a><span class="co"># 5. Build (19 seconds)</span></span>
-<span id="cb40-39"><a href="#cb40-39" tabindex="-1"></a><span class="ex">R</span> CMD build .</span>
-<span id="cb40-40"><a href="#cb40-40" tabindex="-1"></a></span>
-<span id="cb40-41"><a href="#cb40-41" tabindex="-1"></a><span class="co"># 6. Install  </span></span>
-<span id="cb40-42"><a href="#cb40-42" tabindex="-1"></a><span class="ex">R</span> CMD INSTALL report_<span class="pp">*</span>.tar.gz</span>
-<span id="cb40-43"><a href="#cb40-43" tabindex="-1"></a></span>
-<span id="cb40-44"><a href="#cb40-44" tabindex="-1"></a><span class="co"># 7. Test (11 seconds) </span></span>
-<span id="cb40-45"><a href="#cb40-45" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(testthat); library(report); test_local()'</span></span>
-<span id="cb40-46"><a href="#cb40-46" tabindex="-1"></a></span>
-<span id="cb40-47"><a href="#cb40-47" tabindex="-1"></a><span class="co"># 8. Final R CMD check for all issues (~30 seconds) - REQUIRED before PR submission</span></span>
-<span id="cb40-48"><a href="#cb40-48" tabindex="-1"></a><span class="va">_R_CHECK_FORCE_SUGGESTS_</span><span class="op">=</span>FALSE <span class="ex">R</span> CMD check report_<span class="pp">*</span>.tar.gz <span class="at">--no-manual</span> <span class="at">--no-vignettes</span></span>
-<span id="cb40-49"><a href="#cb40-49" tabindex="-1"></a></span>
-<span id="cb40-50"><a href="#cb40-50" tabindex="-1"></a><span class="co"># 9. Look specifically for critical warnings that fail CI:</span></span>
-<span id="cb40-51"><a href="#cb40-51" tabindex="-1"></a><span class="co"># - "no visible binding for global variable"</span></span>
-<span id="cb40-52"><a href="#cb40-52" tabindex="-1"></a><span class="co"># - "Codoc mismatches from Rd file"</span></span>
-<span id="cb40-53"><a href="#cb40-53" tabindex="-1"></a><span class="co"># - Fix these issues before submitting your PR</span></span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/report/report</span>
+<span id="cb42-2"><a href="#cb42-2" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" tabindex="-1"></a><span class="co"># 0. ENSURE: Version number and NEWS.md were already updated once at the beginning of this PR</span></span>
+<span id="cb42-4"><a href="#cb42-4" tabindex="-1"></a><span class="co">#    (Do NOT update them again if this is a subsequent commit in the same PR)</span></span>
+<span id="cb42-5"><a href="#cb42-5" tabindex="-1"></a></span>
+<span id="cb42-6"><a href="#cb42-6" tabindex="-1"></a><span class="co"># 1. Check for global variable binding issues first (look for "no visible binding" warnings)</span></span>
+<span id="cb42-7"><a href="#cb42-7" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'warnings(); R CMD check report_*.tar.gz --no-manual --no-vignettes 2&gt;&amp;1 | grep -i "binding"'</span></span>
+<span id="cb42-8"><a href="#cb42-8" tabindex="-1"></a></span>
+<span id="cb42-9"><a href="#cb42-9" tabindex="-1"></a><span class="co"># 2. Lint code to identify style issues (20 seconds) - use easystats/workflows configuration</span></span>
+<span id="cb42-10"><a href="#cb42-10" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(lintr); lint_package(linters = all_linters(</span></span>
+<span id="cb42-11"><a href="#cb42-11" tabindex="-1"></a><span class="st">  absolute_path_linter = NULL,</span></span>
+<span id="cb42-12"><a href="#cb42-12" tabindex="-1"></a><span class="st">  cyclocomp_linter(40L),</span></span>
+<span id="cb42-13"><a href="#cb42-13" tabindex="-1"></a><span class="st">  if_not_else_linter(exceptions = character(0L)),</span></span>
+<span id="cb42-14"><a href="#cb42-14" tabindex="-1"></a><span class="st">  indentation_linter = NULL,</span></span>
+<span id="cb42-15"><a href="#cb42-15" tabindex="-1"></a><span class="st">  implicit_integer_linter = NULL,</span></span>
+<span id="cb42-16"><a href="#cb42-16" tabindex="-1"></a><span class="st">  library_call_linter = NULL,</span></span>
+<span id="cb42-17"><a href="#cb42-17" tabindex="-1"></a><span class="st">  line_length_linter(120L),</span></span>
+<span id="cb42-18"><a href="#cb42-18" tabindex="-1"></a><span class="st">  namespace_linter = NULL,</span></span>
+<span id="cb42-19"><a href="#cb42-19" tabindex="-1"></a><span class="st">  nonportable_path_linter = NULL,</span></span>
+<span id="cb42-20"><a href="#cb42-20" tabindex="-1"></a><span class="st">  object_length_linter(50L),</span></span>
+<span id="cb42-21"><a href="#cb42-21" tabindex="-1"></a><span class="st">  object_name_linter = NULL,</span></span>
+<span id="cb42-22"><a href="#cb42-22" tabindex="-1"></a><span class="st">  object_usage_linter = NULL,</span></span>
+<span id="cb42-23"><a href="#cb42-23" tabindex="-1"></a><span class="st">  one_call_pipe_linter = NULL,</span></span>
+<span id="cb42-24"><a href="#cb42-24" tabindex="-1"></a><span class="st">  todo_comment_linter = NULL,</span></span>
+<span id="cb42-25"><a href="#cb42-25" tabindex="-1"></a><span class="st">  commented_code_linter = NULL,</span></span>
+<span id="cb42-26"><a href="#cb42-26" tabindex="-1"></a><span class="st">  undesirable_function_linter(c("mapply" = NA, "setwd" = NA)),</span></span>
+<span id="cb42-27"><a href="#cb42-27" tabindex="-1"></a><span class="st">  undesirable_operator_linter = NULL,</span></span>
+<span id="cb42-28"><a href="#cb42-28" tabindex="-1"></a><span class="st">  unnecessary_concatenation_linter(allow_single_expression = FALSE),</span></span>
+<span id="cb42-29"><a href="#cb42-29" tabindex="-1"></a><span class="st">  unused_import_linter = NULL</span></span>
+<span id="cb42-30"><a href="#cb42-30" tabindex="-1"></a><span class="st">))'</span></span>
+<span id="cb42-31"><a href="#cb42-31" tabindex="-1"></a></span>
+<span id="cb42-32"><a href="#cb42-32" tabindex="-1"></a><span class="co"># 3. Style code to automatically fix issues (10-30 seconds) - optional but recommended</span></span>
+<span id="cb42-33"><a href="#cb42-33" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(styler); style_pkg()'</span></span>
+<span id="cb42-34"><a href="#cb42-34" tabindex="-1"></a></span>
+<span id="cb42-35"><a href="#cb42-35" tabindex="-1"></a><span class="co"># 4. Update documentation if documentation was changed (5-15 seconds)</span></span>
+<span id="cb42-36"><a href="#cb42-36" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'roxygen2::document()'</span></span>
+<span id="cb42-37"><a href="#cb42-37" tabindex="-1"></a></span>
+<span id="cb42-38"><a href="#cb42-38" tabindex="-1"></a><span class="co"># 5. Build (19 seconds)</span></span>
+<span id="cb42-39"><a href="#cb42-39" tabindex="-1"></a><span class="ex">R</span> CMD build .</span>
+<span id="cb42-40"><a href="#cb42-40" tabindex="-1"></a></span>
+<span id="cb42-41"><a href="#cb42-41" tabindex="-1"></a><span class="co"># 6. Install  </span></span>
+<span id="cb42-42"><a href="#cb42-42" tabindex="-1"></a><span class="ex">R</span> CMD INSTALL report_<span class="pp">*</span>.tar.gz</span>
+<span id="cb42-43"><a href="#cb42-43" tabindex="-1"></a></span>
+<span id="cb42-44"><a href="#cb42-44" tabindex="-1"></a><span class="co"># 7. Test (11 seconds) </span></span>
+<span id="cb42-45"><a href="#cb42-45" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(testthat); library(report); test_local()'</span></span>
+<span id="cb42-46"><a href="#cb42-46" tabindex="-1"></a></span>
+<span id="cb42-47"><a href="#cb42-47" tabindex="-1"></a><span class="co"># 8. Final R CMD check for all issues (~30 seconds) - REQUIRED before PR submission</span></span>
+<span id="cb42-48"><a href="#cb42-48" tabindex="-1"></a><span class="va">_R_CHECK_FORCE_SUGGESTS_</span><span class="op">=</span>FALSE <span class="ex">R</span> CMD check report_<span class="pp">*</span>.tar.gz <span class="at">--no-manual</span> <span class="at">--no-vignettes</span></span>
+<span id="cb42-49"><a href="#cb42-49" tabindex="-1"></a></span>
+<span id="cb42-50"><a href="#cb42-50" tabindex="-1"></a><span class="co"># 9. Look specifically for critical warnings that fail CI:</span></span>
+<span id="cb42-51"><a href="#cb42-51" tabindex="-1"></a><span class="co"># - "no visible binding for global variable"</span></span>
+<span id="cb42-52"><a href="#cb42-52" tabindex="-1"></a><span class="co"># - "Codoc mismatches from Rd file"</span></span>
+<span id="cb42-53"><a href="#cb42-53" tabindex="-1"></a><span class="co"># - Fix these issues before submitting your PR</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="pull-request-requirements">Pull Request Requirements<a class="anchor" aria-label="anchor" href="#pull-request-requirements"></a></h3>
@@ -938,23 +984,23 @@ grep -A2 -B2 "requireNamespace\|check_installed" R/[your_function_file].R
 <li><p><strong>Show before/after behavior</strong> with your code changes</p></li>
 <li>
 <p><strong>ALWAYS use the actual reprex package</strong> for consistent formatting:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a><span class="co"># Ensure reprex is installed and working BEFORE creating PR</span></span>
-<span id="cb41-2"><a href="#cb41-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
-<span id="cb41-3"><a href="#cb41-3" tabindex="-1"></a><span class="st">if (!requireNamespace("reprex", quietly = TRUE)) {</span></span>
-<span id="cb41-4"><a href="#cb41-4" tabindex="-1"></a><span class="st">  stop("reprex package MUST be installed before creating PRs")</span></span>
-<span id="cb41-5"><a href="#cb41-5" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb41-6"><a href="#cb41-6" tabindex="-1"></a><span class="st">library(reprex)</span></span>
-<span id="cb41-7"><a href="#cb41-7" tabindex="-1"></a><span class="st"># Test with simple example first</span></span>
-<span id="cb41-8"><a href="#cb41-8" tabindex="-1"></a><span class="st">test_result &lt;- reprex(input = "x &lt;- 1:5\nmean(x)", venue = "gh", advertise = FALSE, show = FALSE)</span></span>
-<span id="cb41-9"><a href="#cb41-9" tabindex="-1"></a><span class="st">if (length(test_result) == 0) {</span></span>
-<span id="cb41-10"><a href="#cb41-10" tabindex="-1"></a><span class="st">  stop("reprex package is not working correctly")</span></span>
-<span id="cb41-11"><a href="#cb41-11" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb41-12"><a href="#cb41-12" tabindex="-1"></a><span class="st">cat("reprex is ready for PR creation\n")</span></span>
-<span id="cb41-13"><a href="#cb41-13" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a><span class="co"># Ensure reprex is installed and working BEFORE creating PR</span></span>
+<span id="cb43-2"><a href="#cb43-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
+<span id="cb43-3"><a href="#cb43-3" tabindex="-1"></a><span class="st">if (!requireNamespace("reprex", quietly = TRUE)) {</span></span>
+<span id="cb43-4"><a href="#cb43-4" tabindex="-1"></a><span class="st">  stop("reprex package MUST be installed before creating PRs")</span></span>
+<span id="cb43-5"><a href="#cb43-5" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb43-6"><a href="#cb43-6" tabindex="-1"></a><span class="st">library(reprex)</span></span>
+<span id="cb43-7"><a href="#cb43-7" tabindex="-1"></a><span class="st"># Test with simple example first</span></span>
+<span id="cb43-8"><a href="#cb43-8" tabindex="-1"></a><span class="st">test_result &lt;- reprex(input = "x &lt;- 1:5\nmean(x)", venue = "gh", advertise = FALSE, show = FALSE)</span></span>
+<span id="cb43-9"><a href="#cb43-9" tabindex="-1"></a><span class="st">if (length(test_result) == 0) {</span></span>
+<span id="cb43-10"><a href="#cb43-10" tabindex="-1"></a><span class="st">  stop("reprex package is not working correctly")</span></span>
+<span id="cb43-11"><a href="#cb43-11" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb43-12"><a href="#cb43-12" tabindex="-1"></a><span class="st">cat("reprex is ready for PR creation\n")</span></span>
+<span id="cb43-13"><a href="#cb43-13" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
 </li>
 <li>
 <p><strong>Generate ACTUAL reprex output</strong> using this workflow:</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://reprex.tidyverse.org" class="external-link">reprex</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># For BEFORE behavior (if modifying existing function):</span></span>
@@ -984,30 +1030,30 @@ grep -A2 -B2 "requireNamespace\|check_installed" R/[your_function_file].R
 <div class="section level4">
 <h4 id="optimized-reprex-creation-with-image-handling">Optimized Reprex Creation with Image Handling:<a class="anchor" aria-label="anchor" href="#optimized-reprex-creation-with-image-handling"></a></h4>
 <p><strong>ESSENTIAL</strong>: Always generate actual reprex with automatic imgur integration for plots:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/report/report</span>
-<span id="cb43-2"><a href="#cb43-2" tabindex="-1"></a><span class="bu">export</span> <span class="va">CLIPR_ALLOW</span><span class="op">=</span>TRUE <span class="kw">&amp;&amp;</span> <span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
-<span id="cb43-3"><a href="#cb43-3" tabindex="-1"></a><span class="st">library(reprex)</span></span>
-<span id="cb43-4"><a href="#cb43-4" tabindex="-1"></a><span class="st">library(report)</span></span>
-<span id="cb43-5"><a href="#cb43-5" tabindex="-1"></a></span>
-<span id="cb43-6"><a href="#cb43-6" tabindex="-1"></a><span class="st"># Create ACTUAL reprex - plots automatically uploaded to imgur</span></span>
-<span id="cb43-7"><a href="#cb43-7" tabindex="-1"></a><span class="st">reprex_result &lt;- reprex({</span></span>
-<span id="cb43-8"><a href="#cb43-8" tabindex="-1"></a><span class="st">  library(report)</span></span>
-<span id="cb43-9"><a href="#cb43-9" tabindex="-1"></a><span class="st">  </span></span>
-<span id="cb43-10"><a href="#cb43-10" tabindex="-1"></a><span class="st">  # Example: Create basic report output</span></span>
-<span id="cb43-11"><a href="#cb43-11" tabindex="-1"></a><span class="st">  data(mtcars)</span></span>
-<span id="cb43-12"><a href="#cb43-12" tabindex="-1"></a><span class="st">  model &lt;- lm(mpg ~ wt + hp, data = mtcars)</span></span>
-<span id="cb43-13"><a href="#cb43-13" tabindex="-1"></a><span class="st">  result &lt;- report(model)</span></span>
-<span id="cb43-14"><a href="#cb43-14" tabindex="-1"></a><span class="st">  print(result)</span></span>
-<span id="cb43-15"><a href="#cb43-15" tabindex="-1"></a><span class="st">  </span></span>
-<span id="cb43-16"><a href="#cb43-16" tabindex="-1"></a><span class="st">  # Example: Sample reporting</span></span>
-<span id="cb43-17"><a href="#cb43-17" tabindex="-1"></a><span class="st">  sample_report &lt;- report_sample(mtcars)  </span></span>
-<span id="cb43-18"><a href="#cb43-18" tabindex="-1"></a><span class="st">  print(sample_report)</span></span>
-<span id="cb43-19"><a href="#cb43-19" tabindex="-1"></a><span class="st">  </span></span>
-<span id="cb43-20"><a href="#cb43-20" tabindex="-1"></a><span class="st">}, venue = "gh", advertise = TRUE, html_preview = FALSE)</span></span>
-<span id="cb43-21"><a href="#cb43-21" tabindex="-1"></a></span>
-<span id="cb43-22"><a href="#cb43-22" tabindex="-1"></a><span class="st"># Display complete reprex with imgur links embedded</span></span>
-<span id="cb43-23"><a href="#cb43-23" tabindex="-1"></a><span class="st">cat(paste(reprex_result, collapse = "\n"))</span></span>
-<span id="cb43-24"><a href="#cb43-24" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a><span class="bu">cd</span> /home/runner/work/report/report</span>
+<span id="cb45-2"><a href="#cb45-2" tabindex="-1"></a><span class="bu">export</span> <span class="va">CLIPR_ALLOW</span><span class="op">=</span>TRUE <span class="kw">&amp;&amp;</span> <span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
+<span id="cb45-3"><a href="#cb45-3" tabindex="-1"></a><span class="st">library(reprex)</span></span>
+<span id="cb45-4"><a href="#cb45-4" tabindex="-1"></a><span class="st">library(report)</span></span>
+<span id="cb45-5"><a href="#cb45-5" tabindex="-1"></a></span>
+<span id="cb45-6"><a href="#cb45-6" tabindex="-1"></a><span class="st"># Create ACTUAL reprex - plots automatically uploaded to imgur</span></span>
+<span id="cb45-7"><a href="#cb45-7" tabindex="-1"></a><span class="st">reprex_result &lt;- reprex({</span></span>
+<span id="cb45-8"><a href="#cb45-8" tabindex="-1"></a><span class="st">  library(report)</span></span>
+<span id="cb45-9"><a href="#cb45-9" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb45-10"><a href="#cb45-10" tabindex="-1"></a><span class="st">  # Example: Create basic report output</span></span>
+<span id="cb45-11"><a href="#cb45-11" tabindex="-1"></a><span class="st">  data(mtcars)</span></span>
+<span id="cb45-12"><a href="#cb45-12" tabindex="-1"></a><span class="st">  model &lt;- lm(mpg ~ wt + hp, data = mtcars)</span></span>
+<span id="cb45-13"><a href="#cb45-13" tabindex="-1"></a><span class="st">  result &lt;- report(model)</span></span>
+<span id="cb45-14"><a href="#cb45-14" tabindex="-1"></a><span class="st">  print(result)</span></span>
+<span id="cb45-15"><a href="#cb45-15" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb45-16"><a href="#cb45-16" tabindex="-1"></a><span class="st">  # Example: Sample reporting</span></span>
+<span id="cb45-17"><a href="#cb45-17" tabindex="-1"></a><span class="st">  sample_report &lt;- report_sample(mtcars)  </span></span>
+<span id="cb45-18"><a href="#cb45-18" tabindex="-1"></a><span class="st">  print(sample_report)</span></span>
+<span id="cb45-19"><a href="#cb45-19" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb45-20"><a href="#cb45-20" tabindex="-1"></a><span class="st">}, venue = "gh", advertise = TRUE, html_preview = FALSE)</span></span>
+<span id="cb45-21"><a href="#cb45-21" tabindex="-1"></a></span>
+<span id="cb45-22"><a href="#cb45-22" tabindex="-1"></a><span class="st"># Display complete reprex with imgur links embedded</span></span>
+<span id="cb45-23"><a href="#cb45-23" tabindex="-1"></a><span class="st">cat(paste(reprex_result, collapse = "\n"))</span></span>
+<span id="cb45-24"><a href="#cb45-24" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
 <p><strong>Key Benefits of This Approach</strong>: - ✅ <strong>Automatic image hosting</strong>: Plots automatically uploaded to imgur (whitelisted domain) - ✅ <strong>No local artifacts</strong>: No PNG files left in repository to accidentally commit<br>
 - ✅ <strong>Complete format</strong>: Includes “Created on [date] with reprex v[version]” footer - ✅ <strong>Direct embedding</strong>: Images display directly in GitHub responses - ✅ <strong>Clean workflow</strong>: No manual upload or cleanup steps required</p>
 <p><strong>CRITICAL</strong>: Always set <code>advertise = TRUE</code> to get the complete format with date/version info that provides authority to your reprex.</p>
@@ -1068,89 +1114,122 @@ grep -A2 -B2 "requireNamespace\|check_installed" R/[your_function_file].R
 - **Example**: Change `group_by(var)` to `group_by(.data[[var]])`
 - **DO NOT**: Create `global_variables.R` files with `utils::globalVariables()`
 
-### Documentation Mismatch Warnings ("Codoc mismatches")
-- **Cause**: Function parameter names don't match the documentation
-- **Solution**: Ensure `@param parameter_name` exactly matches function arguments
-- **Prevention**: Always run `roxygen2::document()` after changing function signatures
-
-### CRAN/Network Access Blocked
-- **Cause**: Cannot install packages from CRAN mirrors
-- **Solutions**:
-  - Use system packages: `sudo apt install r-cran-[package]`
-  - Try R-universe: `repos="https://r-universe.dev"`
-  - Use pak package: `pak::pak("[package-name]")`
-
-### reprex Package Issues and Complete Debugging Guide
-**CRITICAL SOLUTION**: The main issues with reprex are missing dependencies and environment variables.
-
-**NEW**: In the pre-configured environment (copilot-setup-steps.yml), all reprex dependencies are now pre-installed: pandoc, knitr, rmarkdown, clipr. If you're using the pre-configured environment, skip to Step 3 (Set Environment Variables).
-
-**For manual setup or debugging**: Follow this complete debugging guide:
-
-#### Step 1: Install Required Dependencies
-```bash
-# Install core dependencies first
-sudo apt install -y pandoc
-R --no-restore --no-save -e 'install.packages(c("knitr", "rmarkdown"), repos="https://cloud.r-project.org/")'</code></pre>
+### Lintr CI vs Local Discrepancies (CRITICAL VERSION ISSUE)
+- **Cause**: CI uses development lintr (`r-lib/lintr`) while local uses CRAN stable (`r-cran-lintr`)
+- **Symptoms**: Local lintr passes but CI lintr fails with stricter rules
+- **Root issue**: Development lintr has stricter rules and different function preferences
+- **Solution**: Always install development lintr to match CI:
+  ```bash
+  # Install development lintr to match CI using workflow approach
+  R --no-restore --no-save -e 'remotes::install_github("r-lib/lintr")'
+  # Fallback to stable if network issues:
+  sudo apt install -y r-cran-lintr</code></pre>
+<ul><li>
+<p><strong>Testing</strong>: Use exact CI configuration for local validation:</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(lintr); lint_package(linters = all_linters(</span></span>
+<span id="cb47-2"><a href="#cb47-2" tabindex="-1"></a><span class="st">  absolute_path_linter = NULL, cyclocomp_linter(40L), if_not_else_linter(exceptions = character(0L)),</span></span>
+<span id="cb47-3"><a href="#cb47-3" tabindex="-1"></a><span class="st">  indentation_linter = NULL, implicit_integer_linter = NULL, library_call_linter = NULL,</span></span>
+<span id="cb47-4"><a href="#cb47-4" tabindex="-1"></a><span class="st">  line_length_linter(120L), namespace_linter = NULL, nonportable_path_linter = NULL,</span></span>
+<span id="cb47-5"><a href="#cb47-5" tabindex="-1"></a><span class="st">  object_length_linter(50L), object_name_linter = NULL, object_usage_linter = NULL,</span></span>
+<span id="cb47-6"><a href="#cb47-6" tabindex="-1"></a><span class="st">  one_call_pipe_linter = NULL, todo_comment_linter = NULL, commented_code_linter = NULL,</span></span>
+<span id="cb47-7"><a href="#cb47-7" tabindex="-1"></a><span class="st">  undesirable_function_linter(c("mapply" = NA, "setwd" = NA)), undesirable_operator_linter = NULL,</span></span>
+<span id="cb47-8"><a href="#cb47-8" tabindex="-1"></a><span class="st">  unnecessary_concatenation_linter(allow_single_expression = FALSE), unused_import_linter = NULL</span></span>
+<span id="cb47-9"><a href="#cb47-9" tabindex="-1"></a><span class="st">))'</span></span></code></pre></div>
+</li>
+<li><p><strong>R Version Compatibility</strong>: Always check the minimum R version in DESCRIPTION file (<code>Depends: R (&gt;= X.X)</code>) to ensure functions used are available in the minimum supported version. Do not use functions introduced in later R versions.</p></li>
+</ul></div>
+</div>
+<div class="section level3">
+<h3 id="documentation-mismatch-warnings-codoc-mismatches">Documentation Mismatch Warnings (“Codoc mismatches”)<a class="anchor" aria-label="anchor" href="#documentation-mismatch-warnings-codoc-mismatches"></a></h3>
+<ul><li>
+<strong>Cause</strong>: Function parameter names don’t match the documentation</li>
+<li>
+<strong>Solution</strong>: Ensure <code>@param parameter_name</code> exactly matches function arguments</li>
+<li>
+<strong>Prevention</strong>: Always run <code>roxygen2::document()</code> after changing function signatures</li>
+</ul></div>
+<div class="section level3">
+<h3 id="crannetwork-access-blocked">CRAN/Network Access Blocked<a class="anchor" aria-label="anchor" href="#crannetwork-access-blocked"></a></h3>
+<ul><li>
+<strong>Cause</strong>: Cannot install packages from CRAN mirrors</li>
+<li>
+<strong>Solutions</strong>:
+<ul><li>Use system packages: <code>sudo apt install r-cran-[package]</code>
+</li>
+<li>Try R-universe: <code>repos="https://r-universe.dev"</code><br></li>
+<li>Use pak package: <code>pak::pak("[package-name]")</code>
+</li>
+</ul></li>
+</ul></div>
+<div class="section level3">
+<h3 id="reprex-package-issues-and-complete-debugging-guide">reprex Package Issues and Complete Debugging Guide<a class="anchor" aria-label="anchor" href="#reprex-package-issues-and-complete-debugging-guide"></a></h3>
+<p><strong>CRITICAL SOLUTION</strong>: The main issues with reprex are missing dependencies and environment variables.</p>
+<p><strong>NEW</strong>: In the pre-configured environment (copilot-setup-steps.yml), all reprex dependencies are now pre-installed: pandoc, knitr, rmarkdown, clipr. If you’re using the pre-configured environment, skip to Step 3 (Set Environment Variables).</p>
+<p><strong>For manual setup or debugging</strong>: Follow this complete debugging guide:</p>
+<div class="section level4">
+<h4 id="step-1-install-required-dependencies">Step 1: Install Required Dependencies<a class="anchor" aria-label="anchor" href="#step-1-install-required-dependencies"></a></h4>
+<div class="sourceCode" id="cb48"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1" tabindex="-1"></a><span class="co"># Install core dependencies first</span></span>
+<span id="cb48-2"><a href="#cb48-2" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> pandoc</span>
+<span id="cb48-3"><a href="#cb48-3" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages(c("knitr", "rmarkdown"), repos="https://cloud.r-project.org/")'</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="step-2-install-reprex-package">Step 2: Install reprex Package<a class="anchor" aria-label="anchor" href="#step-2-install-reprex-package"></a></h4>
-<div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a><span class="co"># Multi-method installation</span></span>
-<span id="cb45-2"><a href="#cb45-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
-<span id="cb45-3"><a href="#cb45-3" tabindex="-1"></a><span class="st">if (!requireNamespace("reprex", quietly = TRUE)) {</span></span>
-<span id="cb45-4"><a href="#cb45-4" tabindex="-1"></a><span class="st">  tryCatch({</span></span>
-<span id="cb45-5"><a href="#cb45-5" tabindex="-1"></a><span class="st">    install.packages("reprex", repos="https://cloud.r-project.org/")</span></span>
-<span id="cb45-6"><a href="#cb45-6" tabindex="-1"></a><span class="st">  }, error = function(e1) {</span></span>
-<span id="cb45-7"><a href="#cb45-7" tabindex="-1"></a><span class="st">    tryCatch({</span></span>
-<span id="cb45-8"><a href="#cb45-8" tabindex="-1"></a><span class="st">      install.packages("reprex", repos="https://r-universe.dev")</span></span>
-<span id="cb45-9"><a href="#cb45-9" tabindex="-1"></a><span class="st">    }, error = function(e2) {</span></span>
-<span id="cb45-10"><a href="#cb45-10" tabindex="-1"></a><span class="st">      install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")</span></span>
-<span id="cb45-11"><a href="#cb45-11" tabindex="-1"></a><span class="st">      pak::pak("reprex")</span></span>
-<span id="cb45-12"><a href="#cb45-12" tabindex="-1"></a><span class="st">    })</span></span>
-<span id="cb45-13"><a href="#cb45-13" tabindex="-1"></a><span class="st">  })</span></span>
-<span id="cb45-14"><a href="#cb45-14" tabindex="-1"></a><span class="st">}</span></span>
-<span id="cb45-15"><a href="#cb45-15" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="#cb49-1" tabindex="-1"></a><span class="co"># Multi-method installation</span></span>
+<span id="cb49-2"><a href="#cb49-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
+<span id="cb49-3"><a href="#cb49-3" tabindex="-1"></a><span class="st">if (!requireNamespace("reprex", quietly = TRUE)) {</span></span>
+<span id="cb49-4"><a href="#cb49-4" tabindex="-1"></a><span class="st">  tryCatch({</span></span>
+<span id="cb49-5"><a href="#cb49-5" tabindex="-1"></a><span class="st">    install.packages("reprex", repos="https://cloud.r-project.org/")</span></span>
+<span id="cb49-6"><a href="#cb49-6" tabindex="-1"></a><span class="st">  }, error = function(e1) {</span></span>
+<span id="cb49-7"><a href="#cb49-7" tabindex="-1"></a><span class="st">    tryCatch({</span></span>
+<span id="cb49-8"><a href="#cb49-8" tabindex="-1"></a><span class="st">      install.packages("reprex", repos="https://r-universe.dev")</span></span>
+<span id="cb49-9"><a href="#cb49-9" tabindex="-1"></a><span class="st">    }, error = function(e2) {</span></span>
+<span id="cb49-10"><a href="#cb49-10" tabindex="-1"></a><span class="st">      install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")</span></span>
+<span id="cb49-11"><a href="#cb49-11" tabindex="-1"></a><span class="st">      pak::pak("reprex")</span></span>
+<span id="cb49-12"><a href="#cb49-12" tabindex="-1"></a><span class="st">    })</span></span>
+<span id="cb49-13"><a href="#cb49-13" tabindex="-1"></a><span class="st">  })</span></span>
+<span id="cb49-14"><a href="#cb49-14" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb49-15"><a href="#cb49-15" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="step-3-set-environment-variables-critical">Step 3: Set Environment Variables (CRITICAL)<a class="anchor" aria-label="anchor" href="#step-3-set-environment-variables-critical"></a></h4>
-<div class="sourceCode" id="cb46"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" tabindex="-1"></a><span class="co"># ESSENTIAL: Set clipboard environment variable to prevent crashes</span></span>
-<span id="cb46-2"><a href="#cb46-2" tabindex="-1"></a><span class="bu">export</span> <span class="va">CLIPR_ALLOW</span><span class="op">=</span>TRUE</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb50-1"><a href="#cb50-1" tabindex="-1"></a><span class="co"># ESSENTIAL: Set clipboard environment variable to prevent crashes</span></span>
+<span id="cb50-2"><a href="#cb50-2" tabindex="-1"></a><span class="bu">export</span> <span class="va">CLIPR_ALLOW</span><span class="op">=</span>TRUE</span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="step-4-test-reprex-with-simple-example">Step 4: Test reprex with Simple Example<a class="anchor" aria-label="anchor" href="#step-4-test-reprex-with-simple-example"></a></h4>
-<div class="sourceCode" id="cb47"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">CLIPR_ALLOW</span><span class="op">=</span>TRUE <span class="kw">&amp;&amp;</span> <span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
-<span id="cb47-2"><a href="#cb47-2" tabindex="-1"></a><span class="st">library(reprex)</span></span>
-<span id="cb47-3"><a href="#cb47-3" tabindex="-1"></a></span>
-<span id="cb47-4"><a href="#cb47-4" tabindex="-1"></a><span class="st"># Test basic functionality</span></span>
-<span id="cb47-5"><a href="#cb47-5" tabindex="-1"></a><span class="st">result &lt;- reprex({</span></span>
-<span id="cb47-6"><a href="#cb47-6" tabindex="-1"></a><span class="st">  x &lt;- 1:5</span></span>
-<span id="cb47-7"><a href="#cb47-7" tabindex="-1"></a><span class="st">  mean(x)</span></span>
-<span id="cb47-8"><a href="#cb47-8" tabindex="-1"></a><span class="st">}, venue = "gh", advertise = FALSE, html_preview = FALSE)</span></span>
-<span id="cb47-9"><a href="#cb47-9" tabindex="-1"></a></span>
-<span id="cb47-10"><a href="#cb47-10" tabindex="-1"></a><span class="st">cat("SUCCESS: Basic reprex working\n")</span></span>
-<span id="cb47-11"><a href="#cb47-11" tabindex="-1"></a><span class="st">cat(result, sep = "\n")</span></span>
-<span id="cb47-12"><a href="#cb47-12" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">CLIPR_ALLOW</span><span class="op">=</span>TRUE <span class="kw">&amp;&amp;</span> <span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
+<span id="cb51-2"><a href="#cb51-2" tabindex="-1"></a><span class="st">library(reprex)</span></span>
+<span id="cb51-3"><a href="#cb51-3" tabindex="-1"></a></span>
+<span id="cb51-4"><a href="#cb51-4" tabindex="-1"></a><span class="st"># Test basic functionality</span></span>
+<span id="cb51-5"><a href="#cb51-5" tabindex="-1"></a><span class="st">result &lt;- reprex({</span></span>
+<span id="cb51-6"><a href="#cb51-6" tabindex="-1"></a><span class="st">  x &lt;- 1:5</span></span>
+<span id="cb51-7"><a href="#cb51-7" tabindex="-1"></a><span class="st">  mean(x)</span></span>
+<span id="cb51-8"><a href="#cb51-8" tabindex="-1"></a><span class="st">}, venue = "gh", advertise = FALSE, html_preview = FALSE)</span></span>
+<span id="cb51-9"><a href="#cb51-9" tabindex="-1"></a></span>
+<span id="cb51-10"><a href="#cb51-10" tabindex="-1"></a><span class="st">cat("SUCCESS: Basic reprex working\n")</span></span>
+<span id="cb51-11"><a href="#cb51-11" tabindex="-1"></a><span class="st">cat(result, sep = "\n")</span></span>
+<span id="cb51-12"><a href="#cb51-12" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="step-5-test-reprex-with-report-functions">Step 5: Test reprex with report Functions<a class="anchor" aria-label="anchor" href="#step-5-test-reprex-with-report-functions"></a></h4>
-<div class="sourceCode" id="cb48"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">CLIPR_ALLOW</span><span class="op">=</span>TRUE <span class="kw">&amp;&amp;</span> <span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
-<span id="cb48-2"><a href="#cb48-2" tabindex="-1"></a><span class="st">library(reprex)</span></span>
-<span id="cb48-3"><a href="#cb48-3" tabindex="-1"></a></span>
-<span id="cb48-4"><a href="#cb48-4" tabindex="-1"></a><span class="st"># Working reprex example with report</span></span>
-<span id="cb48-5"><a href="#cb48-5" tabindex="-1"></a><span class="st">result &lt;- reprex({</span></span>
-<span id="cb48-6"><a href="#cb48-6" tabindex="-1"></a><span class="st">  library(report)</span></span>
-<span id="cb48-7"><a href="#cb48-7" tabindex="-1"></a><span class="st">  data(mtcars)</span></span>
-<span id="cb48-8"><a href="#cb48-8" tabindex="-1"></a><span class="st">  </span></span>
-<span id="cb48-9"><a href="#cb48-9" tabindex="-1"></a><span class="st">  # Example model reporting</span></span>
-<span id="cb48-10"><a href="#cb48-10" tabindex="-1"></a><span class="st">  model &lt;- lm(mpg ~ wt + hp, data = mtcars)</span></span>
-<span id="cb48-11"><a href="#cb48-11" tabindex="-1"></a><span class="st">  result &lt;- report(model)</span></span>
-<span id="cb48-12"><a href="#cb48-12" tabindex="-1"></a><span class="st">  print(result)</span></span>
-<span id="cb48-13"><a href="#cb48-13" tabindex="-1"></a><span class="st">  </span></span>
-<span id="cb48-14"><a href="#cb48-14" tabindex="-1"></a><span class="st">}, venue = "gh", advertise = FALSE, html_preview = FALSE)</span></span>
-<span id="cb48-15"><a href="#cb48-15" tabindex="-1"></a></span>
-<span id="cb48-16"><a href="#cb48-16" tabindex="-1"></a><span class="st">cat("SUCCESS: report reprex working\n")</span></span>
-<span id="cb48-17"><a href="#cb48-17" tabindex="-1"></a><span class="st">cat(result, sep = "\n")</span></span>
-<span id="cb48-18"><a href="#cb48-18" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb52-1"><a href="#cb52-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">CLIPR_ALLOW</span><span class="op">=</span>TRUE <span class="kw">&amp;&amp;</span> <span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
+<span id="cb52-2"><a href="#cb52-2" tabindex="-1"></a><span class="st">library(reprex)</span></span>
+<span id="cb52-3"><a href="#cb52-3" tabindex="-1"></a></span>
+<span id="cb52-4"><a href="#cb52-4" tabindex="-1"></a><span class="st"># Working reprex example with report</span></span>
+<span id="cb52-5"><a href="#cb52-5" tabindex="-1"></a><span class="st">result &lt;- reprex({</span></span>
+<span id="cb52-6"><a href="#cb52-6" tabindex="-1"></a><span class="st">  library(report)</span></span>
+<span id="cb52-7"><a href="#cb52-7" tabindex="-1"></a><span class="st">  data(mtcars)</span></span>
+<span id="cb52-8"><a href="#cb52-8" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb52-9"><a href="#cb52-9" tabindex="-1"></a><span class="st">  # Example model reporting</span></span>
+<span id="cb52-10"><a href="#cb52-10" tabindex="-1"></a><span class="st">  model &lt;- lm(mpg ~ wt + hp, data = mtcars)</span></span>
+<span id="cb52-11"><a href="#cb52-11" tabindex="-1"></a><span class="st">  result &lt;- report(model)</span></span>
+<span id="cb52-12"><a href="#cb52-12" tabindex="-1"></a><span class="st">  print(result)</span></span>
+<span id="cb52-13"><a href="#cb52-13" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb52-14"><a href="#cb52-14" tabindex="-1"></a><span class="st">}, venue = "gh", advertise = FALSE, html_preview = FALSE)</span></span>
+<span id="cb52-15"><a href="#cb52-15" tabindex="-1"></a></span>
+<span id="cb52-16"><a href="#cb52-16" tabindex="-1"></a><span class="st">cat("SUCCESS: report reprex working\n")</span></span>
+<span id="cb52-17"><a href="#cb52-17" tabindex="-1"></a><span class="st">cat(result, sep = "\n")</span></span>
+<span id="cb52-18"><a href="#cb52-18" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="common-error-solutions">Common Error Solutions:<a class="anchor" aria-label="anchor" href="#common-error-solutions"></a></h4>
@@ -1160,17 +1239,17 @@ R --no-restore --no-save -e 'install.packages(c("knitr", "rmarkdown"), repos="ht
 </div>
 <div class="section level4">
 <h4 id="verified-working-example-template">Verified Working Example Template<a class="anchor" aria-label="anchor" href="#verified-working-example-template"></a></h4>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" tabindex="-1"></a><span class="co"># ALWAYS use this pattern for report reprex:</span></span>
-<span id="cb49-2"><a href="#cb49-2" tabindex="-1"></a>export CLIPR_ALLOW<span class="ot">=</span><span class="cn">TRUE</span></span>
-<span id="cb49-3"><a href="#cb49-3" tabindex="-1"></a><span class="fu">library</span>(reprex)</span>
-<span id="cb49-4"><a href="#cb49-4" tabindex="-1"></a></span>
-<span id="cb49-5"><a href="#cb49-5" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">reprex</span>({</span>
-<span id="cb49-6"><a href="#cb49-6" tabindex="-1"></a>  <span class="fu">library</span>(report)</span>
-<span id="cb49-7"><a href="#cb49-7" tabindex="-1"></a>  </span>
-<span id="cb49-8"><a href="#cb49-8" tabindex="-1"></a>  <span class="co"># Your report example here</span></span>
-<span id="cb49-9"><a href="#cb49-9" tabindex="-1"></a>  <span class="co"># Keep it simple, avoid complex plots in reprex</span></span>
-<span id="cb49-10"><a href="#cb49-10" tabindex="-1"></a>  </span>
-<span id="cb49-11"><a href="#cb49-11" tabindex="-1"></a>}, <span class="at">venue =</span> <span class="st">"gh"</span>, <span class="at">advertise =</span> <span class="cn">FALSE</span>, <span class="at">html_preview =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" tabindex="-1"></a><span class="co"># ALWAYS use this pattern for report reprex:</span></span>
+<span id="cb53-2"><a href="#cb53-2" tabindex="-1"></a>export CLIPR_ALLOW<span class="ot">=</span><span class="cn">TRUE</span></span>
+<span id="cb53-3"><a href="#cb53-3" tabindex="-1"></a><span class="fu">library</span>(reprex)</span>
+<span id="cb53-4"><a href="#cb53-4" tabindex="-1"></a></span>
+<span id="cb53-5"><a href="#cb53-5" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">reprex</span>({</span>
+<span id="cb53-6"><a href="#cb53-6" tabindex="-1"></a>  <span class="fu">library</span>(report)</span>
+<span id="cb53-7"><a href="#cb53-7" tabindex="-1"></a>  </span>
+<span id="cb53-8"><a href="#cb53-8" tabindex="-1"></a>  <span class="co"># Your report example here</span></span>
+<span id="cb53-9"><a href="#cb53-9" tabindex="-1"></a>  <span class="co"># Keep it simple, avoid complex plots in reprex</span></span>
+<span id="cb53-10"><a href="#cb53-10" tabindex="-1"></a>  </span>
+<span id="cb53-11"><a href="#cb53-11" tabindex="-1"></a>}, <span class="at">venue =</span> <span class="st">"gh"</span>, <span class="at">advertise =</span> <span class="cn">FALSE</span>, <span class="at">html_preview =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -1216,7 +1295,7 @@ R/cite_easystats.R   - Citation utilities</code></pre>
 <h3 id="code-quality-examples">Code Quality Examples<a class="anchor" aria-label="anchor" href="#code-quality-examples"></a></h3>
 <div class="section level4">
 <h4 id="correct-proper-variable-referencing-and-imports">CORRECT: Proper Variable Referencing and Imports<a class="anchor" aria-label="anchor" href="#correct-proper-variable-referencing-and-imports"></a></h4>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># In report functions - USE proper imports and namespacing:</span></span>
 <span><span class="co">#' @importFrom insight get_parameters</span></span>
 <span><span class="co">#' @importFrom bayestestR describe_posterior</span></span>
@@ -1228,7 +1307,7 @@ R/cite_easystats.R   - Citation utilities</code></pre>
 </div>
 <div class="section level4">
 <h4 id="incorrect-missing-imports-causes-ci-failures">INCORRECT: Missing Imports (Causes CI Failures)<a class="anchor" aria-label="anchor" href="#incorrect-missing-imports-causes-ci-failures"></a></h4>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># DO NOT: Use functions without proper imports</span></span>
 <span><span class="fu">get_parameters</span><span class="op">(</span><span class="va">model</span><span class="op">)</span>  <span class="co"># Should be insight::get_parameters or use @importFrom</span></span>
 <span></span>
@@ -1274,19 +1353,19 @@ R/cite_easystats.R   - Citation utilities</code></pre>
 <div class="section level4">
 <h4 id="id_4-pre-commit-validation-checklist">4. Pre-Commit Validation Checklist<a class="anchor" aria-label="anchor" href="#id_4-pre-commit-validation-checklist"></a></h4>
 <p>Before making any PR, verify locally:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb54-1"><a href="#cb54-1" tabindex="-1"></a><span class="co"># Must show ZERO "no visible binding" warnings:</span></span>
-<span id="cb54-2"><a href="#cb54-2" tabindex="-1"></a><span class="ex">R</span> CMD check report_<span class="pp">*</span>.tar.gz <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> <span class="st">"binding"</span></span>
-<span id="cb54-3"><a href="#cb54-3" tabindex="-1"></a></span>
-<span id="cb54-4"><a href="#cb54-4" tabindex="-1"></a><span class="co"># Must show ZERO "Codoc mismatches" warnings:  </span></span>
-<span id="cb54-5"><a href="#cb54-5" tabindex="-1"></a><span class="ex">R</span> CMD check report_<span class="pp">*</span>.tar.gz <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> <span class="st">"codoc"</span></span>
-<span id="cb54-6"><a href="#cb54-6" tabindex="-1"></a></span>
-<span id="cb54-7"><a href="#cb54-7" tabindex="-1"></a><span class="co"># All tests must pass (expected number varies):</span></span>
-<span id="cb54-8"><a href="#cb54-8" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(testthat); library(report); test_local()'</span></span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb58-1"><a href="#cb58-1" tabindex="-1"></a><span class="co"># Must show ZERO "no visible binding" warnings:</span></span>
+<span id="cb58-2"><a href="#cb58-2" tabindex="-1"></a><span class="ex">R</span> CMD check report_<span class="pp">*</span>.tar.gz <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> <span class="st">"binding"</span></span>
+<span id="cb58-3"><a href="#cb58-3" tabindex="-1"></a></span>
+<span id="cb58-4"><a href="#cb58-4" tabindex="-1"></a><span class="co"># Must show ZERO "Codoc mismatches" warnings:  </span></span>
+<span id="cb58-5"><a href="#cb58-5" tabindex="-1"></a><span class="ex">R</span> CMD check report_<span class="pp">*</span>.tar.gz <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> <span class="st">"codoc"</span></span>
+<span id="cb58-6"><a href="#cb58-6" tabindex="-1"></a></span>
+<span id="cb58-7"><a href="#cb58-7" tabindex="-1"></a><span class="co"># All tests must pass (expected number varies):</span></span>
+<span id="cb58-8"><a href="#cb58-8" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'library(testthat); library(report); test_local()'</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="id_5-pr-description-requirements">5. PR Description Requirements<a class="anchor" aria-label="anchor" href="#id_5-pr-description-requirements"></a></h4>
 <p><strong>CRITICAL</strong>: Always include reprexes in PR descriptions to demonstrate code changes:</p>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create examples showing before/after behavior:</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://easystats.github.io/report/">report</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
