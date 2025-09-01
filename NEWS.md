@@ -2,6 +2,7 @@
 
 Bug fixes
 
+* `report_parameters()`: Fixed lint issues by renaming `text` variables to avoid conflicts with `graphics::text` and improved conditional logic pattern
 * `report.lm()`: Fixed spelling error in variable name for bootstrap functionality
 * `report.lm()`: Updated deprecated `extract_column_names()` call to use standard R `grepl()` for better compatibility
 * Fixed issue with missing effect size for the Intercept term in type 3 anova tables (#451)
