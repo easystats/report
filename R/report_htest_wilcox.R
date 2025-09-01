@@ -8,7 +8,7 @@
 
 # report_effectsize ---------------------
 
-.report_effectsize_wilcox <- function(x, table, dot_args) {
+.report_effectsize_wilcox <- function(x, dot_args) {
   my_args <- c(list(x, es_type = "rank_biserial"), dot_args)
   table <- do.call(parameters::model_parameters, my_args)
   ci <- attributes(table)$ci

@@ -43,7 +43,7 @@
 
 # report_effectsize ---------------------
 
-.report_effectsize_ttest <- function(x, table, dot_args, type, rules = "cohen1988") {
+.report_effectsize_ttest <- function(x, dot_args, type, rules = "cohen1988") {
   es_args <- c(list(x), dot_args)
   table <- do.call(effectsize::effectsize, es_args)
   ci <- attributes(table)$ci

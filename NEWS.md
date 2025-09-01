@@ -2,6 +2,7 @@
 
 Bug fixes
 
+* Fixed issue where `report_effectsize.htest()` called internal effectsize functions with undefined `table` parameter (#459)
 * Fixed issue with missing effect size for the Intercept term in type 3 anova tables (#451)
 
 # report 0.6.1

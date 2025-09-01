@@ -26,7 +26,7 @@
 
 # report_effectsize ---------------------
 
-.report_effectsize_correlation <- function(x, table, dot_args) {
+.report_effectsize_correlation <- function(x, dot_args) {
   args <- c(list(x), dot_args)
   table <- do.call(parameters::parameters, args)
   ci <- attributes(table)$ci
