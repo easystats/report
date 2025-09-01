@@ -65,7 +65,10 @@ as.report_info <- function(x, summary = NULL, ...) {
 #' @export
 summary.report_info <- function(object, ...) {
   summary_attr <- attributes(object)$summary
-  if (is.null(summary_attr)) object else summary_attr
+  if (!is.null(summary_attr)) {
+    return(summary_attr)
+  }
+  object
 }
 
 #' @export
