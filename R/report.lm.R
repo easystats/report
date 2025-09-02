@@ -51,7 +51,8 @@
 #' }
 #' @return An object of class [report()].
 #' @export
-report.lm <- function(x, include_effectsize = TRUE, effectsize_method = "refit", ...) {
+report.lm <- function(x, include_effectsize = TRUE,
+                      effectsize_method = "refit", ...) {
   result_table <- report_table(x,
     include_effectsize = include_effectsize,
     effectsize_method = effectsize_method, ...
@@ -70,7 +71,10 @@ report.lm <- function(x, include_effectsize = TRUE, effectsize_method = "refit",
 #' @export
 
 report_effectsize.lm <- function(x, effectsize_method = "refit", ...) {
-  effect_table <- suppressWarnings(effectsize::effectsize(x, method = effectsize_method, ...))
+  effect_table <- suppressWarnings(effectsize::effectsize(x,
+    method = effectsize_method,
+    ...
+  ))
   method <- .text_standardize(effect_table)
   estimate <- names(effect_table)[effectsize::is_effectsize_name(names(effect_table))]
 
@@ -296,12 +300,12 @@ report_statistics.lm <- function(x,
     # Only include non-empty effectsize information
     has_effectsize <- !is.na(effsize_stats) & effsize_stats != ""
     text_full <- ifelse(has_effectsize,
-      datawizard::text_paste(text, effsize_stats, sep = "; "),
-      text
+      datawizard::text_paste(estimate_text, effsize_stats, sep = "; "),
+      estimate_text
     )
-    text <- ifelse(has_effectsize,
-      datawizard::text_paste(text, effsize_main),
-      text
+    estimate_text <- ifelse(has_effectsize,
+      datawizard::text_paste(estimate_text, effsize_main),
+      estimate_text
     )
   } else {
     text_full <- estimate_text
