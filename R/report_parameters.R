@@ -90,11 +90,7 @@ as.character.report_parameters <- function(x, prefix = NULL, ...) {
 
 #' @export
 summary.report_parameters <- function(object, ...) {
-  if (is.null(attributes(object)$summary)) {
-    object
-  } else {
-    attributes(object)$summary
-  }
+  attributes(object)$summary %||% object
 }
 
 
@@ -177,7 +173,7 @@ print.report_parameters <- function(x, ...) {
 
     if ("ESS" %in% names(diagnostic)) {
       stability <- effectsize::interpret_ess(diagnostic$ESS, ...)
-      text_output <- lapply(seq_len(length(stability)), function(x) {
+      text_output <- lapply(seq_along(stability), function(x) {
         y <- switch(EXPR = paste(stability[x] == "sufficient", convergence[x] == "converged"),
           "TRUE TRUE" = paste0(
             text_output, " and the indices are reliable (ESS = ",
