@@ -85,7 +85,38 @@ R --version
 which R
 
 # Install core R packages via system package manager (recommended)
-sudo apt install -y r-cran-dplyr r-cran-rlang r-cran-testthat r-cran-lintr
+sudo apt install -y r-cran-dplyr r-cran-rlang r-cran-testthat
+
+# CRITICAL: Install development version of lintr to match CI environment
+# The easystats CI uses r-lib/lintr (development version) not CRAN stable
+# Check if lintr is already installed first to save resources/time/errors
+R --no-restore --no-save -e '
+if (!requireNamespace("lintr", quietly = TRUE)) {
+  # Set GitHub token if available to avoid rate limits
+  if (Sys.getenv("GH_PAT") != "") {
+    Sys.setenv(GITHUB_TOKEN = Sys.getenv("GH_PAT"))
+  }
+  # Try pak first
+  if (!requireNamespace("pak", quietly = TRUE)) {
+    install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")
+  }
+  tryCatch({
+    pak::pak("r-lib/lintr")
+  }, error = function(e1) {
+    # Fallback to remotes if pak fails
+    tryCatch({
+      if (!requireNamespace("remotes", quietly = TRUE)) {
+        install.packages("remotes", repos="https://cloud.r-project.org/")
+      }
+      remotes::install_github("r-lib/lintr")
+    }, error = function(e2) {
+      cat("WARNING: Cannot install development lintr. Make high-confidence lint changes only.\n")
+      cat("Proper lint fixes will be completed on second run when copilot setup workflow runs.\n")
+    })
+  })
+} else {
+  cat("Development lintr already installed. Version:", as.character(packageVersion("lintr")), "\n")
+}'
 
 # Install reprex (ESSENTIAL for creating reproducible examples in PRs)
 sudo apt install -y r-cran-reprex || R --no-restore --no-save -e 'install.packages("reprex", repos="https://cloud.r-project.org/")'
@@ -273,17 +304,61 @@ Expected results:
 - 3-5 snapshot failures due to minor precision differences (normal and expected)
 - Some tests may be skipped if optional packages not available
 
-### Run Linting
+### Run Linting with Easystats Settings
+**IMPORTANT**: This package uses the easystats organization's centralized lintr configuration defined in [easystats/workflows](https://github.com/easystats/workflows/blob/main/.github/workflows/lint-changed-files.yaml). This ensures consistency across all easystats packages and stays automatically up-to-date with organization standards.
+
 **NEVER CANCEL: Linting takes ~20 seconds. Set timeout to 60+ seconds.**
+
+**Recommended approach** - Lint **changed files only** (matches CI workflow behavior):
 ```bash
 cd /home/runner/work/report/report
-R --no-restore --no-save -e 'library(lintr); lint_package()'
+# Get list of changed R files in current PR/branch
+git diff --name-only HEAD~1 | grep "\\.R$" > changed_files.txt
+R --no-restore --no-save -e '
+library(lintr)
+if (file.exists("changed_files.txt") && file.size("changed_files.txt") > 0) {
+  changed_files <- readLines("changed_files.txt")
+  changed_files <- changed_files[file.exists(changed_files)]
+  if (length(changed_files) > 0) {
+    # Use the same lintr configuration as the CI workflow
+    lint(changed_files, linters = all_linters(
+      coalesce_linter = NULL,
+      absolute_path_linter = NULL,
+      cyclocomp_linter(40L),
+      if_not_else_linter(exceptions = character(0L)),
+      indentation_linter = NULL,
+      implicit_integer_linter = NULL,
+      library_call_linter = NULL,
+      line_length_linter(120L),
+      namespace_linter = NULL,
+      nonportable_path_linter = NULL,
+      object_length_linter(50L),
+      object_name_linter = NULL,
+      object_usage_linter = NULL,
+      one_call_pipe_linter = NULL,
+      todo_comment_linter = NULL,
+      commented_code_linter = NULL,
+      undesirable_function_linter(c("mapply" = NA, "setwd" = NA)),
+      undesirable_operator_linter = NULL,
+      unnecessary_concatenation_linter(allow_single_expression = FALSE),
+      unused_import_linter = NULL
+    ))
+  } else {
+    cat("No R files changed\n")
+  }
+} else {
+  cat("No R files changed\n")
+}
+'
+rm -f changed_files.txt
 ```
 
 Expected results:
 - Style warnings (normal for existing codebase)
 - Focus on new code adhering to style guidelines
 - Package is functional despite style warnings
+
+**Note**: The lintr configuration above exactly matches the current settings in [easystats/workflows/lint-changed-files.yaml](https://github.com/easystats/workflows/blob/main/.github/workflows/lint-changed-files.yaml). This ensures the local linting matches the CI workflow exactly and stays current with organization standards.
 
 ### Auto-format Code with Styler
 **NEVER CANCEL: Styling takes ~10-30 seconds depending on package size. Set timeout to 60+ seconds.**
@@ -544,6 +619,40 @@ R --no-restore --no-save -e 'install.packages("BayesFactor", repos="https://clou
 
 ## Code Quality and Best Practices
 
+### R Version Compatibility Requirements
+
+**CRITICAL**: Always check minimum R version requirements before using any functions to ensure compatibility across all supported environments.
+
+#### Version Checking Process:
+
+1. **Check DESCRIPTION file**: Always verify the minimum R version in the package DESCRIPTION file:
+   ```bash
+   cd /home/runner/work/report/report
+   grep "Depends:" DESCRIPTION
+   # Shows: R (>= 3.6) - must use functions available in R 3.6+
+   ```
+
+2. **Function availability validation**: Before using any R function, verify it was available in the minimum supported version:
+   - **R 3.6.0+**: Functions like `grep(..., value = TRUE)`, standard base R operations
+   - **R 4.0.0+**: New features and syntax improvements 
+   - **R 4.1.0+**: Native pipe `|>`, new lambda syntax
+   - **R 4.4.0**: Null coalescing operator `%||%`
+   - **R 4.5.0+**: Functions like `grepv()` (if it existed)
+
+3. **Safe function usage**: 
+   ```r
+   # CORRECT: Use functions available in R 3.6+
+   result <- grep(pattern, x, value = TRUE)
+   
+   # INCORRECT: Don't use functions from later R versions
+   # result <- grepv(pattern, x)  # Not available in R 3.6
+   ```
+
+#### Documentation for Minimum R Versions:
+- **R 3.6.0 reference**: Check base R documentation for function availability
+- **When in doubt**: Use `help(function_name)` to check when functions were introduced
+- **Alternative approach**: Use more basic/older functions that are guaranteed to exist
+
 ### Avoiding Global Variable Binding Issues
 
 **CRITICAL**: Always use proper variable referencing to prevent "no visible binding for global variable" warnings that make CI workflows fail.
@@ -623,7 +732,7 @@ R --no-restore --no-save -e 'install.packages("BayesFactor", repos="https://clou
 8. Add exports to roxygen2 comments if needed (`@export`)
 9. Create tests in `/tests/testthat/test-[function_name].R`
 10. **Check for global variable issues**: `R CMD check` should show no binding warnings
-11. **Lint the code**: `R --no-restore --no-save -e 'library(lintr); lint_package()'`
+11. **Lint the code**: `R --no-restore --no-save -e 'library(lintr); lint("R/[function_name].R")'` (lint specific file) or `R --no-restore --no-save -e 'library(lintr); lint_package()'` (lint entire package)
 12. **Style the code**: `R --no-restore --no-save -e 'library(styler); style_file("R/[function_name].R")'`
 13. **Update documentation**: `R --no-restore --no-save -e 'roxygen2::document()'`
 14. **Validate documentation consistency**: Check for "Codoc mismatches" warnings
@@ -643,7 +752,7 @@ R --no-restore --no-save -e 'install.packages("BayesFactor", repos="https://clou
 8. Update `@importFrom` statements if new external functions are used
 9. Update tests if function behavior changes
 10. **Check for global variable issues**: `R CMD check` should show no binding warnings
-11. **Lint the code**: `R --no-restore --no-save -e 'library(lintr); lint_package()'`
+11. **Lint the code**: `R --no-restore --no-save -e 'library(lintr); lint("R/[file].R")'` (lint specific file) or `R --no-restore --no-save -e 'library(lintr); lint_package()'` (lint entire package)
 12. **Style the code**: `R --no-restore --no-save -e 'library(styler); style_file("R/[file].R")'`
 13. **Update documentation if changed**: `R --no-restore --no-save -e 'roxygen2::document()'`
 14. **Validate documentation consistency**: Check for "Codoc mismatches" warnings
@@ -657,7 +766,7 @@ R --no-restore --no-save -e 'install.packages("BayesFactor", repos="https://clou
 
 **CRITICAL**: Every PR must include version number updates and NEWS.md changelog entries. This is mandatory for all changes.
 
-**IMPORTANT CLARIFICATION**: Version numbers should be bumped **ONCE PER PULL REQUEST**, not once per commit. If you make multiple commits within a single PR, all commits should use the same version number. Only bump the version once at the beginning of your PR work or before submitting the PR for review.
+**IMPORTANT CLARIFICATION**: Version numbers should be bumped **ONCE PER PULL REQUEST**, not once per commit. If you make multiple commits within a single PR, all commits should use the same version number. Only bump the version once at the beginning of your PR work or before submitting the PR for review. Only bump if making changes to functions (e.g, not for copilot instructions, workflow, etc.).
 
 ### Version Numbering System
 
@@ -672,6 +781,7 @@ The report package follows this versioning pattern:
 2. **New features**: Increment the fourth decimal (0.6.1.1 → 0.6.1.2) 
 3. **Breaking changes**: Increment the minor version (0.6.1 → 0.7.0) - rare
 4. **Documentation-only changes**: Still increment fourth decimal for tracking
+5. Do not bump when only making changes to copilot instructions, workflow, etc.
 
 ### Multiple Commits Within a Single PR
 
@@ -822,8 +932,29 @@ cd /home/runner/work/report/report
 # 1. Check for global variable binding issues first (look for "no visible binding" warnings)
 R --no-restore --no-save -e 'warnings(); R CMD check report_*.tar.gz --no-manual --no-vignettes 2>&1 | grep -i "binding"'
 
-# 2. Lint code to identify style issues (20 seconds)
-R --no-restore --no-save -e 'library(lintr); lint_package()'
+# 2. Lint code to identify style issues (20 seconds) - use easystats/workflows configuration
+R --no-restore --no-save -e 'library(lintr); lint_package(linters = all_linters(
+  coalesce_linter = NULL,
+  absolute_path_linter = NULL,
+  cyclocomp_linter(40L),
+  if_not_else_linter(exceptions = character(0L)),
+  indentation_linter = NULL,
+  implicit_integer_linter = NULL,
+  library_call_linter = NULL,
+  line_length_linter(120L),
+  namespace_linter = NULL,
+  nonportable_path_linter = NULL,
+  object_length_linter(50L),
+  object_name_linter = NULL,
+  object_usage_linter = NULL,
+  one_call_pipe_linter = NULL,
+  todo_comment_linter = NULL,
+  commented_code_linter = NULL,
+  undesirable_function_linter(c("mapply" = NA, "setwd" = NA)),
+  undesirable_operator_linter = NULL,
+  unnecessary_concatenation_linter(allow_single_expression = FALSE),
+  unused_import_linter = NULL
+))'
 
 # 3. Style code to automatically fix issues (10-30 seconds) - optional but recommended
 R --no-restore --no-save -e 'library(styler); style_pkg()'
@@ -1001,6 +1132,59 @@ cat(paste(reprex_result, collapse = "\n"))
 - **Solution**: Replace with `.data[[variable_name]]` notation and add proper `@importFrom` statements
 - **Example**: Change `group_by(var)` to `group_by(.data[[var]])`
 - **DO NOT**: Create `global_variables.R` files with `utils::globalVariables()`
+
+### Lintr CI vs Local Discrepancies (CRITICAL VERSION ISSUE)
+- **Cause**: CI uses development lintr (`r-lib/lintr`) while local uses CRAN stable (`r-cran-lintr`)
+- **Symptoms**: Local lintr passes but CI lintr fails with stricter rules
+- **Root issue**: Development lintr has stricter rules and different function preferences
+- **Solution**: Always install development lintr to match CI. Check if installed first, then try pak, fallback to remotes, NEVER use CRAN:
+  ```bash
+  # Install development lintr to match CI - check if already installed first
+  R --no-restore --no-save -e '
+  if (!requireNamespace("lintr", quietly = TRUE)) {
+    # Set GitHub token if available to avoid rate limits
+    if (Sys.getenv("GH_PAT") != "") {
+      Sys.setenv(GITHUB_TOKEN = Sys.getenv("GH_PAT"))
+    }
+    # Try pak first
+    if (!requireNamespace("pak", quietly = TRUE)) {
+      install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")
+    }
+    tryCatch({
+      pak::pak("r-lib/lintr")
+    }, error = function(e1) {
+      # Fallback to remotes if pak fails
+      tryCatch({
+        if (!requireNamespace("remotes", quietly = TRUE)) {
+          install.packages("remotes", repos="https://cloud.r-project.org/")
+        }
+        remotes::install_github("r-lib/lintr")
+      }, error = function(e2) {
+        cat("WARNING: Cannot install development lintr\n")
+        cat("Make high-confidence lint changes only, then report that\n")
+        cat("proper lint fixes will be completed on second run when\n")
+        cat("copilot setup workflow runs automatically\n")
+      })
+    })
+  } else {
+    cat("Development lintr already installed. Version:", as.character(packageVersion("lintr")), "\n")
+  }
+  '
+  ```
+- **Testing**: Use exact CI configuration for local validation:
+  ```bash
+  R --no-restore --no-save -e 'library(lintr); lint_package(linters = all_linters(
+    coalesce_linter = NULL, absolute_path_linter = NULL, cyclocomp_linter(40L), 
+    if_not_else_linter(exceptions = character(0L)), indentation_linter = NULL, 
+    implicit_integer_linter = NULL, library_call_linter = NULL, 
+    line_length_linter(120L), namespace_linter = NULL, nonportable_path_linter = NULL,
+    object_length_linter(50L), object_name_linter = NULL, object_usage_linter = NULL,
+    one_call_pipe_linter = NULL, todo_comment_linter = NULL, commented_code_linter = NULL,
+    undesirable_function_linter(c("mapply" = NA, "setwd" = NA)), undesirable_operator_linter = NULL,
+    unnecessary_concatenation_linter(allow_single_expression = FALSE), unused_import_linter = NULL
+  ))'
+  ```
+- **R Version Compatibility**: Always check the minimum R version in DESCRIPTION file (`Depends: R (>= X.X)`) to ensure functions used are available in the minimum supported version. Do not use functions introduced in later R versions.
 
 ### Documentation Mismatch Warnings ("Codoc mismatches")
 - **Cause**: Function parameter names don't match the documentation
@@ -1189,9 +1373,11 @@ describe_posterior(model)  # Should have @importFrom bayestestR describe_posteri
 
 The package uses GitHub Actions with these workflows:
 - **R-CMD-check**: Multi-platform testing (Ubuntu, macOS, Windows)  
-- **lint**: Code style checking with lintr
+- **lint-changed-files**: Code style checking with lintr (only on changed files - efficient!)
 - **test-coverage**: Code coverage reporting with covr
 - **pkgdown**: Documentation website generation
+
+**Centralized Workflow System**: The easystats organization uses a centralized workflow system at [easystats/workflows](https://github.com/easystats/workflows) that all repositories reference. This ensures consistency and automatically keeps all packages up-to-date with the latest organization standards without manual maintenance.
 
 These workflows run automatically on pushes and pull requests to main/master branches.
 

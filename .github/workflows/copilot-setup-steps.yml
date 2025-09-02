@@ -30,7 +30,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 1
 
@@ -85,18 +85,34 @@ jobs:
             echo "No PR context; using probe/heuristics."
 
             # Example probe: if R already present and renv/cache present, skip
-            if command -v R >/dev/null 2>&1 && [ -f "renv.lock" ] && [ -d "~/.cache/R" ]; then
+            if command -v R >/dev/null 2>&1 && [ -f "renv.lock" ] && [ -d "$HOME/.cache/R" ]; then
               echo "R and cache present; likely no heavy setup needed."
               R_NEEDED=false
             else
-              # Last-commit heuristic (with full history available)
-              # Compare against the immediate parent only, to avoid "recent history" bias
-              if git rev-parse --verify HEAD~1 >/dev/null 2>&1; then
-                CHANGED=$(git diff --name-only HEAD~1...HEAD || true)
+              echo "Trying to detect PR from current commit..."
+              PRS=$(curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+                -H "Accept: application/vnd.github+json" \
+                "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/pulls")
+              PR_NUMBER=$(echo "$PRS" | jq -r '.[0].number // empty')
+
+              if [ -n "$PR_NUMBER" ]; then
+                echo "Found PR #$PR_NUMBER; using PR file list."
+                FILES=$(curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+                  -H "Accept: application/vnd.github+json" \
+                  "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/files?per_page=100" \
+                  | jq -r '.[].filename')
+                echo "${FILES}" > /tmp/changed.txt
               else
-                CHANGED=$(git ls-files) # first run in a new repo clone
+                echo "No PR found; diffing against default branch."
+                DEFAULT_BRANCH=$(
+                  curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+                    -H "Accept: application/vnd.github+json" \
+                    "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}" | jq -r '.default_branch'
+                )
+                git fetch --no-tags --depth=200 origin "$DEFAULT_BRANCH"
+                BASE=$(git merge-base HEAD "origin/${DEFAULT_BRANCH}")
+                git diff --name-only "${BASE}...HEAD" > /tmp/changed.txt
               fi
-              echo "${CHANGED}" > /tmp/changed.txt
 
               if grep -E '\.(R|Rmd|Rd)$' /tmp/changed.txt >/dev/null || \
                  grep -E '^(R/|tests/|man/|vignettes/|src/)' /tmp/changed.txt >/dev/null; then
@@ -161,14 +177,15 @@ jobs:
           extra-packages: |
             local::.
             any::testthat
-            any::lintr
-            any::styler
             any::roxygen2
             any::devtools
             any::reprex
             any::knitr
             any::rmarkdown
             any::clipr
+            any::cyclocomp
+            r-lib/lintr
+            r-lib/styler
           needs: check
           # Let r-lib/actions handle caching automatically (more efficient than manual cache)
 
