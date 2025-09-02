@@ -155,38 +155,46 @@ print.report_parameters <- function(x, ...) {
 .parameters_starting_text <- function(x, params) {
   if ("pretty_names" %in% attributes(params)) {
     pretty_name <- attributes(params)$pretty_names[params$Parameter]
-  } else {
+  } else if (
+    inherits(x, "glmmTMB") &&
+      "Component" %in% colnames(params) &&
+      length(unique(params$Component[!is.na(params$Component)])) > 1
+  ) {
     # For glmmTMB models with multiple components, need to handle component-specific naming
-    if (inherits(x, "glmmTMB") && "Component" %in% colnames(params) &&
-      length(unique(params$Component[!is.na(params$Component)])) > 1) {
-      # Create component-aware parameter names for glmmTMB models
-      formatted_params <- parameters::format_parameters(x)
-      # Map parameter names to include component information
-      pretty_name <- character(nrow(params))
-      for (i in seq_len(nrow(params))) {
-        param_name <- params$Parameter[i]
-        component <- params$Component[i]
+    # Create component-aware parameter names for glmmTMB models
+    formatted_params <- parameters::format_parameters(x)
+    # Map parameter names to include component information
+    pretty_name <- character(nrow(params))
+    for (i in seq_len(nrow(params))) {
+      param_name <- params$Parameter[i]
+      component <- params$Component[i]
 
-        if (!is.na(param_name) && !is.na(component) && param_name %in% names(formatted_params)) {
-          if (component == "dispersion") {
-            # For dispersion component, modify the name to indicate it affects variability
-            if (param_name == "(Intercept)") {
-              pretty_name[i] <- "(Intercept) (dispersion)"
-            } else {
-              pretty_name[i] <- paste0(formatted_params[param_name], " (on dispersion)")
-            }
+      if (
+        !is.na(param_name) &&
+          !is.na(component) &&
+          param_name %in% names(formatted_params)
+      ) {
+        if (component == "dispersion") {
+          # For dispersion component, modify the name to indicate it affects variability
+          if (param_name == "(Intercept)") {
+            pretty_name[i] <- "(Intercept) (dispersion)"
           } else {
-            # For conditional component, use standard name
-            pretty_name[i] <- formatted_params[param_name]
+            pretty_name[i] <- paste0(
+              formatted_params[param_name],
+              " (on dispersion)"
+            )
           }
         } else {
-          pretty_name[i] <- param_name
+          # For conditional component, use standard name
+          pretty_name[i] <- formatted_params[param_name]
         }
+      } else {
+        pretty_name[i] <- param_name
       }
-      names(pretty_name) <- params$Parameter
-    } else {
-      pretty_name <- parameters::format_parameters(x)
     }
+    names(pretty_name) <- params$Parameter
+  } else {
+    pretty_name <- parameters::format_parameters(x)
   }
 
   text_output <- vapply(

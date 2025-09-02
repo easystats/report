@@ -51,15 +51,19 @@
 #' }
 #' @return An object of class [report()].
 #' @export
-report.lm <- function(x, include_effectsize = TRUE,
-                      effectsize_method = "refit", ...) {
-  result_table <- report_table(x,
+report.lm <- function(
+  x,
+  include_effectsize = TRUE,
+  effectsize_method = "refit",
+  ...
+) {
+  result_table <- report_table(
+    x,
     include_effectsize = include_effectsize,
-    effectsize_method = effectsize_method, ...
+    effectsize_method = effectsize_method,
+    ...
   )
-  result_text <- report_text(x,
-    table = result_table, ...
-  )
+  result_text <- report_text(x, table = result_table, ...)
 
   as.report(result_text, table = result_table, ...)
 }
@@ -71,24 +75,33 @@ report.lm <- function(x, include_effectsize = TRUE,
 #' @export
 
 report_effectsize.lm <- function(x, effectsize_method = "refit", ...) {
-  effect_table <- suppressWarnings(effectsize::effectsize(x,
+  effect_table <- suppressWarnings(effectsize::effectsize(
+    x,
     method = effectsize_method,
     ...
   ))
   method <- .text_standardize(effect_table)
-  estimate <- names(effect_table)[effectsize::is_effectsize_name(names(effect_table))]
+  estimate <- names(effect_table)[effectsize::is_effectsize_name(names(
+    effect_table
+  ))]
 
   # TODO: finally solve this.
   # interpret <- effectsize::interpret_parameters(x, ...)
   if (insight::model_info(x)$is_logit) {
-    interpret <- effectsize::interpret_oddsratio(effect_table[[estimate]], log = TRUE, ...)
+    interpret <- effectsize::interpret_oddsratio(
+      effect_table[[estimate]],
+      log = TRUE,
+      ...
+    )
   } else {
     interpret <- effectsize::interpret_cohens_d(effect_table[[estimate]], ...)
   }
 
   interpretation <- interpret
-  main <- paste0("Std. beta = ", insight::format_value(effect_table[[estimate]]))
-
+  main <- paste0(
+    "Std. beta = ",
+    insight::format_value(effect_table[[estimate]])
+  )
 
   ci <- effect_table$CI
   names(ci) <- paste0("ci_", estimate)
@@ -107,13 +120,22 @@ report_effectsize.lm <- function(x, effectsize_method = "refit", ...) {
     start_col <- 3L
   }
 
-  effect_table <- as.data.frame(effect_table)[c(merge_by, estimate, "CI_low", "CI_high")]
-  names(effect_table)[start_col:ncol(effect_table)] <- c(paste0(estimate, "_CI_low"), paste0(estimate, "_CI_high"))
+  effect_table <- as.data.frame(effect_table)[c(
+    merge_by,
+    estimate,
+    "CI_low",
+    "CI_high"
+  )]
+  names(effect_table)[start_col:ncol(effect_table)] <- c(
+    paste0(estimate, "_CI_low"),
+    paste0(estimate, "_CI_high")
+  )
 
   rules <- .text_effectsize(attr(attr(interpret, "rules"), "rule_name"))
   parameters <- paste0(interpretation, " (", statistics, ")")
 
-  as.report_effectsize(parameters,
+  as.report_effectsize(
+    parameters,
     summary = parameters,
     table = effect_table,
     interpretation = interpretation,
@@ -127,7 +149,6 @@ report_effectsize.lm <- function(x, effectsize_method = "refit", ...) {
 
 
 # report_table ------------------------------------------------------------
-
 
 #' @rdname report.lm
 #' @include utils_combine_tables.R
@@ -147,12 +168,19 @@ report_table.lm <- function(x, include_effectsize = TRUE, ...) {
   # Add performance
   performance <- performance::model_performance(x, ...)
   params <- .combine_tables_performance(params, performance)
-  params <- params[!tolower(params$Parameter) %in% c(
-    "rmse", # lm
-    "logloss", "score_log", "score_spherical", "pcp", # glm
-    "icc", # lmer
-    "elpd_se", "looic_se" # stanreg
-  ), ]
+  params <- params[
+    !tolower(params$Parameter) %in%
+      c(
+        "rmse", # lm
+        "logloss",
+        "score_log",
+        "score_spherical",
+        "pcp", # glm
+        "icc", # lmer
+        "elpd_se",
+        "looic_se" # stanreg
+      ),
+  ]
 
   # Clean -----
   # Rename some columns
@@ -169,18 +197,30 @@ report_table.lm <- function(x, include_effectsize = TRUE, ...) {
     regex = TRUE,
     verbose = FALSE
   )
-  params_table <- params_table[!params_table$Parameter %in% c("AIC", "BIC", "ELPD", "LOOIC", "WAIC"), ]
+  params_table <- params_table[
+    !params_table$Parameter %in% c("AIC", "BIC", "ELPD", "LOOIC", "WAIC"),
+  ]
 
   # Prepare -----
-  out <- as.report_table(table_full,
+  out <- as.report_table(
+    table_full,
     summary = params_table,
     effsize = effsize,
     performance = performance,
     ...
   )
-  if (!is.null(effsize)) attr(out, paste0(names(attributes(effsize)$ci))) <- attributes(effsize)$ci
+  if (!is.null(effsize)) {
+    attr(out, paste0(names(attributes(effsize)$ci))) <- attributes(effsize)$ci
+  }
   # Add attributes from params table
-  for (att in c("ci", "coefficient_name", "pretty_names", "bootstrap", "iterations", "ci_method")) {
+  for (att in c(
+    "ci",
+    "coefficient_name",
+    "pretty_names",
+    "bootstrap",
+    "iterations",
+    "ci_method"
+  )) {
     attr(out, att) <- attributes(params)[[att]]
   }
 
@@ -192,11 +232,13 @@ report_table.lm <- function(x, include_effectsize = TRUE, ...) {
 
 #' @rdname report.lm
 #' @export
-report_statistics.lm <- function(x,
-                                 table = NULL,
-                                 include_effectsize = TRUE,
-                                 include_diagnostic = TRUE,
-                                 ...) {
+report_statistics.lm <- function(
+  x,
+  table = NULL,
+  include_effectsize = TRUE,
+  include_diagnostic = TRUE,
+  ...
+) {
   if (is.null(table)) {
     params_table <- report_table(x, ...)
   } else {
@@ -208,22 +250,32 @@ report_statistics.lm <- function(x,
   # For glmmTMB models with multiple components, don't filter the table itself
   # but prepare effectsize alignment for text generation
 
-
   # Estimate
   estimate <- .find_regression_estimate(params_table)
-  if (is.null(estimate) || is.na(estimate) || !estimate %in% names(params_table)) {
+  if (
+    is.null(estimate) || is.na(estimate) || !estimate %in% names(params_table)
+  ) {
     estimate_text <- ""
   } else if (estimate == "Coefficient") {
-    estimate_text <- paste0("beta = ", insight::format_value(params_table[[estimate]]))
+    estimate_text <- paste0(
+      "beta = ",
+      insight::format_value(params_table[[estimate]])
+    )
   } else {
-    estimate_text <- paste0(estimate, " = ", insight::format_value(params_table[[estimate]]))
+    estimate_text <- paste0(
+      estimate,
+      " = ",
+      insight::format_value(params_table[[estimate]])
+    )
   }
 
   # CI
   if (!is.null(params_table$CI_low)) {
     estimate_text <- datawizard::text_paste(
-      estimate_text, insight::format_ci(
-        params_table$CI_low, params_table$CI_high,
+      estimate_text,
+      insight::format_ci(
+        params_table$CI_low,
+        params_table$CI_high,
         ci = attributes(params_table)$ci
       )
     )
@@ -233,34 +285,47 @@ report_statistics.lm <- function(x,
   if ("t" %in% names(params_table)) {
     estimate_text <- datawizard::text_paste(
       estimate_text,
-      paste0("t(", insight::format_value(
-        params_table$df,
-        protect_integers = TRUE
-      ), ") = ", insight::format_value(params_table$t))
+      paste0(
+        "t(",
+        insight::format_value(
+          params_table$df,
+          protect_integers = TRUE
+        ),
+        ") = ",
+        insight::format_value(params_table$t)
+      )
     )
   }
 
   # p-value
   if ("p" %in% names(params_table)) {
     estimate_text <- datawizard::text_paste(
-      estimate_text, insight::format_p(params_table$p, stars = FALSE, digits = "apa")
+      estimate_text,
+      insight::format_p(params_table$p, stars = FALSE, digits = "apa")
     )
   }
 
   # pd
   if ("pd" %in% names(params_table)) {
-    estimate_text <- datawizard::text_paste(estimate_text, insight::format_pd(params_table$pd, stars = FALSE))
+    estimate_text <- datawizard::text_paste(
+      estimate_text,
+      insight::format_pd(params_table$pd, stars = FALSE)
+    )
   }
 
   # BF
   if ("ROPE_Percentage" %in% names(params_table)) {
-    estimate_text <- datawizard::text_paste(estimate_text, insight::format_rope(params_table$ROPE_Percentage))
+    estimate_text <- datawizard::text_paste(
+      estimate_text,
+      insight::format_rope(params_table$ROPE_Percentage)
+    )
   }
 
   # BF
   if ("BF" %in% names(params_table)) {
     estimate_text <- datawizard::text_paste(
-      estimate_text, insight::format_bf(params_table$BF, stars = FALSE, exact = TRUE)
+      estimate_text,
+      insight::format_bf(params_table$BF, stars = FALSE, exact = TRUE)
     )
   }
 
@@ -284,12 +349,12 @@ report_statistics.lm <- function(x,
       effsize_main <- character(n_params)
 
       for (i in seq_len(n_params)) {
-        if (!is.na(match_idx[i])) {
-          effsize_stats[i] <- attributes(effsize)$statistics[match_idx[i]]
-          effsize_main[i] <- attributes(effsize)$main[match_idx[i]]
-        } else {
+        if (is.na(match_idx[i])) {
           effsize_stats[i] <- ""
           effsize_main[i] <- ""
+        } else {
+          effsize_stats[i] <- attributes(effsize)$statistics[match_idx[i]]
+          effsize_main[i] <- attributes(effsize)$main[match_idx[i]]
         }
       }
     } else {
@@ -299,11 +364,13 @@ report_statistics.lm <- function(x,
 
     # Only include non-empty effectsize information
     has_effectsize <- !is.na(effsize_stats) & effsize_stats != ""
-    text_full <- ifelse(has_effectsize,
+    text_full <- ifelse(
+      has_effectsize,
       datawizard::text_paste(estimate_text, effsize_stats, sep = "; "),
       estimate_text
     )
-    estimate_text <- ifelse(has_effectsize,
+    estimate_text <- ifelse(
+      has_effectsize,
       datawizard::text_paste(estimate_text, effsize_main),
       estimate_text
     )
@@ -316,21 +383,26 @@ report_statistics.lm <- function(x,
     text_diagnostic <- ""
 
     if ("Rhat" %in% names(params_table)) {
-      text_diagnostic <- paste0("Rhat = ", insight::format_value(params_table$Rhat))
+      text_diagnostic <- paste0(
+        "Rhat = ",
+        insight::format_value(params_table$Rhat)
+      )
     }
 
     estimate_text <- datawizard::text_paste(estimate_text, text_diagnostic)
 
     if ("ESS" %in% names(params_table)) {
       text_diagnostic <- datawizard::text_paste(
-        text_diagnostic, paste0("ESS = ", insight::format_value(params_table$ESS))
+        text_diagnostic,
+        paste0("ESS = ", insight::format_value(params_table$ESS))
       )
     }
 
     text_full <- datawizard::text_paste(text_full, text_diagnostic, sep = "; ")
   }
 
-  as.report_statistics(text_full,
+  as.report_statistics(
+    text_full,
     summary = estimate_text,
     table = params_table,
     effsize = effsize
@@ -343,13 +415,20 @@ report_statistics.lm <- function(x,
 #' @rdname report.lm
 #' @inheritParams report_statistics
 #' @export
-report_parameters.lm <- function(x,
-                                 table = NULL,
-                                 include_effectsize = TRUE,
-                                 include_intercept = TRUE,
-                                 ...) {
+report_parameters.lm <- function(
+  x,
+  table = NULL,
+  include_effectsize = TRUE,
+  include_intercept = TRUE,
+  ...
+) {
   # Get data
-  stats <- report_statistics(x, table = table, include_effectsize = include_effectsize, ...)
+  stats <- report_statistics(
+    x,
+    table = table,
+    include_effectsize = include_effectsize,
+    ...
+  )
   params <- attributes(stats)$table
   effsize <- attributes(stats)$effsize
 
@@ -360,7 +439,10 @@ report_parameters.lm <- function(x,
   params_text <- paste0(
     params_text,
     " is statistically ",
-    effectsize::interpret_p(params$p, rules = effectsize::rules(0.05, c("significant", "non-significant"))),
+    effectsize::interpret_p(
+      params$p,
+      rules = effectsize::rules(0.05, c("significant", "non-significant"))
+    ),
     " and ",
     effectsize::interpret_direction(params$Coefficient)
   )
@@ -379,7 +461,6 @@ report_parameters.lm <- function(x,
 
   text_full <- paste0(params_text[idx], " (", stats[idx], ")")
   result_text <- paste0(params_text[idx], " (", summary(stats)[idx], ")")
-
 
   as.report_parameters(
     text_full,
@@ -401,12 +482,17 @@ report_intercept.lm <- function(x, table = NULL, ...) {
     intercept_table <- table
   }
 
-  if ((insight::model_info(x)$is_zero_inflated ||
-    (inherits(x, "glmmTMB") && "dispersion" %in% table$Component)) &&
-    "Component" %in% colnames(table)) {
-    idx <- !is.na(table$Parameter) & table$Parameter == "(Intercept)" & table$Component == "conditional"
+  if (
+    (insight::model_info(x)$is_zero_inflated ||
+      (inherits(x, "glmmTMB") && "dispersion" %in% table$Component)) &&
+      "Component" %in% colnames(table)
+  ) {
+    idx <- !is.na(table$Parameter) &
+      table$Parameter == "(Intercept)" &
+      table$Component == "conditional"
   } else {
-    idx <- !is.na(intercept_table$Parameter) & intercept_table$Parameter == "(Intercept)"
+    idx <- !is.na(intercept_table$Parameter) &
+      intercept_table$Parameter == "(Intercept)"
   }
 
   # sanity check - if model has no intercept, return NULL
@@ -425,7 +511,11 @@ report_intercept.lm <- function(x, table = NULL, ...) {
     "The model's intercept is at ",
     insight::format_value(is_at),
     " (",
-    insight::format_ci(intercept$CI_low, intercept$CI_high, attributes(intercept)$ci),
+    insight::format_ci(
+      intercept$CI_low,
+      intercept$CI_high,
+      attributes(intercept)$ci
+    ),
     ")."
   )
   text_full <- paste0(
@@ -461,7 +551,11 @@ report_model.lm <- function(x, table = NULL, ...) {
 
   # Bootstrap
   if (attributes(model_table)$bootstrap) {
-    bootstrapped <- paste0("bootstrapped (", attributes(model_table)$iterations, " iterations) ")
+    bootstrapped <- paste0(
+      "bootstrapped (",
+      attributes(model_table)$iterations,
+      " iterations) "
+    )
   } else {
     bootstrapped <- ""
   }
@@ -485,14 +579,17 @@ report_model.lm <- function(x, table = NULL, ...) {
     text_full <- model_text
   }
 
-
   # To predict
   to_predict_text <- paste0(" to predict ", insight::find_response(x))
   if (!is_nullmodel) {
     to_predict_text <- paste0(
       to_predict_text,
       " with ",
-      datawizard::text_concatenate(insight::find_predictors(x, effects = "fixed", flatten = TRUE))
+      datawizard::text_concatenate(insight::find_predictors(
+        x,
+        effects = "fixed",
+        flatten = TRUE
+      ))
     )
   }
 
@@ -514,7 +611,6 @@ report_model.lm <- function(x, table = NULL, ...) {
     model_text <- paste0(model_text, ". ", summary(priors_text))
   }
 
-
   as.report_model(text_full, summary = model_text, ...)
 }
 
@@ -531,7 +627,6 @@ report_performance.lm <- function(x, table = NULL, ...) {
   }
   performance <- attributes(perf_table)$performance
 
-
   # Intercept-only
   if (suppressWarnings(insight::is_nullmodel(x))) {
     return(as.report_performance("", summary = ""))
@@ -546,16 +641,22 @@ report_performance.lm <- function(x, table = NULL, ...) {
 
 #' @rdname report.lm
 #' @export
-report_info.lm <- function(x,
-                           effectsize = NULL,
-                           include_effectsize = FALSE,
-                           parameters = NULL,
-                           ...) {
+report_info.lm <- function(
+  x,
+  effectsize = NULL,
+  include_effectsize = FALSE,
+  parameters = NULL,
+  ...
+) {
   if (is.null(effectsize)) {
     effectsize <- report_effectsize(x, ...)
   }
 
-  info_text <- .info_effectsize(x, effectsize = effectsize, include_effectsize = include_effectsize)
+  info_text <- .info_effectsize(
+    x,
+    effectsize = effectsize,
+    include_effectsize = include_effectsize
+  )
 
   if (is.null(parameters)) {
     parameters <- report_parameters(x, ...)
@@ -567,21 +668,24 @@ report_info.lm <- function(x,
   }
 
   # Only add CI information if effectsize info is empty or doesn't already contain CI details
-  no_ci_info <- nzchar(info_text) == FALSE ||
+  no_ci_info <- !nzchar(info_text) ||
     !grepl("Confidence Intervals.*computed using.*approximation", info_text)
   if ("ci_method" %in% names(att) && no_ci_info) {
-    info_text <- paste0(info_text, ifelse(nzchar(info_text), " ", ""), .info_df(
-      ci = att$ci,
-      ci_method = att$ci_method,
-      test_statistic = att$test_statistic,
-      bootstrap = att$bootstrap
-    ))
+    info_text <- paste0(
+      info_text,
+      ifelse(nzchar(info_text), " ", ""),
+      .info_df(
+        ci = att$ci,
+        ci_method = att$ci_method,
+        test_statistic = att$test_statistic,
+        bootstrap = att$bootstrap
+      )
+    )
   }
 
   # if (!is.null(att$ci_method)) {
   #   .text_ci(ci, ci_method = ci_method, df_method = df_method)
   # }
-
 
   as.report_info(info_text)
 }
@@ -595,7 +699,12 @@ report_text.lm <- function(x, table = NULL, ...) {
   params <- report_parameters(x, table = table, include_intercept = FALSE, ...)
   report_table_data <- attributes(params)$table
 
-  info <- report_info(x, effectsize = attributes(params)$effectsize, parameters = params, ...)
+  info <- report_info(
+    x,
+    effectsize = attributes(params)$effectsize,
+    parameters = params,
+    ...
+  )
   model <- report_model(x, table = report_table_data, ...)
   perf <- report_performance(x, table = report_table_data, ...)
   intercept <- report_intercept(x, table = report_table_data, ...)
@@ -604,7 +713,10 @@ report_text.lm <- function(x, table = NULL, ...) {
     params_text_full <- params_text <- ""
   } else {
     params_text_full <- paste0(" Within this model:\n\n", as.character(params))
-    params_text <- paste0(" Within this model:\n\n", as.character(summary(params), ...))
+    params_text <- paste0(
+      " Within this model:\n\n",
+      as.character(summary(params), ...)
+    )
   }
 
   text_full <- paste0(
@@ -628,7 +740,6 @@ report_text.lm <- function(x, table = NULL, ...) {
     summary(intercept),
     params_text
   )
-
 
   as.report_text(text_full, summary = result_summary)
 }
