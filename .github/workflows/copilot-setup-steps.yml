@@ -183,6 +183,7 @@ jobs:
             any::knitr
             any::rmarkdown
             any::clipr
+            any::cyclocomp
             r-lib/lintr
             r-lib/styler
           needs: check

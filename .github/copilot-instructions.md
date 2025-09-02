@@ -636,6 +636,7 @@ R --no-restore --no-save -e 'install.packages("BayesFactor", repos="https://clou
    - **R 3.6.0+**: Functions like `grep(..., value = TRUE)`, standard base R operations
    - **R 4.0.0+**: New features and syntax improvements 
    - **R 4.1.0+**: Native pipe `|>`, new lambda syntax
+   - **R 4.4.0**: Null coalescing operator `%||%`
    - **R 4.5.0+**: Functions like `grepv()` (if it existed)
 
 3. **Safe function usage**: 
@@ -933,6 +934,7 @@ R --no-restore --no-save -e 'warnings(); R CMD check report_*.tar.gz --no-manual
 
 # 2. Lint code to identify style issues (20 seconds) - use easystats/workflows configuration
 R --no-restore --no-save -e 'library(lintr); lint_package(linters = all_linters(
+  coalesce_linter = NULL,
   absolute_path_linter = NULL,
   cyclocomp_linter(40L),
   if_not_else_linter(exceptions = character(0L)),
@@ -1172,8 +1174,9 @@ cat(paste(reprex_result, collapse = "\n"))
 - **Testing**: Use exact CI configuration for local validation:
   ```bash
   R --no-restore --no-save -e 'library(lintr); lint_package(linters = all_linters(
-    absolute_path_linter = NULL, cyclocomp_linter(40L), if_not_else_linter(exceptions = character(0L)),
-    indentation_linter = NULL, implicit_integer_linter = NULL, library_call_linter = NULL,
+    coalesce_linter = NULL, absolute_path_linter = NULL, cyclocomp_linter(40L), 
+    if_not_else_linter(exceptions = character(0L)), indentation_linter = NULL, 
+    implicit_integer_linter = NULL, library_call_linter = NULL, 
     line_length_linter(120L), namespace_linter = NULL, nonportable_path_linter = NULL,
     object_length_linter(50L), object_name_linter = NULL, object_usage_linter = NULL,
     one_call_pipe_linter = NULL, todo_comment_linter = NULL, commented_code_linter = NULL,
