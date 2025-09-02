@@ -60,7 +60,6 @@ report_parameters <- function(x, ...) {
 
 # METHODS -----------------------------------------------------------------
 
-
 #' @rdname as.report
 #' @export
 as.report_parameters <- function(x, summary = NULL, prefix = "  - ", ...) {
@@ -79,8 +78,12 @@ as.report_parameters <- function(x, summary = NULL, prefix = "  - ", ...) {
 #' @export
 as.character.report_parameters <- function(x, prefix = NULL, ...) {
   # Find prefix
-  if (is.null(prefix)) prefix <- attributes(x)$prefix
-  if (is.null(prefix)) prefix <- ""
+  if (is.null(prefix)) {
+    prefix <- attributes(x)$prefix
+  }
+  if (is.null(prefix)) {
+    prefix <- ""
+  }
 
   # Concatenate
   text_output <- paste0(prefix, x)
@@ -111,7 +114,10 @@ print.report_parameters <- function(x, ...) {
   for (i in seq_along(names)) {
     if (grepl(":", names[i], fixed = TRUE)) {
       interaction_terms <- unlist(strsplit(names[i], ":", fixed = TRUE))
-      names[i] <- paste0("The interaction between ", datawizard::text_concatenate(interaction_terms))
+      names[i] <- paste0(
+        "The interaction between ",
+        datawizard::text_concatenate(interaction_terms)
+      )
     } else {
       names[i] <- paste0("The main effect of ", names[i])
     }
@@ -126,7 +132,12 @@ print.report_parameters <- function(x, ...) {
     if (grepl(" * ", names[i], fixed = TRUE)) {
       parts <- unlist(strsplit(names[i], " * ", fixed = TRUE))
       basis <- paste(utils::head(parts, -1), collapse = " * ")
-      names[i] <- paste0("The interaction effect of ", utils::tail(parts, 1), " on ", basis)
+      names[i] <- paste0(
+        "The interaction effect of ",
+        utils::tail(parts, 1),
+        " on ",
+        basis
+      )
 
       # Intercept
     } else if (names[i] == "(Intercept)") {
@@ -148,9 +159,11 @@ print.report_parameters <- function(x, ...) {
     pretty_name <- parameters::format_parameters(x)
   }
 
-  text_output <- vapply(pretty_name,
+  text_output <- vapply(
+    pretty_name,
     .format_parameters_regression,
-    USE.NAMES = TRUE, "character"
+    USE.NAMES = TRUE,
+    "character"
   )
 
   text_output
@@ -158,11 +171,16 @@ print.report_parameters <- function(x, ...) {
 
 
 #' @keywords internal
-.parameters_diagnostic_bayesian <- function(diagnostic, only_when_insufficient = FALSE, ...) {
+.parameters_diagnostic_bayesian <- function(
+  diagnostic,
+  only_when_insufficient = FALSE,
+  ...
+) {
   # Convergence
   if ("Rhat" %in% names(diagnostic)) {
     convergence <- effectsize::interpret_rhat(diagnostic$Rhat, ...)
-    text_output <- ifelse(convergence == "converged",
+    text_output <- ifelse(
+      convergence == "converged",
       paste0(
         "The estimation successfully converged (Rhat = ",
         insight::format_value(diagnostic$Rhat, digits = 3),
@@ -177,23 +195,35 @@ print.report_parameters <- function(x, ...) {
 
     if ("ESS" %in% names(diagnostic)) {
       stability <- effectsize::interpret_ess(diagnostic$ESS, ...)
-      text_output <- lapply(seq_len(length(stability)), function(x) {
-        y <- switch(EXPR = paste(stability[x] == "sufficient", convergence[x] == "converged"),
+      text_output <- lapply(seq_along(stability), function(x) {
+        y <- switch(
+          EXPR = paste(
+            stability[x] == "sufficient",
+            convergence[x] == "converged"
+          ),
           "TRUE TRUE" = paste0(
-            text_output, " and the indices are reliable (ESS = ",
-            insight::format_value(diagnostic$ESS, digits = 0), ")"
+            text_output,
+            " and the indices are reliable (ESS = ",
+            insight::format_value(diagnostic$ESS, digits = 0),
+            ")"
           ),
           "TRUE FALSE" = paste0(
-            text_output, " even though the indices appear as reliable (ESS = ",
-            insight::format_value(diagnostic$ESS, digits = 0), ")"
+            text_output,
+            " even though the indices appear as reliable (ESS = ",
+            insight::format_value(diagnostic$ESS, digits = 0),
+            ")"
           ),
           "FALSE TRUE" = paste0(
-            text_output, " but the indices are unreliable (ESS = ",
-            insight::format_value(diagnostic$ESS, digits = 0), ")"
+            text_output,
+            " but the indices are unreliable (ESS = ",
+            insight::format_value(diagnostic$ESS, digits = 0),
+            ")"
           ),
           "FALSE FALSE" = paste0(
-            text_output, " and the indices are unreliable (ESS = ",
-            insight::format_value(diagnostic$ESS, digits = 0), ")"
+            text_output,
+            " and the indices are unreliable (ESS = ",
+            insight::format_value(diagnostic$ESS, digits = 0),
+            ")"
           )
         )
         y[[x]]
@@ -205,7 +235,11 @@ print.report_parameters <- function(x, ...) {
   }
 
   if (only_when_insufficient) {
-    ifelse(convergence != "converged" | stability != "sufficient", text_output, "")
+    ifelse(
+      convergence != "converged" | stability != "sufficient",
+      text_output,
+      ""
+    )
   } else {
     text_output
   }
