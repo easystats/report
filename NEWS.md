@@ -1,5 +1,9 @@
 # report 0.6.x
 
+New features
+
+* `report.glm()`: added explainability guidance for interpreting GLM coefficients (odds ratios for binomial models, rate ratios for Poisson models) to help users understand how to transform coefficients for easier interpretation (#484)
+
 Bug fixes
 
 * `report_parameters()`: Fixed lint issues by renaming `text` variables to avoid conflicts with `graphics::text` and improved conditional logic pattern
