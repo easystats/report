@@ -5,23 +5,16 @@ labels: ["question ⁉️"]
 assignees: []
 projects: []
 body:
-  - type: dropdown
-    id: issue-type
-    attributes:
-      label: Issue Type
-      description: Select the type of issue
-      options:
-        - Bug
-        - Feature
-        - Task
-      default: 2
-    validations:
-      required: true
-
   - type: markdown
     attributes:
       value: |
-        Thank you for your question! Please provide details to help us give you the best answer.
+        Thank you for your question! Before asking, please check:
+        
+        1. **Documentation**: Visit our [documentation site](https://easystats.github.io/report/)
+        2. **Discussions**: Browse [existing discussions](https://github.com/easystats/report/discussions) for similar questions
+        3. **Update packages**: Ensure you have the latest version with `easystats::install_latest()`
+        
+        Please provide details to help us give you the best answer.
 
   - type: textarea
     id: question
@@ -61,14 +54,4 @@ body:
       placeholder: Paste the output of sessionInfo() here
       render: r
 
-  - type: dropdown
-    id: setup-preference
-    attributes:
-      label: Copilot setup preference
-      description: Choose the CI environment preference for PRs related to this issue (if applicable)
-      options:
-        - copilot-setup-light
-        - copilot-setup-full
-      default: 0
-    validations:
-      required: false
+

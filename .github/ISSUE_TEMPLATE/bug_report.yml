@@ -5,23 +5,18 @@ labels: ["bug 🐛"]
 assignees: []
 projects: []
 body:
-  - type: dropdown
-    id: issue-type
-    attributes:
-      label: Issue Type
-      description: Select the type of issue
-      options:
-        - Bug
-        - Feature
-        - Task
-      default: 0
-    validations:
-      required: true
-
   - type: markdown
     attributes:
       value: |
-        Thank you for reporting a bug! Please fill out the sections below to help us understand and fix the issue.
+        Thanks for using `{report}` and for reporting a bug! Before filing this issue, please:
+        
+        1. **Update to the latest version**: Try updating to the latest versions of the *easystats* packages with `easystats::install_latest()`. Refresh your R session afterwards (Ctrl+Shift+F10 in RStudio).
+        
+        2. **Search existing issues**: Check if this bug has already been [reported or fixed](https://github.com/easystats/report/issues).
+        
+        3. **Create a reprex**: Please provide a minimal **repr**oducible **ex**ample using the [reprex](http://reprex.tidyverse.org/) package. The process of creating a reprex often helps discover the solution!
+        
+        Please fill out the sections below to help us understand and fix the issue.
 
   - type: textarea
     id: bug-description
@@ -86,14 +81,4 @@ body:
       placeholder: Paste the output of sessionInfo() here
       render: r
 
-  - type: dropdown
-    id: setup-preference
-    attributes:
-      label: Copilot setup preference
-      description: Choose the CI environment preference for PRs related to this issue
-      options:
-        - copilot-setup-light
-        - copilot-setup-full
-      default: 0
-    validations:
-      required: false
+
