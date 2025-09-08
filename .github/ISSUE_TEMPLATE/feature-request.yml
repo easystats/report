@@ -1,7 +1,7 @@
 name: Feature request
 description: Suggest a new idea or enhancement for this project
 title: "[Feature]: "
-labels: ["enhancement :bulb:"]
+labels: ["enhancement :boom:"]
 body:
   - type: markdown
     attributes:
