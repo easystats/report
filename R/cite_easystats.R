@@ -3,19 +3,21 @@
 #' A convenient function for those who wish to cite the easystats packages.
 #'
 #' @param packages A character vector of packages to cite. Can be `"all"` for
-#'   all *easystats* pacakges or a vector with specific package names.
-#' @param format The format to generate citations. Can be `"text"` for plain text,
-#'   `"markdown"` for markdown citations and CSL bibliography (recommended for
-#'   writing in RMarkdown), or `"biblatex"` for BibLaTeX citations and bibliography.
-#' @param intext_prefix A character vector of length 1 containing text to include
-#'   before in-text citations. If `TRUE`, defaults to `"Analyses were conducted
-#'   using the easystats collection of packages "`. If `FALSE` or `NA`, no prefix
-#'   is included.
-#' @param intext_suffix A character vector of length 1 containing text to include
-#'   after in-text citations. Defaults to `"."`. If `FALSE` or `NA`, no suffix
-#'   is included.
+#'   all *easystats* packages or a vector with specific package names.
+#' @param format The format to generate citations. Can be `"text"` for plain
+#'   text, `"markdown"` for markdown citations and CSL bibliography
+#'   (recommended for writing in RMarkdown), or `"biblatex"` for BibLaTeX
+#'   citations and bibliography.
+#' @param intext_prefix A character vector of length 1 containing text to
+#'   include before in-text citations. If `TRUE`, defaults to `"Analyses were
+#'   conducted using the easystats collection of packages "`. If `FALSE` or
+#'   `NA`, no prefix is included.
+#' @param intext_suffix A character vector of length 1 containing text to
+#'   include after in-text citations. Defaults to `"."`. If `FALSE` or `NA`,
+#'   no suffix is included.
 #' @param x,object A `"cite_easystats"` object to print.
-#' @param what What elements of the citations to print, can be `"all"`, `"intext"`, or `"refs"`.
+#' @param what What elements of the citations to print, can be `"all"`,
+#'   `"intext"`, or `"refs"`.
 #' @param ... Not used. Included for compatibility with the generic function.
 #'
 #' @return A list of class `"cite_easystats"` with elements:
@@ -78,47 +80,73 @@ cite_easystats <- function(packages = "easystats",
 
   # in-text
   if (format == "text") {
-    letters_ludeckePackages <- .disamguation_letters(c(
+    letters_ludecke_packages <- .disamguation_letters(c(
       "easystats", "insight",
       "performance", "parameters",
       "see"
     ) %in% packages)
-    if (sum(letters_ludeckePackages != "") == 1) {
-      letters_ludeckePackages <- rep("", length(letters_ludeckePackages))
+    if (sum(letters_ludecke_packages != "") == 1) {
+      letters_ludecke_packages <- rep("", length(letters_ludecke_packages))
     }
-    letters_ludeckeArticles <- .disamguation_letters(c("performance", "see") %in% packages)
-    if (sum(letters_ludeckeArticles != "") == 1) {
-      letters_ludeckeArticles <- rep("", length(letters_ludeckeArticles))
+    letters_ludecke_articles <- .disamguation_letters(
+      c("performance", "see") %in% packages
+    )
+    if (sum(letters_ludecke_articles != "") == 1) {
+      letters_ludecke_articles <- rep("", length(letters_ludecke_articles))
     }
-    letters_makowskiPackages <- .disamguation_letters(c(
+    letters_makowski_packages <- .disamguation_letters(c(
       "datawizard", "bayestestR",
       "correlation", "modelbased",
       "report"
     ) %in% packages)
-    if (sum(letters_makowskiPackages != "") == 1) {
-      letters_makowskiPackages <- rep("", length(letters_makowskiPackages))
+    if (sum(letters_makowski_packages != "") == 1) {
+      letters_makowski_packages <- rep("", length(letters_makowski_packages))
     }
     easystats <- "_easystats_"
     cit_packages <- sprintf(
       "(%s)",
       toString(c(
-        easystats = sprintf("L\u00fcdecke et al., 2019/2023%s", letters_ludeckePackages[1]),
-        insight = sprintf("L\u00fcdecke et al., 2019, 2019/2022%s", letters_ludeckePackages[2]),
-        datawizard = sprintf("Makowski et al., 2021/2022%s", letters_makowskiPackages[1]),
-        bayestestR = sprintf("Makowski et al., 2019, 2019/2022%s", letters_makowskiPackages[2]),
+        easystats = sprintf(
+          "Lüdecke et al., 2019/2023%s",
+          letters_ludecke_packages[1]
+        ),
+        insight = sprintf(
+          "Lüdecke et al., 2019, 2019/2022%s",
+          letters_ludecke_packages[2]
+        ),
+        datawizard = sprintf(
+          "Makowski et al., 2021/2022%s",
+          letters_makowski_packages[1]
+        ),
+        bayestestR = sprintf(
+          "Makowski et al., 2019, 2019/2022%s",
+          letters_makowski_packages[2]
+        ),
         performance = sprintf(
-          "L\u00fcdecke et al., 2021%s, 2019/2022%s",
-          letters_ludeckeArticles[1], letters_ludeckePackages[3]
+          "Lüdecke et al., 2021%s, 2019/2022%s",
+          letters_ludecke_articles[1], letters_ludecke_packages[3]
         ),
-        parameters = sprintf("L\u00fcdecke et al., 2020, 2019/2022%s", letters_ludeckePackages[4]),
+        parameters = sprintf(
+          "Lüdecke et al., 2020, 2019/2022%s",
+          letters_ludecke_packages[4]
+        ),
         effectsize = "Ben-Shachar et al., 2020, 2019/2022",
-        correlation = sprintf("Makowski et al., 2020, 2020/2022%s", letters_makowskiPackages[3]),
-        modelbased = sprintf("Makowski et al., 2020/2022%s", letters_makowskiPackages[4]),
-        see = sprintf(
-          "L\u00fcdecke et al., 2021%s, 2019/2022%s",
-          letters_ludeckeArticles[2], letters_ludeckePackages[5]
+        correlation = sprintf(
+          "Makowski et al., 2020, 2020/2022%s",
+          letters_makowski_packages[3]
         ),
-        report = sprintf("Makowski et al., 2021/2023%s", letters_makowskiPackages[5])
+        modelbased = sprintf(
+          "Makowski et al., 2020/2022%s",
+          letters_makowski_packages[4]
+        ),
+        see = sprintf(
+          "Lüdecke et al., 2021%s, 2019/2022%s",
+          letters_ludecke_articles[2], letters_ludecke_packages[5]
+        ),
+        report = sprintf(
+          "Makowski et al., 2021/2023%s",
+          letters_makowski_packages[5]
+        )
       )[packages])
     )
   } else if (format == "markdown") {
@@ -160,7 +188,10 @@ cite_easystats <- function(packages = "easystats",
   }
 
   if (isTRUE(intext_prefix)) {
-    intext_prefix <- sprintf("Analyses were conducted using the %s collection of packages ", easystats)
+    intext_prefix <- sprintf(
+      "Analyses were conducted using the %s collection of packages ",
+      easystats
+    )
   } else if (isFALSE(intext_prefix)) {
     intext_prefix <- ""
   }
@@ -346,8 +377,8 @@ cite_easystats <- function(packages = "easystats",
       ref_packages[length(ref_packages)]
     )
     ref_packages[[2]] <- split(ref_packages[[2]], cumsum(ref_packages[[2]] == ""))
-    ref_packages.index <- grep(paste0("id: ((", paste(packages, collapse = ")|("), "))"), ref_packages[[2]])
-    ref_packages[[2]] <- unlist(ref_packages[[2]][ref_packages.index], use.names = FALSE)
+    ref_packages_index <- grep(paste0("id: ((", paste(packages, collapse = ")|("), "))"), ref_packages[[2]])
+    ref_packages[[2]] <- unlist(ref_packages[[2]][ref_packages_index], use.names = FALSE)
     ref_packages <- paste(unlist(ref_packages, use.names = FALSE), collapse = "\n")
   } else {
     ref_packages <- readLines(system.file("easystats_bib.bib", package = "report"))
@@ -363,11 +394,11 @@ cite_easystats <- function(packages = "easystats",
       )
     )
     ref_packages <- split(ref_packages, cumsum(ref_packages == ""))
-    ref_packages.index <- grep(paste0(
+    ref_packages_index <- grep(paste0(
       "((article)|(software))\\{((",
       paste(packages, collapse = ")|("), "))"
     ), ref_packages)
-    ref_packages <- unlist(ref_packages[ref_packages.index], use.names = FALSE)
+    ref_packages <- unlist(ref_packages[ref_packages_index], use.names = FALSE)
     ref_packages <- paste(unlist(ref_packages, use.names = FALSE), collapse = "\n")
   }
 
