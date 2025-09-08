@@ -89,7 +89,7 @@ report_priors.brmsfit <- function(x, ...) {
   if (length(unique(values)) == 1L && nrow(params) > 1L) {
     text <- paste0("all set as ", values[1])
   } else {
-    text <- paste0("set as ", values)
+    text <- paste0("set as ", datawizard::text_concatenate(values))
   }
 
   text <- paste0("Priors over parameters were ", text, " distributions")
