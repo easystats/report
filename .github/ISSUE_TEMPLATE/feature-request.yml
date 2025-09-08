@@ -1,8 +1,23 @@
 name: Feature request
 description: Suggest a new idea or enhancement for this project
 title: "[Feature]: "
-labels: ["enhancement :boom:"]
+labels: ["feature idea 🔥"]
+assignees: []
+projects: []
 body:
+  - type: dropdown
+    id: issue-type
+    attributes:
+      label: Issue Type
+      description: Select the type of issue
+      options:
+        - Bug
+        - Feature
+        - Task
+      default: 1
+    validations:
+      required: true
+
   - type: markdown
     attributes:
       value: |

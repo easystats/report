@@ -1,8 +1,23 @@
 name: Bug report
 description: Create a report to help us improve the package
 title: "[Bug]: "
-labels: ["bug :bug:"]
+labels: ["bug 🐛"]
+assignees: []
+projects: []
 body:
+  - type: dropdown
+    id: issue-type
+    attributes:
+      label: Issue Type
+      description: Select the type of issue
+      options:
+        - Bug
+        - Feature
+        - Task
+      default: 0
+    validations:
+      required: true
+
   - type: markdown
     attributes:
       value: |

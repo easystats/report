@@ -1,8 +1,23 @@
 name: Question
 description: Ask a question about the package usage or functionality
 title: "[Question]: "
-labels: ["question :question:"]
+labels: ["question ⁉️"]
+assignees: []
+projects: []
 body:
+  - type: dropdown
+    id: issue-type
+    attributes:
+      label: Issue Type
+      description: Select the type of issue
+      options:
+        - Bug
+        - Feature
+        - Task
+      default: 2
+    validations:
+      required: true
+
   - type: markdown
     attributes:
       value: |
