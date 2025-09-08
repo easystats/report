@@ -34,90 +34,50 @@ jobs:
             if (isCopilotTask) {
               console.log('🎯 Attempting to assign Copilot to the issue...')
               try {
-                // Try multiple Copilot username variants (testing as requested in #537)
-                let assignmentSuccess = false
-                let assignedUsername = ""
+                // Use the correct Copilot username (uppercase - matches actual bot login ID 198982749)
+                console.log('🔍 Assigning to: "Copilot" (Bot ID 198982749)')
+                const assignmentResponse = await github.rest.issues.addAssignees({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  assignees: ["Copilot"]  // Correct username for the GitHub Copilot bot
+                })
                 
-                // Try "Copilot" (uppercase - matches actual bot login)
-                try {
-                  console.log('🔍 Trying username: "Copilot" (uppercase)')
-                  await github.rest.issues.addAssignees({
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    issue_number: issue.number,
-                    assignees: ["Copilot"]
-                  })
-                  assignmentSuccess = true
-                  assignedUsername = "Copilot"
-                  console.log('✅ Success with "Copilot" (uppercase)!')
-                } catch (e1) {
-                  console.log(`❌ Failed with "Copilot": ${e1.message}`)
-                  
-                  // Try "copilot" (lowercase - previous working approach)
-                  try {
-                    console.log('🔍 Trying username: "copilot" (lowercase)')
-                    await github.rest.issues.addAssignees({
-                      owner: context.repo.owner,
-                      repo: context.repo.repo,
-                      issue_number: issue.number,
-                      assignees: ["copilot"]
-                    })
-                    assignmentSuccess = true
-                    assignedUsername = "copilot"
-                    console.log('✅ Success with "copilot" (lowercase)!')
-                  } catch (e2) {
-                    console.log(`❌ Failed with "copilot": ${e2.message}`)
-                    
-                    // Try "github-copilot" (as suggested by ChatGPT in #537)
-                    try {
-                      console.log('🔍 Trying username: "github-copilot" (as suggested)')
-                      await github.rest.issues.addAssignees({
-                        owner: context.repo.owner,
-                        repo: context.repo.repo,
-                        issue_number: issue.number,
-                        assignees: ["github-copilot"]
-                      })
-                      assignmentSuccess = true
-                      assignedUsername = "github-copilot"
-                      console.log('✅ Success with "github-copilot"!')
-                    } catch (e3) {
-                      console.log(`❌ Failed with "github-copilot": ${e3.message}`)
-                      throw new Error(`All Copilot username variants failed: Copilot, copilot, github-copilot`)
-                    }
-                  }
+                // Wait a moment for the assignment to take effect
+                await new Promise(resolve => setTimeout(resolve, 2000))
+                
+                // CRITICAL: Always verify assignment actually worked 
+                console.log('🔍 Verifying assignment took effect...')
+                const updatedIssue = await github.rest.issues.get({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number
+                })
+                
+                const assignees = updatedIssue.data.assignees || []
+                const assigneeList = assignees.map(a => `${a.login} (${a.type})`)
+                console.log(`📋 Current assignees: ${assigneeList.length > 0 ? assigneeList.join(', ') : 'none'}`)
+                
+                // Check if Copilot is actually assigned (Bot ID 198982749)
+                const copilotAssigned = assignees.some(a => 
+                  a.id === 198982749 || (a.login === 'Copilot' && a.type === 'Bot')
+                )
+                
+                if (copilotAssigned) {
+                  console.log('✅ SUCCESS: Copilot is actually assigned to the issue!')
+                } else {
+                  // Assignment API call succeeded but assignment didn't take effect
+                  console.log('❌ FAILURE: Assignment API succeeded but Copilot is NOT actually assigned')
+                  console.log('🔍 This indicates the "Copilot" username may not be accessible or valid')
+                  throw new Error('Assignment verification failed - Copilot not found in assignees list')
                 }
                 
-                if (assignmentSuccess) {
-                  console.log(`🎉 Successfully assigned Copilot using username: "${assignedUsername}"`)
-                  
-                  // Verify assignment by checking the issue
-                  try {
-                    const updatedIssue = await github.rest.issues.get({
-                      owner: context.repo.owner,
-                      repo: context.repo.repo,
-                      issue_number: issue.number
-                    })
-                    const assignees = updatedIssue.data.assignees.map(a => `${a.login} (${a.type})`)
-                    console.log(`🔍 Verification - Current assignees: ${assignees.join(', ')}`)
-                    
-                    const copilotAssigned = updatedIssue.data.assignees.some(a => 
-                      a.login.toLowerCase().includes('copilot') || a.type === 'Bot'
-                    )
-                    if (copilotAssigned) {
-                      console.log('✅ Verification successful: Copilot is now assigned to the issue!')
-                    } else {
-                      console.log('⚠️  Verification warning: Assignment may not have taken effect yet')
-                    }
-                  } catch (verifyError) {
-                    console.log(`⚠️  Could not verify assignment: ${verifyError.message}`)
-                  }
-                }
               } catch (e) {
-                console.log(`❌ Failed to assign copilot: ${e.message}`)
+                console.log(`❌ Failed to assign Copilot: ${e.message}`)
                 console.log(`🔍 Error details: ${JSON.stringify(e, null, 2)}`)
                 console.log('🔄 Falling back to assign rempsyc...')
                 try {
-                  // Fallback: assign to rempsyc, keep the label so Copilot still picks it up
+                  // Fallback: assign to rempsyc and keep the label so manual assignment can be done
                   await github.rest.issues.addAssignees({
                     owner: context.repo.owner,
                     repo: context.repo.repo,
@@ -125,10 +85,11 @@ jobs:
                     assignees: ["rempsyc"]
                   })
                   console.log('✅ Successfully assigned rempsyc as fallback!')
+                  console.log('💡 User will need to manually assign Copilot from the GitHub UI')
                 } catch (fallbackError) {
                   console.log(`❌ Failed to assign fallback rempsyc: ${fallbackError.message}`)
                   console.log(`🔍 Fallback error details: ${JSON.stringify(fallbackError, null, 2)}`)
-                  console.log('💡 Both assignment attempts failed - this indicates a deeper issue')
+                  console.log('💡 Both assignment attempts failed - this indicates a deeper permissions issue')
                   throw fallbackError
                 }
               }
