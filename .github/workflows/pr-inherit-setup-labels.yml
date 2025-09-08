@@ -19,6 +19,7 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
+            const { exec } = require('@actions/exec')
             const pr = context.payload.pull_request
             const body = pr.body || ""
             
@@ -128,15 +129,36 @@ jobs:
               return
             }
             
-            // Apply setup labels to the PR
-            try {
-              await github.rest.issues.addLabels({
-                owner: context.repo.owner, 
-                repo: context.repo.repo, 
-                issue_number: pr.number, 
-                labels: newLabels
-              })
-              core.info(`Successfully applied labels to PR #${pr.number}: ${newLabels.join(", ")}`)
-            } catch (e) {
-              core.error(`Failed to apply labels to PR: ${e.message}`)
+            // Apply setup labels to the PR using GitHub CLI (more reliable)
+            if (newLabels.length > 0) {
+              const labelsString = newLabels.join(",")
+              core.info(`Applying labels using GitHub CLI: ${labelsString}`)
+              
+              try {
+                await exec.exec("gh", [
+                  "pr", "edit", pr.number.toString(), 
+                  "--add-label", labelsString
+                ], {
+                  env: {
+                    ...process.env,
+                    GH_TOKEN: process.env.GITHUB_TOKEN,
+                    GH_REPO: `${context.repo.owner}/${context.repo.repo}`
+                  }
+                })
+                core.info(`Successfully applied labels to PR #${pr.number}: ${newLabels.join(", ")}`)
+              } catch (e) {
+                // Fallback to REST API if CLI fails
+                core.warning(`GitHub CLI failed, falling back to REST API: ${e.message}`)
+                try {
+                  await github.rest.issues.addLabels({
+                    owner: context.repo.owner, 
+                    repo: context.repo.repo, 
+                    issue_number: pr.number, 
+                    labels: newLabels
+                  })
+                  core.info(`Successfully applied labels to PR #${pr.number} via REST API: ${newLabels.join(", ")}`)
+                } catch (fallbackError) {
+                  core.error(`Failed to apply labels to PR: ${fallbackError.message}`)
+                }
+              }
             }
