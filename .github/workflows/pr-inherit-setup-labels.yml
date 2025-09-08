@@ -43,7 +43,7 @@ jobs:
             
             core.info(`Found linked issues: ${[...issueNums].join(", ")}`)
             
-            // Collect copilot setup labels from all linked issues
+            // Collect copilot setup preferences from all linked issues
             const setupLabels = new Set()
             for (const issueNum of issueNums) {
               try {
@@ -53,11 +53,22 @@ jobs:
                   issue_number: issueNum
                 })
                 
+                // Check for existing copilot-setup-* labels first
                 for (const label of issue.labels) {
                   const labelName = typeof label === "string" ? label : label.name
                   if (labelName && labelName.startsWith("copilot-setup-")) {
                     setupLabels.add(labelName)
                     core.info(`Found setup label "${labelName}" on issue #${issueNum}`)
+                  }
+                }
+                
+                // Parse setup preference from issue body text if no labels found
+                if (setupLabels.size === 0 && issue.body) {
+                  const setupPreferenceMatch = issue.body.match(/### Copilot setup preference\s*\n\s*(copilot-setup-(?:light|full))/m)
+                  if (setupPreferenceMatch) {
+                    const setupPreference = setupPreferenceMatch[1]
+                    setupLabels.add(setupPreference)
+                    core.info(`Extracted setup preference "${setupPreference}" from issue #${issueNum} body`)
                   }
                 }
               } catch (e) {
@@ -67,8 +78,45 @@ jobs:
             
             const labelsToAdd = [...setupLabels]
             if (labelsToAdd.length === 0) {
-              core.info("No copilot-setup-* labels found on linked issues.")
+              core.info("No copilot-setup-* preferences found on linked issues.")
               return
+            }
+            
+            core.info(`Setup preferences found: ${labelsToAdd.join(", ")}`)
+            
+            // Ensure the setup preference labels exist in the repository
+            for (const labelName of labelsToAdd) {
+              try {
+                await github.rest.issues.getLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: labelName
+                })
+                core.info(`Label "${labelName}" already exists`)
+              } catch (e) {
+                if (e.status === 404) {
+                  // Create the label if it doesn't exist
+                  const labelColor = labelName.includes("light") ? "d1ecf1" : "b3d4fc"
+                  const labelDescription = labelName.includes("light") 
+                    ? "Copilot light setup - for documentation, configs, minor fixes"
+                    : "Copilot full setup - for code changes, new features, complete R environment"
+                  
+                  try {
+                    await github.rest.issues.createLabel({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      name: labelName,
+                      color: labelColor,
+                      description: labelDescription
+                    })
+                    core.info(`Created new label "${labelName}"`)
+                  } catch (createError) {
+                    core.warning(`Failed to create label "${labelName}": ${createError.message}`)
+                  }
+                } else {
+                  core.warning(`Error checking label "${labelName}": ${e.message}`)
+                }
+              }
             }
             
             // Check if PR already has these labels to avoid duplicates

@@ -25,10 +25,12 @@ jobs:
             // Adjust condition to your template (label, title prefix, or issue type)
             const titleMatches = issue.title.startsWith("[Copilot]: ")
             const labelMatches = issue.labels.some(l => l.name.toLowerCase() === "robot :robot:")
-            const isCopilotTask = titleMatches || labelMatches
+            const setupLabelMatches = issue.labels.some(l => l.name.startsWith("copilot-setup-"))
+            const isCopilotTask = titleMatches || labelMatches || setupLabelMatches
             
             console.log(`🔍 Title starts with "[Copilot]: ": ${titleMatches}`)
             console.log(`🔍 Has "robot :robot:" label: ${labelMatches}`)
+            console.log(`🔍 Has "copilot-setup-*" label: ${setupLabelMatches}`)
             console.log(`✅ Is Copilot task: ${isCopilotTask}`)
 
             if (isCopilotTask) {
