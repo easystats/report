@@ -69,6 +69,16 @@ report_priors.brmsfit <- function(x, ...) {
     return("")
   }
 
+  # Filter out priors with missing/empty information (both location and scale are NA)
+  # This removes uninformative default priors that shouldn't be reported
+  valid_priors <- !is.na(params$Prior_Location) | !is.na(params$Prior_Scale)
+  params <- params[valid_priors, ]
+
+  # Return empty if no valid priors remain after filtering
+  if (nrow(params) == 0L) {
+    return("")
+  }
+
   values <- ifelse(params$Prior_Distribution == "normal",
     paste0(
       "mean = ",
