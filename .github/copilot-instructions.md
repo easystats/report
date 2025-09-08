@@ -96,18 +96,29 @@ if (!requireNamespace("lintr", quietly = TRUE)) {
   if (Sys.getenv("GH_PAT") != "") {
     Sys.setenv(GITHUB_TOKEN = Sys.getenv("GH_PAT"))
   }
-  # ALWAYS use remotes for development lintr installation
+  # Priority order: r-universe FIRST, then remotes as fallback
+  # Based on testing: r-universe fails due to network issues, remotes works with auth
   tryCatch({
-    if (!requireNamespace("remotes", quietly = TRUE)) {
-      install.packages("remotes", repos="https://cloud.r-project.org/")
-    }
-    remotes::install_github("r-lib/lintr")
-  }, error = function(e) {
-    cat("CRITICAL ERROR: Cannot install development lintr from r-lib/lintr\n")
-    cat("This is required for proper linting that matches CI environment.\n")
-    cat("COPILOT MUST STOP and report this issue in the PR.\n")
-    cat("User must resolve lintr installation before continuing.\n")
-    stop("Development lintr installation failed - cannot proceed")
+    # FIRST PRIORITY: Try r-universe installation
+    install.packages("lintr", repos="https://r-lib.r-universe.dev")
+    cat("SUCCESS: r-universe installation worked\n")
+  }, error = function(e1) {
+    cat("r-universe installation failed, trying remotes...\n")
+    tryCatch({
+      # FALLBACK: Use remotes for development lintr installation
+      if (!requireNamespace("remotes", quietly = TRUE)) {
+        install.packages("remotes", repos="https://cloud.r-project.org/")
+      }
+      remotes::install_github("r-lib/lintr")
+      cat("SUCCESS: remotes installation worked\n")
+    }, error = function(e2) {
+      cat("CRITICAL ERROR: Cannot install development lintr from any source\n")
+      cat("Tried: 1) r-universe (failed), 2) remotes (failed)\n")
+      cat("This is required for proper linting that matches CI environment.\n")
+      cat("COPILOT MUST STOP and report this issue in the PR.\n")
+      cat("User must resolve lintr installation before continuing.\n")
+      stop("Development lintr installation failed - cannot proceed")
+    })
   })
 } else {
   cat("Development lintr already installed. Version:", as.character(packageVersion("lintr")), "\n")
@@ -1132,7 +1143,7 @@ cat(paste(reprex_result, collapse = "\n"))
 - **Cause**: CI uses development lintr (`r-lib/lintr`) while local uses CRAN stable (`r-cran-lintr`)
 - **Symptoms**: Local lintr passes but CI lintr fails with stricter rules
 - **Root issue**: Development lintr has stricter rules and different function preferences
-- **Solution**: Always install development lintr to match CI. CRITICAL: MUST use remotes, NEVER use pak or CRAN:
+- **Solution**: Always install development lintr to match CI. Priority order: r-universe first, then remotes fallback:
   ```bash
   # Install development lintr to match CI - check if already installed first
   R --no-restore --no-save -e '
@@ -1141,18 +1152,28 @@ cat(paste(reprex_result, collapse = "\n"))
     if (Sys.getenv("GH_PAT") != "") {
       Sys.setenv(GITHUB_TOKEN = Sys.getenv("GH_PAT"))
     }
-    # ALWAYS use remotes for development lintr installation
+    # Priority order: r-universe FIRST, then remotes as fallback
     tryCatch({
-      if (!requireNamespace("remotes", quietly = TRUE)) {
-        install.packages("remotes", repos="https://cloud.r-project.org/")
-      }
-      remotes::install_github("r-lib/lintr")
-    }, error = function(e) {
-      cat("CRITICAL ERROR: Cannot install development lintr from r-lib/lintr\n")
-      cat("This is required for proper linting that matches CI environment.\n")
-      cat("COPILOT MUST STOP and report this issue in the PR.\n")
-      cat("User must resolve lintr installation before continuing.\n")
-      stop("Development lintr installation failed - cannot proceed")
+      # FIRST PRIORITY: Try r-universe installation
+      install.packages("lintr", repos="https://r-lib.r-universe.dev")
+      cat("SUCCESS: r-universe installation worked\n")
+    }, error = function(e1) {
+      cat("r-universe installation failed, trying remotes...\n")
+      tryCatch({
+        # FALLBACK: Use remotes for development lintr installation
+        if (!requireNamespace("remotes", quietly = TRUE)) {
+          install.packages("remotes", repos="https://cloud.r-project.org/")
+        }
+        remotes::install_github("r-lib/lintr")
+        cat("SUCCESS: remotes installation worked\n")
+      }, error = function(e2) {
+        cat("CRITICAL ERROR: Cannot install development lintr from any source\n")
+        cat("Tried: 1) r-universe (failed), 2) remotes (failed)\n")
+        cat("This is required for proper linting that matches CI environment.\n")
+        cat("COPILOT MUST STOP and report this issue in the PR.\n")
+        cat("User must resolve lintr installation before continuing.\n")
+        stop("Development lintr installation failed - cannot proceed")
+      })
     })
   } else {
     cat("Development lintr already installed. Version:", as.character(packageVersion("lintr")), "\n")
