@@ -1,0 +1,85 @@
+name: Bug report
+description: Create a report to help us improve the package
+title: "[Bug]: "
+labels: ["bug 🐛"]
+assignees: []
+projects: []
+type: Bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for using `{report}` and for reporting a bug! Before filing this issue, please:
+
+        1. **Update to the latest version**: Try updating to the latest versions of the *easystats* packages with `easystats::install_latest()`. Refresh your R session afterwards (Ctrl+Shift+F10 in RStudio).
+
+        2. **Search existing issues**: Check if this bug has already been [reported or fixed](https://github.com/easystats/report/issues).
+
+        3. **Create a reprex**: Please provide a minimal **repr**oducible **ex**ample using the [reprex](http://reprex.tidyverse.org/) package. The process of creating a reprex often helps discover the solution!
+
+        Please fill out the sections below to help us understand and fix the issue.
+
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+      placeholder: Describe what happened...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction-steps
+    attributes:
+      label: Steps to reproduce
+      description: Detailed steps to reproduce the behaviour
+      placeholder: |
+        1. Load the package with `library(report)`
+        2. Run function `...`
+        3. See error
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen.
+      placeholder: What should have happened instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reprex
+    attributes:
+      label: Reproducible example
+      description: Please provide a minimal reproducible example (reprex) if possible
+      placeholder: |
+        ```r
+        library(report)
+        # Your code here that demonstrates the bug
+        ```
+      render: r
+
+  - type: input
+    id: package-version
+    attributes:
+      label: Package version
+      description: What version of the report package are you using?
+      placeholder: "e.g., 0.6.1"
+    validations:
+      required: true
+
+  - type: textarea
+    id: session-info
+    attributes:
+      label: R session information
+      description: Please run `sessionInfo()` and paste the output here
+      placeholder: Paste the output of sessionInfo() here
+      render: r
+
+

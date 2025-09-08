@@ -49,32 +49,52 @@ jobs:
             PR_NUMBER=$(jq -r '.number' < "$GITHUB_EVENT_PATH")
             echo "PR number: $PR_NUMBER"
 
-            # Get changed files from the PR
-            FILES=$(curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+            # First check for setup labels on the PR (highest priority)
+            echo "Checking PR labels for setup preferences..."
+            PR_LABELS=$(curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" \
               -H "Accept: application/vnd.github+json" \
-              "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/files?per_page=100" \
-              | jq -r '.[].filename')
+              "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}" \
+              | jq -r '.labels[].name')
 
-            echo "Files in PR:"
-            echo "${FILES}"
+            echo "PR labels: ${PR_LABELS}"
 
-            # If ANY file is not in the "docs/config-only" set -> need R
-            # Allowed-only set (docs/config): tweak as you like
-            # Note: use a temporary file to avoid word-splitting issues
-            echo "${FILES}" > /tmp/pr_files.txt
-
-            if grep -E '\.(R|Rmd|Rd)$' /tmp/pr_files.txt >/dev/null || \
-               grep -E '^(R/|tests/|man/|vignettes/|src/)' /tmp/pr_files.txt >/dev/null; then
-              echo "Detected R-related paths in PR."
+            # Check for explicit setup labels
+            if echo "${PR_LABELS}" | grep -q "copilot-setup-light"; then
+              echo "Found 'copilot-setup-light' label on PR - forcing light setup"
+              R_NEEDED=false
+            elif echo "${PR_LABELS}" | grep -q "copilot-setup-full"; then
+              echo "Found 'copilot-setup-full' label on PR - forcing full setup"
               R_NEEDED=true
             else
-              # Anything outside the allowed docs/config list? Then R is needed.
-              if grep -v -E '^(\.github/copilot-instructions\.md|\.github/workflows/|README\.md|\.gitignore|\.Rbuildignore|NEWS\.md|CONTRIBUTING\.md|LICENSE|CITATION\.cff|DESCRIPTION|cran-comments\.md|.+\.md$|.+\.ya?ml$)$' /tmp/pr_files.txt | grep -E '.' >/dev/null; then
-                echo "Changes go beyond docs/config-only."
+              echo "No explicit setup labels found, analyzing changed files..."
+
+              # Get changed files from the PR
+              FILES=$(curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+                -H "Accept: application/vnd.github+json" \
+                "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/files?per_page=100" \
+                | jq -r '.[].filename')
+
+              echo "Files in PR:"
+              echo "${FILES}"
+
+              # If ANY file is not in the "docs/config-only" set -> need R
+              # Allowed-only set (docs/config): tweak as you like
+              # Note: use a temporary file to avoid word-splitting issues
+              echo "${FILES}" > /tmp/pr_files.txt
+
+              if grep -E '\.(R|Rmd|Rd)$' /tmp/pr_files.txt >/dev/null || \
+                 grep -E '^(R/|tests/|man/|vignettes/|src/)' /tmp/pr_files.txt >/dev/null; then
+                echo "Detected R-related paths in PR."
                 R_NEEDED=true
               else
-                echo "PR is docs/config-only."
-                R_NEEDED=false
+                # Anything outside the allowed docs/config list? Then R is needed.
+                if grep -v -E '^(\.github/copilot-instructions\.md|\.github/workflows/|README\.md|\.gitignore|\.Rbuildignore|NEWS\.md|CONTRIBUTING\.md|LICENSE|CITATION\.cff|DESCRIPTION|cran-comments\.md|.+\.md$|.+\.ya?ml$)$' /tmp/pr_files.txt | grep -E '.' >/dev/null; then
+                  echo "Changes go beyond docs/config-only."
+                  R_NEEDED=true
+                else
+                  echo "PR is docs/config-only."
+                  R_NEEDED=false
+                fi
               fi
             fi
 
@@ -246,7 +266,7 @@ jobs:
             echo "  - R setup SKIPPED - only documentation/config changes detected"
             echo ""
             if [ "${GITHUB_EVENT_NAME:-}" = "pull_request" ]; then
-              echo "Decision based on PR file analysis using GitHub API"
+              echo "Decision based on PR labels and/or file analysis using GitHub API"
             else
               echo "Decision based on git diff analysis"
             fi

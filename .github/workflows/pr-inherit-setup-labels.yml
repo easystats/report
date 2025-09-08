@@ -1,0 +1,94 @@
+name: Inherit setup labels from linked issues
+description: Automatically copy copilot setup labels from issues to PRs when PRs reference issues
+
+on:
+  pull_request_target:
+    types: [opened, edited, reopened, synchronize]
+
+permissions:
+  pull-requests: write
+  issues: write
+  contents: read
+
+jobs:
+  inherit-setup-labels:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Copy setup labels from linked issues
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request
+            const body = pr.body || ""
+            
+            // Find linked issues like #123, "Closes #123", "Fixes #123", etc.
+            const issuePatterns = [
+              /#(\d+)/g,
+              /(?:close|closes|closed|fix|fixes|fixed|resolve|resolves|resolved)\s+#(\d+)/gi
+            ]
+            
+            const issueNums = new Set()
+            for (const pattern of issuePatterns) {
+              const matches = [...body.matchAll(pattern)]
+              for (const match of matches) {
+                issueNums.add(Number(match[1]))
+              }
+            }
+            
+            if (issueNums.size === 0) {
+              core.info("No linked issues found in PR body.")
+              return
+            }
+            
+            core.info(`Found linked issues: ${[...issueNums].join(", ")}`)
+            
+            // Collect copilot setup labels from all linked issues
+            const setupLabels = new Set()
+            for (const issueNum of issueNums) {
+              try {
+                const { data: issue } = await github.rest.issues.get({
+                  owner: context.repo.owner, 
+                  repo: context.repo.repo, 
+                  issue_number: issueNum
+                })
+                
+                for (const label of issue.labels) {
+                  const labelName = typeof label === "string" ? label : label.name
+                  if (labelName && labelName.startsWith("copilot-setup-")) {
+                    setupLabels.add(labelName)
+                    core.info(`Found setup label "${labelName}" on issue #${issueNum}`)
+                  }
+                }
+              } catch (e) {
+                core.warning(`Failed to load issue #${issueNum}: ${e.message}`)
+              }
+            }
+            
+            const labelsToAdd = [...setupLabels]
+            if (labelsToAdd.length === 0) {
+              core.info("No copilot-setup-* labels found on linked issues.")
+              return
+            }
+            
+            // Check if PR already has these labels to avoid duplicates
+            const currentLabels = pr.labels.map(l => l.name)
+            const newLabels = labelsToAdd.filter(label => !currentLabels.includes(label))
+            
+            if (newLabels.length === 0) {
+              core.info("PR already has all relevant setup labels.")
+              return
+            }
+            
+            // Apply setup labels to the PR
+            try {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner, 
+                repo: context.repo.repo, 
+                issue_number: pr.number, 
+                labels: newLabels
+              })
+              core.info(`Successfully applied labels to PR #${pr.number}: ${newLabels.join(", ")}`)
+            } catch (e) {
+              core.error(`Failed to apply labels to PR: ${e.message}`)
+            }

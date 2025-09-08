@@ -1,0 +1,58 @@
+name: Question
+description: Ask a question about the package usage or functionality
+title: "[Question]: "
+labels: ["question ⁉️"]
+assignees: []
+projects: []
+type: Feature
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for your question! Before asking, please check:
+        
+        1. **Documentation**: Visit our [documentation site](https://easystats.github.io/report/)
+        2. **Discussions**: Browse [existing discussions](https://github.com/easystats/report/discussions) for similar questions
+        3. **Update packages**: Ensure you have the latest version with `easystats::install_latest()`
+        
+        Please provide details to help us give you the best answer.
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: What would you like to know?
+      placeholder: Describe your question in detail...
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Provide context about what you're trying to accomplish
+      placeholder: What are you trying to do? What have you tried so far?
+    validations:
+      required: true
+
+  - type: textarea
+    id: example-code
+    attributes:
+      label: Code example
+      description: If relevant, provide a code example that illustrates your question
+      placeholder: |
+        ```r
+        library(report)
+        # Your code here
+        ```
+      render: r
+
+  - type: textarea
+    id: session-info
+    attributes:
+      label: R session information
+      description: Please run `sessionInfo()` and paste the output here (if relevant to your question)
+      placeholder: Paste the output of sessionInfo() here
+      render: r
+
+
