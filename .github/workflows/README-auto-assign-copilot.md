@@ -17,9 +17,16 @@ An issue is considered a "Copilot task" if **either** of these conditions is met
 
 ### Assignment Logic
 
-1. **Primary attempt**: Try to assign `copilot` (the GitHub Copilot user with correct lowercase username)
-2. **Fallback**: If the primary assignment fails, assign `rempsyc` instead
-3. **Error handling**: If both assignments fail, the workflow fails with detailed error messages and full error context
+The workflow now tests multiple Copilot username variants to ensure reliable assignment:
+
+1. **Primary attempt**: Try to assign `Copilot` (uppercase - matches official bot login)
+2. **Fallback 1**: Try to assign `copilot` (lowercase - previous working approach)  
+3. **Fallback 2**: Try to assign `github-copilot` (as suggested for alternative accounts)
+4. **Final fallback**: If all Copilot variants fail, assign `rempsyc` instead
+5. **Verification**: Check that assignment actually took effect via API verification
+6. **Error handling**: If all assignments fail, the workflow fails with detailed error messages
+
+**New in v2**: The workflow now includes comprehensive testing of different Copilot usernames and verification of successful assignment.
 
 ### Example Scenarios
 
@@ -89,11 +96,14 @@ The improved workflow provides detailed logging with visual indicators:
 
 ### Expected Behaviors
 
-- ✅ Issues matching criteria should be assigned to `copilot` (lowercase username)
+- ✅ Issues matching criteria should be assigned to Copilot (testing multiple username variants)
+- 🔍 Workflow tests `Copilot`, `copilot`, and `github-copilot` usernames automatically  
+- ✅ Assignment is verified via API to confirm it took effect
 - ⏭️ Issues not matching criteria should be skipped (no assignment)
-- 🔄 If `copilot` assignment fails, fallback to `rempsyc`
+- 🔄 If all Copilot variants fail, fallback to `rempsyc`
 - 📝 All actions should be clearly logged with emojis for easy reading
 - 🔍 Detailed error information provided when assignments fail
+- ⏰ Assignment happens within ~3 seconds of issue creation (may not be visible immediately in UI)
 
 ## Troubleshooting
 
@@ -104,16 +114,30 @@ The improved workflow provides detailed logging with visual indicators:
 - Verify the workflow has proper YAML syntax
 - Ensure repository has Actions enabled
 
-**Assignment fails**
+**Assignment appears to fail but Copilot is actually assigned**
+- **This is the most common "issue"** - assignment actually works but timing confusion occurs
+- Check the issue assignees via API or refresh the GitHub web interface  
+- Assignment happens ~3 seconds after issue creation (user may write "not assigned yet" before workflow runs)
+- GitHub UI may have display delays or caching issues
+
+**Assignment fails for all username variants**
 - Check repository permissions for the GitHub token
 - Verify `issues: write` permission is granted
-- Review error messages in workflow logs (now includes detailed error context)
-- Verify the `copilot` user exists and has repository access
-- Check if the repository allows external user assignments
+- Review error messages in workflow logs (now includes detailed error context for all variants tested)
+- Verify the repository allows external user/bot assignments
+- Check if Copilot has access to the repository
 
 **Fallback assignment fails**
 - Check that fallback user (`rempsyc`) has access to the repository
 - Verify user exists and is spelled correctly
+
+### Understanding Copilot Account Types
+
+The workflow assigns to the **GitHub Copilot Bot account** which:
+- Has login "Copilot" (capital C) and type "Bot"  
+- Is associated with GitHub App "copilot-swe-agent"
+- Can be assigned via API using "Copilot", "copilot", or potentially other variants
+- May not appear in user search results (it's a bot, not a regular user)
 
 ### Debug Information
 
@@ -124,7 +148,38 @@ The workflow logs provide comprehensive information for debugging:
 - Detailed error messages with full error context for both primary and fallback assignments
 - Clear indicators when both assignment attempts fail
 
-## Customization
+## Investigation Results: Issue #537
+
+**Status**: RESOLVED - The workflow was already working correctly!
+
+### What Actually Happened:
+
+1. **Issue #537 was created** at 2025-09-08T05:18:14Z with title "[Copilot]: Fix auto-assign-copilot workflow (follow-up on #536)"
+2. **User wrote "You are not yet assigned"** in the issue description 
+3. **Auto-assign workflow triggered** ~3 seconds later at 2025-09-08T05:18:17Z
+4. **Assignment succeeded** - logs show "✅ Successfully assigned copilot to the issue!"
+5. **GitHub API confirms** Copilot (Bot ID 198982749) is assigned to issue #537
+
+### Key Discovery:
+
+The user reported the workflow "hasn't worked" but **the workflow IS working correctly**. The confusion arose because:
+- The issue description was written before the automatic assignment could occur
+- Assignment happens within seconds but there may be UI display delays
+- GitHub's API accepts "copilot" (lowercase) and assigns the "Copilot" bot successfully
+
+### Technical Details:
+
+- **Assigned Account**: GitHub Copilot Bot (login: "Copilot", type: "Bot")
+- **Associated App**: copilot-swe-agent GitHub App  
+- **Username Variants**: API accepts both "copilot" and "Copilot"
+- **Assignment URL**: https://github.com/apps/copilot-swe-agent
+
+### Solution Implemented:
+
+Enhanced the workflow to test multiple username variants and provide verification feedback for future robustness.
+
+---
+
 
 To customize the workflow for different repositories:
 

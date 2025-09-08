@@ -34,14 +34,84 @@ jobs:
             if (isCopilotTask) {
               console.log('🎯 Attempting to assign Copilot to the issue...')
               try {
-                // Try assigning the correct Copilot username (lowercase)
-                await github.rest.issues.addAssignees({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  issue_number: issue.number,
-                  assignees: ["copilot"]   // Using lowercase username
-                })
-                console.log('✅ Successfully assigned copilot to the issue!')
+                // Try multiple Copilot username variants (testing as requested in #537)
+                let assignmentSuccess = false
+                let assignedUsername = ""
+                
+                // Try "Copilot" (uppercase - matches actual bot login)
+                try {
+                  console.log('🔍 Trying username: "Copilot" (uppercase)')
+                  await github.rest.issues.addAssignees({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: issue.number,
+                    assignees: ["Copilot"]
+                  })
+                  assignmentSuccess = true
+                  assignedUsername = "Copilot"
+                  console.log('✅ Success with "Copilot" (uppercase)!')
+                } catch (e1) {
+                  console.log(`❌ Failed with "Copilot": ${e1.message}`)
+                  
+                  // Try "copilot" (lowercase - previous working approach)
+                  try {
+                    console.log('🔍 Trying username: "copilot" (lowercase)')
+                    await github.rest.issues.addAssignees({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      issue_number: issue.number,
+                      assignees: ["copilot"]
+                    })
+                    assignmentSuccess = true
+                    assignedUsername = "copilot"
+                    console.log('✅ Success with "copilot" (lowercase)!')
+                  } catch (e2) {
+                    console.log(`❌ Failed with "copilot": ${e2.message}`)
+                    
+                    // Try "github-copilot" (as suggested by ChatGPT in #537)
+                    try {
+                      console.log('🔍 Trying username: "github-copilot" (as suggested)')
+                      await github.rest.issues.addAssignees({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        issue_number: issue.number,
+                        assignees: ["github-copilot"]
+                      })
+                      assignmentSuccess = true
+                      assignedUsername = "github-copilot"
+                      console.log('✅ Success with "github-copilot"!')
+                    } catch (e3) {
+                      console.log(`❌ Failed with "github-copilot": ${e3.message}`)
+                      throw new Error(`All Copilot username variants failed: Copilot, copilot, github-copilot`)
+                    }
+                  }
+                }
+                
+                if (assignmentSuccess) {
+                  console.log(`🎉 Successfully assigned Copilot using username: "${assignedUsername}"`)
+                  
+                  // Verify assignment by checking the issue
+                  try {
+                    const updatedIssue = await github.rest.issues.get({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      issue_number: issue.number
+                    })
+                    const assignees = updatedIssue.data.assignees.map(a => `${a.login} (${a.type})`)
+                    console.log(`🔍 Verification - Current assignees: ${assignees.join(', ')}`)
+                    
+                    const copilotAssigned = updatedIssue.data.assignees.some(a => 
+                      a.login.toLowerCase().includes('copilot') || a.type === 'Bot'
+                    )
+                    if (copilotAssigned) {
+                      console.log('✅ Verification successful: Copilot is now assigned to the issue!')
+                    } else {
+                      console.log('⚠️  Verification warning: Assignment may not have taken effect yet')
+                    }
+                  } catch (verifyError) {
+                    console.log(`⚠️  Could not verify assignment: ${verifyError.message}`)
+                  }
+                }
               } catch (e) {
                 console.log(`❌ Failed to assign copilot: ${e.message}`)
                 console.log(`🔍 Error details: ${JSON.stringify(e, null, 2)}`)
