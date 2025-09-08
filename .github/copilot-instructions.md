@@ -92,26 +92,32 @@ sudo apt install -y r-cran-dplyr r-cran-rlang r-cran-testthat
 # Check if lintr is already installed first to save resources/time/errors
 R --no-restore --no-save -e '
 if (!requireNamespace("lintr", quietly = TRUE)) {
-  # Set GitHub token if available to avoid rate limits
+  # Set GitHub token if available to avoid rate limits (use GH_PAT directly)
   if (Sys.getenv("GH_PAT") != "") {
-    Sys.setenv(GITHUB_TOKEN = Sys.getenv("GH_PAT"))
+    Sys.setenv(GITHUB_PAT = Sys.getenv("GH_PAT"))
   }
-  # Try pak first
-  if (!requireNamespace("pak", quietly = TRUE)) {
-    install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")
-  }
+  # Priority order: r-universe FIRST, then remotes as fallback
+  # Based on testing with whitelisted r-lib.r-universe.dev and cdn.r-universe.dev: both r-universe and remotes work successfully
   tryCatch({
-    pak::pak("r-lib/lintr")
+    # FIRST PRIORITY: Try r-universe installation
+    install.packages("lintr", repos="https://r-lib.r-universe.dev")
+    cat("SUCCESS: r-universe installation worked\n")
   }, error = function(e1) {
-    # Fallback to remotes if pak fails
+    cat("r-universe installation failed, trying remotes...\n")
     tryCatch({
+      # FALLBACK: Use remotes for development lintr installation
       if (!requireNamespace("remotes", quietly = TRUE)) {
         install.packages("remotes", repos="https://cloud.r-project.org/")
       }
       remotes::install_github("r-lib/lintr")
+      cat("SUCCESS: remotes installation worked\n")
     }, error = function(e2) {
-      cat("WARNING: Cannot install development lintr. Make high-confidence lint changes only.\n")
-      cat("Proper lint fixes will be completed on second run when copilot setup workflow runs.\n")
+      cat("CRITICAL ERROR: Cannot install development lintr from any source\n")
+      cat("Tried: 1) r-universe (failed), 2) remotes (failed)\n")
+      cat("This is required for proper linting that matches CI environment.\n")
+      cat("COPILOT MUST STOP and report this issue in the PR.\n")
+      cat("User must resolve lintr installation before continuing.\n")
+      stop("Development lintr installation failed - cannot proceed")
     })
   })
 } else {
@@ -178,8 +184,10 @@ if (!requireNamespace("reprex", quietly = TRUE)) {
     tryCatch({
       install.packages("reprex", repos="https://r-universe.dev")
     }, error = function(e2) {
-      install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")
-      pak::pak("reprex")
+      if (!requireNamespace("remotes", quietly = TRUE)) {
+        install.packages("remotes", repos="https://cloud.r-project.org/")
+      }
+      remotes::install_github("tidyverse/reprex")
     })
   })
 }
@@ -570,11 +578,11 @@ sudo apt install -y r-cran-[package-name]
 R --no-restore --no-save -e 'install.packages("[package-name]", repos="https://cloud.r-project.org/")'
 
 # Alternative sources when CRAN is blocked:
-# Via R-universe (alternative CRAN mirror):
+# Via R-universe (alternative CRAN mirror, FIRST PRIORITY):
 R --no-restore --no-save -e 'install.packages("[package-name]", repos="https://r-universe.dev")'
 
-# Via pak package (faster, handles dependencies better):
-R --no-restore --no-save -e 'install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/"); pak::pak("[package-name]")'
+# Via remotes for GitHub packages (SECOND PRIORITY):
+R --no-restore --no-save -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes"); remotes::install_github("[author]/[package-name]")'
 ```
 
 #### Common Function-Specific Package Requirements
@@ -1137,33 +1145,37 @@ cat(paste(reprex_result, collapse = "\n"))
 - **Cause**: CI uses development lintr (`r-lib/lintr`) while local uses CRAN stable (`r-cran-lintr`)
 - **Symptoms**: Local lintr passes but CI lintr fails with stricter rules
 - **Root issue**: Development lintr has stricter rules and different function preferences
-- **Solution**: Always install development lintr to match CI. Check if installed first, then try pak, fallback to remotes, NEVER use CRAN:
+- **Solution**: Always install development lintr to match CI. Priority order: r-universe first, then remotes fallback:
   ```bash
   # Install development lintr to match CI - check if already installed first
   R --no-restore --no-save -e '
   if (!requireNamespace("lintr", quietly = TRUE)) {
-    # Set GitHub token if available to avoid rate limits
+    # Set GitHub token if available to avoid rate limits (use GH_PAT directly)
     if (Sys.getenv("GH_PAT") != "") {
-      Sys.setenv(GITHUB_TOKEN = Sys.getenv("GH_PAT"))
+      Sys.setenv(GITHUB_PAT = Sys.getenv("GH_PAT"))
     }
-    # Try pak first
-    if (!requireNamespace("pak", quietly = TRUE)) {
-      install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")
-    }
+    # Priority order: r-universe FIRST, then remotes as fallback
+    # Based on testing with whitelisted r-lib.r-universe.dev and cdn.r-universe.dev: both r-universe and remotes work successfully
     tryCatch({
-      pak::pak("r-lib/lintr")
+      # FIRST PRIORITY: Try r-universe installation
+      install.packages("lintr", repos="https://r-lib.r-universe.dev")
+      cat("SUCCESS: r-universe installation worked\n")
     }, error = function(e1) {
-      # Fallback to remotes if pak fails
+      cat("r-universe installation failed, trying remotes...\n")
       tryCatch({
+        # FALLBACK: Use remotes for development lintr installation
         if (!requireNamespace("remotes", quietly = TRUE)) {
           install.packages("remotes", repos="https://cloud.r-project.org/")
         }
         remotes::install_github("r-lib/lintr")
+        cat("SUCCESS: remotes installation worked\n")
       }, error = function(e2) {
-        cat("WARNING: Cannot install development lintr\n")
-        cat("Make high-confidence lint changes only, then report that\n")
-        cat("proper lint fixes will be completed on second run when\n")
-        cat("copilot setup workflow runs automatically\n")
+        cat("CRITICAL ERROR: Cannot install development lintr from any source\n")
+        cat("Tried: 1) r-universe (failed), 2) remotes (failed)\n")
+        cat("This is required for proper linting that matches CI environment.\n")
+        cat("COPILOT MUST STOP and report this issue in the PR.\n")
+        cat("User must resolve lintr installation before continuing.\n")
+        stop("Development lintr installation failed - cannot proceed")
       })
     })
   } else {
@@ -1195,8 +1207,8 @@ cat(paste(reprex_result, collapse = "\n"))
 - **Cause**: Cannot install packages from CRAN mirrors
 - **Solutions**: 
   - Use system packages: `sudo apt install r-cran-[package]`
-  - Try R-universe: `repos="https://r-universe.dev"`  
-  - Use pak package: `pak::pak("[package-name]")`
+  - Try R-universe (FIRST PRIORITY): `repos="https://r-universe.dev"`  
+  - Use remotes for GitHub packages (SECOND PRIORITY): `remotes::install_github("[author]/[package]")`
 
 ### reprex Package Issues and Complete Debugging Guide
 **CRITICAL SOLUTION**: The main issues with reprex are missing dependencies and environment variables. 
@@ -1223,8 +1235,10 @@ if (!requireNamespace("reprex", quietly = TRUE)) {
     tryCatch({
       install.packages("reprex", repos="https://r-universe.dev")
     }, error = function(e2) {
-      install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")
-      pak::pak("reprex")
+      if (!requireNamespace("remotes", quietly = TRUE)) {
+        install.packages("remotes", repos="https://cloud.r-project.org/")
+      }
+      remotes::install_github("tidyverse/reprex")
     })
   })
 }
@@ -1399,8 +1413,8 @@ These workflows run automatically on pushes and pull requests to main/master bra
 #### 3. Package Installation Strategy
 When packages can't be installed from CRAN:
 - **Primary**: Use system packages via `sudo apt install r-cran-[package]`
-- **Alternative**: Use R-universe repository: `repos="https://r-universe.dev"`
-- **Advanced**: Use pak package for better dependency resolution
+- **Alternative (FIRST PRIORITY)**: Use R-universe repository: `repos="https://r-universe.dev"`
+- **Fallback (SECOND PRIORITY)**: Use remotes for GitHub packages: `remotes::install_github("[author]/[package]")`
 
 #### 4. Pre-Commit Validation Checklist
 Before making any PR, verify locally:

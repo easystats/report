@@ -14,6 +14,29 @@ format_model <- function(x) {
   UseMethod("format_model")
 }
 
+# Helper function to determine model type prefix based on model characteristics
+get_model_type_prefix <- function(info) {
+  if (info$is_logit) {
+    "logistic "
+  } else if (info$is_probit) {
+    "probit "
+  } else if (info$is_linear) {
+    "linear "
+  } else if (info$is_poisson) {
+    "poisson "
+  } else if (info$is_negbin) {
+    "negative-binomial "
+  } else if (info$is_ordinal) {
+    "ordinal "
+  } else if (info$is_multinomial) {
+    "multinomial "
+  } else if (info$is_survival) {
+    "survival "
+  } else {
+    "general linear "
+  }
+}
+
 #' @export
 format_model.default <- function(x) {
   info <- insight::model_info(x)
@@ -38,25 +61,8 @@ format_model.default <- function(x) {
     type <- paste0(type, "hurdle ")
   }
 
-  if (info$is_logit) {
-    type <- paste0(type, "logistic ")
-  } else if (info$is_probit) {
-    type <- paste0(type, "probit ")
-  } else if (info$is_linear) {
-    type <- paste0(type, "linear ")
-  } else if (info$is_poisson) {
-    type <- paste0(type, "poisson ")
-  } else if (info$is_negbin) {
-    type <- paste0(type, "negative-binomial ")
-  } else if (info$is_ordinal) {
-    type <- paste0(type, "ordinal ")
-  } else if (info$is_multinomial) {
-    type <- paste0(type, "multinomial ")
-  } else if (info$is_survival) {
-    type <- paste0(type, "survival ")
-  } else {
-    type <- paste0(type, "general linear ")
-  }
+  # Use helper function to get model type prefix
+  type <- paste0(type, get_model_type_prefix(info))
 
   if (info$is_mixed) {
     type <- paste0(type, "mixed ")
@@ -81,22 +87,13 @@ format_model.default <- function(x) {
 
 #' @export
 format_model.character <- function(x) {
-  if (x == "lm") {
-    type <- "linear model"
-  } else if (x == "glm") {
-    type <- "general linear model"
-  } else if (x == "glm") {
-    type <- "general linear model"
-  } else if (x == "lmer") {
-    type <- "linear mixed model"
-  } else if (x == "glmer") {
-    type <- "general linear mixed model"
-  } else if (x == "gam") {
-    type <- "general additive model"
-  } else if (x == "gamm") {
-    type <- "general additive mixed model"
-  } else {
+  switch(x,
+    lm = "linear model",
+    glm = "general linear model",
+    lmer = "linear mixed model",
+    glmer = "general linear mixed model",
+    gam = "general additive model",
+    gamm = "general additive mixed model",
     "model"
-  }
-  type
+  )
 }
