@@ -4,6 +4,7 @@ title: "[Copilot]: "
 labels: []
 assignees: ["copilot"]
 projects: []
+type: Task
 body:
   - type: markdown
     attributes:

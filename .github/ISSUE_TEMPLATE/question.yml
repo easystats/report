@@ -4,6 +4,7 @@ title: "[Question]: "
 labels: ["question ⁉️"]
 assignees: []
 projects: []
+type: Feature
 body:
   - type: markdown
     attributes:

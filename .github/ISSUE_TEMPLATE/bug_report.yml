@@ -4,6 +4,7 @@ title: "[Bug]: "
 labels: ["bug 🐛"]
 assignees: []
 projects: []
+type: Bug
 body:
   - type: markdown
     attributes:

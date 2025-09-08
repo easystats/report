@@ -4,6 +4,7 @@ title: "[Feature]: "
 labels: ["feature idea 🔥"]
 assignees: []
 projects: []
+type: Feature
 body:
   - type: markdown
     attributes:

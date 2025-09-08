@@ -53,7 +53,7 @@ jobs:
             echo "Checking PR labels for setup preferences..."
             PR_LABELS=$(curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" \
               -H "Accept: application/vnd.github+json" \
-              "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}" \
+              "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}" \
               | jq -r '.labels[].name')
 
             echo "PR labels: ${PR_LABELS}"
