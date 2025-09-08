@@ -211,18 +211,26 @@ cite_easystats <- function(packages = "easystats",
       sort(unlist(list(
         easystats = sprintf(
           paste(
-            "L\u00fcdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., Wiernik, B. M.,",
-            "Bacher, Etienne, & Th\U00E9riault, R. (2023).",
-            "easystats: Streamline model interpretation, visualization, and reporting%s [R package].",
-            "https://easystats.github.io/easystats/ (Original work published 2019)"
+            "Lüdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I.,",
+            "Wiernik, B. M., Bacher, Etienne, & Thériault, R. (2023).",
+            "easystats: Streamline model interpretation, visualization,",
+            "and reporting%s [R package].",
+            "https://easystats.github.io/easystats/",
+            "(Original work published 2019)"
           ),
-          ifelse(installed_packages["easystats"] == "", "", paste0(" (", installed_packages["easystats"], ")"))
+          ifelse(
+            installed_packages["easystats"] == "",
+            "",
+            paste0(" (", installed_packages["easystats"], ")")
+          )
         ),
         insight = c(
           article = paste(
-            "L\u00fcdecke, D., Waggoner, P., & Makowski, D. (2019).",
-            "insight: A unified interface to access information from model objects in R.",
-            "Journal of Open Source Software, 4(38), 1412. https://doi.org/10.21105/joss.01412"
+            "Lüdecke, D., Waggoner, P., & Makowski, D. (2019).",
+            "insight: A unified interface to access information from",
+            "model objects in R.",
+            "Journal of Open Source Software, 4(38), 1412.",
+            "https://doi.org/10.21105/joss.01412"
           ),
           package = sprintf(
             paste(
