@@ -100,14 +100,14 @@ if (!requireNamespace("lintr", quietly = TRUE)) {
   # Based on testing with whitelisted r-lib.r-universe.dev and cdn.r-universe.dev: both r-universe and remotes work successfully
   tryCatch({
     # FIRST PRIORITY: Try r-universe installation
-    install.packages("lintr", repos="https://r-lib.r-universe.dev")
+    install.packages("lintr", lib = .libPaths()[1], repos="https://r-lib.r-universe.dev")
     cat("SUCCESS: r-universe installation worked\n")
   }, error = function(e1) {
     cat("r-universe installation failed, trying remotes...\n")
     tryCatch({
       # FALLBACK: Use remotes for development lintr installation
       if (!requireNamespace("remotes", quietly = TRUE)) {
-        install.packages("remotes", repos="https://cloud.r-project.org/")
+        install.packages("remotes", lib = .libPaths()[1], repos="https://cloud.r-project.org/")
       }
       remotes::install_github("r-lib/lintr")
       cat("SUCCESS: remotes installation worked\n")
@@ -125,7 +125,7 @@ if (!requireNamespace("lintr", quietly = TRUE)) {
 }'
 
 # Install reprex (ESSENTIAL for creating reproducible examples in PRs)
-sudo apt install -y r-cran-reprex || R --no-restore --no-save -e 'install.packages("reprex", repos="https://cloud.r-project.org/")'
+sudo apt install -y r-cran-reprex || R --no-restore --no-save -e 'install.packages("reprex", lib = .libPaths()[1], repos="https://cloud.r-project.org/")'
 
 # Install other essential development packages via system packages when possible
 sudo apt install -y r-cran-devtools r-cran-roxygen2 r-cran-styler || echo "Some packages not available via apt, will install via R"
@@ -136,7 +136,7 @@ packages_needed <- c("styler", "roxygen2", "devtools")
 packages_installed <- rownames(installed.packages())
 packages_to_install <- setdiff(packages_needed, packages_installed)
 if (length(packages_to_install) > 0) {
-  install.packages(packages_to_install, repos="https://cloud.r-project.org/")
+  install.packages(packages_to_install, lib = .libPaths()[1], repos="https://cloud.r-project.org/")
 }
 '
 ```
@@ -172,20 +172,20 @@ if (length(missing_packages) > 0) {
 ```bash
 # Step 1: Install required dependencies for reprex
 sudo apt install -y pandoc
-R --no-restore --no-save -e 'install.packages(c("knitr", "rmarkdown"), repos="https://cloud.r-project.org/")'
+R --no-restore --no-save -e 'install.packages(c("knitr", "rmarkdown"), lib = .libPaths()[1], repos="https://cloud.r-project.org/")'
 
 # Step 2: Install reprex package
 R --no-restore --no-save -e '
 if (!requireNamespace("reprex", quietly = TRUE)) {
   # Try multiple installation methods
   tryCatch({
-    install.packages("reprex", repos="https://cloud.r-project.org/")
+    install.packages("reprex", lib = .libPaths()[1], repos="https://cloud.r-project.org/")
   }, error = function(e1) {
     tryCatch({
-      install.packages("reprex", repos="https://r-universe.dev")
+      install.packages("reprex", lib = .libPaths()[1], repos="https://r-universe.dev")
     }, error = function(e2) {
       if (!requireNamespace("remotes", quietly = TRUE)) {
-        install.packages("remotes", repos="https://cloud.r-project.org/")
+        install.packages("remotes", lib = .libPaths()[1], repos="https://cloud.r-project.org/")
       }
       remotes::install_github("tidyverse/reprex")
     })
@@ -233,13 +233,13 @@ grep -A2 -B2 "requireNamespace\|check_installed" R/[your_function_file].R
 ```bash
 # Step 2: Install ONLY the packages found in Step 1
 # Example: If working on report.lm(), you might need modelbased and effectsize
-R --no-restore --no-save -e 'install.packages(c("modelbased", "effectsize"), repos="https://cloud.r-project.org/")'
+R --no-restore --no-save -e 'install.packages(c("modelbased", "effectsize"), lib = .libPaths()[1], repos="https://cloud.r-project.org/")'
 
 # Example: If working on report.lavaan(), you might need lavaan  
-R --no-restore --no-save -e 'install.packages("lavaan", repos="https://cloud.r-project.org/")'
+R --no-restore --no-save -e 'install.packages("lavaan", lib = .libPaths()[1], repos="https://cloud.r-project.org/")'
 
 # Example: If working on report.brmsfit(), you need brms and related packages
-R --no-restore --no-save -e 'install.packages(c("brms", "rstanarm"), repos="https://cloud.r-project.org/")'
+R --no-restore --no-save -e 'install.packages(c("brms", "rstanarm"), lib = .libPaths()[1], repos="https://cloud.r-project.org/")'
 ```
 
 #### Use report's Built-in Utilities (After Building Package)
@@ -256,7 +256,7 @@ if (file.exists("DESCRIPTION")) {
 # Load report and install only specific packages for your function
 library(report)
 # ONLY install packages needed for your specific function:
-# install.packages("your_specific_package", repos="https://cloud.r-project.org/")
+# install.packages("your_specific_package", lib = .libPaths()[1], repos="https://cloud.r-project.org/")
 '
 ```
 
@@ -569,20 +569,20 @@ Many functions require optional packages. The package uses `requireNamespace()` 
 
 ```bash
 # ALWAYS install reprex first (essential for PR creation):
-sudo apt install -y r-cran-reprex || R --no-restore --no-save -e 'install.packages("reprex", repos="https://cloud.r-project.org/")'
+sudo apt install -y r-cran-reprex || R --no-restore --no-save -e 'install.packages("reprex", lib = .libPaths()[1], repos="https://cloud.r-project.org/")'
 
 # Via system packages (recommended for individual packages):
 sudo apt install -y r-cran-[package-name]
 
 # Via R (if CRAN network available, for individual packages):
-R --no-restore --no-save -e 'install.packages("[package-name]", repos="https://cloud.r-project.org/")'
+R --no-restore --no-save -e 'install.packages("[package-name]", lib = .libPaths()[1], repos="https://cloud.r-project.org/")'
 
 # Alternative sources when CRAN is blocked:
 # Via R-universe (alternative CRAN mirror, FIRST PRIORITY):
-R --no-restore --no-save -e 'install.packages("[package-name]", repos="https://r-universe.dev")'
+R --no-restore --no-save -e 'install.packages("[package-name]", lib = .libPaths()[1], repos="https://r-universe.dev")'
 
 # Via remotes for GitHub packages (SECOND PRIORITY):
-R --no-restore --no-save -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes"); remotes::install_github("[author]/[package-name]")'
+R --no-restore --no-save -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes", lib = .libPaths()[1]); remotes::install_github("[author]/[package-name]")'
 ```
 
 #### Common Function-Specific Package Requirements
@@ -613,16 +613,16 @@ grep -A2 -B2 "requireNamespace\|@importFrom" R/[function_file].R
 #### Targeted Installation Examples
 ```bash
 # Example 1: Working on report.lm() function
-R --no-restore --no-save -e 'install.packages(c("modelbased", "effectsize"), repos="https://cloud.r-project.org/")'
+R --no-restore --no-save -e 'install.packages(c("modelbased", "effectsize"), lib = .libPaths()[1], repos="https://cloud.r-project.org/")'
 
 # Example 2: Working on report.lavaan() function  
-R --no-restore --no-save -e 'install.packages("lavaan", repos="https://cloud.r-project.org/")'
+R --no-restore --no-save -e 'install.packages("lavaan", lib = .libPaths()[1], repos="https://cloud.r-project.org/")'
 
 # Example 3: Working on report.brmsfit() function
-R --no-restore --no-save -e 'install.packages(c("brms", "rstanarm"), repos="https://cloud.r-project.org/")'
+R --no-restore --no-save -e 'install.packages(c("brms", "rstanarm"), lib = .libPaths()[1], repos="https://cloud.r-project.org/")'
 
 # Example 4: Working on report.BFBayesFactor() function
-R --no-restore --no-save -e 'install.packages("BayesFactor", repos="https://cloud.r-project.org/")'
+R --no-restore --no-save -e 'install.packages("BayesFactor", lib = .libPaths()[1], repos="https://cloud.r-project.org/")'
 ```
 
 ## Code Quality and Best Practices
@@ -1107,6 +1107,17 @@ cat(paste(reprex_result, collapse = "\n"))
 - **Cause**: Package not loaded or installed
 - **Solution**: Run `R CMD build . && R CMD INSTALL report_*.tar.gz` then `library(report)`
 
+### Package Installation "lib is not writable" Errors
+- **Cause**: R attempting to install packages to system library (`/usr/local/lib/R/site-library`) instead of user library when custom setup doesn't run
+- **Symptoms**: Warnings like `'lib = "/usr/local/lib/R/site-library"' is not writable` during package installation
+- **Root Cause**: User library directory not properly configured or `.libPaths()[1]` pointing to system directory
+- **Complete Solution**: 
+  1. Set up user library first: `mkdir -p ~/R/library && echo 'R_LIBS_USER=~/R/library' >> ~/.Renviron`
+  2. Use explicit library path: `install.packages("package", lib = "~/R/library", repos="...")`
+  3. Alternatively, restart R session after step 1 and then use: `install.packages("package", lib = .libPaths()[1], repos="...")`
+- **Prevention**: All install.packages calls in these instructions now include the `lib = .libPaths()[1]` parameter, but you must set up user library directory first
+- **Note**: This issue occurs when the pre-configured environment setup doesn't run and R defaults to system library locations
+
 ### Missing Package Errors
 - **Cause**: Suggested packages not installed
 - **Solution**: Install via `sudo apt install r-cran-[package]` or ignore if testing core functionality
@@ -1125,11 +1136,11 @@ cat(paste(reprex_result, collapse = "\n"))
 
 ### Styler Not Available
 - **Cause**: styler package not installed
-- **Solution**: Install via R: `R --no-restore --no-save -e 'install.packages("styler", repos="https://cloud.r-project.org/")'` or skip styling step if not critical
+- **Solution**: Install via R: `R --no-restore --no-save -e 'install.packages("styler", lib = .libPaths()[1], repos="https://cloud.r-project.org/")'` or skip styling step if not critical
 
 ### Roxygen2 Not Available
 - **Cause**: roxygen2 package not installed
-- **Solution**: Install via R: `R --no-restore --no-save -e 'install.packages("roxygen2", repos="https://cloud.r-project.org/")'` or use devtools: `R --no-restore --no-save -e 'devtools::document()'`
+- **Solution**: Install via R: `R --no-restore --no-save -e 'install.packages("roxygen2", lib = .libPaths()[1], repos="https://cloud.r-project.org/")'` or use devtools: `R --no-restore --no-save -e 'devtools::document()'`
 
 ### Documentation Build Failures
 - **Cause**: Documentation not updated after changing roxygen2 comments
@@ -1158,14 +1169,14 @@ cat(paste(reprex_result, collapse = "\n"))
     # Based on testing with whitelisted r-lib.r-universe.dev and cdn.r-universe.dev: both r-universe and remotes work successfully
     tryCatch({
       # FIRST PRIORITY: Try r-universe installation
-      install.packages("lintr", repos="https://r-lib.r-universe.dev")
+      install.packages("lintr", lib = .libPaths()[1], repos="https://r-lib.r-universe.dev")
       cat("SUCCESS: r-universe installation worked\n")
     }, error = function(e1) {
       cat("r-universe installation failed, trying remotes...\n")
       tryCatch({
         # FALLBACK: Use remotes for development lintr installation
         if (!requireNamespace("remotes", quietly = TRUE)) {
-          install.packages("remotes", repos="https://cloud.r-project.org/")
+          install.packages("remotes", lib = .libPaths()[1], repos="https://cloud.r-project.org/")
         }
         remotes::install_github("r-lib/lintr")
         cat("SUCCESS: remotes installation worked\n")
@@ -1221,7 +1232,7 @@ cat(paste(reprex_result, collapse = "\n"))
 ```bash
 # Install core dependencies first
 sudo apt install -y pandoc
-R --no-restore --no-save -e 'install.packages(c("knitr", "rmarkdown"), repos="https://cloud.r-project.org/")'
+R --no-restore --no-save -e 'install.packages(c("knitr", "rmarkdown"), lib = .libPaths()[1], repos="https://cloud.r-project.org/")'
 ```
 
 #### Step 2: Install reprex Package
@@ -1230,13 +1241,13 @@ R --no-restore --no-save -e 'install.packages(c("knitr", "rmarkdown"), repos="ht
 R --no-restore --no-save -e '
 if (!requireNamespace("reprex", quietly = TRUE)) {
   tryCatch({
-    install.packages("reprex", repos="https://cloud.r-project.org/")
+    install.packages("reprex", lib = .libPaths()[1], repos="https://cloud.r-project.org/")
   }, error = function(e1) {
     tryCatch({
-      install.packages("reprex", repos="https://r-universe.dev")
+      install.packages("reprex", lib = .libPaths()[1], repos="https://r-universe.dev")
     }, error = function(e2) {
       if (!requireNamespace("remotes", quietly = TRUE)) {
-        install.packages("remotes", repos="https://cloud.r-project.org/")
+        install.packages("remotes", lib = .libPaths()[1], repos="https://cloud.r-project.org/")
       }
       remotes::install_github("tidyverse/reprex")
     })
