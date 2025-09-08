@@ -17,23 +17,23 @@ format_model <- function(x) {
 # Helper function to determine model type prefix based on model characteristics
 get_model_type_prefix <- function(info) {
   if (info$is_logit) {
-    return("logistic ")
+    "logistic "
   } else if (info$is_probit) {
-    return("probit ")
+    "probit "
   } else if (info$is_linear) {
-    return("linear ")
+    "linear "
   } else if (info$is_poisson) {
-    return("poisson ")
+    "poisson "
   } else if (info$is_negbin) {
-    return("negative-binomial ")
+    "negative-binomial "
   } else if (info$is_ordinal) {
-    return("ordinal ")
+    "ordinal "
   } else if (info$is_multinomial) {
-    return("multinomial ")
+    "multinomial "
   } else if (info$is_survival) {
-    return("survival ")
+    "survival "
   } else {
-    return("general linear ")
+    "general linear "
   }
 }
 
@@ -87,20 +87,13 @@ format_model.default <- function(x) {
 
 #' @export
 format_model.character <- function(x) {
-  if (x == "lm") {
-    type <- "linear model"
-  } else if (x == "glm") {
-    type <- "general linear model"
-  } else if (x == "lmer") {
-    type <- "linear mixed model"
-  } else if (x == "glmer") {
-    type <- "general linear mixed model"
-  } else if (x == "gam") {
-    type <- "general additive model"
-  } else if (x == "gamm") {
-    type <- "general additive mixed model"
-  } else {
+  switch(x,
+    lm = "linear model",
+    glm = "general linear model",
+    lmer = "linear mixed model",
+    glmer = "general linear mixed model",
+    gam = "general additive model",
+    gamm = "general additive mixed model",
     "model"
-  }
-  type
+  )
 }

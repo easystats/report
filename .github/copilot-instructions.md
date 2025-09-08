@@ -96,23 +96,18 @@ if (!requireNamespace("lintr", quietly = TRUE)) {
   if (Sys.getenv("GH_PAT") != "") {
     Sys.setenv(GITHUB_TOKEN = Sys.getenv("GH_PAT"))
   }
-  # Try pak first
-  if (!requireNamespace("pak", quietly = TRUE)) {
-    install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")
-  }
+  # ALWAYS use remotes for development lintr installation
   tryCatch({
-    pak::pak("r-lib/lintr")
-  }, error = function(e1) {
-    # Fallback to remotes if pak fails
-    tryCatch({
-      if (!requireNamespace("remotes", quietly = TRUE)) {
-        install.packages("remotes", repos="https://cloud.r-project.org/")
-      }
-      remotes::install_github("r-lib/lintr")
-    }, error = function(e2) {
-      cat("WARNING: Cannot install development lintr. Make high-confidence lint changes only.\n")
-      cat("Proper lint fixes will be completed on second run when copilot setup workflow runs.\n")
-    })
+    if (!requireNamespace("remotes", quietly = TRUE)) {
+      install.packages("remotes", repos="https://cloud.r-project.org/")
+    }
+    remotes::install_github("r-lib/lintr")
+  }, error = function(e) {
+    cat("CRITICAL ERROR: Cannot install development lintr from r-lib/lintr\n")
+    cat("This is required for proper linting that matches CI environment.\n")
+    cat("COPILOT MUST STOP and report this issue in the PR.\n")
+    cat("User must resolve lintr installation before continuing.\n")
+    stop("Development lintr installation failed - cannot proceed")
   })
 } else {
   cat("Development lintr already installed. Version:", as.character(packageVersion("lintr")), "\n")
@@ -1137,7 +1132,7 @@ cat(paste(reprex_result, collapse = "\n"))
 - **Cause**: CI uses development lintr (`r-lib/lintr`) while local uses CRAN stable (`r-cran-lintr`)
 - **Symptoms**: Local lintr passes but CI lintr fails with stricter rules
 - **Root issue**: Development lintr has stricter rules and different function preferences
-- **Solution**: Always install development lintr to match CI. Check if installed first, then try pak, fallback to remotes, NEVER use CRAN:
+- **Solution**: Always install development lintr to match CI. CRITICAL: MUST use remotes, NEVER use pak or CRAN:
   ```bash
   # Install development lintr to match CI - check if already installed first
   R --no-restore --no-save -e '
@@ -1146,25 +1141,18 @@ cat(paste(reprex_result, collapse = "\n"))
     if (Sys.getenv("GH_PAT") != "") {
       Sys.setenv(GITHUB_TOKEN = Sys.getenv("GH_PAT"))
     }
-    # Try pak first
-    if (!requireNamespace("pak", quietly = TRUE)) {
-      install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")
-    }
+    # ALWAYS use remotes for development lintr installation
     tryCatch({
-      pak::pak("r-lib/lintr")
-    }, error = function(e1) {
-      # Fallback to remotes if pak fails
-      tryCatch({
-        if (!requireNamespace("remotes", quietly = TRUE)) {
-          install.packages("remotes", repos="https://cloud.r-project.org/")
-        }
-        remotes::install_github("r-lib/lintr")
-      }, error = function(e2) {
-        cat("WARNING: Cannot install development lintr\n")
-        cat("Make high-confidence lint changes only, then report that\n")
-        cat("proper lint fixes will be completed on second run when\n")
-        cat("copilot setup workflow runs automatically\n")
-      })
+      if (!requireNamespace("remotes", quietly = TRUE)) {
+        install.packages("remotes", repos="https://cloud.r-project.org/")
+      }
+      remotes::install_github("r-lib/lintr")
+    }, error = function(e) {
+      cat("CRITICAL ERROR: Cannot install development lintr from r-lib/lintr\n")
+      cat("This is required for proper linting that matches CI environment.\n")
+      cat("COPILOT MUST STOP and report this issue in the PR.\n")
+      cat("User must resolve lintr installation before continuing.\n")
+      stop("Development lintr installation failed - cannot proceed")
     })
   } else {
     cat("Development lintr already installed. Version:", as.character(packageVersion("lintr")), "\n")
