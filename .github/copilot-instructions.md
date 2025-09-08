@@ -97,7 +97,7 @@ if (!requireNamespace("lintr", quietly = TRUE)) {
     Sys.setenv(GITHUB_TOKEN = Sys.getenv("GH_PAT"))
   }
   # Priority order: r-universe FIRST, then remotes as fallback
-  # Based on testing: r-universe fails due to network issues, remotes works with auth
+  # Based on testing with whitelisted r-lib.r-universe.dev: r-universe fails due to CDN resolution (cdn.r-universe.dev not accessible), remotes works with auth
   tryCatch({
     # FIRST PRIORITY: Try r-universe installation
     install.packages("lintr", repos="https://r-lib.r-universe.dev")
@@ -1153,6 +1153,7 @@ cat(paste(reprex_result, collapse = "\n"))
       Sys.setenv(GITHUB_TOKEN = Sys.getenv("GH_PAT"))
     }
     # Priority order: r-universe FIRST, then remotes as fallback
+    # Based on testing with whitelisted r-lib.r-universe.dev: r-universe fails due to CDN resolution (cdn.r-universe.dev not accessible), remotes works with auth
     tryCatch({
       # FIRST PRIORITY: Try r-universe installation
       install.packages("lintr", repos="https://r-lib.r-universe.dev")
