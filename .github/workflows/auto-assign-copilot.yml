@@ -11,27 +11,27 @@ jobs:
     permissions:
       issues: write
     steps:
-      - uses: actions/github-script@v7
+      - uses: actions/github-script@v8
         with:
           script: |
             const issue = context.payload.issue
-            
+
             console.log('🤖 Auto-assign Copilot workflow started')
             console.log(`📋 Issue #${issue.number}: "${issue.title}"`)
             console.log(`🏷️  Labels: ${issue.labels.map(l => l.name).join(', ')}`)
             console.log(`👤 Issue author: ${issue.user.login}`)
             console.log(`🏠 Repository: ${context.repo.owner}/${context.repo.repo}`)
-            
+
             // Adjust condition to your template (label, title prefix, or issue type)
             const titleMatches = issue.title.startsWith("[Copilot]: ")
             const labelMatches = issue.labels.some(l => l.name.toLowerCase() === "robot :robot:")
             const setupLabelMatches = issue.labels.some(l => l.name.startsWith("copilot-setup-"))
-            
+
             // Also check if setup preference exists in issue body for newly created issues
             const hasSetupPreference = issue.body && issue.body.includes("### Copilot setup preference")
-            
+
             const isCopilotTask = titleMatches || labelMatches || setupLabelMatches || hasSetupPreference
-            
+
             console.log(`🔍 Title starts with "[Copilot]: ": ${titleMatches}`)
             console.log(`🔍 Has "robot :robot:" label: ${labelMatches}`)
             console.log(`🔍 Has "copilot-setup-*" label: ${setupLabelMatches}`)
@@ -49,30 +49,30 @@ jobs:
                   issue_number: issue.number,
                   assignees: ["Copilot"]  // Correct username for the GitHub Copilot bot
                 })
-                
+
                 // Wait a moment for the assignment to take effect
                 await new Promise(resolve => setTimeout(resolve, 2000))
-                
-                // CRITICAL: Always verify assignment actually worked 
+
+                // CRITICAL: Always verify assignment actually worked
                 console.log('🔍 Verifying assignment took effect...')
                 const updatedIssue = await github.rest.issues.get({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   issue_number: issue.number
                 })
-                
+
                 const assignees = updatedIssue.data.assignees || []
                 const assigneeList = assignees.map(a => `${a.login} (${a.type})`)
                 console.log(`📋 Current assignees: ${assigneeList.length > 0 ? assigneeList.join(', ') : 'none'}`)
-                
+
                 // Check if Copilot is actually assigned (Bot ID 198982749)
-                const copilotAssigned = assignees.some(a => 
+                const copilotAssigned = assignees.some(a =>
                   a.id === 198982749 || (a.login === 'Copilot' && a.type === 'Bot')
                 )
-                
+
                 if (copilotAssigned) {
                   console.log('✅ SUCCESS: Copilot is actually assigned to the issue!')
-                  
+
                   // Additionally, apply setup preference label to the issue itself if found in body
                   if (issue.body && hasSetupPreference) {
                     const setupPreferenceMatch = issue.body.match(/### Copilot setup preference\s*\n\s*(copilot-setup-(?:light|full))/m)
@@ -98,7 +98,7 @@ jobs:
                   console.log('🔍 This indicates the "Copilot" username may not be accessible or valid')
                   throw new Error('Assignment verification failed - Copilot not found in assignees list')
                 }
-                
+
               } catch (e) {
                 console.log(`❌ Failed to assign Copilot: ${e.message}`)
                 console.log(`🔍 Error details: ${JSON.stringify(e, null, 2)}`)
@@ -123,5 +123,5 @@ jobs:
             } else {
               console.log('⏭️  Skipping assignment - not a Copilot task')
             }
-            
+
             console.log('🏁 Auto-assign Copilot workflow completed')

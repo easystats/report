@@ -13,22 +13,22 @@ permissions:
 jobs:
   inherit-setup-labels:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Copy setup labels from linked issues
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const { exec } = require('@actions/exec')
             const pr = context.payload.pull_request
             const body = pr.body || ""
-            
+
             // Find linked issues like #123, "Closes #123", "Fixes #123", etc.
             const issuePatterns = [
               /#(\d+)/g,
               /(?:close|closes|closed|fix|fixes|fixed|resolve|resolves|resolved)\s+#(\d+)/gi
             ]
-            
+
             const issueNums = new Set()
             for (const pattern of issuePatterns) {
               const matches = [...body.matchAll(pattern)]
@@ -36,24 +36,24 @@ jobs:
                 issueNums.add(Number(match[1]))
               }
             }
-            
+
             if (issueNums.size === 0) {
               core.info("No linked issues found in PR body.")
               return
             }
-            
+
             core.info(`Found linked issues: ${[...issueNums].join(", ")}`)
-            
+
             // Collect copilot setup preferences from all linked issues
             const setupLabels = new Set()
             for (const issueNum of issueNums) {
               try {
                 const { data: issue } = await github.rest.issues.get({
-                  owner: context.repo.owner, 
-                  repo: context.repo.repo, 
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
                   issue_number: issueNum
                 })
-                
+
                 // Check for existing copilot-setup-* labels first
                 for (const label of issue.labels) {
                   const labelName = typeof label === "string" ? label : label.name
@@ -62,7 +62,7 @@ jobs:
                     core.info(`Found setup label "${labelName}" on issue #${issueNum}`)
                   }
                 }
-                
+
                 // Parse setup preference from issue body text if no labels found
                 if (setupLabels.size === 0 && issue.body) {
                   const setupPreferenceMatch = issue.body.match(/### Copilot setup preference\s*\n\s*(copilot-setup-(?:light|full))/m)
@@ -76,15 +76,15 @@ jobs:
                 core.warning(`Failed to load issue #${issueNum}: ${e.message}`)
               }
             }
-            
+
             const labelsToAdd = [...setupLabels]
             if (labelsToAdd.length === 0) {
               core.info("No copilot-setup-* preferences found on linked issues.")
               return
             }
-            
+
             core.info(`Setup preferences found: ${labelsToAdd.join(", ")}`)
-            
+
             // Ensure the setup preference labels exist in the repository
             for (const labelName of labelsToAdd) {
               try {
@@ -98,10 +98,10 @@ jobs:
                 if (e.status === 404) {
                   // Create the label if it doesn't exist
                   const labelColor = labelName.includes("light") ? "d1ecf1" : "b3d4fc"
-                  const labelDescription = labelName.includes("light") 
+                  const labelDescription = labelName.includes("light")
                     ? "Copilot light setup - for documentation, configs, minor fixes"
                     : "Copilot full setup - for code changes, new features, complete R environment"
-                  
+
                   try {
                     await github.rest.issues.createLabel({
                       owner: context.repo.owner,
@@ -119,24 +119,24 @@ jobs:
                 }
               }
             }
-            
+
             // Check if PR already has these labels to avoid duplicates
             const currentLabels = pr.labels.map(l => l.name)
             const newLabels = labelsToAdd.filter(label => !currentLabels.includes(label))
-            
+
             if (newLabels.length === 0) {
               core.info("PR already has all relevant setup labels.")
               return
             }
-            
+
             // Apply setup labels to the PR using GitHub CLI (more reliable)
             if (newLabels.length > 0) {
               const labelsString = newLabels.join(",")
               core.info(`Applying labels using GitHub CLI: ${labelsString}`)
-              
+
               try {
                 await exec.exec("gh", [
-                  "pr", "edit", pr.number.toString(), 
+                  "pr", "edit", pr.number.toString(),
                   "--add-label", labelsString
                 ], {
                   env: {
@@ -151,9 +151,9 @@ jobs:
                 core.warning(`GitHub CLI failed, falling back to REST API: ${e.message}`)
                 try {
                   await github.rest.issues.addLabels({
-                    owner: context.repo.owner, 
-                    repo: context.repo.repo, 
-                    issue_number: pr.number, 
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: pr.number,
                     labels: newLabels
                   })
                   core.info(`Successfully applied labels to PR #${pr.number} via REST API: ${newLabels.join(", ")}`)
