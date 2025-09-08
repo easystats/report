@@ -19,7 +19,7 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
-            const { exec } = require('@actions/exec')
+            const exec = require('@actions/exec')
             const pr = context.payload.pull_request
             const body = pr.body || ""
 
@@ -84,6 +84,7 @@ jobs:
             }
 
             core.info(`Setup preferences found: ${labelsToAdd.join(", ")}`)
+            core.info(`Current PR labels: ${pr.labels.map(l => l.name).join(", ") || "none"}`)
 
             // Ensure the setup preference labels exist in the repository
             for (const labelName of labelsToAdd) {
@@ -125,7 +126,9 @@ jobs:
             const newLabels = labelsToAdd.filter(label => !currentLabels.includes(label))
 
             if (newLabels.length === 0) {
-              core.info("PR already has all relevant setup labels.")
+              core.info("PR already has all relevant setup labels. No action needed.")
+              core.info(`Current labels on PR: ${currentLabels.filter(label => label.startsWith("copilot-setup-")).join(", ") || "none"}`)
+              core.info("Workflow completed successfully.")
               return
             }
 
@@ -158,7 +161,10 @@ jobs:
                   })
                   core.info(`Successfully applied labels to PR #${pr.number} via REST API: ${newLabels.join(", ")}`)
                 } catch (fallbackError) {
-                  core.error(`Failed to apply labels to PR: ${fallbackError.message}`)
+                  core.setFailed(`Failed to apply labels to PR: ${fallbackError.message}`)
+                  return
                 }
               }
             }
+            
+            core.info("Workflow completed successfully.")
