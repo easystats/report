@@ -1,0 +1,40 @@
+# .github/workflows/auto-assign-copilot.yaml
+name: Auto-assign Copilot on Copilot tasks
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  assign:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue
+            // Adjust condition to your template (label, title prefix, or issue type)
+            const isCopilotTask =
+              issue.title.startsWith("[Copilot]: ") ||
+              issue.labels.some(l => l.name.toLowerCase() === "robot :robot:")
+
+            if (isCopilotTask) {
+              try {
+                // Try assigning the Copilot app (some orgs allow this)
+                await github.rest.issues.addAssignees({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  assignees: ["Copilot"]   // if this fails, fall back below
+                })
+              } catch (e) {
+                // Fallback: assign to you, keep the label so Copilot still picks it up
+                await github.rest.issues.addAssignees({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  assignees: ["rempsyc"]
+                })
+              }
+            }
