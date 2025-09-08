@@ -13,37 +13,37 @@
 format_algorithm <- function(x) {
   algorithm <- suppressWarnings(insight::find_algorithm(x))
 
-  text <- ""
+  result <- ""
 
   if (is.null(algorithm$algorithm)) {
-    return(text)
+    return(result)
   }
 
   # Name
-  text <- algorithm$algorithm
-  if (text == "sampling") {
-    text <- "MCMC sampling"
+  result <- algorithm$algorithm
+  if (result == "sampling") {
+    result <- "MCMC sampling"
   }
 
   # Chains
   if (!is.null(algorithm$chains)) {
-    text <- paste0(
-      text,
+    result <- paste0(
+      result,
       " with ",
       algorithm$chains,
       " chains"
     )
     if (!is.null(algorithm$iterations)) {
-      text <- paste0(
-        text,
+      result <- paste0(
+        result,
         " of ",
         algorithm$iterations,
         " iterations"
       )
     }
     if (!is.null(algorithm$warmup)) {
-      text <- paste0(
-        text,
+      result <- paste0(
+        result,
         " and a warmup of ",
         algorithm$warmup
       )
@@ -59,13 +59,13 @@ format_algorithm <- function(x) {
     } else if (optimizer == "Nelder_Mead") {
       optimizer <- "Nelder-Mead"
     }
-    text <- paste0(
-      text,
+    result <- paste0(
+      result,
       " and ",
       optimizer,
       " optimizer"
     )
   }
 
-  text
+  result
 }
