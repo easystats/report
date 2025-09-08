@@ -24,7 +24,7 @@ An object of class \code{\link[=report]{report()}}.
 Create a report for \code{lavaan} objects.
 }
 \examples{
-\dontshow{if (requireNamespace("lavaan", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("lavaan", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 # Structural Equation Models (SEM)
 library(lavaan)

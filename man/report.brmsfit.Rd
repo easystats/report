@@ -20,7 +20,7 @@ follows the Sequential Effect eXistence and sIgnificance Testing framework
 (see \link[bayestestR:sexit]{SEXIT documentation}).
 }
 \examples{
-\dontshow{if (require("brms", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("brms", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 # Bayesian models
 library(brms)
