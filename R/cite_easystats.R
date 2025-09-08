@@ -85,13 +85,13 @@ cite_easystats <- function(packages = "easystats",
       "performance", "parameters",
       "see"
     ) %in% packages)
-    if (sum(letters_ludecke_packages != "") == 1) {
+    if (sum(nzchar(letters_ludecke_packages)) == 1) {
       letters_ludecke_packages <- rep("", length(letters_ludecke_packages))
     }
     letters_ludecke_articles <- .disamguation_letters(
       c("performance", "see") %in% packages
     )
-    if (sum(letters_ludecke_articles != "") == 1) {
+    if (sum(nzchar(letters_ludecke_articles)) == 1) {
       letters_ludecke_articles <- rep("", length(letters_ludecke_articles))
     }
     letters_makowski_packages <- .disamguation_letters(c(
@@ -99,7 +99,7 @@ cite_easystats <- function(packages = "easystats",
       "correlation", "modelbased",
       "report"
     ) %in% packages)
-    if (sum(letters_makowski_packages != "") == 1) {
+    if (sum(nzchar(letters_makowski_packages)) == 1) {
       letters_makowski_packages <- rep("", length(letters_makowski_packages))
     }
     easystats <- "_easystats_"
@@ -219,9 +219,9 @@ cite_easystats <- function(packages = "easystats",
             "(Original work published 2019)"
           ),
           ifelse(
-            installed_packages["easystats"] == "",
-            "",
-            paste0(" (", installed_packages["easystats"], ")")
+            nzchar(installed_packages["easystats"]),
+            paste0(" (", installed_packages["easystats"], ")"),
+            ""
           )
         ),
         insight = c(
@@ -384,7 +384,7 @@ cite_easystats <- function(packages = "easystats",
       ref_packages[-c(1:2, length(ref_packages))],
       ref_packages[length(ref_packages)]
     )
-    ref_packages[[2]] <- split(ref_packages[[2]], cumsum(ref_packages[[2]] == ""))
+    ref_packages[[2]] <- split(ref_packages[[2]], cumsum(!nzchar(ref_packages[[2]])))
     ref_packages_index <- grep(paste0("id: ((", paste(packages, collapse = ")|("), "))"), ref_packages[[2]])
     ref_packages[[2]] <- unlist(ref_packages[[2]][ref_packages_index], use.names = FALSE)
     ref_packages <- paste(unlist(ref_packages, use.names = FALSE), collapse = "\n")
@@ -401,7 +401,7 @@ cite_easystats <- function(packages = "easystats",
         installed_packages["see"]
       )
     )
-    ref_packages <- split(ref_packages, cumsum(ref_packages == ""))
+    ref_packages <- split(ref_packages, cumsum(!nzchar(ref_packages)))
     ref_packages_index <- grep(paste0(
       "((article)|(software))\\{((",
       paste(packages, collapse = ")|("), "))"
@@ -432,18 +432,22 @@ summary.cite_easystats <- function(object, what = "all", ...) {
     bib = ,
     refs = "refs"
   )
-  if (what == "all") {
-    insight::print_colour("\nCitations\n----------\n\n", "blue")
-    cat(strwrap(object$intext, exdent = 0, width = 0.95 * getOption("width")), sep = "\n")
-    cat("\n")
-    insight::print_colour("\nReferences\n----------\n\n", "blue")
-    cat(unlist(lapply(object$refs, strwrap, exdent = 4, width = 0.95 * getOption("width"))), sep = "\n")
-    cat("\n")
-  } else if (what == "intext") {
-    cat(strwrap(object$intext, exdent = 0, width = 0.95 * getOption("width")), sep = "\n")
-  } else if (what == "refs") {
-    cat(unlist(lapply(object$refs, strwrap, exdent = 4, width = 0.95 * getOption("width"))), sep = "\n")
-  }
+  switch(what,
+    all = {
+      insight::print_colour("\nCitations\n----------\n\n", "blue")
+      cat(strwrap(object$intext, exdent = 0, width = 0.95 * getOption("width")), sep = "\n")
+      cat("\n")
+      insight::print_colour("\nReferences\n----------\n\n", "blue")
+      cat(unlist(lapply(object$refs, strwrap, exdent = 4, width = 0.95 * getOption("width"))), sep = "\n")
+      cat("\n")
+    },
+    intext = {
+      cat(strwrap(object$intext, exdent = 0, width = 0.95 * getOption("width")), sep = "\n")
+    },
+    refs = {
+      cat(unlist(lapply(object$refs, strwrap, exdent = 4, width = 0.95 * getOption("width"))), sep = "\n")
+    }
+  )
 }
 
 
@@ -475,6 +479,6 @@ print.cite_easystats <- function(x, what = "all", ...) {
   }
   count <- sum(x)
   x[!x] <- ""
-  x[x != ""] <- letters[seq_len(count)]
+  x[nzchar(x)] <- letters[seq_len(count)]
   x
 }
