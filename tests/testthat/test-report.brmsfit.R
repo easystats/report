@@ -46,7 +46,7 @@ test_that("report.brms", {
   paragraphs <- strsplit(report_text, "\\n\\n")[[1]]
   # The main model description paragraph should appear only once
   model_paragraphs <- paragraphs[grepl("We fitted a Bayesian linear model", paragraphs)]
-  expect_length(model_paragraphs, 1, info = "Model description should appear only once, not multiple times")
+  expect_length(model_paragraphs, 1)
   
   # Test that priors text doesn't contain empty/meaningless entries like "uniform (location = , scale = )"
   # This ensures proper filtering of empty priors
