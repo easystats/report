@@ -1,7 +1,7 @@
 Package: report
 Type: Package
 Title: Automated Reporting of Results and Statistical Models
-Version: 0.6.1.3
+Version: 0.6.1.4
 Authors@R:
     c(person(given = "Dominique",
              family = "Makowski",

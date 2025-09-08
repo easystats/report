@@ -439,3 +439,169 @@ print.cite_easystats <- function(x, what = "all", ...) {
   x[x != ""] <- letters[seq_len(count)]
   x
 }
+
+
+# Helper functions for automatic citation fetching
+# ===================================================
+
+# Null coalescing operator
+`%||%` <- function(x, y) if (is.null(x)) y else x
+
+#' Get package citations automatically
+#' 
+#' @param package_name Character string. Name of the package.
+#' @param package_version Character string. Version of the package.
+#' @return A list with 'article' and 'package' citation objects, or NULL if package not found.
+#' @keywords internal
+.get_package_citations <- function(package_name, package_version = NULL) {
+  tryCatch({
+    # Get article citation from citation() function
+    article_citation <- citation(package_name)
+    
+    # Create software citation from package metadata
+    if (is.null(package_version)) {
+      if (package_name %in% rownames(utils::installed.packages())) {
+        package_version <- utils::installed.packages()[package_name, "Version"]
+      } else {
+        package_version <- ""
+      }
+    }
+    
+    # Get package metadata
+    pkg_desc <- utils::packageDescription(package_name)
+    if (inherits(pkg_desc, "try-error") || is.null(pkg_desc)) {
+      return(NULL)
+    }
+    
+    # Create software citation entry
+    software_citation <- .create_software_citation(package_name, pkg_desc, package_version)
+    
+    return(list(
+      article = if (length(article_citation) > 0) article_citation[[1]] else NULL,
+      package = software_citation
+    ))
+  }, error = function(e) {
+    return(NULL)
+  })
+}
+
+#' Create software citation from package metadata
+#' 
+#' @param package_name Character string. Name of the package.
+#' @param pkg_desc Package description object.
+#' @param package_version Character string. Version of the package.
+#' @return A citation object for the software.
+#' @keywords internal
+.create_software_citation <- function(package_name, pkg_desc, package_version) {
+  # Extract authors properly
+  authors <- .extract_package_authors(pkg_desc)
+  
+  # Create a proper bibentry using bibentry() function
+  software_cite <- utils::bibentry(
+    bibtype = "Manual",
+    title = paste0(package_name, ": ", pkg_desc$Title),
+    author = authors,
+    year = format(Sys.Date(), "%Y"),
+    url = paste0("https://CRAN.R-project.org/package=", package_name),
+    note = paste0("R package version ", package_version)
+  )
+  
+  return(software_cite)
+}
+
+#' Extract authors from package description
+#' 
+#' @param pkg_desc Package description object.
+#' @return A character vector of author names or person object.
+#' @keywords internal
+.extract_package_authors <- function(pkg_desc) {
+  # Try to get authors from Authors@R field first
+  if (!is.null(pkg_desc$`Authors@R`)) {
+    tryCatch({
+      # Parse the Authors@R field
+      authors_expr <- parse(text = pkg_desc$`Authors@R`)
+      authors_obj <- eval(authors_expr)
+      return(authors_obj)
+    }, error = function(e) {
+      # Fall back to simple parsing
+    })
+  }
+  
+  # Fall back to Author field
+  if (!is.null(pkg_desc$Author)) {
+    return(pkg_desc$Author)
+  }
+  
+  # Last resort
+  return("Package Authors")
+}
+
+#' Format citation for text output
+#' 
+#' @param cite_obj Citation object.
+#' @param include_version Logical. Whether to include version information.
+#' @return Character string with formatted citation.
+#' @keywords internal
+.format_citation_text <- function(cite_obj, include_version = TRUE) {
+  if (is.null(cite_obj)) {
+    return("")
+  }
+  
+  # Handle bibentry objects properly - they are nested lists
+  if (inherits(cite_obj, "bibentry")) {
+    # For bibentry objects, extract the first (and usually only) entry
+    if (length(cite_obj) > 0) {
+      cite_data <- cite_obj[[1]]
+    } else {
+      return("")
+    }
+  } else {
+    cite_data <- cite_obj
+  }
+  
+  # Extract key components
+  authors <- if (!is.null(cite_data$author)) {
+    if (inherits(cite_data$author, "person")) {
+      # Handle person objects
+      paste(format(cite_data$author, style = "text"), collapse = ", ")
+    } else if (is.character(cite_data$author)) {
+      cite_data$author
+    } else {
+      "Unknown Author"
+    }
+  } else {
+    "Unknown Author"
+  }
+  
+  year <- cite_data$year %||% format(Sys.Date(), "%Y")
+  title <- cite_data$title %||% "Unknown Title"
+  
+  # Format based on citation type
+  if (!is.null(cite_data$journal)) {
+    # Journal article
+    journal <- cite_data$journal
+    volume <- cite_data$volume %||% ""
+    number <- cite_data$number %||% ""
+    pages <- cite_data$pages %||% ""
+    doi <- cite_data$doi %||% ""
+    
+    citation_text <- paste0(authors, " (", year, "). ", title, ". ", journal)
+    if (volume != "") citation_text <- paste0(citation_text, ", ", volume)
+    if (number != "") citation_text <- paste0(citation_text, "(", number, ")")
+    if (pages != "") citation_text <- paste0(citation_text, ", ", pages)
+    if (doi != "") citation_text <- paste0(citation_text, ". https://doi.org/", doi)
+    
+  } else {
+    # Software/package citation
+    url <- cite_data$url %||% ""
+    version_text <- if (include_version && !is.null(cite_data$version)) {
+      paste0(" (", cite_data$version, ")")
+    } else {
+      ""
+    }
+    
+    citation_text <- paste0(authors, " (", year, "). ", title, version_text, " [R package]. ", url)
+  }
+  
+  return(citation_text)
+}
