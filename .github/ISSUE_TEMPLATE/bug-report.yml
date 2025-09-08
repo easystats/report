@@ -1,8 +1,8 @@
 name: Bug report
 description: Create a report to help us improve the package
 title: "[Bug]: "
-labels: ["bug 🐛"]
-assignees: []
+labels: "bug :bug:"
+assignees: ["rempsyc"]
 projects: []
 type: Bug
 body:

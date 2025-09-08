@@ -1,8 +1,8 @@
 name: Feature request
 description: Suggest a new idea or enhancement for this project
 title: "[Feature]: "
-labels: ["feature idea 🔥"]
-assignees: []
+labels: ["feature idea :fire:"]
+assignees: rempsyc
 projects: []
 type: Feature
 body:
