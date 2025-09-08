@@ -1,5 +1,9 @@
 # report 0.6.x
 
+Bug fixes
+
+* `format_algorithm()`: code quality improvements by removing unnecessary comment and optimizing conditional logic
+
 # report 0.6.2
 
 Bug fixes

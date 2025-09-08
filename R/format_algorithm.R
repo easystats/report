@@ -48,7 +48,6 @@ format_algorithm <- function(x) {
         algorithm$warmup
       )
     }
-    # Thinning?
   }
 
   # Optimizer
@@ -57,8 +56,7 @@ format_algorithm <- function(x) {
 
     if (optimizer == "bobyqa") {
       optimizer <- "BOBYQA"
-    }
-    if (optimizer == "Nelder_Mead") {
+    } else if (optimizer == "Nelder_Mead") {
       optimizer <- "Nelder-Mead"
     }
     text <- paste0(
