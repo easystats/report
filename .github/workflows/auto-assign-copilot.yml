@@ -6,6 +6,7 @@ on:
 
 jobs:
   assign:
+    name: Assign Copilot to task
     runs-on: ubuntu-latest
     permissions:
       issues: write
@@ -14,12 +15,22 @@ jobs:
         with:
           script: |
             const issue = context.payload.issue
+            
+            console.log('🤖 Auto-assign Copilot workflow started')
+            console.log(`📋 Issue #${issue.number}: "${issue.title}"`)
+            console.log(`🏷️  Labels: ${issue.labels.map(l => l.name).join(', ')}`)
+            
             // Adjust condition to your template (label, title prefix, or issue type)
-            const isCopilotTask =
-              issue.title.startsWith("[Copilot]: ") ||
-              issue.labels.some(l => l.name.toLowerCase() === "robot :robot:")
+            const titleMatches = issue.title.startsWith("[Copilot]: ")
+            const labelMatches = issue.labels.some(l => l.name.toLowerCase() === "robot :robot:")
+            const isCopilotTask = titleMatches || labelMatches
+            
+            console.log(`🔍 Title starts with "[Copilot]: ": ${titleMatches}`)
+            console.log(`🔍 Has "robot :robot:" label: ${labelMatches}`)
+            console.log(`✅ Is Copilot task: ${isCopilotTask}`)
 
             if (isCopilotTask) {
+              console.log('🎯 Attempting to assign Copilot to the issue...')
               try {
                 // Try assigning the Copilot app (some orgs allow this)
                 await github.rest.issues.addAssignees({
@@ -28,13 +39,26 @@ jobs:
                   issue_number: issue.number,
                   assignees: ["Copilot"]   // if this fails, fall back below
                 })
+                console.log('✅ Successfully assigned Copilot to the issue!')
               } catch (e) {
-                // Fallback: assign to you, keep the label so Copilot still picks it up
-                await github.rest.issues.addAssignees({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  issue_number: issue.number,
-                  assignees: ["rempsyc"]
-                })
+                console.log(`❌ Failed to assign Copilot: ${e.message}`)
+                console.log('🔄 Falling back to assign rempsyc...')
+                try {
+                  // Fallback: assign to you, keep the label so Copilot still picks it up
+                  await github.rest.issues.addAssignees({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: issue.number,
+                    assignees: ["rempsyc"]
+                  })
+                  console.log('✅ Successfully assigned rempsyc as fallback!')
+                } catch (fallbackError) {
+                  console.log(`❌ Failed to assign fallback: ${fallbackError.message}`)
+                  throw fallbackError
+                }
               }
+            } else {
+              console.log('⏭️  Skipping assignment - not a Copilot task')
             }
+            
+            console.log('🏁 Auto-assign Copilot workflow completed')
