@@ -1,5 +1,9 @@
 # report 0.6.x
 
+New features
+
+* `cite_easystats()`: automatically fetch updated easystats citations instead of using hardcoded citation data, ensuring citations are always current
+
 # report 0.6.2
 
 Bug fixes
