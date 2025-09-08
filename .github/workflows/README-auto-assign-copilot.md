@@ -17,9 +17,9 @@ An issue is considered a "Copilot task" if **either** of these conditions is met
 
 ### Assignment Logic
 
-1. **Primary attempt**: Try to assign `Copilot` (the GitHub Copilot app)
+1. **Primary attempt**: Try to assign `copilot` (the GitHub Copilot user with correct lowercase username)
 2. **Fallback**: If the primary assignment fails, assign `rempsyc` instead
-3. **Error handling**: If both assignments fail, the workflow fails with an error message
+3. **Error handling**: If both assignments fail, the workflow fails with detailed error messages and full error context
 
 ### Example Scenarios
 
@@ -63,11 +63,13 @@ The improved workflow provides detailed logging with visual indicators:
 🤖 Auto-assign Copilot workflow started
 📋 Issue #123: "[Copilot]: Test new feature"
 🏷️  Labels: robot :robot:, enhancement
+👤 Issue author: testuser
+🏠 Repository: easystats/report
 🔍 Title starts with "[Copilot]: ": true
 🔍 Has "robot :robot:" label: true
 ✅ Is Copilot task: true
 🎯 Attempting to assign Copilot to the issue...
-✅ Successfully assigned Copilot to the issue!
+✅ Successfully assigned copilot to the issue!
 🏁 Auto-assign Copilot workflow completed
 ```
 
@@ -87,10 +89,11 @@ The improved workflow provides detailed logging with visual indicators:
 
 ### Expected Behaviors
 
-- ✅ Issues matching criteria should be assigned to Copilot
+- ✅ Issues matching criteria should be assigned to `copilot` (lowercase username)
 - ⏭️ Issues not matching criteria should be skipped (no assignment)
-- 🔄 If Copilot assignment fails, fallback to `rempsyc`
+- 🔄 If `copilot` assignment fails, fallback to `rempsyc`
 - 📝 All actions should be clearly logged with emojis for easy reading
+- 🔍 Detailed error information provided when assignments fail
 
 ## Troubleshooting
 
@@ -104,7 +107,9 @@ The improved workflow provides detailed logging with visual indicators:
 **Assignment fails**
 - Check repository permissions for the GitHub token
 - Verify `issues: write` permission is granted
-- Review error messages in workflow logs
+- Review error messages in workflow logs (now includes detailed error context)
+- Verify the `copilot` user exists and has repository access
+- Check if the repository allows external user assignments
 
 **Fallback assignment fails**
 - Check that fallback user (`rempsyc`) has access to the repository
@@ -113,10 +118,11 @@ The improved workflow provides detailed logging with visual indicators:
 ### Debug Information
 
 The workflow logs provide comprehensive information for debugging:
-- Issue details (number, title, labels)
+- Issue details (number, title, labels, author, repository)
 - Condition evaluation results
 - Assignment attempt outcomes
-- Error messages with specific failure reasons
+- Detailed error messages with full error context for both primary and fallback assignments
+- Clear indicators when both assignment attempts fail
 
 ## Customization
 

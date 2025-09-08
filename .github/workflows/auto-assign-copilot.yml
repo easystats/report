@@ -19,6 +19,8 @@ jobs:
             console.log('🤖 Auto-assign Copilot workflow started')
             console.log(`📋 Issue #${issue.number}: "${issue.title}"`)
             console.log(`🏷️  Labels: ${issue.labels.map(l => l.name).join(', ')}`)
+            console.log(`👤 Issue author: ${issue.user.login}`)
+            console.log(`🏠 Repository: ${context.repo.owner}/${context.repo.repo}`)
             
             // Adjust condition to your template (label, title prefix, or issue type)
             const titleMatches = issue.title.startsWith("[Copilot]: ")
@@ -32,19 +34,20 @@ jobs:
             if (isCopilotTask) {
               console.log('🎯 Attempting to assign Copilot to the issue...')
               try {
-                // Try assigning the Copilot app (some orgs allow this)
+                // Try assigning the correct Copilot username (lowercase)
                 await github.rest.issues.addAssignees({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   issue_number: issue.number,
-                  assignees: ["Copilot"]   // if this fails, fall back below
+                  assignees: ["copilot"]   // Using lowercase username
                 })
-                console.log('✅ Successfully assigned Copilot to the issue!')
+                console.log('✅ Successfully assigned copilot to the issue!')
               } catch (e) {
-                console.log(`❌ Failed to assign Copilot: ${e.message}`)
+                console.log(`❌ Failed to assign copilot: ${e.message}`)
+                console.log(`🔍 Error details: ${JSON.stringify(e, null, 2)}`)
                 console.log('🔄 Falling back to assign rempsyc...')
                 try {
-                  // Fallback: assign to you, keep the label so Copilot still picks it up
+                  // Fallback: assign to rempsyc, keep the label so Copilot still picks it up
                   await github.rest.issues.addAssignees({
                     owner: context.repo.owner,
                     repo: context.repo.repo,
@@ -53,7 +56,9 @@ jobs:
                   })
                   console.log('✅ Successfully assigned rempsyc as fallback!')
                 } catch (fallbackError) {
-                  console.log(`❌ Failed to assign fallback: ${fallbackError.message}`)
+                  console.log(`❌ Failed to assign fallback rempsyc: ${fallbackError.message}`)
+                  console.log(`🔍 Fallback error details: ${JSON.stringify(fallbackError, null, 2)}`)
+                  console.log('💡 Both assignment attempts failed - this indicates a deeper issue')
                   throw fallbackError
                 }
               }
