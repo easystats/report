@@ -1,6 +1,6 @@
 #' Reporting ANOVAs
 #'
-#' Create reports for ANOVA models.
+#' Create reports for ANOVA models. 
 #'
 #' @param x Object of class `aov`, `anova` or `aovlist`.
 #' @param include_intercept	Set to `TRUE` to include the intercept (relevant for type-3 ANOVA tables).
