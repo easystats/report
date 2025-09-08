@@ -1,0 +1,65 @@
+name: Feature request
+description: Suggest a new idea or enhancement for this project
+title: "[Feature]: "
+labels: ["enhancement :bulb:"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for suggesting a new feature! Please provide details about your idea.
+
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Describe the feature you'd like
+      description: A clear and concise description of what you want to happen.
+      placeholder: Describe your feature idea...
+    validations:
+      required: true
+
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use case
+      description: Describe the specific use case or problem this feature would solve
+      placeholder: What problem does this solve? How would you use this feature?
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Implementation ideas
+      description: If you have ideas about how this could be implemented, please share them
+      placeholder: How could we implement this? Any technical considerations?
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Describe any alternative solutions or features you've considered
+      placeholder: What other approaches might work?
+
+  - type: textarea
+    id: example-code
+    attributes:
+      label: Example usage
+      description: If possible, show how you envision this feature being used
+      placeholder: |
+        ```r
+        library(report)
+        # Example of how the new feature might work
+        ```
+      render: r
+
+  - type: dropdown
+    id: setup-preference
+    attributes:
+      label: Copilot setup preference
+      description: Choose the CI environment preference for PRs related to this issue
+      options:
+        - copilot-setup-light
+        - copilot-setup-full
+      default: 1
+    validations:
+      required: false
