@@ -1,8 +1,8 @@
 name: Copilot task
 description: Request GitHub Copilot assistance for development tasks
 title: "[Copilot]: "
-labels: []
-assignees: ["copilot"]
+labels: ["robot :robot:"]
+assignees: Copilot
 projects: []
 type: Task
 body:

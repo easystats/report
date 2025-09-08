@@ -1,8 +1,8 @@
 name: Question
 description: Ask a question about the package usage or functionality
 title: "[Question]: "
-labels: ["question ⁉️"]
-assignees: []
+labels: ["question :interrobang:"]
+assignees: rempsyc
 projects: []
 type: Feature
 body:
@@ -10,11 +10,11 @@ body:
     attributes:
       value: |
         Thank you for your question! Before asking, please check:
-        
+
         1. **Documentation**: Visit our [documentation site](https://easystats.github.io/report/)
         2. **Discussions**: Browse [existing discussions](https://github.com/easystats/report/discussions) for similar questions
         3. **Update packages**: Ensure you have the latest version with `easystats::install_latest()`
-        
+
         Please provide details to help us give you the best answer.
 
   - type: textarea
