@@ -330,9 +330,7 @@ report_text.bayesfactor_inclusion <- function(x,
     "probability and the posterior exclusion probability. The change from ",
     "prior to posterior inclusion odds is the Inclusion Bayes factor. ",
     # matched models?
-    if (!matched) {
-      NULL
-    } else {
+    if (matched) {
       paste0(
         "For each predictor, averaging was done only across models that ",
         "did not include any interactions with that predictor; ",
@@ -342,6 +340,8 @@ report_text.bayesfactor_inclusion <- function(x,
         "Inclusion Bayes factors from being contaminated with non-relevant ",
         "evidence (see Mathot, 2017). "
       )
+    } else {
+      NULL
     }
   )
 
