@@ -5,7 +5,7 @@ report.character <- function(x,
                              levels_percentage = "auto",
                              missing_percentage = "auto",
                              ...) {
-  table <- report_table(
+  report_table <- report_table(
     x,
     n_entries = n_entries,
     levels_percentage = levels_percentage,
@@ -13,7 +13,7 @@ report.character <- function(x,
     ...
   )
 
-  text <- report_text(
+  report_text <- report_text(
     x,
     n_entries = n_entries,
     levels_percentage = levels_percentage,
@@ -21,7 +21,7 @@ report.character <- function(x,
     ...
   )
 
-  as.report(text, table = table, ...)
+  as.report(report_text, table = report_table, ...)
 }
 
 
@@ -52,15 +52,15 @@ report_table.character <- function(x,
     n_Missing = sum(is.na(x))
   )
   table_full$percentage_Missing <- table_full$n_Missing / table_full$n_Obs * 100
-  table <- table_full
+  summary_table <- table_full
 
   if (isTRUE(missing_percentage)) {
-    table <- datawizard::data_remove(table, "n_Missing")
+    summary_table <- datawizard::data_remove(summary_table, "n_Missing")
   } else {
-    table <- datawizard::data_remove(table, "percentage_Missing")
+    summary_table <- datawizard::data_remove(summary_table, "percentage_Missing")
   }
 
-  as.report_table(table_full, summary = table, entries = n_char)
+  as.report_table(table_full, summary = summary_table, entries = n_char)
 }
 
 
@@ -88,12 +88,15 @@ report_parameters.character <- function(x,
   entries <- attributes(table)$entries
 
   if (levels_percentage) {
-    text <- paste0(entries$Entry, " (", insight::format_value(entries$percentage_Entry, as_percent = TRUE), ")")
+    param_text <- paste0(
+      entries$Entry, " (",
+      insight::format_value(entries$percentage_Entry, as_percent = TRUE), ")"
+    )
   } else {
-    text <- paste0(entries$Entry, " (n = ", entries$n_Entry, ")")
+    param_text <- paste0(entries$Entry, " (n = ", entries$n_Entry, ")")
   }
 
-  as.report_parameters(text, summary = text[1:n_entries], ...)
+  as.report_parameters(param_text, summary = param_text[1:n_entries], ...)
 }
 
 
@@ -133,39 +136,41 @@ report_text.character <- function(x,
     ...
   )
 
-  text <- paste(summary(params), collapse = "; ")
+  report_text <- paste(summary(params), collapse = "; ")
   if (nrow(entries) > 1) {
-    text <- paste0(name, ": ", nrow(entries), " entries, such as ", text)
+    report_text <- paste0(name, ": ", nrow(entries), " entries, such as ", report_text)
   } else {
-    text <- paste0(name, ": ", nrow(entries), " entry, such as ", text)
+    report_text <- paste0(name, ": ", nrow(entries), " entry, such as ", report_text)
   }
 
   if (nrow(entries) - n_entries == 1) {
-    text <- paste0(text, " and ", nrow(entries) - n_entries, " other")
+    report_text <- paste0(report_text, " and ", nrow(entries) - n_entries, " other")
   }
   if (nrow(entries) - n_entries > 1) {
-    text <- paste0(text, " and ", nrow(entries) - n_entries, " others")
+    report_text <- paste0(report_text, " and ", nrow(entries) - n_entries, " others")
   }
 
-  text_full <- text
+  text_full <- report_text
 
   # Missing
-  text_n_Missing <- paste0(table$n_Missing[1], " missing")
-  text_percentage_Missing <- paste0(insight::format_value(table$percentage_Missing[1]), "% missing")
+  text_n_missing <- paste0(table$n_Missing[1], " missing")
+  text_percentage_missing <- paste0(
+    insight::format_value(table$percentage_Missing[1]), "% missing"
+  )
   if (isTRUE(missing_percentage)) {
-    text_full <- paste0(text_full, "(", text_percentage_Missing, ")")
+    text_full <- paste0(text_full, "(", text_percentage_missing, ")")
     if (table$n_Missing[1] > 0) {
-      text <- paste0(text, " (", text_percentage_Missing, ")")
+      report_text <- paste0(report_text, " (", text_percentage_missing, ")")
     }
   } else {
-    text_full <- paste0(text_full, " (", text_n_Missing, ")")
+    text_full <- paste0(text_full, " (", text_n_missing, ")")
     table <- datawizard::data_remove(table, "percentage_Missing")
     if (table$n_Missing[1] > 0) {
-      text <- paste0(text, " (", text_n_Missing, ")")
+      report_text <- paste0(report_text, " (", text_n_missing, ")")
     }
   }
 
-  as.report_text(text_full, summary = text)
+  as.report_text(text_full, summary = report_text)
 }
 
 
@@ -193,10 +198,16 @@ report_statistics.character <- function(x,
   entries <- attributes(table)$entries
 
   if (levels_percentage) {
-    text <- paste0(entries$Entry, ", ", insight::format_value(entries$percentage_Entry, as_percent = TRUE), "%")
+    stat_text <- paste0(
+      entries$Entry, ", ",
+      insight::format_value(entries$percentage_Entry, as_percent = TRUE), "%"
+    )
   } else {
-    text <- paste0(entries$Entry, ", n = ", entries$n_Entry)
+    stat_text <- paste0(entries$Entry, ", n = ", entries$n_Entry)
   }
 
-  as.report_statistics(paste(text, collapse = "; "), summary = paste(text[1:n_entries], collapse = "; "))
+  as.report_statistics(
+    paste(stat_text, collapse = "; "),
+    summary = paste(stat_text[1:n_entries], collapse = "; ")
+  )
 }
