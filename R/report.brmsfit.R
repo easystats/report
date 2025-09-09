@@ -55,7 +55,6 @@ report_text.brmsfit <- report_text.lm
 
 # ==================== Specific to Bayes ===================================
 
-
 # report_priors -----------------------------------------------------------
 
 #' @export
@@ -72,7 +71,8 @@ report_priors.brmsfit <- function(x, ...) {
     return("")
   }
 
-  values <- ifelse(params$Prior_Distribution == "normal",
+  values <- ifelse(
+    params$Prior_Distribution == "normal",
     paste0(
       "mean = ",
       insight::format_value(params$Prior_Location),
