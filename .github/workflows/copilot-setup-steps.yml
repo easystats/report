@@ -11,6 +11,11 @@ on:
   pull_request:
     types: [opened, synchronize]
 
+permissions:
+  contents: read
+  pull-requests: read
+  issues: read
+
 jobs:
   copilot-setup-steps:
     # Optional: only run on Copilot agent commits; remove this if you also want your own pushes to trigger it
@@ -22,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      GITHUB_PAT: ${{ secrets.GH_PAT }}
+      GITHUB_PAT: ${{ github.token }}
       R_KEEP_PKG_SOURCE: yes
       _R_CHECK_CRAN_INCOMING_: false
       _R_CHECK_FORCE_SUGGESTS_: false
@@ -40,44 +45,76 @@ jobs:
           echo "event payload:"
           jq -r '. | {pull_request: .pull_request?.number, number: .number, action: .action}' "$GITHUB_EVENT_PATH"
 
-      - name: Wait for PR labels (up to 90s)
+      - name: Wait for PR (and setup labels) up to 3 min
+        id: wait_pr
         uses: actions/github-script@v7
         with:
           github-token: ${{ github.token }}
           script: |
             const {owner, repo} = context.repo
-            const pr = context.payload.pull_request
-            const REQUIRED = ['copilot-setup-light','copilot-setup-full'] // <- or [] for “any label”
-            const deadline = Date.now() + 90_000
-            while (Date.now() < deadline) {
-              const {data} = await github.rest.issues.listLabelsOnIssue({ owner, repo, issue_number: pr.number })
-              const names = data.map(l => l.name)
-              const ok = REQUIRED.length === 0 ? names.length > 0 : REQUIRED.some(r => names.includes(r))
-              if (ok) { core.info(`Labels present: [${names.join(', ')}]`); return }
-              core.info(`Waiting… current labels: [${names.join(', ')}]`)
+            const sha = context.sha
+            const branch = process.env.GITHUB_REF_NAME
+            const REQUIRED = ['copilot-setup-full','copilot-setup-light']
+            const end = Date.now() + 3 * 60 * 1000
+
+            // 1) get PR number (works for dynamic + PR events)
+            let prNumber = context.payload.pull_request?.number || null
+            async function findPR() {
+              if (prNumber) return prNumber
+              // by commit
+              const byCommit = await github.request(
+                'GET /repos/{owner}/{repo}/commits/{sha}/pulls',
+                { owner, repo, sha }
+              )
+              prNumber = byCommit.data[0]?.number || null
+              if (prNumber) return prNumber
+              // by head branch
+              if (branch) {
+                const byHead = await github.request(
+                  'GET /repos/{owner}/{repo}/pulls',
+                  { owner, repo, state: 'open', head: `${owner}:${branch}` }
+                )
+                prNumber = byHead.data[0]?.number || null
+              }
+              return prNumber
+            }
+
+            while (!await findPR() && Date.now() < end) {
+              core.info('PR not created yet; waiting 5s…')
               await new Promise(r => setTimeout(r, 5000))
             }
-            core.warning('Timed out waiting for labels; continuing anyway.')
-            // If you want to *block* Copilot until labeled, use:
-            // core.setFailed('Required labels not found before timeout.')
+            if (!prNumber) { core.info('No PR found before timeout; continuing.'); return }
+            core.info(`Found PR #${prNumber}`)
+            core.setOutput('pr', String(prNumber))
+
+            // 2) (optional) wait briefly for one of the setup labels
+            const labelsEnd = Date.now() + 90_000
+            while (Date.now() < labelsEnd) {
+              const {data} = await github.rest.issues.listLabelsOnIssue({ owner, repo, issue_number: prNumber })
+              const names = data.map(l => l.name)
+              if (REQUIRED.some(r => names.includes(r))) {
+                core.info(`Setup labels present: [${names.join(', ')}]`)
+                core.setOutput('labels', names.join(','))
+                return
+              }
+              core.info(`Waiting for setup labels… current: [${names.join(', ')}]`)
+              await new Promise(r => setTimeout(r, 5000))
+            }
+            core.warning('Timed out waiting for setup labels; continuing anyway.')
 
       - name: Determine if R setup is needed
         id: check_r_needed
         env:
           API_TOKEN: ${{ github.token }}
+          PR_NUMBER_FROM_WAIT: ${{ steps.wait_pr.outputs.pr }}
         run: |
           set -euo pipefail
-          echo "Checking if R environment setup is needed..."
-
+          PR_NUMBER="${PR_NUMBER_FROM_WAIT:-}"
           R_NEEDED=true
-          PR_NUMBER=""
+          EXPLICIT_DECISION=""
 
-          # Find PR number for both PR and workflow_dispatch runs
-          if [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
-            PR_NUMBER=$(jq -r '.number' < "$GITHUB_EVENT_PATH")
-            echo "PR context detected. PR #$PR_NUMBER"
-          else
-            echo "No PR context; trying to find PR from current commit..."
+          # If we didn’t get one (very early run), try once more by commit
+          if [ -z "$PR_NUMBER" ]; then
             PRS=$(
               curl -sS --fail-with-body \
                 -H "Authorization: Bearer ${API_TOKEN}" \
@@ -85,40 +122,25 @@ jobs:
                 "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/pulls"
             )
             PR_NUMBER=$(echo "$PRS" | jq -r '.[0].number // empty')
-            [ -n "$PR_NUMBER" ] && echo "Found PR #$PR_NUMBER for this commit."
           fi
 
-          # Helper to read PR labels (Issues endpoint)
-          read_pr_labels() {
-            curl -sS --fail-with-body \
-              -H "Authorization: Bearer ${API_TOKEN}" \
-              -H "Accept: application/vnd.github+json" \
-              "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/labels" \
-            | jq -r '.[].name' | tr '[:upper:]' '[:lower:]'
-          }
-
-          EXPLICIT_DECISION=""
           if [ -n "$PR_NUMBER" ]; then
-            echo "Checking PR labels for setup preferences (short wait)…"
-            deadline=$(( $(date +%s) + 90 ))
-            while :; do
-              PR_LABELS=$(read_pr_labels || true)
-              echo "Current PR labels: ${PR_LABELS:-<none>}"
-              if echo "$PR_LABELS" | grep -Eq '\b(copilot-setup-full)\b'; then
-                echo "Found 'copilot-setup-full'."
-                R_NEEDED=true
-                EXPLICIT_DECISION="full"
-                break
-              elif echo "$PR_LABELS" | grep -Eq '\b(copilot-setup-light)\b'; then
-                echo "Found 'copilot-setup-light'."
-                R_NEEDED=false
-                EXPLICIT_DECISION="light"
-                break
-              fi
-              now=$(date +%s); [ "$now" -ge "$deadline" ] && echo "No explicit setup label before timeout; using heuristics." && break
-              sleep 5
-            done
+            # read labels from Issues endpoint
+            PR_LABELS=$(
+              curl -sS --fail-with-body \
+                -H "Authorization: Bearer ${API_TOKEN}" \
+                -H "Accept: application/vnd.github+json" \
+                "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/labels" \
+              | jq -r '.[].name' | tr '[:upper:]' '[:lower:]'
+            )
+            echo "PR labels: ${PR_LABELS:-<none>}"
+            if echo "$PR_LABELS" | grep -q '\bcopilot-setup-full\b'; then
+              EXPLICIT_DECISION=full; R_NEEDED=true
+            elif echo "$PR_LABELS" | grep -q '\bcopilot-setup-light\b'; then
+              EXPLICIT_DECISION=light; R_NEEDED=false
+            fi
           fi
+          # …(keep your file-heuristics fallback if EXPLICIT_DECISION is empty)…
 
           # Fallback heuristics when no explicit label decided
           if [ -z "$EXPLICIT_DECISION" ]; then
@@ -171,7 +193,6 @@ jobs:
             [ -n "$EXPLICIT_DECISION" ] && echo "Reason: explicit label ($EXPLICIT_DECISION)" || echo "Reason: heuristics"
           fi
           echo "Decision: R_NEEDED=$R_NEEDED"
-
 
       - name: Setup R
         if: steps.check_r_needed.outputs.R_NEEDED == 'true'
