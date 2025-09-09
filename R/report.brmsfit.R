@@ -25,10 +25,10 @@
 #' @include report.lm.R report.stanreg.R report.lme4.R
 #' @export
 report.brmsfit <- function(x, ...) {
-  table <- report_table(x, include_effectsize = FALSE, ...)
-  text <- report_text(x, table = table, ...)
+  tbl <- report_table(x, include_effectsize = FALSE, ...)
+  txt <- report_text(x, table = tbl, ...)
 
-  as.report(text, table = table, ...)
+  as.report(txt, table = tbl, ...)
 }
 
 #' @export
@@ -90,13 +90,16 @@ report_priors.brmsfit <- function(x, ...) {
   values <- paste0(params$Prior_Distribution, " (", values, ")")
 
   if (length(unique(values)) == 1L && nrow(params) > 1L) {
-    text <- paste0("all set as ", values[1])
+    prior_text <- paste0("all set as ", values[1])
   } else {
-    text <- paste0("set as ", values)
+    prior_text <- paste0("set as ", values)
   }
 
-  text <- paste0("Priors over parameters were ", text, " distributions")
-  as.report_priors(text)
+  prior_text <- paste0(
+    "Priors over parameters were ", prior_text,
+    " distributions"
+  )
+  as.report_priors(prior_text)
 }
 
 
