@@ -94,6 +94,46 @@ test_that("glmmTMB deduplication preserves unique parameters", {
   )
 })
 
+test_that("glmmTMB deduplication works without Component column", {
+  # Test that the fix works for glmmTMB tables that don't have a Component column
+  
+  mock_model <- structure(list(), class = c("glmmTMB", "lm"))
+  
+  # Create table with duplicated rows but no Component column
+  duplicated_table_no_component <- data.frame(
+    Parameter = c("(Intercept)", "treatmentcontrol", "treatmentcontrol", "treatmentcontrol"),
+    Coefficient = c(0.13, -0.27, -0.27, -0.27),
+    SE = c(0.25, 0.36, 0.36, 0.36),
+    CI_low = c(-0.37, -0.99, -0.99, -0.99),
+    CI_high = c(0.64, 0.45, 0.45, 0.45),
+    t = c(0.52, -0.75, -0.75, -0.75),
+    df_error = c(18, 18, 18, 18),
+    p = c(0.606, 0.466, 0.466, 0.466),
+    stringsAsFactors = FALSE
+  )
+  
+  # Test report_parameters with duplicated table (should be deduplicated)
+  params_result <- report_parameters(mock_model, table = duplicated_table_no_component, include_intercept = FALSE)
+  params_text <- as.character(params_result)
+  
+  # Count the number of parameter lines in the output
+  lines <- trimws(strsplit(params_text, "\n")[[1]])
+  non_empty_lines <- lines[nchar(lines) > 0]
+  
+  # Should have exactly 1 parameter line after deduplication
+  expect_equal(
+    length(non_empty_lines),
+    1L,
+    info = paste("Expected 1 parameter line after deduplication (no Component), got", length(non_empty_lines), "lines:", paste(non_empty_lines, collapse = " | "))
+  )
+  
+  # Verify the content is correct
+  expect_true(
+    grepl("beta = -0\\.27", params_text),
+    info = paste("Expected to find treatment parameter (beta = -0.27) in:", params_text)
+  )
+})
+
 test_that("glmmTMB deduplication only applies to glmmTMB models", {
   # Test that deduplication logic only applies to glmmTMB models, not other models
   
