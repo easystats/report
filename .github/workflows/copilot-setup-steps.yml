@@ -33,8 +33,14 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Debug event/PR
+        run: |
+          echo "event_name=$GITHUB_EVENT_NAME"
+          echo "sha=$GITHUB_SHA"
+          echo "event payload:"
+          jq -r '. | {pull_request: .pull_request?.number, number: .number, action: .action}' "$GITHUB_EVENT_PATH"
+
       - name: Wait for PR labels (up to 90s)
-        if: ${{ github.event_name == 'pull_request' }}
         uses: actions/github-script@v7
         with:
           github-token: ${{ github.token }}
@@ -64,36 +70,60 @@ jobs:
           echo "Checking if R environment setup is needed..."
 
           R_NEEDED=true
+          PR_NUMBER=""
 
-          # If this is a PR, use the PR's changed files (authoritative)
+          # Find PR number for both PR and workflow_dispatch runs
           if [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
             PR_NUMBER=$(jq -r '.number' < "$GITHUB_EVENT_PATH")
-            echo "PR number: $PR_NUMBER"
-
-            # First check for setup labels on the PR (highest priority)
-            echo "Checking PR labels for setup preferences..."
-            # NOTE: use the Issues labels endpoint (PRs are issues under the hood)
-            PR_LABELS=$(
+            echo "PR context detected. PR #$PR_NUMBER"
+          else
+            echo "No PR context; trying to find PR from current commit..."
+            PRS=$(
               curl -sS --fail-with-body \
                 -H "Authorization: Bearer ${API_TOKEN}" \
                 -H "Accept: application/vnd.github+json" \
-                "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/labels" \
-              | jq -r '.[].name'
+                "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/pulls"
             )
+            PR_NUMBER=$(echo "$PRS" | jq -r '.[0].number // empty')
+            [ -n "$PR_NUMBER" ] && echo "Found PR #$PR_NUMBER for this commit."
+          fi
 
-            echo "PR labels: ${PR_LABELS}"
+          # Helper to read PR labels (Issues endpoint)
+          read_pr_labels() {
+            curl -sS --fail-with-body \
+              -H "Authorization: Bearer ${API_TOKEN}" \
+              -H "Accept: application/vnd.github+json" \
+              "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/labels" \
+            | jq -r '.[].name' | tr '[:upper:]' '[:lower:]'
+          }
 
-            # Check for explicit setup labels
-            if echo "${PR_LABELS}" | grep -q "copilot-setup-light"; then
-              echo "Found 'copilot-setup-light' label on PR - forcing light setup"
-              R_NEEDED=false
-            elif echo "${PR_LABELS}" | grep -q "copilot-setup-full"; then
-              echo "Found 'copilot-setup-full' label on PR - forcing full setup"
-              R_NEEDED=true
-            else
-              echo "No explicit setup labels found, analyzing changed files..."
+          EXPLICIT_DECISION=""
+          if [ -n "$PR_NUMBER" ]; then
+            echo "Checking PR labels for setup preferences (short wait)…"
+            deadline=$(( $(date +%s) + 90 ))
+            while :; do
+              PR_LABELS=$(read_pr_labels || true)
+              echo "Current PR labels: ${PR_LABELS:-<none>}"
+              if echo "$PR_LABELS" | grep -Eq '\b(copilot-setup-full)\b'; then
+                echo "Found 'copilot-setup-full'."
+                R_NEEDED=true
+                EXPLICIT_DECISION="full"
+                break
+              elif echo "$PR_LABELS" | grep -Eq '\b(copilot-setup-light)\b'; then
+                echo "Found 'copilot-setup-light'."
+                R_NEEDED=false
+                EXPLICIT_DECISION="light"
+                break
+              fi
+              now=$(date +%s); [ "$now" -ge "$deadline" ] && echo "No explicit setup label before timeout; using heuristics." && break
+              sleep 5
+            done
+          fi
 
-              # Get changed files from the PR
+          # Fallback heuristics when no explicit label decided
+          if [ -z "$EXPLICIT_DECISION" ]; then
+            if [ -n "$PR_NUMBER" ]; then
+              echo "Analyzing changed files in PR #$PR_NUMBER…"
               FILES=$(
                 curl -sS --fail-with-body \
                   -H "Authorization: Bearer ${API_TOKEN}" \
@@ -101,98 +131,47 @@ jobs:
                   "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/files?per_page=100" \
                 | jq -r '.[].filename'
               )
-
-              echo "Files in PR:"
-              echo "${FILES}"
-
-              # If ANY file is not in the "docs/config-only" set -> need R
               echo "${FILES}" > /tmp/pr_files.txt
-
-              if grep -E '\.(R|Rmd|Rd)$' /tmp/pr_files.txt >/dev/null || \
-                 grep -E '^(R/|tests/|man/|vignettes/|src/)' /tmp/pr_files.txt >/dev/null; then
-                echo "Detected R-related paths in PR."
-                R_NEEDED=true
-              else
-                # Anything outside the allowed docs/config list? Then R is needed.
-                if grep -v -E '^(\.github/copilot-instructions\.md|\.github/workflows/|README\.md|\.gitignore|\.Rbuildignore|NEWS\.md|CONTRIBUTING\.md|LICENSE|CITATION\.cff|DESCRIPTION|cran-comments\.md|.+\.md$|.+\.ya?ml$)$' /tmp/pr_files.txt | grep -E '.' >/dev/null; then
-                  echo "Changes go beyond docs/config-only."
-                  R_NEEDED=true
-                else
-                  echo "PR is docs/config-only."
-                  R_NEEDED=false
-                fi
-              fi
-            fi
-
-          else
-            # No PR context (Copilot run, pushes, etc.)
-            # Fallback: fast probe + light heuristics
-
-            echo "No PR context; using probe/heuristics."
-
-            # Example probe: if R already present and renv/cache present, skip
-            if command -v R >/dev/null 2>&1 && [ -f "renv.lock" ] && [ -d "$HOME/.cache/R" ]; then
-              echo "R and cache present; likely no heavy setup needed."
-              R_NEEDED=false
             else
-              echo "Trying to detect PR from current commit..."
-              PRS=$(
+              echo "No PR; diffing against default branch."
+              DEFAULT_BRANCH=$(
                 curl -sS --fail-with-body \
                   -H "Authorization: Bearer ${API_TOKEN}" \
                   -H "Accept: application/vnd.github+json" \
-                  "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/pulls"
+                  "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}" \
+                | jq -r '.default_branch'
               )
-              PR_NUMBER=$(echo "$PRS" | jq -r '.[0].number // empty')
+              git fetch --no-tags --depth=200 origin "$DEFAULT_BRANCH"
+              BASE=$(git merge-base HEAD "origin/${DEFAULT_BRANCH}")
+              git diff --name-only "${BASE}...HEAD" > /tmp/pr_files.txt
+            fi
 
-              if [ -n "$PR_NUMBER" ]; then
-                echo "Found PR #$PR_NUMBER; using PR file list."
-                FILES=$(
-                  curl -sS --fail-with-body \
-                    -H "Authorization: Bearer ${API_TOKEN}" \
-                    -H "Accept: application/vnd.github+json" \
-                    "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/files?per_page=100" \
-                  | jq -r '.[].filename'
-                )
-                echo "${FILES}" > /tmp/changed.txt
-              else
-                echo "No PR found; diffing against default branch."
-                DEFAULT_BRANCH=$(
-                  curl -sS --fail-with-body \
-                    -H "Authorization: Bearer ${API_TOKEN}" \
-                    -H "Accept: application/vnd.github+json" \
-                    "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}" \
-                  | jq -r '.default_branch'
-                )
-                git fetch --no-tags --depth=200 origin "$DEFAULT_BRANCH"
-                BASE=$(git merge-base HEAD "origin/${DEFAULT_BRANCH}")
-                git diff --name-only "${BASE}...HEAD" > /tmp/changed.txt
-              fi
+            echo "Files to examine:"; cat /tmp/pr_files.txt || true
 
-              if grep -E '\.(R|Rmd|Rd)$' /tmp/changed.txt >/dev/null || \
-                 grep -E '^(R/|tests/|man/|vignettes/|src/)' /tmp/changed.txt >/dev/null; then
+            if grep -E '\.(R|Rmd|Rd)$' /tmp/pr_files.txt >/dev/null || \
+               grep -E '^(R/|tests/|man/|vignettes/|src/)' /tmp/pr_files.txt >/dev/null; then
+              R_NEEDED=true
+            else
+              if grep -v -E '^(\.github/copilot-instructions\.md|\.github/workflows/|README\.md|\.gitignore|\.Rbuildignore|NEWS\.md|CONTRIBUTING\.md|LICENSE|CITATION\.cff|DESCRIPTION|cran-comments\.md|.+\.md$|.+\.ya?ml$)$' /tmp/pr_files.txt | grep -E '.' >/dev/null; then
                 R_NEEDED=true
               else
-                if grep -v -E '^(\.github/copilot-instructions\.md|\.github/workflows/|README\.md|\.gitignore|\.Rbuildignore|NEWS\.md|CONTRIBUTING\.md|LICENSE|CITATION\.cff|DESCRIPTION|cran-comments\.md|.+\.md$|.+\.ya?ml$)$' /tmp/changed.txt | grep -E '.' >/dev/null; then
-                  R_NEEDED=true
-                else
-                  R_NEEDED=false
-                fi
+                R_NEEDED=false
               fi
             fi
           fi
 
           echo "R_NEEDED=${R_NEEDED}" | tee -a "$GITHUB_OUTPUT"
-
           echo ""
           echo "=== FINAL DECISION ==="
-          if [ "$R_NEEDED" == "true" ]; then
+          if [ "$R_NEEDED" = "true" ]; then
             echo "✓ R setup WILL be run"
-            echo "Reason: Analysis indicates R functionality is needed"
+            [ -n "$EXPLICIT_DECISION" ] && echo "Reason: explicit label ($EXPLICIT_DECISION)" || echo "Reason: heuristics"
           else
             echo "✓ R setup WILL BE SKIPPED"
-            echo "Reason: Only documentation/config files detected"
+            [ -n "$EXPLICIT_DECISION" ] && echo "Reason: explicit label ($EXPLICIT_DECISION)" || echo "Reason: heuristics"
           fi
           echo "Decision: R_NEEDED=$R_NEEDED"
+
 
       - name: Setup R
         if: steps.check_r_needed.outputs.R_NEEDED == 'true'
