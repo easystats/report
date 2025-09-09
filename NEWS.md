@@ -1,5 +1,9 @@
 # report 0.6.x
 
+Bug fixes
+
+* `report.brmsfit()`: fix issue where report text was printed multiple times when different parameters had different priors (#543)
+
 # report 0.6.2
 
 Bug fixes
