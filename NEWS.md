@@ -2,7 +2,6 @@
 
 Bug fixes
 
-* Fixed lint issues in `report.character.R`: resolved object overwriting conflicts with base R functions (table, text), fixed line length violations, and corrected variable naming to follow snake_case convention
 * Fixed a lot of linting issues across the package.
 * Fixed duplicated text output in `report()` for glmmTMB objects by addressing both regex pattern and redundant CI information concatenation in `report_info.lm()` (#481)
 * Fixed issue with missing effect size for the Intercept term in type 3 anova tables (#451)
