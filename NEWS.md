@@ -1,9 +1,5 @@
 # report 0.6.x
 
-Bug fixes
-
-* Fixed lint issues in `report.brmsfit.R`: improved code formatting to comply with both default and easystats linting standards
-
 # report 0.6.2
 
 Bug fixes
