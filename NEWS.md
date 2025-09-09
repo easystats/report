@@ -1,9 +1,5 @@
 # report 0.6.x
 
-Bug fixes
-
-* Fixed if_not_else_linter issue in `report.bayesfactor_models.R` for improved code readability
-
 # report 0.6.2
 
 Bug fixes
