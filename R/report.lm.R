@@ -432,6 +432,27 @@ report_parameters.lm <- function(
   params <- attributes(stats)$table
   effsize <- attributes(stats)$effsize
 
+  # For glmmTMB models, deduplicate parameters table to prevent repeated output
+  # This fixes the issue where same parameter appears multiple times in the report
+  if (inherits(x, "glmmTMB") && "Component" %in% colnames(params)) {
+    # Deduplicate based on Parameter and Component combination
+    # Keep the first occurrence of each unique Parameter-Component pair
+    unique_idx <- !duplicated(paste(params$Parameter, params$Component))
+    params <- params[unique_idx, , drop = FALSE]
+    
+    # Also need to adjust the stats object to match the deduplicated table
+    stats_vector <- as.character(stats)
+    effsize_vector <- if (!is.null(effsize)) as.character(effsize) else NULL
+    
+    # Keep only the corresponding stats entries
+    stats <- structure(
+      stats_vector[unique_idx],
+      class = class(stats),
+      table = params,
+      effectsize = effsize
+    )
+  }
+
   # Parameters' names
   params_text <- as.character(.parameters_starting_text(x, params))
 
