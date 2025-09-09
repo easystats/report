@@ -23,7 +23,6 @@ jobs:
 
     env:
       GITHUB_PAT: ${{ secrets.GH_PAT }}
-      GITHUB_TOKEN: ${{ secrets.GH_PAT }}
       R_KEEP_PKG_SOURCE: yes
       _R_CHECK_CRAN_INCOMING_: false
       _R_CHECK_FORCE_SUGGESTS_: false
@@ -34,10 +33,32 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Wait for PR labels (up to 90s)
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const {owner, repo} = context.repo
+            const pr = context.payload.pull_request
+            const REQUIRED = ['copilot-setup-light','copilot-setup-full'] // <- or [] for “any label”
+            const deadline = Date.now() + 90_000
+            while (Date.now() < deadline) {
+              const {data} = await github.rest.issues.listLabelsOnIssue({ owner, repo, issue_number: pr.number })
+              const names = data.map(l => l.name)
+              const ok = REQUIRED.length === 0 ? names.length > 0 : REQUIRED.some(r => names.includes(r))
+              if (ok) { core.info(`Labels present: [${names.join(', ')}]`); return }
+              core.info(`Waiting… current labels: [${names.join(', ')}]`)
+              await new Promise(r => setTimeout(r, 5000))
+            }
+            core.warning('Timed out waiting for labels; continuing anyway.')
+            // If you want to *block* Copilot until labeled, use:
+            // core.setFailed('Required labels not found before timeout.')
+
       - name: Determine if R setup is needed
         id: check_r_needed
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          API_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           echo "Checking if R environment setup is needed..."
@@ -51,10 +72,14 @@ jobs:
 
             # First check for setup labels on the PR (highest priority)
             echo "Checking PR labels for setup preferences..."
-            PR_LABELS=$(curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" \
-              -H "Accept: application/vnd.github+json" \
-              "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}" \
-              | jq -r '.labels[].name')
+            # NOTE: use the Issues labels endpoint (PRs are issues under the hood)
+            PR_LABELS=$(
+              curl -sS --fail-with-body \
+                -H "Authorization: Bearer ${API_TOKEN}" \
+                -H "Accept: application/vnd.github+json" \
+                "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/labels" \
+              | jq -r '.[].name'
+            )
 
             echo "PR labels: ${PR_LABELS}"
 
@@ -69,17 +94,18 @@ jobs:
               echo "No explicit setup labels found, analyzing changed files..."
 
               # Get changed files from the PR
-              FILES=$(curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" \
-                -H "Accept: application/vnd.github+json" \
-                "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/files?per_page=100" \
-                | jq -r '.[].filename')
+              FILES=$(
+                curl -sS --fail-with-body \
+                  -H "Authorization: Bearer ${API_TOKEN}" \
+                  -H "Accept: application/vnd.github+json" \
+                  "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/files?per_page=100" \
+                | jq -r '.[].filename'
+              )
 
               echo "Files in PR:"
               echo "${FILES}"
 
               # If ANY file is not in the "docs/config-only" set -> need R
-              # Allowed-only set (docs/config): tweak as you like
-              # Note: use a temporary file to avoid word-splitting issues
               echo "${FILES}" > /tmp/pr_files.txt
 
               if grep -E '\.(R|Rmd|Rd)$' /tmp/pr_files.txt >/dev/null || \
@@ -110,24 +136,32 @@ jobs:
               R_NEEDED=false
             else
               echo "Trying to detect PR from current commit..."
-              PRS=$(curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" \
-                -H "Accept: application/vnd.github+json" \
-                "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/pulls")
+              PRS=$(
+                curl -sS --fail-with-body \
+                  -H "Authorization: Bearer ${API_TOKEN}" \
+                  -H "Accept: application/vnd.github+json" \
+                  "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/pulls"
+              )
               PR_NUMBER=$(echo "$PRS" | jq -r '.[0].number // empty')
 
               if [ -n "$PR_NUMBER" ]; then
                 echo "Found PR #$PR_NUMBER; using PR file list."
-                FILES=$(curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" \
-                  -H "Accept: application/vnd.github+json" \
-                  "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/files?per_page=100" \
-                  | jq -r '.[].filename')
+                FILES=$(
+                  curl -sS --fail-with-body \
+                    -H "Authorization: Bearer ${API_TOKEN}" \
+                    -H "Accept: application/vnd.github+json" \
+                    "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/files?per_page=100" \
+                  | jq -r '.[].filename'
+                )
                 echo "${FILES}" > /tmp/changed.txt
               else
                 echo "No PR found; diffing against default branch."
                 DEFAULT_BRANCH=$(
-                  curl -sS -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+                  curl -sS --fail-with-body \
+                    -H "Authorization: Bearer ${API_TOKEN}" \
                     -H "Accept: application/vnd.github+json" \
-                    "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}" | jq -r '.default_branch'
+                    "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}" \
+                  | jq -r '.default_branch'
                 )
                 git fetch --no-tags --depth=200 origin "$DEFAULT_BRANCH"
                 BASE=$(git merge-base HEAD "origin/${DEFAULT_BRANCH}")
