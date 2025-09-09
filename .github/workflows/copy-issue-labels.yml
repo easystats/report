@@ -1,0 +1,29 @@
+name: Inherit Issue Labels
+
+on:
+  pull_request:
+    types: [opened]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  copy-labels:
+    runs-on: ubuntu-latest
+    steps:
+      # PR body -> looks for "fixes|closes|resolves #123"
+      - name: Copy labels from linked issue (body)
+        uses: michalvankodev/copy-issue-labels@v1.2.1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          custom-keywords: 'fixes|closes|resolves'   # optional, defaults exist
+
+      # PR title (optional): run a second pass if you sometimes reference in title
+      - name: Copy labels from linked issue (title)
+        uses: michalvankodev/copy-issue-labels@v1.2.1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          from-title: true
+          custom-keywords: 'fixes|closes|resolves'
