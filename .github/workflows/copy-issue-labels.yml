@@ -1,29 +1,95 @@
-name: Inherit Issue Labels
+# .github/workflows/mirror-issue-labels-to-linked-prs.yml
+name: Mirror issue labels to linked PRs
 
 on:
-  pull_request:
-    types: [opened]
+  issues:
+    types: [opened, labeled, unlabeled]  # opened covers issues created WITH labels
 
 permissions:
   contents: read
   issues: write
   pull-requests: write
 
+# Avoid duplicate concurrent runs per issue
+concurrency:
+  group: mirror-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
 jobs:
-  copy-labels:
+  mirror:
     runs-on: ubuntu-latest
     steps:
-      # PR body -> looks for "fixes|closes|resolves #123"
-      - name: Copy labels from linked issue (body)
-        uses: michalvankodev/copy-issue-labels@v1.2.1
+      - name: Sync labels to linked PRs (with short wait for PR to appear)
+        uses: actions/github-script@v7
         with:
-          repo-token: ${{ secrets.USER_GITHUB_TOKEN }}
-          custom-keywords: 'fixes|closes|resolves'   # optional, defaults exist
+          github-token: ${{ github.token }}
+          script: |
+            const {owner, repo} = context.repo
+            const issue = context.payload.issue
+            const action = context.payload.action
 
-      # PR title (optional): run a second pass if you sometimes reference in title
-      - name: Copy labels from linked issue (title)
-        uses: michalvankodev/copy-issue-labels@v1.2.1
-        with:
-          repo-token: ${{ secrets.USER_GITHUB_TOKEN }}
-          from-title: true
-          custom-keywords: 'fixes|closes|resolves'
+            // Determine what to sync
+            const allLabelsOnIssue = (issue.labels || []).map(l => typeof l === 'string' ? l : l.name)
+            const changedLabel = context.payload.label?.name
+            const labelsToAdd =
+              action === 'opened' ? allLabelsOnIssue :
+              action === 'labeled' ? [changedLabel] :
+              []
+            const labelToRemove = action === 'unlabeled' ? changedLabel : null
+
+            // Helper: find PRs linked to this issue (covers sidebar link & "Fixes #X")
+            async function findLinkedPRs() {
+              const events = await github.paginate(
+                github.rest.issues.listEventsForTimeline,
+                {
+                  owner, repo, issue_number: issue.number, per_page: 100,
+                  mediaType: { previews: ['mockingbird'] } // timeline API
+                }
+              )
+              const prs = [...new Set(
+                events
+                  .filter(e =>
+                    (e.event === 'connected' || e.event === 'cross-referenced') &&
+                    e.source?.issue?.pull_request
+                  )
+                  .map(e => e.source.issue.number)
+              )]
+              return prs
+            }
+
+            // Poll up to 10 minutes (every 20s) for a linked PR to show up
+            const deadline = Date.now() + 10 * 60 * 1000
+            let prs = await findLinkedPRs()
+            while (prs.length === 0 && Date.now() < deadline) {
+              await new Promise(r => setTimeout(r, 20_000))
+              prs = await findLinkedPRs()
+            }
+            if (prs.length === 0) {
+              core.info('No linked PR found before timeout. Exiting.')
+              return
+            }
+
+            // Add labels
+            if (labelsToAdd.length > 0) {
+              for (const pr of prs) {
+                await github.rest.issues.addLabels({
+                  owner, repo, issue_number: pr, labels: labelsToAdd
+                })
+                core.info(`Added [${labelsToAdd.join(', ')}] to PR #${pr}`)
+              }
+            }
+
+            // Remove label (single)
+            if (labelToRemove) {
+              for (const pr of prs) {
+                try {
+                  await github.rest.issues.removeLabel({
+                    owner, repo, issue_number: pr, name: labelToRemove
+                  })
+                  core.info(`Removed "${labelToRemove}" from PR #${pr}`)
+                } catch (e) {
+                  // Ignore if label isn't on the PR
+                  if (e.status !== 404) throw e
+                }
+              }
+            }
