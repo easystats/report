@@ -43,13 +43,11 @@ report_text.estimate_contrasts <- function(x, table = NULL, ...) {
     ifelse(x$Difference < 0, " negative", "positive"), " and statistically ",
     ifelse(x$p < 0.05, "significant", "non-significant"),
     " (difference = ", f_table$Difference, ", 95% CI ", f_table$`95% CI`, ", ",
-    names(f_table)[6], " = ", f_table[[6]], ", ", insight::format_p(table$p),
-    ")",
+    names(f_table)[6], " = ", f_table[[6]], ", ", insight::format_p(table$p), ")",
     collapse = ". "
   )
 
-  text <- paste("The marginal contrasts analysis suggests the following.",
-                paste(text, collapse = ""))
+  text <- paste("The marginal contrasts analysis suggests the following.", paste(text, collapse = ""))
 
   as.report_text(text)
 }
