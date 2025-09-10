@@ -18,10 +18,10 @@
 #' @return An object of class [report()].
 #' @export
 report.estimate_contrasts <- function(x, ...) {
-  table <- report_table(x, ...)
-  text <- report_text(x, table = table, ...)
+  report_table_obj <- report_table(x, ...)
+  report_text_obj <- report_text(x, table = report_table_obj, ...)
 
-  as.report(text, table = table, ...)
+  as.report(report_text_obj, table = report_table_obj, ...)
 }
 
 # report_table ------------------------------------------------------------
@@ -39,7 +39,7 @@ report_table.estimate_contrasts <- function(x, ...) {
 report_text.estimate_contrasts <- function(x, table = NULL, ...) {
   f_table <- insight::format_table(table)
 
-  text <- paste0("The difference between ", x$Level1, " and ", x$Level2, " is ",
+  report_text_obj <- paste0("The difference between ", x$Level1, " and ", x$Level2, " is ",
     ifelse(x$Difference < 0, " negative", "positive"), " and statistically ",
     ifelse(x$p < 0.05, "significant", "non-significant"),
     " (difference = ", f_table$Difference, ", 95% CI ", f_table$`95% CI`, ", ",
@@ -47,7 +47,8 @@ report_text.estimate_contrasts <- function(x, table = NULL, ...) {
     collapse = ". "
   )
 
-  text <- paste("The marginal contrasts analysis suggests the following.", paste(text, collapse = ""))
+  report_text_obj <- paste("The marginal contrasts analysis suggests the following.",
+                        paste(report_text_obj, collapse = ""))
 
-  as.report_text(text)
+  as.report_text(report_text_obj)
 }
