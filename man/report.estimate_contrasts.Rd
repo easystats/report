@@ -27,7 +27,7 @@ An object of class \code{\link[=report]{report()}}.
 Create reports for \code{estimate_contrasts} objects.
 }
 \examples{
-\dontshow{if (all(insight::check_if_installed(c("modelbased", "marginaleffects", "collapse", "Formula"), quietly = TRUE))) withAutoprint(\{ # examplesIf}
+\dontshow{if (all(insight::check_if_installed(c("modelbased", "marginaleffects", "collapse", "Formula")))) withAutoprint(\{ # examplesIf}
 library(modelbased)
 model <- lm(Sepal.Width ~ Species, data = iris)
 contr <- estimate_contrasts(model)

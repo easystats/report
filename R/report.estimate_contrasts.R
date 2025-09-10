@@ -9,8 +9,7 @@
 #'
 #' @inherit report return seealso
 #'
-#' @examplesIf all(insight::check_if_installed(c("modelbased",
-#'   "marginaleffects", "collapse", "Formula"), quietly = TRUE))
+#' @examplesIf all(insight::check_if_installed(c("modelbased", "marginaleffects", "collapse", "Formula")))
 #' library(modelbased)
 #' model <- lm(Sepal.Width ~ Species, data = iris)
 #' contr <- estimate_contrasts(model)
@@ -47,8 +46,10 @@ report_text.estimate_contrasts <- function(x, table = NULL, ...) {
     collapse = ". "
   )
 
-  report_text_obj <- paste("The marginal contrasts analysis suggests the following.",
-                        paste(report_text_obj, collapse = ""))
+  report_text_obj <- paste(
+    "The marginal contrasts analysis suggests the following.",
+    paste(report_text_obj, collapse = "")
+  )
 
   as.report_text(report_text_obj)
 }
