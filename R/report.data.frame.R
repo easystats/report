@@ -155,7 +155,8 @@ report_table.data.frame <- function(x,
   if ("Level" %in% names(result_table)) {
     if ("percentage_Obs" %in% names(result_table)) {
       result_table <- datawizard::data_reorder(
-        result_table, c("Variable", "Level", "n_Obs", "percentage_Obs"), verbose = FALSE
+        result_table, c("Variable", "Level", "n_Obs", "percentage_Obs"),
+        verbose = FALSE
       )
       table_full <- datawizard::data_reorder(table_full, c("Variable", "Level", "n_Obs", "percentage_Obs"),
         verbose = FALSE
