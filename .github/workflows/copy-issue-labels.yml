@@ -3,7 +3,7 @@ name: Mirror issue labels to linked PRs
 
 on:
   issues:
-    types: [opened, labeled, unlabeled]  # opened covers issues created WITH labels
+    types: [labeled, unlabeled]  # opened covers issues created WITH labels
 
 permissions:
   contents: read
