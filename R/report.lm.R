@@ -332,19 +332,19 @@ report_statistics.lm <- function(
   # Effect size
   if (include_effectsize && !is.null(effsize)) {
     # For glmmTMB models with components, align effectsize with the table parameters
-    if (inherits(x, "glmmTMB") && "Component" %in% colnames(table)) {
+    if (inherits(x, "glmmTMB") && "Component" %in% colnames(params_table)) {
       # Find matching indices between table and effectsize
       effsize_table <- attributes(effsize)$table
 
       # Create matching vectors for both table and effectsize
-      table_keys <- paste(table$Parameter, table$Component)
+      table_keys <- paste(params_table$Parameter, params_table$Component)
       effsize_keys <- paste(effsize_table$Parameter, effsize_table$Component)
 
       # Find which effectsize entries match table entries
       match_idx <- match(table_keys, effsize_keys)
 
       # Use only the matched effectsize elements, fill missing with empty strings
-      n_params <- nrow(table)
+      n_params <- nrow(params_table)
       effsize_stats <- character(n_params)
       effsize_main <- character(n_params)
 
