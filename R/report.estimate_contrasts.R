@@ -9,7 +9,9 @@
 #'
 #' @inherit report return seealso
 #'
-#' @examplesIf all(insight::check_if_installed(c("modelbased", "marginaleffects", "collapse", "Formula")))
+# nolint start
+#' @examplesIf all(insight::check_if_installed(c("modelbased", "marginaleffects", "collapse", "Formula"), quietly = TRUE))
+# nolint end
 #' library(modelbased)
 #' model <- lm(Sepal.Width ~ Species, data = iris)
 #' contr <- estimate_contrasts(model)
