@@ -28,5 +28,5 @@ body:
     attributes:
       value: |
         **Setup preference guide:**
-        - **copilot-setup-full** (default label): For code changes, new features, function modifications, or tasks requiring complete R development environment.
-        - For documentation changes, minor fixes, configuration updates, or tasks that don't require full R environment (saves 5-10 minutes), remove the **copilot-setup-full** label before creating the issue.
+        - 🔴 **copilot-setup-full** (default label): For code changes, new features, function modifications, or tasks requiring complete R development environment.
+        - 🔵 For documentation changes, minor fixes, configuration updates, or tasks that don't require full R environment (saves 5-10 minutes), remove the **copilot-setup-full** label before creating the issue.
