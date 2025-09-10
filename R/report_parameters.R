@@ -196,19 +196,23 @@ print.report_parameters <- function(x, ...) {
   } else {
     # Try to get formatted parameter names from the model
     # If this fails (e.g., with mock objects), fall back to using parameter names from table
-    pretty_name <- tryCatch({
-      parameters::format_parameters(x)
-    }, warning = function(w) {
-      # If we can't get parameters from the model, use the parameter names from the table
-      param_names <- params$Parameter
-      names(param_names) <- param_names
-      param_names
-    }, error = function(e) {
-      # If we can't get parameters from the model, use the parameter names from the table
-      param_names <- params$Parameter
-      names(param_names) <- param_names
-      param_names
-    })
+    pretty_name <- tryCatch(
+      {
+        parameters::format_parameters(x)
+      },
+      warning = function(w) {
+        # If we can't get parameters from the model, use the parameter names from the table
+        param_names <- params$Parameter
+        names(param_names) <- param_names
+        param_names
+      },
+      error = function(e) {
+        # If we can't get parameters from the model, use the parameter names from the table
+        param_names <- params$Parameter
+        names(param_names) <- param_names
+        param_names
+      }
+    )
   }
 
   text_output <- vapply(

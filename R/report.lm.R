@@ -443,14 +443,14 @@ report_parameters.lm <- function(
       # Deduplicate based on Parameter name only (for tables without Component column)
       unique_idx <- !duplicated(params$Parameter)
     }
-    
+
     # Only apply deduplication if we actually found duplicates
     if (any(!unique_idx)) {
       params <- params[unique_idx, , drop = FALSE]
-      
+
       # Also need to adjust the stats object to match the deduplicated table
       stats_vector <- as.character(stats)
-      
+
       # Keep only the corresponding stats entries
       stats <- structure(
         stats_vector[unique_idx],

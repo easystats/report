@@ -2,7 +2,6 @@
 
 Bug fixes
 
-* Fixed issue where `report()` on glmmTMB models duplicated parameter output multiple times due to duplicated rows in parameter tables. The function now deduplicates parameters based on Parameter-Component combinations for glmmTMB models (#551)
 * Fixed a lot of linting issues across the package.
 * Fixed duplicated text output in `report()` for glmmTMB objects by addressing both regex pattern and redundant CI information concatenation in `report_info.lm()` (#481)
 * Fixed issue with missing effect size for the Intercept term in type 3 anova tables (#451)
