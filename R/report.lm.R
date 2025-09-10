@@ -445,7 +445,7 @@ report_parameters.lm <- function(
     }
 
     # Only apply deduplication if we actually found duplicates
-    if (any(!unique_idx)) {
+    if (!all(unique_idx)) {
       params <- params[unique_idx, , drop = FALSE]
 
       # Also need to adjust the stats object to match the deduplicated table
