@@ -34,9 +34,9 @@
 #' @return An object of class [report()].
 #' @export
 report.test_performance <- function(x, ...) {
-  table <- report_table(x, table = table, ...)
-  text <- report_text(x, ...)
-  as.report(text = text, table = table, ...)
+  performance_table <- report_table(x, table = performance_table, ...)
+  performance_text <- report_text(x, ...)
+  as.report(text = performance_text, table = performance_table, ...)
 }
 
 # report_table ------------------------------------------------------------
@@ -54,37 +54,37 @@ report_table.test_performance <- function(x, ...) {
 #' @export
 report_statistics.test_performance <- function(x, table = NULL, ...) {
   if (is.null(table)) {
-    table <- report_table(x, ...)
+    perf_table <- report_table(x, ...)
   }
 
-  text <- text_short <- ""
-  if ("BF" %in% names(table)) {
-    val <- text <- datawizard::text_paste(text, insight::format_bf(stats::na.omit(table$BF), exact = TRUE))
+  stats_text <- text_short <- ""
+  if ("BF" %in% names(perf_table)) {
+    val <- stats_text <- datawizard::text_paste(stats_text, insight::format_bf(stats::na.omit(perf_table$BF), exact = TRUE))
   }
 
-  if ("Omega2" %in% names(table)) {
-    val <- stats::na.omit(table$Omega2)
+  if ("Omega2" %in% names(perf_table)) {
+    val <- stats::na.omit(perf_table$Omega2)
     text2 <- paste0(
       "Omega2 = ",
-      insight::format_value(stats::na.omit(table$Omega2)),
+      insight::format_value(stats::na.omit(perf_table$Omega2)),
       ", ",
-      insight::format_p(stats::na.omit(table$p_Omega2))
+      insight::format_p(stats::na.omit(perf_table$p_Omega2))
     )
-    text <- datawizard::text_paste(text, text2, sep = "; ")
+    stats_text <- datawizard::text_paste(stats_text, text2, sep = "; ")
   }
 
-  if ("LR" %in% names(table)) {
-    val <- stats::na.omit(table$LR)
+  if ("LR" %in% names(perf_table)) {
+    val <- stats::na.omit(perf_table$LR)
     text2 <- paste0(
       "LR = ",
-      insight::format_value(stats::na.omit(table$LR)),
+      insight::format_value(stats::na.omit(perf_table$LR)),
       ", ",
-      insight::format_p(stats::na.omit(table$p_LR))
+      insight::format_p(stats::na.omit(perf_table$p_LR))
     )
-    text <- datawizard::text_paste(text, text2, sep = "; ")
+    stats_text <- datawizard::text_paste(stats_text, text2, sep = "; ")
   }
 
-  as.report_statistics(text, summary = text_short, table = table)
+  as.report_statistics(stats_text, summary = text_short, table = perf_table)
 }
 
 # report_parameters ------------------------------------------------------------
@@ -100,23 +100,23 @@ report_parameters.test_performance <- report_parameters.compare_performance
 #' @export
 report_text.test_performance <- function(x, table = NULL, ...) {
   stats <- report_statistics(x, table = table)
-  table <- attributes(stats)$table
+  performance_table <- attributes(stats)$table
 
   # Get indices
-  models <- table$Model
-  text <- datawizard::text_concatenate(paste0(models, " (", stats, ")"))
+  models <- performance_table$Model
+  comparison_text <- datawizard::text_concatenate(paste0(models, " (", stats, ")"))
   text_short <- datawizard::text_concatenate(paste0(models, " (", summary(stats), ")"))
 
   # Add intro sentence
   text_start <- paste0(
     "We compared ",
-    insight::format_number(nrow(table)),
+    insight::format_number(nrow(performance_table)),
     " ",
-    ifelse(length(unique(table$Type)) == 1, format_model(unique(table$Type)), "model"),
+    ifelse(length(unique(performance_table$Type)) == 1, format_model(unique(performance_table$Type)), "model"),
     "s"
   )
-  text <- paste0(text_start, "; ", text, ".")
+  comparison_text <- paste0(text_start, "; ", comparison_text, ".")
   text_short <- paste0(text_start, "; ", text_short, ".")
 
-  as.report_text(text, summary = text_short)
+  as.report_text(comparison_text, summary = text_short)
 }

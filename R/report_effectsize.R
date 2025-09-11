@@ -90,7 +90,7 @@ print.report_effectsize <- function(x, ...) {
 .text_effectsize <- function(interpretation) {
   # Effect size
   if (is.null(interpretation)) {
-    text <- ""
+    effect_text <- ""
   } else {
     if (is.character(interpretation)) {
       effsize_name <- switch(interpretation,
@@ -104,12 +104,12 @@ print.report_effectsize <- function(x, ...) {
         field2013 = "Field's (2013)",
         landis1977 = "Landis' (1977)"
       )
-      text <- paste0("Effect sizes were labelled following ", effsize_name, " recommendations.")
+      effect_text <- paste0("Effect sizes were labelled following ", effsize_name, " recommendations.")
     } else {
-      text <- paste0("Effect sizes were labelled following a custom set of rules.")
+      effect_text <- paste0("Effect sizes were labelled following a custom set of rules.")
     }
   }
-  text
+  effect_text
 }
 
 
@@ -121,34 +121,34 @@ print.report_effectsize <- function(x, ...) {
 
   if (method == "refit") {
     if (robust) {
-      text <- "(using the median and the MAD, a robust equivalent of the SD) "
+      standard_text <- "(using the median and the MAD, a robust equivalent of the SD) "
     } else {
-      text <- ""
+      standard_text <- ""
     }
-    text <- paste0(
+    standard_text <- paste0(
       "Standardized parameters were obtained by fitting the model on a standardized version ",
-      text, "of the dataset."
+      standard_text, "of the dataset."
     )
   } else if (method == "2sd") {
     if (robust) {
-      text <- "MAD (a median-based equivalent of the SD) "
+      standard_text <- "MAD (a median-based equivalent of the SD) "
     } else {
-      text <- "SD "
+      standard_text <- "SD "
     }
-    text <- paste0(
+    standard_text <- paste0(
       "Standardized parameters were obtained by standardizing the data by 2 times the ",
-      text, " (see Gelman, 2008)."
+      standard_text, " (see Gelman, 2008)."
     )
   } else if (method %in% c("smart", "basic", "posthoc")) {
     if (robust) {
-      text <- "median and the MAD (a median-based equivalent of the SD) of the response variable."
+      standard_text <- "median and the MAD (a median-based equivalent of the SD) of the response variable."
     } else {
-      text <- "mean and the SD of the response variable."
+      standard_text <- "mean and the SD of the response variable."
     }
-    text <- paste0("Parameters were scaled by the ", text)
+    standard_text <- paste0("Parameters were scaled by the ", standard_text)
   } else {
-    text <- paste0("Parameters were standardized using the ", method, " method.")
+    standard_text <- paste0("Parameters were standardized using the ", method, " method.")
   }
 
-  text
+  standard_text
 }

@@ -48,7 +48,7 @@
 .calculate_groups <- function(x, groups, drop = .groups_drop(x)) {
   # if the dplyr namespace is attached, its `[.grouped_df` method produces
   # erroneous warnings and coerces output to tbl_df
-  `[` <- `[.data.frame`
+  subset_data <- `[.data.frame`
   x <- .ungroup(x)
   unknown <- setdiff(groups, colnames(x))
 
