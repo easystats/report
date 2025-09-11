@@ -36,6 +36,7 @@ report.htest <- function(x, ...) {
 # report_effectsize -------------------------------------------------------
 
 #' @rdname report.htest
+#' @param table Provide the output of `report_table()` to avoid its re-computation.
 #' @export
 report_effectsize.htest <- function(x, table = NULL, ...) {
   dot_args <- list(...)

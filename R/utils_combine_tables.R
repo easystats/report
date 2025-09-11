@@ -69,8 +69,10 @@
 #' @keywords internal
 .remove_performance <- function(table) {
   if ("Fit" %in% names(table)) {
-    perf_table <- table[is.na(table$Fit), ]
-    perf_table <- perf_table[!is.na(perf_table$Parameter), ]
+    params_table <- table[is.na(table$Fit), ]
+    params_table <- params_table[!is.na(params_table$Parameter), ]
+  } else {
+    params_table <- table
   }
-  perf_table
+  params_table
 }
