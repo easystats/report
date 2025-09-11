@@ -30,7 +30,7 @@
 #' @return An object of class [report()].
 #' @export
 report.lavaan <- function(x, ...) {
-  cat("Support for lavaan not fully implemented yet :(\n")
+  print("Support for lavaan not fully implemented yet :(")
 }
 
 

@@ -119,7 +119,7 @@ print.report_performance <- print.report_text
         insight::format_p(r2$p)
       )
     } else {
-      text_full <- text
+      text_full <- r2_text
     }
 
     if ("CI" %in% names(r2)) {
