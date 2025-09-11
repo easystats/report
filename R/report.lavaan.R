@@ -109,11 +109,11 @@ report_performance.lavaan <- function(x, table = NULL, ...) {
 
   perf_table <- effectsize::interpret(performance)
   text_full <- datawizard::text_paste(text_chi2, .text_performance_lavaan(perf_table), sep = " ")
-  text <- datawizard::text_paste(text_chi2,
+  summary_text <- datawizard::text_paste(text_chi2,
     .text_performance_lavaan(perf_table[perf_table$Name %in% c("RMSEA", "CFI", "SRMR"), ]),
     sep = " "
   )
 
 
-  as.report_performance(text_full, summary = text)
+  as.report_performance(text_full, summary = summary_text)
 }

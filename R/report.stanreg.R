@@ -21,10 +21,10 @@
 #' @include report.lm.R report.lme4.R
 #' @export
 report.stanreg <- function(x, ...) {
-  table <- report_table(x, include_effectsize = FALSE, ...)
-  report_text_result <- report_text(x, table = table, ...)
+  stanreg_table <- report_table(x, include_effectsize = FALSE, ...)
+  report_text_result <- report_text(x, table = stanreg_table, ...)
 
-  as.report(report_text_result, table = table, ...)
+  as.report(report_text_result, table = stanreg_table, ...)
 }
 
 #' @export

@@ -24,13 +24,13 @@ report_intercept.MixMod <- report_intercept.lm
 report_random.MixMod <- function(x, ...) {
   random_terms <- insight::find_terms(x)$random
   if (!is.null(random_terms)) {
-    text <- random_terms
-    text <- paste0("The model included ", text, " as random effect")
-    text <- ifelse(length(random_terms) > 1, paste0(text, "s"), text)
-    text_full <- paste0(text, " (", format_formula(x, "random"), ")")
+    random_text <- random_terms
+    random_text <- paste0("The model included ", random_text, " as random effect")
+    random_text <- ifelse(length(random_terms) > 1, paste0(random_text, "s"), random_text)
+    text_full <- paste0(random_text, " (", format_formula(x, "random"), ")")
   }
 
-  as.report_random(text_full, summary = text, ...)
+  as.report_random(text_full, summary = random_text, ...)
 }
 
 
