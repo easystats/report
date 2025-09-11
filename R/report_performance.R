@@ -86,14 +86,14 @@ print.report_performance <- print.report_text
 
 #' @keywords internal
 .text_r2 <- function(x, info, performance, ...) {
-  text <- ""
+  r2_text <- ""
   text_full <- ""
 
   # R2
   if ("R2" %in% names(performance)) {
     r2 <- attributes(performance)$r2
 
-    text <- paste0(
+    r2_text <- paste0(
       "The model's explanatory power is ",
       effectsize::interpret_r2(performance$R2, ...),
       " (R2 = ",
@@ -114,7 +114,7 @@ print.report_performance <- print.report_text
         ", ",
         insight::format_value(r2$df_residual, protect_integers = TRUE),
         ") = ",
-        insight::format_value(r2$`F`),
+        insight::format_value(r2[["F"]]),
         ", ",
         insight::format_p(r2$p)
       )
@@ -136,8 +136,8 @@ print.report_performance <- print.report_text
 
 
     if ("R2_adjusted" %in% names(performance)) {
-      text <- paste0(
-        text, ", adj. R2 = ",
+      r2_text <- paste0(
+        r2_text, ", adj. R2 = ",
         insight::format_value(performance$R2_adjusted),
         ")"
       )
@@ -148,14 +148,14 @@ print.report_performance <- print.report_text
       )
     } else {
       if (datawizard::text_lastchar(text_full) != ")") text_full <- paste0(text_full, ")")
-      if (datawizard::text_lastchar(text) != ")") text <- paste0(text, ")")
+      if (datawizard::text_lastchar(r2_text) != ")") r2_text <- paste0(r2_text, ")")
     }
   }
 
 
   # Tjur's R2
   if ("R2_Tjur" %in% names(performance)) {
-    text <- text_full <- paste0(
+    r2_text <- text_full <- paste0(
       "The model's explanatory power is ",
       effectsize::interpret_r2(performance$R2_Tjur, ...),
       " (Tjur's R2 = ",
@@ -166,7 +166,7 @@ print.report_performance <- print.report_text
 
   # Nagelkerke's R2
   if ("R2_Nagelkerke" %in% names(performance)) {
-    text <- text_full <- paste0(
+    r2_text <- text_full <- paste0(
       "The model's explanatory power is ",
       effectsize::interpret_r2(performance$R2_Nagelkerke, ...),
       " (Nagelkerke's R2 = ",
@@ -177,7 +177,7 @@ print.report_performance <- print.report_text
 
   # CoxSnell's R2
   if ("R2_CoxSnell" %in% names(performance)) {
-    text <- text_full <- paste0(
+    r2_text <- text_full <- paste0(
       "The model's explanatory power is ",
       effectsize::interpret_r2(performance$R2_CoxSnell, ...),
       " (R2_CoxSnell's R2 = ",
@@ -188,7 +188,7 @@ print.report_performance <- print.report_text
 
   # McFadden's R2
   if ("R2_McFadden" %in% names(performance)) {
-    text <- text_full <- paste0(
+    r2_text <- text_full <- paste0(
       "The model's explanatory power is ",
       effectsize::interpret_r2(performance$R2_McFadden, ...),
       " (McFadden's R2 = ",
@@ -199,7 +199,7 @@ print.report_performance <- print.report_text
 
   # R2 Conditional
   if ("R2_conditional" %in% names(performance) && !is.na(performance$R2_conditional)) {
-    text <- text_full <- paste0(
+    r2_text <- text_full <- paste0(
       "The model's total explanatory power is ",
       effectsize::interpret_r2(performance$R2_conditional, ...),
       " (conditional R2 = ",
@@ -210,11 +210,11 @@ print.report_performance <- print.report_text
 
   # R2 marginal
   if ("R2_marginal" %in% names(performance)) {
-    if (text == "") {
-      text <- text_full <- "The model's explanatory power"
+    if (r2_text == "") {
+      r2_text <- text_full <- "The model's explanatory power"
       of <- ""
     } else {
-      text <- paste0(text, " and the part")
+      r2_text <- paste0(r2_text, " and the part")
       text_full <- paste0(text_full, " and the part")
       of <- "of "
     }
@@ -223,7 +223,7 @@ print.report_performance <- print.report_text
       of,
       insight::format_value(performance$R2_marginal)
     )
-    text <- paste0(text, text_r2marginal)
+    r2_text <- paste0(r2_text, text_r2marginal)
 
     if (!is.null(attributes(performance)$r2_bayes$CI$R2_Bayes_marginal)) {
       r2 <- attributes(performance)$r2_bayes$CI$R2_Bayes_marginal
@@ -243,7 +243,7 @@ print.report_performance <- print.report_text
     }
   }
 
-  list(text_full = text_full, text = text)
+  list(text_full = text_full, text = r2_text)
 }
 
 
@@ -282,6 +282,6 @@ print.report_performance <- print.report_text
     text_poor <- ""
   }
 
-  text <- datawizard::text_paste(text_satisfactory, text_poor, sep = " ")
-  text
+  fit_text <- datawizard::text_paste(text_satisfactory, text_poor, sep = " ")
+  fit_text
 }

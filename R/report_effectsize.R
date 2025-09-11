@@ -91,23 +91,21 @@ print.report_effectsize <- function(x, ...) {
   # Effect size
   if (is.null(interpretation)) {
     effect_text <- ""
+  } else if (is.character(interpretation)) {
+    effsize_name <- switch(interpretation,
+      cohen1988 = "Cohen's (1988)",
+      sawilowsky2009 = "Savilowsky's (2009)",
+      gignac2016 = "Gignac's (2016)",
+      funder2019 = "Funder's (2019)",
+      lovakov2021 = "Lovakov's (2021)",
+      evans1996 = "Evans's (1996)",
+      chen2010 = "Chen's (2010)",
+      field2013 = "Field's (2013)",
+      landis1977 = "Landis' (1977)"
+    )
+    effect_text <- paste0("Effect sizes were labelled following ", effsize_name, " recommendations.")
   } else {
-    if (is.character(interpretation)) {
-      effsize_name <- switch(interpretation,
-        cohen1988 = "Cohen's (1988)",
-        sawilowsky2009 = "Savilowsky's (2009)",
-        gignac2016 = "Gignac's (2016)",
-        funder2019 = "Funder's (2019)",
-        lovakov2021 = "Lovakov's (2021)",
-        evans1996 = "Evans's (1996)",
-        chen2010 = "Chen's (2010)",
-        field2013 = "Field's (2013)",
-        landis1977 = "Landis' (1977)"
-      )
-      effect_text <- paste0("Effect sizes were labelled following ", effsize_name, " recommendations.")
-    } else {
-      effect_text <- paste0("Effect sizes were labelled following a custom set of rules.")
-    }
+    effect_text <- paste0("Effect sizes were labelled following a custom set of rules.")
   }
   effect_text
 }

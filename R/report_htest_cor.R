@@ -27,14 +27,14 @@
 # report_effectsize ---------------------
 
 .report_effectsize_correlation <- function(x, table, dot_args) {
-  args <- c(list(x), dot_args)
-  cor_table <- do.call(parameters::parameters, args)
+  param_args <- c(list(x), dot_args)
+  cor_table <- do.call(parameters::parameters, param_args)
   ci <- attributes(cor_table)$ci
   estimate <- names(cor_table)[3]
 
   # Pearson
-  args <- c(list(table[[estimate]]), dot_args)
-  interpretation <- do.call(effectsize::interpret_r, args)
+  interpret_args <- c(list(table[[estimate]]), dot_args)
+  interpretation <- do.call(effectsize::interpret_r, interpret_args)
   rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
   main <- paste0(estimate, " = ", insight::format_value(table[[estimate]]))
 

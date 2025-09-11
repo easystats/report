@@ -80,22 +80,22 @@ print.report_intercept <- function(x, ...) {
     return("")
   }
 
-  terms <- insight::find_variables(model)$conditional
+  model_terms <- insight::find_variables(model)$conditional
   model_data <- insight::get_data(model)
-  data <- model_data[terms[terms %in% names(model_data)]]
-  text <- NULL
-  for (col in names(data)) {
-    if (is.numeric(data[[col]])) {
-      text <- c(text, paste0(col, " = 0"))
-    } else if (is.character(data[[col]])) {
-      text <- c(text, paste0(col, " = ", levels(as.factor(data[[col]]))[1]))
-    } else if (is.factor(data[[col]])) {
-      text <- c(text, paste0(col, " = ", levels(data[[col]])[.find_reference_level(data[[col]])]))
+  intercept_data <- model_data[model_terms[model_terms %in% names(model_data)]]
+  intercept_text <- NULL
+  for (col in names(intercept_data)) {
+    if (is.numeric(intercept_data[[col]])) {
+      intercept_text <- c(intercept_text, paste0(col, " = 0"))
+    } else if (is.character(intercept_data[[col]])) {
+      intercept_text <- c(intercept_text, paste0(col, " = ", levels(as.factor(intercept_data[[col]]))[1]))
+    } else if (is.factor(intercept_data[[col]])) {
+      intercept_text <- c(intercept_text, paste0(col, " = ", levels(intercept_data[[col]])[.find_reference_level(intercept_data[[col]])]))
     } else {
-      text <- c(text, paste0(col, " = [?]"))
+      intercept_text <- c(intercept_text, paste0(col, " = [?]"))
     }
   }
-  paste0(", corresponding to ", datawizard::text_concatenate(text), ",")
+  paste0(", corresponding to ", datawizard::text_concatenate(intercept_text), ",")
 }
 
 
