@@ -1,6 +1,6 @@
 # report 0.6.x
 
-Bug fixes
+Bug fixes 
 
 * Fixed a lot of linting issues across the package.
 * Fixed duplicated text output in `report()` for glmmTMB objects by addressing both regex pattern and redundant CI information concatenation in `report_info.lm()` (#481)
