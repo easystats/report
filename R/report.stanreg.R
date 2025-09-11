@@ -165,7 +165,7 @@ report_intercept.stanreg <- function(x, ...) {
   if (!("(Intercept)" %in% names(posteriors))) {
     return(as.report_intercept("", summary = "", ...))
   }
-  
+
   intercept <- posteriors[["(Intercept)"]]
 
   intercept_data <- bayestestR::sexit(intercept, ...)

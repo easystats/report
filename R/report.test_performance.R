@@ -59,7 +59,8 @@ report_statistics.test_performance <- function(x, table = NULL, ...) {
 
   stats_text <- text_short <- ""
   if ("BF" %in% names(perf_table)) {
-    val <- stats_text <- datawizard::text_paste(stats_text, insight::format_bf(stats::na.omit(perf_table$BF), exact = TRUE))
+    bf_formatted <- insight::format_bf(stats::na.omit(perf_table$BF), exact = TRUE)
+    val <- stats_text <- datawizard::text_paste(stats_text, bf_formatted)
   }
 
   if ("Omega2" %in% names(perf_table)) {

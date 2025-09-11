@@ -90,7 +90,8 @@ print.report_intercept <- function(x, ...) {
     } else if (is.character(intercept_data[[col]])) {
       intercept_text <- c(intercept_text, paste0(col, " = ", levels(as.factor(intercept_data[[col]]))[1]))
     } else if (is.factor(intercept_data[[col]])) {
-      intercept_text <- c(intercept_text, paste0(col, " = ", levels(intercept_data[[col]])[.find_reference_level(intercept_data[[col]])]))
+      ref_level <- .find_reference_level(intercept_data[[col]])
+      intercept_text <- c(intercept_text, paste0(col, " = ", levels(intercept_data[[col]])[ref_level]))
     } else {
       intercept_text <- c(intercept_text, paste0(col, " = [?]"))
     }

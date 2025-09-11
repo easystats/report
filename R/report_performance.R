@@ -225,7 +225,9 @@ print.report_performance <- print.report_text
     )
     r2_text <- paste0(r2_text, text_r2marginal)
 
-    if (!is.null(attributes(performance)$r2_bayes$CI$R2_Bayes_marginal)) {
+    if (is.null(attributes(performance)$r2_bayes$CI$R2_Bayes_marginal)) {
+      text_full <- paste0(text_full, text_r2marginal)
+    } else {
       r2 <- attributes(performance)$r2_bayes$CI$R2_Bayes_marginal
       text_full <- paste0(
         text_full,
@@ -238,8 +240,6 @@ print.report_performance <- print.report_text
         ),
         ")"
       )
-    } else {
-      text_full <- paste0(text_full, text_r2marginal)
     }
   }
 

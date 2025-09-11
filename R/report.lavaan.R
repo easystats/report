@@ -30,42 +30,42 @@
 #' @return An object of class [report()].
 #' @export
 report.lavaan <- function(x, ...) {
-  print("Support for lavaan not fully implemented yet :(")
+  cat("Support for lavaan not fully implemented yet :(\n")
 }
 
 
 #' @export
 report_table.lavaan <- function(x, ...) {
   parameters <- parameters::model_parameters(x, ci_random = FALSE, ...)
-  table <- as.data.frame(parameters)
-  table$Parameter <- paste(table$To, table$Operator, table$From)
-  table <- datawizard::data_remove(table, c("To", "Operator", "From"))
-  table <- datawizard::data_reorder(table, "Parameter")
+  lavaan_table <- as.data.frame(parameters)
+  lavaan_table$Parameter <- paste(lavaan_table$To, lavaan_table$Operator, lavaan_table$From)
+  lavaan_table <- datawizard::data_remove(lavaan_table, c("To", "Operator", "From"))
+  lavaan_table <- datawizard::data_reorder(lavaan_table, "Parameter")
 
   # Combine -----
   # Add performance
   performance <- performance::model_performance(x, ...)
-  table <- .combine_tables_performance(table, performance)
-  table <- table[!tolower(table$Parameter) %in% c("baseline", "baseline_df", "baseline_p"), ]
+  lavaan_table <- .combine_tables_performance(lavaan_table, performance)
+  lavaan_table <- lavaan_table[!tolower(lavaan_table$Parameter) %in% c("baseline", "baseline_df", "baseline_p"), ]
 
   # Clean -----
   # Rename some columns
 
   # Shorten ----
-  table_full <- datawizard::data_remove(table, "SE")
-  table <- datawizard::data_remove(
+  table_full <- datawizard::data_remove(lavaan_table, "SE")
+  lavaan_table <- datawizard::data_remove(
     table_full,
     select = "(_CI_low|_CI_high)$",
     regex = TRUE
   )
-  table <- table[!table$Parameter %in% c(
+  lavaan_table <- lavaan_table[!lavaan_table$Parameter %in% c(
     "AIC", "BIC",
     "RMSEA"
   ), ]
 
   # Prepare -----
   out <- as.report_table(table_full,
-    summary = table,
+    summary = lavaan_table,
     performance = performance,
     parameters = parameters,
     ...

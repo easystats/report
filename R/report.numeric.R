@@ -225,12 +225,12 @@ report_parameters.numeric <- function(x,
     if (centrality == "median") {
       text <- text[!names(text) %in% c("Mean", "Dispersion_Mean")]
       if (!dispersion) {
-        text <- text[!names(text) %in% "Dispersion_Median"]
+        text <- text[names(text) != "Dispersion_Median"]
       }
     } else {
       text <- text[!names(text) %in% c("Median", "Dispersion_Median")]
       if (!dispersion) {
-        text <- text[!names(text) %in% "Dispersion_Mean"]
+        text <- text[names(text) != "Dispersion_Mean"]
       }
     }
   } else {
@@ -239,7 +239,7 @@ report_parameters.numeric <- function(x,
 
   # Range
   if (!range) {
-    text <- text[!names(text) %in% "Range"]
+    text <- text[names(text) != "Range"]
   }
 
   # Distribution
@@ -248,7 +248,7 @@ report_parameters.numeric <- function(x,
   }
 
   if (is.null(missing_percentage) || n_missing == 0) {
-    text <- text[!names(text) %in% "Missing"]
+    text <- text[names(text) != "Missing"]
   }
 
   as.report_parameters(text_full, summary = text, ...)
