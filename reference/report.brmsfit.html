@@ -11,7 +11,7 @@ follows the Sequential Effect eXistence and sIgnificance Testing framework
 
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.1.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.1.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -120,7 +120,10 @@ follows the Sequential Effect eXistence and sIgnificance Testing framework
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># Bayesian models</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/paul-buerkner/brms" class="external-link">brms</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="https://paulbuerkner.com/brms/reference/brm.html" class="external-link">brm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">qsec</span> <span class="op">+</span> <span class="va">wt</span>, data <span class="op">=</span> <span class="va">mtcars</span>, refresh <span class="op">=</span> <span class="fl">0</span>, iter <span class="op">=</span> <span class="fl">300</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="https://paulbuerkner.com/brms/reference/brm.html" class="external-link">brm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">qsec</span> <span class="op">+</span> <span class="va">wt</span>,</span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span></span>
+<span class="r-in"><span>  refresh <span class="op">=</span> <span class="fl">0</span>, iter <span class="op">=</span> <span class="fl">300</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Compiling Stan program...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Start sampling</span>
 <span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="va">model</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
@@ -320,7 +323,7 @@ follows the Sequential Effect eXistence and sIgnificance Testing framework
 <span class="r-out co"><span class="r-pr">#&gt;</span> LOOIC       |             |        |                |      |       |     | 158.16</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> WAIC        |             |        |                |      |       |     | 157.98</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> R2          |             |        |                |      |       |     |   0.82</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (adj.)   |             |        |                |      |       |     |   0.79</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (adj.)   |             |        |                |      |       |     |   0.78</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Sigma       |             |        |                |      |       |     |   2.69</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Parameter   |   Component | Median |         95% CI |   pd |  Rhat | ESS |  Fit</span>
@@ -331,7 +334,7 @@ follows the Sequential Effect eXistence and sIgnificance Testing framework
 <span class="r-out co"><span class="r-pr">#&gt;</span> sigma       |       sigma |   2.66 | [ 2.10,  3.54] | 100% | 1.007 | 321 |     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             |             |        |                |      |       |     |     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> R2          |             |        |                |      |       |     | 0.82</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (adj.)   |             |        |                |      |       |     | 0.79</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2 (adj.)   |             |        |                |      |       |     | 0.78</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Sigma       |             |        |                |      |       |     | 2.69</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
