@@ -14,8 +14,7 @@
 
 \item{...}{Arguments passed to or from other methods.}
 
-\item{table}{Provide the output of  \code{report_table()} to avoid its
-re-computation.}
+\item{table}{Provide the output of \code{report_table()} to avoid its re-computation.}
 }
 \value{
 An object of class \code{\link[=report]{report()}}.

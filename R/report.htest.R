@@ -36,8 +36,9 @@ report.htest <- function(x, ...) {
 # report_effectsize -------------------------------------------------------
 
 #' @rdname report.htest
+#' @param table Provide the output of `report_table()` to avoid its re-computation.
 #' @export
-report_effectsize.htest <- function(x, ...) {
+report_effectsize.htest <- function(x, table = NULL, ...) {
   dot_args <- list(...)
   model_info <- dot_args$model_info
   if (is.null(model_info)) {
@@ -56,6 +57,12 @@ report_effectsize.htest <- function(x, ...) {
 
   # remove arg, so dots can be passed to effectsize
   dot_args[["model_info"]] <- NULL
+
+  # Get table if not provided
+  if (is.null(table)) {
+    call_args <- c(list(x), dot_args)
+    table <- do.call(parameters::model_parameters, call_args)
+  }
 
   # For t-tests ----------------
 
@@ -139,7 +146,7 @@ report_table.htest <- function(x, ...) {
 
   call_args <- c(list(x), dot_args)
   table_full <- do.call(parameters::model_parameters, call_args)
-  call_args <- c(list(x, model_info = model_info), dot_args)
+  call_args <- c(list(x, table = table_full, model_info = model_info), dot_args)
   effsize <- do.call(report_effectsize, call_args)
 
   if (model_info$is_ttest) {

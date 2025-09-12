@@ -65,8 +65,7 @@ indices (standardized coefficients, etc.).}
 
 \item{...}{Arguments passed to or from other methods.}
 
-\item{table}{Provide the output of  \code{report_table()} to avoid its
-re-computation.}
+\item{table}{Provide the output of \code{report_table()} to avoid its re-computation.}
 
 \item{include_diagnostic}{If \code{FALSE}, won't include diagnostic related
 indices for Bayesian models (ESS, Rhat).}
