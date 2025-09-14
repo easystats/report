@@ -7,7 +7,7 @@ test_that("report_table() works with sessionInfo", {
   expect_s3_class(result, "data.frame")
 
   # Should have some basic information about the session
-  expect_true(nrow(result) > 0)
+  expect_gt(nrow(result), 0)
 })
 
 test_that("report_table() works with basic data types", {
@@ -34,7 +34,7 @@ test_that("report_table() works with data frames", {
 
   expect_s3_class(result, "report_table")
   expect_s3_class(result, "data.frame")
-  expect_true(nrow(result) > 0)
+  expect_gt(nrow(result), 0)
 })
 
 test_that("report_table() works with statistical tests", {
@@ -71,14 +71,15 @@ test_that("as.report_table() works correctly", {
   # Create a data frame to convert
   df <- data.frame(
     Parameter = c("A", "B"),
-    Value = c(1, 2)
+    Value = c(1, 2),
+    stringsAsFactors = FALSE
   )
 
   result <- as.report_table(df)
   expect_s3_class(result, "report_table")
   expect_s3_class(result, "data.frame")
-  expect_equal(nrow(result), 2)
-  expect_equal(result$Parameter, c("A", "B"))
+  expect_identical(nrow(result), 2L)
+  expect_identical(result$Parameter, c("A", "B"))
 })
 
 test_that("report_table methods work correctly", {

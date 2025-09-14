@@ -32,7 +32,7 @@ test_that("report.brms", {
     tolerance = 1e-1
   )
 
-  skip("Skipping because of a .01 decimal difference in snapshots")
+  # Note: snapshot test may have slight numerical differences on different platforms
   set.seed(333)
   expect_snapshot(variant = "windows", report(model, verbose = FALSE))
 })

@@ -28,9 +28,9 @@ test_that("inclusion", {
   output_lines <- capture.output(print(r))
   output_text <- paste(output_lines, collapse = " ")
 
-  expect_true(any(grepl("Bayesian model averaging", output_lines)))
-  expect_true(any(grepl("subjective", output_lines)))
-  expect_true(any(grepl("averaging", output_lines)))
+  expect_true(any(grepl("Bayesian model averaging", output_lines, fixed = TRUE)))
+  expect_true(any(grepl("subjective", output_lines, fixed = TRUE)))
+  expect_true(any(grepl("averaging", output_lines, fixed = TRUE)))
 
 
   inc_bf <- bayestestR::bayesfactor_inclusion(BFmodels)

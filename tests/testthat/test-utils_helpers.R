@@ -37,7 +37,7 @@ test_that(".combine_tables_effectsize() combines tables correctly", {
     stringsAsFactors = FALSE
   )
   class(parameters) <- c("parameters_model", "data.frame")
-  attr(parameters, "pretty_names") <- c("(Intercept)" = "(Intercept)", "x" = "x")
+  attr(parameters, "pretty_names") <- c(`(Intercept)` = "(Intercept)", x = "x")
 
   # Create mock effect size table
   effsize_table <- data.frame(
@@ -55,8 +55,8 @@ test_that(".combine_tables_effectsize() combines tables correctly", {
 
   expect_s3_class(result, "parameters_model")
   expect_true("Std_Coefficient" %in% names(result))
-  expect_equal(nrow(result), 2)
-  expect_equal(result$Parameter, c("(Intercept)", "x"))
+  expect_identical(nrow(result), 2L)
+  expect_identical(result$Parameter, c("(Intercept)", "x"))
 })
 
 test_that(".combine_tables_performance() combines tables correctly", {
@@ -81,8 +81,8 @@ test_that(".combine_tables_performance() combines tables correctly", {
 
   expect_s3_class(result, "parameters_model")
   expect_true("Fit" %in% names(result))
-  expect_true(nrow(result) > nrow(parameters)) # Should have added performance rows
-  expect_true(any(is.na(result$Coefficient))) # NA row should exist
+  expect_gt(nrow(result), nrow(parameters)) # Should have added performance rows
+  expect_true(anyNA(result$Coefficient)) # NA row should exist
 })
 
 test_that(".remove_performance() removes performance rows correctly", {
@@ -96,9 +96,9 @@ test_that(".remove_performance() removes performance rows correctly", {
 
   result <- report:::.remove_performance(table_with_perf)
 
-  expect_equal(nrow(result), 2) # Should only keep parameter rows
-  expect_equal(result$Parameter, c("(Intercept)", "x"))
-  expect_false(any(is.na(result$Parameter)))
+  expect_identical(nrow(result), 2L) # Should only keep parameter rows
+  expect_identical(result$Parameter, c("(Intercept)", "x"))
+  expect_false(anyNA(result$Parameter))
 })
 
 test_that(".remove_performance() handles tables without Fit column", {
@@ -111,7 +111,7 @@ test_that(".remove_performance() handles tables without Fit column", {
 
   result <- report:::.remove_performance(table_no_perf)
 
-  expect_equal(result, table_no_perf) # Should return unchanged
+  expect_identical(result, table_no_perf) # Should return unchanged
 })
 
 test_that(".check_spelling() works correctly", {
@@ -130,7 +130,7 @@ test_that(".check_spelling() works correctly", {
     error = function(e) e$message
   )
   # Function may or may not error, but it should handle the case
-  expect_true(is.character(result))
+  expect_type(result, "character")
 
   # Test with NULL input - should not error
   expect_invisible(report:::.check_spelling(data, NULL))
@@ -144,7 +144,7 @@ test_that(".fuzzy_grep() finds approximate matches", {
 
   # Test with close match
   result1 <- report:::.fuzzy_grep(test_names, "Spela")
-  expect_true(length(result1) > 0) # Should find matches
+  expect_gt(length(result1), 0) # Should find matches
 
   # Test with exact match
   result2 <- report:::.fuzzy_grep(test_names, "Species")
@@ -152,11 +152,11 @@ test_that(".fuzzy_grep() finds approximate matches", {
 
   # Test with very different string
   result3 <- report:::.fuzzy_grep(test_names, "xyz")
-  expect_true(length(result3) == 0) # Should find no matches
+  expect_length(result3, 0) # Should find no matches
 
   # Test with custom precision
   result4 <- report:::.fuzzy_grep(test_names, "Sepal", precision = 1)
-  expect_true(length(result4) > 0)
+  expect_gt(length(result4), 0)
 })
 
 test_that(".misspelled_string() creates helpful error messages", {
@@ -178,7 +178,7 @@ test_that(".misspelled_string() creates helpful error messages", {
 
   # Test with default message
   result4 <- report:::.misspelled_string(source_names, "xyz", "Default message")
-  expect_equal(result4, "Default message")
+  expect_identical(result4, "Default message")
 })
 
 test_that("grouped dataframe utilities work correctly", {
@@ -188,7 +188,8 @@ test_that("grouped dataframe utilities work correctly", {
   # Create a grouped dataframe
   df <- data.frame(
     group = rep(c("A", "B"), each = 3),
-    value = 1:6
+    value = 1:6,
+    stringsAsFactors = FALSE
   )
   grouped_df <- dplyr::group_by(df, group)
 
@@ -198,7 +199,7 @@ test_that("grouped dataframe utilities work correctly", {
 
   # Test group variables
   group_vars <- report:::.group_vars(grouped_df)
-  expect_equal(group_vars, "group")
+  expect_identical(group_vars, "group")
 
   # Test ungrouping
   ungrouped <- report:::.ungroup(grouped_df)
