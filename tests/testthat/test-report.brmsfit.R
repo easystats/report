@@ -66,9 +66,11 @@ test_that("report.brms", {
   if (length(prior_paragraphs) > 0) {
     # Should not contain empty parentheses or double spaces from empty values
     expect_false(grepl("(location = , scale = )", prior_paragraphs[1], fixed = TRUE),
-                 info = "Prior text should not contain empty parameter values")
+      info = "Prior text should not contain empty parameter values"
+    )
     expect_false(grepl("\\(,\\s*\\)", prior_paragraphs[1]),
-                 info = "Prior text should not contain empty parameter parentheses")
+      info = "Prior text should not contain empty parameter parentheses"
+    )
   }
   # Note: snapshot test may have slight numerical differences on different platforms
   # Skip snapshot due to platform differences causing CI failures

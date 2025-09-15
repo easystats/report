@@ -74,7 +74,7 @@ report_priors.brmsfit <- function(x, ...) {
   # scale are NA). This removes uninformative default priors that shouldn't
   # be reported
   valid_priors <- !is.na(params$Prior_Location) |
-                  !is.na(params$Prior_Scale)
+    !is.na(params$Prior_Scale)
   params <- params[valid_priors, ]
 
   # Return empty if no valid priors remain after filtering
@@ -88,7 +88,7 @@ report_priors.brmsfit <- function(x, ...) {
   # Group parameters by type for cleaner reporting
   intercept_params <- params[params$Parameter == "(Intercept)", ]
   slope_params <- params[params$Parameter != "(Intercept)" &
-                         !grepl("^(sigma|sd_|cor_)", params$Parameter), ]
+    !grepl("^(sigma|sd_|cor_)", params$Parameter), ]
   scale_params <- params[grepl("^(sigma|sd_)", params$Parameter), ]
 
   # Helper function to format individual priors with mathematical notation
