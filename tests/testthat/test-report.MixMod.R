@@ -1,23 +1,35 @@
 skip_if_not_installed("GLMMadaptive")
+skip_if_not_installed("glmmTMB") # Required by the report.MixMod method
 
 test_that("report.MixMod", {
   # Create a test GLMMadaptive model
   skip_on_cran() # GLMMadaptive models can be computationally intensive
 
-  # Create a simple dataset for mixed model
+  # Use example from GLMMadaptive documentation
+  # Create binary outcome data (GLMMadaptive works best with binomial)
   set.seed(123)
-  data_test <- data.frame(
-    y = c(rnorm(50, 2), rnorm(50, 3)),
-    x = rep(c(0, 1), each = 50),
-    id = rep(1:10, 10)
+  n <- 50
+  K <- 8
+  t.max <- 15
+  
+  times <- c(replicate(n, c(0, sort(runif(K-1, 0, t.max)))))
+  group <- sample(rep(0:1, each = n/2))
+  
+  DF <- data.frame(
+    id = rep(seq_len(n), each = K),
+    time = times,
+    group = factor(rep(group, each = K))
   )
+  
+  # Add binary outcome
+  DF$y <- rbinom(nrow(DF), 1, plogis(-2.13 + 0.24 * DF$time))
 
   suppressWarnings({
     model <- GLMMadaptive::mixed_model(
-      fixed = y ~ x,
+      fixed = y ~ time + group,
       random = ~ 1 | id,
-      data = data_test,
-      family = gaussian()
+      data = DF,
+      family = binomial()
     )
   })
 
