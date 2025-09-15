@@ -70,10 +70,10 @@ report_priors.brmsfit <- function(x, ...) {
     return("")
   }
 
-  # Filter out priors with missing/empty information (both location and 
-  # scale are NA). This removes uninformative default priors that shouldn't 
+  # Filter out priors with missing/empty information (both location and
+  # scale are NA). This removes uninformative default priors that shouldn't
   # be reported
-  valid_priors <- !is.na(params$Prior_Location) | 
+  valid_priors <- !is.na(params$Prior_Location) |
                   !is.na(params$Prior_Scale)
   params <- params[valid_priors, ]
 
@@ -87,30 +87,30 @@ report_priors.brmsfit <- function(x, ...) {
 
   # Group parameters by type for cleaner reporting
   intercept_params <- params[params$Parameter == "(Intercept)", ]
-  slope_params <- params[params$Parameter != "(Intercept)" & 
+  slope_params <- params[params$Parameter != "(Intercept)" &
                          !grepl("^(sigma|sd_|cor_)", params$Parameter), ]
   scale_params <- params[grepl("^(sigma|sd_)", params$Parameter), ]
 
   # Helper function to format individual priors with mathematical notation
-  format_prior <- function(row) {
-    dist <- row$Prior_Distribution
-    loc <- insight::format_value(row$Prior_Location)
-    scale <- insight::format_value(row$Prior_Scale)
-    df <- if (!is.null(row$Prior_df) && !is.na(row$Prior_df)) {
-      paste0("df = ", insight::format_value(row$Prior_df), ", ")
+  format_prior <- function(prior_row) {
+    prior_dist <- prior_row$Prior_Distribution
+    prior_loc <- insight::format_value(prior_row$Prior_Location)
+    prior_scale <- insight::format_value(prior_row$Prior_Scale)
+    prior_df <- if (!is.null(prior_row$Prior_df) && !is.na(prior_row$Prior_df)) {
+      paste0("df = ", insight::format_value(prior_row$Prior_df), ", ")
     } else {
       ""
     }
 
-    if (dist == "normal") {
-      paste0("Normal(", df, "μ = ", loc, ", σ = ", scale, ")")
-    } else if (dist == "student_t") {
-      paste0("Student-t(", df, "μ = ", loc, ", σ = ", scale, ")")
+    if (prior_dist == "normal") {
+      paste0("Normal(", prior_df, "\u03bc = ", prior_loc, ", \u03c3 = ", prior_scale, ")")
+    } else if (prior_dist == "student_t") {
+      paste0("Student-t(", prior_df, "\u03bc = ", prior_loc, ", \u03c3 = ", prior_scale, ")")
     } else {
       # Fallback for other distributions
       paste0(
-        tools::toTitleCase(dist), "(", df, 
-        "location = ", loc, ", scale = ", scale, ")"
+        tools::toTitleCase(prior_dist), "(", prior_df,
+        "location = ", prior_loc, ", scale = ", prior_scale, ")"
       )
     }
   }
@@ -122,7 +122,7 @@ report_priors.brmsfit <- function(x, ...) {
     })
     if (length(unique(intercept_desc)) == 1L) {
       prior_descriptions <- c(
-        prior_descriptions, 
+        prior_descriptions,
         paste0("Intercept ~ ", intercept_desc[1])
       )
     } else {
@@ -155,7 +155,7 @@ report_priors.brmsfit <- function(x, ...) {
       # Different priors for different slopes
       individual_slopes <- paste0(slope_names, " ~ ", slope_desc)
       prior_descriptions <- c(
-        prior_descriptions, 
+        prior_descriptions,
         datawizard::text_concatenate(individual_slopes)
       )
     }
@@ -164,26 +164,26 @@ report_priors.brmsfit <- function(x, ...) {
   # Process scale/sigma parameters
   if (nrow(scale_params) > 0) {
     scale_desc <- sapply(seq_len(nrow(scale_params)), function(i) {
-      row <- scale_params[i, ]
-      desc <- format_prior(row)
+      prior_row <- scale_params[i, ]
+      desc <- format_prior(prior_row)
       # Add + notation for positive-only distributions when appropriate
-      if (grepl("sigma|sd", row$Parameter) && row$Prior_Location >= 0) {
-        desc <- gsub("Student-t\\(", "Student-t⁺(", desc)
-        desc <- gsub("Normal\\(", "Normal⁺(", desc)
+      if (grepl("sigma|sd", prior_row$Parameter) && prior_row$Prior_Location >= 0) {
+        desc <- gsub("Student-t(", "Student-t\u207a(", desc, fixed = TRUE)
+        desc <- gsub("Normal(", "Normal\u207a(", desc, fixed = TRUE)
       }
       desc
     })
 
     if (length(unique(scale_desc)) == 1L && nrow(scale_params) > 1L) {
       prior_descriptions <- c(
-        prior_descriptions, 
-        paste0("Residual SD (σ) ~ ", scale_desc[1])
+        prior_descriptions,
+        paste0("Residual SD (\u03c3) ~ ", scale_desc[1])
       )
     } else {
-      scale_names <- gsub("sigma", "σ", scale_params$Parameter)
+      scale_names <- gsub("sigma", "\u03c3", scale_params$Parameter, fixed = TRUE)
       individual_scales <- paste0(scale_names, " ~ ", scale_desc)
       prior_descriptions <- c(
-        prior_descriptions, 
+        prior_descriptions,
         datawizard::text_concatenate(individual_scales)
       )
     }
@@ -191,20 +191,20 @@ report_priors.brmsfit <- function(x, ...) {
 
   # Combine all descriptions
   if (length(prior_descriptions) > 0) {
-    text <- paste0(
-      "Priors were: ", 
+    report_text <- paste0(
+      "Priors were: ",
       datawizard::text_concatenate(
-        prior_descriptions, 
-        sep = "; ", 
+        prior_descriptions,
+        sep = "; ",
         last = "; "
-      ), 
+      ),
       "."
     )
   } else {
-    text <- ""
+    report_text <- ""
   }
 
-  as.report_priors(text)
+  as.report_priors(report_text)
 }
 
 

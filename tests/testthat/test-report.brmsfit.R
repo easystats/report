@@ -52,22 +52,22 @@ test_that("report.brms", {
   report_text <- as.character(r)
   expect_length(report_text, 1)
   expect_type(report_text, "character")
-  
+
   # Ensure the text doesn't contain multiple identical paragraphs (duplications)
   # Split by double newlines to find paragraphs
   paragraphs <- strsplit(report_text, "\\n\\n")[[1]]
   # The main model description paragraph should appear only once
-  model_paragraphs <- paragraphs[grepl("We fitted a Bayesian linear model", paragraphs)]
+  model_paragraphs <- paragraphs[grepl("We fitted a Bayesian linear model", paragraphs, fixed = TRUE)]
   expect_length(model_paragraphs, 1)
-  
+
   # Test that priors text doesn't contain empty/meaningless entries like "uniform (location = , scale = )"
   # This ensures proper filtering of empty priors
-  prior_paragraphs <- paragraphs[grepl("Priors over parameters", paragraphs)]
+  prior_paragraphs <- paragraphs[grepl("Priors over parameters", paragraphs, fixed = TRUE)]
   if (length(prior_paragraphs) > 0) {
     # Should not contain empty parentheses or double spaces from empty values
-    expect_false(grepl("\\(location = , scale = \\)", prior_paragraphs[1]), 
+    expect_false(grepl("(location = , scale = )", prior_paragraphs[1], fixed = TRUE),
                  info = "Prior text should not contain empty parameter values")
-    expect_false(grepl("\\(,\\s*\\)", prior_paragraphs[1]), 
+    expect_false(grepl("\\(,\\s*\\)", prior_paragraphs[1]),
                  info = "Prior text should not contain empty parameter parentheses")
   }
   # Note: snapshot test may have slight numerical differences on different platforms
