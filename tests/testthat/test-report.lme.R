@@ -3,7 +3,7 @@ skip_if_not_installed("nlme")
 test_that("report.lme", {
   # Create a test nlme model
   suppressWarnings({
-    model <- nlme::lme(
+    model <- lme(
       Sepal.Length ~ Petal.Length,
       data = iris,
       random = ~ 1 | Species

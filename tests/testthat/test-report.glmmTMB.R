@@ -13,7 +13,7 @@ test_that("report.glmmTMB", {
 
   # Create a simple glmmTMB model
   suppressWarnings({
-    model <- glmmTMB::glmmTMB(
+    model <- glmmTMB(
       y ~ x + (1 | group),
       data = data_test,
       family = poisson()

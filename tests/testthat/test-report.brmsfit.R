@@ -14,7 +14,7 @@ test_that("report.brms", {
   )))
   r <- report(model, verbose = FALSE)
 
-  expect_s3_class(summary(r), "character")
+  expect_type(summary(r), "character")
   expect_s3_class(as.data.frame(r), "data.frame")
 
   expect_identical(

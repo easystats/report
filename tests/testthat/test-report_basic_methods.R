@@ -27,7 +27,7 @@ test_that("report.character() handles missing values", {
 
   # Check table contains missing info
   table_result <- as.data.frame(result)
-  expect_true(table_result$n_Missing[1] > 0)
+  expect_gt(table_result$n_Missing[1], 0)
 })
 
 test_that("report.character() respects parameters", {

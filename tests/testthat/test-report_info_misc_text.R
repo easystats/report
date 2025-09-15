@@ -35,8 +35,8 @@ test_that("as.report_info() creates proper objects", {
   result <- as.report_info(text_info, summary = summary_text)
 
   expect_s3_class(result, "report_info")
-  expect_equal(as.character(result), text_info)
-  expect_equal(as.character(summary(result)), summary_text)
+  expect_identical(as.character(result), text_info)
+  expect_identical(as.character(summary(result)), summary_text)
 })
 
 test_that("as.report_info() handles NULL summary", {
@@ -45,7 +45,7 @@ test_that("as.report_info() handles NULL summary", {
   result <- as.report_info(text_info)
 
   expect_s3_class(result, "report_info")
-  expect_equal(summary(result), result) # Should return itself if no summary
+  expect_identical(summary(result), result) # Should return itself if no summary
 })
 
 test_that(".info_df() helper function works", {
@@ -58,7 +58,7 @@ test_that(".info_df() helper function works", {
 
   # Test with NULL ci_method
   result2 <- report:::.info_df(ci = 0.95, ci_method = NULL)
-  expect_equal(result2, "")
+  expect_identical(result2, "")
 
   # Test with bootstrap
   result3 <- report:::.info_df(ci = 0.90, ci_method = "boot", bootstrap = TRUE)
@@ -79,7 +79,7 @@ test_that(".info_effectsize() helper function works", {
 
   # Test basic usage
   result1 <- report:::.info_effectsize(NULL, effectsize = mock_effectsize, include_effectsize = FALSE)
-  expect_equal(result1, "Cohen's d")
+  expect_identical(result1, "Cohen's d")
 
   # Test with include_effectsize = TRUE
   result2 <- report:::.info_effectsize(NULL, effectsize = mock_effectsize, include_effectsize = TRUE)
@@ -88,7 +88,7 @@ test_that(".info_effectsize() helper function works", {
 
   # Test with NULL effectsize
   result3 <- report:::.info_effectsize(NULL, effectsize = NULL, include_effectsize = FALSE)
-  expect_equal(result3, "")
+  expect_identical(result3, "")
 })
 
 test_that("report_date() works correctly", {
@@ -136,12 +136,12 @@ test_that("as.report_text() works correctly", {
   result <- as.report_text(text_content, summary = summary_text)
 
   expect_s3_class(result, "report_text")
-  expect_equal(as.character(result), text_content)
-  expect_equal(as.character(summary(result)), summary_text)
+  expect_identical(as.character(result), text_content)
+  expect_identical(as.character(summary(result)), summary_text)
 
   # Test with NULL summary
   result2 <- as.report_text(text_content)
-  expect_equal(summary(result2), result2) # Should return itself
+  expect_identical(summary(result2), result2) # Should return itself
 })
 
 test_that("as.report_text.report() works correctly", {
@@ -153,7 +153,7 @@ test_that("as.report_text.report() works correctly", {
 
   # Test with summary = FALSE
   result1 <- as.report_text(mock_report, summary = FALSE)
-  expect_false("report" %in% class(result1))
+  expect_false(inherits(result1, "report"))
 
   # Test with summary = TRUE would require a proper report object with summary method
 })

@@ -12,7 +12,7 @@ test_that("report.MixMod", {
   K <- 8
   t.max <- 15
 
-  times <- c(replicate(n, c(0, sort(runif(K - 1, 0, t.max)))))
+  times <- as.vector(replicate(n, c(0, sort(runif(K - 1, 0, t.max)))))
   group <- sample(rep(0:1, each = n / 2))
 
   DF <- data.frame(
@@ -25,7 +25,7 @@ test_that("report.MixMod", {
   DF$y <- rbinom(nrow(DF), 1, plogis(-2.13 + 0.24 * DF$time))
 
   suppressWarnings({
-    model <- GLMMadaptive::mixed_model(
+    model <- mixed_model(
       fixed = y ~ time + group,
       random = ~ 1 | id,
       data = DF,

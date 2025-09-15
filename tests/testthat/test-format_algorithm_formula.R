@@ -13,7 +13,7 @@ test_that("format_algorithm() handles models without algorithm information", {
 
   # Should return empty string for models without algorithm info
   expect_type(result, "character")
-  expect_true(nchar(result) >= 0) # Could be empty string
+  expect_true(nzchar(result, keepNA = TRUE)) # Use nzchar instead of nchar >= 0
 })
 
 test_that("format_algorithm() formats MCMC information correctly", {
@@ -40,7 +40,7 @@ test_that("format_algorithm() formats MCMC information correctly", {
     }
   }
 
-  expect_equal(result_text, "MCMC sampling with 4 chains of 2000 iterations and a warmup of 1000")
+  expect_identical(result_text, "MCMC sampling with 4 chains of 2000 iterations and a warmup of 1000")
 })
 
 test_that("format_algorithm() formats optimizer information correctly", {
@@ -61,7 +61,7 @@ test_that("format_algorithm() formats optimizer information correctly", {
     result_text <- paste0(result_text, " and ", optimizer, " optimizer")
   }
 
-  expect_equal(result_text, "ML and BOBYQA optimizer")
+  expect_identical(result_text, "ML and BOBYQA optimizer")
 
   # Test Nelder-Mead conversion
   mock_algorithm$optimizer <- "Nelder_Mead"
@@ -76,7 +76,7 @@ test_that("format_algorithm() formats optimizer information correctly", {
     result_text2 <- paste0(result_text2, " and ", optimizer, " optimizer")
   }
 
-  expect_equal(result_text2, "ML and Nelder-Mead optimizer")
+  expect_identical(result_text2, "ML and Nelder-Mead optimizer")
 })
 
 test_that("format_formula() works with simple linear models", {
