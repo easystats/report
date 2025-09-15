@@ -4,6 +4,10 @@
 #' follows the Sequential Effect eXistence and sIgnificance Testing framework
 #' (see [SEXIT documentation][bayestestR::sexit]).
 #'
+#' @details
+#' Message from the `rstan` package: "To avoid recompilation of unchanged
+#' Stan programs, we recommend calling `rstan_options(auto_write = TRUE)`"
+#'
 #' @inheritParams report.lm
 #' @inherit report return seealso
 #'
@@ -87,8 +91,10 @@ report_priors.brmsfit <- function(x, ...) {
 
   # Group parameters by type for cleaner reporting
   intercept_params <- params[params$Parameter == "(Intercept)", ]
-  slope_params <- params[params$Parameter != "(Intercept)" &
-    !grepl("^(sigma|sd_|cor_)", params$Parameter), ]
+  slope_params <- params[
+    params$Parameter != "(Intercept)" &
+      !grepl("^(sigma|sd_|cor_)", params$Parameter),
+  ]
   scale_params <- params[grepl("^(sigma|sd_)", params$Parameter), ]
 
   # Helper function to format individual priors with mathematical notation
@@ -96,21 +102,45 @@ report_priors.brmsfit <- function(x, ...) {
     prior_dist <- prior_row$Prior_Distribution
     prior_loc <- insight::format_value(prior_row$Prior_Location)
     prior_scale <- insight::format_value(prior_row$Prior_Scale)
-    prior_df <- if (!is.null(prior_row$Prior_df) && !is.na(prior_row$Prior_df)) {
+    prior_df <- if (
+      !is.null(prior_row$Prior_df) && !is.na(prior_row$Prior_df)
+    ) {
       paste0("df = ", insight::format_value(prior_row$Prior_df), ", ")
     } else {
       ""
     }
 
     if (prior_dist == "normal") {
-      paste0("Normal(", prior_df, "\u03bc = ", prior_loc, ", \u03c3 = ", prior_scale, ")")
+      paste0(
+        "Normal(",
+        prior_df,
+        "\u03bc = ",
+        prior_loc,
+        ", \u03c3 = ",
+        prior_scale,
+        ")"
+      )
     } else if (prior_dist == "student_t") {
-      paste0("Student-t(", prior_df, "\u03bc = ", prior_loc, ", \u03c3 = ", prior_scale, ")")
+      paste0(
+        "Student-t(",
+        prior_df,
+        "\u03bc = ",
+        prior_loc,
+        ", \u03c3 = ",
+        prior_scale,
+        ")"
+      )
     } else {
       # Fallback for other distributions
       paste0(
-        tools::toTitleCase(prior_dist), "(", prior_df,
-        "location = ", prior_loc, ", scale = ", prior_scale, ")"
+        tools::toTitleCase(prior_dist),
+        "(",
+        prior_df,
+        "location = ",
+        prior_loc,
+        ", scale = ",
+        prior_scale,
+        ")"
       )
     }
   }
@@ -167,7 +197,9 @@ report_priors.brmsfit <- function(x, ...) {
       prior_row <- scale_params[i, ]
       desc <- format_prior(prior_row)
       # Add + notation for positive-only distributions when appropriate
-      if (grepl("sigma|sd", prior_row$Parameter) && prior_row$Prior_Location >= 0) {
+      if (
+        grepl("sigma|sd", prior_row$Parameter) && prior_row$Prior_Location >= 0
+      ) {
         desc <- gsub("Student-t(", "Student-t\u207a(", desc, fixed = TRUE)
         desc <- gsub("Normal(", "Normal\u207a(", desc, fixed = TRUE)
       }
@@ -180,7 +212,12 @@ report_priors.brmsfit <- function(x, ...) {
         paste0("Residual SD (\u03c3) ~ ", scale_desc[1])
       )
     } else {
-      scale_names <- gsub("sigma", "\u03c3", scale_params$Parameter, fixed = TRUE)
+      scale_names <- gsub(
+        "sigma",
+        "\u03c3",
+        scale_params$Parameter,
+        fixed = TRUE
+      )
       individual_scales <- paste0(scale_names, " ~ ", scale_desc)
       prior_descriptions <- c(
         prior_descriptions,
