@@ -13,13 +13,22 @@ test_that("models", {
   expect_output(print(r), "BIC approximation")
   expect_output(print(r), "Intercept only")
 
-  BFmodels <- bayestestR::bayesfactor_models(mod1, mod2, mod3, denominator = mod1)
+  BFmodels <- bayestestR::bayesfactor_models(
+    mod1,
+    mod2,
+    mod3,
+    denominator = mod1
+  )
   r <- report(BFmodels)
   expect_output(print(r), "Compared to the Species model")
 })
 
 test_that("inclusion", {
-  inc_bf <- bayestestR::bayesfactor_inclusion(BFmodels, prior_odds = c(1, 2, 3), match_models = TRUE)
+  inc_bf <- bayestestR::bayesfactor_inclusion(
+    BFmodels,
+    prior_odds = c(1, 2, 3),
+    match_models = TRUE
+  )
   r <- report(inc_bf)
   expect_s3_class(summary(r), c("report_text", "character"))
   expect_s3_class(as.data.frame(r), c("report_table", "data.frame"))
@@ -28,10 +37,13 @@ test_that("inclusion", {
   output_lines <- capture.output(print(r))
   output_text <- paste(output_lines, collapse = " ")
 
-  expect_true(any(grepl("Bayesian model averaging", output_lines, fixed = TRUE)))
+  expect_true(any(grepl(
+    "Bayesian model averaging",
+    output_lines,
+    fixed = TRUE
+  )))
   expect_true(any(grepl("subjective", output_lines, fixed = TRUE)))
   expect_true(any(grepl("averaging", output_lines, fixed = TRUE)))
-
 
   inc_bf <- bayestestR::bayesfactor_inclusion(BFmodels)
   r <- report(inc_bf)
