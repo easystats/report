@@ -52,7 +52,10 @@ test_that("cite_easystats() handles prefix and suffix correctly", {
   expect_false(grepl("\\.$", result_no_suffix$intext))
 
   # Custom prefix and suffix
-  result_custom <- cite_easystats(intext_prefix = "Custom prefix ", intext_suffix = " custom suffix")
+  result_custom <- cite_easystats(
+    intext_prefix = "Custom prefix ",
+    intext_suffix = " custom suffix"
+  )
   expect_match(result_custom$intext, "^Custom prefix")
   expect_match(result_custom$intext, "custom suffix$")
 })
@@ -105,5 +108,8 @@ test_that(".disamguation_letters() helper function works", {
   expect_equal(result3, c("", ""))
 
   # Test error handling
-  expect_error(report:::.disamguation_letters(c(1, 2, 3)), "must be a logical vector")
+  expect_error(
+    report:::.disamguation_letters(c(1, 2, 3)),
+    "must be a logical vector"
+  )
 })

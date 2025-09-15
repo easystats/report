@@ -11,16 +11,16 @@ test_that("report.MixMod", {
   n <- 50
   K <- 8
   t.max <- 15
-  
-  times <- c(replicate(n, c(0, sort(runif(K-1, 0, t.max)))))
-  group <- sample(rep(0:1, each = n/2))
-  
+
+  times <- c(replicate(n, c(0, sort(runif(K - 1, 0, t.max)))))
+  group <- sample(rep(0:1, each = n / 2))
+
   DF <- data.frame(
     id = rep(seq_len(n), each = K),
     time = times,
     group = factor(rep(group, each = K))
   )
-  
+
   # Add binary outcome
   DF$y <- rbinom(nrow(DF), 1, plogis(-2.13 + 0.24 * DF$time))
 
@@ -34,7 +34,7 @@ test_that("report.MixMod", {
   })
 
   # Test main report function
-  r <- report(model)
+  r <- suppressWarnings(report(model, data = DF))
   expect_s3_class(r, "report")
   expect_s3_class(summary(r), "character")
   expect_s3_class(as.data.frame(r), c("report_table", "data.frame"))

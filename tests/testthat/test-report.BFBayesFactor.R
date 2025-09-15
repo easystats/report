@@ -41,5 +41,8 @@ test_that("report.BFBayesFactor - custom hypotheses names", {
 
   r <- report(rez, h0 = "the null hypothesis", h1 = "the alternative")
   expect_type(r, "character")
-  expect_true(grepl("the null hypothesis", r, fixed = TRUE) || grepl("the alternative", r, fixed = TRUE))
+  expect_true(
+    grepl("the null hypothesis", r, fixed = TRUE) ||
+      grepl("the alternative", r, fixed = TRUE)
+  )
 })
