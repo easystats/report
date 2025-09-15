@@ -5,23 +5,35 @@ skip_on_cran()
 skip_if_not_installed("brms")
 
 test_that("report.brms", {
-  skip_if_not_installed("rstan", "2.26.0")
+  # skip_if_not_installed("rstan", "2.26.0")
 
   set.seed(333)
   model <- suppressMessages(suppressWarnings(brms::brm(
     mpg ~ qsec + wt,
-    data = mtcars, refresh = 0, iter = 300, seed = 333
+    data = mtcars,
+    refresh = 0,
+    iter = 300,
+    seed = 333
   )))
   r <- report(model, verbose = FALSE)
 
-  expect_s3_class(summary(r), "character")
+  expect_type(summary(r), "character")
   expect_s3_class(as.data.frame(r), "data.frame")
 
   expect_identical(
     as.data.frame(r)$Parameter,
     c(
-      "(Intercept)", "qsec", "wt", "sigma", NA, "ELPD", "LOOIC", "WAIC", "R2",
-      "R2 (adj.)", "Sigma"
+      "(Intercept)",
+      "qsec",
+      "wt",
+      "sigma",
+      NA,
+      "ELPD",
+      "LOOIC",
+      "WAIC",
+      "R2",
+      "R2 (adj.)",
+      "Sigma"
     )
   )
   expect_equal(
@@ -58,7 +70,8 @@ test_that("report.brms", {
     expect_false(grepl("\\(,\\s*\\)", prior_paragraphs[1]), 
                  info = "Prior text should not contain empty parameter parentheses")
   }
-
+  # Note: snapshot test may have slight numerical differences on different platforms
+  # Skip snapshot due to platform differences causing CI failures
   skip("Skipping because of a .01 decimal difference in snapshots")
   set.seed(333)
   expect_snapshot(variant = "windows", report(model, verbose = FALSE))
