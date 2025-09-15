@@ -6,14 +6,14 @@ test_that("report.BFBayesFactor - t-test", {
   rez <- BayesFactor::ttestBF(iris$Sepal.Width, iris$Sepal.Length)
 
   r <- report(rez)
-  expect_s3_class(r, "character")
-  expect_true(nchar(r) > 0)
-  expect_true(grepl("There is", r))
+  expect_type(r, "character")
+  expect_true(nzchar(r))
+  expect_true(grepl("There is", r, fixed = TRUE))
 
   # Test report_statistics
   stats <- report_statistics(rez)
-  expect_s3_class(stats, "character")
-  expect_true(grepl("BF", stats))
+  expect_type(stats, "character")
+  expect_true(grepl("BF", stats, fixed = TRUE))
 })
 
 test_that("report.BFBayesFactor - correlation", {
@@ -23,14 +23,14 @@ test_that("report.BFBayesFactor - correlation", {
   rez <- BayesFactor::correlationBF(iris$Sepal.Width, iris$Sepal.Length)
 
   r <- report(rez)
-  expect_s3_class(r, "character")
-  expect_true(nchar(r) > 0)
-  expect_true(grepl("There is", r))
+  expect_type(r, "character")
+  expect_true(nzchar(r))
+  expect_true(grepl("There is", r, fixed = TRUE))
 
   # Test report_statistics
   stats <- report_statistics(rez)
-  expect_s3_class(stats, "character")
-  expect_true(grepl("BF", stats))
+  expect_type(stats, "character")
+  expect_true(grepl("BF", stats, fixed = TRUE))
 })
 
 test_that("report.BFBayesFactor - custom hypotheses names", {
@@ -40,6 +40,6 @@ test_that("report.BFBayesFactor - custom hypotheses names", {
   rez <- BayesFactor::ttestBF(iris$Sepal.Width, iris$Sepal.Length)
 
   r <- report(rez, h0 = "the null hypothesis", h1 = "the alternative")
-  expect_s3_class(r, "character")
-  expect_true(grepl("the null hypothesis", r) || grepl("the alternative", r))
+  expect_type(r, "character")
+  expect_true(grepl("the null hypothesis", r, fixed = TRUE) || grepl("the alternative", r, fixed = TRUE))
 })

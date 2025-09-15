@@ -20,11 +20,11 @@ test_that("report.estimate_contrasts", {
   # Test report_table
   rt <- report_table(contr)
   expect_s3_class(rt, c("report_table", "data.frame"))
-  expect_true(nrow(rt) > 0)
+  expect_gt(nrow(rt), 0)
 
   # Test report_text
   rtx <- report_text(contr, table = rt)
   expect_s3_class(rtx, c("report_text", "character"))
-  expect_true(nchar(rtx) > 0)
-  expect_true(grepl("marginal contrasts", rtx))
+  expect_gt(nchar(rtx), 0)
+  expect_true(grepl("marginal contrasts", rtx, fixed = TRUE))
 })

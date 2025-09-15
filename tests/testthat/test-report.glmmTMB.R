@@ -27,8 +27,8 @@ test_that("report.glmmTMB", {
   expect_s3_class(as.data.frame(r), c("report_table", "data.frame"))
 
   # Test that basic structure is correct
-  expect_true(nchar(summary(r)) > 0)
-  expect_true(nrow(as.data.frame(r)) > 0)
+  expect_gt(nchar(summary(r)), 0)
+  expect_gt(nrow(as.data.frame(r)), 0)
 
   # Test report components
   rt <- report_table(model)
@@ -38,6 +38,6 @@ test_that("report.glmmTMB", {
   # Test that random effects are reported
   rr <- report_random(model)
   expect_s3_class(rr, c("report_random", "character"))
-  expect_true(grepl("random effect", rr))
-  expect_true(grepl("group", rr))
+  expect_true(grepl("random effect", rr, fixed = TRUE))
+  expect_true(grepl("group", rr, fixed = TRUE))
 })

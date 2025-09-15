@@ -51,9 +51,9 @@ test_that("report.compare.loo", {
 
   r <- report(x)
   expect_s3_class(r, c("report_text", "character"))
-  expect_true(nchar(r) > 0)
-  expect_true(grepl("best model", r))
-  expect_true(grepl("ELPD", r))
+  expect_gt(nchar(r), 0)
+  expect_true(grepl("best model", r, fixed = TRUE))
+  expect_true(grepl("ELPD", r, fixed = TRUE))
 
   # Test with different options
   r2 <- report(x, include_IC = FALSE)

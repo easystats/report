@@ -16,8 +16,8 @@ test_that("report.lme", {
   # Test specific lme methods that should work without standardization issues
   rr <- report_random(model)
   expect_s3_class(rr, c("report_random", "character"))
-  expect_true(grepl("random effect", rr))
-  expect_true(grepl("Species", rr))
+  expect_true(grepl("random effect", rr, fixed = TRUE))
+  expect_true(grepl("Species", rr, fixed = TRUE))
 
   # Test that report.lme exists and is assigned correctly
   expect_true(exists("report.lme", where = asNamespace("report")))

@@ -17,21 +17,21 @@ test_that("report.test_performance", {
   # Test report_table
   rt <- report_table(x)
   expect_s3_class(rt, c("report_table", "data.frame"))
-  expect_true(nrow(rt) >= 1) # At least one comparison
+  expect_gte(nrow(rt), 1) # At least one comparison
 
   # Test report_statistics
   rs <- report_statistics(x)
   expect_s3_class(rs, "character")
-  expect_true(nchar(rs[[1]]) >= 0) # May be empty if no significant comparisons
+  expect_true(nzchar(rs[[1]], keepNA = TRUE)) # May be empty if no significant comparisons
 
   # Test report_parameters
   rp <- report_parameters(x)
   expect_s3_class(rp, "character")
-  expect_true(nchar(rp[[1]]) > 0)
+  expect_gt(nchar(rp[[1]]), 0)
 
   # Test report_text
   rtx <- report_text(x)
   expect_s3_class(rtx, c("report_text", "character"))
-  expect_true(nchar(rtx) > 0)
-  expect_true(grepl("compared", rtx))
+  expect_gt(nchar(rtx), 0)
+  expect_true(grepl("compared", rtx, fixed = TRUE))
 })
