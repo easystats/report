@@ -19,6 +19,10 @@ Create reports for Bayesian models. The description of the parameters
 follows the Sequential Effect eXistence and sIgnificance Testing framework
 (see \link[bayestestR:sexit]{SEXIT documentation}).
 }
+\details{
+Message from the \code{rstan} package: "To avoid recompilation of unchanged
+Stan programs, we recommend calling \code{rstan_options(auto_write = TRUE)}"
+}
 \examples{
 \dontshow{if (require("brms", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
