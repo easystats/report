@@ -21,7 +21,7 @@ test_that("report.lme", {
 
   # Test that report.lme method is properly available
   expect_true("report.lme" %in% ls(asNamespace("report")))
-  
+
   # Test that it works as intended (aliased to report.lm)
   expect_true(identical(get("report.lme", asNamespace("report")), get("report.lm", asNamespace("report"))))
 })

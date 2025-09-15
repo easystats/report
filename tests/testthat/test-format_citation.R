@@ -1,6 +1,8 @@
 test_that("format_citation() works with basic formatting", {
-  citation <- paste0("Makowski, D., Ben-Shachar, M. S., Patil, I., & Ludecke, D. (2020). Methods and ",
-                     "Algorithms for Correlation Analysis in R. Journal of Open Source Software, 5(51), 2306.")
+  citation <- paste0(
+    "Makowski, D., Ben-Shachar, M. S., Patil, I., & Ludecke, D. (2020). Methods and ",
+    "Algorithms for Correlation Analysis in R. Journal of Open Source Software, 5(51), 2306."
+  )
 
   # Test basic citation (no changes)
   result_basic <- format_citation(citation)
@@ -41,8 +43,10 @@ test_that("format_citation() handles multiple citations", {
 })
 
 test_that("cite_citation() creates proper parenthetical citation", {
-  citation <- paste0("Makowski, D., Ben-Shachar, M. S., Patil, I., & Ludecke, D. (2020). ",
-                     "Methods and Algorithms for Correlation Analysis in R.")
+  citation <- paste0(
+    "Makowski, D., Ben-Shachar, M. S., Patil, I., & Ludecke, D. (2020). ",
+    "Methods and Algorithms for Correlation Analysis in R."
+  )
 
   result <- cite_citation(citation)
   expect_match(result, "^\\(Makowski.*et al.*2020\\)$")
@@ -56,8 +60,10 @@ test_that("clean_citation() works with citation objects", {
   expect_length(result_text, 1)
 
   # Test with citation object format (simulated)
-  citation_with_prefix <- paste0("To cite package 'report' in publications use:\n\n  Makowski, D. et al. (2020). ",
-                                  "Some Title.\n\nA BibTeX entry for LaTeX users is")
+  citation_with_prefix <- paste0(
+    "To cite package 'report' in publications use:\n\n  Makowski, D. et al. (2020). ",
+    "Some Title.\n\nA BibTeX entry for LaTeX users is"
+  )
   result_clean <- clean_citation(citation_with_prefix)
   expect_false(grepl("To cite", result_clean, fixed = TRUE))
   expect_match(result_clean, "Makowski")
