@@ -1,5 +1,7 @@
 skip_if_not_installed("brms")
 skip_if_not_installed("loo")
+library(brms)
+library(loo)
 
 test_that("report.compare.loo", {
   # Skip if dependencies not available

@@ -1,4 +1,5 @@
 skip_if_not_installed("nlme")
+library(nlme)
 
 test_that("report.lme", {
   # Create a test nlme model
@@ -23,8 +24,8 @@ test_that("report.lme", {
   expect_true("report.lme" %in% ls(asNamespace("report")))
 
   # Test that it works as intended (aliased to report.lm)
-  expect_true(identical(
+  expect_identical(
     get("report.lme", asNamespace("report")),
     get("report.lm", asNamespace("report"))
-  ))
+  )
 })

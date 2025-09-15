@@ -1,4 +1,5 @@
 skip_if_not_installed("performance")
+library(performance)
 
 test_that("report.test_performance", {
   # Create test models

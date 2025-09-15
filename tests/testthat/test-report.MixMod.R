@@ -1,5 +1,6 @@
 skip_if_not_installed("GLMMadaptive")
 skip_if_not_installed("glmmTMB") # Required by the report.MixMod method
+library(GLMMadaptive)
 
 test_that("report.MixMod", {
   # Create a test GLMMadaptive model
