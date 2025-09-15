@@ -25,7 +25,7 @@ test_that("report.MixMod", {
   DF$y <- rbinom(nrow(DF), 1, plogis(-2.13 + 0.24 * DF$time))
 
   suppressWarnings({
-    model <- mixed_model(
+    model <- GLMMadaptive::mixed_model(
       fixed = y ~ time + group,
       random = ~ 1 | id,
       data = DF,
