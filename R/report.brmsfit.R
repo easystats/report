@@ -11,7 +11,10 @@
 #' \donttest{
 #' # Bayesian models
 #' library(brms)
-#' model <- suppressWarnings(brm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300))
+#' model <- suppressWarnings(brm(mpg ~ qsec + wt,
+#'   data = mtcars,
+#'   refresh = 0, iter = 300
+#' ))
 #' r <- report(model, verbose = FALSE)
 #' r
 #' summary(r)
@@ -22,10 +25,10 @@
 #' @include report.lm.R report.stanreg.R report.lme4.R
 #' @export
 report.brmsfit <- function(x, ...) {
-  table <- report_table(x, include_effectsize = FALSE, ...)
-  text <- report_text(x, table = table, ...)
+  tbl <- report_table(x, include_effectsize = FALSE, ...)
+  txt <- report_text(x, table = tbl, ...)
 
-  as.report(text, table = table, ...)
+  as.report(txt, table = tbl, ...)
 }
 
 #' @export
@@ -51,7 +54,6 @@ report_text.brmsfit <- report_text.lm
 
 
 # ==================== Specific to Bayes ===================================
-
 
 # report_priors -----------------------------------------------------------
 

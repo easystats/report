@@ -29,57 +29,15 @@ body:
       required: true
 
   - type: textarea
-    id: reproduction-steps
-    attributes:
-      label: Steps to reproduce
-      description: Detailed steps to reproduce the behaviour
-      placeholder: |
-        1. Load the package with `library(report)`
-        2. Run function `...`
-        3. See error
-      value: |
-        1.
-        2.
-        3.
-    validations:
-      required: true
-
-  - type: textarea
-    id: expected-behavior
-    attributes:
-      label: Expected behavior
-      description: A clear and concise description of what you expected to happen.
-      placeholder: What should have happened instead?
-    validations:
-      required: true
-
-  - type: textarea
     id: reprex
     attributes:
       label: Reproducible example
-      description: Please provide a minimal reproducible example (reprex) if possible
+      description: Please provide a minimal reproducible example (using the reprex package if possible). Also include `packageVersion("report")` and its result at the beginning of your example.
       placeholder: |
         ```r
         library(report)
+        packageVersion("report")
+        ‘0.6.1’
         # Your code here that demonstrates the bug
         ```
       render: r
-
-  - type: input
-    id: package-version
-    attributes:
-      label: Package version
-      description: What version of the report package are you using?
-      placeholder: "e.g., 0.6.1"
-    validations:
-      required: true
-
-  - type: textarea
-    id: session-info
-    attributes:
-      label: R session information
-      description: Please run `sessionInfo()` and paste the output here
-      placeholder: Paste the output of sessionInfo() here
-      render: r
-
-

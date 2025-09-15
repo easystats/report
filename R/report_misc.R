@@ -15,17 +15,17 @@
 #' @return Objects of class [report_text()].
 #' @export
 report_date <- function(...) {
-  date <- Sys.time()
-  text <- format(date, "It's %A, %B %d of the year %Y, at %l%P %M and %S seconds")
-  text_short <- format(date, "%d/%m/%y - %H:%M:%S")
-  as.report_text(text, summary = text_short)
+  current_date <- Sys.time()
+  date_text <- format(current_date, "It's %A, %B %d of the year %Y, at %l%P %M and %S seconds")
+  text_short <- format(current_date, "%d/%m/%y - %H:%M:%S")
+  as.report_text(date_text, summary = text_short)
 }
 
 
 #' @rdname report_date
 #' @export
 report_story <- function(...) {
-  text <-
+  story_text <-
     paste(
       "Did you ever hear the tragedy of Darth Plagueis The Wise? I thought not.",
       "It's not a story the Jedi would tell you. It's a Sith legend.",
@@ -41,5 +41,5 @@ report_story <- function(...) {
 
   text_short <- "So this is how liberty dies. With thunderous applause."
 
-  as.report_text(text, summary = text_short)
+  as.report_text(story_text, summary = text_short)
 }

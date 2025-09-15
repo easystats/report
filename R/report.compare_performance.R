@@ -35,9 +35,9 @@
 #' @export
 
 report.compare_performance <- function(x, ...) {
-  table <- report_table(x, table = table, ...)
-  text <- report_text(x, ...)
-  as.report(text = text, table = table, ...)
+  result_table <- report_table(x, ...)
+  result_text <- report_text(x, ...)
+  as.report(text = result_text, table = result_table, ...)
 }
 
 # report_table ------------------------------------------------------------
@@ -45,9 +45,9 @@ report.compare_performance <- function(x, ...) {
 #' @rdname report.compare_performance
 #' @export
 report_table.compare_performance <- function(x, ...) {
-  table <- x
+  result_table <- x
   table_short <- x[!names(x) %in% c("Type", "Sigma")]
-  as.report_table(table, summary = table_short)
+  as.report_table(result_table, summary = table_short)
 }
 
 
@@ -61,41 +61,41 @@ report_statistics.compare_performance <- function(x, table = NULL, ...) {
     table <- report_table(x, ...)
   }
 
-  text <- text_short <- ""
+  result_text <- text_short <- ""
 
   if ("R2" %in% names(table)) {
-    text <- datawizard::text_paste(text, paste0("R2 = ", insight::format_value(table$R2)))
+    result_text <- datawizard::text_paste(result_text, paste0("R2 = ", insight::format_value(table$R2)))
     if ("R2_adjusted" %in% names(table)) {
-      text <- datawizard::text_paste(text, paste0("adj. R2 = ", insight::format_value(table$R2_adjusted)))
+      result_text <- datawizard::text_paste(result_text, paste0("adj. R2 = ", insight::format_value(table$R2_adjusted)))
       text_short <- datawizard::text_paste(text_short, paste0("adj. R2 = ", insight::format_value(table$R2_adjusted)))
     } else {
-      text_short <- datawizard::text_paste(text, paste0("R2 = ", insight::format_value(table$R2)))
+      text_short <- datawizard::text_paste(result_text, paste0("R2 = ", insight::format_value(table$R2)))
     }
   }
 
   if ("AIC" %in% names(table)) {
-    text <- datawizard::text_paste(text, paste0("AIC = ", insight::format_value(table$AIC)))
+    result_text <- datawizard::text_paste(result_text, paste0("AIC = ", insight::format_value(table$AIC)))
   }
 
   if ("BIC" %in% names(table)) {
-    text <- datawizard::text_paste(text, paste0("BIC = ", insight::format_value(table$BIC)))
+    result_text <- datawizard::text_paste(result_text, paste0("BIC = ", insight::format_value(table$BIC)))
     text_short <- datawizard::text_paste(text_short, paste0("BIC = ", insight::format_value(table$BIC)))
   }
 
   if ("WAIC" %in% names(table)) {
-    text <- datawizard::text_paste(text, paste0("WAIC = ", insight::format_value(table$WAIC)))
+    result_text <- datawizard::text_paste(result_text, paste0("WAIC = ", insight::format_value(table$WAIC)))
     text_short <- datawizard::text_paste(text_short, paste0("WAIC = ", insight::format_value(table$WAIC)))
   }
 
   if ("RMSE" %in% names(table)) {
-    text <- datawizard::text_paste(text, paste0("RMSE = ", insight::format_value(table$RMSE)))
+    result_text <- datawizard::text_paste(result_text, paste0("RMSE = ", insight::format_value(table$RMSE)))
   }
 
   if ("Sigma" %in% names(table)) {
-    text <- datawizard::text_paste(text, paste0("Sigma = ", insight::format_value(table$Sigma)))
+    result_text <- datawizard::text_paste(result_text, paste0("Sigma = ", insight::format_value(table$Sigma)))
   }
 
-  as.report_statistics(text, summary = text_short, table = table)
+  as.report_statistics(result_text, summary = text_short, table = table)
 }
 
 # report_parameters ------------------------------------------------------------
@@ -104,12 +104,12 @@ report_statistics.compare_performance <- function(x, table = NULL, ...) {
 #' @export
 report_parameters.compare_performance <- function(x, table = NULL, ...) {
   stats <- report_statistics(x, table = table, ...)
-  table <- attributes(stats)$table
+  result_table <- attributes(stats)$table
 
-  text <- paste0(table$Model, " (", stats, ")")
-  text_short <- paste0(table$Model, " (", summary(stats), ")")
+  result_text <- paste0(result_table$Model, " (", stats, ")")
+  text_short <- paste0(result_table$Model, " (", summary(stats), ")")
 
-  as.report_parameters(text, summary = text_short, table = table)
+  as.report_parameters(result_text, summary = text_short, table = result_table)
 }
 
 
@@ -120,23 +120,23 @@ report_parameters.compare_performance <- function(x, table = NULL, ...) {
 
 report_text.compare_performance <- function(x, table = NULL, ...) {
   stats <- report_statistics(x, table = table)
-  table <- attributes(stats)$table
+  result_table <- attributes(stats)$table
 
   # Get indices
-  models <- table$Model
-  text <- datawizard::text_concatenate(paste0(models, " (", stats, ")"))
+  models <- result_table$Model
+  result_text <- datawizard::text_concatenate(paste0(models, " (", stats, ")"))
   text_short <- datawizard::text_concatenate(paste0(models, " (", summary(stats), ")"))
 
   # Add intro sentence
   text_start <- paste0(
     "We compared ",
-    insight::format_number(nrow(table)),
+    insight::format_number(nrow(result_table)),
     " ",
-    ifelse(length(unique(table$Type)) == 1, format_model(unique(table$Type)), "model"),
+    ifelse(length(unique(result_table$Type)) == 1, format_model(unique(result_table$Type)), "model"),
     "s"
   )
-  text <- paste0(text_start, "; ", text, ".")
+  result_text <- paste0(text_start, "; ", result_text, ".")
   text_short <- paste0(text_start, "; ", text_short, ".")
 
-  as.report_text(text, summary = text_short)
+  as.report_text(result_text, summary = text_short)
 }

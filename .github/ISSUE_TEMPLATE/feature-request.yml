@@ -21,15 +21,6 @@ body:
       required: true
 
   - type: textarea
-    id: use-case
-    attributes:
-      label: Use case
-      description: Describe the specific use case or problem this feature would solve
-      placeholder: What problem does this solve? How would you use this feature?
-    validations:
-      required: true
-
-  - type: textarea
     id: implementation
     attributes:
       label: Implementation ideas
@@ -37,17 +28,10 @@ body:
       placeholder: How could we implement this? Any technical considerations?
 
   - type: textarea
-    id: alternatives
-    attributes:
-      label: Alternatives considered
-      description: Describe any alternative solutions or features you've considered
-      placeholder: What other approaches might work?
-
-  - type: textarea
     id: example-code
     attributes:
       label: Example usage
-      description: If possible, show how you envision this feature being used
+      description: If helpful, show how you envision this feature being used
       placeholder: |
         ```r
         library(report)

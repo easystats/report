@@ -3,6 +3,11 @@
 Bug fixes
 
 * `report.brmsfit()`: fix issue where report text was printed multiple times when different parameters had different priors (#543)
+* Fixed duplicated text output in `report()` for glmmTMB objects by addressing both regex pattern and redundant CI information concatenation in `report_info.lm()` (#481)
+* Fixed issue with missing effect size for the Intercept term in type 3 anova tables (#451)
+
+Minor changes
+* Fixed a lot of linting issues across the package.
 
 # report 0.6.2
 

@@ -195,10 +195,10 @@ report_sample <- function(data,
     # remember values of first columns
     variable <- result[[1]]["Variable"]
     # number of observation, based on weights
-    if (!is.null(weights)) {
-      n_obs <- round(as.vector(stats::xtabs(data[[weights]] ~ data[[by]])))
-    } else {
+    if (is.null(weights)) {
       n_obs <- as.vector(table(data[by]))
+    } else {
+      n_obs <- round(as.vector(stats::xtabs(data[[weights]] ~ data[[by]])))
     }
     # column names for groups
     cn <- sprintf("%s (n=%g)", names(result), n_obs)
@@ -227,10 +227,10 @@ report_sample <- function(data,
       final$Total <- NULL
     }
     # define total N, based on weights
-    if (!is.null(weights)) {
-      total_n <- round(sum(as.vector(table(data[by]))) * mean(data[[weights]], na.rm = TRUE))
-    } else {
+    if (is.null(weights)) {
       total_n <- sum(as.vector(table(data[by])))
+    } else {
+      total_n <- round(sum(as.vector(table(data[by]))) * mean(data[[weights]], na.rm = TRUE))
     }
     # add N to column name
     colnames(final)[ncol(final)] <- sprintf(
@@ -268,12 +268,12 @@ report_sample <- function(data,
                                         ci = NULL,
                                         ci_method = "wilson",
                                         ci_correct = FALSE) {
-  if (!is.null(weights)) {
-    w <- x[[weights]]
-    columns <- setdiff(colnames(x), weights)
-  } else {
+  if (is.null(weights)) {
     w <- NULL
     columns <- colnames(x)
+  } else {
+    w <- x[[weights]]
+    columns <- setdiff(colnames(x), weights)
   }
 
   do.call(rbind, lapply(columns, function(cn) {
@@ -346,14 +346,14 @@ report_sample <- function(data,
     x <- as.factor(x)
   }
 
-  if (!is.null(weights)) {
+  if (is.null(weights)) {
+    table_proportions <- prop.table(table(x))
+  } else {
     x[is.na(weights)] <- NA
     weights[is.na(x)] <- NA
     weights <- stats::na.omit(weights)
     x <- stats::na.omit(x)
     table_proportions <- prop.table(stats::xtabs(weights ~ x))
-  } else {
-    table_proportions <- prop.table(table(x))
   }
 
   # for binary factors, just need one level
@@ -362,7 +362,9 @@ report_sample <- function(data,
   }
 
   # CI for proportions?
-  if (!is.null(ci)) {
+  if (is.null(ci)) {
+    .summary <- sprintf("%.1f", 100 * table_proportions)
+  } else {
     ci_low_high <- .ci_proportion(x, table_proportions, weights, ci, ci_method, ci_correct)
     .summary <- sprintf(
       "%.1f [%.1f, %.1f]",
@@ -370,8 +372,6 @@ report_sample <- function(data,
       100 * ci_low_high$ci_low,
       100 * ci_low_high$ci_high
     )
-  } else {
-    .summary <- sprintf("%.1f", 100 * table_proportions)
   }
 
   if (isTRUE(n)) {

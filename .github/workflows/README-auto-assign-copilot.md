@@ -10,22 +10,36 @@ The `auto-assign-copilot.yml` workflow automatically assigns GitHub Copilot to i
 The workflow runs automatically when a new issue is opened in the repository.
 
 ### Conditions
-An issue is considered a "Copilot task" if **either** of these conditions is met:
+An issue is considered a "Copilot task" if **any** of these conditions is met:
 
 1. **Title prefix**: Issue title starts with `[Copilot]: `
 2. **Label**: Issue has the `robot :robot:` label
+3. **Setup label**: Issue has a `copilot-setup-*` label (light/full)
+4. **Setup preference**: Issue body contains a "### Copilot setup preference" section
 
 ### Assignment Logic
 
-The workflow uses a robust assignment approach with verification:
+The workflow uses a robust assignment approach with verification and label management:
 
 1. **Primary assignment**: Assign to `Copilot` (correct username for Bot ID 198982749)
 2. **Wait period**: Brief pause to allow assignment to take effect
 3. **Verification**: Check that Copilot is actually assigned via API verification
-4. **Fallback assignment**: If Copilot assignment fails, assign to `rempsyc` instead
-5. **Error handling**: If both assignments fail, the workflow fails with detailed error messages
+4. **Setup preference label**: Extract setup preference from issue body and apply as label
+5. **Fallback assignment**: If Copilot assignment fails, assign to `rempsyc` instead
+6. **Error handling**: If both assignments fail, the workflow fails with detailed error messages
 
 **Critical Fix in v3**: The workflow now uses the correct username `Copilot` (capital C) instead of `copilot` (lowercase) and includes mandatory verification to ensure assignments actually take effect. Previous versions reported false success when assignments silently failed.
+
+### Setup Preference Label Automation
+
+**Important**: The dropdown in the Copilot issue template (`z_copilot-issue.yml`) **does create labels**, not just body text!
+
+The workflow automatically:
+1. **Detects** the "### Copilot setup preference" section in the issue body
+2. **Extracts** the selected option (copilot-setup-light or copilot-setup-full)  
+3. **Applies** the corresponding label to the issue
+
+This means when someone selects "copilot-setup-light" in the dropdown, the issue will automatically get labeled with `copilot-setup-light`.
 
 ### Example Scenarios
 
@@ -45,11 +59,19 @@ Labels: ["robot :robot:", "help wanted"]
 Result: Assigns Copilot
 ```
 
-**Case 3: Both conditions met**
+**Case 3: Setup preference detection**
+```
+Title: "Update documentation" 
+Body: Contains "### Copilot setup preference\n\ncopilot-setup-light"
+Result: Assigns Copilot + applies "copilot-setup-light" label
+```
+
+**Case 4: Both conditions met**
 ```
 Title: "[Copilot]: Automated code review"
 Labels: ["robot :robot:"]
-Result: Assigns Copilot
+Body: Contains "### Copilot setup preference\n\ncopilot-setup-full"
+Result: Assigns Copilot + applies "copilot-setup-full" label
 ```
 
 #### ⏭️ Skipped Cases
@@ -79,6 +101,8 @@ The improved workflow provides detailed logging with verification:
 🔍 Verifying assignment took effect...
 📋 Current assignees: Copilot (Bot)
 ✅ SUCCESS: Copilot is actually assigned to the issue!
+🏷️  Adding setup preference label: copilot-setup-light
+✅ Applied setup preference label: copilot-setup-light
 🏁 Auto-assign Copilot workflow completed
 ```
 

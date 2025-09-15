@@ -19,21 +19,23 @@ cite_easystats(
 }
 \arguments{
 \item{packages}{A character vector of packages to cite. Can be \code{"all"} for
-all \emph{easystats} pacakges or a vector with specific package names.}
+all \emph{easystats} packages or a vector with specific package names.}
 
-\item{format}{The format to generate citations. Can be \code{"text"} for plain text,
-\code{"markdown"} for markdown citations and CSL bibliography (recommended for
-writing in RMarkdown), or \code{"biblatex"} for BibLaTeX citations and bibliography.}
+\item{format}{The format to generate citations. Can be \code{"text"} for plain
+text, \code{"markdown"} for markdown citations and CSL bibliography
+(recommended for writing in RMarkdown), or \code{"biblatex"} for BibLaTeX
+citations and bibliography.}
 
-\item{intext_prefix}{A character vector of length 1 containing text to include
-before in-text citations. If \code{TRUE}, defaults to \code{"Analyses were conducted using the easystats collection of packages "}. If \code{FALSE} or \code{NA}, no prefix
-is included.}
+\item{intext_prefix}{A character vector of length 1 containing text to
+include before in-text citations. If \code{TRUE}, defaults to \code{"Analyses were conducted using the easystats collection of packages "}. If \code{FALSE} or
+\code{NA}, no prefix is included.}
 
-\item{intext_suffix}{A character vector of length 1 containing text to include
-after in-text citations. Defaults to \code{"."}. If \code{FALSE} or \code{NA}, no suffix
-is included.}
+\item{intext_suffix}{A character vector of length 1 containing text to
+include after in-text citations. Defaults to \code{"."}. If \code{FALSE} or \code{NA},
+no suffix is included.}
 
-\item{what}{What elements of the citations to print, can be \code{"all"}, \code{"intext"}, or \code{"refs"}.}
+\item{what}{What elements of the citations to print, can be \code{"all"},
+\code{"intext"}, or \code{"refs"}.}
 
 \item{...}{Not used. Included for compatibility with the generic function.}
 
