@@ -23,5 +23,8 @@ test_that("report.lme", {
   expect_true("report.lme" %in% ls(asNamespace("report")))
 
   # Test that it works as intended (aliased to report.lm)
-  expect_true(identical(get("report.lme", asNamespace("report")), get("report.lm", asNamespace("report"))))
+  expect_true(identical(
+    get("report.lme", asNamespace("report")),
+    get("report.lm", asNamespace("report"))
+  ))
 })

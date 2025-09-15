@@ -29,12 +29,12 @@ test_that("cite_easystats() works with different formats", {
 test_that("cite_easystats() works with different package specifications", {
   # Single package
   result_single <- cite_easystats(packages = "insight")
-  expect_true(any(grepl("insight", result_single$refs, fixed = TRUE)))
+  expect_true(any(grepl("insight", result_single$refs)))
 
   # Multiple specific packages
   result_multi <- cite_easystats(packages = c("insight", "parameters"))
-  expect_true(any(grepl("insight", result_multi$refs, fixed = TRUE)))
-  expect_true(any(grepl("parameters", result_multi$refs, fixed = TRUE)))
+  expect_true(any(grepl("insight", result_multi$refs)))
+  expect_true(any(grepl("parameters", result_multi$refs)))
 })
 
 test_that("cite_easystats() handles prefix and suffix correctly", {
@@ -45,11 +45,11 @@ test_that("cite_easystats() handles prefix and suffix correctly", {
 
   # Without prefix
   result_no_prefix <- cite_easystats(intext_prefix = FALSE)
-  expect_false(startsWith(result_no_prefix$intext, "Analyses were conducted"))
+  expect_false(grepl("^Analyses were conducted", result_no_prefix$intext))
 
   # Without suffix
   result_no_suffix <- cite_easystats(intext_suffix = FALSE)
-  expect_false(endsWith(result_no_suffix$intext, "."))
+  expect_false(grepl("\\.$", result_no_suffix$intext))
 
   # Custom prefix and suffix
   result_custom <- cite_easystats(
@@ -66,8 +66,8 @@ test_that("cite_easystats() handles missing packages gracefully", {
     result <- cite_easystats(packages = c("insight", "nonexistent_package")),
     "not installed"
   )
-  expect_true(any(grepl("insight", result$refs, fixed = TRUE)))
-  expect_false(any(grepl("nonexistent", result$refs, fixed = TRUE)))
+  expect_true(any(grepl("insight", result$refs)))
+  expect_false(any(grepl("nonexistent", result$refs)))
 })
 
 test_that("print.cite_easystats() works correctly", {
@@ -99,13 +99,13 @@ test_that("summary.cite_easystats() works correctly", {
 test_that(".disamguation_letters() helper function works", {
   # Test with logical vector
   result1 <- report:::.disamguation_letters(c(TRUE, FALSE, TRUE))
-  expect_identical(result1, c("a", "", "b"))
+  expect_equal(result1, c("a", "", "b"))
 
-  result2 <- report:::.disamguation_letters(TRUE)
-  expect_identical(result2, "a") # Single TRUE should return "a", not empty
+  result2 <- report:::.disamguation_letters(c(TRUE))
+  expect_equal(result2, "a") # Single TRUE should return "a", not empty
 
   result3 <- report:::.disamguation_letters(c(FALSE, FALSE))
-  expect_identical(result3, c("", ""))
+  expect_equal(result3, c("", ""))
 
   # Test error handling
   expect_error(
