@@ -1,5 +1,4 @@
 skip_if_not_installed("glmmTMB")
-library(glmmTMB)
 
 test_that("report.glmmTMB", {
   skip_on_cran() # glmmTMB models can be computationally intensive

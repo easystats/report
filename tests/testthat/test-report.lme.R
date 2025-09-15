@@ -1,5 +1,4 @@
 skip_if_not_installed("nlme")
-library(nlme)
 
 test_that("report.lme", {
   # Create a test nlme model
