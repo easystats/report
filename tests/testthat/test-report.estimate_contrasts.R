@@ -1,5 +1,4 @@
 skip_if_not_installed("modelbased")
-library(modelbased)
 
 test_that("report.estimate_contrasts", {
   # Create a simple model for testing contrasts

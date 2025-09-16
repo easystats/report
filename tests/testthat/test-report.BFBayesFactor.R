@@ -1,5 +1,4 @@
 skip_if_not_installed("BayesFactor")
-library(BayesFactor)
 
 test_that("report.BFBayesFactor - t-test", {
   # Test BFBayesFactor objects from BayesFactor package
