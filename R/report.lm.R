@@ -741,32 +741,51 @@ report_text.lm <- function(x, table = NULL, ...) {
   if (suppressWarnings(insight::is_nullmodel(x))) {
     params_text_full <- params_text <- ""
   } else {
-    params_text_full <- paste0(" Within this model:\n\n", as.character(params))
+    params_text_full <- paste0("Within this model:\n\n", as.character(params))
     params_text <- paste0(
-      " Within this model:\n\n",
+      "Within this model:\n\n",
       as.character(summary(params), ...)
     )
   }
 
+  # Helpers
+  sep_after <- function(x) {
+    x <- trimws(x)
+    if (!nzchar(x)) {
+      return("")
+    } # nothing to add if empty
+    if (grepl("[.!?]\\s*$", x)) " " else ". " # space if already ends with .!?; else ". "
+  }
+
+  # Sanitize fragments (remove accidental leading spaces)
+  params_text_full <- sub("^\\s+", "", params_text_full)
+  params_text <- sub("^\\s+", "", params_text)
+  perf <- trimws(perf)
+  intercept <- trimws(intercept)
+
+  # 1) text_full
   text_full <- paste0(
     "We fitted a ",
     model,
     ". ",
     perf,
-    ifelse(nzchar(perf, keepNA = TRUE), ". ", ""),
+    sep_after(perf),
     intercept,
+    sep_after(intercept),
     params_text_full,
     "\n\n",
     info
   )
 
+  # 2) result_summary
   result_summary <- paste0(
     "We fitted a ",
     summary(model),
     ". ",
     summary(perf),
-    ifelse(nzchar(perf, keepNA = TRUE), ". ", ""),
+    sep_after(summary(perf)),
     summary(intercept),
+    sep_after(summary(intercept)),
     params_text
   )
 

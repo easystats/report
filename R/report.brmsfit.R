@@ -234,8 +234,7 @@ report_priors.brmsfit <- function(x, ...) {
         prior_descriptions,
         sep = "; ",
         last = "; "
-      ),
-      "."
+      )
     )
   } else {
     report_text <- ""
