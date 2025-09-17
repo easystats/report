@@ -43,7 +43,7 @@ report_table(lm(Sepal.Length ~ Petal.Length * Species, data = iris))
 report_table(glm(vs ~ disp, data = mtcars, family = "binomial"))
 }
 
-\dontshow{if (requireNamespace("lme4", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("lme4", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 # Mixed models
 library(lme4)
@@ -51,7 +51,7 @@ model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 report_table(model)
 }
 \dontshow{\}) # examplesIf}
-\dontshow{if (requireNamespace("rstanarm", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("rstanarm", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 # Bayesian models
 library(rstanarm)
@@ -59,7 +59,7 @@ model <- suppressWarnings(stan_glm(Sepal.Length ~ Species, data = iris, refresh 
 report_table(model, effectsize_method = "basic")
 }
 \dontshow{\}) # examplesIf}
-\dontshow{if (requireNamespace("lavaan", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("lavaan", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 # Structural Equation Models (SEM)
 library(lavaan)

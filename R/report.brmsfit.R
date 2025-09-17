@@ -36,7 +36,80 @@ report.brmsfit <- function(x, ...) {
 }
 
 #' @export
-report_effectsize.brmsfit <- report_effectsize.lm
+report_effectsize.brmsfit <- function(x, effectsize_method = "basic", ...) {
+  # Use faster method for Bayesian models to avoid expensive refitting
+  # "basic" method is much faster than "refit" while providing similar results
+  effect_table <- suppressWarnings(effectsize::effectsize(
+    x,
+    method = effectsize_method,
+    ...
+  ))
+  method <- .text_standardize(effect_table)
+  estimate <- names(effect_table)[effectsize::is_effectsize_name(names(
+    effect_table
+  ))]
+
+  # TODO: finally solve this.
+  # interpret <- effectsize::interpret_parameters(x, ...)
+  if (insight::model_info(x)$is_logit) {
+    interpret <- effectsize::interpret_oddsratio(
+      effect_table[[estimate]],
+      log = TRUE,
+      ...
+    )
+  } else {
+    interpret <- effectsize::interpret_cohens_d(effect_table[[estimate]], ...)
+  }
+
+  interpretation <- interpret
+  main <- paste0(
+    "Std. beta = ",
+    insight::format_value(effect_table[[estimate]])
+  )
+
+  ci <- effect_table$CI
+  names(ci) <- paste0("ci_", estimate)
+
+  statistics <- paste0(
+    main,
+    ", ",
+    insight::format_ci(effect_table$CI_low, effect_table$CI_high, ci)
+  )
+
+  if ("Component" %in% colnames(effect_table)) {
+    merge_by <- c("Parameter", "Component")
+    start_col <- 4L
+  } else {
+    merge_by <- "Parameter"
+    start_col <- 3L
+  }
+
+  effect_table <- as.data.frame(effect_table)[c(
+    merge_by,
+    estimate,
+    "CI_low",
+    "CI_high"
+  )]
+  names(effect_table)[start_col:ncol(effect_table)] <- c(
+    paste0(estimate, "_CI_low"),
+    paste0(estimate, "_CI_high")
+  )
+
+  rules <- .text_effectsize(attr(attr(interpret, "rules"), "rule_name"))
+  parameters <- paste0(interpretation, " (", statistics, ")")
+
+  as.report_effectsize(
+    parameters,
+    summary = parameters,
+    table = effect_table,
+    interpretation = interpretation,
+    statistics = statistics,
+    rules = rules,
+    ci = ci,
+    method = method,
+    main = main
+  )
+}
 
 #' @export
 report_table.brmsfit <- report_table.lm

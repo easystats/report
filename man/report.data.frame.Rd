@@ -90,7 +90,7 @@ summary(r)
 as.data.frame(r)
 summary(as.data.frame(r))
 
-\dontshow{if (requireNamespace("dplyr", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("dplyr", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # grouped analysis using `{dplyr}` package
 library(dplyr)
 r <- iris \%>\%

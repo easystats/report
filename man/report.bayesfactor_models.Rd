@@ -42,7 +42,7 @@ An object of class \code{\link[=report]{report()}}.
 Create reports of Bayes factors for model comparison.
 }
 \examples{
-\dontshow{if (requireNamespace("bayestestR", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("bayestestR", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 library(bayestestR)
 # Bayes factor - models
 mo0 <- lm(Sepal.Length ~ 1, data = iris)

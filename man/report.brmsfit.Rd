@@ -24,7 +24,7 @@ Message from the \code{rstan} package: "To avoid recompilation of unchanged
 Stan programs, we recommend calling \code{rstan_options(auto_write = TRUE)}"
 }
 \examples{
-\dontshow{if (require("brms", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (require("brms", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 # Bayesian models
 library(brms)

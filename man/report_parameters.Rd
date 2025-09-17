@@ -46,7 +46,7 @@ report_parameters(lm(Petal.Width ~ Species, data = iris), include_intercept = FA
 report_parameters(glm(vs ~ disp, data = mtcars, family = "binomial"))
 }
 
-\dontshow{if (requireNamespace("lme4", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("lme4", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 # Mixed models
 library(lme4)
@@ -54,7 +54,7 @@ model <- lme4::lmer(Sepal.Length ~ Petal.Length + (1 | Species), data = iris)
 report_parameters(model)
 }
 \dontshow{\}) # examplesIf}
-\dontshow{if (requireNamespace("rstanarm", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("rstanarm", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 # Bayesian models
 library(rstanarm)
