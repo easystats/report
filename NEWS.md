@@ -2,6 +2,7 @@
 
 Bug fixes
 
+* `report.brmsfit()`: significantly improved performance by using faster `method = "basic"` instead of `method = "refit"` for effect size calculation, reducing execution time from hours to minutes for large Bayesian models (#568)
 * `report.brmsfit()`: fix issue where report text was printed multiple times when different parameters had different priors (#543)
 * Fixed duplicated text output in `report()` for glmmTMB objects by addressing both regex pattern and redundant CI information concatenation in `report_info.lm()` (#481)
 * Fixed issue with missing effect size for the Intercept term in type 3 anova tables (#451)

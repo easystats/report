@@ -2,14 +2,22 @@
 % Please edit documentation in R/report.brmsfit.R
 \name{report.brmsfit}
 \alias{report.brmsfit}
+\alias{report_effectsize.brmsfit}
 \title{Reporting Bayesian Models from brms}
 \usage{
 \method{report}{brmsfit}(x, ...)
+
+\method{report_effectsize}{brmsfit}(x, effectsize_method = "basic", ...)
 }
 \arguments{
 \item{x}{Object of class \code{lm} or \code{glm}.}
 
 \item{...}{Arguments passed to or from other methods.}
+
+\item{effectsize_method}{Method for computing effect sizes. For \code{brmsfit} objects,
+defaults to \code{"basic"} (faster, no refitting) instead of \code{"refit"} to improve
+performance with large Bayesian models. See documentation for
+\code{\link[effectsize:effectsize]{effectsize::effectsize()}}.}
 }
 \value{
 An object of class \code{\link[=report]{report()}}.
