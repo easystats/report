@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="index.html">report</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.1.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.1.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -132,14 +132,14 @@
 <span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a><span class="st">  # Based on testing with whitelisted r-lib.r-universe.dev and cdn.r-universe.dev: both r-universe and remotes work successfully</span></span>
 <span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a><span class="st">  tryCatch({</span></span>
 <span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a><span class="st">    # FIRST PRIORITY: Try r-universe installation</span></span>
-<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a><span class="st">    install.packages("lintr", lib = .libPaths()[1], repos="https://r-lib.r-universe.dev")</span></span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a><span class="st">    install.packages("lintr", lib = .libPaths()[1], repos=c("https://r-lib.r-universe.dev", "https://cloud.r-project.org"))</span></span>
 <span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a><span class="st">    cat("SUCCESS: r-universe installation worked\n")</span></span>
 <span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a><span class="st">  }, error = function(e1) {</span></span>
 <span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a><span class="st">    cat("r-universe installation failed, trying remotes...\n")</span></span>
 <span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a><span class="st">    tryCatch({</span></span>
 <span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a><span class="st">      # FALLBACK: Use remotes for development lintr installation</span></span>
 <span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a><span class="st">      if (!requireNamespace("remotes", quietly = TRUE)) {</span></span>
-<span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a><span class="st">        install.packages("remotes", lib = .libPaths()[1], repos="https://r-universe.dev")</span></span>
+<span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a><span class="st">        install.packages("remotes", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))</span></span>
 <span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a><span class="st">      }</span></span>
 <span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a><span class="st">      remotes::install_github("r-lib/lintr")</span></span>
 <span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a><span class="st">      cat("SUCCESS: remotes installation worked\n")</span></span>
@@ -157,7 +157,7 @@
 <span id="cb2-47"><a href="#cb2-47" tabindex="-1"></a><span class="st">}'</span></span>
 <span id="cb2-48"><a href="#cb2-48" tabindex="-1"></a></span>
 <span id="cb2-49"><a href="#cb2-49" tabindex="-1"></a><span class="co"># Install reprex (ESSENTIAL for creating reproducible examples in PRs)</span></span>
-<span id="cb2-50"><a href="#cb2-50" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-cran-reprex <span class="kw">||</span> <span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("reprex", lib = .libPaths()[1], repos="https://r-universe.dev")'</span></span>
+<span id="cb2-50"><a href="#cb2-50" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-cran-reprex <span class="kw">||</span> <span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("reprex", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'</span></span>
 <span id="cb2-51"><a href="#cb2-51" tabindex="-1"></a></span>
 <span id="cb2-52"><a href="#cb2-52" tabindex="-1"></a><span class="co"># Install other essential development packages via system packages when possible</span></span>
 <span id="cb2-53"><a href="#cb2-53" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-cran-devtools r-cran-roxygen2 r-cran-styler <span class="kw">||</span> <span class="bu">echo</span> <span class="st">"Some packages not available via apt, will install via R"</span></span>
@@ -168,7 +168,7 @@
 <span id="cb2-58"><a href="#cb2-58" tabindex="-1"></a><span class="st">packages_installed &lt;- rownames(installed.packages())</span></span>
 <span id="cb2-59"><a href="#cb2-59" tabindex="-1"></a><span class="st">packages_to_install &lt;- setdiff(packages_needed, packages_installed)</span></span>
 <span id="cb2-60"><a href="#cb2-60" tabindex="-1"></a><span class="st">if (length(packages_to_install) &gt; 0) {</span></span>
-<span id="cb2-61"><a href="#cb2-61" tabindex="-1"></a><span class="st">  install.packages(packages_to_install, lib = .libPaths()[1], repos="https://r-universe.dev")</span></span>
+<span id="cb2-61"><a href="#cb2-61" tabindex="-1"></a><span class="st">  install.packages(packages_to_install, lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))</span></span>
 <span id="cb2-62"><a href="#cb2-62" tabindex="-1"></a><span class="st">}</span></span>
 <span id="cb2-63"><a href="#cb2-63" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
 </div>
@@ -198,20 +198,20 @@
 <p><strong>If setting up manually</strong>: Follow this complete setup process:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Step 1: Install required dependencies for reprex</span></span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> pandoc</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages(c("knitr", "rmarkdown"), lib = .libPaths()[1], repos="https://r-universe.dev")'</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages(c("knitr", "rmarkdown"), lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'</span></span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a></span>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co"># Step 2: Install reprex package</span></span>
 <span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
 <span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="st">if (!requireNamespace("reprex", quietly = TRUE)) {</span></span>
 <span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="st">  # Try multiple installation methods</span></span>
 <span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="st">  tryCatch({</span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="st">    install.packages("reprex", lib = .libPaths()[1], repos="https://r-universe.dev")</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="st">    install.packages("reprex", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))</span></span>
 <span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="st">  }, error = function(e1) {</span></span>
 <span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="st">    tryCatch({</span></span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="st">      install.packages("reprex", lib = .libPaths()[1], repos="https://r-universe.dev")</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="st">      install.packages("reprex", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))</span></span>
 <span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="st">    }, error = function(e2) {</span></span>
 <span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="st">      if (!requireNamespace("remotes", quietly = TRUE)) {</span></span>
-<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="st">        install.packages("remotes", lib = .libPaths()[1], repos="https://r-universe.dev")</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="st">        install.packages("remotes", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))</span></span>
 <span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="st">      }</span></span>
 <span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="st">      remotes::install_github("tidyverse/reprex")</span></span>
 <span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="st">    })</span></span>
@@ -254,13 +254,13 @@ grep -A2 -B2 "requireNamespace\|check_installed" R/[your_function_file].R
 <h4 id="install-only-required-packages">Install Only Required Packages<a class="anchor" aria-label="anchor" href="#install-only-required-packages"></a></h4>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Step 2: Install ONLY the packages found in Step 1</span></span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co"># Example: If working on report.lm(), you might need modelbased and effectsize</span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages(c("modelbased", "effectsize"), lib = .libPaths()[1], repos="https://r-universe.dev")'</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages(c("modelbased", "effectsize"), lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'</span></span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a></span>
 <span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co"># Example: If working on report.lavaan(), you might need lavaan  </span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("lavaan", lib = .libPaths()[1], repos="https://r-universe.dev")'</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("lavaan", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'</span></span>
 <span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a></span>
 <span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co"># Example: If working on report.brmsfit(), you need brms and related packages</span></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages(c("brms", "rstanarm"), lib = .libPaths()[1], repos="https://r-universe.dev")'</span></span></code></pre></div>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages(c("brms", "rstanarm"), lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="use-reports-built-in-utilities-after-building-package">Use report’s Built-in Utilities (After Building Package)<a class="anchor" aria-label="anchor" href="#use-reports-built-in-utilities-after-building-package"></a></h4>
@@ -276,7 +276,7 @@ grep -A2 -B2 "requireNamespace\|check_installed" R/[your_function_file].R
 <span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="st"># Load report and install only specific packages for your function</span></span>
 <span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="st">library(report)</span></span>
 <span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="st"># ONLY install packages needed for your specific function:</span></span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="st"># install.packages("your_specific_package", lib = .libPaths()[1], repos="https://r-universe.dev")</span></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="st"># install.packages("your_specific_package", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))</span></span>
 <span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="st">'</span></span></code></pre></div>
 </div>
 </div>
@@ -552,13 +552,13 @@ grep -A2 -B2 "requireNamespace\|check_installed" R/[your_function_file].R
 <h3 id="installing-additional-packages-only-when-needed">Installing Additional Packages (Only When Needed)<a class="anchor" aria-label="anchor" href="#installing-additional-packages-only-when-needed"></a></h3>
 <p><strong>PRIORITY</strong>: Always install reprex first, then install other packages ONLY as needed for the specific function you are modifying:</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="co"># ALWAYS install reprex first (essential for PR creation):</span></span>
-<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-cran-reprex <span class="kw">||</span> <span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("reprex", lib = .libPaths()[1], repos="https://r-universe.dev")'</span></span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-cran-reprex <span class="kw">||</span> <span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("reprex", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'</span></span>
 <span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a></span>
 <span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a><span class="co"># Via system packages (recommended for individual packages):</span></span>
 <span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> r-cran-<span class="pp">[</span><span class="ss">package</span><span class="pp">-</span><span class="ss">name</span><span class="pp">]</span></span>
 <span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a></span>
 <span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a><span class="co"># Via R (using r-universe for latest packages including development versions):</span></span>
-<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("[package-name]", lib = .libPaths()[1], repos="https://r-universe.dev")'</span></span>
+<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("[package-name]", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'</span></span>
 <span id="cb24-9"><a href="#cb24-9" tabindex="-1"></a></span>
 <span id="cb24-10"><a href="#cb24-10" tabindex="-1"></a><span class="co"># Alternative sources when r-universe is not available:</span></span>
 <span id="cb24-11"><a href="#cb24-11" tabindex="-1"></a><span class="co"># Via CRAN mirror (FALLBACK PRIORITY):</span></span>
@@ -602,16 +602,16 @@ grep -A2 -B2 "requireNamespace\|check_installed" R/[your_function_file].R
 <div class="section level4">
 <h4 id="targeted-installation-examples">Targeted Installation Examples<a class="anchor" aria-label="anchor" href="#targeted-installation-examples"></a></h4>
 <div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="co"># Example 1: Working on report.lm() function</span></span>
-<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages(c("modelbased", "effectsize"), lib = .libPaths()[1], repos="https://r-universe.dev")'</span></span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages(c("modelbased", "effectsize"), lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'</span></span>
 <span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a></span>
 <span id="cb26-4"><a href="#cb26-4" tabindex="-1"></a><span class="co"># Example 2: Working on report.lavaan() function  </span></span>
-<span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("lavaan", lib = .libPaths()[1], repos="https://r-universe.dev")'</span></span>
+<span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("lavaan", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'</span></span>
 <span id="cb26-6"><a href="#cb26-6" tabindex="-1"></a></span>
 <span id="cb26-7"><a href="#cb26-7" tabindex="-1"></a><span class="co"># Example 3: Working on report.brmsfit() function</span></span>
-<span id="cb26-8"><a href="#cb26-8" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages(c("brms", "rstanarm"), lib = .libPaths()[1], repos="https://r-universe.dev")'</span></span>
+<span id="cb26-8"><a href="#cb26-8" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages(c("brms", "rstanarm"), lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'</span></span>
 <span id="cb26-9"><a href="#cb26-9" tabindex="-1"></a></span>
 <span id="cb26-10"><a href="#cb26-10" tabindex="-1"></a><span class="co"># Example 4: Working on report.BFBayesFactor() function</span></span>
-<span id="cb26-11"><a href="#cb26-11" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("BayesFactor", lib = .libPaths()[1], repos="https://r-universe.dev")'</span></span></code></pre></div>
+<span id="cb26-11"><a href="#cb26-11" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages("BayesFactor", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -1149,11 +1149,11 @@ grep -A2 -B2 "requireNamespace\|check_installed" R/[your_function_file].R
 
 ### Styler Not Available
 - **Cause**: styler package not installed
-- **Solution**: Install via R: `R --no-restore --no-save -e 'install.packages("styler", lib = .libPaths()[1], repos="https://r-universe.dev")'` or skip styling step if not critical
+- **Solution**: Install via R: `R --no-restore --no-save -e 'install.packages("styler", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'` or skip styling step if not critical
 
 ### Roxygen2 Not Available
 - **Cause**: roxygen2 package not installed
-- **Solution**: Install via R: `R --no-restore --no-save -e 'install.packages("roxygen2", lib = .libPaths()[1], repos="https://r-universe.dev")'` or use devtools: `R --no-restore --no-save -e 'devtools::document()'`
+- **Solution**: Install via R: `R --no-restore --no-save -e 'install.packages("roxygen2", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'` or use devtools: `R --no-restore --no-save -e 'devtools::document()'`
 
 ### Documentation Build Failures
 - **Cause**: Documentation not updated after changing roxygen2 comments
@@ -1182,14 +1182,14 @@ grep -A2 -B2 "requireNamespace\|check_installed" R/[your_function_file].R
     # Based on testing with whitelisted r-lib.r-universe.dev and cdn.r-universe.dev: both r-universe and remotes work successfully
     tryCatch({
       # FIRST PRIORITY: Try r-universe installation
-      install.packages("lintr", lib = .libPaths()[1], repos="https://r-lib.r-universe.dev")
+      install.packages("lintr", lib = .libPaths()[1], repos=c("https://r-lib.r-universe.dev", "https://cloud.r-project.org"))
       cat("SUCCESS: r-universe installation worked\n")
     }, error = function(e1) {
       cat("r-universe installation failed, trying remotes...\n")
       tryCatch({
         # FALLBACK: Use remotes for development lintr installation
         if (!requireNamespace("remotes", quietly = TRUE)) {
-          install.packages("remotes", lib = .libPaths()[1], repos="https://r-universe.dev")
+          install.packages("remotes", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))
         }
         remotes::install_github("r-lib/lintr")
         cat("SUCCESS: remotes installation worked\n")
@@ -1239,7 +1239,7 @@ grep -A2 -B2 "requireNamespace\|check_installed" R/[your_function_file].R
 <strong>Solutions</strong>:
 <ul><li>Use system packages: <code>sudo apt install r-cran-[package]</code>
 </li>
-<li>Try R-universe (FIRST PRIORITY): <code>repos="https://r-universe.dev"</code><br></li>
+<li>Try R-universe (FIRST PRIORITY): <code>repos=c("https://r-universe.dev", "https://cloud.r-project.org")</code><br></li>
 <li>Use remotes for GitHub packages (SECOND PRIORITY): <code>remotes::install_github("[author]/[package]")</code>
 </li>
 </ul></li>
@@ -1253,7 +1253,7 @@ grep -A2 -B2 "requireNamespace\|check_installed" R/[your_function_file].R
 <h4 id="step-1-install-required-dependencies">Step 1: Install Required Dependencies<a class="anchor" aria-label="anchor" href="#step-1-install-required-dependencies"></a></h4>
 <div class="sourceCode" id="cb48"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1" tabindex="-1"></a><span class="co"># Install core dependencies first</span></span>
 <span id="cb48-2"><a href="#cb48-2" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> pandoc</span>
-<span id="cb48-3"><a href="#cb48-3" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages(c("knitr", "rmarkdown"), lib = .libPaths()[1], repos="https://r-universe.dev")'</span></span></code></pre></div>
+<span id="cb48-3"><a href="#cb48-3" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'install.packages(c("knitr", "rmarkdown"), lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="step-2-install-reprex-package">Step 2: Install reprex Package<a class="anchor" aria-label="anchor" href="#step-2-install-reprex-package"></a></h4>
@@ -1261,13 +1261,13 @@ grep -A2 -B2 "requireNamespace\|check_installed" R/[your_function_file].R
 <span id="cb49-2"><a href="#cb49-2" tabindex="-1"></a><span class="ex">R</span> <span class="at">--no-restore</span> <span class="at">--no-save</span> <span class="at">-e</span> <span class="st">'</span></span>
 <span id="cb49-3"><a href="#cb49-3" tabindex="-1"></a><span class="st">if (!requireNamespace("reprex", quietly = TRUE)) {</span></span>
 <span id="cb49-4"><a href="#cb49-4" tabindex="-1"></a><span class="st">  tryCatch({</span></span>
-<span id="cb49-5"><a href="#cb49-5" tabindex="-1"></a><span class="st">    install.packages("reprex", lib = .libPaths()[1], repos="https://r-universe.dev")</span></span>
+<span id="cb49-5"><a href="#cb49-5" tabindex="-1"></a><span class="st">    install.packages("reprex", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))</span></span>
 <span id="cb49-6"><a href="#cb49-6" tabindex="-1"></a><span class="st">  }, error = function(e1) {</span></span>
 <span id="cb49-7"><a href="#cb49-7" tabindex="-1"></a><span class="st">    tryCatch({</span></span>
-<span id="cb49-8"><a href="#cb49-8" tabindex="-1"></a><span class="st">      install.packages("reprex", lib = .libPaths()[1], repos="https://r-universe.dev")</span></span>
+<span id="cb49-8"><a href="#cb49-8" tabindex="-1"></a><span class="st">      install.packages("reprex", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))</span></span>
 <span id="cb49-9"><a href="#cb49-9" tabindex="-1"></a><span class="st">    }, error = function(e2) {</span></span>
 <span id="cb49-10"><a href="#cb49-10" tabindex="-1"></a><span class="st">      if (!requireNamespace("remotes", quietly = TRUE)) {</span></span>
-<span id="cb49-11"><a href="#cb49-11" tabindex="-1"></a><span class="st">        install.packages("remotes", lib = .libPaths()[1], repos="https://r-universe.dev")</span></span>
+<span id="cb49-11"><a href="#cb49-11" tabindex="-1"></a><span class="st">        install.packages("remotes", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))</span></span>
 <span id="cb49-12"><a href="#cb49-12" tabindex="-1"></a><span class="st">      }</span></span>
 <span id="cb49-13"><a href="#cb49-13" tabindex="-1"></a><span class="st">      remotes::install_github("tidyverse/reprex")</span></span>
 <span id="cb49-14"><a href="#cb49-14" tabindex="-1"></a><span class="st">    })</span></span>
@@ -1433,7 +1433,7 @@ R/cite_easystats.R   - Citation utilities</code></pre>
 </ul></div>
 <div class="section level4">
 <h4 id="id_3-package-installation-strategy">3. Package Installation Strategy<a class="anchor" aria-label="anchor" href="#id_3-package-installation-strategy"></a></h4>
-<p>When packages can’t be installed from CRAN: - <strong>Primary</strong>: Use system packages via <code>sudo apt install r-cran-[package]</code> - <strong>Alternative (FIRST PRIORITY)</strong>: Use R-universe repository: <code>repos="https://r-universe.dev"</code> - <strong>Fallback (SECOND PRIORITY)</strong>: Use remotes for GitHub packages: <code>remotes::install_github("[author]/[package]")</code></p>
+<p>When packages can’t be installed from CRAN: - <strong>Primary</strong>: Use system packages via <code>sudo apt install r-cran-[package]</code> - <strong>Alternative (FIRST PRIORITY)</strong>: Use R-universe repository: <code>repos=c("https://r-universe.dev", "https://cloud.r-project.org")</code> - <strong>Fallback (SECOND PRIORITY)</strong>: Use remotes for GitHub packages: <code>remotes::install_github("[author]/[package]")</code></p>
 </div>
 <div class="section level4">
 <h4 id="id_4-pre-commit-validation-checklist">4. Pre-Commit Validation Checklist<a class="anchor" aria-label="anchor" href="#id_4-pre-commit-validation-checklist"></a></h4>

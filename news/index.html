@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.1.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.1.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +63,11 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.6" id="report-06x">report 0.6.x<a class="anchor" aria-label="anchor" href="#report-06x"></a></h2>
 <p>Bug fixes</p>
-<ul><li>Fixed duplicated text output in <code><a href="../reference/report.html">report()</a></code> for glmmTMB objects by addressing both regex pattern and redundant CI information concatenation in <code><a href="../reference/report.lm.html">report_info.lm()</a></code> (<a href="https://github.com/easystats/report/issues/481" class="external-link">#481</a>)</li>
+<ul><li>
+<code><a href="../reference/report.brmsfit.html">report.brmsfit()</a></code>: significantly improved performance by using faster <code>method = "basic"</code> instead of <code>method = "refit"</code> for effect size calculation, reducing execution time from hours to minutes for large Bayesian models (<a href="https://github.com/easystats/report/issues/568" class="external-link">#568</a>)</li>
+<li>
+<code><a href="../reference/report.brmsfit.html">report.brmsfit()</a></code>: fix issue where report text was printed multiple times when different parameters had different priors (<a href="https://github.com/easystats/report/issues/543" class="external-link">#543</a>)</li>
+<li>Fixed duplicated text output in <code><a href="../reference/report.html">report()</a></code> for glmmTMB objects by addressing both regex pattern and redundant CI information concatenation in <code><a href="../reference/report.lm.html">report_info.lm()</a></code> (<a href="https://github.com/easystats/report/issues/481" class="external-link">#481</a>)</li>
 <li>Fixed issue with missing effect size for the Intercept term in type 3 anova tables (<a href="https://github.com/easystats/report/issues/451" class="external-link">#451</a>)</li>
 </ul><p>Minor changes * Fixed a lot of linting issues across the package.</p>
 </div>

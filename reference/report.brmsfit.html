@@ -11,7 +11,7 @@ follows the Sequential Effect eXistence and sIgnificance Testing framework
 
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.1.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.1.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,7 +74,10 @@ follows the Sequential Effect eXistence and sIgnificance Testing framework
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for class 'brmsfit'</span></span>
-<span><span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'brmsfit'</span></span>
+<span><span class="fu"><a href="report_effectsize.html">report_effectsize</a></span><span class="op">(</span><span class="va">x</span>, effectsize_method <span class="op">=</span> <span class="st">"basic"</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -88,10 +91,22 @@ follows the Sequential Effect eXistence and sIgnificance Testing framework
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Arguments passed to or from other methods.</p></dd>
 
+
+<dt id="arg-effectsize-method">effectsize_method<a class="anchor" aria-label="anchor" href="#arg-effectsize-method"></a></dt>
+<dd><p>Method for computing effect sizes. For <code>brmsfit</code> objects,
+defaults to <code>"basic"</code> (faster, no refitting) instead of <code>"refit"</code> to improve
+performance with large Bayesian models. See documentation for
+<code><a href="https://easystats.github.io/effectsize/reference/effectsize.html" class="external-link">effectsize::effectsize()</a></code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>An object of class <code><a href="report.html">report()</a></code>.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>Message from the <code>rstan</code> package: "To avoid recompilation of unchanged
+Stan programs, we recommend calling <code>rstan_options(auto_write = TRUE)</code>"</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -127,101 +142,13 @@ follows the Sequential Effect eXistence and sIgnificance Testing framework
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Compiling Stan program...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Start sampling</span>
 <span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="report.html">report</a></span><span class="op">(</span><span class="va">model</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Start sampling</span>
 <span class="r-in"><span><span class="va">r</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> We fitted a Bayesian linear model (estimated using MCMC sampling with 4 chains</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> of 300 iterations and a warmup of 150) to predict mpg with qsec and wt</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (formula: mpg ~ qsec + wt). Priors over parameters were set as student_t</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (location = 19.20, scale = 5.40) distributions. The model's explanatory power</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> is substantial (R2 = 0.82, 95% CI [0.75, 0.85], adj. R2 = 0.79).  Within this</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> model:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of b Intercept (Median = 19.51, 95% CI [9.40, 30.15]) has a</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 100.00% probability of being positive (&gt; 0), 100.00% of being significant (&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.30), and 100.00% of being large (&gt; 1.81). The estimation successfully</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> converged (Rhat = 0.998) but the indices are unreliable (ESS = 507)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of b qsec (Median = 0.93, 95% CI [0.42, 1.48]) has a 100.00%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> probability of being positive (&gt; 0), 99.17% of being significant (&gt; 0.30), and</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.00% of being large (&gt; 1.81). The estimation successfully converged (Rhat =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.998) but the indices are unreliable (ESS = 466)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of b wt (Median = -5.02, 95% CI [-6.03, -3.93]) has a 100.00%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> probability of being negative (&lt; 0), 100.00% of being significant (&lt; -0.30),</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> and 100.00% of being large (&lt; -1.81). The estimation successfully converged</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Rhat = 1.000) but the indices are unreliable (ESS = 712)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> framework, we report the median of the posterior distribution and its 95% CI</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Highest Density Interval), along the probability of direction (pd), the</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> probability of significance and the probability of being large. The thresholds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> beyond which the effect is considered as significant (i.e., non-negligible) and</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> large are |0.30| and |1.81| (corresponding respectively to 0.05 and 0.30 of the</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> outcome's SD). Convergence and stability of the Bayesian sampling has been</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> assessed using R-hat, which should be below 1.01 (Vehtari et al., 2019), and</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Effective Sample Size (ESS), which should be greater than 1000 (Burkner,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2017)., We fitted a Bayesian linear model (estimated using MCMC sampling with 4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> chains of 300 iterations and a warmup of 150) to predict mpg with qsec and wt</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (formula: mpg ~ qsec + wt). Priors over parameters were set as uniform</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (location = , scale = ) distributions. The model's explanatory power is</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> substantial (R2 = 0.82, 95% CI [0.75, 0.85], adj. R2 = 0.79).  Within this</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> model:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of b Intercept (Median = 19.51, 95% CI [9.40, 30.15]) has a</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 100.00% probability of being positive (&gt; 0), 100.00% of being significant (&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.30), and 100.00% of being large (&gt; 1.81). The estimation successfully</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> converged (Rhat = 0.998) but the indices are unreliable (ESS = 507)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of b qsec (Median = 0.93, 95% CI [0.42, 1.48]) has a 100.00%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> probability of being positive (&gt; 0), 99.17% of being significant (&gt; 0.30), and</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.00% of being large (&gt; 1.81). The estimation successfully converged (Rhat =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.998) but the indices are unreliable (ESS = 466)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of b wt (Median = -5.02, 95% CI [-6.03, -3.93]) has a 100.00%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> probability of being negative (&lt; 0), 100.00% of being significant (&lt; -0.30),</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> and 100.00% of being large (&lt; -1.81). The estimation successfully converged</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Rhat = 1.000) but the indices are unreliable (ESS = 712)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> framework, we report the median of the posterior distribution and its 95% CI</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Highest Density Interval), along the probability of direction (pd), the</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> probability of significance and the probability of being large. The thresholds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> beyond which the effect is considered as significant (i.e., non-negligible) and</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> large are |0.30| and |1.81| (corresponding respectively to 0.05 and 0.30 of the</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> outcome's SD). Convergence and stability of the Bayesian sampling has been</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> assessed using R-hat, which should be below 1.01 (Vehtari et al., 2019), and</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Effective Sample Size (ESS), which should be greater than 1000 (Burkner,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2017)., We fitted a Bayesian linear model (estimated using MCMC sampling with 4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> chains of 300 iterations and a warmup of 150) to predict mpg with qsec and wt</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (formula: mpg ~ qsec + wt). Priors over parameters were set as uniform</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (location = , scale = ) distributions. The model's explanatory power is</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> substantial (R2 = 0.82, 95% CI [0.75, 0.85], adj. R2 = 0.79).  Within this</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> model:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of b Intercept (Median = 19.51, 95% CI [9.40, 30.15]) has a</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 100.00% probability of being positive (&gt; 0), 100.00% of being significant (&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.30), and 100.00% of being large (&gt; 1.81). The estimation successfully</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> converged (Rhat = 0.998) but the indices are unreliable (ESS = 507)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of b qsec (Median = 0.93, 95% CI [0.42, 1.48]) has a 100.00%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> probability of being positive (&gt; 0), 99.17% of being significant (&gt; 0.30), and</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.00% of being large (&gt; 1.81). The estimation successfully converged (Rhat =</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.998) but the indices are unreliable (ESS = 466)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of b wt (Median = -5.02, 95% CI [-6.03, -3.93]) has a 100.00%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> probability of being negative (&lt; 0), 100.00% of being significant (&lt; -0.30),</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> and 100.00% of being large (&lt; -1.81). The estimation successfully converged</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Rhat = 1.000) but the indices are unreliable (ESS = 712)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> framework, we report the median of the posterior distribution and its 95% CI</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Highest Density Interval), along the probability of direction (pd), the</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> probability of significance and the probability of being large. The thresholds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> beyond which the effect is considered as significant (i.e., non-negligible) and</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> large are |0.30| and |1.81| (corresponding respectively to 0.05 and 0.30 of the</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> outcome's SD). Convergence and stability of the Bayesian sampling has been</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> assessed using R-hat, which should be below 1.01 (Vehtari et al., 2019), and</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Effective Sample Size (ESS), which should be greater than 1000 (Burkner, 2017).</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> and We fitted a Bayesian linear model (estimated using MCMC sampling with 4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> chains of 300 iterations and a warmup of 150) to predict mpg with qsec and wt</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (formula: mpg ~ qsec + wt). Priors over parameters were set as student_t</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (location = 0.00, scale = 5.40) distributions. The model's explanatory power is</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> substantial (R2 = 0.82, 95% CI [0.75, 0.85], adj. R2 = 0.79).  Within this</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> model:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (formula: mpg ~ qsec + wt). Priors were: Slopes (b_Intercept) ~ Student-t(df =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3.00, μ = 19.20, σ = 5.40); σ ~ Student-t⁺(df = 3.00, μ = 0.00, σ = 5.40). The</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> model's explanatory power is substantial (R2 = 0.82, 95% CI [0.75, 0.85], adj.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> R2 = 0.78). Within this model:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of b Intercept (Median = 19.51, 95% CI [9.40, 30.15]) has a</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 100.00% probability of being positive (&gt; 0), 100.00% of being significant (&gt;</span>
@@ -246,58 +173,10 @@ follows the Sequential Effect eXistence and sIgnificance Testing framework
 <span class="r-out co"><span class="r-pr">#&gt;</span> assessed using R-hat, which should be below 1.01 (Vehtari et al., 2019), and</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Effective Sample Size (ESS), which should be greater than 1000 (Burkner, 2017).</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> We fitted a Bayesian linear model to predict mpg with qsec and wt. Priors over</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> parameters were set as student_t (location = 19.20, scale = 5.40)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> distributions. The model's explanatory power is substantial (R2 = 0.82, adj. R2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> = 0.79).  Within this model:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of b Intercept (Median = 19.51, 95% CI [9.40, 30.15]) has 100.00%,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 100.00% and 100.00% probability of being positive (&gt; 0), significant (&gt; 0.30)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> and large (&gt; 1.81). The estimation successfully converged (Rhat = 0.998) but</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> the indices are unreliable (ESS = 507)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of b qsec (Median = 0.93, 95% CI [0.42, 1.48]) has 100.00%, 99.17%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> and 0.00% probability of being positive (&gt; 0), significant (&gt; 0.30) and large</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (&gt; 1.81). The estimation successfully converged (Rhat = 0.998) but the indices</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 466)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of b wt (Median = -5.02, 95% CI [-6.03, -3.93]) has 100.00%,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 100.00% and 100.00% probability of being negative (&lt; 0), significant (&lt; -0.30)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> and large (&lt; -1.81). The estimation successfully converged (Rhat = 1.000) but</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> the indices are unreliable (ESS = 712), We fitted a Bayesian linear model to</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> predict mpg with qsec and wt. Priors over parameters were set as uniform</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (location = , scale = ) distributions. The model's explanatory power is</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> substantial (R2 = 0.82, adj. R2 = 0.79).  Within this model:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of b Intercept (Median = 19.51, 95% CI [9.40, 30.15]) has 100.00%,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 100.00% and 100.00% probability of being positive (&gt; 0), significant (&gt; 0.30)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> and large (&gt; 1.81). The estimation successfully converged (Rhat = 0.998) but</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> the indices are unreliable (ESS = 507)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of b qsec (Median = 0.93, 95% CI [0.42, 1.48]) has 100.00%, 99.17%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> and 0.00% probability of being positive (&gt; 0), significant (&gt; 0.30) and large</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (&gt; 1.81). The estimation successfully converged (Rhat = 0.998) but the indices</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 466)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of b wt (Median = -5.02, 95% CI [-6.03, -3.93]) has 100.00%,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 100.00% and 100.00% probability of being negative (&lt; 0), significant (&lt; -0.30)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> and large (&lt; -1.81). The estimation successfully converged (Rhat = 1.000) but</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> the indices are unreliable (ESS = 712), We fitted a Bayesian linear model to</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> predict mpg with qsec and wt. Priors over parameters were set as uniform</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (location = , scale = ) distributions. The model's explanatory power is</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> substantial (R2 = 0.82, adj. R2 = 0.79).  Within this model:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of b Intercept (Median = 19.51, 95% CI [9.40, 30.15]) has 100.00%,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 100.00% and 100.00% probability of being positive (&gt; 0), significant (&gt; 0.30)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> and large (&gt; 1.81). The estimation successfully converged (Rhat = 0.998) but</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> the indices are unreliable (ESS = 507)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of b qsec (Median = 0.93, 95% CI [0.42, 1.48]) has 100.00%, 99.17%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> and 0.00% probability of being positive (&gt; 0), significant (&gt; 0.30) and large</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (&gt; 1.81). The estimation successfully converged (Rhat = 0.998) but the indices</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> are unreliable (ESS = 466)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of b wt (Median = -5.02, 95% CI [-6.03, -3.93]) has 100.00%,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 100.00% and 100.00% probability of being negative (&lt; 0), significant (&lt; -0.30)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> and large (&lt; -1.81). The estimation successfully converged (Rhat = 1.000) but</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> the indices are unreliable (ESS = 712) and We fitted a Bayesian linear model to</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> predict mpg with qsec and wt. Priors over parameters were set as student_t</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (location = 0.00, scale = 5.40) distributions. The model's explanatory power is</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> substantial (R2 = 0.82, adj. R2 = 0.79).  Within this model:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> We fitted a Bayesian linear model to predict mpg with qsec and wt. Priors were:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Slopes (b_Intercept) ~ Student-t(df = 3.00, μ = 19.20, σ = 5.40); σ ~</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Student-t⁺(df = 3.00, μ = 0.00, σ = 5.40). The model's explanatory power is</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> substantial (R2 = 0.82, adj. R2 = 0.78). Within this model:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   - The effect of b Intercept (Median = 19.51, 95% CI [9.40, 30.15]) has 100.00%,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 100.00% and 100.00% probability of being positive (&gt; 0), significant (&gt; 0.30)</span>
