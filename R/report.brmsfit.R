@@ -8,6 +8,10 @@
 #' Message from the `rstan` package: "To avoid recompilation of unchanged
 #' Stan programs, we recommend calling `rstan_options(auto_write = TRUE)`"
 #'
+#' @param effectsize_method Method for computing effect sizes. For `brmsfit` objects,
+#'   defaults to `"basic"` (faster, no refitting) instead of `"refit"` to improve
+#'   performance with large Bayesian models. See documentation for
+#'   [effectsize::effectsize()].
 #' @inheritParams report.lm
 #' @inherit report return seealso
 #'
@@ -35,6 +39,7 @@ report.brmsfit <- function(x, ...) {
   as.report(txt, table = tbl, ...)
 }
 
+#' @rdname report.brmsfit
 #' @export
 report_effectsize.brmsfit <- function(x, effectsize_method = "basic", ...) {
   # Use faster method for Bayesian models to avoid expensive refitting
@@ -49,8 +54,7 @@ report_effectsize.brmsfit <- function(x, effectsize_method = "basic", ...) {
     effect_table
   ))]
 
-  # TODO: finally solve this.
-  # interpret <- effectsize::interpret_parameters(x, ...)
+  # Interpret effect sizes based on model type
   if (insight::model_info(x)$is_logit) {
     interpret <- effectsize::interpret_oddsratio(
       effect_table[[estimate]],

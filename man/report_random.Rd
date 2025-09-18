@@ -20,7 +20,7 @@ Reports random effects of mixed models (see list of supported objects in
 \code{\link[=report]{report()}}).
 }
 \examples{
-\dontshow{if (requireNamespace("lme4", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("lme4", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 # Mixed models
 library(lme4)
@@ -30,7 +30,7 @@ r
 summary(r)
 }
 \dontshow{\}) # examplesIf}
-\dontshow{if (requireNamespace("rstanarm", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("rstanarm", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 # Bayesian models
 library(rstanarm)
@@ -43,7 +43,7 @@ r
 summary(r)
 }
 \dontshow{\}) # examplesIf}
-\dontshow{if (requireNamespace("brms", quietly = TRUE) && packageVersion("rstan") >= "2.26.0") (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("brms", quietly = TRUE) && packageVersion("rstan") >= "2.26.0") withAutoprint(\{ # examplesIf}
 \donttest{
 library(brms)
 model <- suppressWarnings(brm(mpg ~ disp + (1 | cyl), data = mtcars, refresh = 0, iter = 1000))
