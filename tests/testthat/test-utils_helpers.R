@@ -206,3 +206,40 @@ test_that("grouped dataframe utilities work correctly", {
   expect_false(report:::.has_groups(ungrouped))
   expect_false(inherits(ungrouped, "grouped_df"))
 })
+
+test_that("grouped dataframe utilities handle edge cases", {
+  skip_if_not_installed("dplyr")
+  
+  # Test .group_indices function
+  df <- data.frame(
+    group = rep(c("A", "B"), each = 3),
+    value = 1:6
+  )
+  grouped_df <- dplyr::group_by(df, group)
+  
+  # Test group indices
+  indices <- report:::.group_indices(grouped_df)
+  expect_type(indices, "list")
+  expect_equal(length(indices), 2)
+  
+  # Test groups_drop function
+  drop_setting <- report:::.groups_drop(grouped_df)
+  expect_type(drop_setting, "logical")
+  
+  # Test calculate_groups with factor data
+  df_factor <- data.frame(
+    group = factor(rep(c("A", "B"), each = 3), levels = c("A", "B", "C")),
+    value = 1:6
+  )
+  
+  # Test .calculate_groups function
+  groups_result <- report:::.calculate_groups(df_factor, "group", drop = FALSE)
+  expect_s3_class(groups_result, "data.frame")
+  expect_true(".rows" %in% names(groups_result))
+  
+  # Test error handling in .calculate_groups
+  expect_error(
+    report:::.calculate_groups(df_factor, "missing_column"),
+    "groups.*missing"
+  )
+})

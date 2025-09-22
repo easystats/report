@@ -2,6 +2,8 @@
 
 Bug fixes
 
+* Added comprehensive test coverage for utility functions and helper methods to improve overall package coverage from 86% towards 90%
+* Enhanced test coverage for `utils_grouped_df.R`, `format_model.R`, `report_table.R`, and `report_effectsize.R` helper functions
 * Fixed issue where `report_effectsize.htest()` called internal effectsize functions with undefined `table` parameter (#459)
 * `report.brmsfit()`: significantly improved performance by using faster `method = "basic"` instead of `method = "refit"` for effect size calculation, reducing execution time from hours to minutes for large Bayesian models (#568)
 * `report.brmsfit()`: fix issue where report text was printed multiple times when different parameters had different priors (#543)
