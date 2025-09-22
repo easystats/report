@@ -45,16 +45,16 @@
       insight::format_ci(cor_table$CI_low, cor_table$CI_high, ci)
     )
 
-    table <- cor_table[c(estimate, "CI_low", "CI_high")]
+    result_table <- cor_table[c(estimate, "CI_low", "CI_high")]
 
     # For Spearman and co.
   } else {
     statistics <- main
-    table <- cor_table[estimate]
+    result_table <- cor_table[estimate]
   }
 
   list(
-    table = table, statistics = statistics, interpretation = interpretation,
+    table = result_table, statistics = statistics, interpretation = interpretation,
     rules = rules, ci = ci, main = main
   )
 }

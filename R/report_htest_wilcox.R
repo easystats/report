@@ -10,26 +10,26 @@
 
 .report_effectsize_wilcox <- function(x, dot_args) {
   my_args <- c(list(x, es_type = "rank_biserial"), dot_args)
-  table <- do.call(parameters::model_parameters, my_args)
-  ci <- attributes(table)$ci
+  wilcox_table <- do.call(parameters::model_parameters, my_args)
+  ci <- attributes(wilcox_table)$ci
   estimate <- "r_rank_biserial"
 
   # same as Pearson's r
-  my_args <- c(list(table$r_rank_biserial), dot_args)
+  my_args <- c(list(wilcox_table$r_rank_biserial), dot_args)
   interpretation <- do.call(effectsize::interpret_r, my_args)
   rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
 
-  main <- paste0("r (rank biserial) = ", insight::format_value(table$r_rank_biserial))
+  main <- paste0("r (rank biserial) = ", insight::format_value(wilcox_table$r_rank_biserial))
   statistics <- paste0(
     main,
     ", ",
-    insight::format_ci(table$rank_biserial_CI_low, table$rank_biserial_CI_high, ci)
+    insight::format_ci(wilcox_table$rank_biserial_CI_low, wilcox_table$rank_biserial_CI_high, ci)
   )
 
-  table <- table[c("r_rank_biserial", "rank_biserial_CI_low", "rank_biserial_CI_high")]
+  result_table <- wilcox_table[c("r_rank_biserial", "rank_biserial_CI_low", "rank_biserial_CI_high")]
 
   list(
-    table = table, statistics = statistics, interpretation = interpretation,
+    table = result_table, statistics = statistics, interpretation = interpretation,
     rules = rules, ci = ci, main = main
   )
 }

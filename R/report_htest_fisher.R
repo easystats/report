@@ -10,44 +10,44 @@
 
 .report_effectsize_fisher <- function(x, dot_args, rules = "funder2019") {
   es_args <- c(list(x), dot_args)
-  table <- do.call(effectsize::effectsize, es_args)
-  ci <- attributes(table)$ci
-  estimate <- names(table)[1]
+  es_table <- do.call(effectsize::effectsize, es_args)
+  ci <- attributes(es_table)$ci
+  estimate <- names(es_table)[1]
   dot_args$rules <- ifelse(is.null(dot_args$rules), rules, dot_args$rules)
 
-  es_args <- c(list(table), dot_args)
+  es_args <- c(list(es_table), dot_args)
   interpretation <- do.call(effectsize::interpret, es_args)$Interpretation
   rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
 
   main <- switch(estimate,
-    Cramers_v_adjusted = paste0("Adjusted Cramer's v = ", insight::format_value(table[[estimate]])),
-    Tschuprows_t = paste0("Tschuprow's t = ", insight::format_value(table[[estimate]])),
-    Tschuprows_t_adjusted = paste0("Adjusted Tschuprow's t = ", insight::format_value(table[[estimate]])),
-    Pearsons_c = paste0("Pearson's c = ", insight::format_value(table[[estimate]])),
-    phi_adjusted = paste0("Adjusted Phi = ", insight::format_value(table[[estimate]])),
-    Cohens_h = paste0("Cohen's h = ", insight::format_value(table[[estimate]])),
-    Odds_ratio = paste0("Odds ratio = ", insight::format_value(table[[estimate]])),
-    Ris_kratio = paste0("Risk ratio = ", insight::format_value(table[[estimate]])),
-    cohens_h = paste0("Cohen's w = ", insight::format_value(table[[estimate]])),
-    paste0(estimate, " = ", insight::format_value(table[[estimate]]))
+    Cramers_v_adjusted = paste0("Adjusted Cramer's v = ", insight::format_value(es_table[[estimate]])),
+    Tschuprows_t = paste0("Tschuprow's t = ", insight::format_value(es_table[[estimate]])),
+    Tschuprows_t_adjusted = paste0("Adjusted Tschuprow's t = ", insight::format_value(es_table[[estimate]])),
+    Pearsons_c = paste0("Pearson's c = ", insight::format_value(es_table[[estimate]])),
+    phi_adjusted = paste0("Adjusted Phi = ", insight::format_value(es_table[[estimate]])),
+    Cohens_h = paste0("Cohen's h = ", insight::format_value(es_table[[estimate]])),
+    Odds_ratio = paste0("Odds ratio = ", insight::format_value(es_table[[estimate]])),
+    Ris_kratio = paste0("Risk ratio = ", insight::format_value(es_table[[estimate]])),
+    cohens_h = paste0("Cohen's w = ", insight::format_value(es_table[[estimate]])),
+    paste0(estimate, " = ", insight::format_value(es_table[[estimate]]))
   )
 
   statistics <- paste0(
     main,
     ", ",
-    insight::format_ci(table$CI_low, table$CI_high, ci)
+    insight::format_ci(es_table$CI_low, es_table$CI_high, ci)
   )
 
-  table <- datawizard::data_rename(
-    as.data.frame(table),
+  result_table <- datawizard::data_rename(
+    as.data.frame(es_table),
     select = c("CI_low", "CI_high"),
     replacement = paste0(estimate, c("_CI_low", "_CI_high"))
   )
 
-  table <- table[c(estimate, paste0(estimate, c("_CI_low", "_CI_high")))]
+  result_table <- result_table[c(estimate, paste0(estimate, c("_CI_low", "_CI_high")))]
 
   list(
-    table = table, statistics = statistics, interpretation = interpretation,
+    table = result_table, statistics = statistics, interpretation = interpretation,
     rules = rules, ci = ci, main = main
   )
 }
