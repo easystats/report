@@ -2,6 +2,7 @@
 
 Bug fixes
 
+* Increased test coverage by enabling tests for `report.brmsfit()`, `report.compare.loo()`, `report.glmmTMB()`, and `report.MixMod()` functions that were previously skipped due to missing optional dependencies
 * `report.brmsfit()`: significantly improved performance by using faster `method = "basic"` instead of `method = "refit"` for effect size calculation, reducing execution time from hours to minutes for large Bayesian models (#568)
 * `report.brmsfit()`: fix issue where report text was printed multiple times when different parameters had different priors (#543)
 * Fixed duplicated text output in `report()` for glmmTMB objects by addressing both regex pattern and redundant CI information concatenation in `report_info.lm()` (#481)
