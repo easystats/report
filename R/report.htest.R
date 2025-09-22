@@ -67,41 +67,41 @@ report_effectsize.htest <- function(x, table = NULL, ...) {
   # For t-tests ----------------
 
   if (model_info$is_ttest) {
-    out <- .report_effectsize_ttest(x, table, dot_args)
+    out <- .report_effectsize_ttest(x, dot_args)
   }
 
   if (model_info$is_ranktest && !model_info$is_correlation) {
     # For friedman test ---------------
 
     if (grepl("Friedman", attributes(x$statistic)$names, fixed = TRUE)) {
-      out <- .report_effectsize_friedman(x, table, dot_args)
+      out <- .report_effectsize_friedman(x, dot_args)
     } else if (!is.null(x$statistic) && grepl(
       "Kruskal", attributes(x$statistic)$names,
       fixed = TRUE
     )) {
       # For Kruskal-Wallis test ---------------
 
-      out <- .report_effectsize_kruskal(x, table, dot_args)
+      out <- .report_effectsize_kruskal(x, dot_args)
     } else {
       # For wilcox test ---------------
 
-      out <- .report_effectsize_wilcox(x, table, dot_args)
+      out <- .report_effectsize_wilcox(x, dot_args)
     }
   }
 
   ## For correlations ---------------
 
   if (model_info$is_correlation) {
-    out <- .report_effectsize_correlation(x, table, dot_args)
+    out <- .report_effectsize_correlation(x, dot_args)
   }
 
   ## For Chi2 ---------------
 
   if (model_info$is_chi2test) {
     if (chi2_type(x) == "fisher") {
-      out <- .report_effectsize_fisher(x, table, dot_args)
+      out <- .report_effectsize_fisher(x, dot_args)
     } else {
-      out <- .report_effectsize_chi2(x, table, dot_args)
+      out <- .report_effectsize_chi2(x, dot_args)
     }
   }
 

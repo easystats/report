@@ -8,7 +8,7 @@
 
 # report_effectsize ---------------------
 
-.report_effectsize_friedman <- function(x, table, dot_args) {
+.report_effectsize_friedman <- function(x, dot_args) {
   param_args <- c(list(x, es_type = "kendalls_w"), dot_args)
   friedman_table <- do.call(parameters::parameters, param_args)
   ci <- attributes(friedman_table)$ci
