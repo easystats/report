@@ -10,6 +10,7 @@ Bug fixes
 
 Minor changes
 * Fixed a lot of linting issues across the package.
+* Increased test coverage across the package.
 
 # report 0.6.1
 
