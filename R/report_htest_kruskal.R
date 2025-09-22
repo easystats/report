@@ -9,29 +9,29 @@
 # report_effectsize ---------------------
 
 .report_effectsize_kruskal <- function(x, dot_args, rules = "funder2019") {
-  args <- c(list(x), dot_args)
-  table <- do.call(effectsize::effectsize, args)
-  ci <- attributes(table)$ci
-  estimate <- names(table)[1]
+  effect_args <- c(list(x), dot_args)
+  kruskal_table <- do.call(effectsize::effectsize, effect_args)
+  ci <- attributes(kruskal_table)$ci
+  estimate <- names(kruskal_table)[1]
 
   rules <- ifelse(is.null(dot_args$rules), rules, dot_args$rules)
 
   # same as Pearson's r
-  args <- c(list(table$rank_epsilon_squared), dot_args)
-  interpretation <- do.call(effectsize::interpret_epsilon_squared, args)
+  interpret_args <- c(list(kruskal_table$rank_epsilon_squared), dot_args)
+  interpretation <- do.call(effectsize::interpret_epsilon_squared, interpret_args)
   rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
 
-  main <- paste0("Epsilon squared (rank) = ", insight::format_value(table$rank_epsilon_squared))
+  main <- paste0("Epsilon squared (rank) = ", insight::format_value(kruskal_table$rank_epsilon_squared))
   statistics <- paste0(
     main,
     ", ",
-    insight::format_ci(table$CI_low, table$CI_high, ci)
+    insight::format_ci(kruskal_table$CI_low, kruskal_table$CI_high, ci)
   )
 
-  table <- table[names(table)[-2]]
+  kruskal_table <- kruskal_table[names(kruskal_table)[-2]]
 
   list(
-    table = table, statistics = statistics, interpretation = interpretation,
+    table = kruskal_table, statistics = statistics, interpretation = interpretation,
     rules = rules, ci = ci, main = main
   )
 }
@@ -44,7 +44,7 @@
   if ("Parameter1" %in% names(table)) {
     vars_full <- paste0(table$Parameter1[[1]], ", and ", table$Parameter2[[1]])
 
-    text <- paste0(
+    kruskal_text <- paste0(
       trimws(x$method),
       " testing the difference in ranks between ",
       vars_full
@@ -53,7 +53,7 @@
     # one-sample
     vars_full <- paste0(table$Parameter[[1]])
 
-    text <- paste0(
+    kruskal_text <- paste0(
       trimws(x$method),
       " testing the difference in rank for ",
       vars_full,
@@ -61,7 +61,7 @@
     )
   }
 
-  text
+  kruskal_text
 }
 
 .report_parameters_kruskal <- function(table, stats, effsize, ...) {

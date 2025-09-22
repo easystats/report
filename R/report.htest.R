@@ -26,18 +26,19 @@
 #' @export
 report.htest <- function(x, ...) {
   model_info <- insight::model_info(x, verbose = FALSE)
-  table <- report_table(x, model_info = model_info, ...)
-  text <- report_text(x, table = table, model_info = model_info, ...)
+  tbl <- report_table(x, model_info = model_info, ...)
+  txt <- report_text(x, table = tbl, model_info = model_info, ...)
 
-  as.report(text, table = table, ...)
+  as.report(txt, table = tbl, ...)
 }
 
 
 # report_effectsize -------------------------------------------------------
 
 #' @rdname report.htest
+#' @param table Provide the output of `report_table()` to avoid its re-computation.
 #' @export
-report_effectsize.htest <- function(x, ...) {
+report_effectsize.htest <- function(x, table = NULL, ...) {
   dot_args <- list(...)
   model_info <- dot_args$model_info
   if (is.null(model_info)) {
@@ -56,6 +57,12 @@ report_effectsize.htest <- function(x, ...) {
 
   # remove arg, so dots can be passed to effectsize
   dot_args[["model_info"]] <- NULL
+
+  # Get table if not provided
+  if (is.null(table)) {
+    call_args <- c(list(x), dot_args)
+    table <- do.call(parameters::model_parameters, call_args)
+  }
 
   # For t-tests ----------------
 
@@ -137,10 +144,10 @@ report_table.htest <- function(x, ...) {
   # remove arg, so dots can be passed to effectsize
   dot_args[["model_info"]] <- NULL
 
-  args <- c(list(x), dot_args)
-  table_full <- do.call(parameters::model_parameters, args)
-  args <- c(list(x, model_info = model_info), dot_args)
-  effsize <- do.call(report_effectsize, args)
+  call_args <- c(list(x), dot_args)
+  table_full <- do.call(parameters::model_parameters, call_args)
+  call_args <- c(list(x, table = table_full, model_info = model_info), dot_args)
+  effsize <- do.call(report_effectsize, call_args)
 
   if (model_info$is_ttest) {
     # If t-test, effect size
@@ -179,7 +186,7 @@ report_statistics.htest <- function(x, table = NULL, ...) {
   }
 
   effsize <- attributes(table)$effsize
-  text <- NULL
+  txt <- NULL
 
   # Estimate
   candidates <- c(
@@ -188,13 +195,13 @@ report_statistics.htest <- function(x, table = NULL, ...) {
   )
   estimate <- candidates[candidates %in% names(table)][1]
   if (!is.null(estimate) && !is.na(estimate)) {
-    text <- paste0(tolower(estimate), " = ", insight::format_value(table[[estimate]]))
+    txt <- paste0(tolower(estimate), " = ", insight::format_value(table[[estimate]]))
   }
 
   # CI
   if (!is.null(attributes(x$conf.int)$conf.level)) {
-    text <- paste0(
-      text,
+    txt <- paste0(
+      txt,
       ", ",
       insight::format_ci(
         table$CI_low,
@@ -206,35 +213,35 @@ report_statistics.htest <- function(x, table = NULL, ...) {
 
   # Statistic
   if ("t" %in% names(table)) {
-    text <- paste0(
-      text,
+    txt <- paste0(
+      txt,
       ", t(",
       insight::format_value(table$df, protect_integers = TRUE),
       ") = ",
       insight::format_value(table$t)
     )
   } else if ("S" %in% names(table)) {
-    text <- paste0(text, ", S = ", insight::format_value(table$S))
+    txt <- paste0(txt, ", S = ", insight::format_value(table$S))
   } else if ("z" %in% names(table)) {
-    text <- paste0(text, ", z = ", insight::format_value(table$z))
+    txt <- paste0(txt, ", z = ", insight::format_value(table$z))
   } else if ("W" %in% names(table)) {
-    text <- paste0("W = ", insight::format_value(table$W))
+    txt <- paste0("W = ", insight::format_value(table$W))
   }
 
   # p-value
-  text <- paste0(text, ", ", insight::format_p(table$p, stars = FALSE, digits = "apa"))
+  txt <- paste0(txt, ", ", insight::format_p(table$p, stars = FALSE, digits = "apa"))
 
   # Effect size
   if (model_info$is_ttest || (model_info$is_ranktest && !model_info$is_correlation) ||
     model_info$is_chi2test) {
-    text_full <- paste0(text, "; ", attributes(effsize)$statistics)
-    text <- paste0(text, ", ", attributes(effsize)$main)
+    text_full <- paste0(txt, "; ", attributes(effsize)$statistics)
+    txt <- paste0(txt, ", ", attributes(effsize)$main)
   } else {
-    text_full <- text
+    text_full <- txt
   }
 
   as.report_statistics(text_full,
-    summary = text,
+    summary = txt,
     estimate = table[[estimate]],
     table = table,
     effsize = effsize
@@ -257,8 +264,8 @@ report_parameters.htest <- function(x, table = NULL, ...) {
   # remove arg, so dots can be passed to other methods
   dot_args[["model_info"]] <- NULL
 
-  args <- c(list(x, table = table, model_info = model_info), dot_args)
-  stats <- do.call(report_statistics, args)
+  call_args <- c(list(x, table = table, model_info = model_info), dot_args)
+  stats <- do.call(report_statistics, call_args)
   table <- attributes(stats)$table
   effsize <- attributes(stats)$effsize
 
@@ -321,39 +328,39 @@ report_model.htest <- function(x, table = NULL, ...) {
   dot_args[["model_info"]] <- NULL
 
   if (is.null(table)) {
-    args <- c(list(x, model_info = model_info), dot_args)
-    table <- do.call(report_table, args)
+    call_args <- c(list(x, model_info = model_info), dot_args)
+    table <- do.call(report_table, call_args)
   }
 
   if (model_info$is_correlation) {
-    text <- paste0(x$method, " between ", x$data.name)
+    txt <- paste0(x$method, " between ", x$data.name)
   }
 
   if (model_info$is_ttest) {
-    text <- .report_model_ttest(x, table)
+    txt <- .report_model_ttest(x, table)
   }
 
   if (model_info$is_ranktest && !model_info$is_correlation) {
     # For friedman test ---------------
 
     if (grepl("Friedman", attributes(x$statistic)$names, fixed = TRUE)) {
-      text <- .report_model_friedman(x, table)
+      txt <- .report_model_friedman(x, table)
     } else {
       # For wilcox test ---------------
 
-      text <- .report_model_wilcox(x, table)
+      txt <- .report_model_wilcox(x, table)
     }
   }
 
   if (model_info$is_chi2test) {
     if (chi2_type(x) == "fisher") {
-      text <- .report_model_fisher(x, table)
+      txt <- .report_model_fisher(x, table)
     } else {
-      text <- .report_model_chi2(x, table)
+      txt <- .report_model_chi2(x, table)
     }
   }
 
-  as.report_model(text, summary = text)
+  as.report_model(txt, summary = txt)
 }
 
 
@@ -372,8 +379,8 @@ report_info.htest <- function(x, effectsize = NULL, ...) {
   dot_args[["model_info"]] <- NULL
 
   if (is.null(effectsize)) {
-    args <- c(list(x, model_info = model_info), dot_args)
-    effectsize <- do.call(report_effectsize, args)
+    call_args <- c(list(x, model_info = model_info), dot_args)
+    effectsize <- do.call(report_effectsize, call_args)
   }
 
   as.report_info(attributes(effectsize)$rules)
@@ -394,18 +401,18 @@ report_text.htest <- function(x, table = NULL, ...) {
   # remove arg, so dots can be passed to other methods
   dot_args[["model_info"]] <- NULL
 
-  args <- c(list(x, table = table, model_info = model_info), dot_args)
-  params <- do.call(report_parameters, args)
+  call_args <- c(list(x, table = table, model_info = model_info), dot_args)
+  params <- do.call(report_parameters, call_args)
 
   table <- attributes(params)$table
-  args <- c(list(x, table = table, model_info = model_info), dot_args)
-  model <- do.call(report_model, args)
+  call_args <- c(list(x, table = table, model_info = model_info), dot_args)
+  model <- do.call(report_model, call_args)
 
-  args <- c(list(x, effectsize = attributes(params)$effectsize, model_info = model_info), dot_args)
-  info <- do.call(report_info, args)
+  call_args <- c(list(x, effectsize = attributes(params)$effectsize, model_info = model_info), dot_args)
+  info <- do.call(report_info, call_args)
 
   if (model_info$is_correlation) {
-    text <- paste0(
+    txt <- paste0(
       "The ",
       model,
       " is ",
@@ -415,7 +422,7 @@ report_text.htest <- function(x, table = NULL, ...) {
     text_full <- paste0(
       info,
       "\n\n",
-      text
+      txt
     )
   } else {
     text_full <- paste0(
@@ -426,7 +433,7 @@ report_text.htest <- function(x, table = NULL, ...) {
       params
     )
 
-    text <- paste0(
+    txt <- paste0(
       "The ",
       model,
       " suggests that the effect is ",
@@ -434,5 +441,5 @@ report_text.htest <- function(x, table = NULL, ...) {
     )
   }
 
-  as.report_text(text_full, summary = text)
+  as.report_text(text_full, summary = txt)
 }

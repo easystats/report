@@ -37,7 +37,6 @@ report.BFBayesFactor <- function(x, h0 = "H0", h1 = "H1", ...) {
   bf <- param$BF
   other_dir <- ifelse(bf < 1, "h0", "h1")
 
-
   if (other_dir == "h1") {
     other_text <- paste0(
       "There is ",
@@ -46,7 +45,9 @@ report.BFBayesFactor <- function(x, h0 = "H0", h1 = "H1", ...) {
       h1,
       " over ",
       h0,
-      " (", report_statistics(x, ...), ")."
+      " (",
+      report_statistics(x, ...),
+      ")."
     )
   } else {
     other_text <- paste0(
@@ -56,7 +57,9 @@ report.BFBayesFactor <- function(x, h0 = "H0", h1 = "H1", ...) {
       h0,
       " over ",
       h1,
-      " (", report_statistics(x, ...), ")."
+      " (",
+      report_statistics(x, ...),
+      ")."
     )
   }
   other_text
@@ -78,7 +81,8 @@ report_statistics.BFBayesFactor <- function(x, table = NULL, ...) {
   }
 
   bf <- table$BF
-  other_text <- ifelse(bf < 1,
+  other_text <- ifelse(
+    bf < 1,
     insight::format_bf(1 / bf, name = "BF01", ...),
     insight::format_bf(bf, name = "BF10", ...)
   )

@@ -9,27 +9,27 @@
 # report_effectsize ---------------------
 
 .report_effectsize_friedman <- function(x, dot_args) {
-  args <- c(list(x, es_type = "kendalls_w"), dot_args)
-  table <- do.call(parameters::parameters, args)
-  ci <- attributes(table)$ci
+  param_args <- c(list(x, es_type = "kendalls_w"), dot_args)
+  friedman_table <- do.call(parameters::parameters, param_args)
+  ci <- attributes(friedman_table)$ci
   estimate <- "kendalls_w"
 
   # same as Pearson's r
-  args <- c(list(table$Kendalls_W), dot_args)
-  interpretation <- do.call(effectsize::interpret_kendalls_w, args)
+  interpret_args <- c(list(friedman_table$Kendalls_W), dot_args)
+  interpretation <- do.call(effectsize::interpret_kendalls_w, interpret_args)
   rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
 
-  main <- paste0("Kendall's W = ", insight::format_value(table$Kendalls_W))
+  main <- paste0("Kendall's W = ", insight::format_value(friedman_table$Kendalls_W))
   statistics <- paste0(
     main,
     ", ",
-    insight::format_ci(table$W_CI_low, table$W_CI_high, ci)
+    insight::format_ci(friedman_table$W_CI_low, friedman_table$W_CI_high, ci)
   )
 
-  table <- table[c("Kendalls_W", "W_CI_low", "W_CI_high")]
+  friedman_table <- friedman_table[c("Kendalls_W", "W_CI_low", "W_CI_high")]
 
   list(
-    table = table, statistics = statistics, interpretation = interpretation,
+    table = friedman_table, statistics = statistics, interpretation = interpretation,
     rules = rules, ci = ci, main = main
   )
 }
@@ -42,7 +42,7 @@
   if ("Parameter1" %in% names(table)) {
     vars_full <- paste0(table$Parameter1[[1]], ", and ", table$Parameter2[[1]])
 
-    text <- paste0(
+    friedman_text <- paste0(
       trimws(x$method),
       " testing the difference in ranks between ",
       vars_full
@@ -51,7 +51,7 @@
     # one-sample
     vars_full <- paste0(table$Parameter[[1]])
 
-    text <- paste0(
+    friedman_text <- paste0(
       trimws(x$method),
       " testing the difference in rank for ",
       vars_full,
@@ -59,7 +59,7 @@
     )
   }
 
-  text
+  friedman_text
 }
 
 .report_parameters_friedman <- function(table, stats, effsize, ...) {

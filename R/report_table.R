@@ -174,19 +174,25 @@ display.report_table <- function(object, ...) {
   footer <- NULL
 
   # footer for htest objects
-  if (!is.null(x$Alternative)) {
+  if (is.null(x$Alternative)) {
+    footer <- NULL
+  } else {
     footer <- "Alternative hypothesis: "
-    if (!is.null(x$null.value)) {
-      if (length(x$null.value) == 1L) {
-        alt.char <- switch(x$Alternative,
-          two.sided = "not equal to",
-          less = "less than",
-          greater = "greater than"
-        )
-        footer <- paste0(footer, "true ", names(x$null.value), " is ", alt.char, " ", x$null.value)
-      } else {
-        footer <- paste0(footer, x$Alternative)
-      }
+    if (is.null(x$null.value)) {
+      # handle missing null.value
+      alt.char <- switch(x$Alternative,
+        two.sided = "two.sided",
+        less = "less",
+        greater = "greater"
+      )
+      footer <- paste0(footer, alt.char)
+    } else if (length(x$null.value) == 1L) {
+      alt.char <- switch(x$Alternative,
+        two.sided = "not equal to",
+        less = "less than",
+        greater = "greater than"
+      )
+      footer <- paste0(footer, "true ", names(x$null.value), " is ", alt.char, " ", x$null.value)
     } else {
       footer <- paste0(footer, x$Alternative)
     }

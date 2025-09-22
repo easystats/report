@@ -3,6 +3,7 @@ bibentry(bibtype = "Article",
          author=c(person("Dominique", "Makowski"), person("Daniel", "Lüdecke"), person("Indrajeet", "Patil"), person("Rémi", "Thériault"), person("Mattan S.", "Ben-Shachar"), person("Brenton M.", "Wiernik")),
          year = 2023,
          journal = "CRAN",
+         doi = "10.32614/CRAN.package.report",
          url = "https://easystats.github.io/report/",
-         	textVersion = paste("Makowski, D., Lüdecke, D., Patil, I., Thériault, R., Ben-Shachar, M.S., & Wiernik, B.M. (2023). Automated Results Reporting as a Practical Tool to Improve Reproducibility and Methodological Best Practices Adoption. CRAN.", "Available from https://easystats.github.io/report/", "doi: .",  sep=" "),
+         	textVersion = paste("Makowski, D., Lüdecke, D., Patil, I., Thériault, R., Ben-Shachar, M.S., & Wiernik, B.M. (2023). Automated Results Reporting as a Practical Tool to Improve Reproducibility and Methodological Best Practices Adoption. CRAN.", "Available from https://easystats.github.io/report/", "doi: 10.32614/CRAN.package.report",  sep=" "),
           mheader = "To cite in publications use:")

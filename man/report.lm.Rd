@@ -65,8 +65,7 @@ indices (standardized coefficients, etc.).}
 
 \item{...}{Arguments passed to or from other methods.}
 
-\item{table}{Provide the output of  \code{report_table()} to avoid its
-re-computation.}
+\item{table}{Provide the output of \code{report_table()} to avoid its re-computation.}
 
 \item{include_diagnostic}{If \code{FALSE}, won't include diagnostic related
 indices for Bayesian models (ESS, Rhat).}
@@ -106,7 +105,7 @@ as.data.frame(r)
 summary(as.data.frame(r))
 }
 
-\dontshow{if (requireNamespace("lme4", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("lme4", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 # Mixed models
 library(lme4)
