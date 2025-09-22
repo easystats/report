@@ -4,7 +4,12 @@ test_that("report.htest-correlation", {
   expect_equal(as.report_table(r)$r, -0.117, tolerance = 0.01)
 
   set.seed(123)
-  r <- cor.test(iris$Sepal.Width, iris$Sepal.Length, method = "spearman", exact = FALSE)
+  r <- cor.test(
+    iris$Sepal.Width,
+    iris$Sepal.Length,
+    method = "spearman",
+    exact = FALSE
+  )
   r <- report(r)
   expect_equal(as.report_table(r)$rho, -0.166, tolerance = 0.01)
 
@@ -17,14 +22,22 @@ test_that("report.htest-correlation", {
   expect_snapshot(variant = "windows", report(cor.test(mtcars$wt, mtcars$mpg)))
 
   set.seed(123)
-  expect_snapshot(variant = "windows", report(suppressWarnings(cor.test(
-    mtcars$wt, mtcars$mpg,
-    method = "spearman"
-  ))))
+  expect_snapshot(
+    variant = "windows",
+    report(suppressWarnings(cor.test(
+      mtcars$wt,
+      mtcars$mpg,
+      method = "spearman"
+    )))
+  )
 
   set.seed(123)
-  expect_snapshot(variant = "windows", report(suppressWarnings(cor.test(
-    mtcars$wt, mtcars$mpg,
-    method = "kendall"
-  ))))
+  expect_snapshot(
+    variant = "windows",
+    report(suppressWarnings(cor.test(
+      mtcars$wt,
+      mtcars$mpg,
+      method = "kendall"
+    )))
+  )
 })
