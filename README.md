@@ -1,7 +1,7 @@
 
 # report <img src='man/figures/logo.png' align="right" height="139" />
 
-[![R-CMD-check](https://github.com/easystats/report/workflows/R-CMD-check/badge.svg?branch=main)](https://github.com/easystats/report/actions)
+[![R-CMD-check](https://github.com/easystats/report/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/easystats/report/actions)
 [![CRAN](http://www.r-pkg.org/badges/version/report)](https://cran.r-project.org/package=report)
 [![r-universe](https://easystats.r-universe.dev/badges/report)](https://easystats.r-universe.dev/report)
 [![downloads](http://cranlogs.r-pkg.org/badges/report)](https://cran.r-project.org/package=report)
