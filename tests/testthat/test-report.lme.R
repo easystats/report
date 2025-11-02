@@ -1,4 +1,5 @@
 skip_if_not_installed("nlme")
+skip_on_cran() # nlme mixed-effects models can be computationally intensive
 
 test_that("report.lme", {
   # Create a test nlme model

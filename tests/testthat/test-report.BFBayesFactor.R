@@ -1,4 +1,5 @@
 skip_if_not_installed("BayesFactor")
+skip_on_cran() # BayesFactor tests can be computationally intensive
 
 test_that("report.BFBayesFactor - t-test", {
   # Test BFBayesFactor objects from BayesFactor package

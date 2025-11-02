@@ -1,6 +1,7 @@
 # Coverage tests for report.MixMod functions
 
 skip_if_not_installed("GLMMadaptive")
+skip_on_cran() # GLMMadaptive mixed models are computationally intensive
 
 test_that("report.MixMod coverage test", {
   set.seed(999)

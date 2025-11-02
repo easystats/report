@@ -1,4 +1,5 @@
 skip_if_not_installed("rstanarm")
+skip_on_cran() # rstanarm models are computationally intensive
 
 set.seed(123)
 model <- suppressWarnings(rstanarm::stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300))
