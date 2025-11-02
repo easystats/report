@@ -21,7 +21,7 @@
   )
 
   # Default: no CI unless we can prove we have it
-  ci <- if (is.null(kruskal_table)) attributes(kruskal_table)$ci else NULL
+  ci <- if (is.null(kruskal_table)) NULL else attributes(kruskal_table)$ci
   estimate_name <- if (is.null(kruskal_table)) {
     names(kruskal_table)[1]
   } else {
