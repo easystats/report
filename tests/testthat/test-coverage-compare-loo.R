@@ -2,6 +2,7 @@
 
 skip_if_not_installed("brms")
 skip_if_not_installed("loo")
+skip_on_cran() # brms models are computationally intensive
 
 test_that("report.compare.loo coverage test", {
   skip_if_not_installed("rstanarm")

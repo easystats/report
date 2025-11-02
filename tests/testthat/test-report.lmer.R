@@ -1,4 +1,5 @@
 skip_if_not_installed("lme4")
+skip_on_cran() # lme4 mixed-effects models can be computationally intensive
 
 test_that("report-lmer", {
   df <- lme4::sleepstudy

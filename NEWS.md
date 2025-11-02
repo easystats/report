@@ -1,3 +1,9 @@
+# report 0.6.x
+
+Bug fixes
+
+* Reduced test execution time for CRAN by adding `skip_on_cran()` to computationally expensive tests involving Bayesian models (brms, rstanarm, BayesFactor), mixed-effects models (lme4, nlme, glmmTMB, GLMMadaptive), and structural equation models (lavaan).
+
 # report 0.6.2
 
 Bug fixes

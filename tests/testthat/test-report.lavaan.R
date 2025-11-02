@@ -1,4 +1,5 @@
 skip_if_not_installed("lavaan")
+skip_on_cran() # lavaan SEM models can be computationally intensive
 
 structure <- " ind60 =~ x1 + x2 + x3
   dem60 =~ y1 + y2 + y3
