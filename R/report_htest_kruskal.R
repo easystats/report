@@ -21,8 +21,8 @@
   )
 
   # Default: no CI unless we can prove we have it
-  ci <- if (!is.null(kruskal_table)) attributes(kruskal_table)$ci else NULL
-  estimate_name <- if (!is.null(kruskal_table)) {
+  ci <- if (is.null(kruskal_table)) attributes(kruskal_table)$ci else NULL
+  estimate_name <- if (is.null(kruskal_table)) {
     names(kruskal_table)[1]
   } else {
     "rank_epsilon_squared"
@@ -35,10 +35,10 @@
       effectsize::interpret_epsilon_squared,
       c(
         list(
-          if (!is.null(kruskal_table)) {
-            kruskal_table$rank_epsilon_squared
-          } else {
+          if (is.null(kruskal_table)) {
             NA_real_
+          } else {
+            kruskal_table$rank_epsilon_squared
           }
         ),
         dot_args
@@ -52,10 +52,10 @@
   main <- paste0(
     "Epsilon squared (rank) = ",
     insight::format_value(
-      if (!is.null(kruskal_table)) {
-        kruskal_table$rank_epsilon_squared
-      } else {
+      if (is.null(kruskal_table)) {
         NA_real_
+      } else {
+        kruskal_table$rank_epsilon_squared
       }
     )
   )
