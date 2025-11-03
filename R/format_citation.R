@@ -25,10 +25,12 @@
 #' cite_citation(citation)
 #' clean_citation(citation())
 #' @export
-format_citation <- function(citation,
-                            authorsdate = FALSE,
-                            short = FALSE,
-                            intext = FALSE) {
+format_citation <- function(
+  citation,
+  authorsdate = FALSE,
+  short = FALSE,
+  intext = FALSE
+) {
   if (isTRUE(authorsdate)) {
     citation <- trimws(gsub(")..*", ")", citation)) # Remove everything after first parenthesis (hopefully, the date)
     citation <- gsub("[A-Z]\\., ", "", citation) # Remove last first names
@@ -37,7 +39,10 @@ format_citation <- function(citation,
   }
 
   if (isTRUE(short)) {
-    n_authors <- lengths(regmatches(citation, gregexpr(",", citation, fixed = TRUE)))
+    n_authors <- lengths(regmatches(
+      citation,
+      gregexpr(",", citation, fixed = TRUE)
+    ))
     for (i in seq_along(n_authors)) {
       if (n_authors[i] > 1 || grepl("&", citation[i], fixed = TRUE)) {
         citation[i] <- trimws(gsub(",.*\\(", " et al. (", citation[i])) # Replace remaining authors by et al.
@@ -57,7 +62,12 @@ format_citation <- function(citation,
 #' @rdname format_citation
 #' @export
 cite_citation <- function(citation) {
-  citation <- format_citation(citation, authorsdate = TRUE, short = TRUE, intext = TRUE)
+  citation <- format_citation(
+    citation,
+    authorsdate = TRUE,
+    short = TRUE,
+    intext = TRUE
+  )
   paste0("(", citation, ")")
 }
 
@@ -66,9 +76,7 @@ cite_citation <- function(citation) {
 #' @export
 clean_citation <- function(citation) {
   if (isTRUE(inherits(citation, "citation"))) {
-    citation <- format(citation,
-      style = "text"
-    )
+    citation <- format(citation, style = "text")
   }
   citation <- unlist(strsplit(citation, "\n", fixed = TRUE))
   citation <- paste(citation, collapse = "SPLIT")
@@ -77,6 +85,11 @@ clean_citation <- function(citation) {
   while (grepl("To cite ", citation[i], fixed = TRUE)) {
     i <- i + 1
   }
-  citation <- gsub("  ", " ", trimws(gsub("SPLIT", " ", citation[i], fixed = TRUE), which = "both"), fixed = TRUE)
+  citation <- gsub(
+    "  ",
+    " ",
+    trimws(gsub("SPLIT", " ", citation[i], fixed = TRUE), which = "both"),
+    fixed = TRUE
+  )
   as.character(citation)
 }

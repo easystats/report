@@ -72,23 +72,27 @@
 #' report_sample(d, ci = 0.95, ci_method = "wilson") # negative CI fixed
 #' report_sample(d, ci = 0.95, ci_correct = TRUE) # continuity correction
 #' @export
-report_sample <- function(data,
-                          by = NULL,
-                          centrality = "mean",
-                          ci = NULL,
-                          ci_method = "wilson",
-                          ci_correct = FALSE,
-                          select = NULL,
-                          exclude = NULL,
-                          weights = NULL,
-                          total = TRUE,
-                          digits = 2,
-                          n = FALSE,
-                          group_by = NULL,
-                          ...) {
+report_sample <- function(
+  data,
+  by = NULL,
+  centrality = "mean",
+  ci = NULL,
+  ci_method = "wilson",
+  ci_correct = FALSE,
+  select = NULL,
+  exclude = NULL,
+  weights = NULL,
+  total = TRUE,
+  digits = 2,
+  n = FALSE,
+  group_by = NULL,
+  ...
+) {
   ## TODO: deprecate later
   if (!is.null(group_by)) {
-    insight::format_warning("Argument `group_by` is deprecated and will be removed in a future release. Please use `by` instead.") # nolint
+    insight::format_warning(
+      "Argument `group_by` is deprecated and will be removed in a future release. Please use `by` instead."
+    ) # nolint
     by <- group_by
   }
 
@@ -97,7 +101,9 @@ report_sample <- function(data,
     data <- tryCatch(
       as.data.frame(data, stringsAsFactors = FALSE),
       error = function(e) {
-        insight::format_error("`data` must be a data frame, or an object that can be coerced to a data frame.")
+        insight::format_error(
+          "`data` must be a data frame, or an object that can be coerced to a data frame."
+        )
       }
     )
   }
@@ -143,7 +149,9 @@ report_sample <- function(data,
 
   # sanity check - weights and grouping
   if (!is.null(by) && length(by) > 1 && !is.null(weights)) {
-    insight::format_error("Cannot apply `weights` when grouping is done by more than one variable.")
+    insight::format_error(
+      "Cannot apply `weights` when grouping is done by more than one variable."
+    )
   }
 
   # make clean data frame
@@ -206,7 +214,10 @@ report_sample <- function(data,
     summaries <- do.call(cbind, lapply(result, function(i) i["Summary"]))
     colnames(summaries) <- cn
     # generate data for total column, but make sure to remove missings
-    total_data <- data[stats::complete.cases(data[by]), unique(c(variables, by))]
+    total_data <- data[
+      stats::complete.cases(data[by]),
+      unique(c(variables, by))
+    ]
     # bind all together, including total column
     final <- cbind(
       variable,
@@ -230,7 +241,9 @@ report_sample <- function(data,
     if (is.null(weights)) {
       total_n <- sum(as.vector(table(data[by])))
     } else {
-      total_n <- round(sum(as.vector(table(data[by]))) * mean(data[[weights]], na.rm = TRUE))
+      total_n <- round(
+        sum(as.vector(table(data[by]))) * mean(data[[weights]], na.rm = TRUE)
+      )
     }
     # add N to column name
     colnames(final)[ncol(final)] <- sprintf(
@@ -260,14 +273,16 @@ report_sample <- function(data,
 
 # helper ------------------------
 
-.generate_descriptive_table <- function(x,
-                                        centrality,
-                                        weights,
-                                        digits,
-                                        n = FALSE,
-                                        ci = NULL,
-                                        ci_method = "wilson",
-                                        ci_correct = FALSE) {
+.generate_descriptive_table <- function(
+  x,
+  centrality,
+  weights,
+  digits,
+  n = FALSE,
+  ci = NULL,
+  ci_method = "wilson",
+  ci_correct = FALSE
+) {
   if (is.null(weights)) {
     w <- NULL
     columns <- colnames(x)
@@ -276,19 +291,22 @@ report_sample <- function(data,
     columns <- setdiff(colnames(x), weights)
   }
 
-  do.call(rbind, lapply(columns, function(cn) {
-    .report_sample_row(
-      x[[cn]],
-      column = cn,
-      centrality = centrality,
-      weights = w,
-      digits = digits,
-      n = n,
-      ci = ci,
-      ci_method = ci_method,
-      ci_correct = ci_correct
-    )
-  }))
+  do.call(
+    rbind,
+    lapply(columns, function(cn) {
+      .report_sample_row(
+        x[[cn]],
+        column = cn,
+        centrality = centrality,
+        weights = w,
+        digits = digits,
+        n = n,
+        ci = ci,
+        ci_method = ci_method,
+        ci_correct = ci_correct
+      )
+    })
+  )
 }
 
 
@@ -298,19 +316,35 @@ report_sample <- function(data,
   UseMethod(".report_sample_row")
 }
 
-.report_sample_row.numeric <- function(x,
-                                       column,
-                                       centrality = "mean",
-                                       weights = NULL,
-                                       digits = 1,
-                                       n = FALSE,
-                                       ...) {
+.report_sample_row.numeric <- function(
+  x,
+  column,
+  centrality = "mean",
+  weights = NULL,
+  digits = 1,
+  n = FALSE,
+  ...
+) {
   n_stat <- ifelse(n, paste0(", ", sum(!is.na(x))), "")
 
   .summary <- if (centrality == "mean") {
-    sprintf("%.*f (%.*f)%s", digits, .weighted_mean(x, weights), digits, .weighted_sd(x, weights), n_stat)
+    sprintf(
+      "%.*f (%.*f)%s",
+      digits,
+      .weighted_mean(x, weights),
+      digits,
+      .weighted_sd(x, weights),
+      n_stat
+    )
   } else {
-    sprintf("%.*f (%.*f)%s", digits, .weighted_median(x, weights), digits, .weighted_mad(x, weights), n_stat)
+    sprintf(
+      "%.*f (%.*f)%s",
+      digits,
+      .weighted_median(x, weights),
+      digits,
+      .weighted_mad(x, weights),
+      n_stat
+    )
   }
 
   n_label <- ifelse(n, ", n", "")
@@ -328,15 +362,17 @@ report_sample <- function(data,
 }
 
 
-.report_sample_row.factor <- function(x,
-                                      column,
-                                      weights = NULL,
-                                      digits = 1,
-                                      ci = NULL,
-                                      ci_method = "wilson",
-                                      ci_correct = FALSE,
-                                      n = FALSE,
-                                      ...) {
+.report_sample_row.factor <- function(
+  x,
+  column,
+  weights = NULL,
+  digits = 1,
+  ci = NULL,
+  ci_method = "wilson",
+  ci_correct = FALSE,
+  n = FALSE,
+  ...
+) {
   # we need a factor here, to determine number of levels. For binary variables,
   # only one category is shown. However, for grouped data, sometimes not all
   # levels are present in each group. A character would then have only two values
@@ -365,7 +401,14 @@ report_sample <- function(data,
   if (is.null(ci)) {
     .summary <- sprintf("%.1f", 100 * table_proportions)
   } else {
-    ci_low_high <- .ci_proportion(x, table_proportions, weights, ci, ci_method, ci_correct)
+    ci_low_high <- .ci_proportion(
+      x,
+      table_proportions,
+      weights,
+      ci,
+      ci_method,
+      ci_correct
+    )
     .summary <- sprintf(
       "%.1f [%.1f, %.1f]",
       100 * table_proportions,
@@ -375,12 +418,21 @@ report_sample <- function(data,
   }
 
   if (isTRUE(n)) {
-    .summary <- paste0(.summary, ", ", round(sum(!is.na(x)) * as.vector(table_proportions)))
+    .summary <- paste0(
+      .summary,
+      ", ",
+      round(sum(!is.na(x)) * as.vector(table_proportions))
+    )
   }
 
   n_label <- ifelse(n, ", n", "")
   data.frame(
-    Variable = sprintf("%s [%s], %%%s", column, names(table_proportions), n_label),
+    Variable = sprintf(
+      "%s [%s], %%%s",
+      column,
+      names(table_proportions),
+      n_label
+    ),
     Summary = as.vector(.summary),
     stringsAsFactors = FALSE
   )
@@ -392,7 +444,14 @@ report_sample <- function(data,
 
 # Standard error for confidence interval of proportions ----
 
-.ci_proportion <- function(x, table_proportions, weights, ci, ci_method, ci_correct) {
+.ci_proportion <- function(
+  x,
+  table_proportions,
+  weights,
+  ci,
+  ci_method,
+  ci_correct
+) {
   ci_method <- match.arg(tolower(ci_method), c("wald", "wilson"))
 
   # variables
@@ -408,14 +467,28 @@ report_sample <- function(data,
   # but it seems "p" is unknown. For now, we give a warning instead of
   # estimating p for weighted data
   if (!is.null(weights)) {
-    insight::format_warning("Confidence intervals are not accurate for weighted data.")
+    insight::format_warning(
+      "Confidence intervals are not accurate for weighted data."
+    )
   }
 
   if (ci_method == "wilson") {
     # Wilson CIs -------------------
     if (isTRUE(ci_correct)) {
-      ci_low <- (2 * n * p + z^2 - 1 - z * sqrt(z^2 - 2 - 1 / n + 4 * p * (n * quant + 1))) / (2 * (n + z^2))
-      ci_high <- (2 * n * p + z^2 + 1 + z * sqrt(z^2 + 2 - 1 / n + 4 * p * (n * quant - 1))) / (2 * (n + z^2))
+      ci_low <- (2 *
+        n *
+        p +
+        z^2 -
+        1 -
+        z * sqrt(z^2 - 2 - 1 / n + 4 * p * (n * quant + 1))) /
+        (2 * (n + z^2))
+      ci_high <- (2 *
+        n *
+        p +
+        z^2 +
+        1 +
+        z * sqrt(z^2 + 2 - 1 / n + 4 * p * (n * quant - 1))) /
+        (2 * (n + z^2))
       # close to 0 or 1, then CI is 0 resp. 1
       fix_ci <- p < 0.00001 | ci_low < 0.00001
       if (any(fix_ci)) {

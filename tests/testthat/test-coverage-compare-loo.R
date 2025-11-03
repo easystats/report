@@ -46,7 +46,8 @@ test_that("report.compare.loo coverage test", {
 
   # Create model comparison object
   comparison <- suppressWarnings(brms::loo_compare(
-    m1, m2,
+    m1,
+    m2,
     model_names = c("model1", "model2")
   ))
 

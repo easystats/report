@@ -25,17 +25,45 @@
   interpretation <- do.call(effectsize::interpret, es_args)$Interpretation
   rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
 
-  main <- switch(estimate,
-    Cramers_v_adjusted = paste0("Adjusted Cramer's v = ", insight::format_value(es_table[[estimate]])),
+  main <- switch(
+    estimate,
+    Cramers_v_adjusted = paste0(
+      "Adjusted Cramer's v = ",
+      insight::format_value(es_table[[estimate]])
+    ),
     Fei = paste0("Fei = ", insight::format_value(es_table[[estimate]])),
-    Tschuprows_t = paste0("Tschuprow's t = ", insight::format_value(es_table[[estimate]])),
-    Tschuprows_t_adjusted = paste0("Adjusted Tschuprow's t = ", insight::format_value(es_table[[estimate]])),
-    Pearsons_c = paste0("Pearson's c = ", insight::format_value(es_table[[estimate]])),
-    phi_adjusted = paste0("Adjusted Phi = ", insight::format_value(es_table[[estimate]])),
-    Cohens_h = paste0("Cohen's h = ", insight::format_value(es_table[[estimate]])),
-    Odds_ratio = paste0("Odds ratio = ", insight::format_value(es_table[[estimate]])),
-    Ris_kratio = paste0("Risk ratio = ", insight::format_value(es_table[[estimate]])),
-    cohens_h = paste0("Cohen's w = ", insight::format_value(es_table[[estimate]])),
+    Tschuprows_t = paste0(
+      "Tschuprow's t = ",
+      insight::format_value(es_table[[estimate]])
+    ),
+    Tschuprows_t_adjusted = paste0(
+      "Adjusted Tschuprow's t = ",
+      insight::format_value(es_table[[estimate]])
+    ),
+    Pearsons_c = paste0(
+      "Pearson's c = ",
+      insight::format_value(es_table[[estimate]])
+    ),
+    phi_adjusted = paste0(
+      "Adjusted Phi = ",
+      insight::format_value(es_table[[estimate]])
+    ),
+    Cohens_h = paste0(
+      "Cohen's h = ",
+      insight::format_value(es_table[[estimate]])
+    ),
+    Odds_ratio = paste0(
+      "Odds ratio = ",
+      insight::format_value(es_table[[estimate]])
+    ),
+    Ris_kratio = paste0(
+      "Risk ratio = ",
+      insight::format_value(es_table[[estimate]])
+    ),
+    cohens_h = paste0(
+      "Cohen's w = ",
+      insight::format_value(es_table[[estimate]])
+    ),
     paste0(estimate, " = ", insight::format_value(es_table[[estimate]]))
   )
 
@@ -51,12 +79,19 @@
     replacement = paste0(estimate, c("_CI_low", "_CI_high"))
   )
 
-  result_table <- result_table[c(estimate, paste0(estimate, c("_CI_low", "_CI_high")))]
+  result_table <- result_table[c(
+    estimate,
+    paste0(estimate, c("_CI_low", "_CI_high"))
+  )]
   attributes(result_table)$table_footer <- table_footer
 
   list(
-    table = result_table, statistics = statistics, interpretation = interpretation,
-    rules = rules, ci = ci, main = main
+    table = result_table,
+    statistics = statistics,
+    interpretation = interpretation,
+    rules = rules,
+    ci = ci,
+    main = main
   )
 }
 
@@ -65,15 +100,25 @@
 .report_model_chi2 <- function(x, table) {
   if (chi2_type(x) == "pearson") {
     type <- " of independence between"
-    vars_full <- paste(names(attributes(x$observed)$dimnames), collapse = " and ")
+    vars_full <- paste(
+      names(attributes(x$observed)$dimnames),
+      collapse = " and "
+    )
   } else if (chi2_type(x) == "probabilities") {
     type <- " / goodness of fit of "
     distr <- ifelse(
-      grepl("non", attr(table, "table_footer"), fixed = TRUE), "a uniform distribution",
-      paste0("a distribution of [", paste0(
-        names(x$expected), ": n=", x$expected,
-        collapse = ", "
-      ), "]")
+      grepl("non", attr(table, "table_footer"), fixed = TRUE),
+      "a uniform distribution",
+      paste0(
+        "a distribution of [",
+        paste0(
+          names(x$expected),
+          ": n=",
+          x$expected,
+          collapse = ", "
+        ),
+        "]"
+      )
     )
 
     vars_full <- paste(x$data.name, "to", distr)

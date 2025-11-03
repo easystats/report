@@ -31,7 +31,16 @@ test_that("report.character() handles missing values", {
 })
 
 test_that("report.character() respects parameters", {
-  char_data <- c("red", "blue", "red", "green", "blue", "red", "yellow", "orange")
+  char_data <- c(
+    "red",
+    "blue",
+    "red",
+    "green",
+    "blue",
+    "red",
+    "yellow",
+    "orange"
+  )
 
   # Test with different n_entries
   result1 <- report(char_data, n_entries = 2)
@@ -100,18 +109,54 @@ test_that("report.default() methods throw appropriate errors", {
   # Test with unsupported object
   unsupported_obj <- structure(list(x = 1), class = "unsupported_class")
 
-  expect_error(report(unsupported_obj), "objects of class.*unsupported_class.*not supported")
-  expect_error(report_table(unsupported_obj), "objects of class.*unsupported_class.*not supported")
-  expect_error(report_parameters(unsupported_obj), "objects of class.*unsupported_class.*not supported")
-  expect_error(report_statistics(unsupported_obj), "objects of class.*unsupported_class.*not supported")
-  expect_error(report_effectsize(unsupported_obj), "objects of class.*unsupported_class.*not supported")
-  expect_error(report_model(unsupported_obj), "objects of class.*unsupported_class.*not supported")
-  expect_error(report_random(unsupported_obj), "objects of class.*unsupported_class.*not supported")
-  expect_error(report_priors(unsupported_obj), "objects of class.*unsupported_class.*not supported")
-  expect_error(report_performance(unsupported_obj), "objects of class.*unsupported_class.*not supported")
-  expect_error(report_info(unsupported_obj), "objects of class.*unsupported_class.*not supported")
-  expect_error(report_text(unsupported_obj), "objects of class.*unsupported_class.*not supported")
-  expect_error(report_intercept(unsupported_obj), "objects of class.*unsupported_class.*not supported")
+  expect_error(
+    report(unsupported_obj),
+    "objects of class.*unsupported_class.*not supported"
+  )
+  expect_error(
+    report_table(unsupported_obj),
+    "objects of class.*unsupported_class.*not supported"
+  )
+  expect_error(
+    report_parameters(unsupported_obj),
+    "objects of class.*unsupported_class.*not supported"
+  )
+  expect_error(
+    report_statistics(unsupported_obj),
+    "objects of class.*unsupported_class.*not supported"
+  )
+  expect_error(
+    report_effectsize(unsupported_obj),
+    "objects of class.*unsupported_class.*not supported"
+  )
+  expect_error(
+    report_model(unsupported_obj),
+    "objects of class.*unsupported_class.*not supported"
+  )
+  expect_error(
+    report_random(unsupported_obj),
+    "objects of class.*unsupported_class.*not supported"
+  )
+  expect_error(
+    report_priors(unsupported_obj),
+    "objects of class.*unsupported_class.*not supported"
+  )
+  expect_error(
+    report_performance(unsupported_obj),
+    "objects of class.*unsupported_class.*not supported"
+  )
+  expect_error(
+    report_info(unsupported_obj),
+    "objects of class.*unsupported_class.*not supported"
+  )
+  expect_error(
+    report_text(unsupported_obj),
+    "objects of class.*unsupported_class.*not supported"
+  )
+  expect_error(
+    report_intercept(unsupported_obj),
+    "objects of class.*unsupported_class.*not supported"
+  )
 })
 
 test_that("report component functions work for character vectors", {

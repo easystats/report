@@ -46,7 +46,6 @@ report_effectsize <- function(x, ...) {
 
 # METHODS -----------------------------------------------------------------
 
-
 #' @rdname as.report
 #' @export
 as.report_effectsize <- function(x, summary = NULL, prefix = "  - ", ...) {
@@ -85,14 +84,14 @@ print.report_effectsize <- function(x, ...) {
 
 # Utilities ---------------------------------------------------------------
 
-
 #' @keywords internal
 .text_effectsize <- function(interpretation) {
   # Effect size
   if (is.null(interpretation)) {
     effect_text <- ""
   } else if (is.character(interpretation)) {
-    effsize_name <- switch(interpretation,
+    effsize_name <- switch(
+      interpretation,
       cohen1988 = "Cohen's (1988)",
       sawilowsky2009 = "Savilowsky's (2009)",
       gignac2016 = "Gignac's (2016)",
@@ -103,9 +102,15 @@ print.report_effectsize <- function(x, ...) {
       field2013 = "Field's (2013)",
       landis1977 = "Landis' (1977)"
     )
-    effect_text <- paste0("Effect sizes were labelled following ", effsize_name, " recommendations.")
+    effect_text <- paste0(
+      "Effect sizes were labelled following ",
+      effsize_name,
+      " recommendations."
+    )
   } else {
-    effect_text <- paste0("Effect sizes were labelled following a custom set of rules.")
+    effect_text <- paste0(
+      "Effect sizes were labelled following a custom set of rules."
+    )
   }
   effect_text
 }
@@ -125,7 +130,8 @@ print.report_effectsize <- function(x, ...) {
     }
     standard_text <- paste0(
       "Standardized parameters were obtained by fitting the model on a standardized version ",
-      standard_text, "of the dataset."
+      standard_text,
+      "of the dataset."
     )
   } else if (method == "2sd") {
     if (robust) {
@@ -135,7 +141,8 @@ print.report_effectsize <- function(x, ...) {
     }
     standard_text <- paste0(
       "Standardized parameters were obtained by standardizing the data by 2 times the ",
-      standard_text, " (see Gelman, 2008)."
+      standard_text,
+      " (see Gelman, 2008)."
     )
   } else if (method %in% c("smart", "basic", "posthoc")) {
     if (robust) {
@@ -145,7 +152,11 @@ print.report_effectsize <- function(x, ...) {
     }
     standard_text <- paste0("Parameters were scaled by the ", standard_text)
   } else {
-    standard_text <- paste0("Parameters were standardized using the ", method, " method.")
+    standard_text <- paste0(
+      "Parameters were standardized using the ",
+      method,
+      " method."
+    )
   }
 
   standard_text

@@ -8,7 +8,10 @@
 
   # Prepare output
   class(combined_table) <- class(parameters)
-  attributes(combined_table) <- utils::modifyList(attributes(parameters), attributes(combined_table))
+  attributes(combined_table) <- utils::modifyList(
+    attributes(parameters),
+    attributes(combined_table)
+  )
 
   combined_table
 }
@@ -20,7 +23,9 @@
 
   # Pretty names
   if (!is.null(attributes(parameters)$pretty_names)) {
-    combined_table$Parameter <- attributes(parameters)$pretty_names[parameters$Parameter]
+    combined_table$Parameter <- attributes(parameters)$pretty_names[
+      parameters$Parameter
+    ]
   }
 
   # Skip row
@@ -34,7 +39,6 @@
   perf_names[perf_names == "R2_conditional"] <- "R2 (conditional)"
   perf_names[perf_names == "R2_marginal"] <- "R2 (marginal)"
 
-
   # add performance
   perf_vertical <- data.frame(
     Parameter = perf_names,
@@ -46,15 +50,26 @@
   perf_vertical <- perf_vertical[!is.na(perf_vertical$Fit), ]
 
   # Name parameter column
-  name_parameter <- names(parameters)[names(parameters) %in% c("Parameter", "Link", "To")][1]
+  name_parameter <- names(parameters)[
+    names(parameters) %in% c("Parameter", "Link", "To")
+  ][1]
   names(perf_vertical)[1] <- name_parameter
 
   # Merge
-  combined_table <- merge(combined_table, perf_vertical, by = name_parameter, all = TRUE, sort = FALSE)
+  combined_table <- merge(
+    combined_table,
+    perf_vertical,
+    by = name_parameter,
+    all = TRUE,
+    sort = FALSE
+  )
 
   # Prepare output
   class(combined_table) <- class(parameters)
-  attributes(combined_table) <- utils::modifyList(attributes(parameters), attributes(combined_table))
+  attributes(combined_table) <- utils::modifyList(
+    attributes(parameters),
+    attributes(combined_table)
+  )
 
   # Add pretty names
   pretty_names <- combined_table$Parameter

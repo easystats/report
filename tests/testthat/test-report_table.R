@@ -54,7 +54,9 @@ test_that("report_table() works with linear models", {
   model1 <- lm(Sepal.Length ~ Petal.Length, data = iris)
   result1 <- report_table(model1)
   expect_s3_class(result1, "report_table")
-  expect_true("Parameter" %in% names(result1) || "Coefficient" %in% names(result1))
+  expect_true(
+    "Parameter" %in% names(result1) || "Coefficient" %in% names(result1)
+  )
 
   # Interaction model
   model2 <- lm(Sepal.Length ~ Petal.Length * Species, data = iris)

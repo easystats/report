@@ -25,7 +25,12 @@ test_that("format_citation() works with basic formatting", {
   expect_false(grepl("(2020)", result_intext, fixed = TRUE))
 
   # Test all options combined
-  result_all <- format_citation(citation, authorsdate = TRUE, short = TRUE, intext = TRUE)
+  result_all <- format_citation(
+    citation,
+    authorsdate = TRUE,
+    short = TRUE,
+    intext = TRUE
+  )
   expect_match(result_all, "^Makowski.*et al.*2020$")
   expect_false(grepl("[\\(\\)]", result_all))
 })
@@ -72,7 +77,11 @@ test_that("clean_citation() works with citation objects", {
 test_that("format_citation() handles edge cases", {
   # Single author
   single_author <- "Smith, J. (2020). Title."
-  result_single <- format_citation(single_author, authorsdate = TRUE, short = TRUE)
+  result_single <- format_citation(
+    single_author,
+    authorsdate = TRUE,
+    short = TRUE
+  )
   expect_false(grepl("et al", result_single, fixed = TRUE))
   expect_match(result_single, "Smith.*\\(2020\\)")
 

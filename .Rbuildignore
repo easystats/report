@@ -24,7 +24,9 @@ tests\^spelling
 ^WIP/.
 \.code-workspace$
 ^CRAN-SUBMISSION$
+.git-blame-ignore-revs
 
 
 # flint files
 ^flint$
+^[.]?air[.]toml$

@@ -140,7 +140,13 @@ test_that(".check_spelling() works correctly", {
 })
 
 test_that(".fuzzy_grep() finds approximate matches", {
-  test_names <- c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width", "Species")
+  test_names <- c(
+    "Sepal.Length",
+    "Sepal.Width",
+    "Petal.Length",
+    "Petal.Width",
+    "Species"
+  )
 
   # Test with close match
   result1 <- report:::.fuzzy_grep(test_names, "Spela")
@@ -160,7 +166,13 @@ test_that(".fuzzy_grep() finds approximate matches", {
 })
 
 test_that(".misspelled_string() creates helpful error messages", {
-  source_names <- c("Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width", "Species")
+  source_names <- c(
+    "Sepal.Length",
+    "Sepal.Width",
+    "Petal.Length",
+    "Petal.Width",
+    "Species"
+  )
 
   # Test with likely misspelling
   result1 <- report:::.misspelled_string(source_names, "Spela")

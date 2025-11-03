@@ -51,8 +51,14 @@ test_that("report_sample check input", {
   data(iris)
   expect_error(report_sample(lm(Sepal.Length ~ Species, data = iris)))
   expect_silent(report_sample(iris$Species))
-  expect_error(report_sample(iris, by = "Spedies"), regex = "The following column")
-  expect_error(report_sample(iris, select = "Spedies"), regex = "The following column")
+  expect_error(
+    report_sample(iris, by = "Spedies"),
+    regex = "The following column"
+  )
+  expect_error(
+    report_sample(iris, select = "Spedies"),
+    regex = "The following column"
+  )
 })
 
 test_that("report_sample default", {
@@ -93,12 +99,22 @@ test_that("report_sample n = TRUE", {
 test_that("report_sample CI", {
   expect_snapshot(
     variant = "windows",
-    report_sample(iris, select = c("Sepal.Length", "Species"), ci = 0.95, ci_method = "wald")
+    report_sample(
+      iris,
+      select = c("Sepal.Length", "Species"),
+      ci = 0.95,
+      ci_method = "wald"
+    )
   )
 
   expect_snapshot(
     variant = "windows",
-    report_sample(iris, select = c("Sepal.Length", "Species"), ci = 0.95, ci_method = "wilson")
+    report_sample(
+      iris,
+      select = c("Sepal.Length", "Species"),
+      ci = 0.95,
+      ci_method = "wilson"
+    )
   )
 
   set.seed(123)
@@ -116,13 +132,28 @@ test_that("report_sample CI", {
   )
   expect_snapshot(
     variant = "windows",
-    report_sample(d, ci = 0.95, ci_correct = TRUE, select = "x", ci_method = "wald")
+    report_sample(
+      d,
+      ci = 0.95,
+      ci_correct = TRUE,
+      select = "x",
+      ci_method = "wald"
+    )
   )
   expect_snapshot(
     variant = "windows",
-    report_sample(d, ci = 0.95, ci_correct = TRUE, select = "x", ci_method = "wilson")
+    report_sample(
+      d,
+      ci = 0.95,
+      ci_correct = TRUE,
+      select = "x",
+      ci_method = "wilson"
+    )
   )
-  expect_warning(report_sample(d, ci = 0.95, weights = "w", ci_method = "wald"), regex = "accurate")
+  expect_warning(
+    report_sample(d, ci = 0.95, weights = "w", ci_method = "wald"),
+    regex = "accurate"
+  )
 })
 
 test_that("report_sample by", {
@@ -240,9 +271,15 @@ test_that("report_sample digits", {
 })
 
 test_that("report_sample weights", {
-  expect_snapshot(report_sample(airquality, weights = "Temp"), variant = "windows")
+  expect_snapshot(
+    report_sample(airquality, weights = "Temp"),
+    variant = "windows"
+  )
   expect_snapshot(report_sample(mtcars, weights = "carb"), variant = "windows")
-  expect_snapshot(report_sample(iris, weights = "Petal.Width"), variant = "windows")
+  expect_snapshot(
+    report_sample(iris, weights = "Petal.Width"),
+    variant = "windows"
+  )
 })
 
 test_that("report_sample grouped data frames", {

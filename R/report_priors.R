@@ -27,7 +27,6 @@ report_priors <- function(x, ...) {
 
 # METHODS -----------------------------------------------------------------
 
-
 #' @rdname as.report
 #' @export
 as.report_priors <- function(x, summary = NULL, ...) {
