@@ -92,7 +92,8 @@ print.report_info <- function(x, ...) {
   )
 
   ci_method <- tolower(ci_method)
-  string_method <- switch(ci_method,
+  string_method <- switch(
+    ci_method,
     bci = ,
     bcai = "bias-corrected accelerated bootstrap",
     si = ,
@@ -123,7 +124,8 @@ print.report_info <- function(x, ...) {
   }
 
   if (!is.null(test_statistic) && ci_method != "normal" && !isTRUE(bootstrap)) {
-    string_statistic <- switch(tolower(test_statistic),
+    string_statistic <- switch(
+      tolower(test_statistic),
       "t-statistic" = "t",
       "chi-squared statistic" = ,
       "z-statistic" = "z",

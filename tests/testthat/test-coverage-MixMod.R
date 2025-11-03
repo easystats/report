@@ -17,7 +17,8 @@ test_that("report.MixMod coverage test", {
 
   # Create binary outcome appropriate for GLMMadaptive
   data_mixmod$y <- rbinom(
-    nrow(data_mixmod), 1,
+    nrow(data_mixmod),
+    1,
     plogis(-1 + 0.5 * data_mixmod$time + 0.3 * data_mixmod$x)
   )
 

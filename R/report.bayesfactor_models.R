@@ -29,11 +29,13 @@
 #' as.data.frame(r)
 #' @return An object of class [report()].
 #' @export
-report.bayesfactor_models <- function(x,
-                                      interpretation = "jeffreys1961",
-                                      exact = TRUE,
-                                      protect_ratio = TRUE,
-                                      ...) {
+report.bayesfactor_models <- function(
+  x,
+  interpretation = "jeffreys1961",
+  exact = TRUE,
+  protect_ratio = TRUE,
+  ...
+) {
   out <- .report.bayesfactor_models(
     x,
     interpretation = interpretation,
@@ -53,11 +55,13 @@ report.bayesfactor_models <- function(x,
 
 
 #' @export
-report_table.bayesfactor_models <- function(x,
-                                            interpretation = "jeffreys1961",
-                                            exact = TRUE,
-                                            protect_ratio = TRUE,
-                                            ...) {
+report_table.bayesfactor_models <- function(
+  x,
+  interpretation = "jeffreys1961",
+  exact = TRUE,
+  protect_ratio = TRUE,
+  ...
+) {
   out <-
     .report.bayesfactor_models(
       x,
@@ -67,7 +71,8 @@ report_table.bayesfactor_models <- function(x,
       ...
     )
 
-  as.report_table(out$table_full,
+  as.report_table(
+    out$table_full,
     summary = out$table_short,
     rules = out$rules,
     denominator = out$denominator,
@@ -76,12 +81,14 @@ report_table.bayesfactor_models <- function(x,
 }
 
 #' @export
-report_text.bayesfactor_models <- function(x,
-                                           table = NULL,
-                                           interpretation = "jeffreys1961",
-                                           exact = TRUE,
-                                           protect_ratio = TRUE,
-                                           ...) {
+report_text.bayesfactor_models <- function(
+  x,
+  table = NULL,
+  interpretation = "jeffreys1961",
+  exact = TRUE,
+  protect_ratio = TRUE,
+  ...
+) {
   out <- .report.bayesfactor_models(
     x,
     interpretation = interpretation,
@@ -90,7 +97,8 @@ report_text.bayesfactor_models <- function(x,
     ...
   )
 
-  as.report_text(out$text_full,
+  as.report_text(
+    out$text_full,
     summary = out$text_short,
     rules = out$rules,
     denominator = out$denominator,
@@ -100,11 +108,13 @@ report_text.bayesfactor_models <- function(x,
 
 
 #' @keywords internal
-.report.bayesfactor_models <- function(model,
-                                       interpretation = "jeffreys1961",
-                                       exact = TRUE,
-                                       protect_ratio = TRUE,
-                                       ...) {
+.report.bayesfactor_models <- function(
+  model,
+  interpretation = "jeffreys1961",
+  exact = TRUE,
+  protect_ratio = TRUE,
+  ...
+) {
   model$Model[model$Model == "1"] <- "(Intercept only)"
   denominator <- attr(model, "denominator")
   BF_method <- attr(model, "BF_method")
@@ -119,19 +129,28 @@ report_text.bayesfactor_models <- function(x,
   summ_inds <- c(max_den, min_den)
   summ_inds <- summ_inds[summ_inds != denominator]
   bf_text <- paste0(
-    "Compared to the ", model$Model[denominator], " model", model_ind[denominator], ", ",
+    "Compared to the ",
+    model$Model[denominator],
+    " model",
+    model_ind[denominator],
+    ", ",
     "we found ",
     paste0(
-      effectsize::interpret_bf(exp(model$log_BF)[summ_inds],
-        rules = interpretation, include_value = TRUE,
-        exact = exact, protect_ratio = protect_ratio
+      effectsize::interpret_bf(
+        exp(model$log_BF)[summ_inds],
+        rules = interpretation,
+        include_value = TRUE,
+        exact = exact,
+        protect_ratio = protect_ratio
       ),
-      " the ", model$Model[summ_inds], " model", model_ind[summ_inds],
+      " the ",
+      model$Model[summ_inds],
+      " model",
+      model_ind[summ_inds],
       collapse = "; "
     ),
     "."
   )
-
 
   #### text full ####
   if (grepl("BIC", BF_method, fixed = TRUE)) {
@@ -151,25 +170,38 @@ report_text.bayesfactor_models <- function(x,
     )
   }
 
-  bf_text_full <- paste0(bf_explain, paste0(
-    "Compared to the ", model$Model[denominator], " model", model_ind[denominator], ", ",
-    "we found ",
+  bf_text_full <- paste0(
+    bf_explain,
     paste0(
-      effectsize::interpret_bf(exp(model$log_BF)[-denominator],
-        rules = interpretation, include_value = TRUE,
-        exact = exact, protect_ratio = protect_ratio
+      "Compared to the ",
+      model$Model[denominator],
+      " model",
+      model_ind[denominator],
+      ", ",
+      "we found ",
+      paste0(
+        effectsize::interpret_bf(
+          exp(model$log_BF)[-denominator],
+          rules = interpretation,
+          include_value = TRUE,
+          exact = exact,
+          protect_ratio = protect_ratio
+        ),
+        " the ",
+        model$Model[-denominator],
+        " model",
+        model_ind[-denominator],
+        collapse = "; "
       ),
-      " the ", model$Model[-denominator], " model", model_ind[-denominator],
-      collapse = "; "
-    ),
-    "."
-  ))
-
+      "."
+    )
+  )
 
   #### table ####
   model$Model <- paste0(" [", seq_len(nrow(model)), "] ", model$Model)
   bf_table <- as.data.frame(model)
-  bf_table$BF <- insight::format_bf(exp(model$log_BF),
+  bf_table$BF <- insight::format_bf(
+    exp(model$log_BF),
     name = NULL,
     exact = exact,
     protect_ratio = protect_ratio
@@ -182,10 +214,10 @@ report_text.bayesfactor_models <- function(x,
   )
   attr(bf_table, "table_footer") <- footer
 
-
   #### table full ####
   bf_table_full <- bf_table
-  bf_table_full$BF2 <- insight::format_bf(exp(model$log_BF) / exp(model$log_BF)[max_den],
+  bf_table_full$BF2 <- insight::format_bf(
+    exp(model$log_BF) / exp(model$log_BF)[max_den],
     name = NULL,
     exact = exact,
     protect_ratio = protect_ratio
@@ -214,11 +246,13 @@ report_text.bayesfactor_models <- function(x,
 
 #' @rdname report.bayesfactor_models
 #' @export
-report.bayesfactor_inclusion <- function(x,
-                                         interpretation = "jeffreys1961",
-                                         exact = TRUE,
-                                         protect_ratio = TRUE,
-                                         ...) {
+report.bayesfactor_inclusion <- function(
+  x,
+  interpretation = "jeffreys1961",
+  exact = TRUE,
+  protect_ratio = TRUE,
+  ...
+) {
   out <- .report.bayesfactor_inclusion(
     x,
     interpretation = interpretation,
@@ -238,11 +272,13 @@ report.bayesfactor_inclusion <- function(x,
 
 
 #' @export
-report_table.bayesfactor_inclusion <- function(x,
-                                               interpretation = "jeffreys1961",
-                                               exact = TRUE,
-                                               protect_ratio = TRUE,
-                                               ...) {
+report_table.bayesfactor_inclusion <- function(
+  x,
+  interpretation = "jeffreys1961",
+  exact = TRUE,
+  protect_ratio = TRUE,
+  ...
+) {
   out <- .report.bayesfactor_inclusion(
     x,
     interpretation = interpretation,
@@ -251,7 +287,8 @@ report_table.bayesfactor_inclusion <- function(x,
     ...
   )
 
-  as.report_table(out$table_full,
+  as.report_table(
+    out$table_full,
     summary = out$table_short,
     interpretation = out$interpretation,
     priorOdds = out$priorOdds,
@@ -260,12 +297,14 @@ report_table.bayesfactor_inclusion <- function(x,
 }
 
 #' @export
-report_text.bayesfactor_inclusion <- function(x,
-                                              table = NULL,
-                                              interpretation = "jeffreys1961",
-                                              exact = TRUE,
-                                              protect_ratio = TRUE,
-                                              ...) {
+report_text.bayesfactor_inclusion <- function(
+  x,
+  table = NULL,
+  interpretation = "jeffreys1961",
+  exact = TRUE,
+  protect_ratio = TRUE,
+  ...
+) {
   out <- .report.bayesfactor_inclusion(
     x,
     interpretation = interpretation,
@@ -274,7 +313,8 @@ report_text.bayesfactor_inclusion <- function(x,
     ...
   )
 
-  as.report_text(out$text_full,
+  as.report_text(
+    out$text_full,
     summary = out$text_short,
     interpretation = out$interpretation,
     priorOdds = out$priorOdds,
@@ -284,19 +324,24 @@ report_text.bayesfactor_inclusion <- function(x,
 
 
 #' @keywords internal
-.report.bayesfactor_inclusion <- function(model,
-                                          interpretation = "jeffreys1961",
-                                          exact = TRUE,
-                                          protect_ratio = TRUE,
-                                          ...) {
+.report.bayesfactor_inclusion <- function(
+  model,
+  interpretation = "jeffreys1961",
+  exact = TRUE,
+  protect_ratio = TRUE,
+  ...
+) {
   matched <- attr(model, "matched")
   priorOdds <- attr(model, "priorOdds")
 
   #### text ####
   bf_results <- data.frame(Term = rownames(model), stringsAsFactors = FALSE)
-  bf_results$evidence <- effectsize::interpret_bf(exp(model$log_BF),
-    rules = interpretation, include_value = TRUE,
-    exact = exact, protect_ratio = protect_ratio
+  bf_results$evidence <- effectsize::interpret_bf(
+    exp(model$log_BF),
+    rules = interpretation,
+    include_value = TRUE,
+    exact = exact,
+    protect_ratio = protect_ratio
   )
   bf_results$postprob <- paste0(round(model$p_posterior * 100, ...), "%")
 
@@ -306,7 +351,8 @@ report_text.bayesfactor_inclusion <- function(x,
     paste(
       paste0(bf_results$evidence, " including ", bf_results$Term),
       collapse = "; "
-    ), "."
+    ),
+    "."
   )
 
   #### text full ####
@@ -319,7 +365,8 @@ report_text.bayesfactor_inclusion <- function(x,
     } else {
       paste0(
         " (here we used subjective prior odds of ",
-        toString(priorOdds), ")"
+        toString(priorOdds),
+        ")"
       )
     },
     ", it is possible to sum the prior probability of all models that include ",
@@ -351,12 +398,17 @@ report_text.bayesfactor_inclusion <- function(x,
       "We found ",
       paste(
         paste0(
-          bf_results$evidence, " including ", bf_results$Term,
-          ", with models including ", bf_results$Term,
-          " having an overall posterior probability of ", bf_results$postprob
+          bf_results$evidence,
+          " including ",
+          bf_results$Term,
+          ", with models including ",
+          bf_results$Term,
+          " having an overall posterior probability of ",
+          bf_results$postprob
         ),
         collapse = "; "
-      ), "."
+      ),
+      "."
     )
   )
 
@@ -375,18 +427,20 @@ report_text.bayesfactor_inclusion <- function(x,
 
   # make table footer
   footer <- list(
-    sprintf("\nAcross %s", ifelse(matched, "matched models only.", "all models.")),
-    ifelse(is.null(priorOdds),
+    sprintf(
+      "\nAcross %s",
+      ifelse(matched, "matched models only.", "all models.")
+    ),
+    ifelse(
+      is.null(priorOdds),
       "\nAssuming unifor prior odds.",
       paste0("\nWith custom prior odds of [", toString(priorOdds), "].")
     )
   )
   attr(bf_table, "table_footer") <- footer
 
-
   #### table full ####
   bf_table_full <- bf_table
-
 
   #### out ####
   out <- list(
@@ -396,6 +450,7 @@ report_text.bayesfactor_inclusion <- function(x,
     text_short = bf_text,
     interpretation = interpretation,
     priorOdds = priorOdds,
-    matched = matched, ...
+    matched = matched,
+    ...
   )
 }

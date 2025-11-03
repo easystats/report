@@ -42,7 +42,11 @@ test_that("report.factor", {
 
 test_that("report.Date", {
   set.seed(123)
-  x <- sample(seq(as.Date("1999/01/01"), as.Date("1999/01/05"), by = "day"), 30, replace = TRUE)
+  x <- sample(
+    seq(as.Date("1999/01/01"), as.Date("1999/01/05"), by = "day"),
+    30,
+    replace = TRUE
+  )
   r <- report(x)
   expect_equal(
     as.character(r),

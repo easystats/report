@@ -87,7 +87,8 @@ format_model.default <- function(x) {
 
 #' @export
 format_model.character <- function(x) {
-  switch(x,
+  switch(
+    x,
     lm = "linear model",
     glm = "general linear model",
     lmer = "linear mixed model",

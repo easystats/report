@@ -2,7 +2,12 @@ skip_if_not_installed("rstanarm")
 skip_on_cran() # rstanarm models are computationally intensive
 
 set.seed(123)
-model <- suppressWarnings(rstanarm::stan_glm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300))
+model <- suppressWarnings(rstanarm::stan_glm(
+  mpg ~ qsec + wt,
+  data = mtcars,
+  refresh = 0,
+  iter = 300
+))
 
 test_that("model-stanreg", {
   r <- report(model, centrality = "mean")
@@ -12,15 +17,31 @@ test_that("model-stanreg", {
   expect_identical(
     as.data.frame(r)$Parameter,
     c(
-      "(Intercept)", "qsec", "wt", NA, "ELPD", "LOOIC", "WAIC", "R2",
-      "R2 (adj.)", "Sigma"
+      "(Intercept)",
+      "qsec",
+      "wt",
+      NA,
+      "ELPD",
+      "LOOIC",
+      "WAIC",
+      "R2",
+      "R2 (adj.)",
+      "Sigma"
     )
   )
   expect_equal(
     as.data.frame(r)$Mean,
     c(
-      19.6150397292409, 0.937896549338215, -5.04660975597389, NA,
-      NA, NA, NA, NA, NA, NA
+      19.6150397292409,
+      0.937896549338215,
+      -5.04660975597389,
+      NA,
+      NA,
+      NA,
+      NA,
+      NA,
+      NA,
+      NA
     ),
     tolerance = 1e-1
   )

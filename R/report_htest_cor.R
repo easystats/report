@@ -54,7 +54,11 @@
   }
 
   list(
-    table = result_table, statistics = statistics, interpretation = interpretation,
-    rules = rules, ci = ci, main = main
+    table = result_table,
+    statistics = statistics,
+    interpretation = interpretation,
+    rules = rules,
+    ci = ci,
+    main = main
   )
 }

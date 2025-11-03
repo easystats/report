@@ -49,7 +49,6 @@ report_random <- function(x, ...) {
 
 # METHODS -----------------------------------------------------------------
 
-
 #' @rdname as.report
 #' @export
 as.report_random <- function(x, summary = NULL, ...) {

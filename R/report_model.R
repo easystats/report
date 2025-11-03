@@ -48,7 +48,6 @@ report_model <- function(x, table = NULL, ...) {
 
 # METHODS -----------------------------------------------------------------
 
-
 #' @rdname as.report
 #' @export
 as.report_model <- function(x, summary = NULL, ...) {

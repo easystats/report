@@ -19,18 +19,33 @@
   interpretation <- do.call(effectsize::interpret_r, my_args)
   rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
 
-  main <- paste0("r (rank biserial) = ", insight::format_value(wilcox_table$r_rank_biserial))
+  main <- paste0(
+    "r (rank biserial) = ",
+    insight::format_value(wilcox_table$r_rank_biserial)
+  )
   statistics <- paste0(
     main,
     ", ",
-    insight::format_ci(wilcox_table$rank_biserial_CI_low, wilcox_table$rank_biserial_CI_high, ci)
+    insight::format_ci(
+      wilcox_table$rank_biserial_CI_low,
+      wilcox_table$rank_biserial_CI_high,
+      ci
+    )
   )
 
-  result_table <- wilcox_table[c("r_rank_biserial", "rank_biserial_CI_low", "rank_biserial_CI_high")]
+  result_table <- wilcox_table[c(
+    "r_rank_biserial",
+    "rank_biserial_CI_low",
+    "rank_biserial_CI_high"
+  )]
 
   list(
-    table = result_table, statistics = statistics, interpretation = interpretation,
-    rules = rules, ci = ci, main = main
+    table = result_table,
+    statistics = statistics,
+    interpretation = interpretation,
+    rules = rules,
+    ci = ci,
+    main = main
   )
 }
 

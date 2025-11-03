@@ -50,8 +50,10 @@ test_that("report_participants", {
 
   expect_snapshot(
     variant = "windows",
-    report_participants(data,
-      age = "Age", sex = "Sex",
+    report_participants(
+      data,
+      age = "Age",
+      sex = "Sex",
       participant = "Participant"
     )
   )
@@ -61,7 +63,8 @@ test_that("report_participants", {
   )
 
   expect_equal(
-    nchar(report_participants(data,
+    nchar(report_participants(
+      data,
       participant = "Participant",
       spell_n = TRUE
     )),
@@ -97,8 +100,13 @@ test_that("report_participants", {
   data4 <- data.frame(
     Education = c(0, 8, -3, -5, 3, 5, NA),
     Education2 = c(
-      "Bachelor", "PhD", "Highschool", "Highschool",
-      "Bachelor", "Bachelor", NA
+      "Bachelor",
+      "PhD",
+      "Highschool",
+      "Highschool",
+      "Bachelor",
+      "Bachelor",
+      NA
     ),
     Country = c("USA", "Canada", "Canada", "India", "Germany", "USA", NA),
     Race = c("Black", NA, "White", "Asian", "Black", "Black", "White"),
@@ -161,12 +169,28 @@ test_that("report_participants age as character", {
 test_that("report_participants different gender spellings", {
   data <- data.frame(
     Gender = c(
-      "Man", "M", "Male", "Men", "Boy", "Guy",
-      "Dude", "Lad", "Sir",
-      "Woman", "W", "Female", "Women", "Girl",
-      "Lady", "Miss", "Madam", "Dame", "Lass",
+      "Man",
+      "M",
+      "Male",
+      "Men",
+      "Boy",
+      "Guy",
+      "Dude",
+      "Lad",
+      "Sir",
+      "Woman",
+      "W",
+      "Female",
+      "Women",
+      "Girl",
+      "Lady",
+      "Miss",
+      "Madam",
+      "Dame",
+      "Lass",
       NA
-    ), stringsAsFactors = FALSE
+    ),
+    stringsAsFactors = FALSE
   )
   expect_snapshot(
     variant = "windows",

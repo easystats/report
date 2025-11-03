@@ -16,7 +16,10 @@ test_that("report-lmer", {
   m1 <- lme4::lmer(Reaction ~ Days + (1 + Days | Subject), data = df)
 
   set.seed(123)
-  m2 <- lme4::lmer(Reaction ~ Days + (1 | mygrp / mysubgrp) + (1 | Subject), data = df)
+  m2 <- lme4::lmer(
+    Reaction ~ Days + (1 | mygrp / mysubgrp) + (1 | Subject),
+    data = df
+  )
 
   expect_snapshot(variant = "windows", report(m1))
 

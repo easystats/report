@@ -31,16 +31,33 @@ test_that("format_algorithm() formats MCMC information correctly", {
   # We can't easily mock insight::find_algorithm in tests, so test the string building logic
   result_text <- "MCMC sampling"
   if (!is.null(mock_algorithm$chains)) {
-    result_text <- paste0(result_text, " with ", mock_algorithm$chains, " chains")
+    result_text <- paste0(
+      result_text,
+      " with ",
+      mock_algorithm$chains,
+      " chains"
+    )
     if (!is.null(mock_algorithm$iterations)) {
-      result_text <- paste0(result_text, " of ", mock_algorithm$iterations, " iterations")
+      result_text <- paste0(
+        result_text,
+        " of ",
+        mock_algorithm$iterations,
+        " iterations"
+      )
     }
     if (!is.null(mock_algorithm$warmup)) {
-      result_text <- paste0(result_text, " and a warmup of ", mock_algorithm$warmup)
+      result_text <- paste0(
+        result_text,
+        " and a warmup of ",
+        mock_algorithm$warmup
+      )
     }
   }
 
-  expect_identical(result_text, "MCMC sampling with 4 chains of 2000 iterations and a warmup of 1000")
+  expect_identical(
+    result_text,
+    "MCMC sampling with 4 chains of 2000 iterations and a warmup of 1000"
+  )
 })
 
 test_that("format_algorithm() formats optimizer information correctly", {

@@ -1,6 +1,9 @@
 test_that("BRMS effectsize method uses faster default", {
   # Test that the brmsfit method exists and has correct default parameters
-  expect_true(exists("report_effectsize.brmsfit", envir = getNamespace("report")))
+  expect_true(exists(
+    "report_effectsize.brmsfit",
+    envir = getNamespace("report")
+  ))
 
   # Get the function
   brms_func <- get("report_effectsize.brmsfit", envir = getNamespace("report"))

@@ -10,8 +10,12 @@ test_that("glmmTMB duplication fix - parameters are deduplicated", {
   # parameters
   duplicated_table <- data.frame(
     Parameter = c(
-      "(Intercept)", "treatmentcontrol", "treatmentcontrol",
-      "treatmentcontrol", "treatmentcontrol", "treatmentcontrol"
+      "(Intercept)",
+      "treatmentcontrol",
+      "treatmentcontrol",
+      "treatmentcontrol",
+      "treatmentcontrol",
+      "treatmentcontrol"
     ),
     Component = c("cond", "cond", "cond", "cond", "cond", "cond"),
     Coefficient = c(0.13, -0.27, -0.27, -0.27, -0.27, -0.27),
@@ -25,7 +29,11 @@ test_that("glmmTMB duplication fix - parameters are deduplicated", {
   )
 
   # Test report_parameters with duplicated table (this should be deduplicated)
-  params_result <- report_parameters(mock_model, table = duplicated_table, include_intercept = FALSE)
+  params_result <- report_parameters(
+    mock_model,
+    table = duplicated_table,
+    include_intercept = FALSE
+  )
   params_text <- as.character(params_result)
 
   # Count the number of parameter lines in the output
@@ -38,7 +46,8 @@ test_that("glmmTMB duplication fix - parameters are deduplicated", {
     1L,
     info = paste(
       "Expected 1 parameter line after deduplication, got",
-      length(non_empty_lines), "lines:",
+      length(non_empty_lines),
+      "lines:",
       paste(non_empty_lines, collapse = " | ")
     )
   )
@@ -46,13 +55,23 @@ test_that("glmmTMB duplication fix - parameters are deduplicated", {
   # Verify the content is correct (contains the treatment parameter information)
   expect_true(
     grepl("beta = -0.27", params_text, fixed = TRUE),
-    info = paste("Expected to find treatment parameter (beta = -0.27) in:", params_text)
+    info = paste(
+      "Expected to find treatment parameter (beta = -0.27) in:",
+      params_text
+    )
   )
 
   # Verify it's marked as non-significant and negative as expected
   expect_true(
-    grepl("statistically non-significant and negative", params_text, fixed = TRUE),
-    info = paste("Expected to find significance interpretation in:", params_text)
+    grepl(
+      "statistically non-significant and negative",
+      params_text,
+      fixed = TRUE
+    ),
+    info = paste(
+      "Expected to find significance interpretation in:",
+      params_text
+    )
   )
 })
 
@@ -76,7 +95,11 @@ test_that("glmmTMB deduplication preserves unique parameters", {
   )
 
   # Test report_parameters with mixed table
-  params_result <- report_parameters(mock_model, table = mixed_table, include_intercept = FALSE)
+  params_result <- report_parameters(
+    mock_model,
+    table = mixed_table,
+    include_intercept = FALSE
+  )
   params_text <- as.character(params_result)
 
   # Count the number of parameter lines in the output
@@ -89,7 +112,8 @@ test_that("glmmTMB deduplication preserves unique parameters", {
     2L,
     info = paste(
       "Expected 2 parameter lines for different parameters, got",
-      length(non_empty_lines), "lines:",
+      length(non_empty_lines),
+      "lines:",
       paste(non_empty_lines, collapse = " | ")
     )
   )
@@ -113,7 +137,12 @@ test_that("glmmTMB deduplication works without Component column", {
 
   # Create table with duplicated rows but no Component column
   duplicated_table_no_component <- data.frame(
-    Parameter = c("(Intercept)", "treatmentcontrol", "treatmentcontrol", "treatmentcontrol"),
+    Parameter = c(
+      "(Intercept)",
+      "treatmentcontrol",
+      "treatmentcontrol",
+      "treatmentcontrol"
+    ),
     Coefficient = c(0.13, -0.27, -0.27, -0.27),
     SE = c(0.25, 0.36, 0.36, 0.36),
     CI_low = c(-0.37, -0.99, -0.99, -0.99),
@@ -125,7 +154,11 @@ test_that("glmmTMB deduplication works without Component column", {
   )
 
   # Test report_parameters with duplicated table (should be deduplicated)
-  params_result <- report_parameters(mock_model, table = duplicated_table_no_component, include_intercept = FALSE)
+  params_result <- report_parameters(
+    mock_model,
+    table = duplicated_table_no_component,
+    include_intercept = FALSE
+  )
   params_text <- as.character(params_result)
 
   # Count the number of parameter lines in the output
@@ -138,7 +171,8 @@ test_that("glmmTMB deduplication works without Component column", {
     1L,
     info = paste(
       "Expected 1 parameter line after deduplication (no Component), got",
-      length(non_empty_lines), "lines:",
+      length(non_empty_lines),
+      "lines:",
       paste(non_empty_lines, collapse = " | ")
     )
   )
@@ -146,7 +180,10 @@ test_that("glmmTMB deduplication works without Component column", {
   # Verify the content is correct
   expect_true(
     grepl("beta = -0.27", params_text, fixed = TRUE),
-    info = paste("Expected to find treatment parameter (beta = -0.27) in:", params_text)
+    info = paste(
+      "Expected to find treatment parameter (beta = -0.27) in:",
+      params_text
+    )
   )
 })
 
@@ -170,7 +207,11 @@ test_that("glmmTMB deduplication only applies to glmmTMB models", {
   )
 
   # Test report_parameters with regular lm model (should NOT deduplicate)
-  params_result <- report_parameters(mock_lm, table = duplicated_table, include_intercept = FALSE)
+  params_result <- report_parameters(
+    mock_lm,
+    table = duplicated_table,
+    include_intercept = FALSE
+  )
   params_text <- as.character(params_result)
 
   # Count the number of parameter lines in the output
@@ -183,7 +224,8 @@ test_that("glmmTMB deduplication only applies to glmmTMB models", {
     2L,
     info = paste(
       "Expected 2 parameter lines for regular lm (no deduplication), got",
-      length(non_empty_lines), "lines:",
+      length(non_empty_lines),
+      "lines:",
       paste(non_empty_lines, collapse = " | ")
     )
   )

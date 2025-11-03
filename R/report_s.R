@@ -13,7 +13,12 @@
 #' report_s(s = 1.5)
 #' report_s(p = 0.05)
 #' @export
-report_s <- function(s = NULL, p = NULL, test_value = 0, test_parameter = "parameter") {
+report_s <- function(
+  s = NULL,
+  p = NULL,
+  test_value = 0,
+  test_parameter = "parameter"
+) {
   # sanity check arguments
   if ((is.null(s) || all(is.na(s))) && (is.null(p) || all(is.na(p)))) {
     insight::format_error("You must provide either `s` or `p`.")
@@ -30,9 +35,17 @@ report_s <- function(s = NULL, p = NULL, test_value = 0, test_parameter = "param
   all_heads <- round(s)
   chance <- sprintf("%.2g", 100 * p)
   msg <- paste0(
-    "If the test hypothesis (", test_parameter, " = ", test_value, ") and all model assumptions were true, ",
-    "there is a ", chance, "% chance of observing this outcome. How weird is that? ",
-    "It's hardly more surprising than getting ", all_heads, " heads in a row with fair coin tosses."
+    "If the test hypothesis (",
+    test_parameter,
+    " = ",
+    test_value,
+    ") and all model assumptions were true, ",
+    "there is a ",
+    chance,
+    "% chance of observing this outcome. How weird is that? ",
+    "It's hardly more surprising than getting ",
+    all_heads,
+    " heads in a row with fair coin tosses."
   )
   insight::format_alert(msg)
 }

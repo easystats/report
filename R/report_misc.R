@@ -16,7 +16,10 @@
 #' @export
 report_date <- function(...) {
   current_date <- Sys.time()
-  date_text <- format(current_date, "It's %A, %B %d of the year %Y, at %l%P %M and %S seconds")
+  date_text <- format(
+    current_date,
+    "It's %A, %B %d of the year %Y, at %l%P %M and %S seconds"
+  )
   text_short <- format(current_date, "%d/%m/%y - %H:%M:%S")
   as.report_text(date_text, summary = text_short)
 }
