@@ -54,6 +54,34 @@ test_that("report.character() respects parameters", {
   expect_match(as.character(result3), "n =")
 })
 
+test_that("report.character() handles single unique value", {
+  # Test with single unique value (issue #XXX)
+  single_char <- "big"
+  result <- report(single_char)
+
+  expect_s3_class(result, "report")
+  expect_match(as.character(result), "1 entry")
+  expect_match(as.character(result), "big")
+  expect_no_match(as.character(result), "NA")
+
+  # Test with single unique value repeated multiple times
+  single_repeated <- c("big", "big", "big", "big")
+  result2 <- report(single_repeated)
+
+  expect_s3_class(result2, "report")
+  expect_match(as.character(result2), "1 entry")
+  expect_match(as.character(result2), "big")
+  expect_match(as.character(result2), "n = 4")
+
+  # Test in data frame context (original issue)
+  df <- data.frame(id = 1:6, size = single_char)
+  result3 <- report(df)
+
+  expect_s3_class(result3, "report")
+  expect_match(as.character(result3), "size")
+  expect_match(as.character(result3), "big")
+})
+
 test_that("report.factor() works correctly", {
   # Test basic factor
   factor_data <- factor(c("low", "medium", "high", "low", "medium", "high"))
