@@ -213,7 +213,7 @@ report_table.lm <- function(x, include_effectsize = TRUE, ...) {
     new_attrs <- attributes(effsize)$ci
     for (idx in seq_along(new_attrs)) {
       if (!is.na(names(new_attrs)[idx])) {
-        attr(out, names(new_attrs)[idx]) <- new_attrs[idx]
+        attr(out, names(new_attrs)[idx]) <- new_attrs[[idx]]
       }
     }
   }
