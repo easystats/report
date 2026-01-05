@@ -1,3 +1,9 @@
+# report (development version)
+
+Bug fixes
+
+* Patch for change in `attr()` in R-devel (#590).
+
 # report 0.6.2
 
 Bug fixes
