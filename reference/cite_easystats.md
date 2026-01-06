@@ -144,16 +144,16 @@ cite_easystats(packages = "all")
 #>     3139. https://doi.org/10.21105/joss.03139
 #> - Lüdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., Højsgaard, S.,
 #>     & Wiernik, B. M. (2022). parameters: Processing of model parameters
-#>     (0.28.2) [R package]. https://CRAN.R-project.org/package=parameters
+#>     (0.28.3) [R package]. https://CRAN.R-project.org/package=parameters
 #>     (Original work published 2019)
 #> - Lüdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., Waggoner, P., &
 #>     Wiernik, B. M. (2021). performance: Assessment of regression models
-#>     performance (0.15.2) [R package].
+#>     performance (0.15.3) [R package].
 #>     https://CRAN.R-project.org/package=performance (Original work published
 #>     2019)
 #> - Lüdecke, D., Makowski, D., Patil, I., Waggoner, P., Ben-Shachar, M. S.,
 #>     Wiernik, B. M., & Arel-Bundock, V. (2022). insight: Easy access to
-#>     model information for various model objects (1.4.2) [R package].
+#>     model information for various model objects (1.4.4) [R package].
 #>     https://CRAN.R-project.org/package=insight (Original work published
 #>     2019)
 #> - Lüdecke, D., Waggoner, P., & Makowski, D. (2019). insight: A unified
@@ -165,7 +165,7 @@ cite_easystats(packages = "all")
 #>     1541. https://doi.org/10.21105/joss.01541
 #> - Makowski, D., Lüdecke, D., Ben-Shachar, M. S., & Patil, I. (2022).
 #>     modelbased: Estimation of model-based predictions, contrasts and means
-#>     (0.13.0) [R package]. https://CRAN.R-project.org/package=modelbased
+#>     (0.13.1) [R package]. https://CRAN.R-project.org/package=modelbased
 #>     (Original work published 2020)
 #> - Makowski, D., Lüdecke, D., Ben-Shachar, M. S., Patil, I., Wilson, M. D.,
 #>     & Wiernik, B. M. (2021). bayestestR: Understand and describe Bayesian
@@ -178,7 +178,7 @@ cite_easystats(packages = "all")
 #>     2021)
 #> - Makowski, D., Lüdecke, D., Patil, I., Thériault, R., Ben-Shachar, M. S.,
 #>     & Wiernik, B. M. (2023). report: Automated reporting of results and
-#>     statistical models (0.6.2) [R package].
+#>     statistical models (0.6.2.1) [R package].
 #>     https://easystats.github.io/easystats/ (Original work published 2021)
 #> 
 summary(cite_easystats(packages = "all"), what = "all")
@@ -215,16 +215,16 @@ summary(cite_easystats(packages = "all"), what = "all")
 #>     3139. https://doi.org/10.21105/joss.03139
 #> - Lüdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., Højsgaard, S.,
 #>     & Wiernik, B. M. (2022). parameters: Processing of model parameters
-#>     (0.28.2) [R package]. https://CRAN.R-project.org/package=parameters
+#>     (0.28.3) [R package]. https://CRAN.R-project.org/package=parameters
 #>     (Original work published 2019)
 #> - Lüdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., Waggoner, P., &
 #>     Wiernik, B. M. (2021). performance: Assessment of regression models
-#>     performance (0.15.2) [R package].
+#>     performance (0.15.3) [R package].
 #>     https://CRAN.R-project.org/package=performance (Original work published
 #>     2019)
 #> - Lüdecke, D., Makowski, D., Patil, I., Waggoner, P., Ben-Shachar, M. S.,
 #>     Wiernik, B. M., & Arel-Bundock, V. (2022). insight: Easy access to
-#>     model information for various model objects (1.4.2) [R package].
+#>     model information for various model objects (1.4.4) [R package].
 #>     https://CRAN.R-project.org/package=insight (Original work published
 #>     2019)
 #> - Lüdecke, D., Waggoner, P., & Makowski, D. (2019). insight: A unified
@@ -236,7 +236,7 @@ summary(cite_easystats(packages = "all"), what = "all")
 #>     1541. https://doi.org/10.21105/joss.01541
 #> - Makowski, D., Lüdecke, D., Ben-Shachar, M. S., & Patil, I. (2022).
 #>     modelbased: Estimation of model-based predictions, contrasts and means
-#>     (0.13.0) [R package]. https://CRAN.R-project.org/package=modelbased
+#>     (0.13.1) [R package]. https://CRAN.R-project.org/package=modelbased
 #>     (Original work published 2020)
 #> - Makowski, D., Lüdecke, D., Ben-Shachar, M. S., Patil, I., Wilson, M. D.,
 #>     & Wiernik, B. M. (2021). bayestestR: Understand and describe Bayesian
@@ -249,7 +249,7 @@ summary(cite_easystats(packages = "all"), what = "all")
 #>     2021)
 #> - Makowski, D., Lüdecke, D., Patil, I., Thériault, R., Ben-Shachar, M. S.,
 #>     & Wiernik, B. M. (2023). report: Automated reporting of results and
-#>     statistical models (0.6.2) [R package].
+#>     statistical models (0.6.2.1) [R package].
 #>     https://easystats.github.io/easystats/ (Original work published 2021)
 #> 
 
@@ -272,7 +272,7 @@ cite_easystats(packages = c("modelbased", "see"))
 #> 
 #> - Makowski, D., Lüdecke, D., Ben-Shachar, M. S., & Patil, I. (2022).
 #>     modelbased: Estimation of model-based predictions, contrasts and means
-#>     (0.13.0) [R package]. https://CRAN.R-project.org/package=modelbased
+#>     (0.13.1) [R package]. https://CRAN.R-project.org/package=modelbased
 #>     (Original work published 2020)
 #> 
 summary(cite_easystats(packages = c("modelbased", "see")), what = "all")
@@ -292,7 +292,7 @@ summary(cite_easystats(packages = c("modelbased", "see")), what = "all")
 #> 
 #> - Makowski, D., Lüdecke, D., Ben-Shachar, M. S., & Patil, I. (2022).
 #>     modelbased: Estimation of model-based predictions, contrasts and means
-#>     (0.13.0) [R package]. https://CRAN.R-project.org/package=modelbased
+#>     (0.13.1) [R package]. https://CRAN.R-project.org/package=modelbased
 #>     (Original work published 2020)
 #> 
 

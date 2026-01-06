@@ -41,14 +41,14 @@ r <- report_text(sessionInfo())
 r
 #> Analyses were conducted using the R Statistical language (version 4.5.2; R Core
 #> Team, 2025) on Ubuntu 24.04.3 LTS, using the packages Matrix (version 1.7.4;
-#> Bates D et al., 2025), lme4 (version 1.1.37; Bates D et al., 2015), brms
+#> Bates D et al., 2025), lme4 (version 1.1.38; Bates D et al., 2015), brms
 #> (version 2.23.0; Bürkner P, 2017), Rcpp (version 1.1.0; Eddelbuettel D et al.,
 #> 2025), rstanarm (version 2.32.2; Goodrich B et al., 2025), performance (version
-#> 0.15.2; Lüdecke D et al., 2021), bayestestR (version 0.17.0; Makowski D et al.,
-#> 2019), modelbased (version 0.13.0; Makowski D et al., 2025), report (version
-#> 0.6.2; Makowski D et al., 2023), BayesFactor (version 0.9.12.4.7; Morey R,
+#> 0.15.3; Lüdecke D et al., 2021), bayestestR (version 0.17.0; Makowski D et al.,
+#> 2019), modelbased (version 0.13.1; Makowski D et al., 2025), report (version
+#> 0.6.2.1; Makowski D et al., 2023), BayesFactor (version 0.9.12.4.7; Morey R,
 #> Rouder J, 2024), coda (version 0.19.4.1; Plummer M et al., 2006), lavaan
-#> (version 0.6.20; Rosseel Y et al., 2025) and dplyr (version 1.1.4; Wickham H et
+#> (version 0.6.21; Rosseel Y et al., 2025) and dplyr (version 1.1.4; Wickham H et
 #> al., 2023).
 #> 
 #> References
@@ -129,9 +129,9 @@ r
 summary(r)
 #> The analysis was done using the R Statistical language (v4.5.2; R Core Team,
 #> 2025) on Ubuntu 24.04.3 LTS, using the packages Matrix (v1.7.4), lme4
-#> (v1.1.37), brms (v2.23.0), Rcpp (v1.1.0), rstanarm (v2.32.2), performance
-#> (v0.15.2), bayestestR (v0.17.0), modelbased (v0.13.0), report (v0.6.2),
-#> BayesFactor (v0.9.12.4.7), coda (v0.19.4.1), lavaan (v0.6.20) and dplyr
+#> (v1.1.38), brms (v2.23.0), Rcpp (v1.1.0), rstanarm (v2.32.2), performance
+#> (v0.15.3), bayestestR (v0.17.0), modelbased (v0.13.1), report (v0.6.2.1),
+#> BayesFactor (v0.9.12.4.7), coda (v0.19.4.1), lavaan (v0.6.21) and dplyr
 #> (v1.1.4).
 
 # Data

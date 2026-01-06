@@ -83,7 +83,7 @@ Template file for supporting new models:
 # \donttest{
 # Structural Equation Models (SEM)
 library(lavaan)
-#> This is lavaan 0.6-20
+#> This is lavaan 0.6-21
 #> lavaan is FREE software! Please report any bugs.
 structure <- "ind60 =~ x1 + x2 + x3
               dem60 =~ y1 + y2 + y3

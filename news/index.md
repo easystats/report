@@ -1,6 +1,15 @@
 # Changelog
 
+## report (development version)
+
+Bug fixes
+
+- Patch for change in [`attr()`](https://rdrr.io/r/base/attr.html) in
+  R-devel ([\#590](https://github.com/easystats/report/issues/590)).
+
 ## report 0.6.2
+
+CRAN release: 2025-11-03
 
 Bug fixes
 
