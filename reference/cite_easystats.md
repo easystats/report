@@ -153,7 +153,7 @@ cite_easystats(packages = "all")
 #>     2019)
 #> - Lüdecke, D., Makowski, D., Patil, I., Waggoner, P., Ben-Shachar, M. S.,
 #>     Wiernik, B. M., & Arel-Bundock, V. (2022). insight: Easy access to
-#>     model information for various model objects (1.4.4) [R package].
+#>     model information for various model objects (1.4.5) [R package].
 #>     https://CRAN.R-project.org/package=insight (Original work published
 #>     2019)
 #> - Lüdecke, D., Waggoner, P., & Makowski, D. (2019). insight: A unified
@@ -178,7 +178,7 @@ cite_easystats(packages = "all")
 #>     2021)
 #> - Makowski, D., Lüdecke, D., Patil, I., Thériault, R., Ben-Shachar, M. S.,
 #>     & Wiernik, B. M. (2023). report: Automated reporting of results and
-#>     statistical models (0.6.2.1) [R package].
+#>     statistical models (0.6.3) [R package].
 #>     https://easystats.github.io/easystats/ (Original work published 2021)
 #> 
 summary(cite_easystats(packages = "all"), what = "all")
@@ -224,7 +224,7 @@ summary(cite_easystats(packages = "all"), what = "all")
 #>     2019)
 #> - Lüdecke, D., Makowski, D., Patil, I., Waggoner, P., Ben-Shachar, M. S.,
 #>     Wiernik, B. M., & Arel-Bundock, V. (2022). insight: Easy access to
-#>     model information for various model objects (1.4.4) [R package].
+#>     model information for various model objects (1.4.5) [R package].
 #>     https://CRAN.R-project.org/package=insight (Original work published
 #>     2019)
 #> - Lüdecke, D., Waggoner, P., & Makowski, D. (2019). insight: A unified
@@ -249,7 +249,7 @@ summary(cite_easystats(packages = "all"), what = "all")
 #>     2021)
 #> - Makowski, D., Lüdecke, D., Patil, I., Thériault, R., Ben-Shachar, M. S.,
 #>     & Wiernik, B. M. (2023). report: Automated reporting of results and
-#>     statistical models (0.6.2.1) [R package].
+#>     statistical models (0.6.3) [R package].
 #>     https://easystats.github.io/easystats/ (Original work published 2021)
 #> 
 

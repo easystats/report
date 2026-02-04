@@ -31,7 +31,7 @@ working. This workflow intelligently determines what setup is needed
 using **sophisticated conditional logic**:
 
 **For R package development tasks** (editing .R files, functions, tests,
-etc.), it pre-installs: - R and system dependencies  
+etc.), it pre-installs: - R and system dependencies\
 - Core development packages (rlang, dplyr, testthat, lintr, styler,
 roxygen2, reprex, devtools) - **Complete reprex setup**: knitr,
 rmarkdown, pandoc, clipr (all dependencies needed for creating
@@ -78,7 +78,7 @@ installation (not necessary) ✅ - Perfect resource optimization
 (intentionally delayed to save resources) - Make code changes to the
 best ability without full testing - Basic syntax checking and file
 editing - Commit initial code changes - **Second run: R installation
-triggered** (after code changes detected)  
+triggered** (after code changes detected)\
 - Full R setup occurs because `git diff` now detects R file changes -
 Complete testing, building, and validation - Full development workflow
 available
@@ -87,7 +87,7 @@ available
 
 - 🌱 **Environmental**: Avoids unnecessary R installations (~5-10
   minutes saved per run)
-- 💰 **Cost savings**: Reduces compute resource usage significantly  
+- 💰 **Cost savings**: Reduces compute resource usage significantly\
 - ⏱️ **Time efficiency**: First iterations are much faster (2-3 minutes
   vs 7-15 minutes)
 - 🔄 **Natural workflow**: Matches how developers actually work (edit
@@ -505,7 +505,7 @@ _R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check report_0.6.1.1.tar.gz --no-manual --n
 ```
 
 Expected results: - Status: May show 1 ERROR (missing suggested
-packages - normal), few NOTEs  
+packages - normal), few NOTEs\
 - Core functionality passes all checks - Tests pass correctly - Examples
 may fail due to missing optional packages (expected)
 
@@ -619,7 +619,7 @@ cat /home/runner/work/report/report/DESCRIPTION
 
 - `/R/` - All R function source files (60+ files)
 - `/tests/testthat/` - Test files using testthat framework
-- `/tests/testthat.R` - Test runner entry point  
+- `/tests/testthat.R` - Test runner entry point\
 - `/man/` - Documentation files (auto-generated from roxygen2)
 - `/vignettes/` - R Markdown tutorials and documentation
 
@@ -1209,7 +1209,7 @@ following:
 1.  **Version number bump** in DESCRIPTION file (see Version Management
     section above)
 2.  **NEWS.md changelog entry** with your changes (see Version
-    Management section above)  
+    Management section above)\
 3.  **Reprexes** (minimally reproducible examples) showing the old and
     new behavior for comparison
 
@@ -1311,7 +1311,7 @@ cat(paste(reprex_result, collapse = "\n"))
 **Key Benefits of This Approach**: - ✅ **Automatic image hosting**:
 Plots automatically uploaded to imgur (whitelisted domain) - ✅ **No
 local artifacts**: No PNG files left in repository to accidentally
-commit  
+commit\
 - ✅ **Complete format**: Includes “Created on \[date\] with reprex
 v\[version\]” footer - ✅ **Direct embedding**: Images display directly
 in GitHub responses - ✅ **Clean workflow**: No manual upload or cleanup
@@ -1464,7 +1464,7 @@ with date/version info that provides authority to your reprex.
 - **Solutions**:
   - Use system packages: `sudo apt install r-cran-[package]`
   - Try R-universe (FIRST PRIORITY):
-    `repos=c("https://r-universe.dev", "https://cloud.r-project.org")`  
+    `repos=c("https://r-universe.dev", "https://cloud.r-project.org")`\
   - Use remotes for GitHub packages (SECOND PRIORITY):
     `remotes::install_github("[author]/[package]")`
 
@@ -1658,7 +1658,7 @@ describe_posterior(model)  # Should have @importFrom bayestestR describe_posteri
 ## CI/CD Integration
 
 The package uses GitHub Actions with these workflows: - **R-CMD-check**:
-Multi-platform testing (Ubuntu, macOS, Windows)  
+Multi-platform testing (Ubuntu, macOS, Windows)\
 - **lint-changed-files**: Code style checking with lintr (only on
 changed files - efficient!) - **test-coverage**: Code coverage reporting
 with covr - **pkgdown**: Documentation website generation
@@ -1739,7 +1739,7 @@ data(mtcars)
 ## Performance Notes
 
 - Package build: ~19 seconds
-- Package install: ~3 seconds  
+- Package install: ~3 seconds\
 - Test suite: ~15 seconds (varies based on enabled tests)
 - Linting: ~20 seconds (normal for existing codebase)
 - Code styling: ~10-30 seconds depending on package size

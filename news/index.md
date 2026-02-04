@@ -1,11 +1,15 @@
 # Changelog
 
-## report (development version)
+## report 0.6.3
+
+CRAN release: 2026-01-08
 
 Bug fixes
 
-- Patch for change in [`attr()`](https://rdrr.io/r/base/attr.html) in
-  R-devel ([\#590](https://github.com/easystats/report/issues/590)).
+- Hotfix patch for change in
+  [`attr()`](https://rdrr.io/r/base/attr.html) in R-devel
+  ([\#590](https://github.com/easystats/report/issues/590)) to prevent
+  CRAN removal.
 
 ## report 0.6.2
 

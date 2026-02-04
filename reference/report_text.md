@@ -42,14 +42,14 @@ r
 #> Analyses were conducted using the R Statistical language (version 4.5.2; R Core
 #> Team, 2025) on Ubuntu 24.04.3 LTS, using the packages Matrix (version 1.7.4;
 #> Bates D et al., 2025), lme4 (version 1.1.38; Bates D et al., 2015), brms
-#> (version 2.23.0; Bürkner P, 2017), Rcpp (version 1.1.0; Eddelbuettel D et al.,
-#> 2025), rstanarm (version 2.32.2; Goodrich B et al., 2025), performance (version
+#> (version 2.23.0; Bürkner P, 2017), Rcpp (version 1.1.1; Eddelbuettel D et al.,
+#> 2026), rstanarm (version 2.32.2; Goodrich B et al., 2025), performance (version
 #> 0.15.3; Lüdecke D et al., 2021), bayestestR (version 0.17.0; Makowski D et al.,
 #> 2019), modelbased (version 0.13.1; Makowski D et al., 2025), report (version
-#> 0.6.2.1; Makowski D et al., 2023), BayesFactor (version 0.9.12.4.7; Morey R,
+#> 0.6.3; Makowski D et al., 2023), BayesFactor (version 0.9.12.4.7; Morey R,
 #> Rouder J, 2024), coda (version 0.19.4.1; Plummer M et al., 2006), lavaan
-#> (version 0.6.21; Rosseel Y et al., 2025) and dplyr (version 1.1.4; Wickham H et
-#> al., 2023).
+#> (version 0.6.21; Rosseel Y et al., 2025) and dplyr (version 1.2.0; Wickham H et
+#> al., 2026).
 #> 
 #> References
 #> ----------
@@ -70,8 +70,8 @@ r
 #> *100*(5), 1-54. doi:10.18637/jss.v100.i05
 #> <https://doi.org/10.18637/jss.v100.i05>.
 #>   - Eddelbuettel D, Francois R, Allaire J, Ushey K, Kou Q, Russell N, Ucar I,
-#> Bates D, Chambers J (2025). _Rcpp: Seamless R and C++ Integration_. R package
-#> version 1.1.0, <https://www.rcpp.org>. Eddelbuettel D, François R (2011).
+#> Bates D, Chambers J (2026). _Rcpp: Seamless R and C++ Integration_. R package
+#> version 1.1.1, <https://www.rcpp.org>. Eddelbuettel D, François R (2011).
 #> “Rcpp: Seamless R and C++ Integration.” _Journal of Statistical Software_,
 #> *40*(8), 1-18. doi:10.18637/jss.v040.i08
 #> <https://doi.org/10.18637/jss.v040.i08>. Eddelbuettel D (2013). _Seamless R and
@@ -124,15 +124,15 @@ r
 #> Package for Structural Equation Modeling.” _Journal of Statistical Software_,
 #> *48*(2), 1-36. doi:10.18637/jss.v048.i02
 #> <https://doi.org/10.18637/jss.v048.i02>.
-#>   - Wickham H, François R, Henry L, Müller K, Vaughan D (2023). _dplyr: A Grammar
-#> of Data Manipulation_. R package version 1.1.4, <https://dplyr.tidyverse.org>.
+#>   - Wickham H, François R, Henry L, Müller K, Vaughan D (2026). _dplyr: A Grammar
+#> of Data Manipulation_. R package version 1.2.0, <https://dplyr.tidyverse.org>.
 summary(r)
 #> The analysis was done using the R Statistical language (v4.5.2; R Core Team,
 #> 2025) on Ubuntu 24.04.3 LTS, using the packages Matrix (v1.7.4), lme4
-#> (v1.1.38), brms (v2.23.0), Rcpp (v1.1.0), rstanarm (v2.32.2), performance
-#> (v0.15.3), bayestestR (v0.17.0), modelbased (v0.13.1), report (v0.6.2.1),
+#> (v1.1.38), brms (v2.23.0), Rcpp (v1.1.1), rstanarm (v2.32.2), performance
+#> (v0.15.3), bayestestR (v0.17.0), modelbased (v0.13.1), report (v0.6.3),
 #> BayesFactor (v0.9.12.4.7), coda (v0.19.4.1), lavaan (v0.6.21) and dplyr
-#> (v1.1.4).
+#> (v1.2.0).
 
 # Data
 report_text(iris$Sepal.Length)
