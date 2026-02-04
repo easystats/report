@@ -1,3 +1,9 @@
+# report 0.6.3
+
+Bug fixes
+
+* Hotfix patch for change in `attr()` in R-devel (#590) to prevent CRAN removal.
+
 # report 0.6.2
 
 Bug fixes
