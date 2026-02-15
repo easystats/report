@@ -40,7 +40,8 @@ report_table.character <- function(
   levels_percentage <- .report_dataframe_percentage(x, levels_percentage)
   missing_percentage <- .report_dataframe_percentage(x, missing_percentage)
 
-  n_char <- as.data.frame(sort(table(x), decreasing = TRUE))
+  n_char <- as.data.frame(table(x))
+  n_char <- n_char[order(n_char$Freq, decreasing = TRUE), ]
   names(n_char) <- c("Entry", "n_Entry")
   n_char$percentage_Entry <- n_char$n_Entry / length(x)
 
@@ -105,7 +106,8 @@ report_parameters.character <- function(
     param_text <- paste0(entries$Entry, " (n = ", entries$n_Entry, ")")
   }
 
-  as.report_parameters(param_text, summary = param_text[1:n_entries], ...)
+  n_entries_actual <- min(n_entries, length(param_text))
+  as.report_parameters(param_text, summary = param_text[1:n_entries_actual], ...)
 }
 
 
@@ -243,8 +245,9 @@ report_statistics.character <- function(
     stat_text <- paste0(entries$Entry, ", n = ", entries$n_Entry)
   }
 
+  n_entries_actual <- min(n_entries, length(stat_text))
   as.report_statistics(
     paste(stat_text, collapse = "; "),
-    summary = paste(stat_text[1:n_entries], collapse = "; ")
+    summary = paste(stat_text[1:n_entries_actual], collapse = "; ")
   )
 }
