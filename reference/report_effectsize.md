@@ -77,6 +77,6 @@ report_effectsize(model, effectsize_method = "basic")
 #> 
 #> very small (Std. beta = 0.00, 95% CI [0.00, 0.00])
 #> medium (Std. beta = 0.53, 95% CI [0.42, 0.65])
-#> large (Std. beta = 0.90, 95% CI [0.80, 1.03])
+#> large (Std. beta = 0.90, 95% CI [0.78, 1.03])
 # }
 ```

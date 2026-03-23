@@ -86,8 +86,8 @@ report_statistics(model)
 library(rstanarm)
 model <- suppressWarnings(stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600))
 report_statistics(model)
-#> Median = 5.01, 95% CI [4.85, 5.14], pd = 100%; Std. beta = -1.02, 95% CI [-1.20, -0.84]; Rhat = 1.00, ESS = 859.76
-#> Median = 0.93, 95% CI [0.72, 1.14], pd = 100%; Std. beta = 1.13, 95% CI [0.87, 1.39]; Rhat = 1.00, ESS = 798.71
-#> Median = 1.58, 95% CI [1.37, 1.80], pd = 100%; Std. beta = 1.91, 95% CI [1.67, 2.17]; Rhat = 1.00, ESS = 911.74
+#> Median = 5.00, 95% CI [4.86, 5.16], pd = 100%; Std. beta = -1.02, 95% CI [-1.20, -0.84]; Rhat = 1.00, ESS = 1059.82
+#> Median = 0.93, 95% CI [0.72, 1.14], pd = 100%; Std. beta = 1.13, 95% CI [0.87, 1.39]; Rhat = 1.00, ESS = 1145.22
+#> Median = 1.58, 95% CI [1.37, 1.79], pd = 100%; Std. beta = 1.91, 95% CI [1.67, 2.17]; Rhat = 1.00, ESS = 1143.80
 # }
 ```

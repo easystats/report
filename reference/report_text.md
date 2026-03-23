@@ -39,15 +39,15 @@ library(report)
 # Miscellaneous
 r <- report_text(sessionInfo())
 r
-#> Analyses were conducted using the R Statistical language (version 4.5.2; R Core
-#> Team, 2025) on Ubuntu 24.04.3 LTS, using the packages Matrix (version 1.7.4;
-#> Bates D et al., 2025), lme4 (version 1.1.38; Bates D et al., 2015), brms
+#> Analyses were conducted using the R Statistical language (version 4.5.3; R Core
+#> Team, 2026) on Ubuntu 24.04.3 LTS, using the packages Matrix (version 1.7.4;
+#> Bates D et al., 2025), lme4 (version 2.0.1; Bates D et al., 2015), brms
 #> (version 2.23.0; Bürkner P, 2017), Rcpp (version 1.1.1; Eddelbuettel D et al.,
 #> 2026), rstanarm (version 2.32.2; Goodrich B et al., 2025), performance (version
-#> 0.15.3; Lüdecke D et al., 2021), bayestestR (version 0.17.0; Makowski D et al.,
-#> 2019), modelbased (version 0.13.1; Makowski D et al., 2025), report (version
-#> 0.6.3; Makowski D et al., 2023), BayesFactor (version 0.9.12.4.7; Morey R,
-#> Rouder J, 2024), coda (version 0.19.4.1; Plummer M et al., 2006), lavaan
+#> 0.16.0; Lüdecke D et al., 2021), bayestestR (version 0.17.0; Makowski D et al.,
+#> 2019), modelbased (version 0.14.0; Makowski D et al., 2025), report (version
+#> 0.6.3; Makowski D et al., 2023), BayesFactor (version 0.9.12.4.8; Morey R,
+#> Rouder J, 2026), coda (version 0.19.4.1; Plummer M et al., 2006), lavaan
 #> (version 0.6.21; Rosseel Y et al., 2025) and dplyr (version 1.2.0; Wickham H et
 #> al., 2026).
 #> 
@@ -108,13 +108,13 @@ r
 #> doi:10.32614/CRAN.package.report
 #> <https://doi.org/10.32614/CRAN.package.report>,
 #> <https://easystats.github.io/report/>.
-#>   - Morey R, Rouder J (2024). _BayesFactor: Computation of Bayes Factors for
-#> Common Designs_. R package version 0.9.12-4.7,
+#>   - Morey R, Rouder J (2026). _BayesFactor: Computation of Bayes Factors for
+#> Common Designs_. R package version 0.9.12-4.8,
 #> <https://richarddmorey.github.io/BayesFactor/>.
 #>   - Plummer M, Best N, Cowles K, Vines K (2006). “CODA: Convergence Diagnosis and
 #> Output Analysis for MCMC.” _R News_, *6*(1), 7-11.
 #> <https://journal.r-project.org/archive/>.
-#>   - R Core Team (2025). _R: A Language and Environment for Statistical
+#>   - R Core Team (2026). _R: A Language and Environment for Statistical
 #> Computing_. R Foundation for Statistical Computing, Vienna, Austria.
 #> <https://www.R-project.org/>.
 #>   - Rosseel Y, Jorgensen T, De Wilde L (2025). _lavaan: Latent Variable
@@ -127,12 +127,11 @@ r
 #>   - Wickham H, François R, Henry L, Müller K, Vaughan D (2026). _dplyr: A Grammar
 #> of Data Manipulation_. R package version 1.2.0, <https://dplyr.tidyverse.org>.
 summary(r)
-#> The analysis was done using the R Statistical language (v4.5.2; R Core Team,
-#> 2025) on Ubuntu 24.04.3 LTS, using the packages Matrix (v1.7.4), lme4
-#> (v1.1.38), brms (v2.23.0), Rcpp (v1.1.1), rstanarm (v2.32.2), performance
-#> (v0.15.3), bayestestR (v0.17.0), modelbased (v0.13.1), report (v0.6.3),
-#> BayesFactor (v0.9.12.4.7), coda (v0.19.4.1), lavaan (v0.6.21) and dplyr
-#> (v1.2.0).
+#> The analysis was done using the R Statistical language (v4.5.3; R Core Team,
+#> 2026) on Ubuntu 24.04.3 LTS, using the packages Matrix (v1.7.4), lme4 (v2.0.1),
+#> brms (v2.23.0), Rcpp (v1.1.1), rstanarm (v2.32.2), performance (v0.16.0),
+#> bayestestR (v0.17.0), modelbased (v0.14.0), report (v0.6.3), BayesFactor
+#> (v0.9.12.4.8), coda (v0.19.4.1), lavaan (v0.6.21) and dplyr (v1.2.0).
 
 # Data
 report_text(iris$Sepal.Length)
@@ -273,18 +272,18 @@ r
 #> of 600 iterations and a warmup of 300) to predict mpg with cyl and wt (formula:
 #> mpg ~ cyl + wt). Priors over parameters were all set as normal (mean = 0.00, SD
 #> = 8.44; mean = 0.00, SD = 15.40) distributions. The model's explanatory power
-#> is substantial (R2 = 0.81, 95% CI [0.71, 0.89], adj. R2 = 0.80). The model's
-#> intercept, corresponding to cyl = 0 and wt = 0, is at 39.70 (95% CI [36.11,
-#> 43.29]). Within this model:
+#> is substantial (R2 = 0.82, 95% CI [0.69, 0.89], adj. R2 = 0.80). The model's
+#> intercept, corresponding to cyl = 0 and wt = 0, is at 39.56 (95% CI [35.82,
+#> 43.32]). Within this model:
 #> 
-#>   - The effect of cyl (Median = -1.49, 95% CI [-2.28, -0.67]) has a 100.00%
+#>   - The effect of cyl (Median = -1.47, 95% CI [-2.35, -0.64]) has a 100.00%
 #> probability of being negative (< 0), 99.83% of being significant (< -0.30), and
-#> 21.33% of being large (< -1.81). The estimation successfully converged (Rhat =
-#> 1.002) but the indices are unreliable (ESS = 743)
-#>   - The effect of wt (Median = -3.22, 95% CI [-4.67, -1.80]) has a 100.00%
-#> probability of being negative (< 0), 100.00% of being significant (< -0.30),
-#> and 97.33% of being large (< -1.81). The estimation successfully converged
-#> (Rhat = 0.999) but the indices are unreliable (ESS = 668)
+#> 20.50% of being large (< -1.81). The estimation successfully converged (Rhat =
+#> 1.005) but the indices are unreliable (ESS = 830)
+#>   - The effect of wt (Median = -3.23, 95% CI [-4.71, -1.73]) has a 99.92%
+#> probability of being negative (< 0), 99.92% of being significant (< -0.30), and
+#> 96.75% of being large (< -1.81). However, the estimation might not have
+#> successfuly converged (Rhat = 1.014) and the indices are unreliable (ESS = 684)
 #> 
 #> Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
 #> framework, we report the median of the posterior distribution and its 95% CI
@@ -298,17 +297,17 @@ r
 summary(r)
 #> We fitted a Bayesian linear model to predict mpg with cyl and wt. Priors over
 #> parameters were all set as normal (mean = 0.00, SD = 8.44; mean = 0.00, SD =
-#> 15.40) distributions. The model's explanatory power is substantial (R2 = 0.81,
-#> adj. R2 = 0.80). The model's intercept is at 39.70 (95% CI [36.11, 43.29]).
+#> 15.40) distributions. The model's explanatory power is substantial (R2 = 0.82,
+#> adj. R2 = 0.80). The model's intercept is at 39.56 (95% CI [35.82, 43.32]).
 #> Within this model:
 #> 
-#>   - The effect of cyl (Median = -1.49, 95% CI [-2.28, -0.67]) has 100.00%, 99.83%
-#> and 21.33% probability of being negative (< 0), significant (< -0.30) and large
-#> (< -1.81). The estimation successfully converged (Rhat = 1.002) but the indices
-#> are unreliable (ESS = 743)
-#>   - The effect of wt (Median = -3.22, 95% CI [-4.67, -1.80]) has 100.00%, 100.00%
-#> and 97.33% probability of being negative (< 0), significant (< -0.30) and large
-#> (< -1.81). The estimation successfully converged (Rhat = 0.999) but the indices
-#> are unreliable (ESS = 668)
+#>   - The effect of cyl (Median = -1.47, 95% CI [-2.35, -0.64]) has 100.00%, 99.83%
+#> and 20.50% probability of being negative (< 0), significant (< -0.30) and large
+#> (< -1.81). The estimation successfully converged (Rhat = 1.005) but the indices
+#> are unreliable (ESS = 830)
+#>   - The effect of wt (Median = -3.23, 95% CI [-4.71, -1.73]) has 99.92%, 99.92%
+#> and 96.75% probability of being negative (< 0), significant (< -0.30) and large
+#> (< -1.81). However, the estimation might not have successfuly converged (Rhat =
+#> 1.014) and the indices are unreliable (ESS = 684)
 # }
 ```

@@ -55,5 +55,5 @@ format_citation(citation, authorsdate = TRUE, short = TRUE, intext = TRUE)
 cite_citation(citation)
 #> [1] "(Makowski et al., 2020)"
 clean_citation(citation())
-#> [1] "R Core Team (2025). _R: A Language and Environment for Statistical Computing_. R Foundation for Statistical Computing, Vienna, Austria. <https://www.R-project.org/>."
+#> [1] "R Core Team (2026). _R: A Language and Environment for Statistical Computing_. R Foundation for Statistical Computing, Vienna, Austria. <https://www.R-project.org/>."
 ```

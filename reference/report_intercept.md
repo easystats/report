@@ -49,6 +49,6 @@ report_intercept(model)
 library(rstanarm)
 model <- suppressWarnings(stan_glm(Sepal.Length ~ Species, data = iris, refresh = 0, iter = 600))
 report_intercept(model)
-#> The model's intercept, corresponding to Species = setosa, is at 5.01 (95% CI [4.86, 5.15]).
+#> The model's intercept, corresponding to Species = setosa, is at 5.01 (95% CI [4.87, 5.15]).
 # }
 ```

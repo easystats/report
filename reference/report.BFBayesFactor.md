@@ -41,7 +41,7 @@ report_statistics(x, table = NULL, ...)
 library(BayesFactor)
 #> Loading required package: coda
 #> ************
-#> Welcome to BayesFactor 0.9.12-4.7. If you have questions, please contact Richard Morey (richarddmorey@gmail.com).
+#> Welcome to BayesFactor 0.9.12-4.8. If you have questions, please contact Richard Morey (richarddmorey@gmail.com).
 #> 
 #> Type BFManual() to open the manual.
 #> ************

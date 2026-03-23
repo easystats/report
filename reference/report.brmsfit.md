@@ -107,18 +107,18 @@ r
 #> model's explanatory power is substantial (R2 = 0.82, 95% CI [0.75, 0.85], adj.
 #> R2 = 0.78). Within this model:
 #> 
-#>   - The effect of b Intercept (Median = 19.51, 95% CI [9.40, 30.15]) has a
-#> 100.00% probability of being positive (> 0), 100.00% of being significant (>
-#> 0.30), and 100.00% of being large (> 1.81). The estimation successfully
-#> converged (Rhat = 0.998) but the indices are unreliable (ESS = 507)
-#>   - The effect of b qsec (Median = 0.93, 95% CI [0.42, 1.48]) has a 100.00%
-#> probability of being positive (> 0), 99.17% of being significant (> 0.30), and
-#> 0.00% of being large (> 1.81). The estimation successfully converged (Rhat =
-#> 0.998) but the indices are unreliable (ESS = 466)
-#>   - The effect of b wt (Median = -5.02, 95% CI [-6.03, -3.93]) has a 100.00%
+#>   - The effect of b Intercept (Median = 20.01, 95% CI [8.31, 31.44]) has a 99.67%
+#> probability of being positive (> 0), 99.67% of being significant (> 0.30), and
+#> 99.67% of being large (> 1.81). The estimation successfully converged (Rhat =
+#> 1.003) but the indices are unreliable (ESS = 636)
+#>   - The effect of b qsec (Median = 0.91, 95% CI [0.32, 1.51]) has a 99.83%
+#> probability of being positive (> 0), 97.50% of being significant (> 0.30), and
+#> 0.50% of being large (> 1.81). The estimation successfully converged (Rhat =
+#> 1.001) but the indices are unreliable (ESS = 731)
+#>   - The effect of b wt (Median = -5.09, 95% CI [-6.14, -3.96]) has a 100.00%
 #> probability of being negative (< 0), 100.00% of being significant (< -0.30),
 #> and 100.00% of being large (< -1.81). The estimation successfully converged
-#> (Rhat = 1.000) but the indices are unreliable (ESS = 712)
+#> (Rhat = 1.000) but the indices are unreliable (ESS = 519)
 #> 
 #> Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
 #> framework, we report the median of the posterior distribution and its 95% CI
@@ -135,42 +135,42 @@ summary(r)
 #> Student-t⁺(df = 3.00, μ = 0.00, σ = 5.40). The model's explanatory power is
 #> substantial (R2 = 0.82, adj. R2 = 0.78). Within this model:
 #> 
-#>   - The effect of b Intercept (Median = 19.51, 95% CI [9.40, 30.15]) has 100.00%,
-#> 100.00% and 100.00% probability of being positive (> 0), significant (> 0.30)
-#> and large (> 1.81). The estimation successfully converged (Rhat = 0.998) but
-#> the indices are unreliable (ESS = 507)
-#>   - The effect of b qsec (Median = 0.93, 95% CI [0.42, 1.48]) has 100.00%, 99.17%
-#> and 0.00% probability of being positive (> 0), significant (> 0.30) and large
-#> (> 1.81). The estimation successfully converged (Rhat = 0.998) but the indices
-#> are unreliable (ESS = 466)
-#>   - The effect of b wt (Median = -5.02, 95% CI [-6.03, -3.93]) has 100.00%,
+#>   - The effect of b Intercept (Median = 20.01, 95% CI [8.31, 31.44]) has 99.67%,
+#> 99.67% and 99.67% probability of being positive (> 0), significant (> 0.30) and
+#> large (> 1.81). The estimation successfully converged (Rhat = 1.003) but the
+#> indices are unreliable (ESS = 636)
+#>   - The effect of b qsec (Median = 0.91, 95% CI [0.32, 1.51]) has 99.83%, 97.50%
+#> and 0.50% probability of being positive (> 0), significant (> 0.30) and large
+#> (> 1.81). The estimation successfully converged (Rhat = 1.001) but the indices
+#> are unreliable (ESS = 731)
+#>   - The effect of b wt (Median = -5.09, 95% CI [-6.14, -3.96]) has 100.00%,
 #> 100.00% and 100.00% probability of being negative (< 0), significant (< -0.30)
 #> and large (< -1.81). The estimation successfully converged (Rhat = 1.000) but
-#> the indices are unreliable (ESS = 712)
+#> the indices are unreliable (ESS = 519)
 as.data.frame(r)
-#> Parameter   |   Component | Median |         95% CI |   pd |  Rhat | ESS |    Fit
-#> ---------------------------------------------------------------------------------
-#> (Intercept) | conditional |  19.51 | [ 9.40, 30.15] | 100% | 0.998 | 507 |       
-#> qsec        | conditional |   0.93 | [ 0.42,  1.48] | 100% | 0.998 | 466 |       
-#> wt          | conditional |  -5.02 | [-6.03, -3.93] | 100% | 1.000 | 712 |       
-#> sigma       |       sigma |   2.66 | [ 2.10,  3.54] | 100% | 1.007 | 321 |       
-#>             |             |        |                |      |       |     |       
-#> ELPD        |             |        |                |      |       |     | -79.08
-#> LOOIC       |             |        |                |      |       |     | 158.16
-#> WAIC        |             |        |                |      |       |     | 157.98
-#> R2          |             |        |                |      |       |     |   0.82
-#> R2 (adj.)   |             |        |                |      |       |     |   0.78
-#> Sigma       |             |        |                |      |       |     |   2.69
+#> Parameter   |   Component | Median |         95% CI |     pd |  Rhat | ESS |    Fit
+#> -----------------------------------------------------------------------------------
+#> (Intercept) | conditional |  20.01 | [ 8.31, 31.44] | 99.67% | 1.003 | 636 |       
+#> qsec        | conditional |   0.91 | [ 0.32,  1.51] | 99.83% | 1.001 | 731 |       
+#> wt          | conditional |  -5.09 | [-6.14, -3.96] |   100% | 1.000 | 519 |       
+#> sigma       |       sigma |   2.71 | [ 2.14,  3.47] |   100% | 0.999 | 468 |       
+#>             |             |        |                |        |       |     |       
+#> ELPD        |             |        |                |        |       |     | -79.32
+#> LOOIC       |             |        |                |        |       |     | 158.64
+#> WAIC        |             |        |                |        |       |     | 158.33
+#> R2          |             |        |                |        |       |     |   0.82
+#> R2 (adj.)   |             |        |                |        |       |     |   0.78
+#> Sigma       |             |        |                |        |       |     |   2.74
 summary(as.data.frame(r))
-#> Parameter   |   Component | Median |         95% CI |   pd |  Rhat | ESS |  Fit
-#> -------------------------------------------------------------------------------
-#> (Intercept) | conditional |  19.51 | [ 9.40, 30.15] | 100% | 0.998 | 507 |     
-#> qsec        | conditional |   0.93 | [ 0.42,  1.48] | 100% | 0.998 | 466 |     
-#> wt          | conditional |  -5.02 | [-6.03, -3.93] | 100% | 1.000 | 712 |     
-#> sigma       |       sigma |   2.66 | [ 2.10,  3.54] | 100% | 1.007 | 321 |     
-#>             |             |        |                |      |       |     |     
-#> R2          |             |        |                |      |       |     | 0.82
-#> R2 (adj.)   |             |        |                |      |       |     | 0.78
-#> Sigma       |             |        |                |      |       |     | 2.69
+#> Parameter   |   Component | Median |         95% CI |     pd |  Rhat | ESS |  Fit
+#> ---------------------------------------------------------------------------------
+#> (Intercept) | conditional |  20.01 | [ 8.31, 31.44] | 99.67% | 1.003 | 636 |     
+#> qsec        | conditional |   0.91 | [ 0.32,  1.51] | 99.83% | 1.001 | 731 |     
+#> wt          | conditional |  -5.09 | [-6.14, -3.96] |   100% | 1.000 | 519 |     
+#> sigma       |       sigma |   2.71 | [ 2.14,  3.47] |   100% | 0.999 | 468 |     
+#>             |             |        |                |        |       |     |     
+#> R2          |             |        |                |        |       |     | 0.82
+#> R2 (adj.)   |             |        |                |        |       |     | 0.78
+#> Sigma       |             |        |                |        |       |     | 2.74
 # }
 ```

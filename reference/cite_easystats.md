@@ -131,7 +131,7 @@ cite_easystats(packages = "all")
 #>     https://doi.org/10.21105/joss.02815
 #> - Ben-Shachar, M. S., Makowski, D., Lüdecke, D., Patil, I., & Wiernik, B.
 #>     M. (2022). effectsize: Indices of effect size and standardized
-#>     parameters (1.0.1) [R package].
+#>     parameters (1.0.2) [R package].
 #>     https://CRAN.R-project.org/package=effectsize (Original work published
 #>     2019)
 #> - Lüdecke, D., Ben-Shachar, M., Patil, I., & Makowski, D. (2020).
@@ -148,12 +148,12 @@ cite_easystats(packages = "all")
 #>     (Original work published 2019)
 #> - Lüdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., Waggoner, P., &
 #>     Wiernik, B. M. (2021). performance: Assessment of regression models
-#>     performance (0.15.3) [R package].
+#>     performance (0.16.0) [R package].
 #>     https://CRAN.R-project.org/package=performance (Original work published
 #>     2019)
 #> - Lüdecke, D., Makowski, D., Patil, I., Waggoner, P., Ben-Shachar, M. S.,
 #>     Wiernik, B. M., & Arel-Bundock, V. (2022). insight: Easy access to
-#>     model information for various model objects (1.4.5) [R package].
+#>     model information for various model objects (1.4.6) [R package].
 #>     https://CRAN.R-project.org/package=insight (Original work published
 #>     2019)
 #> - Lüdecke, D., Waggoner, P., & Makowski, D. (2019). insight: A unified
@@ -165,7 +165,7 @@ cite_easystats(packages = "all")
 #>     1541. https://doi.org/10.21105/joss.01541
 #> - Makowski, D., Lüdecke, D., Ben-Shachar, M. S., & Patil, I. (2022).
 #>     modelbased: Estimation of model-based predictions, contrasts and means
-#>     (0.13.1) [R package]. https://CRAN.R-project.org/package=modelbased
+#>     (0.14.0) [R package]. https://CRAN.R-project.org/package=modelbased
 #>     (Original work published 2020)
 #> - Makowski, D., Lüdecke, D., Ben-Shachar, M. S., Patil, I., Wilson, M. D.,
 #>     & Wiernik, B. M. (2021). bayestestR: Understand and describe Bayesian
@@ -202,7 +202,7 @@ summary(cite_easystats(packages = "all"), what = "all")
 #>     https://doi.org/10.21105/joss.02815
 #> - Ben-Shachar, M. S., Makowski, D., Lüdecke, D., Patil, I., & Wiernik, B.
 #>     M. (2022). effectsize: Indices of effect size and standardized
-#>     parameters (1.0.1) [R package].
+#>     parameters (1.0.2) [R package].
 #>     https://CRAN.R-project.org/package=effectsize (Original work published
 #>     2019)
 #> - Lüdecke, D., Ben-Shachar, M., Patil, I., & Makowski, D. (2020).
@@ -219,12 +219,12 @@ summary(cite_easystats(packages = "all"), what = "all")
 #>     (Original work published 2019)
 #> - Lüdecke, D., Makowski, D., Ben-Shachar, M. S., Patil, I., Waggoner, P., &
 #>     Wiernik, B. M. (2021). performance: Assessment of regression models
-#>     performance (0.15.3) [R package].
+#>     performance (0.16.0) [R package].
 #>     https://CRAN.R-project.org/package=performance (Original work published
 #>     2019)
 #> - Lüdecke, D., Makowski, D., Patil, I., Waggoner, P., Ben-Shachar, M. S.,
 #>     Wiernik, B. M., & Arel-Bundock, V. (2022). insight: Easy access to
-#>     model information for various model objects (1.4.5) [R package].
+#>     model information for various model objects (1.4.6) [R package].
 #>     https://CRAN.R-project.org/package=insight (Original work published
 #>     2019)
 #> - Lüdecke, D., Waggoner, P., & Makowski, D. (2019). insight: A unified
@@ -236,7 +236,7 @@ summary(cite_easystats(packages = "all"), what = "all")
 #>     1541. https://doi.org/10.21105/joss.01541
 #> - Makowski, D., Lüdecke, D., Ben-Shachar, M. S., & Patil, I. (2022).
 #>     modelbased: Estimation of model-based predictions, contrasts and means
-#>     (0.13.1) [R package]. https://CRAN.R-project.org/package=modelbased
+#>     (0.14.0) [R package]. https://CRAN.R-project.org/package=modelbased
 #>     (Original work published 2020)
 #> - Makowski, D., Lüdecke, D., Ben-Shachar, M. S., Patil, I., Wilson, M. D.,
 #>     & Wiernik, B. M. (2021). bayestestR: Understand and describe Bayesian
@@ -272,7 +272,7 @@ cite_easystats(packages = c("modelbased", "see"))
 #> 
 #> - Makowski, D., Lüdecke, D., Ben-Shachar, M. S., & Patil, I. (2022).
 #>     modelbased: Estimation of model-based predictions, contrasts and means
-#>     (0.13.1) [R package]. https://CRAN.R-project.org/package=modelbased
+#>     (0.14.0) [R package]. https://CRAN.R-project.org/package=modelbased
 #>     (Original work published 2020)
 #> 
 summary(cite_easystats(packages = c("modelbased", "see")), what = "all")
@@ -292,7 +292,7 @@ summary(cite_easystats(packages = c("modelbased", "see")), what = "all")
 #> 
 #> - Makowski, D., Lüdecke, D., Ben-Shachar, M. S., & Patil, I. (2022).
 #>     modelbased: Estimation of model-based predictions, contrasts and means
-#>     (0.13.1) [R package]. https://CRAN.R-project.org/package=modelbased
+#>     (0.14.0) [R package]. https://CRAN.R-project.org/package=modelbased
 #>     (Original work published 2020)
 #> 
 

@@ -64,7 +64,7 @@ cite_packages()
   <doi:10.32614/CRAN.package.report>
   <https://doi.org/10.32614/CRAN.package.report>,
   <https://easystats.github.io/report/>.
-- R Core Team (2025). *R: A Language and Environment for Statistical
+- R Core Team (2026). *R: A Language and Environment for Statistical
   Computing*. R Foundation for Statistical Computing, Vienna, Austria.
   <https://www.R-project.org/>.
 

@@ -95,17 +95,17 @@ r
 #> (formula: mpg ~ qsec + wt). Priors over parameters were all set as normal (mean
 #> = 0.00, SD = 8.43; mean = 0.00, SD = 15.40) distributions. The model's
 #> explanatory power is substantial (R2 = 0.81, 95% CI [0.71, 0.89], adj. R2 =
-#> 0.79). The model's intercept, corresponding to qsec = 0 and wt = 0, is at 19.81
-#> (95% CI [9.33, 30.41]). Within this model:
+#> 0.79). The model's intercept, corresponding to qsec = 0 and wt = 0, is at 19.74
+#> (95% CI [8.59, 29.70]). Within this model:
 #> 
-#>   - The effect of qsec (Median = 0.91, 95% CI [0.34, 1.48]) has a 99.60%
-#> probability of being positive (> 0), 98.30% of being significant (> 0.30), and
-#> 0.00% of being large (> 1.81). The estimation successfully converged (Rhat =
-#> 0.999) and the indices are reliable (ESS = 1006)
-#>   - The effect of wt (Median = -5.05, 95% CI [-6.06, -4.13]) has a 100.00%
+#>   - The effect of qsec (Median = 0.93, 95% CI [0.42, 1.48]) has a 100.00%
+#> probability of being positive (> 0), 99.50% of being significant (> 0.30), and
+#> 0.40% of being large (> 1.81). The estimation successfully converged (Rhat =
+#> 1.001) but the indices are unreliable (ESS = 739)
+#>   - The effect of wt (Median = -5.04, 95% CI [-5.96, -4.10]) has a 100.00%
 #> probability of being negative (< 0), 100.00% of being significant (< -0.30),
 #> and 100.00% of being large (< -1.81). The estimation successfully converged
-#> (Rhat = 1.001) and the indices are reliable (ESS = 1216)
+#> (Rhat = 1.000) and the indices are reliable (ESS = 1033)
 #> 
 #> Following the Sequential Effect eXistence and sIgnificance Testing (SEXIT)
 #> framework, we report the median of the posterior distribution and its 95% CI
@@ -120,21 +120,22 @@ summary(r)
 #> We fitted a Bayesian linear model to predict mpg with qsec and wt. Priors over
 #> parameters were all set as normal (mean = 0.00, SD = 8.43; mean = 0.00, SD =
 #> 15.40) distributions. The model's explanatory power is substantial (R2 = 0.81,
-#> adj. R2 = 0.79). The model's intercept is at 19.81 (95% CI [9.33, 30.41]).
+#> adj. R2 = 0.79). The model's intercept is at 19.74 (95% CI [8.59, 29.70]).
 #> Within this model:
 #> 
-#>   - The effect of qsec (Median = 0.91, 95% CI [0.34, 1.48]) has 99.60%, 98.30%
-#> and 0.00% probability of being positive (> 0), significant (> 0.30) and large
-#> (> 1.81)
-#>   - The effect of wt (Median = -5.05, 95% CI [-6.06, -4.13]) has 100.00%, 100.00%
+#>   - The effect of qsec (Median = 0.93, 95% CI [0.42, 1.48]) has 100.00%, 99.50%
+#> and 0.40% probability of being positive (> 0), significant (> 0.30) and large
+#> (> 1.81). The estimation successfully converged (Rhat = 1.001) but the indices
+#> are unreliable (ESS = 739)
+#>   - The effect of wt (Median = -5.04, 95% CI [-5.96, -4.10]) has 100.00%, 100.00%
 #> and 100.00% probability of being negative (< 0), significant (< -0.30) and
 #> large (< -1.81)
 as.data.frame(r)
 #> Parameter   | Median |         95% CI |     pd |  Rhat |  ESS
 #> -------------------------------------------------------------
-#> (Intercept) |  19.81 | [ 9.33, 30.41] |   100% | 0.999 |  944
-#> qsec        |   0.91 | [ 0.34,  1.48] | 99.60% | 0.999 | 1006
-#> wt          |  -5.05 | [-6.06, -4.13] |   100% | 1.001 | 1216
+#> (Intercept) |  19.74 | [ 8.59, 29.70] | 99.70% | 1.002 |  668
+#> qsec        |   0.93 | [ 0.42,  1.48] |   100% | 1.001 |  739
+#> wt          |  -5.04 | [-5.96, -4.10] |   100% | 1.000 | 1033
 #>             |        |                |        |       |     
 #> ELPD        |        |                |        |       |     
 #> LOOIC       |        |                |        |       |     
@@ -149,11 +150,11 @@ as.data.frame(r)
 #> qsec        |   Normal (0.00 +- 8.43) |       
 #> wt          |  Normal (0.00 +- 15.40) |       
 #>             |                         |       
-#> ELPD        |                         | -78.97
-#> LOOIC       |                         | 157.94
-#> WAIC        |                         | 157.65
+#> ELPD        |                         | -78.90
+#> LOOIC       |                         | 157.80
+#> WAIC        |                         | 157.55
 #> R2          |                         |   0.81
 #> R2 (adj.)   |                         |   0.79
-#> Sigma       |                         |   2.65
+#> Sigma       |                         |   2.64
 # }
 ```
