@@ -8,9 +8,8 @@
 - **[Daniel Lüdecke](https://github.com/strengejacke)**. Author.
   [](https://orcid.org/0000-0002-8895-3206)
 
-- **[Indrajeet
-  Patil](https://sites.google.com/site/indrajeetspatilmorality/)**.
-  Author. [](https://orcid.org/0000-0003-1995-6531)
+- **[Indrajeet Patil](https://www.indrapatil.com/)**. Author.
+  [](https://orcid.org/0000-0003-1995-6531)
 
 - **[Rémi Thériault](https://remi-theriault.com/)**. Author, maintainer.
   [](https://orcid.org/0000-0003-4315-6788)

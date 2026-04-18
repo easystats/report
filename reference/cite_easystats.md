@@ -153,7 +153,7 @@ cite_easystats(packages = "all")
 #>     2019)
 #> - Lüdecke, D., Makowski, D., Patil, I., Waggoner, P., Ben-Shachar, M. S.,
 #>     Wiernik, B. M., & Arel-Bundock, V. (2022). insight: Easy access to
-#>     model information for various model objects (1.4.6) [R package].
+#>     model information for various model objects (1.5.0) [R package].
 #>     https://CRAN.R-project.org/package=insight (Original work published
 #>     2019)
 #> - Lüdecke, D., Waggoner, P., & Makowski, D. (2019). insight: A unified
@@ -224,7 +224,7 @@ summary(cite_easystats(packages = "all"), what = "all")
 #>     2019)
 #> - Lüdecke, D., Makowski, D., Patil, I., Waggoner, P., Ben-Shachar, M. S.,
 #>     Wiernik, B. M., & Arel-Bundock, V. (2022). insight: Easy access to
-#>     model information for various model objects (1.4.6) [R package].
+#>     model information for various model objects (1.5.0) [R package].
 #>     https://CRAN.R-project.org/package=insight (Original work published
 #>     2019)
 #> - Lüdecke, D., Waggoner, P., & Makowski, D. (2019). insight: A unified
