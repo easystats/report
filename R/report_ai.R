@@ -27,7 +27,7 @@ report_ai.default <- function(x, ...) {
     ),
     call. = FALSE
   )
-  report(x, ...)
+  report(x, ..., audience = "humans")
 }
 
 #' @export
