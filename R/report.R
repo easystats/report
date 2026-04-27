@@ -20,6 +20,11 @@
 #'
 #' @param x The R object that you want to report (see list of of supported
 #'   objects above).
+#' @param audience The intended audience for the report. `"humans"` (default)
+#'   produces the standard formatted text report. `"ai"` produces a compact,
+#'   structured output optimised for consumption by a Large Language Model (LLM)
+#'   or AI agent via [report_ai()]. The default can be changed globally with
+#'   `options(report_audience = "ai")`.
 #' @param ... Arguments passed to or from other methods.
 #'
 #' @details
@@ -97,7 +102,11 @@
 #' summary(as.data.frame(r))
 #'
 #' @export
-report <- function(x, ...) {
+report <- function(x, ..., audience = getOption("report_audience", "humans")) {
+  audience <- match.arg(audience, c("humans", "ai"))
+  if (audience == "ai") {
+    return(report_ai(x, ...))
+  }
   UseMethod("report")
 }
 

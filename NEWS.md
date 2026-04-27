@@ -1,3 +1,13 @@
+# report 0.6.x
+
+New features
+
+* `report_ai()`: add support for `glm`, `merMod` (lme4), and `glmmTMB` model classes.
+* `report_ai()`: `## Model` section now includes a CI / degrees-of-freedom estimation line (e.g., `Inference: 95% CI [Satterthwaite df]`) when the information is available from `parameters::model_parameters()`.
+* `report_ai.default()`: instead of stopping with an error, now emits a warning and falls back to the standard `report()` output so that documents continue to render for unsupported model classes.
+* `report()`: new `audience` argument (`"humans"` (default) or `"ai"`). When `"ai"`, `report()` delegates to `report_ai()`. The default can be set globally via `options(report_audience = "ai")`.
+* New vignette: *AI-Optimized Reports* — explains `report_ai()`, the `audience` argument, and how to convert an entire Quarto document with a single option.
+
 # report 0.6.3
 
 Bug fixes
