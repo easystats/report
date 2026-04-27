@@ -39,6 +39,19 @@ test_that("report_ai.default - warns and falls back to report()", {
   expect_s3_class(result, "report")
 })
 
+test_that("report_ai.default - falls back to human report() when report_audience option is ai", {
+  # Regression test: fallback from report_ai.default() must not recurse back
+  # into AI routing when the global audience option is set to "ai".
+  ht <- t.test(mtcars$mpg ~ mtcars$am)
+  old <- getOption("report_audience")
+  on.exit(options(report_audience = old))
+
+  options(report_audience = "ai")
+  expect_warning(result <- report_ai(ht), "not yet available")
+  expect_s3_class(result, "report")
+  expect_false(inherits(result, "report_ai"))
+})
+
 test_that("report() audience argument dispatches to report_ai", {
   m <- lm(mpg ~ wt + hp, data = mtcars)
   result_ai <- report(m, audience = "ai")
