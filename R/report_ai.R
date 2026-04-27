@@ -89,7 +89,8 @@ report_ai.glmmTMB <- function(x, ...) {
 
   if (length(fixed_vars) > 0) {
     desc_report <- suppressWarnings(summary(report::report(
-      dat[, fixed_vars, drop = FALSE]
+      dat[, fixed_vars, drop = FALSE],
+      audience = "humans"
     )))
     desc_lines <- unlist(strsplit(as.character(desc_report), "\n"))
 
