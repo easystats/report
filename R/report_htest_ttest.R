@@ -35,7 +35,15 @@
   table_full <- cbind(table_full, attributes(effsize)$table)
   table_small <- datawizard::data_remove(
     table_full,
-    c("Parameter", "Group", "Mean_Group1", "Mean_Group2", "Method", "d_CI_low", "d_CI_high")
+    c(
+      "Parameter",
+      "Group",
+      "Mean_Group1",
+      "Mean_Group2",
+      "Method",
+      "d_CI_low",
+      "d_CI_high"
+    )
   )
   list(table = table_small, table_full = table_full)
 }
@@ -43,42 +51,49 @@
 
 # report_effectsize ---------------------
 
-.report_effectsize_ttest <- function(x, table, dot_args, type, rules = "cohen1988") {
+.report_effectsize_ttest <- function(x, dot_args, type, rules = "cohen1988") {
   es_args <- c(list(x), dot_args)
-  table <- do.call(effectsize::effectsize, es_args)
-  ci <- attributes(table)$ci
-  estimate <- names(table)[1]
+  es_table <- do.call(effectsize::effectsize, es_args)
+  ci <- attributes(es_table)$ci
+  estimate <- names(es_table)[1]
   dot_args$rules <- if (is.null(dot_args$rules)) rules else dot_args$rules
 
-  es_args <- c(list(table), dot_args)
+  es_args <- c(list(es_table), dot_args)
   interpretation <- do.call(effectsize::interpret, es_args)$Interpretation
   rules <- .text_effectsize(attr(attr(interpretation, "rules"), "rule_name"))
 
   if (estimate %in% c("d", "Cohens_d")) {
-    main <- paste0("Cohen's d = ", insight::format_value(table[[estimate]]))
+    main <- paste0("Cohen's d = ", insight::format_value(es_table[[estimate]]))
   } else if (estimate %in% c("g", "Hedges_g")) {
-    main <- paste0("Hedges's g = ", insight::format_value(table[[estimate]]))
+    main <- paste0("Hedges's g = ", insight::format_value(es_table[[estimate]]))
   } else {
-    main <- paste0(estimate, " = ", insight::format_value(table[[estimate]]))
+    main <- paste0(estimate, " = ", insight::format_value(es_table[[estimate]]))
   }
 
   statistics <- paste0(
     main,
     ", ",
-    insight::format_ci(table$CI_low, table$CI_high, ci)
+    insight::format_ci(es_table$CI_low, es_table$CI_high, ci)
   )
 
-  table <- datawizard::data_rename(
-    as.data.frame(table),
+  result_table <- datawizard::data_rename(
+    as.data.frame(es_table),
     select = c("CI_low", "CI_high"),
     replacement = paste0(estimate, c("_CI_low", "_CI_high"))
   )
 
-  table <- table[c(estimate, paste0(estimate, c("_CI_low", "_CI_high")))]
+  result_table <- result_table[c(
+    estimate,
+    paste0(estimate, c("_CI_low", "_CI_high"))
+  )]
 
   list(
-    table = table, statistics = statistics, interpretation = interpretation,
-    rules = rules, ci = ci, main = main
+    table = result_table,
+    statistics = statistics,
+    interpretation = interpretation,
+    rules = rules,
+    ci = ci,
+    main = main
   )
 }
 
@@ -98,7 +113,9 @@
     # If between two groups
   } else {
     table$Difference <- x$estimate[1] - x$estimate[2]
-    means <- paste0(names(x$estimate), " = ",
+    means <- paste0(
+      names(x$estimate),
+      " = ",
       insight::format_value(x$estimate),
       collapse = ", "
     )

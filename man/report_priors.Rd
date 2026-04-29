@@ -20,7 +20,7 @@ Reports priors of Bayesian models (see list of supported objects in
 \code{\link[=report]{report()}}).
 }
 \examples{
-\dontshow{if (requireNamespace("rstanarm", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("rstanarm", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 # Bayesian models
 library(rstanarm)

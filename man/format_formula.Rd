@@ -33,7 +33,7 @@ Convenient formatting of text components
 model <- lm(Sepal.Length ~ Species, data = iris)
 format_algorithm(model)
 
-\dontshow{if (requireNamespace("lme4", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("lme4", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Mixed models
 library(lme4)
 model <- lme4::lmer(Sepal.Length ~ Sepal.Width + (1 | Species), data = iris)
@@ -42,7 +42,7 @@ format_algorithm(model)
 model <- lm(Sepal.Length ~ Species, data = iris)
 format_formula(model)
 
-\dontshow{if (requireNamespace("lme4", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("lme4", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Mixed models
 library(lme4)
 model <- lme4::lmer(Sepal.Length ~ Sepal.Width + (1 | Species), data = iris)
@@ -52,7 +52,7 @@ format_formula(model, "random")
 model <- lm(Sepal.Length ~ Species, data = iris)
 format_model(model)
 
-\dontshow{if (requireNamespace("lme4", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("lme4", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Mixed models
 library(lme4)
 model <- lme4::lmer(Sepal.Length ~ Sepal.Width + (1 | Species), data = iris)
