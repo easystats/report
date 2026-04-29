@@ -66,6 +66,7 @@ All exported functions must be documented using `roxygen2`-style comments (`#'`)
 *   Make sure R-version requirements are not too strict
 *   **Package Functions:** Always use the `::` operator to call functions from other packages (e.g., `stats::shapiro.test`, `insight::model_info`). Do not use `library()` or `require()` at the top of a file (no full import, only selective import of functions).
 *   **Conditional Checks:** Use `insight::check_if_installed("pkg_name")` to check if a package is available before using it, especially for optional ("Suggests") dependencies.
+*   **Argument validation:** Use `insight::validate_argument()` instead of `match.arg()` to validate correct input of arguments, unless you need `several.ok`. In this case, rely on `match.arg()`.
 
 ## S3 Object System
 
