@@ -20,12 +20,12 @@ report_ai <- function(x, ...) {
 
 #' @export
 report_ai.default <- function(x, ...) {
-  warning(
-    sprintf(
-      "AI-optimized reports are not yet available for objects of class '%s'. Falling back to report().",
-      class(x)[1]
-    ),
-    call. = FALSE
+  insight::format_warning(
+    paste0(
+      "AI-optimized reports are not yet available for objects of class '",
+      class(x)[1],
+      "'. Falling back to report()."
+    )
   )
   report(x, ..., audience = "humans")
 }
@@ -69,7 +69,7 @@ report_ai.glmmTMB <- function(x, ...) {
   form <- insight::find_formula(x)
 
   func_name <- tryCatch(
-    as.character(insight::get_call(x)[[1]]),
+    insight::safe_deparse(insight::get_call(x)[[1]]),
     error = function(e) class(x)[1]
   )
   mod_family <- if (!is.null(mi$family)) mi$family else "Unknown"
@@ -129,9 +129,9 @@ report_ai.glmmTMB <- function(x, ...) {
     random_params <- NULL
   }
 
-  param_str <- insight::format_table(fixed_params) |>
-    insight::export_table(format = "markdown") |>
-    paste0(collapse = "\n")
+  param_table <- insight::format_table(fixed_params)
+  param_markdown <- insight::export_table(param_table, format = "markdown")
+  param_str <- paste0(param_markdown, collapse = "\n")
 
   # Format random effect variances as metadata bullet points
   random_str <- NULL
@@ -174,9 +174,9 @@ report_ai.glmmTMB <- function(x, ...) {
   }
 
   perf <- performance::model_performance(x, ...)
-  perf_str <- insight::format_table(perf) |>
-    insight::export_table(format = "markdown") |>
-    paste0(collapse = "\n")
+  perf_table <- insight::format_table(perf)
+  perf_markdown <- insight::export_table(perf_table, format = "markdown")
+  perf_str <- paste0(perf_markdown, collapse = "\n")
 
   if ("p" %in% names(fixed_params) && "Parameter" %in% names(fixed_params)) {
     sig_effects <- fixed_params$Parameter[

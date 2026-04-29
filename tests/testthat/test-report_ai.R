@@ -112,8 +112,9 @@ test_that("report_ai.merMod - lmer", {
   # Subject (grouping variable) should NOT appear in the Variables section
   expect_false(grepl(
     "Subject",
-    strsplit(result, "## Variables\n")[[1]][2] |>
-      strsplit("## Parameters")[[1]][1]
+    strsplit(strsplit(result, "## Variables\n")[[1]][2], "## Parameters")[[1]][
+      1
+    ]
   ))
 })
 
