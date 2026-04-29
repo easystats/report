@@ -34,8 +34,7 @@
 
 \item{include_intercept}{Set to \code{TRUE} to include the intercept (relevant for type-3 ANOVA tables).}
 
-\item{table}{Provide the output of  \code{report_table()} to avoid its
-re-computation.}
+\item{table}{Provide the output of \code{report_table()} to avoid its re-computation.}
 
 \item{effectsize}{Provide the output of \code{report_effectsize()} to avoid
 its re-computation.}

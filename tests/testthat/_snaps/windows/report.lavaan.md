@@ -3,7 +3,7 @@
     Code
       report(model)
     Output
-      [1] "Support for lavaan not fully implemented yet :("
+      Support for lavaan not fully implemented yet :(
 
 # model-lavaan detailed table
 

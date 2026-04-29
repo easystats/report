@@ -3,19 +3,35 @@ test_that("report.htest-t-test", {
 
   set.seed(123)
   r <- report(t.test(iris$Sepal.Width, iris$Sepal.Length, var.equal = TRUE))
-  expect_equal(as.report_table(r, summary = TRUE)$Difference, -2.786, tolerance = 0.01)
+  expect_equal(
+    as.report_table(r, summary = TRUE)$Difference,
+    -2.786,
+    tolerance = 0.01
+  )
 
   set.seed(123)
   r <- report(t.test(iris$Sepal.Width, iris$Sepal.Length))
-  expect_equal(as.report_table(r, summary = TRUE)$Difference, -2.786, tolerance = 0.01)
+  expect_equal(
+    as.report_table(r, summary = TRUE)$Difference,
+    -2.786,
+    tolerance = 0.01
+  )
 
   set.seed(123)
   r <- report(t.test(mtcars$mpg ~ mtcars$vs))
-  expect_equal(as.report_table(r, summary = TRUE)$Difference, -7.9404, tolerance = 0.01)
+  expect_equal(
+    as.report_table(r, summary = TRUE)$Difference,
+    -7.9404,
+    tolerance = 0.01
+  )
 
   set.seed(123)
   r <- report(t.test(iris$Sepal.Width, mu = 1))
-  expect_equal(as.report_table(r, summary = TRUE)$Difference, 2.057, tolerance = 0.01)
+  expect_equal(
+    as.report_table(r, summary = TRUE)$Difference,
+    2.057,
+    tolerance = 0.01
+  )
 
   # one-sample t-test ---------------------
 
@@ -23,16 +39,24 @@ test_that("report.htest-t-test", {
   expect_snapshot(variant = "windows", report(t.test(iris$Sepal.Width, mu = 1)))
 
   set.seed(123)
-  expect_snapshot(variant = "windows", report(t.test(
-    iris$Sepal.Width,
-    mu = -1, alternative = "l"
-  )))
+  expect_snapshot(
+    variant = "windows",
+    report(t.test(
+      iris$Sepal.Width,
+      mu = -1,
+      alternative = "l"
+    ))
+  )
 
   set.seed(123)
-  expect_snapshot(variant = "windows", report(t.test(
-    iris$Sepal.Width,
-    mu = 5, alternative = "g"
-  )))
+  expect_snapshot(
+    variant = "windows",
+    report(t.test(
+      iris$Sepal.Width,
+      mu = 5,
+      alternative = "g"
+    ))
+  )
 
   # two-sample unpaired t-test ---------------------
 
@@ -40,10 +64,16 @@ test_that("report.htest-t-test", {
   expect_snapshot(variant = "windows", report(t.test(mtcars$wt ~ mtcars$am)))
 
   set.seed(123)
-  expect_snapshot(variant = "windows", report(t.test(mtcars$wt ~ mtcars$am, alternative = "l")))
+  expect_snapshot(
+    variant = "windows",
+    report(t.test(mtcars$wt ~ mtcars$am, alternative = "l"))
+  )
 
   set.seed(123)
-  expect_snapshot(variant = "windows", report(t.test(mtcars$wt ~ mtcars$am, alternative = "g")))
+  expect_snapshot(
+    variant = "windows",
+    report(t.test(mtcars$wt ~ mtcars$am, alternative = "g"))
+  )
 
   # two-sample paired t-test ---------------------
 
@@ -54,13 +84,24 @@ test_that("report.htest-t-test", {
   expect_snapshot(variant = "windows", report(t.test(x, y, paired = TRUE)))
 
   set.seed(123)
-  expect_snapshot(variant = "windows", report(t.test(x, y, paired = TRUE, alternative = "l")))
+  expect_snapshot(
+    variant = "windows",
+    report(t.test(x, y, paired = TRUE, alternative = "l"))
+  )
 
   set.seed(123)
-  expect_snapshot(variant = "windows", report(t.test(x, y, paired = TRUE, alternative = "g")))
+  expect_snapshot(
+    variant = "windows",
+    report(t.test(x, y, paired = TRUE, alternative = "g"))
+  )
 
   if (getRversion() > "4.0") {
-    sleep2 <<- reshape(sleep, direction = "wide", idvar = "ID", timevar = "group")
+    sleep2 <<- reshape(
+      sleep,
+      direction = "wide",
+      idvar = "ID",
+      timevar = "group"
+    )
     set.seed(123)
     expect_snapshot(
       variant = "windows",

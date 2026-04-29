@@ -49,7 +49,10 @@ report.estimate_contrasts <- function(model, effsize = "funder2019", ...) {
 
   # Params
   text <- paste0(text, text_parameters(model, parameters = table))
-  text_full <- paste0(text_full, text_parameters(model, parameters = table_full))
+  text_full <- paste0(
+    text_full,
+    text_parameters(model, parameters = table_full)
+  )
 
   out <- list(
     text = text,
@@ -61,9 +64,6 @@ report.estimate_contrasts <- function(model, effsize = "funder2019", ...) {
 
   as.report(out)
 }
-
-
-
 
 
 #' @examples
@@ -80,8 +80,6 @@ report.estimate_contrasts <- function(model, effsize = "funder2019", ...) {
 report.estimate_means <- report.estimate_contrasts
 
 
-
-
 #' @examples
 #' \dontrun{
 #' library(rstanarm)
@@ -91,7 +89,6 @@ report.estimate_means <- report.estimate_contrasts
 #' @rdname report.estimate_contrasts
 #' @export
 report.estimate_slopes <- report.estimate_contrasts
-
 
 
 #' @examples
@@ -114,7 +111,6 @@ report.estimate_smooth <- function(model, ...) {
     attributes(model)$smooth,
     " can be described by the following linear approximation:\n\n"
   )
-
 
   ## Params
   parameters <- table_full
@@ -146,12 +142,10 @@ report.estimate_smooth <- function(model, ...) {
 }
 
 
-
-
-
 #' @keywords internal
 .format_smooth_part <- function(parameters, prefix = "  - ") {
-  parameters$trend_text <- ifelse(!is.na(parameters$Trend),
+  parameters$trend_text <- ifelse(
+    !is.na(parameters$Trend),
     paste0(
       interpret_direction(parameters$Trend),
       " trend (linear coefficient = ",

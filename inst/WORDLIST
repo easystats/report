@@ -6,7 +6,6 @@ CMD
 CSL
 ELPD
 ENP
-ESS
 Gabry
 Hotfix
 IC
@@ -15,9 +14,7 @@ Mattan
 Newcombe
 ORCID
 RMarkdown
-Reproducibility
 Rhat
-SEM
 SEXIT
 Shachar
 Sivula
@@ -28,14 +25,13 @@ brms
 chen
 eXistence
 easystats
+effectsize
 elpd
 github
+glmmTMB
 htest
 ivreg
-pacakges
 participants’
-repo
-reproducibility
 rstanarm
 sIgnificance
 setosa

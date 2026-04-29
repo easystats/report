@@ -2,14 +2,22 @@
 % Please edit documentation in R/report.brmsfit.R
 \name{report.brmsfit}
 \alias{report.brmsfit}
+\alias{report_effectsize.brmsfit}
 \title{Reporting Bayesian Models from brms}
 \usage{
 \method{report}{brmsfit}(x, ...)
+
+\method{report_effectsize}{brmsfit}(x, effectsize_method = "basic", ...)
 }
 \arguments{
 \item{x}{Object of class \code{lm} or \code{glm}.}
 
 \item{...}{Arguments passed to or from other methods.}
+
+\item{effectsize_method}{Method for computing effect sizes. For \code{brmsfit} objects,
+defaults to \code{"basic"} (faster, no refitting) instead of \code{"refit"} to improve
+performance with large Bayesian models. See documentation for
+\code{\link[effectsize:effectsize]{effectsize::effectsize()}}.}
 }
 \value{
 An object of class \code{\link[=report]{report()}}.
@@ -19,12 +27,19 @@ Create reports for Bayesian models. The description of the parameters
 follows the Sequential Effect eXistence and sIgnificance Testing framework
 (see \link[bayestestR:sexit]{SEXIT documentation}).
 }
+\details{
+Message from the \code{rstan} package: "To avoid recompilation of unchanged
+Stan programs, we recommend calling \code{rstan_options(auto_write = TRUE)}"
+}
 \examples{
-\dontshow{if (require("brms", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (require("brms", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 # Bayesian models
 library(brms)
-model <- suppressWarnings(brm(mpg ~ qsec + wt, data = mtcars, refresh = 0, iter = 300))
+model <- suppressWarnings(brm(mpg ~ qsec + wt,
+  data = mtcars,
+  refresh = 0, iter = 300
+))
 r <- report(model, verbose = FALSE)
 r
 summary(r)
