@@ -80,6 +80,9 @@ test_that("report.character() handles single unique value", {
   expect_s3_class(result3, "report")
   expect_match(as.character(result3), "size")
   expect_match(as.character(result3), "big")
+  expect_match(as.character(result3), "1 entry")
+  expect_match(as.character(result3), "n = 6")
+  expect_no_match(as.character(result3), "NA")
 })
 
 test_that("report.factor() works correctly", {
