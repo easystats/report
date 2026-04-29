@@ -4,13 +4,19 @@
 \alias{report}
 \title{Automatic reporting of R objects}
 \usage{
-report(x, ...)
+report(x, ..., audience = getOption("report_audience", "humans"))
 }
 \arguments{
 \item{x}{The R object that you want to report (see list of of supported
 objects above).}
 
 \item{...}{Arguments passed to or from other methods.}
+
+\item{audience}{The intended audience for the report. \code{"humans"} (default)
+produces the standard formatted text report. \code{"ai"} produces a compact,
+structured output optimised for consumption by a Large Language Model (LLM)
+or AI agent via \code{\link[=report_ai]{report_ai()}}. The default can be changed globally with
+\code{options(report_audience = "ai")}.}
 }
 \value{
 A list-object of class \code{report}, which contains further
