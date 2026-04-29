@@ -55,7 +55,7 @@ test_that("report.character() respects parameters", {
 })
 
 test_that("report.character() handles single unique value", {
-  # Test with single unique value (issue #XXX)
+  # Test with a single unique value
   single_char <- "big"
   result <- report(single_char)
 
