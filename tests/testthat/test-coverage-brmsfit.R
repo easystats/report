@@ -2,6 +2,7 @@
 # These are minimal tests to ensure coverage of functions that might be skipped in CI
 
 skip_if_not_installed("brms")
+skip_on_cran() # brms models are computationally intensive
 
 test_that("report.brmsfit coverage test", {
   # Create a very simple brms model for testing

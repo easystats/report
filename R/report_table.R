@@ -74,7 +74,11 @@ as.report_table <- function(x, ...) {
 #' @export
 as.report_table.default <- function(x, summary = NULL, as_is = FALSE, ...) {
   if (as_is) {
-    class(x) <- unique(c(class(x)[1], "report_table", utils::tail(class(x), -1)))
+    class(x) <- unique(c(
+      class(x)[1],
+      "report_table",
+      utils::tail(class(x), -1)
+    ))
   } else {
     class(x) <- unique(c("report_table", class(x)))
   }
@@ -83,7 +87,11 @@ as.report_table.default <- function(x, summary = NULL, as_is = FALSE, ...) {
 
   if (!is.null(summary)) {
     if (as_is) {
-      class(summary) <- unique(c(class(summary)[1], "report_table", utils::tail(class(summary), -1)))
+      class(summary) <- unique(c(
+        class(summary)[1],
+        "report_table",
+        utils::tail(class(summary), -1)
+      ))
     } else {
       class(summary) <- unique(c("report_table", class(summary)))
     }
@@ -129,7 +137,12 @@ print.report_table <- function(x, ...) {
   caption <- .report_table_caption(x)
   footer <- .report_table_footer(x)
 
-  cat(insight::export_table(format(x, ...), caption = caption, footer = footer, ...))
+  cat(insight::export_table(
+    format(x, ...),
+    caption = caption,
+    footer = footer,
+    ...
+  ))
 }
 
 
@@ -180,19 +193,29 @@ display.report_table <- function(object, ...) {
     footer <- "Alternative hypothesis: "
     if (is.null(x$null.value)) {
       # handle missing null.value
-      alt.char <- switch(x$Alternative,
+      alt.char <- switch(
+        x$Alternative,
         two.sided = "two.sided",
         less = "less",
         greater = "greater"
       )
       footer <- paste0(footer, alt.char)
     } else if (length(x$null.value) == 1L) {
-      alt.char <- switch(x$Alternative,
+      alt.char <- switch(
+        x$Alternative,
         two.sided = "not equal to",
         less = "less than",
         greater = "greater than"
       )
-      footer <- paste0(footer, "true ", names(x$null.value), " is ", alt.char, " ", x$null.value)
+      footer <- paste0(
+        footer,
+        "true ",
+        names(x$null.value),
+        " is ",
+        alt.char,
+        " ",
+        x$null.value
+      )
     } else {
       footer <- paste0(footer, x$Alternative)
     }

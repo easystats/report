@@ -35,7 +35,15 @@
   table_full <- cbind(table_full, attributes(effsize)$table)
   table_small <- datawizard::data_remove(
     table_full,
-    c("Parameter", "Group", "Mean_Group1", "Mean_Group2", "Method", "d_CI_low", "d_CI_high")
+    c(
+      "Parameter",
+      "Group",
+      "Mean_Group1",
+      "Mean_Group2",
+      "Method",
+      "d_CI_low",
+      "d_CI_high"
+    )
   )
   list(table = table_small, table_full = table_full)
 }
@@ -74,11 +82,18 @@
     replacement = paste0(estimate, c("_CI_low", "_CI_high"))
   )
 
-  result_table <- result_table[c(estimate, paste0(estimate, c("_CI_low", "_CI_high")))]
+  result_table <- result_table[c(
+    estimate,
+    paste0(estimate, c("_CI_low", "_CI_high"))
+  )]
 
   list(
-    table = result_table, statistics = statistics, interpretation = interpretation,
-    rules = rules, ci = ci, main = main
+    table = result_table,
+    statistics = statistics,
+    interpretation = interpretation,
+    rules = rules,
+    ci = ci,
+    main = main
   )
 }
 
@@ -98,7 +113,9 @@
     # If between two groups
   } else {
     table$Difference <- x$estimate[1] - x$estimate[2]
-    means <- paste0(names(x$estimate), " = ",
+    means <- paste0(
+      names(x$estimate),
+      " = ",
       insight::format_value(x$estimate),
       collapse = ", "
     )

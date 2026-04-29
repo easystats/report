@@ -1,6 +1,9 @@
 test_that("report.htest-chi2 report", {
   m <- as.table(rbind(c(762, 327, 468), c(484, 239, 477)))
-  dimnames(m) <- list(gender = c("F", "M"), party = c("Democrat", "Independent", "Republican"))
+  dimnames(m) <- list(
+    gender = c("F", "M"),
+    party = c("Democrat", "Independent", "Republican")
+  )
   x <- chisq.test(m)
 
   expect_snapshot(
@@ -63,7 +66,8 @@ test_that("report.htest-chi2 report", {
   # Change dataset for "Error: Phi is not appropriate for non-2x2 tables."
   dat <- structure(
     c(71, 50, 30, 100),
-    dim = c(2L, 2L), dimnames = list(
+    dim = c(2L, 2L),
+    dimnames = list(
       Diagnosis = c("Sick", "Recovered"),
       Group = c("Treatment", "Control")
     ),

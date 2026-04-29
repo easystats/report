@@ -39,11 +39,12 @@ report.sessionInfo <- function(x, ...) {
 
 # Aliases -----------------------------------------------------------------
 
-
 #' @rdname report.sessionInfo
 #' @export
 report_packages <- function(session = NULL, include_R = TRUE, ...) {
-  if (is.null(session)) session <- utils::sessionInfo()
+  if (is.null(session)) {
+    session <- utils::sessionInfo()
+  }
   report_parameters(session, include_R = include_R, ...)
 }
 
@@ -51,7 +52,9 @@ report_packages <- function(session = NULL, include_R = TRUE, ...) {
 #' @rdname report.sessionInfo
 #' @export
 cite_packages <- function(session = NULL, include_R = TRUE, ...) {
-  if (is.null(session)) session <- utils::sessionInfo()
+  if (is.null(session)) {
+    session <- utils::sessionInfo()
+  }
 
   # Do not recompute table if passed
   if (is.null(list(...)$table)) {
@@ -68,7 +71,6 @@ cite_packages <- function(session = NULL, include_R = TRUE, ...) {
 
 # report_system --------------------------------------------------------------
 
-
 #' @rdname report.sessionInfo
 #' @export
 report_system <- function(session = NULL) {
@@ -77,8 +79,18 @@ report_system <- function(session = NULL) {
   }
 
   r_version <- paste0(session$R.version$major, ".", session$R.version$minor)
-  year <- paste0(session$R.version$year, "-", session$R.version$month, "-", session$R.version$day)
-  r_citation <- format_citation(clean_citation(utils::citation()), authorsdate = TRUE, intext = TRUE)
+  year <- paste0(
+    session$R.version$year,
+    "-",
+    session$R.version$month,
+    "-",
+    session$R.version$day
+  )
+  r_citation <- format_citation(
+    clean_citation(utils::citation()),
+    authorsdate = TRUE,
+    intext = TRUE
+  )
 
   result_text <- paste0(
     "Analyses were conducted using the R Statistical language (version ",
@@ -118,7 +130,6 @@ report_table.sessionInfo <- function(x, include_R = TRUE, ...) {
     pkg_names <- NULL
   }
 
-
   for (pkg_name in names(pkgs)) {
     citations <- c(citations, clean_citation(utils::citation(pkg_name)))
     versions <- c(versions, as.character(utils::packageVersion(pkg_name)))
@@ -141,7 +152,12 @@ report_table.sessionInfo <- function(x, include_R = TRUE, ...) {
 # report_parameters -------------------------------------------------------
 
 #' @export
-report_parameters.sessionInfo <- function(x, table = NULL, include_R = TRUE, ...) {
+report_parameters.sessionInfo <- function(
+  x,
+  table = NULL,
+  include_R = TRUE,
+  ...
+) {
   # Get table
   if (is.null(table)) {
     x <- report_table(x)
@@ -149,7 +165,9 @@ report_parameters.sessionInfo <- function(x, table = NULL, include_R = TRUE, ...
     x <- table
   }
 
-  if (isFALSE(include_R)) x <- x[x$Package != "R", ]
+  if (isFALSE(include_R)) {
+    x <- x[x$Package != "R", ]
+  }
 
   # Generate text
   x$text <- paste0(
@@ -157,14 +175,18 @@ report_parameters.sessionInfo <- function(x, table = NULL, include_R = TRUE, ...
     " (version ",
     x$Version,
     "; ",
-    format_citation(x$Reference, authorsdate = TRUE, short = TRUE, intext = TRUE),
+    format_citation(
+      x$Reference,
+      authorsdate = TRUE,
+      short = TRUE,
+      intext = TRUE
+    ),
     ")"
   )
 
   x$summary <- paste0(x$Package, " (v", x$Version, ")")
 
   x <- x[order(x$Reference), ]
-
 
   params <- x$text
   names(params) <- x$Package

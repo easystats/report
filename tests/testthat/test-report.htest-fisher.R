@@ -1,6 +1,7 @@
 test_that("report.htest-fisher report", {
   TeaTasting <<-
-    matrix(c(3, 1, 1, 3),
+    matrix(
+      c(3, 1, 1, 3),
       nrow = 2,
       dimnames = list(
         Guess = c("Milk", "Tea"),

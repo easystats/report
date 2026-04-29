@@ -116,23 +116,27 @@
 #'   "were recruited in the study by means of torture and coercion."
 #' )
 #' @export
-report_participants <- function(data,
-                                age = NULL,
-                                sex = NULL,
-                                gender = NULL,
-                                education = NULL,
-                                country = NULL,
-                                race = NULL,
-                                participants = NULL,
-                                by = NULL,
-                                spell_n = FALSE,
-                                digits = 1,
-                                threshold = 10,
-                                group = NULL,
-                                ...) {
+report_participants <- function(
+  data,
+  age = NULL,
+  sex = NULL,
+  gender = NULL,
+  education = NULL,
+  country = NULL,
+  race = NULL,
+  participants = NULL,
+  by = NULL,
+  spell_n = FALSE,
+  digits = 1,
+  threshold = 10,
+  group = NULL,
+  ...
+) {
   ## TODO: deprecate later
   if (!is.null(group)) {
-    insight::format_warning("Argument `group` is deprecated and will be removed in a future release. Please use `by` instead.") # nolint
+    insight::format_warning(
+      "Argument `group` is deprecated and will be removed in a future release. Please use `by` instead."
+    ) # nolint
     by <- group
   }
 
@@ -208,13 +212,25 @@ report_participants <- function(data,
 
       pre_text <- paste0(
         "the '",
-        paste0(names(i[by]), " - ", vapply(i[by], unique, "character"), collapse = " and "),
+        paste0(
+          names(i[by]),
+          " - ",
+          vapply(i[by], unique, "character"),
+          collapse = " and "
+        ),
         "' group: "
       )
 
       final_text <- c(final_text, paste0(pre_text, current_text))
     }
-    final_text <- paste("For", datawizard::text_concatenate(final_text, sep = ", for ", last = " and for "))
+    final_text <- paste(
+      "For",
+      datawizard::text_concatenate(
+        final_text,
+        sep = ", for ",
+        last = " and for "
+      )
+    )
   }
   final_text
 }
@@ -241,18 +257,20 @@ report_participants <- function(data,
 }
 
 #' @keywords internal
-.report_participants <- function(data,
-                                 age = "Age",
-                                 sex = "Sex",
-                                 gender = "Gender",
-                                 education = "Education",
-                                 country = "Country",
-                                 race = "Race",
-                                 participants = NULL,
-                                 spell_n = FALSE,
-                                 digits = 1,
-                                 threshold = 10,
-                                 ...) {
+.report_participants <- function(
+  data,
+  age = "Age",
+  sex = "Sex",
+  gender = "Gender",
+  education = "Education",
+  country = "Country",
+  race = "Race",
+  participants = NULL,
+  spell_n = FALSE,
+  digits = 1,
+  threshold = 10,
+  ...
+) {
   # Sanity checks
   demo_names <- c("Age", "Sex", "Gender", "Education", "Country", "Race")
   data <- .check_df_names(data, names = demo_names)
@@ -270,29 +288,40 @@ report_participants <- function(data,
   # Grouped data
   if (!is.null(participants)) {
     data <- data.frame(
-      Age = stats::aggregate(data[[age]],
+      Age = stats::aggregate(
+        data[[age]],
         by = list(data[[participants]]),
         FUN = mean
       )[[2]],
-      Sex = stats::aggregate(data[[sex]],
+      Sex = stats::aggregate(
+        data[[sex]],
         by = list(data[[participants]]),
-        FUN = utils::head, n = 1
+        FUN = utils::head,
+        n = 1
       )[[2]],
-      Gender = stats::aggregate(data[[gender]],
+      Gender = stats::aggregate(
+        data[[gender]],
         by = list(data[[participants]]),
-        FUN = utils::head, n = 1
+        FUN = utils::head,
+        n = 1
       )[[2]],
-      Education = stats::aggregate(data[[education]],
+      Education = stats::aggregate(
+        data[[education]],
         by = list(data[[participants]]),
-        FUN = utils::head, n = 1
+        FUN = utils::head,
+        n = 1
       )[[2]],
-      Country = stats::aggregate(data[[country]],
+      Country = stats::aggregate(
+        data[[country]],
         by = list(data[[participants]]),
-        FUN = utils::head, n = 1
+        FUN = utils::head,
+        n = 1
       )[[2]],
-      Race = stats::aggregate(data[[race]],
+      Race = stats::aggregate(
+        data[[race]],
         by = list(data[[participants]]),
-        FUN = utils::head, n = 1
+        FUN = utils::head,
+        n = 1
       )[[2]],
       stringsAsFactors = FALSE
     )
@@ -327,40 +356,98 @@ report_participants <- function(data,
     text_age <- sub("Mean =", "Mean age =", text_age, fixed = TRUE)
   }
 
-
   text_sex <- if (all(is.na(data[[sex]]))) {
     ""
   } else {
     paste0(
       "Sex: ",
-      insight::format_value(length(data[[sex]][tolower(
-        data[[sex]]
-      ) %in% c("female", "f")]) / nrow(data) * 100, digits = digits),
+      insight::format_value(
+        length(data[[sex]][
+          tolower(
+            data[[sex]]
+          ) %in%
+            c("female", "f")
+        ]) /
+          nrow(data) *
+          100,
+        digits = digits
+      ),
       "% females, ",
-      insight::format_value(length(data[[sex]][tolower(
-        data[[sex]]
-      ) %in% c("male", "m")]) / nrow(data) * 100, digits = digits),
+      insight::format_value(
+        length(data[[sex]][
+          tolower(
+            data[[sex]]
+          ) %in%
+            c("male", "m")
+        ]) /
+          nrow(data) *
+          100,
+        digits = digits
+      ),
       "% males, ",
-      insight::format_value(100 - length(data[[sex]][tolower(
-        data[[sex]]
-      ) %in% c("male", "m", "female", "f", NA, "na")]) /
-        nrow(data) * 100, digits = digits),
+      insight::format_value(
+        100 -
+          length(data[[sex]][
+            tolower(
+              data[[sex]]
+            ) %in%
+              c("male", "m", "female", "f", NA, "na")
+          ]) /
+            nrow(data) *
+            100,
+        digits = digits
+      ),
       "% other",
-      if (insight::format_value(length(data[[sex]][tolower(data[[sex]]) %in% c(NA, "na")]) / nrow(data) * 100) != "0.00") { # nolint
-        paste0(", ", insight::format_value(length(data[[sex]][tolower(
-          data[[sex]]
-        ) %in% c(NA, "na")]) / nrow(data) * 100), "% missing")
+      if (
+        insight::format_value(
+          length(data[[sex]][tolower(data[[sex]]) %in% c(NA, "na")]) /
+            nrow(data) *
+            100
+        ) !=
+          "0.00"
+      ) {
+        # nolint
+        paste0(
+          ", ",
+          insight::format_value(
+            length(data[[sex]][
+              tolower(
+                data[[sex]]
+              ) %in%
+                c(NA, "na")
+            ]) /
+              nrow(data) *
+              100
+          ),
+          "% missing"
+        )
       }
     )
   }
 
   genders_woman <- c(
-    "woman", "w", "female", "f", "women", "girl",
-    "lady", "miss", "madam", "dame", "lass"
+    "woman",
+    "w",
+    "female",
+    "f",
+    "women",
+    "girl",
+    "lady",
+    "miss",
+    "madam",
+    "dame",
+    "lass"
   )
   genders_man <- c(
-    "man", "m", "male", "men", "boy",
-    "guy", "dude", "lad", "sir"
+    "man",
+    "m",
+    "male",
+    "men",
+    "boy",
+    "guy",
+    "dude",
+    "lad",
+    "sir"
   )
   both_genders <- c(genders_woman, genders_man, NA, "na")
 
@@ -369,24 +456,69 @@ report_participants <- function(data,
   } else {
     paste0(
       "Gender: ",
-      insight::format_value(length(data[[gender]][tolower(
-        data[[gender]]
-      ) %in% genders_woman]) / nrow(data) * 100, digits = digits),
+      insight::format_value(
+        length(data[[gender]][
+          tolower(
+            data[[gender]]
+          ) %in%
+            genders_woman
+        ]) /
+          nrow(data) *
+          100,
+        digits = digits
+      ),
       "% women, ",
-      insight::format_value(length(data[[gender]][tolower(
-        data[[gender]]
-      ) %in% genders_man]) / nrow(data) * 100, digits = digits),
+      insight::format_value(
+        length(data[[gender]][
+          tolower(
+            data[[gender]]
+          ) %in%
+            genders_man
+        ]) /
+          nrow(data) *
+          100,
+        digits = digits
+      ),
       "% men, ",
-      insight::format_value(100 - length(data[[gender]][tolower(
-        data[[gender]]
-      ) %in% both_genders]) /
-        nrow(data) * 100), "% non-binary",
-      if (insight::format_value(length(data[[gender]][tolower(
-        data[[gender]]
-      ) %in% c(NA, "na")]) / nrow(data) * 100) != "0.00") {
-        paste0(", ", insight::format_value(length(data[[gender]][tolower(
-          data[[gender]]
-        ) %in% c(NA, "na")]) / nrow(data) * 100), "% missing")
+      insight::format_value(
+        100 -
+          length(data[[gender]][
+            tolower(
+              data[[gender]]
+            ) %in%
+              both_genders
+          ]) /
+            nrow(data) *
+            100
+      ),
+      "% non-binary",
+      if (
+        insight::format_value(
+          length(data[[gender]][
+            tolower(
+              data[[gender]]
+            ) %in%
+              c(NA, "na")
+          ]) /
+            nrow(data) *
+            100
+        ) !=
+          "0.00"
+      ) {
+        paste0(
+          ", ",
+          insight::format_value(
+            length(data[[gender]][
+              tolower(
+                data[[gender]]
+              ) %in%
+                c(NA, "na")
+            ]) /
+              nrow(data) *
+              100
+          ),
+          "% missing"
+        )
       }
     )
   }
@@ -405,7 +537,12 @@ report_participants <- function(data,
       )
     )
 
-    text_education <- sub("Mean =", "Mean education =", text_education, fixed = TRUE)
+    text_education <- sub(
+      "Mean =",
+      "Mean education =",
+      text_education,
+      fixed = TRUE
+    )
   } else {
     data[which(data[[education]] %in% c(NA, "NA")), education] <- "missing"
     txt <- summary(report_statistics(
@@ -423,7 +560,8 @@ report_participants <- function(data,
   } else {
     data[[country]] <- as.character(data[[country]])
     data[which(data[[country]] %in% c(NA, "NA")), country] <- "missing"
-    frequency_table <- as.data.frame(datawizard::data_tabulate(data[[country]]),
+    frequency_table <- as.data.frame(
+      datawizard::data_tabulate(data[[country]]),
       stringsAsFactors = FALSE
     )[c(2, 4)]
     names(frequency_table)[2] <- "Percent"
@@ -433,7 +571,8 @@ report_participants <- function(data,
     lower <- frequency_table[which(frequency_table$Percent < threshold), ]
     if (nrow(lower) > 0) {
       lower_sum <- data.frame(
-        Value = "other", Percent = sum(lower$Percent),
+        Value = "other",
+        Percent = sum(lower$Percent),
         stringsAsFactors = FALSE
       )
       combined <- rbind(upper, lower_sum)
@@ -441,7 +580,12 @@ report_participants <- function(data,
       combined <- upper
     }
     combined$Percent <- insight::format_value(combined$Percent)
-    value_string <- paste0(combined$Percent, "% ", combined$Value, collapse = ", ")
+    value_string <- paste0(
+      combined$Percent,
+      "% ",
+      combined$Value,
+      collapse = ", "
+    )
     text_country <- paste("Country:", value_string)
   }
 
@@ -450,7 +594,8 @@ report_participants <- function(data,
   } else {
     data[[race]] <- as.character(data[[race]])
     data[which(data[[race]] %in% c(NA, "NA")), race] <- "missing"
-    frequency_table <- as.data.frame(datawizard::data_tabulate(data[[race]]),
+    frequency_table <- as.data.frame(
+      datawizard::data_tabulate(data[[race]]),
       stringsAsFactors = FALSE
     )[c(2, 4)]
     names(frequency_table)[2] <- "Percent"
@@ -460,7 +605,8 @@ report_participants <- function(data,
     lower <- frequency_table[which(frequency_table$Percent < threshold), ]
     if (nrow(lower) > 0) {
       lower_sum <- data.frame(
-        Value = "other", Percent = sum(lower$Percent),
+        Value = "other",
+        Percent = sum(lower$Percent),
         stringsAsFactors = FALSE
       )
       combined <- rbind(upper, lower_sum)
@@ -468,7 +614,12 @@ report_participants <- function(data,
       combined <- upper
     }
     combined$Percent <- insight::format_value(combined$Percent)
-    value_string <- paste0(combined$Percent, "% ", combined$Value, collapse = ", ")
+    value_string <- paste0(
+      combined$Percent,
+      "% ",
+      combined$Value,
+      collapse = ", "
+    )
     text_race <- paste("Race:", value_string)
   }
 
@@ -477,23 +628,73 @@ report_participants <- function(data,
     size,
     " participants (",
     ifelse(text_age == "", "", text_age),
-    ifelse(text_sex == "", "", paste0(ifelse(
-      text_age == "", "", "; "
-    ), text_sex)),
-    ifelse(text_gender == "", "", paste0(ifelse(
-      text_age == "" & text_sex == "", "", "; "
-    ), text_gender)),
-    ifelse(text_education == "", "", paste0(ifelse(
-      text_age == "" & text_sex == "" & text_gender == "", "", "; "
-    ), text_education)),
-    ifelse(text_country == "", "", paste0(ifelse(
-      text_education == "" & text_age == "" & text_sex == "" &
-        text_gender == "", "", "; "
-    ), text_country)),
-    ifelse(text_race == "", "", paste0(ifelse(
-      text_country == "" & text_education == "" & text_age == "" &
-        text_sex == "" & text_gender == "", "", "; "
-    ), text_race)),
+    ifelse(
+      text_sex == "",
+      "",
+      paste0(
+        ifelse(
+          text_age == "",
+          "",
+          "; "
+        ),
+        text_sex
+      )
+    ),
+    ifelse(
+      text_gender == "",
+      "",
+      paste0(
+        ifelse(
+          text_age == "" & text_sex == "",
+          "",
+          "; "
+        ),
+        text_gender
+      )
+    ),
+    ifelse(
+      text_education == "",
+      "",
+      paste0(
+        ifelse(
+          text_age == "" & text_sex == "" & text_gender == "",
+          "",
+          "; "
+        ),
+        text_education
+      )
+    ),
+    ifelse(
+      text_country == "",
+      "",
+      paste0(
+        ifelse(
+          text_education == "" &
+            text_age == "" &
+            text_sex == "" &
+            text_gender == "",
+          "",
+          "; "
+        ),
+        text_country
+      )
+    ),
+    ifelse(
+      text_race == "",
+      "",
+      paste0(
+        ifelse(
+          text_country == "" &
+            text_education == "" &
+            text_age == "" &
+            text_sex == "" &
+            text_gender == "",
+          "",
+          "; "
+        ),
+        text_race
+      )
+    ),
     ")"
   )
   # nolint end

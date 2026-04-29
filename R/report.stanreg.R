@@ -51,7 +51,6 @@ report_text.stanreg <- report_text.lm
 
 # ==================== Specific to Bayes ===================================
 
-
 # report_priors -----------------------------------------------------------
 
 #' @export
@@ -89,19 +88,24 @@ report_priors.stanreg <- function(x, ...) {
     priors_text <- paste0("set as ", values)
   }
 
-  priors_text <- paste0("Priors over parameters were ", priors_text, " distributions")
+  priors_text <- paste0(
+    "Priors over parameters were ",
+    priors_text,
+    " distributions"
+  )
   as.report_priors(priors_text)
 }
 
 
 # report_parameters -------------------------------------------------------
 
-
 #' @export
-report_parameters.stanreg <- function(x,
-                                      include_intercept = TRUE,
-                                      include_diagnostic = TRUE,
-                                      ...) {
+report_parameters.stanreg <- function(
+  x,
+  include_intercept = TRUE,
+  include_diagnostic = TRUE,
+  ...
+) {
   # Get data
   sexit_data <- bayestestR::sexit(x, ...)
 
@@ -115,8 +119,18 @@ report_parameters.stanreg <- function(x,
 
   # Replace parameters names
   for (i in seq_along(param_text)) {
-    att$sexit_textlong[i] <- gsub(names(param_text)[i], param_text[i], att$sexit_textlong[i], fixed = TRUE)
-    att$sexit_textshort[i] <- gsub(names(param_text)[i], param_text[i], att$sexit_textshort[i], fixed = TRUE)
+    att$sexit_textlong[i] <- gsub(
+      names(param_text)[i],
+      param_text[i],
+      att$sexit_textlong[i],
+      fixed = TRUE
+    )
+    att$sexit_textshort[i] <- gsub(
+      names(param_text)[i],
+      param_text[i],
+      att$sexit_textshort[i],
+      fixed = TRUE
+    )
   }
 
   # Include intercept
@@ -137,11 +151,21 @@ report_parameters.stanreg <- function(x,
   if (include_diagnostic) {
     diagnostic <- bayestestR::diagnostic_posterior(x, ...)
 
-    param.dgn <- .parameters_diagnostic_bayesian(diagnostic, only_when_insufficient = TRUE)[idx]
+    param.dgn <- .parameters_diagnostic_bayesian(
+      diagnostic,
+      only_when_insufficient = TRUE
+    )[idx]
     param_text <- datawizard::text_paste(param_text, param.dgn, sep = ". ")
 
-    param.dgn <- .parameters_diagnostic_bayesian(diagnostic, only_when_insufficient = FALSE)[idx]
-    param_text_full <- datawizard::text_paste(param_text_full, param.dgn, sep = ". ")
+    param.dgn <- .parameters_diagnostic_bayesian(
+      diagnostic,
+      only_when_insufficient = FALSE
+    )[idx]
+    param_text_full <- datawizard::text_paste(
+      param_text_full,
+      param.dgn,
+      sep = ". "
+    )
 
     info <- paste(
       info,
@@ -151,12 +175,17 @@ report_parameters.stanreg <- function(x,
     )
   }
 
-  as.report_parameters(param_text_full, summary = param_text, parameters = sexit_data, info = info, ...)
+  as.report_parameters(
+    param_text_full,
+    summary = param_text,
+    parameters = sexit_data,
+    info = info,
+    ...
+  )
 }
 
 
 # report_intercept --------------------------------------------------------
-
 
 #' @export
 report_intercept.stanreg <- function(x, ...) {
@@ -174,7 +203,11 @@ report_intercept.stanreg <- function(x, ...) {
     " is at ",
     insight::format_value(intercept_data$Median),
     " (",
-    insight::format_ci(intercept_data$CI_low, intercept_data$CI_high, ci = intercept_data$CI),
+    insight::format_ci(
+      intercept_data$CI_low,
+      intercept_data$CI_high,
+      ci = intercept_data$CI
+    ),
     ")."
   )
 

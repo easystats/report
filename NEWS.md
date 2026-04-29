@@ -1,4 +1,16 @@
-# report 0.6.x
+# report (devel)
+
+Bug fixes
+
+* Fix `report()` crash when character vector has only one unique value (#578).
+
+# report 0.6.3
+
+Bug fixes
+
+* Hotfix patch for change in `attr()` in R-devel (#590) to prevent CRAN removal.
+
+# report 0.6.2
 
 Bug fixes
 

@@ -210,7 +210,12 @@ report_table.lm <- function(x, include_effectsize = TRUE, ...) {
     ...
   )
   if (!is.null(effsize)) {
-    attr(out, paste0(names(attributes(effsize)$ci))) <- attributes(effsize)$ci
+    new_attrs <- attributes(effsize)$ci
+    for (idx in seq_along(new_attrs)) {
+      if (!is.na(names(new_attrs)[idx])) {
+        attr(out, names(new_attrs)[idx]) <- new_attrs[[idx]]
+      }
+    }
   }
   # Add attributes from params table
   for (att in c(

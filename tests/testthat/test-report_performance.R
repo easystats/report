@@ -74,7 +74,10 @@ test_that("report_performance Bayesian)", {
 
   x5 <- rstanarm::stan_glm(
     Sepal.Length ~ Species,
-    data = iris, refresh = 0, iter = 1000, seed = 333
+    data = iris,
+    refresh = 0,
+    iter = 1000,
+    seed = 333
   )
   expect_snapshot(
     variant = "windows",
@@ -85,9 +88,13 @@ test_that("report_performance Bayesian)", {
     summary(report_performance(x5))
   )
 
-  x6 <- rstanarm::stan_glm(vs ~ disp,
-    data = mtcars, family = "binomial",
-    refresh = 0, iter = 1000, seed = 333
+  x6 <- rstanarm::stan_glm(
+    vs ~ disp,
+    data = mtcars,
+    family = "binomial",
+    refresh = 0,
+    iter = 1000,
+    seed = 333
   )
   expect_snapshot(
     variant = "windows",
@@ -114,8 +121,12 @@ test_that("report_performance Bayesian 2)", {
     on.exit(remove(stan_glmer, envir = .GlobalEnv))
   }
 
-  x7 <- rstanarm::stan_lmer(Sepal.Length ~ Petal.Length + (1 | Species),
-    data = iris, refresh = 0, iter = 1000, seed = 333
+  x7 <- rstanarm::stan_lmer(
+    Sepal.Length ~ Petal.Length + (1 | Species),
+    data = iris,
+    refresh = 0,
+    iter = 1000,
+    seed = 333
   )
   expect_snapshot(
     variant = "windows",

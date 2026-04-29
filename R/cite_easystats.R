@@ -48,17 +48,27 @@
 #' }
 #'
 #' @export
-cite_easystats <- function(packages = "easystats",
-                           format = c("text", "markdown", "biblatex"),
-                           intext_prefix = TRUE,
-                           intext_suffix = ".") {
+cite_easystats <- function(
+  packages = "easystats",
+  format = c("text", "markdown", "biblatex"),
+  intext_prefix = TRUE,
+  intext_suffix = "."
+) {
   format <- match.arg(format, choices = c("text", "markdown", "biblatex"))
   installed_packages <- utils::installed.packages()[, "Version"]
   if (length(packages) == 1 && packages == "all") {
     packages <- c(
-      "easystats", "insight", "datawizard", "bayestestR",
-      "performance", "parameters", "effectsize", "correlation",
-      "modelbased", "see", "report"
+      "easystats",
+      "insight",
+      "datawizard",
+      "bayestestR",
+      "performance",
+      "parameters",
+      "effectsize",
+      "correlation",
+      "modelbased",
+      "see",
+      "report"
     )
     packages <- packages[packages %in% names(installed_packages)]
   } else if (length(packages) == 1 && packages == "easystats") {
@@ -77,14 +87,18 @@ cite_easystats <- function(packages = "easystats",
     }
   }
 
-
   # in-text
   if (format == "text") {
-    letters_ludecke_packages <- .disamguation_letters(c(
-      "easystats", "insight",
-      "performance", "parameters",
-      "see"
-    ) %in% packages)
+    letters_ludecke_packages <- .disamguation_letters(
+      c(
+        "easystats",
+        "insight",
+        "performance",
+        "parameters",
+        "see"
+      ) %in%
+        packages
+    )
     if (sum(nzchar(letters_ludecke_packages)) == 1) {
       letters_ludecke_packages <- rep("", length(letters_ludecke_packages))
     }
@@ -94,11 +108,16 @@ cite_easystats <- function(packages = "easystats",
     if (sum(nzchar(letters_ludecke_articles)) == 1) {
       letters_ludecke_articles <- rep("", length(letters_ludecke_articles))
     }
-    letters_makowski_packages <- .disamguation_letters(c(
-      "datawizard", "bayestestR",
-      "correlation", "modelbased",
-      "report"
-    ) %in% packages)
+    letters_makowski_packages <- .disamguation_letters(
+      c(
+        "datawizard",
+        "bayestestR",
+        "correlation",
+        "modelbased",
+        "report"
+      ) %in%
+        packages
+    )
     if (sum(nzchar(letters_makowski_packages)) == 1) {
       letters_makowski_packages <- rep("", length(letters_makowski_packages))
     }
@@ -124,7 +143,8 @@ cite_easystats <- function(packages = "easystats",
         ),
         performance = sprintf(
           "L\u00fcdecke et al., 2021%s, 2019/2022%s",
-          letters_ludecke_articles[1], letters_ludecke_packages[3]
+          letters_ludecke_articles[1],
+          letters_ludecke_packages[3]
         ),
         parameters = sprintf(
           "L\u00fcdecke et al., 2020, 2019/2022%s",
@@ -141,7 +161,8 @@ cite_easystats <- function(packages = "easystats",
         ),
         see = sprintf(
           "L\u00fcdecke et al., 2021%s, 2019/2022%s",
-          letters_ludecke_articles[2], letters_ludecke_packages[5]
+          letters_ludecke_articles[2],
+          letters_ludecke_packages[5]
         ),
         report = sprintf(
           "Makowski et al., 2021/2023%s",
@@ -202,7 +223,6 @@ cite_easystats <- function(packages = "easystats",
     intext_suffix <- ""
   }
   intext <- sprintf("%s%s%s", intext_prefix, cit_packages, intext_suffix)
-
 
   # references
   if (format == "text") {
@@ -367,15 +387,23 @@ cite_easystats <- function(packages = "easystats",
       "\n"
     )
   } else if (format == "markdown") {
-    ref_packages <- readLines(system.file("easystats_bib.yaml", package = "report"))
+    ref_packages <- readLines(system.file(
+      "easystats_bib.yaml",
+      package = "report"
+    ))
     ref_packages[ref_packages == "  version: %s"] <- sprintf(
       ref_packages[ref_packages == "  version: %s"],
       c(
-        installed_packages["bayestestR"], installed_packages["correlation"],
-        installed_packages["datawizard"], installed_packages["easystats"],
-        installed_packages["effectsize"], installed_packages["insight"],
-        installed_packages["modelbased"], installed_packages["parameters"],
-        installed_packages["performance"], installed_packages["report"],
+        installed_packages["bayestestR"],
+        installed_packages["correlation"],
+        installed_packages["datawizard"],
+        installed_packages["easystats"],
+        installed_packages["effectsize"],
+        installed_packages["insight"],
+        installed_packages["modelbased"],
+        installed_packages["parameters"],
+        installed_packages["performance"],
+        installed_packages["report"],
         installed_packages["see"]
       )
     )
@@ -384,32 +412,58 @@ cite_easystats <- function(packages = "easystats",
       ref_packages[-c(1:2, length(ref_packages))],
       ref_packages[length(ref_packages)]
     )
-    ref_packages[[2]] <- split(ref_packages[[2]], cumsum(!nzchar(ref_packages[[2]])))
-    ref_packages_index <- grep(paste0("id: ((", paste(packages, collapse = ")|("), "))"), ref_packages[[2]])
-    ref_packages[[2]] <- unlist(ref_packages[[2]][ref_packages_index], use.names = FALSE)
-    ref_packages <- paste(unlist(ref_packages, use.names = FALSE), collapse = "\n")
+    ref_packages[[2]] <- split(
+      ref_packages[[2]],
+      cumsum(!nzchar(ref_packages[[2]]))
+    )
+    ref_packages_index <- grep(
+      paste0("id: ((", paste(packages, collapse = ")|("), "))"),
+      ref_packages[[2]]
+    )
+    ref_packages[[2]] <- unlist(
+      ref_packages[[2]][ref_packages_index],
+      use.names = FALSE
+    )
+    ref_packages <- paste(
+      unlist(ref_packages, use.names = FALSE),
+      collapse = "\n"
+    )
   } else {
-    ref_packages <- readLines(system.file("easystats_bib.bib", package = "report"))
+    ref_packages <- readLines(system.file(
+      "easystats_bib.bib",
+      package = "report"
+    ))
     ref_packages[ref_packages == "  version = {%s}"] <- sprintf(
       ref_packages[ref_packages == "  version = {%s}"],
       c(
-        installed_packages["bayestestR"], installed_packages["correlation"],
-        installed_packages["datawizard"], installed_packages["easystats"],
-        installed_packages["effectsize"], installed_packages["insight"],
-        installed_packages["modelbased"], installed_packages["parameters"],
-        installed_packages["performance"], installed_packages["report"],
+        installed_packages["bayestestR"],
+        installed_packages["correlation"],
+        installed_packages["datawizard"],
+        installed_packages["easystats"],
+        installed_packages["effectsize"],
+        installed_packages["insight"],
+        installed_packages["modelbased"],
+        installed_packages["parameters"],
+        installed_packages["performance"],
+        installed_packages["report"],
         installed_packages["see"]
       )
     )
     ref_packages <- split(ref_packages, cumsum(!nzchar(ref_packages)))
-    ref_packages_index <- grep(paste0(
-      "((article)|(software))\\{((",
-      paste(packages, collapse = ")|("), "))"
-    ), ref_packages)
+    ref_packages_index <- grep(
+      paste0(
+        "((article)|(software))\\{((",
+        paste(packages, collapse = ")|("),
+        "))"
+      ),
+      ref_packages
+    )
     ref_packages <- unlist(ref_packages[ref_packages_index], use.names = FALSE)
-    ref_packages <- paste(unlist(ref_packages, use.names = FALSE), collapse = "\n")
+    ref_packages <- paste(
+      unlist(ref_packages, use.names = FALSE),
+      collapse = "\n"
+    )
   }
-
 
   out <- list(
     intext = intext,
@@ -425,27 +479,51 @@ cite_easystats <- function(packages = "easystats",
 #' @rdname cite_easystats
 summary.cite_easystats <- function(object, what = "all", ...) {
   what <- match.arg(what, choices = c("all", "cite", "intext", "bib", "refs"))
-  what <- switch(what,
+  what <- switch(
+    what,
     all = "all",
     cite = ,
     intext = "intext",
     bib = ,
     refs = "refs"
   )
-  switch(what,
+  switch(
+    what,
     all = {
       insight::print_colour("\nCitations\n----------\n\n", "blue")
-      cat(strwrap(object$intext, exdent = 0, width = 0.95 * getOption("width")), sep = "\n")
+      cat(
+        strwrap(object$intext, exdent = 0, width = 0.95 * getOption("width")),
+        sep = "\n"
+      )
       cat("\n")
       insight::print_colour("\nReferences\n----------\n\n", "blue")
-      cat(unlist(lapply(object$refs, strwrap, exdent = 4, width = 0.95 * getOption("width"))), sep = "\n")
+      cat(
+        unlist(lapply(
+          object$refs,
+          strwrap,
+          exdent = 4,
+          width = 0.95 * getOption("width")
+        )),
+        sep = "\n"
+      )
       cat("\n")
     },
     intext = {
-      cat(strwrap(object$intext, exdent = 0, width = 0.95 * getOption("width")), sep = "\n")
+      cat(
+        strwrap(object$intext, exdent = 0, width = 0.95 * getOption("width")),
+        sep = "\n"
+      )
     },
     refs = {
-      cat(unlist(lapply(object$refs, strwrap, exdent = 4, width = 0.95 * getOption("width"))), sep = "\n")
+      cat(
+        unlist(lapply(
+          object$refs,
+          strwrap,
+          exdent = 4,
+          width = 0.95 * getOption("width")
+        )),
+        sep = "\n"
+      )
     }
   )
 }
@@ -455,7 +533,8 @@ summary.cite_easystats <- function(object, what = "all", ...) {
 #' @rdname cite_easystats
 print.cite_easystats <- function(x, what = "all", ...) {
   what <- match.arg(what, choices = c("all", "cite", "intext", "bib", "refs"))
-  what <- switch(what,
+  what <- switch(
+    what,
     all = "all",
     cite = ,
     intext = "intext",
@@ -463,10 +542,13 @@ print.cite_easystats <- function(x, what = "all", ...) {
     refs = "refs"
   )
   if (what == "all") {
-    insight::print_colour(sprintf(
-      "Thanks for crediting us! %s You can cite the easystats ecosystem as follows:",
-      ifelse(.support_unicode, "\U1F600", ":)")
-    ), "blue")
+    insight::print_colour(
+      sprintf(
+        "Thanks for crediting us! %s You can cite the easystats ecosystem as follows:",
+        ifelse(.support_unicode, "\U1F600", ":)")
+      ),
+      "blue"
+    )
     cat("\n")
   }
   summary(x, what = what, ...)

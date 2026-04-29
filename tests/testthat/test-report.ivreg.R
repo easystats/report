@@ -6,7 +6,8 @@ test_that("report-survreg", {
   # model
   set.seed(123)
   ivr <-
-    ivreg::ivreg(log(packs) ~ log(rprice) + log(rincome) | salestax + log(rincome),
+    ivreg::ivreg(
+      log(packs) ~ log(rprice) + log(rincome) | salestax + log(rincome),
       data = ivreg::CigaretteDemand
     )
 

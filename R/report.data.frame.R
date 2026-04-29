@@ -41,17 +41,19 @@
 #' summary(as.data.frame(r))
 #' @return An object of class [report()].
 #' @export
-report.data.frame <- function(x,
-                              n = FALSE,
-                              centrality = "mean",
-                              dispersion = TRUE,
-                              range = TRUE,
-                              distribution = FALSE,
-                              levels_percentage = "auto",
-                              digits = 2,
-                              n_entries = 3,
-                              missing_percentage = "auto",
-                              ...) {
+report.data.frame <- function(
+  x,
+  n = FALSE,
+  centrality = "mean",
+  dispersion = TRUE,
+  range = TRUE,
+  distribution = FALSE,
+  levels_percentage = "auto",
+  digits = 2,
+  n_entries = 3,
+  missing_percentage = "auto",
+  ...
+) {
   # remove list columns
   if (.has_groups(x) && !inherits(x, "tbl_df")) {
     x <- .groups_set(
@@ -99,19 +101,20 @@ report.data.frame <- function(x,
 
 # report_table ------------------------------------------------------------
 
-
 #' @export
-report_table.data.frame <- function(x,
-                                    n = FALSE,
-                                    centrality = "mean",
-                                    dispersion = TRUE,
-                                    range = TRUE,
-                                    distribution = FALSE,
-                                    levels_percentage = "auto",
-                                    digits = 2,
-                                    n_entries = 3,
-                                    missing_percentage = "auto",
-                                    ...) {
+report_table.data.frame <- function(
+  x,
+  n = FALSE,
+  centrality = "mean",
+  dispersion = TRUE,
+  range = TRUE,
+  distribution = FALSE,
+  levels_percentage = "auto",
+  digits = 2,
+  n_entries = 3,
+  missing_percentage = "auto",
+  ...
+) {
   table_full <- data.frame()
   result_table <- data.frame()
 
@@ -155,19 +158,38 @@ report_table.data.frame <- function(x,
   if ("Level" %in% names(result_table)) {
     if ("percentage_Obs" %in% names(result_table)) {
       result_table <- datawizard::data_reorder(
-        result_table, c("Variable", "Level", "n_Obs", "percentage_Obs"),
+        result_table,
+        c("Variable", "Level", "n_Obs", "percentage_Obs"),
         verbose = FALSE
       )
-      table_full <- datawizard::data_reorder(table_full, c("Variable", "Level", "n_Obs", "percentage_Obs"),
+      table_full <- datawizard::data_reorder(
+        table_full,
+        c("Variable", "Level", "n_Obs", "percentage_Obs"),
         verbose = FALSE
       )
     } else {
-      result_table <- datawizard::data_reorder(result_table, c("Variable", "Level", "n_Obs"), verbose = FALSE)
-      table_full <- datawizard::data_reorder(table_full, c("Variable", "Level", "n_Obs"), verbose = FALSE)
+      result_table <- datawizard::data_reorder(
+        result_table,
+        c("Variable", "Level", "n_Obs"),
+        verbose = FALSE
+      )
+      table_full <- datawizard::data_reorder(
+        table_full,
+        c("Variable", "Level", "n_Obs"),
+        verbose = FALSE
+      )
     }
   } else {
-    result_table <- datawizard::data_reorder(result_table, c("Variable", "n_Obs"), verbose = FALSE)
-    table_full <- datawizard::data_reorder(table_full, c("Variable", "n_Obs"), verbose = FALSE)
+    result_table <- datawizard::data_reorder(
+      result_table,
+      c("Variable", "n_Obs"),
+      verbose = FALSE
+    )
+    table_full <- datawizard::data_reorder(
+      table_full,
+      c("Variable", "n_Obs"),
+      verbose = FALSE
+    )
   }
 
   # Reorder cols
@@ -182,20 +204,21 @@ report_table.data.frame <- function(x,
 
 # report_parameters -------------------------------------------------------
 
-
 #' @export
-report_parameters.data.frame <- function(x,
-                                         table = NULL,
-                                         n = FALSE,
-                                         centrality = "mean",
-                                         dispersion = TRUE,
-                                         range = TRUE,
-                                         distribution = FALSE,
-                                         levels_percentage = "auto",
-                                         digits = 2,
-                                         n_entries = 3,
-                                         missing_percentage = "auto",
-                                         ...) {
+report_parameters.data.frame <- function(
+  x,
+  table = NULL,
+  n = FALSE,
+  centrality = "mean",
+  dispersion = TRUE,
+  range = TRUE,
+  distribution = FALSE,
+  levels_percentage = "auto",
+  digits = 2,
+  n_entries = 3,
+  missing_percentage = "auto",
+  ...
+) {
   text_full <- NULL
   result_text <- NULL
 
@@ -226,18 +249,20 @@ report_parameters.data.frame <- function(x,
 # report_text -------------------------------------------------------------
 
 #' @export
-report_text.data.frame <- function(x,
-                                   table = NULL,
-                                   n = FALSE,
-                                   centrality = "mean",
-                                   dispersion = TRUE,
-                                   range = TRUE,
-                                   distribution = FALSE,
-                                   levels_percentage = "auto",
-                                   digits = 2,
-                                   n_entries = 3,
-                                   missing_percentage = "auto",
-                                   ...) {
+report_text.data.frame <- function(
+  x,
+  table = NULL,
+  n = FALSE,
+  centrality = "mean",
+  dispersion = TRUE,
+  range = TRUE,
+  distribution = FALSE,
+  levels_percentage = "auto",
+  digits = 2,
+  n_entries = 3,
+  missing_percentage = "auto",
+  ...
+) {
   params <- report_parameters(
     x,
     n = n,
@@ -255,14 +280,18 @@ report_text.data.frame <- function(x,
   # Concatenate text
   text_full <- paste0(
     "The data contains ",
-    nrow(x), " observations of the following ",
-    ncol(x), " variables:\n\n",
+    nrow(x),
+    " observations of the following ",
+    ncol(x),
+    " variables:\n\n",
     as.character(params)
   )
   result_text <- paste0(
     "The data contains ",
-    nrow(x), " observations of the following ",
-    ncol(x), " variables:\n\n",
+    nrow(x),
+    " observations of the following ",
+    ncol(x),
+    " variables:\n\n",
     as.character(summary(params))
   )
 
@@ -272,20 +301,21 @@ report_text.data.frame <- function(x,
 
 # report_statistics -------------------------------------------------------
 
-
 #' @export
-report_statistics.data.frame <- function(x,
-                                         table = NULL,
-                                         n = FALSE,
-                                         centrality = "mean",
-                                         dispersion = TRUE,
-                                         range = TRUE,
-                                         distribution = FALSE,
-                                         levels_percentage = "auto",
-                                         digits = 2,
-                                         n_entries = 3,
-                                         missing_percentage = "auto",
-                                         ...) {
+report_statistics.data.frame <- function(
+  x,
+  table = NULL,
+  n = FALSE,
+  centrality = "mean",
+  dispersion = TRUE,
+  range = TRUE,
+  distribution = FALSE,
+  levels_percentage = "auto",
+  digits = 2,
+  n_entries = 3,
+  missing_percentage = "auto",
+  ...
+) {
   text_full <- NULL
   result_text <- NULL
 
@@ -321,7 +351,6 @@ report_statistics.data.frame <- function(x,
   ungrouped_x <- as.data.frame(x)
   dfs <- split(ungrouped_x, ungrouped_x[groups], sep = " - ")
 
-
   intro <- paste0(
     "The data contains ",
     nrow(ungrouped_x),
@@ -341,18 +370,20 @@ report_statistics.data.frame <- function(x,
 
 
 #' @export
-report_table.grouped_df <- function(x,
-                                    table = NULL,
-                                    n = FALSE,
-                                    centrality = "mean",
-                                    dispersion = TRUE,
-                                    range = TRUE,
-                                    distribution = FALSE,
-                                    levels_percentage = "auto",
-                                    digits = 2,
-                                    n_entries = 3,
-                                    missing_percentage = "auto",
-                                    ...) {
+report_table.grouped_df <- function(
+  x,
+  table = NULL,
+  n = FALSE,
+  centrality = "mean",
+  dispersion = TRUE,
+  range = TRUE,
+  distribution = FALSE,
+  levels_percentage = "auto",
+  digits = 2,
+  n_entries = 3,
+  missing_percentage = "auto",
+  ...
+) {
   out <- .report_grouped_dataframe(x)
 
   table_full <- data.frame()
@@ -377,7 +408,12 @@ report_table.grouped_df <- function(x,
 
     current_table_full$Group <- group
     if (length(table_full) != 0) {
-      table_full <- merge(table_full, current_table_full, all = TRUE, sort = FALSE)
+      table_full <- merge(
+        table_full,
+        current_table_full,
+        all = TRUE,
+        sort = FALSE
+      )
     } else {
       table_full <- current_table_full
     }
@@ -385,7 +421,12 @@ report_table.grouped_df <- function(x,
     current_table <- summary(current_table_full)
     current_table$Group <- group
     if (length(result_table) != 0) {
-      result_table <- merge(result_table, current_table, all = TRUE, sort = FALSE)
+      result_table <- merge(
+        result_table,
+        current_table,
+        all = TRUE,
+        sort = FALSE
+      )
     } else {
       result_table <- current_table
     }
@@ -399,18 +440,20 @@ report_table.grouped_df <- function(x,
 
 
 #' @export
-report_parameters.grouped_df <- function(x,
-                                         table = NULL,
-                                         n = FALSE,
-                                         centrality = "mean",
-                                         dispersion = TRUE,
-                                         range = TRUE,
-                                         distribution = FALSE,
-                                         levels_percentage = "auto",
-                                         digits = 2,
-                                         n_entries = 3,
-                                         missing_percentage = "auto",
-                                         ...) {
+report_parameters.grouped_df <- function(
+  x,
+  table = NULL,
+  n = FALSE,
+  centrality = "mean",
+  dispersion = TRUE,
+  range = TRUE,
+  distribution = FALSE,
+  levels_percentage = "auto",
+  digits = 2,
+  n_entries = 3,
+  missing_percentage = "auto",
+  ...
+) {
   out <- .report_grouped_dataframe(x)
 
   params_full <- NULL
@@ -442,18 +485,20 @@ report_parameters.grouped_df <- function(x,
 
 
 #' @export
-report_text.grouped_df <- function(x,
-                                   table = NULL,
-                                   n = FALSE,
-                                   centrality = "mean",
-                                   dispersion = TRUE,
-                                   range = TRUE,
-                                   distribution = FALSE,
-                                   levels_percentage = "auto",
-                                   digits = 2,
-                                   n_entries = 3,
-                                   missing_percentage = "auto",
-                                   ...) {
+report_text.grouped_df <- function(
+  x,
+  table = NULL,
+  n = FALSE,
+  centrality = "mean",
+  dispersion = TRUE,
+  range = TRUE,
+  distribution = FALSE,
+  levels_percentage = "auto",
+  digits = 2,
+  n_entries = 3,
+  missing_percentage = "auto",
+  ...
+) {
   out <- .report_grouped_dataframe(x)
 
   text_full <- out$intro
@@ -479,7 +524,11 @@ report_text.grouped_df <- function(x,
     text_group <- paste0("\n- ", group, " (n = ", nrow(group_data), "):\n")
 
     text_full <- paste0(text_full, "\n", paste0(text_group, as.character(r)))
-    result_text <- paste0(result_text, "\n", paste0(text_group, as.character(summary(r))))
+    result_text <- paste0(
+      result_text,
+      "\n",
+      paste0(text_group, as.character(summary(r)))
+    )
   }
 
   as.report_text(text_full, summary = result_text)
@@ -490,18 +539,20 @@ report.grouped_df <- report.data.frame
 
 
 #' @export
-report_statistics.grouped_df <- function(x,
-                                         table = NULL,
-                                         n = FALSE,
-                                         centrality = "mean",
-                                         dispersion = TRUE,
-                                         range = TRUE,
-                                         distribution = FALSE,
-                                         levels_percentage = "auto",
-                                         digits = 2,
-                                         n_entries = 3,
-                                         missing_percentage = "auto",
-                                         ...) {
+report_statistics.grouped_df <- function(
+  x,
+  table = NULL,
+  n = FALSE,
+  centrality = "mean",
+  dispersion = TRUE,
+  range = TRUE,
+  distribution = FALSE,
+  levels_percentage = "auto",
+  digits = 2,
+  n_entries = 3,
+  missing_percentage = "auto",
+  ...
+) {
   out <- .report_grouped_dataframe(x)
 
   text_full <- NULL

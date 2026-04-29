@@ -59,7 +59,10 @@ report_statistics.test_performance <- function(x, table = NULL, ...) {
 
   stats_text <- text_short <- ""
   if ("BF" %in% names(perf_table)) {
-    bf_formatted <- insight::format_bf(stats::na.omit(perf_table$BF), exact = TRUE)
+    bf_formatted <- insight::format_bf(
+      stats::na.omit(perf_table$BF),
+      exact = TRUE
+    )
     val <- stats_text <- datawizard::text_paste(stats_text, bf_formatted)
   }
 
@@ -105,15 +108,29 @@ report_text.test_performance <- function(x, table = NULL, ...) {
 
   # Get indices
   models <- performance_table$Model
-  comparison_text <- datawizard::text_concatenate(paste0(models, " (", stats, ")"))
-  text_short <- datawizard::text_concatenate(paste0(models, " (", summary(stats), ")"))
+  comparison_text <- datawizard::text_concatenate(paste0(
+    models,
+    " (",
+    stats,
+    ")"
+  ))
+  text_short <- datawizard::text_concatenate(paste0(
+    models,
+    " (",
+    summary(stats),
+    ")"
+  ))
 
   # Add intro sentence
   text_start <- paste0(
     "We compared ",
     insight::format_number(nrow(performance_table)),
     " ",
-    ifelse(length(unique(performance_table$Type)) == 1, format_model(unique(performance_table$Type)), "model"),
+    ifelse(
+      length(unique(performance_table$Type)) == 1,
+      format_model(unique(performance_table$Type)),
+      "model"
+    ),
     "s"
   )
   comparison_text <- paste0(text_start, "; ", comparison_text, ".")
