@@ -2,12 +2,20 @@
 # specified column names. "arg_name" is the name of that argument, can be NULL
 .check_spelling <- function(data, select) {
   wrong_arg <- paste0("specified in `", deparse(substitute(select)), "` ")
-  if (!is.null(select) && isTRUE(nzchar(select)) && !all(select %in% colnames(data))) {
+  if (
+    !is.null(select) &&
+      isTRUE(nzchar(select)) &&
+      !all(select %in% colnames(data))
+  ) {
     not_found <- select[!select %in% colnames(data)]
     insight::format_error(
       paste0(
-        sprintf("The following column(s) %sdon't exist in the dataset: ", wrong_arg),
-        datawizard::text_concatenate(not_found), "."
+        sprintf(
+          "The following column(s) %sdon't exist in the dataset: ",
+          wrong_arg
+        ),
+        datawizard::text_concatenate(not_found),
+        "."
       ),
       .misspelled_string(colnames(data), not_found, "Possibly misspelled?")
     )
@@ -48,9 +56,12 @@
   # init default
   msg <- ""
   # guess the misspelled string
-  possible_strings <- unlist(lapply(searchterm, function(s) {
-    source[.fuzzy_grep(source, s)] # nolint
-  }), use.names = FALSE)
+  possible_strings <- unlist(
+    lapply(searchterm, function(s) {
+      source[.fuzzy_grep(source, s)] # nolint
+    }),
+    use.names = FALSE
+  )
   if (length(possible_strings)) {
     msg <- "Did you mean "
     if (length(possible_strings) > 1) {
@@ -62,7 +73,15 @@
         )
         possible_strings <- possible_strings[1:5]
       }
-      msg <- paste0(msg, "one of ", datawizard::text_concatenate(possible_strings, enclose = "\"", last = " or "))
+      msg <- paste0(
+        msg,
+        "one of ",
+        datawizard::text_concatenate(
+          possible_strings,
+          enclose = "\"",
+          last = " or "
+        )
+      )
     } else {
       msg <- paste0(msg, "\"", possible_strings, "\"")
     }

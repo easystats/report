@@ -83,8 +83,8 @@ Additionally, instead of textual summary, `report` also allows one to return a
 tabular summary using the `report_table()` function:
 
 ```{r}
-iris %>%
-  group_by(Species) %>%
+iris |>
+  group_by(Species) |>
   report_table()
 ```
 

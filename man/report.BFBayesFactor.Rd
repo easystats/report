@@ -22,7 +22,7 @@
 Interpretation of the Bayes factor output from the \code{BayesFactor} package.
 }
 \examples{
-\dontshow{if (requireNamespace("BayesFactor", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("BayesFactor", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 library(BayesFactor)
 

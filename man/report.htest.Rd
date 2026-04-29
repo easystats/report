@@ -13,7 +13,7 @@
 \usage{
 \method{report}{htest}(x, ...)
 
-\method{report_effectsize}{htest}(x, ...)
+\method{report_effectsize}{htest}(x, table = NULL, ...)
 
 \method{report_table}{htest}(x, ...)
 
@@ -32,8 +32,7 @@
 
 \item{...}{Arguments passed to or from other methods.}
 
-\item{table}{Provide the output of  \code{report_table()} to avoid its
-re-computation.}
+\item{table}{Provide the output of \code{report_table()} to avoid its re-computation.}
 
 \item{effectsize}{Provide the output of \code{report_effectsize()} to avoid
 its re-computation.}

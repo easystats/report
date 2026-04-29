@@ -85,10 +85,47 @@ R --version
 which R
 
 # Install core R packages via system package manager (recommended)
-sudo apt install -y r-cran-dplyr r-cran-rlang r-cran-testthat r-cran-lintr
+sudo apt install -y r-cran-dplyr r-cran-rlang r-cran-testthat
+
+# CRITICAL: Install development version of lintr to match CI environment
+# The easystats CI uses r-lib/lintr (development version) not CRAN stable
+# Check if lintr is already installed first to save resources/time/errors
+R --no-restore --no-save -e '
+if (!requireNamespace("lintr", quietly = TRUE)) {
+  # Set GitHub token if available to avoid rate limits (use GH_PAT directly)
+  if (Sys.getenv("GH_PAT") != "") {
+    Sys.setenv(GITHUB_PAT = Sys.getenv("GH_PAT"))
+  }
+  # Priority order: r-universe FIRST, then remotes as fallback
+  # Based on testing with whitelisted r-lib.r-universe.dev and cdn.r-universe.dev: both r-universe and remotes work successfully
+  tryCatch({
+    # FIRST PRIORITY: Try r-universe installation
+    install.packages("lintr", lib = .libPaths()[1], repos=c("https://r-lib.r-universe.dev", "https://cloud.r-project.org"))
+    cat("SUCCESS: r-universe installation worked\n")
+  }, error = function(e1) {
+    cat("r-universe installation failed, trying remotes...\n")
+    tryCatch({
+      # FALLBACK: Use remotes for development lintr installation
+      if (!requireNamespace("remotes", quietly = TRUE)) {
+        install.packages("remotes", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))
+      }
+      remotes::install_github("r-lib/lintr")
+      cat("SUCCESS: remotes installation worked\n")
+    }, error = function(e2) {
+      cat("CRITICAL ERROR: Cannot install development lintr from any source\n")
+      cat("Tried: 1) r-universe (failed), 2) remotes (failed)\n")
+      cat("This is required for proper linting that matches CI environment.\n")
+      cat("COPILOT MUST STOP and report this issue in the PR.\n")
+      cat("User must resolve lintr installation before continuing.\n")
+      stop("Development lintr installation failed - cannot proceed")
+    })
+  })
+} else {
+  cat("Development lintr already installed. Version:", as.character(packageVersion("lintr")), "\n")
+}'
 
 # Install reprex (ESSENTIAL for creating reproducible examples in PRs)
-sudo apt install -y r-cran-reprex || R --no-restore --no-save -e 'install.packages("reprex", repos="https://cloud.r-project.org/")'
+sudo apt install -y r-cran-reprex || R --no-restore --no-save -e 'install.packages("reprex", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'
 
 # Install other essential development packages via system packages when possible
 sudo apt install -y r-cran-devtools r-cran-roxygen2 r-cran-styler || echo "Some packages not available via apt, will install via R"
@@ -99,7 +136,7 @@ packages_needed <- c("styler", "roxygen2", "devtools")
 packages_installed <- rownames(installed.packages())
 packages_to_install <- setdiff(packages_needed, packages_installed)
 if (length(packages_to_install) > 0) {
-  install.packages(packages_to_install, repos="https://cloud.r-project.org/")
+  install.packages(packages_to_install, lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))
 }
 '
 ```
@@ -135,20 +172,22 @@ if (length(missing_packages) > 0) {
 ```bash
 # Step 1: Install required dependencies for reprex
 sudo apt install -y pandoc
-R --no-restore --no-save -e 'install.packages(c("knitr", "rmarkdown"), repos="https://cloud.r-project.org/")'
+R --no-restore --no-save -e 'install.packages(c("knitr", "rmarkdown"), lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'
 
 # Step 2: Install reprex package
 R --no-restore --no-save -e '
 if (!requireNamespace("reprex", quietly = TRUE)) {
   # Try multiple installation methods
   tryCatch({
-    install.packages("reprex", repos="https://cloud.r-project.org/")
+    install.packages("reprex", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))
   }, error = function(e1) {
     tryCatch({
-      install.packages("reprex", repos="https://r-universe.dev")
+      install.packages("reprex", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))
     }, error = function(e2) {
-      install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")
-      pak::pak("reprex")
+      if (!requireNamespace("remotes", quietly = TRUE)) {
+        install.packages("remotes", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))
+      }
+      remotes::install_github("tidyverse/reprex")
     })
   })
 }
@@ -194,13 +233,13 @@ grep -A2 -B2 "requireNamespace\|check_installed" R/[your_function_file].R
 ```bash
 # Step 2: Install ONLY the packages found in Step 1
 # Example: If working on report.lm(), you might need modelbased and effectsize
-R --no-restore --no-save -e 'install.packages(c("modelbased", "effectsize"), repos="https://cloud.r-project.org/")'
+R --no-restore --no-save -e 'install.packages(c("modelbased", "effectsize"), lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'
 
 # Example: If working on report.lavaan(), you might need lavaan  
-R --no-restore --no-save -e 'install.packages("lavaan", repos="https://cloud.r-project.org/")'
+R --no-restore --no-save -e 'install.packages("lavaan", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'
 
 # Example: If working on report.brmsfit(), you need brms and related packages
-R --no-restore --no-save -e 'install.packages(c("brms", "rstanarm"), repos="https://cloud.r-project.org/")'
+R --no-restore --no-save -e 'install.packages(c("brms", "rstanarm"), lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'
 ```
 
 #### Use report's Built-in Utilities (After Building Package)
@@ -217,7 +256,7 @@ if (file.exists("DESCRIPTION")) {
 # Load report and install only specific packages for your function
 library(report)
 # ONLY install packages needed for your specific function:
-# install.packages("your_specific_package", repos="https://cloud.r-project.org/")
+# install.packages("your_specific_package", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))
 '
 ```
 
@@ -291,6 +330,7 @@ if (file.exists("changed_files.txt") && file.size("changed_files.txt") > 0) {
   if (length(changed_files) > 0) {
     # Use the same lintr configuration as the CI workflow
     lint(changed_files, linters = all_linters(
+      coalesce_linter = NULL,
       absolute_path_linter = NULL,
       cyclocomp_linter(40L),
       if_not_else_linter(exceptions = character(0L)),
@@ -529,20 +569,20 @@ Many functions require optional packages. The package uses `requireNamespace()` 
 
 ```bash
 # ALWAYS install reprex first (essential for PR creation):
-sudo apt install -y r-cran-reprex || R --no-restore --no-save -e 'install.packages("reprex", repos="https://cloud.r-project.org/")'
+sudo apt install -y r-cran-reprex || R --no-restore --no-save -e 'install.packages("reprex", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'
 
 # Via system packages (recommended for individual packages):
 sudo apt install -y r-cran-[package-name]
 
-# Via R (if CRAN network available, for individual packages):
-R --no-restore --no-save -e 'install.packages("[package-name]", repos="https://cloud.r-project.org/")'
+# Via R (using r-universe for latest packages including development versions):
+R --no-restore --no-save -e 'install.packages("[package-name]", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'
 
-# Alternative sources when CRAN is blocked:
-# Via R-universe (alternative CRAN mirror):
-R --no-restore --no-save -e 'install.packages("[package-name]", repos="https://r-universe.dev")'
+# Alternative sources when r-universe is not available:
+# Via CRAN mirror (FALLBACK PRIORITY):
+R --no-restore --no-save -e 'install.packages("[package-name]", lib = .libPaths()[1], repos="https://cran.r-project.org/")'
 
-# Via pak package (faster, handles dependencies better):
-R --no-restore --no-save -e 'install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/"); pak::pak("[package-name]")'
+# Via remotes for GitHub packages (SECOND PRIORITY):
+R --no-restore --no-save -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes", lib = .libPaths()[1]); remotes::install_github("[author]/[package-name]")'
 ```
 
 #### Common Function-Specific Package Requirements
@@ -573,19 +613,53 @@ grep -A2 -B2 "requireNamespace\|@importFrom" R/[function_file].R
 #### Targeted Installation Examples
 ```bash
 # Example 1: Working on report.lm() function
-R --no-restore --no-save -e 'install.packages(c("modelbased", "effectsize"), repos="https://cloud.r-project.org/")'
+R --no-restore --no-save -e 'install.packages(c("modelbased", "effectsize"), lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'
 
 # Example 2: Working on report.lavaan() function  
-R --no-restore --no-save -e 'install.packages("lavaan", repos="https://cloud.r-project.org/")'
+R --no-restore --no-save -e 'install.packages("lavaan", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'
 
 # Example 3: Working on report.brmsfit() function
-R --no-restore --no-save -e 'install.packages(c("brms", "rstanarm"), repos="https://cloud.r-project.org/")'
+R --no-restore --no-save -e 'install.packages(c("brms", "rstanarm"), lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'
 
 # Example 4: Working on report.BFBayesFactor() function
-R --no-restore --no-save -e 'install.packages("BayesFactor", repos="https://cloud.r-project.org/")'
+R --no-restore --no-save -e 'install.packages("BayesFactor", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'
 ```
 
 ## Code Quality and Best Practices
+
+### R Version Compatibility Requirements
+
+**CRITICAL**: Always check minimum R version requirements before using any functions to ensure compatibility across all supported environments.
+
+#### Version Checking Process:
+
+1. **Check DESCRIPTION file**: Always verify the minimum R version in the package DESCRIPTION file:
+   ```bash
+   cd /home/runner/work/report/report
+   grep "Depends:" DESCRIPTION
+   # Shows: R (>= 3.6) - must use functions available in R 3.6+
+   ```
+
+2. **Function availability validation**: Before using any R function, verify it was available in the minimum supported version:
+   - **R 3.6.0+**: Functions like `grep(..., value = TRUE)`, standard base R operations
+   - **R 4.0.0+**: New features and syntax improvements 
+   - **R 4.1.0+**: Native pipe `|>`, new lambda syntax
+   - **R 4.4.0**: Null coalescing operator `%||%`
+   - **R 4.5.0+**: Functions like `grepv()` (if it existed)
+
+3. **Safe function usage**: 
+   ```r
+   # CORRECT: Use functions available in R 3.6+
+   result <- grep(pattern, x, value = TRUE)
+   
+   # INCORRECT: Don't use functions from later R versions
+   # result <- grepv(pattern, x)  # Not available in R 3.6
+   ```
+
+#### Documentation for Minimum R Versions:
+- **R 3.6.0 reference**: Check base R documentation for function availability
+- **When in doubt**: Use `help(function_name)` to check when functions were introduced
+- **Alternative approach**: Use more basic/older functions that are guaranteed to exist
 
 ### Avoiding Global Variable Binding Issues
 
@@ -700,7 +774,7 @@ R --no-restore --no-save -e 'install.packages("BayesFactor", repos="https://clou
 
 **CRITICAL**: Every PR must include version number updates and NEWS.md changelog entries. This is mandatory for all changes.
 
-**IMPORTANT CLARIFICATION**: Version numbers should be bumped **ONCE PER PULL REQUEST**, not once per commit. If you make multiple commits within a single PR, all commits should use the same version number. Only bump the version once at the beginning of your PR work or before submitting the PR for review.
+**IMPORTANT CLARIFICATION**: Version numbers should be bumped **ONCE PER PULL REQUEST**, not once per commit. If you make multiple commits within a single PR, all commits should use the same version number. Only bump the version once at the beginning of your PR work or before submitting the PR for review. Only bump if making changes to functions (e.g, not for copilot instructions, workflow, etc.).
 
 ### Version Numbering System
 
@@ -715,6 +789,7 @@ The report package follows this versioning pattern:
 2. **New features**: Increment the fourth decimal (0.6.1.1 → 0.6.1.2) 
 3. **Breaking changes**: Increment the minor version (0.6.1 → 0.7.0) - rare
 4. **Documentation-only changes**: Still increment fourth decimal for tracking
+5. Do not bump when only making changes to copilot instructions, workflow, etc.
 
 ### Multiple Commits Within a Single PR
 
@@ -867,6 +942,7 @@ R --no-restore --no-save -e 'warnings(); R CMD check report_*.tar.gz --no-manual
 
 # 2. Lint code to identify style issues (20 seconds) - use easystats/workflows configuration
 R --no-restore --no-save -e 'library(lintr); lint_package(linters = all_linters(
+  coalesce_linter = NULL,
   absolute_path_linter = NULL,
   cyclocomp_linter(40L),
   if_not_else_linter(exceptions = character(0L)),
@@ -1031,6 +1107,17 @@ cat(paste(reprex_result, collapse = "\n"))
 - **Cause**: Package not loaded or installed
 - **Solution**: Run `R CMD build . && R CMD INSTALL report_*.tar.gz` then `library(report)`
 
+### Package Installation "lib is not writable" Errors
+- **Cause**: R attempting to install packages to system library (`/usr/local/lib/R/site-library`) instead of user library when custom setup doesn't run
+- **Symptoms**: Warnings like `'lib = "/usr/local/lib/R/site-library"' is not writable` during package installation
+- **Root Cause**: User library directory not properly configured or `.libPaths()[1]` pointing to system directory
+- **Complete Solution**: 
+  1. Set up user library first: `mkdir -p ~/R/library && echo 'R_LIBS_USER=~/R/library' >> ~/.Renviron`
+  2. Use explicit library path: `install.packages("package", lib = "~/R/library", repos="...")`
+  3. Alternatively, restart R session after step 1 and then use: `install.packages("package", lib = .libPaths()[1], repos="...")`
+- **Prevention**: All install.packages calls in these instructions now include the `lib = .libPaths()[1]` parameter, but you must set up user library directory first
+- **Note**: This issue occurs when the pre-configured environment setup doesn't run and R defaults to system library locations
+
 ### Missing Package Errors
 - **Cause**: Suggested packages not installed
 - **Solution**: Install via `sudo apt install r-cran-[package]` or ignore if testing core functionality
@@ -1049,11 +1136,11 @@ cat(paste(reprex_result, collapse = "\n"))
 
 ### Styler Not Available
 - **Cause**: styler package not installed
-- **Solution**: Install via R: `R --no-restore --no-save -e 'install.packages("styler", repos="https://cloud.r-project.org/")'` or skip styling step if not critical
+- **Solution**: Install via R: `R --no-restore --no-save -e 'install.packages("styler", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'` or skip styling step if not critical
 
 ### Roxygen2 Not Available
 - **Cause**: roxygen2 package not installed
-- **Solution**: Install via R: `R --no-restore --no-save -e 'install.packages("roxygen2", repos="https://cloud.r-project.org/")'` or use devtools: `R --no-restore --no-save -e 'devtools::document()'`
+- **Solution**: Install via R: `R --no-restore --no-save -e 'install.packages("roxygen2", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'` or use devtools: `R --no-restore --no-save -e 'devtools::document()'`
 
 ### Documentation Build Failures
 - **Cause**: Documentation not updated after changing roxygen2 comments
@@ -1065,6 +1152,63 @@ cat(paste(reprex_result, collapse = "\n"))
 - **Example**: Change `group_by(var)` to `group_by(.data[[var]])`
 - **DO NOT**: Create `global_variables.R` files with `utils::globalVariables()`
 
+### Lintr CI vs Local Discrepancies (CRITICAL VERSION ISSUE)
+- **Cause**: CI uses development lintr (`r-lib/lintr`) while local uses CRAN stable (`r-cran-lintr`)
+- **Symptoms**: Local lintr passes but CI lintr fails with stricter rules
+- **Root issue**: Development lintr has stricter rules and different function preferences
+- **Solution**: Always install development lintr to match CI. Priority order: r-universe first, then remotes fallback:
+  ```bash
+  # Install development lintr to match CI - check if already installed first
+  R --no-restore --no-save -e '
+  if (!requireNamespace("lintr", quietly = TRUE)) {
+    # Set GitHub token if available to avoid rate limits (use GH_PAT directly)
+    if (Sys.getenv("GH_PAT") != "") {
+      Sys.setenv(GITHUB_PAT = Sys.getenv("GH_PAT"))
+    }
+    # Priority order: r-universe FIRST, then remotes as fallback
+    # Based on testing with whitelisted r-lib.r-universe.dev and cdn.r-universe.dev: both r-universe and remotes work successfully
+    tryCatch({
+      # FIRST PRIORITY: Try r-universe installation
+      install.packages("lintr", lib = .libPaths()[1], repos=c("https://r-lib.r-universe.dev", "https://cloud.r-project.org"))
+      cat("SUCCESS: r-universe installation worked\n")
+    }, error = function(e1) {
+      cat("r-universe installation failed, trying remotes...\n")
+      tryCatch({
+        # FALLBACK: Use remotes for development lintr installation
+        if (!requireNamespace("remotes", quietly = TRUE)) {
+          install.packages("remotes", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))
+        }
+        remotes::install_github("r-lib/lintr")
+        cat("SUCCESS: remotes installation worked\n")
+      }, error = function(e2) {
+        cat("CRITICAL ERROR: Cannot install development lintr from any source\n")
+        cat("Tried: 1) r-universe (failed), 2) remotes (failed)\n")
+        cat("This is required for proper linting that matches CI environment.\n")
+        cat("COPILOT MUST STOP and report this issue in the PR.\n")
+        cat("User must resolve lintr installation before continuing.\n")
+        stop("Development lintr installation failed - cannot proceed")
+      })
+    })
+  } else {
+    cat("Development lintr already installed. Version:", as.character(packageVersion("lintr")), "\n")
+  }
+  '
+  ```
+- **Testing**: Use exact CI configuration for local validation:
+  ```bash
+  R --no-restore --no-save -e 'library(lintr); lint_package(linters = all_linters(
+    coalesce_linter = NULL, absolute_path_linter = NULL, cyclocomp_linter(40L), 
+    if_not_else_linter(exceptions = character(0L)), indentation_linter = NULL, 
+    implicit_integer_linter = NULL, library_call_linter = NULL, 
+    line_length_linter(120L), namespace_linter = NULL, nonportable_path_linter = NULL,
+    object_length_linter(50L), object_name_linter = NULL, object_usage_linter = NULL,
+    one_call_pipe_linter = NULL, todo_comment_linter = NULL, commented_code_linter = NULL,
+    undesirable_function_linter(c("mapply" = NA, "setwd" = NA)), undesirable_operator_linter = NULL,
+    unnecessary_concatenation_linter(allow_single_expression = FALSE), unused_import_linter = NULL
+  ))'
+  ```
+- **R Version Compatibility**: Always check the minimum R version in DESCRIPTION file (`Depends: R (>= X.X)`) to ensure functions used are available in the minimum supported version. Do not use functions introduced in later R versions.
+
 ### Documentation Mismatch Warnings ("Codoc mismatches")
 - **Cause**: Function parameter names don't match the documentation
 - **Solution**: Ensure `@param parameter_name` exactly matches function arguments
@@ -1074,8 +1218,8 @@ cat(paste(reprex_result, collapse = "\n"))
 - **Cause**: Cannot install packages from CRAN mirrors
 - **Solutions**: 
   - Use system packages: `sudo apt install r-cran-[package]`
-  - Try R-universe: `repos="https://r-universe.dev"`  
-  - Use pak package: `pak::pak("[package-name]")`
+  - Try R-universe (FIRST PRIORITY): `repos=c("https://r-universe.dev", "https://cloud.r-project.org")`  
+  - Use remotes for GitHub packages (SECOND PRIORITY): `remotes::install_github("[author]/[package]")`
 
 ### reprex Package Issues and Complete Debugging Guide
 **CRITICAL SOLUTION**: The main issues with reprex are missing dependencies and environment variables. 
@@ -1088,7 +1232,7 @@ cat(paste(reprex_result, collapse = "\n"))
 ```bash
 # Install core dependencies first
 sudo apt install -y pandoc
-R --no-restore --no-save -e 'install.packages(c("knitr", "rmarkdown"), repos="https://cloud.r-project.org/")'
+R --no-restore --no-save -e 'install.packages(c("knitr", "rmarkdown"), lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))'
 ```
 
 #### Step 2: Install reprex Package
@@ -1097,13 +1241,15 @@ R --no-restore --no-save -e 'install.packages(c("knitr", "rmarkdown"), repos="ht
 R --no-restore --no-save -e '
 if (!requireNamespace("reprex", quietly = TRUE)) {
   tryCatch({
-    install.packages("reprex", repos="https://cloud.r-project.org/")
+    install.packages("reprex", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))
   }, error = function(e1) {
     tryCatch({
-      install.packages("reprex", repos="https://r-universe.dev")
+      install.packages("reprex", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))
     }, error = function(e2) {
-      install.packages("pak", repos="https://r-lib.github.io/p/pak/stable/")
-      pak::pak("reprex")
+      if (!requireNamespace("remotes", quietly = TRUE)) {
+        install.packages("remotes", lib = .libPaths()[1], repos=c("https://r-universe.dev", "https://cloud.r-project.org"))
+      }
+      remotes::install_github("tidyverse/reprex")
     })
   })
 }
@@ -1278,8 +1424,8 @@ These workflows run automatically on pushes and pull requests to main/master bra
 #### 3. Package Installation Strategy
 When packages can't be installed from CRAN:
 - **Primary**: Use system packages via `sudo apt install r-cran-[package]`
-- **Alternative**: Use R-universe repository: `repos="https://r-universe.dev"`
-- **Advanced**: Use pak package for better dependency resolution
+- **Alternative (FIRST PRIORITY)**: Use R-universe repository: `repos=c("https://r-universe.dev", "https://cloud.r-project.org")`
+- **Fallback (SECOND PRIORITY)**: Use remotes for GitHub packages: `remotes::install_github("[author]/[package]")`
 
 #### 4. Pre-Commit Validation Checklist
 Before making any PR, verify locally:
