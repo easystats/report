@@ -1,0 +1,32 @@
+name: Copilot task
+description: Request GitHub Copilot assistance for development tasks
+title: "[Copilot]: "
+labels: ["robot :robot:", "copilot-setup-full"]
+assignees: ["Copilot"]
+projects: []
+type: Task
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Request GitHub Copilot assistance for development tasks. This template will automatically assign the issue to @copilot and allow you to specify the appropriate CI environment setup.
+
+  - type: textarea
+    id: task-description
+    attributes:
+      label: Task description
+      description: Describe the development task you need assistance with
+      placeholder: |
+        What do you need help with? Be as specific as possible about:
+        - What needs to be implemented/fixed/changed
+        - Any relevant context or requirements
+        - Expected outcomes
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        **Setup preference guide:**
+        - 🔴 **copilot-setup-full** (default label): For code changes, new features, function modifications, or tasks requiring complete R development environment.
+        - 🔵 For documentation changes, minor fixes, configuration updates, or tasks that don't require full R environment (saves 5-10 minutes), remove the **copilot-setup-full** label before creating the issue.
