@@ -20,6 +20,8 @@ navbar:
                 href: articles/report.html
               - text: Publication-ready Tables
                 href: articles/report_table.html
+              - text: AI-Optimized Reports
+                href: articles/report_ai.html
         - text: Functions
           icon: fa fa-file-code
           href: reference/index.html
@@ -41,6 +43,7 @@ articles:
           - new_models
           - report
           - report_table
+          - report_ai
 
 reference:
     - title: Report Statistical Information
