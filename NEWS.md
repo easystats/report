@@ -2,6 +2,7 @@
 
 Bug fixes
 
+* `report.anova()`: fix missing denominator degrees of freedom in lmerTest ANOVA reports (#453)
 * Fix `report()` crash when character vector has only one unique value (#578).
 
 # report 0.6.3
