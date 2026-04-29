@@ -18,12 +18,6 @@ This document outlines the common coding conventions observed in the `easystats`
 *   **Spacing:**
     *   Use spaces around all infix operators (`<-`, `==`, `+`, etc.).
     *   Place a space after a comma, but not before.
-*   **Curly Braces:**
-    *   For function definitions, the opening `{` should be on the same line
-        as the closing `)` of that function definition. That can be on the
-        same line as the function definition itself, but might be on a new
-        line if the argument list is too long for one line.
-    *   For `if`/`else` statements, the opening `{` can be on the same line.
 *   **Line Length:** Keep lines to a reasonable length (e.g., under 80-100 characters) to improve readability.
 
 ## Function Naming
