@@ -10,6 +10,10 @@ Bug fixes
 
 * Hotfix patch for change in `attr()` in R-devel (#590) to prevent CRAN removal.
 
+New features
+
+* `cite_easystats()`: automatically fetch updated easystats citations instead of using hardcoded citation data, ensuring citations are always current
+
 # report 0.6.2
 
 Bug fixes
