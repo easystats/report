@@ -58,7 +58,7 @@ r
 #> (version 2.23.0; Bürkner P, 2017), Rcpp (version 1.1.1.1.1; Eddelbuettel D et
 #> al., 2026), performance (version 0.16.0; Lüdecke D et al., 2021), bayestestR
 #> (version 0.17.0; Makowski D et al., 2019), modelbased (version 0.14.0; Makowski
-#> D et al., 2025), report (version 0.6.3; Makowski D et al., 2023), BayesFactor
+#> D et al., 2025), report (version 0.6.3.1; Makowski D et al., 2023), BayesFactor
 #> (version 0.9.12.4.8; Morey R, Rouder J, 2026), coda (version 0.19.4.1; Plummer
 #> M et al., 2006), lavaan (version 0.6.21; Rosseel Y et al., 2025) and dplyr
 #> (version 1.2.1; Wickham H et al., 2026).
@@ -137,7 +137,7 @@ summary(r)
 #> The analysis was done using the R Statistical language (v4.6.0; R Core Team,
 #> 2026) on Ubuntu 24.04.4 LTS, using the packages Matrix (v1.7.5), lme4 (v2.0.1),
 #> brms (v2.23.0), Rcpp (v1.1.1.1.1), performance (v0.16.0), bayestestR (v0.17.0),
-#> modelbased (v0.14.0), report (v0.6.3), BayesFactor (v0.9.12.4.8), coda
+#> modelbased (v0.14.0), report (v0.6.3.1), BayesFactor (v0.9.12.4.8), coda
 #> (v0.19.4.1), lavaan (v0.6.21) and dplyr (v1.2.1).
 as.data.frame(r)
 #> Package     |    Version |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             Reference
@@ -154,7 +154,7 @@ as.data.frame(r)
 #> lme4        |      2.0.1 |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Bates D, Mächler M, Bolker B, Walker S (2015). “Fitting Linear Mixed-Effects Models Using lme4.” _Journal of Statistical Software_, *67*(1), 1-48. doi:10.18637/jss.v067.i01 <https://doi.org/10.18637/jss.v067.i01>.
 #> modelbased  |     0.14.0 |                                                                                                                                                                                                                                                                                                                                                                                                                     Makowski D, Ben-Shachar M, Wiernik B, Patil I, Thériault R, Lüdecke D (2025). “modelbased: An R package to make the most out of your statistical models through marginal means, marginal effects, and model predictions.” _Journal of Open Source Software_, *10*(109), 7969. doi:10.21105/joss.07969 <https://doi.org/10.21105/joss.07969>. <https://joss.theoj.org/papers/10.21105/joss.07969>.
 #> performance |     0.16.0 |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          Lüdecke D, Ben-Shachar M, Patil I, Waggoner P, Makowski D (2021). “performance: An R Package for Assessment, Comparison and Testing of Statistical Models.” _Journal of Open Source Software_, *6*(60), 3139. doi:10.21105/joss.03139 <https://doi.org/10.21105/joss.03139>.
-#> report      |      0.6.3 |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Makowski D, Lüdecke D, Patil I, Thériault R, Ben-Shachar M, Wiernik B (2023). “Automated Results Reporting as a Practical Tool to Improve Reproducibility and Methodological Best Practices Adoption.” _CRAN_. doi:10.32614/CRAN.package.report <https://doi.org/10.32614/CRAN.package.report>. <https://easystats.github.io/report/>.
+#> report      |    0.6.3.1 |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Makowski D, Lüdecke D, Patil I, Thériault R, Ben-Shachar M, Wiernik B (2023). “Automated Results Reporting as a Practical Tool to Improve Reproducibility and Methodological Best Practices Adoption.” _CRAN_. doi:10.32614/CRAN.package.report <https://doi.org/10.32614/CRAN.package.report>. <https://easystats.github.io/report/>.
 summary(as.data.frame(r))
 #> Package     |    Version
 #> ------------------------
@@ -170,7 +170,7 @@ summary(as.data.frame(r))
 #> lme4        |      2.0.1
 #> modelbased  |     0.14.0
 #> performance |     0.16.0
-#> report      |      0.6.3
+#> report      |    0.6.3.1
 
 # Convenience functions
 report_packages(include_R = FALSE)
@@ -181,7 +181,7 @@ report_packages(include_R = FALSE)
 #>   - performance (version 0.16.0; Lüdecke D et al., 2021)
 #>   - bayestestR (version 0.17.0; Makowski D et al., 2019)
 #>   - modelbased (version 0.14.0; Makowski D et al., 2025)
-#>   - report (version 0.6.3; Makowski D et al., 2023)
+#>   - report (version 0.6.3.1; Makowski D et al., 2023)
 #>   - BayesFactor (version 0.9.12.4.8; Morey R, Rouder J, 2026)
 #>   - coda (version 0.19.4.1; Plummer M et al., 2006)
 #>   - lavaan (version 0.6.21; Rosseel Y et al., 2025)

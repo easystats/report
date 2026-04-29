@@ -46,7 +46,7 @@ r
 #> al., 2026), rstanarm (version 2.32.2; Goodrich B et al., 2025), performance
 #> (version 0.16.0; Lüdecke D et al., 2021), bayestestR (version 0.17.0; Makowski
 #> D et al., 2019), modelbased (version 0.14.0; Makowski D et al., 2025), report
-#> (version 0.6.3; Makowski D et al., 2023), BayesFactor (version 0.9.12.4.8;
+#> (version 0.6.3.1; Makowski D et al., 2023), BayesFactor (version 0.9.12.4.8;
 #> Morey R, Rouder J, 2026), coda (version 0.19.4.1; Plummer M et al., 2006),
 #> lavaan (version 0.6.21; Rosseel Y et al., 2025) and dplyr (version 1.2.1;
 #> Wickham H et al., 2026).
@@ -131,7 +131,7 @@ summary(r)
 #> The analysis was done using the R Statistical language (v4.6.0; R Core Team,
 #> 2026) on Ubuntu 24.04.4 LTS, using the packages Matrix (v1.7.5), lme4 (v2.0.1),
 #> brms (v2.23.0), Rcpp (v1.1.1.1.1), rstanarm (v2.32.2), performance (v0.16.0),
-#> bayestestR (v0.17.0), modelbased (v0.14.0), report (v0.6.3), BayesFactor
+#> bayestestR (v0.17.0), modelbased (v0.14.0), report (v0.6.3.1), BayesFactor
 #> (v0.9.12.4.8), coda (v0.19.4.1), lavaan (v0.6.21) and dplyr (v1.2.1).
 
 # Data
@@ -304,11 +304,9 @@ summary(r)
 #> 
 #>   - The effect of cyl (Median = -1.47, 95% CI [-2.35, -0.64]) has 100.00%, 99.83%
 #> and 20.50% probability of being negative (< 0), significant (< -0.30) and large
-#> (< -1.81). The estimation successfully converged (Rhat = 1.005) but the indices
-#> are unreliable (ESS = 830)
+#> (< -1.81)NANA
 #>   - The effect of wt (Median = -3.23, 95% CI [-4.71, -1.73]) has 99.92%, 99.92%
 #> and 96.75% probability of being negative (< 0), significant (< -0.30) and large
-#> (< -1.81). However, the estimation might not have successfuly converged (Rhat =
-#> 1.014) and the indices are unreliable (ESS = 684)
+#> (< -1.81)NANA
 # }
 ```

@@ -141,12 +141,10 @@ summary(r)
 #> indices are unreliable (ESS = 636)
 #>   - The effect of b qsec (Median = 0.91, 95% CI [0.32, 1.51]) has 99.83%, 97.50%
 #> and 0.50% probability of being positive (> 0), significant (> 0.30) and large
-#> (> 1.81). The estimation successfully converged (Rhat = 1.001) but the indices
-#> are unreliable (ESS = 731)
+#> (> 1.81)NANA
 #>   - The effect of b wt (Median = -5.09, 95% CI [-6.14, -3.96]) has 100.00%,
 #> 100.00% and 100.00% probability of being negative (< 0), significant (< -0.30)
-#> and large (< -1.81). The estimation successfully converged (Rhat = 1.000) but
-#> the indices are unreliable (ESS = 519)
+#> and large (< -1.81)NANA
 as.data.frame(r)
 #> Parameter   |   Component | Median |         95% CI |     pd |  Rhat | ESS |    Fit
 #> -----------------------------------------------------------------------------------

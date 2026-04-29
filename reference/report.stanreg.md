@@ -125,11 +125,10 @@ summary(r)
 #> 
 #>   - The effect of qsec (Median = 0.93, 95% CI [0.42, 1.48]) has 100.00%, 99.50%
 #> and 0.40% probability of being positive (> 0), significant (> 0.30) and large
-#> (> 1.81). The estimation successfully converged (Rhat = 1.001) but the indices
-#> are unreliable (ESS = 739)
+#> (> 1.81)NANA
 #>   - The effect of wt (Median = -5.04, 95% CI [-5.96, -4.10]) has 100.00%, 100.00%
 #> and 100.00% probability of being negative (< 0), significant (< -0.30) and
-#> large (< -1.81)
+#> large (< -1.81)NANA
 as.data.frame(r)
 #> Parameter   | Median |         95% CI |     pd |  Rhat |  ESS
 #> -------------------------------------------------------------

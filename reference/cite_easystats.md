@@ -178,7 +178,7 @@ cite_easystats(packages = "all")
 #>     2021)
 #> - Makowski, D., Lüdecke, D., Patil, I., Thériault, R., Ben-Shachar, M. S.,
 #>     & Wiernik, B. M. (2023). report: Automated reporting of results and
-#>     statistical models (0.6.3) [R package].
+#>     statistical models (0.6.3.1) [R package].
 #>     https://easystats.github.io/easystats/ (Original work published 2021)
 #> 
 summary(cite_easystats(packages = "all"), what = "all")
@@ -249,7 +249,7 @@ summary(cite_easystats(packages = "all"), what = "all")
 #>     2021)
 #> - Makowski, D., Lüdecke, D., Patil, I., Thériault, R., Ben-Shachar, M. S.,
 #>     & Wiernik, B. M. (2023). report: Automated reporting of results and
-#>     statistical models (0.6.3) [R package].
+#>     statistical models (0.6.3.1) [R package].
 #>     https://easystats.github.io/easystats/ (Original work published 2021)
 #> 
 
