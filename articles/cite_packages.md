@@ -62,10 +62,11 @@ cite_packages()
   (2023). “Automated Results Reporting as a Practical Tool to Improve
   Reproducibility and Methodological Best Practices Adoption.” *CRAN*.
   <doi:10.32614/CRAN.package.report>
-  <https://doi.org/10.32614/CRAN.package.report>,
+  <https://doi.org/10.32614/CRAN.package.report>.
   <https://easystats.github.io/report/>.
 - R Core Team (2026). *R: A Language and Environment for Statistical
   Computing*. R Foundation for Statistical Computing, Vienna, Austria.
+  <doi:10.32614/R.manuals> <https://doi.org/10.32614/R.manuals>.
   <https://www.R-project.org/>.
 
 ## Where

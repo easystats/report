@@ -173,7 +173,7 @@ cite_easystats(packages = "all")
 #>     https://CRAN.R-project.org/package=bayestestR (Original work published
 #>     2019)
 #> - Makowski, D., Lüdecke, D., Patil, I., Ben-Shachar, M. S., & Wiernik, B.
-#>     M. (2022). datawizard: Easy data wrangling (1.3.0) [R package].
+#>     M. (2022). datawizard: Easy data wrangling (1.3.1) [R package].
 #>     https://CRAN.R-project.org/package=datawizard (Original work published
 #>     2021)
 #> - Makowski, D., Lüdecke, D., Patil, I., Thériault, R., Ben-Shachar, M. S.,
@@ -244,7 +244,7 @@ summary(cite_easystats(packages = "all"), what = "all")
 #>     https://CRAN.R-project.org/package=bayestestR (Original work published
 #>     2019)
 #> - Makowski, D., Lüdecke, D., Patil, I., Ben-Shachar, M. S., & Wiernik, B.
-#>     M. (2022). datawizard: Easy data wrangling (1.3.0) [R package].
+#>     M. (2022). datawizard: Easy data wrangling (1.3.1) [R package].
 #>     https://CRAN.R-project.org/package=datawizard (Original work published
 #>     2021)
 #> - Makowski, D., Lüdecke, D., Patil, I., Thériault, R., Ben-Shachar, M. S.,
