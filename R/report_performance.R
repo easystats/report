@@ -54,7 +54,6 @@ report_performance <- function(x, table = NULL, ...) {
 
 # METHODS -----------------------------------------------------------------
 
-
 #' @rdname as.report
 #' @export
 as.report_performance <- function(x, summary = NULL, ...) {
@@ -82,7 +81,6 @@ summary.report_performance <- function(object, ...) {
 print.report_performance <- print.report_text
 
 # Utils -------------------------------------------------------------------
-
 
 #' @keywords internal
 .text_r2 <- function(x, info, performance, ...) {
@@ -134,24 +132,28 @@ print.report_performance <- print.report_text
       )
     }
 
-
     if ("R2_adjusted" %in% names(performance)) {
       r2_text <- paste0(
-        r2_text, ", adj. R2 = ",
+        r2_text,
+        ", adj. R2 = ",
         insight::format_value(performance$R2_adjusted),
         ")"
       )
       text_full <- paste0(
-        text_full, ", adj. R2 = ",
+        text_full,
+        ", adj. R2 = ",
         insight::format_value(performance$R2_adjusted),
         ")"
       )
     } else {
-      if (datawizard::text_lastchar(text_full) != ")") text_full <- paste0(text_full, ")")
-      if (datawizard::text_lastchar(r2_text) != ")") r2_text <- paste0(r2_text, ")")
+      if (datawizard::text_lastchar(text_full) != ")") {
+        text_full <- paste0(text_full, ")")
+      }
+      if (datawizard::text_lastchar(r2_text) != ")") {
+        r2_text <- paste0(r2_text, ")")
+      }
     }
   }
-
 
   # Tjur's R2
   if ("R2_Tjur" %in% names(performance)) {
@@ -198,7 +200,11 @@ print.report_performance <- print.report_text
   }
 
   # R2 Conditional
-  if ("R2_conditional" %in% names(performance) && !is.na(performance$R2_conditional)) {
+  if (
+    "R2_conditional" %in%
+      names(performance) &&
+      !is.na(performance$R2_conditional)
+  ) {
     r2_text <- text_full <- paste0(
       "The model's total explanatory power is ",
       effectsize::interpret_r2(performance$R2_conditional, ...),
@@ -259,11 +265,21 @@ print.report_performance <- print.report_text
   )
 
   # Satisfactory
-  if (length(perf_table[perf_table$Interpretation == "satisfactory", "Text"]) >= 1) {
+  if (
+    length(perf_table[perf_table$Interpretation == "satisfactory", "Text"]) >= 1
+  ) {
     text_satisfactory <- paste0(
       "The ",
       perf_table[perf_table$Interpretation == "satisfactory", "Text"],
-      ifelse(length(perf_table[perf_table$Interpretation == "satisfactory", "Text"]) > 1, " suggest", " suggests"),
+      ifelse(
+        length(perf_table[
+          perf_table$Interpretation == "satisfactory",
+          "Text"
+        ]) >
+          1,
+        " suggest",
+        " suggests"
+      ),
       " a satisfactory fit."
     )
   } else {
@@ -275,7 +291,11 @@ print.report_performance <- print.report_text
     text_poor <- paste0(
       "The ",
       perf_table[perf_table$Interpretation == "poor", "Text"],
-      ifelse(length(perf_table[perf_table$Interpretation == "poor", "Text"]) > 1, " suggest", " suggests"),
+      ifelse(
+        length(perf_table[perf_table$Interpretation == "poor", "Text"]) > 1,
+        " suggest",
+        " suggests"
+      ),
       " a poor fit."
     )
   } else {

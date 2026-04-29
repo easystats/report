@@ -1,6 +1,7 @@
 # Coverage tests for report.glmmTMB functions
 
 skip_if_not_installed("glmmTMB")
+skip_on_cran() # glmmTMB models are computationally intensive
 
 test_that("report.glmmTMB coverage test", {
   set.seed(789)

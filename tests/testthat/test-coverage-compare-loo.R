@@ -2,6 +2,7 @@
 
 skip_if_not_installed("brms")
 skip_if_not_installed("loo")
+skip_on_cran() # brms models are computationally intensive
 
 test_that("report.compare.loo coverage test", {
   skip_if_not_installed("rstanarm")
@@ -45,7 +46,8 @@ test_that("report.compare.loo coverage test", {
 
   # Create model comparison object
   comparison <- suppressWarnings(brms::loo_compare(
-    m1, m2,
+    m1,
+    m2,
     model_names = c("model1", "model2")
   ))
 

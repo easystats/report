@@ -64,35 +64,68 @@ report_statistics.compare_performance <- function(x, table = NULL, ...) {
   result_text <- text_short <- ""
 
   if ("R2" %in% names(table)) {
-    result_text <- datawizard::text_paste(result_text, paste0("R2 = ", insight::format_value(table$R2)))
+    result_text <- datawizard::text_paste(
+      result_text,
+      paste0("R2 = ", insight::format_value(table$R2))
+    )
     if ("R2_adjusted" %in% names(table)) {
-      result_text <- datawizard::text_paste(result_text, paste0("adj. R2 = ", insight::format_value(table$R2_adjusted)))
-      text_short <- datawizard::text_paste(text_short, paste0("adj. R2 = ", insight::format_value(table$R2_adjusted)))
+      result_text <- datawizard::text_paste(
+        result_text,
+        paste0("adj. R2 = ", insight::format_value(table$R2_adjusted))
+      )
+      text_short <- datawizard::text_paste(
+        text_short,
+        paste0("adj. R2 = ", insight::format_value(table$R2_adjusted))
+      )
     } else {
-      text_short <- datawizard::text_paste(result_text, paste0("R2 = ", insight::format_value(table$R2)))
+      text_short <- datawizard::text_paste(
+        result_text,
+        paste0("R2 = ", insight::format_value(table$R2))
+      )
     }
   }
 
   if ("AIC" %in% names(table)) {
-    result_text <- datawizard::text_paste(result_text, paste0("AIC = ", insight::format_value(table$AIC)))
+    result_text <- datawizard::text_paste(
+      result_text,
+      paste0("AIC = ", insight::format_value(table$AIC))
+    )
   }
 
   if ("BIC" %in% names(table)) {
-    result_text <- datawizard::text_paste(result_text, paste0("BIC = ", insight::format_value(table$BIC)))
-    text_short <- datawizard::text_paste(text_short, paste0("BIC = ", insight::format_value(table$BIC)))
+    result_text <- datawizard::text_paste(
+      result_text,
+      paste0("BIC = ", insight::format_value(table$BIC))
+    )
+    text_short <- datawizard::text_paste(
+      text_short,
+      paste0("BIC = ", insight::format_value(table$BIC))
+    )
   }
 
   if ("WAIC" %in% names(table)) {
-    result_text <- datawizard::text_paste(result_text, paste0("WAIC = ", insight::format_value(table$WAIC)))
-    text_short <- datawizard::text_paste(text_short, paste0("WAIC = ", insight::format_value(table$WAIC)))
+    result_text <- datawizard::text_paste(
+      result_text,
+      paste0("WAIC = ", insight::format_value(table$WAIC))
+    )
+    text_short <- datawizard::text_paste(
+      text_short,
+      paste0("WAIC = ", insight::format_value(table$WAIC))
+    )
   }
 
   if ("RMSE" %in% names(table)) {
-    result_text <- datawizard::text_paste(result_text, paste0("RMSE = ", insight::format_value(table$RMSE)))
+    result_text <- datawizard::text_paste(
+      result_text,
+      paste0("RMSE = ", insight::format_value(table$RMSE))
+    )
   }
 
   if ("Sigma" %in% names(table)) {
-    result_text <- datawizard::text_paste(result_text, paste0("Sigma = ", insight::format_value(table$Sigma)))
+    result_text <- datawizard::text_paste(
+      result_text,
+      paste0("Sigma = ", insight::format_value(table$Sigma))
+    )
   }
 
   as.report_statistics(result_text, summary = text_short, table = table)
@@ -125,14 +158,23 @@ report_text.compare_performance <- function(x, table = NULL, ...) {
   # Get indices
   models <- result_table$Model
   result_text <- datawizard::text_concatenate(paste0(models, " (", stats, ")"))
-  text_short <- datawizard::text_concatenate(paste0(models, " (", summary(stats), ")"))
+  text_short <- datawizard::text_concatenate(paste0(
+    models,
+    " (",
+    summary(stats),
+    ")"
+  ))
 
   # Add intro sentence
   text_start <- paste0(
     "We compared ",
     insight::format_number(nrow(result_table)),
     " ",
-    ifelse(length(unique(result_table$Type)) == 1, format_model(unique(result_table$Type)), "model"),
+    ifelse(
+      length(unique(result_table$Type)) == 1,
+      format_model(unique(result_table$Type)),
+      "model"
+    ),
     "s"
   )
   result_text <- paste0(text_start, "; ", result_text, ".")

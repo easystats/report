@@ -75,10 +75,14 @@ report_effectsize.htest <- function(x, table = NULL, ...) {
 
     if (grepl("Friedman", attributes(x$statistic)$names, fixed = TRUE)) {
       out <- .report_effectsize_friedman(x, dot_args)
-    } else if (!is.null(x$statistic) && grepl(
-      "Kruskal", attributes(x$statistic)$names,
-      fixed = TRUE
-    )) {
+    } else if (
+      !is.null(x$statistic) &&
+        grepl(
+          "Kruskal",
+          attributes(x$statistic)$names,
+          fixed = TRUE
+        )
+    ) {
       # For Kruskal-Wallis test ---------------
 
       out <- .report_effectsize_kruskal(x, dot_args)
@@ -107,14 +111,20 @@ report_effectsize.htest <- function(x, table = NULL, ...) {
 
   # TODO: Chi-squared test -------------
 
-  if (model_info$is_proptest || (model_info$is_xtab && !model_info$is_chi2test) || model_info$is_onewaytest) {
-    stop(insight::format_message(
-      "This test is not yet supported. Please open an issue at {.url https://github.com/easystats/report/issues}."
-    ), call. = FALSE)
+  if (
+    model_info$is_proptest ||
+      (model_info$is_xtab && !model_info$is_chi2test) ||
+      model_info$is_onewaytest
+  ) {
+    stop(
+      insight::format_message(
+        "This test is not yet supported. Please open an issue at {.url https://github.com/easystats/report/issues}."
+      ),
+      call. = FALSE
+    )
   }
 
   parameters <- paste0(out$interpretation, " (", out$statistics, ")")
-
 
   as.report_effectsize(
     parameters,
@@ -130,7 +140,6 @@ report_effectsize.htest <- function(x, table = NULL, ...) {
 
 
 # report_table ------------------------------------------------------------
-
 
 #' @rdname report.htest
 #' @export
@@ -159,14 +168,16 @@ report_table.htest <- function(x, ...) {
   } else if (model_info$is_chi2test) {
     # chi2 test
     out <- .report_table_chi2(table_full, effsize)
-    attr(out$table_full, "table_footer") <- attr(attr(effsize, "table"), "table_footer")
+    attr(out$table_full, "table_footer") <- attr(
+      attr(effsize, "table"),
+      "table_footer"
+    )
   } else if (model_info$is_correlation) {
     # correlation test
     out <- .report_table_correlation(table_full)
   } else {
     out <- list(table_full = table_full, table = NULL)
   }
-
 
   as.report_table(out$table_full, summary = out$table, effsize = effsize)
 }
@@ -190,12 +201,21 @@ report_statistics.htest <- function(x, table = NULL, ...) {
 
   # Estimate
   candidates <- c(
-    "rho", "r", "tau", "Difference", "r_rank_biserial",
-    "Chi2", "Odds Ratio"
+    "rho",
+    "r",
+    "tau",
+    "Difference",
+    "r_rank_biserial",
+    "Chi2",
+    "Odds Ratio"
   )
   estimate <- candidates[candidates %in% names(table)][1]
   if (!is.null(estimate) && !is.na(estimate)) {
-    txt <- paste0(tolower(estimate), " = ", insight::format_value(table[[estimate]]))
+    txt <- paste0(
+      tolower(estimate),
+      " = ",
+      insight::format_value(table[[estimate]])
+    )
   }
 
   # CI
@@ -229,18 +249,26 @@ report_statistics.htest <- function(x, table = NULL, ...) {
   }
 
   # p-value
-  txt <- paste0(txt, ", ", insight::format_p(table$p, stars = FALSE, digits = "apa"))
+  txt <- paste0(
+    txt,
+    ", ",
+    insight::format_p(table$p, stars = FALSE, digits = "apa")
+  )
 
   # Effect size
-  if (model_info$is_ttest || (model_info$is_ranktest && !model_info$is_correlation) ||
-    model_info$is_chi2test) {
+  if (
+    model_info$is_ttest ||
+      (model_info$is_ranktest && !model_info$is_correlation) ||
+      model_info$is_chi2test
+  ) {
     text_full <- paste0(txt, "; ", attributes(effsize)$statistics)
     txt <- paste0(txt, ", ", attributes(effsize)$main)
   } else {
     text_full <- txt
   }
 
-  as.report_statistics(text_full,
+  as.report_statistics(
+    text_full,
     summary = txt,
     estimate = table[[estimate]],
     table = table,
@@ -250,7 +278,6 @@ report_statistics.htest <- function(x, table = NULL, ...) {
 
 
 # report_parameters ------------------------------------------------------------
-
 
 #' @rdname report.htest
 #' @export
@@ -269,7 +296,6 @@ report_parameters.htest <- function(x, table = NULL, ...) {
   table <- attributes(stats)$table
   effsize <- attributes(stats)$effsize
 
-
   ## TODO see https://github.com/easystats/report/issues/256
   # insight::model_info() returns "$is_correlation" for shapiro-test,
   # but shapiro-test has no "estimate", so this fails. We probably need
@@ -284,12 +310,17 @@ report_parameters.htest <- function(x, table = NULL, ...) {
     # Friedman
   } else if (
     model_info$is_ranktest &&
-      grepl("Friedman", attributes(x$statistic)$names, fixed = TRUE)) {
+      grepl("Friedman", attributes(x$statistic)$names, fixed = TRUE)
+  ) {
     out <- .report_parameters_friedman(table, stats, effsize, ...)
-  } else if (!is.null(x$statistic) && grepl(
-    "Kruskal", attributes(x$statistic)$names,
-    fixed = TRUE
-  )) {
+  } else if (
+    !is.null(x$statistic) &&
+      grepl(
+        "Kruskal",
+        attributes(x$statistic)$names,
+        fixed = TRUE
+      )
+  ) {
     # Kruskal
     out <- .report_parameters_kruskal(table, stats, effsize, ...)
     # chi2
@@ -408,7 +439,14 @@ report_text.htest <- function(x, table = NULL, ...) {
   call_args <- c(list(x, table = table, model_info = model_info), dot_args)
   model <- do.call(report_model, call_args)
 
-  call_args <- c(list(x, effectsize = attributes(params)$effectsize, model_info = model_info), dot_args)
+  call_args <- c(
+    list(
+      x,
+      effectsize = attributes(params)$effectsize,
+      model_info = model_info
+    ),
+    dot_args
+  )
   info <- do.call(report_info, call_args)
 
   if (model_info$is_correlation) {

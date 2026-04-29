@@ -75,19 +75,34 @@ test_that(".info_effectsize() helper function works", {
   # Mock effectsize object
   mock_effectsize <- list()
   attr(mock_effectsize, "method") <- "Cohen's d"
-  attr(mock_effectsize, "rules") <- "Effect sizes interpreted following Cohen (1988)."
+  attr(
+    mock_effectsize,
+    "rules"
+  ) <- "Effect sizes interpreted following Cohen (1988)."
 
   # Test basic usage
-  result1 <- report:::.info_effectsize(NULL, effectsize = mock_effectsize, include_effectsize = FALSE)
+  result1 <- report:::.info_effectsize(
+    NULL,
+    effectsize = mock_effectsize,
+    include_effectsize = FALSE
+  )
   expect_identical(result1, "Cohen's d")
 
   # Test with include_effectsize = TRUE
-  result2 <- report:::.info_effectsize(NULL, effectsize = mock_effectsize, include_effectsize = TRUE)
+  result2 <- report:::.info_effectsize(
+    NULL,
+    effectsize = mock_effectsize,
+    include_effectsize = TRUE
+  )
   expect_match(result2, "Cohen's d")
   expect_match(result2, "interpreted following")
 
   # Test with NULL effectsize
-  result3 <- report:::.info_effectsize(NULL, effectsize = NULL, include_effectsize = FALSE)
+  result3 <- report:::.info_effectsize(
+    NULL,
+    effectsize = NULL,
+    include_effectsize = FALSE
+  )
   expect_identical(result3, "")
 })
 

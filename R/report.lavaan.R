@@ -38,15 +38,25 @@ report.lavaan <- function(x, ...) {
 report_table.lavaan <- function(x, ...) {
   parameters <- parameters::model_parameters(x, ci_random = FALSE, ...)
   lavaan_table <- as.data.frame(parameters)
-  lavaan_table$Parameter <- paste(lavaan_table$To, lavaan_table$Operator, lavaan_table$From)
-  lavaan_table <- datawizard::data_remove(lavaan_table, c("To", "Operator", "From"))
+  lavaan_table$Parameter <- paste(
+    lavaan_table$To,
+    lavaan_table$Operator,
+    lavaan_table$From
+  )
+  lavaan_table <- datawizard::data_remove(
+    lavaan_table,
+    c("To", "Operator", "From")
+  )
   lavaan_table <- datawizard::data_reorder(lavaan_table, "Parameter")
 
   # Combine -----
   # Add performance
   performance <- performance::model_performance(x, ...)
   lavaan_table <- .combine_tables_performance(lavaan_table, performance)
-  lavaan_table <- lavaan_table[!tolower(lavaan_table$Parameter) %in% c("baseline", "baseline_df", "baseline_p"), ]
+  lavaan_table <- lavaan_table[
+    !tolower(lavaan_table$Parameter) %in%
+      c("baseline", "baseline_df", "baseline_p"),
+  ]
 
   # Clean -----
   # Rename some columns
@@ -58,13 +68,18 @@ report_table.lavaan <- function(x, ...) {
     select = "(_CI_low|_CI_high)$",
     regex = TRUE
   )
-  lavaan_table <- lavaan_table[!lavaan_table$Parameter %in% c(
-    "AIC", "BIC",
-    "RMSEA"
-  ), ]
+  lavaan_table <- lavaan_table[
+    !lavaan_table$Parameter %in%
+      c(
+        "AIC",
+        "BIC",
+        "RMSEA"
+      ),
+  ]
 
   # Prepare -----
-  out <- as.report_table(table_full,
+  out <- as.report_table(
+    table_full,
     summary = lavaan_table,
     performance = performance,
     parameters = parameters,
@@ -103,17 +118,24 @@ report_performance.lavaan <- function(x, table = NULL, ...) {
       ") = ",
       insight::format_value(performance$Chi2),
       ", ",
-      insight::format_p(performance$p_Chi2), ")."
+      insight::format_p(performance$p_Chi2),
+      ")."
     )
   }
 
   perf_table <- effectsize::interpret(performance)
-  text_full <- datawizard::text_paste(text_chi2, .text_performance_lavaan(perf_table), sep = " ")
-  summary_text <- datawizard::text_paste(text_chi2,
-    .text_performance_lavaan(perf_table[perf_table$Name %in% c("RMSEA", "CFI", "SRMR"), ]),
+  text_full <- datawizard::text_paste(
+    text_chi2,
+    .text_performance_lavaan(perf_table),
     sep = " "
   )
-
+  summary_text <- datawizard::text_paste(
+    text_chi2,
+    .text_performance_lavaan(perf_table[
+      perf_table$Name %in% c("RMSEA", "CFI", "SRMR"),
+    ]),
+    sep = " "
+  )
 
   as.report_performance(text_full, summary = summary_text)
 }

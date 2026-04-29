@@ -1,6 +1,7 @@
 # Coverage tests for report.MixMod functions
 
 skip_if_not_installed("GLMMadaptive")
+skip_on_cran() # GLMMadaptive mixed models are computationally intensive
 
 test_that("report.MixMod coverage test", {
   set.seed(999)
@@ -16,7 +17,8 @@ test_that("report.MixMod coverage test", {
 
   # Create binary outcome appropriate for GLMMadaptive
   data_mixmod$y <- rbinom(
-    nrow(data_mixmod), 1,
+    nrow(data_mixmod),
+    1,
     plogis(-1 + 0.5 * data_mixmod$time + 0.3 * data_mixmod$x)
   )
 

@@ -88,15 +88,25 @@ print.report_intercept <- function(x, ...) {
     if (is.numeric(intercept_data[[col]])) {
       intercept_text <- c(intercept_text, paste0(col, " = 0"))
     } else if (is.character(intercept_data[[col]])) {
-      intercept_text <- c(intercept_text, paste0(col, " = ", levels(as.factor(intercept_data[[col]]))[1]))
+      intercept_text <- c(
+        intercept_text,
+        paste0(col, " = ", levels(as.factor(intercept_data[[col]]))[1])
+      )
     } else if (is.factor(intercept_data[[col]])) {
       ref_level <- .find_reference_level(intercept_data[[col]])
-      intercept_text <- c(intercept_text, paste0(col, " = ", levels(intercept_data[[col]])[ref_level]))
+      intercept_text <- c(
+        intercept_text,
+        paste0(col, " = ", levels(intercept_data[[col]])[ref_level])
+      )
     } else {
       intercept_text <- c(intercept_text, paste0(col, " = [?]"))
     }
   }
-  paste0(", corresponding to ", datawizard::text_concatenate(intercept_text), ",")
+  paste0(
+    ", corresponding to ",
+    datawizard::text_concatenate(intercept_text),
+    ","
+  )
 }
 
 

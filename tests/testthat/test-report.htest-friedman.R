@@ -1,5 +1,6 @@
 test_that("report.htest-friendman report", {
-  wb <<- aggregate(warpbreaks$breaks,
+  wb <<- aggregate(
+    warpbreaks$breaks,
     by = list(
       w = warpbreaks$wool,
       t = warpbreaks$tension

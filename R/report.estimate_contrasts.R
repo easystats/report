@@ -40,11 +40,26 @@ report_table.estimate_contrasts <- function(x, ...) {
 report_text.estimate_contrasts <- function(x, table = NULL, ...) {
   f_table <- insight::format_table(table)
 
-  report_text_obj <- paste0("The difference between ", x$Level1, " and ", x$Level2, " is ",
-    ifelse(x$Difference < 0, " negative", "positive"), " and statistically ",
+  report_text_obj <- paste0(
+    "The difference between ",
+    x$Level1,
+    " and ",
+    x$Level2,
+    " is ",
+    ifelse(x$Difference < 0, " negative", "positive"),
+    " and statistically ",
     ifelse(x$p < 0.05, "significant", "non-significant"),
-    " (difference = ", f_table$Difference, ", 95% CI ", f_table$`95% CI`, ", ",
-    names(f_table)[6], " = ", f_table[[6]], ", ", insight::format_p(table$p), ")",
+    " (difference = ",
+    f_table$Difference,
+    ", 95% CI ",
+    f_table$`95% CI`,
+    ", ",
+    names(f_table)[6],
+    " = ",
+    f_table[[6]],
+    ", ",
+    insight::format_p(table$p),
+    ")",
     collapse = ". "
   )
 
