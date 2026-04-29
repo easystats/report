@@ -35,11 +35,9 @@ test_that("report_ai.lm - print method", {
 test_that("report_ai.default - warns and falls back to report()", {
   # htest has report() support but no dedicated report_ai() method
   ht <- t.test(mtcars$mpg ~ mtcars$am)
-  expect_warning(result <- report_ai(ht), "not yet available")
+  result <- expect_warning(report_ai(ht), "not yet available")
   expect_s3_class(result, "report")
-})
-
-test_that("report_ai.default - falls back to human report() when report_audience option is ai", {
+}) report() when report_audience option is ai", {
   # Regression test: fallback from report_ai.default() must not recurse back
   # into AI routing when the global audience option is set to "ai".
   ht <- t.test(mtcars$mpg ~ mtcars$am)
@@ -47,7 +45,7 @@ test_that("report_ai.default - falls back to human report() when report_audience
   on.exit(options(report_audience = old))
 
   options(report_audience = "ai")
-  expect_warning(result <- report_ai(ht), "not yet available")
+  result <- expect_warning(report_ai(ht), "not yet available")
   expect_s3_class(result, "report")
   expect_false(inherits(result, "report_ai"))
 })
@@ -112,9 +110,10 @@ test_that("report_ai.merMod - lmer", {
   # Subject (grouping variable) should NOT appear in the Variables section
   expect_false(grepl(
     "Subject",
-    strsplit(strsplit(result, "## Variables\n")[[1]][2], "## Parameters")[[1]][
+    strsplit(strsplit(result, "## Variables\n", fixed = TRUE)[[1]][2], "## Parameters", fixed = TRUE)[[1]][
       1
-    ]
+    ],
+    fixed = TRUE
   ))
 })
 

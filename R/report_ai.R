@@ -69,10 +69,13 @@ report_ai.glmmTMB <- function(x, ...) {
   form <- insight::find_formula(x)
 
   func_name <- tryCatch(
-    insight::safe_deparse(insight::get_call(x)[[1]]),
+    {
+      dep <- insight::safe_deparse(insight::get_call(x)[[1]])
+      sub(".*::", "", dep)
+    },
     error = function(e) class(x)[1]
   )
-  mod_family <- if (!is.null(mi$family)) mi$family else "Unknown"
+  mod_family <- if (is.null(mi$family)) "Unknown" else mi$family
 
   model_vars_list <- insight::find_variables(x)
   # Use only response + conditional (fixed) variables for descriptives;
@@ -92,14 +95,18 @@ report_ai.glmmTMB <- function(x, ...) {
       dat[, fixed_vars, drop = FALSE],
       audience = "humans"
     )))
-    desc_lines <- unlist(strsplit(as.character(desc_report), "\n"))
+    desc_lines <- unlist(strsplit(
+      as.character(desc_report),
+      "\n",
+      fixed = TRUE
+    ))
 
     if (length(desc_lines) > 1) {
       # Use trimws() to kill the spaces that cause nested bullets
       clean_lines <- trimws(desc_lines[-1])
-      desc_str <- paste0(clean_lines, collapse = "\n")
+      desc_str <- paste(clean_lines, collapse = "\n")
     } else {
-      desc_str <- paste0(trimws(desc_lines), collapse = "\n")
+      desc_str <- paste(trimws(desc_lines), collapse = "\n")
     }
   } else {
     desc_str <- "- No variables found."
@@ -131,7 +138,7 @@ report_ai.glmmTMB <- function(x, ...) {
 
   param_table <- insight::format_table(fixed_params)
   param_markdown <- insight::export_table(param_table, format = "markdown")
-  param_str <- paste0(param_markdown, collapse = "\n")
+  param_str <- paste(param_markdown, collapse = "\n")
 
   # Format random effect variances as metadata bullet points
   random_str <- NULL
@@ -144,24 +151,24 @@ report_ai.glmmTMB <- function(x, ...) {
       vapply(
         seq_len(nrow(random_params)),
         function(i) {
-          row <- random_params[i, , drop = FALSE]
-          param_name <- if ("Parameter" %in% names(row)) {
-            as.character(row$Parameter)
+          param_row <- random_params[i, , drop = FALSE]
+          param_name <- if ("Parameter" %in% names(param_row)) {
+            as.character(param_row$Parameter)
           } else {
             "?"
           }
           group_tag <- if (
             "Group" %in%
-              names(row) &&
-              !is.na(row$Group) &&
-              nchar(as.character(row$Group)) > 0
+              names(param_row) &&
+              !is.na(param_row$Group) &&
+              nzchar(as.character(param_row$Group))
           ) {
-            paste0(" [", row$Group, "]")
+            paste0(" [", param_row$Group, "]")
           } else {
             ""
           }
-          val <- if (!is.na(coef_col) && coef_col %in% names(row)) {
-            sprintf("%.3f", as.numeric(row[[coef_col]]))
+          val <- if (!is.na(coef_col) && coef_col %in% names(param_row)) {
+            sprintf("%.3f", as.numeric(param_row[[coef_col]]))
           } else {
             "?"
           }
@@ -176,7 +183,7 @@ report_ai.glmmTMB <- function(x, ...) {
   perf <- performance::model_performance(x, ...)
   perf_table <- insight::format_table(perf)
   perf_markdown <- insight::export_table(perf_table, format = "markdown")
-  perf_str <- paste0(perf_markdown, collapse = "\n")
+  perf_str <- paste(perf_markdown, collapse = "\n")
 
   if ("p" %in% names(fixed_params) && "Parameter" %in% names(fixed_params)) {
     sig_effects <- fixed_params$Parameter[
@@ -189,7 +196,7 @@ report_ai.glmmTMB <- function(x, ...) {
     } else {
       sprintf(
         "- Significant effects (p < 0.05): %s",
-        paste(sig_effects, collapse = ", ")
+        toString(sig_effects)
       )
     }
   } else {
@@ -209,20 +216,20 @@ report_ai.glmmTMB <- function(x, ...) {
     ci_pct <- sprintf("%.0f%%", ci_level * 100)
     ci_label <- .ci_method_label(ci_method)
     inference_str <- paste0("- Inference: ", ci_pct, " CI [", ci_label, "]")
-  } else if (!is.null(ci_level)) {
+  } else if (is.null(ci_level)) {
+    inference_str <- NULL
+  } else {
     inference_str <- paste0(
       "- Inference: ",
       sprintf("%.0f%%", ci_level * 100),
       " CI"
     )
-  } else {
-    inference_str <- NULL
   }
 
-  param_section <- if (!is.null(random_str)) {
-    paste0("## Parameters\n", param_str, "\n\n### Random Effects\n", random_str)
-  } else {
+  param_section <- if (is.null(random_str)) {
     paste0("## Parameters\n", param_str)
+  } else {
+    paste0("## Parameters\n", param_str, "\n\n### Random Effects\n", random_str)
   }
 
   model_section <- paste0(
@@ -238,7 +245,7 @@ report_ai.glmmTMB <- function(x, ...) {
     "\n",
     "- N: ",
     n_obs,
-    if (!is.null(inference_str)) paste0("\n", inference_str) else ""
+    if (is.null(inference_str)) "" else paste0("\n", inference_str)
   )
 
   res <- paste0(
@@ -257,12 +264,12 @@ report_ai.glmmTMB <- function(x, ...) {
   )
 
   class(res) <- c("report_ai", "character")
-  return(res)
+  res
 }
 
 # Helper: human-readable CI / df-method label
 .ci_method_label <- function(method) {
-  labels <- c(
+  method_labels <- c(
     wald = "Wald",
     residual = "Residual df (t/F)",
     satterthwaite = "Satterthwaite df",
@@ -275,7 +282,7 @@ report_ai.glmmTMB <- function(x, ...) {
     eti = "ETI",
     si = "SI"
   )
-  lab <- labels[tolower(as.character(method))]
+  lab <- method_labels[tolower(as.character(method))]
   if (is.na(lab)) {
     tools::toTitleCase(tolower(as.character(method)))
   } else {
