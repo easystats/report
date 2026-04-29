@@ -113,6 +113,12 @@ comments (`#'`). The documentation should include:
 - **Conditional Checks:** Use `insight::check_if_installed("pkg_name")`
   to check if a package is available before using it, especially for
   optional (“Suggests”) dependencies.
+- **Argument validation:** Use
+  [`insight::validate_argument()`](https://easystats.github.io/insight/reference/validate_argument.html)
+  instead of [`match.arg()`](https://rdrr.io/r/base/match.arg.html) to
+  validate correct input of arguments, unless you need `several.ok`. In
+  this case, rely on
+  [`match.arg()`](https://rdrr.io/r/base/match.arg.html).
 
 ## S3 Object System
 

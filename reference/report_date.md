@@ -71,9 +71,9 @@ Template file for supporting new models:
 library(report)
 
 report_date()
-#> It's Wednesday, April 29 of the year 2026, at  6am 49 and 51 seconds
+#> It's Wednesday, April 29 of the year 2026, at  9am 03 and 09 seconds
 summary(report_date())
-#> 29/04/26 - 06:49:51
+#> 29/04/26 - 09:03:09
 report_story()
 #> Did you ever hear the tragedy of Darth Plagueis The Wise? I thought not. It's
 #> not a story the Jedi would tell you. It's a Sith legend. Darth Plagueis was a

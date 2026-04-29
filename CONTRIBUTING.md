@@ -72,7 +72,8 @@ of it :)**
 
   - `styler::style_pkg()`: Automatic style formatting
   - `lintr::lint_package()`: Style checks
-  - `devtools::check()`: General checks
+  - [`devtools::check()`](https://devtools.r-lib.org/reference/check.html):
+    General checks
 
 ## Useful Materials
 
