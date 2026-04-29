@@ -3,6 +3,7 @@
 Bug fixes
 
 * Fix `report()` crash when character vector has only one unique value (#578).
+* `report()`: fix failure when reporting Kruskal-Wallis tests with degenerate cases (one observation per group) (#454)
 
 # report 0.6.3
 
