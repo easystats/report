@@ -1,24 +1,8 @@
-#' Generate AI-optimized reports
-#'
-#' This function is designed to produce AI-optimized output for statistical models.
-#' It strikes a careful balance between comprehensiveness, specificity, and compactness.
-#' The primary goal is to provide a Large Language Model (LLM) or AI agent with the
-#' clearest and most relevant analytical information at the lowest possible token cost.
-#'
-#' @param x A statistical model.
-#' @param ... Arguments passed to other functions, like \code{parameters::model_parameters()},
-#'  \code{performance::model_performance()} or \code{insight::format_table()}.
-#' @return A character vector of class `report_ai` containing the formatted text.
-#'
-#' @examples
-#' m <- lm(mpg ~ wt + hp, data = mtcars)
-#' report_ai(m)
-#' @export
+# Internal generic — use report(x, audience = "ai") instead.
 report_ai <- function(x, ...) {
   UseMethod("report_ai")
 }
 
-#' @export
 report_ai.default <- function(x, ...) {
   insight::format_warning(
     paste0(
@@ -30,32 +14,16 @@ report_ai.default <- function(x, ...) {
   report(x, ..., audience = "humans")
 }
 
-#' @export
 report_ai.lm <- function(x, ...) {
   .report_ai_models(x, ...)
 }
 
-#' @export
 report_ai.glm <- report_ai.lm
 
-#' @rdname report_ai
-#' @examplesIf requireNamespace("lme4", quietly = TRUE)
-#' \donttest{
-#' m <- lme4::lmer(Reaction ~ Days + (1 | Subject), data = lme4::sleepstudy)
-#' report_ai(m)
-#' }
-#' @export
 report_ai.merMod <- function(x, ...) {
   .report_ai_models(x, ...)
 }
 
-#' @rdname report_ai
-#' @examplesIf requireNamespace("glmmTMB", quietly = TRUE)
-#' \donttest{
-#' m <- glmmTMB::glmmTMB(count ~ mined + (1 | site), family = poisson(), data = glmmTMB::Salamanders)
-#' report_ai(m)
-#' }
-#' @export
 report_ai.glmmTMB <- function(x, ...) {
   .report_ai_models(x, ...)
 }

@@ -73,7 +73,6 @@ reference:
           - format_model
           - as.report_text
           - report
-          - report_ai
           - report.default
           - report_table
           - report_text

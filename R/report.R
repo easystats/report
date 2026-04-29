@@ -21,10 +21,15 @@
 #' @param x The R object that you want to report (see list of of supported
 #'   objects above).
 #' @param audience The intended audience for the report. `"humans"` (default)
-#'   produces the standard formatted text report. `"ai"` produces a compact,
-#'   structured output optimised for consumption by a Large Language Model (LLM)
-#'   or AI agent via [report_ai()]. The default can be changed globally with
-#'   `options(report_audience = "ai")`.
+#'   produces the standard narrative text report. `"ai"` produces a compact,
+#'   structured Markdown output designed for consumption by a Large Language
+#'   Model (LLM) or AI agent. It strikes a careful balance between
+#'   comprehensiveness, specificity, and compactness, giving the model the
+#'   clearest and most relevant analytical information at the lowest possible
+#'   token cost. The output is a single character vector of class `report_ai`
+#'   that can be pasted directly into a chat window or fed to an LLM API.
+#'   The default can be changed globally with `options(report_audience = "ai")`.
+#'   See `vignette("report_ai", package = "report")` for details and examples.
 #' @param ... Arguments passed to or from other methods.
 #'
 #' @details
