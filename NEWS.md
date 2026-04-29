@@ -1,3 +1,9 @@
+# report (devel)
+
+Bug fixes
+
+* Fix `report()` crash when character vector has only one unique value (#578).
+
 # report 0.6.3
 
 Bug fixes
