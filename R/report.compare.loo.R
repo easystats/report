@@ -87,7 +87,8 @@ report.compare.loo <- function(x, include_IC = TRUE, include_ENP = FALSE, ...) {
       "The difference in predictive accuracy, as indexed by Expected Log ",
       "Predictive Density (%s), suggests that '%s' is the best model ("
     ),
-    index_label, modnames[1]
+    index_label,
+    modnames[1]
   )
   if (all(c(include_IC, include_ENP))) {
     if (include_IC) {
@@ -117,7 +118,11 @@ report.compare.loo <- function(x, include_IC = TRUE, include_ENP = FALSE, ...) {
 
   if (all(c(include_IC, include_ENP))) {
     if (include_IC) {
-      text_models <- sprintf(paste0(text_models, ", %s = %.2f"), index_ic, ic[-1])
+      text_models <- sprintf(
+        paste0(text_models, ", %s = %.2f"),
+        index_ic,
+        ic[-1]
+      )
     }
     if (include_ENP) {
       if (include_IC) {
@@ -132,8 +137,11 @@ report.compare.loo <- function(x, include_IC = TRUE, include_ENP = FALSE, ...) {
     text_models <- paste0(text_models, ")")
   }
 
-
-  text1 <- paste0(text1, ", followed by ", datawizard::text_concatenate(text_models))
+  text1 <- paste0(
+    text1,
+    ", followed by ",
+    datawizard::text_concatenate(text_models)
+  )
   class(text1) <- c("report_text", class(text1))
   text1
 }

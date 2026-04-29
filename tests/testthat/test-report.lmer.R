@@ -1,4 +1,5 @@
 skip_if_not_installed("lme4")
+skip_on_cran() # lme4 mixed-effects models can be computationally intensive
 
 test_that("report-lmer", {
   df <- lme4::sleepstudy
@@ -15,7 +16,10 @@ test_that("report-lmer", {
   m1 <- lme4::lmer(Reaction ~ Days + (1 + Days | Subject), data = df)
 
   set.seed(123)
-  m2 <- lme4::lmer(Reaction ~ Days + (1 | mygrp / mysubgrp) + (1 | Subject), data = df)
+  m2 <- lme4::lmer(
+    Reaction ~ Days + (1 | mygrp / mysubgrp) + (1 | Subject),
+    data = df
+  )
 
   expect_snapshot(variant = "windows", report(m1))
 

@@ -8,9 +8,4 @@ test_that("report-survreg", {
   )
 
   expect_snapshot(variant = "windows", report(mod_survreg))
-
-  unloadNamespace("rstanarm")
-  unloadNamespace("multcomp")
-  unloadNamespace("TH.data")
-  unloadNamespace("survival")
 })

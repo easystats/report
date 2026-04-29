@@ -48,14 +48,17 @@
 .calculate_groups <- function(x, groups, drop = .groups_drop(x)) {
   # if the dplyr namespace is attached, its `[.grouped_df` method produces
   # erroneous warnings and coerces output to tbl_df
-  `[` <- `[.data.frame`
+  subset_data <- `[.data.frame`
   x <- .ungroup(x)
   unknown <- setdiff(groups, colnames(x))
 
   if (length(unknown) > 0L) {
-    stop(insight::format_message(
-      sprintf("`groups` missing from `x`: %s.", toString(groups))
-    ))
+    stop(
+      insight::format_message(
+        sprintf("`groups` missing from `x`: %s.", toString(groups))
+      ),
+      call. = FALSE
+    )
   }
 
   unique_groups <- unique(x[, groups, drop = FALSE])
@@ -91,10 +94,14 @@
   }
 
   unique_groups[[".rows"]] <- rows
-  unique_groups <- unique_groups[do.call(
-    order,
-    lapply(groups, function(x) unique_groups[, x])
-  ), , drop = FALSE]
+  unique_groups <- unique_groups[
+    do.call(
+      order,
+      lapply(groups, function(x) unique_groups[, x])
+    ),
+    ,
+    drop = FALSE
+  ]
 
   rownames(unique_groups) <- NULL
 

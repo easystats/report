@@ -30,20 +30,21 @@
 #' @return An object of class [report()].
 #' @export
 report.sessionInfo <- function(x, ...) {
-  table <- report_table(x, ...)
-  text <- report_text(x, table = table)
+  session_table <- report_table(x, ...)
+  session_text <- report_text(x, table = session_table)
 
-  as.report(text, table = table, ...)
+  as.report(session_text, table = session_table, ...)
 }
 
 
 # Aliases -----------------------------------------------------------------
 
-
 #' @rdname report.sessionInfo
 #' @export
 report_packages <- function(session = NULL, include_R = TRUE, ...) {
-  if (is.null(session)) session <- utils::sessionInfo()
+  if (is.null(session)) {
+    session <- utils::sessionInfo()
+  }
   report_parameters(session, include_R = include_R, ...)
 }
 
@@ -51,13 +52,15 @@ report_packages <- function(session = NULL, include_R = TRUE, ...) {
 #' @rdname report.sessionInfo
 #' @export
 cite_packages <- function(session = NULL, include_R = TRUE, ...) {
-  if (is.null(session)) session <- utils::sessionInfo()
+  if (is.null(session)) {
+    session <- utils::sessionInfo()
+  }
 
   # Do not recompute table if passed
-  if (!is.null(list(...)$table)) {
-    x <- list(...)$table
-  } else {
+  if (is.null(list(...)$table)) {
     x <- report_table(session, include_R = include_R)
+  } else {
+    x <- list(...)$table
   }
 
   x <- sort(x$Reference, na.last = TRUE) # Extract the references
@@ -68,7 +71,6 @@ cite_packages <- function(session = NULL, include_R = TRUE, ...) {
 
 # report_system --------------------------------------------------------------
 
-
 #' @rdname report.sessionInfo
 #' @export
 report_system <- function(session = NULL) {
@@ -76,29 +78,39 @@ report_system <- function(session = NULL) {
     session <- utils::sessionInfo()
   }
 
-  version <- paste0(session$R.version$major, ".", session$R.version$minor)
-  year <- paste0(session$R.version$year, "-", session$R.version$month, "-", session$R.version$day)
-  citation <- format_citation(clean_citation(utils::citation()), authorsdate = TRUE, intext = TRUE)
+  r_version <- paste0(session$R.version$major, ".", session$R.version$minor)
+  year <- paste0(
+    session$R.version$year,
+    "-",
+    session$R.version$month,
+    "-",
+    session$R.version$day
+  )
+  r_citation <- format_citation(
+    clean_citation(utils::citation()),
+    authorsdate = TRUE,
+    intext = TRUE
+  )
 
-  text <- paste0(
+  result_text <- paste0(
     "Analyses were conducted using the R Statistical language (version ",
-    version,
+    r_version,
     "; ",
-    citation,
+    r_citation,
     ") on ",
     session$running
   )
 
   short <- paste0(
     "The analysis was done using the R Statistical language (v",
-    version,
+    r_version,
     "; ",
-    citation,
+    r_citation,
     ") on ",
     datawizard::text_remove(session$running, " \\(build.*")
   )
 
-  as.report_text(text, summary = short)
+  as.report_text(result_text, summary = short)
 }
 
 
@@ -111,28 +123,27 @@ report_table.sessionInfo <- function(x, include_R = TRUE, ...) {
   if (isTRUE(include_R)) {
     citations <- clean_citation(utils::citation("base"))
     versions <- paste0(x$R.version$major, ".", x$R.version$minor)
-    names <- "R"
+    pkg_names <- "R"
   } else {
     citations <- NULL
     versions <- NULL
-    names <- NULL
+    pkg_names <- NULL
   }
-
 
   for (pkg_name in names(pkgs)) {
     citations <- c(citations, clean_citation(utils::citation(pkg_name)))
     versions <- c(versions, as.character(utils::packageVersion(pkg_name)))
-    names <- c(names, pkg_name)
+    pkg_names <- c(pkg_names, pkg_name)
   }
 
-  data <- data.frame(
-    Package = names,
+  session_data <- data.frame(
+    Package = pkg_names,
     Version = versions,
     Reference = citations,
     stringsAsFactors = FALSE
   )
 
-  x <- data[order(data$Package), ]
+  x <- session_data[order(session_data$Package), ]
   row.names(x) <- NULL
   as.report_table(x, summary = x[c("Package", "Version")])
 }
@@ -141,7 +152,12 @@ report_table.sessionInfo <- function(x, include_R = TRUE, ...) {
 # report_parameters -------------------------------------------------------
 
 #' @export
-report_parameters.sessionInfo <- function(x, table = NULL, include_R = TRUE, ...) {
+report_parameters.sessionInfo <- function(
+  x,
+  table = NULL,
+  include_R = TRUE,
+  ...
+) {
   # Get table
   if (is.null(table)) {
     x <- report_table(x)
@@ -149,7 +165,9 @@ report_parameters.sessionInfo <- function(x, table = NULL, include_R = TRUE, ...
     x <- table
   }
 
-  if (isFALSE(include_R)) x <- x[x$Package != "R", ]
+  if (isFALSE(include_R)) {
+    x <- x[x$Package != "R", ]
+  }
 
   # Generate text
   x$text <- paste0(
@@ -157,14 +175,18 @@ report_parameters.sessionInfo <- function(x, table = NULL, include_R = TRUE, ...
     " (version ",
     x$Version,
     "; ",
-    format_citation(x$Reference, authorsdate = TRUE, short = TRUE, intext = TRUE),
+    format_citation(
+      x$Reference,
+      authorsdate = TRUE,
+      short = TRUE,
+      intext = TRUE
+    ),
     ")"
   )
 
   x$summary <- paste0(x$Package, " (v", x$Version, ")")
 
   x <- x[order(x$Reference), ]
-
 
   params <- x$text
   names(params) <- x$Package
@@ -182,7 +204,7 @@ report_text.sessionInfo <- function(x, table = NULL, ...) {
   sys <- report_system(x)
   params <- report_parameters(x, table = table, include_R = FALSE)
 
-  text <- paste0(
+  result_text <- paste0(
     sys,
     ", using the packages ",
     datawizard::text_concatenate(params),
@@ -197,5 +219,5 @@ report_text.sessionInfo <- function(x, table = NULL, ...) {
     "."
   )
 
-  as.report_text(text, summary = short)
+  as.report_text(result_text, summary = short)
 }

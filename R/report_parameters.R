@@ -194,7 +194,25 @@ print.report_parameters <- function(x, ...) {
     }
     names(pretty_name) <- params$Parameter
   } else {
-    pretty_name <- parameters::format_parameters(x)
+    # Try to get formatted parameter names from the model
+    # If this fails (e.g., with mock objects), fall back to using parameter names from table
+    pretty_name <- tryCatch(
+      {
+        parameters::format_parameters(x)
+      },
+      warning = function(w) {
+        # If we can't get parameters from the model, use the parameter names from the table
+        param_names <- params$Parameter
+        names(param_names) <- param_names
+        param_names
+      },
+      error = function(e) {
+        # If we can't get parameters from the model, use the parameter names from the table
+        param_names <- params$Parameter
+        names(param_names) <- param_names
+        param_names
+      }
+    )
   }
 
   text_output <- vapply(
@@ -214,6 +232,8 @@ print.report_parameters <- function(x, ...) {
   only_when_insufficient = FALSE,
   ...
 ) {
+  # init
+  convergence <- stability <- NULL
   # Convergence
   if ("Rhat" %in% names(diagnostic)) {
     convergence <- effectsize::interpret_rhat(diagnostic$Rhat, ...)
@@ -274,7 +294,8 @@ print.report_parameters <- function(x, ...) {
 
   if (only_when_insufficient) {
     ifelse(
-      convergence != "converged" | stability != "sufficient",
+      !identical(convergence, "converged") |
+        !identical(stability, "sufficient"),
       text_output,
       ""
     )

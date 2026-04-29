@@ -210,7 +210,12 @@ report_table.lm <- function(x, include_effectsize = TRUE, ...) {
     ...
   )
   if (!is.null(effsize)) {
-    attr(out, paste0(names(attributes(effsize)$ci))) <- attributes(effsize)$ci
+    new_attrs <- attributes(effsize)$ci
+    for (idx in seq_along(new_attrs)) {
+      if (!is.na(names(new_attrs)[idx])) {
+        attr(out, names(new_attrs)[idx]) <- new_attrs[[idx]]
+      }
+    }
   }
   # Add attributes from params table
   for (att in c(
@@ -332,19 +337,19 @@ report_statistics.lm <- function(
   # Effect size
   if (include_effectsize && !is.null(effsize)) {
     # For glmmTMB models with components, align effectsize with the table parameters
-    if (inherits(x, "glmmTMB") && "Component" %in% colnames(table)) {
+    if (inherits(x, "glmmTMB") && "Component" %in% colnames(params_table)) {
       # Find matching indices between table and effectsize
       effsize_table <- attributes(effsize)$table
 
       # Create matching vectors for both table and effectsize
-      table_keys <- paste(table$Parameter, table$Component)
+      table_keys <- paste(params_table$Parameter, params_table$Component)
       effsize_keys <- paste(effsize_table$Parameter, effsize_table$Component)
 
       # Find which effectsize entries match table entries
       match_idx <- match(table_keys, effsize_keys)
 
       # Use only the matched effectsize elements, fill missing with empty strings
-      n_params <- nrow(table)
+      n_params <- nrow(params_table)
       effsize_stats <- character(n_params)
       effsize_main <- character(n_params)
 
@@ -431,6 +436,35 @@ report_parameters.lm <- function(
   )
   params <- attributes(stats)$table
   effsize <- attributes(stats)$effsize
+
+  # For glmmTMB models, deduplicate parameters table to prevent repeated output
+  # This fixes the issue where same parameter appears multiple times in the report
+  if (inherits(x, "glmmTMB")) {
+    # Check if we have duplicated parameters (could be due to Component structure or other reasons)
+    if ("Component" %in% colnames(params)) {
+      # Deduplicate based on Parameter and Component combination
+      unique_idx <- !duplicated(paste(params$Parameter, params$Component))
+    } else {
+      # Deduplicate based on Parameter name only (for tables without Component column)
+      unique_idx <- !duplicated(params$Parameter)
+    }
+
+    # Only apply deduplication if we actually found duplicates
+    if (!all(unique_idx)) {
+      params <- params[unique_idx, , drop = FALSE]
+
+      # Also need to adjust the stats object to match the deduplicated table
+      stats_vector <- as.character(stats)
+
+      # Keep only the corresponding stats entries
+      stats <- structure(
+        stats_vector[unique_idx],
+        class = class(stats),
+        table = params,
+        effectsize = effsize
+      )
+    }
+  }
 
   # Parameters' names
   params_text <- as.character(.parameters_starting_text(x, params))
@@ -712,32 +746,51 @@ report_text.lm <- function(x, table = NULL, ...) {
   if (suppressWarnings(insight::is_nullmodel(x))) {
     params_text_full <- params_text <- ""
   } else {
-    params_text_full <- paste0(" Within this model:\n\n", as.character(params))
+    params_text_full <- paste0("Within this model:\n\n", as.character(params))
     params_text <- paste0(
-      " Within this model:\n\n",
+      "Within this model:\n\n",
       as.character(summary(params), ...)
     )
   }
 
+  # Helpers
+  sep_after <- function(x) {
+    x <- trimws(x)
+    if (!nzchar(x)) {
+      return("")
+    } # nothing to add if empty
+    if (grepl("[.!?]\\s*$", x)) " " else ". " # space if already ends with .!?; else ". "
+  }
+
+  # Sanitize fragments (remove accidental leading spaces)
+  params_text_full <- sub("^\\s+", "", params_text_full)
+  params_text <- sub("^\\s+", "", params_text)
+  perf <- trimws(perf)
+  intercept <- trimws(intercept)
+
+  # 1) text_full
   text_full <- paste0(
     "We fitted a ",
     model,
     ". ",
     perf,
-    ifelse(nzchar(perf, keepNA = TRUE), ". ", ""),
+    sep_after(perf),
     intercept,
+    sep_after(intercept),
     params_text_full,
     "\n\n",
     info
   )
 
+  # 2) result_summary
   result_summary <- paste0(
     "We fitted a ",
     summary(model),
     ". ",
     summary(perf),
-    ifelse(nzchar(perf, keepNA = TRUE), ". ", ""),
+    sep_after(summary(perf)),
     summary(intercept),
+    sep_after(summary(intercept)),
     params_text
   )
 

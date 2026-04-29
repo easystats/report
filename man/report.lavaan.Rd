@@ -14,8 +14,7 @@
 
 \item{...}{Arguments passed to or from other methods.}
 
-\item{table}{Provide the output of  \code{report_table()} to avoid its
-re-computation.}
+\item{table}{Provide the output of \code{report_table()} to avoid its re-computation.}
 }
 \value{
 An object of class \code{\link[=report]{report()}}.
@@ -24,7 +23,7 @@ An object of class \code{\link[=report]{report()}}.
 Create a report for \code{lavaan} objects.
 }
 \examples{
-\dontshow{if (requireNamespace("lavaan", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("lavaan", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 # Structural Equation Models (SEM)
 library(lavaan)
