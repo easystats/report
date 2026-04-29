@@ -2,6 +2,7 @@
 
 Bug fixes
 
+* Fixed custom effect size rules not being correctly reported as custom rules (#458)
 * Fix `report()` crash when character vector has only one unique value (#578).
 
 # report 0.6.3
