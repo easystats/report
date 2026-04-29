@@ -98,6 +98,13 @@ print.report_intercept <- function(x, ...) {
         intercept_text,
         paste0(col, " = ", levels(intercept_data[[col]])[ref_level])
       )
+    } else if (is.logical(intercept_data[[col]])) {
+      logical_factor <- as.factor(intercept_data[[col]])
+      ref_level <- .find_reference_level(logical_factor)
+      intercept_text <- c(
+        intercept_text,
+        paste0(col, " = ", levels(logical_factor)[ref_level])
+      )
     } else {
       intercept_text <- c(intercept_text, paste0(col, " = [?]"))
     }
