@@ -57,10 +57,10 @@ Depends:
 Imports:
     bayestestR (>= 0.17.0),
     effectsize (>= 1.0.2),
-    insight (>= 1.4.6),
+    insight (>= 1.5.0),
     parameters (>= 0.28.3),
     performance (>= 0.16.0),
-    datawizard (>= 1.3.0),
+    datawizard (>= 1.3.1),
     stats,
     tools,
     utils
