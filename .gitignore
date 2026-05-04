@@ -55,3 +55,4 @@ docs
 *.tar.gz
 report.Rcheck
 .positai
+.claude
