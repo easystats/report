@@ -2,6 +2,8 @@
 
 Bug fixes
 
+* `report_participants()`: fix CRAN failure on r-devel due to `row names contain missing values` error by replacing `datawizard::data_tabulate()` with a direct `table()` call for country and race frequency tables (#593).
+
 * Fix `report()` crash when character vector has only one unique value (#578).
 
 # report 0.6.3
