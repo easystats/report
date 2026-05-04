@@ -46,7 +46,7 @@ r
 #> al., 2026), rstanarm (version 2.32.2; Goodrich B et al., 2025), performance
 #> (version 0.16.0; Lüdecke D et al., 2021), bayestestR (version 0.17.0; Makowski
 #> D et al., 2019), modelbased (version 0.14.0; Makowski D et al., 2025), report
-#> (version 0.6.3.2; Makowski D et al., 2023), BayesFactor (version 0.9.12.4.8;
+#> (version 0.6.4; Makowski D et al., 2023), BayesFactor (version 0.9.12.4.8;
 #> Morey R, Rouder J, 2026), coda (version 0.19.4.1; Plummer M et al., 2006),
 #> lavaan (version 0.6.21; Rosseel Y et al., 2025) and dplyr (version 1.2.1;
 #> Wickham H et al., 2026).
@@ -131,7 +131,7 @@ summary(r)
 #> The analysis was done using the R Statistical language (v4.6.0; R Core Team,
 #> 2026) on Ubuntu 24.04.4 LTS, using the packages Matrix (v1.7.5), lme4 (v2.0.1),
 #> brms (v2.23.0), Rcpp (v1.1.1.1.1), rstanarm (v2.32.2), performance (v0.16.0),
-#> bayestestR (v0.17.0), modelbased (v0.14.0), report (v0.6.3.2), BayesFactor
+#> bayestestR (v0.17.0), modelbased (v0.14.0), report (v0.6.4), BayesFactor
 #> (v0.9.12.4.8), coda (v0.19.4.1), lavaan (v0.6.21) and dplyr (v1.2.1).
 
 # Data

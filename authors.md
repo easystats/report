@@ -29,7 +29,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/easystats/report/blob/main/inst/CITATION)
+[`inst/CITATION`](https://github.com/easystats/report/blob/v0.6.4/inst/CITATION)
 
 Makowski, D., Lüdecke, D., Patil, I., Thériault, R., Ben-Shachar, M.S.,
 & Wiernik, B.M. (2023). Automated Results Reporting as a Practical Tool

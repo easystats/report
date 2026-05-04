@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">report</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.3.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,9 +57,15 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/easystats/report/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/easystats/report/blob/v0.6.4/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.6.4" id="report-064">report 0.6.4<a class="anchor" aria-label="anchor" href="#report-064"></a></h2>
+<p>Bug fixes</p>
+<ul><li><p><code><a href="../reference/report_participants.html">report_participants()</a></code>: fix CRAN failure on r-devel due to <code>row names contain missing values</code> error by replacing <code><a href="https://easystats.github.io/datawizard/reference/data_tabulate.html" class="external-link">datawizard::data_tabulate()</a></code> with a direct <code><a href="https://rdrr.io/r/base/table.html" class="external-link">table()</a></code> call for country and race frequency tables (<a href="https://github.com/easystats/report/issues/593" class="external-link">#593</a>).</p></li>
+<li><p>Fix <code><a href="../reference/report.html">report()</a></code> crash when character vector has only one unique value (<a href="https://github.com/easystats/report/issues/578" class="external-link">#578</a>).</p></li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.6.3" id="report-063">report 0.6.3<a class="anchor" aria-label="anchor" href="#report-063"></a></h2><p class="text-muted">CRAN release: 2026-01-08</p>
 <p>Bug fixes</p>

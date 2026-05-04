@@ -1,5 +1,22 @@
 # Changelog
 
+## report 0.6.4
+
+Bug fixes
+
+- [`report_participants()`](https://easystats.github.io/report/reference/report_participants.md):
+  fix CRAN failure on r-devel due to `row names contain missing values`
+  error by replacing
+  [`datawizard::data_tabulate()`](https://easystats.github.io/datawizard/reference/data_tabulate.html)
+  with a direct [`table()`](https://rdrr.io/r/base/table.html) call for
+  country and race frequency tables
+  ([\#593](https://github.com/easystats/report/issues/593)).
+
+- Fix
+  [`report()`](https://easystats.github.io/report/reference/report.md)
+  crash when character vector has only one unique value
+  ([\#578](https://github.com/easystats/report/issues/578)).
+
 ## report 0.6.3
 
 CRAN release: 2026-01-08
