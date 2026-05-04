@@ -107,7 +107,11 @@ report_parameters.character <- function(
   }
 
   n_entries_actual <- min(n_entries, length(param_text))
-  as.report_parameters(param_text, summary = param_text[1:n_entries_actual], ...)
+  as.report_parameters(
+    param_text,
+    summary = param_text[1:n_entries_actual],
+    ...
+  )
 }
 
 

@@ -91,7 +91,6 @@ VignetteBuilder:
     knitr
 Encoding: UTF-8
 Language: en-US
-RoxygenNote: 7.3.3
 Config/testthat/edition: 3
 Config/Needs/website:
     rstudio/bslib,
@@ -161,3 +160,4 @@ Collate:
     'utils_misspelled_variables.R'
     'zzz.R'
 Roxygen: list(markdown = TRUE)
+Config/roxygen2/version: 8.0.0
