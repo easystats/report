@@ -30,3 +30,5 @@ tests\^spelling
 # flint files
 ^flint$
 ^[.]?air[.]toml$
+^\.positai$
+^\.claude$

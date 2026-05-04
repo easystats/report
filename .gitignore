@@ -54,3 +54,4 @@ revdep/
 docs
 *.tar.gz
 report.Rcheck
+.positai
