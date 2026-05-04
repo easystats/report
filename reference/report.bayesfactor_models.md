@@ -102,6 +102,7 @@ Template file for supporting new models:
 
 ``` r
 library(bayestestR)
+#> May the fourth be with you!
 # Bayes factor - models
 mo0 <- lm(Sepal.Length ~ 1, data = iris)
 mo1 <- lm(Sepal.Length ~ Species, data = iris)

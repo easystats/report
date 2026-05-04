@@ -25,6 +25,9 @@ Useful links:
 
 Authors:
 
+- Rémi Thériault <remi.theriault@mail.mcgill.ca>
+  ([ORCID](https://orcid.org/0000-0003-4315-6788))
+
 - Dominique Makowski <dom.makowski@gmail.com>
   ([ORCID](https://orcid.org/0000-0001-5375-9967))
 
