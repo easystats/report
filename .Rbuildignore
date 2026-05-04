@@ -25,7 +25,7 @@ tests\^spelling
 \.code-workspace$
 ^CRAN-SUBMISSION$
 .git-blame-ignore-revs
-
+GEMINI\.md
 
 # flint files
 ^flint$

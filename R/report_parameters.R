@@ -232,6 +232,8 @@ print.report_parameters <- function(x, ...) {
   only_when_insufficient = FALSE,
   ...
 ) {
+  # init
+  convergence <- stability <- NULL
   # Convergence
   if ("Rhat" %in% names(diagnostic)) {
     convergence <- effectsize::interpret_rhat(diagnostic$Rhat, ...)
@@ -292,7 +294,8 @@ print.report_parameters <- function(x, ...) {
 
   if (only_when_insufficient) {
     ifelse(
-      convergence != "converged" | stability != "sufficient",
+      !identical(convergence, "converged") |
+        !identical(stability, "sufficient"),
       text_output,
       ""
     )

@@ -1,8 +1,16 @@
-# report (development version)
+# report (devel)
 
 Bug fixes
 
-* Patch for change in `attr()` in R-devel (#590).
+* `report_participants()`: fix CRAN failure on r-devel due to `row names contain missing values` error by replacing `datawizard::data_tabulate()` with a direct `table()` call for country and race frequency tables (#593).
+
+* Fix `report()` crash when character vector has only one unique value (#578).
+
+# report 0.6.3
+
+Bug fixes
+
+* Hotfix patch for change in `attr()` in R-devel (#590) to prevent CRAN removal.
 
 # report 0.6.2
 

@@ -141,8 +141,7 @@
       range: [8, 896], Skewness = 4.45, Kurtosis = 20.59, 44 missing
         - sex: 4 entries, such as male (n = 60); female (n = 16); none (n = 6) and 1
       other (4 missing)
-        - gender: 2 entries, such as masculine (n = 66); feminine (n = 17); NA (4
-      missing)
+        - gender: 2 entries, such as masculine (n = 66); feminine (n = 17) (4 missing)
         - homeworld: 48 entries, such as Naboo (n = 11); Tatooine (n = 10); Alderaan (n
       = 3) and 45 others (10 missing)
         - species: 37 entries, such as Human (n = 35); Droid (n = 6); Gungan (n = 3)
