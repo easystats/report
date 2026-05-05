@@ -51,13 +51,12 @@ test_that("reflevel", {
   )
 
   # Logical predictor
+  on.exit(data("mtcars"), add = TRUE)
+  
   mtcars$more_than_4_cyl <- as.logical(mtcars$cyl > 4)
   m4 <- lm(mpg ~ more_than_4_cyl, data = mtcars)
   expect_identical(
     as.character(report_intercept(m4)),
     "The model's intercept, corresponding to more_than_4_cyl = FALSE, is at 26.66 (95% CI [24.41, 28.92], t(30) = 24.16, p < .001)."
   )
-
-  # re-init the data set
-  data(mtcars)
 })
