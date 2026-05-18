@@ -35,7 +35,8 @@ test_that("report_ai.lm - print method", {
 test_that("report_ai.default - warns and falls back to report()", {
   # htest has report() support but no dedicated report_ai() method
   ht <- t.test(mtcars$mpg ~ mtcars$am)
-  result <- expect_warning(report_ai(ht), "not yet available")
+  expect_warning(report_ai(ht), "not yet available")
+  result <- suppressWarnings(report_ai(ht))
   expect_s3_class(result, "report")
 })
 
@@ -47,7 +48,8 @@ test_that("report_ai.default - falls back to human report() when report_audience
   on.exit(options(report_audience = old))
 
   options(report_audience = "ai")
-  result <- expect_warning(report_ai(ht), "not yet available")
+  expect_warning(report_ai(ht), "not yet available")
+  result <- suppressWarnings(report_ai(ht))
   expect_s3_class(result, "report")
   expect_false(inherits(result, "report_ai"))
 })

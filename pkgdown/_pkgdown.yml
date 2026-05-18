@@ -77,6 +77,12 @@ reference:
           - report_table
           - report_text
 
+    - title: AI-Optimized Reports
+      desc: |
+          Functions for generating AI-optimized reports
+      contents:
+          - report_ai
+
     - title: Report Statistical Objects
       desc: |
           Helper functions for reporting of statistical objects
