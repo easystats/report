@@ -1,3 +1,9 @@
+# report (devel)
+
+Bug fixes
+
+* Fixed an issue in `report()` where the reference level for logical predictors was incorrectly displayed as `[?]` instead of `FALSE` for the intercept (@M-Colley, #598).
+
 # report 0.6.4
 
 New features
