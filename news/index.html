@@ -21,6 +21,7 @@
     <li><a class="dropdown-item" href="../articles/new_models.html">Supporting New Models</a></li>
     <li><a class="dropdown-item" href="../articles/report.html">Automated Reporting: Getting Started</a></li>
     <li><a class="dropdown-item" href="../articles/report_table.html">Publication-ready Tables</a></li>
+    <li><a class="dropdown-item" href="../articles/report_ai.html">AI-Optimized Reports</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html" aria-label="Reference"><span class="fa fa-file-code"></span> Functions</a></li>
 <li class="active nav-item"><a class="nav-link" href="../news/index.html" aria-label="News"><span class="fa fa-newspaper"></span> News</a></li>
@@ -61,8 +62,14 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.6.4" id="report-064">report 0.6.4<a class="anchor" aria-label="anchor" href="#report-064"></a></h2>
-<p>Bug fixes</p>
+<h2 class="pkg-version" data-toc-text="0.6.4" id="report-064">report 0.6.4<a class="anchor" aria-label="anchor" href="#report-064"></a></h2><p class="text-muted">CRAN release: 2026-05-04</p>
+<p>New features</p>
+<ul><li><p><code><a href="../reference/report_ai.html">report_ai()</a></code>: add support for <code>glm</code>, <code>merMod</code> (lme4), and <code>glmmTMB</code> model classes.</p></li>
+<li><p><code><a href="../reference/report_ai.html">report_ai()</a></code>: <code>## Model</code> section now includes a CI / degrees-of-freedom estimation line (e.g., <code>Inference: 95% CI [Satterthwaite df]</code>) when the information is available from <code><a href="https://easystats.github.io/parameters/reference/model_parameters.html" class="external-link">parameters::model_parameters()</a></code>.</p></li>
+<li><p><code>report_ai.default()</code>: instead of stopping with an error, now emits a warning and falls back to the standard <code><a href="../reference/report.html">report()</a></code> output so that documents continue to render for unsupported model classes.</p></li>
+<li><p><code><a href="../reference/report.html">report()</a></code>: new <code>audience</code> argument (<code>"humans"</code> (default) or <code>"ai"</code>). When <code>"ai"</code>, <code><a href="../reference/report.html">report()</a></code> delegates to <code><a href="../reference/report_ai.html">report_ai()</a></code>. The default can be set globally via <code>options(report_audience = "ai")</code>.</p></li>
+<li><p>New vignette: <em>AI-Optimized Reports</em> — explains <code><a href="../reference/report_ai.html">report_ai()</a></code>, the <code>audience</code> argument, and how to convert an entire Quarto document with a single option.</p></li>
+</ul><p>Bug fixes</p>
 <ul><li><p><code><a href="../reference/report_participants.html">report_participants()</a></code>: fix CRAN failure on r-devel due to <code>row names contain missing values</code> error by replacing <code><a href="https://easystats.github.io/datawizard/reference/data_tabulate.html" class="external-link">datawizard::data_tabulate()</a></code> with a direct <code><a href="https://rdrr.io/r/base/table.html" class="external-link">table()</a></code> call for country and race frequency tables (<a href="https://github.com/easystats/report/issues/593" class="external-link">#593</a>).</p></li>
 <li><p>Fix <code><a href="../reference/report.html">report()</a></code> crash when character vector has only one unique value (<a href="https://github.com/easystats/report/issues/578" class="external-link">#578</a>).</p></li>
 </ul></div>

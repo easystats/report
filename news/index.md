@@ -2,6 +2,37 @@
 
 ## report 0.6.4
 
+CRAN release: 2026-05-04
+
+New features
+
+- [`report_ai()`](https://easystats.github.io/report/reference/report_ai.md):
+  add support for `glm`, `merMod` (lme4), and `glmmTMB` model classes.
+
+- [`report_ai()`](https://easystats.github.io/report/reference/report_ai.md):
+  `## Model` section now includes a CI / degrees-of-freedom estimation
+  line (e.g., `Inference: 95% CI [Satterthwaite df]`) when the
+  information is available from
+  [`parameters::model_parameters()`](https://easystats.github.io/parameters/reference/model_parameters.html).
+
+- `report_ai.default()`: instead of stopping with an error, now emits a
+  warning and falls back to the standard
+  [`report()`](https://easystats.github.io/report/reference/report.md)
+  output so that documents continue to render for unsupported model
+  classes.
+
+- [`report()`](https://easystats.github.io/report/reference/report.md):
+  new `audience` argument (`"humans"` (default) or `"ai"`). When `"ai"`,
+  [`report()`](https://easystats.github.io/report/reference/report.md)
+  delegates to
+  [`report_ai()`](https://easystats.github.io/report/reference/report_ai.md).
+  The default can be set globally via `options(report_audience = "ai")`.
+
+- New vignette: *AI-Optimized Reports* — explains
+  [`report_ai()`](https://easystats.github.io/report/reference/report_ai.md),
+  the `audience` argument, and how to convert an entire Quarto document
+  with a single option.
+
 Bug fixes
 
 - [`report_participants()`](https://easystats.github.io/report/reference/report_participants.md):

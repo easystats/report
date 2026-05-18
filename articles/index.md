@@ -10,3 +10,5 @@
   Started](https://easystats.github.io/report/articles/report.md):
 - [Publication-ready
   Tables](https://easystats.github.io/report/articles/report_table.md):
+- [AI-Optimized
+  Reports](https://easystats.github.io/report/articles/report_ai.md):

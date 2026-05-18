@@ -6,7 +6,7 @@ object's class:
 ## Usage
 
 ``` r
-report(x, ...)
+report(x, ..., audience = getOption("report_audience", "humans"))
 ```
 
 ## Arguments
@@ -19,6 +19,16 @@ report(x, ...)
 - ...:
 
   Arguments passed to or from other methods.
+
+- audience:
+
+  The intended audience for the report. `"humans"` (default) produces
+  the standard formatted text report. `"ai"` produces a compact,
+  structured output optimised for consumption by a Large Language Model
+  (LLM) or AI agent via
+  [`report_ai()`](https://easystats.github.io/report/reference/report_ai.md).
+  The default can be changed globally with
+  `options(report_audience = "ai")`.
 
 ## Value
 

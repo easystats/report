@@ -79,6 +79,13 @@ Functions for formatting content
 - [`report_text()`](https://easystats.github.io/report/reference/report_text.md)
   : Report a textual description of an object
 
+## AI-Optimized Reports
+
+Functions for generating AI-optimized reports
+
+- [`report_ai()`](https://easystats.github.io/report/reference/report_ai.md)
+  : Generate AI-optimized reports
+
 ## Report Statistical Objects
 
 Helper functions for reporting of statistical objects

@@ -10,6 +10,7 @@
 <url><loc>https://easystats.github.io/report/articles/index.html</loc></url>
 <url><loc>https://easystats.github.io/report/articles/new_models.html</loc></url>
 <url><loc>https://easystats.github.io/report/articles/report.html</loc></url>
+<url><loc>https://easystats.github.io/report/articles/report_ai.html</loc></url>
 <url><loc>https://easystats.github.io/report/articles/report_table.html</loc></url>
 <url><loc>https://easystats.github.io/report/authors.html</loc></url>
 <url><loc>https://easystats.github.io/report/copilot-instructions.html</loc></url>
@@ -38,6 +39,7 @@
 <url><loc>https://easystats.github.io/report/reference/report.sessionInfo.html</loc></url>
 <url><loc>https://easystats.github.io/report/reference/report.stanreg.html</loc></url>
 <url><loc>https://easystats.github.io/report/reference/report.test_performance.html</loc></url>
+<url><loc>https://easystats.github.io/report/reference/report_ai.html</loc></url>
 <url><loc>https://easystats.github.io/report/reference/report_date.html</loc></url>
 <url><loc>https://easystats.github.io/report/reference/report_effectsize.html</loc></url>
 <url><loc>https://easystats.github.io/report/reference/report_info.html</loc></url>
