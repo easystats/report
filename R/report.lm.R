@@ -753,6 +753,18 @@ report_text.lm <- function(x, table = NULL, ...) {
     )
   }
 
+  # --- Assumptions (requires performance) ---------------------------------
+  assumptions_summary <- ""
+  if (requireNamespace("performance", quietly = TRUE)) {
+    assumptions_obj <- tryCatch(
+      report_assumptions(x),
+      error = function(e) NULL
+    )
+    if (!is.null(assumptions_obj)) {
+      assumptions_summary <- as.character(summary(assumptions_obj))
+    }
+  }
+
   # Helpers
   sep_after <- function(x) {
     x <- trimws(x)
@@ -773,6 +785,7 @@ report_text.lm <- function(x, table = NULL, ...) {
     "We fitted a ",
     model,
     ". ",
+    if (nzchar(assumptions_summary)) paste0(assumptions_summary, " ") else "",
     perf,
     sep_after(perf),
     intercept,
@@ -787,6 +800,7 @@ report_text.lm <- function(x, table = NULL, ...) {
     "We fitted a ",
     summary(model),
     ". ",
+    if (nzchar(assumptions_summary)) paste0(assumptions_summary, " ") else "",
     summary(perf),
     sep_after(summary(perf)),
     summary(intercept),
