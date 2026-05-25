@@ -2,7 +2,7 @@
 
 New features
 
-* `report_assumptions()`: new function that reports model assumption checks for a model, covering influential observations (via `performance::check_outliers()`) and homoskedasticity (via `performance::check_heteroskedasticity()`). Calling `summary()` on the result returns a compact one-sentence version integrating all checks. Supports `audience = "ai"` for a compact token-efficient structured output.
+* `report_assumptions()`: new function that reports model assumption checks for a model, covering influential observations (via `performance::check_outliers()`), collinearity (via `performance::check_collinearity()`), and homoskedasticity (via `performance::check_heteroskedasticity()`). Calling `summary()` on the result returns a compact one-sentence version integrating all checks. Supports `audience = "ai"` for a compact token-efficient structured output.
 
 * `report()` / `report_text()` for linear models: assumption checks (from `report_assumptions()`) are now automatically included at the end of the report. For human audience, the compact one-sentence summary is appended; for AI audience, a structured `## Assumptions` section is added to the output.
 
