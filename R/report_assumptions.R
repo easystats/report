@@ -8,6 +8,10 @@
 #' Set `audience = "ai"` for a compact, token-efficient version suitable for
 #' passing to an LLM.
 #'
+#' This function is called automatically by [report()] for supported model
+#' classes (e.g., `lm`, `glm`). Pass `assumptions = FALSE` to [report()] to
+#' suppress assumption checks in the final report.
+#'
 #' @param x A statistical model object (e.g., `lm`, `glm`).
 #' @param audience The intended audience. `"humans"` (default) produces a
 #'   readable bulleted report; `"ai"` produces a compact structured version.
