@@ -4,16 +4,18 @@
 \alias{report_assumptions}
 \title{Report model assumption checks}
 \usage{
-report_assumptions(x, ..., audience = getOption("report_audience", "humans"))
+report_assumptions(x, audience = getOption("report_audience", "humans"), ...)
 }
 \arguments{
 \item{x}{A statistical model object (e.g., \code{lm}, \code{glm}).}
 
-\item{...}{Additional arguments passed to \code{\link[performance:check_outliers]{performance::check_outliers()}}.}
-
 \item{audience}{The intended audience. \code{"humans"} (default) produces a
 readable bulleted report; \code{"ai"} produces a compact structured version.
-The default can be changed globally with \code{options(report_audience = "ai")}.}
+The default can be changed globally with \code{options(report_audience = "ai")}.
+Can be passed positionally as the second argument:
+\code{report_assumptions(model, "ai")}.}
+
+\item{...}{Additional arguments passed to \code{\link[performance:check_outliers]{performance::check_outliers()}}.}
 }
 \value{
 An object of class \code{\link[=report_text]{report_text()}}. \code{\link[=summary]{summary()}} returns a compact

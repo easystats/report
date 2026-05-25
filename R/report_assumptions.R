@@ -16,6 +16,8 @@
 #' @param audience The intended audience. `"humans"` (default) produces a
 #'   readable bulleted report; `"ai"` produces a compact structured version.
 #'   The default can be changed globally with `options(report_audience = "ai")`.
+#'   Can be passed positionally as the second argument:
+#'   `report_assumptions(model, "ai")`.
 #' @param ... Additional arguments passed to [performance::check_outliers()].
 #'
 #' @return An object of class [report_text()]. [summary()] returns a compact
@@ -41,8 +43,8 @@
 #' @export
 report_assumptions <- function(
   x,
-  ...,
-  audience = getOption("report_audience", "humans")
+  audience = getOption("report_audience", "humans"),
+  ...
 ) {
   insight::check_if_installed("performance")
   audience <- match.arg(audience, c("humans", "ai"))
