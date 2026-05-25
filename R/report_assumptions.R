@@ -1,8 +1,9 @@
 #' Report model assumption checks
 #'
 #' Produces a formatted summary of model assumption checks, covering
-#' **influential observations** (via [performance::check_outliers()]) and
-#' **homoskedasticity** (via [performance::check_heteroskedasticity()]).
+#' **influential observations** (via [performance::check_outliers()]),
+#' **homoskedasticity** (via [performance::check_heteroskedasticity()]), and
+#' **collinearity** (via [performance::check_collinearity()]).
 #' Calling [summary()] on the result returns a single integrated sentence.
 #' Set `audience = "ai"` for a compact, token-efficient version suitable for
 #' passing to an LLM.
@@ -44,7 +45,6 @@ report_assumptions <- function(
 
   # TODO: add the following assumption checks:
   # - Linearity          performance::check_predictions() / check_linearity()
-  # - Collinearity       performance::check_collinearity()
   # - Normality          performance::check_normality()
   # - Autocorrelation    performance::check_autocorrelation()
   # - Overdispersion     performance::check_overdispersion()
@@ -64,6 +64,15 @@ report_assumptions <- function(
     p_val <- as.numeric(heterosk)
     p_fmt <- insight::format_p(p_val)
     homosked_ok <- p_val >= 0.05
+  }
+
+  # --- Collinearity -------------------------------------------------------
+  collin <- tryCatch(
+    performance::check_collinearity(x),
+    error = function(e) NULL
+  )
+  if (!is.null(collin)) {
+    collin_info <- .collinearity_info(collin)
   }
 
   # --- AI output ----------------------------------------------------------
@@ -119,10 +128,30 @@ report_assumptions <- function(
       heterosk_ai <- "N/A"
     }
 
+    if (!is.null(collin)) {
+      if (collin_info$severity == "none") {
+        collin_ai <- "OK (all VIF < 5)"
+      } else {
+        level_str <- if (collin_info$severity == "high") "HIGH" else "MODERATE"
+        flagged_str <- paste(
+          paste0(
+            collin_info$flagged_terms,
+            ": VIF = ",
+            insight::format_value(collin_info$flagged_vif)
+          ),
+          collapse = ", "
+        )
+        collin_ai <- paste0(level_str, " (", flagged_str, ")")
+      }
+    } else {
+      collin_ai <- "N/A"
+    }
+
     lines <- c(
       "## Assumptions",
       paste0("- Influential Observations: ", outlier_ai),
-      paste0("- Homoskedasticity: ", heterosk_ai)
+      paste0("- Homoskedasticity: ", heterosk_ai),
+      paste0("- Collinearity: ", collin_ai)
     )
     res <- paste(lines, collapse = "\n")
     class(res) <- c("report_ai", "character")
@@ -172,6 +201,38 @@ report_assumptions <- function(
     phrases <- c(phrases, heterosk_phrase)
   }
 
+  if (!is.null(collin)) {
+    if (collin_info$severity == "none") {
+      collin_bullet <- "No collinearity detected (all VIF < 5)."
+      collin_phrase <- "no collinearity was detected"
+    } else {
+      level_str <- if (collin_info$severity == "high") "High" else "Moderate"
+      flagged_str <- paste(
+        paste0(
+          collin_info$flagged_terms,
+          " (VIF = ",
+          insight::format_value(collin_info$flagged_vif),
+          ")"
+        ),
+        collapse = ", "
+      )
+      collin_bullet <- paste0(
+        level_str,
+        " collinearity detected: ",
+        flagged_str,
+        "."
+      )
+      collin_phrase <- paste0(
+        tolower(level_str),
+        " collinearity was detected (",
+        paste(collin_info$flagged_terms, collapse = ", "),
+        ")"
+      )
+    }
+    lines_bullets <- c(lines_bullets, paste0("- Collinearity: ", collin_bullet))
+    phrases <- c(phrases, collin_phrase)
+  }
+
   if (length(phrases) == 0L) {
     lines_bullets <- c(
       lines_bullets,
@@ -181,7 +242,7 @@ report_assumptions <- function(
   } else {
     text_summary <- paste0(
       "The model's assumptions were checked: ",
-      paste(phrases, collapse = " and "),
+      datawizard::text_concatenate(phrases),
       "."
     )
   }
@@ -215,4 +276,49 @@ report_assumptions <- function(
     method_str,
     ")"
   )
+}
+
+#' @keywords internal
+.collinearity_info <- function(collin) {
+  vif_col <- if ("VIF" %in% names(collin)) {
+    "VIF"
+  } else if ("GVIF" %in% names(collin)) {
+    "GVIF"
+  } else {
+    NULL
+  }
+
+  if (is.null(vif_col) || nrow(collin) == 0L) {
+    return(list(
+      severity = "none",
+      flagged_terms = character(0L),
+      flagged_vif = numeric(0L)
+    ))
+  }
+
+  vif_vals <- collin[[vif_col]]
+  terms <- collin[["Term"]]
+
+  high_idx <- which(vif_vals >= 10)
+  mod_idx <- which(vif_vals >= 5 & vif_vals < 10)
+
+  if (length(high_idx) > 0L) {
+    list(
+      severity = "high",
+      flagged_terms = terms[high_idx],
+      flagged_vif = vif_vals[high_idx]
+    )
+  } else if (length(mod_idx) > 0L) {
+    list(
+      severity = "moderate",
+      flagged_terms = terms[mod_idx],
+      flagged_vif = vif_vals[mod_idx]
+    )
+  } else {
+    list(
+      severity = "none",
+      flagged_terms = character(0L),
+      flagged_vif = numeric(0L)
+    )
+  }
 }

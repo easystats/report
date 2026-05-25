@@ -140,6 +140,78 @@ test_that("report_assumptions - AI full fallback shows N/A for both", {
 })
 
 # ---------------------------------------------------------------------------
+# Collinearity
+# ---------------------------------------------------------------------------
+
+test_that("report_assumptions - no collinearity (humans)", {
+  m <- lm(mpg ~ wt + hp, data = mtcars)
+  result <- report_assumptions(m)
+  expect_match(as.character(result), "Collinearity", fixed = TRUE)
+  expect_match(as.character(result), "No collinearity detected", fixed = TRUE)
+  summ <- as.character(summary(result))
+  expect_match(summ, "no collinearity was detected", fixed = TRUE)
+})
+
+test_that("report_assumptions - high collinearity detected (humans)", {
+  set.seed(42)
+  dat <- mtcars
+  dat$wt_noise <- mtcars$wt + rnorm(32L, 0, 0.01)
+  m <- lm(mpg ~ wt + wt_noise + hp, data = dat)
+  result <- report_assumptions(m)
+  full <- as.character(result)
+  # Either high or moderate collinearity should be flagged
+  expect_true(
+    grepl("High collinearity", full, fixed = TRUE) ||
+      grepl("Moderate collinearity", full, fixed = TRUE)
+  )
+  summ <- as.character(summary(result))
+  expect_true(
+    grepl("high collinearity", summ, fixed = TRUE) ||
+      grepl("moderate collinearity", summ, fixed = TRUE)
+  )
+})
+
+test_that("report_assumptions - no collinearity (AI)", {
+  m <- lm(mpg ~ wt + hp, data = mtcars)
+  result <- report_assumptions(m, audience = "ai")
+  expect_match(result, "- Collinearity:", fixed = TRUE)
+  expect_match(result, "OK (all VIF < 5)", fixed = TRUE)
+})
+
+test_that("report_assumptions - high collinearity (AI)", {
+  set.seed(42)
+  dat <- mtcars
+  dat$wt_noise <- mtcars$wt + rnorm(32L, 0, 0.01)
+  m <- lm(mpg ~ wt + wt_noise + hp, data = dat)
+  result <- report_assumptions(m, audience = "ai")
+  expect_match(result, "- Collinearity:", fixed = TRUE)
+  expect_false(grepl("OK (all VIF < 5)", result, fixed = TRUE))
+})
+
+test_that("report_assumptions - collinearity fallback when check fails", {
+  m <- lm(mpg ~ wt + hp, data = mtcars)
+  local_mocked_bindings(
+    check_collinearity = function(...) stop("not supported"),
+    .package = "performance"
+  )
+  result <- expect_no_error(report_assumptions(m))
+  # Other checks still ran
+  summ <- as.character(summary(result))
+  expect_match(summ, "The model's assumptions were checked", fixed = TRUE)
+  expect_false(grepl("collinearity", summ, fixed = TRUE))
+})
+
+test_that("report_assumptions - collinearity AI fallback shows N/A", {
+  m <- lm(mpg ~ wt + hp, data = mtcars)
+  local_mocked_bindings(
+    check_collinearity = function(...) stop("not supported"),
+    .package = "performance"
+  )
+  result <- expect_no_error(report_assumptions(m, audience = "ai"))
+  expect_match(result, "Collinearity: N/A", fixed = TRUE)
+})
+
+# ---------------------------------------------------------------------------
 # Integration with report()
 # ---------------------------------------------------------------------------
 

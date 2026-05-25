@@ -21,8 +21,9 @@ one-sentence version integrating all checks (for \code{audience = "humans"}).
 }
 \description{
 Produces a formatted summary of model assumption checks, covering
-\strong{influential observations} (via \code{\link[performance:check_outliers]{performance::check_outliers()}}) and
-\strong{homoskedasticity} (via \code{\link[performance:check_heteroscedasticity]{performance::check_heteroskedasticity()}}).
+\strong{influential observations} (via \code{\link[performance:check_outliers]{performance::check_outliers()}}),
+\strong{homoskedasticity} (via \code{\link[performance:check_heteroscedasticity]{performance::check_heteroskedasticity()}}), and
+\strong{collinearity} (via \code{\link[performance:check_collinearity]{performance::check_collinearity()}}).
 Calling \code{\link[=summary]{summary()}} on the result returns a single integrated sentence.
 Set \code{audience = "ai"} for a compact, token-efficient version suitable for
 passing to an LLM.
