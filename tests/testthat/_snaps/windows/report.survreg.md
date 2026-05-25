@@ -17,9 +17,10 @@
       `performance_pcp()` only works for models with binary response values.
       We fitted a logistic model to predict survival::Surv(futime, fustat) with
       ecog.ps and rx (formula: survival::Surv(futime, fustat) ~ ecog.ps + rx). The
-      model's explanatory power is weak (Nagelkerke's R2 = 0.07). The model's
-      intercept, corresponding to ecog.ps = 0 and rx = 0, is at 667.43 (95% CI
-      [-415.59, 1750.45], p = 0.227). Within this model:
+      model's assumptions were checked: no collinearity was detected. The model's
+      explanatory power is weak (Nagelkerke's R2 = 0.07). The model's intercept,
+      corresponding to ecog.ps = 0 and rx = 0, is at 667.43 (95% CI [-415.59,
+      1750.45], p = 0.227). Within this model:
       
         - The effect of ecog ps is statistically non-significant and negative (beta =
       -210.59, 95% CI [-726.18, 305.01], p = 0.423; Std. beta = -107.06, 95% CI

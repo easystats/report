@@ -4,7 +4,8 @@
       report(glm(vs ~ disp, data = mtcars, family = binomial(link = "probit")))
     Output
       We fitted a probit model (estimated using ML) to predict vs with disp (formula:
-      vs ~ disp). The model's explanatory power is substantial (Nagelkerke's R2 =
+      vs ~ disp). The model's assumptions were checked: no influential observations
+      were detected. The model's explanatory power is substantial (Nagelkerke's R2 =
       0.66). The model's intercept, corresponding to disp = 0, is at 2.51 (95% CI
       [1.13, 4.28], p = 0.001). Within this model:
       
@@ -21,7 +22,8 @@
       report(glm(vs ~ mpg, data = mtcars, family = "poisson"))
     Output
       We fitted a poisson model (estimated using ML) to predict vs with mpg (formula:
-      vs ~ mpg). The model's explanatory power is substantial (Nagelkerke's R2 =
+      vs ~ mpg). The model's assumptions were checked: no influential observations
+      were detected. The model's explanatory power is substantial (Nagelkerke's R2 =
       0.39). The model's intercept, corresponding to mpg = 0, is at -3.27 (95% CI
       [-5.46, -1.36], p = 0.002). Within this model:
       
@@ -39,8 +41,10 @@
     Output
        We fitted a constant (intercept-only) linear model (estimated using OLS) to
       predict d_wide$group0 - d_wide$group1 (formula: d_wide$group0 - d_wide$group1 ~
-      1). The model's intercept is at -1.58 (95% CI [-2.46, -0.70], t(9) = -4.06, p =
-      0.003).
+      1). The model's assumptions were checked: 1 influential observation (10.00%)
+      were detected (Cook's distance) and the error variance appeared homoskedastic
+      (p > .999). The model's intercept is at -1.58 (95% CI [-2.46, -0.70], t(9) =
+      -4.06, p = 0.003).
       
       Standardized parameters were obtained by fitting the model on a standardized
       version of the dataset. 95% Confidence Intervals (CIs) and p-values were

@@ -9,10 +9,12 @@
         See help("standardize") for how such terms are standardized.
     Output
       We fitted a linear model to predict packs with rprice, rincome and salestax
-      (formula: log(packs) ~ log(rprice) + log(rincome)). The model's explanatory
-      power is substantial (R2 = 0.42, adj. R2 = 0.39). The model's intercept,
-      corresponding to rprice = 0 and rincome = 0, is at 9.43 (95% CI [6.69, 12.17],
-      t(45) = 6.94, p < .001). Within this model:
+      (formula: log(packs) ~ log(rprice) + log(rincome)). The model's assumptions
+      were checked: no influential observations were detected, the error variance
+      appeared homoskedastic (p = 0.613) and no collinearity was detected. The
+      model's explanatory power is substantial (R2 = 0.42, adj. R2 = 0.39). The
+      model's intercept, corresponding to rprice = 0 and rincome = 0, is at 9.43 (95%
+      CI [6.69, 12.17], t(45) = 6.94, p < .001). Within this model:
       
         - The effect of rprice [log] is statistically significant and negative (beta =
       -1.14, 95% CI [-1.87, -0.42], t(45) = -3.18, p = 0.003; Std. beta = -0.53, 95%

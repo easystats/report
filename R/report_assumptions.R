@@ -63,7 +63,7 @@ report_assumptions <- function(
 
   # --- Homoskedasticity ---------------------------------------------------
   heterosk <- tryCatch(
-    performance::check_heteroskedasticity(x),
+    suppressMessages(performance::check_heteroskedasticity(x)),
     error = function(e) NULL
   )
   if (!is.null(heterosk)) {
@@ -74,7 +74,7 @@ report_assumptions <- function(
 
   # --- Collinearity -------------------------------------------------------
   collin <- tryCatch(
-    performance::check_collinearity(x),
+    suppressMessages(performance::check_collinearity(x)),
     error = function(e) NULL
   )
   if (!is.null(collin)) {

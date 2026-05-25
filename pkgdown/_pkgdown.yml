@@ -94,6 +94,7 @@ reference:
           - report.estimate_contrasts
           - report.compare.loo
           - report.BFBayesFactor
+          - report_text.check_outliers
 
     - title: Report Non-Statistical Objects
       desc: |

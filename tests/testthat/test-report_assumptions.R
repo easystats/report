@@ -24,12 +24,18 @@ test_that("report_assumptions - summary sentence structure", {
 })
 
 test_that("report_assumptions - outliers detected", {
-  dat <- mtcars
-  dat[1L, "mpg"] <- 200
-  dat[2L, "mpg"] <- 200
-  m <- lm(mpg ~ wt + hp, data = dat)
+  m <- lm(mpg ~ wt + hp, data = mtcars)
+  mock_outliers <- structure(
+    c(TRUE, TRUE, rep(FALSE, 30L)),
+    method = "cook",
+    threshold = list(cook = 0.125),
+    class = c("check_outliers", "logical")
+  )
+  local_mocked_bindings(
+    check_outliers = function(...) mock_outliers,
+    .package = "performance"
+  )
   summ <- as.character(summary(report_assumptions(m)))
-
   expect_match(summ, "The model's assumptions were checked", fixed = TRUE)
   expect_false(grepl("no influential observations", summ, fixed = TRUE))
   expect_match(summ, "influential observation", ignore.case = TRUE)
@@ -52,10 +58,17 @@ test_that("report_assumptions - AI no outliers", {
 })
 
 test_that("report_assumptions - AI outliers detected", {
-  dat <- mtcars
-  dat[1L, "mpg"] <- 200
-  dat[2L, "mpg"] <- 200
-  m <- lm(mpg ~ wt + hp, data = dat)
+  m <- lm(mpg ~ wt + hp, data = mtcars)
+  mock_outliers <- structure(
+    c(TRUE, TRUE, rep(FALSE, 30L)),
+    method = "cook",
+    threshold = list(cook = 0.125),
+    class = c("check_outliers", "logical")
+  )
+  local_mocked_bindings(
+    check_outliers = function(...) mock_outliers,
+    .package = "performance"
+  )
   result <- report_assumptions(m, audience = "ai")
   # Should show a count, not "none"
   expect_false(grepl("Influential Observations: none", result, fixed = TRUE))
@@ -101,6 +114,7 @@ test_that("report_assumptions - full fallback when both checks fail", {
   local_mocked_bindings(
     check_outliers = function(...) stop("not supported"),
     check_heteroskedasticity = function(...) stop("not supported"),
+    check_collinearity = function(...) stop("not supported"),
     .package = "performance"
   )
   result <- expect_no_error(report_assumptions(m))
