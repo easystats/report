@@ -28,6 +28,11 @@ Calling \code{\link[=summary]{summary()}} on the result returns a single integra
 Set \code{audience = "ai"} for a compact, token-efficient version suitable for
 passing to an LLM.
 }
+\details{
+This function is called automatically by \code{\link[=report]{report()}} for supported model
+classes (e.g., \code{lm}, \code{glm}). Pass \code{assumptions = FALSE} to \code{\link[=report]{report()}} to
+suppress assumption checks in the final report.
+}
 \examples{
 \dontshow{if (requireNamespace("performance", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{

@@ -14,7 +14,13 @@
 \alias{report_random.merMod}
 \title{Reporting (General) Linear Models}
 \usage{
-\method{report}{lm}(x, include_effectsize = TRUE, effectsize_method = "refit", ...)
+\method{report}{lm}(
+  x,
+  include_effectsize = TRUE,
+  effectsize_method = "refit",
+  assumptions = TRUE,
+  ...
+)
 
 \method{report_effectsize}{lm}(x, effectsize_method = "refit", ...)
 
@@ -50,7 +56,7 @@
   ...
 )
 
-\method{report_text}{lm}(x, table = NULL, ...)
+\method{report_text}{lm}(x, table = NULL, assumptions = TRUE, ...)
 
 \method{report_random}{merMod}(x, ...)
 }
@@ -62,6 +68,10 @@ indices (standardized coefficients, etc.).}
 
 \item{effectsize_method}{See documentation for
 \code{\link[effectsize:effectsize]{effectsize::effectsize()}}.}
+
+\item{assumptions}{If \code{FALSE}, assumption checks (see
+\code{\link[=report_assumptions]{report_assumptions()}}) are skipped and not included in the report.
+Defaults to \code{TRUE}.}
 
 \item{...}{Arguments passed to or from other methods.}
 
