@@ -54,7 +54,7 @@ test_that("report_assumptions - AI audience structure", {
 test_that("report_assumptions - AI no outliers", {
   m <- lm(mpg ~ wt + hp, data = mtcars)
   result <- report_assumptions(m, audience = "ai")
-  expect_match(result, "Influential Observations: none", fixed = TRUE)
+  expect_match(result, "Influential Observations: OK (none)", fixed = TRUE)
 })
 
 test_that("report_assumptions - AI outliers detected", {
@@ -70,8 +70,12 @@ test_that("report_assumptions - AI outliers detected", {
     .package = "performance"
   )
   result <- report_assumptions(m, audience = "ai")
-  # Should show a count, not "none"
-  expect_false(grepl("Influential Observations: none", result, fixed = TRUE))
+  # Should show a count, not the no-outlier "OK (none)" text
+  expect_false(grepl(
+    "Influential Observations: OK (none)",
+    result,
+    fixed = TRUE
+  ))
   expect_match(result, "Influential Observations:", fixed = TRUE)
 })
 

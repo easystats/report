@@ -90,7 +90,7 @@ report_assumptions <- function(
       n_outliers <- sum(outliers)
       n_total <- length(outliers)
       if (n_outliers == 0L) {
-        outlier_ai <- "none"
+        outlier_ai <- "OK (none)"
       } else {
         pct <- insight::format_value(n_outliers / n_total, as_percent = TRUE)
         methods <- attr(outliers, "method")
