@@ -3,6 +3,7 @@ report_ai <- function(x, ...) {
   UseMethod("report_ai")
 }
 
+#' @exportS3Method
 report_ai.default <- function(x, ...) {
   insight::format_warning(
     paste0(
@@ -14,16 +15,22 @@ report_ai.default <- function(x, ...) {
   report(x, ..., audience = "humans")
 }
 
+#' @exportS3Method
 report_ai.lm <- function(x, ...) {
   .report_ai_models(x, ...)
 }
 
-report_ai.glm <- report_ai.lm
+#' @exportS3Method
+report_ai.glm <- function(x, ...) {
+  .report_ai_models(x, ...)
+}
 
+#' @exportS3Method
 report_ai.merMod <- function(x, ...) {
   .report_ai_models(x, ...)
 }
 
+#' @exportS3Method
 report_ai.glmmTMB <- function(x, ...) {
   .report_ai_models(x, ...)
 }
@@ -79,6 +86,8 @@ report_ai.glmmTMB <- function(x, ...) {
   } else {
     desc_str <- "- No variables found."
   }
+  # Remove any leading blank lines introduced by the report() header
+  desc_str <- sub("^\\n+", "", desc_str)
 
   params <- parameters::model_parameters(x, ...)
 
@@ -153,6 +162,12 @@ report_ai.glmmTMB <- function(x, ...) {
   perf_markdown <- insight::export_table(perf_table, format = "markdown")
   perf_str <- paste(perf_markdown, collapse = "\n")
 
+  # Assumptions (requires performance; silently skipped if unsupported)
+  assumptions_str <- tryCatch(
+    as.character(report_assumptions(x, audience = "ai")),
+    error = function(e) NULL
+  )
+
   if ("p" %in% names(fixed_params) && "Parameter" %in% names(fixed_params)) {
     sig_effects <- fixed_params$Parameter[
       !is.na(fixed_params$p) &
@@ -221,6 +236,7 @@ report_ai.glmmTMB <- function(x, ...) {
     "\n\n",
     "## Variables\n",
     desc_str,
+    if (!is.null(assumptions_str)) paste0("\n\n", assumptions_str) else "",
     "\n\n",
     param_section,
     "\n\n",

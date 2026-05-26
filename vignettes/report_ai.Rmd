@@ -33,7 +33,7 @@ The **report** package was originally designed in a pre-AI era with one overarch
 
 However, the analytical landscape has fundamentally changed. Today, researchers increasingly rely on AI agents and Large Language Models (LLMs) to help interpret results, summarize findings, and draft manuscripts, often by simply **pasting raw outputs directly into a chat window**. This shift prompted us to ask: should the scope of the *report* package be expanded to **support** this new workflow, rather than pretending it doesn't exist? And it wasn't even a matter of staying relevant, it was a matter of empowering our users to get the best possible results from their new AI assistants. 
 
-While our standard narrative outputs are excellent for humans, they are remarkably suboptimal for AI: verbose prose forces an LLM to waste valuable context tokens re-parsing implicit structures, wasting tokens and context memory. The answer to this challenge is `report_ai()`, a function that can be triggered via an argument from the main `report()` function. By stripping away the narrative bloat in favour of highly structured, token-efficient formats, `report_ai()` bridges the gap between R and the context window, giving your AI assistant exactly the information it needs in the most effective way possible.
+While our standard narrative outputs are excellent for humans, they are remarkably suboptimal for AI: verbose prose forces an LLM to waste valuable context tokens re-parsing implicit structures, wasting tokens and context memory. The answer to this challenge is the `audience = "ai"` argument in `report()`. By stripping away the narrative bloat in favour of highly structured, token-efficient formats, `report(x, audience = "ai")` bridges the gap between R and the context window, giving your AI assistant exactly the information it needs in the most effective way possible.
 
 ## Basic Usage
 
@@ -51,9 +51,8 @@ report(m)
 report(m, audience = "ai")
 ```
 
-The AI output is a single character vector of class `report_ai` that you can
-pass directly to any LLM API, embed in a system prompt, or include in a
-context window.
+The AI output is a character string that you can pass directly to any LLM API,
+embed in a system prompt, or include in a context window.
 
 ## Setting the Option Globally
 

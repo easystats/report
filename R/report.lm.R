@@ -8,6 +8,9 @@
 #' @param include_diagnostic If `FALSE`, won't include diagnostic related
 #'   indices for Bayesian models (ESS, Rhat).
 #' @param include_intercept If `FALSE`, won't include the intercept.
+#' @param assumptions If `FALSE`, assumption checks (see
+#'   [report_assumptions()]) are skipped and not included in the report.
+#'   Defaults to `TRUE`.
 #' @param effectsize_method See documentation for
 #'   [effectsize::effectsize()].
 #' @param parameters Provide the output of `report_parameters()` to avoid
@@ -55,6 +58,7 @@ report.lm <- function(
   x,
   include_effectsize = TRUE,
   effectsize_method = "refit",
+  assumptions = TRUE,
   ...
 ) {
   result_table <- report_table(
@@ -63,7 +67,12 @@ report.lm <- function(
     effectsize_method = effectsize_method,
     ...
   )
-  result_text <- report_text(x, table = result_table, ...)
+  result_text <- report_text(
+    x,
+    table = result_table,
+    assumptions = assumptions,
+    ...
+  )
 
   as.report(result_text, table = result_table, ...)
 }
@@ -729,7 +738,7 @@ report_info.lm <- function(
 
 #' @rdname report.lm
 #' @export
-report_text.lm <- function(x, table = NULL, ...) {
+report_text.lm <- function(x, table = NULL, assumptions = TRUE, ...) {
   params <- report_parameters(x, table = table, include_intercept = FALSE, ...)
   report_table_data <- attributes(params)$table
 
@@ -753,6 +762,18 @@ report_text.lm <- function(x, table = NULL, ...) {
     )
   }
 
+  # --- Assumptions (requires performance) ---------------------------------
+  assumptions_summary <- ""
+  if (isTRUE(assumptions) && requireNamespace("performance", quietly = TRUE)) {
+    assumptions_obj <- tryCatch(
+      report_assumptions(x),
+      error = function(e) NULL
+    )
+    if (!is.null(assumptions_obj)) {
+      assumptions_summary <- as.character(summary(assumptions_obj))
+    }
+  }
+
   # Helpers
   sep_after <- function(x) {
     x <- trimws(x)
@@ -773,6 +794,7 @@ report_text.lm <- function(x, table = NULL, ...) {
     "We fitted a ",
     model,
     ". ",
+    if (nzchar(assumptions_summary)) paste0(assumptions_summary, " ") else "",
     perf,
     sep_after(perf),
     intercept,
@@ -787,6 +809,7 @@ report_text.lm <- function(x, table = NULL, ...) {
     "We fitted a ",
     summary(model),
     ". ",
+    if (nzchar(assumptions_summary)) paste0(assumptions_summary, " ") else "",
     summary(perf),
     sep_after(summary(perf)),
     summary(intercept),

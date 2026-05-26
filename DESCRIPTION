@@ -1,7 +1,7 @@
 Package: report
 Type: Package
 Title: Automated Reporting of Results and Statistical Models
-Version: 0.6.4
+Version: 0.6.5
 Authors@R:
     c(person(given = "Dominique",
              family = "Makowski",
@@ -117,6 +117,7 @@ Collate:
     'report.stanreg.R'
     'report.brmsfit.R'
     'report.character.R'
+    'report.check_outliers.R'
     'report.compare.loo.R'
     'report.compare_performance.R'
     'report.coxph.R'
@@ -135,6 +136,7 @@ Collate:
     'report.test_performance.R'
     'report.zeroinfl.R'
     'report_ai.R'
+    'report_assumptions.R'
     'report_effectsize.R'
     'report_htest_chi2.R'
     'report_htest_cor.R'
@@ -162,3 +164,4 @@ Collate:
     'zzz.R'
 Roxygen: list(markdown = TRUE)
 Config/roxygen2/version: 8.0.0
+RoxygenNote: 7.3.3

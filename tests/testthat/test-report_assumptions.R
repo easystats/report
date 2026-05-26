@@ -1,0 +1,292 @@
+skip_if_not_installed("performance")
+
+# ---------------------------------------------------------------------------
+# Happy paths
+# ---------------------------------------------------------------------------
+
+test_that("report_assumptions - all assumptions satisfied", {
+  m <- lm(mpg ~ wt + hp, data = mtcars)
+  result <- report_assumptions(m)
+
+  expect_s3_class(result, "report_text")
+  expect_match(as.character(result), "Model Assumptions", fixed = TRUE)
+  expect_match(as.character(result), "Influential observations", fixed = TRUE)
+  expect_match(as.character(result), "Homoskedasticity", fixed = TRUE)
+})
+
+test_that("report_assumptions - summary sentence structure", {
+  m <- lm(mpg ~ wt + hp, data = mtcars)
+  summ <- as.character(summary(report_assumptions(m)))
+
+  expect_match(summ, "The model's assumptions were checked", fixed = TRUE)
+  expect_match(summ, "no influential observations were detected", fixed = TRUE)
+  expect_match(summ, "homoskedastic", fixed = TRUE)
+})
+
+test_that("report_assumptions - outliers detected", {
+  m <- lm(mpg ~ wt + hp, data = mtcars)
+  mock_outliers <- structure(
+    c(TRUE, TRUE, rep(FALSE, 30L)),
+    method = "cook",
+    threshold = list(cook = 0.125),
+    class = c("check_outliers", "logical")
+  )
+  local_mocked_bindings(
+    check_outliers = function(...) mock_outliers,
+    .package = "performance"
+  )
+  summ <- as.character(summary(report_assumptions(m)))
+  expect_match(summ, "The model's assumptions were checked", fixed = TRUE)
+  expect_false(grepl("no influential observations", summ, fixed = TRUE))
+  expect_match(summ, "influential observation", ignore.case = TRUE)
+})
+
+test_that("report_assumptions - AI audience structure", {
+  m <- lm(mpg ~ wt + hp, data = mtcars)
+  result <- report_assumptions(m, audience = "ai")
+
+  expect_s3_class(result, "report_ai")
+  expect_match(result, "## Assumptions", fixed = TRUE)
+  expect_match(result, "- Influential Observations:", fixed = TRUE)
+  expect_match(result, "- Homoskedasticity:", fixed = TRUE)
+})
+
+test_that("report_assumptions - AI no outliers", {
+  m <- lm(mpg ~ wt + hp, data = mtcars)
+  result <- report_assumptions(m, audience = "ai")
+  expect_match(result, "Influential Observations: OK (none)", fixed = TRUE)
+})
+
+test_that("report_assumptions - AI outliers detected", {
+  m <- lm(mpg ~ wt + hp, data = mtcars)
+  mock_outliers <- structure(
+    c(TRUE, TRUE, rep(FALSE, 30L)),
+    method = "cook",
+    threshold = list(cook = 0.125),
+    class = c("check_outliers", "logical")
+  )
+  local_mocked_bindings(
+    check_outliers = function(...) mock_outliers,
+    .package = "performance"
+  )
+  result <- report_assumptions(m, audience = "ai")
+  # Should show a count, not the no-outlier "OK (none)" text
+  expect_false(grepl(
+    "Influential Observations: OK (none)",
+    result,
+    fixed = TRUE
+  ))
+  expect_match(result, "Influential Observations:", fixed = TRUE)
+})
+
+# ---------------------------------------------------------------------------
+# Graceful fallbacks when individual checks fail
+# ---------------------------------------------------------------------------
+
+test_that("report_assumptions - partial fallback when check_outliers fails", {
+  m <- lm(mpg ~ wt + hp, data = mtcars)
+  local_mocked_bindings(
+    check_outliers = function(...) stop("not supported for this class"),
+    .package = "performance"
+  )
+  result <- expect_no_error(report_assumptions(m))
+
+  # Heteroskedasticity check still ran → summary should mention it
+  summ <- as.character(summary(result))
+  expect_match(summ, "The model's assumptions were checked", fixed = TRUE)
+  expect_match(summ, "homoskedastic", fixed = TRUE)
+  # Outlier check absent from summary
+  expect_false(grepl("influential", summ, ignore.case = TRUE))
+})
+
+test_that("report_assumptions - partial fallback when check_heteroskedasticity fails", {
+  m <- lm(mpg ~ wt + hp, data = mtcars)
+  local_mocked_bindings(
+    check_heteroskedasticity = function(...) stop("not supported"),
+    .package = "performance"
+  )
+  result <- expect_no_error(report_assumptions(m))
+
+  summ <- as.character(summary(result))
+  expect_match(summ, "The model's assumptions were checked", fixed = TRUE)
+  expect_match(summ, "influential observations", fixed = TRUE)
+  expect_false(grepl("homoskedast", summ, ignore.case = TRUE))
+})
+
+test_that("report_assumptions - full fallback when both checks fail", {
+  m <- lm(mpg ~ wt + hp, data = mtcars)
+  local_mocked_bindings(
+    check_outliers = function(...) stop("not supported"),
+    check_heteroskedasticity = function(...) stop("not supported"),
+    check_collinearity = function(...) stop("not supported"),
+    .package = "performance"
+  )
+  result <- expect_no_error(report_assumptions(m))
+
+  # Should return an object (not NULL, not an error)
+  expect_false(is.null(result))
+  summ <- as.character(summary(result))
+  expect_match(summ, "could not be performed", fixed = TRUE)
+})
+
+test_that("report_assumptions - AI partial fallback shows N/A", {
+  m <- lm(mpg ~ wt + hp, data = mtcars)
+  local_mocked_bindings(
+    check_outliers = function(...) stop("not supported"),
+    .package = "performance"
+  )
+  result <- expect_no_error(report_assumptions(m, audience = "ai"))
+
+  expect_s3_class(result, "report_ai")
+  expect_match(result, "Influential Observations: N/A", fixed = TRUE)
+  # Homoskedasticity still worked
+  expect_false(grepl("Homoskedasticity: N/A", result, fixed = TRUE))
+})
+
+test_that("report_assumptions - AI full fallback shows N/A for both", {
+  m <- lm(mpg ~ wt + hp, data = mtcars)
+  local_mocked_bindings(
+    check_outliers = function(...) stop("not supported"),
+    check_heteroskedasticity = function(...) stop("not supported"),
+    .package = "performance"
+  )
+  result <- expect_no_error(report_assumptions(m, audience = "ai"))
+
+  expect_s3_class(result, "report_ai")
+  expect_match(result, "Influential Observations: N/A", fixed = TRUE)
+  expect_match(result, "Homoskedasticity: N/A", fixed = TRUE)
+})
+
+# ---------------------------------------------------------------------------
+# Collinearity
+# ---------------------------------------------------------------------------
+
+test_that("report_assumptions - no collinearity (humans)", {
+  m <- lm(mpg ~ wt + hp, data = mtcars)
+  result <- report_assumptions(m)
+  expect_match(as.character(result), "Collinearity", fixed = TRUE)
+  expect_match(as.character(result), "No collinearity detected", fixed = TRUE)
+  summ <- as.character(summary(result))
+  expect_match(summ, "no collinearity was detected", fixed = TRUE)
+})
+
+test_that("report_assumptions - high collinearity detected (humans)", {
+  set.seed(42)
+  dat <- mtcars
+  dat$wt_noise <- mtcars$wt + rnorm(32L, 0, 0.01)
+  m <- lm(mpg ~ wt + wt_noise + hp, data = dat)
+  result <- report_assumptions(m)
+  full <- as.character(result)
+  # Either high or moderate collinearity should be flagged
+  expect_true(
+    grepl("High collinearity", full, fixed = TRUE) ||
+      grepl("Moderate collinearity", full, fixed = TRUE)
+  )
+  summ <- as.character(summary(result))
+  expect_true(
+    grepl("high collinearity", summ, fixed = TRUE) ||
+      grepl("moderate collinearity", summ, fixed = TRUE)
+  )
+})
+
+test_that("report_assumptions - no collinearity (AI)", {
+  m <- lm(mpg ~ wt + hp, data = mtcars)
+  result <- report_assumptions(m, audience = "ai")
+  expect_match(result, "- Collinearity:", fixed = TRUE)
+  expect_match(result, "OK (all VIF < 5)", fixed = TRUE)
+})
+
+test_that("report_assumptions - high collinearity (AI)", {
+  set.seed(42)
+  dat <- mtcars
+  dat$wt_noise <- mtcars$wt + rnorm(32L, 0, 0.01)
+  m <- lm(mpg ~ wt + wt_noise + hp, data = dat)
+  result <- report_assumptions(m, audience = "ai")
+  expect_match(result, "- Collinearity:", fixed = TRUE)
+  expect_false(grepl("OK (all VIF < 5)", result, fixed = TRUE))
+})
+
+test_that("report_assumptions - collinearity fallback when check fails", {
+  m <- lm(mpg ~ wt + hp, data = mtcars)
+  local_mocked_bindings(
+    check_collinearity = function(...) stop("not supported"),
+    .package = "performance"
+  )
+  result <- expect_no_error(report_assumptions(m))
+  # Other checks still ran
+  summ <- as.character(summary(result))
+  expect_match(summ, "The model's assumptions were checked", fixed = TRUE)
+  expect_false(grepl("collinearity", summ, fixed = TRUE))
+})
+
+test_that("report_assumptions - collinearity AI fallback shows N/A", {
+  m <- lm(mpg ~ wt + hp, data = mtcars)
+  local_mocked_bindings(
+    check_collinearity = function(...) stop("not supported"),
+    .package = "performance"
+  )
+  result <- expect_no_error(report_assumptions(m, audience = "ai"))
+  expect_match(result, "Collinearity: N/A", fixed = TRUE)
+})
+
+test_that("report_assumptions - collinearity check skipped for one predictor", {
+  m <- lm(mpg ~ wt, data = mtcars)
+  local_mocked_bindings(
+    check_collinearity = function(...) stop("should not be called"),
+    .package = "performance"
+  )
+
+  result <- expect_no_error(report_assumptions(m))
+  full <- as.character(result)
+  summ <- as.character(summary(result))
+
+  expect_false(grepl("Collinearity", full, fixed = TRUE))
+  expect_false(grepl("collinearity", summ, fixed = TRUE))
+})
+
+test_that("report() - collinearity check skipped for one predictor", {
+  m <- lm(mpg ~ wt, data = mtcars)
+  local_mocked_bindings(
+    check_collinearity = function(...) stop("should not be called"),
+    .package = "performance"
+  )
+
+  result <- expect_no_error(report(m))
+  expect_false(is.null(result))
+})
+
+# ---------------------------------------------------------------------------
+# Integration with report()
+# ---------------------------------------------------------------------------
+
+test_that("report() - assumptions summary appears after model description", {
+  m <- lm(mpg ~ wt + hp, data = mtcars)
+  summ <- as.character(summary(report(m)))
+
+  # Assumptions sentence present
+  expect_match(summ, "The model's assumptions were checked", fixed = TRUE)
+  # It should come before the R2 performance sentence
+  assum_pos <- regexpr("assumptions were checked", summ)
+  r2_pos <- regexpr("R2", summ)
+  expect_true(assum_pos < r2_pos)
+})
+
+test_that("report(audience='ai') - assumptions block between Variables and Parameters", {
+  m <- lm(mpg ~ wt + hp, data = mtcars)
+  result <- report(m, audience = "ai")
+
+  expect_match(result, "## Assumptions", fixed = TRUE)
+  vars_pos <- regexpr("## Variables", result)
+  assum_pos <- regexpr("## Assumptions", result)
+  params_pos <- regexpr("## Parameters", result)
+  expect_true(vars_pos < assum_pos)
+  expect_true(assum_pos < params_pos)
+})
+
+test_that("report(audience='ai') - no blank line after ## Variables", {
+  m <- lm(mpg ~ wt + hp, data = mtcars)
+  result <- report(m, audience = "ai")
+
+  # After "## Variables\n" the very next character should not be "\n"
+  expect_false(grepl("## Variables\n\n", result, fixed = TRUE))
+})

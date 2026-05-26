@@ -1,8 +1,22 @@
 # report (devel)
 
+New features
+
+* `report_assumptions()`: new function that reports model assumption checks for a model, covering influential observations (via `performance::check_outliers()`), collinearity (via `performance::check_collinearity()`), and homoskedasticity (via `performance::check_heteroskedasticity()`). Calling `summary()` on the result returns a compact one-sentence version integrating all checks. Supports `audience = "ai"` for a compact token-efficient structured output.
+
+* `report()` / `report_text()` for linear models: assumption checks (from `report_assumptions()`) are now automatically included right after the model description (before the performance sentence). For human audience, the compact one-sentence summary is inserted there; for AI audience, a structured `## Assumptions` section is added there in the output.
+
+Bug fixes
+
+* Fixed missing `@exportS3Method` roxygen2 tags on `report_ai` S3 methods (`default`, `lm`, `glm`, `merMod`, `glmmTMB`), which caused warnings during package loading.
+
+* `report_text()`: new method for `performance::check_outliers()` output, producing a brief sentence such as "2 observations (5.88%) were detected as potential outliers based on Cook's distance (threshold = 0.806)."
+
 Bug fixes
 
 * Fixed an issue in `report()` where the reference level for logical predictors was incorrectly displayed as `[?]` instead of `FALSE` for the intercept (@M-Colley, #598).
+
+* Fixed the *AI-Optimized Reports* vignette to no longer refer to the internal `report_ai()` function; all examples now use `report(x, audience = "ai")`.
 
 # report 0.6.4
 

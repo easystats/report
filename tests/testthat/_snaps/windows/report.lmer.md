@@ -5,7 +5,9 @@
     Output
       We fitted a linear mixed model (estimated using REML and nloptwrap optimizer)
       to predict Reaction with Days (formula: Reaction ~ Days). The model included
-      Days as random effects (formula: ~1 + Days | Subject). The model's total
+      Days as random effects (formula: ~1 + Days | Subject). The model's assumptions
+      were checked: 4 influential observations (2.22%) were detected (Cook's
+      distance) and heteroskedasticity was detected (p < .001). The model's total
       explanatory power is substantial (conditional R2 = 0.80) and the part related
       to the fixed effects alone (marginal R2) is of 0.28. The model's intercept,
       corresponding to Days = 0, is at 251.41 (95% CI [237.94, 264.87], t(174) =
@@ -34,7 +36,9 @@
       We fitted a linear mixed model (estimated using REML and nloptwrap optimizer)
       to predict Reaction with Days (formula: Reaction ~ Days). The model included
       mysubgrp as random effects (formula: list(~1 | mysubgrp:mygrp, ~1 | mygrp, ~1 |
-      Subject)). The model's explanatory power related to the fixed effects alone
+      Subject)). The model's assumptions were checked: 1 influential observation
+      (0.56%) were detected (Cook's distance) and heteroskedasticity was detected (p
+      < .001). The model's explanatory power related to the fixed effects alone
       (marginal R2) is 0.49. The model's intercept, corresponding to Days = 0, is at
       252.09 (95% CI [232.50, 271.69], t(174) = 25.39, p < .001). Within this model:
       
