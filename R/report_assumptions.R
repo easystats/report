@@ -73,10 +73,13 @@ report_assumptions <- function(
   }
 
   # --- Collinearity -------------------------------------------------------
-  collin <- tryCatch(
-    suppressMessages(performance::check_collinearity(x)),
-    error = function(e) NULL
-  )
+  collin <- NULL
+  if (.can_check_collinearity(x)) {
+    collin <- tryCatch(
+      suppressMessages(performance::check_collinearity(x)),
+      error = function(e) NULL
+    )
+  }
   if (!is.null(collin)) {
     collin_info <- .collinearity_info(collin)
   }
@@ -282,6 +285,26 @@ report_assumptions <- function(
     method_str,
     ")"
   )
+}
+
+#' @keywords internal
+.can_check_collinearity <- function(x) {
+  predictors <- tryCatch(
+    insight::find_predictors(x, effects = "fixed", flatten = TRUE),
+    error = function(e) NULL
+  )
+
+  if (is.null(predictors)) {
+    return(FALSE)
+  }
+
+  if (is.list(predictors)) {
+    predictors <- unlist(predictors, use.names = FALSE)
+  }
+
+  predictors <- unique(stats::na.omit(as.character(predictors)))
+
+  length(predictors) > 1L
 }
 
 #' @keywords internal

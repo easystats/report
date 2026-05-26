@@ -225,6 +225,32 @@ test_that("report_assumptions - collinearity AI fallback shows N/A", {
   expect_match(result, "Collinearity: N/A", fixed = TRUE)
 })
 
+test_that("report_assumptions - collinearity check skipped for one predictor", {
+  m <- lm(mpg ~ wt, data = mtcars)
+  local_mocked_bindings(
+    check_collinearity = function(...) stop("should not be called"),
+    .package = "performance"
+  )
+
+  result <- expect_no_error(report_assumptions(m))
+  full <- as.character(result)
+  summ <- as.character(summary(result))
+
+  expect_false(grepl("Collinearity", full, fixed = TRUE))
+  expect_false(grepl("collinearity", summ, fixed = TRUE))
+})
+
+test_that("report() - collinearity check skipped for one predictor", {
+  m <- lm(mpg ~ wt, data = mtcars)
+  local_mocked_bindings(
+    check_collinearity = function(...) stop("should not be called"),
+    .package = "performance"
+  )
+
+  result <- expect_no_error(report(m))
+  expect_false(is.null(result))
+})
+
 # ---------------------------------------------------------------------------
 # Integration with report()
 # ---------------------------------------------------------------------------
