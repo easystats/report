@@ -54,7 +54,7 @@ report.compare.loo <- function(x, include_IC = TRUE, include_ENP = FALSE, ...) {
 
   # The values in the first row are 0s because the models are ordered from best to worst according to their elpd.
   x <- as.data.frame(x)
-  modnames <- rownames(x)
+  modnames <- if ("model" %in% colnames(x)) x[["model"]] else rownames(x)
 
   elpd_diff <- x[["elpd_diff"]]
   se_elpd_diff <- x[["se_diff"]]
