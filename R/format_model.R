@@ -16,7 +16,17 @@ format_model <- function(x) {
 
 # Helper function to determine model type prefix based on model characteristics
 get_model_type_prefix <- function(info) {
-  if (info$is_logit) {
+  # multinomial and ordinal models can also have a logit or probit link
+  if (info$is_multinomial || info$is_ordinal) {
+    paste0(
+      if (info$is_multinomial) "multinomial " else "ordinal ",
+      if (info$is_logit) {
+        "logistic "
+      } else if (info$is_probit) {
+        "probit "
+      }
+    )
+  } else if (info$is_logit) {
     "logistic "
   } else if (info$is_probit) {
     "probit "
@@ -26,10 +36,6 @@ get_model_type_prefix <- function(info) {
     "poisson "
   } else if (info$is_negbin) {
     "negative-binomial "
-  } else if (info$is_ordinal) {
-    "ordinal "
-  } else if (info$is_multinomial) {
-    "multinomial "
   } else if (info$is_survival) {
     "survival "
   } else {

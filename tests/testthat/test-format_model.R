@@ -22,6 +22,35 @@ test_that("format_model", {
 })
 
 
+test_that("format_model names multinomial and ordinal models", {
+  info <- list(
+    is_logit = FALSE,
+    is_probit = FALSE,
+    is_linear = FALSE,
+    is_poisson = FALSE,
+    is_negbin = FALSE,
+    is_ordinal = FALSE,
+    is_multinomial = FALSE,
+    is_survival = FALSE
+  )
+  multinomial_logit <- modifyList(
+    info,
+    list(is_logit = TRUE, is_multinomial = TRUE)
+  )
+  ordinal_logit <- modifyList(info, list(is_logit = TRUE, is_ordinal = TRUE))
+  ordinal_probit <- modifyList(info, list(is_probit = TRUE, is_ordinal = TRUE))
+  ordinal_other <- modifyList(info, list(is_ordinal = TRUE))
+
+  expect_identical(
+    get_model_type_prefix(multinomial_logit),
+    "multinomial logistic "
+  )
+  expect_identical(get_model_type_prefix(ordinal_logit), "ordinal logistic ")
+  expect_identical(get_model_type_prefix(ordinal_probit), "ordinal probit ")
+  expect_identical(get_model_type_prefix(ordinal_other), "ordinal ")
+})
+
+
 test_that("format_model", {
   skip_if_not_installed("lme4")
   expect_identical(

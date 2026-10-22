@@ -23,19 +23,8 @@ report_intercept.merMod <- report_intercept.lm
 #' @rdname report.lm
 #' @export
 report_random.merMod <- function(x, ...) {
-  random_terms <- insight::find_terms(x)$random
-  if (!is.null(random_terms)) {
-    random_text <- random_terms
-    random_text <- paste0(
-      "The model included ",
-      random_text,
-      " as random effect"
-    )
-    random_text <- ifelse(
-      length(random_terms) > 1,
-      paste0(random_text, "s"),
-      random_text
-    )
+  random_text <- .text_random(x)
+  if (!is.null(random_text)) {
     text_full <- paste0(random_text, " (", format_formula(x, "random"), ")")
   }
 

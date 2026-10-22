@@ -75,3 +75,47 @@ summary.report_random <- function(object, ...) {
 print.report_random <- function(x, ...) {
   cat(paste(x, collapse = "\n"))
 }
+
+
+# HELPERS -----------------------------------------------------------------
+
+.text_random <- function(x) {
+  random_terms <- insight::find_random(x, flatten = TRUE)
+  if (is.null(random_terms)) {
+    return(NULL)
+  }
+
+  # describe interaction grouping factors, e.g. "island:sex"
+  random_terms <- vapply(
+    random_terms,
+    function(term) {
+      if (grepl(":", term, fixed = TRUE)) {
+        paste0(
+          "the interaction of ",
+          datawizard::text_concatenate(strsplit(term, ":", fixed = TRUE)[[1]])
+        )
+      } else {
+        term
+      }
+    },
+    character(1),
+    USE.NAMES = FALSE
+  )
+
+  # use commas when a term already contains "and"
+  if (any(grepl(" and ", random_terms, fixed = TRUE))) {
+    random_text <- datawizard::text_concatenate(
+      random_terms,
+      last = ", and "
+    )
+  } else {
+    random_text <- datawizard::text_concatenate(random_terms)
+  }
+
+  paste0(
+    "The model included ",
+    random_text,
+    " as random effect",
+    if (length(random_terms) > 1) "s"
+  )
+}
