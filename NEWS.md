@@ -4,6 +4,10 @@ Bug fixes
 
 * Fixed an issue in `report()` where the reference level for logical predictors was incorrectly displayed as `[?]` instead of `FALSE` for the intercept (@M-Colley, #598).
 
+* Fixed an issue in `report()` where the random effects of mixed models named only the first grouping factor, or named a random slope instead of its grouping factor. Interaction grouping factors such as `island:sex` are now described as "the interaction of island and sex" (@jmgirard, #616).
+
+* `report()` and `format_model()` now describe multinomial and ordinal models with a logit or probit link as "multinomial logistic", "ordinal logistic", or "ordinal probit" models, instead of "logistic" or "probit" models (@jmgirard, #616).
+
 # report 0.6.4
 
 New features
