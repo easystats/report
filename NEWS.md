@@ -2,6 +2,8 @@
 
 Bug fixes
 
+* Fixed `report()` for numeric vectors ignoring `n = TRUE` in summary text and tables.
+
 * Fixed an issue in `report()` where the reference level for logical predictors was incorrectly displayed as `[?]` instead of `FALSE` for the intercept (@M-Colley, #598).
 
 # report 0.6.4
