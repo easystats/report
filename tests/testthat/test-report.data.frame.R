@@ -100,3 +100,33 @@ test_that("report.data.frame - with list columns", {
   set.seed(123)
   expect_snapshot(variant = "windows", report(dplyr::starwars))
 })
+
+test_that("report.data.frame preserves a single supported column", {
+  with_list <- data.frame(score = 1:5)
+  with_list$details <- as.list(letters[1:5])
+  datasets <- list(
+    data.frame(score = 1:5),
+    data.frame(group = factor(c("A", "B", "A", "B", "A"))),
+    with_list
+  )
+
+  for (data in datasets) {
+    result <- report(data)
+
+    expect_match(
+      as.character(result),
+      "The data contains 5 observations of the following 1 variables:",
+      fixed = TRUE
+    )
+    expect_match(
+      as.character(result),
+      paste0("  - ", names(data)[1], ":"),
+      fixed = TRUE
+    )
+    expect_identical(unique(as.data.frame(result)$Variable), names(data)[1])
+    expect_identical(
+      unique(summary(as.data.frame(result))$Variable),
+      names(data)[1]
+    )
+  }
+})
