@@ -41,8 +41,12 @@ report_table.character <- function(
   missing_percentage <- .report_dataframe_percentage(x, missing_percentage)
 
   n_char <- as.data.frame(table(x))
-  n_char <- n_char[order(n_char$Freq, decreasing = TRUE), ]
-  names(n_char) <- c("Entry", "n_Entry")
+  if (nrow(n_char) == 0L) {
+    n_char <- data.frame(Entry = factor(), n_Entry = integer())
+  } else {
+    n_char <- n_char[order(n_char$Freq, decreasing = TRUE), ]
+    names(n_char) <- c("Entry", "n_Entry")
+  }
   n_char$percentage_Entry <- n_char$n_Entry / length(x)
 
   if (n_entries == "all" || n_entries > nrow(n_char)) {
@@ -95,7 +99,9 @@ report_parameters.character <- function(
   }
   entries <- attributes(table)$entries
 
-  if (levels_percentage) {
+  if (nrow(entries) == 0L) {
+    param_text <- character()
+  } else if (levels_percentage) {
     param_text <- paste0(
       entries$Entry,
       " (",
@@ -106,10 +112,14 @@ report_parameters.character <- function(
     param_text <- paste0(entries$Entry, " (n = ", entries$n_Entry, ")")
   }
 
-  n_entries_actual <- min(n_entries, length(param_text))
+  n_entries_actual <- if (n_entries == "all") {
+    length(param_text)
+  } else {
+    min(n_entries, length(param_text))
+  }
   as.report_parameters(
     param_text,
-    summary = param_text[1:n_entries_actual],
+    summary = param_text[seq_len(n_entries_actual)],
     ...
   )
 }
@@ -153,40 +163,23 @@ report_text.character <- function(
     ...
   )
 
-  report_text <- paste(summary(params), collapse = "; ")
-  if (nrow(entries) > 1) {
-    report_text <- paste0(
-      name,
-      ": ",
-      nrow(entries),
-      " entries, such as ",
-      report_text
-    )
-  } else {
-    report_text <- paste0(
-      name,
-      ": ",
-      nrow(entries),
-      " entry, such as ",
-      report_text
-    )
-  }
+  entry_text <- paste(summary(params), collapse = "; ")
+  report_text <- paste0(
+    name,
+    ": ",
+    nrow(entries),
+    if (nrow(entries) == 1L) " entry" else " entries"
+  )
+  if (nzchar(entry_text)) {
+    report_text <- paste0(report_text, ", such as ", entry_text)
 
-  if (nrow(entries) - n_entries == 1) {
-    report_text <- paste0(
-      report_text,
-      " and ",
-      nrow(entries) - n_entries,
-      " other"
-    )
-  }
-  if (nrow(entries) - n_entries > 1) {
-    report_text <- paste0(
-      report_text,
-      " and ",
-      nrow(entries) - n_entries,
-      " others"
-    )
+    n_others <- if (n_entries == "all") 0L else nrow(entries) - n_entries
+    if (n_others == 1) {
+      report_text <- paste0(report_text, " and ", n_others, " other")
+    }
+    if (n_others > 1) {
+      report_text <- paste0(report_text, " and ", n_others, " others")
+    }
   }
 
   text_full <- report_text
@@ -238,7 +231,9 @@ report_statistics.character <- function(
   }
   entries <- attributes(table)$entries
 
-  if (levels_percentage) {
+  if (nrow(entries) == 0L) {
+    stat_text <- character()
+  } else if (levels_percentage) {
     stat_text <- paste0(
       entries$Entry,
       ", ",
@@ -249,9 +244,13 @@ report_statistics.character <- function(
     stat_text <- paste0(entries$Entry, ", n = ", entries$n_Entry)
   }
 
-  n_entries_actual <- min(n_entries, length(stat_text))
+  n_entries_actual <- if (n_entries == "all") {
+    length(stat_text)
+  } else {
+    min(n_entries, length(stat_text))
+  }
   as.report_statistics(
     paste(stat_text, collapse = "; "),
-    summary = paste(stat_text[1:n_entries_actual], collapse = "; ")
+    summary = paste(stat_text[seq_len(n_entries_actual)], collapse = "; ")
   )
 }
