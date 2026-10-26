@@ -106,10 +106,14 @@ report_parameters.character <- function(
     param_text <- paste0(entries$Entry, " (n = ", entries$n_Entry, ")")
   }
 
-  n_entries_actual <- min(n_entries, length(param_text))
+  n_entries_actual <- if (n_entries == "all") {
+    length(param_text)
+  } else {
+    min(n_entries, length(param_text))
+  }
   as.report_parameters(
     param_text,
-    summary = param_text[1:n_entries_actual],
+    summary = param_text[seq_len(n_entries_actual)],
     ...
   )
 }
@@ -172,19 +176,20 @@ report_text.character <- function(
     )
   }
 
-  if (nrow(entries) - n_entries == 1) {
+  n_others <- if (n_entries == "all") 0L else nrow(entries) - n_entries
+  if (n_others == 1) {
     report_text <- paste0(
       report_text,
       " and ",
-      nrow(entries) - n_entries,
+      n_others,
       " other"
     )
   }
-  if (nrow(entries) - n_entries > 1) {
+  if (n_others > 1) {
     report_text <- paste0(
       report_text,
       " and ",
-      nrow(entries) - n_entries,
+      n_others,
       " others"
     )
   }
@@ -249,9 +254,13 @@ report_statistics.character <- function(
     stat_text <- paste0(entries$Entry, ", n = ", entries$n_Entry)
   }
 
-  n_entries_actual <- min(n_entries, length(stat_text))
+  n_entries_actual <- if (n_entries == "all") {
+    length(stat_text)
+  } else {
+    min(n_entries, length(stat_text))
+  }
   as.report_statistics(
     paste(stat_text, collapse = "; "),
-    summary = paste(stat_text[1:n_entries_actual], collapse = "; ")
+    summary = paste(stat_text[seq_len(n_entries_actual)], collapse = "; ")
   )
 }
