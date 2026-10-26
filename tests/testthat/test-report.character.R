@@ -5,7 +5,10 @@ test_that("character reports can show all entries", {
   expected <- report(x, n_entries = 4)
 
   expect_identical(as.character(result), as.character(expected))
-  expect_identical(as.character(summary(result)), as.character(summary(expected)))
+  expect_identical(
+    as.character(summary(result)),
+    as.character(summary(expected))
+  )
   expect_match(as.character(result), "fourth (n = 1)", fixed = TRUE)
   expect_false(grepl("other", as.character(result), fixed = TRUE))
 
@@ -23,7 +26,10 @@ test_that("zero character entries produces empty summaries", {
   x <- c("first", "second", "third")
 
   expect_length(summary(report_parameters(x, n_entries = 0)), 0)
-  expect_identical(as.character(summary(report_statistics(x, n_entries = 0))), "")
+  expect_identical(
+    as.character(summary(report_statistics(x, n_entries = 0))),
+    ""
+  )
 
   result <- report(x, n_entries = 0, varname = "labels")
   expect_identical(as.character(result), "labels: 3 entries (0 missing)")
@@ -44,7 +50,10 @@ test_that("character reports handle no observed entries", {
         paste0("labels: 0 entries (", length(x), " missing)")
       )
       expect_length(report_parameters(x, n_entries = n_entries), 0)
-      expect_identical(as.character(report_statistics(x, n_entries = n_entries)), "")
+      expect_identical(
+        as.character(report_statistics(x, n_entries = n_entries)),
+        ""
+      )
     }
   }
 })
