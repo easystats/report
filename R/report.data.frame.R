@@ -355,7 +355,7 @@ report_statistics.data.frame <- function(
     "The data contains ",
     nrow(ungrouped_x),
     " observations, grouped by ",
-    groups,
+    datawizard::text_concatenate(groups),
     ", of the following ",
     ncol(ungrouped_x),
     " variables:"
