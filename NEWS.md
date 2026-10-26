@@ -2,6 +2,8 @@
 
 Bug fixes
 
+* Fixed confidence interval headers in `report_table()` for hypothesis tests using a non-default confidence level (#408).
+
 * Fixed an issue in `report()` where the reference level for logical predictors was incorrectly displayed as `[?]` instead of `FALSE` for the intercept (@M-Colley, #598).
 
 # report 0.6.4

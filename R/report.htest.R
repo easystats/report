@@ -155,6 +155,12 @@ report_table.htest <- function(x, ...) {
 
   call_args <- c(list(x), dot_args)
   table_full <- do.call(parameters::model_parameters, call_args)
+  # The test's CI bounds are extracted from x, so its level must match them.
+  ci <- attr(x$conf.int, "conf.level")
+  if (!is.null(ci) && "CI" %in% names(table_full)) {
+    table_full$CI <- ci
+    attr(table_full, "ci") <- ci
+  }
   call_args <- c(list(x, table = table_full, model_info = model_info), dot_args)
   effsize <- do.call(report_effectsize, call_args)
 
