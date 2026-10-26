@@ -4,15 +4,27 @@ test_that("linear-model statistics use exact degrees-of-freedom columns", {
   model <- lm(mpg ~ wt, data = mtcars)
   table <- report_table(model)
 
-  expect_match(as.character(report_statistics(model, table = table)), "t(30) = ", fixed = TRUE)
+  expect_match(
+    as.character(report_statistics(model, table = table)),
+    "t(30) = ",
+    fixed = TRUE
+  )
   expect_no_warning(report(model))
 
   table$df <- table$df_error
   table$df_error <- NULL
-  expect_match(as.character(report_statistics(model, table = table)), "t(30) = ", fixed = TRUE)
+  expect_match(
+    as.character(report_statistics(model, table = table)),
+    "t(30) = ",
+    fixed = TRUE
+  )
 
   table$df <- NULL
-  expect_match(as.character(report_statistics(model, table = table)), "t = ", fixed = TRUE)
+  expect_match(
+    as.character(report_statistics(model, table = table)),
+    "t = ",
+    fixed = TRUE
+  )
 })
 
 test_that("survey logistic models retain their t-test degrees of freedom", {
@@ -36,7 +48,10 @@ test_that("survey logistic models retain their t-test degrees of freedom", {
   expect_identical(table$df_error[!is.na(table$t)], expected_df)
   statistics <- as.character(report_statistics(model, table = table))
   expect_match(statistics, "t(192) = ", fixed = TRUE)
-  expect_s3_class(suppressWarnings(report(model, effectsize_method = "basic")), "report")
+  expect_s3_class(
+    suppressWarnings(report(model, effectsize_method = "basic")),
+    "report"
+  )
 })
 
 test_that("performance reports reuse a supplied model table", {
@@ -47,5 +62,8 @@ test_that("performance reports reuse a supplied model table", {
     stop("Unexpected table recomputation", call. = FALSE)
   })
 
-  expect_identical(as.character(report_performance(model, table = table)), expected)
+  expect_identical(
+    as.character(report_performance(model, table = table)),
+    expected
+  )
 })
