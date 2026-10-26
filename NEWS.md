@@ -2,7 +2,7 @@
 
 Bug fixes
 
-* Fixed `report()` for character vectors when `n_entries = "all"`, and corrected empty summaries when `n_entries = 0`.
+* Fixed `report()` for character vectors when `n_entries = "all"`, and corrected empty summaries when `n_entries = 0` or there are no observed entries.
 
 * Fixed an issue in `report()` where the reference level for logical predictors was incorrectly displayed as `[?]` instead of `FALSE` for the intercept (@M-Colley, #598).
 
