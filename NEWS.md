@@ -2,6 +2,8 @@
 
 Bug fixes
 
+* Fixed factor reports when a real level is named `"missing"`, and corrected automatic percentages in factor summaries.
+
 * Fixed an issue in `report()` where the reference level for logical predictors was incorrectly displayed as `[?]` instead of `FALSE` for the intercept (@M-Colley, #598).
 
 # report 0.6.4
