@@ -27,10 +27,6 @@
       boundary (singular) fit: see help('isSingular')
     Output
       Random effect variances not available. Returned R2 does not account for random effects.
-    Message
-      boundary (singular) fit: see help('isSingular')
-    Output
-      Random effect variances not available. Returned R2 does not account for random effects.
       We fitted a linear mixed model (estimated using REML and nloptwrap optimizer)
       to predict Reaction with Days (formula: Reaction ~ Days). The model included
       mysubgrp as random effects (formula: list(~1 | mysubgrp:mygrp, ~1 | mygrp, ~1 |

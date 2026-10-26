@@ -81,6 +81,7 @@ Suggests:
     rmarkdown,
     rstanarm,
     survival,
+    survey,
     modelbased (>= 0.9.0),
     emmeans,
     marginaleffects (>= 0.25.0),

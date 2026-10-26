@@ -2,6 +2,8 @@
 
 Bug fixes
 
+* Fixed `report()` for survey logistic models by retaining t-test degrees of freedom, and removed partial matching of degrees-of-freedom columns in linear-model statistics (#613, #228). Supplied performance tables are now reused, avoiding unnecessary model refits and repeated diagnostics.
+
 * Fixed an issue in `report()` where the reference level for logical predictors was incorrectly displayed as `[?]` instead of `FALSE` for the intercept (@M-Colley, #598).
 
 # report 0.6.4
