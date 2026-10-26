@@ -22,9 +22,17 @@ test_that("reports combine multiple grouping variables in a single introduction"
   )
   for (output in c(as.character(result), as.character(summary(result)))) {
     expect_true(startsWith(output, intro))
-    for (group in c("north - before", "north - after", "south - before", "south - after")) {
+    for (group in c(
+      "north - before",
+      "north - after",
+      "south - before",
+      "south - after"
+    )) {
       header <- paste0("- ", group, " (n = 2):")
-      expect_length(regmatches(output, gregexpr(header, output, fixed = TRUE))[[1]], 1)
+      expect_length(
+        regmatches(output, gregexpr(header, output, fixed = TRUE))[[1]],
+        1
+      )
     }
   }
 })
