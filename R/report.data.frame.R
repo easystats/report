@@ -57,12 +57,18 @@ report.data.frame <- function(
   # remove list columns
   if (.has_groups(x) && !inherits(x, "tbl_df")) {
     x <- .groups_set(
-      x[, vapply(x, Negate(inherits), what = "list", FUN.VALUE = TRUE)],
+      x[,
+        vapply(x, Negate(inherits), what = "list", FUN.VALUE = TRUE),
+        drop = FALSE
+      ],
       groups = .group_vars(x),
       drop = .groups_drop(x)
     )
   } else {
-    x <- x[, vapply(x, Negate(inherits), what = "list", FUN.VALUE = TRUE)]
+    x <- x[,
+      vapply(x, Negate(inherits), what = "list", FUN.VALUE = TRUE),
+      drop = FALSE
+    ]
   }
 
   result_table <-
