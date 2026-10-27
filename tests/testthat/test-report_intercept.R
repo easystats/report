@@ -52,7 +52,7 @@ test_that("reflevel", {
 
   # Logical predictor
   on.exit(data("mtcars"), add = TRUE)
-  
+
   mtcars$more_than_4_cyl <- as.logical(mtcars$cyl > 4)
   m4 <- lm(mpg ~ more_than_4_cyl, data = mtcars)
   expect_identical(

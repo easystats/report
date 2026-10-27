@@ -9,6 +9,8 @@ ENP
 Gabry
 Hotfix
 IC
+LLM
+LLMs
 Magnusson
 Mattan
 Newcombe
@@ -32,9 +34,11 @@ glmmTMB
 htest
 ivreg
 participants’
+pre
 rstanarm
 sIgnificance
 setosa
+suboptimal
 tidyverse
 unarchive
 versicolor
