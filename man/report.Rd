@@ -13,10 +13,15 @@ objects above).}
 \item{...}{Arguments passed to or from other methods.}
 
 \item{audience}{The intended audience for the report. \code{"humans"} (default)
-produces the standard formatted text report. \code{"ai"} produces a compact,
-structured output optimised for consumption by a Large Language Model (LLM)
-or AI agent via \code{\link[=report_ai]{report_ai()}}. The default can be changed globally with
-\code{options(report_audience = "ai")}.}
+produces the standard narrative text report. \code{"ai"} produces a compact,
+structured Markdown output designed for consumption by a Large Language
+Model (LLM) or AI agent. It strikes a careful balance between
+comprehensiveness, specificity, and compactness, giving the model the
+clearest and most relevant analytical information at the lowest possible
+token cost. The output is a single character vector of class \code{report_ai}
+that can be pasted directly into a chat window or fed to an LLM API.
+The default can be changed globally with \code{options(report_audience = "ai")}.
+See \code{vignette("report_ai", package = "report")} for details and examples.}
 }
 \value{
 A list-object of class \code{report}, which contains further

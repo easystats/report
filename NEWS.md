@@ -8,7 +8,7 @@ Bug fixes
 
 New features
 
-* `report_ai()`: add support for `glm`, `merMod` (lme4), and `glmmTMB` model classes.
+* `report_ai()`: add support for `glm`, `merMod` (`lme4`), and `glmmTMB` model classes.
 
 * `report_ai()`: `## Model` section now includes a CI / degrees-of-freedom estimation line (e.g., `Inference: 95% CI [Satterthwaite df]`) when the information is available from `parameters::model_parameters()`.
 
