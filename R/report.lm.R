@@ -187,7 +187,7 @@ report_table.lm <- function(x, include_effectsize = TRUE, ...) {
   # names(table_full) <- gsub("Coefficient", "beta", names(table_full))
 
   # Shorten ----
-  if (insight::model_info(x)$is_logit) {
+  if (insight::model_info(x)$is_logit && !"t" %in% names(params)) {
     params <- datawizard::data_remove(params, "df_error")
   }
   table_full <- datawizard::data_remove(params, "SE")
@@ -288,15 +288,25 @@ report_statistics.lm <- function(
 
   # Statistic
   if ("t" %in% names(params_table)) {
+    # Use exact column names to avoid partial matching df to df_error.
+    degrees_freedom <- params_table[["df_error"]]
+    if (is.null(degrees_freedom)) {
+      degrees_freedom <- params_table[["df"]]
+    }
+    statistic_text <- rep("t", nrow(params_table))
+    if (!is.null(degrees_freedom)) {
+      has_df <- !is.na(degrees_freedom)
+      statistic_text[has_df] <- paste0(
+        "t(",
+        insight::format_value(degrees_freedom[has_df], protect_integers = TRUE),
+        ")"
+      )
+    }
     estimate_text <- datawizard::text_paste(
       estimate_text,
       paste0(
-        "t(",
-        insight::format_value(
-          params_table$df,
-          protect_integers = TRUE
-        ),
-        ") = ",
+        statistic_text,
+        " = ",
         insight::format_value(params_table$t)
       )
     )
@@ -654,7 +664,7 @@ report_model.lm <- function(x, table = NULL, ...) {
 #' @rdname report.lm
 #' @export
 report_performance.lm <- function(x, table = NULL, ...) {
-  if (!is.null(table) || is.null(attributes(table)$performance)) {
+  if (is.null(table) || is.null(attributes(table)$performance)) {
     perf_table <- report_table(x, ...)
   } else {
     perf_table <- table
