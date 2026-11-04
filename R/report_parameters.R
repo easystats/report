@@ -153,7 +153,7 @@ print.report_parameters <- function(x, ...) {
 
 #' @keywords internal
 .parameters_starting_text <- function(x, params) {
-  if ("pretty_names" %in% attributes(params)) {
+  if ("pretty_names" %in% names(attributes(params))) {
     pretty_name <- attributes(params)$pretty_names[params$Parameter]
   } else if (
     inherits(x, "glmmTMB") &&
