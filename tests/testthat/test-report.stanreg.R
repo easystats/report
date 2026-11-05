@@ -56,14 +56,15 @@ test_that("model-stanreg detailed", {
   expect_snapshot(variant = "windows", report(model))
 })
 
+set.seed(123)
+model_unsorted <- suppressWarnings(rstanarm::stan_glm(
+  mpg ~ wt + qsec + am,
+  data = mtcars,
+  refresh = 0,
+  iter = 300
+))
+
 test_that("report_parameters-stanreg pairs Rhat with its own parameter (#343)", {
-  set.seed(123)
-  model_unsorted <- suppressWarnings(rstanarm::stan_glm(
-    mpg ~ wt + qsec + am,
-    data = mtcars,
-    refresh = 0,
-    iter = 300
-  ))
   params <- as.data.frame(bayestestR::sexit(model_unsorted))
   diagnostic <- bayestestR::diagnostic_posterior(model_unsorted)
   rhat <- diagnostic$Rhat[match(params$Parameter, diagnostic$Parameter)]
@@ -76,14 +77,18 @@ test_that("report_parameters-stanreg pairs Rhat with its own parameter (#343)", 
 })
 
 test_that("report text shows the ESS of each parameter (#343)", {
-  params <- as.data.frame(bayestestR::sexit(model))
-  diagnostic <- bayestestR::diagnostic_posterior(model)
+  params <- as.data.frame(bayestestR::sexit(model_unsorted))
+  diagnostic <- bayestestR::diagnostic_posterior(model_unsorted)
   ess <- diagnostic$ESS_tail[match(params$Parameter, diagnostic$Parameter)]
 
-  out <- as.character(report_parameters(model))
+  out <- as.character(report_parameters(model_unsorted))
   expect_identical(
     regmatches(out, gregexpr("ESS = [0-9]+", out))[[1]],
     paste("ESS =", insight::format_value(ess, digits = 0))
   )
-  expect_match(as.character(report_statistics(model)), "ESS = ", fixed = TRUE)
+  expect_match(
+    as.character(report_statistics(model_unsorted)),
+    "ESS = ",
+    fixed = TRUE
+  )
 })
