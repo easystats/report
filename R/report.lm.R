@@ -396,10 +396,11 @@ report_statistics.lm <- function(
 
     estimate_text <- datawizard::text_paste(estimate_text, text_diagnostic)
 
-    if ("ESS" %in% names(params_table)) {
+    ess <- .ess_values(params_table)
+    if (!is.null(ess)) {
       text_diagnostic <- datawizard::text_paste(
         text_diagnostic,
-        paste0("ESS = ", insight::format_value(params_table$ESS))
+        paste0("ESS = ", insight::format_value(ess))
       )
     }
 
