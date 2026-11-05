@@ -227,6 +227,13 @@ print.report_parameters <- function(x, ...) {
 
 
 #' @keywords internal
+.ess_values <- function(x) {
+  # recent versions of bayestestR and parameters name this column "ESS_tail"
+  if ("ESS" %in% names(x)) x$ESS else x$ESS_tail
+}
+
+
+#' @keywords internal
 .parameters_diagnostic_bayesian <- function(
   diagnostic,
   only_when_insufficient = FALSE,
@@ -234,6 +241,7 @@ print.report_parameters <- function(x, ...) {
 ) {
   # init
   convergence <- stability <- NULL
+  diagnostic$ESS <- .ess_values(diagnostic)
   # Convergence
   if ("Rhat" %in% names(diagnostic)) {
     convergence <- effectsize::interpret_rhat(diagnostic$Rhat, ...)

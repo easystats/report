@@ -4,6 +4,10 @@ Bug fixes
 
 * Fixed an issue in `report()` where the reference level for logical predictors was incorrectly displayed as `[?]` instead of `FALSE` for the intercept (@M-Colley, #598).
 
+* Fixed `report()` text for `stanreg` and `brmsfit` models with predictors out of alphabetical order, which gave parameters the wrong Rhat and ESS. Earlier reports of such models had wrong values (@jmgirard, #343).
+
+* Fixed `report()` for `stanreg` and `brmsfit` models, where the text no longer showed ESS with recent versions of *bayestestR*. It now shows the tail ESS (@jmgirard, #343).
+
 # report 0.6.4
 
 New features

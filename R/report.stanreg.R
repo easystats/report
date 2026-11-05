@@ -150,6 +150,8 @@ report_parameters.stanreg <- function(
   # Diagnostic or Convergence
   if (include_diagnostic) {
     diagnostic <- bayestestR::diagnostic_posterior(x, ...)
+    # diagnostics are not in the same order as the parameters
+    diagnostic <- diagnostic[match(params$Parameter, diagnostic$Parameter), ]
 
     param.dgn <- .parameters_diagnostic_bayesian(
       diagnostic,
