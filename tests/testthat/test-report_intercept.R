@@ -23,9 +23,9 @@ contrasts(data1$f) <- cbind(c(1, 0, 0), c(0, 1, 0))
 data2$f <- relevel(data2$f, 3)
 
 # insight::get_data needs access to data in global environment
-data1 <<- data1
-data2 <<- data2
-data3 <<- data3
+data1 <<- data1 # nolint
+data2 <<- data2 # nolint
+data3 <<- data3 # nolint
 
 # contrasts, ref. level = category 3
 m1 <- lm(y ~ f, data = data1)
