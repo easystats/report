@@ -258,9 +258,9 @@ print.report_performance <- print.report_text
   perf_table$Text <- paste0(
     perf_table$Name,
     " (",
-    substring(insight::format_value(perf_table$Value), 2),
+    sub("^0\\.", ".", insight::format_value(perf_table$Value)),
     ifelse(perf_table$Value > perf_table$Threshold, " > ", " < "),
-    substring(insight::format_value(perf_table$Threshold), 2),
+    sub("^0\\.", ".", insight::format_value(perf_table$Threshold)),
     ")"
   )
 

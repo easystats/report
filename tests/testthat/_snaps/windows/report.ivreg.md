@@ -5,8 +5,6 @@
     Message
       Formula contains log- or sqrt-terms.
         See help("standardize") for how such terms are standardized.
-      Formula contains log- or sqrt-terms.
-        See help("standardize") for how such terms are standardized.
     Output
       We fitted a linear model to predict packs with rprice, rincome and salestax
       (formula: log(packs) ~ log(rprice) + log(rincome)). The model's explanatory

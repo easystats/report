@@ -17,6 +17,7 @@
 tests\^spelling
 ^LICENSE\.md$
 ^\.lintr$
+^lychee[.]toml$
 ^\.circleci$
 ^tests/manual$
 ^paper.*$
