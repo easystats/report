@@ -6,11 +6,13 @@ Bug fixes
 
 * Fixed an issue in `report()` where the reference level for logical predictors was incorrectly displayed as `[?]` instead of `FALSE` for the intercept (@M-Colley, #598).
 
+* Structural equation model reports preserve the sign and integer part of fit indices. Bayesian reports recognize the current and legacy effective sample size columns.
+
 # report 0.6.4
 
 New features
 
-* `report_ai()`: add support for `glm`, `merMod` (lme4), and `glmmTMB` model classes.
+* `report_ai()`: add support for `glm`, `merMod` (`lme4`), and `glmmTMB` model classes.
 
 * `report_ai()`: `## Model` section now includes a CI / degrees-of-freedom estimation line (e.g., `Inference: 95% CI [Satterthwaite df]`) when the information is available from `parameters::model_parameters()`.
 
