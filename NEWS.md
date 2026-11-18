@@ -4,6 +4,8 @@ Bug fixes
 
 * Fixed an issue in `report()` where the reference level for logical predictors was incorrectly displayed as `[?]` instead of `FALSE` for the intercept (@M-Colley, #598).
 
+* Structural equation model reports preserve the sign and integer part of fit indices. Bayesian reports recognize the current and legacy effective sample size columns.
+
 # report 0.6.4
 
 New features
