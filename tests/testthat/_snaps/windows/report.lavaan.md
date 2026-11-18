@@ -8,7 +8,7 @@
 # model-lavaan detailed table
 
     Code
-      report_table(model)
+      print(table)
     Output
       Parameter     | Coefficient |       95% CI |     z |      p |  Component |     Fit
       ----------------------------------------------------------------------------------
@@ -24,7 +24,7 @@
       Chi2_df       |             |              |       |        |            |    8.00
       p_Chi2        |             |              |       |        |            |    0.44
       p_Baseline    |             |              |       |        |            |    0.00
-      GFI           |             |              |       |        |            |    0.97
+      GFI           |             |              |       |        |            |    <GFI>
       AGFI          |             |              |       |        |            |    0.91
       NFI           |             |              |       |        |            |    0.97
       NNFI          |             |              |       |        |            |    1.00
@@ -47,17 +47,17 @@
 # model-lavaan detailed performance
 
     Code
-      report_performance(model)
+      print(performance)
     Output
       The model is not significantly different from a baseline model (Chi2(8) = 7.98,
-      p = 0.435). The GFI (.97 > .95) suggest a satisfactory fit., The model is not
+      p = 0.435). The GFI (<GFI> > .95) suggest a satisfactory fit., The model is not
       significantly different from a baseline model (Chi2(8) = 7.98, p = 0.435). The
       AGFI (.91 > .90) suggest a satisfactory fit., The model is not significantly
       different from a baseline model (Chi2(8) = 7.98, p = 0.435). The NFI (.97 >
       .90) suggest a satisfactory fit., The model is not significantly different from
-      a baseline model (Chi2(8) = 7.98, p = 0.435). The NNFI (.00 > .90) suggest a
+      a baseline model (Chi2(8) = 7.98, p = 0.435). The NNFI (1.00 > .90) suggest a
       satisfactory fit., The model is not significantly different from a baseline
-      model (Chi2(8) = 7.98, p = 0.435). The CFI (.00 > .90) suggest a satisfactory
+      model (Chi2(8) = 7.98, p = 0.435). The CFI (1.00 > .90) suggest a satisfactory
       fit., The model is not significantly different from a baseline model (Chi2(8) =
       7.98, p = 0.435). The RMSEA (.00 < .05) suggest a satisfactory fit., The model
       is not significantly different from a baseline model (Chi2(8) = 7.98, p =
@@ -66,6 +66,6 @@
       RFI (.95 > .90) suggest a satisfactory fit., The model is not significantly
       different from a baseline model (Chi2(8) = 7.98, p = 0.435). The PNFI (.52 >
       .50) suggest a satisfactory fit. and The model is not significantly different
-      from a baseline model (Chi2(8) = 7.98, p = 0.435). The IFI (.00 > .90) suggest
+      from a baseline model (Chi2(8) = 7.98, p = 0.435). The IFI (1.00 > .90) suggest
       a satisfactory fit.
 
