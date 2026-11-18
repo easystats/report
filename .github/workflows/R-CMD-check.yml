@@ -65,7 +65,11 @@ jobs:
           }
           # R 4.2 bundles an older Matrix than MatrixModels requires (>= 1.6-0, < 1.8-0).
           matrix_ref <- if (getRversion() < "4.3.0") {
-            "Matrix=url::https://cran.r-project.org/src/contrib/Archive/Matrix/Matrix_1.6-5.tar.gz"
+            # graph is an optional Matrix enhancement in archived Bioconductor.
+            paste(
+              "Matrix=url::https://cran.r-project.org/src/contrib/Archive/Matrix/Matrix_1.6-5.tar.gz",
+              "graph=?ignore-unavailable"
+            )
           } else {
             ""
           }
