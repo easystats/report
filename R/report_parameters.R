@@ -251,54 +251,49 @@ print.report_parameters <- function(x, ...) {
       )
     )
 
-    if ("ESS" %in% names(diagnostic)) {
-      stability <- effectsize::interpret_ess(diagnostic$ESS, ...)
-      text_output <- lapply(seq_along(stability), function(x) {
-        y <- switch(
-          EXPR = paste(
-            stability[x] == "sufficient",
-            convergence[x] == "converged"
-          ),
-          "TRUE TRUE" = paste0(
-            text_output,
-            " and the indices are reliable (ESS = ",
-            insight::format_value(diagnostic$ESS, digits = 0),
-            ")"
-          ),
-          "TRUE FALSE" = paste0(
-            text_output,
-            " even though the indices appear as reliable (ESS = ",
-            insight::format_value(diagnostic$ESS, digits = 0),
-            ")"
-          ),
-          "FALSE TRUE" = paste0(
-            text_output,
-            " but the indices are unreliable (ESS = ",
-            insight::format_value(diagnostic$ESS, digits = 0),
-            ")"
-          ),
-          "FALSE FALSE" = paste0(
-            text_output,
-            " and the indices are unreliable (ESS = ",
-            insight::format_value(diagnostic$ESS, digits = 0),
-            ")"
-          )
-        )
-        y[[x]]
-      })
-      text_output <- unlist(text_output)
+    ess_column <- intersect(
+      c("ESS_tail", "ESS", "ESS_bulk"),
+      names(diagnostic)
+    )[1]
+    if (!is.na(ess_column)) {
+      ess <- diagnostic[[ess_column]]
+      ess_label <- switch(
+        ess_column,
+        ESS_tail = "ESS (tail)",
+        ESS_bulk = "ESS (bulk)",
+        "ESS"
+      )
+      stability <- effectsize::interpret_ess(ess, ...)
+      stability_text <- c(
+        "TRUE TRUE" = " and the indices are reliable",
+        "TRUE FALSE" = " even though the indices appear as reliable",
+        "FALSE TRUE" = " but the indices are unreliable",
+        "FALSE FALSE" = " and the indices are unreliable"
+      )[paste(
+        stability == "sufficient",
+        convergence == "converged"
+      )]
+      text_output <- paste0(
+        text_output,
+        stability_text,
+        " (",
+        ess_label,
+        " = ",
+        insight::format_value(ess, digits = 0),
+        ")"
+      )
     }
   } else {
     text_output <- ""
   }
 
   if (only_when_insufficient) {
-    ifelse(
-      !identical(convergence, "converged") |
-        !identical(stability, "sufficient"),
-      text_output,
-      ""
-    )
+    sufficient <- convergence == "converged"
+    if (!is.null(stability)) {
+      sufficient <- sufficient & stability == "sufficient"
+    }
+    text_output[which(sufficient)] <- ""
+    text_output
   } else {
     text_output
   }

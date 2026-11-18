@@ -6,7 +6,7 @@
 [![r-universe](https://easystats.r-universe.dev/badges/report)](https://easystats.r-universe.dev/report)
 [![downloads](http://cranlogs.r-pkg.org/badges/report)](https://cran.r-project.org/package=report)
 [![total](https://cranlogs.r-pkg.org/badges/grand-total/report)](https://cranlogs.r-pkg.org/)
-[![stars](https://img.shields.io/github/stars/easystats/report?style=social)](https://github.com/easystats/report/stargazers)
+[![stars](https://img.shields.io/github/stars/easystats/report?style=social)](https://github.com/easystats/report)
 
 ***“From R to your manuscript”***
 
