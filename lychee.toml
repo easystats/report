@@ -1,0 +1,3 @@
+# Cloudflare returns HTTP 403 with a JavaScript challenge for this package page.
+# The public package page was verified on 2026-11-18.
+exclude = ['^https://easystats\.r-universe\.dev/report$']

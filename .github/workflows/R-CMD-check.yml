@@ -1,17 +1,173 @@
-# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
-# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
-#
-# NOTE: This workflow is overkill for most R packages and
-# check-standard.yaml is likely a better choice.
-# usethis::use_github_action("check-standard") will install it.
+# Adapted from easystats/workflows at 99ee8e98a43a5741c3301bff19434a85f01bf821.
+# Keep the compatibility matrix and check settings aligned with the shared workflow.
+name: R-CMD-check
+
 on:
   push:
     branches: [main, master]
   pull_request:
     branches: [main, master]
 
-name: R-CMD-check
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
 
 jobs:
   R-CMD-check:
-    uses: easystats/workflows/.github/workflows/R-CMD-check.yaml@main
+    runs-on: ${{ matrix.config.os }}
+
+    name: R-CMD-check / ${{ matrix.config.os }} (${{ matrix.config.r }})
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          # CRAN doesn't provide binaries for macOS on R-devel, so skip because
+          # it will be too slow otherwise
+          #- {os: macOS-latest, r: 'devel'}
+          - { os: macOS-latest, r: "release" }
+
+          - { os: windows-latest, r: "devel" }
+          - { os: windows-latest, r: "release" }
+
+          - { os: ubuntu-latest, r: "devel" }
+          - { os: ubuntu-latest, r: "release" }
+          - { os: ubuntu-latest, r: "oldrel-1" }
+          - { os: ubuntu-latest, r: "oldrel-2" }
+          - { os: ubuntu-latest, r: "oldrel-3" }
+          - { os: ubuntu-latest, r: "oldrel-4" }
+
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_KEEP_PKG_SOURCE: yes
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
+        with:
+          pandoc-version: "latest"
+
+      - uses: r-lib/actions/setup-r@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
+        with:
+          r-version: ${{ matrix.config.r }}
+          use-public-rspm: true
+
+      - name: Select compatible optional dependencies
+        id: compatibility
+        shell: Rscript {0}
+        run: |
+          # Deriv >= 4.3.5 requires R >= 4.5, but doBy still accepts Deriv 4.2.0.
+          deriv <- if (getRversion() < "4.5.0") {
+            "Deriv=url::https://cran.r-project.org/src/contrib/Archive/Deriv/Deriv_4.2.0.tar.gz"
+          } else {
+            ""
+          }
+          # R 4.2 bundles an older Matrix than MatrixModels requires (>= 1.6-0, < 1.8-0).
+          matrix_ref <- if (getRversion() < "4.3.0") {
+            # graph is an optional Matrix enhancement in archived Bioconductor.
+            paste(
+              "Matrix=url::https://cran.r-project.org/src/contrib/Archive/Matrix/Matrix_1.6-5.tar.gz",
+              "graph=?ignore-unavailable"
+            )
+          } else {
+            ""
+          }
+          # Pin a compatible RStan pair on Windows. Remove both pins together.
+          stan <- if (.Platform$OS.type == "windows") {
+            paste(
+              "rstan@2.32.7",
+              "StanHeaders=url::https://cran.r-project.org/src/contrib/Archive/StanHeaders/StanHeaders_2.32.10.tar.gz"
+            )
+          } else {
+            ""
+          }
+          cat("deriv=", deriv, "\n", file = Sys.getenv("GITHUB_OUTPUT"), append = TRUE, sep = "")
+          cat("matrix=", matrix_ref, "\n", file = Sys.getenv("GITHUB_OUTPUT"), append = TRUE, sep = "")
+          cat("stan=", stan, "\n", file = Sys.getenv("GITHUB_OUTPUT"), append = TRUE, sep = "")
+
+      - uses: r-lib/actions/setup-r-dependencies@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
+        with:
+          extra-packages: |
+            any::BH
+            any::rcmdcheck
+            any::RcppEigen
+            ivprobit=?ignore-before-r=100.0.0
+            discovr=?ignore-before-r=4.4.0
+            BayesFactor=?ignore-before-r=4.4.0
+            bridgesampling=?ignore-before-r=4.4.0
+            Brobdingnag=?ignore-before-r=4.4.0
+            brms=?ignore-before-r=4.4.0
+            car=?ignore-before-r=4.4.0
+            cgam=?ignore-before-r=4.4.0
+            ClassDiscovery=?ignore-before-r=4.4.0
+            CVXR=?ignore-before-r=4.4.0
+            fungible=?ignore-before-r=4.4.0
+            gamm4=?ignore-before-r=4.4.0
+            MatrixModels=?ignore-before-r=4.4.0
+            metaBMA=?ignore-before-r=4.4.0
+            MuMIn=?ignore-before-r=4.4.0
+            ordbetareg=?ignore-before-r=4.4.0
+            osqp=?ignore-before-r=4.4.0
+            PCDimension=?ignore-before-r=4.4.0
+            quantreg=?ignore-before-r=4.4.0
+            rms=?ignore-before-r=4.4.0
+            robustlmm=?ignore-before-r=4.4.0
+            FactoMineR=?ignore-before-r=4.3.0
+            factoextra=?ignore-before-r=4.3.0
+            effects=?ignore-before-r=4.3.0
+            nestedLogit=?ignore-before-r=4.3.0
+            AER=?ignore-before-r=4.2.0
+            afex=?ignore-before-r=4.2.0
+            bayesQR=?ignore-before-r=4.2.0
+            distributional=?ignore-before-r=4.3.0
+            ggstats=?ignore-before-r=4.2.0
+            GGally=?ignore-before-r=4.2.0
+            Hmisc=?ignore-before-r=4.2.0
+            ivreg=?ignore-before-r=4.2.0
+            mediation=?ignore-before-r=4.2.0
+            pbkrtest=?ignore-before-r=4.2.0
+            PROreg=?ignore-before-r=4.2.0
+            qgraph=?ignore-before-r=4.2.0
+            ape=?ignore-before-r=4.1.0
+            censReg=?ignore-before-r=4.1.0
+            collapse=?ignore-before-r=4.1.0
+            correlation=?ignore-before-r=4.1.0
+            drc=?ignore-before-r=4.1.0
+            EGAnet=?ignore-before-r=4.1.0
+            emmeans=?ignore-before-r=4.1.0
+            estimability=?ignore-before-r=4.1.0
+            feisr=?ignore-before-r=4.1.0
+            ggpubr=?ignore-before-r=4.1.0
+            glmmTMB=?ignore-before-r=4.1.0
+            ICS=?ignore-before-r=4.1.0
+            ICSOutlier=?ignore-before-r=4.1.0
+            lavaan=?ignore-before-r=4.1.0
+            multgee=?ignore-before-r=4.1.0
+            plm=?ignore-before-r=4.1.0
+            randomForest=?ignore-before-r=4.1.0
+            rmcorr=?ignore-before-r=4.1.0
+            rstatix=?ignore-before-r=4.1.0
+            serp=?ignore-before-r=4.1.0
+            srvyr=?ignore-before-r=4.1.0
+            survey=?ignore-before-r=4.1.0
+            svylme=?ignore-before-r=4.1.0
+            tinytable=?ignore-before-r=4.1.0
+            VGAM=?ignore-before-r=4.1.0
+            WeightIt=?ignore-before-r=4.1.0
+            WRS2=?ignore-before-r=4.1.0
+            ${{ steps.compatibility.outputs.deriv }}
+            ${{ steps.compatibility.outputs.matrix }}
+            ${{ steps.compatibility.outputs.stan }}
+          needs: check
+
+      - uses: r-lib/actions/check-r-package@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
+        with:
+          upload-snapshots: true
+          upload-results: true
+          error-on: '"warning"'
+        env:
+          _R_CHECK_CRAN_INCOMING_REMOTE_: false
+          _R_CHECK_CRAN_INCOMING_: false
+          _R_CHECK_FORCE_SUGGESTS_: false
+          _R_CHECK_STOP_ON_INVALID_NUMERIC_VERSION_INPUTS_: true
