@@ -63,6 +63,12 @@ jobs:
           } else {
             ""
           }
+          # R 4.2 bundles an older Matrix than MatrixModels requires (>= 1.6-0, < 1.8-0).
+          matrix_ref <- if (getRversion() < "4.3.0") {
+            "Matrix=url::https://cran.r-project.org/src/contrib/Archive/Matrix/Matrix_1.6-5.tar.gz"
+          } else {
+            ""
+          }
           # Pin a compatible RStan pair on Windows. Remove both pins together.
           stan <- if (.Platform$OS.type == "windows") {
             paste(
@@ -73,6 +79,7 @@ jobs:
             ""
           }
           cat("deriv=", deriv, "\n", file = Sys.getenv("GITHUB_OUTPUT"), append = TRUE, sep = "")
+          cat("matrix=", matrix_ref, "\n", file = Sys.getenv("GITHUB_OUTPUT"), append = TRUE, sep = "")
           cat("stan=", stan, "\n", file = Sys.getenv("GITHUB_OUTPUT"), append = TRUE, sep = "")
 
       - uses: r-lib/actions/setup-r-dependencies@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
@@ -146,6 +153,7 @@ jobs:
             WeightIt=?ignore-before-r=4.1.0
             WRS2=?ignore-before-r=4.1.0
             ${{ steps.compatibility.outputs.deriv }}
+            ${{ steps.compatibility.outputs.matrix }}
             ${{ steps.compatibility.outputs.stan }}
           needs: check
 
