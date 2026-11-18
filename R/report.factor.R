@@ -31,9 +31,15 @@ report_table.factor <- function(x, levels_percentage = "auto", ...) {
   levels_percentage <- .report_dataframe_percentage(x, levels_percentage)
 
   if (length(x[is.na(x)]) != 0) {
+    # Keep actual "missing" levels distinct from the label for missing values.
+    missing_level <- if ("missing" %in% levels(x)) {
+      utils::tail(make.unique(c(levels(x), "missing (NA)")), 1)
+    } else {
+      "missing"
+    }
     x <- factor(
-      ifelse(is.na(x), "missing", as.character(x)),
-      levels = c(levels(x), "missing")
+      ifelse(is.na(x), missing_level, as.character(x)),
+      levels = c(levels(x), missing_level)
     )
   }
 
@@ -73,6 +79,7 @@ report_parameters.factor <- function(
   if (!is.factor(x)) {
     x <- as.factor(x)
   }
+  levels_percentage <- .report_dataframe_percentage(x, levels_percentage)
   # Get table
   if (is.null(table)) {
     table <- report_table(x, levels_percentage = levels_percentage, ...)
@@ -144,7 +151,7 @@ report_text.factor <- function(
     table <- report_table(x, levels_percentage = levels_percentage, ...)
   }
 
-  table_no_missing <- table[table$Level != "missing", ]
+  n_levels <- nlevels(x)
   params <- report_parameters(
     x,
     table = table,
@@ -152,18 +159,18 @@ report_text.factor <- function(
     ...
   )
 
-  if (nrow(table) > 1) {
+  if (n_levels > 1) {
     text_total_levels <- paste0(
       name,
       ": ",
-      nrow(table_no_missing),
+      n_levels,
       " levels, namely "
     )
   } else {
     text_total_levels <- paste0(
       name,
       ": ",
-      nrow(table_no_missing),
+      n_levels,
       " level, namely "
     )
   }
@@ -199,6 +206,7 @@ report_statistics.factor <- function(
   if (!is.factor(x)) {
     x <- as.factor(x)
   }
+  levels_percentage <- .report_dataframe_percentage(x, levels_percentage)
   if (is.null(table)) {
     table <- report_table(x, levels_percentage = levels_percentage, ...)
   }
