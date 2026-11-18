@@ -34,6 +34,7 @@ report.numeric <- function(
 
   numeric_table <- report_table(
     x,
+    n = n,
     centrality = centrality,
     dispersion = dispersion,
     range = range,
@@ -46,6 +47,7 @@ report.numeric <- function(
   result_text <- report_text(
     x,
     table = numeric_table,
+    n = n,
     centrality = centrality,
     dispersion = dispersion,
     range = range,
