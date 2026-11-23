@@ -22,6 +22,10 @@
 #'
 #' # Correlations
 #' report(cor.test(iris$Sepal.Width, iris$Sepal.Length))
+#'
+#' # Assumption tests
+#' report(shapiro.test(iris$Sepal.Length))
+#' report(bartlett.test(Sepal.Length ~ Species, data = iris))
 #' @return An object of class [report()].
 #' @export
 report.htest <- function(x, ...) {
@@ -30,6 +34,10 @@ report.htest <- function(x, ...) {
   txt <- report_text(x, table = tbl, model_info = model_info, ...)
 
   as.report(txt, table = tbl, ...)
+}
+
+.is_assumption_htest <- function(model_info) {
+  model_info$family %in% c("shapiro", "bartlett")
 }
 
 
@@ -43,6 +51,10 @@ report_effectsize.htest <- function(x, table = NULL, ...) {
   model_info <- dot_args$model_info
   if (is.null(model_info)) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
+  }
+
+  if (.is_assumption_htest(model_info)) {
+    return(as.report_effectsize("", rules = ""))
   }
 
   model_data <- insight::get_data(x)
@@ -150,6 +162,16 @@ report_table.htest <- function(x, ...) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
   }
 
+  if (.is_assumption_htest(model_info)) {
+    statistic <- unname(x$statistic)
+    statistics <- if (model_info$family == "shapiro") {
+      data.frame(W = statistic, p = x$p.value)
+    } else {
+      data.frame(K2 = statistic, df = unname(x$parameter), p = x$p.value)
+    }
+    return(as.report_table(statistics))
+  }
+
   # remove arg, so dots can be passed to effectsize
   dot_args[["model_info"]] <- NULL
 
@@ -192,6 +214,33 @@ report_statistics.htest <- function(x, table = NULL, ...) {
   if (is.null(model_info)) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
   }
+  if (.is_assumption_htest(model_info)) {
+    if (is.null(table)) {
+      table <- report_table(x, model_info = model_info)
+    }
+    statistic <- if (model_info$family == "shapiro") {
+      paste0("W = ", insight::format_value(table$W, missing = "NA"))
+    } else {
+      paste0(
+        "K-squared(",
+        insight::format_value(table$df, protect_integers = TRUE),
+        ") = ",
+        insight::format_value(table$K2, missing = "NA")
+      )
+    }
+    txt <- paste0(
+      statistic,
+      ", ",
+      insight::format_p(
+        table$p,
+        stars = FALSE,
+        digits = "apa",
+        missing = "p = NA"
+      )
+    )
+    return(as.report_statistics(txt, table = table))
+  }
+
   if (is.null(table) || is.null(attributes(table)$effsize)) {
     table <- report_table(x, model_info = model_info)
   }
@@ -296,10 +345,13 @@ report_parameters.htest <- function(x, table = NULL, ...) {
   table <- attributes(stats)$table
   effsize <- attributes(stats)$effsize
 
-  ## TODO see https://github.com/easystats/report/issues/256
-  # insight::model_info() returns "$is_correlation" for shapiro-test,
-  # but shapiro-test has no "estimate", so this fails. We probably need
-  # to handle shapiro separately
+  if (.is_assumption_htest(model_info)) {
+    return(as.report_parameters(
+      as.character(stats),
+      table = table,
+      prefix = ""
+    ))
+  }
 
   # Correlations
   if (model_info$is_correlation) {
@@ -353,6 +405,11 @@ report_model.htest <- function(x, table = NULL, ...) {
   model_info <- dot_args$model_info
   if (is.null(model_info)) {
     model_info <- suppressWarnings(insight::model_info(x, verbose = FALSE))
+  }
+
+  if (.is_assumption_htest(model_info)) {
+    txt <- paste0(x$method, " for ", x$data.name)
+    return(as.report_model(txt, summary = txt))
   }
 
   # remove arg, so dots can be passed to other methods
@@ -438,6 +495,11 @@ report_text.htest <- function(x, table = NULL, ...) {
   table <- attributes(params)$table
   call_args <- c(list(x, table = table, model_info = model_info), dot_args)
   model <- do.call(report_model, call_args)
+
+  if (.is_assumption_htest(model_info)) {
+    txt <- paste0("The ", model, " returned ", params, ".")
+    return(as.report_text(txt, summary = txt))
+  }
 
   call_args <- c(
     list(
