@@ -54,6 +54,10 @@ report(t.test(iris$Sepal.Width, mu = 1))
 
 # Correlations
 report(cor.test(iris$Sepal.Width, iris$Sepal.Length))
+
+# Assumption tests
+report(shapiro.test(iris$Sepal.Length))
+report(bartlett.test(Sepal.Length ~ Species, data = iris))
 }
 \seealso{
 Specific components of reports (especially for stats models):

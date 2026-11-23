@@ -2,6 +2,8 @@
 
 Bug fixes
 
+* `report()` now preserves the test statistic and p-value from `shapiro.test()` and `bartlett.test()`, and includes degrees of freedom for `bartlett.test()` (#256).
+
 * Fixed an issue in `report()` where the reference level for logical predictors was incorrectly displayed as `[?]` instead of `FALSE` for the intercept (@M-Colley, #598).
 
 # report 0.6.4
